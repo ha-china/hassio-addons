@@ -1,0 +1,21 @@
+# https://ghfast.top/github.com/AlexxIT/builder/blob/master/builder.sh
+name: go2rtc master hardware
+description: 硬件转码Intel（VAAPI/QSV）、AMD（VAAPI）和NVIDIA（CUDA）。
+url: https://ghfast.top/github.com/AlexxIT/go2rtc
+image: docker.1ms.run/alexxit/go2rtc
+arch: [ amd64 ]
+
+# https://developers.home-assistant.io/docs/add-ons/configuration
+version: master-hardware
+slug: go2rtc-master-hw
+init: false
+startup: system
+host_network: true
+homeassistant_api: true
+full_access: true
+video: true
+audio: true
+ingress: true
+ingress_port: 1984
+panel_icon: mdi:camera-wireless
+map: [ "config:rw", "media", "ssl" ]

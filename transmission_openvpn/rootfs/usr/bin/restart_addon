@@ -1,0 +1,8 @@
+#!/usr/bin/env bashio
+# shellcheck shell=bash
+set -e
+
+bashio::log.fatal 'Tunnel down, addon restarting in 15 seconds'
+sleep 15
+touch /data/addonrestarted
+bashio::addon.restart

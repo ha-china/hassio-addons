@@ -1,0 +1,56 @@
+{
+  "name": "Hydroqc Add-on",
+  "version": "v2.0.0-1",
+  "slug": "hydroqc",
+  "description": "获取您的消费数据并将其从HydroQuebec账户传输到MQTT，使用此hass插件。",
+  "url": "https://gitlab.com/hydroqc/hydroqc-hass-addons",
+  "image": "registry.gitlab.com/hydroqc/hydroqc-hass-addons/{arch}",
+  "arch": [
+    "aarch64",
+    "amd64"
+  ],
+  "init": "false",
+  "homeassistant_api": true,
+  "apparmor": true,
+  "map": [
+    "config:rw"
+  ],
+  "services": [
+    "mqtt:need"
+  ],
+  "options": {
+    "hq_name": "maison",
+    "hq_rate": null,
+    "hq_rate_option": null,
+    "hq_username": null,
+    "hq_password": null,
+    "hq_customer": null,
+    "hq_account": null,
+    "hq_contract": null,
+    "sync_hourly_consumption": true,
+    "preheat_duration_minutes": 180
+  },
+  "schema": {
+    "hq_name": "str",
+    "hq_rate": "str",
+    "hq_rate_option": "str?",
+    "hq_username": "email?",
+    "hq_password": "password?",
+    "hq_customer": "match(^\\d{10}$)?",
+    "hq_account": "match(^\\d{12}$)?",
+    "hq_contract": "match(^\\d{10}$)?",
+    "sync_hourly_consumption": "bool",
+    "preheat_duration_minutes": "int(0,)?",
+    "mqtt_discovery_data_topic": "str?",
+    "mqtt_data_root_topic": "str?",
+    "mqtt_username": "str?",
+    "mqtt_password": "password?",
+    "mqtt_server": "str?",
+    "mqtt_port": "str?",
+    "ha_url": "str?",
+    "ha_token": "str?",
+    "timezone": "str?",
+    "log_level": "list(DEBUG|INFO|WARNING|ERROR|CRITICAL)?",
+    "hydroqc_config_file": "str?"
+  }
+}

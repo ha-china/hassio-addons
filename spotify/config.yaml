@@ -1,0 +1,27 @@
+name: Spotify Connect
+version: 0.16.0
+slug: spotify
+description: '[老王杂谈说]：在您的Home Assistant设备上播放Spotify音乐'
+url: https://ghfast.top/github.com/hassio-addons/addon-spotify-connect
+codenotary: codenotary@frenck.dev
+arch:
+  - aarch64
+  - amd64
+  - armv7
+host_network: true
+audio: true
+init: false
+options:
+  name: Home Assistant
+  bitrate: 160
+  initial_volume: 50
+  autoplay: true
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  name: str
+  bitrate: list(96|160|320)
+  username: str?
+  password: password?
+  autoplay: bool
+  initial_volume: match(^([0-9]|[1-9][0-9]|100)$)?
+image: ghcr.nju.edu.cn/hassio-addons/spotify/{arch}

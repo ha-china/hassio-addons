@@ -1,0 +1,48 @@
+name: rsync
+version: 2.0.0
+slug: rsync
+description: 通过ssh和rsync将文件夹同步到远程计算机。
+url: https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/rsync
+arch:
+- armhf
+- armv7
+- aarch64
+- amd64
+- i386
+homeassistant: 2023.12.1
+boot: manual
+init: false
+image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/rsync-{arch}
+ports: {}
+ports_description: {}
+map:
+- type: share
+  read_only: false
+- type: homeassistant_config
+  read_only: false
+- type: backup
+  read_only: false
+- type: addons
+  read_only: false
+- type: ssl
+  read_only: false
+- type: media
+  read_only: false
+schema:
+  private_key_file: match(^/ssl/.+)
+  username: str
+  folders:
+  - local: str
+    remote: str
+    options: str?
+    direction: match(^pull$|^push$)?
+  remote_host: str
+  remote_port: port?
+options:
+  private_key_file: /ssl/rsync/id_rsa
+  username: user
+  folders:
+  - local: /config
+    remote: /home/user
+    direction: push
+  remote_host: ''

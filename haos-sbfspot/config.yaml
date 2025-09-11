@@ -1,0 +1,95 @@
+---
+name: HAOS-SBFspot
+version: 2025.2.1
+slug: haos-sbfspot
+description: 管理SBFspot使用简单的界面。
+url: "https://ghfast.top/github.com/habuild/hassio-addons/tree/main/haos-sbfspot"
+stage: experimental
+
+image: "ghcr.nju.edu.cn/habuild/{arch}-addon-haos-sbfspot"
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+init: false
+host_network: true
+host_dbus: true
+homeassistant_api: true
+panel_icon: mdi:solar-power-variant
+map:
+  - share:rw
+services:
+  - mysql:need
+  - mqtt:want
+options:
+  Connection_Type: "Bluetooth"
+  Sensors_HA: "No"
+  BTAddress: "!secret BTAddress"
+  Password: "!secret SBFpassword"
+  LocalBTAddress: "!secret LocalBTAddress"
+  IP_Address: "55.255.255.254"
+  Plantname: "!secret SBFplantname"
+  Latitude: "!secret home_lat"
+  Longitude: "!secret home_long"
+  Timezone: "!secret Timezone"
+  DateTimeFormat: "'%H:%M:%S %d-%m-%y'"
+  SQL_Password: "!secret mariadb_pw"
+  MQTT_User: "!secret mqtt_user"
+  MQTT_Pass: "!secret mqtt_pass"
+  MQTT_Topic: "homeassistant/sbfspot_{plantname}/sbfspot_{serial}"
+  MQTT_Data: >-
+    PrgVersion,Plantname,Timestamp,SunRise,SunSet,InvSerial,InvName,InvTime,InvStatus,InvSwVer,InvClass,InvType,InvTemperature,InvGridRelay,EToday,ETotal,GridFreq,PACTot,PAC1,UAC1,IAC1,OperTm,FeedTm,PDCTot,UDC1,UDC2,IDC1,IDC2,PDC1,PDC2,BTSignal,InvWakeupTm,InvSleepTm
+  PVoutput_SID: "!secret pvoSID"
+  PVoutput_Key: "!secret pvoAPIkey"
+  LogLevel: info
+schema:
+  Connection_Type: list(Bluetooth|Ethernet)?
+  Sensors_HA: list(No||Create||Purge|)?
+  BTAddress: "str"
+  Password: "password"
+  LocalBTAddress: "str?"
+  IP_Address: "str?"
+  Plantname: "str"
+  MIS_Enabled: "int?"
+  OutputPath: "str?"
+  OutputPathEvents: "str?"
+  Latitude: "str?"
+  Longitude: "str?"
+  Timezone: "str?"
+  DateTimeFormat: "str?"
+  DateFormat: "str?"
+  DecimalPoint: "str?"
+  TimeFormat: "str?"
+  SynchTime: "int?"
+  SynchTimeLow: "int?"
+  SynchTimeHigh: "int?"
+  SunRSOffset: "int?"
+  Locale: "str?"
+  CalculateMissingSpotValues: "int?"
+  BTConnectRetries: "int?"
+  CSV_Export: "int?"
+  CSV_ExtendedHeader: "int?"
+  CSV_Header: "int?"
+  CSV_SaveZeroPower: "int?"
+  CSV_Delimiter: "str?"
+  CSV_Spot_TimeSource: "str?"
+  CSV_Spot_WebboxHeader: "int?"
+  SQL_Database: "str?"
+  SQL_Hostname: "str?"
+  SQL_Port: "str?"
+  SQL_Username: "str?"
+  SQL_Password: "password?"
+  MQTT_Publisher: "str?"
+  MQTT_Host: "str?"
+  MQTT_Port: "str?"
+  MQTT_User: "str"
+  MQTT_Pass: "password"
+  MQTT_Topic: "str"
+  MQTT_ItemFormat: "str?"
+  MQTT_ItemDelimiter: str?
+  MQTT_PublisherArgs: str?
+  MQTT_Data: "str"
+  PVoutput_SID: "password?"
+  PVoutput_Key: "password?"
+  LogLevel: list(debug|info||warning||error)?

@@ -1,0 +1,24 @@
+{
+  "name": "YesPlayMusic",
+  "version": "0.50",
+  "slug": "yesplaymusic",
+  "url": "https://mp.weixin.qq.com/s/48n8mq8wK2mgxr9JyyupuQ",
+  "description": "A web-based music player for Home Assistant. \n 关注微信号：老王杂谈说 获取更多内容吧",
+  "arch": [
+    "amd64",
+    "armhf",
+    "armv7", 
+    "aarch64"
+  ],
+  "startup": "services",
+  "boot": "auto",
+  "image": "ghcr.nju.edu.cn/desmond-dong/yesplaymusic/yesplaymusic-{arch}",
+  "ports": {
+    "3000/tcp": 7080,
+    "80/tcp": 7081
+  },
+  "webui": "http://[HOST]:[PORT:7081]",
+  "panel_icon": "mdi:music",
+  "options": {},
+  "schema": {}
+}

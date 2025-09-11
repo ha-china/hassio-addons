@@ -1,0 +1,30 @@
+{
+  "version": "1.1.1",
+  "name": "节点小宝",
+  "url": "https://mp.weixin.qq.com/s/P0HvAso-Gkdl-awv22si9w?token=940637692&lang=zh_CN",
+  "slug": "jdxb",
+  "codenotary": "djhhui@gmail.com",
+  "description": "A Home Assistant add-on for jdxb service. 这是一个节点小宝客户端",
+  "arch": ["amd64", "aarch64"],
+  "startup": "services",
+  "ingress": true,
+  "ingress_port": 9118,
+  "image": "ghcr.nju.edu.cn/desmond-dong/jdxb/jdxb-{arch}",
+  "init": false,
+  "hassio_role": "manager",
+  "panel_icon": "mdi:server-network",
+  "ports": {
+    "9118/tcp": 9118
+  },
+  "devices": [
+    "/dev/net/tun"
+  ],
+  "map": [
+    "config:rw"
+  ],
+  "boot": "manual",
+  "restart": "always",
+  "host_network": true,
+  "webui": "http://[HOST]:[PORT:9118]"
+}
+

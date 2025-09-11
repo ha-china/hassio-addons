@@ -1,0 +1,26 @@
+{
+  "name": "OWASP ZAP",
+  "version": "2.2.0",
+  "slug": "owasp-zap",
+  "description": "(折旧)OWASP Zed Attack Proxy（ZAP）是世界上最受欢迎的免费安全工具之一，并由一个国际志愿者团队积极维护。",
+  "url": "https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/owasp-zap",
+  "arch": [
+    "armv7",
+    "amd64"
+  ],
+  "boot": "manual",
+  "image": "ghcr.nju.edu.cn/poeschl-homeassistant-addons/owasp-zap-{arch}",
+  "webui": "http://[HOST]:[PORT:8080]/zap",
+  "ingress_port": 8080,
+  "ingress_entry": "zap/",
+  "panel_title": "OWASP ZAP",
+  "panel_icon": "mdi:flash-outline",
+  "ports": {
+    "8080/tcp": 8080,
+    "8090/tcp": 8890
+  },
+  "ports_description": {
+    "8080/tcp": "Port for the web interface",
+    "8090/tcp": "Proxy Port to accept requests which are traced."
+  }
+}

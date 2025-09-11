@@ -1,0 +1,22 @@
+name: Authelia
+version: 0.1.16
+slug: authelia
+description: '[老王杂谈说]：认证和授权服务器'
+url: https://ghfast.top/github.com/einschmidt/addon-authelia
+arch:
+  - amd64
+  - aarch64
+init: false
+ports:
+  9091/tcp: 9091
+ports_description:
+  9091/tcp: Authelia Web UI and API
+map:
+  - addon_config:rw
+options:
+  domain: example.com
+  log_level: info
+schema:
+  domain: str
+  log_level: list(debug|info|warn|error)
+image: ghcr.nju.edu.cn/einschmidt/authelia/{arch}

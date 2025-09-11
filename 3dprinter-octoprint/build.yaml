@@ -1,0 +1,11 @@
+build_from:
+  aarch64:  ghcr.nju.edu.cn/home-assistant/aarch64-base-debian:bullseye
+  amd64:    ghcr.nju.edu.cn/home-assistant/amd64-base-debian:bullseye
+  armhf:    ghcr.nju.edu.cn/home-assistant/armhf-base-debian:bullseye
+  armv7:    ghcr.nju.edu.cn/home-assistant/armv7-base-debian:bullseye
+labels:
+  org.opencontainers.image.title: "Home Assistant Add-on: 3DPrinter-OctoPrint"
+  org.opencontainers.image.description: "3DPrinter-OctoPrint addon for Home-Assistant."
+  org.opencontainers.image.source: "https://ghfast.top/github.com/fredrikbaberg/ha-3dprinter-addons"
+args:
+  OCTOPRINT_VERSION: "1.10.3"

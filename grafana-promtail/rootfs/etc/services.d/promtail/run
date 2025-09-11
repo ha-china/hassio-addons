@@ -1,0 +1,48 @@
+#!/usr/bin/with-contenv bashio
+
+declare LOG_LEVEL
+PROMTAIL_CONFIG='/etc/promtail/config.yaml'
+JOURNAL_PATH='/var/log/journal'
+
+if bashio::config.exists 'config_path'; then
+    CONF_PATH=$(bashio::config 'config_path')
+    if [ -f "${CONF_PATH}" ]; then
+        bashio::log.info "Using config at ${CONF_PATH}"
+        PROMTAIL_CONFIG=$CONF_PATH
+    else
+        bashio::log.info "No config at given path - Using default config"
+    fi
+else
+    bashio::log.info "Using default config"
+fi
+
+if ! bashio::fs.directory_exists "${JOURNAL_PATH}" || [ -z "$(ls -A ${JOURNAL_PATH})" ]; then
+    bashio::log.info "No journal at ${JOURNAL_PATH}, looking for journal in /run/log/journal instead"
+    JOURNAL_PATH='/run/log/journal'
+fi
+
+case "$(bashio::config 'log_level')" in \
+    trace)      ;& \
+    debug)      LOG_LEVEL='debug' ;; \
+    notice)     ;& \
+    warning)    LOG_LEVEL='warn' ;; \
+    error)      ;& \
+    fatal)      LOG_LEVEL='error' ;; \
+    *)          LOG_LEVEL='info' ;; \
+esac;
+bashio::log.info "Promtail log level set to ${LOG_LEVEL}"
+
+bashio::log.info 'Starting Promtail...'
+promtail_args=("-config.expand-env=true" "-config.file=${PROMTAIL_CONFIG}")
+if [ "${LOG_LEVEL}" == "debug" ]; then
+    bashio::log.debug "Logging full config on startup for debugging..."
+    promtail_args+=("-print-config-stderr=true")
+fi
+
+
+export "URL=$(bashio::config 'client.url')"
+export "JOURNAL_PATH=${JOURNAL_PATH}"
+export "LOG_LEVEL=${LOG_LEVEL}"
+
+bashio::log.info "Handing over control to Promtail..."
+exec /usr/bin/promtail "${promtail_args[@]}"

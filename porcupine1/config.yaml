@@ -1,0 +1,22 @@
+---
+version: 1.2.0
+slug: porcupine1
+name: porcupine1
+description: 豪猪1使用怀俄明协议
+url: https://ghfast.top/github.com/rhasspy/hassio-addons/tree/master/porcupine1
+arch:
+  - amd64
+  - aarch64
+  - armv7
+init: false
+discovery:
+  - wyoming
+options:
+  sensitivity: 0.5
+  debug_logging: false
+schema:
+  sensitivity: float
+  debug_logging: bool
+ports:
+  "10400/tcp": null
+homeassistant: 2023.9.0

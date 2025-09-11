@@ -1,0 +1,22 @@
+name: HACS极速版安装器
+version: "2.0.0"
+slug: hacs-china
+image: ghcr.nju.edu.cn/hacs-china/{arch}-addon-get
+description: 最简单的HACS极速版安装方式
+startup: once
+boot: manual
+url: https://gitee.com/hacs-china/addons/tree/china/get
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+init: false
+options:
+  component: hacs
+schema:
+  component: list(hacs|xiaomi_miot|xiaomi_home|xiaomi_gateway3|sonoff|tianqi|edge_tts|yeelight_pro|ai_conversation|ha_file_explorer|bemfa|midea_ac_lan|haier|terncy)
+  channel: list(current|development)?
+map:
+  - homeassistant_config:rw

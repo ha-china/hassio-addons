@@ -1,0 +1,20 @@
+name: LetoReader
+upstream: latest
+version: latest
+slug: letoreader
+description: 莱托阅读器是一款多功能的快速阅读工具，旨在提高您的阅读效率。它支持高速阅读，例如每分钟400到1000个单词的浏览或轻松文本消费。然而，它也可以以更慢的速度使用，以便更好地理解，同时仍然受益于快速序列视觉呈现（RSVP）。
+  LetoReader is a versatile speed reader designed to enhance your reading efficiency. It supports high-speed reading for skimming or consuming easy texts at e.g. 400-1000 words per minute. However, it can also be used at lower speeds for better comprehension while still benefiting from Rapid Serial Visual Presentation (RSVP)
+arch:
+  - amd64
+  - aarch64
+url: "https://ghfast.top/github.com/jdeath/homeassistant-addons"
+ports:
+  8080/tcp: 8080  
+ports_description:
+  8080/tcp: "Web Interface"
+image: davidewiest/reader
+boot: auto
+startup: services
+webui: "[PROTO:ssl]://[HOST]:[PORT:8080]"
+ingress: false
+ingress_port: 8080 

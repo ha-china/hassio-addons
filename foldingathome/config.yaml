@@ -1,0 +1,19 @@
+name: Folding@home
+version: 0.7.2
+slug: foldingathome
+description: 用全球分布的超计算机与疾病抗争。
+url: https://ghfast.top/github.com/hassio-addons/addon-foldingathome
+codenotary: codenotary@frenck.dev
+webui: http://[HOST]:[PORT:7396]
+arch:
+- amd64
+init: false
+hassio_api: true
+video: true
+ports:
+  7396/tcp: 7396
+  36330/tcp: null
+ports_description:
+  7396/tcp: Web interface
+  36330/tcp: Remote command interface
+image: ghcr.nju.edu.cn/hassio-addons/foldingathome/{arch}

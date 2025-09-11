@@ -1,0 +1,33 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "Convos 是一个运行在浏览器中的IRC客户端，它将IRC体验带入21世纪。",
+  "environment": {
+    "CONVOS_HOME": "/config/"
+  },
+  "map": [
+    "addon_config:rw"
+  ],
+  "image": "ghcr.nju.edu.cn/convos-chat/convos",
+  "version": "v8.07",
+  "name": "convos",
+  "options": {},
+  "ports": {
+    "3000/tcp": "3000"
+  },
+  "ports_description": {
+    "3000/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "convos",
+  "startup": "services",
+  "upstream": "v8.07",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:3000]",
+  "panel_admin": false,
+  "ingress": false,
+  "ingress_port": 3000
+}

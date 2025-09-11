@@ -1,0 +1,28 @@
+{
+  "arch": [
+    "armhf",
+    "armv7",
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "Caddy构建器",
+  "environment": {},
+  "map": [
+    "addon_config:rw"
+  ],
+  "init": "false",
+  "version": "v0.4.5",
+  "name": "caddybuilder",
+  "options": {},
+  "ports": {},
+  "ports_description": {},
+  "schema": {},
+  "slug": "caddybuilder",
+  "startup": "services",
+  "upstream": "v0.4.5",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "panel_admin": false,
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:1432]",
+  "ingress": false
+}

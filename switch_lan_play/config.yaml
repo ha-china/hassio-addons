@@ -1,0 +1,21 @@
+name: Switch LAN Play Client
+version: 1.7.0
+slug: switch-lan-play
+description: 任天堂Switch局域网联机 - 客户端
+url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/switch_lan_play
+arch:
+  - armhf
+  - armv7
+  - amd64
+  - i386
+image: ghcr.nju.edu.cn/faserf/switch_lan_play-{arch}
+init: false
+panel_icon: mdi:local-area-network
+host_network: true
+host_ipc: true
+host_dbus: true
+options:
+  server:
+schema:
+  server: str
+ports: {}

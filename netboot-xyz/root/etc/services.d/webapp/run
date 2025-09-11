@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+
+# Run App
+cd /app
+exec \
+/usr/bin/node app.js

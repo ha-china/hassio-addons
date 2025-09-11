@@ -1,0 +1,29 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：Minecraft专用服务器",
+  "environment": {
+    "EULA": "TRUE"
+  },
+  "map": [
+    "share:rw"
+  ],
+  "name": "minecraftbe",
+  "options": {},
+  "ports": {
+    "19132/udp": 19132
+  },
+  "ports_description": {
+    "19132/udp": "Api Port"
+  },
+  "schema": {},
+  "slug": "minecraftbe",
+  "startup": "services",
+  "upstream": "2025.9.0",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "version": "2025.9.0",
+  "ingress": false
+}

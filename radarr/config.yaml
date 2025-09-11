@@ -1,0 +1,19 @@
+name: Radarr
+version: 0.25.0
+slug: radarr
+description: Usenet和torrent用户的电影组织者/管理员。
+url: https://ghfast.top/github.com/hassio-addons/addon-radarr/tree/main/README.md
+codenotary: codenotary@frenck.dev
+webui: http://[HOST]:[PORT:7878]
+init: false
+arch:
+- aarch64
+- amd64
+- armv7
+map:
+- addon_config:rw
+- share:rw
+- media:rw
+ports:
+  7878/tcp: 7878
+image: ghcr.nju.edu.cn/hassio-addons/radarr/{arch}

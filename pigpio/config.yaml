@@ -1,0 +1,26 @@
+name: pigpio
+version: 1.6.0
+slug: pigpio
+description: $translated_description
+url: https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/pigpio
+arch:
+  - armhf
+  - armv7
+  - aarch64
+startup: services
+gpio: true
+privileged:
+  - SYS_RAWIO
+devices:
+  - /dev/mem
+  - /dev/vcio
+  - /dev/i2c-0
+  - /dev/i2c-1
+image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/pigpio-{arch}
+init: false
+ports:
+  8888/tcp: 8888
+ports_description:
+  8888/tcp: The port to control pigpio
+schema:
+  additional_options: str?

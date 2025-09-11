@@ -1,0 +1,41 @@
+---
+name: Grafana Promtail
+version: 4.0.0
+slug: grafana-promtail
+description: Promtail 是一个代理程序，它将本地日志的内容发送到私有 Loki 实例或 Grafana Cloud。
+  Promtail is an agent which ships the contents of local logs to a private Loki instance or Grafana Cloud.
+arch:
+  - aarch64
+  - amd64
+image: "ghcr.nju.edu.cn/bluemaex/ha-addons-promtail-{arch}"
+startup: system
+url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/promtail
+init: false
+journald: true
+ingress: true
+ingress_port: 9080
+ingress_entry: targets
+ports:
+  9080/tcp: 9080
+  1514/tcp: 1514
+ports_description:
+  9080/tcp: Promtail listen port
+  1514/tcp: Promtail Syslog port
+panel_icon: mdi:router-network
+map:
+  - config
+  - share
+options:
+  log_level: notice
+  client:
+    url: http://c1f54215-grafana-loki:3100/loki/api/v1/push
+schema:
+  client:
+    url: str
+    username: str?
+    password: password?
+  additional_pipeline_stages: str?
+  additional_scrape_configs: str?
+  config_path: str?
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  skip_local_journal_scrape_config: bool?

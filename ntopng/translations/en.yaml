@@ -1,0 +1,49 @@
+configuration:
+  log_level:
+    name: log level
+    description: The amount of logging the add-on should do. [trace|debug|info|notice|warning|error|fatal]
+  ssl:
+    name: ssl
+    description: Use SSL (not needed for ingress)
+  certfile:
+    name: certfile
+    description: Certificate file (not needed for ingress)
+  keyfile:
+    name: keyfile
+    description: Private key file (not needed for ingress)
+  leave_front_door_open:
+    name: leave front door open
+    description: Disable HA authentication when not using ingress. Permit to access addon without authorization!
+  ntop_auth:
+    name: ntop auth
+    description: If using ingress authentication you can disable ntop internal authentication
+  custom_scripts:
+    name: ntop custom scripts
+    description: Make ntop scripts accesible and writable in data/scripts directory
+  dns_mode:
+    name: ntop dns mode
+    description: DNS addresses resolution mode
+  local_net:
+    name: local networks
+    description: list of subnets which are considered local network
+  export_flows:
+    name: export flows
+    description: Expired flows will be stored in the given system (MySQL/MariaDB, ELK)
+  geoip_account_id:
+    name: geoip account id
+    description: MaxMind GeoIp database account id (https://www.maxmind.com/en/accounts/current/license-key)
+  geoip_license_key:
+    name: geoip license key
+    description: MaxMind GeoIp database license key (https://www.maxmind.com/en/accounts/current/license-key)
+  zmq_loc_port:
+    name: NetFlow2NG ZMQ localhost port
+    description: Internal localhost only port for communication from ntopng to NetFlow2NG
+  ntopng_loc_port:
+    name: ntopng web interface localhost port
+    description: Internal localhost only port for ntopng user web interface (accessible by ingress)
+  netflow2ng_loc_port:
+    name: NetFlow2NG web interface localhost port
+    description: Internal localhost only port for NetFlow2NG statistic web interface (accessible by ingress)
+  redis_loc_port:
+    name: Redis localhost port
+    description: Internal localhost only port for communication from ntopng to Redis

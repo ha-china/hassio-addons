@@ -1,0 +1,22 @@
+name: PlanarAlly
+version: "v2025.3.0"
+upstream: 2024.3
+slug: planarally
+description: >-
+  [老王杂谈说]：PlanarAlly是一个开源的虚拟桌面（VTT）网络工具，旨在帮助您和您的玩家发现各种虚构的世界。它设计为无需任何互联网连接即可使用，以适应您的黑暗地牢，并且具有多种功能（如照明和视野）来增强您的沉浸感。
+arch:
+  - amd64
+  - aarch64
+url: "https://ghfast.top/github.com/jdeath/homeassistant-addons"
+ports:
+  8000/tcp: 8000
+ports_description:
+  8000/tcp: "Web Interface"
+map:
+  - type: addon_config
+    read_only: false
+boot: manual
+startup: services
+webui: "[PROTO:ssl]://[HOST]:[PORT:8000]"
+ingress: false
+ingress_port: 8000

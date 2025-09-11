@@ -1,0 +1,10 @@
+{
+  "build_from": {
+    "aarch64": "ghcr.nju.edu.cn/gabe565/castsponsorskip:latest",
+    "amd64": "ghcr.nju.edu.cn/gabe565/castsponsorskip:latest",
+    "armv7": "ghcr.nju.edu.cn/gabe565/castsponsorskip:latest"
+  },
+  "codenotary": {
+    "signer": "alexandrep.github@gmail.com"
+  }
+}

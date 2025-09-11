@@ -1,0 +1,24 @@
+{
+  "arch": [
+    "amd64"
+  ],
+  "boot": "auto",
+  "description": "速度测试。",
+  "environment": {},
+  "name": "speedtest",
+  "options": {},
+  "ports": {
+    "80/tcp": "8099"
+  },
+  "ports_description": {
+    "80/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "speedtest",
+  "startup": "services",
+  "upstream": "1.0",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons/tree/main/speedtest",
+  "image": "e7db/speedtest",
+  "version": "v0.5.4-alpha.0",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:8099]"
+}

@@ -1,0 +1,32 @@
+name: SteVe
+version: 3.0.0
+slug: steve
+description: 电动汽车充电站的Ocpp服务器
+url: https://ghfast.top/github.com/erik73/addon-steve
+arch:
+- aarch64
+- amd64
+stage: experimental
+init: false
+panel_icon: mdi:CarElectric
+map:
+- ssl
+services:
+- mysql:need
+ports:
+  8180/tcp: 8180
+  12801/tcp: null
+ports_description:
+  8180/tcp: SteVe TCP port
+  12801/tcp: SteVe SOAP return port
+hassio_api: true
+options:
+  timezone: CET
+  admin_user: admin
+  admin_password: null
+schema:
+  timezone: str
+  admin_user: str
+  admin_password: str
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+image: ghcr.nju.edu.cn/erik73/steve/{arch}

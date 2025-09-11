@@ -1,0 +1,57 @@
+{
+  "name": "Linux Router",
+  "version": "1.0.3",
+  "slug": "linux-router",
+  "description": "物联网设备的接入点，具有可配置的网络接口、DHCP服务器等。",
+  "arch": [
+    "armhf",
+    "armv7",
+    "aarch64",
+    "amd64",
+    "i386"
+  ],
+  "url": "https://ghfast.top/github.com/joaofl/hassio-addons/tree/master/linux-router",
+  "startup": "system",
+  "boot": "auto",
+  "host_network": true,
+  "apparmor": false,
+  "host_dbus": true,
+  "full_access": true,
+  "privileged": [
+    "NET_ADMIN",
+    "SYS_ADMIN",
+    "SYS_RAWIO",
+    "SYS_TIME",
+    "SYS_NICE"
+  ],
+  "devices": [
+    "/dev/mem"
+  ],
+  "map": [
+    "config:rw",
+    "ssl:rw"
+  ],
+  "init": false,
+  "options": {
+    "ssid": "",
+    "passphrase": "",
+    "channel": "0",
+    "address": "192.168.2.1",
+    "interface": "",
+    "allow_internet": false,
+    "allow_lan": false,
+    "hide_ssid": false,
+    "user_args": ""
+  },
+  "schema": {
+    "ssid": "str",
+    "passphrase": "str",
+    "channel": "int",
+    "address": "str",
+    "interface": "str",
+    "allow_internet": "bool",
+    "allow_lan": "bool",
+    "hide_ssid": "bool",
+    "user_args": "str"
+  }
+}

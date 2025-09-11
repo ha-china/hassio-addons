@@ -1,0 +1,23 @@
+---
+configuration:
+  enable_basic_auth:
+    name: Enable HTTP basic auth
+    description: Toggle on to enable HTTP basic authentication (i.e., password protection)
+  basic_auth_user:
+    name: Basic auth username
+    description: The basic auth username
+  basic_auth_pass:
+    name: Basic auth password
+    description: The basic auth password
+  enable_tls:
+    name: Enable TLS
+    description: Toggle on to enable TLS (you will need to provide a path to certificates)
+  cert_file:
+    name: Public key
+    description: This is a /path/to/fullchain.pem
+  cert_key:
+    name: Private key
+    description: This is a /path/to/privkey.pem
+  cmdline_extra_args:
+    name: Command line extra arguments
+    description: Extra arguments to pass to the "node_exporter" command at startup (see https://ghfast.top/github.com/prometheus/node_exporter/#installation-and-usage for more information)

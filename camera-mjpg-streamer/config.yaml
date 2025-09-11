@@ -1,0 +1,27 @@
+name: "Camera-mjpg-streamer"
+version: "2024.01.0"
+slug: "camera-mjpg-streamer"
+description: "Camera-mjpg-streamer Add-on for Home Assistant"
+url: "https://ghfast.top/github.com/fredrikbaberg/ha-3dprinter-addons/tree/main/camera-mjpg-streamer"
+ingress: true
+ingress_stream: true
+panel_icon: mdi:camera
+panel_title: mjpg-streamer
+arch:
+    - armv7
+    - amd64
+    - armhf
+    - aarch64
+    - i386
+init: false
+video: true
+usb: true
+ports:
+    80/tcp: null
+ports_description:
+    80/tcp: Web-based interface (Not required for Ingress)
+options:
+    mjpg_input: "input_uvc.so -n"
+schema:
+    mjpg_input: "str"
+image: ghcr.nju.edu.cn/fredrikbaberg/ha-addon-camera-mjpg-streamer-{arch}

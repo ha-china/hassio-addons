@@ -1,0 +1,26 @@
+{
+  "name": "xiaozhi MCP",
+  "version": "v0.0.1",
+  "slug": "xiaozhi_mcp",
+  "description": "小智AI对接HA MCP",
+  "url": "https://mp.weixin.qq.com/s/tlGvJSDNNPY_pQ9yr1ZM2A",
+  "arch": [
+    "amd64",
+    "aarch64"
+
+  ],
+  "init": false,
+  "startup": "services",
+  "ingress": true,
+  "hassio_api": true,
+  "image": "ghcr.nju.edu.cn/desmond-dong/xiaozhi/xiaozhi-{arch}",
+  "hassio_role": "manager",
+  "options": {
+    "API_ACCESS_TOKEN": "API_ACCESS_TOKEN",
+    "XIAOZHI_MCP_ENDPOINT": "XIAOZHI_MCP_ENDPOINT"
+  },
+  "schema": {
+    "API_ACCESS_TOKEN": "str",
+    "XIAOZHI_MCP_ENDPOINT": "str"
+  }
+}

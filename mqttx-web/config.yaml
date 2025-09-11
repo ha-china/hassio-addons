@@ -1,0 +1,23 @@
+{
+  "name": "MQTTX Web",
+  "version": "1.11.1",
+  "slug": "mqttx-web",
+  "codenotary": "djhhui@gmail.com",
+  "description": "A web-based MQTT client for Home Assistant.",
+  "arch": [
+    "amd64",
+    "armhf",
+    "armv7",
+    "aarch64",
+    "i386"
+  ],
+  "startup": "services",
+  "boot": "auto",
+  "ports": {
+    "80/tcp": 8080
+  },
+  "webui": "http://[HOST]:[PORT:8080]",
+  "ingress": false,
+  "options": {},
+  "schema": {}
+}

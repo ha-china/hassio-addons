@@ -1,0 +1,30 @@
+---
+name: UnPoller
+version: 3.0.13
+slug: unpoller
+description: 收集您的UniFi控制器数据并将其报告给InfluxDB实例，或将其导出以供Prometheus收集。
+  Collect your UniFi controller data and report it to an InfluxDB instance, or export it for Prometheus collection.
+arch:
+  - aarch64
+  - amd64
+  - armv7
+image: "ghcr.nju.edu.cn/bluemaex/ha-addons-unpoller-{arch}"
+startup: system
+url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/unpoller
+init: false
+ports:
+  9130/tcp: 9130
+ports_description:
+  9130/tcp: Unpoller Prometheus Endpoint
+panel_icon: mdi:router-network
+map:
+  - config
+options:
+  log_level: info
+  dynamic_configuration_path: "/config/addons/unpoller/up.conf"
+  env_vars: []
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
+  dynamic_configuration_path: str?
+  env_vars:
+    - str

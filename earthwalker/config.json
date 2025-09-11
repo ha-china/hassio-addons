@@ -1,0 +1,25 @@
+{
+  "arch": [
+    "amd64"
+  ],
+  "boot": "auto",
+  "description": "地球漫步是一款类似于GeoGuessr的游戏。您会在Google街景中的某个地方被放下，目标是找出您的位置并比所有朋友更精确地猜测出您的位置。您可以与时间赛跑、限制游戏区域等。",
+  "name": "earthwalker",
+  "options": {},
+  "ports": {
+    "8080/tcp": "8080"
+  },
+  "ports_description": {
+    "8080/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "earthwalker",
+  "startup": "services",
+  "upstream": "latest",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "image": "registry.gitlab.com/glatteis/earthwalker",
+  "version": "latest",
+  "panel_admin": false,
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:8080]",
+  "ingress": false
+}

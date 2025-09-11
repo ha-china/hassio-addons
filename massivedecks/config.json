@@ -1,0 +1,26 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64",
+    "armhf",
+    "armv7",
+    "i386"
+  ],
+  "boot": "auto",
+  "description": "喜剧派对游戏《人类荒诞卡》（Cards Against Humanity）是一款基于成人主题的即兴幽默卡片游戏。玩家需要根据给出的提示词或句子，从一套预先准备好的讽刺、粗俗和幽默的备选答案中选择一个最合适的进行搭配，然后其他玩家评价其趣味性和创意性。这款游戏因其无厘头的幽默风格而广受欢迎，但同时也可能包含一些冒犯性的内容，因此适合成年观众。",
+  "environment": {},
+  "name": "massivedecks",
+  "ports": {
+    "8080/tcp": "8080"
+  },
+  "ports_description": {
+    "8080/tcp": "WebUI"
+  },
+  "slug": "massivedecks",
+  "startup": "services",
+  "upstream": "1.0",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons/",
+  "version": "1.0",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:8080]",
+  "ingress": false
+}

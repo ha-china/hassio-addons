@@ -1,0 +1,22 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "manual",
+  "description": "基于Bookbinder的JS应用程序，使用PDF-Lib作为后端库重写，用于装订书籍时格式化PDF。",
+  "environment": {},
+  "version": "v1.3.1",
+  "name": "Book Binder JS",
+  "ports": {
+    "5173/tcp": "5173"
+  },
+  "ports_description": {
+    "5173/tcp": "Web interface"
+  },
+  "slug": "bookbinderjs",
+  "startup": "services",
+  "upstream": "v1.3.1",
+  "panel_admin": false,
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons"
+}

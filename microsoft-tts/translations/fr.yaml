@@ -1,0 +1,22 @@
+---
+configuration:
+  subscription_key:
+    name: Clé d'abonnement
+    description: >-
+      Vous Microsoft Azure Speech Service clé d'abonnement.
+  service_region:
+    name: Région de service
+    description: >-
+      La région dans laquelle vous avez configuré votre instance de service vocal (par exemple uksouth).
+  update_voices:
+    name: Mettre à jour les voix
+    description: >-
+      Téléchargez automatiquement la liste des nouvelles voix à chaque fois que l'add-on
+      démarre. Vous devez également recharger l'intégration Wyoming pour Microsoft dans Home
+      Assistant pour voir de nouvelles voix.
+  debug_logging:
+    name: Journalisation de débogage
+    description: >-
+      Imprimez les messages de niveau DEBUG dans le journal de l'add-on.
+network:
+  10200/tcp: Protocole Wyoming Microsoft

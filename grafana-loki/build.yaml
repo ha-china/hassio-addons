@@ -1,0 +1,18 @@
+---
+build_from:
+  aarch64: "ghcr.nju.edu.cn/home-assistant/aarch64-base:3.22"
+  amd64: "ghcr.nju.edu.cn/home-assistant/amd64-base:3.22"
+codenotary:
+  signer: homeassistant@blmx.de
+  base_image: notary@home-assistant.io
+labels:
+  maintainer: "bluemaex <homeassistant@blmx.de>"
+  org.opencontainers.image.authors: "bluemaex <homeassistant@blmx.de>"
+  org.opencontainers.image.licenses: "MIT License"
+  org.opencontainers.image.title: "Home Assistant Unofficial Add-on: grafana-loki"
+  org.opencontainers.image.url: https://ghfast.top/github.com/bluemaex/home-assistant-addons
+  org.opencontainers.image.source: https://ghfast.top/github.com/bluemaex/home-assistant-addons/grafana-loki
+  org.opencontainers.image.documentation: https://ghfast.top/github.com/bluemaex/home-assistant-addons/grafana-loki/README.md
+  org.opencontainers.image.created: "2025-06-22T19:55:36Z"
+  org.opencontainers.image.revision: 754f7623ae4f824609b754748028f35786baa5e6
+  org.opencontainers.image.version: 4.0.1

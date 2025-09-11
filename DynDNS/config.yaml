@@ -1,0 +1,29 @@
+---
+name: DynDNS
+description: 使用此附加组件，可以将各种动态域名服务（如DynDNS或DDNS）连接到您的Home Assistant实例。
+url: "https://ghfast.top/github.com/Digi92/hassio-addon-repository/tree/main/DynDNS"
+version: 1.0.1
+image: "ghcr.nju.edu.cn/digi92/{arch}hassio-addon-dyndns"
+slug: dyndns
+hassio_api: true
+init: false
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+options:
+  updateUrl: null
+  seconds: 300
+  ipv4: default
+  ipv6: default
+schema:
+  updateUrl: str
+  secondUpdateUrl: str?
+  seconds: int
+  dnsServiceUsername: str?
+  dnsServicePassword: password?
+  ipv4: str?
+  ipv6: str?
+startup: services

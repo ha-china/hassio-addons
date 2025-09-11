@@ -1,0 +1,54 @@
+name: Mailserver
+version: 4.3.0
+slug: mailserver
+description: $translated_description
+url: https://ghfast.top/github.com/erik73/hassio-addons
+arch:
+  - aarch64
+  - amd64
+  - armv7
+  - i386
+init: false
+ingress: true
+ingress_stream: true
+panel_icon: mdi:email
+map:
+  - ssl
+services:
+  - mysql:need
+ports:
+  25/tcp: 25
+  465/tcp: 465
+  587/tcp: 587
+  993/tcp: 993
+  995/tcp: null
+  4190/tcp: 4190
+ports_description:
+  25/tcp: SMTP
+  465/tcp: SMTP
+  587/tcp: SMTP
+  993/tcp: IMAPS
+  995/tcp: POP3S
+  4190/tcp: ManageSieve
+hassio_api: true
+options:
+  my_hostname: mydomain.no-ip.com
+  domain_name: mydomain.no-ip.com
+  admin_user: admin
+  admin_password: null
+  letsencrypt_certs: false
+  enable_mailfilter: false
+  message_size_limit: 10
+schema:
+  my_hostname: str
+  domain_name: str
+  admin_user: str
+  admin_password: str
+  letsencrypt_certs: bool
+  enable_mailfilter: bool
+  smtp_relayhost: str?
+  smtp_relayhost_credentials: str?
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  message_size_limit: int
+  mynetworks: str?
+image: ghcr.nju.edu.cn/erik73/mailserver/{arch}

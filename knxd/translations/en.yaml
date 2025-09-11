@@ -1,0 +1,41 @@
+configuration:
+  address:
+    name: Bus Address for KNXD
+    description: The KNX address for the knxd deamon itself. Used e.g. for requests originating at the group cache.
+  client_address:
+    name: Bus Address Pool for KNXD Clients
+    description: >
+      Address range to be distributed to client connections. Note that the length parameter indicates the number of addresses to be allocated.
+      Example: 1.2.3:5 (This assigns addresses 1.2.3 through 1.2.7 to knxd's clients.)
+  interface:
+    name: Interface Driver
+    description: >
+      The driver knxd should use as interface to talk to the KNX bus. The most common ones for the typical usecase of this add-on are:
+      tpuart (for UART based KNX interfaces, like the one from Busware.de)
+      usb (for commercial USB KNX interfaces)
+      ipt (for connecting to existing IP tunneling interface)
+  device:
+    name: Device to use for connection
+    description: >
+      The physical device address of your adapter in linux.
+      You can try leaving this blank in order for knxd to auto-detect your device.
+  usb_filters:
+    name: usb_filters
+    description: When using an USB interface, you can specify additional filters to use. See the filters[https://ghfast.top/github.com/knxd/knxd/blob/master/doc/inifile.rst#filters] section of the official knxd documentation.
+  custom_config:
+    name: Complete custom config (deprecated)
+    description: >
+      WARNING: This option is deprecated. Your custom configuration will automatically be migrated to the new location in the `addon_config` directory on the first start of this add-on.
+      Once migrated, changes to this configuration option will NO LONGER apply. You will have to make your changes in the file located in the `addon_config` folder of this add-on.
+      
+      Allows you to write your own, custom knxd ini configuration instead of using the prepared template from this add-on that makes use of all the other config options above.
+      Your custom configuration will replace the default configuration provided by this add-on and thus all the other config options above will be ignored. See the knxd documentation for all possible configuration options.
+  log_error_level:
+    name: KNXD Loglevel
+    description: Define the loglevel of knxd.
+  ip_address:
+    name: Interface IP-Address
+    description: IP address the IP based interface should use (only for tpuart-ip, ncn5120-ip and ipt)
+  dest_port:
+    name: Interface port
+    description: network port the IP based interface should use (only for tpuart-ip, ncn5120-ip and ipt)

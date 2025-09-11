@@ -1,0 +1,26 @@
+name: "Wiki.js"
+version: "2.5.305"
+upstream: "2.5.305"
+slug: wikijs
+description: 一个基于Node.js的现代、轻量级且强大的wiki应用程序。
+arch:
+  - amd64
+  - aarch64
+url: "https://ghfast.top/github.com/jdeath/homeassistant-addons"
+ports:
+  3000/tcp: 3000 
+ports_description:
+  3000/tcp: "Web Interface"
+map:
+  - type: addon_config
+    read_only: false
+environment:
+    CONFIG_FILE: "/config/wikijs-config.yml"
+    PUID: "0"
+    PGID: "0"
+image: ghcr.nju.edu.cn/requarks/wiki
+boot: auto
+startup: services
+webui: "[PROTO:ssl]://[HOST]:[PORT:3000]"
+ingress: false
+ingress_port: 3000 

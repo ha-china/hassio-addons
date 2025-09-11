@@ -1,0 +1,21 @@
+name: Matterbridge
+version: 1.4.0
+slug: matterbridge
+description: 不同消息应用程序之间的简单聊天桥接。
+url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/matterbridge
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+image: ghcr.nju.edu.cn/faserf/matterbridge-{arch}
+map:
+  - share:rw
+init: false
+panel_icon: mdi:bridge
+options:
+  config_path: "/share/matterbridge.toml"
+  log_level: info
+schema:
+  config_path: str
+  log_level: list(info|debug)?

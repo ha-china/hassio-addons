@@ -1,0 +1,32 @@
+name: Z-Wave JS UI
+version: 5.1.0
+slug: zwavejs2mqtt
+description: '[老王杂谈说]：完全可配置的Z-Wave JS网关和控制面板'
+url: https://ghfast.top/github.com/hassio-addons/addon-zwave-js-ui
+codenotary: codenotary@frenck.dev
+ingress: true
+ingress_stream: true
+panel_title: Z-Wave JS
+panel_icon: mdi:z-wave
+startup: system
+init: false
+timeout: 30
+arch:
+  - aarch64
+  - amd64
+  - armv7
+discovery:
+  - zwave_js
+services:
+  - mqtt:want
+uart: true
+udev: true
+map:
+  - share:rw
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+ports:
+  3000/tcp: null
+ports_description:
+  3000/tcp: Z-Wave JS communication
+image: ghcr.nju.edu.cn/hassio-addons/zwave-js-ui/{arch}

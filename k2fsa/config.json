@@ -1,0 +1,23 @@
+{
+  "version": "0.1.0",
+  "slug": "k2fsa",
+  "codenotary": "djhhui@gmail.com",
+  "name": "sherpa-onnx",
+  "description": "离线语音转文本，基于sherpa-onnx",
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "init": false,
+  "image": "ghcr.nju.edu.cn/desmond-dong/k2fsa/k2fsa-{arch}",
+  "ports": {
+    "6006/tcp": 6006,
+    "10300/tcp": 10300
+  },
+  "map": [
+    "config:rw"
+  ],
+  "backup_exclude": [
+    "/config/addons_config/k2fsa"
+  ]
+}

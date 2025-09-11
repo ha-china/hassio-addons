@@ -1,0 +1,54 @@
+{
+  "name": "Dynu DNS",
+  "version": "1.0.1",
+  "slug": "dynudns",
+  "description": "通过Dynu使用Let's Encrypt支持免费动态DNS。",
+  "url": "https://ghfast.top/github.com/koying/ha-addons/tree/main/dynudns-addon",
+  "arch": [
+    "armhf",
+    "armv7",
+    "aarch64",
+    "amd64",
+    "i386"
+  ],
+  "startup": "services",
+  "init": false,
+  "hassio_api": true,
+  "hassio_role": "default",
+  "map": [
+    "ssl:rw"
+  ],
+  "options": {
+    "lets_encrypt": {
+      "accept_terms": false,
+      "certfile": "fullchain.pem",
+      "keyfile": "privkey.pem"
+    },
+    "token": null,
+    "domains": [
+      null
+    ],
+    "aliases": [],
+    "seconds": 300
+  },
+  "schema": {
+    "lets_encrypt": {
+      "accept_terms": "bool",
+      "certfile": "str",
+      "keyfile": "str"
+    },
+    "ipv4": "str?",
+    "ipv6": "str?",
+    "token": "str",
+    "domains": [
+      "str"
+    ],
+    "aliases": [
+      {
+        "domain": "str",
+        "alias": "str"
+      }
+    ],
+    "seconds": "int"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "集客AC控制器",
+  "version": "202503181710",
+  "slug": "gecoos",
+  "codenotary": "djhhui@gmail.com",
+  "description": "[老王杂谈说]一个集客AC控制器的 Home Assistant 加载项",
+  "url": "https://www.hasscn.top",
+  "arch": ["aarch64", "amd64"],
+  "startup": "services",
+  "boot": "auto",
+  "webui": "http://[HOST]:[PORT:8080]",
+  "image": "ghcr.nju.edu.cn/desmond-dong/gecoos/gecoos-{arch}",
+  "ports": {
+    "8080/tcp": 8080
+  },
+  "options": {
+    "showtip": 1,
+    "debug": 0,
+    "api_port": 60650,
+    "token": 1,
+    "lang": "zh",
+    "passwd": "admin"
+  },
+  "map": [
+    "config:rw"
+  ],
+  "ports_description": {
+    "8080/tcp": "Web interface"
+  },
+  "schema": {
+    "api_port": "int",
+    "showtip": "int",
+    "debug": "int",
+    "token": "int",
+    "lang": "str",
+    "passwd": "str"
+  },
+  "hassio_role": "manager",
+  "environment": {
+    "GIN_MODE": "release"
+  }
+}

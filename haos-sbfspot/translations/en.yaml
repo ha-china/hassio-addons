@@ -1,0 +1,164 @@
+---
+configuration:
+  Connection_Type:
+    name: Connection Type
+    description: >-
+      Pick Bluetooth or Ethernet, only the related options are generated in SBFspot.cfg
+  Sensors_HA:
+    name: Create or Purge Sensors for the MQTT integration. Set as NO until working MQTT connection or sensor creation will break.
+    description: >-
+      Leave this option on NO, until you have confirmed MQTT connection is working, then create sensors. If you have exisiting yaml sensors, backup and remove them prior to avoid naming conflicts.
+  BTAddress:
+    name: Bluetooth Mac !secret BTAddress is Default
+    description: >-
+      Your Inverter Bluetooth MAC Address
+  Password:
+    name: Password !secret SBFpassword is Default
+    description: >-
+      Inverter password - usually 0000 or Sunny Explorer password.
+  LocalBTAddress:
+    name: Host BT MAC !secret LocalBTAddress
+    description: >-
+      Your Host Bluetooth MAC. It is shown in the logs. It can be Blank.
+  IP_Address:
+    name: Ethernet IP address
+    description: >-
+      Inverter IP address. Can be comma separated for Multiple Inverters. 196.168.01.10, 196.168.01.20
+  MIS_Enabled:
+    name: MIS_Enabled Multi Inverter Systems
+    description: >-
+      It is only for Bluetooth multi inverter systems. 0 Disabled, 1 Enabled.
+  Plantname:
+    name: Plant Name !secret Plantname
+    description: >-
+      Plant name is used to create your mqtt topic.
+  OutputPath:
+    name: Data path
+    description: >-
+      /data/sbfspot/%Y is default. Set to default now! Leave empty!
+  OutputPathEvents:
+    name: Events Path
+    description: >-
+      /data/sbfspot/%Y/events is default. Set to default now! Leave empty!
+  Latitude:
+    name: Latitude !secret home_lat
+    description: >-
+      Position of pv-plant http://itouchmap.com/latlong.html
+  Longitude:
+    name: Longitude !secret home_long
+    description: >-
+      Example for Ukkel, Belgium Latitude=50.80 Longitude=4.33
+  CalculateMissingSpotValues:
+    name: Calculate Missing Spot Values
+    description: >-
+      If set to 1, values not provided by inverter will be calculated. eg: Pdc1 = Idc1 * Udc1
+  DateTimeFormat:
+    name: Date and Time format for InvTime SunRise and SunSet.
+    description: >-
+      Custom time display for InvTime SunRise and SunSet (looks nice '%H:%M:%S %d/%m/%Y' ) see strftime() function
+  SynchTime:
+    name: Inverter Sync Time. Default is 0 if left blank
+    description: >-
+      SynchTime (0-30 - 0=disabled, 1=once a day (default), 7=once a week, 30=once a month) If set to non-zero value, the plant time is synchronised with local host time
+  SynchTimeLow:
+    name: Sync Lower threshold
+    description: SynchTimeLow (1-120 - default 1)
+  SynchTimeHigh:
+    name: Sync High threshold
+    description: >-
+      SynchTimeHigh (1200-3600 - default 3600) Plant time is adjusted to local host time when SynchTime=1 and time difference is between SynchTimeLow and SynchTimeHigh limits
+  SunRSOffset:
+    name: Sun Rise/Set Offset
+    description: >-
+      Offset to start before sunrise and end after sunset (0-3600 - default 900 seconds)
+  Locale:
+    name: Language for CSV
+    description: >-
+      Default en-US Supported locales: de-DE;en-US;fr-FR;nl-NL;es-ES;it-IT
+  Timezone:
+    name: Timezone !secret Timezone
+    description: Europe/Brussels
+  BTConnectRetries:
+    name: BT connection attempts
+    description: >-
+      Number of Bluetooth Connection attempts (1-15; Default=10) Leave blank!
+  CSV_Export:
+    name: CSV Export Leave blank! in theory you can send csv to the outputpath..
+    description: >-
+      CSV Export to data path. Leave off. Data paths are not maintained for file deletion.
+  SQL_Database:
+    name: SQL DB Name.
+    description: >-
+      The name of your SBFspot DB. SBFspot is default.
+  SQL_Hostname:
+    name: MariaDB hostname or IP
+    description: >-
+      core-mariadb is default. <Network Name> or <IP-address>
+  SQL_Port:
+    name: SQL port
+    description: >-
+      3306 is default. This port needs to be enabled in the MariaDB addon.
+  SQL_Username:
+    name: SQL User
+    description: >-
+      User and Pass need to be created in MariaDB addon. myPHPadmin addon can be used for Initial DB table creation see readme for link to creation file.
+  SQL_Password:
+    name: SQL password !secret mariadb_pw
+    description: >-
+      User and Pass need to be created in MariaDB addon. !secret mariadb_pw is default!
+  MQTT_Publisher:
+    name: MQTT publish binary path.
+    description: >-
+      /usr/bin/mosquitto_pub is correct. Leave blank it will default!
+  MQTT_Host:
+    name: MQTT Host
+    description: >-
+      core-mosquitto is default for HA. MQTT host IP or Hostname.
+  MQTT_Port:
+    name: MQTT Port
+    description: >-
+      1883 is default. Can be Blank.
+  MQTT_User:
+    name: MQTT User !secret mqtt_user is default!
+    description: >-
+      MQTT username. Defaults to !secret mqtt_user if blank! Required for Sensor setup.
+  MQTT_Pass:
+    name: MQTT Pass !secret mqtt_pass is default!
+    description: >-
+      MQTT password. Defaults to !secret mqtt_pass if blank! Required for Sensor setup.
+  MQTT_Topic:
+    name: MQTT Topic Leave as default for sensors!
+    description: >-
+      homeassistant/sbfspot_{plantname}/sbfspot_{serial} is default. {plantname} and {serial} are captured variables.
+  MQTT_ItemFormat:
+    name: MQTT json globbing style
+    description: >-
+      '"{key}": {value}' is default. Leave blank for default!
+  MQTT_ItemDelimiter:
+    name: MQTT json separator
+    description: >-
+      comma is default.
+  MQTT_PublisherArgs:
+    name: MQTT_PublisherArgs - - Option removed to allow Sensor set up. Add MQTT_User and MQTT_Pass to respective options.
+    description: >-
+      Option removed to allow Sensor set up. Add MQTT_User and MQTT_Pass to respective options.
+  MQTT_Data:
+    name: MQTT Sensors items. Add or remove desired options. The list be found in SBFspot.default.cfg or the readme.
+    description: >-
+      Timestamp,SunRise,SunSet,InvSerial,InvName,InvTime,InvStatus,InvSwVer,InvClass,InvType,InvTemperature,OperTm,FeedTm,EToday,ETotal,GridFreq,PACTot,PAC1,UAC1,IAC1,PDCTot,UDC1,UDC2,IDC1,IDC2,PDC1,PDC2,BTSignal is default
+  PVoutput_SID:
+    name: PVoutput SID !secret pvoSID
+    description: >-
+      Add your Inverter serial number and PVoutput API id here. Inverter serial > 0123456789:12345 < PVoutput ID
+  PVoutput_Key:
+    name: PVoutput API key !secret pvoAPIkey
+    description: >-
+      Add you PVoutput API key here. Defaults to fake if you don't want to create an account.
+  LogDir:
+    name: PVoutput Upload logs. This option is defunct. Removed in SBFspot 3.9.6
+    description: >-
+      Removed in SBFspot 3.9.6
+  LogLevel:
+    name: PVoutput upload logs level
+    description: >-
+      debug|info|warning|error (default info)

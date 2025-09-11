@@ -1,0 +1,19 @@
+---
+version: "3.0"
+slug: cec_scan
+name: CEC Scanner
+url: https://ghfast.top/github.com/home-assistant/addons/tree/master/cec_scan
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+boot: manual
+description: 扫描HDMI CEC设备
+image: docker.1ms.run/homeassistant/{arch}-addon-cec_scan
+options: {}
+schema: {}
+startup: once
+video: true
+init: false

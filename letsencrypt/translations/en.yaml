@@ -1,0 +1,59 @@
+---
+configuration:
+  domains:
+    name: Domains
+    description: >-
+      The domain names to issue certificates for, use "*.yourdomain.com" for
+      wildcard certificates.
+  email:
+    name: Email
+    description: The email address that will be registered for the certificate.
+  keyfile:
+    name: Private Key File
+    description: Path to where the Private Key File will be placed.
+  certfile:
+    name: Certificate File
+    description: Path to where the Certificate File will be placed.
+  challenge:
+    name: Challenge
+    description: The type of challenge used to validate the domain.
+  acme_server:
+    name: Custom ACME Server
+    description: >-
+      By default, this add-on uses Let's Encrypt's servers. However, you can
+      specify a different ACME server.
+  acme_root_ca_cert:
+    name: ACME Root CA Certificate
+    description: >-
+      Only relevant with a custom ACME server using a certificate signed by an
+      untrusted certificate authority (CA) that requires addition to the trust
+      store.
+  dns:
+    name: DNS
+    description: DNS Provider configuration
+  key_type:
+    name: Key Type
+    description: >-
+      Select the certificate key type. If unset, will auto-detect based on
+      the key type of the existing certificate or default to ecdsa.
+  elliptic_curve:
+    name: Elliptic Curve
+    description: >-
+      Elliptic curve for ECDSA keys. This option must be used with Key Type
+      set to ECDSA. If unset the Certbot default will be used.
+  dry_run:
+    name: Dry Run
+    description: >-
+      Do a certbot dry-run for requesting the certificates from Let's Encrypt.
+      This is ignored if a custom server is used.
+  test_cert:
+    name: Issue test certificates
+    description: >-
+      Obtain a test certificate from Let's Encrypt staging server.
+      This is ignored if a custom server is used.
+  verbose:
+    name: Verbose Mode
+    description: >-
+      Run certbot in verbose mode.
+network:
+  80/tcp: Only needed for http challenge

@@ -1,0 +1,28 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Start Microsoft service
+# ==============================================================================
+flags=("--profanity $(bashio::config 'profanity')")
+
+if bashio::config.true 'update_languages'; then
+    flags+=('--update-languages')
+fi
+
+if bashio::config.true 'debug_logging'; then
+    flags+=('--debug')
+fi
+
+# Combine multiple languages into a single string separated by spaces
+IFS=';' read -ra languages <<< "$(bashio::config 'language')"
+# language_flags=$(printf "%s " "${languages[@]}")
+
+echo "Starting Microsoft STT service with flags: ${flags[@]}, --language ${languages[@]}"
+
+exec uv run -m wyoming_microsoft_stt \
+    --uri "tcp://0.0.0.0:10300" \
+    --subscription-key "$(bashio::config 'subscription_key')" \
+    --service-region "$(bashio::config 'service_region')" \
+    --download-dir /data \
+    --language ${languages[@]} \
+    ${flags[@]}

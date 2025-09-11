@@ -1,0 +1,24 @@
+name: PostScript Printer
+version: 20240504-20-edge
+slug: postscript-printer
+description: 支持使用PostScript的打印机。
+url: https://ghfast.top/github.com/Eskander/ha-addon-printer
+arch:
+  - amd64
+  - aarch64
+  - armv7
+stage: experimental
+init: false
+environment:
+  PORT: "631"
+webui: http://[HOST]:[PORT:631]
+host_network: true
+usb: true
+map:
+  - type: data
+    path: /etc/cups/
+    read_only: false
+  - type: addon_config
+    path: /var/lib/ps-printer-app
+    read_only: false
+image: ghcr.nju.edu.cn/openprinting/ps-printer-app

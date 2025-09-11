@@ -1,0 +1,10 @@
+{
+  "build_from": {
+    "aarch64": "docker.1ms.run/ertagh/teamspeak3-server:latest-predownloaded",
+    "amd64": "docker.1ms.run/ertagh/teamspeak3-server:x64-latest-predownloaded",
+    "armv7": "docker.1ms.run/ertagh/teamspeak3-server:latest-predownloaded"
+  },
+  "codenotary": {
+    "signer": "alexandrep.github@gmail.com"
+  }
+}

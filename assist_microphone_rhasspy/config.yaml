@@ -1,0 +1,48 @@
+---
+version: 2.2.3
+slug: assist_microphone_rhasspy
+name: Assist Microphone Rhasspy
+description: 流式麦克风音频到Assist
+url: https://ghfast.top/github.com/rhasspy/hassio-addons
+hassio_api: true
+arch:
+  - amd64
+  - aarch64
+map:
+  - share:rw
+options:
+  token: null
+  vad: "disabled"
+  volume: 1.0
+  awake_sound: "/usr/src/sounds/awake.wav"
+  done_sound: "/usr/src/sounds/done.wav"
+  noise_suppression: 2
+  auto_gain: 15
+  volume_multiplier: 1.0
+  wake_buffer_seconds: 0.0
+  udp_mic: false
+  pipeline: ""
+  host: "homeassistant"
+  debug_logging: false
+  debug_recording_dir: ""
+schema:
+  token: str
+  vad: list(disabled|webrtcvad|silero)
+  volume: float
+  noise_suppression: int
+  auto_gain: int
+  volume_multiplier: float
+  awake_sound: str
+  done_sound: str
+  wake_buffer_seconds: float
+  udp_mic: bool
+  pipeline: str
+  host: str
+  debug_logging: bool
+  debug_recording_dir: str
+init: false
+audio: true
+homeassistant_api: true
+ports:
+  "5000/udp": null
+homeassistant: 2023.9.0.dev20230809

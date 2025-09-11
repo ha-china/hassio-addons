@@ -1,0 +1,29 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "manual",
+  "description": "自动获取MS奖励计划积分并为您完成所有任务（玩测验、搜索等）",
+  "environment": {},
+  "map": [
+    "addon_config:rw"
+  ],
+  "version": "0.1.0",
+  "name": "Microsoft Rewards Farmer - Develop",
+  "options": {
+    "GEO": "US",
+    "LANG": "en"
+  },
+  "schema": {
+    "GEO": "str",
+    "LANG": "str"
+  },
+  "ports": {},
+  "ports_description": {},
+  "slug": "msrewardsfarmer_devel",
+  "startup": "services",
+  "upstream": "0.1.0",
+  "host_network": "true",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons"
+}

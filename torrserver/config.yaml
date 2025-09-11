@@ -1,0 +1,47 @@
+---
+name: TorrServer
+slug: torrserver
+description: '[老王杂谈说]：TorrServer for home assistant'
+image: ghcr.nju.edu.cn/aatrubilin/hassio-torrserver/{arch}
+version: 1.4.0-MatriX.136
+url: https://ghfast.top/github.com/aatrubilin/hassio-torrserver
+codenotary: aatrubilin@gmail.com
+init: false
+auth_api: true
+arch:
+  - armv7
+  - armhf
+  - amd64
+  - i386
+  - aarch64
+map:
+  - addon_config:rw
+options:
+  port: 8090
+  httpauth: false
+  logins:
+    - username: homeassistant
+      password: homeassistant
+  tgtoken: ""
+  m3u_custom_host: ""
+  ssl: false
+  ssl_port: 8091
+  ssl_cert: ""
+  ssl_key: ""
+schema:
+  port: "int(1024,49151)"
+  httpauth: bool
+  logins:
+    - username: str
+      password: password
+  tgtoken: "str?"
+  m3u_custom_host: "str?"
+  ssl: bool
+  ssl_port: "int(1024,49151)"
+  ssl_cert: "str?"
+  ssl_key: "str?"
+ingress: true
+ingress_port: 8090
+host_network: true
+startup: system
+panel_icon: mdi:movie

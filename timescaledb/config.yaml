@@ -1,0 +1,55 @@
+name: TimescaleDB
+version: 5.2.0
+slug: timescaledb
+description: 一个基于PostgreSQL的开源数据库，用于使用SQL的强大和便利性分析时间序列数据。
+  data with the power and convenience of SQL
+url: https://ghfast.top/github.com/expaso/hassos-addon-timescaledb
+codenotary: hans@expaso.nl
+arch:
+- armhf
+- aarch64
+- amd64
+- armv7
+- i386
+startup: system
+init: false
+tmpfs: true
+map:
+- share:rw
+- backup:rw
+- media:rw
+timeout: 60
+ports:
+  5432/tcp: null
+ports_description:
+  5432/tcp: PostgreSQL Port. Beware! This port may already be in use. Choose another
+    port-number if the add-on won't start.
+options:
+  databases:
+  - homeassistant
+  timescale_enabled:
+  - homeassistant
+  timescaledb:
+    telemetry: basic
+    maxmemory: 512MB
+    maxcpus: 4
+  max_connections: 50
+  system_packages: []
+  init_commands: []
+  retry_upgrade: false
+schema:
+  databases:
+  - str
+  timescale_enabled:
+  - str
+  timescaledb:
+    telemetry: list(off|basic)
+    maxmemory: str?
+    maxcpus: int(1,)?
+  max_connections: int(20,)
+  system_packages:
+  - str
+  init_commands:
+  - str
+  retry_upgrade: bool?
+image: ghcr.nju.edu.cn/expaso/timescaledb/{arch}

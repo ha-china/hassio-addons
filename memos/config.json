@@ -1,0 +1,32 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "一个注重隐私的轻量级笔记服务。轻松捕捉和分享你的精彩想法。",
+  "environment": {
+    "MEMOS_DATA": "/config/"
+  },
+  "map": [
+    "addon_config:rw"
+  ],
+  "image": "neosmemo/memos",
+  "version": "0.25.0",
+  "name": "memos",
+  "options": {},
+  "ports": {
+    "5230/tcp": "5230"
+  },
+  "ports_description": {
+    "5230/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "memos",
+  "startup": "services",
+  "upstream": "0.25.0",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:5230]",
+  "ingress": false,
+  "ingress_port": 5230
+}

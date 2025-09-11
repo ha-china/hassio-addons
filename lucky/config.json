@@ -1,0 +1,22 @@
+{
+  "name": "Lucky",
+  "version": "2.18.2",
+  "slug": "lucky",
+  "codenotary": "djhhui@gmail.com",
+  "description": "A Lucky add-on for Home Assistant",
+  "image": "ghcr.nju.edu.cn/desmond-dong/lucky/lucky-{arch}",
+  "arch": ["aarch64", "amd64"],
+  "startup": "services",
+  "boot": "auto",
+  "host_network": true,
+  "ingress": true,
+  "ingress_port": 16601,
+  "panel_icon": "mdi:server-network",
+  "map": [
+    "config:rw"
+  ],
+  "ports": {
+    "16601/tcp": 16601
+  },
+  "webui": "http://[HOST]:[PORT:16601]"
+}

@@ -1,0 +1,6 @@
+---
+build_from:
+  aarch64: ghcr.nju.edu.cn/linkwarden/linkwarden:latest
+  amd64: ghcr.nju.edu.cn/linkwarden/linkwarden:latest
+codenotary:
+  signer: alexandrep.github@gmail.com

@@ -1,0 +1,30 @@
+{
+  "arch": [
+    "amd64",
+    "armv7"
+  ],
+  "boot": "auto",
+  "description": "这是一个用Go语言编写的简单书签管理器。旨在作为Pocket的简单克隆版。",
+  "environment": {
+    "SHIORI_DIR": "/config/"
+  },
+  "map": [
+    "addon_config:rw"
+  ],
+  "name": "shiori",
+  "options": {},
+  "ports": {
+    "8080/tcp": 8000
+  },
+  "ports_description": {
+    "8080/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "shiori",
+  "startup": "services",
+  "upstream": "v1.7.4",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "version": "v1.7.4",
+  "ingress": false,
+  "image": "ghcr.nju.edu.cn/go-shiori/shiori"
+}

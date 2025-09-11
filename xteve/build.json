@@ -1,0 +1,10 @@
+{
+  "build_from": {
+    "aarch64": "docker.1ms.run/senexcrenshaw/xteve:latest",
+    "amd64": "docker.1ms.run/senexcrenshaw/xteve:latest",
+    "armv7": "docker.1ms.run/senexcrenshaw/xteve:latest"
+  },
+  "codenotary": {
+    "signer": "alexandrep.github@gmail.com"
+  }
+}

@@ -1,0 +1,40 @@
+---
+name: Telegraf2Hassio
+version: 0.1.4
+slug: telegraf2hassio
+description: 将 Telegraf 指标转换为 Hass.io 自发现的传感器。
+arch:
+- armhf
+- armv7
+- aarch64
+- amd64
+- i386
+url: https://ghfast.top/github.com/joaofl/hassio-addons/tree/master/telegraf2hassio
+startup: application
+services:
+- mqtt:need
+boot: auto
+host_network: true
+devices:
+- "/dev/mem"
+map:
+- config:rw
+- share:rw
+init: false
+options:
+  mqtt_broker: localhost
+  mqtt_port: 1883
+  mqtt_user: MQTT_USER
+  mqtt_pass: MQTT_PASS
+  telegraf_topic: telegraf/#
+  calc_rate: host_sensor_measurement_1,host_sensor_measurement_2
+  log_level: info
+schema:
+  mqtt_broker: str
+  mqtt_port: int
+  mqtt_user: str
+  mqtt_pass: str
+  telegraf_topic: str
+  calc_rate: str
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
+

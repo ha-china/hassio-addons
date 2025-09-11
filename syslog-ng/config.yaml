@@ -1,0 +1,33 @@
+---
+name: syslog-ng
+version: 5.0.5
+slug: syslog-ng
+description: syslog-ng 允许您灵活地收集、解析、分类、重写和关联来自整个基础设施的日志，并将它们存储或路由到日志分析工具。
+  syslog-ng allows you to flexibly collect, parse, classify, rewrite
+  and correlate logs from across your infrastructure and store or route
+  them to log analysis tools
+arch:
+  - aarch64
+  - amd64
+image: "ghcr.nju.edu.cn/bluemaex/ha-addons-syslog_ng-{arch}"
+startup: system
+url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/syslog-ng
+init: false
+ports:
+  5514/udp: 5514
+  6601/tcp: 6601
+  6514/tcp: 6514
+ports_description:
+  5514/udp: Syslog UDP
+  6601/tcp: Syslog TCP
+  6514/tcp: Syslog TLS
+map:
+  - config
+  - ssl
+options:
+  promtail_host: c1f54215-grafana-promtail
+  promtail_port: 1514
+schema:
+  config_path: str?
+  promtail_host: str
+  promtail_port: int

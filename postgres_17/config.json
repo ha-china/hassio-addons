@@ -1,0 +1,44 @@
+{
+  "arch": [
+    "aarch64",
+    "amd64"
+  ],
+  "backup": "cold",
+  "codenotary": "alexandrep.github@gmail.com",
+  "description": "[老王杂谈说]：带有VectorChord支持的Postgres 17",
+  "environment": {
+    "CONFIG_LOCATION": "/config/postgresql.conf",
+    "PGDATA": "/config/database"
+  },
+  "hassio_api": true,
+  "hassio_role": "manager",
+  "image": "ghcr.nju.edu.cn/alexbelgium/postgres_17-{arch}",
+  "init": false,
+  "map": [
+    "addon_config:rw",
+    "homeassistant_config:rw",
+    "media:rw"
+  ],
+  "name": "Postgres 17",
+  "options": {
+    "POSTGRES_PASSWORD": "homeassistant"
+  },
+  "ports": {
+    "5432/tcp": 5432
+  },
+  "ports_description": {
+    "5432/tcp": "Postgres"
+  },
+  "schema": {
+    "POSTGRES_DB": "str?",
+    "POSTGRES_HOST_AUTH_METHOD": "str?",
+    "POSTGRES_INITDB_ARGS": "str?",
+    "POSTGRES_PASSWORD": "password",
+    "POSTGRES_USER": "str?"
+  },
+  "slug": "postgres_latest",
+  "startup": "system",
+  "udev": true,
+  "url": "https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/postgres",
+  "version": "17.4-13"
+}

@@ -1,0 +1,28 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "一个支持86种文件格式、四种颜色方案和13种用户可选语言的自主托管拖放式文件转换服务器及文件共享工具。",
+  "environment": {},
+  "map": [],
+  "image": "zelon88/hrconvert2",
+  "version": "v3.3.7",
+  "name": "hrconvert2",
+  "options": {},
+  "ports": {
+    "80/tcp": "8080"
+  },
+  "ports_description": {
+    "80/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "hrconvert2",
+  "startup": "services",
+  "upstream": "v3.3.7",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:8080]",
+  "ingress": false,
+  "ingress_port": 80
+}

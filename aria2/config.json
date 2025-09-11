@@ -1,0 +1,42 @@
+{
+    "name": "Aria2",
+    "version": "1.37.0",
+    "slug": "aria2",
+    "codenotary": "djhhui@gmail.com",
+    "description": "Aria2 download manager",
+    "url": "https://github.com/Desmond-Dong/hassio-addons",
+    "startup": "services",
+    "hassio_role": "manager",
+    "panel_icon": "mdi:download",
+    "host_network": true,
+    "ingress": true,
+    "image": "ghcr.nju.edu.cn/desmond-dong/aria2/aria2-{arch}",
+    "ingress_port": 8080,
+    "arch": [
+        "amd64",
+        "aarch64"
+    ],
+    "boot": "auto",
+    "options": {
+        "options": []
+    },
+    "schema": {
+        "downloads": "str?",
+        "secret": "str?",
+        "options": [
+            {
+                "name": "str",
+                "value": "str"
+            }
+        ]
+    },
+    "ports": {
+        "6800/tcp": 6800,
+        "8080/tcp": 8080
+    },
+    "map": [
+        "share:rw",
+        "config:rw"
+    ],
+    "webui": "http://[HOST]:[PORT:8080]/"
+}

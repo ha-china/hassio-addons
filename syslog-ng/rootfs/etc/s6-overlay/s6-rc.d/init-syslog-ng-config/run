@@ -1,0 +1,32 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+# generate config
+mkdir -p /data/log
+gomplate -f /defaults/syslog-ng.conf.gotmpl -d options=/data/options.json -o /data/syslog-ng.conf
+
+CONF_VERSION=$(grep -oP "@version: \K(\d+\.\d+)" "/data/syslog-ng.conf")
+SYSLOG_VERSION=$(syslog-ng --version | grep "Config version" | awk -F ':' '{print $2}' | tr -d '[:space:]')
+
+if [[ -f "/data/syslog-ng.conf" ]] && (( $(bc -l <<< "${CONF_VERSION} < ${SYSLOG_VERSION}") )); then
+cat <<-EOF
+********************************************************
+********************************************************
+*                                                      *
+*                         !!!!                         *
+*    WARNING: Configuration file format is too old,    *
+*     syslog-ng is running in compatibility mode.      *
+*                                                      *
+*   To upgrade the configuration, please review any    *
+*    warnings about incompatible changes in the log.   *
+*                                                      *
+*   Once completed change the @version header at the   *
+*       top of the configuration file to "${SYSLOG_VERSION}"        *
+*                                                      *
+*                                                      *
+********************************************************
+********************************************************
+EOF
+fi
+
+lsiown -R abc:abc /data

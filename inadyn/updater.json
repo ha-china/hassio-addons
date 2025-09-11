@@ -1,0 +1,9 @@
+{
+  "github_beta": "true",
+  "last_update": "23-09-2023",
+  "repository": "alexbelgium/hassio-addons",
+  "slug": "inadyn",
+  "source": "github",
+  "upstream_repo": "troglobit/inadyn",
+  "upstream_version": "2.12.0"
+}

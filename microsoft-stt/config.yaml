@@ -1,0 +1,26 @@
+name: Microsoft STT
+description: '[老王杂谈说]：使用Microsoft Azure进行语音转文字'
+version: 1.3.3
+slug: wyoming_microsoft_stt
+init: false
+arch:
+  - aarch64
+  - amd64
+discovery:
+  - wyoming
+ports:
+  10300/tcp: null
+options:
+  language: en-GB
+  debug_logging: false
+  update_languages: true
+  profanity: masked
+schema:
+  subscription_key: str
+  service_region: str
+  language: str
+  debug_logging: bool
+  update_languages: bool
+  profanity: list(off|masked|removed)
+tmpfs: true
+image: ghcr.nju.edu.cn/hugobloem/{arch}-wyoming-microsoft-stt

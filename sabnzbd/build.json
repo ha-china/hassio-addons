@@ -1,0 +1,9 @@
+{
+  "build_from": {
+    "aarch64": "docker.1ms.run/linuxserver/sabnzbd:arm64v8-latest",
+    "amd64": "docker.1ms.run/linuxserver/sabnzbd:amd64-latest"
+  },
+  "codenotary": {
+    "signer": "alexandrep.github@gmail.com"
+  }
+}

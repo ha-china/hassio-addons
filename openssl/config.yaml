@@ -1,0 +1,19 @@
+name: OpenSSL
+version: 1.7.0
+slug: openssl
+description: 生成自签名证书
+url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/openssl
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+image: ghcr.nju.edu.cn/faserf/openssl-{arch}
+map:
+  - ssl:rw
+init: false
+options:
+  website_name:
+schema:
+  website_name: str

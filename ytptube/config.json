@@ -1,0 +1,45 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：youtube-dl的Web图形用户界面",
+  "map": [
+    "share:rw",
+    "addon_config:rw",
+    "media:rw"
+  ],
+  "version": "v0.9.4",
+  "name": "ytptube",
+  "environment": {
+    "PUID": "1000",
+    "PGID": "1000",
+    "USER_ID": "1000"
+  },
+  "options": {
+    "YTP_REMOVE_FILES": false,
+    "YTP_CONSOLE_ENABLED": false,
+    "YTP_BROWSER_ENABLED": false,
+    "YTP_DOWNLOAD_PATH": "/share/ytptube/"
+  },
+  "schema": {
+    "YTP_REMOVE_FILES": "bool",
+    "YTP_CONSOLE_ENABLED": "bool",
+    "YTP_BROWSER_ENABLED": "bool",
+    "YTP_DOWNLOAD_PATH": "str"
+  },
+  "ports": {
+    "8081/tcp": "8081"
+  },
+  "ports_description": {
+    "8081/tcp": "Web interface"
+  },
+  "slug": "ytptube",
+  "startup": "services",
+  "upstream": "2025-05-30",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:8081]",
+  "ingress": false,
+  "ingress_port": 8081
+}

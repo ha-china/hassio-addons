@@ -1,0 +1,64 @@
+configuration:
+  hq_name:
+    name: Nom du contrat
+    description: "Le nom donné au contrat (maison, chalet, etc) qui apparait dans Home-Assistant et MQTT (default: maison)"
+  hq_username:
+    name: Adresse Couriel
+    description: L'adresse couriel associée à votre compte HydroQuébec
+  hq_password:
+    name: Mot de passe
+    description: Votre mot de passe HydroQuébec
+  hq_customer:
+    name: Numéro de client
+    description: Numéro de client figurant sur votre facture (10 chiffres, vous devrez peut-être ajouter un 0 au début)
+  hq_account:
+    name: Numéro de compte
+    description: Numéro de compte figurant sur votre facture (12 chiffres)
+  hq_contract:
+    name: Numéro de contrat
+    description: Numéro de contrat figurant sur votre facture (10 chiffres, vous devrez peut-être ajouter un 0 au début)
+  hq_rate:
+    name: Tarif du contrat
+    description: "Code de tarif du contrat (ex: D,DT,DPC)"
+  hq_rate_option:
+    name: Option tarifaire du contrat
+    description: "Code de l'option tarifaire appliquée au contrat (ex: CPC, NONE). Dois être à NONE si aucune option n'est présente."
+  sync_hourly_consumption:
+    name: Sync Hourly Consumption
+    description: Active la fonction de consommation horaire (pour configurer le HASS Energy Dashboard)
+  preheat_duration_minutes:
+    name: Temps de préchauffage
+    description: Défini combien de temps (minutes) en avance le préchauffage doit se déclencher avant un évènement de pointe
+  mqtt_discovery_data_topic:
+    name: MQTT Discovery Data Topic
+    description: Le MQTT discovery topic pour Home Assistant, à modifier à vos risques
+  mqtt_data_root_topic:
+    name: MQTT Data Root Topic
+    description: Le sujet MQTT racine où les valeurs générées par hydroqc seront publiées
+  mqtt_username:
+    name: MQTT Nom d'utilisateur
+    description: MQTT Nom d'utilisateur
+  mqtt_password:
+    name: MQTT Mot de passe
+    description: MQTT Mot de passe
+  mqtt_server:
+    name: MQTT Serveur
+    description: Adresse du serveur MQTT
+  mqtt_port:
+    name: MQTT Port
+    description: Port du serveur MQTT
+  ha_url:
+    name: Home Assistant URL
+    description: URL du websocket vers HASS Core.
+  ha_token:
+    name: Home Assistant Token
+    description: Le jeton du superviseur pour accéder à l'api HASS websocket core
+  timezone:
+    name: Fuseau Horaire
+    description: Votre fuseau horaire, le défaut est "America/Toronto"
+  log_level:
+    name: Niveau du journal
+    description: Niveau de journalisation (daemon & HTTP)
+  hydroqc_config_file:
+    name: Fichier de configuration
+    description:  Modifiez à vos risques ! Fichier de configuration à utiliser pour hydroqc2mqtt

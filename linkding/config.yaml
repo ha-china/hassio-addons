@@ -1,0 +1,24 @@
+name: "linkding"
+version: "1.42.0"
+upstream: "1.42.0"
+slug: linkding
+description: >-
+  [老王杂谈说]：Linkding 是一个你可以自行托管的收藏夹管理器。它设计得简约、快速，并易于使用 Docker 设置。
+arch:
+  - amd64
+  - aarch64
+url: "https://ghfast.top/github.com/jdeath/homeassistant-addons"
+ports:
+  9090/tcp: 9090
+ports_description:
+  9090/tcp: "Web Interface"
+map:
+  - type: addon_config
+    read_only: false
+    path: /etc/linkding/data
+image: sissbruecker/linkding
+boot: auto
+startup: services
+webui: "[PROTO:ssl]://[HOST]:[PORT:9090]"
+ingress: false
+ingress_port: 9090

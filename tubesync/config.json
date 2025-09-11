@@ -1,0 +1,32 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64",
+    "armhf",
+    "armv7",
+    "i386"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：TubeSync 是一个用于 YouTube 的个人视频录像机 (PVR)",
+  "environment": {},
+  "map": [
+    "config:rw"
+  ],
+  "name": "tubesync",
+  "options": {},
+  "ports": {
+    "4848/tcp": "4848"
+  },
+  "ports_description": {
+    "4848/tcp": "WebUI"
+  },
+  "schema": {},
+  "slug": "tubesync",
+  "startup": "services",
+  "upstream": "1.0",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons/tree/main/tubesync",
+  "version": "v0.15.9",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:4848]",
+  "init": false,
+  "ingress": false
+}

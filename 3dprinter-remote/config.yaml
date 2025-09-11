@@ -1,0 +1,28 @@
+name: "3DPrinter-Remote"
+version: "2024.01.0"
+slug: "3dprinter-remote"
+description: "3DPrinter-Remote is a 3D printer management software that allows you to control and monitor your 3D printer from a web interface."
+url: "https://ghfast.top/github.com/fredrikbaberg/ha-3dprinter-addons/tree/main/3dprinter-remote"
+arch:
+    - armv7
+    - amd64
+    - armhf
+    - aarch64
+    - i386
+init: false
+gpio: true
+usb: true
+uart: true
+ports:
+    9999/tcp: 9999
+ports_description:
+    9999/tcp: Port for access to ser2net
+options:
+    printer_path: "/dev/null"
+    printer_baudrate: "115200"
+    ser2net_args: ""
+schema:
+    printer_path: "str"
+    printer_baudrate: "int"
+    ser2net_args: "str?"
+image: ghcr.nju.edu.cn/fredrikbaberg/ha-addon-3dprinter-remote-{arch}

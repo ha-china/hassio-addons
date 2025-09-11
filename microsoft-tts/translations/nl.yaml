@@ -1,0 +1,22 @@
+---
+configuration:
+  subscription_key:
+    name: Abonnementssleutel
+    description: >-
+      Uw Microsoft Azure Speech Service-abonnementssleutel.
+  service_region:
+    name: Service-regio
+    description: >-
+      De regio waarin u uw Speech Service-instantie hebt ingesteld (bijv. westeurope).
+  update_voices:
+    name: Stemmen bijwerken
+    description: >-
+      Download de lijst met nieuwe stemmen automatisch elke keer dat de add-on
+      start.  U moet ook de Wyoming-integratie voor Microsoft opnieuw laden in Home
+      Assistent om nieuwe stemmen te zien.
+  debug_logging:
+    name: Debug logging
+    description: >-
+      Print DEBUG level messages to the add-on's log.
+network:
+  10200/tcp: Microsoft Wyoming Protocol

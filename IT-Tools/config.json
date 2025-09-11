@@ -1,0 +1,29 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "开发者及IT行业人员有用的工具。",
+  "environment": {},
+  "map": [],
+  "image": "corentinth/it-tools",
+  "version": "2024.10.22-7ca5933",
+  "name": "IT-Tools",
+  "options": {},
+  "ports": {
+    "80/tcp": "80"
+  },
+  "ports_description": {
+    "80/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "IT-Tools",
+  "startup": "services",
+  "upstream": "2024.10.22-7ca5933",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:80]",
+  "panel_admin": false,
+  "ingress": false,
+  "ingress_port": 80
+}

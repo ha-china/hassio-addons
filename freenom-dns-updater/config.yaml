@@ -1,0 +1,26 @@
+name: Freenom-dns-updater
+version: 1.6.9
+slug: freenom-dns-updater
+description: Freenom 注册商域名管理 - 更新 DNS 记录、管理（添加/更新/删除）域名的 DNS 记录、自动续费域名等。
+  Freenom Registrar Domain Management - update dns records, Manage (add/update/remove)
+  a domain's dns record, auto renew domains and more.
+url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/freenom-dns-updater
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+startup: application
+boot: auto
+map:
+  - share:rw
+ingress: false
+init: false
+panel_icon: mdi:web-box
+options:
+  config_file:
+  update_time_in_seconds: 86400
+schema:
+  config_file: str
+  update_time_in_seconds: int

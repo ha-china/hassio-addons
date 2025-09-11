@@ -1,0 +1,24 @@
+---
+version: 1.2.1
+slug: snowboy
+name: snowboy
+description: 使用怀俄明协议的snowboy唤醒词检测。
+url: https://ghfast.top/github.com/rhasspy/hassio-addons/tree/master/snowboy
+arch:
+  - amd64
+  - aarch64
+  - armv7
+init: false
+discovery:
+  - wyoming
+map:
+  - share:rw
+options:
+  sensitivity: 0.5
+  debug_logging: false
+schema:
+  sensitivity: float
+  debug_logging: bool
+ports:
+  "10400/tcp": null
+homeassistant: 2023.9.0

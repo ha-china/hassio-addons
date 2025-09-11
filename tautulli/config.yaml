@@ -1,0 +1,23 @@
+name: Tautulli
+version: 4.2.1
+slug: tautulli
+description: Plex媒体服务器的监控和跟踪工具。
+url: https://ghfast.top/github.com/hassio-addons/addon-tautulli/tree/main/README.md
+codenotary: codenotary@frenck.dev
+webui: '[PROTO:ssl]://[HOST]:[PORT:8181]'
+arch:
+- aarch64
+- amd64
+- armv7
+init: false
+hassio_api: true
+ports:
+  8181/tcp: 8181
+ports_description:
+  8181/tcp: Tautulli web interface
+map:
+- share:rw
+- backup:rw
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+image: ghcr.nju.edu.cn/hassio-addons/tautulli/{arch}

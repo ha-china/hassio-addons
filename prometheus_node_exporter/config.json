@@ -1,0 +1,51 @@
+{
+  "name": "Prometheus Node Exporter",
+  "version": "1.0.5",
+  "slug": "prometheus_node_exporter",
+  "description": "Prometheus节点导出器用于硬件和操作系统指标。",
+  "url": "https://ghfast.top/github.com/loganmarchione/hassos-addons/tree/main/prometheus_node_exporter",
+  "image": "ghcr.nju.edu.cn/loganmarchione/hassos-addons/prometheusnodeexporter-{arch}",
+  "arch": [
+    "amd64",
+    "aarch64",
+    "armv7"
+  ],
+  "startup": "services",
+  "init": false,
+  "webui": "[PROTO:enable_tls]://[HOST]:[PORT:9100]",
+  "ports": {
+    "9100/tcp": 9100
+  },
+  "ports_description": {
+    "9100/tcp": "Default node exporter port and web interface"
+  },
+  "map": [
+    "config:rw",
+    "ssl"
+  ],
+  "hassio_api": true,
+  "homeassistant_api": true,
+  "auth_api": true,
+  "docker_api": true,
+  "host_network": true,
+  "host_pid": true,
+  "apparmor": false,
+  "options": {
+    "enable_basic_auth": false,
+    "basic_auth_user": "",
+    "basic_auth_pass": "",
+    "enable_tls": false,
+    "cert_file": "",
+    "cert_key": "",
+    "cmdline_extra_args": ""
+  },
+  "schema": {
+    "enable_basic_auth": "bool",
+    "basic_auth_user": "str",
+    "basic_auth_pass": "password",
+    "enable_tls": "bool",
+    "cert_file": "str",
+    "cert_key": "str",
+    "cmdline_extra_args": "str?"
+  }
+}

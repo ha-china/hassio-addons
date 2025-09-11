@@ -1,0 +1,61 @@
+name: Sync Home Assistant Addons
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60  # 添加超时限制
+
+    steps:
+      - name: Checkout public repo
+        uses: actions/checkout@v4
+      - name: Checkout private repo
+        uses: actions/checkout@v4
+        with:
+          repository: desmond-dong/haos-cn-scripts
+          token: ${{ secrets.GH_PAT }}
+          path: private
+
+
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            ~/.cache
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-deps-
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install jq -y
+          npm install -g ai-markdown-translator
+          mkdir -p ~/bin
+          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O ~/bin/yq
+          chmod +x ~/bin/yq
+          echo "$HOME/bin" >> $GITHUB_PATH
+          yq
+          
+      - name: Run private build script
+        run: |
+          chmod +x private/*.sh
+          private/addons.sh
+        env:
+          ZHIPUAI_KEY: ${{ secrets.ZHIPUAI_KEY }}
+            
+
+          
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          rm -rf private
+          git add .
+          git reset --soft $(git commit-tree HEAD^{tree} -m "Sync addons automatically at $(date +'%Y-%m-%d %H:%M:%S')")
+          git push -f origin main

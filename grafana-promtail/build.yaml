@@ -1,0 +1,18 @@
+---
+build_from:
+  aarch64: ghcr.nju.edu.cn/hassio-addons/debian-base/aarch64:7.8.3
+  amd64: ghcr.nju.edu.cn/hassio-addons/debian-base/amd64:7.8.3
+codenotary:
+  signer: homeassistant@blmx.de
+  base_image: notary@home-assistant.io
+labels:
+  maintainer: "bluemaex <homeassistant@blmx.de>"
+  org.opencontainers.image.authors: "bluemaex <homeassistant@blmx.de>"
+  org.opencontainers.image.licenses: "MIT License"
+  org.opencontainers.image.title: "Home Assistant Unofficial Add-on: grafana-promtail"
+  org.opencontainers.image.url: https://ghfast.top/github.com/bluemaex/home-assistant-addons
+  org.opencontainers.image.source: https://ghfast.top/github.com/bluemaex/home-assistant-addons/grafana-promtail
+  org.opencontainers.image.documentation: https://ghfast.top/github.com/bluemaex/home-assistant-addons/grafana-promtail/README.md
+  org.opencontainers.image.created: "2025-06-21T09:46:57Z"
+  org.opencontainers.image.revision: 3698c5d68c830957fb9a7f4d731707c3c9ec74a7
+  org.opencontainers.image.version: 4.0.0

@@ -1,0 +1,39 @@
+name: Music Assistant Server (dev/nightly)
+# version number gets updated only when the mass base image updates!
+version: 1.3.2
+slug: music_assistant_dev
+description: '[老王杂谈说]：Music Assistant 开发（夜间）版本。这个附加组件在启动时直接从 git 中的（可配置）分支安装最新版本。如果你想要紧跟最新的尖端开发，但请自行承担风险使用，不推荐日常使用。只需重新启动附加组件即可从源获取最新版本。'
+url: https://music-assistant.io
+arch:
+  - amd64
+  - aarch64
+homeassistant_api: true
+auth_api: true
+host_network: true
+ingress: true
+ingress_port: 8094
+panel_icon: mdi:play-circle
+panel_title: Music Assistant
+panel_admin: false
+uart: false
+map:
+  - media:rw
+init: false
+advanced: false
+stage: experimental
+tmpfs: true
+backup_exclude:
+  - cache.db
+  - collage_images/*
+  - .cache/*
+options:
+  log_level: info
+  branch: dev
+  safe_mode: false
+schema:
+  log_level: list(debug|info|warning|error)
+  branch: str
+  safe_mode: bool
+privileged:
+  - SYS_ADMIN
+  - DAC_READ_SEARCH

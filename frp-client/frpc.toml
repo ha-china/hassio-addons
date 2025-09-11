@@ -1,0 +1,38 @@
+serverAddr = "your_server_addr"
+serverPort = 7000
+auth.method = "token"
+auth.token = "123456789"
+
+log.to = "/share/frpc.log"
+# trace, debug, info, warn, error
+log.level = "trace"
+log.maxDays = 3
+
+# transport.tls.enable = false
+# transport.tls.certFile = "/share/frp/fullchain.pem"
+# transport.tls.keyFile = "/share/frp/privkey.pem"
+# transport.tls.trustedCaFile = "/share/frp/fullchain.pem"
+# transport.tls.serverName = "your_server_name"
+
+webServer.addr = "0.0.0.0"
+webServer.port = 7500
+webServer.user = "admin"
+webServer.password = "123456789"
+
+[[proxies]]
+name = "your_proxy_name"
+type = "http"
+customDomains = ["your_domain"]
+transport.useEncryption = true
+transport.useCompression = true
+localPort = 8123
+localIP = "0.0.0.0"
+
+# [proxies.plugin]
+# type = "https2http"
+# localAddr = "your_ip:8123"
+# crtPath = "/share/frp/fullchain.pem"
+# keyPath = "/share/frp/privkey.pem"
+# hostHeaderRewrite = "your_host_header_rewrite"
+# requestHeaders.set.x-from-where = "frp"
+

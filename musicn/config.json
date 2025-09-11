@@ -1,0 +1,32 @@
+{
+  "name": "musicn",
+  "version": "3.21.0",
+  "slug": "musicn",
+  "codenotary": "djhhui@gmail.com",
+  "description": "一个可播放及下载音乐的 Node.js 工具，目前已经支持国内用户直接安装使用，不用魔法",
+  "url": "https://github.com/Desmond-Dong/hassio-addons",
+  "arch": [
+    "aarch64",
+    "amd64"
+  ],
+  "startup": "services",
+  "boot": "auto",
+  "init": false,
+  "image": "ghcr.nju.edu.cn/desmond-dong/musicn/musicn-{arch}",
+  "hassio_api": true,
+  "hassio_role": "manager",
+  "ports": {
+    "7478/tcp": 7478
+  },
+  "ports_description": {
+    "7478/tcp": "Web Server port"
+  },
+  "restart": "unless-stopped",
+  "map": [
+    "config:rw"
+  ],
+  "options": {},
+  "schema": {},
+  "webui": "http://[HOST]:[PORT:7478]",
+  "log_level": "info"
+}

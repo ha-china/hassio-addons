@@ -1,0 +1,26 @@
+name: tuya-convert BETA
+version: 0.1.4
+slug: tuya-convert
+description: Tuya 转换器 - 使用开源软件刷入 Tuya/SmartLife 设备。这是一个测试版，不再维护！
+url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/tuya-convert
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+startup: services
+map:
+  - share:rw
+host_network: true
+init: false
+privileged:
+  - NET_ADMIN
+options:
+  backup_path: "/share/tuya-convert/"
+  firmware: tasmota.bin
+  accept_eula: "false"
+schema:
+  backup_path: str
+  firmware: str
+  accept_eula: str

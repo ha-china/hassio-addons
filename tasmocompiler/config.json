@@ -1,0 +1,30 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64",
+    "armv7"
+  ],
+  "boot": "auto",
+  "description": "一个简单的Web图形用户界面，允许您使用自己的设置编译令人惊叹的Tasmota固件。",
+  "environment": {
+    "TZ": "America/New_York"
+  },
+  "name": "tasmocompiler",
+  "options": {},
+  "ports": {
+    "3000/tcp": 3000
+  },
+  "ports_description": {
+    "3000/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "tasmocompiler",
+  "startup": "services",
+  "upstream": "1.0",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "image": "benzino77/tasmocompiler",
+  "version": "12.7.0",
+  "ingress": false,
+  "ingress_port": 3000,
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:3000]"
+}

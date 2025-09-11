@@ -1,0 +1,24 @@
+name: Pocket ID
+version: 1.1.14
+slug: pocket-id
+description: '[老王杂谈说]：简单的OIDC提供者用于密钥认证'
+url: https://ghfast.top/github.com/einschmidt/addon-pocket-id
+arch:
+  - amd64
+  - aarch64
+options:
+  log_level: info
+  APP_URL: http://localhost
+  TRUST_PROXY: false
+schema:
+  log_level: list(debug|info|warn|error)
+  APP_URL: str
+  TRUST_PROXY: bool
+  MAXMIND_LICENSE_KEY: str?
+ports:
+  1411/tcp: 1411
+init: false
+map:
+  - type: data
+    path: /app/data
+image: ghcr.nju.edu.cn/einschmidt/pocket-id/{arch}

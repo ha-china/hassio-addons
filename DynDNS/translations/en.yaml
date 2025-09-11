@@ -1,0 +1,40 @@
+---
+configuration:
+  dnsServiceUsername:
+    name: DNS service authentication username
+    description: >-
+      For some dynDNS services you have to authenticate yourself during the request.
+      To do this, you have to enter the corresponding username here.
+  dnsServicePassword:
+    name: DNS service authentication password
+    description: >-
+      For some dynDNS services you have to authenticate yourself during the request.
+      To do this, you have to enter the corresponding password here
+  updateUrl:
+    name: DNS service update url
+    description: >-
+      The DNS update url must be entered here.
+      In addition, there are various variables for replacing dynamic parts of the update url.
+      For Example: https://dyndns.inwx.com/nic/update?myip=${ipv4}&myipv6=${ipv6}
+      or https://www.duckdns.org/update?domains=example.duckdns.org&token=abcd1234-1234-abcd-1234-abcdef123456&ip=${ipv4}&ipv6=${ipv6}
+  secondUpdateUrl:
+    name: Second DNS service update url
+    description: >-
+      In some cases, you may need to update IPv4 and IPv6 in two separate requests, so you can enter the second DNS update url here.
+      In addition, there are various variables for replacing dynamic parts of the update url.
+      For Example: https://dyndns.inwx.com/nic/update?myip=${ipv4}&myipv6=${ipv6}
+      or https://www.duckdns.org/update?domains=example.duckdns.org&token=abcd1234-1234-abcd-1234-abcdef123456&ip=${ipv4}&ipv6=${ipv6}
+  seconds:
+    name: Seconds
+    description: >-
+      The number of seconds to wait before updating DynDNS subdomains.
+  ipv4:
+    name: IPv4
+    description: >-
+      This option allows to specify either 'default' or an interface name to use an IPv4
+      address of the host, alternatively you can input an address manually.
+  ipv6:
+    name: IPv6
+    description: >-
+      This option allows to specify either 'default' or an interface name to use an IPv6
+      address of the host, alternatively you can input an address manually.

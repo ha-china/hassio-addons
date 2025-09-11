@@ -1,0 +1,10 @@
+{
+  "build_from": {
+    "aarch64": "docker.1ms.run/franchetti/seafile-arm:latest",
+    "amd64": "docker.1ms.run/franchetti/seafile-arm:latest",
+    "armv7": "docker.1ms.run/franchetti/seafile-arm:latest"
+  },
+  "codenotary": {
+    "signer": "alexandrep.github@gmail.com"
+  }
+}

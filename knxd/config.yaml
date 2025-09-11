@@ -1,0 +1,48 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
+name: KNXD daemon
+version: "0.6.1"
+slug: knxd
+description: KNXD守护进程可以通过TUART或USB总线适配器创建一个KNX/IP网关。
+url: https://ghfast.top/github.com/da-anda/hass-io-addons/tree/main/knxd
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+init: false
+startup: services
+host_network: true
+privileged:
+  - SYS_MODULE
+  - SYS_RAWIO
+options:
+  address: "0.0.1"
+  client_address: "0.0.2:8"
+  interface: usb
+  log_error_level: warning
+  usb_filters: single
+  dest_port: "99"
+schema:
+  address: "match(^\\d+\\.\\d+.\\d+$)"
+  client_address: "match(^\\d+\\.\\d+.\\d+\\:\\d+$)"
+  interface: "list(tpuart|tpuart-ip|usb|ft12|ft12cemi|ncn5120|ncn5120-ip|ipt|dummy)"
+  device: "device?"
+  log_error_level: "list(warning|error|fatal|note|info|debug)"
+  usb_filters: "str?"
+  ip_address: "str?"
+  dest_port: "port?"
+  custom_config: "str?"
+watchdog: "tcp://[HOST]:[PORT:6720]"
+ports:
+  "6720/tcp": 6720
+  "3671/udp": 3671
+ports_description:
+  "6720/tcp": "Required by knx interface and being able to access the KNX bus via ETS"
+  "3671/udp": "Required by knx interface and being able to access the KNX bus via ETS"
+image: "ghcr.nju.edu.cn/da-anda/hass-io-addons-{arch}-addon-knxd"
+uart: true
+usb: true
+map:
+  - type: addon_config
+    read_only: false

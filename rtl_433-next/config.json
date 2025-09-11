@@ -1,0 +1,34 @@
+{
+  "name": "rtl_433 (next)",
+  "image": "ghcr.nju.edu.cn/pbkhrv/rtl_433-hass-addons-rtl_433-next-{arch}",
+  "version": "next",
+  "slug": "rtl433-next",
+  "description": "通过SDR接收器使用rtl_433接收无线传感器数据。",
+  "url": "https://ghfast.top/github.com/pbkhrv/rtl_433-hass-addons/tree/main/rtl_433-next",
+  "arch": [
+    "armhf",
+    "armv7",
+    "aarch64",
+    "amd64",
+    "i386"
+  ],
+  "startup": "application",
+  "boot": "auto",
+  "init": false,
+  "map": [
+    "config:rw"
+  ],
+  "services": [
+    "mqtt:want"
+  ],
+  "usb": true,
+  "udev": true,
+  "options": {
+    "rtl_433_conf_file": "",
+    "retain": true
+  },
+  "schema": {
+    "rtl_433_conf_file": "str?",
+    "retain": "bool"
+  }
+}

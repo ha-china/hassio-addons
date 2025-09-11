@@ -1,0 +1,37 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：Silver Bullet (SB) 是一个可扩展的开源个人知识平台",
+  "environment": {
+    "SB_FOLDER": "/config/",
+    "PUID": "0",
+    "PGID": "0"
+  },
+  "map": [
+    "addon_config:rw"
+  ],
+  "version": "2.0.0",
+  "name": "silverbullet",
+  "ports": {
+    "3000/tcp": "3000"
+  },
+  "ports_description": {
+    "3000/tcp": "Web interface"
+  },
+  "options": {
+    "SB_USER": ""
+  },
+  "schema": {
+    "SB_USER": "str?"
+  },
+  "slug": "silverbullet",
+  "startup": "services",
+  "upstream": "2.0.0",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:3000]",
+  "ingress": false,
+  "ingress_port": 3000
+}

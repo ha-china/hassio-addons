@@ -1,0 +1,55 @@
+---
+version: 2.0.4
+slug: rhasspy-speech
+name: rhasspy-speech
+description: Rhasspy的语音转文本系统
+url: https://ghfast.top/github.com/rhasspy/hassio-addons/tree/master/rhasspy-speech
+arch:
+  - amd64
+  - aarch64
+init: false
+discovery:
+  - wyoming
+map:
+  - share:rw
+ingress: true
+homeassistant_api: true
+options:
+  language: "en"
+  builtin_intents: true
+  download_entities: true
+  decode_mode: "auto"
+  streaming: true
+  # Misc
+  debug_logging: false
+schema:
+  language: |
+    list(ca|cs|de|el|en|es|eu|fa|fi|fr|hi|it|ka|mn|nl|pl|pt|ro|ru|sl|sw|ta|th|tr)
+  streaming: bool
+  decode_mode: |
+    list(auto|strict|flexible|flexible_2pass)
+  builtin_intents: bool
+  download_entities: bool
+  # Audio
+  volume_multiplier: float?
+  # VAD
+  vad: bool?
+  vad_threshold: float?
+  before_speech_seconds: float?
+  # Speex
+  speex: bool?
+  speex_noise_suppression: int?
+  speex_auto_gain: int?
+  # Transcribers
+  max_fuzzy_cost: float?
+  max_active: int?
+  lattice_beam: float?
+  acoustic_scale: float?
+  beam: float?
+  nbest: int?
+  arpa_rescore_order: int?
+  # Misc
+  debug_logging: bool
+ports:
+  "10300/tcp": null
+homeassistant: 2023.11.0

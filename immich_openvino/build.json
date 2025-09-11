@@ -1,0 +1,8 @@
+{
+  "build_from": {
+    "amd64": "ghcr.nju.edu.cn/imagegenius/immich:openvino"
+  },
+  "codenotary": {
+    "signer": "alexandrep.github@gmail.com"
+  }
+}

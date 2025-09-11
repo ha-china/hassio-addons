@@ -1,0 +1,44 @@
+
+
+build_from: 
+  aarch64: docker.1ms.run/privoce/vocechat-server:v0.4.3-arm64
+  amd64: docker.1ms.run/privoce/vocechat-server:v0.4.3
+
+labels:
+  maintainer: "Desmond Dong"
+  io.hass.addon.changelog: |
+    ## v0.4.0
+    - Updated VoceChat server to version 0.4.0.
+    - Added support for ARM architecture.
+    ## v0.3.57
+    - Fixed issue where data would be lost after a restart.
+    ## v0.3.54
+    - Initial release of VoceChat addon for Home Assistant
+    - First version of VoceChat server integration
+  io.hass.addon.version: "v0.4.0"
+  io.hass.addon.name: "VoceChat Server"
+  io.hass.addon.description: "VoceChat Server Add-on for Home Assistant with persistent data \n 关注微信号：老王杂谈说 获取更多内容吧"
+  io.hass.addon.url: "https://github.com/Desmond-Dong/hassio-addons"
+  io.hass.addon.arch: "amd64, armhf, aarch64"
+  io.hass.addon.init: "false"
+  io.hass.addon.startup: "services"
+  io.hass.addon.ingress: "true"
+  io.hass.addon.ingress_port: "3000"
+  io.hass.addon.panel_icon: "mdi:chat"
+  io.hass.addon.map: |
+    - /config/addons_config/vocechat-server:/home/vocechat-server
+  io.hass.addon.ports: |
+    3000/tcp: 3000
+  io.hass.addon.ports_description: |
+    3000/tcp: "VoceChat Server"
+  io.hass.addon.hassio_api: "true"
+  io.hass.addon.hassio_role: "manager"
+  io.hass.addon.options: |
+    data_path: "/config/addons_config/vocechat-server/data"
+  io.hass.addon.schema: |
+    data_path: str
+  io.hass.addon.image: |
+    amd64: "docker.io/privoce/vocechat-server:v0.4.1"
+    arm64: "docker.io/privoce/vocechat-server:v0.4.1-arm64"
+  io.hass.addon.webui: "http://[HOST]:[PORT:3000]"
+  io.hass.addon.watchdog: "http://[HOST]:[PORT:3000]"

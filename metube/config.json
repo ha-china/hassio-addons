@@ -1,0 +1,37 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：youtube-dl的Web界面",
+  "map": [
+    "share:rw",
+    "media:rw"
+  ],
+  "version": "2025.09.06",
+  "name": "metube",
+  "options": {
+    "DELETE_FILE_ON_TRASHCAN": false,
+    "DOWNLOAD_DIR": "/share/metube/",
+    "YTDL_OPTIONS": "{\"cookiefile\":\"/share/cookies.txt\"}"
+  },
+  "ports": {
+    "8081/tcp": "8081"
+  },
+  "ports_description": {
+    "8081/tcp": "Web interface"
+  },
+  "schema": {
+    "DELETE_FILE_ON_TRASHCAN": "bool",
+    "DOWNLOAD_DIR": "str",
+    "YTDL_OPTIONS": "str"
+  },
+  "slug": "metube",
+  "startup": "services",
+  "upstream": "2025.09.06",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:8081]",
+  "ingress": true,
+  "ingress_port": 8081
+}

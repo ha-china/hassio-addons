@@ -1,0 +1,73 @@
+#include <tunables/global>
+
+profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+
+  # Capabilities
+  file,
+  signal (send) set=(kill,term,int,hup,cont),
+
+  # S6-Overlay
+  /init ix,
+  /bin/** ix,
+  /usr/bin/** ix,
+  /run/{s6,s6-rc*,service}/** ix,
+  /package/** ix,
+  /command/** ix,
+  /etc/services.d/** rwix,
+  /etc/cont-init.d/** rwix,
+  /etc/cont-finish.d/** rwix,
+  /run/{,**} rwk,
+  /dev/tty rw,
+
+  capability setgid,
+  capability setuid,
+
+  # Bashio
+  /usr/lib/bashio/** ix,
+  /tmp/** rwk,
+
+  # HA base s6 target requires curl connection to supervisor API
+  /usr/bin/curl cx -> curl,
+  profile curl flags=(complain,attach_disconnected,mediate_deleted) {
+    #include <abstractions/base>
+
+    file,
+    network inet tcp,
+    network inet udp,
+    network inet6 tcp,
+    network inet6 udp,
+  }
+
+  # Access to options.json and other files within your addon
+  /data/** rw,
+
+  # Allow for addon specific init tasks
+  /etc/s6-overlay/s6-rc.d/init-taptap/run cx -> init,
+  profile init flags=(complain,attach_disconnected,mediate_deleted) {
+    #include <abstractions/base>
+
+    file,
+    capability chown,
+    /run/taptap rw,
+    /etc/taptap/config.ini rw,
+  }
+
+  # Start new profile for service
+  /usr/bin/taptap/taptap-mqtt.py cx -> taptap,
+  profile taptap flags=(complain,attach_disconnected,mediate_deleted) {
+    #include <abstractions/base>
+
+    file,
+    # Receive signals from S6-Overlay
+    signal (receive) peer=*_ADDON_SLUG,
+
+    # Allow the use of IPv4 TCP networking
+    network inet tcp,
+
+    # Access required for service functionality
+    /usr/bin/taptap/taptap ix,
+    /run/taptap/** w,
+    /dev/tty?* rw,
+  }
+}

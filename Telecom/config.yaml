@@ -1,0 +1,29 @@
+{
+  "name": "chinatelecommonitor",
+  "version": "1.0.1",
+  "slug": "chinatelecommonitor",
+  "codenotary": "djhhui@gmail.com",
+  #"url": "https://mp.weixin.qq.com/s/48n8mq8wK2mgxr9JyyupuQ",
+  "description": "中国电信 话费、通话、流量 套餐用量监控 \n 关注微信号：老王杂谈说 获取更多内容吧",
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "startup": "services",
+  "boot": "auto",
+  "ports": {
+    "10000/tcp": 10000
+  },
+  "webui": "http://[HOST]:[PORT:10000]",
+  "panel_icon": "mdi:currency-cny",
+  "options": {
+    "WHITELIST_NUM": ""
+  },
+  "schema": {
+    "WHITELIST_NUM": "str?"
+  },
+  "environment": {
+    "CONFIG_PATH": "/data",
+    "WHITELIST_NUM": ""
+  }
+}

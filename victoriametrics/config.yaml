@@ -1,0 +1,41 @@
+---
+name: Victoria Metrics
+version: 2.0.7
+slug: victoriametrics
+description: VictoriaMetrics 是一个快速、低成本且可扩展的监控解决方案和时间序列数据库。
+  VictoriaMetrics is a fast, cost-effective and scalable monitoring solution and time series database.
+arch:
+  - aarch64
+  - amd64
+  - armv7
+  - i386
+image: "ghcr.nju.edu.cn/bluemaex/ha-addons-victoriametrics-{arch}"
+startup: system
+url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/victoriametrics
+ports:
+  8428/tcp: 8428
+  2003/udp: null
+ports_description:
+  8428/tcp: victoriametrics HTTP Endpoint
+  2003/udp: Graphite TCP listener Endpoint
+init: false
+ingress: true
+ingress_entry: /vmui
+ingress_port: 8428
+panel_icon: mdi:monitor-eye
+map:
+  - config
+options:
+  log_level: info
+  dynamic_configuration_path: "/config/addons/victoriametrics"
+  retention: "5y"
+  additional_arguments: ""
+  use_agent_instead: false
+  agent_remote_write_url: ""
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
+  dynamic_configuration_path: str
+  additional_arguments: str?
+  retention: str
+  use_agent_instead: bool
+  agent_remote_write_url: str?

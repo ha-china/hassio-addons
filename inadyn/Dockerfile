@@ -1,0 +1,133 @@
+#============================#
+#  ALEXBELGIUM'S DOCKERFILE  #
+#============================#
+#           _.------.
+#       _.-`    ('>.-`"""-.
+# '.--'`       _'`   _ .--.)
+#    -'         '-.-';`   `
+#    ' -      _.'  ``'--.
+#        '---`    .-'""`
+#               /`
+#=== Home Assistant Addon ===#
+
+#################
+# 1 Build Image #
+#################
+
+FROM docker.1ms.run/troglobit/inadyn:latest
+
+##################
+# 2 Modify Image #
+##################
+
+# Set S6 wait time
+ENV S6_CMD_WAIT_FOR_SERVICES=1 \
+    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
+    S6_SERVICES_GRACETIME=0
+
+
+ARG BUILD_ARCH
+ENV LANG='C.UTF-8'\
+    TERM='xterm-256color'\
+    GOPATH='/opt/go'
+
+##################
+# 3 Install apps #
+##################
+
+# Add rootfs
+COPY rootfs/ /
+
+# Uses /bin for compatibility purposes
+# hadolint ignore=DL4005
+RUN if [ ! -f /bin/sh ] && [ -f /usr/bin/sh ]; then ln -s /usr/bin/sh /bin/sh; fi && \
+    if [ ! -f /bin/bash ] && [ -f /usr/bin/bash ]; then ln -s /usr/bin/bash /bin/bash; fi
+
+# Modules
+ARG MODULES="00-banner.sh 01-custom_script.sh"
+
+# Automatic modules download
+ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_automodules.sh" "/ha_automodules.sh"
+RUN chmod 744 /ha_automodules.sh && /ha_automodules.sh "$MODULES" && rm /ha_automodules.sh
+
+# Manual apps
+ENV PACKAGES="curl \
+    jq \
+    bash \
+    build-base libressl-dev ca-certificates npm"
+
+# Automatic apps & bashio
+ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_autoapps.sh" "/ha_autoapps.sh"
+RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.sh
+
+# Install mustache
+# spellcheck disable=SC2015
+# hadolint ignore=SC2015,DL3017
+RUN apk add --no-cache \
+    go \
+    npm \
+    xz \
+    #    && npm install mustache-cli --global
+    && apk upgrade --no-cache &&\
+    apk add --no-cache --virtual .build-deps\
+    build-base\
+    git\
+    go &&\
+    go env -w GO111MODULE=off &&\
+    go get -u github.com/quantumew/mustache-cli &&\
+    cp "$GOPATH"/bin/* /usr/bin/ && \
+    rm -rf "$GOPATH" /var/cache/apk/* /tmp/src &&\
+    apk del .build-deps xz build-base || true
+
+################
+# 4 Entrypoint #
+################
+
+# Add entrypoint
+ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
+ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" "/ha_entrypoint.sh"
+
+# Entrypoint modifications
+ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint_modif.sh" "/ha_entrypoint_modif.sh"
+RUN chmod 777 /ha_entrypoint.sh /ha_entrypoint_modif.sh && /ha_entrypoint_modif.sh && rm /ha_entrypoint_modif.sh
+
+WORKDIR /
+
+ENTRYPOINT [ "/usr/bin/env" ]
+CMD [ "/ha_entrypoint.sh" ]
+VOLUME [ "/data" ]
+
+############
+# 5 Labels #
+############
+
+ARG BUILD_ARCH
+ARG BUILD_DATE
+ARG BUILD_DESCRIPTION
+ARG BUILD_NAME
+ARG BUILD_REF
+ARG BUILD_REPOSITORY
+ARG BUILD_VERSION
+ENV BUILD_VERSION="${BUILD_VERSION}"
+LABEL \
+    io.hass.name="${BUILD_NAME}" \
+    io.hass.description="${BUILD_DESCRIPTION}" \
+    io.hass.arch="${BUILD_ARCH}" \
+    io.hass.type="addon" \
+    io.hass.version=${BUILD_VERSION} \
+    maintainer="alexbelgium (https://ghfast.top/github.com/alexbelgium)" \
+    org.opencontainers.image.title="${BUILD_NAME}" \
+    org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
+    org.opencontainers.image.vendor="Home Assistant Add-ons" \
+    org.opencontainers.image.authors="alexbelgium (https://ghfast.top/github.com/alexbelgium)" \
+    org.opencontainers.image.licenses="MIT" \
+    org.opencontainers.image.url="https://ghfast.top/github.com/alexbelgium" \
+    org.opencontainers.image.source="https://ghfast.top/github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://ghfast.top/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.created=${BUILD_DATE} \
+    org.opencontainers.image.revision=${BUILD_REF} \
+    org.opencontainers.image.version=${BUILD_VERSION}
+
+####################
+# 6 HealthcheckNOT #
+####################

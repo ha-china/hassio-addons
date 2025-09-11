@@ -1,0 +1,15 @@
+---
+build_from:
+  aarch64: "ghcr.nju.edu.cn/linuxserver/syslog-ng:4.8.3"
+  amd64: "ghcr.nju.edu.cn/linuxserver/syslog-ng:4.8.3"
+labels:
+  maintainer: "bluemaex <homeassistant@blmx.de>"
+  org.opencontainers.image.authors: "bluemaex <homeassistant@blmx.de>"
+  org.opencontainers.image.licenses: "MIT License"
+  org.opencontainers.image.title: "Home Assistant Unofficial Add-on: syslog-ng"
+  org.opencontainers.image.url: https://ghfast.top/github.com/bluemaex/home-assistant-addons
+  org.opencontainers.image.source: https://ghfast.top/github.com/bluemaex/home-assistant-addons/syslog-ng
+  org.opencontainers.image.documentation: https://ghfast.top/github.com/bluemaex/home-assistant-addons/syslog-ng/README.md
+  org.opencontainers.image.created: "2025-06-21T09:52:13Z"
+  org.opencontainers.image.revision: c1a4058aa73554183e13ca7dbb20ed4f5ef4f582
+  org.opencontainers.image.version: 5.0.5

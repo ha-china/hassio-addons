@@ -1,0 +1,9 @@
+{
+  "github_beta": true,
+  "github_tagfilter": "v5",
+  "last_update": "07-12-2024",
+  "repository": "alexbelgium/hassio-addons",
+  "slug": "monica",
+  "upstream_repo": "monicahq/monica",
+  "upstream_version": ""
+}

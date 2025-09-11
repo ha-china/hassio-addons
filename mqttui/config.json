@@ -1,0 +1,39 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：MQTTUI的Web图形用户界面",
+  "environment": {},
+  "map": [
+    "share:rw"
+  ],
+  "version": "v1.3.2",
+  "name": "mqttui",
+  "options": {
+    "MQTT_BROKER": "hassio.local",
+    "MQTT_PORT": 1883,
+    "MQTT_USERNAME": "hassio",
+    "MQTT_PASSWORD": "password"
+  },
+  "ports": {
+    "5000/tcp": "5000"
+  },
+  "ports_description": {
+    "5000/tcp": "Web interface"
+  },
+  "schema": {
+    "MQTT_BROKER": "str",
+    "MQTT_PORT": "int",
+    "MQTT_USERNAME": "str",
+    "MQTT_PASSWORD": "str"
+  },
+  "slug": "mqttui",
+  "startup": "services",
+  "upstream": "v1.3.2",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:5000]",
+  "ingress": false,
+  "ingress_port": 5000
+}

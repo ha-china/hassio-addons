@@ -1,0 +1,29 @@
+name: "ConvertX"
+version: "v0.14.1"
+upstream: "v0.14.1"
+slug: convertx
+description: >- 
+  一个自托管的在线文件转换器。支持831种不同格式。使用TypeScript、Bun和Elysia编写。
+arch:
+  - amd64
+  - aarch64
+url: "https://ghfast.top/github.com/jdeath/homeassistant-addons"
+ports:
+  3000/tcp: 3000
+ports_description:
+  3000/tcp: "Web Interface"
+map:
+  - type: addon_config
+    read_only: false
+    path: /app/data
+environment:
+  ACCOUNT_REGISTRATION: "false"
+  HTTP_ALLOWED: "true"
+  ALLOW_UNAUTHENTICATED: "true"
+image: ghcr.nju.edu.cn/c4illin/convertx
+boot: auto
+startup: services
+webui: "[PROTO:ssl]://[HOST]:[PORT:3000]"
+panel_admin: false
+ingress: false
+ingress_port: 3000

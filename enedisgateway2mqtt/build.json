@@ -1,0 +1,10 @@
+{
+  "build_from": {
+    "aarch64": "docker.1ms.run/m4dm4rtig4n/myelectricaldata:latest",
+    "amd64": "docker.1ms.run/m4dm4rtig4n/myelectricaldata:latest",
+    "armv7": "docker.1ms.run/m4dm4rtig4n/myelectricaldata:latest"
+  },
+  "codenotary": {
+    "signer": "alexandrep.github@gmail.com"
+  }
+}

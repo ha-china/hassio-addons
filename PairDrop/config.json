@@ -1,0 +1,39 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "浏览器中的本地文件共享。受苹果的AirDrop启发。",
+  "environment": {
+    "PUID": "1000",
+    "PGID": "1000",
+    "RATE_LIMIT": "false",
+    "WS_FALLBACK": "true",
+    "TZ": "Etc/UTC"
+  },
+  "map": [
+    "share:rw"
+  ],
+  "init": "false",
+  "image": "docker.1ms.run/linuxserver/pairdrop",
+  "version": "version-v1.11.2",
+  "name": "pairdrop",
+  "options": {},
+  "ports": {
+    "3000/tcp": "3000"
+  },
+  "ports_description": {
+    "3000/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "pairdrop",
+  "startup": "services",
+  "upstream": "latest",
+  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:3000]",
+  "ingress": true,
+  "ingress_port": 3000,
+  "panel_admin": false,
+  "panel_icon": "mdi:parachute"
+}

@@ -1,0 +1,24 @@
+name: Ghostscript Printer
+version: 10.05.1-1-edge
+slug: ghostscript-printer
+description: 支持使用Ghostscript打印机驱动程序的打印机和一些额外的过滤器。
+url: https://ghfast.top/github.com/Eskander/ha-addon-printer
+arch:
+  - amd64
+  - aarch64
+  - armv7
+stage: experimental
+init: false
+environment:
+  PORT: "631"
+webui: http://[HOST]:[PORT:631]
+host_network: true
+usb: true
+map:
+  - type: data
+    path: /etc/cups/
+    read_only: false
+  - type: addon_config
+    path: /var/lib/ghostscript-printer-app
+    read_only: false
+image: ghcr.nju.edu.cn/openprinting/ghostscript-printer-app

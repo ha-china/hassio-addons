@@ -1,0 +1,73 @@
+name: Frigate (Full Access) Beta
+version: 0.16.0
+breaking_versions:
+  - 0.16.0
+  - 0.16.0-rc4
+  - 0.16.0-rc3
+  - 0.16.0-rc2
+  - 0.16.0-rc1
+  - 0.16.0-beta4
+  - 0.16.0-beta3
+  - 0.16.0-beta2
+  - 0.16.0-beta1
+  - 0.15.0
+  - 0.15.0-rc2
+  - 0.15.0-rc1
+  - 0.15.0-beta5
+  - 0.15.0-beta4
+  - 0.15.0-beta3
+  - 0.15.0-beta2
+  - 0.15.0-beta1
+  - 0.14.1
+  - 0.14.0
+panel_icon: "mdi:cctv"
+panel_title: Frigate
+slug: frigate-fa-beta
+description: '[老王杂谈说]：带实时本地对象检测的NVR用于IP摄像头'
+url: "https://ghfast.top/github.com/blakeblackshear/frigate"
+image: ghcr.nju.edu.cn/blakeblackshear/frigate
+startup: application
+boot: auto
+init: false
+webui: "http://[HOST]:[PORT:5000]/"
+watchdog: "http://[HOST]:[PORT:5000]/"
+ingress: true
+ingress_port: 5000
+ingress_entry: /
+panel_admin: false
+homeassistant_api: true
+hassio_api: true
+ports:
+  8555/tcp: 8555
+  8555/udp: 8555
+  8554/tcp: null
+  8971/tcp: null
+  5000/tcp: null
+  1984/tcp: null
+  1935/tcp: null
+ports_description:
+  8555/tcp: WebRTC over tcp
+  8555/udp: WebRTC over udp
+  8554/tcp: RTSP Restream
+  8971/tcp: Authenticated Web interface
+  5000/tcp: Unauthenticated Web interface (not required for Home Assistant Ingress)
+  1984/tcp: go2rtc API
+host_network: false
+tmpfs: true
+video: true
+full_access: true
+privileged:
+  - PERFMON
+schema:
+  plus_api_key: password?
+services:
+  - "mqtt:want"
+arch:
+  - amd64
+  - aarch64
+map:
+  - "media:rw"
+  - "ssl"
+  - "addon_config:rw"
+  # Mount old config dir to be migrated by the image
+  - "homeassistant_config:rw"

@@ -1,0 +1,38 @@
+---
+name: Rclone
+version: 3.1.6
+slug: rclone
+description: Rclone 是一个用于同步文件和目录到各种提供者的命令行程序。
+  Rclone is a command line program to sync files and directories to and
+  from various providers.
+arch:
+  - aarch64
+  - amd64
+  - armv7
+  - i386
+image: "ghcr.nju.edu.cn/bluemaex/ha-addons-rclone-{arch}"
+startup: once
+boot: manual
+url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/rclone
+hassio_api: true
+init: false
+map:
+  - backup:rw
+  - config:rw
+  - share:rw
+options:
+  configuration_path: "/config/addons/rclone/rclone.conf"
+  local_retention_days: 60
+  remotes:
+    - name: ""
+      path: "/"
+      retention_days: 60
+schema:
+  configuration_path: str
+  local_retention_days: int
+  remotes:
+    - name: str
+      path: str
+      retention_days: int
+      start_url: str?
+      end_url: str?

@@ -1,0 +1,26 @@
+name: MQTT IO
+version: 0.4.0
+slug: mqtt-io
+description: 通过MQTT公开GPIO模块和数字传感器进行远程控制和监控。
+  monitoring.
+url: https://ghfast.top/github.com/hassio-addons/addon-mqtt-io
+codenotary: codenotary@frenck.dev
+arch:
+- aarch64
+- amd64
+- armv7
+init: false
+homeassistant_api: true
+full_access: true
+privileged:
+- SYS_RAWIO
+map:
+- config:rw
+- share:rw
+- ssl
+options:
+  configuration_file: /config/mqtt-io/config.yml
+schema:
+  configuration_file: str
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+image: ghcr.nju.edu.cn/hassio-addons/mqtt-io/{arch}
