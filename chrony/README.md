@@ -6,12 +6,11 @@
 
 [![Buy me a coffee][buymeacoffee-shield]][buymeacoffee]
 
-chrony NTP Server.
+chrony NTP 服务器。
 
-## About
+## 关于
 
-An NTP server accesible by all hosts on the local network, useful for setting
-time on devices with controlled internet access (such as cameras).
+一个对所有本地网络上的主机都可访问的 NTP 服务器，适用于设置互联网访问受限设备（如摄像头）的时间。
 
 [buymeacoffee-shield]: https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg
 [buymeacoffee]: https://www.buymeacoffee.com/sinclairpaul
@@ -21,5 +20,5 @@ time on devices with controlled internet access (such as cameras).
 [forum]: https://community.home-assistant.io/?u=frenck
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v5.2.0-blue.svg
-[release]: https://github.com/hassio-addons/addon-chrony/tree/v5.2.0
+[release-shield]: https://img.shields.io/badge/version-v5.2.1-blue.svg
+[release]: https://github.com/hassio-addons/addon-chrony/tree/v5.2.1

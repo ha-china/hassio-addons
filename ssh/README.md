@@ -1,6 +1,6 @@
-# Home Assistant 插件：SSH 服务器
+# Home Assistant Add-on: SSH 服务器
 
-允许通过 SSH 或仅使用 Ingress 远程登录 Home Assistant。
+允许通过 SSH 或仅使用 Ingress 的 Web 终端远程登录 Home Assistant。
 
 ![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield] ![支持 armhf 架构][armhf-shield] ![支持 armv7 架构][armv7-shield] ![支持 i386 架构][i386-shield]
 
