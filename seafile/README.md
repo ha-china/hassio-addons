@@ -1,84 +1,118 @@
-## &#9888; 打开问题: [🐛 [Seafile] 下载链接似乎不正确 (打开于2025-02-04)](https://github.com/alexbelgium/hassio-addons/issues/1753) 由 [@igorsantos07](https://github.com/igorsantos07)
-# Home Assistant 插件: Seafile
+# Home assistant add-on: seafile
 
-[![捐赠][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![版本](https://img.shields.io/badge/dynamic/json?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fseafile%2Fconfig.json)
-![入口](https://img.shields.io/badge/dynamic/json?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fseafile%2Fconfig.json)
-![架构](https://img.shields.io/badge/dynamic/json?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fseafile%2Fconfig.json)
+![Version](https://img.shields.io/badge/dynamic/json?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fseafile%2Fconfig.json)
+![Ingress](https://img.shields.io/badge/dynamic/json?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fseafile%2Fconfig.json)
+![Arch](https://img.shields.io/badge/dynamic/json?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fseafile%2Fconfig.json)
 
-[![Codacy徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![构建器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库加星的朋友们！点击下面的图像为它加星，然后它会在右上角显示。谢谢！_
+_感谢所有给我仓库点赞的人！要点赞，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
-[![@alexbelgium/hassio-addons 的 Stargazers 仓库名单](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/seafile/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/seafile/stats.png)
 
 ## 关于
 
 ---
 
-高性能文件同步和分享，同时还具备 Markdown WYSIWYG 编辑、Wiki、文件标签及其他知识管理功能。
+高性能文件同步和共享，同时支持Markdown WYSIWYG编辑、Wiki、文件标签和其他知识管理功能。
 
-此插件基于 Docker 镜像 [https://hub.docker.com/r/franchetti/seafile-arm](https://hub.docker.com/r/franchetti/seafile-arm)
+此插件基于以下Docker镜像：[https://hub.docker.com/r/franchetti/seafile-arm](https://hub.docker.com/r/franchetti/seafile-arm)
 
 ## 安装
 
 ---
 
-此插件的安装相对简单，与安装其他任何插件相比没有不同。
+此插件的安装非常简单，与安装其他插件没有区别。
 
-1. 将我的插件仓库添加到你的 Home Assistant 实例中（在监督者插件商店的右上角，或者如果你已经配置了我的 HA，请点击下面的按钮）
-   [![打开你的 Home Assistant 实例并显示添加插件仓库对话框，预填特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-2. 安装此插件。
-3. 点击 `保存` 按钮以存储你的配置。
-4. 根据你的偏好设置插件选项。
-5. 启动插件。
-6. 查看插件日志以确认一切是否正常。
-7. 打开 webUI 并调整软件选项。
+1. 将我的插件仓库添加到您的home assistant实例中（在supervisor插件商店的右上角，或点击下方按钮如果您已配置我的HA）
+   [![打开您的Home Assistant实例并显示添加插件仓库对话框，预填充特定的仓库URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此插件。
+1. 点击`保存`按钮以保存您的配置。
+1. 设置插件的选项以符合您的偏好。
+1. 启动插件。
+1. 检查插件的日志以查看是否一切正常。
+1. 打开WebUI并调整软件选项。
 
 ## 配置
 
----
+Webui可以在<http://homeassistant:8000>（Seahub）和<http://homeassistant:8082>（文件服务器）找到。
 
-Webui 可以在 <http://homeassistant:PORT> 找到。
-默认用户名/密码 : 在启动日志中描述。
-可以通过应用程序 webUI 进行配置，以下选项除外：
+### 设置步骤
 
-默认名称 : me@example.com
-默认密码 : a_very_secret_password
+1. 默认登录：`me@example.com` / `a_very_secret_password`
+2. 首次登录后更改管理员凭证
+3. 配置数据库（默认为SQLite，推荐在生产环境中使用MariaDB）
+4. 设置正确的文件服务器根URL以供外部访问
 
-如果你将数据库存储在挂载驱动器上，请确保也在那里托管你的 sqlite 数据库：否则如果挂载出现问题，你将失去整个数据库（感谢 @cokeman0）
+### 选项
+
+| 选项 | 类型 | 默认 | 描述 |
+|------|------|------|------|
+| `PGID` | int | `1000` | 文件权限的组ID |
+| `PUID` | int | `1000` | 文件权限的用户ID |
+| `TZ` | str | `Europe/Paris` | 时区（例如，`Europe/London`） |
+| `SEAFILE_ADMIN_EMAIL` | email | `me@example.com` | 管理员电子邮件地址 |
+| `SEAFILE_ADMIN_PASSWORD` | password | `a_very_secret_password` | 管理员密码 |
+| `SERVER_IP` | str | `homeassistant.local` | 服务器IP或主机名 |
+| `FILE_SERVER_ROOT` | str | `http://homeassistant.local:8082` | 文件服务器根URL |
+| `PORT` | str | `8082` | 文件服务器端口 |
+| `url` | str | | Seafile的外部URL |
+| `database` | list | `sqlite` | 数据库类型（sqlite/mariadb_addon） |
+| `data_location` | str | `/share/seafile` | 数据存储位置 |
+| `CONFIG_LOCATION` | str | | 自定义配置文件位置 |
+| `localdisks` | str | | 挂载的本地驱动器（例如，`sda1,sdb1`） |
+| `networkdisks` | str | | 挂载的SMB共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | str | | SMB网络共享的用户名 |
+| `cifspassword` | str | | SMB网络共享的密码 |
+| `cifsdomain` | str | | SMB网络共享的域 |
+
+### 示例配置
 
 ```yaml
-PGID: user
-GPID: user
-TZ: timezone
-PASSWORD: 可选设置 GUI 密码
-CLI_ARGS: 可选传递 cli 启动参数给 seafile
-localdisks: sda1 #以逗号分隔放置要挂载的硬件名称，或其标签。例：sda1, sdb1, MYNAS...
-networkdisks: "//SERVER/SHARE" #可选，列出要挂载的 smb 服务器，以逗号分隔
-cifsusername: "username" #可选，smb 用户名，所有 smb 共享相同
-cifspassword: "password" #可选，smb 密码
-force_scheme_https: 如果在使用 https 访问入口时遇到问题，请勾选此框以强制使用 https
-force_external_port: 如果在使用 https 访问入口时遇到问题，请在此记录用于访问 HA 的外部端口
+PGID: 1000
+PUID: 1000
+TZ: "Europe/London"
+SEAFILE_ADMIN_EMAIL: "admin@mydomain.com"
+SEAFILE_ADMIN_PASSWORD: "SecurePassword123"
+SERVER_IP: "192.168.1.100"
+FILE_SERVER_ROOT: "https://seafile.mydomain.com:8082"
+url: "seafile.mydomain.com"
+database: "mariadb_addon"
+data_location: "/share/seafile"
+localdisks: "sda1,sdb1"
+networkdisks: "//nas.local/seafile"
+cifsusername: "seafileuser"
+cifspassword: "password123"
+cifsdomain: "workgroup"
 ```
+
+### 挂载驱动器
+
+此插件支持挂载本地驱动器和远程SMB共享：
+
+- **本地驱动器**：参见[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+
+**重要**：如果将数据库存储在挂载的驱动器上，请确保SQLite数据库也托管在那里，以防止挂载问题时数据丢失。
 
 ## 支持
 
-在 GitHub 上创建一个问题。
+在github上创建问题
 
 ## 插图
 
 ---
 
-![插图](https://seafile.com/img/slider/artistdetails.png)
+![illustration](https://seafile.com/img/slider/artistdetails.png)
 
 [repository]: https://github.com/alexbelgium/hassio-addons

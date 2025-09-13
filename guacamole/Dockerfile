@@ -98,6 +98,8 @@ ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/mast
 
 # Entrypoint modifications
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint_modif.sh" "/ha_entrypoint_modif.sh"
+RUN sed -i 's|with-contenv|env|g' "/ha_entrypoint_modif.sh"
+RUN sed -i 's|with-contenv|env|g' "/ha_entrypoint.sh"
 RUN chmod 777 /ha_entrypoint.sh /ha_entrypoint_modif.sh && /ha_entrypoint_modif.sh && rm /ha_entrypoint_modif.sh
 
 # Standalone bashio command

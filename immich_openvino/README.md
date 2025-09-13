@@ -1,6 +1,6 @@
 # Home assistant add-on: Immich OpenVINO
 
-⚠️ 项目正在非常积极地开发中。请预期会有错误和变化。不要将其作为您照片和视频的唯一存储方式！（来自开发者）
+⚠️ 项目正在非常积极地开发中。请预期会出现错误和变更。不要将其作为您照片和视频的唯一存储方式！（来自开发者）
 
 [![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -16,7 +16,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我仓库星标的人！要给星标，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它就会在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -24,44 +24,44 @@ _感谢所有给我仓库星标的人！要给星标，请点击下面的图片�
 
 ## 关于
 
-从您的手机直接进行自托管照片和视频备份解决方案，支持 OpenVINO 硬件加速。这是 Immich 的 OpenVINO 启用版本，为使用 Intel GPU 和 CPU 执行机器学习任务提供硬件加速。
+从您的手机直接进行自托管照片和视频备份解决方案，支持 OpenVINO 硬件加速。这是 Immich 的 OpenVINO 功能版本，为使用 Intel GPU 和 CPU 的机器学习任务提供硬件加速。
 
-此插件基于 imagegenius 的 [docker 镜像](https://github.com/imagegenius/docker-immich)，并启用了 OpenVINO 支持，以在 Intel 硬件上提高性能。
+此插件基于 [docker 镜像](https://github.com/imagegenius/docker-immich) 的 imagegenius，并启用了 OpenVINO 支持，以在 Intel 硬件上增强性能。
 
 ## 硬件要求
 
-- **Intel 硬件**：兼容的 Intel CPU 或 Intel 集成/独立 GPU
+- **Intel 硬件**：兼容的 Intel CPU 或 Intel 集成/离散 GPU
 - **OpenVINO 支持**：具有 OpenVINO 工具包兼容性的 Intel 硬件
 - **架构**：仅支持 AMD64（OpenVINO 支持针对 Intel x86-64 架构进行了优化）
-- **Intel GPU 驱动程序**：在主机系统上正确安装的 Intel GPU 驱动程序（用于 Intel GPU 加速）
+- **Intel GPU 驱动程序**：在主机系统上正确安装的 Intel GPU 驱动程序（如果使用 Intel GPU 加速）
 
 ## 配置
 
-Web UI 可在 `<your-ip>:8080` 找到。PostgreSQL 可以是内部的或外部的。
+Web UI 位于 `<your-ip>:8080`。PostgreSQL 可以是内部的或外部的。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `data_location` | str | `/share/immich` | Immich 数据存储的路径 |
-| `library_location` | str | | 照片/视频库的路径 |
-| `TZ` | str | | 时区（例如，`Europe/London`） |
-| `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | str | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | str | | SMB 共享的网络用户名 |
-| `cifspassword` | str | | SMB 共享的网络密码 |
-| `cifsdomain` | str | | SMB 共享的域 |
-| `DB_HOSTNAME` | str | `homeassistant.local` | 数据库主机名 |
-| `DB_USERNAME` | str | `postgres` | 数据库用户名 |
-| `DB_PASSWORD` | str | `homeassistant` | 数据库密码 |
-| `DB_DATABASE_NAME` | str | `immich` | 数据库名 |
-| `DB_PORT` | int | `5432` | 数据库端口 |
-| `DB_ROOT_PASSWORD` | str | | 数据库根密码 |
-| `JWT_SECRET` | str | | 用于认证的 JWT 密钥 |
-| `DISABLE_MACHINE_LEARNING` | bool | `false` | 禁用 ML 功能（不推荐用于 OpenVINO 版本） |
-| `MACHINE_LEARNING_WORKERS` | int | `1` | ML 工作线程的数量（可以与 OpenVINO 增加） |
-| `MACHINE_LEARNING_WORKER_TIMEOUT` | int | `120` | ML 工作线程超时（秒） |
-| `skip_permissions_check` | bool | `false` | 跳过文件权限检查 |
+| `data_location` | 字符串 | `/share/immich` | Immich 数据存储的路径 |
+| `library_location` | 字符串 | | 照片/视频库的路径 |
+| `TZ` | 字符串 | | 时区（例如，`Europe/London`） |
+| `localdisks` | 字符串 | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
+| `networkdisks` | 字符串 | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | 字符串 | | SMB 网络共享的用户名 |
+| `cifspassword` | 字符串 | | SMB 网络共享的密码 |
+| `cifsdomain` | 字符串 | | SMB 网络共享的域 |
+| `DB_HOSTNAME` | 字符串 | `homeassistant.local` | 数据库主机名 |
+| `DB_USERNAME` | 字符串 | `postgres` | 数据库用户名 |
+| `DB_PASSWORD` | 字符串 | `homeassistant` | 数据库密码 |
+| `DB_DATABASE_NAME` | 字符串 | `immich` | 数据库名称 |
+| `DB_PORT` | 整数 | `5432` | 数据库端口 |
+| `DB_ROOT_PASSWORD` | 字符串 | | 数据库根密码 |
+| `JWT_SECRET` | 字符串 | | 用于身份验证的 JWT 密钥 |
+| `DISABLE_MACHINE_LEARNING` | 布尔值 | `false` | 禁用机器学习功能（不推荐用于 OpenVINO 版本） |
+| `MACHINE_LEARNING_WORKERS` | 整数 | `1` | 机器学习工作者的数量（可以与 OpenVINO 增加） |
+| `MACHINE_LEARNING_WORKER_TIMEOUT` | 整数 | `120` | 机器学习工作者超时（秒） |
+| `skip_permissions_check` | 布尔值 | `false` | 跳过文件权限检查 |
 
 ### 示例配置
 
@@ -87,15 +87,15 @@ MACHINE_LEARNING_WORKER_TIMEOUT: 180
 
 此插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **本地驱动器**：请参阅 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：请参阅 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### 自定义脚本和环境变量
 
 此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：请参阅 [向您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **环境变量**：参见 [为您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
 
 ## 安装
 
@@ -111,12 +111,12 @@ MACHINE_LEARNING_WORKER_TIMEOUT: 180
 1. 安装此插件。
 1. 点击 `保存` 按钮以保存您的配置。
 1. 启动插件。
-1. 检查插件的日志，看看是否一切顺利。
-1. 仔细配置插件以满足您的偏好，请参阅官方文档以了解详细信息。
+1. 检查插件的日志，看看是否一切正常。
+1. 仔细配置插件以满足您的需求，请参阅官方文档以获取相关信息。
 
 **数据库设置：**
 请注意，您需要安装一个单独的 postgres 插件才能连接数据库。您可以在我的仓库中安装 postgres 插件。
-请注意在启动之前更改密码；之后将无法更改
+请注意，在启动之前更改密码；之后将无法更改
 
 ## 支持
 
