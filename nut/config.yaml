@@ -1,5 +1,5 @@
 name: Network UPS Tools
-version: 0.15.0
+version: 0.16.0
 slug: nut
 description: '[老王杂谈说]：管理电池备份（UPS）设备'
 url: https://ghfast.top/github.com/hassio-addons/addon-nut
