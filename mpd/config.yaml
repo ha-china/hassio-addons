@@ -1,26 +1,25 @@
 name: MPD
-version: 1.8.1
+version: 1.8.2
 slug: mpd
 panel_icon: mdi:music-circle
-description: 音乐播放器守护进程（MPD）是一款免费的开源音乐播放软件。它可以播放音频文件、组织歌单和维护音乐数据库。
-  audio files, organizes playlists and maintains a music database
+description: '[老王杂谈说]：音乐播放守护程序是一个免费且开源的音乐播放器。它可以播放音频文件、组织播放列表并维护音乐数据库。'
 url: https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/mpd
 ingress: true
 ingress_port: 6680
 arch:
-- armv7
-- armhf
-- aarch64
-- amd64
-- i386
+  - armv7
+  - armhf
+  - aarch64
+  - amd64
+  - i386
 image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/mpd-{arch}
 init: false
 audio: true
 devices:
-- /dev/snd
+  - /dev/snd
 map:
-- share:rw
-- media:rw
+  - share:rw
+  - media:rw
 ports:
   6680/tcp: null
   6600/tcp: 6600

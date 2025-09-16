@@ -1,19 +1,19 @@
-# Syncthing 扩展
+# Syncthing 插件
 
-[**Syncthing**](https://syncthing.net/) 被包裹在一个 [Home Assistant Supervisor 扩展](https://www.home-assistant.io/addons/) 中。
+[**Syncthing**](https://syncthing.net/) 被包含在 [Home Assistant Supervisor 插件](https://www.home-assistant.io/addons/) 中。
 
-> Syncthing 是一个连续的文件同步程序。它实时地在两台或多台计算机之间同步文件，安全地保护免受窥探之眼。你的数据只属于你，你值得选择它的存储位置，是否与某些第三方共享，以及它如何在互联网上传输。
+> Syncthing 是一个持续文件同步程序。它在两个或多个计算机之间实时同步文件，并安全地保护免受窥探者的侵害。你的数据属于你自己的数据，你有权选择数据的存储位置，是否与第三方共享，以及如何在互联网上传输数据。
 
-[![发布版本][release-badge]][release]
-![扩展阶段][stage-badge]
+[![发布][release-badge]][release]
+![插件阶段][stage-badge]
 
-[![支持][donation-badge]][donation-url]
+[![赞助][donation-badge]][donation-url]
 
 
-[stage-badge]: https://img.shields.io/badge/扩展%20阶段-稳定-green.svg
+[stage-badge]: https://img.shields.io/badge/插件%20阶段-稳定-green.svg
 
-[release-badge]: https://img.shields.io/badge/版本-v1.19.8-blue.svg
-[release]: https://github.com/Poeschl-HomeAssistant-Addons/syncthing/tree/v1.19.8
+[release-badge]: https://img.shields.io/badge/版本-v1.19.9-blue.svg
+[release]: https://github.com/Poeschl-HomeAssistant-Addons/syncthing/tree/v1.19.9
 
-[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=for-the-badge&logoColor=white
+[donation-badge]: https://img.shields.io/badge/给我买咖啡-%23d32f2f?logo=buy-me-a-coffee&style=for-the-badge&logoColor=white
 [donation-url]: https://www.buymeacoffee.com/Poeschl

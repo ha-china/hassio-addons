@@ -1,9 +1,9 @@
 name: "LiveBook"
-version: "0.17.1"
-upstream: "0.17.1"
+version: "0.17.2"
+upstream: "0.17.2"
 slug: livebook
 description: >-
-  [老王杂谈说]：Livebook是一个用于编写交互式和协作代码笔记本的web应用程序
+  [老王杂谈说]：Livebook是一个用于编写交互式和协作代码笔记本的Web应用程序
 arch:
   - amd64
   - aarch64

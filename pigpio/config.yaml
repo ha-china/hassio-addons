@@ -1,10 +1,9 @@
 name: pigpio
-version: 1.6.0
+version: 2.0.0
 slug: pigpio
-description: $translated_description
+description: '[老王杂谈说]：使用pigpio在Home Assistant上控制PWM LED灯'
 url: https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/pigpio
 arch:
-  - armhf
   - armv7
   - aarch64
 startup: services

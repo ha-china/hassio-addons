@@ -1,6 +1,6 @@
 ## 配置
 
-示例配置：
+示例配置:
 
 ```yaml
 width: 1280,
@@ -10,12 +10,12 @@ description: Pixelflut
 
 ### `width`
 
-Pixelflut画布的宽度。
+Pixelflut 画布的宽度。
 
 ### `height`
 
-Pixelflut画布的高度。
+Pixelflut 画布的高度。
 
 ### `description`
 
-显示在顶部的描述文本。
+顶部显示的描述文本。

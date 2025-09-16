@@ -8,12 +8,12 @@ vnc_server_host: 192.168.0.23
 
 ### `vnc_server_host`
 
-要连接的 VNC 服务器的主机名或 IP 地址。
+VNC服务器的名称或IP地址，插件应连接到的VNC服务器。
 
-### `vnc_server_port`（可选）
+### `vnc_server_port` (可选)
 
-VNC 服务器的远程端口。（默认值：`5900`）
+VNC服务器的远程端口。（默认：`5900`）
 
-### `vnc_server_password`（可选）
+### `vnc_server_password` (可选)
 
-VNC 服务器的密码。当未设置且连接需要密码时，会在连接时询问。
+VNC服务器的密码。如果未设置且连接需要密码，则在连接时请求输入。

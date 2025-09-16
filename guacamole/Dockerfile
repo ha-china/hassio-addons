@@ -32,16 +32,18 @@ ENV GUACAMOLE_HOME=/config
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-WORKDIR /config
+#WORKDIR /config
 
 # hadolint ignore=SC2016
 RUN \
     # Enable extensions
+    exit 0 && \
     sed -i 's|#!/usr/bin/with-contenv sh|#!/usr/bin/with-contenv bashio|g' /etc/cont-init.d/50-extensions.sh \
     && sed -i 's|$EXTENSIONS|$(bashio::config "EXTENSIONS")|g' /etc/cont-init.d/50-extensions.sh
 
 RUN \
     # Correct transfer
+    exit 0 && \
     sed -i 's|cp -rn /app/guacamole|cp -rn /app/guacamole/*|g' /etc/cont-init.d/* \
     \
     # avoid error
@@ -93,20 +95,20 @@ RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.
 ################
 
 # Add entrypoint
-ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
+#ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" "/ha_entrypoint.sh"
 
 # Entrypoint modifications
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint_modif.sh" "/ha_entrypoint_modif.sh"
-RUN sed -i 's|with-contenv|env|g' "/ha_entrypoint_modif.sh"
-RUN sed -i 's|with-contenv|env|g' "/ha_entrypoint.sh"
 RUN chmod 777 /ha_entrypoint.sh /ha_entrypoint_modif.sh && /ha_entrypoint_modif.sh && rm /ha_entrypoint_modif.sh
+RUN ln -sf /usr/bin/env /usr/bin/with-contenv
 
 # Standalone bashio command
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/.bashio-standalone.sh"
-RUN chmod 777 /.bashio-standalone.sh
-RUN sed -i "s|/usr/bin/with-contenv|/usr/bin/env|g" /etc/cont-init.d/* && \
-    sed -i "s|/usr/bin/with-contenv|/usr/bin/env|g" /etc/services.d/*/run
+#ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/.bashio-standalone.sh"
+#RUN chmod 777 /.bashio-standalone.sh
+#RUN sed -i "s|/usr/bin/with-contenv|/usr/bin/env|g" /etc/cont-init.d/* && \
+#    sed -i "s|/usr/bin/with-contenv|/usr/bin/env|g" /etc/services.d/*/run && \
+#    sed -i "s|/usr/bin/with-contenv|/usr/bin/env|g" /etc/services.d/*/run
 
 #WORKDIR /data
 ENTRYPOINT [ "/usr/bin/env" ]
