@@ -27,24 +27,16 @@ ENV S6_CMD_WAIT_FOR_SERVICES=1 \
     S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
     S6_SERVICES_GRACETIME=0
 
-ENV PGDATA=/config/postgres
-ENV GUACAMOLE_HOME=/config
-
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-#WORKDIR /config
+WORKDIR /config
 
 # hadolint ignore=SC2016
 RUN \
     # Enable extensions
-    exit 0 && \
     sed -i 's|#!/usr/bin/with-contenv sh|#!/usr/bin/with-contenv bashio|g' /etc/cont-init.d/50-extensions.sh \
-    && sed -i 's|$EXTENSIONS|$(bashio::config "EXTENSIONS")|g' /etc/cont-init.d/50-extensions.sh
-
-RUN \
+    && sed -i 's|$EXTENSIONS|$(bashio::config "EXTENSIONS")|g' /etc/cont-init.d/50-extensions.sh \
+    \
     # Correct transfer
-    exit 0 && \
-    sed -i 's|cp -rn /app/guacamole|cp -rn /app/guacamole/*|g' /etc/cont-init.d/* \
+    && sed -i 's|cp -rn /app/guacamole|cp -rn /app/guacamole/*|g' /etc/cont-init.d/* \
     \
     # avoid error
     && sed -i 's|(cat /config/\.database-version)|(cat /config/\.database-version \&>/dev/null)|g' /etc/cont-init.d/* \
@@ -60,9 +52,7 @@ RUN \
     \
     # Avoid https://ghfast.top/github.com/alexbelgium/hassio-addons/issues/659
     && rm -r /run/shm \
-    \
-    # Avoid variable unset
-    && sed -i '1a set +u' /etc/services.d/guacamole/run
+    && sed -i "1a set +e" /etc/services.d/*/run
 
 ##################
 # 3 Install apps #
@@ -101,18 +91,11 @@ ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/mast
 # Entrypoint modifications
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint_modif.sh" "/ha_entrypoint_modif.sh"
 RUN chmod 777 /ha_entrypoint.sh /ha_entrypoint_modif.sh && /ha_entrypoint_modif.sh && rm /ha_entrypoint_modif.sh
-RUN ln -sf /usr/bin/env /usr/bin/with-contenv
-
-# Standalone bashio command
-#ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/.bashio-standalone.sh"
-#RUN chmod 777 /.bashio-standalone.sh
-#RUN sed -i "s|/usr/bin/with-contenv|/usr/bin/env|g" /etc/cont-init.d/* && \
-#    sed -i "s|/usr/bin/with-contenv|/usr/bin/env|g" /etc/services.d/*/run && \
-#    sed -i "s|/usr/bin/with-contenv|/usr/bin/env|g" /etc/services.d/*/run
 
 #WORKDIR /data
 ENTRYPOINT [ "/usr/bin/env" ]
 CMD [ "/ha_entrypoint.sh" ]
+#SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ############
 # 5 Labels #
@@ -125,7 +108,6 @@ ARG BUILD_NAME
 ARG BUILD_REF
 ARG BUILD_REPOSITORY
 ARG BUILD_VERSION
-ENV BUILD_VERSION="${BUILD_VERSION}"
 LABEL \
     io.hass.name="${BUILD_NAME}" \
     io.hass.description="${BUILD_DESCRIPTION}" \
@@ -149,22 +131,6 @@ LABEL \
 # 6 Healthcheck #
 #################
 
-# Avoid spamming logs
-# hadolint ignore=SC2016
-RUN \
-    # Handle Apache configuration
-    if [ -d /etc/apache2/sites-available ]; then \
-        for file in /etc/apache2/sites-*/*.conf; do \
-            sed -i '/<VirtualHost/a \ \n    # Match requests with the custom User-Agent "HealthCheck" \n    SetEnvIf User-Agent "HealthCheck" dontlog \n    # Exclude matching requests from access logs \n    CustomLog ${APACHE_LOG_DIR}/access.log combined env=!dontlog' "$file"; \
-        done; \
-    fi && \
-    \
-    # Handle Nginx configuration
-    if [ -f /etc/nginx/nginx.conf ]; then \
-        awk '/http \{/{print; print "map $http_user_agent $dontlog {\n  default 0;\n  \"~*HealthCheck\" 1;\n}\naccess_log /var/log/nginx/access.log combined if=$dontlog;"; next}1' /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.new && \
-        mv /etc/nginx/nginx.conf.new /etc/nginx/nginx.conf; \
-    fi
-
 ENV HEALTH_PORT="8080" \
     HEALTH_URL=""
 HEALTHCHECK \
@@ -172,4 +138,4 @@ HEALTHCHECK \
     --retries=5 \
     --start-period=30s \
     --timeout=25s \
-    CMD curl -A "HealthCheck: Docker/1.0" -s -f "http://127.0.0.1:${HEALTH_PORT}${HEALTH_URL}" &>/dev/null || exit 1
+    CMD curl --fail "http://127.0.0.1:${HEALTH_PORT}${HEALTH_URL}" &>/dev/null || exit 1

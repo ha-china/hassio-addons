@@ -68,8 +68,12 @@
     "/dev/nvme2"
   ],
   "environment": {
-    "GUACAMOLE_HOME": "/config",
     "PGDATA": "/config/postgres",
+    "GUACAMOLE_HOME": "/config",
+    "PROXY_ALLOWED_IPS_REGEX": "*",
+    "PROXY_BY_HEADER": "X-Forwarded-By",
+    "PROXY_IP_HEADER": "X-Forwarded-For",
+    "PROXY_PROTOCOL_HEADER": "X-Forwarded-Proto",
     "REMOTE_IP_VALVE_ENABLED": "true"
   },
   "image": "ghcr.nju.edu.cn/alexbelgium/guacamole-{arch}",
@@ -101,6 +105,6 @@
   "slug": "guacamole",
   "udev": true,
   "url": "https://ghfast.top/github.com/alexbelgium/hassio-addons",
-  "version": "1.6.0-4_test9",
+  "version": "1.6.0-11",
   "video": true
 }

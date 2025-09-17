@@ -1,6 +1,6 @@
 # Home Assistant Add-on: Authelia
 
-Web应用的单一登录多因素门户
+Web 应用的单一登录多因素门户
 
 ## 关于
 
