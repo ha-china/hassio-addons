@@ -1,7 +1,7 @@
 name: "3DPrinter-Remote"
 version: "2024.01.0"
 slug: "3dprinter-remote"
-description: "3DPrinter-Remote is a 3D printer management software that allows you to control and monitor your 3D printer from a web interface."
+description: "[老王杂谈说]：3DPrinter-Remote is a 3D printer management software that allows you to control and monitor your 3D printer from a web interface."
 url: "https://ghfast.top/github.com/fredrikbaberg/ha-3dprinter-addons/tree/main/3dprinter-remote"
 arch:
     - armv7

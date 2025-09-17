@@ -1,7 +1,7 @@
 name: AirSonos
 version: 4.2.4
 slug: airsonos
-description: Sonos（和UPnP）设备的AirPlay功能。
+description: "[老王杂谈说]：Sonos（和UPnP）设备的AirPlay功能。"
 url: https://ghfast.top/github.com/hassio-addons/addon-airsonos
 codenotary: codenotary@frenck.dev
 startup: services
