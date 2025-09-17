@@ -8,13 +8,13 @@
 
 [![Support Frenck on Patreon][patreon-shield]][patreon]
 
-零配置VPN，用于构建安全网络。
+一个无需配置的VPN，用于构建安全网络。
 
 ## 关于
 
-Tailscale是一种零配置VPN，可以在任何设备上几分钟内安装，包括您的Home Assistant实例。
+Tailscale是一个无需配置的VPN，可以在任何设备上几分钟内安装，包括您的Home Assistant实例。
 
-在您的服务器、计算机和云实例之间创建安全网络。即使它们被防火墙或子网隔开，Tailscale也能正常工作。Tailscale为您管理防火墙规则，并在您所在的任何地方工作。
+在您的服务器、计算机和云实例之间创建一个安全网络。即使被防火墙或子网隔开，Tailscale也能正常工作。Tailscale为您管理防火墙规则，并在您所在的任何地方工作。
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -26,5 +26,5 @@ Tailscale是一种零配置VPN，可以在任何设备上几分钟内安装，�
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.26.0-blue.svg
-[release]: https://github.com/hassio-addons/addon-tailscale/tree/v0.26.0
+[release-shield]: https://img.shields.io/badge/version-v0.26.1-blue.svg
+[release]: https://github.com/hassio-addons/addon-tailscale/tree/v0.26.1

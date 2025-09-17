@@ -87,7 +87,9 @@ RUN \
     # Modify installer
     ##################
     # Use my repository
-    sed -i "s|Nachtzuster|alexbelgium|g" /newinstaller.sh && \
+    cd / && \
+    sed -i "s|Nachtzuster|alexbelgium|g" newinstaller.sh && \
+    cd /home/pi && \
     # Install open PR
     chmod +x /helpers/merge_open_prs.sh && \
     # Avoid rebooting at end of installation
@@ -102,7 +104,7 @@ RUN \
     # Remove all instances of sudo from the newinstaller
     sed -i -e "s|== 0|== 7|g" -e "s|sudo -n true|true|g" -e "s|sudo -K|true|g" /newinstaller.sh && \
     # Merge all PR
-    sed -i '/git clone/a cd BirdNET-Pi && echo "Merge PR" && bash /helpers/merge_open_prs.sh' /newinstaller.sh && \
+    sed -i '/git clone/a sed -i "/exit installation if anything fails/a cd $HOME/BirdNET-Pi \&\& /./helpers/merge_open_prs.sh" $HOME/BirdNET-Pi/scripts/install_birdnet.sh' /newinstaller.sh && \
     \
     # Execute installer
     /./newinstaller.sh && \

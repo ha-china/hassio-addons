@@ -1,13 +1,7 @@
 ## Changes in this version
 
-### ✨ New features
+- ⬆️ Update git to version 1:2.30.2-1+deb11u4 @Poeschl ([#8](https://github.com/Poeschl-HomeAssistant-Addons/pigpio/pull/8))
 
-- ✨ Update config.yaml to expose i2c devices @Clam- ([#6](https://github.com/Poeschl-HomeAssistant-Addons/pigpio/pull/6))
+### 🚨 Breaking changes
 
-### 🔨 Maintenance
-
-- 👷 Add package updater action @Poeschl ([#3](https://github.com/Poeschl-HomeAssistant-Addons/pigpio/pull/3))
-
-### ⬆️ Dependency updates
-
-- ⬆️ Update python-setuptools to 52.0.0-4+deb11u2 @Poeschl ([#7](https://github.com/Poeschl-HomeAssistant-Addons/pigpio/pull/7))
+- ⚰️ Remove arm 32bit compatibility due to package issues @Poeschl ([#9](https://github.com/Poeschl-HomeAssistant-Addons/pigpio/pull/9))

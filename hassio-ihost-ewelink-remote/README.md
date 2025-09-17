@@ -1,9 +1,9 @@
 # eWeLink-Remote Gateway Add-on
 
 
-![Supports armv7 Architecture](https://img.shields.io/badge/armv7-yes-green.svg)
-![Supports aarch64 Architecture](https://img.shields.io/badge/aarch64-yes-green.svg)
-![Supports amd64 Architecture](https://img.shields.io/badge/amd64-yes-green.svg)
+![支持 armv7 架构](https://img.shields.io/badge/armv7-yes-green.svg)
+![支持 aarch64 架构](https://img.shields.io/badge/aarch64-yes-green.svg)
+![支持 amd64 架构](https://img.shields.io/badge/amd64-yes-green.svg)
 
 
 ## 关于
@@ -11,14 +11,27 @@ eWeLink-Remote Gateway add-on 是一个支持添加 eWeLink-Remote 子设备并�
 
 
 ## 前置条件
-要使用 eWeLink-Remote Gateway Add-on，请确保您的 Home Assistant 设置满足以下条件：
-- 运行 Home Assistant 的设备必须具有功能正常的蓝牙模块（如果没有蓝牙模块，您可以配置一个蓝牙适配器）。
-- 启用蓝牙集成
-- 在 Home Assistant 中必须启用蓝牙被动扫描。
+一个可用的蓝牙，可以是运行 Home Assistant 的硬件上的蓝牙、蓝牙接收器或蓝牙代理设备 
+
+### 非蓝牙代理
+- 进入设置 -> 选择设备和服务 -> 启用蓝牙集成
+- 要启用蓝牙被动扫描：进入蓝牙集成 > 配置 > 配置蓝牙选项，勾选被动扫描，然后点击提交。
+
+### 使用蓝牙代理
+#### 安装 ble_passthrough 自定义集成
+- 安装 HACS
+- 打开 HACS → 右上角菜单 → 自定义仓库。
+- 添加仓库 URL：https://github.com/iHost-Open-Source-Project/ble_passthrough。选择 *集成* 作为类别
+- 在 HACS 中搜索 BLE Passthrough 并安装它。
+- 安装后，在您的 configuration.yaml 中添加以下内容
+```yaml
+ble_passthrough:
+```
+- 保存文件并重启 Home Assistant。
 
 ## 安装
-1. 前往 Add-on Store → 点击右上角的 **更多** 按钮 (⋮) → 选择 **仓库**  
-2. 粘贴以下 URL：  
+1. 进入添加组件商店 → 点击右上角的 **更多** 按钮 (⋮) → 选择 **仓库**  
+2. 粘贴以下 URL:  
    [https://github.com/iHost-Open-Source-Project/hassio-ihost-addon](https://github.com/iHost-Open-Source-Project/hassio-ihost-addon)  
 3. 或者，直接点击下面的按钮自动添加：
 

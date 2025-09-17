@@ -1,20 +1,19 @@
 name: JupyterLab
-version: 0.15.12
+version: 0.16.0
 slug: jupyterlablite
-description: 创建包含活代码、方程式、可视化图和说明性文本的文档。
-  explanatory text
+description: '[老王杂谈说]：创建包含活代码、方程、可视化和解释性文本的文档'
 url: https://ghfast.top/github.com/hassio-addons/addon-jupyterlab
 codenotary: codenotary@frenck.dev
 ingress: true
 panel_icon: mdi:flask-outline
 arch:
-- aarch64
-- amd64
+  - aarch64
+  - amd64
 homeassistant_api: true
 init: false
 map:
-- config:rw
-- share:rw
+  - config:rw
+  - share:rw
 options:
   github_access_token: ''
   system_packages: []
@@ -23,7 +22,7 @@ schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   github_access_token: password
   system_packages:
-  - str
+    - str
   init_commands:
-  - str
+    - str
 image: ghcr.nju.edu.cn/hassio-addons/jupyterlab/{arch}

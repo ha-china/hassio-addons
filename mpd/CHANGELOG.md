@@ -2,4 +2,4 @@
 
 ### ⬆️ Dependency updates
 
-- ⬆️ Bump mpd to 0.24.4, alpine base to 3.22 @mrueg ([#12](https://github.com/Poeschl-HomeAssistant-Addons/mpd/pull/12))
+- ⬆️ Update mpd to version 0.24.5-r0 @Addon-Botter ([#13](https://github.com/Poeschl-HomeAssistant-Addons/mpd/pull/13))

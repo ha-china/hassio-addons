@@ -14,7 +14,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库加星标的人！要给仓库加星标，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，它将在右上角显示。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -31,13 +31,13 @@ _感谢所有给我的仓库加星标的人！要给仓库加星标，请点击�
 
 ---
 
-这个插件的安装非常简单，与安装其他插件没有什么不同。
+这个插件的安装非常简单，与安装其他插件没有区别。
 
-1. 将我的插件仓库添加到您的 home assistant 实例中（在 supervisor 插件商店的右上角，或者如果您已经配置了我的 HA，请点击下面的按钮）
-   [![打开您的 Home Assistant 实例并显示添加插件仓库对话框，并预填特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到你的 Home assistant 实例中（在 supervisor 插件商店的右上角，或如果你已经配置了我的 HA，点击下面的按钮）
+   [![打开你的 Home Assistant 实例并显示添加插件仓库对话框，并预填特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装这个插件。
-1. 点击 `保存` 按钮以保存您的配置。
-1. 设置插件的选项以符合您的偏好。
+1. 点击 `保存` 按钮以保存你的配置。
+1. 设置插件的选项以符合你的偏好。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切正常。
 1. 打开 WebUI 并调整软件选项
@@ -50,7 +50,7 @@ Webui 可以在 <http://homeassistant:PORT> 找到。
 
 ## 添加主题/骨架
 
-您可以将主题/骨架的用户文件夹放在 /share/codex/www/user 中，
+你可以将主题/骨架的用户文件夹放在 /share/codex/www/user，
 
 ## 选项
 
@@ -61,9 +61,9 @@ Webui 可以在 <http://homeassistant:PORT> 找到。
 | `TZ` | 长格式时区 | - | `America/Los_Angeles` |
 | `CODEX_RESET_ADMIN` | 将管理员用户和密码重置为默认值 | - | `1` |
 | `CODEX_SKIP_INTEGRITY_CHECK` | 启动时跳过数据库完整性修复 | - | `1` |
-| `csrf_allowed` | 允许访问应用程序的地址列表（用逗号分隔） | `http://homeassistant.local:8123,https://homeassistant.local:8123` | `http://localhost:8123` |
-| `localdisks` | 要挂载的驱动器的硬件名称（用逗号分隔） | - | `sda1,sdb1,MYNAS` |
-| `networkdisks` | 要挂载的 SMB 服务器（用逗号分隔） | - | `//SERVER/SHARE` |
+| `csrf_allowed` | 允许访问应用程序的地址列表，用逗号分隔 | `http://homeassistant.local:8123,https://homeassistant.local:8123` | `http://localhost:8123` |
+| `localdisks` | 要挂载的驱动器的硬件名称，用逗号分隔 | - | `sda1,sdb1,MYNAS` |
+| `networkdisks` | 要挂载的 SMB 服务器，用逗号分隔 | - | `//SERVER/SHARE` |
 | `cifsusername` | 所有共享的 SMB 用户名 | - | `username` |
 | `cifspassword` | SMB 密码 | - | `password` |
 | `cifsdomain` | SMB 域 | - | `WORKGROUP` |
@@ -84,17 +84,17 @@ cifsdomain: "WORKGROUP"
 
 ### 自定义脚本和环境变量
 
-这个插件通过 `addon_config` 映射支持自定义脚本和环境变量：
+这个插件支持通过 `addon_config` 映射自定义脚本和环境变量：
 
-- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：参见 [向您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **自定义脚本**：见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **环境变量**：见 [向你的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
 
 ### 挂载驱动器
 
 这个插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ## 插图
 

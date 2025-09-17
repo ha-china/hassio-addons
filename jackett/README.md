@@ -14,11 +14,11 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库星标的人！要星标它，请点击下面的图片，它将出现在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它就会在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/jackett/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/jackett/stats.png)
 
 ## 关于
 
@@ -28,21 +28,21 @@ _感谢所有给我的仓库星标的人！要星标它，请点击下面的图�
 
 ## 配置
 
-Webui可以在配置的端口上找到，或通过Ingress在侧边栏中访问。
-配置可以通过应用WebUI完成，以下选项除外。
+Webui可以在配置的端口或通过Ingress在侧边栏中找到。
+配置可以通过应用的WebUI进行，以下选项除外。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `PGID` | 整数 | `0` | 文件权限的组ID |
-| `PUID` | 整数 | `0` | 文件权限的用户ID |
-| `TZ` | 字符串 | | 时区（例如，`Europe/London`） |
-| `localdisks` | 字符串 | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | 字符串 | | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | 字符串 | | 网络共享的SMB用户名 |
-| `cifspassword` | 字符串 | | 网络共享的SMB密码 |
-| `cifsdomain` | 字符串 | | 网络共享的SMB域 |
+|------|------|--------|-------|
+| `PGID` | int | `0` | 文件权限的组ID |
+| `PUID` | int | `0` | 文件权限的用户ID |
+| `TZ` | str | | 时区（例如，`Europe/London`） |
+| `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
+| `networkdisks` | str | | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | str | | 网络共享的SMB用户名 |
+| `cifspassword` | str | | 网络共享的SMB密码 |
+| `cifsdomain` | str | | 网络共享的SMB域 |
 
 ### 示例配置
 
@@ -61,8 +61,8 @@ cifsdomain: "workgroup"
 
 这个插件支持挂载本地驱动器和远程SMB共享：
 
-- **本地驱动器**：参见[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：参见[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：见[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：见[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ## 安装
 
@@ -72,7 +72,7 @@ cifsdomain: "workgroup"
 1. 安装这个插件。
 1. 点击`保存`按钮以保存你的配置。
 1. 启动插件。
-1. 检查插件的日志以查看一切是否正常。
-1. 仔细配置插件以符合你的喜好，参见官方文档进行配置。
+1. 检查插件的日志以查看是否一切顺利。
+1. 仔细配置插件以符合你的偏好，请参阅官方文档进行配置。
 
 [repository]: https://github.com/alexbelgium/hassio-addons

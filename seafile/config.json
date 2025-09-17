@@ -5,7 +5,7 @@
     "armv7"
   ],
   "codenotary": "alexandrep.github@gmail.com",
-  "description": "高性能文件同步和共享，同时具有Markdown所见即所得编辑、Wiki、文件标签和其他知识管理功能。",
+  "description": "[老王杂谈说]：高性能文件同步和共享，同时支持Markdown所见即所得编辑、维基、文件标签及其他知识管理功能",
   "devices": [
     "/dev/dri",
     "/dev/dri/card0",
@@ -135,6 +135,6 @@
   "slug": "seafile",
   "udev": true,
   "url": "https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/seafile",
-  "version": "testing",
+  "version": "12.0.14",
   "webui": "http://[HOST]:[PORT:8000]"
 }

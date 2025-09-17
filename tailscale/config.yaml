@@ -1,5 +1,5 @@
 name: Tailscale
-version: 0.26.0
+version: 0.26.1
 slug: tailscale
 description: '[老王杂谈说]：零配置VPN用于构建安全网络'
 url: https://ghfast.top/github.com/hassio-addons/addon-tailscale

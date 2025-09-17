@@ -29,7 +29,7 @@ for KEYS in "${arr[@]}"; do
     # Use locally
     export "${KEYS}=${VALUE//[\"\']/}"
     # Export the variable to run scripts
-    sed -i "1a export $line" /home/seafile/*.sh 2>/dev/null
+    sed -i "1a export $line" /home/seafile/*.sh 2> /dev/null
     find /opt/seafile -name '*.sh' -print0 | xargs -0 sed -i "1a export $line"
 done
 
@@ -73,7 +73,7 @@ bashio::log.info "Defining database"
 
 case $(bashio::config 'database') in
 
-        # Use sqlite
+    # Use sqlite
     sqlite)
         export "SQLITE=1" && sed -i "1a export SQLITE=1" /home/seafile/*.sh
         ;;

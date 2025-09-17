@@ -1,4 +1,4 @@
-# Home Assistant 插件：Z-Wave JS
+# Home Assistant 扩展程序：Z-Wave JS
 
 允许 Home Assistant 通过 USB 控制器与 Z-Wave 网络进行通信。
 

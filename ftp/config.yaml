@@ -1,26 +1,26 @@
 name: FTP
-version: 5.3.2
+version: 5.3.3
 slug: ftp
-description: A secure and fast FTP server for Home Assistant
+description: '[老王杂谈说]：一个安全快速的Home Assistant FTP服务器'
 url: https://ghfast.top/github.com/hassio-addons/addon-ftp
 codenotary: codenotary@frenck.dev
 startup: services
 arch:
-- aarch64
-- amd64
-- armv7
+  - aarch64
+  - amd64
+  - armv7
 init: false
 host_network: true
 privileged:
-- SYS_ADMIN
+  - SYS_ADMIN
 apparmor: false
 map:
-- addons:rw
-- backup:rw
-- config:rw
-- media:rw
-- share:rw
-- ssl:rw
+  - addons:rw
+  - backup:rw
+  - config:rw
+  - media:rw
+  - share:rw
+  - ssl:rw
 options:
   port: 21
   data_port: 20
@@ -35,18 +35,18 @@ options:
   implicit_ssl: false
   max_clients: 5
   users:
-  - username: hassio
-    password: changeme
-    allow_chmod: false
-    allow_download: false
-    allow_upload: false
-    allow_dirlist: true
-    addons: false
-    backup: false
-    config: false
-    media: true
-    share: true
-    ssl: false
+    - username: hassio
+      password: changeme
+      allow_chmod: false
+      allow_download: false
+      allow_upload: false
+      allow_dirlist: true
+      addons: false
+      backup: false
+      config: false
+      media: true
+      share: true
+      ssl: false
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   port: port
@@ -63,17 +63,17 @@ schema:
   implicit_ssl: bool
   max_clients: int
   users:
-  - username: match(^[a-zA-Z0-9\d](?:[a-zA-Z0-9\d]|-(?=[a-zA-Z0-9\d])){0,32}$)
-    password: password
-    allow_chmod: bool
-    allow_download: bool
-    allow_upload: bool
-    allow_dirlist: bool
-    addons: bool
-    backup: bool
-    config: bool
-    media: bool
-    share: bool
-    ssl: bool
+    - username: match(^[a-zA-Z0-9\d](?:[a-zA-Z0-9\d]|-(?=[a-zA-Z0-9\d])){0,32}$)
+      password: password
+      allow_chmod: bool
+      allow_download: bool
+      allow_upload: bool
+      allow_dirlist: bool
+      addons: bool
+      backup: bool
+      config: bool
+      media: bool
+      share: bool
+      ssl: bool
   i_like_to_be_pwned: bool?
 image: ghcr.nju.edu.cn/hassio-addons/ftp/{arch}

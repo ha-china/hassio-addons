@@ -1,7 +1,7 @@
 name: motionEye
-version: 0.22.2
+version: 0.22.3
 slug: motioneye
-description: Simple, elegant and feature-rich CCTV/NVR for your cameras
+description: '[老王杂谈说]：简单、优雅且功能丰富的CCTV/NVR，适用于您的摄像头'
 url: https://ghfast.top/github.com/hassio-addons/addon-motioneye
 codenotary: codenotary@frenck.dev
 ingress: true
@@ -10,28 +10,28 @@ ingress_stream: true
 panel_icon: mdi:cctv
 homeassistant: 0.92.0b2
 arch:
-- aarch64
-- amd64
-- armhf
-- armv7
-- i386
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
 init: false
 ports:
   80/tcp: null
 ports_description:
   80/tcp: Web interface (Not required for Ingress)
 discovery:
-- motioneye
+  - motioneye
 host_network: true
 apparmor: false
 video: true
 privileged:
-- DAC_READ_SEARCH
-- SYS_ADMIN
+  - DAC_READ_SEARCH
+  - SYS_ADMIN
 map:
-- media:rw
-- share:rw
-- ssl
+  - media:rw
+  - share:rw
+  - ssl
 options:
   motion_webcontrol: false
   ssl: true
@@ -45,7 +45,7 @@ schema:
   certfile: str
   keyfile: str
   action_buttons:
-  - type: list(lock|unlock|light_on|light_off|alarm_on|alarm_off|up|right|down|left|zoom_in|zoom_out|preset1|preset2|preset3|preset4|preset5|preset6|preset7|preset8|preset9)?
-    camera: int?
-    command: str?
+    - type: list(lock|unlock|light_on|light_off|alarm_on|alarm_off|up|right|down|left|zoom_in|zoom_out|preset1|preset2|preset3|preset4|preset5|preset6|preset7|preset8|preset9)?
+      camera: int?
+      command: str?
 image: ghcr.nju.edu.cn/hassio-addons/motioneye/{arch}
