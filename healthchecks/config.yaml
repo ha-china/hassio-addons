@@ -8,7 +8,7 @@ description: Healthchecks 是一个用于监控你的cron作业的监视器。�
 arch:
   - aarch64
   - amd64
-image: "ghcr.mirrors.cqupt.edu.cn/bluemaex/ha-addons-healthchecks-{arch}"
+image: "ghcr.nju.edu.cn/bluemaex/ha-addons-healthchecks-{arch}"
 startup: system
 url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/healthchecks
 init: false

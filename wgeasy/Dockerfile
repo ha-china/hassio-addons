@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM ghcr.mirrors.cqupt.edu.cn/wg-easy/wg-easy
+FROM ghcr.nju.edu.cn/wg-easy/wg-easy
 
 VOLUME [ "/ssl" ]
 

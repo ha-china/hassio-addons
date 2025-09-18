@@ -19,4 +19,4 @@ options:
 schema:
   domain: str
   log_level: list(debug|info|warn|error)
-image: ghcr.mirrors.cqupt.edu.cn/einschmidt/authelia/{arch}
+image: ghcr.nju.edu.cn/einschmidt/authelia/{arch}

@@ -11,7 +11,7 @@
     "amd64",
     "i386"
   ],
-  "image": "ghcr.mirrors.cqupt.edu.cn/poeschl-homeassistant-addons/asterisk-{arch}",
+  "image": "ghcr.nju.edu.cn/poeschl-homeassistant-addons/asterisk-{arch}",
   "map": [
     "share",
     "config"

@@ -9,7 +9,7 @@ arch:
   - amd64
   - armv7
   - i386
-image: "ghcr.mirrors.cqupt.edu.cn/bluemaex/ha-addons-victoriametrics-{arch}"
+image: "ghcr.nju.edu.cn/bluemaex/ha-addons-victoriametrics-{arch}"
 startup: system
 url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/victoriametrics
 ports:

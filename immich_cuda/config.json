@@ -85,7 +85,7 @@
     "TRANSFORMERS_CACHE": "/data/machine-learning"
   },
   "hassio_api": true,
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/immich_cuda-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/immich_cuda-{arch}",
   "init": false,
   "map": [
     "addon_config:rw",

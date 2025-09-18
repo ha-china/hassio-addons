@@ -20,7 +20,7 @@ environment:
   ACCOUNT_REGISTRATION: "false"
   HTTP_ALLOWED: "true"
   ALLOW_UNAUTHENTICATED: "true"
-image: ghcr.mirrors.cqupt.edu.cn/c4illin/convertx
+image: ghcr.nju.edu.cn/c4illin/convertx
 boot: auto
 startup: services
 webui: "[PROTO:ssl]://[HOST]:[PORT:3000]"

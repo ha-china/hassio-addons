@@ -8,7 +8,7 @@ arch:
   - armv7
   - aarch64
   - amd64
-image: ghcr.mirrors.cqupt.edu.cn/faserf/matterbridge-{arch}
+image: ghcr.nju.edu.cn/faserf/matterbridge-{arch}
 map:
   - share:rw
 init: false

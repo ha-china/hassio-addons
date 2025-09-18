@@ -31,4 +31,4 @@ schema:
   ntp_server:
     - str?
   mode: list(pool|server)
-image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/chrony/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/chrony/{arch}

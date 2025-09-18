@@ -1,7 +1,7 @@
 name: HACS极速版安装器
 version: "2.0.0"
 slug: hacs-china
-image: ghcr.mirrors.cqupt.edu.cn/hacs-china/{arch}-addon-get
+image: ghcr.nju.edu.cn/hacs-china/{arch}-addon-get
 description: 最简单的HACS极速版安装方式
 startup: once
 boot: manual

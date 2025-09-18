@@ -75,7 +75,7 @@
     "DZM_CONFIG_DIR": "/config/addons_config/zoneminder",
     "ZM_DIR_EVENTS": "/var/cache/zoneminder/events2"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/zoneminder-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/zoneminder-{arch}",
   "map": [
     "config:rw",
     "media:rw",

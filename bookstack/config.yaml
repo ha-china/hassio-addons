@@ -38,4 +38,4 @@ schema:
   envvars:
     - name: str
       value: str
-image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/bookstack/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/bookstack/{arch}

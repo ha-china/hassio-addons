@@ -27,4 +27,4 @@ schema:
   latency_rtp: int
   latency_http: int
   drift: bool
-image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/airsonos/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/airsonos/{arch}

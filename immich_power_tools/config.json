@@ -6,7 +6,7 @@
   "codenotary": "alexandrep.github@gmail.com",
   "description": "[老王杂谈说]：用于组织你的immich库的电动工具",
   "hassio_api": true,
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/immich_power_tools-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/immich_power_tools-{arch}",
   "init": false,
   "map": [
     "addon_config:rw"

@@ -23,4 +23,4 @@ schema:
   update_languages: bool
   profanity: list(off|masked|removed)
 tmpfs: true
-image: ghcr.mirrors.cqupt.edu.cn/hugobloem/{arch}-wyoming-microsoft-stt
+image: ghcr.nju.edu.cn/hugobloem/{arch}-wyoming-microsoft-stt

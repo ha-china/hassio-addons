@@ -85,5 +85,5 @@
     "watchdog": "str?",
     "force_onboarding": "bool?"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/zigbee2mqtt/zigbee2mqtt-edge-{arch}"
+  "image": "ghcr.nju.edu.cn/zigbee2mqtt/zigbee2mqtt-edge-{arch}"
 }

@@ -73,4 +73,4 @@ schema:
   leave_front_door_open: bool?
 environment:
   LOG_FORMAT: '{LEVEL}: {MESSAGE}'
-image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/glances/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/glances/{arch}

@@ -13,7 +13,7 @@ arch:
 startup: once
 boot: manual
 init: false
-image: ghcr.mirrors.cqupt.edu.cn/poeschl-homeassistant-addons/git-exporter-{arch}
+image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/git-exporter-{arch}
 hassio_api: true
 hassio_role: manager
 map:

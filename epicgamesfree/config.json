@@ -71,7 +71,7 @@
   "environment": {
     "CONFIG_DIR": "/config/addons_config/epicgamesfree"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/epicgamesfree-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/epicgamesfree-{arch}",
   "init": false,
   "map": [
     "config:rw"

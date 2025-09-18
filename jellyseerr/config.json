@@ -70,7 +70,7 @@
   ],
   "environment": {},
   "host_network": true,
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/jellyseerr-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/jellyseerr-{arch}",
   "init": false,
   "map": [
     "config:rw"

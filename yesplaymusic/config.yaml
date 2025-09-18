@@ -12,7 +12,7 @@
   ],
   "startup": "services",
   "boot": "auto",
-  "image": "ghcr.mirrors.cqupt.edu.cn/desmond-dong/yesplaymusic/yesplaymusic-{arch}",
+  "image": "ghcr.nju.edu.cn/desmond-dong/yesplaymusic/yesplaymusic-{arch}",
   "ports": {
     "3000/tcp": 7080,
     "80/tcp": 7081

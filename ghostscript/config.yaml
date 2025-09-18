@@ -21,4 +21,4 @@ map:
   - type: addon_config
     path: /var/lib/ghostscript-printer-app
     read_only: false
-image: ghcr.mirrors.cqupt.edu.cn/openprinting/ghostscript-printer-app
+image: ghcr.nju.edu.cn/openprinting/ghostscript-printer-app

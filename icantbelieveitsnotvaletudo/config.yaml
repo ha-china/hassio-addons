@@ -69,4 +69,4 @@ options:
     mapDataTopic: valetudo/rockrobo/MapData/map-data
     minMillisecondsBetweenMapUpdates: 10000
     publishMapImage: true
-image: ghcr.mirrors.cqupt.edu.cn/poeschl-homeassistant-addons/icantbelieveitsnotvaletudo-{arch}
+image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/icantbelieveitsnotvaletudo-{arch}

@@ -15,7 +15,7 @@ map:
   - type: addon_config
     read_only: false
     path: /var/www/html/api/data
-image: ghcr.mirrors.cqupt.edu.cn/ludus-leonis/freebeegee
+image: ghcr.nju.edu.cn/ludus-leonis/freebeegee
 boot: manual
 startup: services
 webui: "[PROTO:ssl]://[HOST]:[PORT:80]"

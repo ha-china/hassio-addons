@@ -1,5 +1,5 @@
 build_from:
-  armhf: "ghcr.mirrors.cqupt.edu.cn/hassio-addons/base:18.0.1"
-  armv7: "ghcr.mirrors.cqupt.edu.cn/hassio-addons/base:18.0.1"
-  aarch64: "ghcr.mirrors.cqupt.edu.cn/hassio-addons/base:18.0.1"
-  amd64: "ghcr.mirrors.cqupt.edu.cn/hassio-addons/base:18.0.1"
+  armhf: "ghcr.nju.edu.cn/hassio-addons/base:18.0.1"
+  armv7: "ghcr.nju.edu.cn/hassio-addons/base:18.0.1"
+  aarch64: "ghcr.nju.edu.cn/hassio-addons/base:18.0.1"
+  amd64: "ghcr.nju.edu.cn/hassio-addons/base:18.0.1"

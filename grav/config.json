@@ -68,7 +68,7 @@
     "/dev/nvme1",
     "/dev/nvme2"
   ],
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/grav-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/grav-{arch}",
   "init": false,
   "map": [
     "share:rw",

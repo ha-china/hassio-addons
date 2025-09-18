@@ -6,7 +6,7 @@ description: 管理SBFspot使用简单的界面。
 url: "https://ghfast.top/github.com/habuild/hassio-addons/tree/main/haos-sbfspot"
 stage: experimental
 
-image: "ghcr.mirrors.cqupt.edu.cn/habuild/{arch}-addon-haos-sbfspot"
+image: "ghcr.nju.edu.cn/habuild/{arch}-addon-haos-sbfspot"
 arch:
   - armhf
   - armv7

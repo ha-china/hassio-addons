@@ -1,4 +1,4 @@
-ARG BUILD_FROM="ghcr.mirrors.cqupt.edu.cn/home-assistant/amd64-base"
+ARG BUILD_FROM="ghcr.nju.edu.cn/home-assistant/amd64-base"
 
 FROM ${BUILD_FROM} AS final
 

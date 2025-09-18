@@ -10,7 +10,7 @@ arch:
   - armv7
   - i386
 init: false
-image: "ghcr.mirrors.cqupt.edu.cn/arbuzov/{arch}-addon-broadlink-ac-mqtt"
+image: "ghcr.nju.edu.cn/arbuzov/{arch}-addon-broadlink-ac-mqtt"
 options:
   service:
     daemon_mode: True

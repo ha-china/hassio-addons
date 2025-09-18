@@ -44,5 +44,5 @@
     "JAVA_TIMEZONE": "str",
     "JAVA_OPTS": "str"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/sanderdw/hassio-addons/ha-metabase-{arch}"
+  "image": "ghcr.nju.edu.cn/sanderdw/hassio-addons/ha-metabase-{arch}"
 }

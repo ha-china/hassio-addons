@@ -41,4 +41,4 @@ schema:
   leave_front_door_open: bool?
 backup_exclude:
   - '*/adguard/data/querylog.*'
-image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/adguard/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/adguard/{arch}

@@ -11,7 +11,7 @@
     "XTEVE_HOME": "/data"
   },
   "host_network": true,
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/xteve-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/xteve-{arch}",
   "map": [
     "config:rw",
     "share:rw",

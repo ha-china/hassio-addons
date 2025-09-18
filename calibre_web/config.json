@@ -78,7 +78,7 @@
     "shm_size": "1gb"
   },
   "hassio_api": true,
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/calibre_web-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/calibre_web-{arch}",
   "ingress": true,
   "init": false,
   "map": [

@@ -7,7 +7,7 @@
   "url": "https://github.com/Desmond-Dong/hassio-addons",
   "arch": ["aarch64", "amd64"],
   "startup": "application",
-  "image": "ghcr.mirrors.cqupt.edu.cn/gotify/server",
+  "image": "ghcr.nju.edu.cn/gotify/server",
   "boot": "auto",
   "init": false,
   "ingress": true,

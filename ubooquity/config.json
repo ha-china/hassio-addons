@@ -68,7 +68,7 @@
     "/dev/nvme1",
     "/dev/nvme2"
   ],
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/ubooquity-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/ubooquity-{arch}",
   "init": false,
   "map": [
     "media:rw",

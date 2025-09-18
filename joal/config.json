@@ -7,7 +7,7 @@
   "codenotary": "alexandrep.github@gmail.com",
   "description": "开源命令行RatioMaster带Web UI",
   "hassio_api": true,
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/joal-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/joal-{arch}",
   "ingress": true,
   "map": [
     "config:rw"

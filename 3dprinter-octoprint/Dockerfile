@@ -1,4 +1,4 @@
-ARG BUILD_FROM="ghcr.mirrors.cqupt.edu.cn/home-assistant/amd64-base-debian:bullseye"
+ARG BUILD_FROM="ghcr.nju.edu.cn/home-assistant/amd64-base-debian:bullseye"
 FROM ${BUILD_FROM}
 ARG OCTOPRINT_VERSION="1.9.3"
 

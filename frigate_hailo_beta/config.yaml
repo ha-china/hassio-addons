@@ -10,7 +10,7 @@ panel_title: Frigate
 slug: frigate-hailo-beta
 description: NVR具有实时本地对象检测功能，适用于IP摄像头。
 url: "https://ghfast.top/github.com/blakeblackshear/frigate"
-image: ghcr.mirrors.cqupt.edu.cn/blakeblackshear/frigate
+image: ghcr.nju.edu.cn/blakeblackshear/frigate
 startup: application
 boot: auto
 init: false

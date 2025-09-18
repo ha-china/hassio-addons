@@ -1,6 +1,6 @@
 {
   "build_from": {
-    "amd64": "ghcr.mirrors.cqupt.edu.cn/imagegenius/immich:openvino"
+    "amd64": "ghcr.nju.edu.cn/imagegenius/immich:openvino"
   },
   "codenotary": {
     "signer": "alexandrep.github@gmail.com"

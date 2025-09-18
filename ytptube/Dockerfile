@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM ghcr.mirrors.cqupt.edu.cn/arabcoders/ytptube
+FROM ghcr.nju.edu.cn/arabcoders/ytptube
 
 USER root
 RUN apt-get update && apt-get install -y --no-install-recommends jq

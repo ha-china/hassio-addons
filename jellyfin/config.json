@@ -79,7 +79,7 @@
   ],
   "host_dbus": true,
   "host_network": true,
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/jellyfin-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/jellyfin-{arch}",
   "ingress": true,
   "ingress_port": 0,
   "ingress_stream": true,

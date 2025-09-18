@@ -25,4 +25,4 @@ schema:
     printer_path: "str"
     printer_baudrate: "int"
     ser2net_args: "str?"
-image: ghcr.mirrors.cqupt.edu.cn/fredrikbaberg/ha-addon-3dprinter-remote-{arch}
+image: ghcr.nju.edu.cn/fredrikbaberg/ha-addon-3dprinter-remote-{arch}

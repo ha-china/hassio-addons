@@ -70,7 +70,7 @@
     "/dev/nvme2"
   ],
   "host_network": true,
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/arpspoof-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/arpspoof-{arch}",
   "map": [],
   "name": "Arpspoof",
   "options": {

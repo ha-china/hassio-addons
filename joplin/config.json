@@ -71,7 +71,7 @@
   "environment": {
     "APP_PORT": "22300"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/joplin-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/joplin-{arch}",
   "map": [
     "config:rw",
     "share:rw"

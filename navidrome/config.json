@@ -8,7 +8,7 @@
   ],
   "codenotary": "alexandrep.github@gmail.com",
   "description": "Navidrome for Home Assistant",
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/navidrome-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/navidrome-{arch}",
   "init": false,
   "map": [
     "addon_config:rw",

@@ -30,4 +30,4 @@ schema:
     - str
   api_auth_token: str
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
-image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/zerotier/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/zerotier/{arch}

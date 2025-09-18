@@ -9,7 +9,7 @@
     "LC_ALL": "en_US.UTF-8",
     "TIMEOUT": "60000"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/changedetection.io-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/changedetection.io-{arch}",
   "init": false,
   "map": [
     "config:rw"

@@ -68,7 +68,7 @@
     "/dev/nvme1",
     "/dev/nvme2"
   ],
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/gitea-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/gitea-{arch}",
   "init": false,
   "map": [
     "addon_config:rw",

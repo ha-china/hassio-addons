@@ -71,7 +71,7 @@
   "environment": {
     "TRUSTED_PROXIES": "**"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/fireflyiii-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/fireflyiii-{arch}",
   "init": false,
   "map": [
     "config:rw",

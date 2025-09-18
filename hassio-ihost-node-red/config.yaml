@@ -66,4 +66,4 @@ schema:
   leave_front_door_open: bool?
   safe_mode: bool?
   max_old_space_size: int?
-image: ghcr.mirrors.cqupt.edu.cn/ihost-open-source-project/hassio-ihost-node-red-{arch}
+image: ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-node-red-{arch}

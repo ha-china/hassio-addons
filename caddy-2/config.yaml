@@ -45,4 +45,4 @@ environment:
 init: false
 breaking_versions:
   - 2.0.0
-image: ghcr.mirrors.cqupt.edu.cn/einschmidt/caddy-2/{arch}
+image: ghcr.nju.edu.cn/einschmidt/caddy-2/{arch}

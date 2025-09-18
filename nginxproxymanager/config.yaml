@@ -20,4 +20,4 @@ map:
 - addon_config:rw
 backup_exclude:
 - '*/logs'
-image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/nginxproxymanager/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/nginxproxymanager/{arch}

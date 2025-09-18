@@ -26,4 +26,4 @@ schema:
   certfile: str
   keyfile: str
   request_size_limit: int?
-image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/bitwarden/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/bitwarden/{arch}

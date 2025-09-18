@@ -34,4 +34,4 @@ panel_title: ESPHome Builder
 version: 2025.6.3
 slug: ihost-esphome
 description: Build your own smart home devices using ESPHome, no programming experience required
-image: ghcr.mirrors.cqupt.edu.cn/ihost-open-source-project/esphome-hassio
+image: ghcr.nju.edu.cn/ihost-open-source-project/esphome-hassio

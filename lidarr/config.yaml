@@ -16,4 +16,4 @@ map:
   - media:rw
 ports:
   8686/tcp: 8686
-image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/lidarr/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/lidarr/{arch}

@@ -16,4 +16,4 @@ ports:
 ports_description:
   7396/tcp: Web interface
   36330/tcp: Remote command interface
-image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/foldingathome/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/foldingathome/{arch}

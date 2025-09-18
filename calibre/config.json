@@ -76,7 +76,7 @@
     "START_DOCKER": "false",
     "shm_size": "1gb"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/calibre-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/calibre-{arch}",
   "ingress": true,
   "init": false,
   "map": [

@@ -35,4 +35,4 @@ schema:
   certfile: str
   keyfile: str
   db_path: str?
-image: ghcr.mirrors.cqupt.edu.cn/einschmidt/yarr/{arch}
+image: ghcr.nju.edu.cn/einschmidt/yarr/{arch}

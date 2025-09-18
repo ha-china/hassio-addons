@@ -7,7 +7,7 @@
   "description": "null",
   "environment": {},
   "map": [],
-  "image": "ghcr.mirrors.cqupt.edu.cn/gchq/cyberchef",
+  "image": "ghcr.nju.edu.cn/gchq/cyberchef",
   "version": "10.19.4",
   "name": "CyberChef",
   "options": {},

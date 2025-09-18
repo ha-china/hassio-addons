@@ -24,4 +24,4 @@ options:
     mjpg_input: "input_uvc.so -n"
 schema:
     mjpg_input: "str"
-image: ghcr.mirrors.cqupt.edu.cn/fredrikbaberg/ha-addon-camera-mjpg-streamer-{arch}
+image: ghcr.nju.edu.cn/fredrikbaberg/ha-addon-camera-mjpg-streamer-{arch}

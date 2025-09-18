@@ -6,7 +6,7 @@
   "codenotary": "alexandrep.github@gmail.com",
   "description": "将您的immich画廊展示为数字相框",
   "hassio_api": true,
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/immich_frame-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/immich_frame-{arch}",
   "init": false,
   "map": [
     "addon_config:rw"

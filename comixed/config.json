@@ -61,7 +61,7 @@
   ],
   "hassio_api": true,
   "homeassistant_api": true,
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/comixed-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/comixed-{arch}",
   "map": [
     "addon_config:rw",
     "media:rw",

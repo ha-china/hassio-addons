@@ -10,7 +10,7 @@ panel_title: Frigate
 slug: frigate-hailo
 description: $translated_description
 url: "https://ghfast.top/github.com/blakeblackshear/frigate"
-image: ghcr.mirrors.cqupt.edu.cn/blakeblackshear/frigate
+image: ghcr.nju.edu.cn/blakeblackshear/frigate
 startup: application
 boot: auto
 init: false

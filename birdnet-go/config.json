@@ -78,7 +78,7 @@
     "BIRDNET_GID": "0",
     "BIRDNET_UID": "0"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/birdnet-go-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/birdnet-go-{arch}",
   "ingress": true,
   "ingress_stream": true,
   "init": false,

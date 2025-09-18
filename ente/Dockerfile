@@ -35,7 +35,7 @@ RUN yarn config set network-timeout 900000 -g \
 # 1 ▸ Base image #
 #################
 ARG BUILD_VERSION
-FROM ghcr.mirrors.cqupt.edu.cn/ente-io/server:latest
+FROM ghcr.nju.edu.cn/ente-io/server:latest
 
 ##################
 # 2 ▸ Tune image #

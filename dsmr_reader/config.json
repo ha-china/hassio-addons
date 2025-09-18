@@ -9,7 +9,7 @@
     "aarch64",
     "amd64"
   ],
-  "image": "ghcr.mirrors.cqupt.edu.cn/sanderdw/hassio-addons/ha-dsmr-reader-{arch}",
+  "image": "ghcr.nju.edu.cn/sanderdw/hassio-addons/ha-dsmr-reader-{arch}",
   "url": "https://ghfast.top/github.com/sanderdw/hassio-addons",
   "startup": "application",
   "boot": "auto",

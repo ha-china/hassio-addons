@@ -40,7 +40,7 @@ ports:
 ports_description:
   "6720/tcp": "Required by knx interface and being able to access the KNX bus via ETS"
   "3671/udp": "Required by knx interface and being able to access the KNX bus via ETS"
-image: "ghcr.mirrors.cqupt.edu.cn/da-anda/hass-io-addons-{arch}-addon-knxd"
+image: "ghcr.nju.edu.cn/da-anda/hass-io-addons-{arch}-addon-knxd"
 uart: true
 usb: true
 map:
