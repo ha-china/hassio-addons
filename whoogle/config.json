@@ -71,7 +71,7 @@
   "environment": {
     "EXPOSE_PORT": "5001"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/whoogle-search-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/whoogle-search-{arch}",
   "ingress": true,
   "ingress_stream": true,
   "map": [

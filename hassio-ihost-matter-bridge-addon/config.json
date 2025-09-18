@@ -55,7 +55,7 @@
       "password": "str?"
     }
   },
-  "image": "ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-matter-bridge-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/ihost-open-source-project/hassio-ihost-matter-bridge-{arch}",
   "devices": [
     "/dev/teepriv0",
     "/dev/tee0",

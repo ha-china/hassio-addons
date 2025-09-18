@@ -74,7 +74,7 @@
     "PGID": "0",
     "PUID": "0"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/lidarr_nas-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/lidarr_nas-{arch}",
   "init": false,
   "map": [
     "config:rw",

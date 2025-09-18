@@ -12,7 +12,7 @@
   "docker_api": true,
   "full_access": true,
   "hassio_api": true,
-  "image": "ghcr.nju.edu.cn/alexbelgium/portainer_agent-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/portainer_agent-{arch}",
   "init": false,
   "map": [
     "config:rw",

@@ -14,7 +14,7 @@
   },
   "hassio_api": true,
   "host_network": true,
-  "image": "ghcr.nju.edu.cn/alexbelgium/netalertx-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/netalertx-{arch}",
   "ingress": true,
   "ingress_port": 0,
   "ingress_stream": true,

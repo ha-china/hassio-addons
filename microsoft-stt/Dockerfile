@@ -2,7 +2,7 @@ ARG BUILD_FROM
 FROM ${BUILD_FROM}
 ARG BUILD_ARCH
 
-COPY --from=ghcr.nju.edu.cn/astral-sh/uv:latest /uv /uvx /bin/
+COPY --from=ghcr.mirrors.cqupt.edu.cn/astral-sh/uv:latest /uv /uvx /bin/
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 

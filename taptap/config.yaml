@@ -4,7 +4,7 @@ version: "0.1.5"
 slug: taptap
 description: Tigo CCA到Home Assistant MQTT桥接器
 url: "https://ghfast.top/github.com/litinoveweedle/hassio-addons/tree/main/taptap"
-image: "ghcr.nju.edu.cn/litinoveweedle/hassio-addon-taptap-{arch}"
+image: "ghcr.mirrors.cqupt.edu.cn/litinoveweedle/hassio-addon-taptap-{arch}"
 homeassistant: 2025.3.1
 arch:
   - armhf

@@ -75,7 +75,7 @@
     "/dev/md3"
   ],
   "environment": {},
-  "image": "ghcr.nju.edu.cn/alexbelgium/transmission_ls-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/transmission_ls-{arch}",
   "ingress": true,
   "init": false,
   "map": [

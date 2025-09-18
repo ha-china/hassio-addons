@@ -37,4 +37,4 @@ schema:
   run_parameters:
     - match(^(--edge-bind-address|--edge-ip-version|--grace-period|--ha-connections|--logfile|--loglevel|--pidfile|--protocol|--region|--retries|--tag)=.*$)?
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
-image: ghcr.nju.edu.cn/brenner-tobias/cloudflared/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/brenner-tobias/cloudflared/{arch}

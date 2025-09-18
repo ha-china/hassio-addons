@@ -12,7 +12,7 @@ arch:
 homeassistant: 0.115.0
 boot: manual
 init: false
-image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/rsync-local-{arch}
+image: ghcr.mirrors.cqupt.edu.cn/poeschl-homeassistant-addons/rsync-local-{arch}
 ports: {}
 ports_description: {}
 map:

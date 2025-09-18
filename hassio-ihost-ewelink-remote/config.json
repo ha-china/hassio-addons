@@ -49,5 +49,5 @@
       "password": "str?"
     }
   },
-  "image": "ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-ewelink-remote-{arch}"
+  "image": "ghcr.mirrors.cqupt.edu.cn/ihost-open-source-project/hassio-ihost-ewelink-remote-{arch}"
 }

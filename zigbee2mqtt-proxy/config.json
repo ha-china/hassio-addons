@@ -34,5 +34,5 @@
     "server": "url",
     "auth_token": "str?"
   },
-  "image": "ghcr.nju.edu.cn/zigbee2mqtt/zigbee2mqtt-proxy-{arch}"
+  "image": "ghcr.mirrors.cqupt.edu.cn/zigbee2mqtt/zigbee2mqtt-proxy-{arch}"
 }

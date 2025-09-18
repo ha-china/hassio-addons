@@ -7,7 +7,7 @@ description: Grafana Loki 是一个基于 Prometheus 启发的可水平扩展、
 arch:
   - aarch64
   - amd64
-image: "ghcr.nju.edu.cn/bluemaex/ha-addons-loki-{arch}"
+image: "ghcr.mirrors.cqupt.edu.cn/bluemaex/ha-addons-loki-{arch}"
 startup: system
 url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/loki
 init: false

@@ -73,7 +73,7 @@
     "PGID": "0",
     "PUID": "0"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/requestrr-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/requestrr-{arch}",
   "init": false,
   "map": [
     "addon_config:rw"

@@ -73,7 +73,7 @@
     "PGID": "0",
     "PUID": "0"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/nzbget-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/nzbget-{arch}",
   "ingress": true,
   "init": false,
   "map": [

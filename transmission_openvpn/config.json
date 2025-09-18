@@ -75,7 +75,7 @@
     "OPENVPN_OPTS": "",
     "WEBPROXY_PORT": "8118"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/transmission_openvpn-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/transmission_openvpn-{arch}",
   "ingress": true,
   "map": [
     "config:rw",

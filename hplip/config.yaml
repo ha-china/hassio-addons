@@ -21,4 +21,4 @@ map:
   - type: addon_config
     path: /var/lib/hplip-printer-app
     read_only: false
-image: ghcr.nju.edu.cn/openprinting/hplip-printer-app
+image: ghcr.mirrors.cqupt.edu.cn/openprinting/hplip-printer-app

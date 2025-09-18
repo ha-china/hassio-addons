@@ -1,8 +1,8 @@
 {
   "build_from": {
-    "aarch64": "ghcr.nju.edu.cn/autobrr/autobrr:latest",
-    "amd64": "ghcr.nju.edu.cn/autobrr/autobrr:latest",
-    "armv7": "ghcr.nju.edu.cn/autobrr/autobrr:latest"
+    "aarch64": "ghcr.mirrors.cqupt.edu.cn/autobrr/autobrr:latest",
+    "amd64": "ghcr.mirrors.cqupt.edu.cn/autobrr/autobrr:latest",
+    "armv7": "ghcr.mirrors.cqupt.edu.cn/autobrr/autobrr:latest"
   },
   "codenotary": {
     "signer": "alexandrep.github@gmail.com"

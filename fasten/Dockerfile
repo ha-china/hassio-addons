@@ -1,6 +1,6 @@
 ARG BUILD_FROM
 ARG BUILD_VERSION
-FROM ghcr.nju.edu.cn/fastenhealth/fasten-onprem:main-${BUILD_VERSION}
+FROM ghcr.mirrors.cqupt.edu.cn/fastenhealth/fasten-onprem:main-${BUILD_VERSION}
 
 CMD ["/opt/fasten/fasten", "start", "--config", "/config/config.yaml"]
 

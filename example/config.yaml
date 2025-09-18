@@ -15,4 +15,4 @@ options:
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)
   seconds_between_quotes: int(1,120)
-image: ghcr.nju.edu.cn/hassio-addons/example/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/example/{arch}

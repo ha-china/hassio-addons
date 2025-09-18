@@ -87,7 +87,7 @@
     "TRUSTED_PROXIES": "**"
   },
   "hassio_api": true,
-  "image": "ghcr.nju.edu.cn/alexbelgium/nextcloud_ocr-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/nextcloud_ocr-{arch}",
   "ingress_port": 0,
   "init": false,
   "map": [

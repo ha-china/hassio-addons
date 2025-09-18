@@ -72,7 +72,7 @@
     "PGID": "0",
     "PUID": "0"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/readarr_nas-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/readarr_nas-{arch}",
   "ingress": true,
   "ingress_entry": "readarr",
   "init": false,

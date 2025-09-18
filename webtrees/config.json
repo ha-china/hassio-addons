@@ -78,7 +78,7 @@
     "PUID": "1000",
     "WEBTREES_HOME": "/var2/www/webtrees"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/webtrees-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/webtrees-{arch}",
   "init": false,
   "map": [
     "addon_config:rw",

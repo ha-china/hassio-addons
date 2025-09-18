@@ -11,7 +11,7 @@
   "map": [
     "addon_config:rw"
   ],
-  "image": "ghcr.nju.edu.cn/convos-chat/convos",
+  "image": "ghcr.mirrors.cqupt.edu.cn/convos-chat/convos",
   "version": "v8.07",
   "name": "convos",
   "options": {},

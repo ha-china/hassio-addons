@@ -75,7 +75,7 @@
     "discovery.type": "single-node"
   },
   "host_network": true,
-  "image": "ghcr.nju.edu.cn/alexbelgium/elasticsearch-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/elasticsearch-{arch}",
   "map": [
     "config:rw"
   ],

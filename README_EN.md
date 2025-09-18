@@ -22,7 +22,7 @@ All Addon acceleration correspondence is as follows:
 
 | Original URL        | China Accelerated URL     |
 |---------------------|-------------------------|
-| ghcr.io             | ghcr.nju.edu.cn         |
+| ghcr.io             | ghcr.mirrors.cqupt.edu.cn         |
 | docker.io           | docker.1ms.run    |
 | lscr.io             | docker.1ms.run    |
 | docker.io           | docker.1ms.run          |

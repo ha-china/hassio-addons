@@ -9,7 +9,7 @@ arch:
   - aarch64
   - amd64
   - i386
-image: ghcr.nju.edu.cn/faserf/bash_script_executer-{arch}
+image: ghcr.mirrors.cqupt.edu.cn/faserf/bash_script_executer-{arch}
 map:
   - share:rw
 init: false

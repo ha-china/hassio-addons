@@ -77,7 +77,7 @@
     "WEBUI_PORT": "7474",
     "WEBUI_USERNAME": "admin"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/autobrr-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/autobrr-{arch}",
   "ingress": true,
   "init": false,
   "map": [

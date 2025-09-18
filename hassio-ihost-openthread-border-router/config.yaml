@@ -21,7 +21,7 @@ privileged:
   - NET_ADMIN
 devices:
   - /dev/net/tun
-image: ghcr.nju.edu.cn/ihost-open-source-project/openthread-border-router
+image: ghcr.mirrors.cqupt.edu.cn/ihost-open-source-project/openthread-border-router
 init: false
 options:
   device: null

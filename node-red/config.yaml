@@ -67,4 +67,4 @@ schema:
   leave_front_door_open: bool?
   safe_mode: bool?
   max_old_space_size: int?
-image: ghcr.nju.edu.cn/hassio-addons/node-red/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/node-red/{arch}

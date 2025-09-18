@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM ghcr.nju.edu.cn/maxmind/geoipupdate
+FROM ghcr.mirrors.cqupt.edu.cn/maxmind/geoipupdate
 
 COPY run.sh /
 RUN chmod a+x /run.sh

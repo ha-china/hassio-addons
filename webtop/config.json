@@ -79,7 +79,7 @@
     "shm_size": "1gb"
   },
   "host_dbus": true,
-  "image": "ghcr.nju.edu.cn/alexbelgium/webtop-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/webtop-{arch}",
   "ingress": true,
   "init": false,
   "map": [

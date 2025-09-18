@@ -21,7 +21,7 @@ host_uts: true
 privileged:
   - IPC_LOCK
   - NET_ADMIN
-image: ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-silabs-multiprotocol-{arch}
+image: ghcr.mirrors.cqupt.edu.cn/ihost-open-source-project/hassio-ihost-silabs-multiprotocol-{arch}
 init: false
 options:
   device: null

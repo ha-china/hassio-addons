@@ -75,4 +75,4 @@ schema:
   certfile: str
   keyfile: str
   grocy_ingress_user: str
-image: ghcr.nju.edu.cn/hassio-addons/grocy/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/grocy/{arch}

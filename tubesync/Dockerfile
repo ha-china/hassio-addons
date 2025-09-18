@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM ghcr.nju.edu.cn/meeb/tubesync:latest
+FROM ghcr.mirrors.cqupt.edu.cn/meeb/tubesync:latest
 
 VOLUME [ "/config" ]
 

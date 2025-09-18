@@ -12,7 +12,7 @@ ports:
   8080/tcp: 8080
 ports_description:
   8080/tcp: "Web Interface"
-image: ghcr.nju.edu.cn/livebook-dev/livebook
+image: ghcr.mirrors.cqupt.edu.cn/livebook-dev/livebook
 map:
   - type: addon_config
     read_only: false

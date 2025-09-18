@@ -9,7 +9,7 @@ description: syslog-ng 允许您灵活地收集、解析、分类、重写和关
 arch:
   - aarch64
   - amd64
-image: "ghcr.nju.edu.cn/bluemaex/ha-addons-syslog_ng-{arch}"
+image: "ghcr.mirrors.cqupt.edu.cn/bluemaex/ha-addons-syslog_ng-{arch}"
 startup: system
 url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/syslog-ng
 init: false

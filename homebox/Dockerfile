@@ -1,4 +1,4 @@
-FROM ghcr.nju.edu.cn/sysadminsmedia/homebox
+FROM ghcr.mirrors.cqupt.edu.cn/sysadminsmedia/homebox
 COPY run.sh /
 RUN  apk add --no-cache jq && chmod a+x /run.sh
 ENTRYPOINT [ "/run.sh" ]

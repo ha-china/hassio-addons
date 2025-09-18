@@ -10,7 +10,7 @@ arch:
   - amd64
   - i386
 homeassistant: 0.115.0
-image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/syncthing-{arch}
+image: ghcr.mirrors.cqupt.edu.cn/poeschl-homeassistant-addons/syncthing-{arch}
 init: false
 ports:
   8384/tcp: null

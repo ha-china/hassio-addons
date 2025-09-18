@@ -13,7 +13,7 @@
   },
   "hassio_api": true,
   "hassio_role": "manager",
-  "image": "ghcr.nju.edu.cn/alexbelgium/postgres-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/postgres-{arch}",
   "init": false,
   "map": [
     "addon_config:rw",

@@ -1,4 +1,4 @@
-ARG BUILD_FROM="ghcr.nju.edu.cn/hassio-addons/base/amd64:15.0.2"
+ARG BUILD_FROM="ghcr.mirrors.cqupt.edu.cn/hassio-addons/base/amd64:15.0.2"
 ARG BUILD_ARCH="amd64"
 
 FROM $BUILD_FROM

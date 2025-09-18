@@ -22,7 +22,7 @@
     "SSLPORT": "3443",
     "TCPSTREAMPORT": "8375"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/signalk-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/signalk-{arch}",
   "map": [
     "addon_config:rw"
   ],

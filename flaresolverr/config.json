@@ -69,7 +69,7 @@
     "/dev/nvme1",
     "/dev/nvme2"
   ],
-  "image": "ghcr.nju.edu.cn/alexbelgium/flaresolverr-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/flaresolverr-{arch}",
   "name": "FlareSolverr",
   "ports": {
     "8191/tcp": 8191

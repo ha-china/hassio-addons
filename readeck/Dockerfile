@@ -1,7 +1,7 @@
 ARG BUILD_VERSION
 FROM codeberg.org/readeck/readeck:${BUILD_VERSION}  AS build
 
-FROM ghcr.nju.edu.cn/hassio-addons/base:stable
+FROM ghcr.mirrors.cqupt.edu.cn/hassio-addons/base:stable
 COPY --from=build /bin/ /bin/
 COPY run.sh /
 RUN chmod a+x /run.sh

@@ -1,9 +1,9 @@
 ---
 build_from:
-  aarch64: ghcr.nju.edu.cn/home-assistant/aarch64-base-python:3.11-alpine3.19
-  amd64: ghcr.nju.edu.cn/home-assistant/amd64-base-python:3.11-alpine3.19
-  armhf: ghcr.nju.edu.cn/home-assistant/armhf-base-python:3.11-alpine3.19
-  armv7: ghcr.nju.edu.cn/home-assistant/armv7-base-python:3.11-alpine3.19
-  i386: ghcr.nju.edu.cn/home-assistant/i386-base-python:3.11-alpine3.19
+  aarch64: ghcr.mirrors.cqupt.edu.cn/home-assistant/aarch64-base-python:3.11-alpine3.19
+  amd64: ghcr.mirrors.cqupt.edu.cn/home-assistant/amd64-base-python:3.11-alpine3.19
+  armhf: ghcr.mirrors.cqupt.edu.cn/home-assistant/armhf-base-python:3.11-alpine3.19
+  armv7: ghcr.mirrors.cqupt.edu.cn/home-assistant/armv7-base-python:3.11-alpine3.19
+  i386: ghcr.mirrors.cqupt.edu.cn/home-assistant/i386-base-python:3.11-alpine3.19
 args:
   UNIVERSAL_SILABS_FLASHER: 0.0.25

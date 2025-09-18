@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM ghcr.nju.edu.cn/soulraven80/wdosg
+FROM ghcr.mirrors.cqupt.edu.cn/soulraven80/wdosg
 
 RUN apk add -U --no-cache jq curl bash
 

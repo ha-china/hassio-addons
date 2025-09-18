@@ -78,7 +78,7 @@
     "PGID": "0",
     "PUID": "0"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/bazarr-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/bazarr-{arch}",
   "init": false,
   "map": [
     "config:rw",

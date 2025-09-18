@@ -10,7 +10,7 @@
   "environment": {
     "GIT_DISCOVERY_ACROSS_FILESYSTEM": "1"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/addons_updater-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/addons_updater-{arch}",
   "init": false,
   "map": [
     "addon_config:rw"

@@ -25,7 +25,7 @@ panel_title: Frigate
 slug: frigate-beta
 description: '[老王杂谈说]：带有实时本地对象检测的NVR，用于IP摄像头'
 url: "https://ghfast.top/github.com/blakeblackshear/frigate"
-image: ghcr.nju.edu.cn/blakeblackshear/frigate
+image: ghcr.mirrors.cqupt.edu.cn/blakeblackshear/frigate
 startup: application
 boot: auto
 init: false

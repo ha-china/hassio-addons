@@ -22,4 +22,4 @@ schema:
   vnc_server_host: str
   vnc_server_port: int?
   vnc_server_password: str?
-image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/vnc-viewer-{arch}
+image: ghcr.mirrors.cqupt.edu.cn/poeschl-homeassistant-addons/vnc-viewer-{arch}

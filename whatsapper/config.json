@@ -4,7 +4,7 @@
   ],
   "codenotary": "alexandrep.github@gmail.com",
   "description": "[老王杂谈说]：Home Assistant的WhatsApp",
-  "image": "ghcr.nju.edu.cn/alexbelgium/whatsapper-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/whatsapper-{arch}",
   "map": [
     "addon_config:rw",
     "share:rw"

@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/amd64-base:3.21
+ARG BUILD_FROM=ghcr.mirrors.cqupt.edu.cn/home-assistant/amd64-base:3.21
 FROM $BUILD_FROM as builder
 MAINTAINER pbkhrv@pm.me
 

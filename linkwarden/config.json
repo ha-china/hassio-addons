@@ -17,7 +17,7 @@
     "NEXT_PUBLIC_DISABLE_REGISTRATION": "false",
     "STORAGE_FOLDER": "/config/library"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/linkwarden-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/linkwarden-{arch}",
   "init": false,
   "map": [
     "addon_config:rw"

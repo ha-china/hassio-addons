@@ -52,4 +52,4 @@ schema:
   init_commands:
   - str
   retry_upgrade: bool?
-image: ghcr.nju.edu.cn/expaso/timescaledb/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/expaso/timescaledb/{arch}

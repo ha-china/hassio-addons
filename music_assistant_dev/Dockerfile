@@ -2,13 +2,13 @@
 #
 # DEV MASS image: base image + MASS installed from prebuilt wheel
 #
-FROM ghcr.nju.edu.cn/music-assistant/base:latest
+FROM ghcr.mirrors.cqupt.edu.cn/music-assistant/base:latest
 
 ENV VIRTUAL_ENV=/app/venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # ensure UV is installed
-COPY --from=ghcr.nju.edu.cn/astral-sh/uv:latest /uv /uvx /bin/
+COPY --from=ghcr.mirrors.cqupt.edu.cn/astral-sh/uv:latest /uv /uvx /bin/
 
 # add some additional packages that are useful for debugging
 RUN set -x \

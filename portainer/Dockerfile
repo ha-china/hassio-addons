@@ -14,7 +14,7 @@
 # 1 Build Image #
 #################
 
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base/amd64:11.0.0
+ARG BUILD_FROM=ghcr.mirrors.cqupt.edu.cn/hassio-addons/base/amd64:11.0.0
 FROM ${BUILD_FROM}
 
 ##################

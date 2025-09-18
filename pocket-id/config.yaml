@@ -21,4 +21,4 @@ init: false
 map:
   - type: data
     path: /app/data
-image: ghcr.nju.edu.cn/einschmidt/pocket-id/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/einschmidt/pocket-id/{arch}

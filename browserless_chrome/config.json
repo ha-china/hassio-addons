@@ -71,7 +71,7 @@
   "environment": {
     "TIMEOUT": "60000"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/browserless_chrome-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/browserless_chrome-{arch}",
   "init": false,
   "map": [
     "addon_config:rw"

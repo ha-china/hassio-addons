@@ -11,7 +11,7 @@
   "map": [
     "addon_config:rw"
   ],
-  "image": "ghcr.nju.edu.cn/dani-garcia/vaultwarden",
+  "image": "ghcr.mirrors.cqupt.edu.cn/dani-garcia/vaultwarden",
   "version": "1.34.3",
   "name": "Vaultwarden",
   "options": {},

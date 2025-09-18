@@ -71,7 +71,7 @@
   "environment": {
     "TINI_SUBREAPER": "false"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/free_games_claimer-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/free_games_claimer-{arch}",
   "init": false,
   "map": [
     "addon_config:rw",

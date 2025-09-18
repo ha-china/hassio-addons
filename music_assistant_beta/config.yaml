@@ -24,7 +24,7 @@ backup_exclude:
   - collage_images/*
   - .cache/*
 stage: stable
-image: ghcr.nju.edu.cn/music-assistant/server
+image: ghcr.mirrors.cqupt.edu.cn/music-assistant/server
 tmpfs: true
 options:
   log_level: info

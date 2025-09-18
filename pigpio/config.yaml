@@ -15,7 +15,7 @@ devices:
   - /dev/vcio
   - /dev/i2c-0
   - /dev/i2c-1
-image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/pigpio-{arch}
+image: ghcr.mirrors.cqupt.edu.cn/poeschl-homeassistant-addons/pigpio-{arch}
 init: false
 ports:
   8888/tcp: 8888

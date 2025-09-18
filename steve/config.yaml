@@ -29,4 +29,4 @@ schema:
   admin_user: str
   admin_password: str
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
-image: ghcr.nju.edu.cn/erik73/steve/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/erik73/steve/{arch}

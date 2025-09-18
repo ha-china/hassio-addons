@@ -46,4 +46,4 @@ schema:
   - name: match(^INFLUXDB_([A-Z0-9_])+$)
     value: str
   leave_front_door_open: bool?
-image: ghcr.nju.edu.cn/hassio-addons/influxdb/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/influxdb/{arch}

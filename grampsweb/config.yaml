@@ -62,7 +62,7 @@ devices:
   - "/dev/nvme1"
   - "/dev/nvme2"
 environment: {"GRAMPSWEB_TREE": "Gramps Web", "GRAMPSWEB_CELERY_CONFIG__broker_url": "redis://localhost:6379/0", "GRAMPSWEB_CELERY_CONFIG__result_backend": "redis://localhost:6379/0", "GRAMPSWEB_RATELIMIT_STORAGE_URI": "redis://localhost:6379/1", "GRAMPS_API_CONFIG": "/config/config/config.cfg", "GRAMPSWEB_USER_DB_URI": "sqlite:////config/users/users.sqlite", "GRAMPSWEB_MEDIA_BASE_DIR": "/config/media", "GRAMPSWEB_SEARCH_INDEX_DB_URI": "sqlite:////config/indexdir/search_index.db", "GRAMPSWEB_STATIC_PATH": "/app/static", "GRAMPSWEB_THUMBNAIL_CACHE_CONFIG__CACHE_DIR": "/config/thumbnail_cache", "GRAMPSWEB_REPORT_DIR": "/config/cache/reports", "GRAMPSWEB_EXPORT_DIR": "/config/cache/export"}
-image: ghcr.nju.edu.cn/alexbelgium/grampsweb-{arch}
+image: ghcr.mirrors.cqupt.edu.cn/alexbelgium/grampsweb-{arch}
 init: false
 options: {"CELERY_NUM_WORKERS": 2, "GUNICORN_NUM_WORKERS": 8, "certfile": "fullchain.pem", "keyfile": "privkey.pem", "ssl": false}
 map:

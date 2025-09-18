@@ -45,4 +45,4 @@ schema:
   env_vars:
   - name: match(^GF_([A-Z0-9_])+$)
     value: str
-image: ghcr.nju.edu.cn/hassio-addons/grafana/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/grafana/{arch}

@@ -62,4 +62,4 @@ schema:
   upsmon_deadtime: int?
   i_like_to_be_pwned: bool?
   leave_front_door_open: bool?
-image: ghcr.nju.edu.cn/hassio-addons/nut/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/nut/{arch}

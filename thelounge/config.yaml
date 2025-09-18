@@ -37,4 +37,4 @@ schema:
   - str
   users:
   - str
-image: ghcr.nju.edu.cn/hassio-addons/thelounge/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/thelounge/{arch}

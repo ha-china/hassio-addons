@@ -23,4 +23,4 @@ options:
 schema:
   configuration_file: str
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
-image: ghcr.nju.edu.cn/hassio-addons/mqtt-io/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/mqtt-io/{arch}

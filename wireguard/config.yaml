@@ -66,4 +66,4 @@ schema:
     endpoint: str?
     pre_shared_key: str?
     fwmark: str?
-image: ghcr.nju.edu.cn/hassio-addons/wireguard/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/wireguard/{arch}

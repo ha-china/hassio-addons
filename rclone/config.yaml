@@ -10,7 +10,7 @@ arch:
   - amd64
   - armv7
   - i386
-image: "ghcr.nju.edu.cn/bluemaex/ha-addons-rclone-{arch}"
+image: "ghcr.mirrors.cqupt.edu.cn/bluemaex/ha-addons-rclone-{arch}"
 startup: once
 boot: manual
 url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/rclone

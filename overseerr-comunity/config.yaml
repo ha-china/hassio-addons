@@ -16,4 +16,4 @@ map:
 - media:rw
 ports:
   5055/tcp: 5055
-image: ghcr.nju.edu.cn/hassio-addons/overseerr/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/overseerr/{arch}

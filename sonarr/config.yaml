@@ -15,4 +15,4 @@ map:
   - media:rw
 ports:
   8989/tcp: 8989
-image: ghcr.nju.edu.cn/hassio-addons/sonarr/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/sonarr/{arch}

@@ -18,7 +18,7 @@ environment:
     CONFIG_FILE: "/config/wikijs-config.yml"
     PUID: "0"
     PGID: "0"
-image: ghcr.nju.edu.cn/requarks/wiki
+image: ghcr.mirrors.cqupt.edu.cn/requarks/wiki
 boot: auto
 startup: services
 webui: "[PROTO:ssl]://[HOST]:[PORT:3000]"

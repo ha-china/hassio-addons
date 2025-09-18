@@ -37,7 +37,7 @@
   "map": [
     "config:rw"
   ],
-  "image": "ghcr.nju.edu.cn/desmond-dong/easytier/easytier-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/desmond-dong/easytier/easytier-{arch}",
   "options": {
     "name": "EasyTier",
     "ipv4": "10.10.10.1/24",

@@ -69,7 +69,7 @@
     "/dev/nvme2"
   ],
   "environment": {},
-  "image": "ghcr.nju.edu.cn/alexbelgium/overseerr-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/overseerr-{arch}",
   "init": false,
   "map": [
     "config:rw"

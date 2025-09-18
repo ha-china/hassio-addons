@@ -75,7 +75,7 @@
     "SSL_KEY_NAME": "privkey.pem",
     "TZ": "Etc/UTC"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/omada-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/omada-{arch}",
   "map": [
     "addon_config:rw",
     "ssl:ro"

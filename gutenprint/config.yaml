@@ -21,4 +21,4 @@ map:
   - type: addon_config
     path: /var/lib/gutenprint-printer-app
     read_only: false
-image: ghcr.nju.edu.cn/openprinting/gutenprint-printer-app
+image: ghcr.mirrors.cqupt.edu.cn/openprinting/gutenprint-printer-app

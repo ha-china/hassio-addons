@@ -76,7 +76,7 @@
     "TITLE": "Ubuntu KDE webtop",
     "shm_size": "1gb"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/webtop_kde-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/webtop_kde-{arch}",
   "ingress": true,
   "init": false,
   "map": [

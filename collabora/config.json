@@ -9,7 +9,7 @@
     "PGID": "0",
     "PUID": "0"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/collabora-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/collabora-{arch}",
   "init": false,
   "map": [
     "addon_config:rw",

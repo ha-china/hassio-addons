@@ -1,4 +1,4 @@
-FROM ghcr.nju.edu.cn/hassio-addons/debian-base:7.8.2
+FROM ghcr.mirrors.cqupt.edu.cn/hassio-addons/debian-base:7.8.2
 
 # Setup base
 # hadolint ignore=DL3003

@@ -1,7 +1,7 @@
 {
   "build_from": {
-    "aarch64": "ghcr.nju.edu.cn/benbusby/whoogle-search:latest",
-    "amd64": "ghcr.nju.edu.cn/benbusby/whoogle-search:latest"
+    "aarch64": "ghcr.mirrors.cqupt.edu.cn/benbusby/whoogle-search:latest",
+    "amd64": "ghcr.mirrors.cqupt.edu.cn/benbusby/whoogle-search:latest"
   },
   "codenotary": {
     "signer": "alexandrep.github@gmail.com"

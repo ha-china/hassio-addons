@@ -69,7 +69,7 @@
     "/dev/nvme1",
     "/dev/nvme2"
   ],
-  "image": "ghcr.nju.edu.cn/alexbelgium/gazpar2mqtt-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/gazpar2mqtt-{arch}",
   "map": [
     "config:rw",
     "share:rw"

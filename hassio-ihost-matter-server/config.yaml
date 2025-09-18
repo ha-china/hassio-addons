@@ -15,7 +15,7 @@ homeassistant: 2024.6.0
 host_ipc: false
 host_network: true
 host_dbus: true
-image: ghcr.nju.edu.cn/ihost-open-source-project/armv7-addon-matter-server
+image: ghcr.mirrors.cqupt.edu.cn/ihost-open-source-project/armv7-addon-matter-server
 ingress: true
 ingress_port: 5580
 init: false

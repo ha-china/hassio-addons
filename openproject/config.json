@@ -12,7 +12,7 @@
     "OPENPROJECT_SECRET_KEY_BASE": "addon_secret",
     "PGDATA": "/data/pg"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/openproject-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/openproject-{arch}",
   "init": false,
   "map": [
     "addon_config:rw",

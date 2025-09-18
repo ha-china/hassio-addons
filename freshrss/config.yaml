@@ -30,4 +30,4 @@ schema:
   certfile: str
   keyfile: str
   base_url: str
-image: ghcr.nju.edu.cn/einschmidt/freshrss/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/einschmidt/freshrss/{arch}

@@ -16,7 +16,7 @@ map:
   - type: addon_config
     read_only: false
     path: /app/medassist
-image: ghcr.nju.edu.cn/njic/medassist
+image: ghcr.mirrors.cqupt.edu.cn/njic/medassist
 boot: auto
 startup: services
 webui: "[PROTO:ssl]://[HOST]:[PORT:3111]"

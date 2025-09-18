@@ -1,6 +1,6 @@
 {
   "name": "rtl_433",
-  "image": "ghcr.nju.edu.cn/pbkhrv/rtl_433-hass-addons-rtl_433-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/pbkhrv/rtl_433-hass-addons-rtl_433-{arch}",
   "version": "0.6.0",
   "slug": "rtl433",
   "description": "通过SDR棒和rtl_433接收无线传感器数据",

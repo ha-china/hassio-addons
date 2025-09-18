@@ -69,7 +69,7 @@
     "/dev/nvme1",
     "/dev/nvme2"
   ],
-  "image": "ghcr.nju.edu.cn/alexbelgium/resiliosync-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/resiliosync-{arch}",
   "ingress": true,
   "init": false,
   "map": [

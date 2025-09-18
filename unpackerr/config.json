@@ -72,7 +72,7 @@
     "VPN_ENABLED": "false",
     "VPN_PROVIDER": "null"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/unpackerr-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/unpackerr-{arch}",
   "init": false,
   "map": [
     "media:rw",

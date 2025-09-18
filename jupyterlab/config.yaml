@@ -25,4 +25,4 @@ schema:
     - str
   init_commands:
     - str
-image: ghcr.nju.edu.cn/hassio-addons/jupyterlab/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/jupyterlab/{arch}

@@ -61,7 +61,7 @@
     "/dev/nvme1",
     "/dev/nvme2"
   ],
-  "image": "ghcr.nju.edu.cn/alexbelgium/birdnet-pi-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/birdnet-pi-{arch}",
   "ingress": true,
   "init": false,
   "map": [

@@ -6,7 +6,7 @@ url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/pterodactyl-
 arch:
   - aarch64
   - amd64
-image: ghcr.nju.edu.cn/faserf/pterodactyl-wings-{arch}
+image: ghcr.mirrors.cqupt.edu.cn/faserf/pterodactyl-wings-{arch}
 #webui: "[PROTO:ssl]://[HOST]:[PORT:8080]"
 map:
   - share:rw

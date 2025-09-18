@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/amd64-base-python:3.12-alpine3.21
+ARG BUILD_FROM=ghcr.mirrors.cqupt.edu.cn/home-assistant/amd64-base-python:3.12-alpine3.21
 FROM ${BUILD_FROM} as builder
 
 ARG rtl433GitRevision=25.02

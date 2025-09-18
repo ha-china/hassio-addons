@@ -7,7 +7,7 @@
   "description": "用于专注和放松的环境音",
   "environment": {},
   "map": [],
-  "image": "ghcr.nju.edu.cn/remvze/moodist",
+  "image": "ghcr.mirrors.cqupt.edu.cn/remvze/moodist",
   "version": "v2.1.0",
   "name": "moodist",
   "options": {},

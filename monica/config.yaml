@@ -69,7 +69,7 @@ environment: {
   "DEFAULT_STORAGE_LIMIT": "1024",
   "DEFAULT_MAX_STORAGE_SIZE": "1024"
 }
-image: ghcr.nju.edu.cn/alexbelgium/monica-{arch}
+image: ghcr.mirrors.cqupt.edu.cn/alexbelgium/monica-{arch}
 init: false
 options: {
   "database": "sqlite"

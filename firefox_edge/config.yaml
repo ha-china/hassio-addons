@@ -29,7 +29,7 @@ devices:
   - /dev/snd
 # Map a working PulseAudio setup into the container
 audio: true
-image: "ghcr.nju.edu.cn/mincka/firefox-edge-{arch}"
+image: "ghcr.mirrors.cqupt.edu.cn/mincka/firefox-edge-{arch}"
 # To pass options as environment variables (thanks to legacy mode), they must be either "int" or "str" ("str?" will be ignored).
 legacy: true
 options:

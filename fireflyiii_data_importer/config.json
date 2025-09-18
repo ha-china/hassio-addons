@@ -71,7 +71,7 @@
   "environment": {
     "TRUSTED_PROXIES": "**"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/fireflyiii_data_importer-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/fireflyiii_data_importer-{arch}",
   "init": false,
   "map": [
     "addon_config:rw",

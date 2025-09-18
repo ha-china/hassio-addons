@@ -81,7 +81,7 @@
     "WEB_GUNICORN": "true",
     "WORKERS_PER_CORE": "0.5"
   },
-  "image": "ghcr.nju.edu.cn/alexbelgium/mealie-{arch}",
+  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/mealie-{arch}",
   "ingress": true,
   "map": [
     "addon_config:rw",

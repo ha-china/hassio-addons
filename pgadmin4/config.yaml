@@ -42,4 +42,4 @@ schema:
   init_commands:
   - str
   leave_front_door_open: bool?
-image: ghcr.nju.edu.cn/expaso/pgadmin4/{arch}
+image: ghcr.mirrors.cqupt.edu.cn/expaso/pgadmin4/{arch}
