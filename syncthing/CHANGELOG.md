@@ -2,4 +2,4 @@
 
 ### 🐛 Bug fixes
 
-- 🐛 Fix restart loops by waiting for healthy Syncthing @Poeschl ([#22](https://github.com/Poeschl-HomeAssistant-Addons/syncthing/pull/22))
+- 🐛 Remove DB migration timeout @salim-b ([#24](https://github.com/Poeschl-HomeAssistant-Addons/syncthing/pull/24))

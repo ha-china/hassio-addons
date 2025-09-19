@@ -1,10 +1,10 @@
 ## 配置
 
-配置是通过 [Syncthing 的 Web 界面](/hassio/ingress/68413af6_syncthing)（嵌入到 Home Assistant 中）完成的。首先从 [*信息* 标签](/hassio/addon/68413af6_syncthing/info) 中启动附加组件，然后点击 `打开 Web 界面`。
+通过 [Syncthing 的 Web 界面](/hassio/ingress/68413af6_syncthing)（嵌入在 Home Assistant 中）进行配置。首先从 [*信息* 标签](/hassio/addon/68413af6_syncthing/info) 启动附加组件，然后点击 `打开 Web 界面`。
 
-启动后，Syncthing 显示一个通知（在顶部黄色框中）说：
+启动后，Syncthing 显示一个通知（在顶部黄色框中）：
 
-> 不安全的管理员访问已启用。
+> 启用了不安全的管理员访问。
 
 这可以安全地忽略，因为它 [不适用于此附加组件](https://github.com/Poeschl/Hassio-Addons/issues/340)。
 
@@ -12,9 +12,9 @@
 
 如果您想通过 Home Assistant 的 [**Syncthing** 集成](https://www.home-assistant.io/integrations/syncthing/) 监控 Syncthing 附加组件，您需要将 Syncthing 的 Web 界面暴露给（本地）网络，而不仅仅是暴露给 [Home Assistant Supervisor](https://developers.home-assistant.io/docs/supervisor)。
 
-为此，转到附加组件的 [*配置* 标签](/hassio/addon/68413af6_syncthing/config)，切换 `显示禁用端口` 并在标记为 *Web 前端（不需要 Ingress）* 的字段中输入一个端口号（按默认值 `8384` 即可）。点击 `保存`，切换到 [*信息* 标签](/hassio/addon/68413af6_syncthing/info) 并点击 `重启`。
+为此，转到附加组件的 [*配置* 标签](/hassio/addon/68413af6_syncthing/config)，切换 `显示禁用端口` 并在标记为 *Web 前端（Ingress 不需要）* 的字段中输入一个端口号（按照默认值 `8384` 是可以的）。点击 `保存`，切换到 [*信息* 标签](/hassio/addon/68413af6_syncthing/info) 并点击 `重启`。
 
-完成设置，请按照集成文档中的 [*先决条件*](https://www.home-assistant.io/integrations/syncthing/#prerequisites) 和 [*配置*](https://www.home-assistant.io/integrations/syncthing/#configuration) 部分进行操作。
+要完成设置，请按照集成文档中的 [*先决条件*](https://www.home-assistant.io/integrations/syncthing/#prerequisites) 和 [*配置*](https://www.home-assistant.io/integrations/syncthing/#configuration) 部分进行操作。
 
 请注意，如果您的 Home Assistant 安装可以从互联网访问（例如，因为您启用了 [远程访问](https://www.home-assistant.io/docs/configuration/remote/)），设置上述端口会有安全影响。在这种情况下，强烈建议通过 Syncthing 的设置设置一个 `GUI 认证用户` 和一个强 `GUI 认证密码`。有关更多信息，请参阅 [*安全原则*](https://docs.syncthing.net/users/security)。
 
@@ -28,22 +28,22 @@
 | `/addons`        | 本地 Home Assistant 附加组件。                                                                                                                              |
 | `/backups`       | Home Assistant 备份。                                                                                                                                    |
 | `/config`        | Syncthing 自己的配置。                                                                                                                             |
-| `/data`          | Syncthing 自己的内部数据（状态）。不推荐在此存储同步文件夹。                                                                            |
+| `/data`          | Syncthing 自己的内部数据（状态）。不推荐存储同步文件夹。                                                                            |
 | `/homeassistant` | Home Assistant 自己的配置。                                                                                                                        |
-| **`/media`**     | 在附加组件和 Home Assistant 之间共享的媒体文件。下面是一个可能的方法，可以自动在此路径下挂载外部存储设备。                                                       |
-| ***`/share`***   | 在附加组件和 Home Assistant 之间共享的数据。这是同步文件夹的默认路径。                                                         |
+| **`/media`**     | 要在附加组件和 Home Assistant 之间共享的媒体文件。有关在此路径下自动挂载外部存储设备的一种可能方法，请参见下文。 |
+| ***`/share`***   | 要在附加组件和 Home Assistant 之间共享的数据。这是同步文件夹的默认路径。                                                         |
 | `/ssl`           | TLS/SSL 证书。                                                                                                                                      |
 
-只有上述目录被映射到附加组件容器中。如果您将同步文件夹放在任何其他目录（如 `/root` 或 `/mnt`）下，同步数据将在附加组件重启时被删除。我们建议将同步文件夹放在 **`/share`** 或 **`/media`** 下。这两个目录都设计为在附加组件之间共享，因此您可以通过 [终端 & SSH](/hassio/addon/core_ssh/info) 附加组件等方式访问同步文件夹。
+只有上述目录被映射到附加组件容器中。如果您将同步文件夹放在任何其他目录（如 `/root` 或 `/mnt`），则在附加组件重启时同步数据将被删除。我们建议将同步文件夹放在 **`/share`** 或 **`/media`** 下。这两个目录都旨在在附加组件之间共享，因此您可以通过 [终端 & SSH](/hassio/addon/core_ssh/info) 附加组件等访问同步文件夹。
 
 此外，请注意：
 
-- Syncthing 附加组件的备份将包括其 `/data` 目录，其中存储其内部状态。此文件夹可能占用几个 GiB 的数据。
-- 一个 [*完整* Home Assistant 备份](https://www.home-assistant.io/common-tasks/os/#backup) 将包括 `/addons`、`/config`、`/media`、`/share` 和 `/ssl` 目录及其内容。创建一个 *部分* 备份以特定排除其中任何一项。
-- 同步 `/backup` 目录（最好在 [仅发送模式](https://docs.syncthing.net/users/foldertypes.html#send-only-folder) 下）是一种简单的方法，可以自动将 Home Assistant 备份备份到您其他 Syncthing 设备。 😉
-- 将数据同步到内存卡（eMMC、SD 等）可能是个坏主意，因为快速磨损，或者如果同步数据太大而根本不可能。这个问题可以通过以下方式解决：
-  - 通过 [配置 Home Assistant 以使用外部数据磁盘](https://www.home-assistant.io/common-tasks/os/#using-external-data-disk)，或者
-  - 通过在上述目录之一（例如 `/media/ext`）下挂载合适的存储设备，然后将同步文件夹放在该路径下。
+- Syncthing 附加组件的备份将包括其 `/data` 目录，其中存储其内部状态。此文件夹可能包含数 GB 的数据。
+- 一个 [*完整* Home Assistant 备份](https://www.home-assistant.io/common-tasks/os/#backup) 将包括 `/addons`、`/config`、`/media`、`/share` 和 `/ssl` 目录及其内容。创建一个 *部分* 备份以特定排除其中任何一个。
+- 同步 `/backup` 目录（最好在 [仅发送模式](https://docs.syncthing.net/users/foldertypes.html#send-only-folder) 下）是自动备份 Home Assistant 备份到您其他 Syncthing 设备的一种简单方法。 😉
+- 将数据同步到内存卡（eMMC、SD 等）可能是一个坏主意，因为快速磨损，或者如果同步数据太大而根本不可能。这个问题可以通过以下方式解决：
+  - 通过 [配置 Home Assistant 使用外部数据磁盘](https://www.home-assistant.io/common-tasks/os/#using-external-data-disk)，或者
+  - 通过在上述目录之一下挂载合适的存储设备（例如 `/media/ext`）并在该路径下放置同步文件夹。
 
     要自动让 Home Assistant OS 在 `/media` 下挂载 USB 存储设备，请使用以下 udev 规则：
     <!-- markdownlint-disable MD033 -->
@@ -53,30 +53,31 @@
     ```sh
     #
     # udev 规则
-    #   使用分区名称作为挂载点，将 USB 驱动器挂载到媒体目录
+    #   使用分区名称作为挂载点将 USB 驱动器挂载到媒体目录
     #
     # 描述：
     #   为 Home Assistant OS 创建，此规则将任何 USB 驱动器
     #   挂载到 Hassio 媒体目录 (/mnt/data/supervisor/media)。
-    #   当 USB 驱动器连接到主板时，规则在媒体目录下为每个分区创建一个目录。
-    #   新创建的分区按分区名称命名。如果分区没有名称，则使用以下名称格式： "usb-{block-name}"，
-    #   其中 block name 是 sd[a-z][0-9]。
+    #   当 USB 驱动器连接到主板时，规则在媒体目录下为每个分区
+    #   创建一个目录。新创建的分区按分区名称命名。如果分区没有名称，
+    #   则使用以下名称格式： "usb-{block-name}"，其中 block-name 是 sd[a-z][0-9]。
     #
     # 注意 1：
-    #   规则名称始终以数字开头。在这种情况下，规则使用 80。
-    #   这表示 udev 中规则的顺序。低数字先执行，高数字后执行。但是，低数字不具备高数字可能有的所有功能。
-    #   为了让此规则正常运行，请使用大于或等于 80 的数字。
+    #   规则名称始终以数字为前缀。在这种情况下，规则使用 80。
+    #   这表示 udev 中规则的顺序。低数字优先执行，高数字最后执行。
+    #   然而，低数字不具备高数字可能具有的所有功能。
+    #   为了使此规则正常运行，请使用大于或等于 80 的数字。
     #
     # 注意 2：
     #   此规则将跳过挂载 'CONFIG' USB 钥。
     #   https://github.com/home-assistant/operating-system/blob/dev/Documentation/configuration.md
     #
     # 注意 3：
-    #   如果操作系统在 USB 驱动器上排序（即 USB 启动），此规则将挂载操作系统分区。
-    #   为防止此问题发生，请更新规则以跳过启动 USB 驱动器。
+    #   如果 OS 在 USB 驱动器上排序（即 USB 启动），此规则将挂载 OS 分区。
+    #   要防止此问题发生，请更新规则以跳过启动 USB 驱动器。
     #   请参阅下面的 CAUTION 消息。
     #
-    # 启发来源：
+    # 获得灵感的来源：
     #   https://www.axllent.org/docs/auto-mounting-usb-storage/
     #
     # 有用的链接：
@@ -96,7 +97,7 @@
 
 
     # 过滤块设备，否则退出
-    # CAUTION: 如果从 USB 驱动器启动（例如：sda），则更改到 'sd[b-z][0-9]'
+    # CAUTION: 如果从 USB 驱动器启动（例如：sda），请更改为 'sd[b-z][0-9]'
     KERNEL!="sd[a-z][0-9]", GOTO="abort_rule"
 
     # 跳过非 USB 设备（例如：内部 SATA 驱动器）
@@ -128,8 +129,8 @@
     LABEL="abort_rule"
     ```
 
-    [源](https://gist.github.com/eklex/c5fac345de5be9d9bc420510617c86b5)
+    [来源](https://gist.github.com/eklex/c5fac345de5be9d9bc420510617c86b5)
 
     </details>
 
-    上述 udev 规则必须放在 Home Assistant OS 主机的 `/etc/udev/rules.d/` 下。这需要 [SSH 访问主机](https://developers.home-assistant.io/docs/operating-system/debugging/#ssh-access-to-the-host) 或一个 [`CONFIG` USB 驱动器](https://github.com/home-assistant/operating-system/blob/dev/Documentation/configuration.md#configuration)，您在该驱动器上创建文件 `udev/80-mount-usb-to-media-by-label.rules`，内容如上所示。更多信息和讨论可以在 [Home Assistant 社区论坛](https://community.home-assistant.io/t/solved-mount-usb-drive-in-hassio-to-be-used-on-the-media-folder-with-udev-customization/258406) 上找到。
+    上述 udev 规则必须放在 Home Assistant OS 主机的 `/etc/udev/rules.d/` 下。这需要 [SSH 访问主机](https://developers.home-assistant.io/docs/operating-system/debugging/#ssh-access-to-the-host) 或一个 [`CONFIG` USB 驱动器](https://github.com/home-assistant/operating-system/blob/dev/Documentation/configuration.md#configuration)，您在该驱动器上创建文件 `udev/80-mount-usb-to-media-by-label.rules`，其中包含上述内容。更多信息和国讨论可以在 [Home Assistant 社区论坛](https://community.home-assistant.io/t/solved-mount-usb-drive-in-hassio-to-be-used-on-the-media-folder-with-udev-customization/258406) 上找到。
