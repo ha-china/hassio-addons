@@ -18,13 +18,13 @@ _感谢所有给我的仓库加星标的人！要加星标，请点击下面的�
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/prowlarr/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/prowlarr/stats.png)
 
 ## 关于
 
 ---
 
-[Prowlarr](https://github.com/Prowlarr/Prowlarr) 是一个索引器管理器/代理，基于流行的 arr .net/reactjs 基础栈，以与您的各种 PVR 应用程序集成。
+[Prowlarr](https://github.com/Prowlarr/Prowlarr) 是一个索引管理器/代理，基于流行的 arr .net/reactjs 基础堆栈，用于与您的各种 PVR 应用集成。
 此插件基于 Docker 镜像 https://github.com/linuxserver/docker-prowlarr
 
 ## 安装
@@ -33,33 +33,33 @@ _感谢所有给我的仓库加星标的人！要加星标，请点击下面的�
 
 此插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到您的 home assistant 实例中（在 supervisor 插件商店的右上角，或点击下面的按钮如果您已配置我的 HA）
-   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的 home assistant 实例中（在 supervisor 插件商店的右上角，或如果您已经配置了我的 HA，请点击下面的按钮）
+   [![打开您的 Home Assistant 实例并显示添加插件仓库对话框，并预填特定仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 点击 `保存` 按钮以保存您的配置。
-1. 根据您的偏好设置插件选项。
+1. 设置插件选项以符合您的偏好。
 1. 启动插件。
-1. 检查插件的日志以查看一切是否正常。
+1. 检查插件的日志以查看是否一切正常。
 1. 打开 WebUI 并调整软件选项
 
 ## 配置
 
-Webui 可以在 <http://homeassistant:PORT> 或通过 Ingress 在侧边栏中找到。
-配置可以通过应用程序 WebUI 进行，除了以下选项。
+Webui 可以在 <http://homeassistant:PORT> 或通过 Ingress 侧边栏找到。
+配置可以通过应用 WebUI 进行，但以下选项除外。
 
 ### 选项
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
-| `PGID` | int | `0` | 文件权限的组 ID |
-| `PUID` | int | `0` | 文件权限的用户 ID |
-| `TZ` | str | | 时区（例如，`Europe/London`） |
-| `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | str | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | str | | 网络共享的 SMB 用户名 |
-| `cifspassword` | str | | 网络共享的 SMB 密码 |
-| `cifsdomain` | str | | 网络共享的 SMB 域 |
-| `smbv1` | bool | `false` | 启用 SMB v1 协议 |
+| 选项 | 类型 | 默认 | 描述 |
+|------|------|------|------|
+| `PGID` | 整数 | `0` | 文件权限的组 ID |
+| `PUID` | 整数 | `0` | 文件权限的用户 ID |
+| `TZ` | 字符串 | | 时区（例如，`Europe/London`） |
+| `localdisks` | 字符串 | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
+| `networkdisks` | 字符串 | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | 字符串 | | SMB 网络共享的用户名 |
+| `cifspassword` | 字符串 | | SMB 网络共享的密码 |
+| `cifsdomain` | 字符串 | | SMB 网络共享的域 |
+| `smbv1` | 布尔值 | `false` | 启用 SMB v1 协议 |
 
 ### 示例配置
 
@@ -90,6 +90,6 @@ smbv1: false
 
 ---
 
-![illustration](https://wiki.servarr.com/assets/prowlarr/hist_1_history.png)
+![插图](https://wiki.servarr.com/assets/prowlarr/hist_1_history.png)
 
 [repository]: https://github.com/alexbelgium/hassio-addons

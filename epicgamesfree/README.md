@@ -14,11 +14,11 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢大家给我的仓库点赞！要给仓库点赞，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_感谢大家给我的仓库加星！要加星，请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/epicgamesfree/stats.png)
+![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/epicgamesfree/stats.png)
 
 ## 关于
 
@@ -75,13 +75,13 @@ _感谢大家给我的仓库点赞！要给仓库点赞，请点击下面的图�
 ### 配置选项
 
 | 选项 | 类型 | 描述 |
-|--------|------|-------------|
+|------|------|------|
 | `accounts` | 数组 | Epic Games 账户列表 |
-| `intervalHours` | 数字 | 检查间隔（小时）（默认：24） |
+| `intervalHours` | 数字 | 检查间隔小时数（默认：24） |
 | `onlyWeekly` | 布尔值 | 仅申领每周免费游戏 |
 | `searchStrategy` | 字符串 | 搜索策略："purchase" 或 "claim" |
-| `browserNavigationTimeout` | 数字 | 浏览器超时（毫秒） |
-| `notifications` | 对象 | 通知设置（电子邮件、Webhook 等） |
+| `browserNavigationTimeout` | 数字 | 浏览器超时毫秒数 |
+| `notifications` | 对象 | 通知设置（电子邮件、webhook 等） |
 
 ### 账户配置
 
@@ -127,7 +127,7 @@ _感谢大家给我的仓库点赞！要给仓库点赞，请点击下面的图�
 
 ### 重要提示
 
-- **自动兑换**：由于 Epic Games 增强的自动化检测，自动兑换不再可能
+- **自动兑换**：由于 Epic Games 加强了自动化检测，自动兑换不再可能
 - **通知系统**：插件现在通过您首选的通知方法发送兑换链接，而不是自动申领游戏
 - **2FA 支持**：支持 TOTP（基于时间的单次密码）用于具有双因素认证的账户
 - **多个账户**：您可以配置多个 Epic Games 账户
@@ -136,7 +136,7 @@ _感谢大家给我的仓库点赞！要给仓库点赞，请点击下面的图�
 
 您可以将浏览器 Cookie 导入以避免登录问题。创建 `/config/addons_config/epicgamesfree/cookies.json`：
 
-详细 Cookie 导入说明，请参阅：https://github.com/claabs/epicgames-freegames-node#cookie-import
+有关详细的 Cookie 导入说明，请参阅：https://github.com/claabs/epicgames-freegames-node#cookie-import
 
 ### 故障排除
 
@@ -147,17 +147,17 @@ _感谢大家给我的仓库点赞！要给仓库点赞，请点击下面的图�
 ```
 
 #### 登录问题
-1. 检查您的凭据是否正确
-2. 如果启用，验证 2FA/TOTP 配置
+1. 检查您的凭证是否正确
+2. 如果启用，请验证 2FA/TOTP 配置
 3. 考虑导入浏览器 Cookie
-4. 检查插件日志以获取特定错误消息
+4. 检查插件的日志以获取特定的错误消息
 
 ## 安装
 
-此插件的安装非常简单，与安装其他插件没有区别。
+此插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例（在右上角的 Supervisor 插件商店，或点击下面的按钮如果您已经配置了我的 HA）
-   [![打开您的 Home Assistant 实例并显示添加插件仓库对话框，预填了特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的 Home Assistant 实例（在右上角的 Supervisor 插件商店，或如果您已配置我的 HA，请点击下面的按钮）
+   [![打开您的 Home Assistant 实例并显示添加插件仓库对话框，预填充了特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 点击 `保存` 按钮以保存您的配置。
 1. 设置插件选项以符合您的偏好

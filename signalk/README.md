@@ -18,11 +18,11 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载量变化](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/signalk/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/signalk/stats.png)
 
 ## 关于
 
-[Signal K Server](https://github.com/SignalK/signalk-server) 是一个在船的中央枢纽上运行的服务器应用程序。如果你使用或开发海洋电子设备，Signal K Server 有很多适合你的东西。
+[Signal K Server](https://github.com/SignalK/signalk-server) 是一个在船舶中央枢纽上运行的服务器应用程序。如果您使用或开发海洋电子设备，Signal K Server 将为您提供一些有用的功能。
 
 ## 配置
 
@@ -32,13 +32,13 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 这个插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到你的 home assistant 实例中（在 supervisor 插件商店的右上角，或者如果你已经配置了我的 HA，点击下面的按钮）
-   [![打开你的 Home Assistant 实例并显示添加插件仓库对话框，并预填特定仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的 home assistant 实例中（在 supervisor 插件商店的右上角，或如果您已经配置了我的 HA，请点击下面的按钮）
+   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装这个插件。
-1. 点击 `保存` 按钮以保存你的配置。
-1. 根据你的喜好设置插件选项
+1. 点击 `保存` 按钮以保存您的配置。
+1. 设置插件选项以符合您的偏好
 1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
+1. 检查插件的日志以查看一切是否正常。
 1. 打开 WebUI 并调整软件选项
 
 ## 支持

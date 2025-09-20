@@ -1,5 +1,5 @@
 ## What’s changed
 
-## ⬆️ Dependency updates
+## 🐛 Bug fixes
 
-- ⬆️ Update pocket-id/pocket-id to v1.10.0 @[renovate[bot]](https://github.com/apps/renovate) (#62)
+- Set log level for pocket-id inside container @einschmidt (#66)

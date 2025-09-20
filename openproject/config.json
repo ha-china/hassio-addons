@@ -12,7 +12,7 @@
     "OPENPROJECT_SECRET_KEY_BASE": "addon_secret",
     "PGDATA": "/data/pg"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/openproject-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/openproject-{arch}",
   "init": false,
   "map": [
     "addon_config:rw",
@@ -39,6 +39,6 @@
   "slug": "openproject",
   "udev": true,
   "url": "https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/openproject",
-  "version": "16.4.0",
+  "version": "16.4.1",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8080]"
 }

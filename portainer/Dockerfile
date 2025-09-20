@@ -14,7 +14,7 @@
 # 1 Build Image #
 #################
 
-ARG BUILD_FROM=ghcr.mirrors.cqupt.edu.cn/hassio-addons/base/amd64:11.0.0
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base/amd64:11.0.0
 FROM ${BUILD_FROM}
 
 ##################
@@ -31,7 +31,7 @@ ENV S6_CMD_WAIT_FOR_SERVICES=1 \
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
-ARG BUILD_UPSTREAM="2.33.1"
+ARG BUILD_UPSTREAM="2.34.0"
 
 # spellcheck disable=SC2015
 # hadolint ignore=SC2015

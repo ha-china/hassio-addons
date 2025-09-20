@@ -75,7 +75,7 @@
     "POSTGRES_DB": "/config/addons_config/tandoor_recipes/recipes.db",
     "TRUSTED_PROXIES": "**"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/tandoor_recipes-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/tandoor_recipes-{arch}",
   "map": [
     "config:rw",
     "share:rw",
@@ -119,6 +119,6 @@
   "slug": "tandoor_recipes",
   "udev": true,
   "url": "https://ghfast.top/github.com/alexbelgium/hassio-addons",
-  "version": "2.2.0",
+  "version": "2.2.3",
   "webui": "http://[HOST]:[PORT:80]"
 }

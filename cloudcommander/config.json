@@ -4,7 +4,7 @@
     "amd64"
   ],
   "codenotary": "alexandrep.github@gmail.com",
-  "description": "[老王杂谈说]：Cloud Commander是一个带控制台和编辑器的网络文件管理器",
+  "description": "[老王杂谈说]：一个带有控制台和编辑器的网络文件管理器 Cloud Commander",
   "devices": [
     "/dev/dri",
     "/dev/dri/card0",
@@ -108,5 +108,5 @@
   "slug": "cloudcommander",
   "udev": true,
   "url": "https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/cloudcommander",
-  "version": "18.8.7"
+  "version": "19.0.7"
 }

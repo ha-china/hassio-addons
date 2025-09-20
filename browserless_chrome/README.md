@@ -14,7 +14,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我仓库点赞的人！要点赞请点击下面的图片，然后它就会在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -25,7 +25,7 @@ _感谢所有给我仓库点赞的人！要点赞请点击下面的图片，然�
 ---
 
 [Browserless chrome](https://github.com/browserless/chrome) 是一个允许远程客户端连接、驱动和执行无头工作的网络服务。
-此插件基于 Docker 镜像 https://hub.docker.com/r/browserless/chrome/
+这个插件基于 Docker 镜像 https://hub.docker.com/r/browserless/chrome/
 
 ## 配置
 ---
@@ -43,7 +43,7 @@ TIMEOUT: 60000
 
 ### 自定义脚本和环境变量
 
-此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
+这个插件支持通过 `addon_config` 映射自定义脚本和环境变量：
 
 - **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
 - **环境变量**：参见 [为您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
@@ -52,11 +52,11 @@ TIMEOUT: 60000
 
 ---
 
-此插件的安装非常简单，与安装任何其他插件没有区别。
+这个插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到您的 home assistant 实例中（在右上角的 supervisor 插件商店，或如果您已经配置了我的 HA，请点击下面的按钮）
+1. 将我的插件仓库添加到您的 home assistant 实例中（在 supervisor 插件商店的右上角，或如果您已配置我的 HA，请点击下面的按钮）
    [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此插件。
+1. 安装这个插件。
 1. 点击 `保存` 按钮以保存您的配置。
 1. 设置插件选项以符合您的偏好。
 1. 启动插件。

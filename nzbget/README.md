@@ -14,35 +14,34 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它就会在右上角。谢谢！_
+_感谢大家给我的仓库点赞！点击下面的图片即可点赞，点赞后它将显示在最右侧。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/nzbget/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/nzbget/stats.png)
 
 ## 关于
 
-[nzbget](http://nzbget.net/) 是一个usenet下载器，用C++编写，设计时注重性能，以使用最少的系统资源来实现最大下载速度。
-这个插件基于以下docker镜像：https://github.com/linuxserver/docker-nzbget
+[nzbget](http://nzbget.net/) 是一个基于usenet的下载工具，用C++编写，旨在通过使用很少的系统资源来实现最大的下载速度。这个插件基于以下docker镜像：https://github.com/linuxserver/docker-nzbget
 
 ## 配置
 
-Webui 可以在 <http://homeassistant:PORT> 或通过 Ingress 侧边栏访问。
-默认的用户名/密码：用户名：`nzbget`，密码：`tegbzn6789`
-配置可以通过应用WebUI进行，以下选项除外。
+Web界面可以在 <http://homeassistant:PORT> 或通过Ingress在侧边栏中访问。
+默认的用户名/密码：用户名:`nzbget`，密码:`tegbzn6789`
+配置可以通过应用Web界面进行，以下选项除外。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `PGID` | int | `0` | 文件权限的组ID |
-| `PUID` | int | `0` | 文件权限的用户ID |
-| `TZ` | str | | 时区（例如，`Europe/London`） |
-| `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | str | | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | str | | 网络共享的SMB用户名 |
-| `cifspassword` | str | | 网络共享的SMB密码 |
-| `cifsdomain` | str | | 网络共享的SMB域 |
+|------|------|--------|-------|
+| `PGID` | 整数 | `0` | 文件权限的组ID |
+| `PUID` | 整数 | `0` | 文件权限的用户ID |
+| `TZ` | 字符串 | | 时区（例如，`Europe/London`） |
+| `localdisks` | 字符串 | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
+| `networkdisks` | 字符串 | | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | 字符串 | | 网络共享的SMB用户名 |
+| `cifspassword` | 字符串 | | 网络共享的SMB密码 |
+| `cifsdomain` | 字符串 | | 网络共享的SMB域 |
 
 ### 示例配置
 
@@ -61,28 +60,28 @@ cifsdomain: "workgroup"
 
 这个插件支持挂载本地驱动器和远程SMB共享：
 
-- **本地驱动器**：请参阅 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：请参阅 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### 自定义脚本和环境变量
 
 这个插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：请参阅 [向您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **环境变量**：参见 [为你的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
 
 ## 安装
 
 这个插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到您的home assistant实例（在supervisor插件商店右上角，或点击下面的按钮如果您已经配置了我的HA）
-   [![打开您的Home Assistant实例并显示带有特定仓库URL预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到你的home assistant实例（在右上角的supervisor插件商店中，或如果你已经配置了我的HA，点击下面的按钮）
+   [![打开你的Home Assistant实例并显示添加插件仓库对话框，预填充特定的仓库URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装这个插件。
-1. 点击 `保存` 按钮以保存您的配置。
-1. 设置插件的选项以符合您的偏好。
+1. 点击 `保存` 按钮保存你的配置。
+1. 设置插件的选项以符合你的偏好。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切正常。
-1. 打开WebUI并调整软件选项。
+1. 打开Web界面并调整软件选项。
 
 ## 支持
 
@@ -90,6 +89,6 @@ cifsdomain: "workgroup"
 
 ## 插图
 
-![插图](https://nzbget.com/img/slider/artistdetails.png)
+![illustration](https://nzbget.com/img/slider/artistdetails.png)
 
 [repository]: https://github.com/alexbelgium/hassio-addons

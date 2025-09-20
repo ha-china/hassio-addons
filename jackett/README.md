@@ -14,11 +14,11 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它就会在右上角。谢谢！_
+_感谢所有给我的仓库加星的贡献者！要给星标，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/jackett/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/jackett/stats.png)
 
 ## 关于
 
@@ -29,12 +29,12 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 ## 配置
 
 Webui可以在配置的端口或通过Ingress在侧边栏中找到。
-配置可以通过应用的WebUI进行，以下选项除外。
+配置可以通过应用程序的webUI完成，以下选项除外。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
+|------|------|--------|------|
 | `PGID` | int | `0` | 文件权限的组ID |
 | `PUID` | int | `0` | 文件权限的用户ID |
 | `TZ` | str | | 时区（例如，`Europe/London`） |
@@ -61,8 +61,8 @@ cifsdomain: "workgroup"
 
 这个插件支持挂载本地驱动器和远程SMB共享：
 
-- **本地驱动器**：见[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：见[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：查看[Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：查看[Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ## 安装
 
@@ -70,9 +70,9 @@ cifsdomain: "workgroup"
 
 1. [将我的Hass.io插件仓库][repository]添加到你的Hass.io实例中。
 1. 安装这个插件。
-1. 点击`保存`按钮以保存你的配置。
+1. 点击`Save`按钮以保存你的配置。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切顺利。
-1. 仔细配置插件以符合你的偏好，请参阅官方文档进行配置。
+1. 检查插件的日志，看看一切是否正常。
+1. 仔细配置插件以满足你的需求，查看官方文档以获取相关信息。
 
 [repository]: https://github.com/alexbelgium/hassio-addons

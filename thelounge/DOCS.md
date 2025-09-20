@@ -1,30 +1,26 @@
 # Home Assistant Community Add-on: The Lounge
 
-A self-hosted web IRC client that uses a modern and sleek interface with
-support for theming, push notifications, link previews, file uploads and
-more. Fully cross-platform and mobile friendly.
+一个自托管的网页IRC客户端，使用现代且简洁的界面，支持主题定制、推送通知、链接预览、文件上传等功能。完全跨平台且对移动设备友好。
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Home Assistant add-on.
+此插件的安装过程相当简单，与安装其他Home Assistant插件的过程相同。
 
-1. Click the Home Assistant My button below to open the add-on on your Home
-   Assistant instance.
+1. 点击下方的Home Assistant我的按钮，在您的Home Assistant实例中打开此插件。
 
-   [![Open this add-on in your Home Assistant instance.][addon-badge]][addon]
+   [![在您的Home Assistant实例中打开此插件][addon-badge]][addon]
 
-1. Click the "Install" button to install the add-on.
-1. Configure the "The Lounge" add-on. (See below)
-1. Start the "The Lounge" add-on.
-1. Check the logs of the "The Lounge" add-on to see it in action.
-1. Click "Open Web UI".
+1. 点击“安装”按钮以安装插件。
+1. 配置“Lounge”插件。（见下文）
+1. 启动“Lounge”插件。
+1. 查看Lounge插件的日志以查看其运行情况。
+1. 点击“打开Web UI”。
 
-## Configuration
+## 配置
 
-**Note**: _Remember to restart the add-on when the configuration is changed._
+**注意**：_当配置更改时，请记得重启插件。_
 
-Example add-on configuration:
+示例插件配置：
 
 ```yaml
 log_level: info
@@ -38,119 +34,93 @@ users:
   - hassio
 ```
 
-### Option: `log_level`
+### 选项：`log_level`
 
-The `log_level` option controls the level of log output by the addon and can
-be changed to be more or less verbose, which might be useful when you are
-dealing with an unknown issue. Possible values are:
+`log_level`选项控制插件的日志输出级别，可以更改为更详细或更简洁，这在处理未知问题时可能很有用。可能的值有：
 
-- `trace`: Show every detail, like all called internal functions.
-- `debug`: Shows detailed debug information.
-- `info`: Normal (usually) interesting events.
-- `warning`: Exceptional occurrences that are not errors.
-- `error`: Runtime errors that do not require immediate action.
-- `fatal`: Something went terribly wrong. Add-on becomes unusable.
+- `trace`：显示所有细节，例如所有调用的内部函数。
+- `debug`：显示详细的调试信息。
+- `info`：正常（通常）有趣的事件。
+- `warning`：非异常的异常情况。
+- `error`：不需要立即处理的运行时错误。
+- `fatal`：发生了严重错误。插件变得无法使用。
 
-Please note that each level automatically includes log messages from a
-more severe level, e.g., `debug` also shows `info` messages. By default,
-the `log_level` is set to `info`, which is the recommended setting unless
-you are troubleshooting.
+请注意，每个级别自动包含更严重级别的日志消息，例如，`debug`也会显示`info`消息。默认情况下，`log_level`设置为`info`，这是推荐设置，除非您正在解决问题。
 
-### Option: `ssl`
+### 选项：`ssl`
 
-Enables/Disables SSL (HTTPS) on the app. Set it `true` to enable it,
-`false` otherwise.
+启用/禁用应用的SSL（HTTPS）。设置为`true`以启用，`false`否则。
 
-### Option: `certfile`
+### 选项：`certfile`
 
-The certificate file to use for SSL.
+用于SSL的证书文件。
 
-**Note**: _The file MUST be stored in `/ssl/`, which is the default_
+**注意**：_文件必须存储在`/ssl/`中，这是默认的。_
 
-### Option: `keyfile`
+### 选项：`keyfile`
 
-The private key file to use for SSL.
+用于SSL的私钥文件。
 
-**Note**: _The file MUST be stored in `/ssl/`, which is the default_
+**注意**：_文件必须存储在`/ssl/`中，这是默认的。_
 
-### Option: `default_theme`
+### 选项：`default_theme`
 
-The default theme for each user. The pre-installed themes are `default` and
-`morning`. You can add more using the next option.
+每个用户的默认主题。预安装的主题是`default`和`morning`。您可以使用下一个选项添加更多主题。
 
-**Note**: _The theme can still be changed in the settings of the app_
+**注意**：_主题仍然可以在应用的设置中更改。_
 
-### Option: `themes`
+### 选项：`themes`
 
-A list of themes to install which can be found in the [npm registry][themes].
-Use the name of the package. (refer to the example above)
+要在[npm registry][themes]中安装的主题列表。使用包的名称。（参考上面的示例）
 
-### Option: `users`
+### 选项：`users`
 
-A list of users to setup. At first, these will use the default password
-`hassio`. **Make sure you change your password as soon as you login!**
+要设置的用户的列表。最初，这些用户将使用默认密码`hassio`。**确保您在登录后立即更改密码！**
 
-## Changelog & Releases
+## 更改日志与发布
 
-This repository keeps a change log using [GitHub's releases][releases]
-functionality.
+此存储库使用GitHub的[发布][releases]功能维护更改日志。
 
-Releases are based on [Semantic Versioning][semver], and use the format
-of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented
-based on the following:
+发布基于[语义版本控制][semver]，并使用`MAJOR.MINOR.PATCH`的格式。简而言之，版本将根据以下情况增加：
 
-- `MAJOR`: Incompatible or major changes.
-- `MINOR`: Backwards-compatible new features and enhancements.
-- `PATCH`: Backwards-compatible bugfixes and package updates.
+- `MAJOR`：不兼容或重大更改。
+- `MINOR`：向后兼容的新功能和增强。
+- `PATCH`：向后兼容的补丁和包更新。
 
-## Support
+## 支持
 
-Got questions?
+有问题吗？
 
-You have several options to get them answered:
+您有几个选项来获得答案：
 
-- The [Home Assistant Community Add-ons Discord chat server][discord] for add-on
-  support and feature requests.
-- The [Home Assistant Discord chat server][discord-ha] for general Home
-  Assistant discussions and questions.
-- The Home Assistant [Community Forum][forum].
-- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
+- 用于插件支持和功能请求的[Home Assistant Community Add-ons Discord聊天服务器][discord]。
+- 用于一般Home Assistant讨论和问题的[Home Assistant Discord聊天服务器][discord-ha]。
+- Home Assistant的[社区论坛][forum]。
+- 加入Reddit的[homeassistant子版块][reddit]在[/r/homeassistant][reddit]。
 
-You could also [open an issue here][issue] on GitHub.
+您也可以在GitHub上[打开一个问题][issue]。
 
-## Authors & contributors
+## 作者与贡献者
 
-The original setup of this repository is by [Timmo][timmo].
+此存储库的原始设置由[Timmo][timmo]完成。
 
-For a full list of all authors and contributors,
-check [the contributor's page][contributors].
+要查看所有作者和贡献者的完整列表，
+请查看[贡献者页面][contributors]。
 
-## License
+## 许可证
 
-MIT License
+MIT许可证
 
-Copyright (c) 2019-2025 Timmo
+版权（c）2019-2025 Timmo
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+特此授予任何获得此软件及其相关文档文件（“软件”）副本的人，在不限制的情况下自由处理软件的权利，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许提供软件的人这样做，但需遵守以下条件：
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+上述版权声明和本许可声明应包含在软件的所有副本或重要部分的软件中。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+软件按“原样”提供，不提供任何形式的保证，无论是明示的还是暗示的，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，作者或版权持有人均不对任何索赔、损害赔偿或其他责任承担责任，无论是由合同、侵权或其他行为引起的，均由软件或软件的使用或其他交易引起的。
 
 [addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
-[addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=a0d7b954_thelounge&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository
+[addon]: https://my.home-assistant.io/redirect/supervisor_addon/? addon=a0d7b954_thelounge&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository
 [contributors]: https://github.com/hassio-addons/addon-thelounge/graphs/contributors
 [discord-ha]: https://discord.gg/c5DvZ4e
 [discord]: https://discord.me/hassioaddons

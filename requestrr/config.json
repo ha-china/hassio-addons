@@ -5,7 +5,7 @@
     "armv7"
   ],
   "codenotary": "alexandrep.github@gmail.com",
-  "description": "聊天机器人通过使用聊天来简化Sonarr/Radarr/Ombi等服务的使用。",
+  "description": "[老王杂谈说]：聊天机器人通过聊天来简化使用 Sonarr/Radarr/Ombi 等服务",
   "devices": [
     "/dev/dri",
     "/dev/dri/card0",
@@ -73,7 +73,7 @@
     "PGID": "0",
     "PUID": "0"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/requestrr-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/requestrr-{arch}",
   "init": false,
   "map": [
     "addon_config:rw"
@@ -101,6 +101,6 @@
   "slug": "requestrr",
   "udev": true,
   "url": "https://ghfast.top/github.com/alexbelgium/hassio-addons",
-  "version": "2.1.8",
+  "version": "2.1.9",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:4545]"
 }
