@@ -18,7 +18,7 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/fireflyiii/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/fireflyiii/stats.png)
 
 ## 关于
 
@@ -28,7 +28,7 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 ## 配置
 
 Webui 可以在 <http://homeassistant:PORT> 或通过 Ingress 侧边栏访问。
-配置可以通过应用 WebUI 进行，除了以下选项。
+配置可以通过应用 WebUI 进行，以下选项除外。
 
 **⚠️ 重要提示**：在首次启动之前更改你的 `APP_KEY`！你将无法在不重置数据库的情况下更改它。
 
@@ -36,15 +36,15 @@ Webui 可以在 <http://homeassistant:PORT> 或通过 Ingress 侧边栏访问。
 
 | 选项 | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `APP_KEY` | 字符串 | `CHANGEME_32_CHARS_EuC5dfn3LAPzeO` | **关键**：32 字符加密密钥 - 首次运行前更改！ |
-| `CONFIG_LOCATION` | 字符串 | `/config/addons_config/fireflyiii/config.yaml` | 额外配置文件的位置 |
-| `DB_CONNECTION` | 列表 | `sqlite_internal` | 数据库类型 (sqlite_internal/mariadb_addon/mysql/pgsql) |
+| `APP_KEY` | 字符串 | `CHANGEME_32_CHARS_EuC5dfn3LAPzeO` | **关键**：32 位加密密钥 - 在首次运行前更改！ |
+| `CONFIG_LOCATION` | 字符串 | `/config/addons_config/fireflyiii/config.yaml` | 附加配置文件的位置 |
+| `DB_CONNECTION` | 列表 | `sqlite_internal` | 数据库类型（sqlite_internal/mariadb_addon/mysql/pgsql） |
 | `DB_HOST` | 字符串 | | 数据库主机（用于外部数据库） |
 | `DB_PORT` | 字符串 | | 数据库端口（用于外部数据库） |
 | `DB_DATABASE` | 字符串 | | 数据库名称（用于外部数据库） |
 | `DB_USERNAME` | 字符串 | | 数据库用户名（用于外部数据库） |
 | `DB_PASSWORD` | 字符串 | | 数据库密码（用于外部数据库） |
-| `Updates` | 列表 | | 自动更新计划 (hourly/daily/weekly) |
+| `Updates` | 列表 | | 自动更新计划（hourly/daily/weekly） |
 | `silent` | 布尔值 | `true` | 静默模式 - 设置为 false 以获取调试信息 |
 
 ### 示例配置
@@ -70,15 +70,15 @@ silent: false
 
 ## 安装
 
-这个插件的安装非常简单，与其他插件的安装方式相同。
+这个插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到你的 Home Assistant 实例中（在 supervisor 插件商店的右上角，或如果你已经配置了我的 HA，点击下面的按钮）
-   [![打开你的 Home Assistant 实例并显示带有预填特定仓库 URL 的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到你的 Home Assistant 实例中（在 Supervisor 插件商店的右上角，或点击下面的按钮如果你已经配置了我的 HA）
+   [![打开你的 Home Assistant 实例并显示带有预填充特定仓库 URL 的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装这个插件。
 1. 点击 `保存` 按钮以保存你的配置。
 1. 将插件选项设置为你的偏好。
 1. 启动插件。
-1. 检查插件的日志，看看一切是否正常。
+1. 检查插件的日志以查看一切是否正常。
 1. 打开 WebUI 并调整软件选项
 
 ## 支持
