@@ -5,7 +5,7 @@
     "armv7"
   ],
   "codenotary": "alexandrep.github@gmail.com",
-  "description": "[老王杂谈说]：代理服务器以绕过 Cloudflare 保护",
+  "description": "[老王杂谈说]：代理服务器绕过 Cloudflare 保护",
   "devices": [
     "/dev/dri",
     "/dev/dri/card0",
@@ -69,7 +69,7 @@
     "/dev/nvme1",
     "/dev/nvme2"
   ],
-  "image": "ghcr.nju.edu.cn/alexbelgium/flaresolverr-{arch}",
+  "image": "flaresolverr/flaresolverr:latest",
   "name": "FlareSolverr",
   "ports": {
     "8191/tcp": 8191
@@ -80,6 +80,6 @@
   "slug": "flaresolverr",
   "udev": true,
   "url": "https://ghfast.top/github.com/alexbelgium/hassio-addons",
-  "version": "3.4.1",
+  "version": "3.4.1-2",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8191]"
 }
