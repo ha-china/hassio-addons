@@ -1,0 +1,31 @@
+{
+  "name": "voice-assistant",
+  "version": "1.0.0",
+  "slug": "voice-assistant",
+  "description": "[老王杂谈说]：一款Linux下的语音助手",
+  "url": "https://www.hasscn.top",
+  "init": false,
+  "arch": ["aarch64", "amd64"],
+  "panel_icon": "mdi:account-voice",
+  "boot": "auto",
+  "image": "ghcr.nju.edu.cn/desmond-dong/voice-assistant/voice-assistant-{arch}",
+  "host_network": true,
+  "audio": true,
+  "map": [
+    "share:ro",
+    "media:ro"
+  ],
+  "devices": [
+    "/dev/snd:/dev/snd"
+  ],
+  "options": {
+    "name": "Javis",
+    "audio-input-device": "default",
+    "audio-output-device": "default"
+  },
+  "schema": {
+    "name": "str?",
+    "audio-input-device": "str?",
+    "audio-output-device": "str?"
+  }
+}
