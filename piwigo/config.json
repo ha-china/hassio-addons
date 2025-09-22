@@ -72,7 +72,7 @@
   "environment": {
     "PWG_LOCAL_DIR": "/config/addons_config/piwigo"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/piwigo-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/piwigo-{arch}",
   "init": false,
   "map": [
     "config:rw",

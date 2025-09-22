@@ -8,7 +8,7 @@
   "description": "跳过所有本地Google Cast设备上的YouTube广告和赞助商内容。",
   "environment": {},
   "host_network": true,
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/sponsorblockcast-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/sponsorblockcast-{arch}",
   "init": false,
   "map": [
     "addon_config:rw"

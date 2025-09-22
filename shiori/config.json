@@ -26,5 +26,5 @@
   "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
   "version": "v1.7.4",
   "ingress": false,
-  "image": "ghcr.mirrors.cqupt.edu.cn/go-shiori/shiori"
+  "image": "ghcr.nju.edu.cn/go-shiori/shiori"
 }

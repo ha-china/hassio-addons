@@ -20,4 +20,4 @@ map:
 - backup:rw
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
-image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/tautulli/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/tautulli/{arch}

@@ -5,7 +5,7 @@
   ],
   "codenotary": "alexandrep.github@gmail.com",
   "description": "本地托管的强大网络工具集合，用于日常任务。无广告，无追踪，只需从您的浏览器快速访问实用工具。",
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/omni-tools-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/omni-tools-{arch}",
   "map": [
     "addon_config:rw"
   ],

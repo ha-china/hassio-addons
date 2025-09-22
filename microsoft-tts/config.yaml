@@ -19,4 +19,4 @@ schema:
   debug_logging: bool
   update_voices: bool
 tmpfs: true
-image: ghcr.mirrors.cqupt.edu.cn/hugobloem/{arch}-wyoming-microsoft-tts
+image: ghcr.nju.edu.cn/hugobloem/{arch}-wyoming-microsoft-tts

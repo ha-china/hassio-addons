@@ -21,4 +21,4 @@ map:
   - type: addon_config
     path: /var/lib/ps-printer-app
     read_only: false
-image: ghcr.mirrors.cqupt.edu.cn/openprinting/ps-printer-app
+image: ghcr.nju.edu.cn/openprinting/ps-printer-app

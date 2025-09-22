@@ -1,8 +1,8 @@
 ---
 build_from:
-  aarch64: ghcr.mirrors.cqupt.edu.cn/hassio-addons/base/aarch64:stable
-  amd64: ghcr.mirrors.cqupt.edu.cn/hassio-addons/base/amd64:stable
-  armv7: ghcr.mirrors.cqupt.edu.cn/hassio-addons/base/armv7:stable
-  i386: ghcr.mirrors.cqupt.edu.cn/hassio-addons/base/i386:stable
+  aarch64: ghcr.nju.edu.cn/hassio-addons/base/aarch64:stable
+  amd64: ghcr.nju.edu.cn/hassio-addons/base/amd64:stable
+  armv7: ghcr.nju.edu.cn/hassio-addons/base/armv7:stable
+  i386: ghcr.nju.edu.cn/hassio-addons/base/i386:stable
 codenotary:
   signer: alexandrep.github@gmail.com

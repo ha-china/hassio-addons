@@ -7,7 +7,7 @@
   "codenotary": "alexandrep.github@gmail.com",
   "description": "Spotweb 是基于 Spotnet 协议的一个去中心化的 Usenet 社区。",
   "hassio_api": true,
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/spotweb-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/spotweb-{arch}",
   "ingress": true,
   "init": false,
   "map": [

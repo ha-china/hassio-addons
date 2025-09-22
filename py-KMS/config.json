@@ -11,7 +11,7 @@
     "armv7"
   ],
   "startup": "services",
-  "image": "ghcr.mirrors.cqupt.edu.cn/thespad/py-kms",
+  "image": "ghcr.nju.edu.cn/thespad/py-kms",
   "boot": "auto",
   "init": false,
   "hassio_api": true,

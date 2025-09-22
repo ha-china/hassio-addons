@@ -1,6 +1,6 @@
 {
   "name": "rtl_433 MQTT Auto Discovery",
-  "image": "ghcr.mirrors.cqupt.edu.cn/pbkhrv/rtl_433-hass-addons-rtl_433_mqtt_autodiscovery-{arch}",
+  "image": "ghcr.nju.edu.cn/pbkhrv/rtl_433-hass-addons-rtl_433_mqtt_autodiscovery-{arch}",
   "version": "0.9.0",
   "slug": "rtl433mqttautodiscovery",
   "description": "通过MQTT自动发现rtl_433设备信息。",

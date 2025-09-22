@@ -73,7 +73,7 @@
     "PGID": "0",
     "PUID": "0"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/mylar3-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/mylar3-{arch}",
   "init": false,
   "map": [
     "config:rw",

@@ -1,6 +1,6 @@
 {
   "name": "rtl_433 (next)",
-  "image": "ghcr.mirrors.cqupt.edu.cn/pbkhrv/rtl_433-hass-addons-rtl_433-next-{arch}",
+  "image": "ghcr.nju.edu.cn/pbkhrv/rtl_433-hass-addons-rtl_433-next-{arch}",
   "version": "next",
   "slug": "rtl433-next",
   "description": "通过SDR接收器使用rtl_433接收无线传感器数据。",

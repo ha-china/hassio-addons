@@ -25,7 +25,7 @@
 
 | 原地址                | 国内加速地址                  |
 |---------------------|-------------------------|
-| ghcr.io             | ghcr.mirrors.cqupt.edu.cn         |
+| ghcr.io             | ghcr.nju.edu.cn         |
 | docker.io           | docker.1ms.run    |
 | lscr.io             | docker.1ms.run    |
 | docker.io           | docker.1ms.run          |

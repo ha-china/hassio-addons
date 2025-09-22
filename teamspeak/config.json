@@ -14,7 +14,7 @@
     "TS3SERVER_LICENSE": "accept",
     "TS_UPDATE": "1"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/teamspeak-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/teamspeak-{arch}",
   "init": false,
   "map": [
     "share:rw"

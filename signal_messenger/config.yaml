@@ -24,4 +24,4 @@ schema:
   SIGNAL_CLI_CMD_TIMEOUT: int
 environment:
   SIGNAL_CLI_CONFIG_DIR: /config
-image: ghcr.mirrors.cqupt.edu.cn/haberda/signal_messenger/{arch}
+image: ghcr.nju.edu.cn/haberda/signal_messenger/{arch}

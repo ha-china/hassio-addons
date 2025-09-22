@@ -90,7 +90,7 @@
     "webUIPort": "8265"
   },
   "host_dbus": true,
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/tdarr-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/tdarr-{arch}",
   "init": false,
   "map": [
     "media:rw",

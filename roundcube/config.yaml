@@ -28,4 +28,4 @@ schema:
   certfile: str
   keyfile: str
   ssl: bool
-image: ghcr.mirrors.cqupt.edu.cn/erik73/roundcube/{arch}
+image: ghcr.nju.edu.cn/erik73/roundcube/{arch}

@@ -73,7 +73,7 @@
     "PGID": "0",
     "PUID": "0"
   },
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/sonarr_nas-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/sonarr_nas-{arch}",
   "ingress": true,
   "ingress_entry": "sonarr",
   "init": false,

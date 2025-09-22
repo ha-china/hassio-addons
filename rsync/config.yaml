@@ -12,7 +12,7 @@ arch:
 homeassistant: 2023.12.1
 boot: manual
 init: false
-image: ghcr.mirrors.cqupt.edu.cn/poeschl-homeassistant-addons/rsync-{arch}
+image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/rsync-{arch}
 ports: {}
 ports_description: {}
 map:

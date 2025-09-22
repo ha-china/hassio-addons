@@ -17,4 +17,4 @@ map:
 - share:rw
 schema:
   database: str?
-image: ghcr.mirrors.cqupt.edu.cn/hassio-addons/sqlite-web/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/sqlite-web/{arch}

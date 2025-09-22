@@ -80,7 +80,7 @@
     "TZ": "Etc/UTC"
   },
   "host_network": true,
-  "image": "ghcr.mirrors.cqupt.edu.cn/alexbelgium/omada_v3-{arch}",
+  "image": "ghcr.nju.edu.cn/alexbelgium/omada_v3-{arch}",
   "map": [
     "config:rw",
     "ssl:ro"

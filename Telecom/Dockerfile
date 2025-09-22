@@ -1,5 +1,5 @@
 #FROM cp0204/chinatelecommonitor:main
-FROM ghcr.mirrors.cqupt.edu.cn/cp0204/chinatelecommonitor:main
+FROM ghcr.nju.edu.cn/cp0204/chinatelecommonitor:main
 
 # 使用官方 Python 镜像作为基础镜像
 #FROM python:3.13-alpine
