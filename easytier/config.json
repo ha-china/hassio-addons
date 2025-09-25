@@ -1,8 +1,8 @@
 {
   "name": "EasyTier",
-  "version": "v2.4.2",
+  "version": "v2.4.3",
   "slug": "easytier",
-  "description": "EasyTier 优秀的开源组网工具",
+  "description": "[老王杂谈说]：EasyTier 优秀的开源组网工具",
   "url": "https://github.com/desmond-dong/hassio-addons",
   "init": false,
   "arch": [
@@ -34,10 +34,7 @@
   "panel_icon": "mdi:application-variable",
   "boot": "manual",
   "host_network": true,
-  "map": [
-    "config:rw"
-  ],
-  "image": "ghcr.hasscn.top/desmond-dong/easytier/easytier-{arch}",
+  "image": "ghcr.hasscn.top/desmond-dong/easytier-{arch}",
   "options": {
     "name": "EasyTier",
     "ipv4": "10.10.10.1/24",
