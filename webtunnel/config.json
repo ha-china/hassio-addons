@@ -1,10 +1,10 @@
 {
-  "version": "25.08.09",
+  "version": "25.08.28",
   "name": "WebTunnel",
   "url": "https://mp.weixin.qq.com/s/nWA72IHHPTtsmoG_45rCsQ",
   "slug": "webtunnel",
   "codenotary": "djhhui@gmail.com",
-  "description": "安全好用的内网穿透软件",
+  "description": "[老王杂谈说]：安全好用的内网穿透软件",
   "arch": ["amd64", "aarch64"],
   "startup": "services",
    "image": "ghcr.hasscn.top/desmond-dong/webtunnel/webtunnel-{arch}",
@@ -22,3 +22,4 @@
   "host_network": true,
   "webui": "http://[HOST]:[PORT:9600]/?s=gjhAXN"
 }
+
