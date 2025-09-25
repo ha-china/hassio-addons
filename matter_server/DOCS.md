@@ -1,58 +1,52 @@
-# Home Assistant Add-on: Matter Server
+# Home Assistant 添加组件：Matter 服务器
 
-## Installation
+## 安装
 
-Use the following steps to install this add-on.
+使用以下步骤安装此添加组件。
 
-1. Click the Home Assistant My button below to open the add-on page on your
-   Home Assistant instance.
+1. 点击 Home Assistant 下的 My 按钮，在您的 Home Assistant 实例中打开添加组件页面。
 
-   [![Open this add-on in your Home Assistant instance.][ addon-badge]][ addon]
+   [![在您的 Home Assistant 实例中打开此添加组件。][addon-badge]][addon]
 
-1. Click the "Install" button to install the add-on.
+1. 点击“安装”按钮来安装添加组件。
 
-## How to use
+## 使用方法
 
-Start the Matter Server add-on to make the WebSocket available to Home
-Assistant Core. Install the [Matter integration][matter_integration]
-in Home Assistant Core.
+启动 Matter 服务器添加组件，使 WebSocket 可用给 Home Assistant 核心。在 Home Assistant 核心中安装 [Matter 集成][matter_integration]。
 
-### Access WebSocket interface externally (advanced)
+### 外部访问 WebSocket 接口（高级）
 
-By default, the Python Matter Server's WebSocket interface is only exposed
-internally. It is still possible to enable access through the host interface
-To do so, click on "Show disabled ports" and enter a port (e.g. 5580) in the
-Matter Server WebSocket server port field.
+默认情况下，Python Matter 服务器的 WebSocket 接口仅在内部暴露。仍然可以通过主机接口启用访问。为此，点击“显示禁用端口”，并在 Matter 服务器 WebSocket 服务器端口字段中输入一个端口（例如 5580）。
 
-## Configuration
+## 配置
 
-Add-on configuration:
+添加组件配置：
 
-| Configuration       | Description                                                 |
-|---------------------|-------------------------------------------------------------|
-| log_level           | Logging level of the Matter Server component.               |
-| log_level_sdk       | Logging level for Matter SDK logs.                          |
-| beta                | Whether to install the latest beta version on startup       |
-| enable_test_net_dcl | Enable test-net DCL for PAA root certificates and other device information. |
-| bluetooth_adapter_id | Set BlueZ Bluetooth Controller ID (for local commissioning) |
+| 配置       | 描述                                                         |
+|------------|--------------------------------------------------------------|
+| log_level  | Matter 服务器组件的日志级别。                               |
+| log_level_sdk | Matter SDK 日志的日志级别。                                |
+| beta       | 是否在启动时安装最新测试版                                  |
+| enable_test_net_dcl | 启用用于 PAA 根证书和其他设备信息的测试网 DCL。           |
+| bluetooth_adapter_id | 设置 BlueZ 蓝牙控制器 ID（用于本地配对） |
 
-## Support
+## 支持
 
-Got questions?
+有问题？
 
-You have several options to get them answered:
+您有几个选项来获得答案：
 
-- The [Home Assistant Discord Chat Server][discord].
-- The Home Assistant [Community Forum][forum].
-- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
+- [Home Assistant Discord 聊天服务器][discord]。
+- Home Assistant [社区论坛][forum]。
+- 加入 [Reddit 子版块][reddit] 在 [/r/homeassistant][reddit]
 
-In case you've found a bug, please [open an issue on our GitHub][issue].
+如果您发现了一个错误，请 [在我们的 GitHub 上打开一个问题][issue]。
 
-[ addon]: https://my.home-assistant.io/redirect/supervisor_addon/? addon=core_matter_server
-[ addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
-[ discord]: https://discord.gg/c5DvZ4e
-[ forum]: https://community.home-assistant.io
-[ reddit]: https://reddit.com/r/homeassistant
-[ issue]: https://github.com/home-assistant/addons/issues
-[ matter_server_repo]: https://github.com/home-assistant-libs/python-matter-server
-[ matter_integration]: https://www.home-assistant.io/integrations/matter/
+[addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_matter_server
+[addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
+[discord]: https://discord.gg/c5DvZ4e
+[forum]: https://community.home-assistant.io
+[reddit]: https://reddit.com/r/homeassistant
+[issue]: https://github.com/home-assistant/addons/issues
+[matter_server_repo]: https://github.com/home-assistant-libs/python-matter-server
+[matter_integration]: https://www.home-assistant.io/integrations/matter/
