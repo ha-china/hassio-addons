@@ -1,7 +1,8 @@
 # 一个本地化的语音转文本（STT）服务，专为中文用户设计，这是二进制版。
 
-该服务基于k2fsa-stt构建，文件挺大，需要耐心等待。
+该服务基于k2fsa-stt构建，文件挺大，需要耐心等待，第一次运行还需要下载离线库。
 
+需要配合[LocalSTT](https://my.home-assistant.io/redirect/hacs_repository/?owner=Desmond-Dong&repository=LocalSTT&category=integration)使用
 
 ## 引擎地址
 [引擎地址](https://github.com/k2-fsa/sherpa-onnx/releases/download/v1.10.43/sherpa-onnx-v1.10.43-linux-x64-static.tar.bz2)
