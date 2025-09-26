@@ -2,7 +2,7 @@
   "name": "[重要说明]",
   "version": "1.0.0",
   "url": "https://gitee.com/desmond_GT/hassio-addons/blob/main/README.md",
-  "codenotary": "djhhui@gmail.com",
+  "codenotary": "djhui@live.cn",
   "slug": "dedeaddon",
   "description": "！！请先阅读此说明",
   "arch": ["aarch64", "amd64", "armv7", "i386", "armhf"],

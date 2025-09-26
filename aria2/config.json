@@ -2,7 +2,7 @@
     "name": "Aria2",
     "version": "1.37.0",
     "slug": "aria2",
-    "codenotary": "djhhui@gmail.com",
+    "codenotary": "djhui@live.cn",
     "description": "Aria2 download manager",
     "url": "https://github.com/Desmond-Dong/hassio-addons",
     "startup": "services",

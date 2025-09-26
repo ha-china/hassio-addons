@@ -2,7 +2,7 @@
   "name": "Lucky",
   "version": "2.18.2",
   "slug": "lucky",
-  "codenotary": "djhhui@gmail.com",
+  "codenotary": "djhui@live.cn",
   "description": "A Lucky add-on for Home Assistant",
   "image": "ghcr.hasscn.top/desmond-dong/lucky/lucky-{arch}",
   "arch": ["aarch64", "amd64"],
