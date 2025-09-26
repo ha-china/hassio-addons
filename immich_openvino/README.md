@@ -1,12 +1,12 @@
 # Home assistant add-on: Immich OpenVINO
 
-⚠️ 项目正在非常积极地开发中。请预期会有错误和变更。不要将其作为存储您照片和视频的唯一方式！（来自开发者）
+⚠️ 项目正在非常活跃地开发中。请预期会有错误和变更。不要将其作为存储您照片和视频的唯一方式！（来自开发者）
 
-[![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+![Donate](https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white)
+[![Donate](https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white)](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ![Version](https://img.shields.io/badge/dynamic/json?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_openvino%2Fconfig.json)
-![Ingress](https://img.shields.io/badge/dynamic/json?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_openvino%2Fconfig.json)
+![Ingress](https://img.shields.io/badge/dynamic/json?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_openvino%2Fconfig.json)
 ![Arch](https://img.shields.io/badge/dynamic/json?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_openvino%2Fconfig.json)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
@@ -16,41 +16,41 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢大家给我的仓库星标！要星标它，请点击下面的图片，它将在右上角显示。谢谢！_
+_感谢所有将我的仓库标记为星标的人！要标记它，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
-[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)(https://github.com/alexbelgium/hassio-addons/stargazers)
 
 ![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/immich_openvino/stats.png)
 
 ## 关于
 
-从您的手机直接进行自托管照片和视频备份解决方案，并支持 OpenVINO 硬件加速。这是 Immich 的 OpenVINO 启用版本，它为使用 Intel GPU 和 CPU 的机器学习任务提供硬件加速。
+直接从您的手机上自托管照片和视频备份解决方案，并支持 OpenVINO 硬件加速。这是 Immich 的 OpenVINO 启用版本，它为使用 Intel GPU 和 CPU 执行机器学习任务提供了硬件加速。
 
 此插件基于 imagegenius 的 [docker 镜像](https://github.com/imagegenius/docker-immich)，并启用了 OpenVINO 支持，以在 Intel 硬件上增强性能。
 
 ## 硬件要求
 
-- **Intel 硬件**：兼容的 Intel CPU 或 Intel 集成/独立 GPU
+- **Intel 硬件**：兼容的 Intel CPU 或 Intel 集成/离散 GPU
 - **OpenVINO 支持**：具有 OpenVINO 工具包兼容性的 Intel 硬件
 - **架构**：仅支持 AMD64（OpenVINO 支持针对 Intel x86-64 架构进行了优化）
-- **Intel GPU 驱动程序**：在主机系统上正确安装的 Intel GPU 驱动程序（用于 Intel GPU 加速）
+- **Intel GPU 驱动程序**：在主机系统上正确安装的 Intel GPU 驱动程序（如果使用 Intel GPU 加速）
 
 ## 配置
 
-Web UI 位于 `<your-ip>:8080`。PostgreSQL 可以是内部的或外部的。
+Webui 可以在 `<your-ip>:8080` 找到。PostgreSQL 可以是内部的或外部的。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+|------|------|--------|-------|
 | `data_location` | 字符串 | `/share/immich` | Immich 数据存储的路径 |
 | `library_location` | 字符串 | | 照片/视频库的路径 |
 | `TZ` | 字符串 | | 时区（例如，`Europe/London`） |
 | `localdisks` | 字符串 | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
 | `networkdisks` | 字符串 | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | 字符串 | | SMB 共享的网络用户名 |
-| `cifspassword` | 字符串 | | SMB 共享的网络密码 |
-| `cifsdomain` | 字符串 | | SMB 共享的网络域 |
+| `cifsusername` | 字符串 | | SMB 网络共享的用户名 |
+| `cifspassword` | 字符串 | | SMB 网络共享的密码 |
+| `cifsdomain` | 字符串 | | SMB 网络共享的域 |
 | `DB_HOSTNAME` | 字符串 | `homeassistant.local` | 数据库主机名 |
 | `DB_USERNAME` | 字符串 | `postgres` | 数据库用户名 |
 | `DB_PASSWORD` | 字符串 | `homeassistant` | 数据库密码 |
@@ -59,7 +59,7 @@ Web UI 位于 `<your-ip>:8080`。PostgreSQL 可以是内部的或外部的。
 | `DB_ROOT_PASSWORD` | 字符串 | | 数据库根密码 |
 | `JWT_SECRET` | 字符串 | | 用于身份验证的 JWT 密钥 |
 | `DISABLE_MACHINE_LEARNING` | 布尔值 | `false` | 禁用 ML 功能（不推荐用于 OpenVINO 版本） |
-| `MACHINE_LEARNING_WORKERS` | 整数 | `1` | ML 工作线程的数量（可以使用 OpenVINO 增加） |
+| `MACHINE_LEARNING_WORKERS` | 整数 | `1` | ML 工作线程的数量（可以使用 OpenVINO 增加数量） |
 | `MACHINE_LEARNING_WORKER_TIMEOUT` | 整数 | `120` | ML 工作线程超时（秒） |
 | `skip_permissions_check` | 布尔值 | `false` | 跳过文件权限检查 |
 
@@ -102,24 +102,24 @@ MACHINE_LEARNING_WORKER_TIMEOUT: 180
 此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
 **前提条件：**
-- Intel CPU 或 Intel GPU 以支持 OpenVINO 加速
-- AMD64 架构（ARM 不支持）
+- Intel CPU 或 Intel GPU 以便进行 OpenVINO 加速
+- 仅支持 AMD64 架构（ARM 不支持）
 - 安装了 Intel GPU 驱动程序（如果使用 Intel GPU 加速）
 
 **步骤：**
-1. [将我的 Hass.io 插件仓库][repository]添加到您的 Hass.io 实例。
-1. 安装此插件。
-1. 点击 `保存` 按钮以保存您的配置。
-1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 仔细配置插件以满足您的需求，参见官方文档进行配置。
+1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例。
+2. 安装此插件。
+3. 点击 `保存` 按钮以存储您的配置。
+4. 启动插件。
+5. 检查插件的日志，看看一切是否正常。
+6. 仔细配置插件以满足您的偏好，请参阅官方文档。
 
 **数据库设置：**
-注意，您需要安装一个单独的 postgres 插件才能连接数据库。您可以在我的仓库中安装 postgres 插件。
-注意，在启动之前更改密码；之后将不会更改
+请注意，您需要安装一个单独的 postgres 插件才能连接数据库。您可以在我的仓库中安装 postgres 插件。
+注意在启动之前更改密码；之后将无法更改
 
 ## 支持
 
-在 github 上创建问题，或在 [home assistant 论坛](https://community.home-assistant.io/t/home-assistant-addon-immich/282108/3) 上提问
+在 github 上创建问题，或在 [home assistant thread](https://community.home-assistant.io/t/home-assistant-addon-immich/282108/3) 上提问
 
 [repository]: https://github.com/alexbelgium/hassio-addons
