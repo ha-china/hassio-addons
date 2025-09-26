@@ -19,6 +19,5 @@
   ],
   "backup_exclude": [
     "/data/k2fsa"
-  ],
-  "healthcheck": "/k2fsa/healthcheck.sh"
+  ]
 }
