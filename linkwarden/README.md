@@ -14,7 +14,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库加星标的人！要加星标，请点击下面的图片，然后它就会在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，它将在右上角显示。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -22,20 +22,20 @@ _感谢所有给我的仓库加星标的人！要加星标，请点击下面的�
 
 ## 关于
 
-[Linkwarden](https://linkwarden.app/) 是一个协作书签管理器，用于收集、组织和保存网页和文章。它允许团队和个人保存、分类和管理书签，具有标签、集合和全文搜索等功能。
+[Linkwarden](https://linkwarden.app/) 是一个协作书签管理器，用于收集、组织和管理网页和文章。它允许团队和个人保存、分类和管理书签，具有标签、收藏夹和全文搜索等功能。
 
 这个插件基于 [官方的 Linkwarden Docker 镜像](https://github.com/linkwarden/linkwarden)。
 
 ## 配置
 
 Webui 可以在 `<你的IP>:3000` 或通过 Ingress 在侧边栏中访问。
-你需要在启动时创建一个新的用户账户。
+您需要在启动时创建一个新的用户帐户。
 
 ### 选项
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `NEXTAUTH_SECRET` | 字符串 | **必需** | NextAuth.js 认证的秘密密钥（必须在启动时填写） |
+| 选项 | 类型 | 默认 | 描述 |
+|------|------|------|------|
+| `NEXTAUTH_SECRET` | 字符串 | **必需** | NextAuth.js 认证的秘密键（必须在启动时填写） |
 | `NEXTAUTH_URL` | 字符串 | | 自定义 NextAuth URL（可选，如果 Linkwarden 保持在外部） |
 | `NEXT_PUBLIC_DISABLE_REGISTRATION` | 布尔值 | `false` | 禁用新用户注册 |
 | `NEXT_PUBLIC_CREDENTIALS_ENABLED` | 布尔值 | `true` | 启用用户名/密码登录 |
@@ -44,10 +44,10 @@ Webui 可以在 `<你的IP>:3000` 或通过 Ingress 在侧边栏中访问。
 | `NEXT_PUBLIC_AUTHENTIK_ENABLED` | 布尔值 | `false` | 启用 Authentik SSO 集成 |
 | `AUTHENTIK_CUSTOM_NAME` | 字符串 | `Authentik` | Authentik 按钮的自定义提供者名称 |
 | `AUTHENTIK_ISSUER` | 字符串 | | Authentik OpenID 配置发行者 URL |
-| `AUTHENTIK_CLIENT_ID` | 字符串 | | 来自 Authentik 提供者概览的客户端 ID |
-| `AUTHENTIK_CLIENT_SECRET` | 字符串 | | 来自 Authentik 提供者概览的客户端密钥 |
-| `NEXT_PUBLIC_OLLAMA_ENDPOINT_URL` | 字符串 | | 用于 AI 功能的 Ollama 端点 URL |
-| `OLLAMA_MODEL` | 字符串 | | 用于 AI 处理的 Ollama 模型名称 |
+| `AUTHENTIK_CLIENT_ID` | 字符串 | | Authentik 提供者概览中的客户端 ID |
+| `AUTHENTIK_CLIENT_SECRET` | 字符串 | | Authentik 提供者概览中的客户端密钥 |
+| `NEXT_PUBLIC_OLLAMA_ENDPOINT_URL` | 字符串 | | AI 功能的 Ollama 端点 URL |
+| `OLLAMA_MODEL` | 字符串 | | AI 处理的 Ollama 模型名称 |
 
 ### 示例配置
 
@@ -66,48 +66,48 @@ AUTHENTIK_CLIENT_SECRET: "your-client-secret"
 
 ### 设置步骤
 
-1. **首次设置**：启动插件后，访问 Web 界面并创建您的第一个用户账户
-2. **NEXTAUTH_SECRET**：为 `NEXTAUTH_SECRET` 选项生成一个安全的随机字符串（至少 32 个字符）
-3. **数据库**：默认情况下，Linkwarden 使用内部 SQLite 数据库。对于生产使用，请考虑设置 PostgreSQL
-4. **认证**：如果您需要 SSO 功能，请配置 Authentik 集成
-5. **存储**：书签数据和文件存储在配置的 `STORAGE_FOLDER` 中
+1. **首次设置**: 启动插件后，访问 Web 界面并创建您的第一个用户帐户
+2. **NEXTAUTH_SECRET**: 为 `NEXTAUTH_SECRET` 选项生成一个安全的随机字符串（至少 32 个字符）
+3. **数据库**: 默认情况下，Linkwarden 使用内部 SQLite 数据库。对于生产使用，请考虑设置 PostgreSQL
+4. **认证**: 如果您需要 SSO 功能，请配置 Authentik 集成
+5. **存储**: 书签数据和文件存储在配置的 `STORAGE_FOLDER` 中
 
 ### 自定义脚本和环境变量
 
-此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
+这个插件支持通过 `addon_config` 映射的自定义脚本和环境变量：
 
-- **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：请参阅 [向您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **自定义脚本**: 查看 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **环境变量**: 查看 [向您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
 
 ### Authentik 集成
 
-要与 Authentik 进行 SSO 集成：
+要使用 Authentik 进行单点登录集成：
 
-1. 按照 [Linkwarden 文档](https://docs.linkwarden.app/self-hosting/sso-oauth#authentik) 的说明进行操作
+1. 跟随 [Linkwarden 文档](https://docs.linkwarden.app/self-hosting/sso-oauth#authentik) 中的说明
 2. 将 `NEXT_PUBLIC_AUTHENTIK_ENABLED` 设置为 `true`
-3. 使用来自您的 Authentik 提供者概览的值配置 Authentik 特定的选项
-4. 注意：从 `AUTHENTIK_ISSUER` URL 中移除尾随的斜杠
+3. 使用 Authentik 提供者概览中的值配置 Authentik 特定的选项
+4. 注意：从 `AUTHENTIK_ISSUER` URL 中移除尾随的 "/" 
 
-### 额外配置
+### 其他配置
 
-有关高级配置选项，请参阅 [Linkwarden 文档](https://docs.linkwarden.app/self-hosting/environment-variables) 中的完整环境变量列表。
+对于高级配置选项，请参考 [Linkwarden 文档](https://docs.linkwarden.app/self-hosting/environment-variables) 中的完整环境变量列表。
 
 ## 安装
 
-此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
+这个插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
 1. [将我的 Hass.io 插件仓库][repository] 添加到您的 Hass.io 实例。 [![在我的 Home Assistant 中添加仓库][repository-badge]][repository-url]
-1. 安装此插件
+1. 安装这个插件
 1. 点击 `保存` 按钮以保存您的配置
 1. 将 `NEXTAUTH_SECRET` 选项设置为安全的随机字符串
 1. 根据需要配置其他选项
 1. 启动插件
 1. 检查插件的日志以查看是否一切正常
-1. 打开 WebUI 并创建您的第一个用户账户
+1. 打开 WebUI 并创建您的第一个用户帐户
 
 ## 支持
 
-在 github 上创建问题，或在 [home assistant 论坛](https://community.home-assistant.io/t/home-assistant-addon-linkwarden/279247) 上提问。
+在 github 上创建问题，或在 [Home Assistant 论坛](https://community.home-assistant.io/t/home-assistant-addon-linkwarden/279247) 上提问。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 [repository-badge]: https://img.shields.io/badge/Add%20repository%20to%20my-Home%20Assistant-41BDF5?logo=home-assistant&style=for-the-badge

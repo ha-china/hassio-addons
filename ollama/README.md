@@ -1,6 +1,6 @@
 # Ollama 插件 for Home Assistant
 
-请注意，此插件使用 CPU 加速或实验性 Nvidia GPU 支持（如果它对您有效，请报告！）。对于 ROCm，支持仍在等待中。
+请注意，此插件使用 CPU 加速或实验性 Nvidia GPU 支持（如果您使用有效，请报告！）。对于 ROCm，支持仍在等待中。
 
 ## 模型目录
 

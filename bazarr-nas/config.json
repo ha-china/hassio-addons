@@ -10,7 +10,7 @@
     "**/MediaCover/*"
   ],
   "codenotary": "alexandrep.github@gmail.com",
-  "description": "字幕下载伴侣应用程序，适用于Sonarr和Radarr。",
+  "description": "[老王杂谈说]：Sonarr和Radarr的配套应用程序，用于下载字幕",
   "devices": [
     "/dev/dri",
     "/dev/dri/card0",
@@ -114,6 +114,6 @@
   "slug": "bazarr_nas",
   "udev": true,
   "url": "https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/bazarr",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:6767]"
 }
