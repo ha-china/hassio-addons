@@ -1,6 +1,6 @@
 {
   "name": "py-kms",
-  "version": "646f4766-spad25",
+  "version": "646f4766-spad27",
   "slug": "py-kms",
   "description": "这是py-kms，一个用来激活Windows和Office的服务器",
   "codenotary": "djhui@live.cn",
@@ -14,8 +14,6 @@
   "image": "ghcr.nju.edu.cn/thespad/py-kms",
   "boot": "auto",
   "init": false,
-  "hassio_api": true,
-  "hassio_role": "manager",
   "ports": {
     "1688/tcp": 1688
   },
@@ -31,7 +29,5 @@
     "config:rw"
   ],
   "restart": "unless-stopped",
-  "options": {},
-  "schema": {},
   "log_level": "info"
 }

@@ -9,5 +9,6 @@
   "startup": "services",
   "boot": "auto",
   "ingress": true,
-  "panel_icon": "mdi:network"
+  "panel_icon": "mdi:network",
+  "homeassistant_api": true
 }
