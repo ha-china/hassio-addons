@@ -12,7 +12,7 @@
   "startup": "services",
   "boot": "auto",
   "init": false,
-  "image": "ghcr.hasscn.top/desmond-dong/musicn/musicn-{arch}",
+  "image": "ghcr.nju.edu.cn/desmond-dong/musicn/musicn-{arch}",
   "hassio_api": true,
   "hassio_role": "manager",
   "ports": {

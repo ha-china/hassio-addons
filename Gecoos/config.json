@@ -9,7 +9,7 @@
   "startup": "services",
   "boot": "auto",
   "webui": "http://[HOST]:[PORT:8080]",
-  "image": "ghcr.hasscn.top/desmond-dong/gecoos/gecoos-{arch}",
+  "image": "ghcr.nju.edu.cn/desmond-dong/gecoos/gecoos-{arch}",
   "ports": {
     "8080/tcp": 8080
   },
