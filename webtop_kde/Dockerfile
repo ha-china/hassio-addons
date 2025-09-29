@@ -32,11 +32,17 @@ USER root
 # load volume
 VOLUME [ "/sys/fs/cgroup" ]
 
+# Set shell
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 # Allow UID and GID setting
 # hadolint ignore=SC2015,DL4006,SC2013,SC2086
 RUN \
     # Change home folder location
-    usermod --home /config/data_kde abc
+    usermod --home /config/data_kde abc && \
+    \
+    # Set +e
+    if [[ -d /etc/services.d ]] && ls /etc/services.d/*/run 1> /dev/null 2>&1; then sed -i "1a set +e" /etc/services.d/*/run; fi
 
 # Global LSIO modifications
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_lsio.sh" "/ha_lsio.sh"
@@ -74,7 +80,7 @@ RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.
 ################
 
 # Add entrypoint
-ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
+#ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" "/ha_entrypoint.sh"
 
 # Entrypoint modifications
@@ -86,8 +92,8 @@ ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/mast
 RUN chmod 777 /.bashio-standalone.sh
 
 #WORKDIR /
-#ENTRYPOINT [ "/usr/bin/env" ]
-#CMD [ "/ha_entrypoint.sh" ]
+ENTRYPOINT [ "/usr/bin/env" ]
+CMD [ "/ha_entrypoint.sh" ]
 
 ############
 # 5 Labels #
