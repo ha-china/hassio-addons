@@ -5,6 +5,11 @@
 # ==============================================================================
 flags=("--profanity $(bashio::config 'profanity')")
 
+# Remove outdated options
+if bashio::config.exists 'update_voices'; then
+    bashio::addon.option 'update_voices'
+fi
+
 if bashio::config.true 'update_languages'; then
     flags+=('--update-languages')
 fi
