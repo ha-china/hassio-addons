@@ -4,7 +4,7 @@
   "slug": "lucky",
   "codenotary": "djhui@live.cn",
   "description": "A Lucky add-on for Home Assistant",
-  "image": "ghcr.nju.edu.cn/desmond-dong/lucky/lucky-{arch}",
+  "image": "ghcr.hasscn.top/desmond-dong/lucky/lucky-{arch}",
   "arch": ["aarch64", "amd64"],
   "startup": "services",
   "boot": "auto",

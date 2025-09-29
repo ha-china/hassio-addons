@@ -8,7 +8,7 @@
   "arch": ["aarch64", "amd64"],
   "panel_icon": "mdi:account-voice",
   "boot": "auto",
-  "image": "ghcr.nju.edu.cn/desmond-dong/voice-assistant/voice-assistant-{arch}",
+  "image": "ghcr.hasscn.top/desmond-dong/voice-assistant/voice-assistant-{arch}",
   "host_network": true,
   "audio": true,
   "map": [
