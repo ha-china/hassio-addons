@@ -8,7 +8,7 @@
   "arch": ["aarch64", "amd64"],
   "panel_icon": "mdi:application-variable",
   "boot": "auto",
-  "image": "ghcr.nju.edu.cn/desmond-dong/file-transfer/file-transfer-{arch}",
+  "image": "ghcr.hasscn.top/desmond-dong/file-transfer/file-transfer-{arch}",
   "ports": {
     "8080/tcp": 8080
   },

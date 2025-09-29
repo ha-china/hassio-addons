@@ -7,7 +7,7 @@
   "description": "[老王杂谈说]：安全好用的内网穿透软件",
   "arch": ["amd64", "aarch64"],
   "startup": "services",
-   "image": "ghcr.nju.edu.cn/desmond-dong/webtunnel/webtunnel-{arch}",
+   "image": "ghcr.hasscn.top/desmond-dong/webtunnel/webtunnel-{arch}",
   "init": false,
   "hassio_role": "manager",
   "panel_icon": "mdi:server-network",
