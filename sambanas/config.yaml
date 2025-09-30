@@ -1,8 +1,8 @@
 ---
 name: Samba NAS
-version: 12.5.0-nas
+version: 12.5.0-nas1
 slug: sambanas
-description: 暴露Home Assistant磁盘使用SMB/CIFS。
+description: '[老王杂谈说]：暴露 Home Assistant 光盘使用 SMB/CIFS'
 url: https://ghfast.top/github.com/dianlight/hassio-addons/tree/master/sambanas
 codenotary: lucio.tarantino@gmail.com
 arch:
@@ -112,7 +112,6 @@ schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   meaning_of_life: int?
   multi_channel: bool?
-
 image: dianlight/{arch}-addon-sambanas
 services:
   - mqtt:want
@@ -136,4 +135,4 @@ auth_api: true
 homeassistant_api: true
 timeout: 60
 breaking_versions:
-  - 12.5.0-nas  # Turn in maintence mode
+  - 12.5.0-nas # Turn in maintence mode
