@@ -1,3 +1,43 @@
+## 3.0.0-alpha.91 (2025-09-30)
+
+### 🐛 Fixes
+
+- trying to figure out why serialization works locally but not in docker ([a2c880b](https://github.com/t0bst4r/home-assistant-matter-hub/commit/a2c880b))
+
+### ❤️ Thank You
+
+- t0bst4r @t0bst4r
+
+## 3.0.0-alpha.90 (2025-09-30)
+
+### 🐛 Fixes
+
+- use matter internal serialization to be able to serialize additional types (bigint, etc.) ([#836](https://github.com/t0bst4r/home-assistant-matter-hub/issues/836))
+
+### 🚧 Chores
+
+- **deps:** bump the all-actions group with 3 updates ([30c41fb](https://github.com/t0bst4r/home-assistant-matter-hub/commit/30c41fb))
+- **deps-dev:** bump the all-deps group across 1 directory with 3 updates ([f8e2c33](https://github.com/t0bst4r/home-assistant-matter-hub/commit/f8e2c33))
+
+### ❤️ Thank You
+
+- t0bst4r @t0bst4r
+
+## 3.0.0-alpha.89 (2025-09-30)
+
+### 🐛 Fixes
+
+- resolve dependabot vulnerability checks ([f2aa5ca](https://github.com/t0bst4r/home-assistant-matter-hub/commit/f2aa5ca))
+- **docker:** migrate all docker images to node22 ([0af1d92](https://github.com/t0bst4r/home-assistant-matter-hub/commit/0af1d92))
+
+### 🚧 Chores
+
+- **docs:** add developer documentation ([0501e29](https://github.com/t0bst4r/home-assistant-matter-hub/commit/0501e29))
+
+### ❤️ Thank You
+
+- t0bst4r @t0bst4r
+
 ## 3.0.0-alpha.88 (2025-09-29)
 
 ### 🐛 Fixes

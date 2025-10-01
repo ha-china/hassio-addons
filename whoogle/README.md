@@ -14,11 +14,11 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它会在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，它将在右上角显示。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/whoogle/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/whoogle/stats.png)
 
 ## 关于
 
@@ -32,25 +32,25 @@ Web UI 可以在 <http://homeassistant:PORT> 或通过 Ingress 在侧边栏中�
 
 ### 选项
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 选项 | 类型 | 默认 | 描述 |
+|------|------|------|------|
 | `TZ` | 字符串 | `Europe/Amsterdam` | 时区 |
 | `WHOOGLE_CONFIG_LANGUAGE` | 字符串 | `lang_en` | 界面语言 |
 | `WHOOGLE_CONFIG_URL` | 字符串 | | 服务的基本 URL |
 | `WHOOGLE_CONFIG_THEME` | 列表 | | 主题（system/light/dark） |
-| `WHOOGLE_CONFIG_COUNTRY` | 字符串 | | 搜索结果的国别代码 |
+| `WHOOGLE_CONFIG_COUNTRY` | 字符串 | | 搜索结果的地区代码 |
 | `WHOOGLE_CONFIG_SEARCH_LANGUAGE` | 字符串 | | 搜索语言 |
 | `WHOOGLE_CONFIG_BLOCK` | 字符串 | | 要阻止的网站列表，用逗号分隔 |
 | `WHOOGLE_CONFIG_SAFE` | 列表 | | 安全搜索（0/1） |
 | `WHOOGLE_CONFIG_ALTS` | 列表 | | 使用替代前端（0/1） |
 | `WHOOGLE_CONFIG_NEW_TAB` | 列表 | | 在新标签页中打开结果（0/1） |
 | `WHOOGLE_CONFIG_VIEW_IMAGE` | 列表 | | 启用查看图片选项（0/1） |
-| `WHOOGLE_CONFIG_GET_ONLY` | 列表 | | 仅 GET 请求（0/1） |
+| `WHOOGLE_CONFIG_GET_ONLY` | 列表 | | 仅使用 GET 请求（0/1） |
 | `WHOOGLE_CONFIG_DISABLE` | 列表 | | 禁止更改设置（0/1） |
 | `WHOOGLE_AUTOCOMPLETE` | 列表 | | 启用自动完成（0/1） |
-| `WHOOGLE_MINIMAL` | 列表 | | 简约模式（0/1） |
+| `WHOOGLE_MINIMAL` | 列表 | | 简化模式（0/1） |
 | `WHOOGLE_CSP` | 列表 | | 内容安全策略（0/1） |
-| `WHOOGLE_RESULTS_PER_PAGE` | 整数 | | 每页结果数（5-100） |
+| `WHOOGLE_RESULTS_PER_PAGE` | 整数 | | 每页结果数量（5-100） |
 | `WHOOGLE_USER` | 字符串 | | 认证用户名 |
 | `WHOOGLE_PASS` | 密码 | | 认证密码 |
 | `WHOOGLE_PROXY_TYPE` | 字符串 | | 代理类型 |
@@ -84,23 +84,23 @@ WHOOGLE_RESULTS_PER_PAGE: 20
 
 ## 安装
 
-这个插件的安装非常简单，与安装其他插件没有什么不同。
+这个插件的安装非常简单，与安装其他插件没有区别。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 Supervisor 插件商店的右上角，或者如果您已经配置了我的 HA，请点击下面的按钮）
-   [![打开您的 Home Assistant 实例并显示添加插件仓库对话框，并预填特定仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到你的 Home Assistant 实例中（在 Supervisor 插件商店的右上角，或者如果你已经配置了我的 HA，点击下面的按钮）
+   [![打开你的 Home Assistant 实例并显示添加插件仓库对话框，预填充特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装这个插件。
-1. 点击 `保存` 按钮以保存您的配置。
-1. 设置插件选项以符合您的偏好。
+1. 点击 `保存` 按钮以保存你的配置。
+1. 设置插件的选项以符合你的偏好。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切正常。
 1. 打开 Web UI 并调整软件选项
 
 ## 支持
 
-在 GitHub 上创建问题
+在 github 上创建问题
 
 ## 插图
 
-![插图](https://github.com/benbusby/whoogle-search/raw/main/docs/screenshot_desktop.jpg)
+![illustration](https://github.com/benbusby/whoogle-search/raw/main/docs/screenshot_desktop.jpg)
 
 [repository]: https://github.com/alexbelgium/hassio-addons
