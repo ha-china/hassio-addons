@@ -1,0 +1,79 @@
+---
+name: HAOS-SBFspot SensorsGen
+version: 2025.10.1
+slug: haos-sbfspot-sensorsgen
+description: '[老王杂谈说]：为SBFspot多逆变器设置创建额外的传感器'
+url: "https://ghfast.top/github.com/habuild/hassio/tree/main/haos-sbfspot-sensorsgen"
+image: "ghcr.nju.edu.cn/habuild/{arch}-addon-haos-sbfspot-sensorsgen"
+arch:
+  - armv7
+  - aarch64
+  - amd64
+init: false
+hassio_api: true
+homeassistant_api: true
+panel_icon: mdi:solar-power-variant
+boot: manual_only
+options:
+  Make_Sensors: false
+  Make_Third: false
+  Test_Msg: false
+  MQTT_Data: >-
+    PrgVersion,Plantname,Timestamp,SunRise,SunSet,InvSerial,InvName,InvTime,InvStatus,InvSwVer,InvClass,InvType,InvTemperature,InvGridRelay,EToday,ETotal,GridFreq,PACTot,PAC1,PAC2,PAC3,UAC1,UAC2,UAC3,IAC1,IAC2,IAC3,OperTm,FeedTm,PDCTot,PDC1,PDC2,PDC,UDC1,UDC2,UDC,IDC1,IDC2,IDC,BTSignal,BatTmpVal,BatVol,BatAmp,BatChaStt,InvWakeupTm,InvSleepTm,MeteringWOut,MeteringWIn,MeteringWTot
+  Message1: '{"Plantname": "over9000", "Timestamp": "2025-09-29T13:40:04+1000", "InvSerial": "2120108811", "EToday": "6334", "ETotal": "75462350"}'
+  Send_Message1: false
+  Message2: '{"Plantname": "SNA5000", "Timestamp": "2025-09-29T13:40:04+1000", "InvSerial": "2124584855", "EToday": "4546334", "ETotal": "2350"}'
+  Send_Message2: false
+  Message3: "Some Message like Above will work best"
+  Send_Message3: false
+  InvName: "Nom1"
+  InvSerial: "First_Inverter_Serial"
+  Plantname: "First_Inverter_Plantname"
+  InvName2: "Nom2"
+  InvSerial2: "Second_Inverter_Serial"
+  Plantname2: "null"
+  InvSwVer2: "12.35.45"
+  InvType2: "model-number"
+  InvClass2: "Solar Inverter"
+  InvName3: "Nom3"
+  InvSerial3: "Third_Inverter_Serial"
+  Plantname3: "null"
+  InvSwVer3: ""
+  InvType3: ""
+  InvClass3: ""
+  DateTimeFormat: "null"
+  MQTT_User: "!secret mqtt_user"
+  MQTT_Pass: "!secret mqtt_pass"
+  MQTT_Topic: "homeassistant/sbfspot_{plantname}/sbfspot_{serial}"
+  LogLevel: info
+schema:
+  Make_Sensors: bool
+  Make_Third: bool
+  Test_Msg: bool
+  MQTT_Data: str?
+  Message1: str
+  Send_Message1: bool
+  Message2: str
+  Send_Message2: bool
+  Message3: str
+  Send_Message3: bool
+  InvName: str?
+  InvSerial: str
+  Plantname: str
+  InvName2: str?
+  InvSerial2: str
+  Plantname2: str?
+  InvSwVer2: str?
+  InvType2: str?
+  InvClass2: str?
+  InvName3: str?
+  InvSerial3: str
+  Plantname3: str?
+  InvSwVer3: str?
+  InvType3: str?
+  InvClass3: str?
+  DateTimeFormat: str?
+  MQTT_User: str?
+  MQTT_Pass: password?
+  MQTT_Topic: str
+  LogLevel: list(trace|debug|info|notice|warning|error|fatal)?

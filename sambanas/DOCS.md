@@ -1,66 +1,67 @@
-# 家用助手插件：Samba NAS 共享
+# Home Assistant Add-on: Samba NAS share
 
-# 📰 关于 SambaNas 插件开发的重要通知
+# 📰 Important Notice Regarding SambaNas Addon Development
 
-**SambaNas 插件现已进入维护模式**
+**SambaNas Addon is Now in Maintenance Mode**
 
-此通知旨在告知我们的用户，**SambaNas 插件将现在过渡到维护模式。** 这意味着对于此版本的插件**将不再实现未来功能。** 我们的开发工作将专注于仅提供**关键错误修复**，以确保现有用户的功能持续稳定性。
+This notice is to inform our users that the **SambaNas addon will now transition into maintenance mode.** This means that **no future features will be implemented** for this version of the addon. Our development efforts will be focused solely on providing **critical bug fixes** to ensure its continued stability for existing users.
 
-**推出 SambaNas2：Samba 集成的未来**
+**Introducing SambaNas2: The Future of Samba Integration**
 
-我们很高兴地宣布 **SambaNas2**，它是原始 SambaNas 插件的继任者！SambaNas2 代表了**从零开始完全重写，使用 Go 语言开发，拥有全新的核心。** 这将带来在性能、稳定性和未来可扩展性方面的显著改进。
+We are excited to announce **SambaNas2**, the successor to the original SambaNas addon! SambaNas2 represents a **complete rewrite from the ground up, developed in Go with a brand new core.** This will bring significant improvements in performance, stability, and future extensibility.
 
-**当前状态和即将发布的 Beta 版本**
+**Current Status and Upcoming Beta Release**
 
-SambaNas2 目前处于开发的**Alpha 阶段**。我们很高兴地宣布，**将在未来几周内发布公共 Beta 版本**，并通过我们的 Beta 渠道提供。
+SambaNas2 is currently in an **Alpha stage** of development. We are pleased to announce that a **public Beta version will be released in the coming weeks** and will be available through our beta channel.
 
-我们鼓励对最新功能和改进感兴趣的用户密切关注 SambaNas2 Beta 版本的发布。感谢您持续的支持。
+We encourage users interested in the latest features and improvements to keep an eye out for the SambaNas2 beta release. Thank you for your continued support.
 
-## 🚨 重要提示 🚨
 
-此插件已设计、构建和测试以与 HAOS（家用助手操作系统）一起工作。在其他类型的安装中使用它是不推荐的，因为主机提供的其他解决方案更有效。
+## 🚨 Important Note 🚨
 
-### 在不同的操作系统上使用它会导致启动时出错。我向所有在不同操作系统上使用它的高级用户表示歉意，但我是在我的业余时间管理此插件，而我最近没有做任何有用的事情，只是回复那些不看文档的人。“这就是生活的意义”
+This addon has been designed, built and tested to work with HAOS (Homeassistant Operating System). The use in other types of installations is not recommended and useless as other solutions given by the host can be used.
 
-## 安装
+### Using it on a different operating system leads to the error at startup. I apologize to all the advanced users who are using it on different OSes but I manage the addon in my spare time and instead of doing something useful lately I'm only replying to people who don't read the documentation. "This is the meaning of life"
 
-按照以下步骤将插件安装到您的系统上：
+## Installation
 
-1. 在家用助手的界面前端导航到 **Supervisor** -> **插件商店**。
-2. 找到“Samba NAS 共享”插件并点击它。
-3. 点击“安装”按钮。
+Follow these steps to get the add-on installed on your system:
 
-## 如何使用
+1. Navigate in your Home Assistant frontend to **Supervisor** -> **Add-on Store**.
+2. Find the "Samba NAS share" add-on and click it.
+3. Click on the "INSTALL" button.
 
-1. 在配置部分，设置用户名和密码。
-2. 查看启用的共享。禁用您不打算使用的任何共享。如果需要，稍后可以重新启用共享。
+## How to use
 
-## 连接
+1. In the configuration section, set a username and password.
+2. Review the enabled shares. Disable any you do not plan to use. Shares can be re-enabled later if needed.
 
-如果您使用的是 Windows，您使用 `\\<IP_ADDRESS>\`，如果您使用的是 MacOS，您使用 `smb://<IP_ADDRESS>` 来连接到共享。
+## Connection
 
-此插件通过 smb（samba）公开以下目录：
+If you are on Windows you use `\\<IP_ADDRESS>\`, if you are on MacOS you use `smb://<IP_ADDRESS>` to connect to the shares.
 
-| 目录       | 描述                                                              |
+This addon exposes the following directories over smb (samba):
+
+| Directory       | Description                                                              |
 | --------------- | ------------------------------------------------------------------------ |
-| `addons`        | 这是用于您本地插件的目录。                                          |
-| `backup`        | 这是用于您的快照的目录。                                              |
-| `config`        | 这是用于您的家用助手配置的目录。                           |
-| `addon_configs` | 这是用于您的插件基本配置目录的目录                     |
-| `media`         | 这是用于本地媒体文件的目录。                                           |
-| `share`         | 这是用于在插件和家用助手之间共享的数据的目录。 |
-| `ssl`           | 这是用于您的 SSL 证书的目录。                                       |
+| `addons`        | This is for your local add-ons.                                          |
+| `backup`        | This is for your snapshots.                                              |
+| `config`        | This is for your Home Assistant configuration.                           |
+| `addon_configs` | This is for your Addons base configuration directory                     |
+| `media`         | This is for local media files.                                           |
+| `share`         | This is for your data that is shared between add-ons and Home Assistant. |
+| `ssl`           | This is for your SSL certificates.                                       |
 
-## 配置
+## Configuration
 
-这是一个配置示例。**_请勿使用_**，除非您进行了必要的更改，特别是对于用户名、密码、密钥和更多磁盘部分。
-`<` 和 `>` 之间的字段表示省略的值，需要更改。
+This is an example of a configuration. **_DO NOT USE_** without making the necessary changes especially for the username, password, secret and moredisk part.
+Fields between `<` and `>` indicate values that are omitted and need to be changed.
 
 ```yaml
 workgroup: WORKGROUP
 local_master: true
 username: Hassio
-password: "<您的密钥密码>"
+password: "<Your secret password>"
 allow_hosts:
   - 10.0.0.0/8
   - 172.16.0.0/12
@@ -70,8 +71,8 @@ allow_hosts:
   - fc00::/7
 automount: true
 moredisks:
-  - "<分区的标签>"
-  - "id:<分区的 uuid>"
+  - "<Partition's Label>"
+  - "id:<Partition uuid>"
 mountoptions: "nosuid,relatime,noexec"
 veto_files:
   - "._*"
@@ -86,9 +87,9 @@ medialibrary:
   enable: true
 other_users:
   - username: backupuser
-    password: "<backupuser 密码>"
+    password: "<backupuser secret password>"
   - username: secureuser
-    password: "<secureuser 密码>"
+    password: "<secureuser secret password>"
 acl:
   - share: config
     disabled: true
@@ -101,112 +102,309 @@ acl:
       - secureuser
 ```
 
-### 选项：`workgroup`（必需）
+### Option: `workgroup` (required)
 
-将 WORKGROUP 更改为反映您的网络需求。
+Change WORKGROUP to reflect your network needs.
 
-### 选项：`local_master`（必需）
+### Option: `local_master` (required)
 
-启用以尝试成为子网上的本地主浏览器。
+Enable to try and become a local master browser on a subnet.
 
-### 选项：`username`（必需）
+### Option: `username` (required)
 
-您希望用于向 Samba 服务器进行身份验证的用户名。
+The username you would like to use to authenticate with the Samba server.
 
-### 选项：`password`（必需）
+### Option: `password` (required)
 
-与配置用于身份验证的用户名对应的密码。
+The password that goes with the username configured for authentication.
 
-### 选项：`allow_hosts`（必需）
+### Option: `allow_hosts` (required)
 
-允许访问共享文件夹的主机/网络列表。
+List of hosts/networks allowed to access the shared folders.
 
-### 选项 `automount`（可选）
+### Option `automount` (optional)
 
-**_必须禁用保护模式才能启用此功能_**
-自动挂载并公开所有标记的磁盘。
+**_Protection Mode must be disabled to allow this function_**
+Automatic mount and expose all labeled disk.
 
-默认为 `true`。
+Defaults to `true`.
 
-### 选项：`moredisks`（可选）
+### Option: `moredisks` (optional)
 
-**_必须禁用保护模式才能启用此功能_**
-列出要搜索和共享的磁盘或分区标签。如果将名称以 `id:` 开头，也可以使用磁盘 ID（警告：仅小写写 id 前缀！）
+**_Protection Mode must be disabled to allow this function_**
+List of disks or partitions label to search and share. It is also possible to use the disk id if you prepend the name with `id:` (WARN: write id prefix in lowercase only!)
 
-支持的 Fs：
+The following Fs are supported:
 
 - [x] ext3
 - [x] ext2
 - [x] ext4
 - [x] squashfs
-- [x] vfat --> **_注意：不支持 ACL，因此不支持 TimeMachine 兼容性_**
-- [x] msdos --> **_注意：不支持 ACL，因此不支持 TimeMachine 兼容性_**
-- [x] f2fs --> **_注意：不支持 ACL，因此不支持 TimeMachine 兼容性_**
-- [x] exFat --> **_注意：与 exFat 内核驱动程序实验性支持_**
-- [x] ntfs --> **_注意：与 ntfs3 内核驱动程序实验性支持。在某些架构上不可用_**
+- [x] vfat --> **_NOTE: ACL are not supported so no TimeMachine compatibility_**
+- [x] msdos --> **_NOTE: ACL are not supported so no TimeMachine compatibility_**
+- [x] f2fs --> **_NOTE: ACL are not supported so no TimeMachine compatibility_**
+- [x] exFat --> **_NOTE: Experimental with exFat kernel driver_**
+- [x] ntfs --> **_NOTE: Experimental with ntfs3 kernel driver. Not available on some architectures_**
 - [x] brtfs
 - [x] xfs
-- [x] apfs --> **_注意：非常实验性。只读，仅通过 ID 而不是标签引用。不支持挂载选项_**
+- [x] apfs --> **_NODE: Very Experimental. ReadOnly and referenced only by id not label. Mount options are not supported_**
 
-### 选项 `mountoptions`（必需）
-允许设置挂载选项。
+### Option `mountoptions` (required)
+Allows setting of mount options.
 
-**_必须禁用保护模式才能启用此功能_**
-默认为 'nosuid,relatime,noexec'
+**_Protection Mode must be disabled to allow this function_**
+Defaults to 'nosuid,relatime,noexec'
 
-### 选项 `available_disks_log`（可选）
+### Option `available_disks_log` (optional)
 
-启用找到标记磁盘的日志。对于初始配置非常有用。
+Enable the log of found labeled disk. Usefull for initial configuration.
 
-### 选项：`log_level`（可选）
+### Option: `log_level` (optional)
 
-log_level 选项控制插件生成的日志级别，可以更改为更详细或更简洁，这在处理未知问题时可能有用。可能的值是：
+The log_level option controls the level of log output by the addon and can be changed to be more or less verbose, which might be useful when you are dealing with an unknown issue. Possible values are:
 
-- trace: 显示每个细节，如所有调用的内部函数。
-- debug: 显示详细的调试信息。
-- info: 通常（通常）有趣的正常事件。
-- warning: 异常情况，但不一定是错误。
-- error: 运行时错误，不需要立即采取行动。
-- fatal: 发生了严重的问题。插件变得无法使用。
+- trace: Show every detail, like all called internal functions.
+- debug: Shows detailed debug information.
+- info: Normal (usually) interesting events.
+- warning: Exceptional occurrences that are not errors.
+- error: Runtime errors that do not require immediate action.
+- fatal: Something went terribly wrong. Add-on becomes unusable.
 
-请注意，每个级别自动包含更严重级别的日志消息，例如，debug 也显示 info 消息。默认情况下，log_level 设置为 info，这是推荐的设置，除非您正在解决问题。
+Please note that each level automatically includes log messages from a more severe level, e.g., debug also shows info messages. By default, the log_level is set to info, which is the recommended setting unless you are troubleshooting.
 
-### 选项：`medialibrary`（可选） **_实验性_**
+### Option: `medialibrary` (optional) **_Exteprimental_**
 
-启用 `/media` 路径上 `moredisk` 的可见性。
+Enable the visibility of `moredisk` on /media path.
 
-_从 Homeassistant 2023.6.0 开始，插件使用 'mount' supervisor 功能。因此，您不再需要 SSH 密钥。_
+_Starting from Homeassistant 2023.6.0 the addon use the 'mount' supervisor feature. So you don't need the ssh key anymore._
 
-**警告：此功能被视为实验性，可能会导致问题或数据丢失。**
+**WARNING: The feature is considered experimental and may cause problems or data loss.**
 
-#### 选项：`enable`（可选）
+#### Option: `enable` (optional)
 
-启用/禁用主机挂载选项。
+Enable/Disable host mounting option.
 
-默认为 `false`。
+Defaults to `false`.
 
-### 选项：`recyle_bin_enabled`（可选）
+### Option: `recyle_bin_enabled` (optional)
 
-将此选项设置为 `true` 将在 Samba 插件上启用回收站功能
-***检查 'veto_files'，因为可能会被 '._*' 阻止。***
+Setting this option to `true` will enable recycle bin functions
+on the Samba add-on. ***Check 'veto_files' as could be blocked by '._*'.***
 
-默认为 `false`。
+Defaults to `false`.
 
-#### 选项：`ssh_private_key`（可选） **_已弃用_**
+#### Option: `ssh_private_key` (optional) **_Deprecated_**
 
-用于通过 SSH 访问主机（端口 22222）的**私钥**。
+The **_PRIVATE_** key for SSH access to the host on port 22222.
 
-启用主机挂载 `moredisk` 而不是容器挂载。
+Enables mounting of `moredisk` by the host and not by the container.
 
-注意<sup>1</sup>：它只适用于 HassOS，在其他主机上未经测试，很可能无法工作。
+NOTE<sup>1</sup>: It works only and only on HassOS on other hosts it is not tested and most likely it does not work.
 
-注意<sup>2</sup>：必须启用主机 SSH 端口 22222 的访问。请参阅 HassOS [开发者文档](https://developers.home-assistant.io/docs/operating-system/debugging/#home-assistant-operating-system)或使用 [配置插件](https://community.home-assistant.io/t/add-on-hassos-ssh-port-22222-configurator/264109)。
+NOTE<sup>2</sup>: It is necessary to enable the access to the SSH port 22222 of the host. Read the HassOS [Developers Documentation](https://developers.home-assistant.io/docs/operating-system/debugging/#home-assistant-operating-system) or use the [Configutarion Addon](https://community.home-assistant.io/t/add-on-hassos-ssh-port-22222-configurator/264109).
 
-注意<sup>3</sup>：必须传递 SSH 私钥以获得对主机的 root 访问。确保使用密钥文件来保护无法访问密钥的人员。
+NOTE<sup>3</sup>: It is necessary to pass the SSH private key for root access to the host. Be sure to use secrets files to protect the key from people who don't have access to it.
 
-注意<sup>4</sup>：如果“媒体浏览器”中的磁盘为空，请尝试重新启动 Homeassistant。
+NOTE<sup>4</sup>: If the disk in the "Media Browser" is seen empty try restarting Homeassitant.
 
-如果您发现了一个错误，请[在我们的 GitHub 上打开一个问题][issue]。
+
+### Option: `veto_files` (optional)
+
+List of files that are neither visible nor accessible. Useful to stop clients
+from littering the share with temporary hidden files
+(e.g., macOS `.DS_Store` or Windows `Thumbs.db` files)
+
+### Option: `other_users` (optional) (**advanced users only**)
+
+The list of additional user for the addon. See `acl` option for enable the access to the shares.
+
+#### Option: `username` (required)
+
+The username you would like to use to authenticate with.
+
+#### Option: `password` (required)
+
+The password that goes with the username configured for authentication.
+
+### Option: `acl` (optional) (**advanced users only**)
+
+The Access Control List for shares. This is an advanced parameter to control every single share.
+The format is an array of share object with this subparameters
+
+#### Option: `share` (required)
+
+The share name.
+
+#### Option: `disabled` (optional)
+
+If the disabled flag is true the share is not exported
+
+Defaults to `false`
+
+#### Option: `users` (optional)
+
+The list of users with access to share. If omitted the main user is used. See `other_users` option
+
+Defaults to `master user`
+
+#### Option: `ro_users` (optional)
+
+The list of users with readonly access to share.
+
+Defaults to none
+
+#### Option: `timemachine` (optional)
+
+If is true the share is exposed with timechine compatible setting.
+
+Defaults to `false` for internal share, `true` forn extra disks.
+
+### Option: `usage` (optional) (**valid only for external disks**)
+
+Set the scope of the disk, usefull for ha network storage mount. Valid values are `media`,`backup`,`share`
+
+Defaults to `media` for external disks if `medialibray` is enabled.
+
+
+### Option: `interfaces` (optional) (**advanced users only**)
+
+The network interfaces Samba should listen on for incoming connections.
+
+This option should only be used in advanced cases. In general, setting this option is not needed.
+
+If omitted Samba will listen on all supported interfaces of Home Assistant (see > ha network info), but if there are no supported interfaces, Samba will exit with an error.
+
+**Note**: Samba needs at least one non-loopback, non-ipv6, local interface to listen on and become browser on it. Without it, it works, but reloads it's interfaces in an infinite loop forever in each 10 seconds to check, whether a non-loopback, non-ipv6, local interface is added. This reload will fill the log file with infinite number of entries like added interface lo ip=::1 bcast= netmask=ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff.
+
+### Option: `bind_all_interfaces` (optional)
+
+Force Samba to bind on all network interface.
+This is usefull for pseudo-ethernet devices like TailScale
+
+Defaults to `false`.
+
+### Option: `compatibility_mode` (optional)
+
+Setting this option to `true` will enable old legacy Samba protocols
+on the Samba add-on. This might solve issues with some clients that cannot
+handle the newer protocols, however, it lowers security. Only use this
+when you absolutely need it and understand the possible consequences.
+
+Defaults to `false`.
+
+### Option: `wsdd`
+
+Setting this option to `true` will enable the use of wsdd over internal samba system.
+
+Defaults to `true`.
+
+### Option: `wsdd2` (optional) (**advanced users only**)
+
+Setting this option to `true` will enable the use of wsdd2 over wsdd. Set to true if you have trouble to see the disk on Windows 11+
+
+Defaults to `false`.
+
+### Option: `hdd_idle_seconds` (optional) (**Use only if your disks never spind down**)
+
+Idle time in seconds for all disks. Setting this value to 0 will never spin down the disk(s).
+
+**NOTE<sup>1</sup>**: Depending on your environment host system can take up to **10minutes** to unlock used file on disk so setting to a low number like 10 don't garantee that the disk go on sleep after 10s from last access. Sometime you need to wait 10 or 15 minutes.
+**NOTE<sup>2</sup>**: If you use `mqtt_nexgen_entities` also enable a new sensor for power disk status.
+
+Defaults to hd-idle demon not being used at all.
+
+### Option: `enable_smart` (optional)
+
+Enable SMART on all disks, enable automatic offline testing every four hours, and enable autosaving of SMART Attributes.
+
+Defaults to `true`.
+
+### Option: `multi_channel` (optional) **_Exteprimental_**
+
+Samba 4.4.0 adds *experimental* support for SMB3 Multi-Channel.
+Multi-Channel is an SMB3 protocol feature that allows the client
+to bind multiple transport connections into one authenticated
+SMB session. This allows for increased fault tolerance and
+throughput. The client chooses transport connections as reported
+by the server and also chooses over which of the bound transport
+connections to send traffic. I/O operations for a given file
+handle can span multiple network connections this way.
+An SMB multi-channel session will be valid as long as at least
+one of its channels are up.
+
+Defaults to `false`
+
+### Option: `mqtt_enable` (optional)
+
+Setting this option to `true` will enable the use of mqtt to send disks status data.
+
+Defaults to `false`.
+
+### Option: `mqtt_nexgen_entities` (optional)
+
+Setting this option to `true` will expose mqtt new entities. This is a refactor that allow to use less CPU.
+
+**NOTE<sup>1</sup>**: If your HDD newer spindown please set `hdd_idle_seconds`.
+
+
+Defaults to `false`.
+
+### Option: `mqtt_host` (optional)
+
+If using an external mqtt broker, the hostname/URL of the broker. See [MQTT Status Notifications](https://github.com/thomasmauerer/hassio-addons/blob/master/samba-backup/DOCS.md#mqtt-status-notifications) for additional infos.
+
+**Note**: _Do not set this option if you want to use the (on-device) Mosquitto broker addon._
+
+### Option: `mqtt_username` (optional)
+
+If using an external mqtt broker, the username to authenticate with the broker.
+
+### Option: `mqtt_password` (optional)
+
+If using an external mqtt broker, the password to authenticate with the broker.
+
+### Option: `mqtt_port` (optional)
+
+If using an external mqtt broker, the port of the broker. If not specified the default port 1883 will be used.
+
+### Option: `mqtt_topic` (optional)
+
+The topic to which status updates will be published. You can only control the root topic with this option, the subtopic is fixed!
+
+_Example_: sambanas/status: "sambanas" is the root topic, whereas "status" is the subtopic.
+
+### Option: `autodiscovery` (**advanced users only**)
+
+#### Option: `disable_discovery` (optional)
+
+Setting this option to `true` will disable the sending of Auto Discovery MQTT messages. You need to configure MQTT sensors manually
+
+Defaults to `false`.
+
+#### Option: `disable_persistent` (optional)
+
+Setting this option to `true` will disable the mark MQTT discovery messages as persistents.
+
+Defaults to `false`.
+
+#### Option: `disable_autoremove` (optional)
+
+Setting this option to `true` will disable the delete of MQTT discovery messages when addon stop.
+
+Defaults to `false`.
+
+## Support
+
+### Do you like the Addon?
+<a href="https://www.buymeacoffee.com/ypKZ2I0"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=ypKZ2I0&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
+
+### Common problems
+
+- **_The disk does not mount_** : check that the Label of the partition of the disk you want to mount is case-sensitive with the label indicated in the `moredisk` parameter.
+
+- **_In the menu `Media Browser` the folder with the name of the disk is empty_** : it happens when the homeassistant server starts before the add-on. Restart HomeAssitant from menu `Configuration->Server Controls->Server management -> RESTART`
+
+In case you've found a bug, please [open an issue on our GitHub][issue].
 
 [issue]: https://github.com/dianlight/hassio-addons/issues
 [reddit]: https://reddit.com/r/homeassistant
