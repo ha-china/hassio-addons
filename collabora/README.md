@@ -14,7 +14,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它将在右上角。谢谢！_
+_感谢大家给我的仓库点赞！点击下面的图片可以点赞，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -31,7 +31,7 @@ Collabora Online 是一个基于 LibreOffice 技术的协作办公套件。
 1. 将我的 add-ons 仓库添加到您的 Home Assistant 实例中，或点击下面的 My 链接。
 1. 安装 add-on。
 1. 启动 add-on。
-1. 检查 add-on 日志以验证是否成功启动。
+1. 检查 add-on 日志以验证成功启动。
 
 <a href="https://my.home-assistant.io/redirect/supervisor_addon/?addon=local_collabora" target="_blank"><img src="https://my.home-assistant.io/badges/supervisor_addon.svg" alt="打开您的 Home Assistant 实例并显示添加 add-on 仓库对话框"/></a>
 
@@ -43,10 +43,10 @@ Webui 可以在 `https://homeassistant:9980/browser/dist/admin/admin.html` 找�
 
 ### 选项
 
-| 选项 | 类型 | 默认 | 描述 |
-|------|------|------|------|
-| `aliasgroup1` | str | | Nextcloud 外部域名，使用两个反斜杠转义点（例如 `nextcloud_domain\\.com`） |
-| `domain1` | str | | Collabora 外部域名，使用两个反斜杠转义点（例如 `code_domain\\.com`） |
+| 选项 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `aliasgroup1` | str | | Nextcloud 外部域名，使用两个 \ 转义点（例如 `nextcloud_domain\\.com`） |
+| `domain1` | str | | Collabora 外部域名，使用两个 \ 转义点（例如 `code_domain\\.com`） |
 | `extra_params` | str | | 传递给 Collabora 启动脚本的额外参数 |
 | `ssl` | bool | `false` | 使用来自 /ssl 的证书启用 SSL |
 | `certfile` | str | `fullchain.pem` | 位于 /ssl 中的证书文件名 |

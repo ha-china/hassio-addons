@@ -14,18 +14,18 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库加星标的人！要加星标，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_感谢所有给我仓库点赞的人！要点赞，请点击下面的图片，然后它会在右上角显示。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/tdarr/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/tdarr/stats.png)
 
 ## 关于
 
-[Tdarr](https://tdarr.io) 是一个分布式转码系统，使用 FFmpeg/HandBrake 自动管理媒体库的转码/重新封装。它确保您的文件在编解码器、流和容器方面完全符合您的要求。Tdarr 支持分布式处理，允许您使用 Tdarr 节点（Windows、Linux（包括 ARM）和 macOS）将您的闲置硬件投入使用。
+[Tdarr](https://tdarr.io) 是一个分布式转码系统，用于使用 FFmpeg/HandBrake 自动管理媒体库的转码/复用。它确保您的文件在编解码器、流和容器方面完全符合您的要求。Tdarr 支持分布式处理，允许您使用 Tdarr 节点（适用于 Windows、Linux（包括 ARM）和 macOS）将您的闲置硬件投入使用。
 
 主要功能：
-- 跨多个节点的分布式转码
+- 跨多个节点进行分布式转码
 - 自动化媒体库管理
 - 支持 FFmpeg 和 HandBrake
 - 硬件加速支持
@@ -36,18 +36,18 @@ _感谢所有给我的仓库加星标的人！要加星标，请点击下面的�
 
 ## 安装
 
-此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
+此插件的安装非常简单，与其他 Hass.io 插件的安装方式相同。
 
 1. [将我的 Hass.io 插件仓库][repository] 添加到您的 Hass.io 实例。
-1. 安装此插件。
-1. 点击 `保存` 按钮以保存您的配置。
-1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 仔细配置插件以满足您的偏好，请参阅官方文档。
+2. 安装此插件。
+3. 点击 `保存` 按钮以保存您的配置。
+4. 启动插件。
+5. 检查插件的日志以查看是否一切正常。
+6. 仔细配置插件以满足您的需求，请参阅官方文档。
 
 ## 配置
 
-Web 界面位于 `<your-ip>:8265` 或通过 Ingress 在侧边栏中访问。
+Web 界面位于 `<你的 IP>:8265` 或通过 Ingress 在侧边栏中访问。
 服务器端口为 `8266`，用于连接外部 Tdarr 节点。
 
 ### 选项
@@ -60,7 +60,7 @@ Web 界面位于 `<your-ip>:8265` 或通过 Ingress 在侧边栏中访问。
 | `networkdisks` | 字符串 | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
 | `cifsusername` | 字符串 | | SMB 共享的网络用户名 |
 | `cifspassword` | 字符串 | | SMB 共享的网络密码 |
-| `cifsdomain` | 字符串 | | SMB 共享的网络域 |
+| `cifsdomain` | 字符串 | | SMB 共享的域 |
 
 ### 示例配置
 
@@ -77,17 +77,17 @@ cifsdomain: "workgroup"
 ### 设置分布式转码
 
 1. **配置服务器**：
-   - 在 `<your-ip>:8265` 访问 Web 界面
+   - 访问 Web 界面 `<你的 IP>:8265`
    - 设置您的媒体库和转码设置
    - 根据需要配置插件和工作流
 
 2. **添加外部节点**：
    - 在其他机器上安装 Tdarr 节点
-   - 将它们指向您的 Home Assistant IP 在端口 `8266`
+   - 指向您的 Home Assistant IP 端口 `8266`
    - 节点将自动注册并在 Web 界面中显示
 
 3. **硬件加速**：
-   - 插件包括硬件加速支持
+   - 插件支持硬件加速
    - 在 Tdarr Web 界面设置中配置 GPU 转码
    - 支持的加速：Intel QuickSync、NVIDIA NVENC、AMD VCE
 
@@ -95,29 +95,29 @@ cifsdomain: "workgroup"
 
 此插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **本地驱动器**：请参阅 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：请参阅 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### 自定义脚本和环境变量
 
 此插件支持通过 `addon_config` 映射的自定义脚本和环境变量：
 
-- **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：请参阅 [为您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **自定义脚本**：见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **环境变量**：见 [为您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
 
-### 硬件加速注意事项
+### 硬件加速说明
 
-插件包括硬件加速的设备访问：
+插件包含硬件加速的设备访问：
 - Intel QuickSync：`/dev/dri` 设备映射
 - NVIDIA：设置环境变量以检测 GPU
 - AMD：通过可用设备支持硬件加速
 
-在 Tdarr Web 界面中配置硬件加速，路径为 `设置 > FFmpeg/HandBrake 设置`。
+在 Tdarr Web 界面中配置硬件加速，位于设置 > FFmpeg/HandBrake 设置。
 
 ## 支持
 
 - 官方 Tdarr 文档：[https://docs.tdarr.io/](https://docs.tdarr.io/)
 - 在 [GitHub](https://github.com/alexbelgium/hassio-addons/issues) 上创建问题
-- 在 [Home Assistant 社区线程](https://community.home-assistant.io/t/home-assistant-addon-tdarr/282108/3) 上提问
+- 在 [Home Assistant 社区主题](https://community.home-assistant.io/t/home-assistant-addon-tdarr/282108/3) 上提问
 
 [repository]: https://github.com/alexbelgium/hassio-addons
