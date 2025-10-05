@@ -1,21 +1,22 @@
-# Home Assistant 插件：Cloudflared
+# Home Assistant 扩展程序：Cloudflared
 
 [![GitHub 发布][releases-shield]][releases]
 ![项目阶段][project-stage-shield]
-![项目维护状态][maintenance-shield]
+![项目维护][maintenance-shield]
 ![已报告的安装][installations-shield-stable]
 
 通过 Cloudflared，无需打开任何端口即可远程连接到您的 Home Assistant 实例。
 
 ## 关于
 
-Cloudflared 通过安全的隧道连接您的 Home Assistant 实例到 Cloudflare 的一个域名或子域名。这样，您可以在不打开路由器端口的情况下将 Home Assistant 暴露给互联网。此外，您还可以利用 Cloudflare Teams，他们的 Zero Trust 平台来进一步保护您的 Home Assistant 连接。
+Cloudflared 通过一个安全的隧道将您的 Home Assistant 实例连接到 Cloudflare 的一个域名或子域名。这样做，您可以在不打开路由器端口的情况下将 Home Assistant 暴露给互联网。此外，您还可以利用 Cloudflare Teams 及其零信任平台来进一步保护您的 Home Assistant 连接。
 
-**要使用此插件，您必须拥有一个使用 Cloudflare 进行 DNS 条目的域名（例如 example.com）。您可以在我们的 [Wiki][wiki] 中找到更多相关信息**。
+**要使用此扩展程序，您必须拥有一个使用 Cloudflare 进行其 DNS 条目的域名（例如 example.com）。您可以在我们的 [Wiki][wiki] 中找到更多相关信息**。
 
 ## 免责声明
 
-在使用此插件时，请确保遵守 [Cloudflare 自助服务订阅协议][cloudflare-sssa]。
+在使用此扩展程序时，请确保您遵守
+[Cloudflare 自助服务订阅协议][cloudflare-sssa]。
 
 [cloudflare-sssa]: https://www.cloudflare.com/terms/
 [domainarticle]: https://www.linkedin.com/pulse/what-do-domain-name-how-get-one-free-tobias-brenner?trk=public_post-content_share-article
