@@ -4,7 +4,7 @@
 
 ## 安装
 
-这个插件的安装非常简单，与其他 Home Assistant 插件的安装方式相同。
+此插件的安装非常直接，与其他 Home Assistant 插件的安装方式相同。
 
 1. 点击下方的 Home Assistant 我的按钮，在您的 Home Assistant 实例上打开插件。
 
@@ -32,26 +32,26 @@ _此插件运行不需要任何配置。_
 
 - `MAJOR`：不兼容或主要更改。
 - `MINOR`：向后兼容的新功能和增强。
-- `PATCH`：向后兼容的修复和软件包更新。
+- `PATCH`：向后兼容的补丁和软件包更新。
 
 ## 支持
 
-有问题吗？
+有问题？
 
 您有几个选项来获得答案：
 
 - [Home Assistant 社区插件 Discord 聊天服务器][discord] 用于插件支持和功能请求。
-- [Home Assistant Discord 聊天服务器][discord-ha] 用于一般的 Home Assistant 讨论和问题。
+- [Home Assistant Discord 聊天服务器][discord-ha] 用于一般 Home Assistant 讨论和问题。
 - Home Assistant [社区论坛][forum]。
 - 加入 [Reddit 子版块][reddit] 在 [/r/homeassistant][reddit]
 
-您也可以 [在这里打开问题][issue] GitHub。
+您也可以 [在此处打开 GitHub 的问题][issue]。
 
 ## 作者与贡献者
 
 此存储库的原始设置由 [Franck Nijhof][frenck] 完成。
 
-有关所有作者和贡献者的完整列表，
+要查看所有作者和贡献者的完整列表，
 请查看 [贡献者页面][contributors]。
 
 ## 许可证
@@ -60,15 +60,17 @@ MIT 许可证
 
 版权所有 (c) 2024-2025 Franck Nijhof
 
-特此免费授予任何获得此软件及其相关文档文件（“软件”）副本的人，
-在软件中自由处理的权限，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权限，
-并允许获得软件的人这样做，但须遵守以下条件：
+特此授予任何人免费获得此软件和关联文档文件（“软件”）副本的权限，
+在软件中不受限制地处理，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，
+并允许提供软件的人这样做，但需遵守以下条件：
 
 上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
 
-软件按“原样”提供，不提供任何明示或暗示的保证，包括但不限于对适销性、特定用途适用性和非侵权的保证。
-在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任承担责任，无论是因合同、侵权或其他行为引起的，
-与软件或软件的使用或其他交易有关。
+软件按“原样”提供，不提供任何形式的保证，
+包括但不限于对适销性、特定用途适用性和非侵权的保证。
+在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，
+无论是由合同、侵权或其他行为引起的，
+均与软件或软件的使用或其他交易无关。
 
 [addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
 [addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=a0d7b954_bazarr&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository

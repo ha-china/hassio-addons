@@ -1,7 +1,7 @@
 name: Mailserver
-version: 4.3.0
+version: 5.0.0
 slug: mailserver
-description: $translated_description
+description: '[老王杂谈说]：为Home Assistant配置Postfix和Dovecot邮件服务器，带有Postfix Admin网页界面'
 url: https://ghfast.top/github.com/erik73/hassio-addons
 arch:
   - aarch64
@@ -50,5 +50,6 @@ schema:
   smtp_relayhost_credentials: str?
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   message_size_limit: int
+  mail_max_userip_connections: int?
   mynetworks: str?
 image: ghcr.nju.edu.cn/erik73/mailserver/{arch}

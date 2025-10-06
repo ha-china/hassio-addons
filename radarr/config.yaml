@@ -1,7 +1,7 @@
 name: Radarr
-version: 0.26.0
+version: 0.26.1
 slug: radarr
-description: '[老王杂谈说]：用于新闻组和BT用户的电影组织者/管理器'
+description: '[老王杂谈说]：用于Usenet和种子用户的电影组织/管理器'
 url: https://ghfast.top/github.com/hassio-addons/addon-radarr/tree/main/README.md
 codenotary: codenotary@frenck.dev
 webui: http://[HOST]:[PORT:7878]

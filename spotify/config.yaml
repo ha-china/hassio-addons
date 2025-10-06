@@ -1,5 +1,5 @@
 name: Spotify Connect
-version: 0.16.0
+version: 0.16.1
 slug: spotify
 description: '[老王杂谈说]：在您的Home Assistant设备上播放Spotify音乐'
 url: https://ghfast.top/github.com/hassio-addons/addon-spotify-connect

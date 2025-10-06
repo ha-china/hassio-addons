@@ -4,11 +4,11 @@
 
 [![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
 
-用于usenet和torrent用户的电影组织/管理工具。
+电影组织/管理器，适用于usenet和torrent用户。
 
 ## 关于
 
-[Radarr] 是一个用于usenet和BitTorrent用户的电影收藏管理工具。它可以监控多个RSS源以获取新电影，并与客户端和索引器接口以获取、排序和重命名它们。它还可以配置为在更高质量的格式可用时自动升级图书馆中现有文件的质量。
+[Radarr] 是一个适用于usenet和BitTorrent用户的电影收藏管理器。它可以监控多个RSS源以获取新电影，并与客户端和索引器接口以获取、排序和重命名它们。它还可以配置为在更高质量的格式可用时自动升级图书馆中现有文件的质量。
 
 [Radarr]: https://radarr.video/
 
@@ -18,5 +18,5 @@
 [forum]: https://community.home-assistant.io/t/?u=frenck
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.26.0-blue.svg
-[release]: https://github.com/hassio-addons/addon-radarr/tree/v0.26.0
+[release-shield]: https://img.shields.io/badge/version-v0.26.1-blue.svg
+[release]: https://github.com/hassio-addons/addon-radarr/tree/v0.26.1
