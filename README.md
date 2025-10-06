@@ -82,6 +82,10 @@
 - 🏠 [**Hikvision Addons**](https://github.com/pergolafabio/Hikvision-Addons): Hikvision 的加载项
 - 🛠️ [**Ollama Addons**](https://github.com/SirUli/homeassistant-ollama-addon): Ollama 的加载项
 - 🏠 [**iHost Open Source Addons**](https://github.com/iHost-Open-Source-Project/hassio-ihost-addon): iHost 开源项目的加载项
+- 🛠️ [**Limych Addons**](https://github.com/Limych/hassio-addons): Limych 的加载项
+- 🤖 [**Motion AI Addons**](https://github.com/motion-ai/addons): Motion AI 的加载项
+- 🛠️ [**Dcmartin Addons**](https://github.com/dcmartin/hassio-addons/): Dcmartin 的加载项
+
 
 
 

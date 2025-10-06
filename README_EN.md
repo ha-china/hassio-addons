@@ -73,6 +73,10 @@ Excellent third-party libraries:
 - 🏠 [**Hikvision Addons**](https://github.com/pergolafabio/Hikvision-Addons): Addons by Hikvision
 - 🛠️ [**Ollama Addons**](https://github.com/SirUli/homeassistant-ollama-addon): Addons by Ollama
 - 🏠 [**iHost Open Source Addons**](https://github.com/iHost-Open-Source-Project/hassio-ihost-addon): Addons from the iHost Open Source Project
+- 🛠️ [**Limych Addons**](https://github.com/Limych/hassio-addons): Addons by Limych
+- 🤖 [**Motion AI Addons**](https://github.com/motion-ai/addons): Addons by Motion AI
+- 🛠️ [**Dcmartin Addons**](https://github.com/dcmartin/hassio-addons/): Addons by Dcmartin
+
 
 
 
