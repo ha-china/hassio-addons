@@ -1,0 +1,48 @@
+{
+  "name": "Pharos Server",
+  "version": "0.0.2",
+  "slug": "pharos",
+  "description": "[老王杂谈说]：TP-LINK CPE WiFi接入点的Pharos服务器",
+  "url": "https://ghfast.top/github.com/dcmartin/hassio-addons/tree/master/pharos/README.md",
+  "webui": "http://[HOST]:[PORT:9321]",
+  "startup": "application",
+  "boot": "auto",
+  "arch": [
+    "armv7",
+    "armhf",
+    "aarch64",
+    "amd64"
+  ],
+  "ingress": false,
+  "ingress_port": 9321,
+  "panel_admin": true,
+  "panel_icon": "mdi:router-wireless",
+  "stage": "experimental",
+  "devices": [],
+  "hassio_api": true,
+  "hassio_role": "default",
+  "host_network": true,
+  "homeassistant_api": true,
+  "privileged": [],
+  "timeout": 90,
+  "tmpfs": true,
+  "map": [],
+  "ports": {
+    "9321/tcp": 9321
+  },
+  "ports_description": {
+    "9321/tcp": "Web interface"
+  },
+  "options": {
+    "log_level": "info",
+    "timezone": "America/Los_Angeles"
+  },
+  "schema": {
+    "log_level": "str",
+    "timezone": "str?"
+  },
+  "environment": {
+    "LOG_FORMAT": "{LEVEL}: {MESSAGE}"
+  },
+  "image": "dcmartin/{arch}-addon-pharos"
+}

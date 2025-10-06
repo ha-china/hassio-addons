@@ -4,7 +4,7 @@
     "aarch64"
   ],
   "codenotary": "alexandrep.github@gmail.com",
-  "description": "从您的FinTS支持的银行导入财务交易到Firefly III中。",
+  "description": "[老王杂谈说]：从支持FinTS的银行导入财务交易到Firefly III",
   "devices": [
     "/dev/dri",
     "/dev/dri/card0",
@@ -91,6 +91,6 @@
   "slug": "fireflyiii_fints_importer",
   "udev": true,
   "url": "https://ghfast.top/github.com/alexbelgium/hassio-addons",
-  "version": "1.3.0-4",
+  "version": "1.3.0-5",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8080]"
 }

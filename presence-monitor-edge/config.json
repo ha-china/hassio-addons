@@ -1,0 +1,65 @@
+{
+  "name": "Bluetooth Presence Monitor (edge)",
+  "version": "5e75061",
+  "slug": "presence_monitor__edge",
+  "description": "[老王杂谈说]：蓝牙信标、手机和其他蓝牙设备的被动蓝牙存在检测。",
+  "url": "https://ghfast.top/github.com/Limych/addon-presence-monitor",
+  "image": "limych/hassio-presence-monitor-{arch}",
+  "startup": "services",
+  "arch": [
+    "aarch64",
+    "amd64",
+    "armhf",
+    "armv7",
+    "i386"
+  ],
+  "boot": "auto",
+  "host_network": true,
+  "hassio_api": true,
+  "privileged": [
+    "NET_ADMIN"
+  ],
+  "map": [
+    "share:rw"
+  ],
+  "options": {
+    "mqtt": {
+      "broker": "127.0.0.1",
+      "port": 1883,
+      "username": "",
+      "password": "",
+      "topic_root": "presence",
+      "publisher": ""
+    },
+    "known": {
+      "beacons": [],
+      "static": []
+    },
+    "blacklist": []
+  },
+  "schema": {
+    "log_level": "match(^(trace|debug|info|notice|warning|error|fatal)$)?",
+    "mqtt": {
+      "broker": "str",
+      "port": "port",
+      "username": "str",
+      "password": "str",
+      "topic_root": "str",
+      "publisher": "str",
+      "certfile": "str?",
+      "version": "str?"
+    },
+    "known": {
+      "beacons": [
+        "match(^[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}\\s+\\w+$)"
+      ],
+      "static": [
+        "match(^[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}(\\s+\\w+)*$)"
+      ]
+    },
+    "blacklist": [
+      "match(^[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}$)"
+    ],
+    "extra_arguments": "str?"
+  }
+}

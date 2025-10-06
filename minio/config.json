@@ -1,0 +1,53 @@
+{
+  "name": "MINIO",
+  "version": "0.0.1",
+  "slug": "minio",
+  "description": "[老王杂谈说]：来自min.io的MINIO",
+  "url": "https://ghfast.top/github.com/dcmartin/open-horizon/tree/master/services/minio/README.md",
+  "startup": "application",
+  "boot": "auto",
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "panel_admin": true,
+  "panel_icon": "mdi:store-24-hour",
+  "stage": "experimental",
+  "devices": [],
+  "hassio_api": false,
+  "hassio_role": "default",
+  "host_network": true,
+  "homeassistant_api": false,
+  "privileged": [],
+  "timeout": 90,
+  "tmpfs": true,
+  "map": [],
+  "ports": {
+    "9001/tcp": 9001,
+    "9000/tcp": 9000
+  },
+  "ports_description": {
+    "9000/tcp": "MINIO server API",
+    "9001/tcp": "MINIO service API"
+  },
+  "options": {
+    "log_level": "info",
+    "timezone": "America/Los_Angeles",
+    "workspace": "/data/minio",
+    "project": "MyProject"
+  },
+  "schema": {
+    "log_level": "str",
+    "timezone": "str?",
+    "workspace": "str?",
+    "project": "str?",
+    "username": "str?",
+    "password": "str?",
+    "init": "str?"
+  },
+  "environment": {
+    "LOG_FORMAT": "{LEVEL}: {MESSAGE}"
+  },
+  "image": "dcmartin/{arch}-minio",
+  "watchdog": "http://[HOST]:[PORT:9000]/minio/health/live"
+}

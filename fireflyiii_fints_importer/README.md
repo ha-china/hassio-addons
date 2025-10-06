@@ -1,57 +1,100 @@
-# 家庭助理插件：Fireflyiii fints 导入器
+# Home assistant add-on: Fireflyiii fints importer
 
-[![捐赠][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![版本](https://img.shields.io/badge/dynamic/json?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffireflyiii_fints_importer%2Fconfig.json)
-![Ingress](https://img.shields.io/badge/dynamic/json?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffireflyiii_fints_importer%2Fconfig.json)
-![架构](https://img.shields.io/badge/dynamic/json?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffireflyiii_fints_importer%2Fconfig.json)
+![Version](https://img.shields.io/badge/dynamic/json?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffireflyiii_fints_importer%2Fconfig.json)
+![Ingress](https://img.shields.io/badge/dynamic/json?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffireflyiii_fints_importer%2Fconfig.json)
+![Arch](https://img.shields.io/badge/dynamic/json?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffireflyiii_fints_importer%2Fconfig.json)
 
-[![Codacy 勋章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
-[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![构建器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20代码%20库)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建者)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有关注我仓库的人！要关注，请点击下图，然后就会在右上角。谢谢！_
+_感谢所有给我仓库点赞的人！点击下面的图片给仓库点赞，它就会出现在右上角。谢谢！_
 
-[![关注者名单 @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载演变](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/fireflyiii_fints_importer/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/fireflyiii_fints_importer/stats.png)
 
 ## 关于
 
-["Firefly III"](https://www.firefly-iii.org) 是一个（自托管）个人财务管理工具。它可以帮助你跟踪支出和收入，让你花费更少、储蓄更多。此工具允许你将支持 FinTS 的银行的交易导入到 Firefly III。它提供了一个网络 GUI，引导你完成整个过程。
+["Firefly III"](https://www.firefly-iii.org) 是一个（自托管）的个人财务管理工具。它可以帮助您跟踪支出和收入，以便您少花钱多储蓄。这个工具允许您将来自支持 FinTS 协议的银行的交易导入 Firefly III。它附带一个 Web GUI，引导您完成整个过程。
 
-此插件基于 Docker 镜像 [https://hub.docker.com/r/benkl/firefly-iii-fints-importer](https://hub.docker.com/r/benkl/firefly-iii-fints-importer)
+这个插件基于以下 Docker 镜像：https://hub.docker.com/r/benkl/firefly-iii-fints-importer
 
 ## 配置
 
-请阅读官方文档以获取设置信息： [https://github.com/bnw/firefly-iii-fints-importer](https://github.com/bnw/firefly-iii-fints-importer)
+Web UI 可以在 <http://homeassistant:3476> 找到。
 
-可以在 `/config/addons_config/fireflyiii_fints_importer/` 文件夹中添加配置，详见： [https://github.com/bnw/firefly-iii-fints-importer#storing-configurations](https://github.com/bnw/firefly-iii-fints-importer#storing-configurations)
+这个工具允许您将来自支持 FinTS 协议的银行（主要是德国银行）的交易导入 Firefly III。
 
-### 定时任务
+### 配置步骤
 
-通过选择周期可以激活一个定期运行所有配置的定时任务。请注意，周期 `daily2`、`daily4` 等在早上 2 点、4 点等运行，因此你可以选择更新小时。
+1. 确保您有一个运行的 Firefly III 实例
+2. 访问 Web 界面以配置银行连接
+3. 为每个银行账户设置导入配置
+4. 如有需要，配置自动导入计划
+
+有关详细配置文档，请参阅：https://github.com/bnw/firefly-iii-fints-importer
+
+### 选项
+
+| 选项 | 类型 | 描述 |
+|------|------|------|
+| `Updates` | 列表 | 自动导入计划（每小时、每日2次、每日4次、每日6次、每日8次、每日10次、每日12次、每周） |
+| `silent` | 布尔 | 抑制调试消息 |
+
+### 示例配置
+
+```yaml
+Updates: ["daily6"]  # 每天早上6点运行
+silent: false
+```
+
+### 自动导入计划
+
+`Updates` 选项允许您安排自动导入：
+
+- `hourly`: 每小时
+- `daily2`: 每天早上2点
+- `daily4`: 每天早上4点
+- `daily6`: 每天早上6点
+- `daily8`: 每天早上8点
+- `daily10`: 每天早上10点
+- `daily12`: 每天中午12点
+- `weekly`: 每周（星期天早上2点）
+
+### 配置存储
+
+银行配置和导入设置存储在：
+`/config/addons_config/fireflyiii_fints_importer/`
+
+有关配置文件格式，请参阅：https://github.com/bnw/firefly-iii-fints-importer#storing-configurations
+
+### FinTS 支持
+
+这个导入器支持使用 FinTS（金融交易服务）协议的德国银行。大多数德国主要银行支持 FinTS 进行自动交易检索。
 
 ## 安装
 
-此插件的安装非常简单，与安装其他插件没有区别。
+这个插件的安装非常简单，与其他插件的安装方式类似。
 
-1. 将我的插件仓库添加到您的家庭助理实例中（在监督员插件商店的右上角，或如果您已配置我的 HA，请点击下面的按钮）
-   [![打开你的家庭助理实例并显示添加插件仓库对话框，预填充特定仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-2. 安装此插件。
-3. 点击 `保存` 按钮以保存您的配置。
-4. 根据您的偏好设置插件选项。
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 Supervisor 插件商店的右上角，或点击下面的按钮如果您已经配置了我的 HA）
+   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+2. 安装这个插件。
+3. 点击 `保存` 按钮以存储您的配置。
+4. 根据您的喜好设置插件选项。
 5. 启动插件。
-6. 检查插件的日志以查看一切是否正常。
-7. 打开 webUI 并调整软件选项。
+6. 检查插件的日志以查看是否一切正常。
+7. 打开 Web UI 并调整软件选项。
 
 ## 支持
 
-在 GitHub 上创建问题。
+在 github 上创建问题
 
 ## 插图
 

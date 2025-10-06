@@ -28,8 +28,7 @@ if bashio::config.has_value 'Updates'; then
         bashio::log.info "$FREQUENCY updates"
         echo ""
 
-        for i in $(seq 4 2 12)
-        do
+        for i in $(seq 4 2 12); do
             hour="   $i"
             freqDir="/etc/periodic/daily$i"
             echo "0    ${hour:(-4)}       *       *       *       run-parts \"$freqDir\"" >> /etc/crontabs/root
@@ -39,7 +38,7 @@ if bashio::config.has_value 'Updates'; then
         # Sets cron // do not delete this message
         freqDir="/etc/periodic/${FREQUENCY}"
         cp /templates/cronupdate "$freqDir/"
-        chmod 777 "$freqDir/cronupdate"
+        chmod 755 "$freqDir/cronupdate"
 
         # Sets cron to run with www-data user
         # sed -i 's|root|www-data|g' /etc/crontab
@@ -69,7 +68,7 @@ bashio::log.info "Please wait while the app is loading !"
 
 if bashio::config.true 'silent'; then
     bashio::log.warning "Silent mode activated. Only errors will be shown. Please disable in addon options if you need to debug"
-    php -S 0.0.0.0:8080 /app/index.php >/dev/null
+    php -S 0.0.0.0:8080 /app/index.php > /dev/null
 else
     php -S 0.0.0.0:8080 /app/index.php
 fi

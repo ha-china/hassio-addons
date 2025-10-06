@@ -1,0 +1,323 @@
+{
+  "arch": [
+    "aarch64",
+    "amd64",
+    "i386",
+    "armhf",
+    "armv7"
+  ],
+  "audio": true,
+  "boot": "auto",
+  "description": "[老王杂谈说]：经典运动附加组件，支持本地和远程视频设备",
+  "environment": {
+    "LOG_FORMAT": "{LEVEL}: {MESSAGE}"
+  },
+  "hassio_api": true,
+  "hassio_role": "manager",
+  "homeassistant": "2023.5.4",
+  "homeassistant_api": true,
+  "host_network": true,
+  "image": "dcmartin/{arch}-addon-motion-video0",
+  "ingress": true,
+  "ingress_port": 7999,
+  "init": false,
+  "map": [
+    "share:rw",
+    "config:rw"
+  ],
+  "name": "Motion Classic",
+  "options": {
+    "animal": {
+      "ago": 30,
+      "deviation": 1.5,
+      "notify": false,
+      "speak": false,
+      "tune": true
+    },
+    "cameras": [
+      {
+        "icon": "cctv",
+        "name": "wyze-rtsp",
+        "netcam_url": "rtsp://192.168.1.222/live",
+        "type": "netcam",
+        "w3w": [
+          "glass",
+          "grapes",
+          "wiser"
+        ]
+      },
+      {
+        "entity": {
+          "confirmed": true,
+          "critical": true,
+          "entity": "person",
+          "notify": true,
+          "speak": true
+        },
+        "icon": "webcam",
+        "name": "panasonic-http",
+        "netcam_url": "http://192.168.1.162/nphMotionJpeg?Resolution=640x480&Quality=Clarity",
+        "netcam_userpass": "notthesame:astheothers",
+        "type": "netcam",
+        "w3w": [
+          "pushy",
+          "funded",
+          "slick"
+        ]
+      },
+      {
+        "entity": {
+          "confirmed": false,
+          "critical": true,
+          "entity": "person",
+          "notify": true,
+          "speak": true
+        },
+        "icon": "webcam",
+        "name": "reolink-rtsp",
+        "netcam_url": "rtsp://192.168.1.184//h264Preview_01_sub",
+        "netcam_userpass": "another:different",
+        "type": "netcam",
+        "w3w": [
+          "bike",
+          "mice",
+          "zones"
+        ]
+      }
+    ],
+    "device": "",
+    "entity": {},
+    "group": "motion",
+    "latitude": "none",
+    "log_level": "info",
+    "longitude": "none",
+    "media": {
+      "mask": false,
+      "save": true
+    },
+    "mqtt": {
+      "host": "core-mosquitto",
+      "password": "password",
+      "port": "1883",
+      "username": "username"
+    },
+    "overview": {},
+    "person": {
+      "ago": 30,
+      "deviation": 1.5,
+      "notify": false,
+      "speak": false,
+      "tune": true
+    },
+    "timezone": "GMT",
+    "vehicle": {
+      "ago": 30,
+      "deviation": 1.5,
+      "notify": false,
+      "speak": false,
+      "tune": true
+    },
+    "w3w": {
+      "apikey": "APIKEY",
+      "words": "///what.three.words"
+    }
+  },
+  "panel_admin": true,
+  "panel_icon": "mdi:motion-sensor",
+  "panel_title": "Motion-AI",
+  "ports": {
+    "7999/tcp": 7999,
+    "8080/tcp": 8080,
+    "8090/tcp": 8090
+  },
+  "ports_description": {
+    "7999/tcp": "UI and API",
+    "8080/tcp": "Motion UI and API",
+    "8090/tcp": "Camera stream"
+  },
+  "privileged": [
+    "SYS_ADMIN"
+  ],
+  "reload": true,
+  "runtime": {
+    "io.containerd.runc.v2": false,
+    "io.containerd.runtime.v1.linux": false,
+    "nvidia": true,
+    "runc": true
+  },
+  "schema": {
+    "animal": {
+      "ago": "int(30,300)?",
+      "deviation": "float(0.1,6.0)?",
+      "entity": "str?",
+      "notify": "bool?",
+      "speak": "bool?",
+      "tune": "bool?"
+    },
+    "camera_any": "bool?",
+    "camera_restart": "bool?",
+    "cameras": [
+      {
+        "brightness": "int?",
+        "changes": "list(on|off)?",
+        "contrast": "int?",
+        "despeckle": "str?",
+        "device": "str?",
+        "event_gap": "int?",
+        "fov": "int?",
+        "framerate": "int(2,100)?",
+        "height": "int?",
+        "hue": "int?",
+        "icon": "str?",
+        "left": "int(0,100)?",
+        "lightswitch_frames": "int(0,1000)?",
+        "lightswitch_percent": "int(0,100)?",
+        "mac": "str?",
+        "mjpeg_url": "url?",
+        "movie_max_time": "int(1,120)?",
+        "movie_output": "list(off|mp4|mpeg4|3gp)?",
+        "movie_quality": "int(1,100)?",
+        "name": "str",
+        "netcam_url": "str?",
+        "netcam_userpass": "str?",
+        "palette": "int?",
+        "password": "str?",
+        "picture_quality": "int(1,100)?",
+        "port": "port?",
+        "rotate": "int(0,360)?",
+        "saturation": "int?",
+        "still_image_url": "url?",
+        "stream_maxrate": "int(2,100)?",
+        "stream_motion": "list(on|off)?",
+        "stream_quality": "int(10,100)?",
+        "text_scale": "int(1,10)?",
+        "threshold": "int?",
+        "threshold_maximum": "int?",
+        "threshold_percent": "int(0,100)?",
+        "threshold_tune": "list(on|off)?",
+        "top": "int(0,100)?",
+        "type": "list(local|netcam|ftpd|mqtt)",
+        "username": "str?",
+        "userpass": "str?",
+        "w3w": [
+          "str?",
+          "str?",
+          "str?"
+        ],
+        "width": "int?",
+        "words": "str?"
+      }
+    ],
+    "client": "str?",
+    "default": {
+      "brightness": "int?",
+      "changes": "list(on|off)?",
+      "contrast": "int?",
+      "despeckle": "str?",
+      "event_gap": "int?",
+      "fov": "int?",
+      "framerate": "int(2,100)?",
+      "height": "int?",
+      "hue": "int?",
+      "interval": "int(60,86400)?",
+      "lightswitch_frames": "int(0,1000)?",
+      "lightswitch_percent": "int(0,100)?",
+      "minimum_motion_frames": "int(1,300)?",
+      "movie_max_time": "int(1,120)?",
+      "movie_output": "list(off|mp4|3gp|mpeg4|swf|flv|ffv1|mov|mkv|hevc)?",
+      "movie_quality": "int(1,100)?",
+      "netcam_userpass": "str?",
+      "palette": "int?",
+      "password": "str?",
+      "picture_output": "list(off|on|first|best)?",
+      "picture_quality": "int?",
+      "post_capture": "int?",
+      "post_pictures": "list(first|last|best|most|center)?",
+      "pre_capture": "int?",
+      "saturation": "int?",
+      "stream_maxrate": "int(2,100)?",
+      "stream_motion": "list(on|off)?",
+      "stream_quality": "int(10,100)?",
+      "text_scale": "int(1,10)?",
+      "threshold": "int?",
+      "threshold_maximum": "int?",
+      "threshold_percent": "int(0,100)?",
+      "threshold_tune": "list(on|off)?",
+      "type": "list(local|netcam|ftpd|mqtt)?",
+      "username": "str?",
+      "width": "int?"
+    },
+    "device": "str?",
+    "elevation": "int?",
+    "entity": {
+      "ago": "int(30,300)?",
+      "deviation": "float(0.1,6.0)?",
+      "name": "str?",
+      "notify": "bool?",
+      "speak": "bool?",
+      "tune": "bool?"
+    },
+    "format": "list(gif|mp4)?",
+    "group": "str?",
+    "latitude": "float?",
+    "log_file": "str?",
+    "log_level": "str",
+    "log_motion": "int?",
+    "log_motion_level": "list(emergency|alert|critical|error|warn|notice|info|debug|all)?",
+    "log_motion_type": "list(COR|STR|ENC|NET|DBL|EVT|TRK|VID|ALL)?",
+    "log_type": "str?",
+    "longitude": "float?",
+    "media": {
+      "mask": "bool?",
+      "save": "bool?"
+    },
+    "mqtt": {
+      "host": "str?",
+      "password": "str?",
+      "port": "port?",
+      "username": "str?"
+    },
+    "overview": {
+      "apikey": "str?",
+      "image": "str?",
+      "mode": "list(local|hybrid|roadmap|satellite|terrain)?",
+      "zoom": "int(10,22)?"
+    },
+    "password": "str?",
+    "person": {
+      "ago": "int(30,300)?",
+      "deviation": "float(0.1,6.0)?",
+      "entity": "str?",
+      "notify": "bool?",
+      "speak": "bool?",
+      "tune": "bool?",
+      "user": "str?"
+    },
+    "reload": "bool?",
+    "router_name": "str?",
+    "timezone": "str?",
+    "username": "str?",
+    "vehicle": {
+      "ago": "int(30,300)?",
+      "deviation": "float(0.1,6.0)?",
+      "entity": "str?",
+      "notify": "bool?",
+      "speak": "bool?",
+      "tune": "bool?"
+    },
+    "w3w": {
+      "apikey": "str?",
+      "email": "str?",
+      "words": "str?"
+    }
+  },
+  "slug": "motion-video0",
+  "stage": "stable",
+  "startup": "services",
+  "timeout": 300,
+  "tmpfs": true,
+  "url": "https://ghfast.top/github.com/dcmartin/addon-motion-video0/",
+  "version": "0.13.2",
+  "video": true,
+  "webui": "http://[HOST]:[PORT:7999]/"
+}

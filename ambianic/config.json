@@ -1,0 +1,195 @@
+{
+  "name": "Ambianic Edge",
+  "stage": "stable",
+  "version": "1.7.1",
+  "slug": "ambianic",
+  "description": "[老王杂谈说]：Ambianic 边缘人工智能",
+  "url": "https://ghfast.top/github.com/dcmartin/addon-ambianic",
+  "startup": "services",
+  "boot": "auto",
+  "arch": [
+    "aarch64",
+    "amd64",
+    "armv7"
+  ],
+  "devices": [],
+  "hassio_api": true,
+  "hassio_role": "default",
+  "host_network": true,
+  "homeassistant_api": true,
+  "timeout": 90,
+  "options": {
+    "log_level": "info",
+    "timezone": "America/Los_Angeles",
+    "workspace": "/data/ambianic",
+    "ai_models": [
+      {
+        "name": "mobilenet_v2_coco",
+        "type": "video",
+        "entity": "object",
+        "top_k": 10,
+        "labels": "coco",
+        "tflite": "mobilenet_ssd_v2_coco_quant_postprocess"
+      },
+      {
+        "name": "mobilenet_v2_face",
+        "type": "video",
+        "entity": "face",
+        "top_k": 2,
+        "labels": "coco",
+        "tflite": "mobilenet_ssd_v2_face_quant_postprocess"
+      }
+    ],
+    "pipelines": [
+      {
+        "name": "pipeline1",
+        "source": "camera1",
+        "type": "video",
+        "action": "detectObject"
+      },
+      {
+        "name": "pipeline1",
+        "type": "video",
+        "action": "saveObject"
+      },
+      {
+        "name": "pipeline1",
+        "source": "camera1",
+        "type": "video",
+        "action": "detectFace"
+      },
+      {
+        "name": "pipeline1",
+        "type": "video",
+        "action": "saveFace"
+      },
+      {
+        "name": "pipeline2",
+        "source": "camera2",
+        "type": "video",
+        "action": "detectObject"
+      },
+      {
+        "name": "pipeline2",
+        "type": "video",
+        "action": "saveObject"
+      },
+      {
+        "name": "pipeline2",
+        "source": "camera2",
+        "type": "video",
+        "action": "detectFace"
+      },
+      {
+        "name": "pipeline2",
+        "type": "video",
+        "action": "saveFace"
+      }
+    ],
+    "actions": [
+      {
+        "name": "detectObject",
+        "act": "detect",
+        "type": "video",
+        "entity": "object",
+        "ai_model": "mobilenet_v2_coco",
+        "confidence": 0.6
+      },
+      {
+        "name": "saveObject",
+        "act": "save",
+        "type": "video",
+        "entity": "object",
+        "interval": 2,
+        "idle": 600
+      },
+      {
+        "name": "detectFace",
+        "act": "detect",
+        "type": "video",
+        "entity": "face",
+        "ai_model": "mobilenet_v2_face",
+        "confidence": 0.6
+      },
+      {
+        "name": "saveFace",
+        "act": "save",
+        "type": "video",
+        "entity": "face",
+        "interval": 2,
+        "idle": 600
+      }
+    ],
+    "sources": [
+      {
+        "name": "camera1",
+        "uri": "http://192.168.1.163/img/snapshot.cgi",
+        "type": "image",
+        "live": true
+      },
+      {
+        "name": "camera2",
+        "uri": "http://192.168.1.166/img/snapshot.cgi",
+        "type": "image",
+        "live": true
+      }
+    ]
+  },
+  "schema": {
+    "log_level": "str",
+    "workspace": "str",
+    "group": "str?",
+    "device": "str?",
+    "timezone": "str?",
+    "ai_models": [
+      {
+        "name": "str",
+        "type": "list(video|audio)",
+        "top_k": "int(1,100)?",
+        "entity": "str",
+        "labels": "str?",
+        "tflite": "str"
+      }
+    ],
+    "pipelines": [
+      {
+        "name": "str?",
+        "source": "str?",
+        "type": "list(video|audio)",
+        "action": "str?"
+      }
+    ],
+    "actions": [
+      {
+        "name": "str",
+        "act": "list(detect|save|send|publish)",
+        "type": "list(video|audio)?",
+        "payload": "list(mp4|jpeg|wav|json)?",
+        "entity": "list(object|face)",
+        "ai_model": "str?",
+        "confidence": "float?",
+        "interval": "int?",
+        "idle": "int?"
+      }
+    ],
+    "sources": [
+      {
+        "name": "str",
+        "type": "list(video|image|audio)",
+        "uri": "str",
+        "live": "bool",
+        "framerate": "int(2,30)?",
+        "refresh": "int(1,120)?",
+        "duration": "int(1,60)?",
+        "quality": "int(1,100)?",
+        "rotate": "list(90|180|270)?",
+        "width": "int?",
+        "height": "int?"
+      }
+    ]
+  },
+  "environment": {
+    "LOG_FORMAT": "{LEVEL}: {MESSAGE}"
+  },
+  "image": "dcmartin/{arch}-addon-ambianic"
+}
