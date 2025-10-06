@@ -1,5 +1,5 @@
 name: chrony
-version: 5.2.1
+version: 5.2.2
 slug: chrony
 description: '[老王杂谈说]：一个用于相机等的本地NTP（网络时间协议）服务器'
 url: https://ghfast.top/github.com/hassio-addons/addon-chrony

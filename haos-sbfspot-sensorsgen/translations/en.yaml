@@ -1,0 +1,126 @@
+---
+configuration:
+  Make_Sensors:
+    name: Generate Second Inverter
+    description: >-
+      Enable Sensor creation - Second Inverter - MQTT discovery Topics and messages for HAOS-SBFspot
+  Make_Third:
+    name: Generate Third Inverter
+    description: >-
+      Enable Sensor creation - Third Inverter - MQTT discovery Topics and messages for HAOS-SBFspot
+  Test_Msg:
+    name: Test Message
+    description: >-
+      Test Message with All MQTT_Data Items. These Messages Will Self Configure based on Inverter details.
+  MQTT_Data:
+    name: MQTT Data Triggers. Add or remove desired options. This is the Complete list by default.
+    description: >-
+      Lists on the README >> PrgVersion,Plantname,InvSerial,InvName,InvSwVer,InvClass,etc,etc
+  Send_Message_One:
+    name: Send Message One
+    description: >-
+      Create your desired message for Testing.
+  Message1:
+    name: Message 1 format Very Important '{"Key1":"Value1", "Key2":"Value2", "Key3":"Value3", "ETC":"Ectetera"}'
+    description: >-
+      '{"Plantname": "Your_Plantname", "Timestamp": "2025-09-29T13:40:04+1000", "InvSerial": "2120108811", "EToday": "6334", "ETotal": "75462350"}'
+  Send_Message1:
+    name: Message 1 Enable
+    description: >-
+      Toggle messages. They require InvSerial being set to trigger.
+  Send_Message_Two:
+    name: Send Message Two for Inverter 2
+    description: >-
+      Create your desired message for Testing. Replace Plantname2 and InvSerial2 with your Values
+  Message2:
+    name: Message 2 format Very Important '{"Key1":"Value1", "Key2":"Value2", "Key3":"Value3", "ETC":"Ectetera"}'
+    description: >-
+      '{"Plantname": "Plantname2", "Timestamp": "2025-09-29T13:40:04+1000", "InvSerial": "InvSerial2", "EToday": "6334", "ETotal": "75462350"}'
+  Send_Message2:
+    name: Message 2 Enable
+    description: >-
+      If you don't set Plantname2, it should auto create. They require InvSerial2 being set to trigger.
+  Send_Message_Three:
+    name: Send Message Three for Inverter 3
+    description: >-
+      replace Plantname2 and InvSerial2 with your Values, Create your desired message for Testing.
+  Message3:
+    name: Message 3 format Very Important '{"Key1":"Value1", "Key2":"Value2", "Key3":"Value3", "ETC":"Ectetera"}'
+    description: >-
+      '{"Plantname": "Plantname3", "Timestamp": "2025-09-29T13:40:04+1000", "InvSerial": "InvSerial3", "EToday": "6334", "ETotal": "75462350"}'
+  Send_Message3:
+    name: Message 3 Enable
+    description: >-
+      If you don't set Plantname3, it should auto create. They require InvSerial3 being set to trigger.
+  InvName:
+    name: Inverter One name {InvName}
+    description: >-
+      Usually auto gen by SBFspot, you can use it to name your MQTT device in HA.
+  InvSerial:
+    name: Primary Inverter Serial No.
+    description: >-
+      Required to create and trigger Message One.
+  Plantname:
+    name: Plantname - Primary Inverter  > Very Important
+    description: >-
+      Plantname, required for setting Main MQTT topic.
+  InvName2:
+    name: Second Inverter Name {InvName2}
+    description: >-
+      Not overly important. Useful for setting MQTT device name in HA.
+  InvSerial2:
+    name: Serial Two - Second Inverter {InvSerial2}
+    description: >-
+      Links you MQTT messages to Inverter 2. Triggers Message 2 when enabled
+  Plantname2:
+    name: Plantname Two. {Plantname2}
+    description: >-
+      Very Important, Will AutoGen if Blank to First {Plantname}_Inverter2
+  InvSwVer2:
+    name: Firmware version - Inverter 2 {InvSwVer2}
+    description: >-
+      12.35.45 is the typical format. Aesthetic Only. SBFspot should populate it
+  InvType2:
+    name: model-number - Inverter 2 {InvType2}
+    description: >-
+      Set your Inverter 2 model number. Aesthetic Only. SBFspot should populate it
+  InvClass2:
+    name: Defines "Solar Inverter" for Inverter 2 {InvClass2}
+    description: >-
+      Defines your Equipment. Aesthetic Only. SBFspot should populate it
+  InvName3:
+    name: Third Inverter Name {InvName3}
+    description: >-
+      Not overly important. Useful for setting MQTT device name in HA.
+  InvSerial3:
+    name: Third Inverter Serial, {InvSerial3}
+    description: >-
+      Important. Links you MQTT messages to Inverter 3. Triggers Message 3 when enabled
+  Plantname3:
+    name: Plantname Three. {Plantname3}
+    description: >-
+      Very Important, Will AutoGen if Blank to First {Plantname}_Inverter3
+  InvSwVer3:
+    name: Firmware version - Inverter 3 {InSwVer3}
+    description: >-
+      12.35.45 is the typical format. Aesthetic Only. SBFspot should populate it
+  InvType3:
+    name: model-number - Inverter 3
+    description: >-
+      Set your Inverter 3 model number. Aesthetic Only. SBFspot should populate it
+  InvClass3:
+    name: Defines "Solar Inverter" - Inverter 3
+    description: >-
+      Defines your Equipment. Aesthetic Only. SBFspot should populate it
+  MQTT_Host:
+    name: MQTT Host
+    description: >-
+      core-mosquitto is default for HA. MQTT host IP or Hostname.
+  MQTT_User:
+    name: MQTT User !secret mqtt_user is default!
+    description: >-
+      MQTT username. Defaults to !secret mqtt_user if blank! Required for Sensor setup.
+  MQTT_Pass:
+    name: MQTT Pass !secret mqtt_pass is default!
+    description: >-
+      MQTT password. Defaults to !secret mqtt_pass if blank! Required for Sensor setup.

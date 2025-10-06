@@ -1,6 +1,6 @@
 # Home Assistant Add-on: Pocket ID
 
-基于 [Pocket ID](https://pocket-id.org/) 的 OIDC 的 Home Assistant 插件，用于通过 OIDC 进行密钥认证。
+Home Assistant 插件，用于通过 OIDC 基于Pocket ID进行密钥认证。
 
 ## 关于
 

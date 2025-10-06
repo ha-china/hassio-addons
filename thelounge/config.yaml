@@ -1,7 +1,7 @@
 name: The Lounge
-version: 0.21.1
+version: 0.21.2
 slug: thelounge
-description: '[老王杂谈说]：一个自托管的网页IRC客户端'
+description: '[老王杂谈说]：一个自托管网页IRC客户端'
 url: https://ghfast.top/github.com/hassio-addons/addon-thelounge
 codenotary: codenotary@frenck.dev
 arch:

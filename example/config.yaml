@@ -1,7 +1,7 @@
 name: Example
-version: 11.0.2
+version: 11.0.3
 slug: example
-description: '[老王杂谈说]：社区家庭助手附加组件的示例附加组件'
+description: '[老王杂谈说]：社区家庭助手插件示例'
 url: https://ghfast.top/github.com/hassio-addons/addon-example
 codenotary: codenotary@frenck.dev
 init: false

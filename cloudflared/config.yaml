@@ -1,7 +1,8 @@
 name: Cloudflared
-version: 5.3.9
+version: 6.0.1
 breaking_versions:
   - 5.3.7
+  - 6.0.0
 slug: cloudflared
 description: '[老王杂谈说]：使用 Cloudflare Tunnel 远程连接 Home Assistant 而无需打开任何端口'
 url: https://ghfast.top/github.com/brenner-tobias/addon-cloudflared/
@@ -19,7 +20,6 @@ map:
 options:
   external_hostname: ''
   additional_hosts: []
-  use_builtin_proxy: true
 ports:
   36500/tcp: null
 schema:
@@ -31,7 +31,6 @@ schema:
   tunnel_name: str?
   catch_all_service: str?
   nginx_proxy_manager: bool?
-  use_builtin_proxy: bool?
   tunnel_token: str?
   post_quantum: bool?
   run_parameters:

@@ -1,7 +1,7 @@
 name: SQLite Web
-version: 4.4.0
+version: 4.4.1
 slug: sqlite-web
-description: 探索你的SQLite数据库
+description: '[老王杂谈说]：探索你的SQLite数据库'
 url: https://ghfast.top/github.com/hassio-addons/addon-sqlite-web/tree/main/README.md
 codenotary: codenotary@frenck.dev
 ingress: true
@@ -9,12 +9,12 @@ advanced: true
 init: false
 panel_icon: mdi:database
 arch:
-- aarch64
-- amd64
-- armv7
+  - aarch64
+  - amd64
+  - armv7
 map:
-- homeassistant_config:rw
-- share:rw
+  - homeassistant_config:rw
+  - share:rw
 schema:
   database: str?
 image: ghcr.nju.edu.cn/hassio-addons/sqlite-web/{arch}

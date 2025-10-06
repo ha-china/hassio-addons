@@ -1,7 +1,7 @@
 name: ZeroTier One
-version: 0.23.0
+version: 0.23.1
 slug: zerotier
-description: '[老王杂谈说]：用一种在任何地方都一样工作的虚拟网络层，从根本上简化您的网络'
+description: '[老王杂谈说]：用一种在任何地方都一样工作的虚拟网络层来彻底简化您的网络'
 url: https://ghfast.top/github.com/hassio-addons/addon-zerotier
 codenotary: codenotary@frenck.dev
 startup: services

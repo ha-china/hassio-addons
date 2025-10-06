@@ -1,0 +1,79 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+sleep 8
+set -e
+declare -a options
+
+CONFIG_PATH=/data/options.json
+
+MQTT_Host="$(bashio::config 'MQTT_Host' 'core-mosquitto')"
+MQTT_User="$(bashio::config 'MQTT_User')"
+MQTT_Pass="$(bashio::config 'MQTT_Pass')"
+MQTT_Topic="$(bashio::config 'MQTT_Topic')"
+MQTT_Data="$(bashio::config 'MQTT_Data')"
+
+PLANTNAME="$(bashio::config 'Plantname')"
+InvSerial="$(bashio::config 'InvSerial')"
+
+PLANTNAME2="$(bashio::config 'Plantname2' "${PLANTNAME}_Inverter2")"
+InvSerial2="$(bashio::config 'InvSerial2')"
+
+PLANTNAME3="$(bashio::config 'Plantname3' "${PLANTNAME}_Inverter3")"
+InvSerial3="$(bashio::config 'InvSerial3')"
+
+current_timestamp=$(date +'%Y-%m-%dT%H:%M:%S%z')
+timestamp=$(date +'%Y-%m-%dT%H:%M:%S%z')
+
+bashio::log.yellow "$timestamp" is the current_timestamp
+
+bashio::log.cyan "${InvSerial}"
+bashio::log.green "${InvSerial2}"
+bashio::log.yellow "${InvSerial3}"
+
+bashio::log.cyan "$PLANTNAME"
+bashio::log.magenta "$PLANTNAME2"
+bashio::log.yellow "$PLANTNAME3"
+
+
+#############################################
+
+if bashio::config.true 'Test_Msg'; then
+
+        FakeMsg1="{\"PrgVersion\": \"3100\",\"Plantname\": \"SNA5000\",\"Timestamp\": \"$current_timestamp\",\"SunRise\": \"$current_timestamp\",\"SunSet\": \"$current_timestamp\",\"InvSerial\": \"2120108811\",\"InvName\": \"SN: 2120108811\",\"InvTime\": \"$current_timestamp\",\"InvStatus\": \"Ok\",\"InvSwVer\": \"031037R\",\"InvClass\": \"Solar Inverters\",\"InvType\": \"SB 5000TL-20\",\"InvTemperature\": \"0000\",\"InvGridRelay\": \"Information not available\",\"EToday\": \"6334\",\"ETotal\": \"75462350\",\"GridFreq\": \"2000\",\"PACTot\": \"0.000\",\"PAC1\": \"0000\",\"UAC1\": \"0000\",\"IAC1\": \"0000\",\"OperTm\": \"59117104\",\"FeedTm\": \"57784924\",\"PDCTot\": \"0000\",\"UDC1\": \"0000\",\"UDC2\": \"0000\",\"IDC1\": \"22\",\"IDC2\": \"454\",\"PDC1\": \"465400\",\"PDC2\": \"55000\",\"BTSignal\": \"68627\",\"InvWakeupTm\": \"$current_timestamp\",\"InvSleepTm\": \"$current_timestamp\"}"
+
+        if bashio::config.has_value 'InvSerial'; then
+                bashio::log.red "Sending Test Message for First Inverter..."
+
+                bashio::log.green /usr/bin/mosquitto_pub -h "$MQTT_Host" -u "$MQTT_User" -P "$MQTT_Pass" -t homeassistant/sbfspot_"$PLANTNAME"/sbfspot_"$InvSerial" -m "{\"PrgVersion\": \"3100\",\"Plantname\": \"SNA5000\",\"Timestamp\": \"$current_timestamp\",\"SunRise\": \"$current_timestamp\",\"SunSet\": \"$current_timestamp\",\"InvSerial\": \"2120108811\",\"InvName\": \"SN: 2120108811\",\"InvTime\": \"$current_timestamp\",\"InvStatus\": \"Ok\",\"InvSwVer\": \"031037R\",\"InvClass\": \"Solar Inverters\",\"InvType\": \"SB 5000TL-20\",\"InvTemperature\": \"0000\",\"InvGridRelay\": \"Information not available\",\"EToday\": \"6334\",\"ETotal\": \"75462350\",\"GridFreq\": \"2000\",\"PACTot\": \"0.000\",\"PAC1\": \"0000\",\"UAC1\": \"0000\",\"IAC1\": \"0000\",\"OperTm\": \"59117104\",\"FeedTm\": \"57784924\",\"PDCTot\": \"0000\",\"UDC1\": \"0000\",\"UDC2\": \"0000\",\"IDC1\": \"22\",\"IDC2\": \"454\",\"PDC1\": \"465400\",\"PDC2\": \"55000\",\"BTSignal\": \"68627\",\"InvWakeupTm\": \"$current_timestamp\",\"InvSleepTm\": \"$current_timestamp\"}" -d
+
+                /usr/bin/mosquitto_pub -h "$MQTT_Host" -u "$MQTT_User" -P "$MQTT_Pass" -t homeassistant/sbfspot_"$PLANTNAME"/sbfspot_"$InvSerial" -m "$FakeMsg1" -d
+
+        fi
+
+ #########################################
+
+        FakeMsg2="{\"PrgVersion\": \"3100\",\"Plantname\": \"SNA5000\",\"Timestamp\": \"$current_timestamp\",\"SunRise\": \"$current_timestamp\",\"SunSet\": \"$current_timestamp\",\"InvSerial\": \"2120108811\",\"InvName\": \"SN: 2120108811\",\"InvTime\": \"$current_timestamp\",\"InvStatus\": \"Ok\",\"InvSwVer\": \"031037R\",\"InvClass\": \"Solar Inverters\",\"InvType\": \"SB 5000TL-20\",\"InvTemperature\": \"0000\",\"InvGridRelay\": \"Information not available\",\"EToday\": \"6334\",\"ETotal\": \"75462350\",\"GridFreq\": \"2000\",\"PACTot\": \"0.000\",\"PAC1\": \"0000\",\"UAC1\": \"0000\",\"IAC1\": \"0000\",\"OperTm\": \"59117104\",\"FeedTm\": \"57784924\",\"PDCTot\": \"0000\",\"UDC1\": \"0000\",\"UDC2\": \"0000\",\"IDC1\": \"22\",\"IDC2\": \"454\",\"PDC1\": \"465400\",\"PDC2\": \"55000\",\"BTSignal\": \"68627\",\"InvWakeupTm\": \"$current_timestamp\",\"InvSleepTm\": \"$current_timestamp\"}"
+
+        if bashio::config.has_value 'InvSerial2'; then
+                bashio::log.red "Sending Test Message for Second Inverter..."
+
+                bashio::log.red /usr/bin/mosquitto_pub -h "$MQTT_Host" -u "$MQTT_User" -P "$MQTT_Pass" -t homeassistant/sbfspot_"$PLANTNAME"/sbfspot_"$InvSerial2" -m "{\"PrgVersion\": \"3100\",\"Plantname\": \"SNA5000\",\"Timestamp\": \"$current_timestamp\",\"SunRise\": \"$current_timestamp\",\"SunSet\": \"$current_timestamp\",\"InvSerial\": \"2120108811\",\"InvName\": \"SN: 2120108811\",\"InvTime\": \"$current_timestamp\",\"InvStatus\": \"Ok\",\"InvSwVer\": \"031037R\",\"InvClass\": \"Solar Inverters\",\"InvType\": \"SB 5000TL-20\",\"InvTemperature\": \"0000\",\"InvGridRelay\": \"Information not available\",\"EToday\": \"6334\",\"ETotal\": \"75462350\",\"GridFreq\": \"2000\",\"PACTot\": \"0.000\",\"PAC1\": \"0000\",\"UAC1\": \"0000\",\"IAC1\": \"0000\",\"OperTm\": \"59117104\",\"FeedTm\": \"57784924\",\"PDCTot\": \"0000\",\"UDC1\": \"0000\",\"UDC2\": \"0000\",\"IDC1\": \"22\",\"IDC2\": \"454\",\"PDC1\": \"465400\",\"PDC2\": \"55000\",\"BTSignal\": \"68627\",\"InvWakeupTm\": \"$current_timestamp\",\"InvSleepTm\": \"$current_timestamp\"}" -d
+
+                /usr/bin/mosquitto_pub -h "$MQTT_Host" -u "$MQTT_User" -P "$MQTT_Pass" -t homeassistant/sbfspot_"$PLANTNAME"/sbfspot_"$InvSerial2" -m "$FakeMsg2" -d
+
+        fi
+
+ ##########################################
+
+        FakeMsg3="{\"PrgVersion\": \"3100\",\"Plantname\": \"SNA5000\",\"Timestamp\": \"$current_timestamp\",\"SunRise\": \"$current_timestamp\",\"SunSet\": \"$current_timestamp\",\"InvSerial\": \"2120108811\",\"InvName\": \"SN: 2120108811\",\"InvTime\": \"$current_timestamp\",\"InvStatus\": \"Ok\",\"InvSwVer\": \"031037R\",\"InvClass\": \"Solar Inverters\",\"InvType\": \"SB 5000TL-20\",\"InvTemperature\": \"0000\",\"InvGridRelay\": \"Information not available\",\"EToday\": \"6334\",\"ETotal\": \"75462350\",\"GridFreq\": \"2000\",\"PACTot\": \"0.000\",\"PAC1\": \"0000\",\"UAC1\": \"0000\",\"IAC1\": \"0000\",\"OperTm\": \"59117104\",\"FeedTm\": \"57784924\",\"PDCTot\": \"0000\",\"UDC1\": \"0000\",\"UDC2\": \"0000\",\"IDC1\": \"22\",\"IDC2\": \"454\",\"PDC1\": \"465400\",\"PDC2\": \"55000\",\"BTSignal\": \"68627\",\"InvWakeupTm\": \"$current_timestamp\",\"InvSleepTm\": \"$current_timestamp\"}"
+
+        if bashio::config.has_value 'InvSerial3'; then
+                bashio::log.blue "Sending Test Message for Third Inverter..."
+
+                bashio::log.blue /usr/bin/mosquitto_pub -h "$MQTT_Host" -u "$MQTT_User" -P "$MQTT_Pass" -t homeassistant/sbfspot_"$PLANTNAME"/sbfspot_"$InvSerial3" -m "{\"PrgVersion\": \"3100\",\"Plantname\": \"SNA5000\",\"Timestamp\": \"$current_timestamp\",\"SunRise\": \"$current_timestamp\",\"SunSet\": \"$current_timestamp\",\"InvSerial\": \"2120108811\",\"InvName\": \"SN: 2120108811\",\"InvTime\": \"$current_timestamp\",\"InvStatus\": \"Ok\",\"InvSwVer\": \"031037R\",\"InvClass\": \"Solar Inverters\",\"InvType\": \"SB 5000TL-20\",\"InvTemperature\": \"0000\",\"InvGridRelay\": \"Information not available\",\"EToday\": \"6334\",\"ETotal\": \"75462350\",\"GridFreq\": \"2000\",\"PACTot\": \"0.000\",\"PAC1\": \"0000\",\"UAC1\": \"0000\",\"IAC1\": \"0000\",\"OperTm\": \"59117104\",\"FeedTm\": \"57784924\",\"PDCTot\": \"0000\",\"UDC1\": \"0000\",\"UDC2\": \"0000\",\"IDC1\": \"22\",\"IDC2\": \"454\",\"PDC1\": \"465400\",\"PDC2\": \"55000\",\"BTSignal\": \"68627\",\"InvWakeupTm\": \"$current_timestamp\",\"InvSleepTm\": \"$current_timestamp\"}" -d
+
+                /usr/bin/mosquitto_pub -h "$MQTT_Host" -u "$MQTT_User" -P "$MQTT_Pass" -t homeassistant/sbfspot_"$PLANTNAME"/sbfspot_"$InvSerial3" -m "$FakeMsg3" -d
+
+        fi
+fi

@@ -6,11 +6,11 @@
 
 [![Buy me a coffee][buymeacoffee-shield]][buymeacoffee]
 
-一个自托管的网页IRC客户端。
+一个自托管的网络IRC客户端。
 
 ## 关于
 
-一个自托管的网页IRC客户端，使用现代且美观的界面，支持主题定制、推送通知、链接预览、文件上传等功能。完全跨平台，并且对移动设备友好。
+一个自托管的网络IRC客户端，使用现代化的界面，支持主题、推送通知、链接预览、文件上传等功能。完全跨平台，支持移动设备。
 
 ![截图][screenshot]
 
@@ -27,7 +27,7 @@
 [midnight-theme]: https://raw.githubusercontent.com/timmo001/thelounge/master/docs/resources/midnight-theme.png
 [more-info-light]: https://raw.githubusercontent.com/timmo001/thelounge/master/docs/resources/more-info-light.png
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v0.21.1-blue.svg
-[release]: https://github.com/hassio-addons/addon-thelounge/tree/v0.21.1
+[release-shield]: https://img.shields.io/badge/version-v0.21.2-blue.svg
+[release]: https://github.com/hassio-addons/addon-thelounge/tree/v0.21.2
 [screenshot]: https://raw.githubusercontent.com/hassio-addons/addon-thelounge/master/images/screenshot.png
 [thelounge]: https://github.com/timmo001/thelounge

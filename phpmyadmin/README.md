@@ -12,9 +12,9 @@
 
 ## 关于
 
-phpMyAdmin 是一个用于 MySQL & MariaDB 的数据库管理工具。常用操作（如管理数据库、表、列、关系、索引、用户、权限等）可以通过用户界面进行，同时您仍然可以直接执行任何 SQL 语句。
+phpMyAdmin 是一个用于 MySQL & MariaDB 的数据库管理工具。常用的操作（管理数据库、表格、列、关系、索引、用户、权限等）可以通过用户界面进行，同时您仍然可以直接执行任何 SQL 语句。
 
-这个插件特别设计用于管理官方 Home Assistant MariaDB 插件。
+这个插件是专门设计用来管理官方 Home Assistant MariaDB 插件的。
 
 ![phpMyAdmin 截图][screenshot]
 
@@ -28,6 +28,6 @@ phpMyAdmin 是一个用于 MySQL & MariaDB 的数据库管理工具。常用操�
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.12.0-blue.svg
-[release]: https://github.com/hassio-addons/addon-phpmyadmin/tree/v0.12.0
+[release-shield]: https://img.shields.io/badge/version-v0.12.1-blue.svg
+[release]: https://github.com/hassio-addons/addon-phpmyadmin/tree/v0.12.1
 [screenshot]: https://github.com/hassio-addons/addon-phpmyadmin/raw/main/images/screenshot.png

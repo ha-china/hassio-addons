@@ -8,21 +8,20 @@
 
 [![Support Frenck on Patreon][patreon-shield]][patreon]
 
-Centrally manage all your Sonoff-Tasmota devices.
+集中管理您所有的 Sonoff-Tasmota 设备。
 
-## About
+## 关于
 
-TasmoAdmin (formerly known as SonWEB) is an administrative web interface to
-manage all your Sonoff-Tasmota flashed devices centrally.
-Some of its features:
+TasmoAdmin（曾被称为 SonWEB）是一个管理您所有已刷入 Sonoff-Tasmota 设备的集中式管理网页界面。
+它的部分功能包括：
 
-- Scans your networks and adds your devices automatically
-- See the status off all your devices quick and easy
-- Configure all your devices from a single place
-- Send out firmware updates over the air to one or more your devices at once
-- Can automatically download the latest firmware for you
+- 扫描您的网络并自动添加您的设备
+- 快速轻松地查看所有设备的状态
+- 从一个地方配置所有设备
+- 一次性通过无线方式向一个或多个设备发送固件更新
+- 可自动为您下载最新固件
 
-![TasmoAdmin screenshot][screenshot]
+![TasmoAdmin 截图][screenshot]
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -34,6 +33,6 @@ Some of its features:
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.32.0-blue.svg
-[release]: https://github.com/hassio-addons/addon-tasmoadmin/tree/v0.32.0
+[release-shield]: https://img.shields.io/badge/version-v0.32.1-blue.svg
+[release]: https://github.com/hassio-addons/addon-tasmoadmin/tree/v0.32.1
 [screenshot]: https://github.com/hassio-addons/addon-tasmoadmin/raw/main/images/screenshot.png

@@ -1,3 +1,99 @@
+## 3.0.0-alpha.93 (2025-10-05)
+
+### 🐛 Fixes
+
+- log but avoid crash for invalid device errors ([df983ed](https://github.com/t0bst4r/home-assistant-matter-hub/commit/df983ed))
+- ⚠️  Do not interpret "unknown" boolean states as "true" matter state ([#856](https://github.com/t0bst4r/home-assistant-matter-hub/pull/856))
+
+### 📚 Documentation Changes
+
+- Add hints for IGMP Snooping issues ([#849](https://github.com/t0bst4r/home-assistant-matter-hub/pull/849))
+
+### 🚧 Chores
+
+- **ci:** switch to arm builds to prevent qemu bug ([1df51a1](https://github.com/t0bst4r/home-assistant-matter-hub/commit/1df51a1))
+
+### ⚠️  Breaking Changes
+
+- This could affect some sensors like water leak or occupancy. Make sure to verify your automations in Alexa, Apple Home, Google Home and others."
+
+### ❤️ Thank You
+
+- chah90 @chah90
+- depahk @depahk
+- Jeffrey Larson @jeffothy
+- t0bst4r @t0bst4r
+
+## 3.0.0-alpha.92 (2025-10-01)
+
+### 🐛 Fixes
+
+- finally fix bigint serialization to be compatible with matter.js ([51f84e1](https://github.com/t0bst4r/home-assistant-matter-hub/commit/51f84e1))
+- introduce an initial start-up delay to make sure home assistant is ready ([0fdb09a](https://github.com/t0bst4r/home-assistant-matter-hub/commit/0fdb09a))
+
+### ❤️ Thank You
+
+- t0bst4r @t0bst4r
+
+## 3.0.0-alpha.91 (2025-09-30)
+
+### 🐛 Fixes
+
+- trying to figure out why serialization works locally but not in docker ([a2c880b](https://github.com/t0bst4r/home-assistant-matter-hub/commit/a2c880b))
+
+### ❤️ Thank You
+
+- t0bst4r @t0bst4r
+
+## 3.0.0-alpha.90 (2025-09-30)
+
+### 🐛 Fixes
+
+- use matter internal serialization to be able to serialize additional types (bigint, etc.) ([#836](https://github.com/t0bst4r/home-assistant-matter-hub/issues/836))
+
+### 🚧 Chores
+
+- **deps:** bump the all-actions group with 3 updates ([30c41fb](https://github.com/t0bst4r/home-assistant-matter-hub/commit/30c41fb))
+- **deps-dev:** bump the all-deps group across 1 directory with 3 updates ([f8e2c33](https://github.com/t0bst4r/home-assistant-matter-hub/commit/f8e2c33))
+
+### ❤️ Thank You
+
+- t0bst4r @t0bst4r
+
+## 3.0.0-alpha.89 (2025-09-30)
+
+### 🐛 Fixes
+
+- resolve dependabot vulnerability checks ([f2aa5ca](https://github.com/t0bst4r/home-assistant-matter-hub/commit/f2aa5ca))
+- **docker:** migrate all docker images to node22 ([0af1d92](https://github.com/t0bst4r/home-assistant-matter-hub/commit/0af1d92))
+
+### 🚧 Chores
+
+- **docs:** add developer documentation ([0501e29](https://github.com/t0bst4r/home-assistant-matter-hub/commit/0501e29))
+
+### ❤️ Thank You
+
+- t0bst4r @t0bst4r
+
+## 3.0.0-alpha.88 (2025-09-29)
+
+### 🐛 Fixes
+
+- cleanup boot sequence and state handling, update all dependencies ([4afb864](https://github.com/t0bst4r/home-assistant-matter-hub/commit/4afb864))
+- ⚠️  remove funding ([#825](https://github.com/t0bst4r/home-assistant-matter-hub/issues/825))
+
+### 🚧 Chores
+
+- merge review fixes ([14c20e4](https://github.com/t0bst4r/home-assistant-matter-hub/commit/14c20e4))
+
+### ⚠️  Breaking Changes
+
+- MAINTAINER WANTED! This project is currently **looking for a new maintainer**. Due to limited time, I can no longer actively maintain it. If you are interested in taking over or co-maintaining, please reach out via GitHub Discussions (#825).
+
+### ❤️ Thank You
+
+- t0bst4r @t0bst4r
+
 ## 3.0.0-alpha.87 (2025-07-09)
 
 ### 🚀 Features

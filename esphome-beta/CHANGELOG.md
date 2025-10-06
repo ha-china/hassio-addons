@@ -1,9 +1,8 @@
-## 2025.9.1
+## 2025.9.3
 
 [**Read release announcement**](https://beta.esphome.io/changelog/2025.9.0)
 
-- [mqtt] Fix KeyError when MQTT logging configured without explicit level [esphome#10774](https://github.com/esphome/esphome/pull/10774) by [@bdraco](https://github.com/bdraco)
-- fix(packet_transport): Add initialization for sensor configuration in packet transport [esphome#10765](https://github.com/esphome/esphome/pull/10765) by [@TMaYaD](https://github.com/TMaYaD)
-- [core] Fix ESP8266 mDNS compilation failure caused by incorrect coroutine priorities [esphome#10773](https://github.com/esphome/esphome/pull/10773) by [@bdraco](https://github.com/bdraco)
-- [gpio] Fix unused function warnings when compiling with log level below DEBUG [esphome#10779](https://github.com/esphome/esphome/pull/10779) by [@bdraco](https://github.com/bdraco)
+- [api] Prevent API from overriding noise encryption keys set in YAML [esphome#10927](https://github.com/esphome/esphome/pull/10927) by [@bdraco](https://github.com/bdraco)
+- [sim800l] Fixed ignoring incoming calls. [esphome#10865](https://github.com/esphome/esphome/pull/10865) by [@vmakeev](https://github.com/vmakeev)
+- [voice_assistant] Fix wakeword string being reset while referenced [esphome#10945](https://github.com/esphome/esphome/pull/10945) by [@abmantis](https://github.com/abmantis)
 

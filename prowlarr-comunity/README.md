@@ -4,15 +4,11 @@
 
 [![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
 
-Indexer manager/proxy built on the popular arr stack to integrate with your various PVR apps.
+基于流行的 arr 堆栈构建的索引器管理器/代理，用于与您的各种 PVR 应用集成。
 
-## About
+## 关于
 
-[Prowlarr] is an indexer manager/proxy built on the popular *arr .net/reactjs
-base stack to integrate with your various PVR apps. Prowlarr supports management
-of both Torrent Trackers and Usenet Indexers. It integrates seamlessly with
-Lidarr, Mylar3, Radarr, Readarr, and Sonarr offering complete management of
-your indexers with no per app Indexer setup required (it does it all).
+[Prowlarr] 是一个基于流行的 *arr .net/reactjs 基础堆栈构建的索引器管理器/代理，用于与您的各种 PVR 应用集成。Prowlarr 支持管理 torrent 跟踪器和 Usenet 索引器。它无缝集成 Lidarr、Mylar3、Radarr、Readarr 和 Sonarr，为您提供完整的索引器管理，无需每个应用单独设置索引器（它全部搞定）。
 
 [Prowlarr]: https://github.com/Prowlarr/Prowlarr
 
@@ -22,5 +18,5 @@ your indexers with no per app Indexer setup required (it does it all).
 [forum]: https://community.home-assistant.io/t/?u=frenck
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2024.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.25.0-blue.svg
-[release]: https://github.com/hassio-addons/addon-prowlarr/tree/v0.25.0
+[release-shield]: https://img.shields.io/badge/version-v0.26.0-blue.svg
+[release]: https://github.com/hassio-addons/addon-prowlarr/tree/v0.26.0

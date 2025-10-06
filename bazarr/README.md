@@ -8,7 +8,7 @@
 
 ## 关于
 
-[Bazarr] 是 [Sonarr] 和 [Radarr] 的一个附属应用程序，它根据你的需求管理和下载字幕。
+[Bazarr] 是 [Sonarr] 和 [Radarr] 的一个附属应用程序，它根据您的要求管理和下载字幕。
 
 [Bazarr]: https://www.bazarr.media/
 [Sonarr]: https://sonarr.tv/
@@ -20,5 +20,5 @@
 [forum]: https://community.home-assistant.io/t/?u=frenck
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.5.1-blue.svg
-[release]: https://github.com/hassio-addons/addon-bazarr/tree/v0.5.1
+[release-shield]: https://img.shields.io/badge/version-v0.5.2-blue.svg
+[release]: https://github.com/hassio-addons/addon-bazarr/tree/v0.5.2
