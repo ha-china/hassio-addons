@@ -1,19 +1,18 @@
 name: Hikvision Doorbell
-description: 连接海康威视门铃到Home Assistant。
-version: '3.0.22'
+description: '[老王杂谈说]：将您的海康威视门铃连接到 Home Assistant'
+version: '3.0.24'
 image: ghcr.nju.edu.cn/pergolafabio/hikvision-doorbell
 slug: hikvision_doorbell
 url: https://ghfast.top/github.com/pergolafabio/Hikvision-Addons/tree/main/doorbell
 arch:
-- amd64
-- i386
-- aarch64
+  - amd64
+  - i386
+  - aarch64
 stage: stable
 startup: application
 boot: auto
 stdin: true
 homeassistant_api: true
-
 # Default options when used as an HA add-on
 options:
   doorbells:
@@ -25,7 +24,6 @@ options:
     log_level: INFO
     sdk_log_level: NONE
   mqtt: {}
-
 # Schema for the options above
 schema:
   doorbells:
@@ -44,8 +42,7 @@ schema:
     port: "int?"
     ssl: "bool?"
     username: "str?"
-    password: "str?"    
-
+    password: "str?"
 # To request MQTT configuration using the supervisor API
 services:
   - "mqtt:need"

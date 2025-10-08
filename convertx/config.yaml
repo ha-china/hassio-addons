@@ -1,9 +1,9 @@
 name: "ConvertX"
-version: "v0.14.1"
-upstream: "v0.14.1"
+version: "v0.15.1"
+upstream: "v0.15.1"
 slug: convertx
-description: >- 
-  一个自托管的在线文件转换器。支持831种不同格式。使用TypeScript、Bun和Elysia编写。
+description: >-
+  [老王杂谈说]：一个自托管的在线文件转换器。支持831种不同的格式。使用TypeScript、Bun和Elysia编写。
 arch:
   - amd64
   - aarch64
