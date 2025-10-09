@@ -1,6 +1,6 @@
-# Home Assistant Add-on: Authelia
+# Home Assistant 添加组件：Authelia
 
-Web应用的单一登录多因素门户
+为Web应用提供的单一登录多因素门户
 
 ## 关于
 
