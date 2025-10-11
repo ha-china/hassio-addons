@@ -1,10 +1,10 @@
 # Ollama 插件 for Home Assistant
 
-请注意，此插件使用 CPU 加速或实验性 Nvidia GPU 支持（如果您使用有效，请报告！）。对于 ROCm，支持仍在等待中。
+请注意，此插件使用 CPU 加速或实验性 Nvidia GPU 支持（如果它对您有效，请报告！）对于 ROCm 的支持仍在等待中。
 
 ## 模型目录
 
-默认情况下，所有下载的模型都存储在 `/share/ollama` 中。由于历史原因，您也可以将其配置为 `/config/ollama`。请确保您有足够的空间可用。
+默认情况下，所有下载的模型都存储在 `/share/ollama`。由于历史原因，您也可以将其配置为 `/config/ollama`。请确保您有足够的空间可用。
 
 ## Ollama 集成
 

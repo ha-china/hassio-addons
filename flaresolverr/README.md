@@ -1,11 +1,9 @@
-## ⚠️ Open Issue : [🐛 [FlareSolverr] Failing at startup after HA update to 2025.9.4 (opened 2025-09-21)](https://github.com/alexbelgium/hassio-addons/issues/2115) by [@xpucu](https://github.com/xpucu)
-
 # Home assistant add-on: Flaresolver
 
 [![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![Version](https://img.shields.io/badge/dynamic/json?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fflaresolverr%2Fconfig.json)
+![Version](https://img.shields.io/badge/dynamic/json?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fflaresolverr%2Fconfig.json)
 ![Ingress](https://img.shields.io/badge/dynamic/json?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fflaresolverr%2Fconfig.json)
 ![Arch](https://img.shields.io/badge/dynamic/json?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fflaresolverr%2Fconfig.json)
 
@@ -30,18 +28,18 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 - 自动绕过 Cloudflare 保护
 - 使用 Firefox 进行无头浏览器自动化
 - 提供RESTful API以与其他工具集成
-- 用于后续请求的Cookie提取
+- 用于后续请求的 Cookie 提取
 - 支持多种 Cloudflare 挑战类型
 
-**注意**：网络浏览器会消耗大量内存。在内存有限的系统上避免发起多个并发请求。
+**注意**：网络浏览器会消耗大量内存。在内存有限的系统上避免并发发送多个请求。
 
 ## 安装
 
-这个插件的安装过程非常简单，与其他插件的安装方式相同。
+这个插件的安装非常简单，与安装其他插件没有什么不同。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的 Supervisor 插件商店中，或如果您已经配置了我的 HA，请点击下面的按钮）
+1. 将我的插件仓库添加到您的 home assistant 实例中（在 supervisor 插件商店的右上角，或者如果您已经配置了我的 HA，请点击下面的按钮）
    [![打开您的 Home Assistant 实例并显示带有特定仓库URL预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此插件。
+1. 安装这个插件。
 1. 点击 `保存` 按钮以保存您的配置。
 1. 启动插件。
 1. 检查插件的日志，看看是否一切正常。
@@ -49,15 +47,15 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 ## 配置
 
 Web 界面可以在 <http://homeassistant:8191> 找到。
-这个插件没有配置选项，开箱即用。
+这个插件没有配置选项 - 它可以直接使用。
 
 ### API 使用
 
-FlareSolverr 提供了一个 REST API 以与其他应用程序集成：
+FlareSolverr 提供了一个 REST API，用于与其他应用程序集成：
 
-**端点**：`http://homeassistant:8191/v1`
+**端点**: `http://homeassistant:8191/v1`
 
-**示例请求**：
+**示例请求**:
 ```json
 {
   "cmd": "request.get",
@@ -69,8 +67,8 @@ FlareSolverr 提供了一个 REST API 以与其他应用程序集成：
 ### 与 *arr 应用的集成
 
 配置您的索引器以使用 FlareSolverr：
-- **Prowlarr/Jackett**：将 FlareSolverr URL 设置为 `http://homeassistant:8191`
-- **Sonarr/Radarr**：配置索引器使用 FlareSolverr 代理
+- **Prowlarr/Jackett**: 将 FlareSolverr URL 设置为 `http://homeassistant:8191`
+- **Sonarr/Radarr**: 配置索引器以使用 FlareSolverr 代理
 
 ### 选项
 
@@ -78,9 +76,9 @@ FlareSolverr 提供了一个 REST API 以与其他应用程序集成：
 
 ### 资源需求
 
-- **内存**：推荐 512MB+
-- **CPU**：在解决挑战时使用适度
-- **网络**：需要互联网访问才能正常工作
+- **内存**: 推荐 512MB+
+- **CPU**: 在解决挑战时使用适度
+- **网络**: 需要互联网访问才能正常工作
 
 ## 支持
 

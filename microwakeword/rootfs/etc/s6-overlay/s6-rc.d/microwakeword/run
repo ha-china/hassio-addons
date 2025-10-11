@@ -11,4 +11,7 @@ if bashio::config.true 'debug_logging'; then
 fi
 
 exec .venv/bin/python3 -m wyoming_microwakeword \
-    --uri 'tcp://0.0.0.0:10400' ${flags[@]}
+    --uri 'tcp://0.0.0.0:10400' \
+    --zeroconf \
+    --custom-model-dir /share/microwakeword \
+    --custom-model-dir wakewords ${flags[@]}

@@ -21,7 +21,7 @@ fi
 bashio::log.info "Defining database"
 case "$(bashio::config "DB_CONNECTION")" in
 
-        # Use MariaDB
+    # Use MariaDB
     mariadb_addon)
         bashio::log.info "Using MariaDB addon. Requirements : running MariaDB addon. Detecting values..."
         if ! bashio::services.available 'mysql'; then
@@ -66,7 +66,6 @@ case "$(bashio::config "DB_CONNECTION")" in
             fi
         done
         ;;
-
 
         # Use remote
     *)

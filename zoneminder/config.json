@@ -5,7 +5,7 @@
     "armv7"
   ],
   "codenotary": "alexandrep.github@gmail.com",
-  "description": "完整的、开源的、最先进的视频监控系统软件。",
+  "description": "[老王杂谈说]：一个功能齐全、开源的、最先进的视频监控软件系统",
   "devices": [
     "/dev/dri",
     "/dev/dri/card0",
@@ -101,6 +101,6 @@
   "slug": "zoneminder",
   "udev": true,
   "url": "https://ghfast.top/github.com/alexbelgium/hassio-addons",
-  "version": "1.36.35",
+  "version": "1.36.36",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:80]/zm"
 }

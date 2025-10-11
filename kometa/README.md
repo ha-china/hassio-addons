@@ -16,7 +16,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有将我的仓库加入星标的人！点击下面的图片将仓库加入星标，它将出现在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它将在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -26,7 +26,7 @@ _感谢所有将我的仓库加入星标的人！点击下面的图片将仓库�
 
 ---
 
-[Kometa](https://kometa.wiki/en/latest/) 是一个 Python 3 脚本，可以通过 YAML 配置文件持续运行，以按计划更新您图书馆中电影、节目和收藏的元数据，并自动根据各种方法构建收藏，所有这些方法都在维基中详细说明。
+[Kometa](https://kometa.wiki/en/latest/) 是一个 Python 3 脚本，可以通过 YAML 配置文件持续运行，以按计划更新您库中电影、节目和集合的元数据，并自动根据各种方法构建集合，所有这些方法都在 wiki 中详细说明。
 
 此插件基于 Docker 镜像 <https://github.com/linuxserver/docker-kometa>
 
@@ -36,19 +36,19 @@ _感谢所有将我的仓库加入星标的人！点击下面的图片将仓库�
 
 此插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 Supervisor 插件商店的右上角，或如果您已配置我的 HA，请点击下面的按钮）
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 supervisor 插件商店的右上角，或如果您已经配置了我的 HA，请点击下面的按钮）
    [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 点击 `保存` 按钮以保存您的配置。
-1. 根据您的偏好设置插件选项
+1. 设置插件选项以符合您的偏好
 1. 启动插件。
 1. 检查插件的日志以查看是否一切正常。
 1. 打开 WebUI 并调整软件选项
 
 ## 配置
 
-有一个 [教程](https://github.com/Kometa-Team/Kometa#setting-up-the-initial-config-file) 可帮助您快速上手。
-更多信息请参阅 [官方维基](https://github.com/Kometa-Team/Kometa)。
+有一个 [快速入门指南](https://github.com/Kometa-Team/Kometa#setting-up-the-initial-config-file) 可帮助您快速上手。
+更多信息请参阅 [官方 wiki](https://github.com/Kometa-Team/Kometa)。
 
 选项可以通过两种方式配置：
 
@@ -67,9 +67,9 @@ KOMETA_NO_MISSING: False #Set to True to run without any of the missing movie/sh
 
 - Config.yaml (高级用法)
 
-附加变量可以通过在 config.yaml 中添加它们来作为 ENV 变量设置，位置根据此指南定义：<https://github.com/alexbelgium/hassio-addons/wiki/Addons-feature:-add-env-variables>
+附加变量可以作为 ENV 变量通过在 config.yaml 中添加它们来设置，根据此指南添加它们： <https://github.com/alexbelgium/hassio-addons/wiki/Addons-feature:-add-env-variables>
 
-完整的 ENV 变量列表可以在这里查看：<https://kometa.wiki/en/latest/kometa/environmental/>
+完整的 ENV 变量列表可以在这里查看： <https://kometa.wiki/en/latest/kometa/environmental/>
 
 ## 支持
 
