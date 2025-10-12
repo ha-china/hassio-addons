@@ -14,7 +14,7 @@ tpeap_install()
 {
   bashio::log.trace "${FUNCNAME[0]}"
 
-  cd /opt/omada/Omada_SDN_Controller_v4.1.5_linux_x64
+  cd /opt/omada/Omada_SDN_Controller_v5.9.31_Linux_x64
   yes YES | bash -x ./install.sh &> /dev/stderr || true
 }
 
@@ -34,7 +34,6 @@ main()
 
   bashio::log.info "Setting TIMEZONE ${VALUE}" >&2
 
-  cp /usr/share/zoneinfo/${VALUE} /etc/localtime
   JSON="${JSON}"',"timezone":"'"${VALUE}"'"'
   # PHAROS
   JSON="${JSON}"',"tpeap":{"port":8088}'
