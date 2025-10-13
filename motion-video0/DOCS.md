@@ -1,38 +1,38 @@
-# ✨ `motion` 经典配置
-`motion` 插件处理视频信息，生成运动检测 JSON 事件、多帧 GIF 动画，以及一个包含检测、分类和注释的代表性帧（注：需要 Open Horizon `yolo4motion` 服务）。此插件设计用于与各种来源配合使用，包括：
+# 🧍 `motion` 经典配置
+`motion` 插件处理视频信息，生成运动检测 JSON 事件、多帧 GIF 动画，以及包含检测、分类和标注实体的代表性帧（注意：需要 Open Horizon `yolo4motion` 服务）。此插件设计用于与多种来源配合使用，包括：
 
 + `3GP` - 运动检测 WebCam（例如 Linksys WCV80n）；通过 `FTP` 社区插件接收
-+ `MJPEG` - 提供运动 JPEG 实时流的网络摄像机
-+ `V4L2` - Linux（v2）视频，用于直接连接的摄像机，例如索尼 PlayStation3 Eye 摄像机或 RaspberryPi v2
++ `MJPEG` - 提供运动 JPEG 实时流的网络摄像头
++ `V4L2` - 视频 Linux（v2）用于直接连接摄像头，例如索尼 PlayStation3 Eye 摄像头或树莓派 v2
 
-此插件的配置关键选项；`_group_`、`_device_` 和 `_camera_` 选项用于标识计算机集合和相关视频源；`MQTT` 中继器是接收此插件消息的**必需**，同时启用 [`motion-ai`](http://github.com/dcmartin/motion-ai) 解决方案。
+此插件的配置关键选项；_组_、_设备_和_摄像头_选项标识计算机集合和相关视频来源；`MQTT` 中继器是**必需**的，用于接收此插件的消息，以及启用 [`motion-ai`](http://github.com/dcmartin/motion-ai) 解决方案。
 
 ## `group`、`device` 和 `client`
-标识符区分集合和个体；摄像机标识符必须在组内唯一。
+标识符区分集合和个体；摄像头标识符必须在组内唯一。
 
 + `group` - 设备集合的标识符；默认：`motion`
 + `device` - 计算机的标识符；默认：无
-+ `client` - 将主题订阅限制为一个或所有（注：`+`）设备
++ `client` - 限制主题订阅到一个或所有（注意：`+`）设备
 
-✅ **标识符** **只能** 包含小写字母 (`a-z`)、数字 (`0-9`) 和下划线 (`_`)。
+⭐ **标识符****只能**包含小写字母（`a-z`）、数字（`0-9`）和下划线（`_`）。
 
 ## `mqtt`
-+ `mqtt.host` - 如果在局域网中使用单个 MQTT 中继器，请使用 TCP/IPv4 地址，例如 `192.168.1.40`。
++ `mqtt.host` - 如果在局域网中使用单个 MQTT 中继器，使用 TCP/IPv4 地址，例如 `192.168.1.40`。
 + `mqtt.port` - TCP/IP 端口号；默认：`1883`
-+ `mqtt.username` - 访问中继器的凭据；默认：无
-+ `mqtt.password` - 访问中继器的凭据；默认：无
++ `mqtt.username` - 访问中继器的凭证；默认：无
++ `mqtt.password` - 访问中继器的凭证；默认：无
 
 ## `cameras` **必需**
-+ `cameras[].name` - 摄像机的标识符；在 `_device_` 和 `_group_` 中唯一；默认：无
++ `cameras[].name` - 摄像头的标识符；在_设备_和_组_中唯一；默认：无
 + `cameras[].type` - `netcam`、`ftp`、`mqtt`；`local` 仅适用于 [motion-video0](http://github.com/dcmartin/addon-motion-video) 版本
-+ `cameras[].w3w` - 摄像机的位置，为三个字符串；来自 what3words.com；无则使用 `[]`
++ `cameras[].w3w` - 摄像头的位置，作为三个字符串；来自 what3words.com；使用 `[]` 表示无
 
 ## `cameras` _可选_
-+ `cameras[].top` - 图标顶部的百分比位置（0-95）
-+ `cameras[].left` - 图标左侧的百分比位置（0-95）
-+ `cameras[].icon` - 来自 materialdesignicons.com 的摄像机图标（注：不包括 `mdi:` 组件）
-+ `cameras[].framerate` - 捕获/尝试的每秒帧数
-+ `cameras[].threshold_percent` - 像素变化的百分比；使用 `threshold` 覆盖计数
++ `cameras[].top` - 图标顶部位置，以百分比（0-95）
++ `cameras[].left` - 图标左侧位置，以百分比（0-95）
++ `cameras[].icon` - 来自 materialdesignicons.com 的摄像头图标（注意：不包括 `mdi:` 组件）
++ `cameras[].framerate` - 每秒捕获/尝试的帧数
++ `cameras[].threshold_percent` - 像素变化百分比；使用 `threshold` 覆盖计数
 + `cameras[].threshold` - 变化的像素数
 
 ### 示例
@@ -57,8 +57,8 @@ cameras:
 # 详细信息
 以下部分详细说明了可用于配置插件的属性。
 
-### 摄像机类型：`network`
-网络摄像机通过 `MJPEG`、`RTSP` 或 `HTTP` 三种传输方式直接由插件访问；不同摄像机需要特定的传输方式和相关属性，例如凭据。示例如下：
+### 摄像头类型：`network`
+网络摄像头直接通过插件使用三种传输方式之一访问：`MJPEG`、`RTSP` 或 `HTTP`；不同摄像头需要特定的传输方式和相关属性，例如凭证。示例如下：
 
 #### `MJPEG`
 ```
@@ -96,7 +96,7 @@ cameras:
     height: 480
 ```
 
-### 摄像机类型：`ftpd`
+### 摄像头类型：`ftpd`
 
 ```
   - name: backyard
@@ -108,6 +108,7 @@ cameras:
 ```
 
 # 示例 (_子集_)
+
 ```
 ...
 group: motion

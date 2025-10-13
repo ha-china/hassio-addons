@@ -14,26 +14,26 @@ This addon is experimental, and provides a mailfilter for your mailserver.
 
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v4.2.2-blue.svg
-[release]: https://github.com/erik73/addon-mailfilter/tree/v4.2.2
+[release-shield]: https://img.shields.io/badge/version-v4.2.3-blue.svg
+[release]: https://github.com/erik73/addon-mailfilter/tree/v4.2.3
 
-## 翻译
+请将以下文本翻译成中文。请保持格式不变:
 
-# Home Assistant 插件：Mailfilter
+# Home Assistant Add-on: Mailfilter
 
-[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
+[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
 
-Rspamd 邮件过滤器，可选的 clamav 防病毒软件...
+Rspamd mailfilter with optional clamav antivirus...
 请小心！clamav 会使用大量内存！
-不建议在内存小于 6GB 的设备上使用。
+对于内存低于 6GB 的设备不推荐使用。
 
-## 关于
+## About
 
-重要：此插件要求已安装 Mailserver 插件！
+重要：此插件需要已安装 Mailserver 插件！
 
-此插件是实验性的，为您的邮件服务器提供邮件过滤器。
+此插件是实验性的，为您的邮件服务器提供过滤器。
 
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v4.2.2-blue.svg
-[release]: https://github.com/erik73/addon-mailfilter/tree/v4.2.2
+[release-shield]: https://img.shields.io/badge/version-v4.2.3-blue.svg
+[release]: https://github.com/erik73/addon-mailfilter/tree/v4.2.3
