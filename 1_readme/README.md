@@ -10,9 +10,17 @@
 - 🚫 **不收录逆向、模拟登录、侵权及违法内容**
 
 ---
-> **说明**  
-此加载项安装之后会自动监控所依赖的服务器状态。如果你启用了通知功能，当服务器异常或者恢复正常时，Home Assistant 会及时推送通知给您，让你第一时间了解状态变化。
 
+<h2 align="center" style="color: #0d47a1; background: #bbdefb; padding: 12px; border-radius: 10px;">
+  🛈 <span style="color:#1a237e;">重要说明</span>
+</h2>
+
+<div style="font-size: 1.1em; background: #fff9c4; color: #1a1a1a; padding: 16px 20px; border-left: 6px solid #ffa000; border-radius: 8px; margin-bottom:18px;"><b>
+此加载项安装后将 <span style="color:#b71c1c; font-weight:bold;">自动监控</span> 所依赖的服务器状态。<br>
+如启用 <span style="color:#1b5e20; font-weight:bold;">通知功能</span>，服务器异常或恢复时，<span style="color:#0d47a1; font-weight:bold;">Home Assistant</span> 会<b style="color:#b71c1c;">推送通知</b>，助您第一时间掌握状态变化！
+</b></div>
+
+---
 
 ## ⚠️ 温馨提示：
 
