@@ -4,12 +4,12 @@
     "aarch64"
   ],
   "boot": "auto",
-  "description": "[老王杂谈说]：SiYuan是一个以隐私为中心的个人知识管理系统，支持细粒度的块级引用和Markdown所见即所得编辑器",
+  "description": "[老王杂谈说]：SiYuan 是一款以隐私为先的个人知识管理系统，支持细粒度的块级引用和 Markdown 可视化编辑。",
   "environment": {},
   "map": [
     "addon_config:rw"
   ],
-  "version": "v3.3.4",
+  "version": "v3.3.5",
   "name": "siyuan",
   "ports": {
     "6806/tcp": "6806"
@@ -25,7 +25,7 @@
   },
   "slug": "siyuan",
   "startup": "services",
-  "upstream": "v3.3.4",
+  "upstream": "v3.3.5",
   "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:6806]",
   "ingress": false,

@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.5](https://github.com/hugobloem/wyoming-microsoft-tts/compare/v1.3.4...v1.3.5) (2025-10-13)
+
+
+### 🏗️ Maintenance
+
+* **deps:** bump astral-sh/setup-uv from 6 to 7 ([#128](https://github.com/hugobloem/wyoming-microsoft-tts/issues/128)) ([17d3bb0](https://github.com/hugobloem/wyoming-microsoft-tts/commit/17d3bb0ec5b35235914e48c2233b58710b46a463))
+* **deps:** bump wyoming from 1.7.2 to 1.8.0 ([#130](https://github.com/hugobloem/wyoming-microsoft-tts/issues/130)) ([d18c172](https://github.com/hugobloem/wyoming-microsoft-tts/commit/d18c1723e2b9e2f703f6dfe666b349e5c16c82ac))
+
 ## [1.3.4](https://github.com/hugobloem/wyoming-microsoft-tts/compare/v1.3.3...v1.3.4) (2025-09-22)
 
 
