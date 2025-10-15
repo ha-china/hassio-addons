@@ -76,6 +76,8 @@ Excellent third-party libraries:
 - 🛠️ [**Limych Addons**](https://github.com/Limych/hassio-addons): Addons by Limych
 - 🤖 [**Motion AI Addons**](https://github.com/motion-ai/addons): Addons by Motion AI
 - 🛠️ [**Dcmartin Addons**](https://github.com/dcmartin/hassio-addons/): Addons by Dcmartin
+- ⏳ [**Time Machine Addons**](https://github.com/saihgupr/HomeAssistantTimeMachine): Home Assistant snapshot/restore and backup automation tools
+
 
 
 
