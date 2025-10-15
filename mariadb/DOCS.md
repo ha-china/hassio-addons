@@ -2,7 +2,7 @@
 
 ## 安装
 
-按照以下步骤将插件安装到您的系统上：
+按照以下步骤在您的系统上安装此插件：
 
 1. 在 Home Assistant 前端导航到 **设置** -> **插件** -> **插件商店**。
 2. 找到 "MariaDB" 插件并点击它。
@@ -10,14 +10,14 @@
 
 ## 如何使用
 
-1. 将 `logins` -> `password` 字段设置为一个强而独特的值。
+1. 将 `logins` -> `password` 字段设置为强而唯一的值。
 2. 启动插件。
 3. 检查插件日志输出以查看结果。
 4. 将 `recorder` 集成添加到您的 Home Assistant 配置中。
 
 ## 插件配置
 
-MariaDB 服务器插件可以根据您的喜好进行调整。本节将描述每个插件的配置选项。
+MariaDB 服务器插件可以根据您的喜好进行调整。本节将描述每个插件配置选项。
 
 示例插件配置：
 
@@ -44,19 +44,19 @@ rights:
 
 ### 选项：`logins`（必需）
 
-本节定义了 MariaDB 中的创建用户定义。[创建用户][createuser] 文档。
+此部分定义 MariaDB 中的用户创建定义。[创建用户][createuser] 文档。
 
 ### 选项：`logins.username`（必需）
 
-数据库用户登录，例如 `homeassistant`。[用户名][username] 文档。
+数据库用户登录名，例如 `homeassistant`。[用户名][username] 文档。
 
 ### 选项：`logins.password`（必需）
 
-用户登录密码。这应该是强而独特的。
+用户登录密码。这应该是强而唯一的。
 
 ### 选项：`rights`（必需）
 
-本节授予 MariaDB 中的用户权限。[授予权限][grant] 文档。
+此部分授予 MariaDB 中的用户权限。[授权][grant] 文档。
 
 ### 选项：`rights.username`（必需）
 
@@ -68,17 +68,19 @@ rights:
 
 ### 选项：`rights.privileges`（可选）
 
-要授予此用户的权限列表，例如 `SELECT` 和 `CREATE`，参考 [授予权限][grant]。如果省略，将向用户授予 `ALL PRIVILEGES`。不建议限制 Home Assistant 使用的用户的权限，但如果您希望允许其他应用程序查看 recorder 数据，应该创建一个仅具有数据库只读访问权限的用户。
+授予此用户的权限列表，例如从 [授权][grant] 的 `SELECT` 和 `CREATE`。
+如果省略，将向用户授予 `ALL PRIVILEGES`。不建议限制 Home Assistant 使用的用户的权限，但如果您希望允许其他应用程序查看记录器数据，则应创建一个仅具有数据库只读访问权限的用户。
 
 ### 选项：`mariadb_server_args`（可选）
 
-一些用户在 Home Assistant 大型数据库架构更新过程中遇到了 [错误][migration-issues]。如果可用 RAM 足够，定义推荐参数可能会有所帮助。
+一些用户在 Home Assistant 对大型数据库进行模式更新时遇到了 [错误][migration-issues]。
+如果可用，定义推荐参数可能会有所帮助。
 
 示例：`--innodb_buffer_pool_size=512M`
 
 ## Home Assistant 配置
 
-MariaDB 将被 Home Assistant 中的 `recorder` 和 `history` 组件使用。有关设置此配置的更多信息，请参阅 Home Assistant 的 [recorder 集成][mariadb-ha-recorder] 文档。
+Home Assistant 中的 `recorder` 和 `history` 组件将使用 MariaDB。有关如何设置此配置的更多信息，请参阅 Home Assistant 的 [recorder 集成][mariadb-ha-recorder] 文档。
 
 示例 Home Assistant 配置：
 
@@ -91,7 +93,7 @@ recorder:
 
 有问题？
 
-您可以在此处 [打开问题][issue] GitHub。
+您可以在这里 [打开一个 GitHub 问题][issue]。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
