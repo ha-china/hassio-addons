@@ -1,0 +1,4 @@
+/* Hide the Next.js development indicator logo */
+nextjs-portal {
+  display: none !important;
+}
