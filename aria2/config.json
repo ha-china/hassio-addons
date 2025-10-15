@@ -4,7 +4,7 @@
     "slug": "aria2",
     "codenotary": "djhui@live.cn",
     "description": "Aria2 download manager",
-    "url": "https://github.com/Desmond-Dong/hassio-addons",
+    "url": "https://github.com/ha-china/hassio-addons",
     "startup": "services",
     "hassio_role": "manager",
     "panel_icon": "mdi:download",

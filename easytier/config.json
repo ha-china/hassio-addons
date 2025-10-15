@@ -3,7 +3,7 @@
   "version": "v2.4.5",
   "slug": "easytier",
   "description": "[老王杂谈说]：EasyTier 优秀的开源组网工具",
-  "url": "https://github.com/desmond-dong/hassio-addons",
+  "url": "https://github.com/ha-china/hassio-addons",
   "init": false,
   "arch": [
     "aarch64",

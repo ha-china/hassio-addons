@@ -17,7 +17,7 @@ This add-on provides MQTTX Web, a powerful MQTT client tool, within your Home As
 
 1. Navigate to the Home Assistant Add-on Store
 2. Click on the three dots in the top right corner and select "Repositories"
-3. Add the following URL: `https://github.com/Desmond-Dong/hassio-addons`
+3. Add the following URL: `https://github.com/ha-china/hassio-addons`
 4. Find the "MQTTX Web" add-on in the list and click "Install"
 
 ## Usage
@@ -36,7 +36,7 @@ If you have any questions or need assistance, feel free to:
 
 扫描下面二维码，关注我。有需要可以随时给我留言
 
-![QR Code](https://github.com/Desmond-Dong/hassio-addons/raw/main/WeChat_QRCode.png)
+![QR Code](https://github.com/ha-china/hassio-addons/raw/main/WeChat_QRCode.png)
 ![QR Code](https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png)
 
 扫描上面二维码，关注我。有需要可以随时给我留言

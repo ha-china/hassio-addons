@@ -4,7 +4,7 @@
   "slug": "gotify",
   "codenotary": "djhui@live.cn",
   "description": "一个用go编写的消息服务端，也有客户端，通过gotify我们可以简单的进行收发消息。",
-  "url": "https://github.com/Desmond-Dong/hassio-addons",
+  "url": "https://github.com/ha-china/hassio-addons",
   "arch": ["aarch64", "amd64"],
   "startup": "application",
   "image": "ghcr.nju.edu.cn/gotify/server",

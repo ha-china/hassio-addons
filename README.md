@@ -1,7 +1,7 @@
 [English](README_EN.md) | [中文](README.md)
 
 # 🔔 Home Assistant 加载项库 
-> [`Github 仓库`](https://github.com/Desmond-Dong/hassio-addons)只是为了方便自动更新，要使用的话请用 `Gitee同步镜像站` [![添加加载项到 Home Assistant](https://img.shields.io/badge/add_addon_repository-MY%20HA-41BDF5?style=for-the-badge&logo=home-assistant&logoColor=white)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://gitee.com/desmond_GT/hassio-addons) 🚀
+> [`Github 仓库`](https://github.com/ha-china/hassio-addons)只是为了方便自动更新，要使用的话请用 `Gitee同步镜像站` [![添加加载项到 Home Assistant](https://img.shields.io/badge/add_addon_repository-MY%20HA-41BDF5?style=for-the-badge&logo=home-assistant&logoColor=white)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://gitee.com/desmond_GT/hassio-addons) 🚀
 
 🎉 **欢迎来到 Home Assistant 加载项库！** 在这里，您将发现众多自定义加载项，✨  
 

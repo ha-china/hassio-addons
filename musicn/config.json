@@ -4,7 +4,7 @@
   "slug": "musicn",
   "codenotary": "djhui@live.cn",
   "description": "一个可播放及下载音乐的 Node.js 工具，目前已经支持国内用户直接安装使用，不用魔法",
-  "url": "https://github.com/Desmond-Dong/hassio-addons",
+  "url": "https://github.com/ha-china/hassio-addons",
   "arch": [
     "aarch64",
     "amd64"

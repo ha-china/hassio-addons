@@ -15,7 +15,7 @@
 
 1. 访问Home Assistant插件商店
 2. 点击右上角的三个点，选择“仓库”
-3. 添加以下URL：`https://github.com/Desmond-Dong/hassio-addons`
+3. 添加以下URL：`https://github.com/ha-china/hassio-addons`
 4. 在列表中找到“EZVIZ云信号接收器”插件并点击“安装”
 
 ## 配置详情

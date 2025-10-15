@@ -18,7 +18,7 @@ labels:
   io.hass.addon.version: "v0.4.0"
   io.hass.addon.name: "VoceChat Server"
   io.hass.addon.description: "VoceChat Server Add-on for Home Assistant with persistent data \n 关注微信号：老王杂谈说 获取更多内容吧"
-  io.hass.addon.url: "https://github.com/Desmond-Dong/hassio-addons"
+  io.hass.addon.url: "https://github.com/ha-china/hassio-addons"
   io.hass.addon.arch: "amd64, armhf, aarch64"
   io.hass.addon.init: "false"
   io.hass.addon.startup: "services"
