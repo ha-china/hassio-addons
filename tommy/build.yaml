@@ -1,0 +1,10 @@
+build_from:
+  aarch64: "ghcr.nju.edu.cn/home-assistant/aarch64-base-debian:trixie"
+  amd64: "ghcr.nju.edu.cn/home-assistant/amd64-base-debian:trixie"
+labels:
+  org.opencontainers.image.title: "TOMMY (Home Assistant Add-on)"
+  org.opencontainers.image.description: "Home Assistant Add-on for TOMMY"
+  org.opencontainers.image.source: "https://ghfast.top/github.com/tommy-sense/homeassistant-addon"
+  org.opencontainers.image.licenses: "SEE LICENSE IN LICENSE.md"
+args:
+  TEMPIO_VERSION: "2021.09.0"

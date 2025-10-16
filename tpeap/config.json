@@ -1,23 +1,20 @@
 {
   "arch": [
-    "aarch64",
     "amd64"
   ],
   "boot": "auto",
-  "description": "[老王杂谈说]：TP-Link Omada 服务器（v5.9.31）",
+  "description": "[老王杂谈说]：TP-Link Omada 服务器",
   "devices": [],
   "environment": {
     "LOG_FORMAT": "{LEVEL}: {MESSAGE}"
   },
   "hassio_api": true,
   "hassio_role": "default",
-  "homeassistant": "2023.6.0",
   "homeassistant_api": true,
   "host_network": true,
   "image": "dcmartin/{arch}-addon-tpeap",
   "ingress": true,
-  "ingress_port": 8088,
-  "init": false,
+  "ingress_port": 8043,
   "map": [],
   "name": "TP-Link EAP Server",
   "options": {
@@ -38,11 +35,11 @@
     "timezone": "str?"
   },
   "slug": "tpeap",
-  "stage": "stable",
+  "stage": "experimental",
   "startup": "application",
   "timeout": 90,
   "tmpfs": true,
   "url": "https://ghfast.top/github.com/dcmartin/hassio-addons/tree/master/tpeap/README.md",
-  "version": "0.3.1",
+  "version": "0.0.2",
   "webui": "https://[HOST]:[PORT:8043]"
 }
