@@ -1,0 +1,48 @@
+#!/usr/bin/with-contenv bashio
+
+# Get the ingress port from Supervisor API
+INGRESS_PORT=$(bashio::addon.ingress_port)
+
+bashio::log.info "Ingress port assigned: ${INGRESS_PORT}"
+bashio::log.info "Starting Caddy ingress proxy on port ${INGRESS_PORT}..."
+bashio::log.info "Proxying to dashboard on port 8080"
+
+# Generate Caddyfile with path prefixing from X-Ingress-Path header
+cat > /tmp/Caddyfile << EOF
+{
+    auto_https off
+    admin off
+    log {
+        output stdout
+        format console
+        level INFO
+    }
+}
+
+:${INGRESS_PORT} {
+    bind 0.0.0.0
+    
+    log {
+        output stdout
+        format console
+        level INFO
+    }
+    
+    @allowed {
+        remote_ip 172.30.32.2
+    }
+    
+    handle @allowed {
+        # Prepend the X-Ingress-Path to the URI
+        rewrite * {http.request.header.X-Ingress-Path}{uri}
+        reverse_proxy localhost:8080
+    }
+    
+    handle {
+        respond 403
+    }
+}
+EOF
+
+# Start caddy
+exec caddy run --config /tmp/Caddyfile
