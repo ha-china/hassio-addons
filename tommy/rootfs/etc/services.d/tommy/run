@@ -12,11 +12,27 @@ if [ -n "$INGRESS_URL" ]; then
     bashio::log.info "Extracted ingress path: ${INGRESS_PATH}"
 fi
 
+# Get ports from configuration
+DASHBOARD_PORT=$(bashio::config 'ports.dashboard')
+FILE_SERVER_HTTP_PORT=$(bashio::config 'ports.file_server_http')
+FILE_SERVER_HTTPS_PORT=$(bashio::config 'ports.file_server_https')
+MQTT_PORT=$(bashio::config 'ports.mqtt')
+UDP_RELAY_PORT=$(bashio::config 'ports.udp_relay')
+WEBSOCKET_SERVER_PORT=$(bashio::config 'ports.websocket_server')
+
+export DASHBOARD_PORT
+export FILE_SERVER_HTTP_PORT
+export FILE_SERVER_HTTPS_PORT
+export MQTT_PORT
+export UDP_RELAY_PORT
+export WEBSOCKET_SERVER_PORT
+bashio::log.info "Dashboard port: ${DASHBOARD_PORT}"
+bashio::log.info "File server HTTP port: ${FILE_SERVER_HTTP_PORT}"
+bashio::log.info "File server HTTPS port: ${FILE_SERVER_HTTPS_PORT}"
+bashio::log.info "MQTT port: ${MQTT_PORT}"
+bashio::log.info "UDP relay port: ${UDP_RELAY_PORT}"
+bashio::log.info "Websocket server port: ${WEBSOCKET_SERVER_PORT}"
+
 # Start virtual bridge
-if [ -n "$INGRESS_PATH" ]; then
-    cd /app || exit
-    exec ./start.sh --ingress-path "$INGRESS_PATH"
-else
-    cd /app || exit
-    exec ./start.sh
-fi
+cd /app || exit
+exec ./start.sh
