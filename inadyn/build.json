@@ -1,8 +1,8 @@
 {
   "build_from": {
-    "aarch64": "docker.1ms.run/troglobit/inadyn:latest",
-    "amd64": "docker.1ms.run/troglobit/inadyn:latest",
-    "armv7": "docker.1ms.run/troglobit/inadyn:latest"
+    "aarch64": "troglobit/inadyn:latest",
+    "amd64": "troglobit/inadyn:latest",
+    "armv7": "troglobit/inadyn:latest"
   },
   "codenotary": {
     "signer": "alexandrep.github@gmail.com"

@@ -1,8 +1,8 @@
 {
   "build_from": {
-    "aarch64": "docker.1ms.run/m4dm4rtig4n/myelectricaldata:latest-dev",
-    "amd64": "docker.1ms.run/m4dm4rtig4n/myelectricaldata:latest-dev",
-    "armv7": "docker.1ms.run/m4dm4rtig4n/myelectricaldata:latest-dev"
+    "aarch64": "m4dm4rtig4n/myelectricaldata:latest-dev",
+    "amd64": "m4dm4rtig4n/myelectricaldata:latest-dev",
+    "armv7": "m4dm4rtig4n/myelectricaldata:latest-dev"
   },
   "codenotary": {
     "signer": "alexandrep.github@gmail.com"

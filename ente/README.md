@@ -3,9 +3,9 @@
 [![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![Version](https://img.shields.io/badge/dynamic/json?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fente%2Fconfig.json)
-![Ingress](https://img.shields.io/badge/dynamic/json?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fente%2Fconfig.json)
-![Arch](https://img.shields.io/badge/dynamic/json?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fente%2Fconfig.json)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fente%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fente%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fente%2Fconfig.yaml)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
@@ -14,17 +14,17 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有将我的仓库标星的人！要标星，请点击下面的图片，它将出现在右上角。谢谢！_
+_感谢每一位给我的仓库点赞的人！点击下面的图片进行点赞，它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/ente/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/ente/stats.png)
 
 ## 关于
 
 ---
 
-[Ente](https://github.com/ente-io/ente) 是一个自托管、端到端加密的照片和视频存储解决方案。此插件提供了一个完整的 Ente 服务器设置，包括博物馆 API 服务器和 MinIO S3 兼容存储后端。
+[Ente](https://github.com/ente-io/ente) 是一个自托管、端到端加密的照片和视频存储解决方案。这个插件提供了一个完整的 Ente 服务器设置，包括博物馆 API 服务器和 MinIO S3 兼容存储后端。
 
 Ente 提供：
 - 端到端加密的照片和视频备份
@@ -34,7 +34,7 @@ Ente 提供：
 - 与家人和朋友共享相册
 - 通过自托管完全控制您的数据
 
-此插件基于官方 Ente 服务器：https://github.com/ente-io/ente/tree/main/server
+这个插件基于官方 Ente 服务器：https://github.com/ente-io/ente/tree/main/server
 
 ## 配置
 
@@ -45,8 +45,8 @@ Webui 可以在 <http://homeassistant:PORT> 找到。
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
-| `ENTE_ENDPOINT_URL` | 字符串 | `http://homeassistant.local:8280` | Ente API 将可访问的 URL |
+|------|------|--------|------|
+| `ENTE_ENDPOINT_URL` | 字符串 | `http://homeassistant.local:8280` | Ente API 可访问的 URL |
 | `MINIO_ROOT_USER` | 字符串 | `minioadmin` | MinIO 根用户名 |
 | `MINIO_ROOT_PASSWORD` | 字符串 | `minioadmin` | MinIO 根密码 |
 | `MINIO_DATA_LOCATION` | 字符串 | `/config/minio-data` | MinIO 存储数据的路径 |
@@ -57,10 +57,10 @@ Webui 可以在 <http://homeassistant:PORT> 找到。
 
 ### 外部数据库配置
 
-如果您想使用外部 PostgreSQL 数据库，请将 `USE_EXTERNAL_DB: true` 设置并配置：
+如果您想使用外部 PostgreSQL 数据库，设置 `USE_EXTERNAL_DB: true` 并配置：
 
 | 选项 | 类型 | 描述 |
-|------|------|-------|
+|------|------|------|
 | `DB_HOSTNAME` | 字符串 | PostgreSQL 服务器主机名 |
 | `DB_PORT` | 整数 | PostgreSQL 服务器端口（默认：5432） |
 | `DB_USERNAME` | 字符串 | PostgreSQL 用户名 |
@@ -80,29 +80,29 @@ TZ: "America/New_York"
 
 ### 自定义脚本和环境变量
 
-此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
+这个插件支持通过 `addon_config` 映射的自定义脚本和环境变量：
 
-- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：参见 [为您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **自定义脚本**：查看 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **环境变量**：查看 [为您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
 
-### 挂载驱动器
+### 挂载驱动
 
-此插件支持挂载本地驱动器和远程 SMB 共享：
+这个插件支持挂载本地驱动和远程 SMB 共享：
 
-- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动**：查看 [在插件中挂载本地驱动](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：查看 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ## 安装
 
 ---
 
-此插件的安装非常简单，与安装任何其他插件没有区别。
+这个插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到您的 home assistant 实例（在 supervisor 插件商店右上角，或如果您已配置我的 HA，请点击下面的按钮）
-   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此插件。
+1. 将我的插件仓库添加到您的 Home Assistant 实例（在 Supervisor 插件商店的右上角，或点击下面的按钮如果您已经配置了我的 HA）
+   [![打开您的 Home Assistant 实例并显示添加插件仓库对话框，预填充特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装这个插件。
 1. 点击 `保存` 按钮以保存您的配置。
-1. 根据您的偏好设置插件选项。
+1. 设置插件选项以符合您的偏好。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切正常。
 
@@ -112,38 +112,38 @@ TZ: "America/New_York"
 
 首次启动插件后：
 
-1. 从以下位置下载 Ente 移动应用程序：
+1. 从以下地方下载 Ente 移动应用程序：
    - [iOS App Store](https://apps.apple.com/app/ente-photos/id1542026904)
    - [Google Play Store](https://play.google.com/store/apps/details?id=io.ente.photos)
    - [F-Droid](https://f-droid.org/packages/io.ente.photos.fdroid/)
 
-2. 在应用程序设置期间，选择 "使用自定义服务器" 并输入您的插件 URL：`http://your-homeassistant-ip:8280`
+2. 在应用程序设置过程中，选择 "使用自定义服务器" 并输入您的插件 URL：`http://your-homeassistant-ip:8280`
 
-3. 使用移动应用程序创建新帐户。
+3. 使用移动应用程序创建新账户。
 
 4. **重要**：对于自托管实例，订阅代码不能通过电子邮件发送。检查插件日志以获取验证码：
    ```
-   验证码：xxxxxx
+   验证码: xxxxxx
    ```
 
-5. 使用日志中的验证码完成帐户设置
+5. 使用日志中的验证码完成账户设置
 
 ## 端口
 
-插件公开三个端口：
+插件暴露了三个端口：
 
-- **8300** (3000/tcp)：Ente Web UI（如果启用）
-- **8280** (8080/tcp)：Ente API 服务器（博物馆）- 应用程序的主要端点
-- **8320** (3200/tcp)：MinIO S3 端点（用于存储后端）
+- **8300** (3000/tcp): Ente Web UI（如果启用）
+- **8280** (8080/tcp): Ente API 服务器（博物馆）- 应用程序的主要端点
+- **8320** (3200/tcp): MinIO S3 端点（用于存储后端）
 
 ## 数据存储
 
 默认情况下，照片和视频存储在 `/config/minio-data`。您可以使用 `MINIO_DATA_LOCATION` 选项更改此位置，或挂载外部存储以获得更大的容量。
 
 插件包括：
-- 用于元数据的 PostgreSQL 数据库
-- 用于实际照片/视频的 MinIO S3 兼容存储
-- 用于客户端通信的 Ente 博物馆 API 服务器
+- PostgreSQL 数据库用于元数据
+- MinIO S3 兼容存储用于实际的照片/视频
+- Ente 博物馆 API 服务器用于客户端通信
 
 ## 备份建议
 

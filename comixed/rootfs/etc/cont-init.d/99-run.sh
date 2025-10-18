@@ -10,7 +10,7 @@ if bashio::config.has_value 'TZ'; then
     bashio::log.info "Setting timezone to $TIMEZONE"
     if [ -f /usr/share/zoneinfo/"$TIMEZONE" ]; then
         ln -snf /usr/share/zoneinfo/"$TIMEZONE" /etc/localtime
-        echo "$TIMEZONE" >/etc/timezone
+        echo "$TIMEZONE" > /etc/timezone
     else
         bashio::log.fatal "$TIMEZONE not found, are you sure it is a valid timezone?"
     fi
@@ -27,16 +27,16 @@ if [[ "$INGRESS" == "true" ]]; then
     declare ingress_interface
     declare ingress_port
     #declare keyfile
-    
+
     FB_BASEURL="$(bashio::addon.ingress_entry)"
     export FB_BASEURL
-    
+
     declare ADDON_PROTOCOL=http
     # Generate Ingress configuration
     if bashio::config.true 'ssl'; then
         ADDON_PROTOCOL=https
     fi
-    
+
     #port=$(bashio::addon.port 80)
     ingress_port=$(bashio::addon.ingress_port)
     ingress_interface=$(bashio::addon.ip_address)
@@ -45,7 +45,7 @@ if [[ "$INGRESS" == "true" ]]; then
     sed -i "s|%%interface%%|${ingress_interface}|g" /etc/nginx/servers/ingress.conf
     sed -i "s|%%subpath%%|${FB_BASEURL}/|g" /etc/nginx/servers/ingress.conf
     mkdir -p /var/log/nginx && touch /var/log/nginx/error.log
-    
+
     # Correct baseurl
     for file in /config/hypercorn.toml $(find /usr -name hypercorn.toml.default); do
         if [ -f "$file" ]; then
@@ -80,7 +80,7 @@ bashio::log.warning "Username: comixedreader@localhost Password: comixedreader"
 bashio::log.info "Starting..."
 
 # shellcheck disable=SC2086
-/./app/comixed-release*/bin/run.sh -L /config/comixed.log
+/./app/"$(find /app -type d -name 'comixed-release*' | head -n 1)"/bin/run.sh -L /config/comixed.log
 
 #& true
 #bashio::net.wait_for 7171 localhost 900 || true

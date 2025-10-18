@@ -1,3 +1,8 @@
+## "2.13.1" (18-10-2025)
+- Minor bugs fixed
+
+## 2.13.1 (18-10-2025)
+- Update to latest version from linkwarden/linkwarden (changelog : https://github.com/linkwarden/linkwarden/releases)
 
 ## 2.13.0 (27-09-2025)
 - Update to latest version from linkwarden/linkwarden (changelog : https://github.com/linkwarden/linkwarden/releases)
