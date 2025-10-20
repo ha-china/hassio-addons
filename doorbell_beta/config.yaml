@@ -1,6 +1,6 @@
 name: Hikvision Doorbell (Beta)
 description: '[老王杂谈说]：将您的海康威视门铃连接到 Home Assistant（Beta 版本）'
-version: '3.0.0-beta.75'
+version: '3.0.0-beta.76'
 image: ghcr.nju.edu.cn/pergolafabio/hikvision-doorbell
 slug: hikvision_doorbell_beta
 url: https://ghfast.top/github.com/pergolafabio/Hikvision-Addons/tree/main/doorbell_beta

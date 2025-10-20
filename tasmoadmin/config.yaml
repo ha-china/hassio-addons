@@ -1,5 +1,5 @@
 name: TasmoAdmin
-version: 0.32.1
+version: 0.32.2
 slug: sonweb
 description: '[老王杂谈说]：集中管理您所有的Sonoff-Tasmota设备'
 url: https://ghfast.top/github.com/hassio-addons/addon-tasmoadmin
