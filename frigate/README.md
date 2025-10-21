@@ -4,7 +4,7 @@
 
 ![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield] ![支持 armv7 架构][armv7-shield]
 
-支持 IP 摄像头的实时本地目标检测的 NVR。
+支持 IP 摄像头的实时本地物体检测的 NVR。
 
 您必须在您的插件配置文件夹中创建一个名为 `config.yml` 的配置文件。
 
