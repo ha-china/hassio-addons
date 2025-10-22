@@ -12,14 +12,14 @@
 
 ## 关于
 
-TasmoAdmin（曾被称为 SonWEB）是一个管理您所有已刷入 Sonoff-Tasmota 设备的集中式管理网页界面。
-它的部分功能包括：
+TasmoAdmin（曾被称为 SonWEB）是一个管理所有您通过 Sonoff-Tasmota 烧录的设备的管理式网络界面。
+它的部分功能：
 
 - 扫描您的网络并自动添加您的设备
-- 快速轻松地查看所有设备的状态
-- 从一个地方配置所有设备
-- 一次性通过无线方式向一个或多个设备发送固件更新
-- 可自动为您下载最新固件
+- 快速轻松地查看所有您设备的状态
+- 从一个地方配置所有您的设备
+- 同时通过无线方式向一个或多个您的设备发送固件更新
+- 可以自动为您下载最新的固件
 
 ![TasmoAdmin 截图][screenshot]
 
@@ -33,6 +33,6 @@ TasmoAdmin（曾被称为 SonWEB）是一个管理您所有已刷入 Sonoff-Tasm
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.32.1-blue.svg
-[release]: https://github.com/hassio-addons/addon-tasmoadmin/tree/v0.32.1
+[release-shield]: https://img.shields.io/badge/version-v0.32.2-blue.svg
+[release]: https://github.com/hassio-addons/addon-tasmoadmin/tree/v0.32.2
 [screenshot]: https://github.com/hassio-addons/addon-tasmoadmin/raw/main/images/screenshot.png

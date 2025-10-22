@@ -1,8 +1,7 @@
 {
   "build_from": {
-    "aarch64": "docker.1ms.run/techblog/arpspoof-docker:1.0.0",
-    "amd64": "docker.1ms.run/techblog/arpspoof-docker:1.0.0",
-    "armv7": "docker.1ms.run/techblog/arpspoof-docker:1.0.0"
+    "aarch64": "techblog/arpspoof-docker:latest",
+    "amd64": "techblog/arpspoof-docker:latest"
   },
   "codenotary": {
     "signer": "alexandrep.github@gmail.com"

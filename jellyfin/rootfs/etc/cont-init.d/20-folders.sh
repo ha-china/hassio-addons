@@ -92,4 +92,3 @@ echo "Enable legacy mode"
 mkdir -p /config/addons_config
 ln -sf "$LOCATION" /config/addons_config/jellyfin
 chown -R "$PUID:$PGID" "$LOCATION"
-

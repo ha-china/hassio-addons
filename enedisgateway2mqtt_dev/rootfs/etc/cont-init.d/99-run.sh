@@ -17,8 +17,8 @@ DATABASESOURCE="$(dirname "${CONFIGSOURCE}")/cache.db"
 # Make sure folder exist
 mkdir -p "$(dirname "${CONFIGSOURCE}")"
 mkdir -p "$(dirname "${DATABASESOURCE}")"
-chmod 777 -R "$(dirname "${CONFIGSOURCE}")"
-chmod 777 -R "$(dirname "${DATABASESOURCE}")"
+chmod 755 -R "$(dirname "${CONFIGSOURCE}")"
+chmod 755 -R "$(dirname "${DATABASESOURCE}")"
 
 # Check absence of config file
 if [ -f /data/config.yaml ] && [ ! -L /data/config.yaml ]; then
@@ -82,7 +82,7 @@ if [ -f "$CONFIGSOURCE" ]; then
 
     # Check if yaml is valid
     EXIT_CODE=0
-    yamllint -d relaxed "$CONFIGSOURCE" &>ERROR || EXIT_CODE=$?
+    yamllint -d relaxed "$CONFIGSOURCE" &> ERROR || EXIT_CODE=$?
     if [ "$EXIT_CODE" = 0 ]; then
         echo "Config file is a valid yaml"
     else
@@ -102,7 +102,8 @@ fi
 # Launch App #
 ##############
 echo " "
-nginx & bashio::log.info "Starting nginx"
+nginx &
+bashio::log.info "Starting nginx"
 echo " "
 bashio::log.info "Starting the app"
 echo " "

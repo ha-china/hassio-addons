@@ -1,7 +1,7 @@
 ---
 version: 2.13.0
-slug: openthread_border_router
-name: OpenThread Border Router
+slug: ihost-openthread_border_router
+name: ihost-OpenThread-Border-Router
 description: OpenThread Border Router add-on
 url: >-
   https://ghfast.top/github.com/home-assistant/addons/tree/master/openthread_border_router

@@ -1,33 +1,37 @@
-## ⚠️ 开启问题 : [🐛 [Postgres 17] 与 TeslaMate 在 HomeAssistant 中的错误 (已开启 2025-07-09)](https://github.com/alexbelgium/hassio-addons/issues/1944) 由 [@cortesmario](https://github.com/cortesmario)
-# Home assistant 插件：Postgres
+# Home assistant add-on: Postgres
 
-![捐赠](https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white) ![捐赠](https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white)
+[![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![版本](https://img.shields.io/badge/dynamic/json?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fpostgres%2Fconfig.json)
-![Ingress](https://img.shields.io/badge/dynamic/json?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fpostgres%2Fconfig.json)
-![架构](https://img.shields.io/badge/dynamic/json?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fpostgres%2Fconfig.json)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fpostgres%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fpostgres%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fpostgres%2Fconfig.yaml)
 
-![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e) ![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base) ![构建器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建器)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-感谢大家给我的仓库点赞！要点赞请点击下面的图片，然后它就会出现在右上角。谢谢！
+_感谢所有给我仓库星标的人！要星标它，请点击下面的图片，然后它将在右上角。谢谢！_
 
-![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg) ![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/postgres/stats.png)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/postgres/stats.png)
 
 ## 关于
 
-PostgreSQL，通常简称为 "Postgres"，是一个面向对象的数据库管理系统 (ORDBMS)，注重可扩展性和标准合规性。作为数据库服务器，其主要功能是安全地存储数据，支持最佳实践，并在其他软件应用程序（无论是同一台计算机上的应用程序还是跨网络（包括互联网）运行在其他计算机上的应用程序）请求时检索数据。它可以处理从小型单机应用程序到具有许多并发用户的大型面向互联网的应用程序的工作负载。最近的版本还提供了数据库本身的复制，以增强安全性和可扩展性。
+PostgreSQL，通常简称为"Postgres"，是一个对象关系型数据库管理系统（ORDBMS），强调可扩展性和标准合规性。作为数据库服务器，其主要功能是安全地存储数据，并按照其他软件应用程序（无论是同一台计算机上的应用程序还是跨网络运行在另一台计算机上的应用程序，包括互联网）的请求检索数据。它可以处理从单机小应用程序到具有许多并发用户的大型互联网应用程序的工作负载。最新版本还提供数据库本身的复制，以提高安全性和可扩展性。
 
 此插件基于官方镜像：https://hub.docker.com/_/postgres
 
 ## 配置
 
-Postgres 端口默认为 5432，并暴露给主机网络。
+Postgres端口默认为5432，并暴露给主机网络。
 
 默认用户：`postgres`
-密码：`由 POSTGRES_PASSWORD 设置`
+密码：`由POSTGRES_PASSWORD设置`
 
 您可以配置以下选项：
 
@@ -39,48 +43,47 @@ POSTGRES_INITDB_ARGS
 POSTGRES_HOST_AUTH_METHOD
 ```
 
-更多信息请参考 [基础镜像文档](https://hub.docker.com/_/postgres)。
+有关更多信息，请查看[基础镜像文档](https://hub.docker.com/_/postgres)。
 
-默认情况下，`postgresql.conf` 存储在可被其他插件和 Home Assistant 访问的卷中，因此您可以通过例如 File Editor 插件方便地修改它。如果您更喜欢更好的安全性，请将 `CONFIG_LOCATION` 更改为例如 `/data/orig/postgresql.conf`，这样它将只能被此插件访问，但您将不得不通过 [Hassio SSH](https://developers.home-assistant.io/docs/operating-system/debugging/) 来修改它。
+默认情况下，`postgresql.conf`存储在一个卷中，其他插件和Home Assistant都可以访问，因此您可以通过例如文件编辑插件方便地修改它。如果您更喜欢更高的安全性，请将`CONFIG_LOCATION`更改为例如`/data/orig/postgresql.conf`，这样它将只能被此插件访问，但您将不得不通过[Hassio SSH](https://developers.home-assistant.io/docs/operating-system/debugging/)来修改它。
 
 ### 自定义脚本和环境变量
 
-此插件支持通过 `addon_config` 映射的自定义脚本和环境变量：
+此插件通过`addon_config`映射支持自定义脚本和环境变量：
 
-- **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：请参阅 [向您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **自定义脚本**：请参阅[在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **环境变量**：请参阅[向您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
 
 ## 安装
 
-此插件的安装非常简单，与其他插件的安装方式相同。
+此插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例（在 supervisor 插件商店右上角，或点击下方按钮如果您已配置我的 HA）
-   ![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)
-   ![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此插件。
-2. 点击 `保存` 按钮以保存您的配置。
-3. 设置插件选项以符合您的偏好，至少需要设置 `POSTGRES_PASSWORD`。
-4. 启动插件。
-5. 检查插件的日志以查看是否一切正常。
-6. 使用任何 Postgres 客户端连接，例如连接到 `homeassistant.local:5432`。
+1. 将我的插件仓库添加到您的Home Assistant实例（在supervisor插件商店的右上角，或者如果您已配置我的HA，请点击下面的按钮）
+   [![打开您的Home Assistant实例并显示带有特定仓库URL预填充的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+2. 安装此插件。
+3. 点击`保存`按钮以保存您的配置。
+4. 根据您的偏好设置插件选项，至少需要设置`POSTGRES_PASSWORD`。
+5. 启动插件。
+6. 检查插件的日志，以查看是否一切正常。
+7. 使用任何Postgres客户端连接，例如`homeassistant.local:5432`。
 
-从 postgres 15 迁移：
+从postgres 15迁移：
 
-- 停止 postgres 15 插件
-- 使用 Filebrowser 插件将数据库文件夹从 /addon_configs/xxx-postgres 复制到 /addon_configs/xxx-postgres_latest
-- 启动 postgres 17 插件。数据库升级应该会继续。如果升级失败，您的数据仍然安全在 postgres 15 插件中
+- 停止postgres 15插件
+- 使用Filebrowser插件将数据库文件夹从`/addon_configs/xxx-postgres`复制到`/addon_configs/xxx-postgres_latest`
+- 启动postgres 17插件。数据库升级应该会继续。如果升级失败，您的数据仍然安全在postgres 15插件中
 
-## 安全
+## 安全性
 
-默认情况下，Postgres 将在您的主机系统的本地网络上可达。为了提高安全性，您可以禁用此行为，并使 Postgres 仅对 Home Assistant 内的其他插件可用。
+默认情况下，Postgres将可在您的主机系统的本地网络上访问。为了提高安全性，您可以使Postgres仅在Home Assistant内的其他插件中可用。
 
-1. 配置所有使用 Postgres 的插件通过内部 DNS 名称连接：`db21ed7f-postgres-latest:5432`。
-2. 转到 **设置 → 插件 → Postgres 17 → 配置**，在 **网络** 下，通过清除文本字段删除端口 `5432`。
-3. 点击 **保存** 并重启插件。
-4. 现在 Postgres 仅对其他插件可用，不再从本地网络（例如笔记本电脑、物联网设备等）可达。
+1. 配置所有使用Postgres的插件通过内部DNS名称连接：`db21ed7f-postgres-latest:5432`。
+2. 转到**设置 → 插件 → Postgres 17 → 配置**，在**网络**下，通过清除文本字段删除端口`5432`。
+3. 点击**保存**并重新启动插件。
+4. Postgres现在只能从其他插件访问，而不再从您的本地网络（例如，笔记本电脑、物联网设备等）访问。
 
 ## 支持
 
-在 GitHub 上创建问题
+在github上创建问题
 
 [repository]: https://github.com/alexbelgium/hassio-addons

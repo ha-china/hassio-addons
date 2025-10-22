@@ -22,7 +22,7 @@ fi
 # Remove erroneous folder named config.env (bug fix for looping issue)
 if [ -d "$CONFIG_HOME/config.env" ]; then
     bashio::log.warning "Found directory named config.env, deleting it..."
-    rm -rf "$CONFIG_HOME/config.env" # Fix: Ensures directory removal even if it exists
+    rm -rf "$CONFIG_HOME/config.env"                   # Fix: Ensures directory removal even if it exists
     cp /templates/config.env "$CONFIG_HOME/config.env" # Recreate as a valid file
     chmod 755 "$CONFIG_HOME/config.env"
 fi
@@ -61,7 +61,7 @@ cd /data || true
 # Fetch commands
 CMD_ARGUMENTS="$(bashio::config "CMD_ARGUMENTS")"
 IFS=';'
-read -a strarr <<< "$CMD_ARGUMENTS"
+read -ar strarr <<< "$CMD_ARGUMENTS"
 
 # Sanitizes commands
 trim() {

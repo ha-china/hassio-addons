@@ -1,12 +1,11 @@
-## ⚠️ Open Issue : [[WhatsApp] {error:Client not initialized} (opened 2025-09-11)](https://github.com/alexbelgium/hassio-addons/issues/2097) by [@RetroTrek](https://github.com/RetroTrek)
 # Home assistant add-on: WhatsApp
 
 [![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![Version](https://img.shields.io/badge/dynamic/json?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fwhatsapper%2Fconfig.json)
-![Ingress](https://img.shields.io/badge/dynamic/json?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fwhatsapper%2Fconfig.json)
-![Arch](https://img.shields.io/badge/dynamic/json?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fwhatsapper%2Fconfig.json)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fwhatsapper%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fwhatsapper%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fwhatsapper%2Fconfig.yaml)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
@@ -21,18 +20,18 @@ _Thanks to everyone having starred my repo! To star it click on the image below,
 
 ![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/whatsapper/stats.png)
 
-## About
+## 关于
 
 各种调整和配置选项的添加。
 此插件基于 [docker 镜像](https://hub.docker.com/r/whatsapper/whatsapper)。
 
-添加在此处找到的 HACS 集成
+在此处找到 HACS 集成
 
 https://github.com/baldarn/whatsapper-ha-integration
 
-并按照那里的说明来配置系统
+并按照那里的说明配置系统
 
-## Configuration
+## 配置
 
 ```yaml
 TODO
@@ -40,7 +39,7 @@ TODO
 
 Webui 可以在 `<your-ip>:port` 找到。
 
-## Installation
+## 安装
 
 此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
@@ -49,7 +48,7 @@ Webui 可以在 `<your-ip>:port` 找到。
 1. 点击 `保存` 按钮以保存您的配置。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切正常。
-1. 进入 Webui，您将初始化应用程序
-1. 重新启动插件，以应用任何应应用的选项
+1. 转到 Webui，在那里您将初始化应用程序
+1. 重新启动插件，以应用任何应该应用的选项
 
 [repository]: https://github.com/alexbelgium/hassio-addons

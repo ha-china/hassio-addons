@@ -1,5 +1,5 @@
 name: TOMMY
-version: "0.5.0"
+version: "0.8.0"
 slug: tommysense-homeassistant-addon
 description: '[老王杂谈说]：TOMMY (Home Assistant 插件)'
 url: "https://ghfast.top/github.com/tommy-sense/homeassistant-addon"
@@ -17,3 +17,19 @@ init: false
 map:
   - type: data
     read_only: False
+options:
+  ports:
+    dashboard: 8080
+    file_server_http: 8090
+    file_server_https: 8091
+    mqtt: 1884
+    udp_relay: 8547
+    websocket_server: 8101
+schema:
+  ports:
+    dashboard: port
+    file_server_http: port
+    file_server_https: port
+    mqtt: port
+    udp_relay: port
+    websocket_server: port

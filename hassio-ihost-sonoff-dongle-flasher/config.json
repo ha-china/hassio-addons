@@ -1,8 +1,8 @@
 {
   "name": "SONOFF Dongle Flasher",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "slug": "sonoff_dongle_flasher_for_ihost",
-  "description": "SONOFF Dongle Flasher支持iHost MG21芯片和SONOFF Dongle系列（ZBDongle-P和ZBDongle-E）的在线固件刷新",
+  "description": "[老王杂谈说]：SONOFF Dongle Flasher 支持对 iHost MG21 芯片和 SONOFF Dongle 系列（ZBDongle-P、ZBDongle-E、Dongle-M、Dongle-PMG24）进行在线固件烧录",
   "uart": true,
   "udev": true,
   "url": "https://ghfast.top/github.com/iHost-Open-Source-Project/hassio-ihost-addon/tree/master/hassio-ihost-sonoff-dongle-flasher",
@@ -34,11 +34,10 @@
     "SYS_RESOURCE"
   ],
   "map": [
-    "data:rw",
-    "config:rw",
     {
-      "type": "share",
-      "read_only": false
+      "type": "addon_config",
+      "read_only": false,
+      "path": "/Sonoff-Dongle-Flasher-For-IHost"
     },
     {
       "type": "homeassistant_config",

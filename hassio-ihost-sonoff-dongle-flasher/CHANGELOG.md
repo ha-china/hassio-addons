@@ -1,5 +1,12 @@
 # Changelog  
 
+## 1.2.0
+### Added
+- Added support for **SONOFF Dongle-M** and **Dongle-PMG24**.
+
+### Changed
+- Added a progress bar display during the **Step 1: Connect** process.
+
 ## 1.1.1
 ### Fixed
 - Fixed add-on malfunction caused by accessing Home Assistant through the HTTPS protocol.

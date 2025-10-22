@@ -57,7 +57,7 @@ bashio::log.warning "If UI was changed, you need to clear browser cache for it t
 echo "Creating config"
 download_dir=$(bashio::config 'download_dir')
 incomplete_dir=$(bashio::config 'incomplete_dir')
-CONFIG=$(<$CONFIGDIR/settings.json)
+CONFIG=$(< $CONFIGDIR/settings.json)
 
 # Permissions
 echo "Updating permissions"
@@ -85,13 +85,13 @@ if bashio::config.has_value 'watch_dir'; then
     CONFIG=$(bashio::jq "${CONFIG}" ".\"watch-dir\"=\"$(bashio::config 'watch_dir')\"")
 fi
 
-echo "${CONFIG}" >"$CONFIGDIR"/settings.json &&
-jq . -S "$CONFIGDIR"/settings.json | cat >temp.json && mv temp.json $CONFIGDIR/settings.json
+echo "${CONFIG}" > "$CONFIGDIR"/settings.json \
+    && jq . -S "$CONFIGDIR"/settings.json | cat > temp.json && mv temp.json $CONFIGDIR/settings.json
 
 # USER and PASS
 ###############
 
-CONFIG=$(<"$CONFIGDIR"/settings.json)
+CONFIG=$(< "$CONFIGDIR"/settings.json)
 USER=$(bashio::config 'user')
 PASS=$(bashio::config 'pass')
 if bashio::config.has_value 'user'; then
@@ -104,13 +104,13 @@ fi
 CONFIG=$(bashio::jq "${CONFIG}" ".\"rpc-authentication-required\"=${BOOLEAN}")
 CONFIG=$(bashio::jq "${CONFIG}" ".\"rpc-username\"=\"${USER}\"")
 CONFIG=$(bashio::jq "${CONFIG}" ".\"rpc-password\"=\"${PASS}\"")
-echo "${CONFIG}" >"$CONFIGDIR"/settings.json &&
-jq . -S "$CONFIGDIR"/settings.json | cat >temp.json && mv temp.json "$CONFIGDIR"/settings.json
+echo "${CONFIG}" > "$CONFIGDIR"/settings.json \
+    && jq . -S "$CONFIGDIR"/settings.json | cat > temp.json && mv temp.json "$CONFIGDIR"/settings.json
 
 # WHITELIST
 ###########
 
-CONFIG=$(<"$CONFIGDIR"/settings.json)
+CONFIG=$(< "$CONFIGDIR"/settings.json)
 WHITELIST=$(bashio::config 'whitelist')
 if bashio::config.has_value 'whitelist'; then
     BOOLEAN=true
@@ -121,5 +121,5 @@ else
 fi
 CONFIG=$(bashio::jq "${CONFIG}" ".\"rpc-whitelist-enabled\"=${BOOLEAN}")
 CONFIG=$(bashio::jq "${CONFIG}" ".\"rpc-whitelist\"=\"$WHITELIST\"")
-echo "${CONFIG}" >"$CONFIGDIR"/settings.json &&
-jq . -S "$CONFIGDIR"/settings.json | cat >temp.json && mv temp.json "$CONFIGDIR"/settings.json
+echo "${CONFIG}" > "$CONFIGDIR"/settings.json \
+    && jq . -S "$CONFIGDIR"/settings.json | cat > temp.json && mv temp.json "$CONFIGDIR"/settings.json

@@ -72,7 +72,7 @@ if bashio::config.true 'OPENVPN_CUSTOM_PROVIDER'; then
 fi
 
 # Function to check for files path
-function check_path () {
+function check_path() {
 
     # Get variable
     file="$1"
@@ -86,8 +86,7 @@ function check_path () {
     cp "$file" /tmpfile
 
     # Loop through each line of the input file
-    while read -r line
-    do
+    while read -r line; do
         # Check if the line contains a txt file
         if [[ "$line" =~ \.txt ]] || [[ "$line" =~ \.crt ]]; then
             # Extract the txt file name from the line
@@ -171,8 +170,11 @@ ip route add 172.30.0.0/16 via 172.30.32.1
 if bashio::config.true 'auto_restart'; then
 
     bashio::log.info "Auto restarting addon if openvpn down"
-    (set -o posix; export -p) > /env.sh
-    chmod 777 /env.sh
+    (
+        set -o posix
+        export -p
+    ) > /env.sh
+    chmod 755 /env.sh
     chmod +x /usr/bin/restart_addon
     sed -i "1a . /env.sh; /usr/bin/restart_addon >/proc/1/fd/1 2>/proc/1/fd/2" /etc/openvpn/tunnelDown.sh
 
@@ -195,13 +197,14 @@ echo ""
 # Correct mullvad
 if [ "$(bashio::config "OPENVPN_PROVIDER")" == "mullvad" ]; then
     bashio::log.info "Mullvad selected, copying script for IPv6 disabling"
-    chown "$PUID:$PGID"  /opt/modify-mullvad.sh
-    chmod +x  /opt/modify-mullvad.sh
+    chown "$PUID:$PGID" /opt/modify-mullvad.sh
+    chmod +x /opt/modify-mullvad.sh
     sed -i '$i/opt/modify-mullvad.sh' /etc/openvpn/start.sh
 fi
 
 bashio::log.info "Starting app"
-/./etc/openvpn/start.sh & echo ""
+/./etc/openvpn/start.sh &
+echo ""
 
 #################
 # Allow ingress #
