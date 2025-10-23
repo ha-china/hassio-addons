@@ -1,8 +1,8 @@
 ---
-version: 8.0.0
+version: 8.1.1
 slug: ihost-matter_server
 name: ihost-Matter Server
-description: Matter WebSocket Server for Home Assistant Matter support.
+description: '[老王杂谈说]：Home Assistant Matter支持的Matter WebSocket服务器。'
 url: >-
   https://ghfast.top/github.com/home-assistant/addons/tree/master/matter_server
 arch:

@@ -1,11 +1,11 @@
 # https://ghfast.top/github.com/AlexxIT/builder/blob/master/builder.sh
 name: go2rtc
-description: '[老王杂谈说]：英特尔硬件转码（VAAPI）和树莓派（V4L2）硬件转码'
+description: '[老王杂谈说]：为Intel（VAAPI）和Raspberry（V4L2）的硬件转码'
 url: https://ghfast.top/github.com/AlexxIT/go2rtc
 image: alexxit/go2rtc
 arch: [amd64, aarch64, i386, armv7]
 # https://developers.home-assistant.io/docs/add-ons/configuration
-version: 1.9.10
+version: 1.9.11
 slug: go2rtc
 init: false
 startup: system
