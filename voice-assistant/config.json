@@ -16,7 +16,7 @@
     "media:ro"
   ],
   "devices": [
-    "/dev/snd:/dev/snd"
+    "/dev/snd"
   ],
   "options": {
     "name": "Javis",
