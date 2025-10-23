@@ -1,16 +1,16 @@
-![项目阶段][项目阶段盾牌]
-![维护状态][维护状态盾牌]
-[![许可证][许可证盾牌]](https://github.com/expaso/hassos-addon-timescaledb/blob/main/LICENSE)
+![项目阶段][project-stage-shield]
+![维护状态][maintenance-shield]
+[![许可证][license-shield]](https://github.com/expaso/hassos-addon-timescaledb/blob/main/LICENSE)
 
 <a href="https://www.buymeacoffee.com/expaso" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
-# Home Assistant 添加组件：[PostgreSQL](https://www.postgresql.org/) [TimescaleDB](https://www.timescale.com/)
+# Home Assistant 添加程序：[PostgreSQL](https://www.postgresql.org/) [TimescaleDB](https://www.timescale.com/)
 
-## [PostgreSql 17.6](https://www.postgresql.org/) & [Postgis 3.6.0](https://postgis.net/) & [TimescaleDB 2.22.1](https://www.timescale.com/) & [TimescaleDB Toolkit 1.21.0](https://github.com/timescale/timescaledb-toolkit) & [pgAgent 4.2.3](https://www.pgadmin.org/docs/pgadmin4/development/pgagent.html)
+## [PostgreSql 17.6](https://www.postgresql.org/) & [Postgis 3.6.0](https://postgis.net/) & [TimescaleDB 2.22.1](https://www.timescale.com/) & [TimescaleDB 工具包 1.21.0](https://github.com/timescale/timescaledb-toolkit) & [pgAgent 4.2.3](https://www.pgadmin.org/docs/pgadmin4/development/pgagent.html)
 
 #### 配置
 
-示例添加组件配置：
+示例添加程序配置：
 
 ```
  {
@@ -29,70 +29,70 @@
 
 #### 选项：`databases`
 
-设置一个数据库名称列表，在启动添加组件时将为您创建这些数据库。
-您也可以使用您选择的选择的 psql 客户端自行创建数据库。
+设置一系列数据库名称，在启动添加程序时将为您创建这些数据库。
+当然，您也可以使用您选择的 psql 客户端自行创建数据库。
 
 #### 选项：`timescale_enabled`
 
-设置一个数据库名称列表，在这些数据库中启用 timescale 扩展。
-不在该列表中的数据库将像普通 Postgre 数据库一样运行。
+设置一系列数据库名称，在这些数据库中启用 timescale 扩展。
+不在该列表中的数据库将像普通 PostgreSQL 数据库一样运行。
 
 #### 选项：`timescaledb.telemetry`
 
-切换 TimescaleDb 的遥测功能开启或关闭。
+切换 TimescaleDb 的遥测功能开关。
 有效选项为：'basic' 或 'off'。
 参见：https://docs.timescale.com/latest/using-timescaledb/telemetry
 
 #### 选项：`timescaledb.maxmemory`
 
-设置 PostgreSQL 将占用的最大内存量。
-重要的是为您的机器（或树莓派）上的其他进程留出空间，因此不要将这些级别设置得太高（例如，总内存的 50% 以下）。
+设置 PostgreSQL 声明的最大内存量。
+重要的是要为您的机器（或树莓派）上的其他进程留出空间，因此请勿将此值设置过高（例如，总内存的 50% 以下）。
 
 示例：`maxmemory="1024MB"`
-或者留空以接受自动调谐。
+或留空以接受自动调优。
 
 #### 选项：`timescaledb.maxcpu`
 
 设置 PostgreSQL 将使用的最大核心数。
-重要的是为您的机器（或树莓派）上的其他进程留出空间，因此不要将这些级别设置得太高（例如，总核心数的 75% 以下）。
+重要的是要为您的机器（或树莓派）上的其他进程留出空间，因此请勿将此值设置过高（例如，总核心数的 75% 以下）。
 
 示例：`maxcpu="2"`
-或者留空以接受自动调谐。
+或留空以接受自动调优。
 
 参见：
 https://docs.timescale.com/latest/getting-started/configuring
-进行进一步调谐。您的 Postgres.config 文件位于添加组件的数据目录中。
+以进行进一步的调优。您的 Postgres.config 文件位于添加程序的数据目录中。
 
 #### 选项：`max_connections`
 
 设置 PostgreSQL 将接受的连接数上限。
-提高此设置可能会导致更高的内存使用。
+提高此值可能会导致更高的内存使用。
 
 示例：`max_connections=30`
 
 #### 选项：`system_packages`
 
 仅限高级用户！
-在启动添加组件时安装的额外 Alpine 软件包列表。
+在添加程序启动期间要安装的额外 Alpine 软件包列表。
 
 示例：['nano']
 
 #### 选项：`init_commands`
 
 仅限高级用户！
-在启动期间运行的额外命令列表。
+在启动期间要运行的额外命令列表。
 
-例如，修改 postgresql.conf 文件中的内容：
+例如，要修改 postgresql.conf 文件中的内容：
 
 示例：['sed -i -e "/max_connections =/ s/= .*/= 50/" /data/postgres/postgresql.conf']
 
 #### 选项：`retry_upgrade`
 
 仅限高级用户！
-如果升级过程中失败，可以重试从 Postgres 14 到 15 的升级。
-基本上，这会尝试找到 PostgreSQL 12 的旧数据库文件，并在尝试再次升级到 PostgreSQL 14 之前将它们恢复。
+如果从 PostgreSQL 14 升级到 15 失败，可以重新尝试升级。
+基本上，这将尝试找到 PostgreSQL 12 的旧数据库文件，并在尝试再次升级到 PostgreSQL 14 之前将其恢复。
 
-!! 如果您不知道自己在做什么，或者在进行备份之前，请不要设置此选项。 !!!
+!! 如果您不知道自己在做什么或在进行备份之前，请不要设置此选项。 !! 
 
 #### 选项：`postgresql_config`
 
@@ -108,11 +108,11 @@ postgresql_config:
 
 参见 [PostgreSQL 文档](https://www.postgresql.org/docs/current/runtime-config.html) 以获取可用参数。
 
-**注意：** 一些关键参数无法修改（例如，`shared_preload_libraries`、`port`、`data_directory`），因为它们由添加组件管理。
+**注意：** 某些关键参数无法修改（例如，`shared_preload_libraries`、`port`、`data_directory`），因为它们由添加程序管理。
 
 #### 选项：`pg_hba_config`
 
-允许您向 `pg_hba.conf` 添加自定义认证规则。规则将追加到默认规则中。
+允许您向 `pg_hba.conf` 添加自定义身份验证规则。规则将追加到默认规则中。
 
 示例：
 ```yaml
@@ -124,14 +124,14 @@ pg_hba_config:
     method: "md5"
 ```
 
-参见 [PostgreSQL 文档](https://www.postgresql.org/docs/current/auth-pg-hba-conf.html) 以获取认证方法。
+参见 [PostgreSQL 文档](https://www.postgresql.org/docs/current/auth-pg-hba-conf.html) 以获取身份验证方法。
 
-**警告：** 不正确的配置可能会使您无法访问数据库。
+**警告：** 不正确的配置可能会导致您无法访问数据库。
 
 ### 独立运行容器
 
-在这种情况下，您需要在您的机器上有一个工作的 Docker 安装。
-从 Docker Hub 拉取所需架构的镜像：
+在这种情况下，您需要在您的机器上安装 Docker。
+从 Docker Hub 拉取适合所需架构的镜像：
 
 ```
 docker pull ghcr.io/expaso/timescaledb/amd64:stable
@@ -141,9 +141,9 @@ docker pull ghcr.io/expaso/timescaledb/armhf:stable
 docker pull ghcr.io/expaso/timescaledb/i386:stable
 ```
 
-您可以将 *stable* 替换为您想要使用的版本号。
+您可以将 *stable* 替换为您要使用的版本号。
 
-简单地这样启动它：
+直接这样启动它：
 
 ```
 docker run \
@@ -156,7 +156,7 @@ docker run \
 
 这将使用 ~/timescaledb_addon_data 作为容器的数据目录，并将端口 5432 映射到主机。
 
-如果您想作为守护进程启动容器，只需移除 `--rm` 选项并添加 `-d` 选项，如下所示：
+如果您想以守护进程方式启动容器，只需删除 `--rm` 选项并添加 `-d` 选项，如下所示：
 
 ```
 docker run \
@@ -169,23 +169,23 @@ docker run \
 
 ## 使用
 
-现在您已经准备好使用带有 TimescaleDb 扩展的 PostgreSQL 了！
+现在，您已经准备好开始使用带有 TimescaleDb 扩展的 PostgreSQL 了！
 
-寻找一个不错的基于 Web 的客户端？**尝试 pgAdmin4 添加组件。**
+寻找一个不错的基于 Web 的客户端？**尝试 pgAdmin4 添加程序。**
 
-请别忘了在添加组件的网络部分映射 TCP/IP 端口到所需的端口号。
+请不要忘记将添加程序的网络部分中的 TCP/IP 端口映射到所需的端口号。
 默认端口是 `5432`
 
-**安全警告！**
+**安全提示！**
 
-默认用户名是 `postgres`，密码是 `homeassistant`。
-激活添加组件后，请立即更改此设置：
+默认用户是 `postgres`，密码是 `homeassistant`。
+激活添加程序后，请立即更改此设置：
 
 ```
 ALTER USER postgres WITH PASSWORD 'strongpassword';
 ```
 
-⚠️ 创建每个数据库的单独用户被认为是最佳实践，并将数据库的所有权转移给该用户。
+⚠️ 创建每个数据库的单独用户并转移数据库所有权被认为是最佳实践。
 在此配置中，`postgres` 用户仅用于管理任务。
 
 使用以下命令创建用户 `homeassistant`，密码 `mypassword`，并将数据库 `mydatabase` 的所有权转移给该用户，或者如果您更喜欢 GUI，可以使用 _pgAdmin_ 完成此任务。
@@ -204,45 +204,43 @@ local   all             all             0.0.0.0/0               md5"
 local   all             all             0.0.0.0/0               peer"
 ```
 
-请仔细审查此配置，参考文档：
+请仔细审查此配置，并查看文档：
 https://www.postgresql.org/docs/devel/auth-pg-hba-conf.html
 
 ## 备份和恢复
 
-此添加组件实现了一个强大的备份和恢复机制，旨在保护您的数据库免受数据丢失。
+此添加程序实现了一个强大的备份和恢复机制，旨在保护您的数据库免受数据丢失。
 
 ### 备份如何工作
 
 当 Home Assistant 的备份系统运行时，它将自动执行以下操作：
 
-1. **备份前**：执行 `pg_dumpall` 创建所有数据库的完整 SQL 快照（`backup_db.sql`）
-2. **备份**：备份 SQL 快照文件以及其他添加组件数据（但排除 PostgreSQL 数据目录）
-3. **备份后**：删除临时 SQL 快照文件以节省空间
+1. **备份前**：执行 `pg_dumpall` 创建所有数据库的完整 SQL 备份（`backup_db.sql`）
+2. **备份**：备份 SQL 备份文件以及其他添加程序数据（但排除 PostgreSQL 数据目录）
+3. **备份后**：删除临时 SQL 备份文件以节省空间
 
 这种方法有几个优点：
 
-- **一致性**：SQL 快照是事务一致的快照
+- **一致性**：SQL 备份是事务一致的快照
 - **安全性**：没有备份损坏或正在过渡的数据库文件的风险
-- **可移植性**：SQL 快照可以在不同的 PostgreSQL 版本之间恢复
-- **小尺寸**：备份中不包括大型 PostgreSQL 数据目录
+- **可移植性**：SQL 备份可以在不同的 PostgreSQL 版本之间恢复
+- **小尺寸**：备份不包括大型 PostgreSQL 数据目录
 
 ### 恢复如何工作
 
 当您恢复 Home Assistant 备份时：
 
-1. 添加组件使用恢复的 `backup_db.sql` 文件启动
-2. 如果 PostgreSQL 数据目录丢失或损坏，添加组件：
+1. 添加程序使用恢复的 `backup_db.sql` 文件启动
+2. 如果 PostgreSQL 数据目录丢失或损坏，添加程序将：
    - 初始化一个新的 PostgreSQL 数据库
-   - 自动从 SQL 快照恢复所有数据
-   - 成功恢复后删除 SQL 快照
+   - 自动从 SQL 备份恢复所有数据
+   - 成功恢复后删除 SQL 备份
 
-这种自动恢复过程确保即使：
+这种自动恢复过程确保即使发生以下情况，您的数据也能安全恢复：
 
 - 数据库文件损坏
 - 您正在恢复到不同的系统
 - PostgreSQL 升级失败
-
-您的数据也能安全恢复
 
 ### 手动备份
 
@@ -262,18 +260,18 @@ docker exec addon_timescaledb_timescaledb su - postgres -c "psql -U postgres -f 
 
 ### 重要提示
 
-- SQL 快照仅在备份过程中存在，并且会自动清理
-- 如果您需要保留备份 SQL 文件的副本，请在备份完成前复制它
-- PostgreSQL 数据目录（`/data/postgres/*`）不包含在备份中，以减少备份大小并提高可靠性
-- 恢复是自动的 - 从 Home Assistant 备份恢复时不需要手动干预
+- SQL 备份仅在备份过程中存在，并且会自动清理
+- 如果您需要保留备份 SQL 文件的副本，请在备份完成前将其复制
+- PostgreSQL 数据目录（`/data/postgres/*`）不包括在备份中，以减少备份大小并提高可靠性
+- 恢复是自动的 - 从 Home Assistant 备份恢复时无需手动干预
 
 ### 故障排除
 
 **如果恢复失败：**
 
-1. 检查添加组件日志以获取详细错误消息
-2. 备份 SQL 文件将保留在 `/data/backup_db.sql` 以便手动恢复
-3. 您可以尝试使用以下命令手动恢复：
+1. 检查添加程序日志以获取详细的错误消息
+2. 备份 SQL 文件将保留在 `/data/backup_db.sql` 以供手动恢复
+3. 您可以尝试使用以下命令进行手动恢复：
 
    ```bash
    docker exec -it addon_timescaledb_timescaledb su - postgres -c "psql -U postgres -f /data/backup_db.sql -d postgres"
@@ -282,29 +280,31 @@ docker exec addon_timescaledb_timescaledb su - postgres -c "psql -U postgres -f 
 **如果备份失败：**
 
 - 确保在备份期间 PostgreSQL 正在运行
-- 确保有足够的磁盘空间用于 SQL 快照
-- 查看添加组件日志以获取特定错误消息
+- 确保有足够的磁盘空间用于 SQL 备份
+- 查看添加程序日志以获取具体的错误消息
 
-### 现在做什么..
+### 现在做什么...
 
-嗯.. 开始探索吧！
+嗯...开始探索吧！
 
-您可以在以下位置阅读有关如何处理您的数据和 Grafana 的额外文档：
+您可以在此处阅读有关如何处理您的数据和使用 Grafana 的附加文档：
 
 https://github.com/expaso/hassos-addons/issues/1
 
 ## 支持
 
-- 有问题？
+- 有问题吗？
   [在此处打开问题][issues]
 
-- 对于一般仓库问题或添加组件建议？ [在此处打开问题][repo-issues]
+- 对于一般的仓库问题或添加程序建议？[在此处打开问题][repo-issues]
 
 [issues]: https://github.com/expaso/hassos-addon-timescaledb/issues
 [repo-issues]: https://github.com/expaso/hassos-addons/issues
 
 
 
-[项目阶段盾牌]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[维护状态盾牌]: https://img.shields.io/maintenance/yes/2025.svg
-[许可证盾牌]: https://img.shields.io/github/license/expaso/hassos-addon-TimescaleDB.svg
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
+[release-shield]: https://img.shields.io/badge/version-v5.4.2-blue.svg
+[release]: https://github.com/expaso/hassos-addon-timescaledb/tree/v5.4.2
+[license-shield]: https://img.shields.io/github/license/expaso/hassos-addon-TimescaleDB.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg

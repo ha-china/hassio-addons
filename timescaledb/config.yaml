@@ -1,7 +1,7 @@
 name: TimescaleDB
-version: 5.4.1
+version: 5.4.2
 slug: timescaledb
-description: '[老王杂谈说]：一个基于PostgreSQL的开源数据库，用于使用SQL的强大和便利性分析时间序列数据'
+description: '[老王杂谈说]：一个基于PostgreSQL构建的开源数据库，用于使用SQL的强大和便利性分析时间序列数据'
 url: https://ghfast.top/github.com/expaso/hassos-addon-timescaledb
 codenotary: hans@expaso.nl
 arch:
@@ -21,7 +21,8 @@ timeout: 60
 backup_pre: /usr/share/timescaledb/backup_pre.sh
 backup_post: /usr/share/timescaledb/backup_post.sh
 backup_exclude:
-  - /data/postgres/*
+  - data/postgres/**
+  - postgres/**
 ports:
   5432/tcp: null
 ports_description:

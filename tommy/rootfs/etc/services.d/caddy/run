@@ -17,7 +17,7 @@ cat > /tmp/Caddyfile << EOF
     log {
         output stdout
         format console
-        level INFO
+        level WARN
     }
 }
 
@@ -27,7 +27,7 @@ cat > /tmp/Caddyfile << EOF
     log {
         output stdout
         format console
-        level INFO
+        level WARN
     }
 
     @allowed {
