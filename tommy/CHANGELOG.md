@@ -1,5 +1,36 @@
 # TOMMY
 
+## 0.11.2
+
+### Minor Changes
+
+- Removed error logging for devices in zones with no other devices
+- Added default refresh interval to ESPHome YAML configurations
+
+## 0.11.1
+
+### Minor Changes
+
+- Improved webserial error in sensor debugger
+
+## 0.11.0
+
+### Major Changes
+
+- Algorithm improvements to lower false positives outside the zone perimeter
+
+## 0.10.6
+
+### Minor Changes
+
+- Added default to ingress path
+
+## 0.10.5
+
+### Minor Changes
+
+- ESPHome as compile flag instead of runtime variable
+
 ## 0.10.4
 
 ### Minor Changes

@@ -1,7 +1,7 @@
 name: TOMMY
-version: "0.10.4"
+version: "0.11.2"
 slug: tommysense-homeassistant-addon
-description: '[老王杂谈说]：TOMMY (Home Assistant 插件)'
+description: '[老王杂谈说]：TOMMY（Home Assistant插件）'
 url: "https://ghfast.top/github.com/tommy-sense/homeassistant-addon"
 arch:
   - aarch64
