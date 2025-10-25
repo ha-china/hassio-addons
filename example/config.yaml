@@ -1,14 +1,13 @@
 name: Example
-version: 11.0.3
+version: 12.0.0
 slug: example
-description: '[老王杂谈说]：社区家庭助手插件示例'
+description: '[老王杂谈说]：社区Home Assistant插件示例'
 url: https://ghfast.top/github.com/hassio-addons/addon-example
 codenotary: codenotary@frenck.dev
 init: false
 arch:
   - aarch64
   - amd64
-  - armv7
 options:
   log_level: info
   seconds_between_quotes: 5

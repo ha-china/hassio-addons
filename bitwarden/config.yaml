@@ -1,5 +1,5 @@
 name: Vaultwarden (Bitwarden)
-version: 0.24.3
+version: 0.25.0
 slug: bitwarden
 description: '[老王杂谈说]：开源密码管理解决方案'
 url: https://ghfast.top/github.com/hassio-addons/addon-bitwarden
@@ -9,7 +9,6 @@ init: false
 arch:
   - aarch64
   - amd64
-  - armv7
 ports:
   7277/tcp: 7277
 ports_description:

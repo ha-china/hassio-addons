@@ -14,7 +14,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它就会在右上角。谢谢！_
+_感谢所有星标我的仓库的人！要星标它，请点击下面的图片，然后它将在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -22,46 +22,46 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 ## 关于
 
-[webtop](https://github.com/webtop/webtop) 是一个可以通过任何现代网络浏览器访问的完整桌面环境。
-这个插件基于 Docker 镜像 https://github.com/linuxserver/docker-webtop
+[webtop](https://github.com/webtop/webtop) 是一个可通过任何现代网络浏览器访问的完整桌面环境。
+此插件基于 Docker 镜像 https://github.com/linuxserver/docker-webtop
 
 ## 配置
 
-Webui 可以通过 ingress 或在 <http://homeassistant:PORT> 找到。端口默认是禁用的，但可以通过插件的选项来启用。
+Webui 可以通过 Ingress 或在 <http://homeassistant:PORT> 找到。端口默认是禁用的，但可以通过插件选项启用。
 
-默认情况下，镜像基于 abc 用户，我们建议使用这个用户，因为所有的 init/config 都是围绕它构建的。默认密码也是 abc。如果你想改变这个密码并在访问界面时需要认证，只需在 webtop 中的 gui 终端中输入 passwd。然后当访问网络界面时使用路径：
+默认情况下，镜像基于 abc 用户，我们建议使用此用户，因为所有初始化/配置都基于它。默认密码也是 abc。如果您想更改此密码并在访问界面时需要身份验证，请在 webtop 中的图形终端中运行 passwd。然后，当访问网络界面时，使用路径：
 
 http://localhost:3000/?login=true
 
-应用程序的安装不是持久的，你需要通过插件的选项来安装。然而，它们的配置是持久的。
+应用程序的安装不是持久的，您需要通过插件选项进行安装。但是，它们的配置是持久的。
 
-如果图形不工作，使用 DRINODE 功能来选择你的图形设备。
+如果图形不工作，请使用 DRINODE 功能选择您的图形设备。
 
-查看所有潜在的环境变量：https://docs.linuxserver.io/images/docker-webtop#optional-environment-variables
+查看所有潜在的 ENV 变量：https://docs.linuxserver.io/images/docker-webtop#optional-environment-variables
 
 ```yaml
 TZ: timezone ; 国家/城市根据 https://manpages.ubuntu.com/manpages/trusty/man3/DateTime::TimeZone::Catalog.3pm.html
 additional_apps: engrampa,thunderbird # 允许安装应用程序，因为它们不是持久的
 DRINODE: 指定自定义图形设备，默认是 /dev/dri/renderD128
-DNS_servers: 8.8.8.8,1.1.1.1 # 保持空白以使用路由器的 DNS，或设置自定义 DNS 以避免在本地 DNS 广告拦截器的情况下发送垃圾邮件
-localdisks: sda1 # 将你的驱动硬件名称挂载到逗号分隔，或其标签。例如。 sda1, sdb1, MYNAS...
-networkdisks: "//SERVER/SHARE" # 可选，要挂载的 smb 服务器列表，用逗号分隔
-cifsusername: "username" # 可选，smb 用户名，所有 smb 共享相同
-cifspassword: "password" # 可选，smb 密码
-cifsdomain: "domain" # 可选，允许设置 smb 共享的域
+DNS_servers: 8.8.8.8,1.1.1.1 # 保持空白以使用路由器的 DNS，或设置自定义 DNS 以避免在本地 DNS 广告拦截器的情况下进行垃圾邮件
+localdisks: sda1 # 将您的驱动器的硬件名称挂载到逗号分隔，或其标签。例如。 sda1, sdb1, MYNAS...
+networkdisks: "//SERVER/SHARE" # 可选的，要挂载的 SMB 服务器的列表，用逗号分隔
+cifsusername: "username" # 可选的，SMB 用户名，所有 SMB 共享相同
+cifspassword: "password" # 可选的，SMB 密码
+cifsdomain: "domain" # 可选的，允许为 SMB 共享设置域
 ```
 
 ## 安装
 
-这个插件的安装非常简单，与安装任何其他插件没有区别。
+此插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到你的 home assistant 实例中（在 supervisor 插件商店的右上角，或如果你已经配置了我的 HA，点击下面的按钮）
-   [![打开你的 Home Assistant 实例并显示带有特定仓库 URL 预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装这个插件。
-1. 点击 `保存` 按钮以保存你的配置。
-1. 设置插件的选项以符合你的偏好。
+1. 将我的插件仓库添加到您的 home assistant 实例中（在右上角的 supervisor 插件商店中，或点击下面的按钮如果您已配置我的 HA）
+   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此插件。
+1. 点击 `保存` 按钮以保存您的配置。
+1. 设置插件选项以符合您的偏好。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
+1. 检查插件的日志以查看一切是否正常。
 1. 打开 WebUI 并调整软件选项
 
 ## 支持

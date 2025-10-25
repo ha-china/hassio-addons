@@ -10,7 +10,7 @@ chrony NTP 服务器。
 
 ## 关于
 
-一个所有本地网络主机都可以访问的 NTP 服务器，适用于设置互联网访问受限设备（如摄像头）的时间。
+一个对所有本地网络上的主机都可访问的 NTP 服务器，适用于设置互联网访问受限的设备上的时间（例如摄像头）。
 
 [buymeacoffee-shield]: https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg
 [buymeacoffee]: https://www.buymeacoffee.com/sinclairpaul
@@ -20,5 +20,5 @@ chrony NTP 服务器。
 [forum]: https://community.home-assistant.io/?u=frenck
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v5.2.2-blue.svg
-[release]: https://github.com/hassio-addons/addon-chrony/tree/v5.2.2
+[release-shield]: https://img.shields.io/badge/version-v6.0.0-blue.svg
+[release]: https://github.com/hassio-addons/addon-chrony/tree/v6.0.0

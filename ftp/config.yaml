@@ -1,14 +1,13 @@
 name: FTP
-version: 5.3.4
+version: 6.0.0
 slug: ftp
-description: '[老王杂谈说]：一个为Home Assistant设计的可靠且快速的FTP服务器'
+description: '[老王杂谈说]：一个安全快速的FTP服务器用于Home Assistant'
 url: https://ghfast.top/github.com/hassio-addons/addon-ftp
 codenotary: codenotary@frenck.dev
 startup: services
 arch:
   - aarch64
   - amd64
-  - armv7
 init: false
 host_network: true
 privileged:

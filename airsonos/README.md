@@ -8,17 +8,17 @@
 
 [![Support Frenck on Patreon][patreon-shield]][patreon]
 
-为您的 Sonos（和 UPnP）播放器提供 AirPlay 功能。
+AirPlay功能，适用于您的Sonos（和UPnP）播放器。
 
 ## 关于
 
-苹果设备使用 AirPlay 将音频发送到其他设备，但这与 Sonos 播放器不兼容。该插件尝试解决这一兼容性差距。
+苹果设备使用AirPlay将音频发送到其他设备，但这与Sonos播放器不兼容。此插件试图解决这种兼容性问题。
 
-它会检测您网络中的 Sonos 播放器，并为它们每个创建虚拟的 AirPlay 设备。它充当 AirPlay 客户端和真实 Sonos 设备之间的桥梁。
+它检测您网络中的Sonos播放器，并为每个播放器创建虚拟AirPlay设备。它充当AirPlay客户端和真实Sonos设备之间的桥梁。
 
-由于 Sonos 使用 UPnP，该插件也可能适用于其他 UPnP 播放器（例如，较新的三星电视）。
+由于Sonos使用UPnP，此插件也可能适用于其他UPnP播放器（例如，新款三星电视）。
 
-AirCast 插件基于优秀的 [AirConnect][airconnect] 项目。
+AirCast插件基于优秀的[AirConnect][airconnect]项目。
 
 [airconnect]: https://github.com/philippe44/AirConnect
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
@@ -31,5 +31,5 @@ AirCast 插件基于优秀的 [AirConnect][airconnect] 项目。
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v4.2.4-blue.svg
-[release]: https://github.com/hassio-addons/addon-airsonos/tree/v4.2.4
+[release-shield]: https://img.shields.io/badge/version-v5.0.0-blue.svg
+[release]: https://github.com/hassio-addons/addon-airsonos/tree/v5.0.0

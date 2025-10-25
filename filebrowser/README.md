@@ -14,15 +14,15 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库加星的人！要加星，请点击下面的图片，然后它会在右上角显示。谢谢！_
+_感谢所有给我的仓库加星标的人！要给仓库加星标，请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/filebrowser/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/filebrowser/stats.png)
 
 ## 关于
 
-基于Web的文件管理界面，提供了一种安全的方式来浏览、上传、下载、编辑和管理您Home Assistant系统上的文件。Filebrowser提供了一种干净、现代的界面，通过Web浏览器处理文件，支持多种文件格式、预览功能和全面的文件操作。
+基于Web的文件管理界面，为您的Home Assistant系统提供了一种安全的方式来浏览、上传、下载、编辑和管理文件。Filebrowser提供了一个干净、现代的界面，通过Web浏览器处理文件，支持多种文件格式、预览功能和全面的文件操作。
 
 此插件基于官方Filebrowser项目的[docker镜像](https://hub.docker.com/r/filebrowser/filebrowser)。
 
@@ -30,38 +30,38 @@ _感谢所有给我的仓库加星的人！要加星，请点击下面的图片�
 
 此插件的安装非常简单，与安装任何其他Home Assistant插件没有区别。
 
-1. [将我的Home Assistant插件仓库][repository]添加到您的Home Assistant实例。
+1. 将我的Home Assistant插件仓库[repository]添加到您的Home Assistant实例中。
 1. 安装此插件。
 1. 点击“保存”按钮以保存您的配置。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
+1. 检查插件的日志以查看是否一切顺利。
 1. 通过侧边栏或`<your-ip>:8071`访问Web界面。
 
 ## 配置
 
-Web界面可以在`<your-ip>:8071`或通过使用Ingress时的Home Assistant侧边栏找到。
+Web界面可以在`<your-ip>:8071`或通过Ingress使用Home Assistant侧边栏访问。
 
-**默认凭证：**
+**默认凭据：**
 - 用户名：`admin`
 - 密码：`admin`
 
-**重要：**首次登录后立即更改默认凭证以提高安全性。
+**重要：**首次登录后立即更改默认凭据以提高安全性。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
 |------|------|--------|-------|
-| `ssl` | bool | `false` | 启用Web界面的HTTPS |
-| `certfile` | str | `fullchain.pem` | SSL证书文件（位于`/ssl/`） |
-| `keyfile` | str | `privkey.pem` | SSL私钥文件（位于`/ssl/`） |
+| `ssl` | bool | `false` | 为Web界面启用HTTPS |
+| `certfile` | str | `fullchain.pem` | SSL证书文件（在`/ssl/`中） |
+| `keyfile` | str | `privkey.pem` | SSL私钥文件（在`/ssl/`中） |
 | `NoAuth` | bool | `true` | 禁用身份验证（更改时重置数据库） |
 | `disable_thumbnails` | bool | `true` | 禁用缩略图生成以提高性能 |
 | `base_folder` | str | _(可选)_ | 文件浏览器的根文件夹（默认为所有映射文件夹） |
-| `localdisks` | str | _(可选)_ | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | str | _(可选)_ | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | str | _(可选)_ | SMB网络共享的用户名 |
-| `cifspassword` | str | _(可选)_ | SMB网络共享的密码 |
-| `cifsdomain` | str | _(可选)_ | SMB网络共享的域 |
+| `localdisks` | str | _(可选)_ | 挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
+| `networkdisks` | str | _(可选)_ | 挂载的SMB共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | str | _(可选)_ | 用于网络共享的SMB用户名 |
+| `cifspassword` | str | _(可选)_ | 用于网络共享的SMB密码 |
+| `cifsdomain` | str | _(可选)_ | 用于网络共享的SMB域 |
 
 ### 示例配置
 
@@ -83,7 +83,7 @@ cifsdomain: "workgroup"
 
 1. 启动插件并等待其初始化。
 1. 通过Home Assistant侧边栏或`<your-ip>:8071`访问Web界面。
-1. 使用默认凭证登录：
+1. 使用默认凭据登录：
    - 用户名：`admin`
    - 密码：`admin`
 1. **重要：**立即通过点击“设置”>“用户管理”更改默认密码。
@@ -94,15 +94,15 @@ cifsdomain: "workgroup"
 
 此插件支持挂载本地驱动器和远程SMB共享：
 
-- **本地驱动器**：查看[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：查看[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### 自定义脚本和环境变量
 
-此插件支持通过`addon_config`映射的自定义脚本和环境变量：
+此插件通过`addon_config`映射支持自定义脚本和环境变量：
 
-- **自定义脚本**：查看[在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：查看[为您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **自定义脚本**：参见[在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **环境变量**：参见[向您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
 
 ## 支持
 

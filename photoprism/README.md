@@ -14,9 +14,9 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-所需最小配置：2个核心和4 GB内存
+所需最小配置：2核和4 GB内存
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它会在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞请点击下面的图片，然后它就会在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,52 +28,52 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 项目主页：https://github.com/photoprism/photoprism
 
-基于的Docker镜像：https://hub.docker.com/r/photoprism/photoprism
+基于的docker镜像：https://hub.docker.com/r/photoprism/photoprism
 
 ## 安装
 
 这个插件的安装非常简单，与安装任何其他Hass.io插件没有区别。
 
 1. [将我的Hass.io插件仓库][repository]添加到您的Hass.io实例。
-1. 安装这个插件。
-1. 点击`保存`按钮以保存您的配置。
-1. 启动插件。
-1. 检查插件的日志，看看是否一切顺利。
-1. 仔细配置插件以满足您的偏好，请参阅官方文档。
+2. 安装这个插件。
+3. 点击`保存`按钮以保存您的配置。
+4. 启动插件。
+5. 检查插件的日志以查看一切是否正常。
+6. 仔细配置插件以符合您的偏好，请参阅官方文档进行配置。
 
 ## 配置
 
-Web UI可以在<http://homeassistant:2342>或通过Ingress在侧边栏中找到。
-配置可以通过应用程序Web UI进行，除了以下选项。
+Webui可以在<http://homeassistant:2342>或通过Ingress在侧边栏中找到。
+配置可以通过插件WebUI完成，除了以下选项。
 
-**系统要求**：至少2个核心和4GB RAM
+**系统要求**：最小2核和4GB RAM
 **默认凭证**：
 - 用户名：admin
 - 密码：请更改密码
 
-**WebDAV访问**：使用URL `http://local-ip:addon-port/api/hassio.../originals`（请查看插件日志以获取完整路径）
+**WebDAV访问**：使用URL `http://local-ip:addon-port/api/hassio.../originals`（请参阅插件日志以获取完整路径）
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
-| `ssl` | 布尔 | `false` | 启用Web界面的HTTPS |
-| `certfile` | 字符串 | `fullchain.pem` | SSL证书文件（必须位于/ssl） |
-| `keyfile` | 字符串 | `privkey.pem` | SSL密钥文件（必须位于/ssl） |
-| `DB_TYPE` | 列表 | `sqlite` | 数据库类型（sqlite/mariadb_addon/external） |
-| `ORIGINALS_PATH` | 字符串 | `/share/photoprism/originals` | 照片和视频集合路径 |
-| `STORAGE_PATH` | 字符串 | `/share/photoprism/storage` | 缓存、数据库和sidecar文件路径 |
-| `IMPORT_PATH` | 字符串 | `/share/photoprism/import` | 导入文件路径 |
-| `BACKUP_PATH` | 字符串 | `/share/photoprism/backup` | 备份存储路径 |
-| `UPLOAD_NSFW` | 布尔 | `true` | 允许可能冒犯性的上传 |
-| `CONFIG_LOCATION` | 字符串 | | 额外配置.yaml的位置 |
-| `graphic_drivers` | 列表 | | 图形驱动（mesa） |
-| `ingress_disabled` | 布尔 | | 禁用Ingress以直接通过IP:端口访问 |
-| `localdisks` | 字符串 | | 挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | 字符串 | | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | 字符串 | | 用于网络共享的SMB用户名 |
-| `cifspassword` | 字符串 | | 用于网络共享的SMB密码 |
-| `cifsdomain` | 字符串 | | 用于网络共享的SMB域 |
+|------|------|--------|------|
+| `ssl` | bool | `false` | 启用Web界面的HTTPS |
+| `certfile` | str | `fullchain.pem` | SSL证书文件（必须在/ssl中） |
+| `keyfile` | str | `privkey.pem` | SSL密钥文件（必须在/ssl中） |
+| `DB_TYPE` | list | `sqlite` | 数据库类型（sqlite/mariadb_addon/external） |
+| `ORIGINALS_PATH` | str | `/share/photoprism/originals` | 照片和视频集合路径 |
+| `STORAGE_PATH` | str | `/share/photoprism/storage` | 缓存、数据库和sidecar文件路径 |
+| `IMPORT_PATH` | str | `/share/photoprism/import` | 导入文件路径 |
+| `BACKUP_PATH` | str | `/share/photoprism/backup` | 备份存储路径 |
+| `UPLOAD_NSFW` | bool | `true` | 允许可能冒犯性的上传 |
+| `CONFIG_LOCATION` | str | | 额外config.yaml的位置 |
+| `graphic_drivers` | list | | 图形驱动（mesa） |
+| `ingress_disabled` | bool | | 禁用Ingress以直接通过IP:端口访问 |
+| `localdisks` | str | | 挂载的本地驱动（例如，`sda1,sdb1,MYNAS`） |
+| `networkdisks` | str | | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | str | | 网络共享的SMB用户名 |
+| `cifspassword` | str | | 网络共享的SMB密码 |
+| `cifsdomain` | str | | 网络共享的SMB域 |
 
 ### 示例配置
 
@@ -96,7 +96,7 @@ cifsdomain: "workgroup"
 
 ### 高级配置
 
-可以在`/config/addons_config/photoprism/config.yaml`中配置额外的选项。
+额外的选项可以在`/config/addons_config/photoprism/config.yaml`中配置。
 完整列表：https://github.com/photoprism/photoprism/blob/develop/docker-compose.yml
 
 ### 外部数据库设置
@@ -120,11 +120,11 @@ PHOTOPRISM_DATABASE_PASSWORD: "PASSWORD"
 
 ## 使用Photoprism命令行界面
 
-Photoprism还提供了一个命令行界面：
+Photoprism还提供了命令行界面：
 
 https://docs.photoprism.app/getting-started/docker-compose/#command-line-interface
 
-您可以通过Portainer插件或执行`docker exec -it <photoprism container id> bash`通过_ssh_访问它。
+您可以通过portainer插件或执行`docker exec -it <photoprism container id> bash`通过_ssh_访问它。
 
 :warning: 不要使用`docker exec <photoprism container id> photoprism`，因为这会导致不可预测的行为。
 

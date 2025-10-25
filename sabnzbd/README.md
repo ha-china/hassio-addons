@@ -14,7 +14,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它将出现在右上角。谢谢！_
+_感谢所有给我的仓库加星标的人！要加星标，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -22,26 +22,27 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 ## 关于
 
-[sabnzbd](http://sabnzbd.net/) 是一个usenet下载器，用C++编写，旨在通过使用很少的系统资源来实现最大下载速度。这个插件基于docker镜像 https://github.com/linuxserver/docker-sabnzbd
+[sabnzbd](http://sabnzbd.net/) 是一个usenet下载器，用C++编写，设计时注重性能，以使用最少的系统资源实现最大下载速度。
+此插件基于以下docker镜像：https://github.com/linuxserver/docker-sabnzbd
 
 ## 配置
 
-Webui 可以在 <http://homeassistant:PORT> 或通过Ingress在侧边栏中找到。
-默认的用户名/密码：用户名:`sabnzbd`，密码:`tegbzn6789`
-配置可以通过app的WebUI进行，除了以下选项。
+Webui 可以在 <http://homeassistant:PORT> 或通过 Ingress 侧边栏访问。
+默认的用户名/密码：用户名：`sabnzbd`，密码：`tegbzn6789`
+配置可以通过app的WebUI进行，以下选项除外。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `PGID` | int | `0` | 文件权限的组ID |
-| `PUID` | int | `0` | 文件权限的用户ID |
-| `TZ` | str | | 时区（例如，`Europe/London`） |
-| `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | str | | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | str | | SMB网络共享的用户名 |
-| `cifspassword` | str | | SMB网络共享的密码 |
-| `cifsdomain` | str | | SMB网络共享的域 |
+|------|------|--------|-------|
+| `PGID` | 整数 | `0` | 文件权限的组ID |
+| `PUID` | 整数 | `0` | 文件权限的用户ID |
+| `TZ` | 字符串 | | 时区（例如，`Europe/London`） |
+| `localdisks` | 字符串 | | 挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
+| `networkdisks` | 字符串 | | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | 字符串 | | 网络共享的SMB用户名 |
+| `cifspassword` | 字符串 | | 网络共享的SMB密码 |
+| `cifsdomain` | 字符串 | | 网络共享的SMB域 |
 
 ### 示例配置
 
@@ -58,30 +59,30 @@ cifsdomain: "workgroup"
 
 ### 挂载驱动器
 
-这个插件支持挂载本地驱动器和远程SMB共享：
+此插件支持挂载本地驱动器和远程SMB共享：
 
 - **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
 - **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### 自定义脚本和环境变量
 
-这个插件通过 `addon_config` 映射支持自定义脚本和环境变量：
+此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
 - **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：参见 [为您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **环境变量**：参见 [向您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
 
 ## 安装
 
-这个插件的安装非常简单，与安装其他插件没有区别。
+此插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到您的home assistant实例（在supervisor插件商店的右上角，或如果您已配置我的HA，请点击下面的按钮）
+1. 将我的插件仓库添加到您的home assistant实例（在supervisor插件商店的右上角，或点击下面的按钮如果您已经配置了我的HA）
    [![打开您的Home Assistant实例并显示带有预填充特定仓库URL的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装这个插件。
+1. 安装此插件。
 1. 点击 `保存` 按钮以保存您的配置。
-1. 设置插件的选项以符合您的偏好。
+1. 设置插件选项以符合您的偏好。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切正常。
-1. 打开WebUI并调整软件选项。
+1. 打开WebUI并调整软件选项
 
 ## 支持
 

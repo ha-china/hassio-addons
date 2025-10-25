@@ -3,7 +3,7 @@
 [![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcodex%2Fconfig.yaml)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcodex%2Fconfig.yaml)
 ![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcodex%2Fconfig.yaml)
 ![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcodex%2Fconfig.yaml)
 
@@ -14,59 +14,59 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有给我的仓库添加星标的人！要添加星标，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/codex/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/codex/stats.png)
 
-## About
-
----
-
-[Codex](https://github.com/ajslater/codex) is a web based comic archive browser and reader
-This addon is based on the official docker image : https://hub.docker.com/r/ajslater/codex
-
-## Installation
+## 关于
 
 ---
 
-The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
+[Codex](https://github.com/ajslater/codex) 是一个基于网络的漫画存档浏览器和阅读器
+这个插件基于官方的 docker 镜像：https://hub.docker.com/r/ajslater/codex
 
-1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
-   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Set the add-on options to your preferences
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Open the webUI and adapt the software options
+## 安装
 
-## Configuration
+---
 
-Webui can be found at <http://homeassistant:PORT>.
-The default username/password : described in the startup log.
-Configurations can be done through the app webUI, except for the following options
+这个插件的安装非常简单，与安装任何其他插件没有区别。
 
-## Add theme/squeleton
+1. 将我的插件仓库添加到您的 home assistant 实例中（在 supervisor 插件商店的右上角，或者如果您已经配置了我的 HA，请点击下面的按钮）
+   [![打开您的 Home Assistant 实例并显示添加插件仓库对话框，预填充特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装这个插件。
+1. 点击 `保存` 按钮以保存您的配置。
+1. 设置插件的选项以符合您的偏好。
+1. 启动插件。
+1. 检查插件的日志以查看是否一切正常。
+1. 打开 WebUI 并调整软件选项
 
-You can place the user folder from the theme/skeleton in /share/codex/www/user,
+## 配置
 
-## Options
+Webui 可以在 <http://homeassistant:PORT> 找到。
+默认的用户名/密码：在启动日志中描述。
+配置可以通过应用程序的 WebUI 进行，除了以下选项
 
-| Option | Description | Default | Example |
-|--------|-------------|---------|---------|
-| `PGID` | Group ID for file permissions | `0` | `1000` |
-| `PUID` | User ID for file permissions | `0` | `1000` |
-| `TZ` | Timezone in long format | - | `America/Los_Angeles` |
-| `CODEX_RESET_ADMIN` | Reset admin user and password to defaults | - | `1` |
-| `CODEX_SKIP_INTEGRITY_CHECK` | Skip database integrity repair on startup | - | `1` |
-| `csrf_allowed` | Comma separated list of addresses allowed to access the app | `http://homeassistant.local:8123,https://homeassistant.local:8123` | `http://localhost:8123` |
-| `localdisks` | Hardware name of drives to mount (comma separated) | - | `sda1,sdb1,MYNAS` |
-| `networkdisks` | SMB servers to mount (comma separated) | - | `//SERVER/SHARE` |
-| `cifsusername` | SMB username for all shares | - | `username` |
-| `cifspassword` | SMB password | - | `password` |
-| `cifsdomain` | SMB domain | - | `WORKGROUP` |
+## 添加主题/骨架
+
+您可以将主题/骨架的用户文件夹放在 /share/codex/www/user 中，
+
+## 选项
+
+| 选项 | 描述 | 默认 | 示例 |
+|------|------|------|------|
+| `PGID` | 文件权限的组 ID | `0` | `1000` |
+| `PUID` | 文件权限的用户 ID | `0` | `1000` |
+| `TZ` | 长格式时区 | - | `America/Los_Angeles` |
+| `CODEX_RESET_ADMIN` | 将管理员用户和密码重置为默认值 | - | `1` |
+| `CODEX_SKIP_INTEGRITY_CHECK` | 启动时跳过数据库完整性修复 | - | `1` |
+| `csrf_allowed` | 允许访问应用程序的地址列表，用逗号分隔 | `http://homeassistant.local:8123,https://homeassistant.local:8123` | `http://localhost:8123` |
+| `localdisks` | 要挂载的驱动器的硬件名称，用逗号分隔 | - | `sda1,sdb1,MYNAS` |
+| `networkdisks` | 要挂载的 SMB 服务器，用逗号分隔 | - | `//SERVER/SHARE` |
+| `cifsusername` | 所有共享的 SMB 用户名 | - | `username` |
+| `cifspassword` | SMB 密码 | - | `password` |
+| `cifsdomain` | SMB 域 | - | `WORKGROUP` |
 
 ```yaml
 PGID: 1000
@@ -82,26 +82,26 @@ cifspassword: "password"
 cifsdomain: "WORKGROUP"
 ```
 
-### Custom Scripts and Environment Variables
+### 自定义脚本和环境变量
 
-This addon supports custom scripts and environment variables through the `addon_config` mapping:
+这个插件支持通过 `addon_config` 映射自定义脚本和环境变量：
 
-- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **Environment variables**: See [Add Environment Variables to your Addon](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **环境变量**：参见 [为您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
 
-### Mounting Drives
+### 挂载驱动器
 
-This addon supports mounting both local drives and remote SMB shares:
+这个插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-## Illustration
+## 插图
 
 ![image](https://github.com/alexbelgium/hassio-addons/assets/44178713/f1cf3cad-5bda-46df-a0f5-864b127d7b6b)
 
-## Support
+## 支持
 
-Create an issue on github
+在 github 上创建问题
 
 [repository]: https://github.com/alexbelgium/hassio-addons

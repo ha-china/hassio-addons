@@ -8,24 +8,23 @@
 
 [![Support Frenck on Patreon][patreon-shield]][patreon]
 
-Example add-on by Community Home Assistant add-ons.
+示例 Home Assistant 社区插件。
 
-## About
+## 关于
 
-This is an example add-on for Home Assistant. When started, it displays a
-random quote every 5 seconds.
+这是一个 Home Assistant 的示例插件。启动后，它每 5 秒显示一条随机引言。
 
-It shows off several features and structures like:
+它展示了多种功能和结构，例如：
 
-- Full blown GitHub repository.
-- General Dockerfile structure and setup.
-- The use of the `config.yaml` and `build.yaml` files.
-- General shell scripting structure (`run.sh`).
-- Quality assurance using CodeClimate.
-- Continuous integration and deployment using GitLab.
-- Usage of the Community Home Assistant Add-ons build environment.
-- Small use of the Bash function library in our base images.
-- The use of Docker label schema.
+- 完整的 GitHub 仓库。
+- 通用 Dockerfile 结构和设置。
+- 使用 `config.yaml` 和 `build.yaml` 文件。
+- 通用 shell 脚本结构（`run.sh`）。
+- 使用 CodeClimate 进行质量保证。
+- 使用 GitLab 进行持续集成和部署。
+- 使用社区 Home Assistant 插件构建环境。
+- 在基础镜像中少量使用 Bash 函数库。
+- 使用 Docker 标签方案。
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -37,5 +36,5 @@ It shows off several features and structures like:
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v11.0.3-blue.svg
-[release]: https://github.com/hassio-addons/addon-example/tree/v11.0.3
+[release-shield]: https://img.shields.io/badge/version-v12.0.0-blue.svg
+[release]: https://github.com/hassio-addons/addon-example/tree/v12.0.0

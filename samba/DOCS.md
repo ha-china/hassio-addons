@@ -1,34 +1,34 @@
-# Home Assistant 插件: Samba 共享
+# Home Assistant Add-on: Samba Share
 
 ## 安装
 
-按照以下步骤在您的系统上安装插件：
+按照以下步骤将插件安装到您的系统上：
 
-1. 在您的 Home Assistant 前端中导航至 **设置** -> **插件** -> **插件商店**。
-2. 找到 "Samba 共享" 插件并点击它。
+1. 在 Home Assistant 前端导航到 **设置** -> **插件** -> **插件商店**。
+2. 查找 "Samba share" 插件并点击它。
 3. 点击 "安装" 按钮。
 
 ## 如何使用
 
-1. 在配置部分，设置一个用户名和密码。
-   您可以指定任何用户名和密码；这些与您用于登录 Home Assistant 或登录将使用 Samba 共享的计算机的凭据没有任何关系。
-2. 查看启用的共享。禁用任何您不打算使用的共享。如果需要，可以稍后重新启用共享。
+1. 在配置部分，设置用户名和密码。
+   您可以指定任何用户名和密码；这些与您用于登录 Home Assistant 或用于使用 Samba share 的计算机的登录凭据无关。
+2. 查看启用的共享。禁用您不打算使用的任何共享。如果需要，可以稍后重新启用共享。
 
 ## 连接
 
-如果您在 Windows 上，使用 `\\<IP_ADDRESS>\`，如果您在 MacOS 上，使用 `smb://<IP_ADDRESS>` 连接到共享。
+如果您使用的是 Windows，您使用 `\\<IP_ADDRESS>\`，如果您使用的是 MacOS，您使用 `smb://<IP_ADDRESS>` 来连接到共享。
 
-此插件通过 smb (samba) 开放以下目录：
+此插件通过 smb（samba）公开以下目录：
 
-目录 | 描述
--- | --
-`addons` | 这是您的本地插件。
-`addon_configs` | 这是您的插件的配置文件。
-`backup` | 这是您的备份文件。
-`config` | 这是您的 Home Assistant 配置。
-`media` | 这是本地媒体文件。
-`share` | 这是您在插件和 Home Assistant 之间共享的数据。
-`ssl` | 这是您的 SSL 证书。
+| 目录 | 描述 |
+| -- | -- |
+| `addons` | 这用于您的本地插件。 |
+| `addon_configs` | 这用于您的插件配置文件。 |
+| `backup` | 这用于您的备份。 |
+| `config` | 这用于您的 Home Assistant 配置。 |
+| `media` | 这用于本地媒体文件。 |
+| `share` | 这用于在插件和 Home Assistant 之间共享的数据。 |
+| `ssl` | 这用于您的 SSL 证书。 |
 
 ## 配置
 
@@ -61,62 +61,64 @@ veto_files:
 compatibility_mode: false
 ```
 
-### 选项: `workgroup` (必需)
+### 选项：`workgroup` (必需)
 
-更改 WORKGROUP 以反映您的网络需求。
+将 WORKGROUP 更改为反映您的网络需求。
 
-### 选项: `local_master` (必需)
+### 选项：`local_master` (必需)
 
-启用以尝试成为子网中的本地主浏览器。
+启用以尝试成为子网上的本地主浏览器。
 
-### 选项: `username` (必需)
+### 选项：`username` (必需)
 
-您希望用于身份验证的 Samba 服务器的用户名。
+您希望用于向 Samba 服务器进行身份验证的用户名。
 
-### 选项: `password` (必需)
+### 选项：`password` (必需)
 
-与配置的用户名关联的密码，用于身份验证。
+与用于身份验证配置的用户名对应的密码。
 
-### 选项: `enabled_shares` (必需)
+### 选项：`enabled_shares` (必需)
 
-可访问的 Samba 共享列表。任何从列表中删除或注释掉的共享将无法访问。
+将要可访问的 Samba 共享的列表。从列表中删除或注释掉的任何共享将不可访问。
 
-### 选项: `allow_hosts` (必需)
+### 选项：`allow_hosts` (必需)
 
 允许访问共享文件夹的主机/网络列表。
 
-### 选项: `veto_files` (可选)
+### 选项：`veto_files` (可选)
 
-不可见且不可访问的文件列表。对于阻止客户端
-在共享中乱七八糟设置临时隐藏文件很有用
-（如 macOS 的 `.DS_Store` 或 Windows 的 `Thumbs.db` 文件）
+既不可见也不可访问的文件列表。用于阻止客户端在共享中堆砌临时隐藏文件（例如 macOS 的 `.DS_Store` 或 Windows 的 `Thumbs.db` 文件）。
 
-### 选项: `compatibility_mode`
+### 选项：`compatibility_mode`
 
-将此选项设置为 `true` 将启用 Samba 插件上的旧版遗留 Samba 协议。
-这可能会解决一些无法
-处理较新协议的客户端的问题，但会降低安全性。只有在绝对必要且了解可能后果时才使用它。
+将此选项设置为 `true` 将在 Samba 插件上启用旧的遗留 Samba 协议。这可能解决一些无法处理新协议的客户端的问题，但会降低安全性。仅在绝对需要并了解可能后果的情况下使用。
 
 默认值为 `false`。
 
-### 选项: `apple_compatibility_mode`
+### 选项：`apple_compatibility_mode`
 
-启用 Samba 配置以提高与 Apple 设备的互操作性。
-这可能导致不支持 xattr 的文件系统（如 exFAT）出现问题。
+启用 Samba 配置以提高与 Apple 设备的互操作性。这可能导致不支持 xattr 的文件系统（如 exFAT）出现问题。
 
 默认值为 `true`。
 
+### 选项：`server_signing`
+
+配置 SMB 服务器签名要求。此选项可以通过要求消息签名来提高安全性，从而有助于防止中间人攻击。
+有关详细信息的值，请参阅 `smb.conf` 的手册页：**default**、**auto**、**mandatory** 和 **disabled**。
+
+默认值为 `default`。
+
 ## 支持
 
-有问题吗？
+有问题？
 
-您有多种方式可以获得答案：
+您有几个选项来获得答案：
 
 - [Home Assistant Discord 聊天服务器][discord]。
 - Home Assistant [社区论坛][forum]。
-- 加入 [/r/homeassistant][reddit] 的 [Reddit 子版块][reddit]。
+- 加入 [Reddit 子版块][reddit] 在 [/r/homeassistant][reddit]
 
-如果您发现了一个bug，请 [在我们的 GitHub 上报告一个问题][issue]。
+如果您发现了一个错误，请 [在我们的 GitHub 上打开一个问题][issue]。
 
 [discord]: https://discord.gg/c5DvZ4e
 [forum]: https://community.home-assistant.io

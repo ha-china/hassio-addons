@@ -1,9 +1,9 @@
 ---
-version: 8.3.0
+version: 8.5.0
 slug: deconz
 name: deCONZ
 description: >-
-  [老王杂谈说]：通过Dresden Elektronik使用ConBee或RaspBee控制Zigbee网络
+  [老王杂谈说]：通过dresden elektronik使用ConBee或RaspBee控制Zigbee网络
 url: https://ghfast.top/github.com/home-assistant/addons/tree/master/deconz
 apparmor: false
 arch:

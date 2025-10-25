@@ -1,5 +1,5 @@
 name: Bookstack
-version: 3.2.1
+version: 4.0.0
 slug: bookstack
 description: '[老王杂谈说]：简单免费维基软件'
 url: https://ghfast.top/github.com/hassio-addons/addon-bookstack
@@ -9,7 +9,6 @@ init: false
 arch:
   - aarch64
   - amd64
-  - armv7
 services:
   - mysql:want
 map:

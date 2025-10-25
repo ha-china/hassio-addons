@@ -1,41 +1,32 @@
 # Home Assistant Community Add-on: AirSonos
 
-Apple devices use AirPlay to send audio to other devices, but this is not
-compatible with Sonos players. This add-on tries to solve this
-compatibility gap.
+苹果设备使用AirPlay将音频发送到其他设备，但这与Sonos播放器不兼容。此插件试图解决这种兼容性问题。
 
-It detects Sonos players in your network and creates virtual AirPlay
-devices for each of them. It acts as a bridge between the AirPlay client
-and the real Sonos device.
+它检测您网络中的Sonos播放器，并为每个播放器创建虚拟AirPlay设备。它充当AirPlay客户端和真实Sonos设备之间的桥梁。
 
-Since Sonos uses UPnP, the add-on might also work for other UPnP players
-(e.g., newer Samsung televisions).
+由于Sonos使用UPnP，因此此插件可能也适用于其他UPnP播放器（例如，较新的三星电视）。
 
-The AirCast add-on is based on the excellent [AirConnect][airconnect] project.
+AirCast插件基于优秀的[AirConnect][airconnect]项目。
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Home Assistant add-on.
+此插件的安装非常简单，与安装任何其他Home Assistant插件没有区别。
 
-1. Click the Home Assistant My button below to open the add-on on your Home
-   Assistant instance.
+1. 点击下面的Home Assistant My按钮以在您的Home Assistant实例中打开该插件。
 
-   [![Open this add-on in your Home Assistant instance.][addon-badge]][addon]
+   [![在您的Home Assistant实例中打开此插件。][addon-badge]][addon]
 
-1. Click the "Install" button to install the add-on.
-1. Start the "AirSonos" add-on
-1. Check the logs of the "AirSonos" add-on to see if everything went well.
+1. 点击“安装”按钮以安装插件。
+1. 启动“AirSonos”插件
+1. 检查“AirSonos”插件的日志，看看是否一切顺利。
 
-After ~30 seconds you should see some log messages appear in the add-on log.
-Using your iOS/Mac/iTunes/Airfoil/other clients, you should now see new AirPlay
-devices and can try to play audio to them.
+大约30秒后，您应该在插件日志中看到一些日志消息出现。现在，使用您的iOS/Mac/iTunes/Airfoil/其他客户端，您应该看到新的AirPlay设备，并可以尝试将音频播放到它们。
 
-## Configuration
+## 配置
 
-**Note**: _Remember to restart the add-on when the configuration is changed._
+**注意**：_更改配置时请记住重新启动插件。_
 
-Example add-on configuration:
+示例插件配置：
 
 ```yaml
 log_level: info
@@ -46,198 +37,126 @@ latency_http: 2000
 drift: true
 ```
 
-**Note**: _This is just an example, don't copy and past it! Create your own!_
+**注意**：_这只是一个示例，不要复制粘贴！创建您自己的！_
 
-### Option: `log_level`
+### 选项：`log_level`
 
-The `log_level` option controls the level of log output by the addon and can
-be changed to be more or less verbose, which might be useful when you are
-dealing with an unknown issue. Possible values are:
+`log_level`选项控制插件的日志输出级别，可以更改为更详细或更简洁，这在处理未知问题时可能很有用。可能的值有：
 
-- `trace`: Show every detail, like all called internal functions.
-- `debug`: Shows detailed debug information.
-- `info`: Normal (usually) interesting events.
-- `warning`: Exceptional occurrences that are not errors.
-- `error`: Runtime errors that do not require immediate action.
-- `fatal`: Something went terribly wrong. Add-on becomes unusable.
+- `trace`：显示每个细节，例如所有调用的内部函数。
+- `debug`：显示详细的调试信息。
+- `info`：正常（通常）有趣的事件。
+- `warning`：异常情况，但不是错误。
+- `error`：运行时错误，不需要立即采取行动。
+- `fatal`：出了严重的问题。插件变得无法使用。
 
-Please note that each level automatically includes log messages from a
-more severe level, e.g., `debug` also shows `info` messages. By default,
-the `log_level` is set to `info`, which is the recommended setting unless
-you are troubleshooting.
+请注意，每个级别自动包含更严重级别的日志消息，例如，`debug`也会显示`info`消息。默认情况下，`log_level`设置为`info`，这是推荐设置，除非您正在排除故障。
 
-These log level also affects the log levels of AirSonos server.
+这些日志级别也会影响AirSonos服务器的日志级别。
 
-### Option: `address`
+### 选项：`address`
 
-This option allows you to specify the IP address the AirSonos server needs to
-bind to. It will automatically detect the interface to use when this option is
-left empty. Nevertheless, it might get detected wrong (e.g., in case you have
-multiple network interfaces).
+此选项允许您指定AirSonos服务器需要绑定到的IP地址。当此选项为空时，它将自动检测要使用的接口。尽管如此，它可能会检测错误（例如，如果您有多个网络接口）。
 
-### Option: `port`
+### 选项：`port`
 
-The port the AirSonos server will expose itself on. The default `49152` should
-be fine in most cases. Only change this if you really have to.
+AirSonos服务器将暴露自身的端口。默认的`49152`在大多数情况下应该足够。只有当您确实需要更改时才更改它。
 
-### Option: `latency_rtp`
+### 选项：`latency_rtp`
 
-Allows you to tweak the buffering, which is needed when the audio is stuttering
-(e.g., low-quality network). This option specifies the number of ms the addon
-has to buffer the RTP audio (AirPlay). Setting this value below 500ms is not
-recommended!
+允许您调整缓冲区，这在音频卡顿时（例如，低质量网络）是需要的。此选项指定插件需要缓冲的RTP音频（AirPlay）的毫秒数。不建议将此值设置为低于500ms！
 
-### Option: `latency_http`
+### 选项：`latency_http`
 
-Allows you to tweak the buffering, which is needed when the audio is stuttering
-(e.g., low-quality network). This option specifies the number of ms the addon
-has to buffer the HTTP audio.
+允许您调整缓冲区，这在音频卡顿时（例如，低质量网络）是需要的。此选项指定插件需要缓冲的HTTP音频的毫秒数。
 
-### Option: `drift`
+### 选项：`drift`
 
-Set to `true` to let timing reference drift (no click).
+设置为`true`以允许时间参考漂移（无点击声）。
 
-## Sonos hints and limitations
+## Sonos提示和限制
 
-When a Sonos group is created, only the master of that group will appear as
-an AirPlay player and others will be removed if they were already detected.
-If the group is later split, then individual players will re-appear.
-Each detection cycle takes ~30 seconds.
+当创建Sonos组时，只有该组的主机将显示为AirPlay播放器，其他设备如果已经被检测到将会被移除。如果组后来被拆分，那么单独的播放器将会重新出现。
+每次检测周期大约需要30秒。
 
-Volume is set for the whole group, but the same level applies to all members.
-If you need to change individual volumes, you need to use a Sonos native
-controller. **Note**: these will be overridden if the group volume is later
-changed again from an AirPlay device.
+音量设置为整个组，但相同的级别适用于所有成员。如果您需要更改单个音量，您需要使用Sonos原生控制器。**注意**：如果后来从AirPlay设备再次更改组音量，这些设置将会被覆盖。
 
-## Latency options explained
+## 延迟选项解释
 
-These bridges receive real-time "synchronous" audio from the AirPlay controller
-in the format of RTP frames and forward it to the Sonos player in an HTTP
-"asynchronous" continuous audio binary format. In other words,
-the AirPlay clients "push" the audio using RTP and the Sonos players
-"pull" the audio using an HTTP GET request.
+这些桥梁从AirPlay控制器接收实时“同步”音频，以RTP帧的格式，并将其转发到Sonos播放器，以HTTP“异步”连续音频二进制格式。换句话说，
+AirPlay客户端使用RTP“推送”音频，而Sonos播放器使用HTTP GET请求“拉取”音频。
 
-A player using HTTP to get its audio expects to receive an initial large
-portion of audio as the response to its GET and this creates a large enough
-buffer to handle most further network congestion/delays. The rest of the audio
-transmission is regulated by the player using TCP flow control. However, when
-the source is an AirPlay RTP device, there is no such significant portion of
-audio available in advance to be sent to the Player, as the audio comes to the
-bridge in real time. Every 8ms, an RTP frame is received and is immediately
-forwarded as the continuation of the HTTP body. If the Sonos player
-starts to play immediately the first received audio sample, expecting an initial
-burst to follow, then any network congestion delaying RTP audio will starve
-the player and create shuttering.
+使用HTTP获取音频的播放器期望在GET响应中接收初始的大量音频，这会创建一个足够大的缓冲区来处理大多数进一步的网络拥塞/延迟。
+音频传输的其余部分由使用TCP流控制的播放器调节。然而，当源是一个AirPlay RTP设备时，没有预先发送到播放器的如此大量的音频，因为音频实时到达桥梁。
+每8毫秒，会收到一个RTP帧，并立即作为HTTP正文的延续转发。如果Sonos播放器立即开始播放第一个收到的音频样本，期望随后有一个初始的突发，
+那么任何延迟RTP音频的网络拥塞将会导致播放器饥饿并产生卡顿。
 
-The `latency_http` option allows a certain amount of silence frames to be sent
-to the Sonos player, in a burst at the beginning. Then, while this
-"artificial" silence is being played, it is possible for the bridge to build
-a buffer of RTP frames that will then hide network delays that might happen
-in further RTP frames transmission. This delays the start of the playback
-by `latency_http` ms.
+`latency_http`选项允许向Sonos播放器发送一定数量的静音帧，在开始时以突发方式发送。然后，在播放这些“人工”静音时，
+桥梁可以构建一个RTP帧缓冲区，然后隐藏可能发生在进一步RTP帧传输中的网络延迟。
+这会延迟播放的开始`latency_http`毫秒。
 
-However, RTP frames are transmitted using UDP, which means there is no guarantee
-of delivery, so frames might be lost from time to time
-(often happens on WiFi networks). To allow detection of lost frames, they are
-numbered sequentially (1,2 ... n) so every time two received frames are not
-consecutive, the missing ones can be asked again by the AirPlay receiver.
+然而，RTP帧使用UDP传输，这意味着没有交付保证，因此帧可能会不时丢失（通常发生在WiFi网络上）。为了允许检测丢失的帧，它们按顺序编号（1,2 ... n），因此每次收到的两个帧不连续时，AirPlay接收器可以请求重新发送丢失的帧。
 
-Typically, the bridge forwards immediately every RTP frame using HTTP and again,
-in HTTP, the notion of frame numbers does not exist, it is just the continuous
-binary audio. So it is not possible to send audio non-sequentially when using
-HTTP.
+通常，桥梁会立即使用HTTP转发每个RTP帧，再次在HTTP中，帧编号的概念不存在，它只是连续的二进制音频。因此，在使用HTTP时，不可能以非顺序方式发送音频。
 
-For example, if received RTP frames are numbered 1,2,3,6, this bridge will
-forward (once decoded and transformed into raw audio) 1,2,3 immediately using
-HTTP but when it receives 6, it will re-ask for 4 and 5 to be resent and
-hold 6 while waiting (if 6 was transmitted immediately, the Sonos
-will play 1,2,3,6 ... not nice).
+例如，如果收到的RTP帧编号为1,2,3,6，此桥梁将立即使用HTTP转发（解码和转换为原始音频）1,2,3，但当收到6时，它将请求重新发送4和5，并暂时保留6，等待（如果6立即传输，Sonos将播放1,2,3,6 ... 不太好）。
 
-The `latency_rtp` option sets for how long frame 6 shall be held before adding
-two silence frames for 4 and 5 and send sending 4,5,6. Obviously, if this delay
-is larger than the buffer in the Sonos player, playback will stop by
-lack of audio. Note that `latency_rtp` does not delay playback start.
+`latency_rtp`选项设置在添加两个静音帧以发送4和5之前，应保留帧6多长时间。显然，如果此延迟大于Sonos播放器中的缓冲区，播放将因缺少音频而停止。
+请注意，`latency_rtp`不会延迟播放的开始。
 
-> **Note**: `latency_rtp` and `latency_http` could have been merged into a
-> single `latency` parameter which would have set the max RTP frames holding time
-> as well as the duration of the initial additional silence (delay),
-> however, all Sonos devices do properly their own buffering of HTTP audio
-> (i.e., they wait until they have received a certain amount of audio before
-> starting to play), then adding silence would have introduced an extra
-> unnecessary delay in playback.
+> **注意**：`latency_rtp`和`latency_http`本可以合并为一个`latency`参数，该参数将设置最大RTP帧保留时间以及初始额外静音的持续时间（延迟），
+> 然而，所有Sonos设备都正确地缓冲HTTP音频（即，它们等待收到一定量的音频后再开始播放），然后添加静音将会在播放中引入不必要的额外延迟。
 
-## Tweaking AirSonos
+## 调整AirSonos
 
-AirSonos creates a configuration file called `airsonos.xml` in the add-on
-configuration directory. This file allows you to tweak each device
-separately. Every time it finds a new device, it will be added to that file.
+AirSonos在插件配置目录中创建一个名为`airsonos.xml`的配置文件。此文件允许您单独调整每个设备。每次它发现一个新设备时，它都会被添加到该文件中。
 
-> **NOTE**: It is HIGHLY recommended to stop the addon before making changes
-> to the configuration file manually.
+> **注意**：在手动更改配置文件之前，强烈建议停止插件。
 
-## Known issues and limitations
+## 已知问题和限制
 
-- This add-on does support ARM-based devices, nevertheless, they must
-  at least be an ARMv7 device. (Raspberry Pi 1 and Zero is not supported).
+- 此插件支持基于ARM的设备，但它们至少必须是ARMv7设备。（不支持Raspberry Pi 1和Zero）。
 
-## Changelog & Releases
+## 更改日志和发布
 
-This repository keeps a change log using [GitHub's releases][releases]
-functionality.
+此存储库使用[GitHub的发布][releases]功能维护更改日志。
 
-Releases are based on [Semantic Versioning][semver], and use the format
-of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented
-based on the following:
+发布基于[语义版本控制][semver]，并使用`MAJOR.MINOR.PATCH`的格式。简而言之，版本将根据以下内容进行增量：
 
-- `MAJOR`: Incompatible or major changes.
-- `MINOR`: Backwards-compatible new features and enhancements.
-- `PATCH`: Backwards-compatible bugfixes and package updates.
+- `MAJOR`：不兼容或主要更改。
+- `MINOR`：向后兼容的新功能和增强。
+- `PATCH`：向后兼容的补丁和包更新。
 
-## Support
+## 支持
 
-Got questions?
+有问题吗？
 
-You have several options to get them answered:
+您有几个选项可以回答这些问题：
 
-- The [Home Assistant Community Add-ons Discord chat server][discord] for add-on
-  support and feature requests.
-- The [Home Assistant Discord chat server][discord-ha] for general Home
-  Assistant discussions and questions.
-- The Home Assistant [Community Forum][forum].
-- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
+- [Home Assistant社区插件Discord聊天服务器][discord]用于插件支持和功能请求。
+- [Home Assistant Discord聊天服务器][discord-ha]用于一般Home Assistant讨论和问题。
+- Home Assistant [社区论坛][forum]。
+- 加入[Reddit子版块][reddit]中的[/r/homeassistant][reddit]
 
-You could also [open an issue here][issue] GitHub.
+您也可以在GitHub上[打开一个问题][issue]。
 
-## Authors & contributors
+## 作者和贡献者
 
-The original setup of this repository is by [Franck Nijhof][frenck].
+此存储库的原始设置由[Franck Nijhof][frenck]完成。
 
-For a full list of all authors and contributors,
-check [the contributor's page][contributors].
+有关所有作者和贡献者的完整列表，请查看[贡献者页面][contributors]。
 
-## License
+## 许可证
 
-MIT License
+MIT许可证
 
-Copyright (c) 2017-2025 Franck Nijhof
+版权所有（c）2017-2025 Franck Nijhof
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+特此授予任何获得此软件及其相关文档文件（“软件”）副本的人，在不受限制的情况下处理该软件的权利，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许获得软件的人这样做，但须遵守以下条件：
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+上述版权声明和此许可声明应包含在软件的所有副本或重要部分中。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+该软件按“原样”提供，不提供任何明示或暗示的保证，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，作者或版权持有人均不对任何索赔、损害赔偿或其他责任负责，无论是由合同、侵权或其他行为引起的，均与软件或软件的使用或其他交易有关。
 
 [addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
 [addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=a0d7b954_airsonos&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository
