@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.1.7
+
+- updated taptap to v0.1.2 - implemented reconnect logic
+  
 ## 0.1.6
 
 - updated taptap-mqtt to v0.0.9 - fix for negative timezones
