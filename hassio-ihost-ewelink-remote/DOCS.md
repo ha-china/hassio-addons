@@ -1,75 +1,73 @@
 # eWeLink-Remote Gateway
-## 1. 简介
-eWeLink-Remote Gateway 插件是一个支持添加 eWeLink-Remote 子设备并将子设备同步到 Home Assistant 的 eWeLink-Remote Gateway 网关，例如 **[R5](https://sonoff.tech/product/smart-wall-switches/r5/),[R5W](https://sonoff.tech/product/smart-wall-switches/r5/),[S-Mate](https://sonoff.tech/product/diy-smart-switches/s-mate/),[S-Mate2](https://sonoff.tech/product/diy-smart-switches/s-mate/)**。您可以在 Home Assistant 自动化中选择 eWeLink-Remote 子设备，并通过 eWeLink-Remote Gateway 子设备报告的单击、双击和长按事件触发自动化。**了解更多信息 [关于 eWeLink-Remote](https://sonoff.tech/news-and-events/what-is-ewelink-remote-control/)**。
+## 1. Introduction
+eWeLink-Remote Gateway add-on is an eWeLink-Remote Gateway gateway that supports adding eWeLink-Remote sub-devices and syncing sub-devices  to Home Assistant,such as  **[R5](https://sonoff.tech/product/smart-wall-switches/r5/),[R5W](https://sonoff.tech/product/smart-wall-switches/r5/),[S-Mate](https://sonoff.tech/product/diy-smart-switches/s-mate/),[S-Mate2](https://sonoff.tech/product/diy-smart-switches/s-mate/)**. You can select eWeLink-Remote sub-devices in Home Assistant Automations and trigger automations through single-click,double-click,and long-press events reported by eWeLink-Remote Gateway sub-devices.**[Learn more](https://sonoff.tech/news-and-events/what-is-ewelink-remote-control/)** about eWeLink-Remote.
 
-## 2. 前置条件
-一个可用的蓝牙，可以是运行 Home Assistant 的硬件上的蓝牙，也可以是蓝牙适配器或蓝牙代理设备。
+## 2. Prerequisite
+A working Bluetooth, which can be the Bluetooth on the hardware running Home Assistant, a Bluetooth Dongle, or a Bluetooth proxy device 
 
-### 2.1 非蓝牙代理
-- 进入设置 -> 选择设备和服务 -> 启用蓝牙集成
-- 要启用蓝牙被动扫描：进入蓝牙集成 > 配置 > 配置蓝牙选项，勾选被动扫描，然后点击提交。
+### 2.1 Non-Bluetooth Agent
+- Go to Settings -> Select Devices and Services ->  Enable Bluetooth integration
+- To enable Bluetooth passive scanning: Go to Bluetooth Integration > Configuration > Configure Bluetooth Options, check Passive Scanning, and click Submit.
 
-### 2.2 使用蓝牙代理
-#### 安装 ble_passthrough 自定义集成
-- 安装 HACS
-- 打开 HACS → 右上角菜单 → 自定义仓库。
-- 添加仓库 URL: https://github.com/iHost-Open-Source-Project/ble_passthrough。选择 *集成* 作为类别
-- 在 HACS 中搜索 BLE Passthrough 并安装它。
-- 安装后，在您的配置文件中添加以下内容：
+### 2.2 Using Bluetooth Agent
+#### Install the ble_passthrough Custom Integration
+- Installing HACS
+- Open HACS → top-right menu → Custom repositories.
+- Add the repository URL: https://github.com/iHost-Open-Source-Project/ble_passthrough. Select *Integration* as the category
+- Search for BLE Passthrough in HACS and install it.
+- After installation, add the following to your configuration.yaml
 ```yaml
 ble_passthrough:
 ```
-- 保存文件并重启 Home Assistant。
+- Save the file and restart Home Assistant.
 
-## 3. 如何安装 eWeLink-Remote Gateway 插件？
-### 3.1 将 eWeLink-Remote Gateway 插件添加到仓库
-如果您已经添加了此仓库的插件（例如 iHost Hardware Control），则可以跳过此步骤，直接进入插件商店安装所需的插件。
-1. 通过 URL
-- 导航到设置 > 插件商店> 点击右上角的三点菜单（⋮）并选择仓库
-- 在输入框中输入仓库 URL：https://github.com/iHost-Open-Source-Project/hassio-ihost-addon
-2. 通过按钮点击
-- 点击此按钮自动添加插件    
-[![打开您的 Home Assistant 实例并显示添加插件仓库对话框，并预填特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FiHost-Open-Source-Project%2Fhassio-ihost-addon)
-### 3.2 安装 eWeLink-Remote Gateway 插件
-1. 在插件商店中搜索 eWeLink-Remote Gateway。
+## 3. How to Install eWeLink-Remote Gateway Add-on?
+### 3.1 Add eWeLink-Remote Gateway Add-on to Repositories
+Skip this step and simply proceed to the Add-on Store to install the required add-on if you have already added the add-ons from this repository (e.g., iHost Hardware Control).
+1. Via URL
+- Navigate to Settings > Add-on Store> Click the three-dot menu (⋮) in the top right corner and select Repositories
+- Enter the repository URL into the input box: https://github.com/iHost-Open-Source-Project/hassio-ihost-addon
+2. Via Button Clicking
+- Click this buttonto add the add-on automatically    
+[![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FiHost-Open-Source-Project%2Fhassio-ihost-addon)
+### 3.2 Install eWeLink-Remote Gateway Add-on
+1.    Search for eWeLink-Remote Gateway in the Add-ons Store.
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/find.png)
-2. 点击安装
+2.    Click Install
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/install_Addon.png)
-3. 等待安装完成
-### 3.3 启动 eWeLink-Remote Gateway 插件
-安装后，点击启动以启动插件。等待服务完全启动后再继续。
+3.   Wait for the installation to complete
+### 3.3 Start the eWeLink-Remote Gateway Add-on
+After installation, click Start to launch the add-on. Wait until the service has fully started before proceeding.
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/start.png)
-
-## 4. 通过 eWeLink-Remote Gateway 插件添加设备
-1. 点击“Web 界面”进入插件操作界面。
+## 4. Add devices via eWeLink-Remote Gateway Add-on
+1.  Click "Web Interface" to enter the Add-on operation interface.
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/open_web_ui1.png)
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/open_web_ui.png)
-**注意*：
-- 要使用 eWeLink-Remote Gateway 插件，Home Assistant 中必须启用蓝牙。如果没有蓝牙硬件模块（可配置的蓝牙适配器）或蓝牙集成未启用，插件将无法工作；
-您可以查看日志以确定插件是否因蓝牙集成未启用而失败运行。
+**Note*:**
+- Bluetooth must be enabled in Home Assistant to use the eWeLink-Remote Gateway Add-on. If there is no Bluetooth hardware module (configurable Bluetooth Dongle) or Bluetooth integration is not enabled, the Add-on will not work;
+You can check the log to determine whether the Add-on failed to run because the Bluetooth integration is not enabled. 
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/Log-image.png)
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/Log-Blue.png)
-- 在点击“配对”以开始添加 eWeLink-Remote 子设备之前，您需要配置并启用蓝牙“**被动扫描**”(https://www.home-assistant.io/integrations/bluetooth/#passive-scanning) 以检测和连接到 eWeLink-Remote 子设备。如果事先未启用，将出现提示页面。您可以按照提示路径（进入蓝牙集成 > 配置 > 配置蓝牙选项，勾选被动扫描，然后点击提交。）来启用它。
+- Before clicking "Pair" to start adding eWeLink-Remote sub-devices, you need to configure and enable Bluetooth "[ passive scanning ](https://www.home-assistant.io/integrations/bluetooth/#passive-scanning)  " to detect and connect to eWeLink-Remote sub-devices. If it is not enabled in advance, a prompt page will appear. You can follow the prompt path (Go to Bluetooth Integration > Configuration > Configure Bluetooth Options, check Passive Scanning, and click Submit.) to enable it.
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/passive_scanning.png)
-2. 点击“配对”以开始添加设备。
-倒计时为 180 秒。在添加过程中，您可以手动点击“退出 xxs”以停止添加设备。在倒计时期间按子设备的任何按钮以完成设备添加。
-**注意*：
-- 支持 180 秒内添加多个设备
-- 添加智能灯设备的上限为 50
+2.  Click "Pair" to start adding devices. 
+Countdown is 180 seconds. During the adding process, you can manually click "Quit xxs" to stop adding devices. Press any button of the sub-device during the countdown to complete the device addition. 
+**Note*:**
+- Supports adding multiple devices within 180 seconds
+- The upper limit of adding light smart devices is 50
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/Pair.png)
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/add_device.png)
-3. 编辑设备列表  
-点击“编辑”以管理添加的设备，选择相应的设备，然后点击“删除”以确认删除选中的设备
+3.  Edit device list  
+Click "Edit" to manage the added devices, select the corresponding device, and click "Delete" to confirm to delete the selected device
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/Edit.png)
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/Del.png)
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/Del_1.png)
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/device_deleted.png)
-
-## 5. 在 Home Assistant 中查看设备
-1. 在 Home Assistant 中查看设备
+## 5. View devices in Home Assistant
+1. View devices in Home Assistant
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/HA_device.png)
-2. 设备添加成功后，您可以在 Home Assistant 中配置场景作为场景触发条件。
+2. After the device is added successfully, you can configure scenes in Home Assistant as scene trigger conditions.
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/Sence.png)
-**注意*：
-- 在 Home Assistant 自动化中成功配置 eWeLink-Remote 子设备后，如果实体名称被更改，实体名称将在自动化配置信息中显示为“未知”，但这将不会影响自动化场景触发。
+**Note*:**
+- After the eWeLink-Remote sub-device is successfully configured in Home Assistant Automation, if the entity name is changed, the entity name will be displayed as "Unknown" in the automation configuration information, but it will not affect the automation scene triggering.
 ![](https://raw.githubusercontent.com/iHost-Open-Source-Project/hassio-ihost-addon/master/hassio-ihost-ewelink-remote/images/UNknow.png)

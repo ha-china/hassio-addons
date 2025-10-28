@@ -1,38 +1,38 @@
 # eWeLink-Remote Gateway Add-on
 
 
-![支持 armv7 架构](https://img.shields.io/badge/armv7-yes-green.svg)
-![支持 aarch64 架构](https://img.shields.io/badge/aarch64-yes-green.svg)
-![支持 amd64 架构](https://img.shields.io/badge/amd64-yes-green.svg)
+![Supports armv7 Architecture](https://img.shields.io/badge/armv7-yes-green.svg)
+![Supports aarch64 Architecture](https://img.shields.io/badge/aarch64-yes-green.svg)
+![Supports amd64 Architecture](https://img.shields.io/badge/amd64-yes-green.svg)
 
 
-## 关于
-eWeLink-Remote Gateway add-on 是一个支持添加 eWeLink-Remote 子设备并将子设备同步到 Home Assistant 的 eWeLink-Remote Gateway 网关，例如 **[R5](https://sonoff.tech/product/smart-wall-switches/r5/),[R5W](https://sonoff.tech/product/smart-wall-switches/r5/),[S-Mate](https://sonoff.tech/product/diy-smart-switches/s-mate/),[S-Mate2](https://sonoff.tech/product/diy-smart-switches/s-mate/)**。您可以在 Home Assistant 自动化中选择 eWeLink-Remote 子设备，并通过 eWeLink-Remote Gateway 子设备报告的单击、双击和长按事件触发自动化。
+## About
+eWeLink-Remote Gateway add-on is an eWeLink-Remote Gateway gateway that supports adding eWeLink-Remote sub-devices and syncing sub-devices  to Home Assistant,such as **[R5](https://sonoff.tech/product/smart-wall-switches/r5/),[R5W](https://sonoff.tech/product/smart-wall-switches/r5/),[S-Mate](https://sonoff.tech/product/diy-smart-switches/s-mate/),[S-Mate2](https://sonoff.tech/product/diy-smart-switches/s-mate/)**. You can select eWeLink-Remote sub-devices in Home Assistant Automations and trigger automations through single-click,double-click,and long-press events reported by eWeLink-Remote Gateway sub-devices.
 
 
-## 前置条件
-一个可用的蓝牙，可以是运行 Home Assistant 的硬件上的蓝牙、蓝牙接收器或蓝牙代理设备 
+## Prerequisite
+A working Bluetooth, which can be the Bluetooth on the hardware running Home Assistant, a Bluetooth Dongle, or a Bluetooth proxy device 
 
-### 非蓝牙代理
-- 进入设置 -> 选择设备和服务 -> 启用蓝牙集成
-- 要启用蓝牙被动扫描：进入蓝牙集成 > 配置 > 配置蓝牙选项，勾选被动扫描，然后点击提交。
+### Non-Bluetooth Agent
+- Go to Settings -> Select Devices and Services ->  Enable Bluetooth integration
+- To enable Bluetooth passive scanning: Go to Bluetooth Integration > Configuration > Configure Bluetooth Options, check Passive Scanning, and click Submit.
 
-### 使用蓝牙代理
-#### 安装 ble_passthrough 自定义集成
-- 安装 HACS
-- 打开 HACS → 右上角菜单 → 自定义仓库。
-- 添加仓库 URL：https://github.com/iHost-Open-Source-Project/ble_passthrough。选择 *集成* 作为类别
-- 在 HACS 中搜索 BLE Passthrough 并安装它。
-- 安装后，在您的 configuration.yaml 中添加以下内容
+### Using Bluetooth Agent
+#### Install the ble_passthrough Custom Integration
+- Installing HACS
+- Open HACS → top-right menu → Custom repositories.
+- Add the repository URL: https://github.com/iHost-Open-Source-Project/ble_passthrough. Select *Integration* as the category
+- Search for BLE Passthrough in HACS and install it.
+- After installation, add the following to your configuration.yaml
 ```yaml
 ble_passthrough:
 ```
-- 保存文件并重启 Home Assistant。
+- Save the file and restart Home Assistant.
 
-## 安装
-1. 进入添加组件商店 → 点击右上角的 **更多** 按钮 (⋮) → 选择 **仓库**  
-2. 粘贴以下 URL:  
+## Installation
+1. Go to the Add-on Store → Click the **More** button (⋮) in the upper-right corner → Select **Repositories**  
+2. Paste the following URL:  
    [https://github.com/iHost-Open-Source-Project/hassio-ihost-addon](https://github.com/iHost-Open-Source-Project/hassio-ihost-addon)  
-3. 或者，直接点击下面的按钮自动添加：
+3. Or, simply click the button below to add it automatically:
 
-[![添加仓库](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FiHost-Open-Source-Project%2Fhassio-ihost-addon)
+[![Add Repository](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FiHost-Open-Source-Project%2Fhassio-ihost-addon)
