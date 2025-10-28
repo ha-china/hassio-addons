@@ -34,10 +34,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get install jq -y
           npm install -g ai-markdown-translator
           mkdir -p ~/bin
-          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O ~/bin/yq
+          wget -q https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O ~/bin/yq
           chmod +x ~/bin/yq
           echo "$HOME/bin" >> $GITHUB_PATH
           yq
