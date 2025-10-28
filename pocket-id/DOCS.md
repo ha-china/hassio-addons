@@ -1,23 +1,23 @@
-# Pocket ID Add-on
+# 口袋 ID 插件
 
 ## 概述
 
-[Pocket ID](https://pocket-id.org/) 是一个简单且易于使用的 **OIDC（OpenID Connect）提供者**，它支持使用密钥进行身份验证。它允许您的服务无缝且安全地用户身份验证，而无需依赖传统密码。
+[Pocket ID](https://pocket-id.org/) 是一个简单且易于使用的 **OIDC（OpenID Connect）提供者**，它允许使用密钥进行身份验证。它允许为您的服务提供无缝且安全的用户身份验证，而无需依赖传统密码。
 
-此 add-on 作为 Home Assistant add-on 运行，在您的网络中提供 **身份提供者**。
+此插件作为 Home Assistant 插件运行，在您的网络中提供一个 **身份提供者**。
 
 ## 支持的架构
 
-此 add-on 支持以下架构：
+此插件支持以下架构：
 
 - `amd64`
 - `aarch64`
 
 ## 配置
 
-**注意**：_更改配置时请记住重新启动 add-on。_
+**注意**：_更改配置时请记住重新启动插件。_
 
-示例 add-on 配置：
+示例插件配置：
 
 ```yaml
 APP_URL: https://id.domain.com
@@ -26,7 +26,7 @@ TRUST_PROXY: true
 
 ### 选项：`APP_URL`
 
-`APP_URL` 选项设置 Pocket ID 实例的公开 URL。这必须是 HTTPS 并且客户端可以访问它以正常进行身份验证。
+`APP_URL` 选项设置 Pocket ID 实例的面向公众的 URL。这必须是 HTTPS，并且客户端可以访问它以正常进行身份验证。
 
 ### 选项：`TRUST_PROXY`
 
@@ -36,12 +36,12 @@ TRUST_PROXY: true
 
 MaxMind GeoIP 数据库集成的可选许可证密钥。如果提供，它将启用基于地理位置的功能。
 
-## 如何使用
+## 使用方法
 
-1. **在 Home Assistant 中安装 add-on**。
-2. **按需配置**选项通过 add-on 设置。
-3. **启动 add-on** 以启动 Pocket ID。
-4. **使用配置的 `APP_URL`** 以与您的 OIDC 兼容应用程序集成。
+1. **在 Home Assistant 中安装插件**。
+2. **根据需要配置选项**，通过插件设置。
+3. **启动插件**以启动 Pocket ID。
+4. **使用配置的 `APP_URL`**，以与您的 OIDC 兼容应用程序集成。
 
 ## 故障排除
 
