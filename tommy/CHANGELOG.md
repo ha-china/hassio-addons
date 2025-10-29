@@ -1,5 +1,24 @@
 # TOMMY
 
+## 0.12.0
+
+### Major Changes
+
+- Added support for ESP32 and ESP32-S2
+
+### Minor Changes
+
+- Show variable motion in visualization
+- Show motion threshold in visualization
+- Changed sensitivity wording to threshold
+- Moved 'Add to Home Assistant' button to 'Actions'
+- Added 'Copy' button to ESPHome YAML configuration
+- Renamed 'Add device' button to 'Flash device' and moved to 'Available devices' box
+- Display firmware for ESPHome devices
+- Added 'Device info' popover to device list
+- Added SSID of router to device info
+- Added white border around Matter QR code
+  
 ## 0.11.2
 
 ### Minor Changes
