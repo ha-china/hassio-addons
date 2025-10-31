@@ -1,8 +1,9 @@
 {
-  "default-backup-job": {
-    "cronExpression": "30 7 * * *",
-    "enabled": true,
-    "backupFolderPath": "/Volumes/media-1/backups/yaml",
-    "liveFolderPath": "/Volumes/config-1"
+  "jobs": {
+    "default-backup-job": {
+      "cronExpression": "0 * * * *",
+      "enabled": false,
+      "timezone": "America/New_York"
+    }
   }
 }

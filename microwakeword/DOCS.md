@@ -1,46 +1,50 @@
 # Home Assistant Add-on: microWakeWord
 
-## 安装
+## Installation
 
-按照以下步骤在您的系统上安装此插件：
+Follow these steps to get the add-on installed on your system:
 
-1. 在 Home Assistant 前端导航到 **设置** -> **插件** -> **插件商店**。
-2. 添加商店 https://github.com/rhasspy/hassio-addons
-2. 查找 "microWakeWord" 插件并点击它。
-3. 点击 "安装" 按钮。
+1. Navigate in your Home Assistant frontend to **Settings** -> **Add-ons** -> **Add-on store**.
+2. Add the store https://github.com/rhasspy/hassio-addons
+2. Find the "microWakeWord" add-on and click it.
+3. Click on the "INSTALL" button.
 
-## 如何使用
+## How to use
 
-此插件安装并运行后，Wyoming 集成将在 Home Assistant 中自动发现。要完成设置，请点击以下我的按钮：
+After this add-on is installed and running, it will be automatically discovered
+by the Wyoming integration in Home Assistant. To finish the setup,
+click the following my button:
 
-[![打开您的 Home Assistant 实例并开始设置新的集成。](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=wyoming)
+[![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=wyoming)
 
-或者，您可以手动安装 Wyoming 集成，有关更多信息，请参阅
-[Wyoming 集成文档](https://www.home-assistant.io/integrations/wyoming/)。
+Alternatively, you can install the Wyoming integration manually, see the
+[Wyoming integration documentation](https://www.home-assistant.io/integrations/wyoming/)
+for more information.
 
-## 配置
+## Configuration
 
-### 选项：`debug_logging`
+### Option: `debug_logging`
 
-启用调试日志。用于在日志中查看卫星连接和每个唤醒词检测。
+Enable debug logging. Useful for seeing satellite connections and each wake word detection in the logs.
 
-## 自定义唤醒词模型
+## Custom Wake Word Models
 
-插件将自动从 `/share/microwakeword` 目录加载自定义唤醒词模型。[安装 Samba 插件](https://www.home-assistant.io/common-tasks/supervised/#installing-and-using-the-samba-add-on) 以将唤醒词模型文件（包括 `<wake_word>.json` 和 `<wake_word>.tflite`）复制到此目录。
+The add-on will automatically load custom wake word models from the `/share/microwakeword` directory. [Install the Samba add-on](https://www.home-assistant.io/common-tasks/supervised/#installing-and-using-the-samba-add-on) to copy wake word model files (both `<wake_word>.json` and `<wake_word>.tflite`) to this directory.
 
-在 `/share/microwakeword` 添加新模型后，确保重新加载任何 microWakeWord 的 Wyoming 集成。重新加载后，新的唤醒词将在语音助手设置页面中选择。
+After adding new models to `/share/microwakeword`, make sure to reload any Wyoming integrations for microWakeWord. Once reloaded, the new wake words will be available to select in the Voice Assistants settings page.
 
-## 支持
 
-有问题？
+## Support
 
-您有几个选项来获得答案：
+Got questions?
 
-- [Home Assistant Discord 聊天服务器][discord]。
-- Home Assistant [社区论坛][forum]。
-- 加入 [Reddit 子版块][reddit] 在 [/r/homeassistant][reddit]
+You have several options to get them answered:
 
-如果您发现了一个错误，请 [在我们的 GitHub 上打开一个问题][issue]。
+- The [Home Assistant Discord Chat Server][discord].
+- The Home Assistant [Community Forum][forum].
+- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
+
+In case you've found an bug, please [open an issue on our GitHub][issue].
 
 [discord]: https://discord.gg/c5DvZ4e
 [forum]: https://community.home-assistant.io

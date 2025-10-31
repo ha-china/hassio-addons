@@ -55,7 +55,7 @@ echo "Server URL: $server_url"
 echo ""
 
 # Activate virtual environment
-source $VIRTUAL_ENV/bin/activate
+. $VIRTUAL_ENV/bin/activate
 
 echo "-----------------------------------------------------------"
 echo "Step 1: Installing Music Assistant Server"
@@ -111,14 +111,19 @@ if [ ! -f "package.json" ]; then
     exit 1
 fi
 
-echo "Installing frontend dependencies..."
-npm ci --prefer-offline --no-audit
+echo "Installing frontend dependencies...1"
+# Try to remount /tmp with exec if it's mounted noexec
+if mount | grep -q "on /tmp.*noexec"; then
+  echo "Detected /tmp mounted with noexec, attempting to remount..."
+  mount -o remount,exec /tmp 2>/dev/null || echo "Warning: Could not remount /tmp"
+fi
+yarn install --frozen-lockfile --prefer-offline
 
 echo "✓ Dependencies installed"
 echo ""
 
 echo "Building frontend..."
-npm run build
+yarn build
 
 echo "✓ Frontend build complete"
 echo ""

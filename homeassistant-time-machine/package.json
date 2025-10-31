@@ -1,32 +1,20 @@
 {
-  "name": "home-assistant-editor",
-  "version": "0.1.0",
+  "name": "home-assistant-time-machine",
+  "version": "2.0.1",
+  "description": "Browse and restore Home Assistant configuration backups",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "node app.js",
+    "dev": "node app.js"
   },
   "dependencies": {
+    "express": "^4.18.2",
+    "ejs": "^3.1.9",
     "js-yaml": "^4.1.0",
-    "next": "15.5.4",
     "node-cron": "^4.2.1",
-    "react": "19.1.0",
-    "react-diff-viewer-continued": "next",
-    "react-dom": "19.1.0"
+    "node-fetch": "^2.6.12"
   },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
-    "@types/js-yaml": "^4.0.9",
-    "@types/node": "^20",
-    "@types/node-cron": "^3.0.11",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.5.4",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+  "overrides": {
+    "brace-expansion": "2.0.2"
   }
 }
