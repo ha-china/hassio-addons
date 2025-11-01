@@ -1,7 +1,7 @@
 name: Matterbridge
-version: 1.4.0
+version: 1.4.1
 slug: matterbridge
-description: 不同消息应用程序之间的简单聊天桥接。
+description: '[老王杂谈说]：一个连接不同消息应用的单向聊天桥接'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/matterbridge
 arch:
   - armhf

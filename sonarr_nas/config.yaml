@@ -3,7 +3,7 @@ arch:
   - amd64
   - armv7
 codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：可以监控多个RSS源以获取您喜欢的节目新集数，并将它们抓取、排序和重命名'
+description: '[老王杂谈说]：可以监控多个RSS源以获取您喜爱的节目新集数，并会抓取、排序和重命名它们'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -67,8 +67,8 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment:
-  PGID: '0'
-  PUID: '0'
+  PGID: "0"
+  PUID: "0"
 image: ghcr.nju.edu.cn/alexbelgium/sonarr_nas-{arch}
 ingress: true
 ingress_entry: sonarr
@@ -105,4 +105,4 @@ schema:
 slug: sonarr_nas
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/sonarr
-version: 4.0.15.2941-2
+version: "4.0.16.2942"

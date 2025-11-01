@@ -14,17 +14,17 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢大家给我的仓库点赞！要点赞请点击下面的图片，然后它会在右上角显示。谢谢！_
+_感谢所有给我的仓库加星的人！要给星，请点击下面的图片，然后它会在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/sonarr/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/sonarr/stats.png)
 
 ## 关于
 
 ---
 
-[Sonarr](https://sonarr.tv/) 是一个针对 Usenet 和 BitTorrent 用户的 PVR（个人视频录像机）。它可以监控多个 RSS 源以获取您最喜欢的节目的新剧集，并会自动抓取、排序和重命名它们。它还可以配置为在更好的质量格式可用时自动升级已下载文件的格式。
+[Sonarr](https://sonarr.tv/) 是一个 Usenet 和 BitTorrent 用户的 PVR（个人视频记录器）。它可以监控多个 RSS 源，以获取您最喜欢的节目的新剧集，并会抓取、排序和重命名它们。它还可以配置为在更好的质量格式可用时自动升级已下载文件的 quality。
 
 这个插件基于以下 Docker 镜像：https://github.com/linuxserver/docker-sonarr
 
@@ -32,21 +32,21 @@ _感谢大家给我的仓库点赞！要点赞请点击下面的图片，然后�
 
 ---
 
-这个插件的安装过程非常简单，与安装其他插件没有区别。
+这个插件的安装非常简单，与安装其他插件没有区别。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 Supervisor 插件商店的右上角，或者如果您已配置我的 HA，请点击下面的按钮）
+1. 将我的插件仓库添加到您的 home assistant 实例中（在 supervisor 插件商店的右上角，或点击下面的按钮如果您已经配置了我的 HA）
    [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此插件。
+1. 安装这个插件。
 1. 点击 `保存` 按钮以保存您的配置。
 1. 设置插件的选项以符合您的偏好。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
+1. 检查插件的日志，以查看是否一切正常。
 1. 打开 WebUI 并调整软件选项。
 
 ## 配置
 
-Webui 可以在 <http://homeassistant:PORT> 或通过 Ingress 在侧边栏中找到。
-配置可以通过 WebUI 应用进行，但以下选项除外。
+Webui 可以在 <http://homeassistant:PORT> 或通过 Ingress 侧边栏找到。
+配置可以通过 WebUI 应用进行，除了以下选项。
 
 ### 选项
 
@@ -64,7 +64,7 @@ Webui 可以在 <http://homeassistant:PORT> 或通过 Ingress 在侧边栏中找
 
 ### 连接模式
 
-- `ingress_noauth` - 默认，禁用认证以实现无缝的 Ingress 集成
+- `ingress_noauth` - 默认，禁用认证以实现无缝 Ingress 集成
 - `noingress_auth` - 禁用 Ingress 以使用外部 URL，启用认证
 - `ingress_auth` - 启用 Ingress 和认证
 
@@ -86,8 +86,8 @@ cifsdomain: "workgroup"
 
 这个插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ## 支持
 
@@ -97,6 +97,22 @@ cifsdomain: "workgroup"
 
 ---
 
-![illustration](https://b0b.fr/wp-content/uploads/2016/02/Sonarr-1-1000x924.jpg)
+![插图](https://b0b.fr/wp-content/uploads/2016/02/Sonarr-1-1000x924.jpg)
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

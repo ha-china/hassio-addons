@@ -1,0 +1,24 @@
+name: "GlassHome Dashboard"
+version: "0.2.0"
+slug: glasshome
+description: "[老王杂谈说]：为Home Assistant设计的现代、可定制的仪表板，支持拖放小部件"
+url: "https://ghfast.top/github.com/IhsenBouallegue/glasshome-addon"
+arch:
+  - amd64
+  - aarch64
+init: false
+ingress: false
+panel_icon: mdi:view-dashboard
+startup: application
+boot: auto
+ports:
+  3123/tcp: 3123
+ports_description:
+  3123/tcp: "Web interface"
+map:
+  - data:rw
+options:
+  log_level: info
+schema:
+  log_level: list(debug|info|warning|error)
+image: "ghcr.nju.edu.cn/ihsenbouallegue/{arch}-glasshome"

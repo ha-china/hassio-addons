@@ -2,7 +2,7 @@ arch:
   - aarch64
   - amd64
 codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：FlexGet是一款适用于所有媒体的多功能自动化工具'
+description: '[老王杂谈说]：FlexGet是一个用于所有媒体的多功能自动化工具'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -66,7 +66,7 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment:
-  FG_PLUGINS: ''
+  FG_PLUGINS: ""
   FG_WEBUI_PASSWD: homeassistant123
 image: ghcr.nju.edu.cn/alexbelgium/flexget-{arch}
 init: false
@@ -92,5 +92,5 @@ schema:
 slug: flexget
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "3.18.18"
-webui: '[PROTO:ssl]://[HOST]:[PORT:5050]'
+version: "3.18.20"
+webui: "[PROTO:ssl]://[HOST]:[PORT:5050]"

@@ -1,73 +1,85 @@
-# Home Assistant 社区附加组件：Bluetooth-MQTT-Gateway
-![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield] ![支持 armhf 架构][armhf-shield] ![支持 armv7 架构][armv7-shield] ![支持 i386 架构][i386-shield]
-![项目维护][maintenance-shield]
+# Home Assistant Community Add-on: Bluetooth-MQTT-Gateway
+![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield] ![Supports armhf Architecture][armhf-shield] ![Supports armv7 Architecture][armv7-shield] ![Supports i386 Architecture][i386-shield]
+![Project Maintenance][maintenance-shield]
 
-# 项目已被原作者弃用，因此此附加组件将不会接收新功能
-请查看 [这里](https://github.com/zewelor/bt-mqtt-gateway)，建议使用 Bluetooth Proxy。
+# Project has been deprecated by the original creator, therefore this Addon won't receive new features
+Please have a look [here](https://github.com/zewelor/bt-mqtt-gateway), it is recommended to use Bluetooth Proxy.
 
-针对 Homeassistant OS 的 Bluetooth-MQTT-Gateway
+Bluetooth-MQTT-Gateway for Homeassistant OS
 
-## 关于
+## About
 
-一个简单的 Python 脚本，提供 Bluetooth 到 MQTT 的网关，通过自定义工作线程轻松扩展。
-请参阅 [Wiki](https://github.com/zewelor/bt-mqtt-gateway/wiki) 以获取更多信息（支持的设备、功能等）
+A simple Python script which provides a Bluetooth to MQTT gateway, easily extensible via custom workers.
+See [Wiki](https://github.com/zewelor/bt-mqtt-gateway/wiki) for more information (supported devices, features and much more).
 
-这可以用于提高蓝牙温控器的可靠性。请参见 <https://github.com/home-assistant/core/issues/28601> 获得更多信息。
+This can be used to improve the reliability of Bluetooth thermostats. See <https://github.com/home-assistant/core/issues/28601> for more information.
 
-## 安装
+## Installation
 
-此附加组件的安装非常简单，与安装其他自定义 Home Assistant 附加组件没有区别。
-只需将我的仓库添加到 hassio 附加组件库：<https://github.com/FaserF/hassio-addons>
+The installation of this add-on is pretty straightforward and not different from installing any other custom Home Assistant add-on.
+Just add my repo to the hassio addons repository: <https://github.com/FaserF/hassio-addons>
 
-将您的配置文件放置在 /share/bt-mqtt-gateway.yaml
-请确保已经安装了 MQTT 附加组件。
+Put your config file to /share/bt-mqtt-gateway.yaml
+Please make sure that a MQTT Addon is already installed.
 
-## 配置
+## Configuration
 
-**注意**：_在更改配置后，请记得重启附加组件。_
-到目前为止，这些配置选项没有任何作用！它们尚未实现，但已经规划！！！
+**Note**: _Remember to restart the add-on when the configuration is changed._
+Until now these config options do NOTHING! they are not implemented yet, but planned!!!
 
-附加组件配置示例：
+Example add-on configuration:
 
 ```yaml
 config_path: /share/bt-mqtt-gateway.yaml
 debug: true
 ```
 
-**注意**：_这只是一个示例，请勿复制粘贴！创建你自己的！_
+**Note**: _This is just an example, don't copy and paste it! Create your own!_
 
-### 选项： `config_path`
+### Option: `config_path`
 
-此选项是必需的。根据您的配置文件在 Homeassistant 安装中的位置进行更改。
+This option is needed. Change it depending on where your config file is on your Homeassistant installation.
 
-### 选项： `debug`
+### Option: `debug`
 
-将此选项设置为 "true" 将以调试模式启动附加组件。默认值：false
--> 要启用调试模式，请在 /share/bt-mqtt-gateway-debug.txt 处创建一个空文件
+Setting this option to "true" will start the add-on in debugging mode. Default: false
+-> To enable debugging mode, please create an empty file at /share/bt-mqtt-gateway-debug.txt
 
-## 支持
+## Support
 
-有问题吗？
+Got questions?
 
-您可以 [在这里提交问题][issue] GitHub。
-请记住，这款软件仅在 Raspberry Pi 4 上的 armv7 上进行了测试。
+You could [open an issue here][issue] GitHub.
+Please keep in mind that this software is only tested on armv7 running on a Raspberry Pi 4.
 
-## 作者和贡献者
+## Authors & contributors
 
-原始程序来自 @zewelor。欲了解更多信息，请访问此页面： <https://github.com/zewelor/bt-mqtt-gateway>
-此 hassio 附加组件由 [FaserF] 提供。
+The original program is from @zewelor. For more information, please visit this page: <https://github.com/zewelor/bt-mqtt-gateway>
+The hassio add-on is brought to you by [FaserF].
 
-## 许可证
+## License
 
-MIT 许可证
+MIT License
 
-版权 (c) 2022 FaserF & zewelor
+Copyright (c) 2022 FaserF & zewelor
 
-特此免费授权任何获得本软件及相关文档文件（“软件”）副本的人，在不受限制的情况下使用、复制、修改、合并、出版、分发、再许可和/或出售本软件副本，并允许提供软件的人这样做，条件如下：
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-本软件按 “原样” 提供，不附带任何类型的担保，包括但不限于对适销性、特定用途适用性和非侵权的担保。在任何情况下，作者或版权持有人均不对因本软件或使用或其他交易所引起的任何索赔、损害或其他责任承担责任，无论是合同诉讼、侵权诉讼或其他原因。
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
@@ -77,3 +89,19 @@ MIT 许可证
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
 [issue]: https://github.com/FaserF/hassio-addons/issues
 [maintenance-shield]: https://img.shields.io/maintenance/no/2024.svg
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

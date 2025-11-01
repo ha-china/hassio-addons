@@ -1,5 +1,12 @@
 # TOMMY
 
+## 0.16.0
+
+### Major Changes
+
+- Option to manually enter instance details as a fallback for when mDNS fails, both during Wi-Fi provisioning and as parameters in ESPHome YAML configuration
+- Added 'Amplify Sensing' feature, which amplifies sensing especially in non-line-of-sight scenarios. This can lead to a higher false positive rate
+
 ## 0.15.0
 
 ### Major Changes

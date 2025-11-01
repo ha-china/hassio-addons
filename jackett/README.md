@@ -22,19 +22,19 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 ## 关于
 
-[jackett](https://github.com/jackett/jackett) - 一个用于电影的Couchpotato的分支。
+[jackett](https://github.com/jackett/jackett) - 一个用于处理电影的Couchpotato的分支。
 
 这个插件基于linuxserver.io的[docker镜像](https://github.com/linuxserver/docker-jackett)。
 
 ## 配置
 
 Webui可以在配置的端口或通过Ingress在侧边栏中找到。
-配置可以通过应用的WebUI进行，除了以下选项。
+配置可以通过应用WebUI进行，以下选项除外。
 
 ### 选项
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+| 选项 | 类型 | 默认 | 描述 |
+|------|------|------|------|
 | `PGID` | 整数 | `0` | 文件权限的组ID |
 | `PUID` | 整数 | `0` | 文件权限的用户ID |
 | `TZ` | 字符串 | | 时区（例如，`Europe/London`） |
@@ -61,18 +61,34 @@ cifsdomain: "workgroup"
 
 这个插件支持挂载本地驱动器和远程SMB共享：
 
-- **本地驱动器**：见[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：见[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ## 安装
 
 这个插件的安装非常简单，与安装任何其他Hass.io插件没有区别。
 
-1. [将我的Hass.io插件仓库][repository]添加到您的Hass.io实例。
+1. [将我的Hass.io插件仓库][repository]添加到您的Hass.io实例中。
 1. 安装这个插件。
-1. 点击`Save`按钮以保存您的配置。
+1. 点击`保存`按钮以保存您的配置。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切正常。
-1. 仔细配置插件以满足您的偏好，请参阅官方文档。
+1. 仔细配置插件以符合您的偏好，请参阅官方文档进行配置。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

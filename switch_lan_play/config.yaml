@@ -1,7 +1,7 @@
 name: Switch LAN Play Client
-version: 1.7.0
+version: 1.7.1
 slug: switch-lan-play
-description: 任天堂Switch局域网联机 - 客户端
+description: '[老王杂谈说]：任天堂Switch局域网游戏 - 客户端'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/switch_lan_play
 arch:
   - armhf

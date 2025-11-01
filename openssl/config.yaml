@@ -1,7 +1,7 @@
 name: OpenSSL
-version: 1.7.0
+version: 1.7.1
 slug: openssl
-description: 生成自签名证书
+description: '[老王杂谈说]：生成自签名证书'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/openssl
 arch:
   - armhf

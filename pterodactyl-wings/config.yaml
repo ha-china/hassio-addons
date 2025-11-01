@@ -1,7 +1,7 @@
 name: pterodactyl Wings Gameserver
-version: 1.4.0
+version: 1.4.1
 slug: pterodactyl_wings
-description: 开源游戏服务器
+description: '[老王杂谈说]：开源游戏服务器'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/pterodactyl-wings
 arch:
   - aarch64

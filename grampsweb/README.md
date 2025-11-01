@@ -14,57 +14,57 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢大家给我的仓库点赞！点击下面的图片点赞，它将出现在右上角。谢谢！_
+_感谢所有给我的仓库星标的人！要星标它，请点击下面的图片，它将在右上角显示。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/grampsweb/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/grampsweb/stats.png)
 
 ## 关于
 
 ---
 
-[Gramps Web](https://github.com/gramps-project/gramps-web) 是一个用于创建和共享家谱的网页应用程序。它是 Gramps 的网页前端，Gramps 是一款免费开源的家谱软件。
+[Gramps Web](https://github.com/gramps-project/gramps-web) 是一个用于创建和共享家谱的Web应用程序。它是Gramps的Web前端，Gramps是一款免费且开源的家谱软件。
 
-Gramps Web 提供：
-- 现代化的家谱研究网页界面
+Gramps Web提供：
+- 现代化的家谱研究Web界面
 - 多用户支持与用户管理
 - 丰富的媒体支持（照片、文档等）
 - 高级搜索和过滤功能
 - 图表和报告生成
-- 各种格式的导入/导出功能
-- RESTful API 用于集成
+- 多种格式的导入/导出功能
+- RESTful API用于集成
 
-这个插件基于官方的 Gramps Web 项目：https://github.com/gramps-project/gramps-web
+这个插件基于官方的Gramps Web项目：https://github.com/gramps-project/gramps-web
 
 ## 配置
 
 ---
 
-Webui 可以在 <http://homeassistant:5000> 上找到。
+Webui位于 <http://homeassistant:5000>。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
-| `CELERY_NUM_WORKERS` | 整数 | `2` | 用于后台任务的 Celery 工作线程数量 |
-| `GUNICORN_NUM_WORKERS` | 整数 | `8` | 用于网页请求的 Gunicorn 工作线程数量 |
-| `GRAMPSWEB_SECRET_KEY` | 字符串 | - | 会话安全密钥（如果未设置，将自动生成） |
-| `GRAMPSWEB_BASE_URL` | 字符串 | - | 应用程序的基本 URL |
-| `ssl` | 布尔值 | `false` | 启用 SSL/TLS |
-| `certfile` | 字符串 | `fullchain.pem` | SSL 证书文件 |
-| `keyfile` | 字符串 | `privkey.pem` | SSL 私有密钥文件 |
+| `CELERY_NUM_WORKERS` | int | `2` | 背景任务的Celery工作线程数量 |
+| `GUNICORN_NUM_WORKERS` | int | `8` | Web请求的Gunicorn工作线程数量 |
+| `GRAMPSWEB_SECRET_KEY` | str | - | 会话安全密钥（如果未设置，则自动生成） |
+| `GRAMPSWEB_BASE_URL` | str | - | 应用程序的基URL |
+| `ssl` | bool | `false` | 启用SSL/TLS |
+| `certfile` | str | `fullchain.pem` | SSL证书文件 |
+| `keyfile` | str | `privkey.pem` | SSL私钥文件 |
 
 ### 邮件配置（可选）
 
 | 选项 | 类型 | 描述 |
 |------|------|------|
-| `GRAMPSWEB_EMAIL_HOST` | 字符串 | SMTP 服务器主机名 |
-| `GRAMPSWEB_EMAIL_PORT` | 整数 | SMTP 服务器端口 |
-| `GRAMPSWEB_EMAIL_USE_TLS` | 布尔值 | 使用 TLS 加密 |
-| `GRAMPSWEB_EMAIL_HOST_USER` | 字符串 | SMTP 用户名 |
-| `GRAMPSWEB_EMAIL_HOST_PASSWORD` | 字符串 | SMTP 密码 |
-| `GRAMPSWEB_DEFAULT_FROM_EMAIL` | 字符串 | 默认发件人电子邮件地址 |
+| `GRAMPSWEB_EMAIL_HOST` | str | SMTP服务器主机名 |
+| `GRAMPSWEB_EMAIL_PORT` | int | SMTP服务器端口 |
+| `GRAMPSWEB_EMAIL_USE_TLS` | bool | 使用TLS加密 |
+| `GRAMPSWEB_EMAIL_HOST_USER` | str | SMTP用户名 |
+| `GRAMPSWEB_EMAIL_HOST_PASSWORD` | str | SMTP密码 |
+| `GRAMPSWEB_DEFAULT_FROM_EMAIL` | str | 默认发件人电子邮件地址 |
 
 ### 示例配置
 
@@ -86,42 +86,42 @@ GRAMPSWEB_DEFAULT_FROM_EMAIL: "gramps@example.com"
 
 ### 自定义脚本和环境变量
 
-这个插件支持自定义脚本和环境变量，通过 `addon_config` 映射：
+这个插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
 - **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：参见 [为您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **环境变量**：参见 [为你的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
 
 ## 安装
 
 ---
 
-这个插件的安装非常简单，与其他插件的安装方式相同。
+这个插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到您的 home assistant 实例中（在 supervisor 插件商店的右上角，或者如果您已配置我的 HA，点击下面的按钮）
-   [![打开您的 Home Assistant 实例并显示添加插件仓库对话框，并预填特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此插件。
-1. 点击 `保存` 按钮以保存您的配置。
-1. 根据您的偏好设置插件选项。
+1. 将我的插件仓库添加到你的home assistant实例（在supervisor插件商店的右上角，或如果你已经配置了我的HA，点击下面的按钮）
+   [![打开你的Home Assistant实例并显示添加插件仓库对话框，预填充特定的仓库URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装这个插件。
+1. 点击 `保存` 按钮以存储你的配置。
+1. 设置插件选项以符合你的偏好。
 1. 启动插件。
-1. 检查插件的日志，看看是否一切正常。
-1. 打开 WebUI 并设置您的第一个用户账户
+1. 检查插件的日志以查看是否一切正常。
+1. 打开WebUI并设置你的第一个用户账户
 
 ## 首次设置
 
 ---
 
-首次启动插件后：
+第一次启动插件后：
 
-1. 导航到网页界面。
-2. 创建一个管理员用户账户。
-3. 设置您的家谱数据库。
-4. 导入现有的 GEDCOM 文件或开始创建您的家族树。
+1. 导航到Web界面
+2. 创建一个管理员用户账户
+3. 设置你的家谱数据库
+4. 导入现有的GEDCOM文件或开始创建你的家谱
 5. 配置用户权限和共享设置
 
 ## 数据存储
 
 插件在 `/config` 目录的多个位置存储数据：
-- **数据库**：`/config/config/` - 主 Gramps 数据库文件
+- **数据库**：`/config/config/` - 主要的Gramps数据库文件
 - **媒体**：`/config/media/` - 照片、文档和其他媒体文件
 - **用户**：`/config/users/` - 用户账户和认证数据
 - **缓存**：`/config/cache/` - 临时文件和报告
@@ -131,17 +131,33 @@ GRAMPSWEB_DEFAULT_FROM_EMAIL: "gramps@example.com"
 
 为了数据安全，定期备份：
 - 整个 `/config` 目录（包含所有数据）
-- 从网页界面导出 GEDCOM 文件
-- 记录您的用户账户和权限
+- 从Web界面导出GEDCOM文件
+- 记录你的用户账户和权限
 
 ## 性能调优
 
-- **CELERY_NUM_WORKERS**：根据您的系统 CPU 核心数量调整
+- **CELERY_NUM_WORKERS**：根据你的系统CPU核心数量调整
 - **GUNICORN_NUM_WORKERS**：增加以支持更多并发用户
-- 考虑使用外部的 MySQL/PostgreSQL 数据库以提高性能
+- 考虑使用外部MySQL/PostgreSQL数据库以提高性能
 
 ## 支持
 
-在 github 上创建问题
+在github上创建问题
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

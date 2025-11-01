@@ -2,11 +2,11 @@ arch:
   - aarch64
   - amd64
 backup_exclude:
-  - '*/cache/'
-  - '*/transcoding-temp/'
-  - '*/logs/*'
+  - "*/cache/"
+  - "*/transcoding-temp/"
+  - "*/logs/*"
 codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：一个免费的软件媒体系统，让您掌控管理和流式传输您的媒体（测试版）'
+description: '[老王杂谈说]：一个让你掌控管理和流式传输你媒体的自由软件媒体系统（测试版）'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -117,5 +117,5 @@ schema:
 slug: emby_nas
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/emby
-version: 4.9.2.2
+version: "4.9.2.6"
 video: true

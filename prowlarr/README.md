@@ -24,28 +24,28 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 ---
 
-[Prowlarr](https://github.com/Prowlarr/Prowlarr) 是一个索引器管理器/代理，基于流行的 arr .net/reactjs 基础堆栈，用于与您的各种 PVR 应用集成。
-此插件基于 Docker 镜像 https://github.com/linuxserver/docker-prowlarr
+[Prowlarr](https://github.com/Prowlarr/Prowlarr) 是一个基于流行的 arr .net/reactjs 基础栈构建的索引器管理器/代理，用于与您的各种 PVR 应用集成。
+这个插件基于 Docker 镜像 https://github.com/linuxserver/docker-prowlarr
 
 ## 安装
 
 ---
 
-此插件的安装非常简单，与安装任何其他插件没有区别。
+这个插件的安装非常简单，与其他插件的安装方式没有区别。
 
-1. 将我的插件仓库添加到您的 home assistant 实例中（在 supervisor 插件商店的右上角，或如果您已配置我的 HA，请点击下面的按钮）
+1. 将我的插件仓库添加到您的 home assistant 实例中（在 supervisor 插件商店的右上角，或点击下面的按钮如果您已经配置了我的 HA）
    [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此插件。
-1. 点击 `保存` 按钮以存储您的配置。
-1. 设置插件选项以符合您的偏好。
+1. 安装这个插件。
+1. 点击 `保存` 按钮以保存您的配置。
+1. 根据您的偏好设置插件选项。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切正常。
-1. 打开 WebUI 并调整软件选项
+1. 打开 WebUI 并调整软件选项。
 
 ## 配置
 
-Webui 可以在 <http://homeassistant:PORT> 或通过 Ingress 在侧边栏中找到。
-配置可以通过应用程序 WebUI 进行，除了以下选项。
+Webui 可以在 <http://homeassistant:PORT> 或通过 Ingress 侧边栏访问。
+配置可以通过应用 WebUI 进行，除了以下选项。
 
 ### 选项
 
@@ -77,7 +77,7 @@ smbv1: false
 
 ### 挂载驱动器
 
-此插件支持挂载本地驱动器和远程 SMB 共享：
+这个插件支持挂载本地驱动器和远程 SMB 共享：
 
 - **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
 - **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
@@ -93,3 +93,19 @@ smbv1: false
 ![illustration](https://wiki.servarr.com/assets/prowlarr/hist_1_history.png)
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！
