@@ -3,7 +3,7 @@ arch:
   - amd64
   - armv7
 codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：Inadyn 是一个小型且简单的动态域名（DDNS）客户端，支持 HTTPS。它支持大量的动态 DNS 提供商（https://ghfast.top/github.com/troglobit/inadyn#supported-providers）。对于不支持的，您可以根据此项目的文档使用自定义提供商（https://ghfast.top/github.com/nalipaz/hassio-addons/blob/master/README.md）。'
+description: '[老王杂谈说]：Inadyn是一个带有HTTPS支持的小型简单动态DNS（DDNS）客户端。支持大量的动态DNS提供者（https://ghfast.top/github.com/troglobit/inadyn#supported-providers）。对于那些不支持的，你可以根据这个项目的文档使用自定义提供者（https://ghfast.top/github.com/nalipaz/hassio-addons/blob/master/README.md）。'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -107,4 +107,4 @@ schema:
 slug: inadyn
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 2.12.0-2
+version: "2.13.0"

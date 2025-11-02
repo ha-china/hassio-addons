@@ -1,13 +1,14 @@
 name: Music Assistant DEV SERVER
 # version number gets updated only when the mass base image updates!
-version: 1.4.0
+version: 1.4.1
 slug: music_assistant_dev
-description: '[老王杂谈说]：音乐助手开发插件。仅供开发者使用。'
+description: '[老王杂谈说]：为Music Assistant的开发者插件。仅限开发者使用。'
 url: https://music-assistant.io
 arch:
   - amd64
   - aarch64
 homeassistant_api: true
+audio: true
 auth_api: true
 host_network: true
 ingress: true

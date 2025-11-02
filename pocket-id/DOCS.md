@@ -1,57 +1,57 @@
-# 口袋 ID 插件
+# Pocket ID Add-on
 
-## 概述
+## Overview
 
-[Pocket ID](https://pocket-id.org/) 是一个简单且易于使用的 **OIDC（OpenID Connect）提供者**，它允许使用密钥进行身份验证。它允许为您的服务提供无缝且安全的用户身份验证，而无需依赖传统密码。
+[Pocket ID](https://pocket-id.org/) is a simple and easy-to-use **OIDC (OpenID Connect) provider** that enables authentication using passkeys. It allows seamless and secure user authentication for your services without relying on traditional passwords.
 
-此插件作为 Home Assistant 插件运行，在您的网络中提供一个 **身份提供者**。
+This add-on runs as a Home Assistant add-on, providing an **identity provider** within your network.
 
-## 支持的架构
+## Supported Architectures
 
-此插件支持以下架构：
+This add-on supports the following architectures:
 
 - `amd64`
 - `aarch64`
 
-## 配置
+## Configuration
 
-**注意**：_更改配置时请记住重新启动插件。_
+**Note**: _Remember to restart the add-on when the configuration is changed._
 
-示例插件配置：
+Example add-on configuration:
 
 ```yaml
 APP_URL: https://id.domain.com
 TRUST_PROXY: true
 ```
 
-### 选项：`APP_URL`
+### Option: `APP_URL`
 
-`APP_URL` 选项设置 Pocket ID 实例的面向公众的 URL。这必须是 HTTPS，并且客户端可以访问它以正常进行身份验证。
+The `APP_URL` option sets the public-facing URL of the Pocket ID instance. This must be HTTPS and accessible by clients for authentication to work properly.
 
-### 选项：`TRUST_PROXY`
+### Option: `TRUST_PROXY`
 
-如果设置为 `true`，Pocket ID 将信任代理头，如 `X-Forwarded-For`。当在反向代理后面运行时，这很有用。
+If set to `true`, Pocket ID will trust proxy headers like `X-Forwarded-For`. This is useful when running behind a reverse proxy.
 
-### 选项：`MAXMIND_LICENSE_KEY`
+### Option: `MAXMIND_LICENSE_KEY`
 
-MaxMind GeoIP 数据库集成的可选许可证密钥。如果提供，它将启用基于地理位置的功能。
+Optional license key for MaxMind GeoIP database integration. If provided, it enables geolocation-based features.
 
-## 使用方法
+## How to Use
 
-1. **在 Home Assistant 中安装插件**。
-2. **根据需要配置选项**，通过插件设置。
-3. **启动插件**以启动 Pocket ID。
-4. **使用配置的 `APP_URL`**，以与您的 OIDC 兼容应用程序集成。
+1. **Install the add-on** in Home Assistant.
+2. **Configure** the options as needed via the add-on settings.
+3. **Start the add-on** to launch Pocket ID.
+4. **Use the configured `APP_URL`** to integrate with your OIDC-compatible applications.
 
-## 故障排除
+## Troubleshooting
 
-- 确保 `APP_URL` 设置正确且可访问。
-- 如果使用反向代理，将 `TRUST_PROXY` 设置为 `true` 以避免身份验证问题。
-- 如果需要地理位置功能，获取并配置 MaxMind 许可证密钥。
+- Ensure that `APP_URL` is correctly set and accessible.
+- If using a reverse proxy, set `TRUST_PROXY` to `true` to avoid authentication issues.
+- If geolocation features are required, obtain and configure a MaxMind license key.
 
-## 更多信息
+## More Information
 
-有关更多详细信息，请访问官方 Pocket ID 资源：
+For additional details, visit the official Pocket ID resources:
 
-- **网站**：[Pocket ID](https://pocket-id.org/)
-- **文档**：[入门指南](https://pocket-id.org/docs/introduction/)
+- **Website:** [Pocket ID](https://pocket-id.org/)
+- **Documentation:** [Getting Started Guide](https://pocket-id.org/docs/introduction/)

@@ -6,7 +6,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install microWakeWord
 WORKDIR /usr/src
-ENV WYOMING_MICROWAKEWORD_VERSION=2.0.2
+ENV WYOMING_MICROWAKEWORD_VERSION=2.1.0
 
 COPY wakewords/ ./wakewords/
 RUN \

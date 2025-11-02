@@ -1,30 +1,34 @@
-# [2.7.0.dev2025102809] - 28.10.2025
+# [2.7.0.dev2025110203] - 02.11.2025
 
 ## 📦 Nightly Release
 
-_Changes since [2.7.0.dev2025102803](https://github.com/music-assistant/server/releases/tag/2.7.0.dev2025102803)_
+_Changes since [2.7.0.dev2025110113](https://github.com/music-assistant/server/releases/tag/2.7.0.dev2025110113)_
 
-### 🐛 Bugfixes
+### 🧰 Maintenance and dependency bumps
 
-- Fix recursion when grouping players (by @MarvinSchenkel in #2564)
+- AirPlay Fix line too long (by @OzGav in #2581)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@MarvinSchenkel
+@OzGav
 
 
-# [2.7.0.dev2025102803] - 28.10.2025
+# [2.7.0.dev2025110113] - 01.11.2025
 
 * No changes
 
 
-# [2.7.0.dev2025102801] - 28.10.2025
+# [2.7.0.dev2025110103] - 01.11.2025
 
 ## 📦 Nightly Release
 
-_Changes since [2.7.0.dev2025102723](https://github.com/music-assistant/server/releases/tag/2.7.0.dev2025102723)_
+_Changes since [2.7.0.dev2025103104](https://github.com/music-assistant/server/releases/tag/2.7.0.dev2025103104)_
+
+### 🚀 Features and enhancements
+
+- Use system version of FFmpeg for Resonate (by @maximmaxim345 in #2577)
 
 ### 🎨 Frontend Changes
 
@@ -32,6 +36,12 @@ _Changes since [2.7.0.dev2025102723](https://github.com/music-assistant/server/r
 
 ### 🧰 Maintenance and dependency bumps
 
-- ⬆️ Update music-assistant-frontend to 2.17.5 (by @music-assistant-machine in #2563)
+- ⬆️ Update music-assistant-frontend to 2.17.7 (by @music-assistant-machine in #2579)
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@maximmaxim345
 
 

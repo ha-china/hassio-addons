@@ -3,7 +3,7 @@ arch:
   - amd64
 audio: true
 codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：实时鸟声景观分析器'
+description: '[老王杂谈说]：实时鸟类网络声音景观分析器'
 devices:
   - /dev/dri
   - /dev/snd
@@ -72,8 +72,8 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment:
-  BIRDNET_GID: '0'
-  BIRDNET_UID: '0'
+  BIRDNET_GID: "0"
+  BIRDNET_UID: "0"
 image: ghcr.nju.edu.cn/alexbelgium/birdnet-go-{arch}
 ingress: true
 ingress_stream: true
@@ -114,4 +114,4 @@ slug: birdnet-go
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/birdnet-go
 usb: true
-version: "nightly-20251012"
+version: "nightly-20251028"

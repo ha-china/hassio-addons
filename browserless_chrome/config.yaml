@@ -2,7 +2,7 @@ arch:
   - aarch64
   - amd64
 codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：将Chromium作为服务容器'
+description: '[老王杂谈说]：将铬作为服务容器'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -66,14 +66,14 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment:
-  TIMEOUT: '60000'
+  TIMEOUT: "60000"
 image: ghcr.nju.edu.cn/alexbelgium/browserless_chrome-{arch}
 init: false
 map:
   - addon_config:rw
 name: Browserless Chromium
 options:
-  TIMEOUT: '60000'
+  TIMEOUT: "60000"
 ports:
   3000/tcp: 3000
 ports_description:
@@ -83,5 +83,5 @@ schema:
 slug: browserless_chrome
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/browserless_chrome
-version: "2.38.1"
-webui: '[PROTO:ssl]://[HOST]:[PORT:3000]/docs'
+version: "2.38.2"
+webui: "[PROTO:ssl]://[HOST]:[PORT:3000]/docs"

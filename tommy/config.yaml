@@ -1,11 +1,12 @@
 name: TOMMY
-version: "0.11.2"
+version: "0.18.0"
 slug: tommysense-homeassistant-addon
 description: '[老王杂谈说]：TOMMY（Home Assistant插件）'
 url: "https://ghfast.top/github.com/tommy-sense/homeassistant-addon"
 arch:
   - aarch64
   - amd64
+image: tommysense/homeassistant-addon-{arch}
 startup: application
 boot: auto
 host_network: true # Needed for mDNS discovery

@@ -3,7 +3,7 @@ arch:
   - amd64
   - armv7
 codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：一个为Usenet和BitTorrent用户设计的音乐收藏管理器'
+description: '[老王杂谈说]：用于Usenet和BitTorrent用户的音乐收藏管理器'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -68,8 +68,8 @@ devices:
   - /dev/nvme2
 environment:
   DOCKER_MODS: linuxserver/mods:lidarr-flac2mp3
-  PGID: '0'
-  PUID: '0'
+  PGID: "0"
+  PUID: "0"
 image: ghcr.nju.edu.cn/alexbelgium/lidarr_nas-{arch}
 init: false
 map:
@@ -99,5 +99,5 @@ schema:
 slug: lidarr_nas
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/blob/master/lidarr/README.md
-version: 2.14.5.4836
-webui: '[PROTO:ssl]://[HOST]:[PORT:8686]'
+version: "3.0.1.4866"
+webui: "[PROTO:ssl]://[HOST]:[PORT:8686]"

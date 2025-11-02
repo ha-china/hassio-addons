@@ -1,3 +1,8 @@
+## "debian-2025-10-28" (01-11-2025)
+- Minor bugs fixed
+
+## debian-2025-10-28 (2025-10-28)
+- Update to latest version from charlocharlie/epicgames-freegames
 ## "debian-2025-10-21" (25-10-2025)
 - Minor bugs fixed
 

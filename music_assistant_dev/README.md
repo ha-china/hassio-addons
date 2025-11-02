@@ -1,19 +1,19 @@
 # Music Assistant DEV Add-on
 
-这是一个专门为 Music Assistant 开发的特殊开发插件，允许开发人员快速测试特定的分支、拉取请求，甚至直接在 Home Assistant 中测试 Music Assistant 的分支。
+这是一个专门为 Music Assistant 开发的开发插件，允许开发人员直接在 Home Assistant 中快速测试特定的分支、拉取请求，甚至 Music Assistant 的分支。
 
 ## 目的
 
-这个插件是为以下目的设计的：
+此插件设计用于：
 
-- 在合并之前测试拉取请求
+- 在合并前测试拉取请求
 - 开发和调试新功能
 - 测试 Music Assistant 的分支
 - 运行用于测试的自定义分支
 
 ## 工作原理
 
-与使用预构建发布的常规 Music Assistant 插件不同，这个开发插件：
+与使用预构建发布的常规 Music Assistant 插件不同，此开发插件：
 
 1. 从指定的 Git 源（分支、PR 或分支）构建和安装服务器
 2. 从指定的 Git 源（分支、PR 或分支）构建和安装前端
@@ -37,14 +37,14 @@ safe_mode: false
 
 ### 服务器仓库配置
 
-使用 `server_repo` 选项来指定要安装的 Music Assistant 服务器的版本：
+使用 `server_repo` 选项指定要安装的 Music Assistant 服务器的版本：
 
-**格式**： `owner/repo@reference` 或只是 `reference`
+**格式**：`owner/repo@reference` 或仅 `reference`
 
-- **分支**： `dev`、`main` 或任何分支名称
-- **拉取请求**： `pr-123`（将检出 PR #123）
-- **分支**： `username/server@branch-name`
-- **提交**： 完整的提交 SHA
+- **分支**：`dev`、`main` 或任何分支名称
+- **拉取请求**：`pr-123`（将检出 PR #123）
+- **分支**：`username/server@branch-name`
+- **提交**：完整的提交 SHA
 
 **示例**：
 
@@ -65,13 +65,13 @@ server_repo: someuser/server@experimental-feature
 server_repo: abc123def456...
 ```
 
-**默认**： `dev`（使用 `music-assistant/server@dev`）
+**默认**：`dev`（使用 `music-assistant/server@dev`）
 
 ### 前端仓库配置
 
-使用 `frontend_repo` 选项来指定要安装的 Music Assistant 前端的版本：
+使用 `frontend_repo` 选项指定要安装的 Music Assistant 前端的版本：
 
-**格式**： 与 server_repo 相同 - `owner/repo@reference` 或只是 `reference`
+**格式**：与服务器_repo 相同 - `owner/repo@reference` 或仅 `reference`
 
 **示例**：
 
@@ -92,7 +92,7 @@ frontend_repo: someuser/frontend@redesign
 frontend_repo: abc123def456...
 ```
 
-**默认**： `main`（使用 `music-assistant/frontend@main`）
+**默认**：`main`（使用 `music-assistant/frontend@main`）
 
 ## 完整配置示例
 
@@ -103,31 +103,31 @@ server_repo: pr-456
 frontend_repo: someuser/frontend@custom-ui
 ```
 
-这将测试服务器上的 PR #456，并使用来自分支的自定义 UI。
+这将测试服务器 PR #456 及来自分支的自定义 UI。
 
 ## 重要说明
 
 ### 构建时间
 
-- 启动需要一段时间，因为需要构建代码
+- 启动可能需要一段时间，因为需要构建代码
 
 ### 安全模式
 
-- 如果您需要在不加载提供者的情况下启动 Music Assistant，请设置 `safe_mode: true`
-- 对于调试任何启动问题非常有用
+- 如果您需要在加载提供程序的情况下启动 Music Assistant，请设置 `safe_mode: true`
+- 对于调试任何启动问题很有用
 
 ### 拉取请求语法
 
-在指定拉取请求时，使用 `pr-NUMBER`（例如，`pr-123`、`pr-456`）。插件将自动获取并检出 PR。
+指定拉取请求时，使用 `pr-NUMBER`（例如，`pr-123`、`pr-456`）。插件将自动获取并检出 PR。
 
 ## 故障排除
 
 ### 插件无法启动
 
 1. 检查插件日志中的构建错误
-2. 验证分支/PR/分支是否存在并且可以访问
-3. 尝试使用已知良好的分支，如 `dev` 或 `main`
-4. 启用 `safe_mode: true` 以绕过提供者加载
+2. 验证分支/PR/分支是否存在并可访问
+3. 尝试使用 `dev` 或 `main` 等已知良好分支
+4. 启用 `safe_mode: true` 以绕过提供程序加载
 
 ### 构建失败
 
@@ -137,8 +137,8 @@ frontend_repo: someuser/frontend@custom-ui
 
 ### 性能问题
 
-- 从源代码构建使用更多资源
-- 仅将此插件用于开发测试，而不是日常使用
+- 从源代码构建会使用更多资源
+- 仅将此插件用于开发测试，不要作为日常驱动
 
 ## 开发者工作流程
 
@@ -154,7 +154,7 @@ frontend_repo: someuser/frontend@custom-ui
 1. 将您的分支推送到您的分支
 2. 配置：`server_repo: yourusername/server@your-branch`
 3. 重新启动插件
-4. 测试并迭代
+4. 测试和迭代
 
 ### 测试服务器和前端更改
 
@@ -163,7 +163,7 @@ server_repo: pr-456
 frontend_repo: pr-789
 ```
 
-这允许您测试两个存储库之间的协调更改。
+这允许您测试两个存储库中的协调更改。
 
 ## 支持
 
@@ -178,8 +178,24 @@ frontend_repo: pr-789
 
 | 功能      | 常规插件    | DEV 插件             |
 | ------------ | ----------------- | ---------------------- |
-| 安装       | 预构建发布 | 从源构建      |
-| 启动时间   | 快速          | 较慢（构建时间）    |
+| 安装      | 预构建发布 | 从源代码构建      |
+| 启动时间 | 快速              | 较慢（构建时间）    |
 | 稳定性    | 稳定发布   | 开发代码       |
-| 更新       | 自动         | 手动（更改配置） |
-| 用途       | 生产        | 开发/测试    |
+| 更新      | 自动         | 手动（更改配置） |
+| 用途      | 生产        | 开发/测试    |
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

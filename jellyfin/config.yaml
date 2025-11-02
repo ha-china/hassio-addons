@@ -9,7 +9,7 @@ backup_exclude:
 breaking_versions:
   - 10.10.6*
 codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：一个自由软件媒体系统，让你掌控管理和流式传输你的媒体'
+description: '[老王杂谈说]：一个让你掌控媒体管理和流媒体的自由软件媒体系统'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -120,5 +120,5 @@ schema:
 slug: jellyfin
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 10.11.0
+version: "10.11.1"
 video: true

@@ -3,7 +3,7 @@ arch:
   - amd64
   - armv7
 codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：将来自应用程序（Sonarr、Sickrage、CouchPotato、Mylar等）的查询转换为特定跟踪器网站的HTTP查询，解析HTML响应，然后将结果发送回请求软件'
+description: '[老王杂谈说]：将应用程序（Sonarr、Sickrage、CouchPotato、Mylar等）中的查询转换为针对特定追踪器站点的HTTP查询，解析HTML响应，然后将结果发送回请求软件'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -67,8 +67,8 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment:
-  PGID: '0'
-  PUID: '0'
+  PGID: "0"
+  PUID: "0"
 image: ghcr.nju.edu.cn/alexbelgium/jackett_nas-{arch}
 init: false
 map:
@@ -101,5 +101,5 @@ schema:
 slug: jackett_nas
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/jackett
-version: "0.24.179"
+version: "0.24.234"
 webui: http://[HOST]:[PORT:9117]

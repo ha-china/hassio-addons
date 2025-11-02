@@ -2,10 +2,10 @@ arch:
   - aarch64
   - amd64
 codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：Collabora Online办公套件'
+description: '[老王杂谈说]：Collabora Online 办公套件'
 environment:
-  PGID: '0'
-  PUID: '0'
+  PGID: "0"
+  PUID: "0"
 image: ghcr.nju.edu.cn/alexbelgium/collabora-{arch}
 init: false
 map:
@@ -13,14 +13,14 @@ map:
   - ssl:ro
 name: Collabora
 options:
-  aliasgroup1: ''
+  aliasgroup1: ""
   certfile: fullchain.pem
-  domain1: ''
+  domain1: ""
   extra_params: --o:ssl.enable=false --o:user_interface.use_integration_theme=false --o:net.proto=IPv4
   keyfile: privkey.pem
-  password: ''
+  password: ""
   ssl: false
-  username: ''
+  username: ""
 ports:
   9980/tcp: 9980
 ports_description:
@@ -40,5 +40,5 @@ schema:
   username: str
 slug: collabora
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 25.4.6
-webui: '[PROTO:ssl]://[HOST]:[PORT:9980]/browser/dist/admin/admin.html'
+version: "25.4.7"
+webui: "[PROTO:ssl]://[HOST]:[PORT:9980]/browser/dist/admin/admin.html"

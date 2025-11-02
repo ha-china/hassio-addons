@@ -6,22 +6,22 @@ Netboot.xyz PXE Server for Homeassistant OS
 
 ## About
 
-netboot.xyz is a way to PXE boot various operating system installers or utilities from one place within the BIOS without the need of having to go retrieve the media to run the tool. iPXE is used to provide a user friendly menu from within the BIOS that lets you easily choose the operating system you want along with any specific types of versions or bootable flags.
+netboot.xyz 是一种从 BIOS 中启动各种操作系统安装程序或工具的方法，无需检索运行工具的介质。使用 iPXE 在 BIOS 中提供用户友好的菜单，让您可以轻松选择所需的操作系统以及任何特定的版本或可引导标志。
 
-You can remote attach the ISO to servers, set it up as a rescue option in Grub, or even set up your home network to boot to it by default so that it’s always available.
+您可以将 ISO 远程附加到服务器，在 Grub 中设置它作为救援选项，甚至将您的家庭网络设置为默认启动到它，以便始终可用。
 
-## Installation
+## 安装
 
 [![FaserF Homeassistant Addons](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FFaserF%2Fhassio-addons)
 <br />
-The installation of this add-on is pretty straightforward and not different in comparison to installing any other custom Home Assistant add-on.<br />
-Just click the link above or add my repo to the hassio addons repositorys: <https://github.com/FaserF/hassio-addons>
+此插件的安装非常简单，与其他任何自定义 Home Assistant 插件的安装方式相同。<br />
+只需点击上面的链接或将我的存储库添加到 hassio 插件存储库： <https://github.com/FaserF/hassio-addons>
 
-## Configuration
+## 配置
 
-**Note**: _Remember to restart the add-on when the configuration is changed._
+**注意**: _更改配置时请重启插件。_
 
-Example add-on configuration:
+示例插件配置：
 
 ```yaml
 path: /media/netboot/image
@@ -30,112 +30,107 @@ dhcp_range: 192.168.178.200
 ```
 <br />
 
-**Note**: _This is just an example, don't copy and paste it! Create your own!_
+**注意**: _这只是一个示例，不要复制粘贴！创建您自己的！_
 
-### Option: `path`
+### 选项: `path`
 
-This option is needed. Change it depending where your ISO files and more are.
+此选项是必需的。根据您的 ISO 文件和其他文件的位置进行更改。
 
-Note: it has to be somewhere in the /media folder! Other folders are not visible to this addon.
+注意：它必须在 /media 文件夹中的某个地方！其他文件夹对此插件不可见。
 
-### Option: `path_config`
+### 选项: `path_config`
 
-This option is needed. Change it depending where your netboot.xyz config files and more are.
+此选项是必需的。根据您的 netboot.xyz 配置文件和其他文件的位置进行更改。
 
-Note: it has to be somewhere in the /media folder! Other folders are not visible to this addon.
+注意：它必须在 /media 文件夹中的某个地方！其他文件夹对此插件不可见。
 
-### Option: `dhcp_range`
+### 选项: `dhcp_range`
 
-This option is needed. Change it depending to your network. Try using a higher IP in the last range (f.e. 100 or 200)
+此选项是必需的。根据您的网络进行更改。尝试在最后范围的 IP 地址中使用更高的 IP（例如 100 或 200）
 
 ## Ingress
 
-This addon supports Homeassistant Ingress. But it seems to be buggy.
+此插件支持 Homeassistant Ingress。但它似乎有错误。
 
-## Post-Installation
-Before booting for the first time, I recommend having a look at the netboot config.<br />
-Go to <http://YOUR-HOMEASSISTANT-IP:3000> -> Menus -> boot.cfg<br />
+## 安装后
+在首次启动之前，我建议查看 netboot 配置。<br />
+转到 <http://YOUR-HOMEASSISTANT-IP:3000> -> 菜单 -> boot.cfg<br />
 
 ### Windows
-1. Change the following line depending to your WinPE location: <br />
+1. 根据您的 WinPE 位置更改以下行：<br />
    set win_base_url <http://YOUR-SERVER-IP:PortForTheNGINXserver/WinPE> <br />
 
-   example if you are hosting your extracted files directly on the netboot.xyz server and your IP address is 192.168.178.2: <br />
+   如果您将提取的文件直接托管在 netboot.xyz 服务器上，并且您的 IP 地址是 192.168.178.2：<br />
    set win_base_url <http://192.168.178.2:85/WinPE> <br />
 
-2. Copy the windows PE files to your $path folder -> WinPE -> x64<br />
-   Example: /media/netboot/image/WinPE/x64<br />
+2. 将 Windows PE 文件复制到您的 $path 文件夹 -> WinPE -> x64<br />
+   示例：/media/netboot/image/WinPE/x64<br />
 
-3. Extract the windows ISO and Copy the files anywhere to your $path folder, for example:<br />
+3. 解压 Windows ISO 并将文件复制到您的 $path 文件夹中的任何位置，例如：<br />
    /media/netboot/image/windows<br />
 
-4. Install the Samba Share Homeassistant Addon & Start it<br />
-   Needed for providing the win10 ISO to the winPE<br />
+4. 安装 Samba Share Homeassistant 插件并启动它<br />
+   需要为 winPE 提供 win10 ISO
 
-5. Enter the following line after booting the WinPE<br />
+5. 启动 WinPE 后输入以下行<br />
 net use Z: \ \YOUR-SERVER-IP\$path /user:YOUR-SERVER-IP\mySambaUser myPassword<br />
 net use Z: \ \192.168.178.2\media\netboot\image\windows /user:192.168.178.2\mySambaUser myPassword<br />
 Z:\setup.exe <br />
 
-More informations: <br />
+更多信息： <br />
 <https://netboot.xyz/faq/windows/>
 
-### Automate this Windows Installation Process
+### 自动化此 Windows 安装过程
 
-Modify your WinPE:<br />
-1. Create a Main.cmd file at your WinPE location in a new folder "Scripts" <br />
-   f.e. /media/netboot/image/WinPE/x64/Scripts/Start.cmd<br />
-   Then add the two lines from above into that script<br />
-   Then modify the wpeinit to use that script.
-2. Create an autounattend.xml file. You can find some examples from me here: <https://github.com/FaserF/WindowsPostInstaller/tree/master/autounattend><br />
+修改您的 WinPE：<br />
+1. 在 WinPE 位置的新文件夹 "Scripts" 中创建一个 Main.cmd 文件 <br />
+   例如 /media/netboot/image/WinPE/x64/Scripts/Start.cmd<br />
+   然后将上面的两行添加到该脚本中<br />
+   然后修改 wpeinit 以使用该脚本。
+2. 创建一个 autounattend.xml 文件。您可以在这里找到一些示例： <https://github.com/FaserF/WindowsPostInstaller/tree/master/autounattend><br />
 
-Have a look at <https://github.com/netbootxyz/netboot.xyz/discussions/757><br />
+查看 <https://github.com/netbootxyz/netboot.xyz/discussions/757><br />
 
-## Support
+## 支持
 
-Got questions or problems?
+有问题或问题？
 
-You can [open an issue here][issue] GitHub.
-Please keep in mind, that this software is only tested on armv7 running on a Raspberry Pi 4.
+您可以 [在这里打开问题][issue] GitHub。
+请注意，此软件仅在运行在 Raspberry Pi 4 上的 armv7 上经过测试。
 
-### Known issues
-1. Directly after the PXE boot the boot will run into multiple timeouts if you wont configure PXE DHCP options in your router's settings<br />
-2. Changes to boot.cfg seem to be ignored by netboot.xyz . It will always use the default config. <https://github.com/netbootxyz/netboot.xyz/discussions/861> <br />
+### 已知问题
+1. 如果您不在路由器设置中配置 PXE DHCP 选项，PXE 启动后将会出现多个超时<br />
+2. 对 boot.cfg 的更改似乎被 netboot.xyz 忽略。它将始终使用默认配置。 <https://github.com/netbootxyz/netboot.xyz/discussions/861> <br />
 
-## Authors & contributors
+## 作者和贡献者
 
-The original program is from the Netboot.xyz Project. For more informatios please visit this page: <https://netboot.xyz/>
-The hassio addon is brought to you by [FaserF].
+原始程序来自 Netboot.xyz 项目。更多信息请访问此页面： <https://netboot.xyz/>
+hassio 插件由 [FaserF] 提供。
 
-## License
+## 许可证
 
-MIT License
+MIT 许可证
 
-Copyright (c) 2019-2025 FaserF & Netboot.xyz Project
+版权所有 (c) 2019-2025 FaserF & Netboot.xyz 项目
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+特此免费授予任何获得此软件及其相关文档文件（“软件”）副本的人，在不受限制的情况下处理该软件的权利，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或出售软件副本的权利，并允许被提供软件的人这样做，但须遵守以下条件：
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+软件按“原样”提供，不提供任何明示或暗示的保证，包括但不限于对适销性、特定用途适用性和非侵权的保证。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是因合同、侵权或其他行为引起的，还是因与软件的使用或其他交易有关。
+## 📱 关注我
 
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
-[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
-[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
-[armhf-shield]: https://img.shields.io/badge/armhf-yes-green.svg
-[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
-[i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
-[FaserF]: https://github.com/FaserF/
-[issue]: https://github.com/FaserF/hassio-addons/issues
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

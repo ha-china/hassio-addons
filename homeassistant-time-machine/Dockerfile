@@ -1,48 +1,26 @@
-ARG BUILD_FROM
-# Stage 1: Build the Next.js application
-FROM node:20-alpine AS builder
+FROM node:20-alpine
 
+# Install git and other dependencies
+RUN apk add --no-cache git
+
+# Create app directory
 WORKDIR /app
 
-# Install all dependencies
+# Copy package files and install dependencies
 COPY package*.json ./
-RUN npm install --legacy-peer-deps
+RUN npm install
 
-# Copy the rest of the application files
+# Copy the rest of the application
 COPY . .
 
-# Build the application
-RUN npm run build
+# Make run script executable
+RUN chmod +x run.sh
 
-# Stage 2: Production dependencies
-FROM node:20-alpine AS production-deps
+# Expose the port
+EXPOSE 54000
 
-WORKDIR /app
+# Set environment variables
+ENV NODE_ENV=development
 
-COPY package*.json ./
-RUN npm install --omit=dev --legacy-peer-deps
-
-# Stage 3: Create the final image
-FROM $BUILD_FROM
-
-ARG BUILD_ARCH
-
-# Install Node.js and npm
-RUN apk add --no-cache nodejs npm
-
-WORKDIR /app
-
-# Copy built application and production dependencies
-COPY --from=builder /app/.next ./.next
-COPY --from=production-deps /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/next.config.js ./next.config.js
-COPY --from=builder /app/run.sh ./run.sh
-COPY --from=builder /app/scheduled-jobs.json ./scheduled-jobs.json
-
-# Expose the port Next.js runs on
-EXPOSE 3000
-
-# Command to run the application
-CMD ["npm", "start"]
+# Start the application
+CMD ["/bin/sh", "run.sh"]

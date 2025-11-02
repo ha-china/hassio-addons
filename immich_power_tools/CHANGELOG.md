@@ -1,3 +1,8 @@
+## "0.19.0" (01-11-2025)
+- Minor bugs fixed
+
+## 0.19.0 (01-11-2025)
+- Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)
 
 ## 0.18.0 (30-08-2025)
 - Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)

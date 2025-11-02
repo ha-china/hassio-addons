@@ -14,7 +14,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它将在右上角。谢谢！_
+_感谢所有给我仓库星标的人！要给星标，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://reporoster.com/stars/alexbelgium/hassio-addons)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -23,74 +23,74 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 ## 关于
 
-[BirdNET-Go](https://github.com/tphakala/birdnet-go/tree/main) 是一个由 @tphakala 开发的用于连续鸟类监测和识别的 AI 解决方案。
+[BirdNET-Go](https://github.com/tphakala/birdnet-go/tree/main) 是一个由 @tphakala 开发的用于持续鸟类监测和识别的AI解决方案。
 
-这个插件基于他们的 Docker 镜像。
+这个插件基于他们的Docker镜像。
 
 ## 配置
 
-安装后，首次启动插件。Web UI 可以在 <http://homeassistant:8080> 找到。
-您需要一个麦克风：可以使用连接到 HA 的麦克风，或者使用 RTP 摄像机的音频流。
+安装后，首次启动插件。Web UI可以在 <http://homeassistant:8080> 找到。
+您需要一个麦克风：要么使用连接到HA的麦克风，要么是RSTP摄像头的音频流。
 
-音频片段文件夹可以通过在插件选项中挂载它来存储在外部或 SMB 驱动器上，然后指定路径而不是 "clips/"。例如，"/mnt/NAS/Birdnet/"
+音频片段文件夹可以存储在外部或SMB驱动器上，通过在插件选项中挂载它，然后指定路径而不是 "clips/"。例如，"/mnt/NAS/Birdnet/"
 
 选项可以通过三种方式配置：
 
 - 插件选项
 
 ```yaml
-ALSA_CARD : 卡的编号（通常是 0 或 1），请参阅 https://github.com/tphakala/birdnet-go/blob/main/doc/installation.md#deciding-alsa_card-value
-TZ: Etc/UTC 指定一个要使用的时间区域，请参阅 https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
-COMMAND : realtime --rtsp url # 允许向 birdnet-go 提供参数
+ALSA_CARD : 卡的编号（通常是0或1），请参阅 https://github.com/tphakala/birdnet-go/blob/main/doc/installation.md#deciding-alsa_card-value
+TZ: Etc/UTC 指定一个时区来使用，请参阅 https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
+COMMAND : realtime --rtsp url # 允许提供参数给birdnet-go
 ```
 
-- Config.yaml
-可以使用在 /config/db21ed7f_birdnet-go/config.yaml 中找到的 config.yaml 文件，使用 Filebrowser 插件进行额外的变量配置
+- config.yaml
+使用 Filebrowser 插件在 /config/db21ed7f_birdnet-go/config.yaml 文件中配置其他变量
 
 - Config_env.yaml
-可以在那里配置额外的环境变量
+在那里可以配置其他环境变量
 
 ### 挂载驱动器
 
-这个插件支持挂载本地驱动器和远程 SMB 共享：
+这个插件支持本地驱动器和远程SMB共享的挂载：
 
 - **本地驱动器**：请参阅 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
 - **远程共享**：请参阅 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### 自定义脚本和环境变量
 
-这个插件支持通过 `addon_config` 映射自定义脚本和环境变量：
+这个插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
 - **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：请参阅 [向您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **环境变量**：请参阅 [为您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
 
 ## 安装
 
-这个插件的安装非常简单，与安装任何其他插件没有区别。
+这个插件的安装非常简单，与安装其他插件没有区别。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例（在 supervisor 插件商店的右上角，或者如果您已配置我的 HA，请点击下面的按钮）
+1. 将我的插件仓库添加到您的 Home Assistant 实例（在 Supervisor 插件商店的右上角，或如果您已经配置了我的 HA，请点击下面的按钮）
 
-   [![打开您的 Home Assistant 实例并显示带有预填充特定仓库 URL 的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+   [![打开您的 Home Assistant 实例并显示带有预填充特定仓库URL的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装这个插件。
 1. 点击 `保存` 按钮以保存您的配置。
-1. 设置插件的选项以符合您的偏好。
+1. 设置插件选项以符合您的偏好。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切正常。
 1. 打开 Web UI 并调整软件选项
 
 ## 与 HA 集成
 
-Home Assistant 集成说明在这里找到，[Birdnet-Go 插件：Home Assistant 集成](./HAINTEGRATION.md)
+Home Assistant 集成说明在这里，[Birdnet-Go 插件：Home Assistant 集成](./HAINTEGRATION.md)
 
 ## 使用 VLC 设置 RTSP 源
 
-VLC 打开一个 TCP 端口，但流是 UDP。因此需要配置 Birdnet-Go 使用 UDP。调整 config.yaml 文件为 UDP 或使用 birdnet-go 命令行选项：
+VLC 打开一个 TCP 端口，但流是 UDP。因此需要配置 Birdnet-Go 使用 UDP。调整 config.yaml 文件到 UDP 或使用 birdnet-go 命令行选项：
 
 `--rtsptransport udp --rtsp rtsp://192.168.1.21:8080/stream.sdp`
 
 ### Linux 说明
 
-使用以下命令之一运行 VLC 而不使用界面：
+使用以下命令之一不带界面运行 vlc：
 
 ```bash
 # 这应该适用于大多数设备
@@ -103,28 +103,28 @@ VLC 打开一个 TCP 端口，但流是 UDP。因此需要配置 Birdnet-Go 使�
 运行 `arecord -l` 获取麦克风硬件信息
 
 ```text
-**** CAPTURE 设备列表 ****
+**** CAPTURE 硬件设备列表 ****
 card 0: PCH [HDA Intel PCH], device 0: ALC3220 Analog [ALC3220 Analog]
-  子设备: 1/1
-  子设备 #0: 子设备 #0
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
 card 2: S7 [SteelSeries Arctis 7], device 0: USB Audio [USB Audio]
-  子设备: 1/1
-  子设备 #0: 子设备 #0
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
 card 3: Nano [Yeti Nano], device 0: USB Audio [USB Audio]
-  子设备: 1/1
-  子设备 #0: 子设备 #0
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
 card 4: Device [USB PnP Sound Device], device 0: USB Audio [USB Audio]
-  子设备: 0/1
-  子设备 #0: 子设备 #0
+  Subdevices: 0/1
+  Subdevice #0: subdevice #0
 ```
 
 hw:4,0 = **card 4**: Device [USB PnP Sound Device], **device 0**: USB Audio [USB Audio]
 
-Systemd 服务文件示例。根据情况调整用户:组。如果您想以 root 用户运行，您可能需要运行 vlc-wrapper 而不是 vlc。
+Systemd 服务文件示例。根据需要调整用户:组。如果您想以 root 用户运行，您可能需要运行 vlc-wrapper 而不是 vlc。
 
 ```text
 [Unit]
-Description=VLC Birdnet RTSP Server
+Description=VLC Birdnet RTSP 服务器
 Wants=network-online.target
 After=network-online.target
 
@@ -145,8 +145,20 @@ WantedBy=multi-user.target
 
 ## 支持
 
-在 github 上创建问题
+在 GitHub 上创建问题
+## 📱 关注我
 
----
+扫描下面二维码，关注我。有需要可以随时给我留言：
 
-![插图](https://raw.githubusercontent.com/tphakala/birdnet-go/main/doc/BirdNET-Go-dashboard.webp)
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！
