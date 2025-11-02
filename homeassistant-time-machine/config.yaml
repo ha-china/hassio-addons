@@ -1,5 +1,5 @@
 name: Home Assistant Time Machine
-version: 2.0.1
+version: 2.0.2
 slug: homeassistant-time-machine
 description: '[老王杂谈说]：浏览和恢复 Home Assistant 配置备份。'
 url: https://ghfast.top/github.com/saihgupr/HomeAssistantTimeMachine

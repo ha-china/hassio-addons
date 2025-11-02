@@ -1,5 +1,22 @@
 # TOMMY
 
+## 0.18.0
+
+### Major Changes
+
+- Send log output to JTAG when UART is not in use (only applicable for devices flashed with TOMMY flasher)
+
+## 0.17.0
+
+### Major Changes
+
+- Use prebuilt images in Home Assistant Add-on for faster installation
+- Use Node 24 for virtual bridge
+
+### Minor Changes
+
+- Simplified raw signal analyzer
+
 ## 0.16.0
 
 ### Major Changes

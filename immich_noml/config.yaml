@@ -4,7 +4,7 @@ arch:
 backup_exclude:
   - "**/machine-learning/*"
 codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：从您的手机直接获取自带托管的照片和视频备份解决方案'
+description: '[老王杂谈说]：从您的手机直接托管照片和视频备份解决方案'
 devices:
   - /dev/dri
   - /dev/dxg
@@ -136,6 +136,6 @@ slug: immich_noml
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
 usb: true
-version: "2.2.0"
+version: "2.2.1"
 video: true
 webui: http://[HOST]:[PORT:8080]

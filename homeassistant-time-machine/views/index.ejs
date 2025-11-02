@@ -263,6 +263,7 @@
     let currentMode = 'automations';
     let currentBackupPath = null;
     let currentBackupName = null;
+    let currentBackupMtime = null;
     let allItems = [];
     let liveItemsMap = {};
     let itemStatuses = {};
@@ -598,7 +599,7 @@
     
     // Format backup folder name to date/time
     // Handles format: YYYY-MM-DD-HHMMSS (e.g., 2025-10-17-085000)
-    function formatFolderName(folderName) {
+    function formatFolderName(folderName, mtime) {
       let date;
       // Try parsing YYYY-MM-DD-HHMMSS
       if (/^\d{4}-\d{2}-\d{2}-\d{6}$/.test(folderName)) {
@@ -617,6 +618,8 @@
         const hour = parseInt(folderName.substring(8, 10));
         const minute = parseInt(folderName.substring(10, 12));
         date = new Date(year, month, day, hour, minute);
+      } else if (mtime) {
+        date = new Date(mtime);
       } else {
         // Fallback for unknown formats
         return folderName;
@@ -689,11 +692,11 @@
               return `
                 <button 
                   class="list-item" 
-                  onclick="selectBackup('${backup.path}', '${backup.folderName}')"
+                  onclick="selectBackup('${backup.path}', '${backup.folderName}', '${backup.mtime}')"
                   style="width: 100%; text-align: left; padding: 16px; background-color: ${bgColor}; border-radius: 12px; border: 1px solid ${borderColor}; cursor: pointer; transition: all 0.2s; box-shadow: ${boxShadow}; color: ${textColor};"
                 >
                   <div style="display: flex; align-items: center; gap: 12px;">
-                    <span style="font-weight: 400; font-size: 16px;">${formatFolderName(backup.folderName)}</span>
+                    <span style="font-weight: 400; font-size: 16px;">${formatFolderName(backup.folderName, backup.mtime)}</span>
                   </div>
                 </button>
               `;
@@ -709,13 +712,14 @@
     }
 
     // Select backup
-    async function selectBackup(backupPath, folderName) {
+    async function selectBackup(backupPath, folderName, mtime) {
       currentBackupPath = backupPath;
       currentBackupName = folderName;
+      currentBackupMtime = mtime;
       
       // Update title and subtitle
       document.getElementById('itemsTitle').textContent = currentMode.charAt(0).toUpperCase() + currentMode.slice(1);
-      document.getElementById('itemsSubtitle').textContent = formatFolderName(folderName);
+      document.getElementById('itemsSubtitle').textContent = formatFolderName(folderName, currentBackupMtime);
       
       // Reload backup list to update selection styling
       await loadBackups();
@@ -921,7 +925,7 @@
       
       if (!liveItem) {
         // Deleted state
-        document.getElementById('diffSubtitle').innerHTML = `<span>${formatFolderName(currentBackupName)}</span>`;
+        document.getElementById('diffSubtitle').innerHTML = `<span>${formatFolderName(currentBackupName, currentBackupMtime)}</span>`;
         modalBody.innerHTML = `
           <div class="diff-state-block">
             <div class="diff-state-banner diff-state-banner-deleted">
@@ -942,12 +946,12 @@
       } else {
         // Changed state - side by side comparison with diff highlighting
         document.getElementById('diffSubtitle').textContent = getStyledText('ui.diffViewer.compareVersions');
-        const backupTimestamp = currentBackupName ? formatFolderName(currentBackupName) : '';
+        const backupTimestamp = currentBackupName ? formatFolderName(currentBackupName, currentBackupMtime) : '';
         const diffHtml = generateDiff(liveYaml, backupYaml, {
           leftLabel: 'Live version',
           rightLabel: 'Backup version',
           rightMeta: backupTimestamp,
-          bannerText: formatFolderName(currentBackupName)
+          bannerText: formatFolderName(currentBackupName, currentBackupMtime)
         });
         modalBody.innerHTML = `
           ${diffHtml}
@@ -1154,8 +1158,7 @@
       
       if (!lovelaceLiveContent) {
         // Deleted state
-        document.getElementById('diffSubtitle').innerHTML = `<span>${formatFolderName(currentBackupName)}</span>`;
-        modalBody.innerHTML = `
+        document.getElementById('diffSubtitle').innerHTML = `<span>${formatFolderName(currentBackupName, currentBackupMtime)}</span>`;        modalBody.innerHTML = `
           <div class="diff-state-block">
             <div class="diff-state-banner diff-state-banner-deleted">
               <span class="diff-state-label">${getStyledText('ui.diffViewer.fileDeleted')}</span>
@@ -1178,12 +1181,12 @@
       } else {
         // Changed state - side by side comparison with diff highlighting
         document.getElementById('diffSubtitle').textContent = getStyledText('ui.diffViewer.compareVersions');
-        const backupTimestamp = currentBackupName ? formatFolderName(currentBackupName) : '';
+        const backupTimestamp = currentBackupName ? formatFolderName(currentBackupName, currentBackupMtime) : '';
         const diffHtml = generateDiff(lovelaceLiveContent, lovelaceBackupContent, {
           leftLabel: 'Live version',
           rightLabel: 'Backup version',
           rightMeta: backupTimestamp,
-          bannerText: formatFolderName(currentBackupName)
+          bannerText: formatFolderName(currentBackupName, currentBackupMtime)
         });
         modalBody.innerHTML = `
           ${diffHtml}
@@ -1377,7 +1380,7 @@
       
       if (!esphomeLiveContent) {
         // Deleted state
-        document.getElementById('diffSubtitle').innerHTML = `<span>${formatFolderName(currentBackupName)}</span>`;
+        document.getElementById('diffSubtitle').innerHTML = `<span>${formatFolderName(currentBackupName, currentBackupMtime)}</span>`;
         modalBody.innerHTML = `
           <div class="diff-state-block">
             <div class="diff-state-banner diff-state-banner-deleted">
@@ -1401,12 +1404,12 @@
       } else {
         // Changed state - side by side comparison with diff highlighting
         document.getElementById('diffSubtitle').textContent = 'Compare backup with current live version.';
-        const backupTimestamp = currentBackupName ? formatFolderName(currentBackupName) : '';
+        const backupTimestamp = currentBackupName ? formatFolderName(currentBackupName, currentBackupMtime) : '';
         const diffHtml = generateDiff(esphomeLiveContent, esphomeBackupContent, {
           leftLabel: 'Live version',
           rightLabel: 'Backup version',
           rightMeta: backupTimestamp,
-          bannerText: formatFolderName(currentBackupName)
+          bannerText: formatFolderName(currentBackupName, currentBackupMtime)
         });
         modalBody.innerHTML = `
           ${diffHtml}
@@ -1571,7 +1574,7 @@
       
       if (!packagesLiveContent) {
         // Deleted state
-        document.getElementById('diffSubtitle').innerHTML = `<span>${formatFolderName(currentBackupName)}</span>`;
+        document.getElementById('diffSubtitle').innerHTML = `<span>${formatFolderName(currentBackupName, currentBackupMtime)}</span>`;
         modalBody.innerHTML = `
           <div class="diff-state-block">
             <div class="diff-state-banner diff-state-banner-deleted">
@@ -1595,12 +1598,12 @@
       } else {
         // Changed state - side by side comparison with diff highlighting
         document.getElementById('diffSubtitle').textContent = 'Compare backup with current live version.';
-        const backupTimestamp = currentBackupName ? formatFolderName(currentBackupName) : '';
+        const backupTimestamp = currentBackupName ? formatFolderName(currentBackupName, currentBackupMtime) : '';
         const diffHtml = generateDiff(packagesLiveContent, packagesBackupContent, {
           leftLabel: 'Live version',
           rightLabel: 'Backup version',
           rightMeta: backupTimestamp,
-          bannerText: formatFolderName(currentBackupName)
+          bannerText: formatFolderName(currentBackupName, currentBackupMtime)
         });
         modalBody.innerHTML = `
           ${diffHtml}
