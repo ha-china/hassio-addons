@@ -1,21 +1,21 @@
-# ESPHome 扩展
-## 安装
+# ESPHome Add-on
+## Installation
 
-这个扩展的安装过程非常直接，与安装任何其他 Home Assistant 扩展没有区别。
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other Home Assistant add-on.
 
-1. 在 Supervisor 扩展商店中搜索“ESPHome”扩展。
-2. 点击安装以下载扩展并在您的机器上解压它。这可能需要一些时间。
-3. 可选：如果您正在使用 SSL/TLS 证书并希望加密与该扩展的通信，请在 `ssl` 字段中输入 `true`，并相应地设置 `fullchain` 和 `certfile` 选项。
-4. 启动扩展，检查扩展的日志以查看是否一切正常。
-5. 点击“打开 Web UI”以打开 ESPHome 仪表板。系统将要求您输入 Home Assistant 凭据 - ESPHome 使用 Home Assistant 的认证系统来登录您。
+1. Search for the “ESPHome” add-on in the Supervisor add-on store.
+2. Press install to download the add-on and unpack it on your machine. This can take some time.
+3. Optional: If you're using SSL/TLS certificates and want to encrypt your communication to this add-on, please enter `true` into the `ssl` field and set the `fullchain` and `certfile` options accordingly.
+4. Start the add-on, check the logs of the add-on to see if everything went well.
+5. Click "OPEN WEB UI" to open the ESPHome dashboard. You will be asked for your Home Assistant credentials - ESPHome uses Home Assistant's authentication system to log you in.
 
-您可以在 https://esphome.io/ 查看ESPHome文档。
+You can view the ESPHome documentation at https://esphome.io/
 
-## 配置
+## Configuration
 
-**注意**：_更改配置时，请记住重新启动扩展。_
+**Note**: _Remember to restart the add-on when the configuration is changed._
 
-示例扩展配置：
+Example add-on configuration:
 
 ```json
 {
@@ -25,39 +25,47 @@
 }
 ```
 
-### 选项：`ssl`
+### Option: `ssl`
 
-启用或禁用与该扩展的 Web 服务器的加密 SSL/TLS（HTTPS）连接。
-将其设置为 `true` 以加密通信，否则设置为 `false`。
-请注意，如果您将此设置为 `true`，您还必须生成用于加密的密钥和证书文件。例如，使用 [Let's Encrypt](https://www.home-assistant.io/addons/lets_encrypt/)
-或 [自签名证书](https://www.home-assistant.io/docs/ecosystem/certificates/tls_self_signed_certificate/)。
+Enables or disables encrypted SSL/TLS (HTTPS) connections to the web server of this add-on.
+Set it to `true` to encrypt communications, `false` otherwise.
+Please note that if you set this to `true` you must also generate the key and certificate
+files for encryption. For example using [Let's Encrypt](https://www.home-assistant.io/addons/lets_encrypt/)
+or [Self-signed certificates](https://www.home-assistant.io/docs/ecosystem/certificates/tls_self_signed_certificate/).
 
-### 选项：`certfile`
+### Option: `certfile`
 
-用于 SSL 的证书文件。如果此文件不存在，扩展启动将失败。
+The certificate file to use for SSL. If this file doesn't exist, the add-on start will fail.
 
-**注意**：文件必须存储在 `/ssl/` 中，这是 Home Assistant 的默认路径。
+**Note**: The file MUST be stored in `/ssl/`, which is the default for Home Assistant
 
-### 选项：`keyfile`
+### Option: `keyfile`
 
-用于 SSL 的私钥文件。如果此文件不存在，扩展启动将失败。
+The private key file to use for SSL. If this file doesn't exist, the add-on start will fail.
 
-**注意**：文件必须存储在 `/ssl/` 中，这是 Home Assistant 的默认路径。
+**Note**: The file MUST be stored in `/ssl/`, which is the default for Home Assistant
 
-### 选项：`leave_front_door_open`
+### Option: `leave_front_door_open`
 
-将此选项添加到扩展配置中，允许您通过将其设置为 `true` 来禁用身份验证。
+Adding this option to the add-on configuration allows you to disable
+authentication by setting it to `true`.
 
-### 选项：`relative_url`
+### Option: `relative_url`
 
-在相对 URL 下托管 ESPHome 仪表板，以便它可以集成到现有的 Web 代理（如 NGINX）的相对 URL 下。默认值为 `/`。
+Host the ESPHome dashboard under a relative URL, so that it can be integrated
+into existing web proxies like NGINX under a relative URL. Defaults to `/`.
 
-### 选项：`status_use_ping`
+### Option: `status_use_ping`
 
-默认情况下，仪表板使用 mDNS 来检查节点是否在线。如果您的路由器支持 mDNS 转发或 avahi，这可以在子网之间工作。
+By default the dashboard uses mDNS to check if nodes are online. This does
+not work across subnets unless your router supports mDNS forwarding or avahi.
 
-将此设置为 `true` 将使 ESPHome 使用 ICMP ping 请求来获取节点状态。如果所有节点即使连接时也总是显示离线状态，请使用此选项。
+Setting this to `true` will make ESPHome use ICMP ping requests to get the node status. Use this if all nodes always have offline status even when they're connected.
 
-### 选项：`streamer_mode`
+### Option: `streamer_mode`
 
-如果设置为 `true`，这将启用流模式，使 ESPHome 隐藏所有可能包含私人信息的详细信息。例如 WiFi (B)SSID（这些信息可能用于确定您的位置）、用户名等。请注意，您需要在您的 YAML 文件中使用 `!secret` 标签来阻止这些信息在编辑和验证时显示。
+If set to `true`, this will enable streamer mode, which makes ESPHome hide all
+potentially private information. So for example WiFi (B)SSIDs (which could be
+used to find your location), usernames, etc. Please note that you need to use
+the `!secret` tag in your YAML file to also prevent these from showing up
+while editing and validating.

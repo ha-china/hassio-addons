@@ -11,9 +11,10 @@
     "PGID": "0"
   },
   "map": [
-    "addon_config:rw"
+    "addon_config:rw",
+    "share:rw"
   ],
-  "version": "2.1.9",
+  "version": "2.2.1",
   "name": "silverbullet",
   "ports": {
     "3000/tcp": "3000"
@@ -22,14 +23,16 @@
     "3000/tcp": "Web interface"
   },
   "options": {
-    "SB_USER": ""
+    "SB_USER": "",
+    "SB_FOLDER": ""
   },
   "schema": {
-    "SB_USER": "str?"
+    "SB_USER": "str?",
+    "SB_FOLDER": "str?"
   },
   "slug": "silverbullet",
   "startup": "services",
-  "upstream": "2.1.9",
+  "upstream": "2.2.1",
   "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:3000]",
   "ingress": false,

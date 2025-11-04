@@ -1,5 +1,29 @@
 # TOMMY
 
+## 0.19.2
+
+### Minor Changes
+
+- Improved algorithm for 'High Performance' mode
+
+## 0.19.1
+
+### Minor Changes
+
+- Scale raw signal
+
+## 0.19.0
+
+### Major Changes
+
+- Added performance modes
+- Improvements to detection algorithm
+
+### Minor Changes
+
+- Show status when OTA is in progress
+- Performance improvements
+  
 ## 0.18.0
 
 ### Major Changes
