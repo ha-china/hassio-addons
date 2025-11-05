@@ -1,5 +1,21 @@
 # TOMMY
 
+## 0.20.1
+
+### Minor Changes
+
+- Fixed warning about Wi-Fi 6 in 'Performance Mode'
+
+## 0.20.0
+
+### Major Changes
+
+- Added Boundary Mode
+
+### Minor Changes
+
+- UI changes
+
 ## 0.19.2
 
 ### Minor Changes
