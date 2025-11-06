@@ -1,5 +1,12 @@
 # TOMMY
 
+## 0.20.2
+
+### Minor Changes
+
+- Performance improvements to visualizations in the dashboard
+- Minor UI changes
+
 ## 0.20.1
 
 ### Minor Changes

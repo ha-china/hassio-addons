@@ -1,11 +1,10 @@
 #============================#
 #  ALEXBELGIUM'S DOCKERFILE  #
 #============================#
-# ... ascii art omitted ...
 #=== Home Assistant Add‑on – ENTE (server + web UI) ===#
 
 ########################################################
-# 0 ▸ Build the ente‑web static front‑end (multi‑stage) #
+# 0 Build the ente‑web static front‑end (multi‑stage) #
 ########################################################
 FROM node:22-alpine AS web-builder
 
@@ -32,34 +31,38 @@ RUN yarn config set network-timeout 900000 -g \
  && yarn build:cast
 
 #################
-# 1 ▸ Base image #
+# 1 Base image #
 #################
-ARG BUILD_VERSION
 FROM ghcr.nju.edu.cn/ente-io/server:latest
 
 ##################
-# 2 ▸ Tune image #
+# 2 Tune image #
 ##################
 ENV  S6_CMD_WAIT_FOR_SERVICES=1 \
      S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
      S6_SERVICES_GRACETIME=0
 USER root
 
-# --- LSIO helper (unchanged) ---
+# --- LSIO helper ---
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_lsio.sh" /ha_lsio.sh
 ARG CONFIGLOCATION="/config"
 RUN chmod 744 /ha_lsio.sh && \
     if grep -qr "lsio" /etc; then /ha_lsio.sh "$CONFIGLOCATION"; fi && \
     rm /ha_lsio.sh
 
-# --- MinIO, psql client etc. (unchanged) ---
-ARG BUILD_ARCH
+# --- MinIO, psql client etc. ---
 RUN set -eux; \
-    if [ "$BUILD_ARCH" = "aarch64" ]; then BUILD_ARCH="arm64"; fi && \
-    apk add --no-cache \
+    BUILD_ARCH=$(uname -m) \
+    && echo "${BUILD_ARCH}" \
+    && BUILD_ARCH=${BUILD_ARCH:-x86} \
+    && if [[ "${BUILD_ARCH}" == *aarch64* ]]; then ARCH="arm64"; fi \
+    && if [[ "${BUILD_ARCH}" == *armv8* ]]; then ARCH="arm64"; fi \
+    && if [[ "${BUILD_ARCH}" == *arm64* ]]; then ARCH="arm64"; fi \
+    && if [[ "${BUILD_ARCH}" == *x86* ]]; then ARCH="amd64"; fi \
+    && apk add --no-cache \
         bash curl ca-certificates wget jq tini postgresql15-client; \
-    curl -fsSL https://dl.min.io/server/minio/release/linux-"$BUILD_ARCH"/minio -o /usr/local/bin/minio; \
-    curl -fsSL https://dl.min.io/client/mc/release/linux-"$BUILD_ARCH"/mc -o /usr/local/bin/mc; \
+    curl -fsSL https://dl.min.io/server/minio/release/linux-"$ARCH"/minio -o /usr/local/bin/minio; \
+    curl -fsSL https://dl.min.io/client/mc/release/linux-"$ARCH"/mc -o /usr/local/bin/mc; \
     chmod +x /usr/local/bin/minio /usr/local/bin/mc
 RUN apk add --no-cache \
         lsb-release curl gnupg wget tini jq sudo \
@@ -75,7 +78,7 @@ COPY --from=web-builder /src/web/apps/auth/out      /www/auth
 COPY --from=web-builder /src/web/apps/cast/out      /www/cast
 
 ##################
-# 3 ▸ Install add‑on helpers (unchanged) #
+# 3 Install add‑on helpers #
 ##################
 COPY rootfs/ /
 ARG MODULES="00-banner.sh 01-custom_script.sh 00-global_var.sh 00-local_mounts.sh 00-smb_mounts.sh"
@@ -88,7 +91,7 @@ RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.
 
 
 ################
-# 4 ▸ Entrypoint (unchanged) #
+# 4 Entrypoint #
 ################
 ENV  S6_STAGE2_HOOK=/ha_entrypoint.sh
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh"       /ha_entrypoint.sh
@@ -99,9 +102,9 @@ ENTRYPOINT ["/usr/bin/env"]
 CMD        ["/ha_entrypoint.sh"]
 
 ############
-# 5 ▸ Labels (unchanged) #
+# 5 Labels #
 ############
-ARG BUILD_ARCH BUILD_DATE BUILD_NAME BUILD_DESCRIPTION BUILD_REF BUILD_REPOSITORY
+ARG BUILD_VERSION BUILD_ARCH BUILD_DATE BUILD_NAME BUILD_DESCRIPTION BUILD_REF BUILD_REPOSITORY
 LABEL \
   io.hass.name="${BUILD_NAME}" \
   io.hass.description="${BUILD_DESCRIPTION}" \
@@ -119,6 +122,6 @@ LABEL \
   org.opencontainers.image.version=${BUILD_VERSION}
 
 #################
-# 6 ▸ Finish line #
+# 6 Finish line #
 #################
 EXPOSE 3000 3001 3002 3003 3004
