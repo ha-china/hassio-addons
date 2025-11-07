@@ -1,8 +1,8 @@
 name: Music Assistant DEV SERVER
 # version number gets updated only when the mass base image updates!
-version: 1.4.1
+version: 1.4.9g
 slug: music_assistant_dev
-description: '[老王杂谈说]：为Music Assistant的开发者插件。仅限开发者使用。'
+description: '[老王杂谈说]：音乐助手开发插件。仅供开发者使用。'
 url: https://music-assistant.io
 arch:
   - amd64
@@ -17,6 +17,7 @@ panel_icon: mdi:play-circle
 panel_title: Music Assistant
 panel_admin: false
 uart: false
+apparmor: true
 map:
   - media:rw
 init: false
@@ -29,13 +30,13 @@ backup_exclude:
   - .cache/*
 options:
   log_level: info
-  server_repo: dev
-  frontend_repo: main
+  server_repo: ""
+  frontend_repo: ""
   safe_mode: false
 schema:
   log_level: list(debug|info|warning|error)
-  server_repo: str
-  frontend_repo: str
+  server_repo: str?
+  frontend_repo: str?
   safe_mode: bool
 privileged:
   - SYS_ADMIN
