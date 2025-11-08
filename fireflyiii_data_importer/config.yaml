@@ -1,8 +1,7 @@
 arch:
   - aarch64
   - amd64
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：Firefly III 的数据导入器（独立的插件）'
+description: '[老王杂谈说]：Firefly III 数据导入器（独立的插件）'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -66,7 +65,7 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment:
-  TRUSTED_PROXIES: '**'
+  TRUSTED_PROXIES: "**"
 image: ghcr.nju.edu.cn/alexbelgium/fireflyiii_data_importer-{arch}
 init: false
 map:
@@ -76,12 +75,16 @@ map:
   - ssl
 name: Firefly iii Data Importer
 options:
+  env_vars: []
   CONFIG_LOCATION: /config
 ports:
   8080/tcp: 3474
 ports_description:
   8080/tcp: web interface
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   AUTO_IMPORT_SECRET: str?
   CAN_POST_AUTOIMPORT: bool?
   CAN_POST_FILES: bool?
@@ -98,5 +101,5 @@ schema:
 slug: fireflyiii_data_importer
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "1.9.0"
-webui: '[PROTO:ssl]://[HOST]:[PORT:8080]'
+version: "1.9.1"
+webui: "[PROTO:ssl]://[HOST]:[PORT:8080]"

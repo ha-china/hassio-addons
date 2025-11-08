@@ -3,8 +3,7 @@ arch:
   - amd64
 backup_exclude:
   - "**/machine-learning/*"
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：从您的手机直接托管照片和视频备份解决方案'
+description: '[老王杂谈说]：从您的手机直接提供的自助托管照片和视频备份解决方案'
 devices:
   - /dev/dri
   - /dev/dxg
@@ -92,6 +91,7 @@ map:
   - ssl:rw
 name: Immich without Machine Learning
 options:
+  env_vars: []
   DB_DATABASE_NAME: immich
   DB_HOSTNAME: homeassistant.local
   DB_PASSWORD: homeassistant
@@ -111,6 +111,9 @@ privileged:
   - SYS_ADMIN
   - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   DB_DATABASE_NAME: str
   DB_HOSTNAME: str
   DB_PASSWORD: str
@@ -136,6 +139,6 @@ slug: immich_noml
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
 usb: true
-version: "2.2.1"
+version: "2.2.3"
 video: true
 webui: http://[HOST]:[PORT:8080]

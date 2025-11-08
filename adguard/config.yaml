@@ -1,9 +1,8 @@
 name: AdGuard Home
-version: 6.0.0
+version: 6.0.1
 slug: adguard
 description: '[老王杂谈说]：全网广告和跟踪器阻止DNS服务器'
 url: https://ghfast.top/github.com/hassio-addons/addon-adguard-home
-codenotary: codenotary@frenck.dev
 ingress: true
 ingress_port: 0
 ingress_stream: true

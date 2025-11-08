@@ -1,5 +1,5 @@
 name: Pocket ID
-version: 1.1.23
+version: 1.1.24
 slug: pocket-id
 description: '[老王杂谈说]：用于密钥认证的简单OIDC提供程序'
 url: https://ghfast.top/github.com/einschmidt/addon-pocket-id

@@ -1,13 +1,13 @@
 configuration:
   log_level:
-   name: log level
-   description: The amount of logging the add-on should do. [trace|debug|info|notice|warning|error|fatal]
+    name: log level
+    description: The amount of logging the add-on should do. [trace|debug|info|notice|warning|error|fatal]
   mqtt_server:
     name: MQTT server IP
     description: IP address or FQDN of the MQTT broker. If you are running Mosquitto addon it will be IP address of your HomeAssistant.
   mqtt_port:
     name: MQTT port
-    description: MQTT broker TCP port, default is `1883`.
+    description: MQTT broker TCP port, default is '1883'.
   mqtt_qos:
     name: MQTT QoS
     description: MQTT QoS configuration - refer to Home Assistant MQTT documentation, default 1.
@@ -28,31 +28,28 @@ configuration:
     description: If you use Modbus to Ethernet convertor connected to Home assistant server this will be its IP address. If you use Modbus to Serial/USB convertor this must not be filled!
   taptap_port:
     name: Modbus to Ethernet convertor port
-    description: If you use Modbus to Ethernet convertor connected to Home assistant server this will be its TCP port, default is 502.
-  taptap_module_ids: 
-    name: Tigo modules IDs as user on the Modbus
-    description: Comma separated list of Tigo modules ids as those communicate on the Modbus. This ID are numbers typically starting from 2 and each next module has +1. If you replace one Tigo module by another new module will get new ID.
-  taptap_module_names:
-    name: Tigo modules names for Home Assistant
-    description: Comma separated list of the names you would like to see in Home Assistant in corresponding entities names. Enter in the same order as Ids.
-  taptap_topic_prefix:
-    name: MQTT topic prefix for taptap
-    description: MQTT topic prefix used on the MQTT to post messages so Home Assistant can read those, default is taptap. There is typically no need to change this setting.
+    description: If you use Modbus to Ethernet convertor connected to Home assistant server this will be its TCP port, default is '502'.
+  taptap_modules_serials:
+    name: Tigo modules names and serial numbers
+    description: Tuple of modules friendly names as defined by user and modules serial numbers in the format 'NAME1:SERIAL1, NAME2:SERIAL2,...' Tigo modules serial numbers can be found on the modules barcode stickers or in the Tigo cloud. Serials have 'X-XXXXXX' format. Program will log any unknown serial number so you can use it to discover serials if you do not know them. Be aware that messages with serial numbers are emitted rarely, very often only during night time! Wait as lest 24hrs for the complete discovery! To allow for monitoring to start as soon as possible (before receiving all serials), addon will temporarily assign Tigo modules to the user names randomly at the first run. Once serials are received, addon will enumerate all sensors to match user defined names. Once detected serial numbers and mapping to user names are stored in the addon persistent storage in HA and stored information will be reused for any future addon runs.
   taptap_topic_name:
     name: MQTT topic and device name
-    description: MQTT topic name used on the MQTT to post messages so Home Assistant can read those, default is tigo. This name will be also used in name of the Home Assistant taptap device and entities.
+    description: Name to be used as device name in the Home Assistant, default is 'tigo'. This will be also used as MQTT topic (together with topic prefix) to post messages on MQTT to Home Assistant.
+  taptap_topic_prefix:
+    name: MQTT topic prefix for taptap
+    description: MQTT topic prefix used on the MQTT to post messages so Home Assistant can read those, default is 'taptap'. There is typically there is no need to change this setting.
   taptap_update:
     name: MQTT update time
-    description: How often Home Assistant entities are updated in seconds, default is 10.
+    description: How often Home Assistant entities are updated in seconds, default is '10'.
   taptap_timeout:
     name: Availability timeout
-    description: If no message is received within last x seconds from the node and 'Entities unavailable if node is offline' is set to true then corresponding entities are set to Unavailable state.
+    description: If no message is received within last X seconds from the node and 'Entities unavailable if node is offline' is set to true then corresponding entities are set to 'Unavailable' state. If your entities have flapping 'Unavailable' status during the day increase this number. Default is '120' seconds.
   ha_entity_availability:
     name: Entities unavailable if node is offline
-    description: If set to true, then if no message from any given module is received in the time specified by 'Availability timeout' corresponding entities are set to Unavailable state.
+    description: If set to true, then if no message from any given module is received in the time specified by 'Availability timeout' corresponding entities are set to 'Unavailable' state.
   ha_discovery_prefix:
     name: Home assistant MQTT discovery prefix
-    description: MQTT prefix Home Assistant is subscribed for auto discovery of the new devices and entities. Please refer to HA MQTT documentation, default is homeassistant. There is typically no need to change this setting.
+    description: MQTT prefix Home Assistant is subscribed for auto discovery of the new devices and entities. Please refer to HA MQTT documentation, default is 'homeassistant'. There is typically no need to change this setting.
   ha_birth_topic:
     name: Home assistant MQTT LWT and birth topic
-    description: MQTT prefix Home Assistant announces when gets online. Please refer to HA MQTT documentation, default is homeassistant/status. There is typically no need to change this setting.
+    description: MQTT prefix Home Assistant announces when gets online. Please refer to HA MQTT documentation, default is 'homeassistant/status'. There is typically no need to change this setting.

@@ -3,8 +3,7 @@ arch:
   - aarch64
   - amd64
   - armv7
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：一种用于船的Signal K中央服务器的实现'
+description: '[老王杂谈说]：一个用于船只的Signal K中央服务器的实现'
 devices:
   - /dev/can0
   - /dev/can1
@@ -14,10 +13,10 @@ devices:
   - /dev/ttyACM1
 environment:
   HOME: /config
-  NMEA0183PORT: '10110'
-  PORT: '3000'
-  SSLPORT: '3443'
-  TCPSTREAMPORT: '8375'
+  NMEA0183PORT: "10110"
+  PORT: "3000"
+  SSLPORT: "3443"
+  TCPSTREAMPORT: "8375"
 image: ghcr.nju.edu.cn/alexbelgium/signalk-{arch}
 map:
   - addon_config:rw
@@ -46,5 +45,5 @@ uart: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
 usb: true
-version: "2.17.2"
+version: "2.18.0"
 webui: http://[HOST]:[PORT:3000]

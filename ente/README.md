@@ -14,11 +14,11 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我仓库星标的人！要星标它，请点击下面的图片，它将出现在右上角。谢谢！_
+_感谢所有星标我的仓库的人！要星标它，请点击下面的图片，然后它会在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/ente/stats.png)
+![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/ente/stats.png)
 
 ## 关于
 
@@ -32,7 +32,7 @@ Ente 提供：
 - 跨平台的移动和桌面应用程序
 - 从移动设备自动备份照片
 - 与家人和朋友共享相册
-- 自托管下对数据的完全控制
+- 自托管，完全控制您的数据
 
 这个插件基于官方 Ente 服务器：https://github.com/ente-io/ente/tree/main/server
 
@@ -57,14 +57,14 @@ Webui 可以在 <http://homeassistant:PORT> 找到。
 
 ### 外部数据库配置
 
-如果你想要使用外部 PostgreSQL 数据库，设置 `USE_EXTERNAL_DB: true` 并配置：
+如果您想使用外部 PostgreSQL 数据库，设置 `USE_EXTERNAL_DB: true` 并配置：
 
 | 选项 | 类型 | 描述 |
 |------|------|------|
 | `DB_HOSTNAME` | 字符串 | PostgreSQL 服务器主机名 |
 | `DB_PORT` | 整数 | PostgreSQL 服务器端口（默认：5432） |
 | `DB_USERNAME` | 字符串 | PostgreSQL 用户名 |
-| `DB_DATABASE_NAME` | 字符串 | PostgreSQL 数据库名称 |
+| `DB_DATABASE_NAME` | 字符串 | PostgreSQL 数据库名 |
 
 ### 示例配置
 
@@ -80,31 +80,31 @@ TZ: "America/New_York"
 
 ### 自定义脚本和环境变量
 
-这个插件支持通过 `addon_config` 映射自定义脚本和环境变量：
+这个插件支持通过 `addon_config` 映射的自定义脚本和环境变量：
 
-- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：参见 [向你的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **自定义脚本**：见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详情。
 
 ### 挂载驱动器
 
 这个插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ## 安装
 
 ---
 
-这个插件的安装非常简单，与安装其他插件没有区别。
+这个插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到你的 home assistant 实例（在 supervisor 插件商店右上角，或如果你已经配置了我的 HA，点击下面的按钮）
-   [![打开你的 Home Assistant 实例并显示添加插件仓库对话框，并预填特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的 home assistant 实例（在 supervisor 插件商店的右上角，或如果您已配置我的 HA，请点击下面的按钮）
+   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装这个插件。
-1. 点击 `保存` 按钮来保存你的配置。
-1. 设置插件的选项以符合你的偏好。
+1. 点击 `保存` 按钮保存您的配置。
+1. 设置插件选项以符合您的偏好。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
+1. 检查插件的日志以查看一切是否正常。
 
 ## 首次设置
 
@@ -112,43 +112,43 @@ TZ: "America/New_York"
 
 首次启动插件后：
 
-1. 从以下地方下载 Ente 移动应用程序：
+1. 从以下链接下载 Ente 移动应用程序：
    - [iOS App Store](https://apps.apple.com/app/ente-photos/id1542026904)
    - [Google Play Store](https://play.google.com/store/apps/details?id=io.ente.photos)
    - [F-Droid](https://f-droid.org/packages/io.ente.photos.fdroid/)
 
-2. 在应用程序设置过程中，选择 "使用自定义服务器" 并输入你的插件 URL：`http://your-homeassistant-ip:8280`
+2. 在应用程序设置期间，选择 "使用自定义服务器" 并输入您的插件 URL：`http://your-homeassistant-ip:8280`
 
 3. 使用移动应用程序创建新账户
 
-4. **重要**：对于自托管实例，订阅代码无法通过电子邮件发送。检查插件日志以获取验证码：
+4. **重要**：对于自托管实例，订阅代码不能通过电子邮件发送。检查插件日志以获取验证码：
    ```
-   验证码：xxxxxx
+   验证码：xxxxxxxx
    ```
 
 5. 使用日志中的验证码完成账户设置
 
 ## 端口
 
-插件公开了三个端口：
+插件暴露了三个端口：
 
-- **8300**（3000/tcp）：Ente Web UI（如果启用）
-- **8280**（8080/tcp）：Ente API 服务器（博物馆）- 应用程序的主要端点
-- **8320**（3200/tcp）：MinIO S3 端点（用于存储后端）
+- **8300** (3000/tcp)：Ente Web UI（如果启用）
+- **8280** (8080/tcp)：Ente API 服务器（博物馆）- 应用程序的主要端点
+- **8320** (3200/tcp)：MinIO S3 端点（用于存储后端）
 
 ## 数据存储
 
-默认情况下，照片和视频存储在 `/config/minio-data`。你可以使用 `MINIO_DATA_LOCATION` 选项更改此位置，或挂载外部存储以获得更大的容量。
+默认情况下，照片和视频存储在 `/config/minio-data`。您可以使用 `MINIO_DATA_LOCATION` 选项更改此位置，或挂载外部存储以获得更大的容量。
 
 插件包括：
-- 用于元数据的 PostgreSQL 数据库
-- 用于实际照片/视频的 MinIO S3 兼容存储
-- 用于客户端通信的 Ente 博物馆 API 服务器
+- PostgreSQL 数据库用于元数据
+- MinIO S3 兼容存储用于实际的照片/视频
+- Ente 博物馆 API 服务器用于客户端通信
 
 ## 备份建议
 
 为了数据安全，定期备份：
-- `/config/minio-data`（或你的自定义存储位置）- 包含所有照片/视频
+- `/config/minio-data`（或您的自定义存储位置）- 包含所有照片/视频
 - PostgreSQL 数据库（由插件自动处理）
 - 插件配置
 

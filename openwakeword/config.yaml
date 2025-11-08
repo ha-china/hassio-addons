@@ -1,13 +1,12 @@
 ---
-version: 1.10.0
+version: 2.1.0
 slug: openwakeword
 name: openWakeWord
-description: 使用怀俄明协议打开唤醒词。
+description: '[老王杂谈说]：使用怀俄明协议打开唤醒词'
 url: https://ghfast.top/github.com/home-assistant/addons/blob/master/openwakeword
 arch:
   - amd64
   - aarch64
-  - armv7
 init: false
 discovery:
   - wyoming

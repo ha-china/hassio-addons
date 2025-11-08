@@ -1,7 +1,6 @@
 arch:
   - aarch64
   - amd64
-codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：一个免费且开源的个人财务管理器'
 devices:
   - /dev/dri
@@ -74,6 +73,7 @@ map:
   - share:rw
 name: Firefly iii
 options:
+  env_vars: []
   APP_KEY: CHANGEME_32_CHARS_EuC5dfn3LAPzeO
   CONFIG_LOCATION: /config/addons_config/fireflyiii/config.yaml
   DB_CONNECTION: sqlite_internal
@@ -85,6 +85,9 @@ ports_description:
   8080/tcp: web interface
   8443/tcp: ssl web interface
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   APP_KEY: str
   CONFIG_LOCATION: str
   DB_CONNECTION: list(sqlite_internal|mariadb_addon|mysql|pgsql)
@@ -101,5 +104,5 @@ slug: fireflyiii
 startup: services
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "6.4.3"
+version: "6.4.4"
 webui: "[PROTO:ssl]://[HOST]:[PORT:8080]"

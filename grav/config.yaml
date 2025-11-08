@@ -1,7 +1,6 @@
 arch:
   - aarch64
   - amd64
-codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：快速、简单、灵活，基于文件的Web平台'
 devices:
   - /dev/dri
@@ -73,6 +72,7 @@ map:
   - config:rw
 name: Grav web server
 options:
+  env_vars: []
   PGID: 1000
   PUID: 1000
 ports:
@@ -80,11 +80,14 @@ ports:
 ports_description:
   80/tcp: web interface
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   PGID: int
   PUID: int
   TZ: str?
 slug: grav
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "1.7.50.4"
+version: "1.7.50.8"
 webui: "[PROTO:ssl]://[HOST]:[PORT:80]"

@@ -1,36 +1,36 @@
-## ⚠️ Open Request : [✨ [REQUEST] Access to Gitea app.ini (opened 2025-06-10)](https://github.com/alexbelgium/hassio-addons/issues/1907) by [@UplandJacob](https://github.com/UplandJacob)
-# Home assistant add-on: Gitea
+## ⚠️ 开启请求 : [✨ [请求] 访问 Gitea app.ini (已开启 2025-06-10)](https://github.com/alexbelgium/hassio-addons/issues/1907) 由 [@UplandJacob](https://github.com/UplandJacob)
+# Home assistant 插件：Gitea
 
-[![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![捐赠][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgitea%2Fconfig.yaml)
-![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgitea%2Fconfig.yaml)
-![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgitea%2Fconfig.yaml)
+![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgitea%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgitea%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgitea%2Fconfig.yaml)
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![构建器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建器)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我仓库点赞的人！要点赞请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_感谢大家给我的仓库点赞！点击下面的图片即可点赞，然后它就会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/gitea/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/gitea/stats.png)
 
 ## 关于
 
-[Gitea](https://about.gitea.com/) 是一个无痛苦的自我托管的一站式软件开发服务，它包括 Git 托管、代码审查、团队协作、包注册和 CI/CD。它与 GitHub、Bitbucket 和 GitLab 类似。
+[Gitea](https://about.gitea.com/) 是一种无痛的自托管全功能软件开发服务，它包括 Git 托管、代码审查、团队协作、软件包注册和 CI/CD。它与 GitHub、Bitbucket 和 GitLab 类似。
 
-各种调整和配置选项的添加。
+各种调整和配置选项的增加。
 此插件基于 [Docker 镜像](https://hub.docker.com/r/gitea/gitea)。
 
 ## 配置
 
-Webui 可以在 <http://homeassistant:PORT> 或通过 Ingress 在侧边栏中找到。
+Webui 可以在 <http://homeassistant:PORT> 或通过侧边栏使用入口访问。
 配置可以通过应用 WebUI 进行，除了以下选项。
 
 ### 选项
@@ -59,8 +59,8 @@ ROOT_URL: "http://homeassistant.local:3000"
 
 此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：参见 [为您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
 ## 安装
 
@@ -70,8 +70,8 @@ ROOT_URL: "http://homeassistant.local:3000"
 1. 安装此插件。
 1. 点击 `保存` 按钮以保存您的配置。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 进入 Webui，您将初始化应用
+1. 检查插件的日志，看看是否一切顺利。
+1. 进入 WebUI，您将初始化应用程序
 1. 重新启动插件，以应用任何应应用的选项
 
 [repository]: https://github.com/alexbelgium/hassio-addons

@@ -1,8 +1,8 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: TapTap
-version: "0.1.7"
+version: "0.2.2"
 slug: taptap
-description: '[老王杂谈说]：Tigo CCA 到 HomeAssistant MQTT桥接'
+description: '[老王杂谈说]：Tigo CCA 到 HomeAssistant MQTT 桥接'
 url: "https://ghfast.top/github.com/litinoveweedle/hassio-addons/tree/main/taptap"
 image: "ghcr.nju.edu.cn/litinoveweedle/hassio-addon-taptap-{arch}"
 homeassistant: 2025.3.1
@@ -24,12 +24,11 @@ options:
   mqtt_user: null
   mqtt_pass: null
   taptap_port: 502
-  taptap_module_ids: null
-  taptap_module_names: null
-  taptap_topic_prefix: taptap
+  taptap_modules_serials: null
   taptap_topic_name: tigo
+  taptap_topic_prefix: taptap
   taptap_update: 10
-  taptap_timeout: 60
+  taptap_timeout: 120
   ha_entity_availability: true
   ha_discovery_prefix: homeassistant
   ha_birth_topic: homeassistant/status
@@ -44,10 +43,10 @@ schema:
   taptap_serial: device(subsystem=tty)?
   taptap_address: str
   taptap_port: port
-  taptap_module_ids: match(^(\s*\d+\s*)(\,\s*\d+\s*)*$)
-  taptap_module_names: match(^(\s*\w+\s*)(\,\s*\w+\s*)*$)
-  taptap_topic_prefix: str
-  taptap_topic_name: str
+  taptap_modules_serials:
+    - match(^\w+\s*\:\s*[0-9A-Z]\-[0-9A-Z]{7}$)
+  taptap_topic_name: match(^\w+$)
+  taptap_topic_prefix: match((\w+)(\/\w+)*)
   taptap_update: int
   taptap_timeout: int
   ha_entity_availability: bool

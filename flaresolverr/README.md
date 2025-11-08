@@ -14,11 +14,11 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，它将在右上角显示。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它会在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/flaresolverr/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/flaresolverr/stats.png)
 
 ## 关于
 
@@ -27,9 +27,9 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 主要功能：
 - 自动绕过 Cloudflare 保护
 - 使用 Firefox 进行无头浏览器自动化
-- RESTful API 用于与其他工具集成
-- 用于后续请求的 Cookie 提取
-- 支持各种 Cloudflare 挑战类型
+- 提供RESTful API以与其他工具集成
+- 提取 Cookie 用于后续请求
+- 支持多种 Cloudflare 挑战类型
 
 **注意**：网络浏览器会消耗大量内存。在内存有限的系统上避免进行多个并发请求。
 
@@ -37,25 +37,25 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 这个插件的安装非常简单，与安装其他插件没有区别。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的 supervisor 插件商店中，或者如果您已经配置了我的 HA，点击下面的按钮）
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的 supervisor 插件商店中，或如果您已配置我的 HA，请点击下面的按钮）
    [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装这个插件。
+1. 安装此插件。
 1. 点击 `保存` 按钮以保存您的配置。
 1. 启动插件。
-1. 检查插件的日志，看看是否一切正常。
+1. 检查插件的日志以查看是否一切正常。
 
 ## 配置
 
 Web 界面可以在 <http://homeassistant:8191> 找到。
-这个插件没有配置选项 - 它可以开箱即用。
+这个插件没有配置选项 - 它可以直接使用。
 
 ### API 使用
 
 FlareSolverr 提供了一个 REST API 用于与其他应用程序集成：
 
-**端点**: `http://homeassistant:8191/v1`
+**端点**： `http://homeassistant:8191/v1`
 
-**示例请求**:
+**示例请求**：
 ```json
 {
   "cmd": "request.get",
@@ -64,11 +64,11 @@ FlareSolverr 提供了一个 REST API 用于与其他应用程序集成：
 }
 ```
 
-### 与 *arr 应用程序集成
+### 与 *arr 应用程序的集成
 
 配置您的索引器以使用 FlareSolverr：
-- **Prowlarr/Jackett**: 将 FlareSolverr URL 设置为 `http://homeassistant:8191`
-- **Sonarr/Radarr**: 配置索引器使用 FlareSolverr 代理
+- **Prowlarr/Jackett**：将 FlareSolverr URL 设置为 `http://homeassistant:8191`
+- **Sonarr/Radarr**：配置索引器以使用 FlareSolverr 代理
 
 ### 选项
 
@@ -76,13 +76,13 @@ FlareSolverr 提供了一个 REST API 用于与其他应用程序集成：
 
 ### 资源需求
 
-- **内存**: 推荐 512MB+
-- **CPU**: 挑战解决期间使用适度
-- **网络**: 需要互联网访问才能正常工作
+- **内存**：推荐 512MB+
+- **CPU**：挑战解决期间使用适度
+- **网络**：需要互联网访问才能正常工作
 
 ## 支持
 
-在 github 上创建问题
+在 github 上创建一个问题
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 ## 📱 关注我

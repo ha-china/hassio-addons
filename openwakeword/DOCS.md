@@ -1,52 +1,58 @@
-# Home Assistant 插件：openWakeWord
+# Home Assistant Add-on: openWakeWord
 
-## 安装
+## Installation
 
-按照以下步骤在您的系统上安装插件：
+Follow these steps to get the add-on installed on your system:
 
-1. 在您的 Home Assistant 前端中导航至 **设置** -> **插件** -> **插件商店**。
-2. 找到 "openWakeWord" 插件并点击它。
-3. 点击 "安装" 按钮。
+1. Navigate in your Home Assistant frontend to **Settings** -> **Add-ons** -> **Add-on store**.
+2. Find the "openWakeWord" add-on and click it.
+3. Click on the "INSTALL" button.
 
-## 如何使用
+## How to use
 
-安装并运行此插件后，它将被 Home Assistant 中的 Wyoming 集成自动发现。要完成设置，请点击以下我的按钮：
+After this add-on is installed and running, it will be automatically discovered
+by the Wyoming integration in Home Assistant. To finish the setup,
+click the following my button:
 
-[![打开您的 Home Assistant 实例并开始设置新的集成。](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=wyoming)
+[![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=wyoming)
 
-另外，您也可以手动安装 Wyoming 集成，请参见 [Wyoming 集成文档](https://www.home-assistant.io/integrations/wyoming/) 获取更多信息。
+Alternatively, you can install the Wyoming integration manually, see the
+[Wyoming integration documentation](https://www.home-assistant.io/integrations/wyoming/)
+for more information.
 
-## 配置
+## Configuration
 
-### 选项：`threshold`
+### Option: `threshold`
 
-激活阈值（0-1），越高表示激活次数越少。请查看触发级别以了解激活与唤醒词检测之间的关系。
+Activation threshold (0-1), where higher means fewer activations.  See trigger
+level for the relationship between activations and wake word detections.
 
-### 选项：`trigger_level`
+### Option: `trigger_level`
 
-在注册检测之前的激活次数。更高的触发级别意味着更少的检测。
+Number of activations before a detection is registered. A higher trigger level
+means fewer detections.
 
-### 选项：`debug_logging`
+### Option: `debug_logging`
 
-启用调试日志记录。对于查看卫星连接和每次唤醒词检测的日志非常有用。
+Enable debug logging. Useful for seeing satellite connections and each wake word detection in the logs.
 
-## 自定义唤醒词模型
+## Custom Wake Word Models
 
-插件将自动从 `/share/openwakeword` 目录加载自定义唤醒词模型。[安装 Samba 插件](https://www.home-assistant.io/common-tasks/supervised/#installing-and-using-the-samba-add-on) 以将唤醒词模型文件（`*.tflite`）复制到此目录。
+The add-on will automatically load custom wake word models from the `/share/openwakeword` directory. [Install the Samba add-on](https://www.home-assistant.io/common-tasks/supervised/#installing-and-using-the-samba-add-on) to copy wake word model files (`*.tflite`) to this directory.
 
-在将新模型添加到 `/share/openwakeword` 后，请确保重新加载任何用于 openWakeWord 的 Wyoming 集成。重新加载后，新的唤醒词将可以在语音助手设置页面中选择。
+After adding new models to `/share/openwakeword`, make sure to reload any Wyoming integrations for openWakeWord. Once reloaded, the new wake words will be available to select in the Voice Assistants settings page.
 
-## 支持
+## Support
 
-有问题吗？
+Got questions?
 
-您有几种选择可以得到答案：
+You have several options to get them answered:
 
-- [Home Assistant Discord 聊天服务器][discord]。
-- Home Assistant [社区论坛][forum]。
-- 加入 [Reddit 子论坛][reddit] 在 [/r/homeassistant][reddit]。
+- The [Home Assistant Discord Chat Server][discord].
+- The Home Assistant [Community Forum][forum].
+- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
 
-如果您发现了一个错误，请 [在我们的 GitHub 上开一个问题][issue]。
+In case you've found an bug, please [open an issue on our GitHub][issue].
 
 [discord]: https://discord.gg/c5DvZ4e
 [forum]: https://community.home-assistant.io

@@ -1,28 +1,36 @@
 # Home Assistant Community Add-on: FTP
 
-FTP 协议在有时候可能会派上用场。虽然它比较老，但仍然有其用途。例如，大多数 IP 摄像头仍然支持通过 FTP 上传图像或视频。
+The FTP protocol might be come in handy sometimes. While old,
+it still has its use. For example, most IP Cameras still support the upload
+of images or videos via FTP.
 
-这个插件以一种相对安全的方式为 Hass.io 提供了 FTP 服务器。虽然 FTP 由于其（未加密）的性质并不是完全安全的，但这个插件支持 FTP over SSL (FTPS) 并在虚拟用户在其主目录中受到限制（chroot）。
+This add-on provides an FTP Server for Hass.io in a reasonably secure manner.
+While FTP is not entirely secure by its (unencrypted) nature, this add-on
+supports FTP over SSL (FTPS) and jails (chroot) the virtual users in their
+home directories.
 
-当然，如果你真的想这样做，你也可以使用这个插件通过 FTP 再次访问你的 Home Assistant 配置。
+Of course, if you'd really want to, you could also use this add-on to again
+access to your Home Assistant configuration via FTP.
 
-## 安装
+## Installation
 
-这个插件的安装过程非常直接，与安装任何其他 Home Assistant 插件没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Home Assistant add-on.
 
-1. 点击下面的 Home Assistant 我的按钮，在你的 Home Assistant 实例上打开插件。
+1. Click the Home Assistant My button below to open the add-on on your Home
+   Assistant instance.
 
-   ![在你的 Home Assistant 实例上打开这个插件][addon-badge]][addon]
+   [![Open this add-on in your Home Assistant instance.][addon-badge]][addon]
 
-1. 点击“安装”按钮来安装插件。
-1. 启动“FTP”插件
-1. 检查“FTP”插件的日志，看看是否一切顺利。
+1. Click the "Install" button to install the add-on.
+1. Start the "FTP" add-on
+1. Check the logs of the "FTP" add-on to see if everything went well.
 
-## 配置
+## Configuration
 
-**注意**：_在更改配置时，请记得重启插件。_
+**Note**: _Remember to restart the add-on when the configuration is changed._
 
-示例插件配置：
+Example add-on configuration:
 
 ```yaml
 log_level: info
@@ -65,180 +73,223 @@ users:
     ssl: false
 ```
 
-**注意**：_这只是个示例，不要复制粘贴！自己创建！_
+**Note**: _This is just an example, don't copy and paste it! Create your own!_
 
-### 选项：`log_level`
+### Option: `log_level`
 
-`log_level` 选项控制插件的日志输出级别，可以更改为更详细或更简洁，这在处理未知问题时可能很有用。可能的值有：
+The `log_level` option controls the level of log output by the addon and can
+be changed to be more or less verbose, which might be useful when you are
+dealing with an unknown issue. Possible values are:
 
-- `trace`：显示每个细节，例如所有调用的内部函数。
-- `debug`：显示详细的调试信息。
-- `info`：正常（通常）有趣的事件。
-- `warning`：非错误性的异常情况。
-- `error`：不需要立即处理的运行时错误。
-- `fatal`：发生了严重错误。插件变得无法使用。
+- `trace`: Show every detail, like all called internal functions.
+- `debug`: Shows detailed debug information.
+- `info`: Normal (usually) interesting events.
+- `warning`: Exceptional occurrences that are not errors.
+- `error`: Runtime errors that do not require immediate action.
+- `fatal`: Something went terribly wrong. Add-on becomes unusable.
 
-请注意，每个级别自动包含更严重级别的日志消息，例如，`debug` 也显示 `info` 消息。默认情况下，`log_level` 设置为 `info`，这是推荐的设置，除非你在进行故障排除。
+Please note that each level automatically includes log messages from a
+more severe level, e.g., `debug` also shows `info` messages. By default,
+the `log_level` is set to `info`, which is the recommended setting unless
+you are troubleshooting.
 
-这些日志级别也会影响 FTP 服务器的日志级别。
+These log level also affects the log levels of the FTP server.
 
-### 选项：`port`
+### Option: `port`
 
-FTP 将监听传入 FTP 连接的端口。
+The port the FTP will listen on for incoming FTP connections.
 
-### 选项：`data_port`
+### Option: `data_port`
 
-PORT 风格连接的来源端口。
+The port from which PORT style connections originate.
 
-### 选项：`banner`
+### Option: `banner`
 
-这个字符串选项允许你提供 FTP 服务器在首次连接时显示的问候横幅。
+This string option allows you to provide the greeting banner displayed by
+the FTP server when a connection first comes in.
 
-### 选项：`pasv`
+### Option: `pasv`
 
-如果你想要禁用获取数据连接的 PASV 方法，请将其设置为 `false`。有关被动与主动 FTP 的更多信息，请参阅[这个优秀的 Stack Overflow][passive-vs-active]答案。
+Set to `false` if you want to disallow the PASV method of obtaining a data
+connection. For more information about passive versus active FTP, see
+[this excellent Stack Overflow][passive-vs-active] answer.
 
-### 选项：`pasv_min_port`
+### Option: `pasv_min_port`
 
-为 PASV 风格数据连接分配的最小端口。可用于指定一个狭窄的端口范围以协助防火墙。
+The minimum port to allocate for PASV style data connections. Can be used to
+specify a narrow port range to assist firewalling.
 
-### 选项：`pasv_max_port`
+### Option: `pasv_max_port`
 
-为 PASV 风格数据连接分配的最大端口。可用于指定一个狭窄的端口范围以协助防火墙。
+The maximum port to allocate for PASV style data connections. Can be used to
+specify a narrow port range to assist firewalling.
 
-### 选项：`pasv_address`
+### Option: `pasv_address`
 
-使用此选项来覆盖 FTP 服务器在响应 PASV 命令时广告的 IP 地址。提供一个数字 IP 地址，或者提供一个主机名，它将在启动时为你进行 DNS 解析。如果留空，地址将取自传入的连接套接字。
+Use this option to override the IP address that the FTP server will advertise
+in response to the PASV command. Provide a numeric IP address, or provide a
+hostname which will be DNS resolved for you at startup. When left empty, the
+address is taken from the incoming connected socket.
 
-### 选项：`pasv_addr_resolve`
+### Option: `pasv_addr_resolve`
 
-设置为 `true` 以允许为 PASV 连接解析主机名。
+Set to `true` to allow a hostname to be resolved for PASV connections.
 
-### 选项：`ssl`
+### Option: `ssl`
 
-启用/禁用 FTP 服务器的 SSL。设置为 `true` 以启用，`false` 否则。
+Enables/Disables SSL on the FTP Server. Set it `true` to enable it,
+`false` otherwise.
 
-### 选项：`certfile`
+### Option: `certfile`
 
-用于 SSL 的证书文件。
+The certificate file to use for SSL.
 
-**注意**：_文件必须存储在 `/ssl/`，这是默认的。_
+**Note**: _The file MUST be stored in `/ssl/`, which is the default_
 
-### 选项：`keyfile`
+### Option: `keyfile`
 
-用于 SSL 的私钥文件。
+The private key file to use for SSL.
 
-**注意**：_文件必须存储在 `/ssl/`，这是默认的。_
+**Note**: _The file MUST be stored in `/ssl/`, which is the default_
 
-### 选项：`implicit_ssl`
+### Option: `implicit_ssl`
 
-如果设置为 `true`，则所有连接的第一件事就是期待一个 SSL 握手（FTPS 协议）。
+If set to `true`, an SSL handshake is the first thing expect on all connections
+(the FTPS protocol).
 
-### 选项：`max_clients`
+### Option: `max_clients`
 
-这是同时可以连接的最大客户端数量。任何额外的连接将收到错误消息。
+This is the maximum number of clients which may be connected at the same time.
+Any additional clients connecting will get an error message.
 
-### 选项：`users`
+### Option: `users`
 
-此选项允许你指定一个或多个用户。每个用户都可以有自己的权限，如下面的子选项中定义。
+This option allows you to specify a list of one or more users. Each user can
+have its own permissions like defined in the sub-options below.
 
-#### 子选项：`username`
+#### Sub-option: `username`
 
-用户需要使用的用户名来登录 FTP 服务器。有效的用户名最多有 32 个字符，只包含 `A-Z` 和 `0-9`。
-用户名可以包含连字符（`-`），但不得以之开始或结束。
+The username the user needs to use to login to the FTP server. A valid username
+has a maximum of 32 characters, contains only `A-Z` and `0-9`.
+Usernames may contain a hyphen (`-`) but must not start or end with one.
 
-#### 子选项：`password`
+#### Sub-option: `password`
 
-用户登录时使用的密码。
+The password the user logs in with.
 
-#### 子选项：`allow_chmod`
+#### Sub-option: `allow_chmod`
 
-将此选项设置为 `true` 将允许该用户使用 `SITE CHMOD` 命令。
+Setting this option to `true` will allow the use of the `SITE CHMOD` command for
+that user.
 
-#### 子选项：`allow_download`
+#### Sub-option: `allow_download`
 
-将此选项设置为 `true` 将允许用户从 FTP 服务器下载文件。
+Setting this option to `true` will allow the user to download files from the
+FTP server.
 
-#### 子选项：`allow_upload`
+#### Sub-option: `allow_upload`
 
-此选项控制是否允许任何更改文件系统的 FTP 命令。
+This controls whether any FTP commands which change the filesystem are
+allowed or not.
 
-这些命令是 `STOR`、`DELE`、`RNFR`、`RNTO`、`MKD`、`RMD`、`APPE` 和 `SITE`。
+These commands are `STOR`, `DELE`, `RNFR`, `RNTO`, `MKD`, `RMD`,
+`APPE`, and `SITE`.
 
-#### 子选项：`allow_dirlist`
+#### Sub-option: `allow_dirlist`
 
-将此选项设置为 `true`，允许用户使用列表命令浏览用户被授予访问权限的所有目录。
+Setting this option to `true`, allows to user to browse all directories
+the user was given access to by using the list commands.
 
-#### 子选项：`addons`
+#### Sub-option: `addons`
 
-允许用户访问 `/addons` 目录。
+Allow the user to access the `/addons` directory.
 
-#### 子选项：`backup`
+#### Sub-option: `backup`
 
-允许用户访问 `/backup` 目录。
+Allow the user to access the `/backup` directory.
 
-#### 子选项：`config`
+#### Sub-option: `config`
 
-允许用户访问 `/config` 目录。
+Allow the user to access the `/config` directory.
 
-#### 子选项：`media`
+#### Sub-option: `media`
 
-允许用户访问 `/media` 目录。
+Allow the user to access the `/media` directory.
 
-#### 子选项：`share`
+#### Sub-option: `share`
 
-允许用户访问 `/share` 目录。
+Allow the user to access the `/share` directory.
 
-#### 子选项：`ssl`
+#### Sub-option: `ssl`
 
-允许用户访问 `/ssl` 目录。
+Allow the user to access the `/ssl` directory.
 
-### 选项：`i_like_to_be_pwned`
+### Option: `i_like_to_be_pwned`
 
-将此选项添加到插件配置中，允许你通过将其设置为 `true` 来绕过 HaveIBeenPwned 密码要求。
+Adding this option to the add-on configuration allows to you bypass the
+HaveIBeenPwned password requirement by setting it to `true`.
 
-**注意**：_我们强烈建议选择一个更强/更安全的密码，而不是使用此选项！自担风险！_
+**Note**: _We STRONGLY suggest picking a stronger/safer password instead of
+using this option! USE AT YOUR OWN RISK!_
 
-## 更改日志与发布
+## Changelog & Releases
 
-此存储库使用 [GitHub 的发布][releases] 功能来维护更改日志。
+This repository keeps a change log using [GitHub's releases][releases]
+functionality.
 
-发布基于 [语义版本控制][semver]，并使用 `MAJOR.MINOR.PATCH` 的格式。简而言之，版本将根据以下情况增加：
+Releases are based on [Semantic Versioning][semver], and use the format
+of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented
+based on the following:
 
-- `MAJOR`：不兼容或重大更改。
-- `MINOR`：向后兼容的新功能和增强。
-- `PATCH`：向后兼容的补丁和软件包更新。
+- `MAJOR`: Incompatible or major changes.
+- `MINOR`: Backwards-compatible new features and enhancements.
+- `PATCH`: Backwards-compatible bugfixes and package updates.
 
-## 支持
+## Support
 
-有问题？
+Got questions?
 
-你有几个选项来得到答案：
+You have several options to get them answered:
 
-- [Home Assistant Community Add-ons Discord 服务器][discord] 用于插件支持和功能请求。
-- [Home Assistant Discord 服务器][discord-ha] 用于一般 Home Assistant 讨论和问题。
-- Home Assistant [社区论坛][forum]。
-- 加入 [Reddit 子版块][reddit] 在 [/r/homeassistant][reddit]
+- The [Home Assistant Community Add-ons Discord chat server][discord] for add-on
+  support and feature requests.
+- The [Home Assistant Discord chat server][discord-ha] for general Home
+  Assistant discussions and questions.
+- The Home Assistant [Community Forum][forum].
+- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
 
-你也可以在 GitHub 上[打开一个问题][issue]。
+You could also [open an issue here][issue] GitHub.
 
-## 作者与贡献者
+## Authors & contributors
 
-此存储库的原始设置由 [Franck Nijhof][frenck] 完成。
+The original setup of this repository is by [Franck Nijhof][frenck].
 
-要查看所有作者和贡献者的完整列表，请查看[贡献者页面][contributors]。
+For a full list of all authors and contributors,
+check [the contributor's page][contributors].
 
-## 许可证
+## License
 
-MIT 许可证
+MIT License
 
-版权所有 (c) 2017-2025 Franck Nijhof
+Copyright (c) 2017-2025 Franck Nijhof
 
-特此免费授予任何获得此软件及其相关文档文件（“软件”）副本的人，在不受限制的情况下处理软件的权利，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许获得软件的人这样做，但须遵守以下条件：
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-软件按“原样”提供，不提供任何形式的保证，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是由合同、侵权或其他行为引起的，均与软件或软件的使用或其他交易无关。
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 [addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
 [addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=a0d7b954_ftp&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository

@@ -1,7 +1,6 @@
 arch:
   - amd64
   - aarch64
-codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：Openproject for Home Assistant'
 environment:
   APP_DATA_PATH: /data/assets
@@ -16,14 +15,18 @@ map:
   - share:rw
 name: Openproject
 options:
+  env_vars: []
   OPENPROJECT_DEFAULT__LANGUAGE: en
   OPENPROJECT_HOST__NAME: homeassistant:8080
-  OPENPROJECT_HTTPS: 'false'
+  OPENPROJECT_HTTPS: "false"
 ports:
   8080/tcp: 8080
 ports_description:
   8080/tcp: Web interface
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   OPENPROJECT_DEFAULT__LANGUAGE: str
   OPENPROJECT_HOST__NAME: str
   OPENPROJECT_HTTPS: bool
@@ -31,5 +34,5 @@ schema:
 slug: openproject
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/openproject
-version: "16.5.1"
-webui: '[PROTO:ssl]://[HOST]:[PORT:8080]'
+version: "16.6.0"
+webui: "[PROTO:ssl]://[HOST]:[PORT:8080]"

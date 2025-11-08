@@ -1,9 +1,8 @@
 name: EMQX
-version: 0.8.0
+version: 0.8.1
 slug: emqx
-description: '[老王杂谈说]：最可扩展的开源MQTT代理，用于物联网。Mosquitto插件的一个替代方案。'
+description: '[老王杂谈说]：最可扩展的开源MQTT代理，适用于物联网，是Mosquitto插件的替代方案。'
 url: https://ghfast.top/github.com/hassio-addons/addon-emqx
-codenotary: codenotary@frenck.dev
 startup: services
 ingress: true
 ingress_port: 18083

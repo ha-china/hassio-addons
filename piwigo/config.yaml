@@ -2,7 +2,6 @@ arch:
   - aarch64
   - amd64
   - armv7
-codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：Piwigo是一款网页相册软件'
 devices:
   - /dev/dri
@@ -77,6 +76,7 @@ map:
   - ssl
 name: Piwigo
 options:
+  env_vars: []
   PGID: 0
   PUID: 0
 ports:
@@ -87,6 +87,9 @@ privileged:
   - SYS_ADMIN
   - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   PGID: int
   PUID: int
   TZ: str?
@@ -98,5 +101,5 @@ schema:
 slug: piwigo
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 15.6.0
-webui: '[PROTO:ssl]://[HOST]:[PORT:80]'
+version: "15.7.0"
+webui: "[PROTO:ssl]://[HOST]:[PORT:80]"

@@ -8,7 +8,6 @@ backup_exclude:
   - "**/transcode/"
 breaking_versions:
   - 10.10.6*
-codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：一个让你掌控媒体管理和流媒体的自由软件媒体系统'
 devices:
   - /dev/dri
@@ -87,6 +86,7 @@ map:
   - ssl
 name: Jellyfin NAS
 options:
+  env_vars: []
   PGID: 0
   PUID: 0
   data_location: /share/jellyfin
@@ -107,6 +107,9 @@ privileged:
   - DAC_READ_SEARCH
   - NET_ADMIN
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   DOCKER_MODS: list(linuxserver/mods:jellyfin-opencl-intel|linuxserver/mods:jellyfin-amd|linuxserver/mods:jellyfin-rffmpeg|)?
   PGID: int
   PUID: int
@@ -120,5 +123,5 @@ schema:
 slug: jellyfin
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "10.11.1"
+version: "10.11.2"
 video: true
