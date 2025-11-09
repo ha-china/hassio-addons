@@ -1,13 +1,11 @@
 name: WireGuard
-version: 0.12.3
+version: 0.13.0
 slug: wireguard
 description: '[老王杂谈说]：快速、现代、安全的VPN隧道'
 url: https://ghfast.top/github.com/hassio-addons/addon-wireguard
-codenotary: codenotary@frenck.dev
 arch:
   - aarch64
   - amd64
-  - armv7
 init: false
 ports:
   80/tcp: null
