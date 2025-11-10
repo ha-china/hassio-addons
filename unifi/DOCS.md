@@ -1,30 +1,36 @@
 # Home Assistant Community Add-on: UniFi Network Application
 
-这个插件运行 Ubiquiti Networks 的 UniFi Network Application 软件应用程序，它允许您通过网页浏览器管理您的 UniFi 网络。该插件为 Home Assistant 提供了一键安装和运行解决方案，使用户可以轻松地让他们的网络启动、运行和更新。
+This add-on runs Ubiquiti Networks' UniFi Network Application software, which
+allows you to manage your UniFi network via the web browser. The add-on
+provides a single-click installation and run solution for Home Assistant,
+allowing users to get their network up, running, and updated, easily.
 
-## 安装
+## Installation
 
-这个插件的安装非常简单，与安装任何其他 Home Assistant 插件没有什么不同。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Home Assistant add-on.
 
-1. 点击下面的 Home Assistant 我的按钮，在您的 Home Assistant 实例中打开该插件。
+1. Click the Home Assistant My button below to open the add-on on your Home
+   Assistant instance.
 
-   ![在您的 Home Assistant 实例中打开此插件][ addon-badge ][ addon ]
+   [![Open this add-on in your Home Assistant instance.][addon-badge]][addon]
 
-1. 点击“安装”按钮来安装插件。
-1. 检查“UniFi Network Application”的日志，看看是否一切顺利。
-1. 点击“打开 Web UI”按钮，并按照初始向导进行操作。
-1. 完成向导后，使用刚刚创建的凭据登录。
-1. 选择您可以在左侧找到的 Unifi 设备。在那里，选择右上角的设备更新和设置。
-1. 向下滚动到设备设置，并在 `Inform Host Override` 标签下方输入运行 Home Assistant 的设备的 IP 或主机名。
-1. 勾选 `Inform Host Override` 的复选框选项，使其现在为“已勾选”。
-1. 点击“应用更改”按钮来激活设置。
-1. 准备就绪！
+1. Click the "Install" button to install the add-on.
+1. Check the logs of the "UniFi Network Application" to see if everything went
+   well.
+1. Click the "OPEN WEB UI" button, and follow the initial wizard.
+1. After completing the wizard, log in with the credentials just created.
+1. Select Unifi Devices which you can find on the left hand. Once there, select Device Updates and Settings on the top right.
+1. Scroll down to Device settings and below the `Inform Host Override` label, enter the IP or hostname of the device running Home Assistant.
+1. Click the checkbox option for `Inform Host Override` so that is now "checked".
+1. Hit the "Apply Changes" button to activate the settings.
+1. Ready to go!
 
-## 配置
+## Configuration
 
-**注意**：_更改配置时请记得重启插件。_
+**Note**: _Remember to restart the add-on when the configuration is changed._
 
-示例插件配置，包含所有可用选项：
+Example add-on configuration, with all available options:
 
 ```yaml
 log_level: info
@@ -32,108 +38,152 @@ memory_max: 2048
 memory_init: 512
 ```
 
-**注意**：_这只是个示例，不要复制粘贴！创建您自己的！_
+**Note**: _This is just an example, don't copy and paste it! Create your own!_
 
-### 选项：`log_level`
+### Option: `log_level`
 
-`log_level` 选项控制插件的日志输出级别，可以根据需要设置为更详细或更简洁，这在处理未知问题时可能很有用。可能的值有：
+The `log_level` option controls the level of log output by the addon and can
+be changed to be more or less verbose, which might be useful when you are
+dealing with an unknown issue. Possible values are:
 
-- `trace`：显示所有细节，例如所有调用的内部函数。
-- `debug`：显示详细的调试信息。
-- `info`：正常（通常）有趣的事件。
-- `warning`：异常事件，但不是错误。
-- `error`：运行时错误，不需要立即采取行动。
-- `fatal`：出了严重问题。插件变得无法使用。
+- `trace`: Show every detail, like all called internal functions.
+- `debug`: Shows detailed debug information.
+- `info`: Normal (usually) interesting events.
+- `warning`: Exceptional occurrences that are not errors.
+- `error`: Runtime errors that do not require immediate action.
+- `fatal`: Something went terribly wrong. Add-on becomes unusable.
 
-请注意，每个级别会自动包含更严重级别的日志消息，例如，`debug` 也会显示 `info` 消息。默认情况下，`log_level` 设置为 `info`，这是推荐设置，除非您正在排错。
+Please note that each level automatically includes log messages from a
+more severe level, e.g., `debug` also shows `info` messages. By default,
+the `log_level` is set to `info`, which is the recommended setting unless
+you are troubleshooting.
 
-### 选项：`memory_max`
+### Option: `memory_max`
 
-这个选项允许您更改 UniFi Network Application 允许消耗的内存量。默认情况下，这限制为 256 MB。您可能希望增加此值，以减少 CPU 负载，或者减少此值，以优化系统以降低内存使用。
+This option allows you to change the amount of memory the UniFi Network
+Application is allowed to consume. By default, this is limited to 256 MB.
+You might want to increase this, in order to reduce CPU load or reduce this,
+in order to optimize your system for lower memory usage.
 
-这个选项以兆字节为单位，例如，默认值为 256。
+This option takes the number of Megabyte, for example, the default is 256.
 
-### 选项：`memory_init`
+### Option: `memory_init`
 
-这个选项允许您更改 UniFi Network Application 在启动时最初保留/消耗的内存量。默认情况下，这限制为 128MB。
+This option allows you to change the amount of memory the UniFi Network
+Application will initially reserve/consume when starting. By default,
+this is limited to 128MB.
 
-这个选项以兆字节为单位，例如，默认值为 128。
+This option takes the number of Megabyte, for example, the default is 128.
 
-## 自动备份
+## Automated backups
 
-UniFi Network Application 附带了一个自动备份功能。该功能可以正常工作，但已调整为将创建的备份放在不同的位置。
+The UniFi Network Application ships with an automated backup feature. This
+feature works but has been adjusted to put the created backups in a different
+location.
 
-备份在 `/backup/unifi` 中创建。您可以使用 Home Assistant 的常规方法（例如，使用 Samba、终端、SSH）访问这个文件夹。
+Backups are created in `/backup/unifi`. You can access this folder using
+the normal Home Assistant methods (e.g., using Samba, Terminal, SSH).
 
-## 手动采用设备
+## Manually adopting a device
 
-或者，您可以通过以下步骤手动采用设备（而不是设置自定义的 inform 地址（安装步骤 7-9））：
+Alternatively to setting up a custom inform address (installation steps 7-9)
+you can manually adopt a device by following these steps:
 
-- 使用 `ubnt` 作为用户名和密码，通过 SSH 连接到设备
+- SSH into the device using `ubnt` as username and `ubnt` as password
 - `$ mca-cli`
-- `$ set-inform http://<Hassio 的 IP>:<控制器端口（默认：8080）>/inform`
-  - 例如：`$ set-inform http://192.168.1.14:8080/inform`
+- `$ set-inform http://<IP of Hassio>:<controller port (default:8080)>/inform`
+  - for example `$ set-inform http://192.168.1.14:8080/inform`
 
-## 已知问题和限制
+## Known issues and limitations
 
-- AP 似乎卡在“采用”状态：请仔细阅读安装说明。为了使此插件正常工作，您需要更改一些控制器设置。使用 Ubiquiti 发现工具，或者通过 SSH 连接到 AP 并在采用后设置 INFORM 可以解决这个问题。（参见：_手动采用设备_）
-- 以下错误可能会在日志中显示，但可以安全地忽略：
+- The AP seems stuck in "adopting" state: Please read the installation
+  instructions carefully. You need to change some controller settings
+  in order for this add-on to work properly. Using the Ubiquiti Discovery
+  Tool, or SSH'ing into the AP and setting the INFORM after adopting
+  will resolve this. (see: _Manually adopting a device_)
+- The following error can show up in the log, but can be safely ignored:
 
   ```
     INFO: I/O exception (java.net.ConnectException) caught when processing
     request: Connection refused (Connection refused)
   ```
 
-  这是一个已知问题，但是插件可以正常工作。
+  This is a known issue, however, the add-on functions normally.
 
-- 由于 UniFi Network Application 软件的安全策略，目前无法使用 `panel_iframe` 将 UniFI 网页界面添加到您的 Home Assistant 前端。
-- EDU 类 AP 的广播功能目前无法与这个插件一起使用。由于 Home Assistant 的限制，目前无法打开所需的“范围”端口以使此功能正常工作。
-- 由于 UniFi 软件的技术限制，这个插件无法支持 Ingress。
-- 在通过 Home Assistant 备份这个插件时，该插件将暂时关闭，并在备份完成后重新启动。这可以防止在备份过程中数据损坏。
+- Due to security policies in the UniFi Network Application software, it is
+  currently impossible to add the UniFI web interface to your Home Assistant
+  frontend using a `panel_iframe`.
+- The broadcast feature of the EDU type APs are currently not working with
+  this add-on. Due to a limitation in Home Assistant, is it currently impossible
+  to open the required "range" of ports needed for this feature to work.
+- This add-on cannot support Ingress due to technical limitations of the
+  UniFi software.
+- During making a backup of this add-on via Home Assistant, this add-on will
+  temporary shutdown and start up after the backup has finished. This prevents
+  data corruption during taking the backup.
 
-## 更改日志和发布
+## Changelog & Releases
 
-这个仓库使用 [GitHub 的发布功能][releases] 维护一个更改日志。日志的格式基于 [Keep a Changelog][keepchangelog]。
+This repository keeps a change log using [GitHub's releases][releases]
+functionality. The format of the log is based on
+[Keep a Changelog][keepchangelog].
 
-发布基于 [语义版本控制][semver]，并使用 `MAJOR.MINOR.PATCH` 的格式。简而言之，版本将根据以下情况增加：
+Releases are based on [Semantic Versioning][semver], and use the format
+of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented
+based on the following:
 
-- `MAJOR`：不兼容或主要更改。
-- `MINOR`：向后兼容的新功能和增强。
-- `PATCH`：向后兼容的补丁和包更新。
+- `MAJOR`: Incompatible or major changes.
+- `MINOR`: Backwards-compatible new features and enhancements.
+- `PATCH`: Backwards-compatible bugfixes and package updates.
 
-## 支持
+## Support
 
-有问题？
+Got questions?
 
-您有几个选项来得到答案：
+You have several options to get them answered:
 
-- [Home Assistant Community Add-ons Discord 服务器][discord] 用于插件支持和功能请求。
-- [Home Assistant Discord 服务器][discord-ha] 用于一般 Home Assistant 讨论和问题。
-- Home Assistant [社区论坛][forum]。
-- 加入 [Reddit 子版块][reddit] 在 [/r/homeassistant][reddit]
+- The [Home Assistant Community Add-ons Discord chat server][discord] for add-on
+  support and feature requests.
+- The [Home Assistant Discord chat server][discord-ha] for general Home
+  Assistant discussions and questions.
+- The Home Assistant [Community Forum][forum].
+- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
 
-您也可以在 GitHub 上 [打开一个问题][issue]。
+You could also [open an issue here][issue] GitHub.
 
-## 作者和贡献者
+## Authors & contributors
 
-这个仓库的原始设置由 [Franck Nijhof][frenck] 完成。
+The original setup of this repository is by [Franck Nijhof][frenck].
 
-要查看所有作者和贡献者的完整列表，请查看 [贡献者页面][contributors]。
+For a full list of all authors and contributors,
+check [the contributor's page][contributors].
 
-## 许可证
+## License
 
-MIT 许可证
+MIT License
 
-版权所有 (c) 2018-2025 Franck Nijhof
+Copyright (c) 2018-2025 Franck Nijhof
 
-特此免费授予任何获得此软件及其相关文档文件（“软件”）副本的人，在软件上进行操作的权限，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或出售软件副本的权限，并允许提供软件的人这样做，但须遵守以下条件：
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-软件按“原样”提供，不提供任何明示或暗示的保证，包括但不限于对适销性、特定用途适用性和不侵犯版权的保证。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是由合同、侵权或其他行为引起的，均与软件或软件的使用或其他交易有关。
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 [addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
-[addon]: https://my.home-assistant.io/redirect/supervisor_addon/? addon=a0d7b954_unifi&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository
+[addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=a0d7b954_unifi&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository
 [contributors]: https://github.com/hassio-addons/addon-unifi/graphs/contributors
 [discord-ha]: https://discord.gg/c5DvZ4e
 [discord]: https://discord.me/hassioaddons

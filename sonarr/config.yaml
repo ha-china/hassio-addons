@@ -1,9 +1,8 @@
 name: Sonarr
-version: 0.4.2
+version: 0.4.3
 slug: sonarr
-description: '[老王杂谈说]：智能PVR适用于新闻组和BitTorrent用户'
+description: '[老王杂谈说]：适合新闻组和比特 torrent 用户的智能 PVR'
 url: https://ghfast.top/github.com/hassio-addons/addon-sonarr/tree/main/README.md
-codenotary: codenotary@frenck.dev
 webui: http://[HOST]:[PORT:8989]
 init: false
 arch:

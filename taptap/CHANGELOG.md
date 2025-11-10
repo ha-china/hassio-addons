@@ -1,5 +1,11 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.2.4
+
+- fixed persistent nodes identification storage in the HA addon data
+- updated taptap to v 0.2.6 - fix infrastructure events
+- updated taptap-mqtt to v0.1.4 - added configurable granular nodes and statistical entities availability 
+
 ## 0.2.3
 
 - BREAKING CHANGE - Tigo modules serials are now used for the configuration

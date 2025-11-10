@@ -1,57 +1,57 @@
-# Home Assistant 拓展程序：Authelia
+# Home Assistant Add-on: Authelia
 
-## 描述
+## Description
 
-Authelia 是一个开源的身份验证和授权服务器，旨在为您的服务提供安全的访问控制。此扩展程序允许您在 Home Assistant 中运行 Authelia。
+Authelia is an open-source authentication and authorization server designed to provide secure access control for your services. This add-on allows you to run Authelia within Home Assistant.
 
-## 支持的架构
+## Supported Architectures
 
-此扩展程序支持以下架构：
+This add-on supports the following architectures:
 
 - `amd64`
 - `aarch64`
 
-## 安装
+## Installation
 
-1. 在 Home Assistant 中导航到 **设置** > **扩展程序**。
-2. 点击 **扩展程序商店** 并搜索 **Authelia**。
-3. 如有必要，添加 `https://github.com/einschmidt/hassio-addons` 仓库
-4. 安装扩展程序并使用下方的设置进行配置。
-5. 启动扩展程序并打开日志以检查任何问题。
+1. Navigate to **Settings** > **Add-ons** in Home Assistant.
+2. Click **Add-on Store** and search for **Authelia**.
+3. If necessary, add the `https://github.com/einschmidt/hassio-addons` repository
+4. Install the add-on and configure it using the settings below.
+5. Start the add-on and open the logs to check for any issues.
 
-## 配置
+## Configuration
 
-在首次启动扩展程序之前，您**必须编辑 `domain`** 选项在配置中。这是一个关键步骤，因为它确保 Authelia 使用您的特定域名进行正确功能。
+Before launching the add-on for the first time, you **must edit the `domain`** option in the configuration. This is a critical step, as it ensures Authelia is set up with your specific domain for proper functionality.
 
-### 配置步骤
+### Steps for Configuration
 
-1. **编辑域名**  
-   `domain` 选项必须在首次启动之前设置。此选项对于正确路由请求和配置会话 Cookie 至关重要。
+1. **Edit the Domain**  
+   The `domain` option must be set before the first launch. This option is essential for properly routing requests and configuring session cookies.
 
-   - 示例：
+   - Example:
      ```yaml
      domain: yourdomain.com
      ```
 
-2. **首次启动**  
-   首次启动时，扩展程序将自动在 `addon_config` 文件夹中创建 `config.yml` 文件。此文件将被默认设置填充，包括配置的域名和其他所需设置。
+2. **First Launch**  
+   Upon first launch, the add-on will automatically create the `config.yml` file in the `addon_config` folder. This file will be populated with the default settings, including the configured domain and other required settings.
 
-3. **编辑生成的 `config.yml`**  
-   首次启动后，您将在 `/addon_config` 文件夹中找到 `config.yml` 文件。**您必须编辑此文件以匹配您的个人环境**。确保所有必要设置，如域名、用户身份验证路径和其他相关选项都正确配置。
+3. **Edit the Generated `config.yml`**  
+   After the first launch, you will find the `config.yml` file in the `/addon_config` folder. **You must edit this file to match your personal environment**. Ensure that all necessary settings, such as domain, user authentication paths, and other relevant options, are correctly configured.
 
-4. **重新启动扩展程序**  
-   在对 `config.yml` 文件进行任何编辑后，**您必须重新启动扩展程序** 以使更改生效。此步骤对于确保更新的配置的正确应用至关重要。
+4. **Relaunch the Add-on**  
+   After making any edits to the `config.yml` file, **you must restart the add-on** for the changes to take effect. This step is crucial to ensure the proper application of the updated configuration.
 
-### 重要提示
+### Important Notes
 
-- `domain` 设置仅在初始配置创建时需要。
-- 在首次启动后对 `config.yml` 进行任何更改都需要**重新启动扩展程序** 以应用新设置。
+- The **`domain`** setting is required for the initial config creation only.
+- Any changes to `config.yml` after the initial launch require a **relaunch of the add-on** to apply the new settings.
 
-请确保在继续之前仔细审查和自定义 `config.yml` 以确保最佳运行。
+Please make sure to carefully review and customize the `config.yml` before proceeding to ensure optimal operation.
 
-## 更多信息
+## More Information
 
-有关更多详细信息，请访问官方 Authelia 资源：
+For additional details, visit the official Authelia resources:
 
-- **网站：** [Authelia](https://www.authelia.com//)
-- **文档：** [入门指南](https://www.authelia.com/integration/prologue/get-started/)
+- **Website:** [Authelia](https://www.authelia.com//)
+- **Documentation:** [Getting Started Guide](https://www.authelia.com/integration/prologue/get-started/)

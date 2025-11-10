@@ -43,10 +43,19 @@ configuration:
     description: How often Home Assistant entities are updated in seconds, default is '10'.
   taptap_timeout:
     name: Availability timeout
-    description: If no message is received within last X seconds from the node and 'Entities unavailable if node is offline' is set to true then corresponding entities are set to 'Unavailable' state. If your entities have flapping 'Unavailable' status during the day increase this number. Default is '120' seconds.
-  ha_entity_availability:
-    name: Entities unavailable if node is offline
-    description: If set to true, then if no message from any given module is received in the time specified by 'Availability timeout' corresponding entities are set to 'Unavailable' state.
+    description: If no message is received within last X seconds from the node and 'Entities unavailable if node is offline' is set to true then corresponding entities are set to 'Unavailable' state. If your entities have flapping 'Unavailable' status during the day increase this number. Default is '180' seconds.
+  ha_node_availability_online:
+    name: Node entities unavailable if node is offline
+    description: To render Home Assistant node entities 'UNAVAILABLE' if no message received within TIMEOUT, set to 'true' or 'false'. Default is 'true'.
+  ha_node_availability_serial:
+    name: Node entities unavailable if node serial is not yet discovered
+    description: To render Home Assistant node entities 'UNAVAILABLE' if node serial is not yet discovered, set to 'true' or 'false'. Default is 'false'.
+  ha_stats_availability_online:
+    name: Statistical entities unavailable if all nodes are offline
+    description: To render Home Assistant statistical entities 'UNAVAILABLE' if there is not any node online, set to 'true' or 'false'. Default is 'false'.
+  ha_stats_availability_serial:
+    name: Statistical entities unavailable if all node serials are not yet discovered
+    description: To render Home Assistant statistical entities 'UNAVAILABLE' if not all node serials are not yet discovered, set to 'true' or 'false'. Default is 'false'.
   ha_discovery_prefix:
     name: Home assistant MQTT discovery prefix
     description: MQTT prefix Home Assistant is subscribed for auto discovery of the new devices and entities. Please refer to HA MQTT documentation, default is 'homeassistant'. There is typically no need to change this setting.

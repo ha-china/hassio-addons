@@ -1,15 +1,13 @@
 name: Uptime Kuma
-version: 0.14.1
+version: 0.15.0
 slug: uptime-kuma
 description: '[老王杂谈说]：null'
 url: https://ghfast.top/github.com/hassio-addons/addon-uptime-kuma
-codenotary: codenotary@frenck.dev
 webui: http://[HOST]:[PORT:3001]
 init: false
 arch:
   - aarch64
   - amd64
-  - armv7
 ports:
   3001/tcp: 3001
 ports_description:

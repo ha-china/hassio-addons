@@ -1,9 +1,8 @@
 name: Node-RED
-version: 20.0.0
+version: 20.1.0
 slug: nodered
-description: Flow-based programming for the Internet of Things
+description: '[老王杂谈说]：基于流的物联网编程'
 url: https://ghfast.top/github.com/hassio-addons/addon-node-red
-codenotary: codenotary@frenck.dev
 ingress: true
 ingress_port: 0
 ingress_stream: true
@@ -11,8 +10,8 @@ panel_icon: mdi:sitemap
 init: false
 homeassistant: 2023.3.0
 arch:
-- aarch64
-- amd64
+  - aarch64
+  - amd64
 ports:
   80/tcp: 1880
 ports_description:
@@ -24,13 +23,13 @@ host_network: true
 auth_api: true
 uart: true
 map:
-- addon_config:rw
-- homeassistant_config:rw
-- media:rw
-- share:rw
-- ssl
+  - addon_config:rw
+  - homeassistant_config:rw
+  - media:rw
+  - share:rw
+  - ssl
 backup_exclude:
-- node_modules
+  - node_modules
 options:
   theme: default
   http_node:
@@ -48,7 +47,7 @@ options:
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   credential_secret: password?
-  theme: list(default|aurora|cobalt2|dark|dracula|espresso-libre|github-dark|github-dark-default|github-dark-dimmed|midnight-red|monoindustrial|monokai|monokai-dimmed|noctis|oceanic-next|oled|one-dark-pro|one-dark-pro-darker|solarized-dark|solarized-light|tokyo-night|tokyo-night-light|tokyo-night-storm|totallyinformation|zenburn)?
+  theme: list(default|aurora|cobalt2|dark|dracula|espresso-libre|github-dark|github-dark-default|github-dark-dimmed|midnight-red|monoindustrial|monokai|monokai-dimmed|night-owl|noctis|noctis-azureus|noctis-bordo|noctis-minimus|noctis-obscuro|noctis-sereno|noctis-uva|noctis-viola|oceanic-next|oled|one-dark-pro|one-dark-pro-darker|railscasts-extended|selenized-dark|selenized-light|solarized-dark|solarized-light|tokyo-night|tokyo-night-light|tokyo-night-storm|totallyinformation|zenburn|zendesk-garden)?
   http_node:
     username: str
     password: password
@@ -59,11 +58,11 @@ schema:
   certfile: str
   keyfile: str
   system_packages:
-  - str
+    - str
   npm_packages:
-  - str
+    - str
   init_commands:
-  - str
+    - str
   leave_front_door_open: bool?
   safe_mode: bool?
   max_old_space_size: int?

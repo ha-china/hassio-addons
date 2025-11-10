@@ -1,15 +1,13 @@
 name: Radarr
-version: 0.26.1
+version: 0.27.0
 slug: radarr
-description: '[老王杂谈说]：用于Usenet和种子用户的电影组织/管理器'
+description: '[老王杂谈说]：适用于Usenet和BitTorrent用户的电影组织/管理程序'
 url: https://ghfast.top/github.com/hassio-addons/addon-radarr/tree/main/README.md
-codenotary: codenotary@frenck.dev
 webui: http://[HOST]:[PORT:7878]
 init: false
 arch:
   - aarch64
   - amd64
-  - armv7
 map:
   - addon_config:rw
   - share:rw

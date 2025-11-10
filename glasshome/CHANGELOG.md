@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.3.0
+
+### Features
+- Build and integrate @glasshome/sync-layer, a new library to interface and sync with Home Assistant
+- Add a debug dialog to peak into the sync-layer and HA communication (enabled in the settings)
+- Add a Home Assistant button that let's you jump to HA (enabled in the settings)
+- Add the button widget
+- Add the switch widget 
+
+### Bug Fixes
+- Rewrite of the camera widget and improve its stability
+- Add more debugging information to the camera 
+- Add a full test suite for early bug detection
+
 ## 0.2.0
 
 ### Features
@@ -15,6 +29,7 @@
 - Fix icons in navigation dock and area widgets to use HA-defined icons
 
 ## 0.1.1
+
 - Support processors older than 2013
 
 ## 0.1.0

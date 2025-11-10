@@ -1,9 +1,8 @@
 name: UniFi Network Application
-version: 4.2.0
+version: 4.2.1
 slug: unifi
 description: '[老王杂谈说]：使用网络浏览器管理您的UniFi网络'
 url: https://ghfast.top/github.com/hassio-addons/addon-unifi
-codenotary: codenotary@frenck.dev
 webui: https://[HOST]:[PORT:8443]
 startup: services
 arch:

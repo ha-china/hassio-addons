@@ -1,8 +1,8 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: TapTap
-version: "0.2.3"
+version: "0.2.4"
 slug: taptap
-description: '[老王杂谈说]：Tigo CCA 到 HomeAssistant MQTT 桥接'
+description: '[老王杂谈说]：Tigo CCA 到 HomeAssistant MQTT 桥接器'
 url: "https://ghfast.top/github.com/litinoveweedle/hassio-addons/tree/main/taptap"
 image: "ghcr.nju.edu.cn/litinoveweedle/hassio-addon-taptap-{arch}"
 homeassistant: 2025.3.1
@@ -28,8 +28,11 @@ options:
   taptap_topic_name: tigo
   taptap_topic_prefix: taptap
   taptap_update: 10
-  taptap_timeout: 120
-  ha_entity_availability: true
+  taptap_timeout: 180
+  ha_node_availability_online: true
+  ha_node_availability_serial: false
+  ha_stats_availability_online: false
+  ha_stats_availability_serial: false
   ha_discovery_prefix: homeassistant
   ha_birth_topic: homeassistant/status
 schema:
@@ -49,6 +52,9 @@ schema:
   taptap_topic_prefix: match((\w+)(\/\w+)*)
   taptap_update: int
   taptap_timeout: int
-  ha_entity_availability: bool
+  ha_node_availability_online: bool
+  ha_node_availability_serial: bool
+  ha_stats_availability_online: bool
+  ha_stats_availability_serial: bool
   ha_discovery_prefix: str
   ha_birth_topic: str
