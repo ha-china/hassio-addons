@@ -5,7 +5,6 @@
     "armv7"
   ],
   "boot": "manual",
-  "codenotary": "alexandrep.github@gmail.com",
   "description": "[老王杂谈说]：自动通过与上游发布版本标签对齐来更新附加组件。",
   "environment": {
     "GIT_DISCOVERY_ACROSS_FILESYSTEM": "1"

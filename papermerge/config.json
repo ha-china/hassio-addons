@@ -4,7 +4,6 @@
     "amd64",
     "armv7"
   ],
-  "codenotary": "alexandrep.github@gmail.com",
   "description": "开源文档管理系统（DMS）",
   "devices": [
     "/dev/dri",

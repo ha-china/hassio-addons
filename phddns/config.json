@@ -1,7 +1,6 @@
 {
   "version": "1.0.5",
   "name": "phddns-花生壳",
-  "codenotary": "djhui@live.cn",
   "url": "https://mp.weixin.qq.com/s/P0HvAso-Gkdl-awv22si9w?token=940637692&lang=zh_CN",
   "slug": "phddns",
   "description": "A Home Assistant add-on for Oray's phddns service.这是一个花生壳客户端",

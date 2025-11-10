@@ -2,7 +2,6 @@
     "name": "Aria2",
     "version": "1.37.0",
     "slug": "aria2",
-    "codenotary": "djhui@live.cn",
     "description": "Aria2 download manager",
     "url": "https://github.com/ha-china/hassio-addons",
     "startup": "services",

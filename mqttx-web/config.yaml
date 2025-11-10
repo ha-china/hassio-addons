@@ -2,7 +2,6 @@
   "name": "MQTTX Web",
   "version": "1.11.1",
   "slug": "mqttx-web",
-  "codenotary": "djhui@live.cn",
   "description": "A web-based MQTT client for Home Assistant.",
   "arch": [
     "amd64",

@@ -5,7 +5,6 @@
     "armv7"
   ],
   "backup": "cold",
-  "codenotary": "alexandrep.github@gmail.com",
   "description": "带有向量弦支持的PostgreSQL 15。",
   "environment": {
     "CONFIG_LOCATION": "/config/postgresql.conf",

@@ -2,7 +2,6 @@
   "name": "VoceChat Server",
   "version": "v0.4.3",
   "slug": "vocechat-server",
-  "codenotary": "djhui@live.cn",
 
   "description": "VoceChat Server Add-on for Home Assistant with persistent data. \n 关注微信号：老王杂谈说 获取更多内容吧",
   "url": "https://mp.weixin.qq.com/s?__biz=MzUzNTExMDE2Mg==&mid=2247484336&idx=1&sn=fb27849f3e0d6f2a57f6990a5532e069&chksm=fa8b34cdcdfcbddb8edd9c7626929318393dbf660816eb0cf5dff0020993f92861997f28bd39&token=1833866204&lang=zh_CN#rd",
