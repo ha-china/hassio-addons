@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1
+
+### Bug Fixes
+- Fix the bug where the entity picker doesn't display any entities when creating or editing a widget.
+
 ## 0.3.0
 
 ### Features
