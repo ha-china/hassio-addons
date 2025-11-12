@@ -18,21 +18,6 @@ a Thread Border Router.
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 
----
-
-## **简介**
-
-这个插件允许您创建或加入一个Thread网络，并使Home Assistant成为一个Thread边界路由器。
-
-![支持aarch64架构][aarch64-shield]
-![支持amd64架构][amd64-shield]
-
-## **关于**
-
-这个插件允许您创建或加入一个Thread网络，并使Home Assistant成为一个Thread边界路由器。
-
-[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
-[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

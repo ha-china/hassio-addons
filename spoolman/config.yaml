@@ -1,0 +1,25 @@
+name: Spoolman
+version: "0.22.1-0"
+slug: spoolman
+description: "[老王杂谈说]：跟踪你的3D打印机线轴库存。"
+arch:
+  - amd64
+  - aarch64
+startup: services
+init: false
+map:
+  - addon_config:rw
+ports:
+  7912/tcp: 7912
+ports_description:
+  7912/tcp: "Web interface port (fixed: 7912, do not change). If another add-on uses this host port, HA will show an error."
+webui: "http://[HOST]:[PORT:7912]"
+environment:
+  SPOOLMAN_HOST: "0.0.0.0"
+  SPOOLMAN_PORT: "7912"
+  SPOOLMAN_DIR_DATA: "/config"
+  SPOOLMAN_DIR_BACKUPS: "/config/backups"
+  SPOOLMAN_DIR_LOGS: "/config/logs"
+homeassistant_api: false
+hassio_api: false
+privileged: []

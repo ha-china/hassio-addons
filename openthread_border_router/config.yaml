@@ -1,5 +1,5 @@
 ---
-version: 2.15.0
+version: 2.15.1
 slug: openthread_border_router
 name: OpenThread Border Router
 description: '[老王杂谈说]：OpenThread 边界路由器插件'

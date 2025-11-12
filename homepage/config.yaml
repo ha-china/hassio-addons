@@ -1,0 +1,19 @@
+name: Homepage
+version: "1.6.1.0"
+slug: homepage
+description: "[老王杂谈说]：一个现代的、完全静态的、快速的、安全地完全代理的、高度可定制的应用程序控制面板，集成了超过100个服务，并翻译成多种语言。可通过YAML文件轻松配置或通过docker标签发现。"
+url: https://ghfast.top/github.com/bytenoodle/hassioaddon/tree/main/homepage
+arch:
+  - amd64
+  - aarch64
+map:
+  - addon_config:rw
+docker_api: true
+environment:
+  HOMEPAGE_ALLOWED_HOSTS: "*"
+ports:
+  3000/tcp: 3000
+ports_description:
+  3000/tcp: "Web interface port, default is 3000."
+panel_icon: "mdi:broadcast"
+webui: "http://[HOST]:[PORT:3000]"
