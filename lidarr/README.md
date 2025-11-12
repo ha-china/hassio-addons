@@ -8,7 +8,7 @@
 
 ## 关于
 
-[Lidarr] 是一个用于Usenet和BitTorrent用户的音乐集合管理器。它可以监控多个RSS源以获取您最喜欢的艺术家的最新曲目，并将其抓取、排序和重命名。它还可以配置为在更好的质量格式可用时自动升级已下载文件的质量。
+[Lidarr] 是一个用于Usenet和BitTorrent用户的音乐集合管理器。它可以监控多个RSS源，以获取您喜欢的艺术家的最新曲目，并将其抓取、排序和重命名。它还可以配置为在更好的质量格式可用时自动升级已下载文件的质量。
 
 [Lidarr]: https://lidarr.audio/
 
@@ -18,5 +18,21 @@
 [forum]: https://community.home-assistant.io/t/?u=frenck
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.13.0-blue.svg
-[release]: https://github.com/hassio-addons/addon-lidarr/tree/v0.13.0
+[release-shield]: https://img.shields.io/badge/version-v0.14.0-blue.svg
+[release]: https://github.com/hassio-addons/addon-lidarr/tree/v0.14.0
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

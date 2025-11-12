@@ -12,11 +12,11 @@
 
 ## 关于
 
-[Node-RED][nodered] 是一种编程工具，用于以新颖和有趣的方式连接硬件设备、API 和在线服务。
+[Node-RED][nodered] 是一个编程工具，用于以新颖有趣的方式连接硬件设备、API 和在线服务。
 
-它提供了一个基于浏览器的编辑器，使您能够轻松地使用调色板中的各种节点连接流程，并且只需单击一次即可将其部署到其运行时。
+它提供了一个基于浏览器的编辑器，可以轻松地使用调色板中的各种节点来连接流程，并且只需单击一次即可将其部署到其运行时。
 
-![Home Assistant 前端中的 Node-RED][screenshot]
+![Node-RED 在 Home Assistant 前端][screenshot]
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -29,8 +29,8 @@
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v20.1.0-blue.svg
-[release]: https://github.com/hassio-addons/addon-node-red/tree/v20.1.0
+[release-shield]: https://img.shields.io/badge/version-v20.2.0-blue.svg
+[release]: https://github.com/hassio-addons/addon-node-red/tree/v20.2.0
 [screenshot]: https://github.com/hassio-addons/addon-node-red/raw/main/images/screenshot.png
 ## 📱 关注我
 
