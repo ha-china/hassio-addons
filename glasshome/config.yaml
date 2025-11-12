@@ -1,7 +1,7 @@
 name: "GlassHome Dashboard"
-version: "0.3.0"
+version: "0.3.1"
 slug: glasshome
-description: "[老王杂谈说]：适用于Home Assistant的现代可定制仪表板，具有拖放小部件"
+description: "[老王杂谈说]：适用于Home Assistant的现代可定制仪表板，支持拖放小部件"
 url: "https://ghfast.top/github.com/IhsenBouallegue/glasshome-addon"
 arch:
   - amd64

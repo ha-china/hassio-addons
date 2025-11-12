@@ -1,7 +1,7 @@
 name: Tor
-version: 7.0.0
+version: 7.0.1
 slug: tor-0
-description: '[老王杂谈说]：保护你的隐私，通过Tor访问Home Assistant'
+description: '[老王杂谈说]：保护你的隐私并通过Tor访问Home Assistant'
 url: https://ghfast.top/github.com/hassio-addons/addon-tor
 startup: services
 arch:

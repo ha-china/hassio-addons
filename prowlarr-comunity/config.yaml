@@ -1,15 +1,13 @@
 name: Prowlarr
-version: 0.26.0
+version: 0.27.0
 slug: prowlarr-0
-description: '[老王杂谈说]：基于流行的arr堆栈构建的索引器管理器/代理，用于与您的各种PVR应用程序集成'
+description: '[老王杂谈说]：基于流行的arr堆栈构建的索引器管理器/代理，以与您的各种PVR应用程序集成'
 url: https://ghfast.top/github.com/hassio-addons/addon-prowlarr/tree/main/README.md
-codenotary: codenotary@frenck.dev
 webui: http://[HOST]:[PORT:9696]
 init: false
 arch:
   - aarch64
   - amd64
-  - armv7
 map:
   - addon_config:rw
   - share:rw
