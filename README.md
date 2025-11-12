@@ -86,6 +86,8 @@
 - 🤖 [**Motion AI Addons**](https://github.com/motion-ai/addons): Motion AI 的加载项
 - 🛠️ [**Dcmartin Addons**](https://github.com/dcmartin/hassio-addons/): Dcmartin 的加载项
 - ⏳ [**Time Machine Addons**](https://github.com/saihgupr/HomeAssistantTimeMachine): Home Assistant 快照/还原与备份自动化工具
+- 🛠️ [**Bytenoodle Addons**](https://github.com/bytenoodle/hassioaddon): Bytenoodle 的加载项
+
 
 
 
