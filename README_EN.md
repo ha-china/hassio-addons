@@ -30,53 +30,58 @@ All Addon acceleration correspondence is as follows:
 
 Excellent third-party libraries:
 
-- 📚 [**Official Addons**](https://github.com/home-assistant/addons): Official Addons
-- 🌐 [**Community Addons**](https://github.com/hassio-addons/repository): Official community Addons
-- 🎨 [**Alexbelgium Addons**](https://github.com/alexbelgium/hassio-addons): Addons by Alexbelgium
-- ⭐ [**Jdeath Addons**](https://github.com/jdeath/homeassistant-addons): Addons by Jdeath
-- 📡 [**Broadlink Manager**](https://github.com/t0mer/broadlinkmanager-docker): Broadlink Manager Addon for learning and sending IR/RF commands
-- 🖌️ [**Poeschl Addons**](https://github.com/Poeschl-HomeAssistant-Addons/repository): Addons by Poeschl
-- 🛠️ [**Erik73 Addons**](https://github.com/erik73/hassio-addons): Addons by Erik73
-- 📦 [**Einschmidt Addons**](https://github.com/einschmidt/hassio-addons): Addons by Einschmidt
-- 🚀 [**FaserF Addons**](https://github.com/FaserF/hassio-addons): Addons by FaserF
-- 🖥️ [**Hass Panel**](https://github.com/mrtian2016/hass-panel): A web panel for managing Home Assistant
-- 🛠️ [**HACS Addons**](https://github.com/hacs/addons): Addons by HACS for extending Home Assistant functionality
-- 🛡️ [**Bluemaex Addons**](https://github.com/bluemaex/home-assistant-addons): Addons by Bluemaex
-- 🏠 [**Expaso Addons**](https://github.com/expaso/hassos-addons): Addons by Expaso
-- 📹 [**Frigate Addons**](https://github.com/blakeblackshear/frigate-hass-addons): Frigate Addons by Blake Blackshear
-- 🎵 [**Music Assistant**](https://github.com/music-assistant/home-assistant-addon): Music Assistant Addon
-- 🏠 [**ESPHome Addon**](https://github.com/esphome/home-assistant-addon): ESPHome Addon
-- 🌿 [**Litinoveweedle Addons**](https://github.com/litinoveweedle/hassio-addons): Addons by Litinoveweedle
-- 🛠️ [**Brenner-Tobias Addons**](https://github.com/brenner-tobias/ha-addons): Addons by Brenner-Tobias
-- 🏠 [**Sanderdw Addons**](https://github.com/sanderdw/hassio-addons): Addons by Sanderdw
-- 💡 [**Dianlight Addons**](https://github.com/dianlight/hassio-addons): Addons by Dianlight
-- ⚡ [**HydroQC Addons**](https://gitlab.com/hydroqc/hydroqc-hass-addons/): HydroQC Addons
-- 🌡️ [**Broadlink AC MQTT**](https://github.com/Arbuzov/hass-broadlink-ac-mqtt): Broadlink AC MQTT Addon
-- 🏠 [**Hugobloem Addons**](https://github.com/hugobloem/homeassistant-addons): Addons by Hugobloem
-- 🛠️ [**Haberda Addons**](https://github.com/haberda/hassio_addons): Addons by Haberda
-- 🏠 [**AlexxIT Addons**](https://github.com/AlexxIT/hassio-addons): Addons by AlexxIT
-- 🛠️ [**Da-anda Addons**](https://github.com/da-anda/hass-io-addons): Addons by Da-anda
-- 🇨🇳 [**HACS China Addons**](https://github.com/hacs-china/addons): HACS China Edition Addons
-- 🛠️ [**T0bst4r Addons**](https://github.com/t0bst4r/home-assistant-addons): Addons by T0bst4r
-- 🖥️ [**Adamoutler Addons**](https://github.com/adamoutler/HassOSConfigurator): Addons by Adamoutler
-- 🛠️ [**GollumDom Addons**](https://github.com/GollumDom/addon-repository): Addons by GollumDom
-- 🖥️ [**Thejeffreystone Addons**](https://github.com/thejeffreystone/hassio_addons): Addons by Thejeffreystone
-- 🛠️ [**Joaofl Addons**](https://github.com/joaofl/hassio-addons): Addons by Joaofl
-- 🖥️ [**Habuild Addons**](https://github.com/habuild/hassio-addons): Addons by Habuild
-- 🛠️ [**Mincka Addons**](https://github.com/Mincka/ha-addons): Addons by Mincka
-- 🖥️ [**Koying Addons**](https://github.com/koying/ha-addons): Addons by Koying
-- 📡 [**RTL_433 Addons**](https://github.com/pbkhrv/rtl_433-hass-addons): RTL_433 Addons
-- 🛠️ [**Loganmarchione Addons**](https://github.com/loganmarchione/hassos-addons): Addons by Loganmarchione
-- 🚀 [**Torrserver Addons**](https://github.com/aatrubilin/hassio-torrserver): Torrserver Addons
-- 🗣️ [**Rhasspy Addons**](https://github.com/rhasspy/hassio-addons): Rhasspy Addons
-- 🛠️ [**SimpleScheduler Addons**](https://github.com/arthurdent75/SimpleScheduler): Addons by SimpleScheduler
-- 🏠 [**Hikvision Addons**](https://github.com/pergolafabio/Hikvision-Addons): Addons by Hikvision
-- 🛠️ [**Ollama Addons**](https://github.com/SirUli/homeassistant-ollama-addon): Addons by Ollama
-- 🏠 [**iHost Open Source Addons**](https://github.com/iHost-Open-Source-Project/hassio-ihost-addon): Addons from the iHost Open Source Project
-- 🛠️ [**Limych Addons**](https://github.com/Limych/hassio-addons): Addons by Limych
-- 🤖 [**Motion AI Addons**](https://github.com/motion-ai/addons): Addons by Motion AI
-- 🛠️ [**Dcmartin Addons**](https://github.com/dcmartin/hassio-addons/): Addons by Dcmartin
-- ⏳ [**Time Machine Addons**](https://github.com/saihgupr/HomeAssistantTimeMachine): Home Assistant snapshot/restore and backup automation tools
+- [**adamoutler/HassOSConfigurator:main**](https://github.com/adamoutler/HassOSConfigurator)  
+- [**AlexxIT/hassio-addons:master**](https://github.com/AlexxIT/hassio-addons)  
+- [**alexbelgium/hassio-addons:master**](https://github.com/alexbelgium/hassio-addons)  
+- [**blakeblackshear/frigate-hass-addons:main**](https://github.com/blakeblackshear/frigate-hass-addons)  
+- [**bluemaex/home-assistant-addons:main**](https://github.com/bluemaex/home-assistant-addons)  
+- [**brenner-tobias/ha-addons:main**](https://github.com/brenner-tobias/ha-addons)  
+- [**hassio-addons/repository:master (community)**](https://github.com/hassio-addons/repository)  
+- [**da-anda/hass-io-addons:main**](https://github.com/da-anda/hass-io-addons)  
+- [**dianlight/hassio-addons:master**](https://github.com/dianlight/hassio-addons)  
+- [**Digi92/hassio-addon-repository:main**](https://github.com/Digi92/hassio-addon-repository)  
+- [**einschmidt/hassio-addons:main**](https://github.com/einschmidt/hassio-addons)  
+- [**erik73/hassio-addons:master**](https://github.com/erik73/hassio-addons)  
+- [**Eskander/ha-addon-printer:main**](https://github.com/Eskander/ha-addon-printer)  
+- [**esphome/home-assistant-addon:main**](https://github.com/esphome/home-assistant-addon)  
+- [**expaso/hassos-addons:main**](https://github.com/expaso/hassos-addons)  
+- [**FaserF/hassio-addons:master**](https://github.com/FaserF/hassio-addons)  
+- [**fredrikbaberg/ha-3dprinter-addons:main**](https://github.com/fredrikbaberg/ha-3dprinter-addons)  
+- [**GollumDom/addon-repository:master**](https://github.com/GollumDom/addon-repository)  
+- [**haberda/hassio_addons:master**](https://github.com/haberda/hassio_addons)  
+- [**habuild/hassio-addons:main**](https://github.com/habuild/hassio-addons)  
+- [**hacs/addons:main**](https://github.com/hacs/addons)  
+- [**hacs-china/addons:china**](https://github.com/hacs-china/addons)  
+- [**hugobloem/homeassistant-addons:main**](https://github.com/hugobloem/homeassistant-addons)  
+- [**jdeath/homeassistant-addons:main**](https://github.com/jdeath/homeassistant-addons)  
+- [**joaofl/hassio-addons:master**](https://github.com/joaofl/hassio-addons)  
+- [**koying/ha-addons:main**](https://github.com/koying/ha-addons)  
+- [**litinoveweedle/hassio-addons:main**](https://github.com/litinoveweedle/hassio-addons)  
+- [**loganmarchione/hassos-addons:main**](https://github.com/loganmarchione/hassos-addons)  
+- [**Mincka/ha-addons:main**](https://github.com/Mincka/ha-addons)  
+- [**music-assistant/home-assistant-addon:main**](https://github.com/music-assistant/home-assistant-addon)  
+- [**home-assistant/addons:master (official)**](https://github.com/home-assistant/addons)  
+- [**Poeschl-HomeAssistant-Addons/repository:main**](https://github.com/Poeschl-HomeAssistant-Addons/repository)  
+- [**rhasspy/hassio-addons:master**](https://github.com/rhasspy/hassio-addons)  
+- [**pbkhrv/rtl_433-hass-addons:main**](https://github.com/pbkhrv/rtl_433-hass-addons)  
+- [**sanderdw/hassio-addons:master**](https://github.com/sanderdw/hassio-addons)  
+- [**t0bst4r/home-assistant-addons:main**](https://github.com/t0bst4r/home-assistant-addons)  
+- [**thejeffreystone/hassio_addons:main**](https://github.com/thejeffreystone/hassio_addons)  
+- [**aatrubilin/hassio-torrserver:master**](https://github.com/aatrubilin/hassio-torrserver)  
+- [**zigbee2mqtt/hassio-zigbee2mqtt:master**](https://github.com/zigbee2mqtt/hassio-zigbee2mqtt)  
+- [**SirUli/homeassistant-ollama-addon:main**](https://github.com/SirUli/homeassistant-ollama-addon)  
+- [**arthurdent75/SimpleScheduler:master**](https://github.com/arthurdent75/SimpleScheduler)  
+- [**pergolafabio/Hikvision-Addons:main**](https://github.com/pergolafabio/Hikvision-Addons)  
+- [**iHost-Open-Source-Project/hassio-ihost-addon:main**](https://github.com/iHost-Open-Source-Project/hassio-ihost-addon)  
+- [**Limych/hassio-addons:master**](https://github.com/Limych/hassio-addons)  
+- [**motion-ai/addons:master**](https://github.com/motion-ai/addons)  
+- [**dcmartin/hassio-addons:master**](https://github.com/dcmartin/hassio-addons)  
+- [**TimeMachine (saihgupr/HomeAssistantTimeMachine:main)**](https://github.com/saihgupr/HomeAssistantTimeMachine)  
+- [**tommy-sense/homeassistant-addon:main**](https://github.com/tommy-sense/homeassistant-addon)  
+- [**jkunczik/home-assistant-omada:master**](https://github.com/jkunczik/home-assistant-omada)  
+- [**IhsenBouallegue/glasshome-addon:main**](https://github.com/IhsenBouallegue/glasshome-addon)  
+- [**bytenoodle/hassioaddon:main**](https://github.com/bytenoodle/hassioaddon)  
+- [**hydroqc/hydroqc-hass-addons:main** (GitLab)](https://gitlab.com/hydroqc/hydroqc-hass-addons/)  
 
 
 
