@@ -1,9 +1,14 @@
 # Changelog
 
+## 0.3.2
+
+### Bug Fixes
+- Fix a bug where no entities were being detected in the area widget dialogs, preventing creation or editing 
+
 ## 0.3.1
 
 ### Bug Fixes
-- Fix the bug where the entity picker doesn't display any entities when creating or editing a widget.
+- Fix a bug where the entity picker doesn't display any entities when creating or editing a widget
 
 ## 0.3.0
 

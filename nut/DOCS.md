@@ -1,36 +1,46 @@
 # Home Assistant Community Add-on: Network UPS Tools
 
-网络UPS工具（NUT）项目的主要目标是提供对电源设备（如不间断电源、电源分配单元、自动转换开关、电源单元和太阳能控制器）的支持。
+The primary goal of the Network UPS Tools (NUT) project is to provide support
+for Power Devices, such as Uninterruptible Power Supplies, Power Distribution
+Units, Automatic Transfer Switch, Power Supply Units and Solar Controllers.
 
-NUT提供了许多控制和监控功能[特性][nut-features]，具有统一的控制和接口管理。
+NUT provides many control and monitoring [features][nut-features], with a
+uniform control and management interface.
 
-超过140个不同的制造商，以及数千个型号都是[兼容的][nut-compatible]。
+More than 140 different manufacturers, and several thousands models
+are [compatible][nut-compatible].
 
-网络UPS工具（NUT）项目是许多[个人和公司][nut-acknowledgements]共同努力的结果。
+The Network UPS Tools (NUT) project is the combined effort of
+many [individuals and companies][nut-acknowledgements].
 
-## 安装
+## Installation
 
-这个插件的安装非常简单，与安装任何其他Home Assistant插件没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Home Assistant add-on.
 
-1. 点击下面的Home Assistant我的按钮，在您的Home Assistant实例上打开插件。
+1. Click the Home Assistant My button below to open the add-on on your Home
+   Assistant instance.
 
-   ![在您的Home Assistant实例中打开此插件][addon-badge]][addon]
+   [![Open this add-on in your Home Assistant instance.][addon-badge]][addon]
 
-1. 点击“安装”按钮来安装插件。
-1. 配置`users`和`devices`选项，如下所述。
-1. 启动“网络UPS工具”插件。
-1. 检查“网络UPS工具”插件的日志，以查看是否一切正常。
-1. 注意“网络UPS工具”插件“信息”选项卡中列出的`Hostname`。
-1. 使用插件主机名（如上所述）、端口`3493`以及插件中配置的用户名/密码配置[NUT集成][nut-ha-docs]。
-1. 要了解如何在Home Assistant中配置NUT集成的更多信息，请参阅[NUT集成文档][nut-ha-docs]。
+1. Click the "Install" button to install the add-on.
+1. Configure the `users` and `devices` options, as described below.
+1. Start the "Network UPS Tools" add-on.
+1. Check the logs of the "Network UPS Tools" add-on to see if everything went well.
+1. Note the `Hostname` listed on the "Info" tab of the "Network UPS Tools" add-on.
+1. Configure the [NUT Integration][nut-ha-docs] using add-on Hostname (identified
+   above), Port `3493`, and the Username/Password configured in the add-on.
+1. For more information on configuring the NUT Integration in Home Assistant see
+   the [NUT integration documentation][nut-ha-docs].
 
-## 配置
+## Configuration
 
-插件可以使用基本配置，其他选项供高级用户使用。
+The add-on can be used with the basic configuration, with other options for more
+advanced users.
 
-**注意**：_更改配置时，请记得重启插件。_
+**Note**: _Remember to restart the add-on when the configuration is changed._
 
-网络UPS工具插件配置：
+Network UPS Tools add-on configuration:
 
 ```yaml
 users:
@@ -48,79 +58,102 @@ mode: netserver
 shutdown_host: "false"
 ```
 
-**注意**：_这只是个示例，不要复制粘贴！创建你自己的！_
+**Note**: _This is just an example, don't copy and paste it! Create your own!_
 
-### 选项：`log_level`
+### Option: `log_level`
 
-`log_level`选项控制插件生成的日志级别，可以更改为更详细或更简洁，这在处理未知问题时可能很有用。可能的值有：
+The `log_level` option controls the level of log output by the add-on and can
+be changed to be more or less verbose, which might be useful when you are
+dealing with an unknown issue. Possible values are:
 
-- `trace`：显示所有细节，如所有调用的内部函数。
-- `debug`：显示详细的调试信息。
-- `info`：正常（通常）有趣的事件。
-- `warning`：非错误的异常情况。
-- `error`：不需要立即处理的运行时错误。
-- `fatal`：出了严重问题。插件变得无法使用。
+- `trace`: Show every detail, like all called internal functions.
+- `debug`: Shows detailed debug information.
+- `info`: Normal (usually) interesting events.
+- `warning`: Exceptional occurrences that are not errors.
+- `error`: Runtime errors that do not require immediate action.
+- `fatal`: Something went terribly wrong. Add-on becomes unusable.
 
-请注意，每个级别自动包括更严重级别的日志消息，例如，`debug`也会显示`info`消息。默认情况下，`log_level`设置为`info`，这是推荐的设置，除非你在进行故障排除。
+Please note that each level automatically includes log messages from a
+more severe level, e.g., `debug` also shows `info` messages. By default,
+the `log_level` is set to `info`, which is the recommended setting unless
+you are troubleshooting.
 
-### 选项：`users`
+### Option: `users`
 
-此选项允许您指定一个或多个用户列表。每个用户可以有自己的权限，如下面的子选项定义。
+This option allows you to specify a list of one or more users. Each user can
+have its own privileges like defined in the sub-options below.
 
-_有关更多信息，请参阅[`upsd.users(5)`][upsd-users]文档。_
+_Refer to the [`upsd.users(5)`][upsd-users] documentation for more information._
 
-#### 子选项：`username`
+#### Sub-option: `username`
 
-用户需要使用的用户名来登录到NUT服务器。有效的用户名只包含`a-z`、`A-Z`、`0-9`和下划线字符（`_`）。
+The username the user needs to use to login to the NUT server. A valid username
+contains only `a-z`, `A-Z`, `0-9` and underscore characters (`_`).
 
-#### 子选项：`password`
+#### Sub-option: `password`
 
-设置此用户的密码。
+Set the password for this user.
 
-#### 子选项：`instcmds`
+#### Sub-option: `instcmds`
 
-用户被允许发起的即时命令列表。使用`all`自动授予所有命令。
+A list of instant commands that a user is allowed to initiate. Use `all` to
+grant all commands automatically.
 
-#### 子选项：`actions`
+#### Sub-option: `actions`
 
-用户被允许执行的操作列表。有效的操作是：
+A list of actions that a user is allowed to perform. Valid actions are:
 
-- `set`：更改UPS中某些变量的值。
-- `fsd`：在UPS中设置强制关机标志。这对于监控来说相当于“电池供电+低电量”情况。
+- `set`: change the value of certain variables in the UPS.
+- `fsd`: set the forced shutdown flag in the UPS. This is equivalent to an
+  "on battery + low battery" situation for the purposes of monitoring.
 
-预计操作列表在未来会增长。
+The list of actions is expected to grow in the future.
 
-#### 子选项：`upsmon`
+#### Sub-option: `upsmon`
 
-为`upsmon`进程添加必要的操作。这设置为`master`或`slave`。如果为`netclient`设置帐户以连接此插件，则应设置为`slave`。
+Add the necessary actions for a `upsmon` process to work. This is either set to
+`master` or `slave`. If creating an account for a `netclient` setup to connect
+this should be set to `slave`.
 
-### 选项：`devices`
+### Option: `devices`
 
-此选项允许您指定系统上连接的UPS设备列表。
+This option allows you to specify a list of UPS devices attached to your
+system.
 
-_有关更多信息，请参阅[`ups.conf(5)`][ups-conf]文档。_
+_Refer to the [`ups.conf(5)`][ups-conf] documentation for more information._
 
-#### 子选项：`name`
+#### Sub-option: `name`
 
-UPS的名称。您不能使用任何空格字符或`default`名称。
+The name of the UPS. You cannot use any space characters or the name `default`.
 
-#### 子选项：`driver`
+#### Sub-option: `driver`
 
-这指定将监控此UPS的程序。您需要指定与您的硬件兼容的程序。有关驱动程序的更多信息以及特定驱动程序的手册页面，请参阅[`nutupsdrv(8)`][nutupsdrv]。
+This specifies which program will be monitoring this UPS. You need to specify
+the one that is compatible with your hardware. See [`nutupsdrv(8)`][nutupsdrv]
+for more information on drivers in general and pointers to the man pages of
+specific drivers.
 
-#### 子选项：`port`
+#### Sub-option: `port`
 
-这是UPS连接的串行端口。第一个串行端口通常是`/dev/ttyS0`。使用`auto`自动检测端口。
+This is the serial port where the UPS is connected. The first serial port
+usually is `/dev/ttyS0`. Use `auto` to automatically detect the port.
 
-#### 子选项：`powervalue`
+#### Sub-option: `powervalue`
 
-可选地允许您设置此特定UPS是否向运行此插件的设备供电。如果您有多个UPS并希望监控，但不想让其中一些UPS的低电量关闭此主机，则很有用。可接受的值是`1`表示“向此主机供电”或`0`表示“仅监控”。默认值为`1`
+Optionally lets you set whether this particular UPS provides power to the
+device this add-on is running on. Useful if you have multiple UPS that you
+wish to monitor, but you don't want low battery on some of them to shut down
+this host. Acceptable values are `1` for "providing power to this host" or `0`
+for "monitor only". Defaults to `1`
 
-**注意**：_必须有至少一个连接的设备具有`powervalue`为`1`_
+**Note**: _There must be a minimum of one attached device with powervalue `1`_
 
-#### 子选项：`config`
+#### Sub-option: `config`
 
-为此UPS配置的附加[选项][ups-fields]列表。常见的[`usbhid-ups`][usbhid-ups]驱动程序允许您通过使用`vendor`、`product`、`serial`、`vendorid`和`productid`选项的组合来区分设备：
+A list of additional [options][ups-fields] to configure for this UPS. The common
+[`usbhid-ups`][usbhid-ups] driver allows you to distinguish between devices by
+using a combination of the `vendor`, `product`, `serial`, `vendorid`, and
+`productid` options:
 
 ```yaml
 devices:
@@ -146,86 +179,104 @@ devices:
       - product = ".*(Smart|Back)-?UPS.*"
 ```
 
-### 选项：`mode`
+### Option: `mode`
 
-识别的值是`netserver`和`netclient`。
+Recognized values are `netserver` and `netclient`.
 
-- `netserver`：运行管理本地连接的UPS并允许其他客户端连接（作为从属或进行管理）的组件。
-- `netclient`：仅运行`upsmon`以连接到作为`netserver`运行的远程系统。
+- `netserver`: Runs the components needed to manage a locally connected UPS and
+  allow other clients to connect (either as slaves or for management).
+- `netclient`: Only runs `upsmon` to connect to a remote system running as
+  `netserver`.
 
-### 选项：`shutdown_host`
+### Option: `shutdown_host`
 
-当此选项在UPS关机命令上设置为`true`时，主机系统将被关闭。设置为`false`时，仅停止插件。这是为了在不影响系统的情况下进行测试。
+When this option is set to `true` on a UPS shutdown command, the host system
+will be shutdown. When set to `false` only the add-on will be stopped. This is to
+allow testing without impact to the system.
 
-### 选项：`list_usb_devices`
+### Option: `list_usb_devices`
 
-当此选项设置为`true`时，插件启动时会在插件日志中显示连接的USB设备列表。此选项可用于帮助识别连接到系统的多个UPS设备。
+When this option is set to `true`, a list of connected USB devices will be
+displayed in the add-on log when the add-on starts up. This option can be used
+to help identify different UPS devices when multiple UPS devices are connected
+to the system.
 
-### 选项：`remote_ups_name`
+### Option: `remote_ups_name`
 
-在`netclient`模式下运行的远程UPS的名称。
+When running in `netclient` mode, the name of the remote UPS.
 
-### 选项：`remote_ups_host`
+### Option: `remote_ups_host`
 
-在`netclient`模式下运行的远程UPS的主机。
+When running in `netclient` mode, the host of the remote UPS.
 
-### 选项：`remote_ups_user`
+### Option: `remote_ups_user`
 
-在`netclient`模式下运行的远程UPS的用户。
+When running in `netclient` mode, the user of the remote UPS.
 
-### 选项：`remote_ups_password`
+### Option: `remote_ups_password`
 
-在`netclient`模式下运行的远程UPS的密码。
+When running in `netclient` mode, the password of the remote UPS.
 
-**注意**：_在使用远程选项时，用户和设备选项仍然必须存在，但是它们将没有任何效果_
+**Note**: _When using the remote option, the user and device options must still
+be present, however they will have no effect_
 
-### 选项：`upsd_maxage`
+### Option: `upsd_maxage`
 
-允许设置`upsd.conf`中的MAXAGE值，以增加特定驱动程序的超时时间，大多数用户不应更改此设置。
+Allows setting the MAXAGE value in upsd.conf to increase the timeout for
+specific drivers, should not be changed for the majority of users.
 
-### 选项：`upsmon_deadtime`
+### Option: `upsmon_deadtime`
 
-允许设置`upsmon.conf`中的DEADTIME值，以调整监控进程的过期时间，大多数用户不应更改此设置。
+Allows setting the DEADTIME value in upsmon.conf to adjust the stale time for
+the monitor process, should not be changed for the majority of users.
 
-### 选项：`i_like_to_be_pwned`
+### Option: `i_like_to_be_pwned`
 
-在插件配置中添加此选项允许您通过设置为`true`来绕过HaveIBeenPwned密码要求。
+Adding this option to the add-on configuration allows to you bypass the
+HaveIBeenPwned password requirement by setting it to `true`.
 
-**注意**：_我们强烈建议选择一个更强的/更安全的密码，而不是使用此选项！自己承担风险！_
+**Note**: _We STRONGLY suggest picking a stronger/safer password instead of
+using this option! USE AT YOUR OWN RISK!_
 
-### 选项：`leave_front_door_open`
+### Option: `leave_front_door_open`
 
-在插件配置中添加此选项允许您通过设置为`true`并留空用户名和密码来禁用NUT服务器的身份验证。
+Adding this option to the add-on configuration allows you to disable
+authentication on the NUT server by setting it to `true` and leaving the
+username and password empty.
 
-**注意**：_我们强烈建议不要使用此功能，即使此插件仅暴露到您的内部网络。自己承担风险！_
+**Note**: _We STRONGLY suggest, not to use this, even if this add-on is
+only exposed to your internal network. USE AT YOUR OWN RISK!_
 
-## 事件通知
+## Event Notifications
 
-每当您的UPS状态发生变化时，都会触发名为`nut.ups_event`的事件。它的有效载荷如下所示：
+Whenever your UPS changes state, an event named `nut.ups_event` will be fired.
+It's payload looks like this:
 
-| 键          | 值                                        |
-| ----------- | -------------------------------------------- |
-| `ups_name`  | 您配置的UPS的名称                         |
-| `notify_type` | 通知的类型                                 |
-| `notify_msg` | NUT的默认通知消息                         |
+| Key           | Value                                        |
+| ------------- | -------------------------------------------- |
+| `ups_name`    | The name of the UPS as you configured it     |
+| `notify_type` | The type of notification                     |
+| `notify_msg`  | The NUT default message for the notification |
 
-`notify_type`表示通知的类型。
-有关更多信息以及将在`notify_msg`中显示的消息，请参阅下面的表格。`%s`会自动被NUT替换为您的UPS名称。
+`notify_type` signifies what kind of notification it is.
+See the below table for more information as well as the message that will be in
+`notify_msg`. `%s` is automatically replaced by NUT with your UPS name.
 
-| 类型       | 原因                                                                 | 默认消息                                    |
+| Type       | Cause                                                                 | Default Message                                    |
 | ---------- | --------------------------------------------------------------------- | -------------------------------------------------- |
-| `ONLINE`   | UPS恢复在线                                                    | "UPS %s on line power"                             |
-| `ONBATT`   | UPS在电池上                                                     | "UPS %s on battery"                                |
-| `LOWBATT`  | UPS电池低（如果也在电池上，则为“关键”）                           | "UPS %s battery is low"                            |
-| `FSD`      | UPS正在由主控关闭（FSD = “强制关机”）                             | "UPS %s: forced shutdown in progress"              |
-| `COMMOK`   | 与UPS建立了通信                                               | "Communications with UPS %s established"           |
-| `COMMBAD`  | 与UPS失去了通信                                               | "Communications with UPS %s lost"                  |
-| `SHUTDOWN` | 系统正在关闭                                                    | "Auto logout and shutdown proceeding"              |
-| `REPLBATT` | UPS电池已损坏并需要更换                                           | "UPS %s battery needs to be replaced"              |
-| `NOCOMM`   | UPS不可用（无法联系进行监控）                                     | "UPS %s is unavailable"                            |
-| `NOPARENT` | 关闭系统进程已死亡（关闭不可能）                                 | "upsmon parent process died - shutdown impossible" |
+| `ONLINE`   | UPS is back online                                                    | "UPS %s on line power"                             |
+| `ONBATT`   | UPS is on battery                                                     | "UPS %s on battery"                                |
+| `LOWBATT`  | UPS has a low battery (if also on battery, it's "critical")           | "UPS %s battery is low"                            |
+| `FSD`      | UPS is being shutdown by the master (FSD = "Forced Shutdown")         | "UPS %s: forced shutdown in progress"              |
+| `COMMOK`   | Communications established with the UPS                               | "Communications with UPS %s established"           |
+| `COMMBAD`  | Communications lost to the UPS                                        | "Communications with UPS %s lost"                  |
+| `SHUTDOWN` | The system is being shutdown                                          | "Auto logout and shutdown proceeding"              |
+| `REPLBATT` | The UPS battery is bad and needs to be replaced                       | "UPS %s battery needs to be replaced"              |
+| `NOCOMM`   | A UPS is unavailable (can't be contacted for monitoring)              | "UPS %s is unavailable"                            |
+| `NOPARENT` | The process that shuts down the system has died (shutdown impossible) | "upsmon parent process died - shutdown impossible" |
 
-此事件允许您创建自动化操作，例如向您的手机发送[critical notification][critical-notif]：
+This event allows you to create automations to do things like send a
+[critical notification][critical-notif] to your phone:
 
 ```yaml
 automations:
@@ -246,51 +297,70 @@ automations:
                 volume: 1.0
 ```
 
-有关更多信息，请参阅NUT文档[此处][nut-notif-doc-1]和[此处][nut-notif-doc-2]。
+For more information, see the NUT docs [here][nut-notif-doc-1] and
+[here][nut-notif-doc-2].
 
-## 更改日志与发布
+## Changelog & Releases
 
-此存储库使用GitHub的发布功能[发布]功能来维护更改日志。
+This repository keeps a change log using [GitHub's releases][releases]
+functionality.
 
-发布基于[语义版本控制][semver]，并使用`MAJOR.MINOR.PATCH`格式。简而言之，版本将根据以下情况增加：
+Releases are based on [Semantic Versioning][semver], and use the format
+of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented
+based on the following:
 
-- `MAJOR`：不兼容或主要更改。
-- `MINOR`：向后兼容的新功能和增强功能。
-- `PATCH`：向后兼容的补丁和软件包更新。
+- `MAJOR`: Incompatible or major changes.
+- `MINOR`: Backwards-compatible new features and enhancements.
+- `PATCH`: Backwards-compatible bugfixes and package updates.
 
-## 支持
+## Support
 
-有问题吗？
+Got questions?
 
-您有几个选项可以回答他们：
+You have several options to get them answered:
 
-- Home Assistant Community Add-ons Discord聊天服务器[discord]用于插件支持和功能请求。
-- Home Assistant Discord聊天服务器[discord-ha]用于一般Home Assistant讨论和问题。
-- Home Assistant[社区论坛][forum]。
-- 加入[Reddit子版块][reddit]在[/r/homeassistant][reddit]
+- The [Home Assistant Community Add-ons Discord chat server][discord] for add-on
+  support and feature requests.
+- The [Home Assistant Discord chat server][discord-ha] for general Home
+  Assistant discussions and questions.
+- The Home Assistant [Community Forum][forum].
+- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
 
-您也可以在GitHub上[打开问题][issue]。
+You could also [open an issue here][issue] GitHub.
 
-## 作者与贡献者
+## Authors & contributors
 
-此存储库的原始设置由[Dale Higgs][dale3h]完成。
+The original setup of this repository is by [Dale Higgs][dale3h].
 
-有关所有作者和贡献者的完整列表，请查看[贡献者页面][contributors]。
+For a full list of all authors and contributors,
+check [the contributor's page][contributors].
 
-## 许可证
+## License
 
-MIT许可证
+MIT License
 
-版权（c）2018-2025 Dale Higgs
+Copyright (c) 2018-2025 Dale Higgs
 
-特此授予任何人免费获得此软件及其相关文档文件（“软件”）的副本，并在软件上进行处理，不受任何限制，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许接受软件的人这样做，但需遵守以下条件：
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-软件按“原样”提供，不提供任何形式的保证，无论是明示的还是暗示的，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是合同行为、侵权行为或其他行为，均源于、发生于或与软件的使用或其他交易有关。
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 [addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
-[addon]: https://my.home-assistant.io/redirect/supervisor_addon/? addon=a0d7b954_nut&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository
+[addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=a0d7b954_nut&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository
 [contributors]: https://github.com/hassio-addons/addon-nut/graphs/contributors
 [critical-notif]: https://companion.home-assistant.io/docs/notifications/critical-notifications
 [dale3h]: https://github.com/dale3h

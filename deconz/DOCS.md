@@ -1,193 +1,236 @@
 # Home Assistant Add-on: deCONZ
 
-## 安装
+## Installation
 
-按照以下步骤在您的系统上安装此插件：
+Follow these steps to get the add-on installed on your system:
 
-1. 在 Home Assistant 前端导航到 **设置** -> **插件** -> **插件商店**。
-2. 找到 "deCONZ" 插件并点击它。
-3. 点击 "安装" 按钮。
+1. Navigate in your Home Assistant frontend to **Settings** -> **Add-ons** -> **Add-on store**.
+2. Find the "deCONZ" add-on and click it.
+3. Click on the "INSTALL" button.
 
-## 使用方法
+## How to use
 
-### 使用 RaspBee
+### Using a RaspBee
 
-如果您使用 RaspBee，您可能需要编辑 SD 卡根目录中的 `config.txt` 文件，以便您的 RaspBee 被识别并分配一个设备名称。
+If you are using RaspBee, you may need to edit the `config.txt` file in the root
+of your SD card in order for your RaspBee to be recognized and assigned a device name.
 
-在您的 `config.txt` 中添加以下内容：
+Add following to your `config.txt`:
 
 ```txt
 enable_uart=1
 dtoverlay=pi3-miniuart-bt
 ```
 
-### 配置插件
+### Configure the add-on
 
-插件需要知道您的 ConBee/RaspBee 的位置，因此，您需要配置插件以指向正确的设备。
+The add-on needs to know where your ConBee/RaspBee can be found, and therefore,
+you'll need to configure the add-on to point to the right device.
 
-如果您使用 Home Assistant，您可以在 **设置** -> **系统** -> **硬件** -> **所有硬件** 页面上找到此的正确值。如果存在，建议使用 "by-id" 路径到设备，因为它不会在系统中添加其他设备时发生变化。
+If you're using Home Assistant you may find the correct value for this on the
+**Settings** -> **System** -> **Hardware** -> **All hardware** page. It is recommended
+to use a "by-id" path to the device if one exists, as it is not subject to
+change if other devices are added to the system.
 
-1. 在插件配置中的 `device` 选项中替换 `null`，并指定带引号的设备名称：例如，类似于 <br>
-   `"/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_XXXXXXXX-if00"`，
-   `"/dev/ttyUSB0"`，`"/dev/ttyAMA0"`，或 `"/dev/ttyACM0"`。
-2. 点击 "保存" 以保存插件配置。
-3. 切换 "在侧边栏中显示" 以将其添加到您的 Home Assistant 侧边栏。
-4. 启动插件。
+1. Replace `null` in the `device` option in the add-on configuration and specify
+   the device name in quotes: e.g. something like <br>
+   `"/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_XXXXXXXX-if00"`,
+   `"/dev/ttyUSB0"`, `"/dev/ttyAMA0"`, or `"/dev/ttyACM0"`.
+2. Click on "SAVE" to save the add-on configuration.
+3. Toggle the "Show in sidebar" to add it to your Home Assistant side bar.
+4. Start the add-on.
 
-安装并启动此插件后，您可以在 Web UI 中选择 **deCONZ** 以通过 VNC 访问 deCONZ GUI，或选择 **Phoscon** 以在 Phoscon 应用中配置设置。
+After installing and launching this add-on, you can select **deCONZ** under web UI to access
+the deCONZ GUI via VNC, or select **Phoscon** to configure the settings in the Phoscon App.
 
-## 配置 Home Assistant deCONZ 集成
+## Configuring the Home Assistant deCONZ integration
 
-默认情况下，Home Assistant 启用了 `discovery` 集成，它将自动发现此插件。
+By default, Home Assistant has the `discovery` integration enabled, which
+automatically discovers this add-on.
 
-启动此插件后，导航到 **设置** -> **设备和服务** -> **集成** 页面以配置 deCONZ 集成。
+Navigate to **Settings** -> **Devices & Services** -> **Integrations** page after starting this
+add-on to configure the deCONZ integration.
 
-如果您在 Home Assistant 实例上未启用 `discovery`，请按照以下说明配置 deCONZ 集成：
+In case you don't have `discovery` enabled on your Home Assistant instance,
+follow these instructions to configure the deCONZ integration:
 
 <https://www.home-assistant.io/integrations/deconz/>
 
-## 迁移到此插件
+## Migrating to this add-on
 
-要将 deCONZ 迁移到 Home Assistant 和此插件，请通过 Phoscon 应用备份数据，并在安装/重新安装后恢复。
+To migrate deCONZ to Home Assistant and this add-on, back up your configuration via
+the Phoscon App and restore it after installation/reinstallation.
 
-**_您必须执行这些步骤，否则您的灯、组名称和其他数据将丢失！_**
+**_You must perform these steps or your Light, Group names and other data will be lost!_**
 
-但是，您的 Zigbee 设备仍然会与您的 ConBee 或 RaspBee 硬件配对。
+However, your Zigbee devices will still be paired to your ConBee or RaspBee hardware.
 
-## 通过 VNC 访问 deCONZ 应用程序并查看网状网络
+## Accessing the deCONZ application and viewing the mesh via VNC
 
-插件允许您通过 VNC 访问在远程桌面上运行的底层 deCONZ 应用程序。它允许您查看 Zigbee 网状网络（在调试网络问题时非常有用），但还提供了许多高级功能。
+The add-on allows you to access the underlying deCONZ application running on
+a remote desktop via VNC. It allows you to view the Zigbee mesh (which can
+be really helpful when debugging network issues), but also gives you access
+to tons of advanced features.
 
-要启用它：
+To enable it:
 
-- 在插件的 "网络" 配置部分设置 VNC 端口号，然后点击 "保存"。建议使用端口 5900，但任何其他端口都可以（只要高于 5900）。
-- 重新启动插件。
+- Set a port number for VNC in the "Network" configuration section of the
+  add-on and hit "SAVE". Advised is to use port 5900, but any other port above
+  5900 works as well.
+- Restart the add-on.
 
-要访问它，您需要一个 [VNC Viewer][vnc-viewer] 应用程序。如果您使用 macOS，您很幸运，因为 VNC 是内置的。打开 Spotlight 搜索并输入 VNC 服务 URL。
+To access it, you need a [VNC Viewer][vnc-viewer] application. If you are using
+macOS, you are in luck, since VNC is built-in. Open the spotlight search and
+enter the VNC service URL.
 
-VNC 服务 URL 看起来像 [vnc://homeassistant.local:5900](vnc-service-url)。如果您在 Home Assistant 主机系统设置中更改了端口或主机名，请相应调整端口。
+The VNC service URL looks like [vnc://homeassistant.local:5900](vnc-service-url).
+Adjust port and possibly hostname if you've changed it in Home Assistant host system
+settings.
 
-## 升级 RaspBee 和 ConBee 固件
+## Upgrading RaspBee and ConBee firmware
 
-此插件允许您轻松地从 Phoscon 应用程序直接升级固件。
+This add-on allows you to upgrade your firmware straight from the Phoscon App with ease.
 
-在 Phoscon 应用程序中，导航到 **设置** -> **网关**，然后选择升级按钮。
+In the Phoscon App, go to **Settings** -> **Gateway**, then select the upgrade button.
 
-但是，某些 USB 闪存驱动器（如 Aeotec Z-Wave 闪存驱动器）可能会干扰升级过程，导致固件升级失败。如果您在开始升级后得到与之前相同的固件版本，请考虑拔掉其他闪存驱动器并重试。
+However, some USB sticks (like the Aeotec Z-Wave sticks), can interfere with
+the upgrade process, causing the firmware upgrade to fail silently. If you end
+up with the same firmware version as before you started the upgrade, consider
+unplugging the other sticks and try again.
 
-如果仍然不起作用，请尝试 [手动升级固件][manual-upgrade]。
+If that is still not working, try [upgrading the firmware manually][manual-upgrade].
 
-## 使用 deCONZ/Phoscon API 与另一个插件
+## Using the deCONZ/Phoscon API with another add-on
 
-某些插件能够直接消费 deCONZ API。Node-RED 是其中一个可以作为插件提供的应用程序，它可以使用 `node-red-contrib-deconz` 节点消费 deCONZ API。
+Some add-ons are capable of consuming the deCONZ API directly. Node-RED is
+one of those applications, that is available as an add-on, that can
+consume the deCONZ API using the `node-red-contrib-deconz` node.
 
-**警告：** 请不要使用这些设置在 Home Assistant 中设置集成。
+**WARNING:** Do not use these settings to set up an integration in Home Assistant.
 
-要允许这些插件连接到 deCONZ，请使用以下设置：
+To allow these add-ons to connect to deCONZ, use the following settings:
 
-- **主机**：`core-deconz`
-- **(API) 端口**：`40850`
-- **WebSocket 端口**：`8081`
+- **Host**: `core-deconz`
+- **(API) Port**: `40850`
+- **WebSocket Port**: `8081`
 
-_注意：上述设置可能在将来此插件的更新中发生变化。_
+_Note: The above settings are likely to change in a future update of this add-on._
 
-## 高级调试输出控制
+## Advanced debug output control
 
-插件中添加了隐藏控件，以允许控制 deCONZ 的调试输出。以下选项是隐藏的，但可以添加到插件配置中：
+Hidden controls are added to the add-on to allow control over the debug
+output of deCONZ. The following options are hidden, but can be added to
+the add-on configuration:
 
 - `dbg_info`
 - `dbg_aps`
-- `dbg_otau`
 - `dbg_zcl`
 - `dbg_zdp`
+- `dbg_ddf`
+- `dbg_dev`
+- `dbg_ota`
+- `dbg_error`
+- `dbg_http`
 
-这些选项需要一个表示日志级别的数字。
+These options require a number that represents the log level. The default value
+of `dbg_info` is 1 and all other debug options are 0.
 
-带 `dbg_aps` 在日志级别 1 上启用的插件配置示例：
+Example add-on config with `dbg_aps` enabled on log level L2:
 
 ```yaml
 device: /dev/ttyUSB0
-dbg_aps: 1
+dbg_aps: 2
 
 ```
 
-## 配置
+## Configuration
 
-插件配置：
+Add-on configuration:
 
 ```yaml
 device: /dev/ttyAMA0
 ```
 
-### 选项：`device`（必需）
+### Option: `device` (required)
 
-您的 ConBee/RaspBee 的设备地址。
+The device address of your ConBee/RaspBee.
 
-如果您使用 Home Assistant，您可以在 **设置** -> **系统** -> **硬件** -> **所有硬件** 页面上找到此的正确值。如果存在，建议使用 "by-id" 路径到设备，因为它不会在系统中添加其他设备时发生变化。
+If you're using Home Assistant you may find the correct value for this on the
+**Settings** -> **System** -> **Hardware** -> **All hardware** page. It is recommended
+to use a "by-id" path to the device if one exists, as it is not subject to
+change if other devices are added to the system.
 
-在大多数情况下，它看起来像以下之一：
+In most cases this looks like one of the following:
 
 - `"/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_XXXXXXXX-if00"` <br> 
-   （以及类似的 RaspBee 和原始 ConBee，将 `XXXXXXXX` 替换为您在上述硬件页面上看到的价值）
+   (and similar for RaspBee and the original ConBee, replace `XXXXXXXX` with the value you see in your above mentioned hardware page)
 - `"/dev/ttyUSB0"`
 - `"/dev/ttyAMA0"`
 - `"/dev/ttyACM0"`
 
-## 故障排除
+## Troubleshooting
 
-### 我的网关在 Home Assistant 中显示 ID 为 0000000000000000
+### My gateway shows up in Home Assistant with ID 0000000000000000
 
-这是一个在插件中已解决的旧问题。过去，插件在 deCONZ 分配网关 ID 之前发送网关 ID 太快了。
+This is an older bug that has been solved in the add-on. The add-on
+was too quick on sending the gateway ID in the past, before deCONZ had
+one assigned.
 
-这可能会导致 Home Assistant 中的问题，例如没有设备。它还可能导致插件内部更改时无法向 Home Assistant 传达新设置的问题。
+This might cause issues in Home Assistant, like having no devices.
+It also might cause an issue when the add-on has internal changes and next
+fails to communicate new settings to Home Assistant.
 
-可以通过以下步骤解决：
+This can be solved by the following steps:
 
-1. 通过进入 Phoscon 应用程序，从菜单中选择：
-  **设置** -> **网关** -> **备份选项**，然后创建
-  一个新备份并将其下载到您的计算机上。
-2. 卸载插件。
-3. 在 Home Assistant 中删除您当前的 deCONZ 集成。
-4. 重启 Home Assistant。
-5. 再次安装 deCONZ 插件，并根据 [说明](#configure-the-add-on) 进行配置。
-6. 在第一步中创建的备份，在 Phoscon 应用程序中与之前相同的位置恢复。
-7. 重新启动插件，然后再次重启 Home Assistant。
-8. 按照说明在 [设置 deCONZ 集成](#configuring-the-home-assistant-deconz-integration) 中的指示操作。
+1. Backup your deCONZ/Phoscon data, by going into the Phoscon App, from the menu choose:
+  **Settings** -> **Gateway** -> **Backup options**, then create
+  a new backup and download it onto your computer.
+2. Uninstall the add-on.
+3. In Home Assistant, remove the current integration you have for deCONZ.
+4. Restart Home Assistant.
+5. Install the deCONZ add-on again, and configure it again according to the [instructions](#configure-the-add-on).
+6. Restore the backup you created at the first step at the same location in the Phoscon App as before.
+7. Restart the add-on and next, restart Home Assistant once more.
+8. Follow the instructions on [setting up the deCONZ integration](#configuring-the-home-assistant-deconz-integration).
 
-### 升级到 4.x 后我的集成显示没有设备
+### My integration shows no devices after upgrading to 4.x
 
-_请确保您没有 ID 为 0000000000000000 的问题。_
+_Please, be sure you don't have the issue with gateway ID 0000000000000000._
 
-可能会发生您在过去意外使用了旧发现或手动设置集成的情况。由于此原因，插件无法通知 Home Assistant 4.x 中发生的内部设置更改。
+It can happen that you have accidentally used an older discovery or a manual
+set up of the integration in the past. Because of this, the add-on is unable
+to inform Home Assistant of changed internal settings, which happened in 4.x.
 
-要解决这个问题，请执行以下步骤以一次性解决此问题，以便将来不再遇到此问题。
+The solution for this is to do the following steps to take care of that issue
+for once and for all, so in the future, you won't end up having this issue.
 
-1. 在 Home Assistant 中删除您当前的 deCONZ 集成。
-2. 重启 Home Assistant。
-3. 按照说明在 [设置 deCONZ 集成](#configuring-the-home-assistant-deconz-integration) 中的指示操作。
+1. In Home Assistant, remove the current integration you have for deCONZ.
+2. Restart Home Assistant.
+3. Follow the instructions on [setting up the deCONZ integration](#configuring-the-home-assistant-deconz-integration).
 
-这将确保您有一个正常工作的集成和插件，以便将来使用。
+This will ensure you have a working integration and add-on for the future.
 
-## 已知问题和限制
+## Known issues and limitations
 
-- 为您的 Raspberry Pi 使用至少 2.5A 电源！
-  这可以避免在使用此插件时出现奇怪的行为。
-- 插件没有 UPnP 支持。
-- 如果由于某种原因 deCONZ 前端没有为您提供初始 ConBee 或 RaspBee 设置，并不断要求密码，那么很可能是
-  `delight` 是您可以使用默认密码进入的密码。
+- Use at least 2.5A power supply for your Raspberry Pi!
+  This avoids strange behavior when using this add-on.
+- The add-on has no UPnP support.
+- If for some reason the deCONZ frontend does not give you an initial setup
+  for your ConBee or RaspBee and keeps asking for a password, then most likely
+  `delight` is the default password you can use to get in.
 
-## 支持
+## Support
 
-有问题吗？
+Got questions?
 
-您有几个选项可以回答这些问题：
+You have several options to get them answered:
 
-- [Home Assistant Discord 聊天服务器][discord].
-- Home Assistant [社区论坛][forum].
-- 加入 [Reddit 子版块][reddit] 在 [/r/homeassistant][reddit]
-- [deCONZ Discord 服务器](https://discord.gg/QFhTxqN).
+- The [Home Assistant Discord Chat Server][discord].
+- The Home Assistant [Community Forum][forum].
+- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
+- The [deCONZ discord server](https://discord.gg/QFhTxqN).
 
-如果您发现了一个错误，请 [在我们的 GitHub 上打开一个问题][issue].
+In case you've found a bug, please [open an issue on our GitHub][issue].
 
 [discord]: https://discord.gg/c5DvZ4e
 [forum]: https://community.home-assistant.io
