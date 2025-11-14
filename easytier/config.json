@@ -1,6 +1,6 @@
 {
   "name": "EasyTier",
-  "version": "v2.4.5",
+  "version": "v2.4.5.1",
   "slug": "easytier",
   "description": "[老王杂谈说]：EasyTier 优秀的开源组网工具",
   "url": "https://github.com/ha-china/hassio-addons",
@@ -12,67 +12,27 @@
   "privileged": [
     "NET_ADMIN"
   ],
+  "environment": {
+    "PGID": "0",
+    "PUID": "0"
+  },
   "devices": [
     "/dev/net/tun"
   ],
-  "ports": {
-    "11010/tcp": 11010,
-    "11010/udp": 11010,
-    "11011/tcp": 11011,
-    "11011/udp": 11011,
-    "11012/tcp": 11012,
-    "15888/tcp": 15888
-  },
-  "ports_description": {
-    "11010/tcp": "TCP listener",
-    "11010/udp": "UDP listener",
-    "11011/tcp": "WebSocket listener",
-    "11011/udp": "WireGuard listener",
-    "11012/tcp": "Secure WebSocket listener",
-    "15888/tcp": "RPC portal"
-  },
   "panel_icon": "mdi:application-variable",
   "boot": "manual",
   "host_network": true,
   "image": "ghcr.hasscn.top/desmond-dong/easytier/easytier-{arch}",
   "options": {
-    "name": "EasyTier",
-    "ipv4": "10.10.10.1/24",
-    "dhcp": true,
-    "rpc_portal": "0.0.0.0:0",
-    "network_name": "easytier",
-    "network_secret": "easytier",
-    "peer_uri": "tcp://public.easytier.top:11010",
-    "cidr": "10.10.1.0/24",
-    "disable_kcp_input": false,
-    "disable_p2p": false,
-    "enable_encryption": false,
-    "enable_exit_node": false,
-    "enable_kcp_proxy": false,
-    "latency_first": false,
-    "no_tun": false,
-    "relay_all_peer_rpc": false,
-    "use_smoltcp": false,
-    "config_server": "username"
+    "env_vars": []
   },
   "schema": {
-    "name": "str?",
-    "ipv4": "str?",
-    "dhcp": "bool?",
-    "rpc_portal": "str?",
-    "network_name": "str?",
-    "network_secret": "str?",
-    "peer_uri": "str?",
-    "cidr": "str?",
-    "disable_kcp_input": "bool?",
-    "disable_p2p": "bool?",
-    "enable_encryption": "bool?",
-    "enable_exit_node": "bool?",
-    "enable_kcp_proxy": "bool?",
-    "latency_first": "bool?",
-    "no_tun": "bool?",
-    "relay_all_peer_rpc": "bool?",
-    "use_smoltcp": "bool?",
-    "config_server": "str?"
+    "env_vars": [
+      {
+        "name": "str?",
+        "value": "str?",
+        "type": "list(string|boolean|integer)?"
+      }
+    ]
   }
 }
