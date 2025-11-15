@@ -4,11 +4,13 @@ This enables you to easily explore all tables and content that is saved in your 
 
 ## Installation
 
-The installation of this add-on is pretty straightforward and not different in comparison to installing any other Home Assistant add-on.
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Home Assistant add-on.
 
-1. Click the Home Assistant My button below to open the add-on on your Home Assistant instance.
+1. Click the Home Assistant My button below to open the add-on on your Home
+   Assistant instance.
 
-   [![Open this add-on in your Home Assistant instance.][ addon-badge]][ addon]
+   [![Open this add-on in your Home Assistant instance.][addon-badge]][addon]
 
 1. Click the "Install" button to install the add-on.
 1. Start the "SQLite Web" add-on
@@ -18,17 +20,22 @@ The installation of this add-on is pretty straightforward and not different in c
 
 ## Configuration
 
-**Note**: Remember to restart the add-on when the configuration is changed.
+**Note**: _Remember to restart the add-on when the configuration is changed._
 
 ### Option: Database
 
-An optional database path that can be set to instruct SQLite web to use a specific database file. When not set, the default Home Assistant database file location is used.
+An optional database path that can set to instruct SQLite web to use a specific
+database file. When not set, the default Home Assistant database file location
+is used.
 
 ## Changelog & Releases
 
-This repository keeps a change log using [GitHub's releases][ releases] functionality.
+This repository keeps a change log using [GitHub's releases][releases]
+functionality.
 
-Releases are based on [Semantic Versioning][ semver], and use the format of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented based on the following:
+Releases are based on [Semantic Versioning][semver], and use the format
+of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented
+based on the following:
 
 - `MAJOR`: Incompatible or major changes.
 - `MINOR`: Backwards-compatible new features and enhancements.
@@ -40,18 +47,21 @@ Got questions?
 
 You have several options to get them answered:
 
-- The [Home Assistant Community Add-ons Discord chat server][ discord] for add-on support and feature requests.
-- The [Home Assistant Discord chat server][ discord-ha] for general Home Assistant discussions and questions.
-- The Home Assistant [Community Forum][ forum].
-- Join the [Reddit subreddit][ reddit] in [/r/homeassistant][ reddit]
+- The [Home Assistant Community Add-ons Discord chat server][discord] for add-on
+  support and feature requests.
+- The [Home Assistant Discord chat server][discord-ha] for general Home
+  Assistant discussions and questions.
+- The Home Assistant [Community Forum][forum].
+- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
 
-You could also [open an issue here][ issue] GitHub.
+You could also [open an issue here][issue] GitHub.
 
 ## Authors & contributors
 
-The original setup of this repository is by [Joakim Sørensen][ ludeeus].
+The original setup of this repository is by [Joakim Sørensen][ludeeus].
 
-For a full list of all authors and contributors, check [the contributor's page][ contributors].
+For a full list of all authors and contributors,
+check [the contributor's page][contributors].
 
 ## License
 

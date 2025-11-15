@@ -14,7 +14,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞请点击下面的图片，然后它会在右上角。谢谢！_
+_感谢大家给我的仓库点赞！要点赞请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,15 +28,15 @@ _感谢所有给我的仓库点赞的人！要点赞请点击下面的图片，�
 
 ## 配置
 
-使用插件的`env_vars`选项来传递额外的环境变量（大写或小写名称）。查看 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
+使用插件的`env_vars`选项来传递额外的环境变量（大小写名称）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
 Webui可以在配置的端口或通过Ingress在侧边栏中找到。
-配置可以通过应用程序的webUI进行，以下选项除外。
+配置可以通过应用WebUI进行，除了以下选项。
 
 ### 选项
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
+| 选项 | 类型 | 默认 | 描述 |
+|------|------|------|------|
 | `PGID` | int | `0` | 文件权限的组ID |
 | `PUID` | int | `0` | 文件权限的用户ID |
 | `TZ` | str | | 时区（例如，`Europe/London`） |
@@ -63,19 +63,19 @@ cifsdomain: "workgroup"
 
 这个插件支持挂载本地驱动器和远程SMB共享：
 
-- **本地驱动器**：查看 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：查看 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ## 安装
 
 这个插件的安装非常简单，与安装任何其他Hass.io插件没有区别。
 
-1. [将我的Hass.io插件仓库][repository]添加到你的Hass.io实例。
+1. [将我的Hass.io插件仓库][repository]添加到您的Hass.io实例。
 1. 安装这个插件。
-1. 点击`保存`按钮来保存你的配置。
+1. 点击`保存`按钮以保存您的配置。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切正常。
-1. 仔细配置插件以满足你的需求，查看官方文档以获取详细信息。
+1. 仔细配置插件以满足您的需求，请参考官方文档进行配置。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 ## 📱 关注我

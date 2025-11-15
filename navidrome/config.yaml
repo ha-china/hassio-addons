@@ -2,8 +2,7 @@ arch:
   - amd64
   - aarch64
 backup_exclude:
-  - '**/cache/**'
-codenotary: alexandrep.github@gmail.com
+  - "**/cache/**"
 description: '[老王杂谈说]：Navidrome for Home Assistant'
 image: ghcr.nju.edu.cn/alexbelgium/navidrome-{arch}
 init: false
@@ -14,6 +13,7 @@ map:
   - ssl:rw
 name: Navidrome
 options:
+  env_vars: []
   base_url: /
   certfile: fullchain.pem
   data_folder: /data
@@ -25,7 +25,13 @@ ports:
   4533/tcp: 4533
 ports_description:
   4533/tcp: Web interface
+privileged:
+  - SYS_ADMIN
+  - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   base_url: str
   certfile: str?
   cifsdomain: str?
@@ -51,5 +57,5 @@ schema:
 slug: navidrome
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/navidrome
-version: 0.58.0
-webui: '[PROTO:ssl]://[HOST]:[PORT:4533]'
+version: "0.58.5"
+webui: "[PROTO:ssl]://[HOST]:[PORT:4533]"

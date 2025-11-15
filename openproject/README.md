@@ -14,11 +14,11 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20Paypal-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 
-_感谢所有给我仓库点赞的人！要点赞，请点击下面的图片，它将在右上角显示。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它会在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/openproject/stats.png)
+![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/openproject/stats.png)
 
 ## 关于
 
@@ -26,24 +26,24 @@ _感谢所有给我仓库点赞的人！要点赞，请点击下面的图片，�
 
 ## 配置
 
-使用插件的 `env_vars` 选项来传递额外的环境变量（名称大小写不敏感）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+使用插件的 `env_vars` 选项来传递额外的环境变量（大小写名称都可以）。详情请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-填写默认的插件选项以启动插件。确保特别是配置主机名，使用你的 homeassistant ip + 插件暴露的端口
-对于其他选项，使用 config.yaml 系统：https://github.com/alexbelgium/hassio-addons/wiki/Addons-feature:-add-env-variables
+填写默认的插件选项以启动插件。务必特别配置主机名，使用你的 homeassistant ip 加上插件暴露的端口。
+对于额外的选项，使用 config.yaml 系统：https://github.com/alexbelgium/hassio-addons/wiki/Addons-feature:-add-env-variables
 
-Webui 可以在 `<your-ip>:port` 找到。
+Webui 可以在 `<你的ip>:端口` 找到。
 
 ## 安装
 
-这个插件的安装非常简单，与其他任何 Hass.io 插件的安装方式相同。
+这个插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
 1. [将我的 Hass.io 插件仓库][repository] 添加到你的 Hass.io 实例。
 1. 安装这个插件。
 1. 点击 `保存` 按钮来保存你的配置。
 1. 启动插件。
 1. 检查插件的日志，看看是否一切正常。
-1. 前往 webui，在那里初始化应用
-1. 重新启动插件，以应用任何需要应用的选项
+1. 进入 webui，初始化应用
+1. 重启插件，以应用任何应该应用的选项
 
 默认的管理员密码（登录：admin，密码：admin）。
 

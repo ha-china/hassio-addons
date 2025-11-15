@@ -14,7 +14,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有星标我的仓库的人！要星标它，请点击下面的图片，然后它会在右上角。谢谢！_
+_感谢所有给我仓库点赞的人！点击下面的图片来点赞，它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -32,7 +32,7 @@ Ente 提供：
 - 跨平台的移动和桌面应用程序
 - 从移动设备自动备份照片
 - 与家人和朋友共享相册
-- 自托管，完全控制您的数据
+- 通过自托管完全控制您的数据
 
 这个插件基于官方 Ente 服务器：https://github.com/ente-io/ente/tree/main/server
 
@@ -64,7 +64,7 @@ Webui 可以在 <http://homeassistant:PORT> 找到。
 | `DB_HOSTNAME` | 字符串 | PostgreSQL 服务器主机名 |
 | `DB_PORT` | 整数 | PostgreSQL 服务器端口（默认：5432） |
 | `DB_USERNAME` | 字符串 | PostgreSQL 用户名 |
-| `DB_DATABASE_NAME` | 字符串 | PostgreSQL 数据库名 |
+| `DB_DATABASE_NAME` | 字符串 | PostgreSQL 数据库名称 |
 
 ### 示例配置
 
@@ -80,17 +80,17 @@ TZ: "America/New_York"
 
 ### 自定义脚本和环境变量
 
-这个插件支持通过 `addon_config` 映射的自定义脚本和环境变量：
+这个插件支持通过 `addon_config` 映射来使用自定义脚本和环境变量：
 
-- **自定义脚本**：见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详情。
+- **自定义脚本**：参考 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（大小写名称）。参考 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详情。
 
 ### 挂载驱动器
 
 这个插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **本地驱动器**：见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参考 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参考 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ## 安装
 
@@ -98,13 +98,13 @@ TZ: "America/New_York"
 
 这个插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到您的 home assistant 实例（在 supervisor 插件商店的右上角，或如果您已配置我的 HA，请点击下面的按钮）
-   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的 home assistant 实例中（在 supervisor 插件商店的右上角，或者如果您已经配置了我的 HA，点击下面的按钮）
+   [![打开您的 Home Assistant 实例并显示添加插件仓库对话框，并预填特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装这个插件。
-1. 点击 `保存` 按钮保存您的配置。
-1. 设置插件选项以符合您的偏好。
+1. 点击 `保存` 按钮来存储您的配置。
+1. 设置插件的选项以符合您的偏好。
 1. 启动插件。
-1. 检查插件的日志以查看一切是否正常。
+1. 检查插件的日志以查看是否一切正常。
 
 ## 首次设置
 
@@ -117,16 +117,16 @@ TZ: "America/New_York"
    - [Google Play Store](https://play.google.com/store/apps/details?id=io.ente.photos)
    - [F-Droid](https://f-droid.org/packages/io.ente.photos.fdroid/)
 
-2. 在应用程序设置期间，选择 "使用自定义服务器" 并输入您的插件 URL：`http://your-homeassistant-ip:8280`
+2. 在应用程序设置过程中，选择 "使用自定义服务器" 并输入您的插件 URL：`http://your-homeassistant-ip:8280`
 
-3. 使用移动应用程序创建新账户
+3. 使用移动应用程序创建新账户。
 
 4. **重要**：对于自托管实例，订阅代码不能通过电子邮件发送。检查插件日志以获取验证码：
    ```
-   验证码：xxxxxxxx
+   验证码：xxxxxx
    ```
 
-5. 使用日志中的验证码完成账户设置
+5. 使用日志中的验证码完成账户设置。
 
 ## 端口
 
