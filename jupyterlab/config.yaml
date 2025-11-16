@@ -1,9 +1,8 @@
 name: JupyterLab
-version: 0.16.1
+version: 0.16.2
 slug: jupyterlablite
 description: '[老王杂谈说]：创建包含活代码、方程式、可视化和解释性文本的文档'
 url: https://ghfast.top/github.com/hassio-addons/addon-jupyterlab
-codenotary: codenotary@frenck.dev
 ingress: true
 panel_icon: mdi:flask-outline
 arch:

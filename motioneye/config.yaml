@@ -1,9 +1,8 @@
 name: motionEye
-version: 0.22.3
+version: 0.23.0
 slug: motioneye
 description: '[老王杂谈说]：简单、优雅且功能丰富的CCTV/NVR，适用于您的摄像头'
 url: https://ghfast.top/github.com/hassio-addons/addon-motioneye
-codenotary: codenotary@frenck.dev
 ingress: true
 ingress_port: 0
 ingress_stream: true
@@ -12,9 +11,6 @@ homeassistant: 0.92.0b2
 arch:
   - aarch64
   - amd64
-  - armhf
-  - armv7
-  - i386
 init: false
 ports:
   80/tcp: null

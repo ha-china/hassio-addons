@@ -14,26 +14,27 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢大家给我的仓库点赞！要点赞请点击下面的图片，然后它会在右上角显示。谢谢！_
+_感谢大家给我的仓库点赞！点击下面的图片点赞，它就会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/monica/stats.png)
+![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/monica/stats.png)
 
 ## 关于
 
-[Monica](https://www.monicahq.com/) 是一个个人关系管理（PRM）工具，帮助你组织社交生活并跟踪与朋友、家人和同事的关系。它就像一个CRM，但用于你的个人生活。
+[Monica](https://www.monicahq.com/) 是一个个人关系管理（PRM）工具，帮助您组织社交生活并跟踪与朋友、家人和同事的关系。它就像一个CRM，但用于您的个人生活。
 
 主要功能：
 - 跟踪对话、活动和重要日期
-- 存储联系人信息和关系详情
-- 设置生日、周年纪念日和跟进提醒
+- 存储联系人信息和关系细节
+- 设置生日、周年纪念和跟进提醒
 - 记录赠送和收到的礼物
 - 跟踪债务和人情
 - 组织关于人们的笔记和回忆
 - 日记功能
-- 礼物建议跟踪
+- 礼物创意跟踪
 - 多种数据库选项（SQLite、MariaDB、MySQL）
+- 内置的Meilisearch全文搜索引擎
 
 这个插件基于官方的 [Monica](https://github.com/monicahq/monica) 应用程序。
 
@@ -45,21 +46,21 @@ Webui 可以在 `<你的IP>:8181` 找到。
 
 | 选项 | 类型 | 默认 | 描述 |
 |------|------|------|------|
-| `database` | 列表 | `sqlite` | 数据库类型 (sqlite/MariaDB_addon/Mysql_external) |
-| `APP_KEY` | 字符串 | | 应用加密密钥 (如果为空则自动生成) |
-| `DB_DATABASE` | 字符串 | | 数据库名称 (用于外部 MySQL/MariaDB) |
-| `DB_HOST` | 字符串 | | 数据库主机名 (用于外部 MySQL/MariaDB) |
-| `DB_USERNAME` | 字符串 | | 数据库用户名 (用于外部 MySQL/MariaDB) |
-| `DB_PASSWORD` | 字符串 | | 数据库密码 (用于外部 MySQL/MariaDB) |
-| `DB_PORT` | 整数 | | 数据库端口 (用于外部 MySQL/MariaDB) |
-| `MAIL_MAILER` | 字符串 | `log` | 邮件驱动 (smtp/log/sendmail) |
+| `database` | 列表 | `sqlite` | 数据库类型（sqlite/MariaDB_addon/Mysql_external） |
+| `APP_KEY` | 字符串 | | 应用程序加密密钥（如果为空，则自动生成） |
+| `DB_DATABASE` | 字符串 | | 数据库名称（用于外部 MySQL/MariaDB） |
+| `DB_HOST` | 字符串 | | 数据库主机名（用于外部 MySQL/MariaDB） |
+| `DB_USERNAME` | 字符串 | | 数据库用户名（用于外部 MySQL/MariaDB） |
+| `DB_PASSWORD` | 字符串 | | 数据库密码（用于外部 MySQL/MariaDB） |
+| `DB_PORT` | 整数 | | 数据库端口（用于外部 MySQL/MariaDB） |
+| `MAIL_MAILER` | 字符串 | `log` | 邮件驱动（smtp/log/sendmail） |
 | `MAIL_HOST` | 字符串 | | SMTP 服务器主机名 |
 | `MAIL_PORT` | 字符串 | | SMTP 服务器端口 |
 | `MAIL_USERNAME` | 字符串 | | SMTP 用户名 |
 | `MAIL_PASSWORD` | 字符串 | | SMTP 密码 |
-| `MAIL_ENCRYPTION` | 字符串 | | SMTP 加密 (tls/ssl) |
-| `MAIL_FROM_ADDRESS` | 字符串 | | 发件人邮箱地址 |
-| `MAIL_FROM_NAME` | 字符串 | | 发件人邮箱名称 |
+| `MAIL_ENCRYPTION` | 字符串 | | SMTP 加密（tls/ssl） |
+| `MAIL_FROM_ADDRESS` | 字符串 | | 发件人电子邮件地址 |
+| `MAIL_FROM_NAME` | 字符串 | | 发件人电子邮件名称 |
 
 ### 示例配置
 
@@ -78,21 +79,21 @@ MAIL_FROM_NAME: "Monica"
 
 ### 数据库配置
 
-**SQLite (默认):**
+**SQLite（默认）：**
 - 无需额外配置
 - 数据存储在插件目录中
 - 适用于单用户设置
 
-**MariaDB 插件:**
+**MariaDB 插件：**
 - 将 `database` 设置为 `MariaDB_addon`
-- 需要安装并运行 MariaDB 插件
+- 需要 MariaDB 插件已安装并运行
 - 插件将自动配置数据库连接
 
-**外部 MySQL/MariaDB:**
+**外部 MySQL/MariaDB：**
 - 将 `database` 设置为 `Mysql_external`
-- 使用所有 `DB_*` 选项配置你的数据库详情
+- 使用您的数据库详细信息配置所有 `DB_*` 选项
 
-### 邮件配置
+### 电子邮件配置
 
 配置 SMTP 设置以启用：
 - 密码重置邮件
@@ -102,31 +103,32 @@ MAIL_FROM_NAME: "Monica"
 
 ### 自定义脚本和环境变量
 
-此插件支持通过 `addon_config` 映射的自定义脚本和环境变量：
+此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **自定义脚本**: 查看 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**: 使用插件的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。详情请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2
+- **Meilisearch 全文搜索**：插件自带一个嵌入的 [Meilisearch](https://www.meilisearch.com/) 服务，Monica 默认使用它。搜索 API 在容器内的 `http://127.0.0.1:7700` 上监听。如果您更喜欢外部 Meilisearch 实例，可以通过 `env_vars` 覆盖 `MEILISEARCH_URL`——初始化脚本将检测到这一点并跳过启动捆绑的守护进程。如果需要，您可以通过 `env_vars` 选项定义额外的环境变量来进一步调整 Meilisearch。
+- **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
 ## 安装
 
-此插件的安装非常简单，与其他 Hass.io 插件安装方式相同。
+此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. [将我的 Hass.io 插件仓库][repository] 添加到你的 Hass.io 实例。
-1. 安装此插件。
-1. 根据需要配置数据库和邮件设置。
-1. 点击 `保存` 按钮以保存你的配置。
-1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 打开 WebUI 以设置你的 Monica 账户。
+1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例。
+2. 安装此插件。
+3. 根据需要配置数据库和电子邮件设置。
+4. 点击 `保存` 按钮以保存您的配置。
+5. 启动插件。
+6. 检查插件的日志以查看是否一切正常。
+7. 打开 WebUI 以设置您的 Monica 账户。
 
 ## 首次设置
 
 安装和启动后：
 
-1. 在 `<你的IP>:8181` 打开 WebUI
-2. 创建你的第一个用户账户
-3. 完成设置向导
-4. 开始添加你的联系人和关系
+1. 在 `<你的IP>:8181` 打开 WebUI。
+2. 创建您的第一个用户账户。
+3. 完成设置向导。
+4. 开始添加您的联系人和关系。
 
 ## 支持
 

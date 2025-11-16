@@ -1,26 +1,33 @@
 # Home Assistant Community Add-on: JupyterLab
 
-JupyterLab 是一个开源的 Web 应用程序，它允许您创建和共享包含实时代码、方程式、可视化和叙述性文本的文档。用途包括：数据清理和转换、数值模拟、统计建模、数据可视化、机器学习等。
+JupyterLab is an open-source web application that allows you to create and share
+documents that contain live code, equations, visualizations and narrative text.
+Uses include: data cleaning and transformation, numerical simulation,
+statistical modeling, data visualization, machine learning, and much more.
 
-此插件运行 JupyterLab，它是 Jupyter 项目的新一代用户界面。它是一个基于 Jupyter Notebook 和架构的可扩展环境，用于交互式和可重复的计算。
+This add-on runs JupyterLab, which is the next-generation user interface for
+Project Jupyter. It is an extensible environment for interactive and
+reproducible computing, based on the Jupyter Notebook and Architecture.
 
-## 安装
+## Installation
 
-此插件的安装非常简单，与安装任何其他 Home Assistant 插件没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Home Assistant add-on.
 
-1. 点击下方的 Home Assistant 我的按钮，在您的 Home Assistant 实例中打开此插件。
+1. Click the Home Assistant My button below to open the add-on on your Home
+   Assistant instance.
 
-   ![在您的 Home Assistant 实例中打开此插件][addon-badge]][addon]
+   [![Open this add-on in your Home Assistant instance.][addon-badge]][addon]
 
-1. 点击“安装”按钮以安装插件。
-1. 启动“JupyterLab”插件
-1. 检查“JupyterLab”插件的日志，看看是否一切顺利。
+1. Click the "Install" button to install the add-on.
+1. Start the "JupyterLab" add-on
+1. Check the logs of the "JupyterLab" add-on to see if everything went well.
 
-## 配置
+## Configuration
 
-**注意**：_更改配置时，请记住重新启动插件。_
+**Note**: _Remember to restart the add-on when the configuration is changed._
 
-示例插件配置：
+Example add-on configuration:
 
 ```yaml
 log_level: info
@@ -32,93 +39,126 @@ init_commands:
   - pip install yamllint
 ```
 
-**注意**：_这只是一个示例，不要复制粘贴它！创建您自己的！_
+**Note**: _This is just an example, don't copy and past it! Create your own!_
 
-### 选项：`log_level`
+### Option: `log_level`
 
-`log_level` 选项控制插件的日志输出级别，可以更改为更详细或更简洁，这在您处理未知问题时可能很有用。可能的值有：
+The `log_level` option controls the level of log output by the addon and can
+be changed to be more or less verbose, which might be useful when you are
+dealing with an unknown issue. Possible values are:
 
-- `trace`：显示每个细节，例如所有调用的内部函数。
-- `debug`：显示详细的调试信息。
-- `info`：正常（通常）有趣的事件。
-- `warning`：非错误的异常情况。
-- `error`：不需要立即处理的运行时错误。
-- `fatal`：出了严重问题。插件变得无法使用。
+- `trace`: Show every detail, like all called internal functions.
+- `debug`: Shows detailed debug information.
+- `info`: Normal (usually) interesting events.
+- `warning`: Exceptional occurrences that are not errors.
+- `error`: Runtime errors that do not require immediate action.
+- `fatal`: Something went terribly wrong. Add-on becomes unusable.
 
-请注意，每个级别自动包含更严重级别的日志消息，例如，`debug` 也显示 `info` 消息。默认情况下，`log_level` 设置为 `info`，这是推荐设置，除非您正在解决问题。
+Please note that each level automatically includes log messages from a
+more severe level, e.g., `debug` also shows `info` messages. By default,
+the `log_level` is set to `info`, which is the recommended setting unless
+you are troubleshooting.
 
-### 选项：`github_access_token`
+### Option: `github_access_token`
 
-设置一个 GitHub 访问令牌。当对 GitHub 进行未经身份验证的请求（我们必须这样做以获取存储库数据）时，GitHub 对我们能够发出的请求数量有相当严格的速率限制。因此，您可能会在几分钟内达到该限制。
+Sets an GitHub access token. When making unauthenticated requests to GitHub
+(as we must do to get repository data), GitHub imposes fairly strict rate-limits
+on how many requests we can make. As such, you are likely to hit that limit
+within a few minutes of work.
 
-本文档中有一个章节，介绍了如何获取此类令牌。
+There is a chapter in this document with instruction on obtaining such a token.
 
-**注意**：_此选项支持密钥，例如 `!secret github_token`。_
+**Note**: _This option support secrets, e.g., `!secret github_token`._
 
-### 选项：`system_packages`
+### Option: `system_packages`
 
-允许您指定要安装到您的 JupyterLab 设置中的其他 [Debian 软件包][debian-packages]（例如 `g++`、`make`、`ffmpeg`）。
+Allows you to specify additional [Debian packages][debian-packages] to be
+installed to your JupyterLab setup (e.g., `g++`. `make`, `ffmpeg`).
 
-**注意**：_添加许多软件包将导致插件启动时间更长。_
+**Note**: _Adding many packages will result in a longer start-up time
+for the add-on._
 
-#### 选项：`init_commands`
+#### Option: `init_commands`
 
-使用 `init_commands` 选项进一步自定义您的环境。将一个或多个 Shell 命令添加到列表中，它们将在每次此插件启动时执行。
+Customize your environment even more with the `init_commands` option.
+Add one or more shell commands to the list, and they will be executed every
+single time this add-on starts.
 
-## 获取 GitHub 访问令牌
+## Getting a GitHub access token
 
-您可以通过以下步骤获取访问令牌：
+You can get an access token by following these steps:
 
-1. [在 GitHub 上验证][github-verify]您的电子邮件地址。
-1. 转到 GitHub 上的您的账户设置，并从左侧面板选择“开发者设置”。
-1. 在左侧，选择“个人访问令牌”。
-1. 点击“生成新令牌”按钮，并输入您的密码。
-1. 为令牌添加描述，并勾选“**repo**”范围框。
-1. 点击“生成令牌”。
-1. 您应该会得到一个字符串，它将是您的访问令牌。
+1. [Verify][github-verify] your email address with GitHub.
+1. Go to your account settings on GitHub and select "Developer Settings"
+   from the left panel.
+1. On the left, select "Personal access tokens"
+1. Click the "Generate new token" button, and enter your password.
+1. Give the token a description, and check the "**repo**" scope box.
+1. Click "Generate token"
+1. You should be given a string which will be your access token.
 
-请记住，此令牌实际上是您的 GitHub 账户的密码。_不要_ 在线分享它或将其检查到版本控制中，因为人们可以使用它来访问您 GitHub 上的所有数据。
+Remember that this token is effectively a password for your GitHub account.
+_Do not_ share it online or check the token into version control,
+as people can use it to access all of your data on GitHub.
 
-## 更改日志与发布
+## Changelog & Releases
 
-此存储库使用 GitHub 的发布功能维护更改日志。
+This repository keeps a change log using [GitHub's releases][releases]
+functionality.
 
-发布基于 [语义版本控制][semver]，并使用 `MAJOR.MINOR.PATCH` 格式。简而言之，版本将根据以下情况增加：
+Releases are based on [Semantic Versioning][semver], and use the format
+of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented
+based on the following:
 
-- `MAJOR`：不兼容或主要更改。
-- `MINOR`：向后兼容的新功能和增强。
-- `PATCH`：向后兼容的错误修复和软件包更新。
+- `MAJOR`: Incompatible or major changes.
+- `MINOR`: Backwards-compatible new features and enhancements.
+- `PATCH`: Backwards-compatible bugfixes and package updates.
 
-## 支持
+## Support
 
-有问题吗？
+Got questions?
 
-您有几个选项来获得答案：
+You have several options to get them answered:
 
-- [Home Assistant Community Add-ons Discord 服务器][discord] 用于插件支持和功能请求。
-- [Home Assistant Discord 服务器][discord-ha] 用于一般 Home Assistant 讨论和问题。
-- Home Assistant [社区论坛][forum]。
-- 加入 [Reddit 子版块][reddit] 在 [/r/homeassistant][reddit]
+- The [Home Assistant Community Add-ons Discord chat server][discord] for add-on
+  support and feature requests.
+- The [Home Assistant Discord chat server][discord-ha] for general Home
+  Assistant discussions and questions.
+- The Home Assistant [Community Forum][forum].
+- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
 
-您也可以在 GitHub 上 [打开一个问题][issue]。
+You could also [open an issue here][issue] GitHub.
 
-## 作者与贡献者
+## Authors & contributors
 
-此存储库的原始设置由 [Franck Nijhof][frenck] 完成。
+The original setup of this repository is by [Franck Nijhof][frenck].
 
-有关所有作者和贡献者的完整列表，请查看 [贡献者页面][contributors]。
+For a full list of all authors and contributors,
+check [the contributor's page][contributors].
 
-## 许可证
+## License
 
-MIT 许可证
+MIT License
 
-版权所有 (c) 2018-2025 Franck Nijhof
+Copyright (c) 2018-2025 Franck Nijhof
 
-特此免费授予任何获得此软件及其相关文档文件（“软件”）副本的人，在不受限制的情况下处理软件的权利，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许获得软件的人这样做，但须遵守以下条件：
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-软件按“原样”提供，不提供任何形式的保证，无论是明示的还是暗示的，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，作者或版权持有人均不对任何索赔、损害赔偿或其他责任承担责任，无论是由合同、侵权或其他行为引起的，也不论是与软件有关还是与软件的使用或其他交易有关。
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 [addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
 [addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=a0d7b954_jupyterlablite&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository

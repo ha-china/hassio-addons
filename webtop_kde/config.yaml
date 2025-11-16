@@ -2,7 +2,7 @@ arch:
   - aarch64
   - amd64
 audio: true
-description: '[老王杂谈说]：通过任何现代网络浏览器都可访问的完整Linux桌面环境'
+description: '[老王杂谈说]：通过任何现代网页浏览器可访问的完整Linux桌面环境'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -143,5 +143,5 @@ slug: webtop
 tmpfs: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "4.16-r0-ls95"
+version: "4.16-r0-ls92"
 video: true
