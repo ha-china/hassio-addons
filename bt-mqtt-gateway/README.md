@@ -20,7 +20,7 @@ The installation of this add-on is pretty straightforward and not different from
 Just add my repo to the hassio addons repository: <https://github.com/FaserF/hassio-addons>
 
 Put your config file to /share/bt-mqtt-gateway.yaml
-Please make sure that a MQTT Addon is already installed.
+Please make sure that an MQTT Add-on is being installed already.
 
 ## Configuration
 
@@ -89,6 +89,10 @@ SOFTWARE.
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
 [issue]: https://github.com/FaserF/hassio-addons/issues
 [maintenance-shield]: https://img.shields.io/maintenance/no/2024.svg
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

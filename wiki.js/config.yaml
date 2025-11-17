@@ -1,5 +1,5 @@
 name: Wiki.JS
-version: 2.1.1
+version: 2.1.2
 slug: wikijs
 description: '[老王杂谈说]：最强大和可扩展的开源Wiki软件'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/wiki.js
@@ -8,9 +8,6 @@ arch:
   - amd64
 services:
   - mysql:need
-startup: application
-boot: auto
-webui: "[PROTO:ssl]://[HOST]:[PORT:3000]"
 map:
   - ssl
 ingress: true

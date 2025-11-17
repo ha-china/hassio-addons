@@ -1,10 +1,8 @@
 name: Studio Code Server
-version: 5.19.3
+version: 6.0.0
 slug: vscode
-description: 功能齐全的Visual Studio Code（VSCode）体验已集成到Home Assistant前端。
-  Home Assistant frontend.
+description: '[老王杂谈说]：在Home Assistant前端集成了功能齐全的Visual Studio Code (VSCode)体验。'
 url: https://ghfast.top/github.com/hassio-addons/addon-vscode
-codenotary: codenotary@frenck.dev
 ingress: true
 ingress_port: 1337
 ingress_stream: true
@@ -12,31 +10,31 @@ panel_icon: mdi:microsoft-visual-studio-code
 startup: services
 init: false
 arch:
-- aarch64
-- amd64
+  - aarch64
+  - amd64
 uart: true
 hassio_api: true
 hassio_role: manager
 homeassistant_api: true
 map:
-- type: addons
-  read_only: false
-- type: all_addon_configs
-  read_only: false
-- type: backup
-  read_only: false
-- type: homeassistant_config
-  read_only: false
-  path: /config
-- type: media
-  read_only: false
-- type: share
-  read_only: false
-- type: ssl
-  read_only: false
+  - type: addons
+    read_only: false
+  - type: all_addon_configs
+    read_only: false
+  - type: backup
+    read_only: false
+  - type: homeassistant_config
+    read_only: false
+    path: /config
+  - type: media
+    read_only: false
+  - type: share
+    read_only: false
+  - type: ssl
+    read_only: false
 services:
-- mysql:want
-- mqtt:want
+  - mysql:want
+  - mqtt:want
 options:
   packages: []
   init_commands: []
@@ -44,7 +42,7 @@ schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   config_path: str?
   packages:
-  - str
+    - str
   init_commands:
-  - str
+    - str
 image: ghcr.nju.edu.cn/hassio-addons/vscode/{arch}

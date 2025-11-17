@@ -9,7 +9,7 @@ Tuya-Convert for Homeassistant OS
 Work has been deprecated!
 DO NOT USE RIGHT NOW!!! This was a test, it seems to work, but I won't guarantee anything!
 
-A Chinese company named Tuya offers a free-to-brand turnkey smart home solution to anyone. Using their offer is dead-simple, since everything can be done by clicking through the Tuya web page, from choosing your pre-designed products or pre-programmed wifi-modules (mostly ESP8266) to building your own app. In the end, this has resulted in as they claim over 11,000 devices 'made' by over 10,000 vendors using Tuyas firmware and cloud services.
+A Chinese company named Tuya offers a free-to-brand turnkey smart home solution to anyone. Using their offer is dead-simple, since everything can be done by clicking through the Tuya web page, from choosing your pre-designed products or pre-programmed wifi-modules (mostly ESP8266) to building your own app. In the end, this has resulted in, as they claim, over 11 000 devices 'made' by over 10 000 vendors using Tuyas firmware and cloud services.
 
 Aside from that, they claim their cloud solution has 'military grade security'. Michael Steigerwald, founder of the German IT security startup VTRUST, was able to disprove this claim and presented his results in the "Smart home - Smart hack" talk at 35C3 in Leipzig: <https://media.ccc.de/v/35c3-9723-smart_home_-_smart_hack>
 
@@ -96,6 +96,10 @@ SOFTWARE.
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
 [issue]: https://github.com/FaserF/hassio-addons/issues
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2020.svg
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：
