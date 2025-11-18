@@ -16,16 +16,16 @@ This can be used to improve the reliability of Bluetooth thermostats. See <https
 
 ## Installation
 
-The installation of this add-on is pretty straightforward and not different from installing any other custom Home Assistant add-on.
+The installation of this add-on is quite straightforward and not different from installing any other custom Home Assistant add-on.
 Just add my repo to the hassio addons repository: <https://github.com/FaserF/hassio-addons>
 
 Put your config file to /share/bt-mqtt-gateway.yaml
-Please make sure that an MQTT Add-on is being installed already.
+Please make sure that a MQTT Add-on is already installed.
 
 ## Configuration
 
 **Note**: _Remember to restart the add-on when the configuration is changed._
-Until now these config options do NOTHING! they are not implemented yet, but planned!!!
+Until now, these config options do NOTHING! They are not implemented yet, but planned!!!
 
 Example add-on configuration:
 
@@ -38,7 +38,7 @@ debug: true
 
 ### Option: `config_path`
 
-This option is needed. Change it depending on where your config file is on your Homeassistant installation.
+This option is required. Change it depending on where your config file is located in your Home Assistant installation.
 
 ### Option: `debug`
 
@@ -49,7 +49,7 @@ Setting this option to "true" will start the add-on in debugging mode. Default: 
 
 Got questions?
 
-You could [open an issue here][issue] GitHub.
+You can [open an issue here][issue] on GitHub.
 Please keep in mind that this software is only tested on armv7 running on a Raspberry Pi 4.
 
 ## Authors & contributors

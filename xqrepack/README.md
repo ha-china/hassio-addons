@@ -1,35 +1,35 @@
 # Home Assistant Community Add-on: xqrepack
-![支持aarch64架构][aarch64-shield] ![支持amd64架构][amd64-shield] ![支持armhf架构][armhf-shield] ![支持armv7架构][armv7-shield] ![支持i386架构][i386-shield]
-![项目维护][maintenance-shield]
+![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield] ![Supports armhf Architecture][armhf-shield] ![Supports armv7 Architecture][armv7-shield] ![Supports i386 Architecture][i386-shield]
+![Project Maintenance][maintenance-shield]
 
-xqrepack - 打包并重新构建MiWifi镜像以获得SSH访问权限和其他功能。
+xqrepack - Repack and rebuild MiWifi Images to gain SSH access and other stuff.
 
-## 关于
+## About
 
-这些脚本允许您修改Xiaomi R3600 (AX3600) / rm1800 (AX1800) 固件镜像，以确保SSH和UART访问始终启用。
+These scripts allow you to modify the Xiaomi R3600 (AX3600) / rm1800 (AX1800) firmware image to make sure SSH and UART access is always enabled.
 
-默认的root密码是password。请在升级后登录路由器并更改该密码。您的路由器设置，如IP地址和SSID，存储在nvram中，应保持不变。
+The default root password is password. Please remember to login to the router and change that after the upgrade. Your router settings like IP address and SSIDs are stored in the nvram and should stay the same.
 
-⚠ 脚本也会尽力移除或禁用电话回家二进制文件，以及智能控制器（AIoT）部分，使您得到一个（接近）OpenWRT路由器，您可以通过UCI或/etc/config进行配置。在保留原始功能和隐私问题之间，我会更倾向于谨慎处理，宁愿牺牲一些功能，以连接到一个我更有信心连接到互联网的路由器。
+⚠ The script also tries its best to remove or disable phone-home binaries, and also the smart controller (AIoT) parts, leaving you with a (close to) OpenWRT router that you can configure via UCI or /etc/config. Between preserving stock functionality and privacy concerns, I would err on the side of caution and rather that some functionality be sacrificed for a router that I have more confidence to connect to the Internet.
 
-请注意，为了最初获得对路由器的SSH访问权限，您需要降级到1.0.17版本并利用它。一旦您有了SSH，您可以使用这种重新打包方法来维持新版本的SSH访问权限。<br />
+Note that in order to get SSH access to the router initially, you need to downgrade to version 1.0.17 and exploit it first. Once you have SSH, you can use this repacking method to maintain SSH access for newer versions.<br />
 
-请访问@geekman的原始程序仓库：<https://github.com/geekman/xqrepack>
+Please visit @geekman original repo of this program: <https://github.com/geekman/xqrepack>
 
-## 安装
+## Installation
 
 [![FaserF Homeassistant Addons](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FFaserF%2Fhassio-addons)
 <br />
-这个插件的安装非常简单，与安装任何其他自定义Home Assistant插件没有区别。<br />
-只需点击上面的链接或将我的仓库添加到hassio插件仓库：<https://github.com/FaserF/hassio-addons>
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other custom Home Assistant add-on.<br />
+Just click the link above or add my repo to the hassio addons repositorys: <https://github.com/FaserF/hassio-addons>
 
-新的固件将位于您的"firmware_path"文件夹中，并命名为"r3600-raw-img.bin"
+The new firmware will be at your "firmware_path" folder and will be called "r3600-raw-img.bin"
 
-## 配置
+## Configuration
 
-**注意**: _在更改配置时，请记得重启插件。_
+**Note**: _Remember to restart the add-on when the configuration is changed._
 
-示例插件配置：
+Example add-on configuration:
 
 ### AX3600
 
@@ -47,43 +47,43 @@ firmware_name: miwifi_rm1800_firmware_df7e3_1.0.385.bin
 ```
 <br />
 
-**注意**: _这只是一个示例，不要复制和粘贴它！创建您自己的！_
+**Note**: _This is just an example, don't copy and paste it! Create your own!_
 
-### 选项: `firmware_path`
+### Option: `firmware_path`
 
-此选项是必需的。根据您的固件文件文件夹的位置进行更改。<br />
+This option is needed. Change it depending where your firmware files folder is.<br />
 
-注意：它必须在/share文件夹中的某个位置！其他文件夹对此插件不可见。
+Note: it has to be somewhere in the /share folder! Other folders are not visible to this addon.
 
-### 选项: `firmware_name`
+### Option: `firmware_name`
 
-此选项是必需的。根据您的固件文件的名称进行更改。<br />
-注意：如果您使用的是AX1800的镜像，请在固件文件中保留rm1800的名称。这是必需的，因为AX1800的修改过程与AX3600不同！
+This option is needed. Change it depending what your firmware file is called.<br />
+NOTE: Please keep the name rm1800 inside the firmware file, if you are using a image for the AX1800. This is needed, as the modifying process for AX1800 is different than for the AX3600!
 
-## 支持
+## Support
 
-有问题或问题？
+Got questions or problems?
 
-您可以在此处[打开问题][issue] GitHub。<br />
-请注意，此软件仅在运行在Raspberry Pi 4上的armv7上进行了测试。
+You can [open an issue here][issue] GitHub.<br />
+Please keep in mind, that this software is only tested on armv7 running on a Raspberry Pi 4.
 
-## 作者和贡献者
+## Authors & contributors
 
-原始程序来自@geekman。有关更多信息，请访问此页面：<https://github.com/geekman/xqrepack>
-hassio插件由[FaserF]提供。
+The original program is from @geekman. For more informations please visit this page: <https://github.com/geekman/xqrepack>
+The hassio addon is brought to you by [FaserF].
 
-## 许可证
+## License
 
-xqrepack根据3条款（修改版）的BSD许可证进行许可。
+xqrepack is licensed under the 3-clause ("modified") BSD License.
 
-版权（C）2020-2025 Darell Tan / FaserF 用于HA插件
+Copyright (C) 2020-2025 Darell Tan / FaserF for the HA Addon
 
-源代码和二进制形式的重新分发和使用，无论是否修改，均被允许，前提是满足以下条件：
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
-源代码的重新分发必须保留上述版权声明、此条件列表和以下免责声明。
-二进制形式的重新分发必须在提供的文档和/或其他材料中复制上述版权声明、此条件列表和以下免责声明。
-作者的名字不得用于未经特定事先书面许可推广或支持由本软件派生的产品。
-本软件由作者按“原样”提供，任何明示或暗示的保证，包括但不限于对适销性和特定用途适用性的暗示保证，均不适用。在任何情况下，作者均不对任何直接、间接、偶然、特殊、示例或后果性损害（包括但不限于替代商品或服务的采购；使用、数据或利润的损失；或业务中断）负责，无论何种原因，也不论责任理论如何，无论是合同、严格责任还是侵权（包括疏忽或其他）在任何方式上使用本软件的结果，即使已被告知此类损害的可能性。
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+The name of the author may not be used to endorse or promote products derived from this software without specific prior written permission.
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2023.svg
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg

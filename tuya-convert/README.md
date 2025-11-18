@@ -1,36 +1,36 @@
 # Home Assistant Community Add-on: Tuya-Convert
-![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield] ![Supports armhf Architecture][armhf-shield] ![Supports armv7 Architecture][armv7-shield] ![Supports i386 Architecture][i386-shield]
-![Project Maintenance][maintenance-shield]
+![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield] ![支持 armhf 架构][armhf-shield] ![支持 armv7 架构][armv7-shield] ![支持 i386 架构][i386-shield]
+![项目维护状态][maintenance-shield]
 
-Tuya-Convert for Homeassistant OS
+适用于 Homeassistant OS 的 Tuya-Convert
 
-## About
+## 关于
 
-Work has been deprecated!
-DO NOT USE RIGHT NOW!!! This was a test, it seems to work, but I won't guarantee anything!
+工作已被弃用！
+现在不要使用！！！这是一个测试，看起来可以工作，但我不能保证任何事！
 
-A Chinese company named Tuya offers a free-to-brand turnkey smart home solution to anyone. Using their offer is dead-simple, since everything can be done by clicking through the Tuya web page, from choosing your pre-designed products or pre-programmed wifi-modules (mostly ESP8266) to building your own app. In the end, this has resulted in, as they claim, over 11 000 devices 'made' by over 10 000 vendors using Tuyas firmware and cloud services.
+一家名为 Tuya 的中国公司为任何人提供免费的品牌智能家庭解决方案。使用他们的服务非常简单，因为所有操作都可以通过 Tuya 网页点击完成，从选择预设计的商品或预编程的 wifi 模块（主要是 ESP8266）到构建自己的应用程序。最终，他们声称有超过 11,000 台设备由超过 10,000 个供应商使用 Tuya 的固件和云服务“制造”。
 
-Aside from that, they claim their cloud solution has 'military grade security'. Michael Steigerwald, founder of the German IT security startup VTRUST, was able to disprove this claim and presented his results in the "Smart home - Smart hack" talk at 35C3 in Leipzig: <https://media.ccc.de/v/35c3-9723-smart_home_-_smart_hack>
+除此之外，他们声称他们的云解决方案具有“军事级安全”。德国 IT 安全初创公司 VTRUST 的创始人 Michael Steigerwald 能够驳斥这一说法，并在莱比锡 35C3 的“智能家居 - 智能黑客”演讲中展示了他的结果：<https://media.ccc.de/v/35c3-9723-smart_home_-_smart_hack>
 
-In the following days, VTRUST and the German tech magazine c't decided to work together. Since reflashing devices using the ESP8266/85 is widespread among DIY smart home enthusiasts, we wanted to provide an easy way for everyone to free their devices from the cloud without the need for a soldering iron.
+在接下来的几天里，VTRUST 和德国科技杂志 c't 决定合作。由于使用 ESP8266/85 重新刷写设备在 DIY 智能家居爱好者中非常普遍，我们希望为每个人提供一种简单的方法，以摆脱云服务，而无需使用烙铁。
 
-Please make sure to visit VTRUST (<https://www.vtrust.de/>), since the hack is their work.
+请确保访问 VTRUST (<https://www.vtrust.de/>)，因为这次黑客行为是他们的工作。
 
-Please prefer using the normal installation of tuya-convert and not this homeassistant-os addon, as it is possible that the risks of bricking is higher. <https://github.com/ct-Open-Source/tuya-convert>
+请优先使用 tuya-convert 的正常安装，而不是这个 homeassistant-os 插件，因为有可能烧录风险更高。<https://github.com/ct-Open-Source/tuya-convert>
 
-## Installation
+## 安装
 
 [![FaserF Homeassistant Addons](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FFaserF%2Fhassio-addons)
 <br />
-The installation of this add-on is pretty straightforward and not different in comparison to installing any other custom Home Assistant add-on.<br />
-Just click the link above or add my repo to the hassio addons repositorys: <https://github.com/FaserF/hassio-addons>
+这个插件的安装非常简单，与安装任何其他自定义 Home Assistant 插件没有区别。<br />
+只需点击上面的链接或添加我的仓库到 hassio 插件仓库：<https://github.com/FaserF/hassio-addons>
 
-## Configuration
+## 配置
 
-**Note**: _Remember to restart the add-on when the configuration is changed._
+**注意**：_更改配置时请重启插件。_
 
-Example add-on configuration:
+示例插件配置：
 
 ```yaml
 backup_path: /share/tuya-convert
@@ -38,55 +38,43 @@ firmware: tasmota.bin
 accept_eula: true
 ```
 
-**Note**: _This is just an example, don't copy and paste it! Create your own!_
+**注意**：_这只是个示例，不要复制粘贴！创建你自己的！_
 
-### Option: `backup_path`
+### 选项：`backup_path`
 
-This option is needed. Change it depending where your firmware backup location should be.
+这个选项是必需的。根据你的固件备份位置进行更改。
 
-### Option: `firmware`
+### 选项：`firmware`
 
-This option is needed. Change it depending what custom firmware you want to install. You have the option between "tasmota.bin" and "espurna.bin".
+这个选项是必需的。根据你想安装的自定义固件进行更改。你可以选择 "tasmota.bin" 和 "espurna.bin"。
 
-### Option: `accept_eula`
+### 选项：`accept_eula`
 
-This option is needed. The software will only start if you are setting it to true. You can read the EULA agreement from tuya-convert here: <https://github.com/ct-Open-Source/tuya-convert/blob/master/scripts/setup_checks.sh#L18>
+这个选项是必需的。只有当你将其设置为 true 时，软件才会启动。你可以在 Tuya-Convert 的 EULA 协议中阅读这里：<https://github.com/ct-Open-Source/tuya-convert/blob/master/scripts/setup_checks.sh#L18>
 
-## Support
+## 支持
 
-Got questions?
+有问题？
 
-You could [open an issue here][issue] GitHub.
-Please keep in mind, that this software is only tested on armv7 running on a Raspberry Pi 4.
+你可以在 GitHub 上[打开问题][issue]。
+请注意，这个软件仅在运行在 Raspberry Pi 4 上的 armv7 上经过测试。
 
-## Authors & contributors
+## 作者和贡献者
 
-The original program is from @ct-Open-Source. For more informatios please visit this page: <https://github.com/ct-Open-Source/tuya-convert>
-The hassio addon is brought to you by [FaserF].
+原始程序来自 @ct-Open-Source。更多信息请访问此页面：<https://github.com/ct-Open-Source/tuya-convert>
+hassio 插件由 [FaserF] 提供。
 
-## License
+## 许可证
 
-MIT License
+MIT 许可证
 
-Copyright (c) 2020 FaserF & ct-Open-Source
+版权所有 (c) 2020 FaserF & ct-Open-Source
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+特此授予任何获得本软件及关联文档文件（“软件”）副本的人，在不限制的情况下，在软件中自由处理的权利，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许提供软件的人这样做，但须遵守以下条件：
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+软件按“原样”提供，不提供任何形式的保证，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是因合同、侵权或其他行为引起的，也不论其是否与软件或软件的使用或其他交易有关。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg

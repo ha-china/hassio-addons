@@ -1,7 +1,7 @@
 name: Apache2 Minimal with MariaDB Client
-version: 2.14.2
+version: 2.14.3
 slug: apache2-minimal-mariadb
-description: '[老王杂谈说]：开源Web服务器，带有MariaDB客户端和某些PHP模块。'
+description: '[老王杂谈说]：开源Web服务器，带有MariaDB客户端和一些PHP模块。'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/apache2-minimal-mariadb
 arch:
   - armhf

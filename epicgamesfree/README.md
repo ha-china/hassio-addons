@@ -14,11 +14,11 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢大家给我的仓库点赞！要点赞，请点击下面的图片，它将出现在右上角。谢谢！_
+_感谢所有给我仓库星标的人！要给星标，请点击下面的图片，然后它将在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/epicgamesfree/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/epicgamesfree/stats.png)
 
 ## 关于
 
@@ -27,16 +27,18 @@ _感谢大家给我的仓库点赞！要点赞，请点击下面的图片，它�
 
 ## 配置
 
-通过 Home Assistant 界面没有可用的插件选项。所有配置都是通过 JSON 文件完成的。
+插件选项暴露了 `env_vars` 字段来传递额外的环境变量；所有其他配置都通过 JSON 文件完成。
 
 ### 配置文件
 
 配置文件存储在 `/config/addons_config/epicgamesfree/`：
 
-- **config.yaml**: 主配置文件
+- **config.yaml**: 主要配置文件
 - **cookies.json**: 认证 Cookie（可选）
 
 如果这些文件不存在，它们将在首次启动时使用默认设置创建。
+
+- **env_vars 选项**: 使用插件的 `env_vars` 选项来传递额外的环境变量（大小写名称）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
 ### 基本配置
 
@@ -81,7 +83,7 @@ _感谢大家给我的仓库点赞！要点赞，请点击下面的图片，它�
 | `onlyWeekly` | 布尔值 | 仅申领每周免费游戏 |
 | `searchStrategy` | 字符串 | 搜索策略："purchase" 或 "claim" |
 | `browserNavigationTimeout` | 数字 | 浏览器超时毫秒数 |
-| `notifications` | 对象 | 通知设置（电子邮件、Webhook 等） |
+| `notifications` | 对象 | 通知设置（电子邮件、webhook 等） |
 
 ### 账户配置
 
@@ -127,8 +129,8 @@ _感谢大家给我的仓库点赞！要点赞，请点击下面的图片，它�
 
 ### 重要提示
 
-- **自动兑换**：由于 Epic Games 的自动化检测改进，自动兑换不再可能
-- **通知系统**：插件现在通过您选择的通知方法发送兑换链接，而不是自动申领游戏
+- **自动兑换**：由于 Epic Games 增强了自动化检测，自动兑换不再可能
+- **通知系统**：插件现在通过您喜欢的通知方法发送兑换链接，而不是自动申领游戏
 - **2FA 支持**：支持 TOTP（基于时间的单次密码）用于具有双因素认证的账户
 - **多个账户**：您可以配置多个 Epic Games 账户
 
@@ -136,7 +138,7 @@ _感谢大家给我的仓库点赞！要点赞，请点击下面的图片，它�
 
 您可以导入浏览器 Cookie 以避免登录问题。创建 `/config/addons_config/epicgamesfree/cookies.json`：
 
-详细 Cookie 导入说明请参阅：https://github.com/claabs/epicgames-freegames-node#cookie-import
+详细的 Cookie 导入说明，请见：https://github.com/claabs/epicgames-freegames-node#cookie-import
 
 ### 故障排除
 
@@ -147,20 +149,20 @@ _感谢大家给我的仓库点赞！要点赞，请点击下面的图片，它�
 ```
 
 #### 登录问题
-1. 检查您的凭据是否正确
+1. 检查您的凭证是否正确
 2. 如果启用，请验证 2FA/TOTP 配置
 3. 考虑导入浏览器 Cookie
-4. 检查插件的日志以获取特定的错误消息
+4. 检查插件日志以获取具体的错误消息
 
 ## 安装
 
 此插件的安装非常简单，与其他插件的安装没有区别。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例（在 Supervisor 插件商店的右上角，或点击下面的按钮如果您已配置我的 HA）
-   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的 Home Assistant 实例（在右上角的 Supervisor 插件商店，或如果您已配置我的 HA，请点击下面的按钮）
+   [![打开您的 Home Assistant 实例并显示带有预填充特定仓库 URL 的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 点击 `保存` 按钮以保存您的配置。
-1. 设置插件选项以符合您的偏好
+1. 设置插件选项以符合您的偏好。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切正常。
 1. 打开 WebUI 并调整软件选项
@@ -169,13 +171,17 @@ _感谢大家给我的仓库点赞！要点赞，请点击下面的图片，它�
 
 ### 超时错误
 
-请尝试在您的 `config.yaml` 中添加 `"browserNavigationTimeout": 300000,` (https://github.com/alexbelgium/hassio-addons/issues/675#issuecomment-1407675351)
+请尝试在您的 `config.yaml` 中添加 `"browserNavigationTimeout": 300000,`（https://github.com/alexbelgium/hassio-addons/issues/675#issuecomment-1407675351）
 
 ### 其他错误
 
-在 GitHub 上创建问题
+在 github 上创建问题
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

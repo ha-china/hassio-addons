@@ -1,7 +1,7 @@
 name: Apache2 Minimal
-version: 2.14.2
+version: 2.14.3
 slug: apache2-minimal
-description: '[老王杂谈说]：没有PHP的开源Web服务器和最小的额外模块。'
+description: '[老王杂谈说]：不含PHP的开源Web服务器及极少数额外模块。'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/apache2-minimal
 arch:
   - armhf

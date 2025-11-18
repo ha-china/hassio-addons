@@ -1,7 +1,7 @@
 name: xqrepack
-version: 1.7.6
+version: 1.7.7
 slug: xqrepack
-description: '[老王杂谈说]：这些脚本允许你修改小米路由器固件镜像，以确保 SSH 和 UART 访问始终启用。'
+description: '[老王杂谈说]：这些脚本允许你修改小米路由器固件镜像，以确保SSH和UART访问始终启用。'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/xqrepack
 arch:
   - armhf

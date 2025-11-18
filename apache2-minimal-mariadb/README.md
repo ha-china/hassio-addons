@@ -1,4 +1,4 @@
-请查看 Apache2 完整插件（Addon）的 README 文件以获取更多信息。
+请查看 Apache2 完整附加功能的 README 以获取更多信息。
 [README](https://github.com/FaserF/hassio-addons/blob/master/apache2/README.md)
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 

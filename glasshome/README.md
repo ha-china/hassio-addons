@@ -1,20 +1,20 @@
 # GlassHome Dashboard
 
-现代、可定制的 Home Assistant 仪表盘，具有漂亮的玻璃态设计。
+一个现代、可定制的 Home Assistant 仪表板，具有漂亮的玻璃态设计。
 
 ## 免责声明：
-这是一个 BETA 版本。如果你的设置非常定制化，它可能无法正常工作。我不期望它会崩溃和烧毁，因为我已经在我的设置上彻底测试过，但请小心操作并备份你的 Home Assistant！
+这是一个 BETA 版本。如果你的设置非常自定义，它可能无法正常工作。我在我的设置上进行了彻底的测试，不期望它崩溃和烧毁，但请谨慎操作并备份你的 Home Assistant！
 
 ## 安装
 
 1. 将此存储库添加到你的 Home Assistant：
-   - 设置 → 附加组件 → 附加组件商店
+   - 设置 → 插件 → 插件商店
    - 点击 ⋮（菜单）→ 存储库
-   - 添加：`https://github.com/IhsenBouallegue/glasshome-addon`
+   - 添加: `https://github.com/IhsenBouallegue/glasshome-addon`
 
-2. 从附加组件商店安装 "GlassHome Dashboard"
+2. 从插件商店安装 "GlassHome Dashboard"
 
-3. 启动附加组件
+3. 启动插件
 
 ## 功能
 
@@ -29,12 +29,12 @@
   - 天气
   - 场景
   - 电池监控
-- 💾 持久化仪表板配置
+- 💾 持久化的仪表板配置
 - 🔐 安全认证
 
-## 访问仪表盘
+## 访问仪表板
 
-启动附加组件后，打开你的浏览器并前往：
+启动插件后，打开你的浏览器并前往：
 - `http://homeassistant.local:3123`（如果使用 .local 域名）
 - `http://YOUR_HA_IP:3123`（替换为你的 HA IP 地址）
 

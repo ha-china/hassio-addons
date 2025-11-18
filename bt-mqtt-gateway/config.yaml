@@ -1,5 +1,5 @@
 name: bt-mqtt-gateway
-version: 1.6.6
+version: 1.6.7
 slug: bt-mqtt-gateway
 description: '[老王杂谈说]：蓝牙MQTT网关服务器'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/bt-mqtt-gateway
