@@ -1,14 +1,11 @@
 name: Apache2
-version: 2.14.3
+version: 2.15.1
 slug: apache2
-description: '[老王杂谈说]：基于PHP和MariaDB的开源Web服务器。'
+description: '[老王杂谈说]：使用PHP和MariaDB的开源Web服务器。'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/apache2
 arch:
-  - armhf
-  - armv7
   - aarch64
   - amd64
-  - i386
 image: ghcr.nju.edu.cn/faserf/apache2-{arch}
 # webui: http://[HOST]:[PORT:80]
 map:

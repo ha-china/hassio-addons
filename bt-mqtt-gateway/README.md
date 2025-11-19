@@ -20,12 +20,12 @@ The installation of this add-on is quite straightforward and not different from 
 Just add my repo to the hassio addons repository: <https://github.com/FaserF/hassio-addons>
 
 Put your config file to /share/bt-mqtt-gateway.yaml
-Please make sure that a MQTT Add-on is already installed.
+Please make sure that a MQTT add-on is already installed.
 
 ## Configuration
 
 **Note**: _Remember to restart the add-on when the configuration is changed._
-Until now, these config options do NOTHING! They are not implemented yet, but planned!!!
+Until now, these config options do NOTHING! they are not implemented yet, but planned!!!
 
 Example add-on configuration:
 

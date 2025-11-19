@@ -1,5 +1,5 @@
 name: Switch LAN Play Server
-version: 1.7.3
+version: 1.8.1
 slug: switch-lan-play-server
 description: '[老王杂谈说]：任天堂Switch局域网游戏 - 服务器'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/switch_lan_play_server
@@ -7,7 +7,6 @@ arch:
   - armhf
   - armv7
   - amd64
-  - i386
 #image: ghcr.nju.edu.cn/faserf/switch_lan_play_server-{arch}
 panel_icon: mdi:local-area-network
 init: false

@@ -1,24 +1,24 @@
-# Home Assistant Community Add-on: Tado Auto-Assist for Geofencing and Open Window Detection
-![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield] ![Supports armhf Architecture][armhf-shield] ![Supports armv7 Architecture][armv7-shield]
-![Project Maintenance][maintenance-shield]
+# Home Assistant 社区插件：Tado 自动辅助地理围栏和开窗检测
+![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield] ![支持 armhf 架构][armhf-shield] ![支持 armv7 架构][armv7-shield]
+![项目维护][maintenance-shield]
 
-Tado Auto-Assist for Geofencing and Open Window Detection for Home Assistant OS
+适用于 Home Assistant OS 的 Tado 自动辅助地理围栏和开窗检测
 
 ## 关于
 
-一个Python脚本，根据您的位置（到达或离开）自动调整您家的温度，使用来自Tado应用的设置。它还可以在任何Tado TRV检测到窗户打开的房间中关闭供暖（激活开窗模式）。
+一个 Python 脚本，根据您的存在（到达或离开）自动调整家中的温度，使用 Tado 应用的设置。它还会在 Tado TRV 检测到任何房间有开窗时关闭供暖（激活开窗模式）。
 
 ## 安装
 
-[![FaserF Home Assistant Add-ons](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FFaserF%2Fhassio-addons)
+[![FaserF Home Assistant 插件](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FFaserF%2Fhassio-addons)
 
-这个add-on的安装非常简单，类似于安装任何其他自定义Home Assistant add-on。
-只需点击上面的链接或手动将此仓库添加到您的Home Assistant add-on仓库：
+此插件的安装非常简单，类似于安装任何其他自定义 Home Assistant 插件。
+只需点击上面的链接或手动将此仓库添加到您的 Home Assistant 插件仓库：
 <https://github.com/FaserF/hassio-addons>
 
 ## 配置
 
-示例add-on配置：
+示例插件配置：
 
 ```yaml
 username: my@email.com
@@ -27,37 +27,37 @@ minTemp: 5       # 可选 – 设置的最小温度
 maxTemp: 25      # 可选 – 设置的最大温度
 ```
 
-> **注意**: _这只是一个示例。请使用您自己的凭证和所需的温度设置._
+> **注意**：_这只是一个示例。请使用您自己的凭证和所需的温度设置。_
 
-### 选项: `username`
+### 选项：`username`
 
-定义您的Tado用户名（通常是您的电子邮件地址）。
+定义您的 Tado 用户名（通常是您的电子邮件地址）。
 
-### 选项: `password`
+### 选项：`password`
 
-定义您的Tado密码。
+定义您的 Tado 密码。
 
-### 选项: `minTemp`
+### 选项：`minTemp`
 
-可选。定义当您离开时Tado应设置的最小温度。
+可选。定义当您离开时 Tado 应该设置的最小温度。
 
-### 选项: `maxTemp`
+### 选项：`maxTemp`
 
-可选。定义当您回家时Tado应设置的最大温度。
+可选。定义当您回家时 Tado 应该设置的最大温度。
 
 ## 支持
 
-有疑问或问题？
-如果您遇到任何问题或有建议，可以在GitHub上[打开一个问题][issue]。
+有问题或问题？
+如果您遇到任何问题或有建议，可以在 GitHub 上[打开问题][issue]。
 
-⚠️ **请注意:** 这个add-on仅在`armv7`（Raspberry Pi 4）上测试过。
+⚠️ **请注意**：此插件仅在 `armv7`（Raspberry Pi 4）上进行了测试。
 
 ## 致谢
 
-这个add-on基于[adrianslabu]的工作，他创建了原始的Python脚本：
+此插件基于 [adrianslabu] 的工作，他创建了原始的 Python 脚本：
 ➡️ <https://github.com/adrianslabu/tado_aa>
 
-Home Assistant add-on包装器由[FaserF]创建和维护。
+Home Assistant 插件包装器由 [FaserF] 创建和维护。
 
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg

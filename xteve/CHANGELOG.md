@@ -1,3 +1,8 @@
+## 2.5.3-4 (18-11-2025)
+- Minor bugs fixed
+## 2.5.3-3 (18-11-2025)
+- Added `env_vars` option to allow passing custom environment variables from the add-on configuration.
+
 - WARNING : update to supervisor 2022.11 before installing
 
 ## 2.5.3 (22-10-2022)

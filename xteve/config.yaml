@@ -2,8 +2,7 @@ arch:
   - aarch64
   - amd64
   - armv7
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：M3U代理用于Plex DVR和Emby直播电视'
+description: '[老王杂谈说]：Plex DVR和Emby直播电视的M3U代理'
 environment:
   XTEVE_CONF: /data/conf
   XTEVE_HOME: /data
@@ -14,12 +13,18 @@ map:
   - share:rw
   - ssl:ro
 name: Xteve
+options:
+  env_vars: []
 ports:
   34400/tcp: 34400
 ports_description:
   34400/tcp: Web interface
+schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
 slug: xteve
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 2.5.3-2
-webui: '[PROTO:ssl]://[HOST]:[PORT:34400]/web'
+version: 2.5.3-4
+webui: "[PROTO:ssl]://[HOST]:[PORT:34400]/web"
