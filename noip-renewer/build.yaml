@@ -1,0 +1,4 @@
+---
+#  https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
+build_from:
+  aarch64: "ghcr.nju.edu.cn/home-assistant/aarch64-base:3.22"

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.4
+
+### Bug Fixes
+- Fix a bug where the delete and edit buttons in widgets do not appear if entity is deleted from HA
 
 ## 0.4.3
 

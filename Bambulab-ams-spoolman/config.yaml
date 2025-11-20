@@ -1,0 +1,34 @@
+name: Bambulab AMS Spoolman FilamentStatus
+version: "1.1.0-0"
+slug: bambulabspoolmanfs
+description: "[老王杂谈说]：这个项目将Bambulab AMS系统与Spoolman集成，以同步线材卷轴的使用。"
+url: https://ghfast.top/github.com/bytenoodle/hassioaddon
+arch:
+  - amd64
+  - aarch64
+startup: services
+init: false
+map:
+  - addon_config:rw
+  - data:rw
+ports:
+  4000/tcp: 4000
+webui: "http://[HOST]:[PORT:4000]"
+options:
+  PRINTER_ID: "printer-ID"
+  PRINTER_CODE: "XYZ123"
+  PRINTER_IP: "192.168.1.x"
+  SPOOLMAN_ENDPOINT: "http://spoolmanurl:port"
+  UPDATE_INTERVAL: 300000
+  NEVER_MERGE_IF_TAG: false
+  DEBUG: false
+  MODE: "manual"
+schema:
+  PRINTER_ID: str
+  PRINTER_CODE: str
+  PRINTER_IP: str
+  SPOOLMAN_ENDPOINT: str
+  UPDATE_INTERVAL: int
+  NEVER_MERGE_IF_TAG: bool
+  DEBUG: bool
+  MODE: list(automatic|manual)

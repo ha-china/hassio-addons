@@ -1,0 +1,26 @@
+---
+name: noip-renewer --test
+version: 2025.10.7
+slug: noip-renewer
+description: '[老王杂谈说]：simao-silva/noip-renewer for homeassistant 插件'
+url: "https://ghfast.top/github.com/habuild/hassio-addons/tree/main/noip-renewer"
+stage: experimental
+init: false
+image: "ghcr.nju.edu.cn/habuild/{arch}-addon-noip-renewer"
+hassio_api: true
+homeassistant_api: true
+arch:
+  - aarch64
+panel_icon: mdi:certificate
+map:
+  - share:rw
+options:
+  NOIP_Email: "!secret NOIP_Email"
+  NOIP_Password: "!secret NOIP_Password"
+  NOIP_TOTP_KEY: "!secret NOIP_TOTP_KEY"
+  Translate_Enabled: "false"
+schema:
+  NOIP_Email: "str?"
+  NOIP_Password: "str?"
+  NOIP_TOTP_KEY: "str?"
+  Translate_Enabled: "str?"

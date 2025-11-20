@@ -1,0 +1,27 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Start noip-renewer with options
+# s6-overlay docs: https://github.com/just-containers/s6-overlay
+# ==============================================================================
+
+CONFIG_PATH=/data/options.json
+
+message=$(echo "PWD is current directory $(pwd)")
+
+# docker pull simaofsilva/noip-renewer:latest
+
+EMAIL="$(jq --raw-output '.NOIP_Email' $CONFIG_PATH)"
+
+PASSWORD="$(jq --raw-output '.NOIP_Password' $CONFIG_PATH)"
+
+message=$(echo "The current time is $(date)")
+
+NOIP_TOTPKEY="$(jq --raw-output '.NOIP_TOTP_KEY' $CONFIG_PATH)"
+set -x
+TRANSLATE="$(jq --raw-output '.Translate_Enabled' $CONFIG_PATH)"
+
+
+#sudo docker run --rm --env NO_IP_USERNAME="$EMAIL" --env NO_IP_PASSWORD="$PASSWORD" --env NO_IP_TOTP_KEY="$NOIP_TOTPKEY" --env TRANSLATE_ENABLED="$TRANSLATE" simaofsilva/noip-renewer:latest /bin/bash
+docker exec -it simaofsilva/noip-renewer:latest /bin/bash
+sleep 20
