@@ -8,21 +8,22 @@
 
 [![Support Frenck on Patreon][patreon-shield]][patreon]
 
-保护你的隐私并通过Tor访问Home Assistant。
+保护您的隐私并通过Tor访问Home Assistant。
 
 ## 关于
 
-这个Tor插件允许你将你的Home Assistant实例作为一个洋葱站点来访问，
-通过[Tor的隐藏服务][tor-hidden-service]功能。启用此功能后，你无需打开防火墙端口或设置HTTPS来启用安全的远程访问。
+此Tor插件允许您将您的Home Assistant实例作为洋葱站点访问，
+通过[Tor的隐藏服务][tor-hidden-service]功能。启用此功能后，
+您无需打开防火墙端口或设置HTTPS即可启用安全的远程访问。
 
-如果你想要：
+如果您希望：
 
-- 无需打开防火墙端口或设置VPN即可远程访问你的Home Assistant实例。
+- 无需打开防火墙端口或设置VPN即可远程访问您的Home Assistant实例。
 - 不想或不知道如何获取SSL/TLS证书和HTTPS配置。
-- 想要阻止攻击者甚至能够访问/扫描你的端口和服务器。
-- 想要阻止任何人知道你的家庭IP地址并看到你访问Home Assistant的流量。
+- 希望阻止攻击者甚至能够访问/扫描您的端口和服务器。
+- 希望阻止任何人知道您的家庭IP地址并看到您访问Home Assistant的流量。
 
-该插件还提供打开一个到Tor网络的Sock代理的可能性。允许你通过你的Home Assistant安装访问Tor。
+该插件还提供了向Tor网络打开Sock代理的可能性。允许您通过Home Assistant安装访问Tor。
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -34,9 +35,13 @@
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v7.0.1-blue.svg
-[release]: https://github.com/hassio-addons/addon-tor/tree/v7.0.1
+[release-shield]: https://img.shields.io/badge/version-v7.0.2-blue.svg
+[release]: https://github.com/hassio-addons/addon-tor/tree/v7.0.2
 [tor-hidden-service]: https://www.torproject.org/docs/hidden-services.html.en
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

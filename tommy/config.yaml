@@ -1,7 +1,7 @@
 name: TOMMY
-version: "0.20.2"
+version: "0.20.8"
 slug: tommysense-homeassistant-addon
-description: '[老王杂谈说]：TOMMY（Home Assistant插件）'
+description: '[老王杂谈说]：TOMMY (Home Assistant 插件)'
 url: "https://ghfast.top/github.com/tommy-sense/homeassistant-addon"
 arch:
   - aarch64
@@ -9,6 +9,8 @@ arch:
 image: tommysense/homeassistant-addon-{arch}
 startup: application
 boot: auto
+hassio_role: default
+hassio_api: true
 host_network: true # Needed for mDNS discovery
 apparmor: true
 ingress: true
@@ -20,10 +22,10 @@ map:
     read_only: False
 options:
   ports:
-    dashboard: 8080
+    dashboard: 8089
     file_server_http: 8090
     file_server_https: 8091
-    mqtt: 1884
+    mqtt: 1886
     udp_relay: 8547
 schema:
   ports:
@@ -32,3 +34,5 @@ schema:
     file_server_https: port
     mqtt: port
     udp_relay: port
+  license_key: "str?"
+  machine_certificate: "str?"

@@ -1,5 +1,43 @@
 # TOMMY
 
+## 0.20.8
+
+### Minor Changes
+
+- Fixed a problem with sensor fusion that could cause degraded motion detection under some specific network conditions
+
+## 0.20.7
+
+### Minor Changes
+
+- Update to internal credentials manager
+
+## 0.20.6
+
+### Minor Changes
+
+- Update to internal credentials manager
+
+## 0.20.5
+
+### Minor Changes
+
+- Moved credentials to root configuration
+
+## 0.20.4
+
+### Minor Changes
+
+- Fixed credentials input
+
+## 0.20.3
+
+### Minor Changes
+
+- Changed default dashboard port to 8089
+- Changed default MQTT port to 1886
+- Added configuration options for license
+
 ## 0.20.2
 
 ### Minor Changes
