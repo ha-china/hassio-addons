@@ -8,7 +8,7 @@
 
 [![Support Frenck on Patreon][patreon-shield]][patreon]
 
-AirPlay功能为您的Chromecast播放器。
+AirPlay功能适用于您的Chromecast播放器。
 
 ## 关于
 
@@ -29,8 +29,12 @@ AirCast插件基于优秀的[AirConnect][airconnect]项目。
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v5.0.1-blue.svg
-[release]: https://github.com/hassio-addons/addon-aircast/tree/v5.0.1
+[release-shield]: https://img.shields.io/badge/version-v5.0.2-blue.svg
+[release]: https://github.com/hassio-addons/addon-aircast/tree/v5.0.2
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

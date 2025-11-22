@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：自托管、端到端加密的照片和视频存储（Ente服务器 + MinIO）'
+description: '[老王杂谈说]：自托管端到端加密的照片和视频存储（Ente服务器 + MinIO）'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -118,6 +118,6 @@ schema:
 slug: ente
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "4.4.11"
+version: "4.4.10"
 video: true
 webui: http://[HOST]:[PORT:3000]

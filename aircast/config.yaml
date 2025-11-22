@@ -1,7 +1,7 @@
 name: AirCast
-version: 5.0.1
+version: 5.0.2
 slug: aircast
-description: '[老王杂谈说]：为您的Chromecast设备提供AirPlay功能。'
+description: '[老王杂谈说]：适用于您的Chromecast设备的AirPlay功能。'
 url: https://ghfast.top/github.com/hassio-addons/addon-aircast
 startup: services
 init: false

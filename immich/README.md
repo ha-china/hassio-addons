@@ -1,6 +1,6 @@
 # Home assistant add-on: immich
 
-⚠️ 项目正在非常活跃地开发中。预期会有错误和变更。不要将其作为您照片和视频的唯一存储方式！（来自开发者）
+⚠️ 项目正在非常活跃地开发中。请预期存在错误和变更。不要将其作为存储您照片和视频的唯一方式！（来自开发者）
 
 [![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -16,7 +16,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有星标我的仓库的人！要星标它，请点击下面的图片，然后它将在右上角。谢谢！_
+_感谢所有给我的仓库加星的贡献者！要加星，请点击下面的图片，然后它就会在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -24,17 +24,17 @@ _感谢所有星标我的仓库的人！要星标它，请点击下面的图片�
 
 ## 关于
 
-基于文件浏览器的Web应用程序。
+基于文件的Web浏览器。
 此插件基于imagegenius的[docker镜像](https://github.com/imagegenius/docker-immich)。
 
 ## 配置
 
-Webui位于 `<你的IP>:8080`。PostgreSQL/MySQL可以是内部的也可以是外部的。
+Webui位于`<你的IP>:8080`。PostgreSQL/MySQL可以是内部的或外部的。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+|------|------|--------|-------|
 | `data_location` | str | `/share/immich` | Immich数据存储路径 |
 | `library_location` | str | | 照片/视频库路径 |
 | `TZ` | str | | 时区（例如，`Europe/London`） |
@@ -48,10 +48,10 @@ Webui位于 `<你的IP>:8080`。PostgreSQL/MySQL可以是内部的也可以是�
 | `DB_PASSWORD` | str | | 数据库密码 |
 | `DB_DATABASE_NAME` | str | `immich` | 数据库名称 |
 | `DB_PORT` | int | `5432` | 数据库端口 |
-| `DB_ROOT_PASSWORD` | str | | 数据库root密码 |
-| `JWT_SECRET` | str | | 认证用的JWT密钥 |
+| `DB_ROOT_PASSWORD` | str | | 数据库根密码 |
+| `JWT_SECRET` | str | | 用于认证的JWT密钥 |
 | `DISABLE_MACHINE_LEARNING` | bool | `false` | 禁用ML功能 |
-| `MACHINE_LEARNING_WORKERS` | int | `1` | ML工作线程数 |
+| `MACHINE_LEARNING_WORKERS` | int | `1` | ML工作线程数量 |
 | `MACHINE_LEARNING_WORKER_TIMEOUT` | int | `120` | ML工作线程超时（秒） |
 | `skip_permissions_check` | bool | `false` | 跳过文件权限检查 |
 
@@ -76,29 +76,29 @@ JWT_SECRET: "your-secret-key-here"
 
 此插件支持挂载本地驱动器和远程SMB共享：
 
-- **本地驱动器**：请参阅[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：请参阅[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### 自定义脚本和环境变量
 
 此插件通过`addon_config`映射支持自定义脚本和环境变量：
 
-- **自定义脚本**：请参阅[在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars选项**：使用插件的`env_vars`选项传递额外的环境变量（大小写名称）。请参阅https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2以获取详细信息。
+- **自定义脚本**：参见[在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars选项**：使用插件的`env_vars`选项传递额外的环境变量（大小写名称）。参见https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2获取详细信息。
 
 ## 安装
 
 此插件的安装非常简单，与安装任何其他Hass.io插件没有区别。
 
-1. 将我的Hass.io插件仓库[repository]添加到您的Hass.io实例。
-1. 安装此插件。
-1. 点击`保存`按钮以保存您的配置。
-1. 启动插件。
-1. 检查插件的日志，查看是否一切正常。
-1. 仔细配置插件以满足您的需求，请参阅官方文档以获取相关信息。
+1. [将我的Hass.io插件仓库][repository]添加到您的Hass.io实例。
+2. 安装此插件。
+3. 点击`保存`按钮以保存您的配置。
+4. 启动插件。
+5. 检查插件的日志以查看是否一切正常。
+6. 仔细配置插件以满足您的偏好，请参阅官方文档以获取相关信息。
 
-请注意，您需要安装一个单独的postgres插件才能连接数据库。您可以在我的仓库中安装postgres插件。
-请注意在启动之前更改密码；之后将无法更改。
+注意：您需要安装一个单独的postgres插件才能连接数据库。您可以在我的仓库中安装postgres插件。
+注意：在启动之前更改密码；之后将无法更改。
 
 ## 支持
 
@@ -108,6 +108,10 @@ JWT_SECRET: "your-secret-key-here"
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

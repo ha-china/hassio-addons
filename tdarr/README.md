@@ -14,7 +14,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它会在右上角。谢谢！_
+_感谢所有给我仓库点赞的人！点击下面的图片即可点赞，点赞后会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -22,14 +22,14 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 ## 关于
 
-[Tdarr](https://tdarr.io) 是一个分布式转码系统，用于使用 FFmpeg/HandBrake 自动管理媒体库的转码/重新封装。它确保您的文件在编解码器、流和容器方面完全符合您的需求。Tdarr 支持分布式处理，允许您使用 Tdarr 节点（Windows、Linux（包括 ARM）和 macOS）将您的闲置硬件投入使用。
+[Tdarr](https://tdarr.io) 是一个分布式转码系统，使用 FFmpeg/HandBrake 自动管理媒体库的转码/重新封装。它确保您的文件在编解码器、流和容器方面完全符合您的需求。Tdarr 支持分布式处理，允许您使用 Tdarr 节点将您的闲置硬件用于 Windows、Linux（包括 ARM）和 macOS。
 
 主要功能：
-- 跨多个节点进行分布式转码
+- 跨多个节点的分布式转码
 - 自动媒体库管理
 - 支持 FFmpeg 和 HandBrake
 - 硬件加速支持
-- 基于网页的管理界面
+- 基于网络的管理界面
 - 基于插件的流程系统
 
 此插件基于 [docker 镜像](https://hub.docker.com/r/hurlenko/Tdarr)。
@@ -39,16 +39,16 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
 1. [将我的 Hass.io 插件仓库][repository] 添加到您的 Hass.io 实例。
-1. 安装此插件。
-1. 点击 `保存` 按钮以保存您的配置。
-1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 仔细配置插件以满足您的偏好，请参阅官方文档。
+2. 安装此插件。
+3. 点击 `保存` 按钮以保存您的配置。
+4. 启动插件。
+5. 检查插件的日志以查看是否一切正常。
+6. 仔细配置插件以满足您的偏好，请参阅官方文档。
 
 ## 配置
 
-Web UI 可以在 `<your-ip>:8265` 或通过 Ingress 在侧边栏中找到。
-服务器端口是 `8266`，用于连接外部 Tdarr 节点。
+Web UI 可以在 `<your-ip>:8265` 或通过 Ingress 侧边栏访问。
+服务器端口为 `8266`，用于连接外部 Tdarr 节点。
 
 ### 选项
 
@@ -77,13 +77,13 @@ cifsdomain: "workgroup"
 ### 设置分布式转码
 
 1. **配置服务器**：
-   - 访问 Web UI 在 `<your-ip>:8265`
+   - 访问 Web UI at `<your-ip>:8265`
    - 设置您的媒体库和转码设置
-   - 根据需要配置插件和工作流
+   - 根据需要配置插件和工作流程
 
 2. **添加外部节点**：
    - 在其他机器上安装 Tdarr 节点
-   - 将它们指向您的 Home Assistant IP 在端口 `8266`
+   - 将它们指向您的 Home Assistant IP 端口 `8266`
    - 节点将自动注册并在 Web UI 中显示
 
 3. **硬件加速**：
@@ -95,24 +95,24 @@ cifsdomain: "workgroup"
 
 此插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **本地驱动器**：请参阅 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：请参阅 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### 自定义脚本和环境变量
 
-此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
+此插件支持通过 `addon_config` 映射自定义脚本和环境变量：
 
-- **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（名称可以是大小写）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详细信息。
+- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（大小写名称）。参见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
-### 硬件加速注意事项
+### 硬件加速说明
 
 插件包含硬件加速的设备访问：
-- Intel QuickSync：`/dev/dri` 设备映射
-- NVIDIA：设置环境变量以检测 GPU
+- Intel QuickSync：`/dev/dri` 设备被映射
+- NVIDIA：设置了环境变量用于 GPU 检测
 - AMD：通过可用设备支持硬件加速
 
-在 Tdarr Web UI 中配置硬件加速，位于设置 > FFmpeg/HandBrake 设置下。
+在 Tdarr Web UI 的设置 > FFmpeg/HandBrake 设置中配置硬件加速。
 
 ## 支持
 
@@ -121,6 +121,10 @@ cifsdomain: "workgroup"
 - 在 [Home Assistant 社区线程](https://community.home-assistant.io/t/home-assistant-addon-tdarr/282108/3) 上提问
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

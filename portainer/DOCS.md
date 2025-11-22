@@ -1,34 +1,34 @@
-Portainer 可以用于在 Docker 容器中执行自定义命令。它是一个开源的轻量级管理 UI，允许您轻松管理 Docker 主机或 Docker 群集。
+Portainer can be used to execute custom commands in a docker container. It is an open-source lightweight management UI which allows you to easily manage a Docker host(s) or Docker swarm clusters.
 
-# 快速入门
-- 使用此链接添加我的仓库
-[![在我的 Home Assistant 中添加仓库][repository-badge]][repository-url]
-- 从我的仓库安装 portainer 插件
-- 在插件的配置面板中，您可以更改密码
-- 在插件的主页中，禁用“保护模式”，然后启动插件
-- 登录（默认用户名是 `admin`，默认密码是 `homeassistant`）
-- 点击环境中的 `Primary`（页面中央）
-- 点击左侧菜单栏中的 `Containers`
-- 增加每页项目数量以查看所有您的插件
-- 点击您选择的插件名称旁边的符号 `>_` 以打开控制台页面
-- 要么更改用户名，或者更常见的是直接点击连接
-- 输入您的命令，您将完全访问该特定容器的终端（这不会影响您的 HA 系统的其他部分）
+# Quick start
+- Add my repository using this link
+[![Add repository on my Home Assistant][repository-badge]][repository-url]
+- Install the portainer addon from my repo
+- In the configuration panel of the addon, you can change the password
+- In the main page of the addon, disable "Protection mode", then start the addon
+- Login (default name is `admin`, default password is `homeassistant`)
+- Click on `Primary` in the environement (at the center of the page)
+- Click on `Containers` in the left menu bar
+- Increase the number of items per page to see all your addons
+- Click on the symbol `>_` next to the name of your selected addon to open the console page
+- Either change the username, or more usually just click connect
+- Type your commands, you have full access to the terminal of this specific container (this does not affect other parts of your HA system)
 
-# 对您系统的影响
-- 安装或运行 portainer 没有任何影响
-- 手动安装自定义容器将使您的 HA 状态变为不支持/不健康状态。您将无法升级 Home Assistant 和任何您可能拥有的插件。停止此自定义容器将重置正常状态
+# Impact on your system
+- There is no impact of installing, or running portainer
+- Installing manually a custom container will modify your HA status to an unsupported/unhealthy state. You will be blocked from upgrading Home Assistant and upgrading any Add-ons you may have. Stopping this custom container will reset the normal status
 
-# 小贴士
+# Tips and tricks
 
-## 重置数据库
-只需更改您的插件选项中的密码，数据库就会被重置
+## Reset database
+Just change the password in your addon options and the database will be reset
 
-## 60 秒超时
-插件包含一个非常长的超时。但是，如果您使用另一层代理（例如 nginx proxy manager 插件），它将默认为 60 秒的超时。您需要调整代理层以增加超时。更多详情请参阅：https://github.com/portainer/portainer/issues/2953#issuecomment-1235795256
+## Timeout of 60s
+The addon includes a very long timeout. However, if you use another layer of proxy such as the addon nginx proxy manager, it will default to a timeout of 60s. You'll have to adapt the proxy layer to increase timeout. More details here : https://github.com/portainer/portainer/issues/2953#issuecomment-1235795256
 
-## 进一步参考
-- 这里有一个使用它的完整指南：https://codeopolis.com/posts/beginners-guide-to-portainer/
-- Home Assistant 社区论坛上关于 portainer 的旧页面：https://community.home-assistant.io/t/home-assistant-community-add-on-portainer
+## Further reference
+- Here is a full guide on using it : https://codeopolis.com/posts/beginners-guide-to-portainer/
+- Old page on the HA community forum about portainer : https://community.home-assistant.io/t/home-assistant-community-add-on-portainer
 
 [repository-badge]: https://img.shields.io/badge/Add%20repository%20to%20my-Home%20Assistant-41BDF5?logo=home-assistant&style=for-the-badge
 [repository-url]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons

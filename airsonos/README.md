@@ -12,11 +12,11 @@ AirPlay功能，适用于您的Sonos（和UPnP）播放器。
 
 ## 关于
 
-Apple设备使用AirPlay将音频发送到其他设备，但这与Sonos播放器不兼容。此插件试图解决这种兼容性问题。
+Apple设备使用AirPlay将音频发送到其他设备，但这与Sonos播放器不兼容。这个插件试图解决这种兼容性问题。
 
-它会检测您网络中的Sonos播放器，并为每个播放器创建虚拟AirPlay设备。它充当AirPlay客户端和真实Sonos设备之间的桥梁。
+它检测您网络中的Sonos播放器，并为每个播放器创建虚拟AirPlay设备。它充当AirPlay客户端和真实Sonos设备之间的桥梁。
 
-由于Sonos使用UPnP，此插件也可能适用于其他UPnP播放器（例如，新款三星电视）。
+由于Sonos使用UPnP，插件也可能适用于其他UPnP播放器（例如，新款三星电视）。
 
 AirCast插件基于优秀的[AirConnect][airconnect]项目。
 
@@ -31,8 +31,12 @@ AirCast插件基于优秀的[AirConnect][airconnect]项目。
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v5.0.1-blue.svg
-[release]: https://github.com/hassio-addons/addon-airsonos/tree/v5.0.1
+[release-shield]: https://img.shields.io/badge/version-v5.0.2-blue.svg
+[release]: https://github.com/hassio-addons/addon-airsonos/tree/v5.0.2
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

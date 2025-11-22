@@ -14,7 +14,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库星标的人！要星标它，请点击下面的图片，然后它会在右上角。谢谢！_
+_感谢所有星标我的仓库的人！要星标它，请点击下面的图片，然后它会在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -22,41 +22,41 @@ _感谢所有给我的仓库星标的人！要星标它，请点击下面的图�
 
 ## 关于
 
-[FlexGet](https://flexget.com/) 是一个多功能的自动化工具，适用于所有类型的媒体。它可以支持种子、NZB、播客、漫画、电视节目、电影、RSS、HTML、CSV 等。
+[FlexGet](https://flexget.com/) 是一个用于所有媒体的多功能自动化工具。它可以支持种子文件、NZBs、播客、漫画、电视剧、电影、RSS、HTML、CSV 等。
 
 主要功能：
 - 强大的插件系统，包含 300 多个插件
 - RSS 源处理和过滤
 - 与下载客户端集成
-- 基于网页的管理界面
+- 基于网络的管理界面
 - 定时执行和守护进程模式
 
 ## 安装
 
-这个插件的安装非常简单，与安装其他插件没有区别。
+这个插件的安装非常简单，与安装其他插件没有什么不同。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的 Supervisor 插件商店，或如果您已配置我的 HA，请点击下面的按钮）
-   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的 supervisor 插件商店，或如果您已经配置了我的 HA，请点击下面的按钮）
+   [![打开您的 Home Assistant 实例并显示添加插件仓库对话框，预填充了特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装这个插件。
 1. 点击 `保存` 按钮以保存您的配置。
-1. 根据您的偏好设置插件选项。
+1. 设置插件的选项以符合您的偏好。
 1. 启动插件。
-1. 检查插件的日志，看看一切是否正常。
+1. 检查插件的日志以查看是否一切正常。
 1. 打开 WebUI 并调整软件选项
 
 ## 配置
 
-使用插件的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+使用插件的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。详细信息请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
 Webui 可以在 <http://homeassistant:5050> 找到。
 默认密码：`homeassistant123`（通过插件选项更改）。
 
 ### 设置步骤
 
-1. 启动插件后访问网页界面
+1. 启动插件后访问 Web 界面
 2. 创建或编辑您的 FlexGet 配置文件
 3. 设置 RSS 源和下载源
-4. 配置输出插件以供您的下载客户端使用
+4. 配置输出插件以用于您的下载客户端
 5. 测试配置并启用定时任务
 
 ### 选项
@@ -66,7 +66,7 @@ Webui 可以在 <http://homeassistant:5050> 找到。
 | `PGID` | int | `0` | 文件权限的组 ID |
 | `PUID` | int | `0` | 文件权限的用户 ID |
 | `WebuiPass` | str | `homeassistant123` | Web 界面密码 |
-| `FG_PLUGINS` | str | | 需要额外安装的插件 |
+| `FG_PLUGINS` | str | | 需要安装的额外插件 |
 | `FG_LOG_LEVEL` | list | | 日志级别（critical/error/warning/info/verbose/debug/trace） |
 
 ### 示例配置
@@ -95,11 +95,15 @@ tasks:
       port: 9091
 ```
 
-完整的配置文档请参见：https://flexget.com/Configuration
+有关完整的配置文档，请参阅：https://flexget.com/Configuration
 
 ## 支持
 
 如果您在安装过程中遇到问题，请务必查看 github。
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

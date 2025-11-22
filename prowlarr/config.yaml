@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：提供Sonarr、Radarr、Lidarr和Readarr索引器完整管理的Torrent Trackers和Usenet索引器，无需每款应用单独设置'
+description: '[老王杂谈说]：提供Sonarr、Radarr、Lidarr和Readarr索引器完整管理的Torrent Trackers和Usenet索引器，无需每个应用单独设置'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -102,5 +102,5 @@ schema:
 slug: prowlarr
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "nightly-2.3.1.5238-ls217"
+version: "nightly-2.3.1.5238-ls218"
 webui: "[PROTO:ssl]://[HOST]:[PORT:9696]"

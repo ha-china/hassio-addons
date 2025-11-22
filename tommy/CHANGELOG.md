@@ -1,5 +1,28 @@
 # TOMMY
 
+
+## 0.21.1
+
+### Minor Changes
+
+- Allow toggling new false positive filter
+- Fixed issues with machine ID overflowing screen
+- Fixed issue with motion being detection at threshold instead of above
+
+## 0.21.0
+
+### Major Changes
+
+- Improved motion detection when entering zone
+- Improved motion detection for fast twitch movements
+- Improved filtering of false positives
+- Improved packet processing
+- Implemented redundancy that allows other sensors to continue detecting motion when one is offline. A minimum of 2 active devices is still required.
+
+### Minor Changes
+
+- Added info text to visualizations in dashboard regarding choppiness being normal
+
 ## 0.20.8
 
 ### Minor Changes

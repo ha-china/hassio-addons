@@ -7,7 +7,7 @@ backup_exclude:
   - "*/logs/"
   - "*/transcoding-temp/"
   - "*/metadata/"
-description: '[老王杂谈说]：使用FFmpeg/HandBrake的分布式转码自动化'
+description: '[老王杂谈说]：使用FFmpeg/HandBrake进行分布式转码自动化'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -122,6 +122,6 @@ schema:
 slug: tdarr
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "2.55.01"
+version: "2.58.02"
 video: true
 webui: "[PROTO:ssl]://[HOST]:[PORT:8265]"

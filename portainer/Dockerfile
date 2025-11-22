@@ -31,7 +31,7 @@ ENV S6_CMD_WAIT_FOR_SERVICES=1 \
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base
-ARG BUILD_UPSTREAM="2.35.0"
+ARG BUILD_UPSTREAM="2.33.4"
 
 # spellcheck disable=SC2015
 # hadolint ignore=SC2015
@@ -43,7 +43,6 @@ RUN \
     && if [[ "${BUILD_ARCH}" == *armv8* ]]; then ARCH="arm64"; fi \
     && if [[ "${BUILD_ARCH}" == *arm64* ]]; then ARCH="arm64"; fi \
     && if [[ "${BUILD_ARCH}" == *armhf* ]]; then ARCH="arm"; fi \
-    && if [[ "${BUILD_ARCH}" == *armv7* ]]; then ARCH="arm"; fi \
     && if [[ "${BUILD_ARCH}" == arm ]]; then ARCH="arm"; fi \
     && if [[ "${BUILD_ARCH}" == *x86* ]]; then ARCH="amd64"; fi \
     \

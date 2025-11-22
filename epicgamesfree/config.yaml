@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：自动登录并兑换Epic Games商店的促销免费游戏'
+description: '[老王杂谈说]：自动登录并兑换Epic Games Store的促销免费游戏'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -84,5 +84,5 @@ schema:
 slug: epicgamesfree
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "debian-2025-11-09"
+version: "debian-2025-11-16"
 webui: "[PROTO:ssl]://[HOST]:[PORT:3000]"

@@ -14,38 +14,38 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它会在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/filebrowser/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/filebrowser/stats.png)
 
 ## 关于
 
-基于Web的文件管理界面，提供了一个安全的方式来浏览、上传、下载、编辑和管理您Home Assistant系统上的文件。Filebrowser提供了一个干净、现代的界面，通过Web浏览器处理文件，支持多种文件格式、预览功能和全面的文件操作。
+一个基于Web的文件管理界面，提供了一个安全的方式来浏览、上传、下载、编辑和管理您Home Assistant系统上的文件。Filebrowser提供了一个干净、现代的界面，通过Web浏览器处理文件，支持多种文件格式、预览功能和全面的文件操作。
 
-此插件基于官方Filebrowser项目的[docker镜像](https://hub.docker.com/r/filebrowser/filebrowser)。
+这个插件基于官方Filebrowser项目的[docker镜像](https://hub.docker.com/r/filebrowser/filebrowser)。
 
 ## 安装
 
-此插件的安装非常简单，与安装任何其他Home Assistant插件的方式相同。
+这个插件的安装非常简单，与安装任何其他Home Assistant插件没有区别。
 
 1. 将我的Home Assistant插件仓库[repository]添加到您的Home Assistant实例中。
-1. 安装此插件。
-1. 点击`保存`按钮以保存您的配置。
+1. 安装这个插件。
+1. 点击“保存”按钮以保存您的配置。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 通过侧边栏或在`<your-ip>:8071`处访问Web界面。
+1. 检查插件的日志，看看是否一切正常。
+1. 通过侧边栏或在`<your-ip>:8071`访问Web界面。
 
 ## 配置
 
-Web界面可以在`<your-ip>:8071`处找到，或通过使用Ingress时在Home Assistant侧边栏中访问。
+Web界面可以在`<your-ip>:8071`或通过Ingress在Home Assistant侧边栏中找到。
 
 **默认凭证：**
 - 用户名：`admin`
 - 密码：`admin`
 
-**重要：**首次登录后立即更改默认凭证以增强安全性。
+**重要：**首次登录后立即更改默认凭证以提高安全性。
 
 ### 选项
 
@@ -54,8 +54,8 @@ Web界面可以在`<your-ip>:8071`处找到，或通过使用Ingress时在Home A
 | `ssl` | 布尔 | `false` | 为Web界面启用HTTPS |
 | `certfile` | 字符串 | `fullchain.pem` | SSL证书文件（在`/ssl/`中） |
 | `keyfile` | 字符串 | `privkey.pem` | SSL私钥文件（在`/ssl/`中） |
-| `NoAuth` | 布尔 | `true` | 禁用身份验证（更改时重置数据库） |
-| `disable_thumbnails` | 布尔 | `true` | 禁用缩略图生成以提升性能 |
+| `NoAuth` | 布尔 | `true` | 禁用认证（更改时重置数据库） |
+| `disable_thumbnails` | 布尔 | `true` | 禁用缩略图生成以提高性能 |
 | `base_folder` | 字符串 | _(可选)_ | 文件浏览器的根文件夹（默认为所有映射文件夹） |
 | `localdisks` | 字符串 | _(可选)_ | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
 | `networkdisks` | 字符串 | _(可选)_ | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
@@ -82,36 +82,40 @@ cifsdomain: "workgroup"
 ## 设置
 
 1. 启动插件并等待其初始化。
-1. 通过Home Assistant侧边栏或在`<your-ip>:8071`处访问Web界面。
+1. 通过Home Assistant侧边栏或在`<your-ip>:8071`访问Web界面。
 1. 使用默认凭证登录：
    - 用户名：`admin`
    - 密码：`admin`
 1. **重要：**立即通过点击“设置”>“用户管理”更改默认密码。
-1. 通过Web界面配置您的首选设置。
-1. 如果禁用身份验证（`NoAuth: true`），则将跳过登录屏幕。
+1. 通过Web界面配置您喜欢的设置。
+1. 如果禁用认证（`NoAuth: true`），将跳过登录屏幕。
 
 ### 挂载驱动器
 
-此插件支持挂载本地驱动器和远程SMB共享：
+这个插件支持挂载本地驱动器和远程SMB共享：
 
 - **本地驱动器**：参见[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
 - **远程共享**：参见[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### 自定义脚本和环境变量
 
-此插件支持通过`addon_config`映射自定义脚本和环境变量：
+这个插件支持通过`addon_config`映射的自定义脚本和环境变量：
 
 - **自定义脚本**：参见[在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars选项**：使用插件的`env_vars`选项传递额外的环境变量（大小写名称均可）。参见https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2以获取详细信息。
+- **env_vars选项**：使用插件的`env_vars`选项传递额外的环境变量（大小写名称）。参见https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2获取详细信息。
 
 ## 支持
 
-在GitHub上创建问题，或在[Home Assistant社区线程](https://community.home-assistant.io/t/home-assistant-addon-filebrowser/282108/3)中提问。
+在GitHub上创建问题，或在[Home Assistant社区讨论板](https://community.home-assistant.io/t/home-assistant-addon-filebrowser/282108/3)上提问。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：
