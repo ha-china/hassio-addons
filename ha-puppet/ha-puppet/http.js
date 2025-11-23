@@ -2,6 +2,8 @@ import http from "node:http";
 import { Browser } from "./screenshot.js";
 import { isAddOn, hassUrl, hassToken, keepBrowserOpen } from "./const.js";
 import { CannotOpenPageError } from "./error.js";
+import { handleUIRequest } from "./ui.js";
+import { loadDevicesConfig, getDeviceConfig } from "./devices.js";
 
 // Maximum number of next requests to keep in memory
 const MAX_NEXT_REQUESTS = 100;
@@ -61,9 +63,16 @@ class RequestHandler {
   }
 
   async handleRequest(request, response) {
-    if (request.url === "/favicon.ico") {
+    const requestUrl = new URL(request.url, "http://localhost");
+
+    if (requestUrl.pathname === "/favicon.ico") {
       response.statusCode = 404;
       response.end();
+      return;
+    }
+
+    if (requestUrl.pathname === "/") {
+      await handleUIRequest(response);
       return;
     }
 
@@ -81,19 +90,38 @@ class RequestHandler {
 
     try {
       console.debug(requestId, "Handling", request.url);
-      const requestUrl = new URL(
-        request.url,
-        // We don't use this, but we need full URL for parsing.
-        "http://localhost",
-      );
+
+      // Load device configurations
+      const devicesData = loadDevicesConfig();
+
+      // Check for device parameter and apply device configuration
+      const deviceParam = requestUrl.searchParams.get("device");
+      let deviceConfig = null;
+      if (deviceParam) {
+        deviceConfig = getDeviceConfig(deviceParam, devicesData);
+        if (!deviceConfig) {
+          response.statusCode = 400;
+          response.end(`Unknown device: ${deviceParam}`);
+          return;
+        }
+      }
 
       let extraWait = parseInt(requestUrl.searchParams.get("wait"));
       if (isNaN(extraWait)) {
         extraWait = undefined;
       }
-      const viewportParams = (requestUrl.searchParams.get("viewport") || "")
-        .split("x")
-        .map((n) => parseInt(n));
+
+      // Get viewport - use device config as default if device is specified
+      let viewportParams;
+      const viewportQuery = requestUrl.searchParams.get("viewport");
+      if (viewportQuery) {
+        viewportParams = viewportQuery.split("x").map((n) => parseInt(n));
+      } else if (deviceConfig) {
+        viewportParams = [deviceConfig.width, deviceConfig.height];
+      } else {
+        viewportParams = [];
+      }
+
       if (
         viewportParams.length != 2 ||
         !viewportParams.every((x) => !isNaN(x))
@@ -106,6 +134,53 @@ class RequestHandler {
       let einkColors = parseInt(requestUrl.searchParams.get("eink"));
       if (isNaN(einkColors) || einkColors < 2) {
         einkColors = undefined;
+      }
+
+      // Supported colours as hex: colors=FF0000,00FF00,0000FF,... or colors=#FF0000,#00FF00,#0000FF,...
+      // Use device config as default if available
+      const colorsQuery = requestUrl.searchParams.get("colors");
+      const colorsString = colorsQuery !== null ? colorsQuery : (deviceConfig?.colors || "");
+      let colors = colorsString
+        .split(",")
+        .map((color) => color.trim())
+        .map((color) => color.startsWith("#") ? color : `#${color}`)
+        .filter((color) => /^#[0-9A-F]{6}$/i.test(color));
+
+      // Palette colours for quantization (pixels matched to these, then mapped to colors)
+      // Use device config as default if available
+      const paletteColorsQuery = requestUrl.searchParams.get("palette_colors");
+      const paletteColorsString = paletteColorsQuery !== null ? paletteColorsQuery : (deviceConfig?.palette_colors || "");
+      let paletteColors = paletteColorsString
+        .split(",")
+        .map((color) => color.trim())
+        .map((color) => color.startsWith("#") ? color : `#${color}`)
+        .filter((color) => /^#[0-9A-F]{6}$/i.test(color));
+
+      // Validate that colors and paletteColors have the same length if both are provided
+      if (colors.length > 0 && paletteColors.length > 0 && colors.length !== paletteColors.length) {
+        // Mismatch - clear paletteColors to ignore it
+        paletteColors = [];
+      }
+
+      // If palette_colors is empty, use colors as the palette
+      if (paletteColors.length === 0 && colors.length > 0) {
+        paletteColors = colors;
+      }
+
+      // Handle eink parameter deprecation and mutual exclusivity with colors
+      if (einkColors !== undefined) {
+        console.warn('[DEPRECATED] The "eink" query parameter is deprecated. Please use "colors" instead. Example: colors=000000,FFFFFF for black and white.');
+
+        // Convert eink=2 to black and white colors for backward compatibility
+        if (einkColors === 2 && colors.length === 0) {
+          colors = ["#000000", "#FFFFFF"];
+          console.log('[eink migration] Converted eink=2 to colors=000000,FFFFFF');
+          einkColors = undefined;
+        } else if (colors.length > 0) {
+          // colors parameter takes precedence - ignore eink
+          console.warn('[eink ignored] Both "eink" and "colors" parameters provided. Using "colors" and ignoring "eink".');
+          einkColors = undefined;
+        }
       }
 
       let zoom = parseFloat(requestUrl.searchParams.get("zoom"));
@@ -129,11 +204,31 @@ class RequestHandler {
       const theme = requestUrl.searchParams.get("theme") || undefined;
       const dark = requestUrl.searchParams.has("dark");
 
+      // Dithering algorithm
+      // Use device config as default if available
+      const ditheringQuery = requestUrl.searchParams.get("dithering");
+      let dithering = ditheringQuery !== null ? ditheringQuery : (deviceConfig?.dithering || "none");
+      const validDitheringAlgorithms = [
+        "none",
+        "floyd-steinberg",
+        "atkinson",
+        "jarvis-judice-ninke",
+        "stucki",
+        "burkes",
+        "sierra",
+        "sierra-lite"
+      ];
+      if (!validDitheringAlgorithms.includes(dithering)) {
+        dithering = "none";
+      }
+
       const requestParams = {
         pagePath: requestUrl.pathname,
         viewport: { width: viewportParams[0], height: viewportParams[1] },
         extraWait,
-        einkColors,
+        colors,
+        paletteColors,
+        dithering,
         invert,
         zoom,
         format,
@@ -150,26 +245,25 @@ class RequestHandler {
         next = undefined;
       }
 
+      // We removed error handling on this block so the add-on crashes and watchdog recovers
       let image;
+      let navigateResult = null;
       try {
-        const navigateResult = await this.browser.navigatePage(requestParams);
-        console.debug(requestId, `Navigated in ${navigateResult.time} ms`);
-        this.navigationTime = Math.max(
-          this.navigationTime,
-          navigateResult.time,
-        );
-        const screenshotResult = await this.browser.screenshotPage(
-          requestParams,
-        );
-        console.debug(requestId, `Screenshot in ${screenshotResult.time} ms`);
-        image = screenshotResult.image;
+        navigateResult = await this.browser.navigatePage(requestParams);
       } catch (err) {
-        console.error(requestId, "Error generating screenshot", err);
-        response.statusCode =
-          err instanceof CannotOpenPageError ? err.status : 500;
-        response.end();
-        return;
+        if (err instanceof CannotOpenPageError) {
+          console.error(requestId, `Cannot open page: ${err.message}`);
+          response.statusCode = 404;
+          response.end(`Cannot open page: ${err.message}`);
+          return;
+        }
+        throw err;
       }
+      console.debug(requestId, `Navigated in ${navigateResult.time} ms`);
+      this.navigationTime = Math.max(this.navigationTime, navigateResult.time);
+      const screenshotResult = await this.browser.screenshotPage(requestParams);
+      console.debug(requestId, `Screenshot in ${screenshotResult.time} ms`);
+      image = screenshotResult.image;
 
       // If eink processing happened, the format could be png or bmp
       const responseFormat = format;
@@ -269,6 +363,4 @@ const now = new Date();
 const serverUrl = isAddOn
   ? `http://homeassistant.local:${port}`
   : `http://localhost:${port}`;
-console.log(
-  `[${now.toLocaleTimeString()}] Visit server at ${serverUrl}/lovelace/0?viewport=800x480`,
-);
+console.log(`[${now.toLocaleTimeString()}] Visit server at ${serverUrl}`);

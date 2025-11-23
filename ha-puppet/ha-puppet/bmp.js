@@ -88,8 +88,7 @@ export class BMPEncoder {
           pixelData.writeUInt8(0, offset++);
         }
       }
-}
-
+    }
 
     return pixelData;
   }
