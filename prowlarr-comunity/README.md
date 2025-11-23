@@ -4,11 +4,11 @@
 
 [![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
 
-基于流行的 arr 堆栈构建的索引器管理器/代理，用于与您的各种 PVR 应用程序集成。
+基于流行的 arr 堆栈构建的索引器管理器/代理，用于与您的各种 PVR 应用集成。
 
 ## 关于
 
-[Prowlarr] 是一个基于流行的 *arr .net/reactjs 基础堆栈构建的索引器管理器/代理，用于与您的各种 PVR 应用程序集成。Prowlarr 支持对 Torrent 跟踪器和 Usenet 索引器的管理。它与 Lidarr、Mylar3、Radarr、Readarr 和 Sonarr 无缝集成，提供对您的索引器的完整管理，无需每个应用程序设置索引器（它全部处理）。
+[Prowlarr] 是一个基于流行的 *arr .net/reactjs 基础堆栈构建的索引器管理器/代理，用于与您的各种 PVR 应用集成。Prowlarr 支持管理和使用 Torrent 跟踪器和 Usenet 索引器。它可以与 Lidarr、Mylar3、Radarr、Readarr 和 Sonarr 无缝集成，为您提供全面的索引器管理，无需每个应用单独设置索引器（它可以全部处理）。
 
 [Prowlarr]: https://github.com/Prowlarr/Prowlarr
 
@@ -18,8 +18,12 @@
 [forum]: https://community.home-assistant.io/t/?u=frenck
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2024.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.27.0-blue.svg
-[release]: https://github.com/hassio-addons/addon-prowlarr/tree/v0.27.0
+[release-shield]: https://img.shields.io/badge/version-v0.27.1-blue.svg
+[release]: https://github.com/hassio-addons/addon-prowlarr/tree/v0.27.1
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：
