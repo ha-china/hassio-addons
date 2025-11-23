@@ -1,8 +1,7 @@
 arch:
   - aarch64
   - amd64
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：带可选VPN的Bittorrent客户端'
+description: '[老王杂谈说]：带可选VPN的BitTorrent客户端'
 devices:
   - /dev/net/tun
   - /dev/dri
@@ -68,7 +67,7 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment:
-  WEBUI_PORT: '8080'
+  WEBUI_PORT: "8080"
 homeassistant: 2023.12.0
 image: ghcr.nju.edu.cn/alexbelgium/qbittorrent-{arch}
 ingress: true
@@ -81,9 +80,10 @@ map:
   - ssl
 name: qBittorrent
 options:
+  env_vars: []
   DNS_server: 8.8.8.8,1.1.1.1
-  PGID: '0'
-  PUID: '0'
+  PGID: "0"
+  PUID: "0"
   SavePath: /share/qBittorrent
   Username: admin
   certfile: fullchain.pem
@@ -91,6 +91,8 @@ options:
   keyfile: privkey.pem
   qbit_manage: false
   ssl: false
+  wireguard_enabled: false
+  wireguard_config: ""
   whitelist: localhost,127.0.0.1,172.30.0.0/16,192.168.0.0/16
 panel_admin: false
 panel_icon: mdi:progress-download
@@ -111,6 +113,9 @@ privileged:
   - DAC_READ_SEARCH
   - NET_ADMIN
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   DNS_server: str?
   PGID: int?
   PUID: int?
@@ -134,8 +139,10 @@ schema:
   run_duration: str?
   silent: bool?
   ssl: bool
+  wireguard_config: str?
+  wireguard_enabled: bool?
   whitelist: str?
 slug: qbittorrent
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 5.1.2-7
+version: 5.1.2-13

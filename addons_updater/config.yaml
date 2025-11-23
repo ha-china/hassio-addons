@@ -3,7 +3,7 @@ arch:
   - amd64
   - armv7
 boot: manual
-description: '[老王杂谈说]：自动通过将版本标签与上游发布对齐来更新附加组件'
+description: '[老王杂谈说]：通过将版本标签与上游发布进行对齐来自动更新附加组件'
 environment:
   GIT_DISCOVERY_ACROSS_FILESYSTEM: "1"
 image: ghcr.nju.edu.cn/alexbelgium/addons_updater-{arch}
@@ -12,10 +12,14 @@ map:
   - addon_config:rw
 name: Repository Updater
 options:
+  env_vars: []
   gitapi: gitapi
   gituser: gituser
   repository: alexbelgium/hassio-addons
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   dry_run: bool?
   gitapi: str
   gitmail: str?
@@ -25,4 +29,4 @@ schema:
 slug: updater
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/addons_updater
-version: "3.19.11"
+version: "3.19.12"

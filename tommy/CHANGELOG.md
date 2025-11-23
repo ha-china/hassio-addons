@@ -1,5 +1,66 @@
 # TOMMY
 
+
+## 0.21.1
+
+### Minor Changes
+
+- Allow toggling new false positive filter
+- Fixed issues with machine ID overflowing screen
+- Fixed issue with motion being detection at threshold instead of above
+
+## 0.21.0
+
+### Major Changes
+
+- Improved motion detection when entering zone
+- Improved motion detection for fast twitch movements
+- Improved filtering of false positives
+- Improved packet processing
+- Implemented redundancy that allows other sensors to continue detecting motion when one is offline. A minimum of 2 active devices is still required.
+
+### Minor Changes
+
+- Added info text to visualizations in dashboard regarding choppiness being normal
+
+## 0.20.8
+
+### Minor Changes
+
+- Fixed a problem with sensor fusion that could cause degraded motion detection under some specific network conditions
+
+## 0.20.7
+
+### Minor Changes
+
+- Update to internal credentials manager
+
+## 0.20.6
+
+### Minor Changes
+
+- Update to internal credentials manager
+
+## 0.20.5
+
+### Minor Changes
+
+- Moved credentials to root configuration
+
+## 0.20.4
+
+### Minor Changes
+
+- Fixed credentials input
+
+## 0.20.3
+
+### Minor Changes
+
+- Changed default dashboard port to 8089
+- Changed default MQTT port to 1886
+- Added configuration options for license
+
 ## 0.20.2
 
 ### Minor Changes

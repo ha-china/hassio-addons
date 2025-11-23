@@ -1,4 +1,14 @@
 # Changelog
+## 2.15.1
+- Automatically updated addon-base to version v19.0.0
+
+## 2.15.0
+- Automatically updated addon-base to version v19.0.0
+- Drop support for armhf, armv7, and i386 systems
+
+## 2.14.2
+- Test
+
 ## 2.14.1
 - Automatically updated addon-base to version v18.2.1
 - Improved webdir permissions

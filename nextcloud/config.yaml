@@ -1,7 +1,6 @@
 arch:
   - aarch64
   - amd64
-codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：Nextcloud for Homeassistant'
 devices:
   - /dev/dri
@@ -80,8 +79,8 @@ devices:
   - /dev/nvme2
 environment:
   NEXTCLOUD_PATH: /data/config/www/nextcloud
-  SKIP_DATA_DIRECTORY_PERMISSION_CHECK: 'yes'
-  TRUSTED_PROXIES: '**'
+  SKIP_DATA_DIRECTORY_PERMISSION_CHECK: "yes"
+  TRUSTED_PROXIES: "**"
 hassio_api: true
 image: ghcr.nju.edu.cn/alexbelgium/nextcloud_ocr-{arch}
 ingress_port: 0
@@ -94,6 +93,7 @@ map:
   - ssl:rw
 name: Nextcloud
 options:
+  env_vars: []
   Full_Text_Search: false
   OCR: false
   OCRLANG: fra
@@ -118,6 +118,9 @@ privileged:
   - SYS_ADMIN
   - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   Full_Text_Search: bool?
   OCR: bool?
   OCRLANG: str?
@@ -148,5 +151,5 @@ slug: nextcloud_ocr
 uart: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/nextcloud
-version: "32.0.1"
+version: "32.0.2"
 webui: https://[HOST]:[PORT:443]

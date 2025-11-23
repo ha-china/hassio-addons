@@ -1,7 +1,6 @@
 arch:
   - aarch64
   - amd64
-codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：食谱管理器'
 devices:
   - /dev/dri
@@ -67,10 +66,10 @@ devices:
   - /dev/nvme2
 environment:
   DB_ENGINE: django.db.backends.sqlite3
-  DISABLE_INGRESS: 'true'
-  MEDIA_ROOT: ''
+  DISABLE_INGRESS: "true"
+  MEDIA_ROOT: ""
   POSTGRES_DB: /config/addons_config/tandoor_recipes/recipes.db
-  TRUSTED_PROXIES: '**'
+  TRUSTED_PROXIES: "**"
 image: ghcr.nju.edu.cn/alexbelgium/tandoor_recipes-{arch}
 map:
   - config:rw
@@ -78,9 +77,10 @@ map:
   - media:rw
 name: Tandoor recipes
 options:
-  ALLOWED_HOSTS: '*'
+  env_vars: []
+  ALLOWED_HOSTS: "*"
   DB_TYPE: sqlite
-  DEBUG: '0'
+  DEBUG: "0"
   SECRET_KEY: YOUR_SECRET_KEY
   externalfiles_folder: /config/addons_config/tandoor_recipes/externalfiles
 panel_admin: false
@@ -91,6 +91,9 @@ ports:
 ports_description:
   80/tcp: Web interface
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   AI_API_KEY: str?
   AI_MODEL_NAME: str?
   AI_RATELIMIT: str?
@@ -109,5 +112,5 @@ services:
 slug: tandoor_recipes
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "2.3.3"
+version: "2.3.5"
 webui: http://[HOST]:[PORT:80]

@@ -1,5 +1,42 @@
 # Changelog
 
+## 0.4.4
+
+### Bug Fixes
+- Fix a bug where the delete and edit buttons in widgets do not appear if entity is deleted from HA
+
+## 0.4.3
+
+### Bug Fixes
+- Fix the issue where the app does not load at all on startup (for real for real this time)
+
+## 0.4.2
+
+### Bug Fixes
+- Fix the issue where the app does not load at all on startup (for real this time)
+
+## 0.4.1
+
+### Bug Fixes
+- Fix the issue where the app does not load at all on startup
+
+## 0.4.0
+
+### Features
+
+- Add media player widget with play, pause, next, previous, volume control, and source selection
+- Add cover widget for controlling Home Assistant cover entities with position adjustments
+- Add clock widget with configuration options
+- Add demo mode functionality for testing without real Home Assistant connections
+- Implement simplified session management architecture
+- Enhance dock management with drag-and-drop reordering and dynamic item visibility
+- Add support for dock links to external URLs alongside dashboards
+
+### Bug Fixes
+
+- Refactor area widget dialogs to use consistent entity ID retrieval
+- Remove deprecated configuration files and migrate to unified configuration structure
+
 ## 0.3.2
 
 ### Bug Fixes

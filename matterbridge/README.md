@@ -6,83 +6,67 @@ Matterbridge for Homeassistant OS
 
 ## About
 
-A simple chat bridge<br />
-Letting people be where they want to be.<br />
-Bridges between a growing number of protocols.<br />
+一个简单的聊天桥接<br />
+让人们在哪里他们想要的地方。<br />
+在越来越多的协议之间建立桥梁。<br />
 
-## Installation
+## 安装
 
 [![FaserF Homeassistant Addons](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FFaserF%2Fhassio-addons)
 <br />
-The installation of this add-on is pretty straightforward and not different in comparison to installing any other custom Home Assistant add-on.<br />
-Just click the link above or add my repo to the hassio addons repositorys: <https://github.com/FaserF/hassio-addons>
+这个插件的安装非常简单，与安装任何其他自定义 Home Assistant 插件没有区别。<br />
+只需点击上面的链接或添加我的仓库到 hassio 插件仓库： <https://github.com/FaserF/hassio-addons>
 
-Put your website files to /share/htdocs<br />
-Example File where your index.html should be: /share/htdocs/index.html <br />
+将您的网站文件放到 /share/htdocs<br />
+您的 index.html 应该放置的示例文件： /share/htdocs/index.html <br />
 
-If you want to integrate your website with a mariadb database. Please ensure that the MariaDB Addon is installed!
+如果您想将您的网站与 mariadb 数据库集成。请确保安装了 MariaDB 插件！
 
-## Configuration
+## 配置
 
-**Note**: _Remember to restart the add-on when the configuration is changed._
+**注意**: _更改配置时，请记住重启插件。_
 
-Example add-on configuration:
+示例插件配置：
 
 ```yaml
 config_path: /share/matterbridge.toml
 ```
 
-**Note**: _This is just an example, don't copy and paste it! Create your own!_
+**注意**: _这只是个示例，不要复制粘贴它！创建你自己的！_
 
-### Option: `config_path`
+### 选项: `config_path`
 
-The path to your matterbridge config file. Have a look at the example config here: <https://github.com/42wim/matterbridge/blob/master/matterbridge.toml.sample>
+您 matterbridge 配置文件的路径。查看这里的示例配置： <https://github.com/42wim/matterbridge/blob/master/matterbridge.toml.sample>
 
-**Note**: _It has to be put somewhere in the /share folder!_
+**注意**: _它必须放在 /share 文件夹的某个地方！_
 
-## Support
+## 支持
 
-Got questions or problems?
+有问题或问题？
 
-You can [open an issue here][issue] GitHub.
-Please keep in mind, that this software is only tested on armv7 running on a Raspberry Pi 4.
+您可以 [在这里打开一个问题][issue] GitHub。
+请记住，这个软件只在与 Raspberry Pi 4 一起运行的 armv7 上进行了测试。
 
-## Authors & contributors
+## 作者和贡献者
 
-The original program is from the 42wim. For more informatios please visit this page: <https://github.com/42wim/matterbridge><br />
-The hassio addon is brought to you by [FaserF].
+原始程序来自 42wim。更多信息请访问这个页面： <https://github.com/42wim/matterbridge><br />
+hassio 插件由 [FaserF] 提供。
 
-## License
+## 许可证
 
-MIT License
+MIT 许可证
 
-Copyright (c) 2019-2025 FaserF & 42wim
+版权所有 (c) 2019-2025 FaserF & 42wim
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+特此授予任何获得此软件及其相关文档文件（“软件”）副本的人，在软件中自由处理的权限，不受任何限制，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权限，并允许提供软件的人这样做，但须遵守以下条件：
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+软件按“原样”提供，不提供任何形式的保证，明示或暗示，包括但不限于对适销性、特定用途适用性和非侵权性的保证。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论这些责任是由于合同、侵权或其他行为引起的，还是由于与软件的使用或其他交易有关。
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
-[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
-[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
-[armhf-shield]: https://img.shields.io/badge/armhf-yes-green.svg
-[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
-[FaserF]: https://github.com/FaserF/
-[issue]: https://github.com/FaserF/hassio-addons/issues
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

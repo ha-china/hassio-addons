@@ -111,7 +111,7 @@ RUN chmod 744 /ha_automodules.sh && /ha_automodules.sh "$MODULES" && rm /ha_auto
 #    && chmod a+x /etc/s6-overlay/s6-rc.d/$SCRIPTSNAME/* ; done; fi
 
 # Manual apps
-ARG PACKAGES="wireguard-tools"
+ARG PACKAGES="wireguard-tools iptables ip6tables"
 
 # Automatic apps & bashio
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_autoapps.sh" "/ha_autoapps.sh"
@@ -124,6 +124,8 @@ RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.
 ################
 # 4 Entrypoint #
 ################
+
+RUN chmod +x /usr/local/bin/* /usr/local/sbin/*
 
 # Add entrypoint
 ENV S6_STAGE2_HOOK=/ha_entrypoint.sh

@@ -6,7 +6,7 @@ Freenom DNS Updater for Homeassistant OS
 
 ## About
 
-Freenom is a (free) Registrar provider. This is a docker image based on @maxisoft's work from his [Freenom DNS Updater](https://github.com/maxisoft/Freenom-dns-updater).<br />
+Freenom is a (free) Registrar provider. This is a docker image based on @maxisoft 's work from his [Freenom DNS Updater](https://github.com/maxisoft/Freenom-dns-updater).<br />
 The full feature list can be found there.
 
 ## Installation
@@ -85,6 +85,10 @@ SOFTWARE.
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
 [FaserF]: https://github.com/FaserF/
 [issue]: https://github.com/FaserF/hassio-addons/issues
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

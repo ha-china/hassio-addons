@@ -1,8 +1,7 @@
 arch:
   - aarch64
   - amd64
-  - armv7
-description: '[老王杂谈说]：将应用程序（Sonarr、Sickrage、CouchPotato、Mylar等）中的查询翻译成针对特定追踪站点的HTTP查询，解析HTML响应，然后将结果发送回请求软件'
+description: '[老王杂谈说]：将来自应用程序（Sonarr、Sickrage、CouchPotato、Mylar等）的查询转换为针对特定跟踪站点的HTTP查询，解析HTML响应，然后将结果发送回请求软件'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -104,5 +103,5 @@ schema:
 slug: jackett_nas
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/jackett
-version: "0.24.255"
+version: "0.24.338"
 webui: http://[HOST]:[PORT:9117]

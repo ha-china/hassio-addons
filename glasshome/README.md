@@ -1,25 +1,25 @@
 # GlassHome Dashboard
 
-现代、可定制的 Home Assistant 仪表板，具有美丽的玻璃态设计。
+现代、可定制的Home Assistant仪表板，具有漂亮的玻璃态设计。
 
 ## 免责声明：
-这是一个 BETA 版本。如果你的设置非常定制化，它可能无法正常工作。我没有在测试我的设置上彻底测试，但我希望它不会崩溃和烧毁，请谨慎操作并备份你的 Home Assistant！
+这是一个BETA版本。如果你的设置非常自定义，它可能无法正常工作。我不期望它会崩溃和烧毁，因为我已经在我的设置上彻底测试了，但请小心操作并备份你的Home Assistant！
 
 ## 安装
 
-1. 将此仓库添加到你的 Home Assistant：
+1. 将此仓库添加到你的Home Assistant：
    - 设置 → 插件 → 插件商店
    - 点击 ⋮（菜单）→ 仓库
    - 添加：`https://github.com/IhsenBouallegue/glasshome-addon`
 
-2. 从插件商店安装 "GlassHome Dashboard"
+2. 从插件商店安装“GlassHome Dashboard”
 
 3. 启动插件
 
 ## 功能
 
-- 🎨 带暗黑模式的美丽玻璃态设计
-- 🖱️ 拖放式小部件定制
+- 🎨 带有暗黑模式的漂亮玻璃态设计
+- 🖱️ 拖放小部件定制
 - 🏠 基于区域的组织
 - 📊 多种小部件类型：
   - 带颜色控制的灯光
@@ -29,22 +29,26 @@
   - 天气
   - 场景
   - 电池监控
-- 💾 持久化仪表板配置
+- 💾 持久化的仪表板配置
 - 🔐 安全认证
 
 ## 访问仪表板
 
 启动插件后，打开你的浏览器并前往：
-- `http://homeassistant.local:3123`（如果使用 .local 域名）
-- `http://YOUR_HA_IP:3123`（替换为你的 HA IP 地址）
+- `http://homeassistant.local:3123`（如果使用.local域名）
+- `http://YOUR_HA_IP:3123`（替换为你的HA IP地址）
 
 ## 配置
 
-目前不需要配置选项 - 开箱即用！
+目前不需要配置选项 - 即开即用！
 
 ## 支持
 
-如有问题或功能请求，请访问 [discord 频道](https://discord.com/channels/1428131437265289248/1428167573094010930)
+如有问题或功能请求，请访问 [discord频道](https://discord.com/channels/1428131437265289248/1428167573094010930)
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

@@ -1,3 +1,8 @@
+## 5.14.26.1-2024-08-29-2 (18-11-2025)
+- Minor bugs fixed
+
+## 5.14.26.1-2024-08-29-1 (18-11-2025)
+- Added `env_vars` option to allow passing custom environment variables from the add-on configuration.
 
 ## 5.14.26.1-2024-08-29 (2024-08-29)
 - Update to latest version from mbentley/omada-controller

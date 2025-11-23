@@ -1,3 +1,11 @@
+## 3.4.5-2 (18-11-2025)
+- Minor bugs fixed
+
+## 3.4.5-1 (18-11-2025)
+- Added `env_vars` option to allow custom environment variables from the add-on configuration.
+
+## 3.4.5 (15-11-2025)
+- Update to latest version from FlareSolverr/FlareSolverr (changelog : https://github.com/FlareSolverr/FlareSolverr/releases)
 
 ## 3.4.4 (08-11-2025)
 - Update to latest version from FlareSolverr/FlareSolverr (changelog : https://github.com/FlareSolverr/FlareSolverr/releases)

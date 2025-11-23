@@ -3,7 +3,7 @@ arch:
   - aarch64
   - amd64
   - armv7
-description: '[老王杂谈说]：一个用于船只的Signal K中央服务器的实现'
+description: '[老王杂谈说]：一艘船的Signal K中央服务器实现'
 devices:
   - /dev/can0
   - /dev/can1
@@ -21,6 +21,8 @@ image: ghcr.nju.edu.cn/alexbelgium/signalk-{arch}
 map:
   - addon_config:rw
 name: Signalk Server
+options:
+  env_vars: []
 ports:
   10110/tcp: 10110
   1458/udp: null
@@ -37,6 +39,10 @@ ports_description:
   3000/tcp: web interface
   3443/tcp: ssl web interface
   8375/tcp: TCPSTREAM port
+schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
 privileged:
   - SYS_ADMIN
   - SYS_RAWIO
@@ -45,5 +51,5 @@ uart: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
 usb: true
-version: "2.18.0"
+version: 2.18.0-2
 webui: http://[HOST]:[PORT:3000]

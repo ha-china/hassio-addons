@@ -1,4 +1,11 @@
 
+## 8.15.0 (22-11-2025)
+- Update to latest version from linuxserver/docker-calibre (changelog : https://github.com/linuxserver/docker-calibre/releases)
+## 8.14.0-4 (16-11-2025)
+- Minor bugs fixed
+## 8.14.0-2 (15-11-2025)
+- Minor bugs fixed
+
 ## 8.14.0 (08-11-2025)
 - Update to latest version from linuxserver/docker-calibre (changelog : https://github.com/linuxserver/docker-calibre/releases)
 - Added support for configuring extra environment variables via the `env_vars` add-on option alongside config.yaml. See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.

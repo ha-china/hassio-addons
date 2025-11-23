@@ -1,9 +1,7 @@
 arch:
   - aarch64
   - amd64
-  - armv7
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：一个类似Couchpotato的Sonarr分支程序'
+description: '[老王杂谈说]：Sonarr的一个分支，用于处理像Couchpotato这样的电影'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -67,8 +65,8 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment:
-  PGID: '0'
-  PUID: '0'
+  PGID: "0"
+  PUID: "0"
 image: ghcr.nju.edu.cn/alexbelgium/radarr_nas-{arch}
 ingress: true
 ingress_entry: radarr
@@ -80,6 +78,7 @@ map:
   - ssl
 name: Radarr
 options:
+  env_vars: []
   PGID: 0
   PUID: 0
   connection_mode: ingress_noauth
@@ -93,6 +92,9 @@ privileged:
   - SYS_ADMIN
   - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   PGID: int
   PUID: int
   TZ: str?
@@ -105,4 +107,4 @@ schema:
 slug: radarr_nas
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/radarr
-version: "5.28.0.10274"
+version: "6.0.4.10291"

@@ -1,14 +1,11 @@
 name: Freenom-dns-updater
-version: 1.6.10
+version: 1.7.1
 slug: freenom-dns-updater
 description: '[老王杂谈说]：Freenom 注册商域名管理 - 更新DNS记录，管理（添加/更新/删除）域名的DNS记录，自动续订域名等。'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/freenom-dns-updater
 arch:
-  - armhf
-  - armv7
   - aarch64
   - amd64
-  - i386
 startup: application
 boot: auto
 map:

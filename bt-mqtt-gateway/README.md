@@ -16,16 +16,16 @@ This can be used to improve the reliability of Bluetooth thermostats. See <https
 
 ## Installation
 
-The installation of this add-on is pretty straightforward and not different from installing any other custom Home Assistant add-on.
+The installation of this add-on is quite straightforward and not different from installing any other custom Home Assistant add-on.
 Just add my repo to the hassio addons repository: <https://github.com/FaserF/hassio-addons>
 
 Put your config file to /share/bt-mqtt-gateway.yaml
-Please make sure that a MQTT Addon is already installed.
+Please make sure that a MQTT add-on is already installed.
 
 ## Configuration
 
 **Note**: _Remember to restart the add-on when the configuration is changed._
-Until now these config options do NOTHING! they are not implemented yet, but planned!!!
+Until now, these config options do NOTHING! they are not implemented yet, but planned!!!
 
 Example add-on configuration:
 
@@ -38,7 +38,7 @@ debug: true
 
 ### Option: `config_path`
 
-This option is needed. Change it depending on where your config file is on your Homeassistant installation.
+This option is required. Change it depending on where your config file is located in your Home Assistant installation.
 
 ### Option: `debug`
 
@@ -49,7 +49,7 @@ Setting this option to "true" will start the add-on in debugging mode. Default: 
 
 Got questions?
 
-You could [open an issue here][issue] GitHub.
+You can [open an issue here][issue] on GitHub.
 Please keep in mind that this software is only tested on armv7 running on a Raspberry Pi 4.
 
 ## Authors & contributors
@@ -89,6 +89,10 @@ SOFTWARE.
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
 [issue]: https://github.com/FaserF/hassio-addons/issues
 [maintenance-shield]: https://img.shields.io/maintenance/no/2024.svg
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

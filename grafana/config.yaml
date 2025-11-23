@@ -1,9 +1,8 @@
 name: Grafana
-version: 11.0.0
+version: 12.0.0
 slug: grafana
-description: 美丽的分析和监控的开平台。
+description: '[老王杂谈说]：用于美观分析和监控的开平台'
 url: https://ghfast.top/github.com/hassio-addons/addon-grafana
-codenotary: codenotary@frenck.dev
 startup: services
 ingress: true
 ingress_port: 1337
@@ -12,13 +11,12 @@ init: false
 panel_icon: mdi:chart-timeline
 panel_title: Grafana
 arch:
-- aarch64
-- amd64
-- armv7
+  - aarch64
+  - amd64
 map:
-- homeassistant_config
-- share
-- ssl
+  - homeassistant_config
+  - share
+  - ssl
 options:
   plugins: []
   custom_plugins: []
@@ -33,16 +31,16 @@ ports_description:
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   plugins:
-  - str
+    - str
   custom_plugins:
-  - name: str
-    url: str
-    unsigned: bool?
+    - name: str
+      url: str
+      unsigned: bool?
   certfile: str
   keyfile: str
   ssl: bool
   grafana_ingress_user: str?
   env_vars:
-  - name: match(^GF_([A-Z0-9_])+$)
-    value: str
+    - name: match(^GF_([A-Z0-9_])+$)
+      value: str
 image: ghcr.nju.edu.cn/hassio-addons/grafana/{arch}

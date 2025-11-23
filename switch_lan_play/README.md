@@ -8,8 +8,8 @@ Nintendo Switch LAN-Play Client for Homeassistant OS
 
 ## About
 
-To play with your CFW Nintendo Switch online, you can use this addon + a public or private Server. This addon can be used, to stop running the lan play client on a Desktop PC/Laptop.
-This is just the Client Software and NOT the Server Sotware. To use a lan-play server with Homeassistant OS, please have a look at my other addon: <https://github.com/FaserF/hassio-addons/switch_lan_play_server>
+To play with your CFW Nintendo Switch online, you can use this add-on + a public or private Server. This add-on can be used to stop running the lan play client on a Desktop PC/Laptop.
+This is just the Client Software and NOT the Server Software. To use a lan-play server with Homeassistant OS, please have a look at my other add-on: <https://github.com/FaserF/hassio-addons/switch_lan_play_server>
 
 This docker image will self-compile the latest lan-play software and run it based on your architecture. More information can be found here: <https://drive.google.com/file/d/1A_4o8HCAfDBFsePcGL3utG-LfzMUovcx/view>
 The first installation can take up to 10 minutes because of this! Depending on your hardware.
@@ -83,6 +83,10 @@ SOFTWARE.
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
 [issue]: https://github.com/FaserF/hassio-addons/issues
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

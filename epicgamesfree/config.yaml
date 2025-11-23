@@ -1,8 +1,7 @@
 arch:
   - aarch64
   - amd64
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：自动登录并兑换Epic Games商店的促销免费游戏'
+description: '[老王杂谈说]：自动登录并兑换Epic Games Store的促销免费游戏'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -72,12 +71,18 @@ init: false
 map:
   - config:rw
 name: Epic Games Free
+options:
+  env_vars: []
 ports:
   3000/tcp: 3000
 ports_description:
   3000/tcp: web interface
+schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
 slug: epicgamesfree
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "debian-2025-10-28"
+version: "debian-2025-11-16"
 webui: "[PROTO:ssl]://[HOST]:[PORT:3000]"

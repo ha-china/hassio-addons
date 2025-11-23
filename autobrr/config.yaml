@@ -2,7 +2,6 @@ arch:
   - aarch64
   - amd64
   - armv7
-codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：下载自动化'
 devices:
   - /dev/dri
@@ -68,10 +67,10 @@ devices:
   - /dev/nvme2
 environment:
   BASE_DOCKER_DATA_PATH: /data/autobrr
-  PGID: '0'
-  PUID: '0'
+  PGID: "0"
+  PUID: "0"
   WEBUI_PASSWORD: password
-  WEBUI_PORT: '7474'
+  WEBUI_PORT: "7474"
   WEBUI_USERNAME: admin
 image: ghcr.nju.edu.cn/alexbelgium/autobrr-{arch}
 ingress: true
@@ -83,6 +82,7 @@ map:
   - ssl
 name: Autobrr
 options:
+  env_vars: []
   PGID: 0
   PUID: 0
 panel_admin: false
@@ -95,6 +95,9 @@ privileged:
   - SYS_ADMIN
   - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   PGID: int
   PUID: int
   TZ: str?
@@ -106,4 +109,4 @@ schema:
 slug: autobrr
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/autobrr
-version: 1.68.0
+version: "1.69.0"

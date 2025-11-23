@@ -3,7 +3,6 @@ arch:
   - amd64
 audio: true
 backup: cold
-codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：实时声学鸟类分类系统'
 devices:
   - /dev/dri
@@ -68,6 +67,7 @@ map:
   - ssl
 name: BirdNET-pi
 options:
+  env_vars: []
   BIRDSONGS_FOLDER: /config/BirdSongs
   LIVESTREAM_BOOT_ENABLED: false
   MQTT_DISABLED: true
@@ -88,6 +88,9 @@ privileged:
   - SYS_ADMIN
   - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   BIRDSONGS_FOLDER: str?
   LIVESTREAM_BOOT_ENABLED: bool
   MQTT_DISABLED: bool?
@@ -113,5 +116,5 @@ tmpfs: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/birdnet-pi
 usb: true
-version: 2025.11.04
+version: 2025.11.09
 video: true

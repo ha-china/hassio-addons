@@ -1,7 +1,6 @@
 arch:
   - aarch64
   - amd64
-codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：开源在线家谱系统'
 devices:
   - /dev/dri
@@ -77,6 +76,7 @@ environment:
 image: ghcr.nju.edu.cn/alexbelgium/grampsweb-{arch}
 init: false
 options:
+  env_vars: []
   CELERY_NUM_WORKERS: 2
   GUNICORN_NUM_WORKERS: 8
   certfile: fullchain.pem
@@ -93,6 +93,9 @@ ports:
 ports_description:
   5001/tcp: webui
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   CELERY_NUM_WORKERS: int
   GUNICORN_NUM_WORKERS: int
   GRAMPSWEB_SECRET_KEY: str?
@@ -111,5 +114,5 @@ services:
 slug: grampsweb
 tmpfs: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/grampsweb
-version: "25.10.2"
+version: "25.11.0"
 webui: "[PROTO:ssl]://[HOST]:[PORT:5001]"

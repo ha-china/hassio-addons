@@ -1,9 +1,7 @@
 arch:
   - aarch64
   - amd64
-  - armv7
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：用于Usenet和BitTorrent用户的音乐收藏管理器'
+description: '[老王杂谈说]：Usenet和BitTorrent用户的音乐收藏管理器'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -78,6 +76,7 @@ map:
   - media:rw
 name: Lidarr NAS
 options:
+  env_vars: []
   PGID: 0
   PUID: 0
 ports:
@@ -88,6 +87,9 @@ privileged:
   - SYS_ADMIN
   - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   PGID: int
   PUID: int
   TZ: str?
@@ -99,5 +101,5 @@ schema:
 slug: lidarr_nas
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/blob/master/lidarr/README.md
-version: "3.0.1.4866"
+version: "3.1.0.4875"
 webui: "[PROTO:ssl]://[HOST]:[PORT:8686]"

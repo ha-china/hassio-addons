@@ -1,7 +1,7 @@
 name: AirSonos
-version: 5.0.1
+version: 5.0.2
 slug: airsonos
-description: '[老王杂谈说]：AirPlay功能，适用于您的Sonos（和UPnP）设备。'
+description: '[老王杂谈说]：为您的Sonos（和UPnP）设备提供AirPlay功能。'
 url: https://ghfast.top/github.com/hassio-addons/addon-airsonos
 startup: services
 init: false

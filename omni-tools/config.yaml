@@ -1,17 +1,22 @@
 arch:
   - aarch64
   - amd64
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：一个强大的基于网络的工具集合，用于日常任务。没有广告，没有追踪，只需从您的浏览器访问快速、便捷的工具。'
+description: '[老王杂谈说]：一个强大的基于网络的工具集合，用于日常任务。没有广告，没有跟踪，只是从你的浏览器中快速、可访问的实用工具。'
 image: ghcr.nju.edu.cn/alexbelgium/omni-tools-{arch}
 map:
   - addon_config:rw
 name: Omni Tools
+options:
+  env_vars: []
 ports:
   80/tcp: 8188
 ports_description:
   80/tcp: Web UI port
+schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
 slug: omni-tools
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 0.6.0
-webui: '[PROTO:ssl]://[HOST]:[PORT:80]'
+version: 0.6.1
+webui: "[PROTO:ssl]://[HOST]:[PORT:80]"

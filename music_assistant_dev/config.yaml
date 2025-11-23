@@ -1,6 +1,6 @@
 name: Music Assistant DEV SERVER
 # version number gets updated only when the mass base image updates!
-version: 1.4.9g
+version: 1.4.10
 slug: music_assistant_dev
 description: '[老王杂谈说]：音乐助手开发插件。仅供开发者使用。'
 url: https://music-assistant.io

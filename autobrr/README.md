@@ -1,4 +1,4 @@
-# Home assistant add-on: Autobrr
+# Home assistant add-on: Autobrrf
 
 [![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -18,30 +18,30 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/autobrr/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/autobrr/stats.png)
 
 ## 关于
 
 ---
 
-[Autobrr](https://autobrr.com/) autobrr 是用于 torrent 下载的现代化自动化工具。在 trackarr、autodl-irssi 和 flexget 等工具的灵感和想法下，我们构建了一个可以完成所有事情并超越这一切的工具。
+[Autobrr](https://autobrr.com/) autobrr 是现代的种子下载自动化工具。在 trackarr、autodl-irssi 和 flexget 等工具的灵感和想法下，我们构建了一个可以完成所有事情，甚至更多功能的工具。
 
-此插件基于以下 Docker 镜像：https://github.com/autobrr/autobrr
+这个插件基于 Docker 镜像 https://github.com/autobrr/autobrr
 
 ## 安装
 
 ---
 
-此插件的安装非常简单，与安装任何其他插件没有区别。
+这个插件的安装非常简单，与安装其他插件没有什么不同。
 
-1. 将我的插件仓库添加到您的 home assistant 实例中（在 supervisor 插件商店的右上角，或如果您已配置我的 HA，请点击下面的按钮）
-   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此插件。
-1. 点击 `保存` 按钮以保存您的配置。
-1. 设置插件的选项以符合您的偏好。
+1. 将我的插件仓库添加到你的 Home Assistant 实例中（在 supervisor 插件商店的右上角，或者如果你已经配置了我的 HA，点击下面的按钮）
+   [![打开你的 Home Assistant 实例并显示添加插件仓库对话框，并预填特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装这个插件。
+1. 点击 `保存` 按钮以保存你的配置。
+1. 设置插件的选项以符合你的偏好。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 打开 WebUI 并调整软件选项。
+1. 检查插件的日志以查看是否一切顺利。
+1. 打开 WebUI 并调整软件选项
 
 ## 配置
 
@@ -58,8 +58,8 @@ Webui 可以在 <http://homeassistant:7474> 或通过 Ingress 访问。
 
 ### 选项
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
+| 选项 | 类型 | 默认 | 描述 |
+|------|------|------|------|
 | `PGID` | 整数 | `0` | 文件权限的组 ID |
 | `PUID` | 整数 | `0` | 文件权限的用户 ID |
 | `TZ` | 字符串 | | 时区（例如，`Europe/London`） |
@@ -67,7 +67,7 @@ Webui 可以在 <http://homeassistant:7474> 或通过 Ingress 访问。
 | `networkdisks` | 字符串 | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
 | `cifsusername` | 字符串 | | SMB 共享的网络用户名 |
 | `cifspassword` | 字符串 | | SMB 共享的网络密码 |
-| `cifsdomain` | 字符串 | | SMB 共享的网络域 |
+| `cifsdomain` | 字符串 | | SMB 共享的域 |
 
 ### 示例配置
 
@@ -84,20 +84,36 @@ cifsdomain: "workgroup"
 
 ### 挂载驱动器
 
-此插件支持挂载本地驱动器和远程 SMB 共享：
+这个插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **本地驱动器**：请参阅 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：请参阅 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### 自定义脚本和环境变量
 
-此插件支持自定义脚本执行和环境变量注入：
+这个插件支持自定义脚本执行和环境变量注入：
 
-- **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：请参阅 [向您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（大小写名称均可）。参见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详情。
 
 ## 支持
 
 在 github 上创建问题
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

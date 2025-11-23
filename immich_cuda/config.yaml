@@ -2,7 +2,7 @@ arch:
   - amd64
 backup_exclude:
   - "**/machine-learning/*"
-description: '[老王杂谈说]：从您的手机直接进行自托管照片和视频备份的解决方案'
+description: '[老王杂谈说]：从您的手机直接提供的自托管照片和视频备份解决方案'
 devices:
   - /dev/dri
   - /dev/dxg
@@ -138,6 +138,6 @@ slug: immich_cuda
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
 usb: true
-version: "2.2.3"
+version: "2.3.1"
 video: true
 webui: http://[HOST]:[PORT:8080]
