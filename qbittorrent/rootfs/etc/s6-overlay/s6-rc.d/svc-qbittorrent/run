@@ -5,6 +5,18 @@ WEBUI_PORT=${WEBUI_PORT:-8080}
 
 export PATH="/usr/local/sbin:/usr/local/bin:${PATH}"
 
+# --- New helper: get public IP with rate-limiting fallbacks ---
+_get_public_ip() {
+    local ip
+    ip=$(
+        curl -fsS --max-time 10 https://ifconfig.co/ip \
+        || curl -fsS --max-time 10 https://api64.ipify.org \
+        || curl -fsS --max-time 10 https://ipecho.net/plain
+    ) || return 1
+
+    printf '%s\n' "${ip}"
+}
+
 if bashio::config.true 'silent'; then
     sed -i 's|/proc/1/fd/1 hassio;|off;|g' /etc/nginx/nginx.conf
 fi
@@ -127,6 +139,14 @@ else
         fi
 
         bashio::log.info "WireGuard interface ${wireguard_interface} is up."
+
+        # Example usage of the helper: get VPN-protected IP and store it
+        if vpn_ip="$(_get_public_ip)"; then
+            echo "${vpn_ip}" > /vpn_ip
+            bashio::log.info "Detected VPN public IP: ${vpn_ip}"
+        else
+            bashio::log.warning 'Unable to determine VPN public IP (all IP services failed).'
+        fi
 
         # Refresh DNS resolver configuration if resolvconf is present
         if command -v resolvconf >/dev/null 2>&1; then

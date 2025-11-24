@@ -1,14 +1,13 @@
 arch:
   - aarch64
   - amd64
-  - armv7
 backup_exclude:
   - "**/cache/"
   - "**/log/"
   - "**/transcode/"
 breaking_versions:
   - 10.10.6*
-description: '[老王杂谈说]：一个让你掌控管理和流式传输你媒体的自由软件媒体系统'
+description: '[老王杂谈说]：一个自由软件媒体系统，让您掌控管理和流式传输您的媒体'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -90,7 +89,6 @@ options:
   PGID: 0
   PUID: 0
   data_location: /share/jellyfin
-  i915_enable_guc: null
 panel_admin: false
 panel_icon: mdi:billiards-rack
 ports:
@@ -125,5 +123,5 @@ schema:
 slug: jellyfin
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "10.11.3"
+version: "10.11.3-1"
 video: true
