@@ -1,22 +1,21 @@
 # Home Assistant Add-on: OpenThread Border Router Add-on
 
-OpenThread Border Router add-on. The add-on uses the upstream OpenThread
-Border Router implementation and wraps it as an add-on for Home Assistant.
+OpenThread Border Router add-on。该插件使用上游的OpenThread Border Router实现，并将其封装为Home Assistant的插件。
 
-**NOTE:** This requires a supported 802.15.4 capable radio with OpenThread
-RCP firmware. If you are using [Home Assistant Yellow](https://www.home-assistant.io/yellow/) or [Home Assistant Connect ZBT-1](https://www.home-assistant.io/connectzbt1/) (previously called SkyConnect) then
-the correct firmware is automatically installed.
+**注意：** 这需要支持802.15.4功能的无线电设备，并配备OpenThread RCP固件。如果您正在使用[Home Assistant Yellow](https://www.home-assistant.io/yellow/)或[Home Assistant Connect ZBT-1](https://www.home-assistant.io/connectzbt1/)（以前称为SkyConnect），则正确的固件将自动安装。
 
-![Supports aarch64 Architecture][aarch64-shield]
-![Supports amd64 Architecture][amd64-shield]
+![支持aarch64架构][aarch64-shield]
+![支持amd64架构][amd64-shield]
 
-## About
+## 关于
 
-This add-on allows you to form or join a Thread network and make Home Assistant
-a Thread Border Router.
+该插件允许您形成或加入一个Thread网络，并将Home Assistant设置为Thread Border Router。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
 
 ## 📱 关注我
 

@@ -1,5 +1,8 @@
-## 5.1.2-16 (23-11-2025)
+## 5.1.2-22 (24-11-2025)
+- Minor bugs fixed
+## 5.1.2-21 (24-11-2025)
 - Cycle through ip providers to avoid rate limiting api
+- Simplify vpn leakage verification script
 
 ## 5.1.2-13 (19-11-2025)
 - Add IPv4 fallback for WireGuard connections
