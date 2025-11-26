@@ -1,6 +1,12 @@
-# Home Assistant 添加组件：Hikvision Doorbell (__Beta__)
+# Home Assistant Add-on: Hikvision Doorbell (__Beta__)
 
-__注意__：此添加组件仅用于测试，如果您仍在使用它，请切换到“稳定”版本
+__NOTE__: This Add-on is for testing only, please switch to the "stable" release if you are still using it
+
+翻译成中文：
+
+# Home Assistant 插件：海康威视门铃 (__Beta__)
+
+__注意__：此插件仅用于测试，如果您仍在使用它，请切换到“稳定”版本。
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 
 

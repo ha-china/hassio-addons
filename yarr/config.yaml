@@ -1,14 +1,12 @@
 name: yarr!
-version: 0.5.1
+version: 1.0.0
 slug: yarr
-description: 又一款RSS阅读器。
+description: '[老王杂谈说]：又一个 RSS 阅读器'
 url: https://ghfast.top/github.com/einschmidt/addon-yarr
 panel_icon: mdi:rss-box
 arch:
-- armhf
-- armv7
-- amd64
-- aarch64
+  - amd64
+  - aarch64
 ports:
   80/tcp: 7070
 ports_description:
@@ -17,8 +15,8 @@ init: false
 ingress: true
 ingress_stream: true
 map:
-- share:rw
-- ssl
+  - share:rw
+  - ssl
 options:
   login:
     username: ''
