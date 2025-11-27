@@ -2,9 +2,9 @@ apparmor: false
 arch:
   - aarch64
   - amd64
-  - armv7
 description: '[老王杂谈说]：一艘船的Signal K中央服务器实现'
 devices:
+  - /dev/can
   - /dev/can0
   - /dev/can1
   - /dev/ttyUSB0
@@ -44,6 +44,8 @@ schema:
     - name: match(^[A-Za-z0-9_]+$)
       value: str?
 privileged:
+  - NET_ADMIN
+  - NET_RAW
   - SYS_ADMIN
   - SYS_RAWIO
 slug: signalk
@@ -51,5 +53,5 @@ uart: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
 usb: true
-version: 2.18.0-2
+version: 2.18.0-3
 webui: http://[HOST]:[PORT:3000]
