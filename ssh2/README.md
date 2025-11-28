@@ -15,7 +15,7 @@ SSH or by using the Web Terminal.
 
 This add-on allows you to log in to your Home Assistant instance using
 SSH or a Web Terminal, giving you access to your folders and
-also includes a command-line tool to perform actions such as restart, update,
+also includes a command-line tool to do things like restart, update,
 and check your instance.
 
 This is an enhanced version of the provided
@@ -26,8 +26,8 @@ usability, flexibility and also provides access using a web interface.
 
 ## WARNING
 
-The advanced SSH & Web Terminal add-on is a highly powerful tool that gives you
-virtual access to all tools and almost all hardware of your system.
+The advanced SSH & Web Terminal add-on is a really powerful and gives you
+virtually access to all tools and almost all hardware of your system.
 
 While this add-on is created and maintained with care and with security in mind,
 in the wrong or inexperienced hands, it could damage your system.
@@ -42,7 +42,7 @@ well. Additionally, it comes out of the box with the following:
 - A secure default configuration of SSH:
   - Only allows login by the configured user, even if more users are created.
   - Only uses known secure ciphers and algorithms.
-  - Limits login attempts to better defend against brute-force attacks.
+  - Limits login attempts to hold off brute-force attacks better.
 - Comes with an SSH compatibility mode option to allow older clients to connect.
 - Support for Mosh allowing roaming and supports intermittent connectivity.
 - SFTP support is disabled by default but is user configurable.
@@ -58,13 +58,13 @@ well. Additionally, it comes out of the box with the following:
 - Have custom Alpine packages installed on start. This allows you to install
   your favorite tools, which will be available every single time you log in.
 - Execute custom commands on add-on start so that you can customize the
-  shell to your liking.
-- [ZSH][zsh] as its default shell. Easier to use for beginners, more advanced
-  for experienced users. It even comes preloaded with
+  shell to your likings.
+- [ZSH][zsh] as its default shell. Easier to use for the beginner, more advanced
+  for the more experienced user. It even comes preloaded with
   ["Oh My ZSH"][ohmyzsh], with some plugins enabled as well.
 - Contains a sensible set of tools right out of the box: curl, Wget, RSync, GIT,
   Nmap, Mosquitto client, MariaDB/MySQL client, Awake (“wake on LAN”), Nano,
-  Vim, tmux, and a variety of commonly used networking tools.
+  Vim, tmux, and a bunch commonly used networking tools.
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -79,8 +79,8 @@ well. Additionally, it comes out of the box with the following:
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v22.0.2-blue.svg
-[release]: https://github.com/hassio-addons/addon-ssh/tree/v22.0.2
+[release-shield]: https://img.shields.io/badge/version-v22.0.3-blue.svg
+[release]: https://github.com/hassio-addons/addon-ssh/tree/v22.0.3
 [screenshot]: https://github.com/hassio-addons/addon-ssh/raw/main/images/screenshot.png
 [zsh]: https://en.wikipedia.org/wiki/Z_shell
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
