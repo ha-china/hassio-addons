@@ -8,23 +8,28 @@
 
 [![Support Frenck on Patreon][patreon-shield]][patreon]
 
-可完全配置的Z-Wave JS控制面板和MQTT网关。
+Fully configurable Z-Wave JS control panel and MQTT gateway.
 
 ![Z-Wave JS UI][logo]
 
-## 关于
+## About
 
-Z-Wave JS UI插件提供了一个额外的控制面板，允许您配置您的Z-Wave网络的各个方面。它提供了一个解耦的网关，可以通过Z-Wave JS WebSocket（Home Assistant Z-Wave JS集成使用）和MQTT（甚至可以同时使用）进行通信。
+The Z-Wave JS UI add-on provides an additional control panel, allowing you
+to configure every aspect of your Z-Wave network. It provides a decoupled
+gateway which can communicate using Z-Wave JS WebSockets (used by the
+Home Assistant Z-Wave JS integration) and MQTT (even simultaneously).
 
-一些优点和使用案例：
+Some advantages and use-cases:
 
-- 与Home Assistant Z-Wave JS集成兼容。
-- 您的Z-Wave网络将在Home Assistant重新启动之间继续运行。
-- 您可以直接使用Node-RED等工具与您的Z-Wave网络进行交互，同时它对Home Assistant也可用。
-- 允许基于[ESPHome.io][esphome]的ESP设备直接响应或与您的Z-Wave网络工作。
-- 当发现时，会使用Mosquitto插件进行预配置。
+- Compatible with the Home Assistant Z-Wave JS integration.
+- Your Z-Wave network will keep running between Home Assistant restarts.
+- You can directly use things like Node-RED with your Z-Wave network, while
+  it is available for Home Assistant at the same time.
+- Allow [ESPHome.io][esphome] based ESP devices to directly respond or work
+  with your Z-Wave network.
+- Pre-configures itself with the Mosquitto add-on when found.
 
-此插件使用[Z-Wave JS UI][zwave-js-ui]软件。
+This add-on uses the [Z-Wave JS UI][zwave-js-ui] software.
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -38,8 +43,8 @@ Z-Wave JS UI插件提供了一个额外的控制面板，允许您配置您的Z-
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v6.1.0-blue.svg
-[release]: https://github.com/hassio-addons/addon-zwave-js-ui/tree/v6.1.0
+[release-shield]: https://img.shields.io/badge/version-v6.1.1-blue.svg
+[release]: https://github.com/hassio-addons/addon-zwave-js-ui/tree/v6.1.1
 [zwave-js-ui]: https://github.com/zwave-js/zwave-js-ui
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 

@@ -1,5 +1,14 @@
 # TOMMY
 
+## 0.22.0
+
+### Major Changes
+
+- Added higher fidelity in High Performance mode
+
+### Minor Changes
+
+- Improvements to false positives filtering
 
 ## 0.21.1
 
