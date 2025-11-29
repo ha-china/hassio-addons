@@ -1,110 +1,110 @@
-## 环境变量
+## Environment Variables
 
 <!-- markdownlint-disable MD007 MD010 MD030 MD033 -->
 
-Whoogle 实例有一些可选的环境变量可以用于自定义。这些可以手动设置，或复制到 `whoogle.env` 中并启用您首选的部署方法：
+There are a few optional environment variables available for customizing a Whoogle instance. These can be set manually, or copied into `whoogle.env` and enabled for your preferred deployment method:
 
-- 本地运行：在运行前设置 `WHOOGLE_DOTENV=1`
-- 使用 `docker-compose`：取消注释 `env_file` 选项
-- 使用 `docker build/run`：在命令中添加 `--env-file ./whoogle.env`
+- Local runs: Set `WHOOGLE_DOTENV=1` before running
+- With `docker-compose`: Uncomment the `env_file` option
+- With `docker build/run`: Add `--env-file ./whoogle.env` to your command
 
-| 变量                 | 描述                                                                                  |
+| Variable                 | Description                                                                                  |
 | ------------------------ | -------------------------------------------------------------------------------------------- |
-| WHOOGLE_DOTENV           | 加载 `whoogle.env` 中的环境变量                                                  |
-| WHOOGLE_USER             | 基本认证的用户名。如果使用，也必须设置 `WHOOGLE_PASS`。                          |
-| WHOOGLE_PASS             | 基本认证的密码。如果使用，也必须设置 `WHOOGLE_USER`。                          |
-| WHOOGLE_PROXY_USER       | 代理服务器的用户名。                                                            |
-| WHOOGLE_PROXY_PASS       | 代理服务器的密码。                                                            |
-| WHOOGLE_PROXY_TYPE       | 代理服务器的类型。可以是 "socks5"、"socks4" 或 "http"。                          |
-| WHOOGLE_PROXY_LOC        | 代理服务器的位置（主机或 IP）。                                               |
-| EXPOSE_PORT              | Whoogle 将暴露的端口。                                                          |
-| HTTPS_ONLY               | 强制使用 HTTPS。（参见 [这里](https://github.com/benbusby/whoogle-search#https-enforcement))    |
-| WHOOGLE_ALT_TW           | 当配置中启用网站替代选项时，使用的 twitter.com 替代选项。                     |
-| WHOOGLE_ALT_YT           | 当配置中启用网站替代选项时，使用的 youtube.com 替代选项。                     |
-| WHOOGLE_ALT_IG           | 当配置中启用网站替代选项时，使用的 instagram.com 替代选项。                 |
-| WHOOGLE_ALT_RD           | 当配置中启用网站替代选项时，使用的 reddit.com 替代选项。                      |
-| WHOOGLE_ALT_TL           | 使用的 Google 翻译替代选项。这用于所有 "translate \_\_\_\_" 搜索。             |
-| WHOOGLE_ALT_MD           | 当配置中启用网站替代选项时，使用的 medium.com 替代选项。                      |
-| WHOOGLE_AUTOCOMPLETE     | 控制自动完成/搜索建议的可见性。默认开启 -- 使用 '0' 禁用                     |
-| WHOOGLE_MINIMAL          | 从所有搜索查询中移除除基本结果卡片之外的所有内容。                             |
-| WHOOGLE_CSP              | 设置一组默认的 'Content-Security-Policy' 头                                      |
-| WHOOGLE_RESULTS_PER_PAGE | 设置每页的结果数量                                                           |
+| WHOOGLE_DOTENV           | Load environment variables in `whoogle.env`                                                  |
+| WHOOGLE_USER             | The username for basic auth. WHOOGLE_PASS must also be set if used.                          |
+| WHOOGLE_PASS             | The password for basic auth. WHOOGLE_USER must also be set if used.                          |
+| WHOOGLE_PROXY_USER       | The username of the proxy server.                                                            |
+| WHOOGLE_PROXY_PASS       | The password of the proxy server.                                                            |
+| WHOOGLE_PROXY_TYPE       | The type of the proxy server. Can be "socks5", "socks4", or "http".                          |
+| WHOOGLE_PROXY_LOC        | The location of the proxy server (host or ip).                                               |
+| EXPOSE_PORT              | The port where Whoogle will be exposed.                                                      |
+| HTTPS_ONLY               | Enforce HTTPS. (See [here](https://github.com/benbusby/whoogle-search#https-enforcement))    |
+| WHOOGLE_ALT_TW           | The twitter.com alternative to use when site alternatives are enabled in the config.         |
+| WHOOGLE_ALT_YT           | The youtube.com alternative to use when site alternatives are enabled in the config.         |
+| WHOOGLE_ALT_IG           | The instagram.com alternative to use when site alternatives are enabled in the config.       |
+| WHOOGLE_ALT_RD           | The reddit.com alternative to use when site alternatives are enabled in the config.          |
+| WHOOGLE_ALT_TL           | The Google Translate alternative to use. This is used for all "translate \_\_\_\_" searches. |
+| WHOOGLE_ALT_MD           | The medium.com alternative to use when site alternatives are enabled in the config.          |
+| WHOOGLE_AUTOCOMPLETE     | Controls visibility of autocomplete/search suggestions. Default on -- use '0' to disable     |
+| WHOOGLE_MINIMAL          | Remove everything except basic result cards from all search queries.                         |
+| WHOOGLE_CSP              | Sets a default set of 'Content-Security-Policy' headers                                      |
+| WHOOGLE_RESULTS_PER_PAGE | Set the number of results per page                                                           |
 
-### 配置环境变量
+### Config Environment Variables
 
-这些环境变量允许设置默认配置值，但可以通过使用主页配置菜单手动覆盖。这些允许快速销毁/重建实例到相同的配置状态。
+These environment variables allow setting default config values, but can be overwritten manually by using the home page config menu. These allow a shortcut for destroying/rebuilding an instance to the same config state every time.
 
-| 变量                       | 描述                                                   |
+| Variable                       | Description                                                   |
 | ------------------------------ | ------------------------------------------------------------- |
-| WHOOGLE_CONFIG_DISABLE         | 隐藏配置并禁止客户端更改配置                           |
-| WHOOGLE_CONFIG_COUNTRY         | 按托管国家过滤结果                             |
-| WHOOGLE_CONFIG_LANGUAGE        | 设置界面语言                                        |
-| WHOOGLE_CONFIG_SEARCH_LANGUAGE | 设置搜索结果语言                                    |
-| WHOOGLE_CONFIG_BLOCK           | 从搜索结果中阻止网站（使用逗号分隔的列表）             |
-| WHOOGLE_CONFIG_THEME           | 设置主题模式（亮色、暗色或系统）                       |
-| WHOOGLE_CONFIG_SAFE            | 启用安全搜索                                          |
-| WHOOGLE_CONFIG_ALTS            | 使用社交媒体网站替代选项（nitter、invidious 等）       |
-| WHOOGLE_CONFIG_NEAR            | 仅限制特定城市的结果                                |
-| WHOOGLE_CONFIG_TOR             | 使用 Tor 路由（如果可用）                                |
-| WHOOGLE_CONFIG_NEW_TAB         | 总是在新标签页中打开结果                                |
-| WHOOGLE_CONFIG_VIEW_IMAGE      | 启用查看图像选项                                      |
-| WHOOGLE_CONFIG_GET_ONLY        | 仅使用 GET 请求进行搜索                                |
-| WHOOGLE_CONFIG_URL             | 实例的根 URL (`https://<your url>/`)                  |
-| WHOOGLE_CONFIG_STYLE           | 用于样式的自定义 CSS（应为单行）                     |
+| WHOOGLE_CONFIG_DISABLE         | Hide config from UI and disallow changes to config by client  |
+| WHOOGLE_CONFIG_COUNTRY         | Filter results by hosting country                             |
+| WHOOGLE_CONFIG_LANGUAGE        | Set interface language                                        |
+| WHOOGLE_CONFIG_SEARCH_LANGUAGE | Set search result language                                    |
+| WHOOGLE_CONFIG_BLOCK           | Block websites from search results (use comma-separated list) |
+| WHOOGLE_CONFIG_THEME           | Set theme mode (light, dark, or system)                       |
+| WHOOGLE_CONFIG_SAFE            | Enable safe searches                                          |
+| WHOOGLE_CONFIG_ALTS            | Use social media site alternatives (nitter, invidious, etc)   |
+| WHOOGLE_CONFIG_NEAR            | Restrict results to only those near a particular city         |
+| WHOOGLE_CONFIG_TOR             | Use Tor routing (if available)                                |
+| WHOOGLE_CONFIG_NEW_TAB         | Always open results in new tab                                |
+| WHOOGLE_CONFIG_VIEW_IMAGE      | Enable View Image option                                      |
+| WHOOGLE_CONFIG_GET_ONLY        | Search using GET requests only                                |
+| WHOOGLE_CONFIG_URL             | The root url of the instance (`https://<your url>/`)          |
+| WHOOGLE_CONFIG_STYLE           | The custom CSS to use for styling (should be single line)     |
 
-## 使用方法
+## Usage
 
-与大多数搜索引擎相同，除外可以按时间范围过滤。
+Same as most search engines, with the exception of filtering by time range.
 
-要按时间范围过滤，将 `:past <time>` 追加到搜索的末尾，其中 `<time>` 可以是 `hour`、`day`、`month` 或 `year`。例如：`coronavirus updates :past hour`
+To filter by a range of time, append ":past <time>" to the end of your search, where <time> can be `hour`, `day`, `month`, or `year`. Example: `coronavirus updates :past hour`
 
-## 额外步骤
+## Extra Steps
 
-### 将 Whoogle 设置为您的默认搜索引擎
+### Set Whoogle as your primary search engine
 
-_注意：如果您使用反向代理运行 Whoogle Search，请确保在执行这些步骤之前，主页上的“Root URL”配置选项设置为您的 URL。_
+_Note: If you're using a reverse proxy to run Whoogle Search, make sure the "Root URL" config option on the home page is set to your URL before going through these steps._
 
-浏览器设置：
+Browser settings:
 
-- Firefox（桌面版）
-  - 版本 89+
-    - 导航到您的应用 URL，右键单击地址栏，并选择“添加搜索引擎”。
-  - 旧版本
-    - 导航到您的应用 URL，并单击地址栏中的 3 点菜单。在底部，应该有一个选项“添加搜索引擎”。
-  - 添加新搜索引擎后，打开 Firefox 首选项菜单，在左侧菜单中单击“搜索”，并使用可用的下拉菜单从列表中选择“Whoogle”。
-  - **注意**：如果您的 Whoogle 实例使用 Firefox 容器，您需要 [按照这些步骤操作](https://github.com/benbusby/whoogle-search/blob/main/README.md#using-with-firefox-containers) 才能正确运行。
-- Firefox（iOS）
-  - 在移动应用设置页面中，在“常规”部分中点击“搜索”。应该有一个名为“添加搜索引擎”的选项可供选择。它应该提示您输入标题和搜索查询 URL - 使用以下元素填写表单：
-    - 标题："Whoogle"
+- Firefox (Desktop)
+  - Version 89+
+    - Navigate to your app's url, right click the address bar, and select "Add Search Engine".
+  - Previous versions
+    - Navigate to your app's url, and click the 3 dot menu in the address bar. At the bottom, there should be an option to "Add Search Engine".
+  - Once you've added the new search engine, open your Firefox Preferences menu, click "Search" in the left menu, and use the available dropdown to select "Whoogle" from the list.
+  - **Note**: If your Whoogle instance uses Firefox Containers, you'll need to [go through the steps here](https://github.com/benbusby/whoogle-search/blob/main/README.md#using-with-firefox-containers) to get it working properly.
+- Firefox (iOS)
+  - In the mobile app Settings page, tap "Search" within the "General" section. There should be an option titled "Add Search Engine" to select. It should prompt you to enter a title and search query url - use the following elements to fill out the form:
+    - Title: "Whoogle"
     - URL: `http[s]://\<your whoogle url\>/search?q=%s`
-- Firefox（Android）
-  - 版本 <79.0.0
-    - 导航到您的应用 URL
-    - 长按搜索文本字段
-    - 点击“添加搜索引擎”菜单项
-      - 选择一个名称并点击确定
-    - 点击右上角的 3 点菜单
-    - 导航到设置菜单并选择“搜索”子菜单
-    - 选择 Whoogle 并点击“设置为默认”
-  - 版本 >=79.0.0
-    - 点击右上角的 3 点菜单
-    - 导航到设置菜单并选择“搜索”子菜单
-    - 点击“添加搜索引擎”
-    - 选择“其他”单选按钮
-      - 名称："Whoogle"
-      - 搜索字符串：`https://\<your whoogle url\>/search?q=%s`
-- [Alfred](https://www.alfredapp.com/)（Mac OS X）
+- Firefox (Android)
+  - Version <79.0.0
+    - Navigate to your app's url
+    - Long-press on the search text field
+    - Click the "Add Search Engine" menu item
+      - Select a name and click ok
+    - Click the 3 dot menu in the top right
+    - Navigate to the settings menu and select the "Search" sub-menu
+    - Select Whoogle and press "Set as default"
+  - Version >=79.0.0
+    - Click the 3 dot menu in the top right
+    - Navigate to the settings menu and select the "Search" sub-menu
+    - Click "Add search engine"
+    - Select the 'Other' radio button
+      - Name: "Whoogle"
+      - Search string to use: `https://\<your whoogle url\>/search?q=%s`
+- [Alfred](https://www.alfredapp.com/) (Mac OS X)
 
-  1.  前往 `Alfred Preferences` > `Features` > `Web Search` 并点击 `Add Custom Search`。然后配置这些设置
+  1.  Go to `Alfred Preferences` > `Features` > `Web Search` and click `Add Custom Search`. Then configure these settings
 
-      - 搜索 URL：`https://\<your whoogle url\>/search?q={query}`
-      - 标题：`Whoogle for '{query}'`（或您想要的任何内容）
-      - 关键词：`whoogle`
+      - Search URL: `https://\<your whoogle url\>/search?q={query}
+      - Title: `Whoogle for '{query}'` (or whatever you want)
+      - Keyword: `whoogle`
 
-  2.  前往 `Default Results` 并点击 `Setup fallback results` 按钮。点击 `+` 并添加 Whoogle，然后将其拖到顶部。
+  2.  Go to `Default Results` and click the `Setup fallback results` button. Click `+` and add Whoogle, then drag it to the top.
 
-- Chrome/Chromium 基于的浏览器
-  - 自动
-    - 访问您的 Whoogle Search 实例的主页 -- 这可能会自动将搜索引擎添加到您的搜索引擎列表中。如果没有，您可以手动添加。
-  - 手动
-    - 在搜索引擎 > 管理搜索引擎 > 添加下，手动输入您的 Whoogle 实例详细信息，并使用 `<whoogle url>/search?q=%s` 格式的搜索 URL。
+- Chrome/Chromium-based Browsers
+  - Automatic
+    - Visit the home page of your Whoogle Search instance -- this may automatically add the search engine to your list of search engines. If not, you can add it manually.
+  - Manual
+    - Under search engines > manage search engines > add, manually enter your Whoogle instance details with a `<whoogle url>/search?q=%s` formatted search URL.

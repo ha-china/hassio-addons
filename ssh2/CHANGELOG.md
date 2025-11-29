@@ -2,4 +2,4 @@
 
 ## ⬆️ Dependency updates
 
-- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v19 @[renovate[bot]](https://github.com/apps/renovate) ([#966](https://github.com/hassio-addons/addon-ssh/pull/966))
+- ⬆️ Update home-assistant/cli to v4.43.0 @[renovate[bot]](https://github.com/apps/renovate) ([#972](https://github.com/hassio-addons/addon-ssh/pull/972))

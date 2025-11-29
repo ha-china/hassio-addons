@@ -1,30 +1,35 @@
-# Home Assistant 社区插件：Z-Wave JS UI
+# Home Assistant Community Add-on: Z-Wave JS UI
 
-[![发布版本][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
+[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
 
-[![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
+[![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
 
-[![通过 GitHub Sponsors 赞助 Frenck][github-sponsors-shield]][github-sponsors]
+[![Sponsor Frenck via GitHub Sponsors][github-sponsors-shield]][github-sponsors]
 
-[![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
+[![Support Frenck on Patreon][patreon-shield]][patreon]
 
-全配置的 Z-Wave JS 控制面板和 MQTT 网关。
+Fully configurable Z-Wave JS control panel and MQTT gateway.
 
 ![Z-Wave JS UI][logo]
 
-## 关于
+## About
 
-Z-Wave JS UI 插件提供了一个额外的控制面板，允许你配置 Z-Wave 网络的各个方面。它提供了一个解耦的网关，可以使用 Z-Wave JS WebSockets（由 Home Assistant Z-Wave JS 集成使用）和 MQTT（甚至可以同时使用）进行通信。
+The Z-Wave JS UI add-on provides an additional control panel, allowing you
+to configure every aspect of your Z-Wave network. It provides a decoupled
+gateway which can communicate using Z-Wave JS WebSockets (used by the
+Home Assistant Z-Wave JS integration) and MQTT (even simultaneously).
 
-一些优点和使用场景：
+Some advantages and use-cases:
 
-- 与 Home Assistant Z-Wave JS 集成兼容。
-- 在 Home Assistant 重启期间，你的 Z-Wave 网络将保持运行。
-- 你可以直接使用 Node-RED 等工具与你的 Z-Wave 网络进行交互，同时它仍然可供 Home Assistant 使用。
-- 允许基于 [ESPHome.io][esphome] 的 ESP 设备直接响应或与你的 Z-Wave 网络进行交互。
-- 当发现时，会使用 Mosquitto 插件进行预配置。
+- Compatible with the Home Assistant Z-Wave JS integration.
+- Your Z-Wave network will keep running between Home Assistant restarts.
+- You can directly use things like Node-RED with your Z-Wave network, while
+  it is available for Home Assistant at the same time.
+- Allow [ESPHome.io][esphome] based ESP devices to directly respond or work
+  with your Z-Wave network.
+- Pre-configures itself with the Mosquitto add-on when found.
 
-此插件使用 [Z-Wave JS UI][zwave-js-ui] 软件。
+This add-on uses the [Z-Wave JS UI][zwave-js-ui] software.
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -38,9 +43,13 @@ Z-Wave JS UI 插件提供了一个额外的控制面板，允许你配置 Z-Wave
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v6.0.0-blue.svg
-[release]: https://github.com/hassio-addons/addon-zwave-js-ui/tree/v6.0.0
+[release-shield]: https://img.shields.io/badge/version-v6.1.1-blue.svg
+[release]: https://github.com/hassio-addons/addon-zwave-js-ui/tree/v6.1.1
 [zwave-js-ui]: https://github.com/zwave-js/zwave-js-ui
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

@@ -12,14 +12,14 @@
 
 ## 关于
 
-适用于所有您指标的统计分析平台。
+适用于所有指标的通用分析平台。
 
 Grafana 允许您查询、可视化、警报并理解存储在任何地方的指标。
 创建、探索和共享仪表板。使用吸引人的图表和其他数据可视化来了解您的家庭自动化系统。
 
-将此插件与 InfluxDB 插件结合使用，以获得对您家庭的无与伦比的洞察力。
+将此插件与 InfluxDB 插件结合使用，以获取对您家庭的无与伦比的有力洞察。
 
-![Home Assistant 前端中的 Grafana][screenshot]
+![Grafana 在 Home Assistant 前端][screenshot]
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -31,9 +31,13 @@ Grafana 允许您查询、可视化、警报并理解存储在任何地方的指
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v12.0.0-blue.svg
-[release]: https://github.com/hassio-addons/addon-grafana/tree/v12.0.0
+[release-shield]: https://img.shields.io/badge/version-v12.1.0-blue.svg
+[release]: https://github.com/hassio-addons/addon-grafana/tree/v12.1.0
 [screenshot]: https://github.com/hassio-addons/addon-grafana/raw/main/images/screenshot.png
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

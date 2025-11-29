@@ -1,3 +1,18 @@
+## breaking_versions: 10.11.3-2 (28-11-2025)
+- Minor bugs fixed
+## 10.11.3-2 (30-11-2025)
+- Allow `i915_enable_guc` to be applied on hosts that expose the runtime parameter by granting raw I/O capability and AppArmor access to `/sys/module/i915/parameters/enable_guc`.
+
+## breaking_versions: 10.11.3-1 (23-11-2025)
+- Minor bugs fixed
+
+## 10.11.3-1 (23-11-2025)
+- Fix optional `i915_enable_guc` setting so the add-on no longer requires a value after updates.
+
+## 10.11.3 (22-11-2025)
+- Update to latest version from linuxserver/docker-jellyfin (changelog : https://github.com/linuxserver/docker-jellyfin/releases)
+- The Home Assistant project has deprecated support for the armv7, armhf and i386 architectures. Support wil be fully dropped in the upcoming Home Assistant 2025.12 release
+
 ## breaking_versions: 10.11.3 (17-11-2025)
 - Minor bugs fixed
 

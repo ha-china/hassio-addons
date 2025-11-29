@@ -22,9 +22,13 @@ BookStack 是一个简单、自托管、易于使用的平台，用于组织和�
 [forum]: https://community.home-assistant.io/?u=frenck
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v4.0.1-blue.svg
-[release]: https://github.com/hassio-addons/addon-bookstack/tree/v4.0.1
+[release-shield]: https://img.shields.io/badge/version-v4.0.2-blue.svg
+[release]: https://github.com/hassio-addons/addon-bookstack/tree/v4.0.2
 [screenshot]: https://github.com/hassio-addons/addon-bookstack/raw/main/images/screenshot.png
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

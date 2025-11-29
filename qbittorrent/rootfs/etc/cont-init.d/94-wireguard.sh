@@ -76,7 +76,4 @@ else
     bashio::log.warning "qBittorrent config file not found. Bind the client manually to interface ${interface_name}."
 fi
 
-# Get current ip
-curl -s ipecho.net/plain > /currentip
-
 bashio::log.info "WireGuard prepared with interface ${interface_name} using configuration ${wireguard_config##*/}."

@@ -1,65 +1,90 @@
-# [2.7.0.dev2025112202] - 22.11.2025
+# [2.7.0.dev2025112904] - 29.11.2025
 
 ## 📦 Nightly Release
 
-_Changes since [2.7.0.dev2025112103](https://github.com/music-assistant/server/releases/tag/2.7.0.dev2025112103)_
+_Changes since [2.7.0.dev2025112903](https://github.com/music-assistant/server/releases/tag/2.7.0.dev2025112903)_
+
+### 🎨 Frontend Changes
+
+* No changes
+
+### 🧰 Maintenance and dependency bumps
+
+- ⬆️ Update music-assistant-frontend to 2.17.16 (by @music-assistant-machine in #2713)
+
+
+# [2.7.0.dev2025112903] - 29.11.2025
+
+## 📦 Nightly Release
+
+_Changes since [2.7.0.dev2025112803](https://github.com/music-assistant/server/releases/tag/2.7.0.dev2025112803)_
 
 ### 🚀 Features and enhancements
 
-- Add TLS options with fingerprint support to Fully Kiosk provider (by @miguelangel-nubla in #2649)
+- Add Version suffix config to scrobble providers (by @wjzijderveld in #2709)
+- Prepare remote connect feature (by @marcelveldt in #2710)
 
 ### 🐛 Bugfixes
 
-- Disable Zone Handling if needed for MusicCast players (by @fmunkes in #2650)
-- fix(tidal): auth refresh time diff (by @jozefKruszynski in #2653)
-- Fix Chromecast volume rounding bug (by @OzGav in #2656)
+- Fix snapcast crash by copying control.py to plugins directory (by @OzGav in #2685)
+- Airplay2 improvements (by @bradkeifer in #2702)
+- Spotify Connect: Fix UI not updating when MA starts playing an item (by @MarvinSchenkel in #2705)
+- Tidal: fix for sync returned no proper data (by @jozefKruszynski in #2707)
+- fix(tidal): media metadata None fix (by @jozefKruszynski in #2711)
+
+### 🎨 Frontend Changes
+
+- Handle login natively in the Vue app (by @marcelveldt in [#1231](https://github.com/music-assistant/frontend/pull/1231))
+- Add CNAME file for custom domain (app.music-assistant.io) (by @marcelveldt in [#1232](https://github.com/music-assistant/frontend/pull/1232))
+* No changes
 
 ### 🧰 Maintenance and dependency bumps
 
-<details>
-<summary>7 changes</summary>
-
-- Chore(deps): Bump pywidevine from 1.8.0 to 1.9.0 (by @dependabot[bot] in #2590)
-- Chore(deps): Bump liblistenbrainz from 0.6.0 to 0.6.1 (by @dependabot[bot] in #2592)
-- Chore(deps): Bump aiohttp from 3.13.1 to 3.13.2 (by @dependabot[bot] in #2620)
-- Typing fixes for artists controller (by @OzGav in #2625)
-- Typing fixes for the audiobooks controller (by @OzGav in #2626)
-- Some typing fixes for the music controller (by @OzGav in #2629)
-- Types fixes for the Albums Controller (by @OzGav in #2632)
-
-</details>
+- ⬆️ Update music-assistant-frontend to 2.17.14 (by @music-assistant-machine in #2706)
+- ⬆️ Update music-assistant-frontend to 2.17.15 (by @music-assistant-machine in #2708)
+- ⬆️ Update music-assistant-models to 1.1.74 (by @music-assistant-machine in #2712)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@OzGav, @fmunkes, @jozefKruszynski, @miguelangel-nubla
+@MarvinSchenkel, @OzGav, @bradkeifer, @jozefKruszynski, @marcelveldt, @wjzijderveld
 
 
-# [2.7.0.dev2025112103] - 21.11.2025
+# [2.7.0.dev2025112803] - 28.11.2025
 
 ## 📦 Nightly Release
 
-_Changes since [2.7.0.dev2025112003](https://github.com/music-assistant/server/releases/tag/2.7.0.dev2025112003)_
+_Changes since [2.7.0.dev2025112703](https://github.com/music-assistant/server/releases/tag/2.7.0.dev2025112703)_
 
-### 🚀 New Providers
+### 🚀 Features and enhancements
 
-- Add VBAN Receiver plugin provider (by @sprocket-9 in #2498)
+- Some follow-up additions and fixes for the Authentication support (by @marcelveldt in #2699)
+- Add recently added tracks and albums playlist + recommendation (by @theomega in #2700)
+
+### 🐛 Bugfixes
+
+- BBC Sounds: Fix Radio 4 station (by @kieranhogg in #2696)
+- ABS: fix for schema issue (by @fmunkes in #2701)
+
+### 🎨 Frontend Changes
+
+* No changes
+- Implement new toaster and remove the old one (by @stvncode in [#1229](https://github.com/music-assistant/frontend/pull/1229))
+- Add a way to copy the token after his creation (by @stvncode in [#1230](https://github.com/music-assistant/frontend/pull/1230))
+- Remove sync button for media items (by @stvncode in [#1227](https://github.com/music-assistant/frontend/pull/1227))
+- Fix content hidden for core settings server information (by @stvncode in [#1228](https://github.com/music-assistant/frontend/pull/1228))
 
 ### 🧰 Maintenance and dependency bumps
 
-- Update alexapy requirement to version 1.29.9 (by @michaelansel in #2647)
-- Enable disabled lint rules (by @OzGav in #2658)
+- ⬆️ Update music-assistant-frontend to 2.17.12 (by @music-assistant-machine in #2694)
+- ⬆️ Update music-assistant-models to 1.1.73 (by @music-assistant-machine in #2697)
+- ⬆️ Update music-assistant-frontend to 2.17.13 (by @music-assistant-machine in #2703)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@OzGav, @michaelansel, @sprocket-9
-
-
-# [2.7.0.dev2025112003] - 20.11.2025
-
-* No changes
+@fmunkes, @kieranhogg, @marcelveldt, @stvncode, @theomega
 
 

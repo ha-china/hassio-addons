@@ -14,9 +14,6 @@ if bashio::config.true 'openvpn_enabled'; then
     bashio::log.info "Openvpn enabled, configuring"
     bashio::log.info "----------------------------"
 
-    # Get current ip
-    curl -s ipecho.net/plain > /currentip
-
     # Function to check for files path
     function check_path() {
 

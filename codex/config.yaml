@@ -1,7 +1,6 @@
 arch:
   - aarch64
   - amd64
-codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：基于网络的漫画存档浏览器和阅读器'
 devices:
   - /dev/dri
@@ -58,8 +57,8 @@ devices:
   - /dev/nvme2
 environment:
   CODEX_CONFIG_DIR: /config
-  PGID: '0'
-  PUID: '0'
+  PGID: "0"
+  PUID: "0"
 hassio_api: true
 homeassistant_api: true
 image: ghcr.nju.edu.cn/alexbelgium/codex-{arch}
@@ -71,8 +70,9 @@ map:
   - share:rw
 name: Codex
 options:
-  PGID: '0'
-  PUID: '0'
+  env_vars: []
+  PGID: "0"
+  PUID: "0"
   csrf_allowed: http://homeassistant.local:8123,https://homeassistant.local:8123
 panel_admin: false
 panel_icon: mdi:book-open
@@ -84,6 +84,9 @@ privileged:
   - SYS_ADMIN
   - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   CODEX_RESET_ADMIN: int?
   CODEX_SKIP_INTEGRITY_CHECK: int?
   PGID: int?
@@ -98,4 +101,4 @@ schema:
 slug: codex
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "1.8.16"
+version: "1.8.19"

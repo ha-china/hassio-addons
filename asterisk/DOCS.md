@@ -1,4 +1,4 @@
-# 配置
+# Configuration
 
 ```yaml
 config_files:
@@ -7,13 +7,13 @@ config_files:
 
 ### `config_files`
 
-一个指向您 asterisk 配置文件的路径列表。
-每个列出的文件将在每次插件启动时覆盖 `/etc/asterisk` 的模板配置文件。
-配置文件可以位于 `/config` 或 `/share`。
+A list of paths to your configuration files of asterisk.
+Every listed file will overwrite the template config file at `/etc/asterisk` on each addon start.
+The config files can be located on `/config` or`/share`.
 
-有关示例文件，请查看 [官方 asterisk 仓库](https://github.com/asterisk/asterisk/blob/main/configs/samples)。
+For the sample files take a look at the [official asterisk repository](https://github.com/asterisk/asterisk/blob/main/configs/samples).
 
-## 测试
+## Testing
 
-默认情况下，有一个测试 SIP 电话设置。使用用户 `1001` 和密码 `1234`，可以拨打号码 `100`。
-应该有声音确认工作状态。
+As default there is a test sip phone setup. With user `1001` and password `1234` the number `100` can be called.
+A sound should confirm the working state.

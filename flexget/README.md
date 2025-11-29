@@ -1,9 +1,17 @@
 # Hass.io Add-ons: Flexget
 
-[![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+## 💖 Support development
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fflexget%2Fconfig.yaml)
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the add-ons
+
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## Addon informations
+
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fflexget%2Fconfig.yaml)
 ![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fflexget%2Fconfig.yaml)
 ![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fflexget%2Fconfig.yaml)
 
@@ -11,65 +19,65 @@
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有星标我的仓库的人！要星标它，请点击下面的图片，然后它会在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/flexget/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/flexget/stats.png)
 
-## 关于
+## About
 
-[FlexGet](https://flexget.com/) 是一个用于所有媒体的多功能自动化工具。它可以支持种子文件、NZBs、播客、漫画、电视剧、电影、RSS、HTML、CSV 等。
+[FlexGet](https://flexget.com/) is a multipurpose automation tool for all of your media. It can support torrents, NZBs, podcasts, comics, TV, movies, RSS, HTML, CSV, and more.
 
-主要功能：
-- 强大的插件系统，包含 300 多个插件
-- RSS 源处理和过滤
-- 与下载客户端集成
-- 基于网络的管理界面
-- 定时执行和守护进程模式
+Key features:
+- Powerful plugin system with 300+ plugins
+- RSS feed processing and filtering
+- Integration with download clients
+- Web-based management interface
+- Scheduled execution and daemon mode
 
-## 安装
+## Installation
 
-这个插件的安装非常简单，与安装其他插件没有什么不同。
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的 supervisor 插件商店，或如果您已经配置了我的 HA，请点击下面的按钮）
-   [![打开您的 Home Assistant 实例并显示添加插件仓库对话框，预填充了特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装这个插件。
-1. 点击 `保存` 按钮以保存您的配置。
-1. 设置插件的选项以符合您的偏好。
-1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 打开 WebUI 并调整软件选项
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Set the add-on options to your preferences
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open the webUI and adapt the software options
 
-## 配置
+## Configuration
 
-使用插件的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。详细信息请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-Webui 可以在 <http://homeassistant:5050> 找到。
-默认密码：`homeassistant123`（通过插件选项更改）。
+Webui can be found at <http://homeassistant:5050>.
+Default password: `homeassistant123` (change via addon options).
 
-### 设置步骤
+### Setup Steps
 
-1. 启动插件后访问 Web 界面
-2. 创建或编辑您的 FlexGet 配置文件
-3. 设置 RSS 源和下载源
-4. 配置输出插件以用于您的下载客户端
-5. 测试配置并启用定时任务
+1. Access the web interface after starting the add-on
+2. Create or edit your FlexGet configuration file
+3. Set up RSS feeds and download sources
+4. Configure output plugins for your download clients
+5. Test configuration and enable scheduling
 
-### 选项
+### Options
 
-| 选项 | 类型 | 默认 | 描述 |
-|------|------|------|------|
-| `PGID` | int | `0` | 文件权限的组 ID |
-| `PUID` | int | `0` | 文件权限的用户 ID |
-| `WebuiPass` | str | `homeassistant123` | Web 界面密码 |
-| `FG_PLUGINS` | str | | 需要安装的额外插件 |
-| `FG_LOG_LEVEL` | list | | 日志级别（critical/error/warning/info/verbose/debug/trace） |
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `PGID` | int | `0` | Group ID for file permissions |
+| `PUID` | int | `0` | User ID for file permissions |
+| `WebuiPass` | str | `homeassistant123` | Web interface password |
+| `FG_PLUGINS` | str | | Additional plugins to install |
+| `FG_LOG_LEVEL` | list | | Log level (critical/error/warning/info/verbose/debug/trace) |
 
-### 示例配置
+### Example Configuration
 
 ```yaml
 PGID: 1000
@@ -79,9 +87,9 @@ FG_PLUGINS: "flexget-plugins-extra"
 FG_LOG_LEVEL: "info"
 ```
 
-### 配置文件
+### Configuration File
 
-FlexGet 使用位于 `/config/flexget/config.yml` 的 YAML 配置文件。示例：
+FlexGet uses a YAML configuration file located at `/config/flexget/config.yml`. Example:
 
 ```yaml
 tasks:
@@ -95,11 +103,11 @@ tasks:
       port: 9091
 ```
 
-有关完整的配置文档，请参阅：https://flexget.com/Configuration
+For complete configuration documentation, see: https://flexget.com/Configuration
 
-## 支持
+## Support
 
-如果您在安装过程中遇到问题，请务必查看 github。
+If you have an issue with your installation, please be sure to checkout github.
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 
 
