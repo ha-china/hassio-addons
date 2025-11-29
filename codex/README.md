@@ -1,22 +1,30 @@
 # Home assistant add-on: Codex
 
-[![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+## 💖 支持开发
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcodex%2Fconfig.yaml)
+我利用业余时间维护这个和其他Home Assistant add-on：跟上上游的变更、HA的变更，并在真实硬件上测试都需要大量的时间（和一些金钱）。我大约使用我超过110个add-on中的5-10个非常频繁，我安装了一些我自己的测试机器（和一些我不用的一些测试服务，比如VPN）来调试和改进这些add-on。
+
+如果这个add-on节省了你的时间或者让你的设置更简单，我将非常感谢你的支持！
+
+[![给我买咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过PayPal捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## Addon信息
+
+![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcodex%2Fconfig.yaml)
 ![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcodex%2Fconfig.yaml)
-![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcodex%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcodex%2Fconfig.yaml)
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![构建器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建器)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库添加星标的人！要添加星标，请点击下面的图片，然后它将出现在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它就会在右上角。谢谢！_
 
-[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![@alexbelgium/hassio-addons的星标仓库名单](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
 ![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/codex/stats.png)
 
@@ -25,48 +33,48 @@ _感谢所有给我的仓库添加星标的人！要添加星标，请点击下�
 ---
 
 [Codex](https://github.com/ajslater/codex) 是一个基于网络的漫画存档浏览器和阅读器
-这个插件基于官方的 docker 镜像：https://hub.docker.com/r/ajslater/codex
+这个add-on基于官方的docker镜像：https://hub.docker.com/r/ajslater/codex
 
 ## 安装
 
 ---
 
-这个插件的安装非常简单，与安装任何其他插件没有区别。
+这个add-on的安装非常简单，与安装任何其他add-on没有区别。
 
-1. 将我的插件仓库添加到您的 home assistant 实例中（在 supervisor 插件商店的右上角，或者如果您已经配置了我的 HA，请点击下面的按钮）
-   [![打开您的 Home Assistant 实例并显示添加插件仓库对话框，预填充特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装这个插件。
-1. 点击 `保存` 按钮以保存您的配置。
-1. 设置插件的选项以符合您的偏好。
-1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 打开 WebUI 并调整软件选项
+1. 将我的add-ons仓库添加到你的Home Assistant实例（在supervisor add-ons商店的右上角，或者如果你已经配置了我的HA，点击下面的按钮）
+   [![打开你的Home Assistant实例并显示添加add-on仓库对话框，并预填充特定的仓库URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装这个add-on。
+1. 点击`保存`按钮来存储你的配置。
+1. 设置add-on选项到你的偏好设置。
+1. 启动add-on。
+1. 检查add-on的日志以查看是否一切正常。
+1. 打开webUI并调整软件选项
 
 ## 配置
 
-Webui 可以在 <http://homeassistant:PORT> 找到。
+Webui可以在<http://homeassistant:PORT>找到。
 默认的用户名/密码：在启动日志中描述。
-配置可以通过应用程序的 WebUI 进行，除了以下选项
+配置可以通过app的webUI进行，除了以下选项
 
 ## 添加主题/骨架
 
-您可以将主题/骨架的用户文件夹放在 /share/codex/www/user 中，
+你可以将主题/骨架的用户文件夹放在/share/codex/www/user，
 
 ## 选项
 
 | 选项 | 描述 | 默认 | 示例 |
 |------|------|------|------|
-| `PGID` | 文件权限的组 ID | `0` | `1000` |
-| `PUID` | 文件权限的用户 ID | `0` | `1000` |
-| `TZ` | 长格式时区 | - | `America/Los_Angeles` |
+| `PGID` | 文件权限的组ID | `0` | `1000` |
+| `PUID` | 文件权限的用户ID | `0` | `1000` |
+| `TZ` | 长格式的时区 | - | `America/Los_Angeles` |
 | `CODEX_RESET_ADMIN` | 将管理员用户和密码重置为默认值 | - | `1` |
-| `CODEX_SKIP_INTEGRITY_CHECK` | 启动时跳过数据库完整性修复 | - | `1` |
-| `csrf_allowed` | 允许访问应用程序的地址列表，用逗号分隔 | `http://homeassistant.local:8123,https://homeassistant.local:8123` | `http://localhost:8123` |
-| `localdisks` | 要挂载的驱动器的硬件名称，用逗号分隔 | - | `sda1,sdb1,MYNAS` |
-| `networkdisks` | 要挂载的 SMB 服务器，用逗号分隔 | - | `//SERVER/SHARE` |
-| `cifsusername` | 所有共享的 SMB 用户名 | - | `username` |
-| `cifspassword` | SMB 密码 | - | `password` |
-| `cifsdomain` | SMB 域 | - | `WORKGROUP` |
+| `CODEX_SKIP_INTEGRITY_CHECK` | 在启动时跳过数据库完整性修复 | - | `1` |
+| `csrf_allowed` | 允许访问app的地址列表，用逗号分隔 | `http://homeassistant.local:8123,https://homeassistant.local:8123` | `http://localhost:8123` |
+| `localdisks` | 要挂载的驱动器的硬件名称（用逗号分隔） | - | `sda1,sdb1,MYNAS` |
+| `networkdisks` | 要挂载的SMB服务器（用逗号分隔） | - | `//SERVER/SHARE` |
+| `cifsusername` | 所有共享的SMB用户名 | - | `username` |
+| `cifspassword` | SMB密码 | - | `password` |
+| `cifsdomain` | SMB域 | - | `WORKGROUP` |
 
 ```yaml
 PGID: 1000
@@ -84,24 +92,44 @@ cifsdomain: "WORKGROUP"
 
 ### 自定义脚本和环境变量
 
-这个插件支持通过 `addon_config` 映射自定义脚本和环境变量：
+这个add-on通过`addon_config`映射支持自定义脚本和环境变量：
 
-- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：参见 [为您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- **自定义脚本**：参见[在Add-on中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars选项**：使用add-on的`env_vars`选项来传递额外的环境变量（大写或小写名称）。参见https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2获取详细信息。
 
 ### 挂载驱动器
 
-这个插件支持挂载本地驱动器和远程 SMB 共享：
+这个add-on支持挂载本地驱动器和远程SMB共享：
 
-- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见[在Add-on中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见[在Add-on中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ## 插图
 
-![image](https://github.com/alexbelgium/hassio-addons/assets/44178713/f1cf3cad-5bda-46df-a0f5-864b127d7b6b)
+![图片](https://github.com/alexbelgium/hassio-addons/assets/44178713/f1cf3cad-5bda-46df-a0f5-864b127d7b6b)
 
 ## 支持
 
-在 github 上创建问题
+在github上创建问题
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

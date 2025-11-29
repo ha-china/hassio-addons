@@ -1,7 +1,6 @@
 arch:
   - aarch64
   - amd64
-codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：一个基于服务器的应用程序，用于浏览、组织和共享您的个人照片收藏'
 devices:
   - /dev/dri
@@ -68,8 +67,8 @@ devices:
 environment:
   PHOTOPRISM_ADMIN_PASSWORD: please_change_password
   PHOTOPRISM_ADMIN_USER: admin
-  PHOTOPRISM_DETECT_NSFW: 'true'
-  PHOTOPRISM_HTTP_PORT: '2341'
+  PHOTOPRISM_DETECT_NSFW: "true"
+  PHOTOPRISM_HTTP_PORT: "2341"
   working_dir: /data/photoprism
 homeassistant: 0.92.0b2
 image: ghcr.nju.edu.cn/alexbelgium/photoprism-{arch}
@@ -82,13 +81,14 @@ map:
   - ssl:ro
 name: Photoprism
 options:
+  env_vars: []
   BACKUP_PATH: /share/photoprism/backup
   CONFIG_LOCATION: /config/addons_config/photoprism/config.yaml
   DB_TYPE: sqlite
   IMPORT_PATH: /share/photoprism/import
   ORIGINALS_PATH: /share/photoprism/originals
   STORAGE_PATH: /share/photoprism/storage
-  UPLOAD_NSFW: 'true'
+  UPLOAD_NSFW: "true"
   certfile: fullchain.pem
   keyfile: privkey.pem
   ssl: false
@@ -103,6 +103,9 @@ privileged:
   - SYS_RAWIO
   - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   BACKUP_PATH: str
   CONFIG_LOCATION: str
   DB_TYPE: list(sqlite|mariadb_addon|external)
@@ -125,5 +128,5 @@ services:
 slug: photoprism
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "ubuntu-2025-10-18"
+version: "ubuntu-2025-11-27"
 video: true
