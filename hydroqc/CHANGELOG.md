@@ -1,8 +1,16 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## v2.1.0-1
+
+**We released a new Home-Assistant Custom Component available here: https://github.com/hydroqc/hydroqc-ha**
+
+It is still considered beta but feel free to give it a try. It will eventually replace the Add-On.
+
+- hydroqc2mqtt: upgraded to [`2.1.0`](https://gitlab.com/hydroqc/hydroqc2mqtt/-/releases/2.1.0)
+
 ## v2.0.0-1
 
-- BEAKING: You now need to specify a rate and a rate option if applicable
+- BREAKING: You now need to specify a rate and a rate option if applicable
 - feat: Add new open data source for winter peaks
 
 ## v1.3.0-4

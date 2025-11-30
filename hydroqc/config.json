@@ -1,8 +1,8 @@
 {
   "name": "Hydroqc Add-on",
-  "version": "v2.0.0-1",
+  "version": "v2.1.0-1",
   "slug": "hydroqc",
-  "description": "获取您的消费数据并将其从HydroQuebec账户传输到MQTT，使用此hass插件。",
+  "description": "[老王杂谈说]：将您的 HydroQuebec 账户的消耗数据通过此 hass 插件发送到 MQTT。",
   "url": "https://gitlab.com/hydroqc/hydroqc-hass-addons",
   "image": "registry.gitlab.com/hydroqc/hydroqc-hass-addons/{arch}",
   "arch": [

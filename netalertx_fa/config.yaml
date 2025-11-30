@@ -1,13 +1,11 @@
 arch:
   - aarch64
   - amd64
-  - armv7
-codenotary: alexandrep.github@gmail.com
 description: "[老王杂谈说]：\U0001F5A7\U0001F50D WIFI / LAN扫描器，入侵者检测器和存在检测器"
 environment:
-  PGID: '102'
-  PORT: '20211'
-  PUID: '102'
+  PGID: "102"
+  PORT: "20211"
+  PUID: "102"
   TZ: Europe/Berlin
 full_access: true
 hassio_api: true
@@ -23,6 +21,8 @@ map:
   - share:rw
   - ssl
 name: NetAlertX Full Access
+options:
+  env_vars: []
 panel_icon: mdi:wifi-check
 ports:
   20211/tcp: 20211
@@ -36,11 +36,15 @@ privileged:
   - NET_ADMIN
   - NET_RAW
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   APP_CONF_OVERRIDE: str?
   TZ: str?
 services:
   - mqtt:want
 slug: netalertx_fa
+tmpfs: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 25.10.1
+version: 25.10.1-3
