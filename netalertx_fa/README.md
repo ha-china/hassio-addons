@@ -1,6 +1,6 @@
 # Home assistant add-on: NetAlertX Full Access
 
-我利用业余时间维护这个和其他 Home Assistant add-ons：跟上上游的更改、HA 更改，并在真实硬件上测试需要花费很多时间（和一些钱）。我大约使用我超过 110 个 add-ons 中 5-10 个非常频繁，所以我安装了一些我自己的测试机器（和一些测试服务，如 VPN）来调试和改进 add-ons。
+我利用业余时间维护这个和其他 Home Assistant add-ons：跟上上游的变化、HA 的变化，并在真实硬件上测试需要大量时间（和一些钱）。我大约使用我超过 110 个 add-ons 中的 5-10 个，所以我会安装一些我不自己使用的测试机器（和一些测试服务，如 VPN）来调试和改进 add-ons。
 
 如果这个 add-on 为您节省了时间或使您的设置更简单，我将非常感谢您的支持！
 
@@ -20,7 +20,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它将在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！点击下面的图片即可点赞，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -30,7 +30,7 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 [NetAlertX](https://github.com/jokob-sk/NetAlertX) 是一个 WIFI / LAN 扫描器、入侵者和存在检测器，帮助您监控网络中的新设备和潜在的安全威胁。
 
-**这是 Full Access 版本**，与标准 NetAlertX add-on 相比，它提供了额外的权限和网络访问功能。
+**这是全访问版本**，与标准 NetAlertX add-on 相比，它提供了额外的权限和网络访问功能。
 
 主要功能：
 - 网络设备发现和监控
@@ -49,7 +49,7 @@ Webui 可以在 `<your-ip>:20211` 或通过 Ingress 在侧边栏中找到。
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `TZ` | str | `Europe/Berlin` | 时区（例如，`Europe/London`） |
-| `APP_CONF_OVERRIDE` | str | | 额外的应用程序配置覆盖 |
+| `APP_CONF_OVERRIDE` | str | | 额外的应用配置覆盖 |
 
 ### Example Configuration
 
@@ -66,14 +66,14 @@ APP_CONF_OVERRIDE: "SCAN_SUBNETS=['192.168.1.0/24']"
 
 这个 add-on 通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **Custom scripts**：参见 [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用 add-on 的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。参见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
+- **Custom scripts**: 查看 [在 Addons 中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: 使用 add-on 的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。查看 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
 ## Installation
 
 这个 add-on 的安装非常简单，与安装任何其他 Hass.io add-on 没有区别。
 
-1. [将我的 Hass.io add-ons 仓库][repository] 添加到您的 Hass.io 实例。
+1. [将我的 Hass.io add-ons 仓库][repository] 添加到您的 Hass.io 实例中。
 1. 安装这个 add-on。
 1. 点击 `Save` 按钮保存您的配置。
 1. 启动 add-on。
@@ -82,7 +82,7 @@ APP_CONF_OVERRIDE: "SCAN_SUBNETS=['192.168.1.0/24']"
 
 ## Full Access vs Standard Version
 
-这个 **Full Access** 版本提供：
+这个 **全访问** 版本提供：
 - `full_access: true` - 完整的系统访问
 - `host_network: true` - 直接主机网络访问
 - 增强权限 (`SYS_ADMIN`, `NET_ADMIN`, `NET_RAW`)
