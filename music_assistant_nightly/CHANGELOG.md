@@ -1,58 +1,49 @@
-# [2.7.0.dev2025120103] - 01.12.2025
+# [2.7.0.dev2025120203] - 02.12.2025
 
 ## 📦 Nightly Release
 
-_Changes since [2.7.0.dev2025113021](https://github.com/music-assistant/server/releases/tag/2.7.0.dev2025113021)_
-
-### 🎨 Frontend Changes
-
-* No changes
+_Changes since [2.7.0.dev2025120114](https://github.com/music-assistant/server/releases/tag/2.7.0.dev2025120114)_
 
 ### 🧰 Maintenance and dependency bumps
 
-- ⬆️ Update music-assistant-frontend to 2.17.20 (by @music-assistant-machine in #2719)
-- ⬆️ Update music-assistant-models to 1.1.75 (by @music-assistant-machine in #2720)
+- ⬆️ Update music-assistant-frontend to 2.17.22 (by @music-assistant-machine in #2729)
 
 
-# [2.7.0.dev2025113021] - 30.11.2025
+# [2.7.0.dev2025120114] - 01.12.2025
 
 ## 📦 Nightly Release
 
-_Changes since [2.7.0.dev2025113013](https://github.com/music-assistant/server/releases/tag/2.7.0.dev2025113013)_
-
-### 🚀 Features and enhancements
-
-- Extract HLS parser to shared helpers module (by @Shi-553 in #2715)
-
-### 🎨 Frontend Changes
-
-* No changes
+_Changes since [2.7.0.dev2025120110](https://github.com/music-assistant/server/releases/tag/2.7.0.dev2025120110)_
 
 ### 🧰 Maintenance and dependency bumps
 
-- ⬆️ Update music-assistant-frontend to 2.17.19 (by @music-assistant-machine in #2718)
+- Bump YTM api to 1.11.3. (by @MarvinSchenkel in #2722)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@Shi-553
+@MarvinSchenkel
 
 
-# [2.7.0.dev2025113013] - 30.11.2025
+# [2.7.0.dev2025120110] - 01.12.2025
 
 ## 📦 Nightly Release
 
-_Changes since [2.7.0.dev2025113003](https://github.com/music-assistant/server/releases/tag/2.7.0.dev2025113003)_
+_Changes since [2.7.0.dev2025120103](https://github.com/music-assistant/server/releases/tag/2.7.0.dev2025120103)_
 
-### 🎨 Frontend Changes
+### 🐛 Bugfixes
 
-* No changes
-* No changes
+- Spotify connect: Fix sudden volume change when session starts (by @MarvinSchenkel in #2704)
 
 ### 🧰 Maintenance and dependency bumps
 
-- ⬆️ Update music-assistant-frontend to 2.17.17 (by @music-assistant-machine in #2716)
-- ⬆️ Update music-assistant-frontend to 2.17.18 (by @music-assistant-machine in #2717)
+- ⬆️ Update music-assistant-frontend to 2.17.21 (by @music-assistant-machine in #2721)
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@MarvinSchenkel
 
 
