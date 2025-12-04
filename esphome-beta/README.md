@@ -18,7 +18,7 @@
 
 ## 示例
 
-使用 ESPHome，您可以从几行 YAML 直接到定制固件。例如，要包含一个 [DHT22][dht22] 温度和湿度传感器，您只需要在配置文件中包含 8 行 YAML：
+使用 ESPHome，您可以从几行 YAML 直接制作定制的固件。例如，要包含一个 [DHT22][dht22] 温度和湿度传感器，您只需要在配置文件中包含 8 行 YAML：
 
 <img title="ESPHome DHT 配置示例" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome-beta/images/dht-example.png" width="500px"></img>
 
@@ -34,9 +34,10 @@
 [releases]: https://beta.esphome.io/changelog/index.html
 [logo]: https://github.com/esphome/home-assistant-addon/raw/main/esphome-beta/logo.png
 [website]: https://beta.esphome.io/
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

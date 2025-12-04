@@ -1,5 +1,14 @@
 # TOMMY
 
+## 0.23.0
+
+### Major Changes
+- Improvements to motion detection algorithm
+
+### Minor Changes
+
+- Minor UI changes
+
 ## 0.22.3
 
 ### Minor Changes
