@@ -1,7 +1,6 @@
 {
-  "build_from": {
-    "aarch64": "ghcr.nju.edu.cn/autobrr/autobrr:latest",
-    "amd64": "ghcr.nju.edu.cn/autobrr/autobrr:latest",
-    "armv7": "ghcr.nju.edu.cn/autobrr/autobrr:latest"
-  }
+    "build_from": {
+        "aarch64": "ghcr.nju.edu.cn/autobrr/autobrr:latest",
+        "amd64": "ghcr.nju.edu.cn/autobrr/autobrr:latest"
+    }
 }

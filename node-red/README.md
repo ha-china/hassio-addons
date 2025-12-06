@@ -1,20 +1,20 @@
-# Home Assistant 社区插件：Node-RED
+# Home Assistant Community Add-on: Node-RED
 
-[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
+[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
 
-[![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
+[![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
 
-[![通过 GitHub Sponsors 支持Frenck][github-sponsors-shield]][github-sponsors]
+[![Sponsor Frenck via GitHub Sponsors][github-sponsors-shield]][github-sponsors]
 
-[![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
+[![Support Frenck on Patreon][patreon-shield]][patreon]
 
 基于流程的编程，适用于物联网。
 
 ## 关于
 
-[Node-RED][nodered] 是一种编程工具，可以以新颖有趣的方式连接硬件设备、API 和在线服务。
+[Node-RED][nodered] 是一种编程工具，用于以新颖有趣的方式连接硬件设备、API 和在线服务。
 
-它提供了一个基于浏览器的编辑器，可以轻松地使用调色板中的各种节点来连接流程，并可以单击一次将其部署到其运行时。
+它提供了一个基于浏览器的编辑器，可以轻松地使用调色板中的各种节点连接流程，并且可以单击一次将其部署到其运行时。
 
 ![Node-RED 在 Home Assistant 前端][screenshot]
 
@@ -29,12 +29,13 @@
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v20.2.3-blue.svg
-[release]: https://github.com/hassio-addons/addon-node-red/tree/v20.2.3
+[release-shield]: https://img.shields.io/badge/version-v20.2.4-blue.svg
+[release]: https://github.com/hassio-addons/addon-node-red/tree/v20.2.4
 [screenshot]: https://github.com/hassio-addons/addon-node-red/raw/main/images/screenshot.png
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

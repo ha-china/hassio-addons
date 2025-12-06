@@ -1,10 +1,8 @@
 # Home assistant add-on: Photoprism
 
-## 💖 Support development
+我利用业余时间维护这个和其他 Home Assistant add-on：跟上上游的变更、HA的变更，并在真实硬件上测试需要大量时间（和一些金钱）。我大约使用我超过110个add-on中的5-10个，所以我安装了测试机器（和购买了一些我自己不使用的测试服务，如VPN）来调试和改进这些add-on。
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
-
-If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+如果这个add-on节省了你的时间或使你的设置更简单，我将非常感谢你的支持！
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -32,59 +30,58 @@ _Thanks to everyone having starred my repo! To star it click on the image below,
 
 ## About
 
-A server-based application for browsing, organizing and sharing your personal photo collection.
+一个基于服务器的应用程序，用于浏览、组织和共享您的个人照片收藏。
 
-Project homepage : https://github.com/photoprism/photoprism
+项目主页：https://github.com/photoprism/photoprism
 
-Based on the docker image : https://hub.docker.com/r/photoprism/photoprism
+基于的docker镜像：https://hub.docker.com/r/photoprism/photoprism
 
 ## Installation
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+这个add-on的安装非常简单，与安装任何其他Hass.io add-on没有区别。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Carefully configure the add-on to your preferences, see the official documentation for for that.
+1. [将我的Hass.io add-ons仓库][repository]添加到你的Hass.io实例。
+1. 安装这个add-on。
+1. 点击“保存”按钮以保存你的配置。
+1. 启动add-on。
+1. 检查add-on的日志，看看是否一切正常。
+1. 仔细配置add-on以符合你的偏好，查看官方文档以获取详细信息。
 
 ## Configuration
 
-Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+使用add-on的`env_vars`选项来传递额外的环境变量（名称可以是大小写）。详细信息请参阅：https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-Webui can be found at <http://homeassistant:2342> or through the sidebar using Ingress.
-Configurations can be done through the app webUI, except for the following options.
+Webui可以在<http://homeassistant:2342>或通过Ingress在侧边栏中找到。
+配置可以通过app的WebUI进行，除了以下选项。
 
-**System Requirements**: Minimum 2 cores and 4GB RAM
-**Default Credentials**:
-- Username: admin
-- Password: please_change_password
+**系统要求**：至少2核和4GB RAM
+**默认凭证**：
+- 用户名：admin
+- 密码：请更改密码
 
-**WebDAV Access**: Use URL `http://local-ip:addon-port/api/hassio.../originals` (see addon logs for full path)
+**WebDAV访问**：使用URL `http://local-ip:addon-port/api/hassio.../originals`（请查看add-on日志以获取完整路径）
 
 ### Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `ssl` | bool | `false` | Enable HTTPS for the web interface |
-| `certfile` | str | `fullchain.pem` | SSL certificate file (must be in /ssl) |
-| `keyfile` | str | `privkey.pem` | SSL key file (must be in /ssl) |
-| `DB_TYPE` | list | `sqlite` | Database type (sqlite/mariadb_addon/external) |
-| `ORIGINALS_PATH` | str | `/share/photoprism/originals` | Photo and video collection path |
-| `STORAGE_PATH` | str | `/share/photoprism/storage` | Cache, database and sidecar files path |
-| `IMPORT_PATH` | str | `/share/photoprism/import` | Import files path |
-| `BACKUP_PATH` | str | `/share/photoprism/backup` | Backup storage path |
-| `UPLOAD_NSFW` | bool | `true` | Allow uploads that may be offensive |
-| `CONFIG_LOCATION` | str | | Location of additional config.yaml |
-| `graphic_drivers` | list | | Graphics driver (mesa) |
-| `ingress_disabled` | bool | | Disable ingress for direct IP:port access |
-| `localdisks` | str | | Local drives to mount (e.g., `sda1,sdb1,MYNAS`) |
-| `networkdisks` | str | | SMB shares to mount (e.g., `//SERVER/SHARE`) |
-| `cifsusername` | str | | SMB username for network shares |
-| `cifspassword` | str | | SMB password for network shares |
-| `cifsdomain` | str | | SMB domain for network shares |
+| `ssl` | bool | `false` | 启用web界面的HTTPS |
+| `certfile` | str | `fullchain.pem` | SSL证书文件（必须位于/ssl） |
+| `keyfile` | str | `privkey.pem` | SSL密钥文件（必须位于/ssl） |
+| `DB_TYPE` | list | `sqlite` | 数据库类型（sqlite/mariadb_addon/external） |
+| `ORIGINALS_PATH` | str | `/share/photoprism/originals` | 照片和视频收藏路径 |
+| `STORAGE_PATH` | str | `/share/photoprism/storage` | 缓存、数据库和sidecar文件路径 |
+| `IMPORT_PATH` | str | `/share/photoprism/import` | 导入文件路径 |
+| `BACKUP_PATH` | str | `/share/photoprism/backup` | 备份存储路径 |
+| `UPLOAD_NSFW` | bool | `true` | 允许上传可能令人反感的文件 |
+| `CONFIG_LOCATION` | str | | 额外config.yaml的位置 |
+| `graphic_drivers` | list | | 图形驱动（mesa） |
+| `ingress_disabled` | bool | | 禁用Ingress以直接通过IP:端口访问 |
+| `localdisks` | str | | 要挂载的本地驱动（例如，`sda1,sdb1,MYNAS`） |
+| `networkdisks` | str | | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | str | | SMB网络共享的用户名 |
+| `cifspassword` | str | | SMB网络共享的密码 |
+| `cifsdomain` | str | | 网络共享的SMB域 |
 
 ### Example Configuration
 
@@ -107,12 +104,12 @@ cifsdomain: "workgroup"
 
 ### Advanced Configuration
 
-Additional options can be configured in `/config/addons_config/photoprism/config.yaml`.
-Complete list: https://github.com/photoprism/photoprism/blob/develop/docker-compose.yml
+可以在`/config/addons_config/photoprism/config.yaml`中配置额外的选项。
+完整列表：https://github.com/photoprism/photoprism/blob/develop/docker-compose.yml
 
 ### External Database Setup
 
-For external database, add to `addons_config/photoprism/config.yaml`:
+对于外部数据库，添加到`addons_config/photoprism/config.yaml`：
 
 ```yaml
 PHOTOPRISM_DATABASE_DRIVER: "mysql"
@@ -124,19 +121,20 @@ PHOTOPRISM_DATABASE_PASSWORD: "PASSWORD"
 
 ### Mounting Drives
 
-This addon supports mounting both local drives and remote SMB shares:
+这个add-on支持挂载本地驱动和远程SMB共享：
 
-- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动**：参见[在Add-ons中挂载本地驱动](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见[在Add-ons中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+
 ## Using Photoprism Command-Line Interface
 
-Photoprism also provides a command line interface:
+Photoprism还提供了命令行界面：
 
 https://docs.photoprism.app/getting-started/docker-compose/#command-line-interface
 
-You can access it via portainer addon or executing `docker exec -it <photoprism container id> bash` via _ssh_.
+你可以通过portainer add-on访问它，或通过执行`docker exec -it <photoprism container id> bash`通过_ssh_访问。
 
-:warning: Do not use `docker exec <photoprism container id> photoprism` as this will lead to unpredictable behavior.
+:warning: 不要使用`docker exec <photoprism container id> photoprism`，因为这会导致不可预测的行为。
 
 ## Illustration
 
@@ -144,12 +142,13 @@ You can access it via portainer addon or executing `docker exec -it <photoprism 
 
 ## Support
 
-Create an issue on github
+在github上创建问题
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

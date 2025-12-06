@@ -1,17 +1,16 @@
 # Home assistant add-on: Filebrowser
 
-## 💖 Support development
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the add-ons
+我利用业余时间维护这个及其他 Home Assistant add-on：跟进上游更改、HA 更改，并在真实硬件上测试，这需要大量时间（和一些金钱）。我大约使用我超过 110 个 add-on 中 5-10 个，因此我安装了一些我自己不使用的测试机器（并购买了一些测试服务，如 VPN）来调试和改进这些 add-on。
 
-If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+如果这个 add-on 为您节省了时间或简化了设置，我将非常感谢您的支持！
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## Addon informations
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffilebrowser%2Fconfig.yaml)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffilebrowser%2Fconfig.yaml)
 ![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffilebrowser%2Fconfig.yaml)
 ![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffilebrowser%2Fconfig.yaml)
 
@@ -22,7 +21,7 @@ If this add-on saves you time or makes your setup easier, I would be very gratef
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有给我的仓库点赞的人！点击下面的图片即可点赞，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -30,48 +29,48 @@ _Thanks to everyone having starred my repo! To star it click on the image below,
 
 ## About
 
-基于网络管理的文件界面，提供了一种安全的方法来浏览、上传、下载、编辑和管理您 Home Assistant 系统上的文件。Filebrowser 提供了一个干净、现代的界面，通过网页浏览器处理文件，支持多种文件格式、预览功能和全面的文件操作。
+基于 Web 的文件管理界面，提供了一种安全的方式来浏览、上传、下载、编辑和管理您 Home Assistant 系统上的文件。Filebrowser 提供了一个干净、现代的界面，通过 Web 浏览器处理文件，支持多种文件格式、预览功能和全面的文件操作。
 
-此插件基于官方 Filebrowser 项目的 [docker 镜像](https://hub.docker.com/r/filebrowser/filebrowser)。
+这个 add-on 基于 [官方 Filebrowser 镜像](https://hub.docker.com/r/filebrowser/filebrowser)。
 
-## Installation
+## 安装
 
-此插件的安装非常简单，与安装任何其他 Home Assistant 插件没有区别。
+这个 add-on 的安装非常简单，与其他 Home Assistant add-on 的安装方式相同。
 
-1. [将我的 Home Assistant 插件仓库][repository] 添加到您的 Home Assistant 实例中。
-1. 安装此插件。
-1. 点击“保存”按钮以存储您的配置。
-1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
+1. [将我的 Home Assistant add-on 仓库][repository]添加到您的 Home Assistant 实例。
+1. 安装这个 add-on。
+1. 点击 `保存` 按钮以保存您的配置。
+1. 启动 add-on。
+1. 检查 add-on 的日志，看看是否一切正常。
 1. 通过侧边栏或在 `<your-ip>:8071` 访问 Web UI。
 
-## Configuration
+## 配置
 
-Web UI 可以在 `<your-ip>:8071` 或通过 Ingress 在 Home Assistant 侧边栏中找到。
+Web UI 位于 `<your-ip>:8071` 或通过 Ingress 在 Home Assistant 侧边栏访问。
 
 **默认凭证：**
 - 用户名：`admin`
 - 密码：`admin`
 
-**重要：** 首次登录后立即更改默认凭证以提高安全性。
+**重要：** 首次登录后立即更改默认凭证以确保安全。
 
-### Options
+### 选项
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
-| `ssl` | bool | `false` | 为 Web 界面启用 HTTPS |
-| `certfile` | str | `fullchain.pem` | SSL 证书文件（位于 `/ssl/`） |
-| `keyfile` | str | `privkey.pem` | SSL 私有密钥文件（位于 `/ssl/`） |
-| `NoAuth` | bool | `true` | 禁用身份验证（更改时重置数据库） |
-| `disable_thumbnails` | bool | `true` | 禁用缩略图生成以提高性能 |
-| `base_folder` | str | _(可选)_ | 文件浏览器的根文件夹（默认为所有映射文件夹） |
-| `localdisks` | str | _(可选)_ | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | str | _(可选)_ | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | str | _(可选)_ | SMB 共享的网络用户名 |
-| `cifspassword` | str | _(可选)_ | SMB 共享的网络密码 |
-| `cifsdomain` | str | _(可选)_ | SMB 共享的域 |
+| 选项 | 类型 | 默认 | 描述 |
+|------|------|------|------|
+| `ssl` | 布尔 | `false` | 为 Web 界面启用 HTTPS |
+| `certfile` | 字符串 | `fullchain.pem` | SSL 证书文件（位于 `/ssl/`） |
+| `keyfile` | 字符串 | `privkey.pem` | SSL 私有密钥文件（位于 `/ssl/`） |
+| `NoAuth` | 布尔 | `true` | 禁用认证（更改时重置数据库） |
+| `disable_thumbnails` | 布尔 | `true` | 禁用缩略图生成以提高性能 |
+| `base_folder` | 字符串 | _(可选)_ | 文件浏览器的根文件夹（默认为所有映射文件夹） |
+| `localdisks` | 字符串 | _(可选)_ | 挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
+| `networkdisks` | 字符串 | _(可选)_ | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | 字符串 | _(可选)_ | SMB 网络共享的用户名 |
+| `cifspassword` | 字符串 | _(可选)_ | SMB 网络共享的密码 |
+| `cifsdomain` | 字符串 | _(可选)_ | SMB 网络共享的域 |
 
-### Example Configuration
+### 示例配置
 
 ```yaml
 ssl: true
@@ -87,42 +86,43 @@ cifspassword: "password123"
 cifsdomain: "workgroup"
 ```
 
-## Setup
+## 设置
 
-1. 启动插件并等待其初始化。
+1. 启动 add-on 并等待其初始化。
 1. 通过 Home Assistant 侧边栏或在 `<your-ip>:8071` 访问 Web 界面。
 1. 使用默认凭证登录：
    - 用户名：`admin`
    - 密码：`admin`
-1. **重要：** 点击“设置” > “用户管理”立即更改默认密码。
+1. **重要：** 点击 "设置" > "用户管理" 立即更改默认密码。
 1. 通过 Web 界面配置您喜欢的设置。
-1. 如果禁用身份验证 (`NoAuth: true`)，将跳过登录屏幕。
+1. 如果禁用认证 (`NoAuth: true`)，则将跳过登录屏幕。
 
-### Mounting Drives
+### 挂载驱动器
 
-此插件支持挂载本地驱动器和远程 SMB 共享：
+这个 add-on 支持挂载本地驱动器和远程 SMB 共享：
 
-- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见 [在 Add-on 中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见 [在 Add-on 中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-### Custom Scripts and Environment Variables
+### 自定义脚本和环境变量
 
-此插件支持通过 `addon_config` 映射自定义脚本和环境变量：
+这个 add-on 通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（大小写名称）。参见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详情。
+- **自定义脚本**：参见 [在 Add-on 中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用 add-on 的 `env_vars` 选项传递额外的环境变量（名称大小写均可）。详细说明请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-## Support
+## 支持
 
-在 GitHub 上创建问题，或在 [Home Assistant 社区讨论帖](https://community.home-assistant.io/t/home-assistant-addon-filebrowser/282108/3) 中提问。
+在 GitHub 上创建问题，或在 [Home Assistant 社区线程](https://community.home-assistant.io/t/home-assistant-addon-filebrowser/282108/3) 上提问。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

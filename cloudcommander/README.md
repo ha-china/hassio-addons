@@ -1,10 +1,9 @@
 # Home assistant add-on: Cloudcommander
 
-## 💖 Support development
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+我利用业余时间维护这个和其他 Home Assistant add-ons：跟上上游的变化、HA 的变化，并在真实硬件上测试需要大量时间（和一些钱）。我大约使用我 >110 个 add-ons 中 5-10 个，所以我安装了一些我不用来测试和改进 add-ons 的测试机器（和一些测试服务，比如 vpn）。
 
-If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+如果这个 add-on 为您节省了时间或使您的设置更简单，我将非常感谢您的支持！
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -22,7 +21,7 @@ If this add-on saves you time or makes your setup easier, I would be very gratef
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它会在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -31,7 +30,7 @@ _Thanks to everyone having starred my repo! To star it click on the image below,
 ## About
 
 [Cloud Commander](https://github.com/coderaiser/cloudcmd) 是一个带有控制台和编辑器的网页文件管理器。
-这个插件基于 [docker 镜像](https://hub.docker.com/r/coderaiser/cloudcmd)。
+这个 add-on 基于 [docker image](https://hub.docker.com/r/coderaiser/cloudcmd)。
 
 ## Configuration
 
@@ -42,10 +41,10 @@ Webui 可以在 <http://homeassistant:8000> 或通过 Ingress 在侧边栏中找
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `CUSTOM_OPTIONS` | str | | 自定义 CLI 选项 (例如，`--name Homeassistant`) |
-| `DROPBOX_TOKEN` | str | | Dropbox 集成令牌 (参见 https://cloudcmd.io/) |
-| `localdisks` | str | | 要挂载的本地驱动器 (例如，`sda1,sdb1,MYNAS`) |
-| `networkdisks` | str | | 要挂载的 SMB 共享 (例如，`//SERVER/SHARE`) |
+| `CUSTOM_OPTIONS` | str | | 自定义 CLI 选项（例如，`--name Homeassistant`) |
+| `DROPBOX_TOKEN` | str | | Dropbox 集成令牌（见 https://cloudcmd.io/) |
+| `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`) |
+| `networkdisks` | str | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`) |
 | `cifsusername` | str | | SMB 网络共享的用户名 |
 | `cifspassword` | str | | SMB 网络共享的密码 |
 | `cifsdomain` | str | | SMB 网络共享的域 |
@@ -66,32 +65,33 @@ smbv1: false
 
 ### Mounting Drives
 
-这个插件支持挂载本地驱动器和远程 SMB 共享：
+这个 add-on 支持挂载本地驱动器和远程 SMB 共享：
 
-- **本地驱动器**: 查看 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**: 查看 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：见 [在 Addons 中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：见 [在 Addons 中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### Custom Scripts and Environment Variables
 
-这个插件支持自定义脚本和环境变量：
+这个 add-on 支持自定义脚本和环境变量：
 
-- **自定义脚本**: 查看 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**: 使用插件的 `env_vars` 选项传递额外的环境变量 (大小写名称都可以)。查看 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
+- **自定义脚本**：见 [在 Addons 中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用 add-on 的 `env_vars` 选项来传递额外的环境变量（大小写名称均可）。见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
 ## Installation
 
-这个插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
+这个 add-on 的安装非常简单，与安装任何其他 Hass.io add-on 没有区别。
 
-1. [将我的 Hass.io 插件仓库][repository] 添加到你的 Hass.io 实例。
-1. 安装这个插件。
-1. 点击 `Save` 按钮以保存你的配置。
-1. 启动插件。
-1. 检查插件的日志以查看一切是否正常。
+1. [将我的 Hass.io add-ons 仓库][repository] 添加到您的 Hass.io 实例。
+1. 安装这个 add-on。
+1. 点击 `Save` 按钮保存您的配置。
+1. 启动 add-on。
+1. 检查 add-on 的日志，看看一切是否正常。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 
