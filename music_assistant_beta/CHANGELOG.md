@@ -1,3 +1,49 @@
+# [2.7.0b22] - 07.12.2025
+
+## 📦 Beta Release
+
+_Changes since [2.7.0b21](https://github.com/music-assistant/server/releases/tag/2.7.0b21)_
+
+### 🐛 Bugfixes
+
+- Fix race condition when transitioning from plugin source (by @sprocket-9 in #2758)
+- Handle more cases of instance steering (by @marcelveldt in #2762)
+
+### 🎨 Frontend Changes
+
+- Lokalise: Translations update (by @marcelveldt in [#1258](https://github.com/music-assistant/frontend/pull/1258))
+
+### 🧰 Maintenance and dependency bumps
+
+- ⬆️ Update music-assistant-models to 1.1.79 (by @music-assistant-machine in #2760)
+- ⬆️ Update music-assistant-frontend to 2.17.32 (by @music-assistant-machine in #2761)
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@marcelveldt, @sprocket-9
+
+
+# [2.7.0b21] - 06.12.2025
+
+## 📦 Beta Release
+
+_Changes since [2.7.0b20](https://github.com/music-assistant/server/releases/tag/2.7.0b20)_
+
+### 🧰 Maintenance and dependency bumps
+
+<details>
+<summary>4 changes</summary>
+
+- ⬆️ Update music-assistant-models to 1.1.77 (by @music-assistant-machine in #2755)
+- ⬆️ Update music-assistant-frontend to 2.17.30 (by @music-assistant-machine in #2756)
+- ⬆️ Update music-assistant-models to 1.1.78 (by @music-assistant-machine in #2757)
+- ⬆️ Update music-assistant-frontend to 2.17.31 (by @music-assistant-machine in #2759)
+
+</details>
+
+
 # [2.7.0b20] - 06.12.2025
 
 ## 📦 Beta Release
@@ -38,65 +84,5 @@ _Changes since [2.7.0b19](https://github.com/music-assistant/server/releases/tag
 Special thanks to the following contributors who helped with this release:
 
 @MarvinSchenkel, @elialbert, @marcelveldt, @maximmaxim345, @stvncode
-
-
-# [2.7.0b19] - 04.12.2025
-
-## 📦 Beta Release
-
-_Changes since [2.7.0b18](https://github.com/music-assistant/server/releases/tag/2.7.0b18)_
-
-### 🚀 Features and enhancements
-
-- Update Implemented Sendspin Version with included Volume Support (by @maximmaxim345 in #2732)
-
-### 🐛 Bugfixes
-
-- Adjust minimum username length to 2 characters (by @marcelveldt in #2746)
-
-### 🎨 Frontend Changes
-
-- Fix some redirect issues and some alignments (by @stvncode in [#1252](https://github.com/music-assistant/frontend/pull/1252))
-- feat: Add Safari 15 / iOS 15 compatibility (by @sethbrammer in [#1253](https://github.com/music-assistant/frontend/pull/1253))
-- Fix reconnect logic when hosted in HA Ingress mode (by @marcelveldt in [#1254](https://github.com/music-assistant/frontend/pull/1254))
-- Fix some redirect issues and some alignments (by @stvncode in [#1252](https://github.com/music-assistant/frontend/pull/1252))
-
-### 🧰 Maintenance and dependency bumps
-
-- ⬆️ Update music-assistant-frontend to 2.17.26 (by @music-assistant-machine in #2747)
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@marcelveldt, @maximmaxim345, @sethbrammer, @stvncode
-
-
-# [2.7.0b18] - 04.12.2025
-
-## ⚠️ Important Notes
-
-Read the B17 release notes about mandatory auth!
-
----
-
-## 📦 Beta Release
-
-_Changes since [2.7.0b17](https://github.com/music-assistant/server/releases/tag/2.7.0b17)_
-
-### 🐛 Bugfixes
-
-- A few bugfixes to auth manager after beta reports (by @marcelveldt in #2744)
-
-### 🧰 Maintenance and dependency bumps
-
-- Chore(deps): Bump plexapi from 4.17.1 to 4.17.2 (by @dependabot[bot] in #2727)
-- ⬆️ Update music-assistant-frontend to 2.17.25 (by @music-assistant-machine in #2745)
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@marcelveldt
 
 

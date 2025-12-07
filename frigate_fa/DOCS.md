@@ -1,11 +1,11 @@
-你必须创建一个配置文件在 `/addon_configs/ccab4aaf_frigate-fa/config.yml` ([点击这里了解更多关于如何访问这个目录](https://docs.frigate.video/configuration/#accessing-add-on-config-dir))。
+You must create a config file at `/addon_configs/ccab4aaf_frigate-fa/config.yml` ([click here to learn more on how to access this directory](https://docs.frigate.video/configuration/#accessing-add-on-config-dir)).
 
-Frigate 将实时对象检测功能带到任何由 FFmpeg 支持的摄像头视频流。更详细的文档维护在 [这里](https://docs.frigate.video)。
+Frigate brings realtime object detection to any camera video feed supported by FFmpeg. More detailed docs are maintained [here](https://docs.frigate.video).
 
-## 必需的依赖项
+## Required Dependencies
 
-- MQTT: Frigate 通过 MQTT 与 Home Assistant 进行通信
+- MQTT: Frigate communicates with Home Assistant via MQTT
 
-## 支持
+## Support
 
-如果你需要支持，请 [打开一个问题](https://github.com/blakeblackshear/frigate/issues/new/choose)。
+Please [open an issue](https://github.com/blakeblackshear/frigate/issues/new/choose) if you need support.
