@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.5.0
+
+### Features
+
+- Add lock widget for controlling Home Assistant lock entities       
+- Enhance demo mode functionality with improved widget support       
+
+### Improvements
+
+- Migrate the underlying framework for better stability in the long run
+- Improve performance overall by reducing rerenders and using React Compiler for better memoization
+- Add a performance testing suite
+- Implement session validation for improved dashboard redirection    
+- Refactor application structure for better maintainability
+
+### Bug Fixes
+
+- Fix build and Docker image configuration
+- Fix a bug where the baterry widget would cause too many rerenders and bad performance
+
 ## 0.4.4
 
 ### Bug Fixes
