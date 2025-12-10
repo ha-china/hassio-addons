@@ -1,12 +1,11 @@
 name: Mailfilter
-version: 4.2.3
+version: 5.0.0
 slug: mailfilter
 description: '[老王杂谈说]：Rspamd 邮件过滤器用于 Home Assistant'
 url: https://ghfast.top/github.com/erik73/hassio-addons
 arch:
   - aarch64
   - amd64
-  - armv7
 stage: experimental
 init: false
 ingress: true

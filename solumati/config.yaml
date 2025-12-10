@@ -1,0 +1,25 @@
+---
+name: "Solumati"
+version: "1.2.0"
+slug: "solumati"
+description: "[老王杂谈说]：反滑动革命 - 专注于有意义的匹配的自托管约会平台"
+url: "https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/solumati"
+startup: application
+arch:
+  - aarch64
+  - amd64
+image: ghcr.nju.edu.cn/faserf/solumati-{arch}
+init: false
+map:
+  - config:rw
+  - share:rw
+ports:
+  80/tcp: 8099
+ports_description:
+  80/tcp: "Web Interface Port"
+options:
+  log_level: info
+  test_mode: false
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  test_mode: bool
