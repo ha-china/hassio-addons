@@ -25,15 +25,12 @@ RUN \
 
 # --- SOURCE CODE FETCH STAGE ---
 # Download the specific release tarball
-ARG SOLUMATI_VERSION="v2025.12.1-b1"
+ARG SOLUMATI_VERSION="v2025.12.1-b10"
 WORKDIR /tmp
 RUN curl -L "https://ghfast.top/github.com/FaserF/Solumati/archive/refs/tags/${SOLUMATI_VERSION}.tar.gz" -o solumati.tar.gz && \
     tar -xzf solumati.tar.gz && \
     mv Solumati-* src && \
     rm solumati.tar.gz
-
-# Fix syntax error in upstream Questionnaire.jsx (duplicate return statement)
-RUN sed -i '81d' src/frontend/src/components/Questionnaire.jsx
 
 # --- FRONTEND BUILD STAGE ---
 WORKDIR /tmp/frontend_build

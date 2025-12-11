@@ -1,10 +1,10 @@
-# Home Assistant Add-on: LLDAP
+# Home Assistant 插件：LLDAP
 
-基于 [LLDAP](https://github.com/lldap/lldap) 的 Home Assistant 添加项。
+基于 [LLDAP](https://github.com/lldap/lldap) 的 Home Assistant LDAP 插件。
 
 ## 关于
 
-LLDAP 是一个轻量级的身份验证服务器，提供了一个简化的、有见解的 LDAP 接口用于身份验证。
+LLDAP 是一个轻量级认证服务器，提供了一个主观的、简化的 LDAP 接口用于认证。
 
 更多信息：https://github.com/lldap/lldap
 ---

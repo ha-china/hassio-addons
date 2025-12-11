@@ -1,5 +1,5 @@
 name: LLDAP
-version: 0.1.0
+version: 0.1.1
 slug: lldap
 description: '[老王杂谈说]：轻量级认证服务器'
 url: https://ghfast.top/github.com/einschmidt/addon-lldap
