@@ -1,44 +1,49 @@
 # Home Assistant Add-on: Hikvision Doorbell
 
-## 配置
-**注意**: _当配置更改时，请记得重启该插件。_
+## Configuration
+**Note**: _Remember to restart the add-on when the configuration is changed._
 
-**注意**: _当插件首次连接到门铃时，可能会发生门站卡住的情况，因为它正在下载完整的事件回放。您还会看到很多错误事件，只需稍等片刻，有时可能需要几小时... 可能需要重启。_
+**Note**: _When the add-on connects to a doorbell for the first time, it might happen that your door station gets stuck, because it is downloading the complete backlog of events. You will also see a lot of false events just give it a while, it can sometimes takes a few hours... A reboot might be required._
 
-在 Home Assistant 界面中，您可以通过此插件的 **配置** 选项卡设置以下配置选项：
+The following configuration options are available to be setup using the **Configuration** tab of this add-on in the Home Assistant interface:
 
-### 门铃
-配置与门铃的连接。如果未定义值，则使用默认设置。
+### Doorbells
+Configure the connection to the doorbells. If a value is not defined, the default setting is used.
 
-对于您的每个门铃，请重复以下配置：
+For each of your doorbells, repeat the following configuration:
 
-| 选项        | 默认       | 描述                           |
-| --------    | ----       | ----                           |
-| name        |           | 此门铃的自定义名称（在 HA UI 和传感器名称中可见） |
-| ip          |           | 门铃的 IP 地址                 |
-| port        | 8000       | （可选）门铃的端口             |
-| username    | admin      | 访问门铃的用户名               |
-| password    |           | 访问门铃的密码                 |
-| output_relays | 2         | （可选）如果您看不到正确数量的门开关，或者您在室内附加了一个安全门控制模块，请设置此选项 |
-| scenes      | false      | （可选）室内面板的额外场景按钮 |
+| Option          | Default       | Description                           |
+| --------        | ----          | ----                                  |
+| name            |               | Custom name for this doorbell (visibile in the HA UI and the sensors names)
+| ip              |               | IP address of the doorbell
+| port            | 8000          | (Optional) Port of the doorbell
+| username        | admin         | Username to access the doorbell
+| password        |               | Password to access the doorbell
+| output_relays   | 2             | (optional) Set this option if you don't see the correct number of door switches or if you have attached an secure door control module on your indoor
+| scenes          | false         | (optional) Extra Scene buttons for indoor panels
+| call_state_poll | 5             | (optional) Make the call state poll every 5 sec, for devices that dont support the ringing event, devices for example running 3.7.x or newer... 
 
-#### 示例配置
-以下配置设置了两个门铃，分别命名为 `Front door`（前门）和 `Rear door`（后门）以及一个 `Indoor` 面板：
+
+#### Example config
+The following configuration setups two doorbells, named `Front door` and `Rear door` and an `Indoor` panel
 ```yaml
 - name: "Front door"
   ip: 192.168.0.1
   username: admin
-  password: password  
+  password: password
+  output_relays: 2
 
 - name: "Rear door"
   ip: 192.168.0.2
   username: admin
   password: password
+  call_state_poll: 10
 
 - name: "Indoor"
   ip: 192.168.0.3
   username: admin
   password: password
+  scenes: true
 
 - name: "Indoor Extension"
   ip: 192.168.0.4
@@ -46,35 +51,35 @@
   password: password
 ```
 
-### 系统
-以下系统设置可用：
+### System
+The following system settings are available:
 
-| 名称              | 默认               | 描述                           |
-| --------          | ----               | ----                           |
-| log_level         | WARNING           | 插件日志的详细程度。可用选项：_ERROR_ _WARNING_ _INFO_ _DEBUG_ |
-| sdk_log_level     | NONE              | Hikvision SDK 日志的详细程度。可用选项：_NONE_ _ERROR_ _INFO_ _DEBUG_ |
+| Name              | Default               | Description                           |
+| --------          | ----                  | ----                                  |
+| log_level         | WARNING               | The verbosity of the add-on logs. Available options: _ERROR_ _WARNING_ _INFO_ _DEBUG_
+| sdk_log_level     | NONE               | The verbosity of the Hikvision SDK logs. Available options: _NONE_ _ERROR_ _INFO_ _DEBUG_
 
-#### 示例配置
+#### Example config
 ```yaml
 log_level: WARNING
 sdk_log_level: NONE
 ```
 
-## 设置
+## Setup
 
-### 要求
+### Requirements
 
-一个运行的 MQTT 中继。
+A running MQTT broker.
 
-您可以使用官方支持的 __Mosquitto 中继__，它在您的 Home Assistant 实例的官方插件部分中可用。
-您可以通过点击以下按钮快速设置它：
-[![打开您的 Home Assistant 实例并显示 Supervisor 插件的仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_mosquitto)，或者通过在您的 `插件商店` 中手动找到它。
+You can use the officially supported __Mosquitto broker__, available in the official add-ons section of your Home Assistant instance. 
+You can quickly set it up by clicking the following button:
+[![Open your Home Assistant instance and show the dashboard of a Supervisor add-on.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_mosquitto), or by manually finding it inside your `Add-on store`.
 
-在您启动了 __Mosquitto 中继__ 插件后，您应该能够通过进入 `设置` -> `设备和服务` -> `MQTT` 并点击 `配置` 来自动连接 Home Assistant 到中继。
+After you have started the __Mosquitto broker__ add-on, you should be able to automatically connect Home Assistant to the broker by going to `Settings` -> `Devices & Services` -> `MQTT`, and clicking `Configure`.
 
-（可选）如果您有外部 MQTT 中继，您也可以在插件配置中定义它：
+(Optional) If you have an external MQTT broker, you can define it the add-on config too:
 
-#### 示例配置
+#### Example config
 ```yaml
 host: 192.168.0.17
 port: 1883
@@ -83,61 +88,63 @@ username: user
 password: pass
 ```
 
-### 开始使用
+### Getting started
 
-在您设置好 MQTT 中继后，您可以开始 __Hikvision Doorbell__。
-您定义的每个门铃都应作为设备显示在 `设置` -> `设备和服务` -> `设备` 下。
+After you have setup an MQTT broker, you can start __Hikvision Doorbell__. 
+Each of you defined doorbell should be visible as a device under `Settings` -> `Devices & Services` -> `Devices`.
 
-### 传感器、开关、输入文本和按钮
-对于您的每个门铃，以下实体可用：
+### Sensors, switches, input text and buttons
+For each of your doorbells, the following entities are available:
 
-- 传感器
-  - `呼叫状态` (_空闲_, _响铃_, _已取消_)
-- 开关
-  - `门继电器`（每个可用继电器一个，打开连接到设备输出继电器的门）
-- 按钮
-  - `接听呼叫`（设备需要连接到 Hikconnect 才能让“接听”工作，如果不可能，您可以使用“拒绝”代替）
-  - `挂断呼叫`（设备需要连接到 Hikconnect 才能让“挂断”工作，如果不可能，您可以使用“拒绝”代替）
-  - `拒绝呼叫`
-  - `重启`
+- Sensors
+  - `Call state` (_idle_, _ringing_, _dismissed_)
+- Switches
+  - `Door relays` (one for each available relay, open the door connected to the output relay of the device)
+- Buttons
+  - `Answer call` (The device needs to be connected to Hikconnect in to make "answer" work, if its not possible, you can use "reject" instead)
+  - `Hangup call` (The device needs to be connected to Hikconnect in to make "hangup" work, if its not possible, you can use "reject" instead)
+  - `Reject call`
+  - `Reboot`
   - ...
-- 设备触发器（取决于设备型号）
-  - `检测到运动`
-  - `篡改警报`
-  - `门未关闭`
+- Device triggers (depending on device model)
+  - `Motion detected`
+  - `Tamper alarm`
+  - `Door not closed`
   - ...
 
-  _设备触发器_ 用于指示由门铃生成的警报和事件（生成的具体事件类型取决于具体型号）。
-  这些是特殊实体，它们没有与它们关联的状态（因此不在 HA 实体列表中，但在每个 `设备信息` 页面下可见）。
+  The _device triggers_ are used to signal alarms and events generated by the doorbells (the type of events generated depends on the specific model).
+  These are special entities that do not have a state associated to them (therefore are not visible in the list of HA entities, but under each `Device info` page). 
   
-  **注意**: 设备触发器是在设备上至少触发一次相关事件后才被发现的。
+  **NOTE**: The device triggers are discovered *once the associated event is triggered on the device at least once.*
+
+   **NOTE**: Devices that run newer firmare like 3.7.x dont support the ring event anymore, you need to manually poll it now using the call_state_poll in the config.*
   
-  **注意**: 由于某种原因，没有“门未关闭”的设备触发器，这里是一个解决方案：
+  **NOTE**: For some reason there is no "door not closed" device trigger, here is a workaround:
 
   https://community.home-assistant.io/t/hikvision-doorbell-videointercom-integration/532796/537
 
   https://community.home-assistant.io/t/hikvision-doorbell-videointercom-integration/532796/2297?
   
   
-  您可以在自动化中使用 [设备触发器](https://www.home-assistant.io/docs/automation/trigger/#device-triggers) 通过使用类型为 `设备` 的触发器。
-  查看自动化指南 [Automating Home Assistant](https://www.home-assistant.io/getting-started/automation/) 或自动化文档 [Automation](https://www.home-assistant.io/docs/automation/) 以获取完整详细信息。
+  You can use a [device trigger](https://www.home-assistant.io/docs/automation/trigger/#device-triggers) in an automation by using a trigger of type `Device`.
+  Check out the [Automating Home Assistant](https://www.home-assistant.io/getting-started/automation/) guide on automations or the [Automation](https://www.home-assistant.io/docs/automation/) documentation for full details.
   
   <p align="center">
     <img src="https://raw.githubusercontent.com/pergolafabio/Hikvision-Addons/dev/hikvision-doorbell/assets/docs_device_triggers_automation.png" width="600px" />
   </p>
 
- - 输入文本 
-   - `Isapi request`（此输入文本用于向室内/室外设备发送 ISAPI 命令。室内设备没有打开端口 80 来发送 ISAPI 命令，但使用此插件可以工作，因为它基于 SDK。小心使用此服务，如果不正确使用，它可能会崩溃插件/容器。下面发布了一个示例服务。GET/PUT 是必需的，以及 ISAPI 命令，JSON/XML 是可选的，取决于使用的命令。确保输入之间只有一个空格。一个有用的 ISAPI 命令列表可以在... [ISAPI](https://github.com/pergolafabio/Hikvision-Addons/blob/main/doorbell/ISAPI.md) 找到。
+ - Input Text 
+   - `Isapi request` (This input text is usefull for sending ISAPI commands to indoor/outdoor devices. Indoor devices dont have port 80 open to send ISAPI commands, but it does work using this addon, since its based on the SDK. Be carefull using this service, it can crash the add-on/docker if not properly used. An example service is posted below. GET/PUT is mandatory, as well as the ISAPI command, the JSON/XML is optional, depending on the command used. Make sure there is only 1 space between the input. A sample list of usefull ISAPI commands can be found here... [ISAPI](https://github.com/pergolafabio/Hikvision-Addons/blob/main/doorbell/ISAPI.md)
 
   ```
-  # 获取呼叫状态
+  # Get call status
   action: text.set_value
   target:
     entity_id: text.ds_kd8003_isapi_request
   data:
     value: GET /ISAPI/VideoIntercom/callStatus?format=json
 
-  # 打开门
+  # Open a door
   action: text.set_value
   target:
     entity_id: text.ds_kd8003_isapi_request
@@ -146,59 +153,60 @@ password: pass
 
   ```
 
-## 向门铃发送命令
 
-您可以通过以下两种方式与您的门铃交互： 
-- 通过自动创建的 MQTT 实体（开关、按钮）
-- 手动调用插件的 `stdin` 服务
+## Sending commands to the doorbells
 
-### MQTT 实体
+There are two ways in which you can interact with your doorbells: 
+- via the automatically created MQTT entities (switches, buttons)
+- manually invoking the add-on `stdin` service
 
-此插件自动创建 [开关](https://www.home-assistant.io/integrations/switch/) 和 [按钮](https://www.home-assistant.io/integrations/button/)，您可以在 Home Assistant UI 中切换和响应，或者在自己的自动化中响应。
+### MQTT entities
 
-### STDIN 服务（高级）
+This add-on automatically creates [switches](https://www.home-assistant.io/integrations/switch/) and [buttons](https://www.home-assistant.io/integrations/button/) you can toggle and react to from the Home Assistant UI or from your own automations.
 
-有一种高级方法可以通过向插件在其 `标准输入`（STDIN）发送文本消息来与设备交互。
-您可以使用 Home Assistant 提供的内置 `hassio.addon_stdin` 服务。
+### STDIN service (advanced)
 
-输入字符串必须为以下格式
+There is an advanced method to interact with the devices by sending a text message to the add-on on its `standard input` (STDIN).
+You can use the built-in `hassio.addon_stdin` service provided by Home Assistant.
+
+The input string must be in the format
 ```
-<command> <门铃名称> <可选参数>
+<command> <doorbell_name> <optional_parameter>
 ```
-- `<command>` 是一个：
+- `<command>` is one of:
 
-  | 命令     | 描述                                               |
-  | -------- | -------------------------------------------------- |
-  | unlock   | 解锁指定的门（`<可选参数>` 必须是 `1` 或 `2`），连接到门铃站输出继电器 |
-  | reboot   | 重启指定的门站 |
-  | reject   | 拒绝来电并停止室内站点响铃 |
-  | request  | 未知 |
-  | cancel   | 未知 |
-  | answer   | 接听呼叫，与“hangUp”之后一起使用很有用，这样对讲机停止响铃（空闲）并且您可以开始与 Frigate 进行双向音频 |
-  | reject   | 未知 |
-  | bellTimeout | 未知 |
-  | hangUp   | 挂断呼叫，与“answer”之前一起使用很有用，这样对讲机停止响铃（空闲）并且您可以开始与 Frigate 进行双向音频 |
-  | deviceOnCall | 未知 |
-  | atHome   | 为室内面板发送场景“在家” |
-  | goOut    | 为室内面板发送场景“外出” |
-  | goToBed  | 为室内面板发送场景“去睡觉” |
-  | custom   | 为室内面板发送场景“自定义” |
-  | setupAlarm | 在室内面板上打开警报 |
-  | closeAlarm | 在室内面板上关闭警报 |
-  | muteAudioOutput   | 静音门铃/室内站点的音频输出 |
-  | unmuteAudioOutput | 取消静音门铃/室内站点的音频输出  
+  | Command     | Description                                               |
+  | --------    | ----                                                      |
+  | unlock      | Unlock the specified door (`<optional_parameter>` must be `1` or `2`) connected to the doorbell station output relay
+  | reboot      | Reboot the specified  door station
+  | reject      | Reject the incoming call and stop the indoor stations from ringing
+  | request     | Unknown
+  | cancel      | Unknown
+  | answer      | Answers the call, usefull in combination with "hangUp" afterwards, so the intercom stops ringing (idle) and you can start two way audio with Frigate for example
+  | reject      | Unknown
+  | bellTimeout | Unknown
+  | hangUp      | Hangs up the call, usefull in combination with "answer" before, so the intercom stops ringing (idle) and you can start two way audio with Frigate for example
+  | deviceOnCall| Unknown
+  | atHome      | Sending scene "At home" for indoor panels
+  | goOut       | Sending scene "Go out" for indoor panels
+  | goToBed     | Sending scene "Go to bed" for indoor panels
+  | custom      | Sending scene "custom" for indoor panels
+  | setupAlarm  | Turn on the alarm on the indoor panel
+  | closeAlarm  | Turn off the alarm on the indoor panel
+  | muteAudioOutput   | Mutes the audio output of the doorbell / indoor station
+  | unmuteAudioOutput | Unmutes the audio output of the doorbell / indoor station  
 
-- `<门铃名称>` 是在配置选项中为门铃给出的自定义名称，全部小写，空格用下划线 `_` 代替。 
+- `<doorbell_name>` is the custom name given to the doorbell in the configuration options, all lowercase and with whitespace substituted by underscores `_`. 
 
-  例如：如果门铃命名为 `Front door`，输入字符串必须引用它为 `front_door`。
+  E.G.: If the doorbell is named `Front door`, the input string must reference it as `front_door`.
 
-- `<可选参数>` 可以是附加字符串，例如用于指定命令的附加选项
+- `<optional_parameter>` can be an additional string, used for instance to specify additional options for a command
 
-#### 示例
-更多详细信息，请参阅关于 `hassio.addon_stdin` 服务的 [官方文档](https://www.home-assistant.io/integrations/hassio/#service-hassioaddon_stdin)。
+#### Example
+For more details see the [official documentation]((https://www.home-assistant.io/integrations/hassio/#service-hassioaddon_stdin)) about the `hassio.addon_stdin` service.
 
-#### 解锁门
-此服务解锁连接到门站名为 `Front door` 的 _1_ 个输出继电器的门：
+#### Unlock a door
+This service unlocks the door connected to the _1st_ output relay of the door station named `Front door`:
 ````yaml
 service: hassio.addon_stdin
 data:
@@ -206,8 +214,8 @@ data:
   input: unlock front_door 1
 ````
 
-#### 重启设备
-要重启名为 `Rear door` 的门铃：
+#### Reboot the device
+To reboot the doorbell named `Rear door`:
 ````yaml
 service: hassio.addon_stdin
 data:
@@ -215,11 +223,12 @@ data:
   input: reboot rear_door
 ````
 
-#### 拒绝呼叫
-与监控前门状态的传感器一起使用可能会很有用。当有人按下门铃的按钮时，如果手动打开门而不接听电话，以下服务将拒绝呼叫。
-所有室内站点包括 Hik-Connect 设备都将停止响铃。
+#### Reject a call
+It might come in handy in tandem with a sensor monitoring the status of the front door. When someone presses the ring button on the doorbell, if the door is opened by hand without picking up the call, the below service rejects the call.
+All indoor stations including the Hik-Connect devices stop ringing.
 
-此示例在名为 `Indoor unit` 的 `DS-KD8003` 室外单元上已测试，该类型的命令只能发送到室内站点。
+This example has been tested on a `DS-KD8003` outdoor unit with indoor stations named `Indoor unit`.
+This type of command must be sent to an indoor station only.
 
 ````yaml
 service: hassio.addon_stdin
@@ -228,18 +237,19 @@ data:
   input: reject indoor_unit
 ````
 
-## 支持
-如果您发现错误或需要支持，请在 GitHub 上[打开一个问题](https://github.com/pergolafabio/Hikvision-Addons/issues/new)。
-如果可能，请提供您的日志副本在问题表单中，以帮助我们更好地诊断问题！
+## Support
+If you find a bug or need support [open an issue here](https://github.com/pergolafabio/Hikvision-Addons/issues/new) on GitHub.
+If possible, please provide a copy of your logs in the issue form to help us better diagnose the problem!
 
-### 故障排除
-查看 Home Assistant UI 中插件的 **日志** 选项卡。
+### Troubleshooting
+Have a look at the **Log** tab of the add-on in the Home Assistant UI.
 
-您可以通过更改 `system.log_level` 配置选项来增加详细程度。例如：
+You can increase the verbosity by changing the `system.log_level` configuration option. For instance:
 ```yaml
 system:
   log_level: DEBUG
   sdk_log_level: DEBUG
 ```
 
-*N.B.*: 当插件首次连接到门铃时，可能会发生门站卡住的情况，因为它正在下载完整的事件回放。可能需要重启。
+*N.B.*: When the add-on connects to a doorbell for the first time, it might happen that your door station gets stuck, because it is downloading the complete backlog of events. A reboot might be required.
+

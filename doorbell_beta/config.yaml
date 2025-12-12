@@ -1,6 +1,6 @@
 name: Hikvision Doorbell (Beta)
 description: '[老王杂谈说]：将您的海康威视门铃连接到 Home Assistant（Beta 版本）'
-version: '3.0.0-beta.85'
+version: '3.0.0-beta.87'
 image: ghcr.nju.edu.cn/pergolafabio/hikvision-doorbell
 slug: hikvision_doorbell_beta
 url: https://ghfast.top/github.com/pergolafabio/Hikvision-Addons/tree/main/doorbell_beta
@@ -16,10 +16,11 @@ homeassistant_api: true
 # Default options when used as an HA add-on
 options:
   doorbells:
-    - name: null
-      ip: null
+    - name: ""
+      ip: ""
       username: admin
       password: ""
+      scenes: false
   system:
     log_level: INFO
     sdk_log_level: NONE
@@ -34,6 +35,7 @@ schema:
       password: str
       output_relays: "int?"
       scenes: "bool?"
+      call_state_poll: "int?"
   system:
     log_level: match(^ERROR|WARNING|INFO|DEBUG$)
     sdk_log_level: match(^NONE|ERROR|INFO|DEBUG$)?

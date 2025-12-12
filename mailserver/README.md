@@ -7,10 +7,10 @@
 
 ## 关于
 
-重要提示：此插件需要 MariaDB 插件已安装并正在运行！
+重要提示：此插件要求 MariaDB 插件已安装并运行！
 
 此插件是实验性的，为您的域名提供邮件服务器。
-也可以在 Postfixadmin 网页界面中配置额外的电子邮件域名和账户。
+还可以在 Postfixadmin 网页界面中配置额外的电子邮件域名和账户。
 
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg

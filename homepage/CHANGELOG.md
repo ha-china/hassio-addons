@@ -1,3 +1,12 @@
+## [1.8.0-0] - 2025-12-11
+
+### Changed
+
+- Bumped Homepage version to : 1.8.0
+   - Homepage changelog: https://github.com/gethomepage/homepage/releases/tag/v1.8.0
+- Bumped HA addon version to : 1.8.0-0
+
+
 ## [1.7.0-0] - 2025-11-12
 
 ### Changed

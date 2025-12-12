@@ -5,13 +5,193 @@ DATA_DIR="/data/postgresql"
 IMAGES_DIR="/data/images"
 DB_USER="solumati"
 DB_NAME="solumatidb"
+
+bashio::log.info "Starting Solumati Add-on initialization..."
+
+# --- FACTORY RESET CHECK (DANGEROUS!) ---
+if bashio::config.true 'factory_reset'; then
+	bashio::log.warning "=================================================="
+	bashio::log.warning "   ⚠️  FACTORY RESET ENABLED  ⚠️"
+	bashio::log.warning "=================================================="
+	bashio::log.warning "ALL DATA WILL BE PERMANENTLY DELETED!"
+	bashio::log.warning "This includes:"
+	bashio::log.warning "  - All user accounts"
+	bashio::log.warning "  - All messages and conversations"
+	bashio::log.warning "  - All uploaded images"
+	bashio::log.warning "  - All settings and configurations"
+	bashio::log.warning "=================================================="
+
+	# Wait 5 seconds to give user time to cancel
+	bashio::log.warning "Starting reset in 5 seconds... (Stop add-on NOW to abort)"
+	sleep 5
+
+	bashio::log.info "Proceeding with factory reset..."
+
+	# Stop PostgreSQL if running
+	if [ -d "$DATA_DIR" ]; then
+		bashio::log.info "Stopping PostgreSQL..."
+		su postgres -c "pg_ctl stop -D $DATA_DIR -m immediate" 2>/dev/null || true
+	fi
+
+	# Delete all data
+	bashio::log.info "Deleting database..."
+	rm -rf "$DATA_DIR"
+
+	bashio::log.info "Deleting uploaded images..."
+	rm -rf "$IMAGES_DIR"
+
+	bashio::log.info "=================================================="
+	bashio::log.info "   ✅ FACTORY RESET COMPLETE"
+	bashio::log.info "=================================================="
+	bashio::log.info "All data has been deleted."
+	bashio::log.info "The add-on will now restart with a fresh database."
+	bashio::log.info ""
+	bashio::log.warning "IMPORTANT: Disable 'factory_reset' in the add-on settings!"
+	bashio::log.warning "Otherwise, the database will be wiped again on next restart."
+	bashio::log.info "=================================================="
+
+	# Continue with normal startup (fresh database will be created)
+fi
+
+# --- READ CONFIGURATION FROM HA UI ---
+bashio::log.info "Reading configuration from Home Assistant..."
+
+# Log Level (convert to uppercase for Python logging)
+if bashio::config.has_value 'log_level'; then
+	LOG_LEVEL=$(bashio::config 'log_level' | tr '[:lower:]' '[:upper:]')
+	# Map HA log levels to Python log levels
+	case "$LOG_LEVEL" in
+		TRACE|DEBUG) LOG_LEVEL="DEBUG" ;;
+		NOTICE|INFO) LOG_LEVEL="INFO" ;;
+		WARNING) LOG_LEVEL="WARNING" ;;
+		ERROR|FATAL) LOG_LEVEL="ERROR" ;;
+		*) LOG_LEVEL="INFO" ;;
+	esac
+	export LOG_LEVEL
+	bashio::log.info "Log level set to: $LOG_LEVEL"
+fi
+
+# Test Mode
+if bashio::config.true 'test_mode'; then
+	export TEST_MODE="true"
+	bashio::log.info "Test mode: ENABLED (dummy data will be generated)"
+else
+	export TEST_MODE="false"
+fi
+
+# Marketing Page
+if bashio::config.true 'marketing_page_enabled'; then
+	export ENABLE_MARKETING_PAGE="true"
+	bashio::log.info "Marketing Page: ENABLED"
+else
+	export ENABLE_MARKETING_PAGE="false"
+	bashio::log.info "Marketing Page: DISABLED"
+fi
+
+# App Base URL (for emails, links, etc.)
+if bashio::config.has_value 'app_base_url' && [ -n "$(bashio::config 'app_base_url')" ]; then
+	APP_BASE_URL=$(bashio::config 'app_base_url')
+	export APP_BASE_URL
+	bashio::log.info "App base URL set to: $APP_BASE_URL"
+else
+	# Try to auto-detect from Ingress
+	if bashio::var.has_value "$(bashio::addon.ingress_url)"; then
+		APP_BASE_URL="$(bashio::addon.ingress_url)"
+		export APP_BASE_URL
+		bashio::log.info "App base URL auto-detected from Ingress: $APP_BASE_URL"
+	else
+		export APP_BASE_URL="http://homeassistant.local:8099"
+		bashio::log.info "App base URL set to default: $APP_BASE_URL"
+	fi
+fi
+
+# --- DEV MODE: USE MAIN BRANCH ---
+if bashio::config.true 'dev_use_main_branch'; then
+	bashio::log.warning "=================================================="
+	bashio::log.warning "   ⚠️  DEVELOPER MODE ENABLED  ⚠️"
+	bashio::log.warning "=================================================="
+	bashio::log.warning "Using latest code from 'main' branch."
+	bashio::log.warning "Downloading and rebuilding... This will take time!"
+	bashio::log.warning "Please wait..."
+
+	# Download main branch
+	cd /tmp || exit 1
+	if curl -L "https://github.com/FaserF/Solumati/archive/refs/heads/main.tar.gz" -o main.tar.gz; then
+		bashio::log.info "Download successful. Extracting..."
+		rm -rf /tmp/solumati-main
+		mkdir -p /tmp/solumati-main
+		tar -xzf main.tar.gz -C /tmp/solumati-main --strip-components=1
+
+		# Update Backend
+		bashio::log.info "Updating Backend code..."
+		if [ -d "/tmp/solumati-main/backend" ]; then
+			cp -r /tmp/solumati-main/backend/* /app/backend/
+
+			# Install potentially new python requirements
+			if [ -f "/app/backend/requirements.txt" ]; then
+				bashio::log.info "Installing Python dependencies..."
+				pip install --no-cache-dir -r /app/backend/requirements.txt
+			fi
+		else
+			bashio::log.error "Backend directory not found in main branch!"
+		fi
+
+		# Rebuild Frontend
+		bashio::log.info "Rebuilding Frontend (this may take several minutes)..."
+		if [ -d "/tmp/solumati-main/frontend" ]; then
+			# Create temp build dir
+			rm -rf /tmp/frontend_build
+			mkdir -p /tmp/frontend_build
+			cp -r /tmp/solumati-main/frontend/* /tmp/frontend_build/
+
+			cd /tmp/frontend_build || exit 1
+
+			# IMPORTANT: Apply config.js fix found in Dockerfile
+			if [ -f "src/config.js" ]; then
+				sed -i 's|http://localhost:7777|/api|g' src/config.js
+			fi
+
+			bashio::log.info "Running 'npm install'..."
+			if npm install; then
+				bashio::log.info "Running 'npm run build'..."
+				if npm run build; then
+					bashio::log.info "Frontend build successful. Updating files..."
+					# Remove old frontend files (preserve dir)
+					rm -rf /app/frontend/*
+					if [ -d "dist" ]; then
+						cp -r dist/* /app/frontend/
+					else
+						bashio::log.error "'dist' directory not found after build!"
+					fi
+				else
+					bashio::log.error "Frontend build failed! Keeping old frontend."
+				fi
+			else
+				bashio::log.error "npm install failed! Keeping old frontend."
+			fi
+		else
+			bashio::log.error "Frontend directory not found in main branch!"
+		fi
+
+		# Cleanup
+		rm -rf /tmp/main.tar.gz /tmp/solumati-main /tmp/frontend_build
+		cd / || exit 1
+
+		bashio::log.info "=================================================="
+		bashio::log.info "   ✅ DEV MODE UPDATE COMPLETE"
+		bashio::log.info "=================================================="
+	else
+		bashio::log.error "Failed to download main branch from GitHub!"
+	fi
+else
+	bashio::log.info "Production Mode: Using packaged version."
+fi
+
 # Generate random password for database
 DB_PASS=$(
 	tr -dc A-Za-z0-9 </dev/urandom | head -c 32
 	echo ''
 )
-
-bashio::log.info "Starting Solumati Add-on initialization..."
 
 # --- POSTGRESQL SETUP ---
 if [ ! -d "$DATA_DIR" ]; then
@@ -62,17 +242,12 @@ ln -s "$IMAGES_DIR" /app/backend/static/images
 
 # --- BACKEND START ---
 export DATABASE_URL="postgresql://$DB_USER:$DB_PASS@localhost:5432/$DB_NAME"
-export APP_BASE_URL="http://homeassistant.local:8099" # Default fallback
-if bashio::config.true 'test_mode'; then
-	export TEST_MODE="true"
-else
-	export TEST_MODE="false"
-fi
 
 bashio::log.info "Starting Backend (Uvicorn)..."
-cd /app/backend
+bashio::log.info "Environment: TEST_MODE=$TEST_MODE, LOG_LEVEL=${LOG_LEVEL:-INFO}"
+cd /app/backend || exit 1
 # Start Uvicorn in background
-uvicorn main:app --host 127.0.0.1 --port 7777 &
+uvicorn app.main:app --host 127.0.0.1 --port 7777 &
 BACKEND_PID=$!
 
 # --- NGINX START ---
@@ -80,6 +255,9 @@ bashio::log.info "Starting Nginx (Frontend)..."
 mkdir -p /run/nginx
 nginx -g "daemon off;" &
 NGINX_PID=$!
+
+bashio::log.info "Solumati is now running!"
+bashio::log.info "Access via Home Assistant Ingress or http://homeassistant.local:8099"
 
 # Trap signals to stop processes correctly
 cleanup() {
