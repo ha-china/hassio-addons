@@ -1,5 +1,11 @@
-## v3.6.1-2 (08-12-2025)
+## v3.6.1-5 (12-12-2025)
 - Minor bugs fixed
+## v3.6.1-4 (12-12-2025)
+- Minor bugs fixed
+## v3.6.1-3 (12-12-2025)
+- Minor bugs fixed
+## v3.6.1-2 (08-12-2025)
+- Allow to start with sign up disabled
 
 ## v3.6.1 (06-12-2025)
 - Update to latest version from mealie-recipes/mealie (changelog : https://github.com/mealie-recipes/mealie/releases)

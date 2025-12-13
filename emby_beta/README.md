@@ -1,9 +1,9 @@
 # Home assistant add-on: emby
 
 
-我利用业余时间维护这个和其他 Home Assistant add-ons：跟上上游的变更、HA 的变更，并在真实硬件上测试都需要花费大量时间（和一些金钱）。我大约使用我超过 110 个 add-ons 中的一小部分，因此我安装了一些测试机器（和购买了一些我自己不使用的测试服务，例如 vpn），以用来调试和改进这些 add-ons。
+我利用业余时间维护这个和其他Home Assistant add-ons：跟上上游的变化、HA的变化，以及在真实硬件上测试需要花费很多时间（并且有些花费）。我大约使用我超过110个add-ons中的5-10个，所以我会安装一些我自身不使用的测试机器（并购买一些测试服务，如vpn）来调试和改进这些add-ons。
 
-如果这个 add-on 为您节省了时间或使您的设置更简单，我将非常感谢您的支持！
+如果这个add-on节省了你的时间或简化了你的设置，我将非常感谢你的支持！
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -21,7 +21,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它就会在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -29,39 +29,38 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 ## About
 
-[emby](https://emby.media/) 组织视频、音乐、直播电视和照片，从个人媒体库中流式传输到智能电视、流媒体盒子和移动设备。这个容器被包装为一个独立的 emby Media Server。
+[emby](https://emby.media/) 组织视频、音乐、直播电视和照片，从个人媒体库中流式传输到智能电视、流媒体盒子和移动设备。这个容器作为一个独立的emby Media Server进行包装。
 
-这个 add-on 基于 linuxserver.io 的 [docker image](https://github.com/linuxserver/docker-emby)。
-初始 add-on 版本：https://github.com/petersendev/hassio-addons
+这个add-on基于[linuxserver.io的docker镜像](https://github.com/linuxserver/docker-emby)。初始add-on版本：[https://github.com/petersendev/hassio-addons](https://github.com/petersendev/hassio-addons)
 
 ## Configuration
 
-使用 add-on 的 `env_vars` 选项来传递额外的环境变量（大小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+使用add-on的`env_vars`选项来传递额外的环境变量（大小写名称）。详情请参考：[https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2)。
 
-Webui 可以在 `<your-ip>:8096` 找到，或者通过 Ingress 在 Home Assistant 中找到。
+Webui可以在`<your-ip>:8096`找到，或者在Home Assistant通过Ingress访问。
 
 ```yaml
 PGID: user
 GPID: user
 TZ: timezone
-localdisks: sda1 #put the hardware name of your drive to mount separated by commas, or its label. ex. sda1, sdb1, MYNAS...
-networkdisks: "//SERVER/SHARE" # optional, list of smb servers to mount, separated by commas
-cifsusername: "username" # optional, smb username, same for all smb shares
-cifspassword: "password" # optional, smb password
-cifsdomain: "domain" # optional, allow setting the domain for the smb share
-silent: true #suppresses debug messages
+localdisks: sda1 #将你的驱动硬件名称用逗号分隔来挂载，或者使用其标签。例如。 sda1, sdb1, MYNAS...
+networkdisks: "//SERVER/SHARE" #可选，要挂载的smb服务器的列表，用逗号分隔
+cifsusername: "username" #可选，smb用户名，所有smb共享相同
+cifspassword: "password" #可选，smb密码
+cifsdomain: "domain" #可选，允许为smb共享设置域
+silent: true #抑制调试消息
 ```
 
 ## Installation
 
-这个 add-on 的安装非常简单，与安装任何其他 Hass.io add-on 没有区别。
+这个add-on的安装非常简单，与安装任何其他Hass.io add-on没有区别。
 
-1. [将我的 Hass.io add-ons 仓库][repository]添加到您的 Hass.io 实例。
-1. 安装这个 add-on。
-1. 点击 `Save` 按钮以保存您的配置。
-1. 启动 add-on。
-1. 检查 add-on 的日志，看看是否一切正常。
-1. 仔细配置 add-on 以符合您的偏好，请参阅官方文档进行配置。
+1. [将我的Hass.io add-ons仓库][repository]添加到你的Hass.io实例中。
+1. 安装这个add-on。
+1. 点击`Save`按钮来保存你的配置。
+1. 启动add-on。
+1. 检查add-on的日志，看看一切是否正常。
+1. 仔细配置add-on以满足你的偏好，查看官方文档了解如何配置。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 ---
