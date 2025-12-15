@@ -9,33 +9,33 @@
 
 ## 关于
 
-Mozilla Firefox 是由 Mozilla 基金会及其子公司 Mozilla Corporation 开发的免费且开源的网页浏览器。
+Mozilla Firefox 是由 Mozilla 基金会和其子公司 Mozilla Corporation 开发的免费开源网络浏览器。
 
-此添加组件基于 [Docker 镜像](https://github.com/jlesage/docker-firefox) 由 [Jocelyn Le Sage](https://github.com/jlesage) 提供。
+此添加组件基于 [Docker 镜像](https://github.com/jlesage/docker-firefox) 来自 [Jocelyn Le Sage](https://github.com/jlesage)。
 
-非常感谢他创建和维护的优秀容器。
-他是需要被 [支持](https://github.com/sponsors/jlesage) 的真正英雄。
+非常感谢他为创建和维护出色的容器所做的贡献。
+他是需要 [支持](https://github.com/sponsors/jlesage) 的真正英雄。
 
-## 与原始容器的区别
+## 与原始容器的差异
 
-为了使其与 Home Assistant 持久化兼容，我需要重新映射文件夹，为此，启动脚本以 `root` 用户运行。我将在未来尽量避免这种情况。
+为了使其与 Home Assistant 持久化兼容，我需要重新映射文件夹，为此，启动脚本以 `root` 用户运行。我将在未来尽量避免这一点。
 
 ## 使用方法
 
-只需安装，启动容器，然后点击“打开 Web UI”。您可以使用“在侧边栏中显示”进行轻松访问。您在 Firefox 中所做的任何操作都会被持久化。即使您停止添加组件或重新启动 Home Assistant 主机操作系统。
+只需安装，启动容器，然后点击“打开 Web UI”。您可以使用“在侧边栏中显示”进行轻松访问。您在 Firefox 中所做的所有操作都会被持久化。即使您停止添加组件或重新启动 Home Assistant 主机操作系统。
 
 ## 下载
 
-在 Firefox 中下载的文件将自动存储到您的 `/share/firefox` 文件夹。
+在 Firefox 中下载的文件将自动存储到您的 `/share/firefox` 文件夹中。
 
 ## 上传
 
 如果您需要通过 Firefox 添加组件上传文件，您可以使用 [文件编辑器添加组件](https://github.com/home-assistant/addons/blob/master/configurator/) 将文件上传到您的 `/share/firefox` 文件夹。
-文件将在添加组件的 `downloads` 文件夹中可用。当您选择要上传的文件时，可以浏览到此位置。
+文件将在添加组件的 `downloads` 文件夹中可用。您可以在选择要上传的文件时浏览到此位置。
 
 ## 导入书签
 
-您可以通过将它们放入您的 `/share/firefox` 文件夹来导入 `bookmarks.html` 文件，并在 Firefox 中导入 `bookmarks.html` 文件。
+您可以通过将文件拖放到您的 `/share/firefox` 文件夹中导入 `bookmarks.html` 文件，并在 Firefox 中导入 `bookmarks.html` 文件。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
