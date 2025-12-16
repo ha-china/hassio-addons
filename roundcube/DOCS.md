@@ -1,70 +1,74 @@
-# 家助理件：Roundcube
+# Home Assistant Add-on: Roundcube
 
-基于网络的邮件客户端。
+Roundcube web based email client.
 
-![支持aarch64架构][aarch64-shield] ![支持amd64架构][amd64-shield]
-![支持armv7架构][armv7-shield]
+![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
 
-## 关于
+## About
 
-重要提示：此插件需要安装并运行MariaDB插件！
+Important: This addon requires that the MariaDB add-on is installed and running!
 
-此插件是实验性的，它提供了一个连接到Mailserver插件的Web邮件前端。它还允许您为您的邮箱配置Sieve脚本。
+This add-on is experimental, and provides a webmail frontend that connects
+to the Mailserver add-on. It also enables you to configure Sieve scripts
+for your mailbox.
 
-您可以通过点击插件页面中的Web UI按钮来使用ingress功能访问Roundcube界面。使用您的IMAP凭据登录。
-如果您想直接访问插件，您可以在可选端口部分指定一个端口。假设您设置了端口2665：
-将您的浏览器指向：http://{homeassistant IP}:2665。
-如果您启用SSL选项，则它是https://{homeassistant IP}:2665。
-也可以使用主机名而不是IP地址。
-如果您想将您选择的端口转发到您的路由器，强烈推荐使用HTTPS！
+You reach the Roundcube interface by clicking the Web UI button in the add-on
+page to use ingress feature. Login with your IMAP credentials.
+If you want to reach the add-on directly you can specify a port in the optional
+ports section. Lets say you set the port 2665:
+Point your browser to: http://{homeassistant IP}:2665.
+If you enable the SSL option it is https://{homeassistant IP}:2665.
+It is also possible to use the hostname insted of IP address.
+If you want to forward your chosen port in your router, HTTPS is
+highly recommended!
 
-## 安装
+## Installation
 
-按照以下步骤在您的系统上安装插件：
+Follow these steps to get the add-on installed on your system:
 
-添加仓库 `https://github.com/erik73/hassio-addons`。
-找到“Roundcube”插件并点击它。
-点击“安装”按钮。
+Add the repository `https://github.com/erik73/hassio-addons`.
+Find the "Roundcube" add-on and click it.
+Click on the "INSTALL" button.
 
-## 如何使用
+## How to use
 
-### 启动插件
+### Starting the add-on
 
-安装后，您将看到一个默认和示例配置。
+After installation you are presented with a default and example configuration.
 
-调整插件配置以匹配您的需求。
-通过点击“保存”按钮保存插件配置。
-启动插件。
+Adjust the add-on configuration to match your requirements.
+Save the add-on configuration by clicking the "SAVE" button.
+Start the add-on.
 
-## 配置
+## Configuration
 
-请注意：在插件启动期间，会在MariaDB插件中创建一个数据库。
+Please note: During the startup of the add-on, a database is created in the
+MariaDB add-on.
 
-### 选项：`ssl`
+### Option: `ssl`
 
-在Roundcube的Web界面启用/禁用SSL（HTTPS）
-将其设置为`true`以启用它，否则设置为`false`。
+Enables/Disables SSL (HTTPS) on the web interface of Roundcube
+Set it `true` to enable it, `false` otherwise.
 
-### 选项：`certfile`
+### Option: `certfile`
 
-用于SSL的证书文件。
+The certificate file to use for SSL.
 
-**注意**：_文件必须存储在`/ssl/`中，这是默认的_
+**Note**: _The file MUST be stored in `/ssl/`, which is the default_
 
-### 选项：`keyfile`
+### Option: `keyfile`
 
-用于SSL的私钥文件。
+The private key file to use for SSL.
 
-**注意**：_文件必须存储在`/ssl/`中，这是默认的_
+**Note**: _The file MUST be stored in `/ssl/`, which is the default_
 
-## 支持
+## Support
 
-有问题？
+Got questions?
 
-您可以在此处[打开一个GitHub问题][issue]。
+You could [open an issue here][issue] GitHub.
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
-[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 [issue]: https://github.com/erik73/addon-roundcube/issues
 [repository]: https://github.com/erik73/hassio-addons

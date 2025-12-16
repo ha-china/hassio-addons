@@ -1,5 +1,10 @@
 # TOMMY
 
+## 0.26.0
+
+### Major Changes
+- Added a balanced boundary mode, which is now default for new zones
+
 ## 0.25.2
 
 ### Minor Changes
