@@ -1,5 +1,15 @@
 # TOMMY
 
+## 1.0.0
+
+### Major Changes
+- Home Assistant Integration. A button is now added to the dashboard with information on how to install the integration. It automatically keeps TOMMY zones in sync with Home Assistant and exposes a device for each zone with a motion sensor entity. This feature is exclusive to the Pro Edition. The Matter integration is still available for users of the Community Edition.
+
+### Minor Changes
+
+- Added more information to the license error message
+- Fixed a bug where the logs for an ESP32 would be flooded with "PACKET_SENDER: Failed to send packet: ESP_ERR_ESPNOW_NOT_FOUND" when a sensor wasn't added to a zone yet.
+
 ## 0.26.0
 
 ### Major Changes
