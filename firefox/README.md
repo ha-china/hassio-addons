@@ -11,16 +11,16 @@
 
 Mozilla Firefox 是由 Mozilla 基金会和其子公司 Mozilla Corporation 开发的免费开源网络浏览器。
 
-此添加组件基于 [Docker 镜像](https://github.com/jlesage/docker-firefox) 来自 [Jocelyn Le Sage](https://github.com/jlesage)。
+此添加组件基于 [docker 镜像](https://github.com/jlesage/docker-firefox) 来自 [Jocelyn Le Sage](https://github.com/jlesage)。
 
-非常感谢他为创建和维护出色的容器所做的贡献。
-他是需要 [支持](https://github.com/sponsors/jlesage) 的真正英雄。
+非常感谢他创建了并维护了这些出色的容器。
+他是需要被 [支持](https://github.com/sponsors/jlesage) 的真正英雄。
 
-## 与原始容器的差异
+## 与原始容器的区别
 
-为了使其与 Home Assistant 持久化兼容，我需要重新映射文件夹，为此，启动脚本以 `root` 用户运行。我将在未来尽量避免这一点。
+为了使其与 Home Assistant 持久化兼容，我需要重新映射文件夹，为此，启动脚本以 `root` 用户运行。我将在未来尽量避免这种情况。
 
-## 使用方法
+## 如何使用
 
 只需安装，启动容器，然后点击“打开 Web UI”。您可以使用“在侧边栏中显示”进行轻松访问。您在 Firefox 中所做的所有操作都会被持久化。即使您停止添加组件或重新启动 Home Assistant 主机操作系统。
 
@@ -35,7 +35,7 @@ Mozilla Firefox 是由 Mozilla 基金会和其子公司 Mozilla Corporation 开�
 
 ## 导入书签
 
-您可以通过将文件拖放到您的 `/share/firefox` 文件夹中导入 `bookmarks.html` 文件，并在 Firefox 中导入 `bookmarks.html` 文件。
+您可以通过将它们放入您的 `/share/firefox` 文件夹中来导入 `bookmarks.html` 文件，并在 Firefox 中导入 `bookmarks.html` 文件。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg

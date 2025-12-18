@@ -1,8 +1,8 @@
 name: "Firefox (Edge)"
-version: "1.8.0"
+version: "1.8.1"
 slug: "firefox_edge"
 panel_icon: "mdi:firefox"
-description: '[老王杂谈说]：Firefox 的 Docker 容器。在容器启动时更新到最新版本的 Firefox。'
+description: '[老王杂谈说]：为Firefox的Docker容器。在容器启动时更新到最新的Firefox版本。'
 url: "https://ghfast.top/github.com/mincka/ha-addons/tree/main/firefox_edge"
 arch:
   - aarch64
@@ -50,7 +50,7 @@ options:
   WEB_AUTHENTICATION: "0"
   WEB_AUTHENTICATION_USERNAME: ""
   WEB_AUTHENTICATION_PASSWORD: ""
-  FF_CUSTOM_ARGS: "0"
+  FF_CUSTOM_ARGS: ""
   WEB_FILE_MANAGER: "0"
   WEB_NOTIFICATION: "0"
 schema:

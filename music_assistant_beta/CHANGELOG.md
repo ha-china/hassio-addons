@@ -1,80 +1,52 @@
-# [2.7.0b29] - 17.12.2025
+# [2.8.0b0] - 18.12.2025
+
+## ⚠️ Important Notes
+
+Start of the 2.8 beta cycle!
+
+---
 
 ## 📦 Beta Release
 
-_Changes since [2.7.0b28](https://github.com/music-assistant/server/releases/tag/2.7.0b28)_
-
-### 🚀 Features and enhancements
-
-- Enable immediate Sendspin sync delay changes for Cast players (by @maximmaxim345 in #2823)
-- Add a more smarter way to resume a player with empty queue (by @marcelveldt in #2827)
+_Changes since [2.7.0b31](https://github.com/music-assistant/server/releases/tag/2.7.0b31)_
 
 ### 🐛 Bugfixes
 
-- Bump aiosendspin to fix metadata clear edge case (by @maximmaxim345 in #2824)
-
-### 🎨 Frontend Changes
-
-- Lokalise translations update (by @[github-actions[bot]](https://github.com/apps/github-actions) in [#1298](https://github.com/music-assistant/frontend/pull/1298))
-- Show warning when a provider needs to be reconfigured (by @marcelveldt in [#1304](https://github.com/music-assistant/frontend/pull/1304))
-- New input number + reorganize for mobile (by @stvncode in [#1303](https://github.com/music-assistant/frontend/pull/1303))
-- Make web player delay option apply immediately on changes  (by @maximmaxim345 in [#1302](https://github.com/music-assistant/frontend/pull/1302))
-- Fix slider for players drawer drag (by @stvncode in [#1301](https://github.com/music-assistant/frontend/pull/1301))
-- Center music title and music name in player fullscreen (by @stvncode in [#1299](https://github.com/music-assistant/frontend/pull/1299))
-
-### 🧰 Maintenance and dependency bumps
-
-- Streamline Plugin Source behavior (by @marcelveldt in #2826)
-- ⬆️ Update music-assistant-frontend to 2.17.43 (by @music-assistant-machine in #2829)
+- Fix SSL configuration (by @marcelveldt in #2836)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@marcelveldt, @maximmaxim345, @stvncode
+@marcelveldt
 
 
-# [2.7.0b28] - 16.12.2025
+# [2.7.0b31] - 17.12.2025
 
 ## 📦 Beta Release
 
-_Changes since [2.7.0b27](https://github.com/music-assistant/server/releases/tag/2.7.0b27)_
-
-### 🚀 Features and enhancements
-
-- Allow configuration of developer token in Spotify provider (by @marcelveldt in #2818)
-- Add user filter to scrobble providers (by @marcelveldt in #2822)
+_Changes since [2.7.0b30](https://github.com/music-assistant/server/releases/tag/2.7.0b30)_
 
 ### 🐛 Bugfixes
 
-- Sendspin fixes (by @maximmaxim345 in #2810)
-- abs: fix: remove playlog sync during provider load (by @fmunkes in #2817)
-- Fix sendspin mDNS name (by @maximmaxim345 in #2819)
+- Close old sendspin connections (by @maximmaxim345 in #2831)
 
 ### 🎨 Frontend Changes
 
-- Change icons for player (by @stvncode in [#1295](https://github.com/music-assistant/frontend/pull/1295))
-- Add unsaved settings guard (by @marcelveldt in [#1289](https://github.com/music-assistant/frontend/pull/1289))
-- Fix bg color for input for login (by @stvncode in [#1288](https://github.com/music-assistant/frontend/pull/1288))
-- Fix scrollbar issue (by @stvncode in [#1297](https://github.com/music-assistant/frontend/pull/1297))
-- Improved web player syncing (by @maximmaxim345 in [#1294](https://github.com/music-assistant/frontend/pull/1294))
-- Fix some safari issues (by @stvncode in [#1293](https://github.com/music-assistant/frontend/pull/1293))
-- Revert saas package upgrade (by @stvncode in [#1292](https://github.com/music-assistant/frontend/pull/1292))
-- Fix sidebar hidden in tablet (by @stvncode in [#1291](https://github.com/music-assistant/frontend/pull/1291))
-- Fix missing drag for group players (by @stvncode in [#1290](https://github.com/music-assistant/frontend/pull/1290))
-- Fix lint warning regarding utility class for ui components (by @stvncode in [#1296](https://github.com/music-assistant/frontend/pull/1296))
+- Lokalise: Translations update (by @marcelveldt in [#1311](https://github.com/music-assistant/frontend/pull/1311))
+- Lokalise translations update (by @[github-actions[bot]](https://github.com/apps/github-actions) in [#1308](https://github.com/music-assistant/frontend/pull/1308))
+- Add Lithuanian to workflow (by @OzGav in [#1307](https://github.com/music-assistant/frontend/pull/1307))
+- Add Lithuanian (by @OzGav in [#1306](https://github.com/music-assistant/frontend/pull/1306))
 
 ### 🧰 Maintenance and dependency bumps
 
 <details>
-<summary>6 changes</summary>
+<summary>4 changes</summary>
 
-- Alexa Player Provider Cleanup (by @alams154 in #2809)
-- Chore(deps-dev): Bump ruff from 0.14.6 to 0.14.9 (by @dependabot[bot] in #2813)
-- Chore(deps): Bump actions/upload-artifact from 5 to 6 (by @dependabot[bot] in #2815)
-- Chore(deps): Bump actions/download-artifact from 6 to 7 (by @dependabot[bot] in #2816)
-- ⬆️ Update music-assistant-models to 1.1.82 (by @music-assistant-machine in #2820)
-- ⬆️ Update music-assistant-frontend to 2.17.42 (by @music-assistant-machine in #2821)
+- ⬆️ Update music-assistant-models to 1.1.83 (by @music-assistant-machine in #2832)
+- ⬆️ Update music-assistant-frontend to 2.17.45 (by @music-assistant-machine in #2833)
+- ⬆️ Update music-assistant-frontend to 2.17.46 (by @music-assistant-machine in #2834)
+- ⬆️ Update music-assistant-frontend to 2.17.47 (by @music-assistant-machine in #2835)
 
 </details>
 
@@ -82,35 +54,31 @@ _Changes since [2.7.0b27](https://github.com/music-assistant/server/releases/tag
 
 Special thanks to the following contributors who helped with this release:
 
-@alams154, @fmunkes, @marcelveldt, @maximmaxim345, @stvncode
+@OzGav, @marcelveldt, @maximmaxim345
 
 
-# [2.7.0b27] - 15.12.2025
+# [2.7.0b30] - 17.12.2025
 
 ## 📦 Beta Release
 
-_Changes since [2.7.0b26](https://github.com/music-assistant/server/releases/tag/2.7.0b26)_
+_Changes since [2.7.0b29](https://github.com/music-assistant/server/releases/tag/2.7.0b29)_
 
 ### 🐛 Bugfixes
 
-- Adjust duration match with ISRC (by @OzGav in #2806)
+- (Roku) Media Assistant provider: bug fixes / cleanup (by @MedievalApple in #2828)
 
 ### 🎨 Frontend Changes
 
-- Lokalise: Translations update (by @marcelveldt in [#1275](https://github.com/music-assistant/frontend/pull/1275))
-- Use new sidebar component and update icons related to this (by @stvncode in [#1274](https://github.com/music-assistant/frontend/pull/1274))
-- Add all needed components from shadcn (by @stvncode in [#1273](https://github.com/music-assistant/frontend/pull/1273))
+- Refacto user avatar and dropdown (by @stvncode in [#1305](https://github.com/music-assistant/frontend/pull/1305))
 
 ### 🧰 Maintenance and dependency bumps
 
-- adapt get_playlog_provider_item_ids method of music controller (by @fmunkes in #2804)
-- Subsonic: Update py-opensonic (by @khers in #2807)
-- ⬆️ Update music-assistant-frontend to 2.17.41 (by @music-assistant-machine in #2808)
+- ⬆️ Update music-assistant-frontend to 2.17.44 (by @music-assistant-machine in #2830)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@OzGav, @fmunkes, @khers, @marcelveldt, @stvncode
+@MedievalApple, @stvncode
 
 

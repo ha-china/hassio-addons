@@ -1,5 +1,24 @@
 # TOMMY
 
+## 1.0.3
+
+### Minor Changes
+
+- Minor UI improvements
+
+## 1.0.2
+
+### Minor Changes
+
+- Memory optimizations
+- Added Bluetooth Proxy compatibility warning to ESPHome documentation and flasher dialog, including PSRAM recommendations for memory-constrained setups
+
+## 1.0.1
+
+### Minor Changes
+
+- Removed 'Tips' button and replaced with 'Device Placement Guide' in header
+
 ## 1.0.0
 
 ### Major Changes
