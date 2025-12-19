@@ -1,0 +1,27 @@
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:14.1.0
+FROM ${BUILD_FROM}
+
+# Install necessary tools
+# 'curl' and 'bash' for installing filebrowser
+# 'dos2unix' to fix potential Windows line ending issues in scripts
+RUN apk add --no-cache curl bash dos2unix
+
+# Setup Filebrowser
+# We grab the binary from the official install script
+RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
+
+# Create database directory
+RUN mkdir -p /data/database
+
+# Copy Addon run script
+COPY run.sh /run.sh
+
+# Fix permissions and line endings (CRLF -> LF)
+RUN dos2unix /run.sh && chmod +x /run.sh
+
+# Start the addon
+# We explicitly inherit the S6 entrypoint from the base image
+ENTRYPOINT [ "/init" ]
+
+# The CMD is passed to the entrypoint
+CMD [ "/run.sh" ]

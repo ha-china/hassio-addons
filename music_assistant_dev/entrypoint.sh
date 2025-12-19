@@ -84,9 +84,12 @@ else
     echo ""
 
     # Get the latest pre-release info from GitHub API
-    latest_release=$(curl -s https://api.github.com/repos/music-assistant/server/releases | jq -r '[.[] | select(.prerelease == true)] | first')
-    release_tag=$(echo "$latest_release" | jq -r '.tag_name')
-    wheel_url=$(echo "$latest_release" | jq -r '.assets[] | select(.name | endswith(".whl")) | .browser_download_url')
+    # Write to temp file to avoid control character issues when passing through shell variables
+    tmp_releases="/tmp/releases.json"
+    curl -s "https://api.github.com/repos/music-assistant/server/releases?per_page=10" > "$tmp_releases"
+    release_tag=$(jq -r '[.[] | select(.prerelease == true)] | first | .tag_name' < "$tmp_releases")
+    wheel_url=$(jq -r '[.[] | select(.prerelease == true)] | first | .assets[] | select(.name | endswith(".whl")) | .browser_download_url' < "$tmp_releases")
+    rm -f "$tmp_releases"
 
     if [ -z "$wheel_url" ] || [ "$wheel_url" = "null" ]; then
         echo "ERROR: Could not find wheel in latest nightly release"
@@ -111,35 +114,25 @@ echo ""
 echo "✓ Server installation complete"
 echo ""
 
-# Check if we should build frontend
+# Check if we should build frontend - this is independent of server source
 build_frontend=false
-if [ "$build_from_source" = true ]; then
-    # Building server from source - check if frontend_repo is specified
-    if [ -n "$frontend_repo" ] && [ "$frontend_repo" != "null" ]; then
-        build_frontend=true
-        # Parse frontend repository reference
-        frontend_ref=$(parse_repo_ref "$frontend_repo" "music-assistant" "frontend")
+if [ -n "$frontend_repo" ] && [ "$frontend_repo" != "null" ]; then
+    build_frontend=true
+    # Parse frontend repository reference
+    frontend_ref=$(parse_repo_ref "$frontend_repo" "music-assistant" "frontend")
 
-        echo "-----------------------------------------------------------"
-        echo "Step 2: Building and Installing Music Assistant Frontend"
-        echo "-----------------------------------------------------------"
-        echo ""
-        echo "Frontend repository: $frontend_ref"
-        echo ""
-    else
-        echo "-----------------------------------------------------------"
-        echo "Step 2: Skipping Frontend Build"
-        echo "-----------------------------------------------------------"
-        echo ""
-        echo "No frontend_repo specified - using frontend bundled with server"
-        echo ""
-    fi
+    echo "-----------------------------------------------------------"
+    echo "Step 2: Building and Installing Music Assistant Frontend"
+    echo "-----------------------------------------------------------"
+    echo ""
+    echo "Frontend repository: $frontend_ref"
+    echo ""
 else
     echo "-----------------------------------------------------------"
     echo "Step 2: Skipping Frontend Build"
     echo "-----------------------------------------------------------"
     echo ""
-    echo "Frontend build skipped - using frontend bundled with PyPI release"
+    echo "No frontend_repo specified - using frontend bundled with server"
     echo ""
 fi
 

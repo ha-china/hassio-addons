@@ -1,251 +1,231 @@
 # Music Assistant DEV Add-on
 
-这是一个为 Music Assistant 专门设计的开发附加组件，允许开发人员直接在 Home Assistant 中快速测试特定的分支、拉取请求，甚至 Music Assistant 的分叉。
+This is a special development add-on for Music Assistant that allows developers to quickly test specific branches, pull requests, or even forks of Music Assistant directly in Home Assistant.
 
-## 目的
+## Purpose
 
-该附加组件专为以下用途设计：
+This add-on is designed for:
 
-- 在合并之前测试拉取请求
-- 开发和调试新功能
-- 测试 Music Assistant 的分叉
-- 运行用于测试的自定义分支
+- Testing pull requests before merging
+- Developing and debugging new features
+- Testing forks of Music Assistant
+- Running custom branches for testing
 
-## 工作原理
+## How It Works
 
-与使用预构建发布的常规 Music Assistant 附加组件不同，此开发附加组件：
+Unlike the regular Music Assistant add-on which uses pre-built releases, this dev add-on:
 
-1. 从指定的 Git 源（分支、PR 或分叉）构建和安装服务器
-2. 从指定的 Git 源（分支、PR 或分叉）构建和安装前端
-3. 使用您的自定义代码启动 Music Assistant
+1. Builds and installs the server from a specified Git source (branch, PR, or fork)
+2. Builds and installs the frontend from a specified Git source (branch, PR, or fork)
+3. Starts Music Assistant with your custom code
 
-构建过程：
+The build process:
 
-1. 从指定的 Git 引用安装服务器软件包
-2. 根据其构建过程（npm build）构建前端
-3. 将前端作为 Python 软件包安装（覆盖默认前端）
-4. 启动 Music Assistant
+1. Installs the server package from the specified Git reference
+2. Builds the frontend according to its build procedure (npm build)
+3. Installs the frontend as a Python package (overwriting the default frontend)
+4. Starts Music Assistant
 
-## 配置
+## Configuration
 
-### 基本配置
+### Basic Configuration
 
 ```yaml
 log_level: info
 safe_mode: false
 ```
 
-### 服务器仓库配置
+### Server Repository Configuration
 
-使用 `server_repo` 选项指定要安装的 Music Assistant 服务器的版本：
+Use the `server_repo` option to specify which version of the Music Assistant server to install:
 
-**格式**： `owner/repo@reference` 或仅 `reference`
+**Format**: `owner/repo@reference` or just `reference`
 
-- **分支**： `dev`、`main` 或任何分支名称
-- **拉取请求**： `pr-123`（将检出 PR #123）
-- **分叉**： `username/server@branch-name`
-- **提交**： 完整的提交 SHA
-- **空/空白**： 使用 GitHub 上的最新夜间发布（快速模式 - 无需构建）
+- **Branch**: `dev`, `main`, or any branch name
+- **Pull Request**: `pr-123` (will checkout PR #123)
+- **Fork**: `username/server@branch-name`
+- **Commit**: Full commit SHA
+- **Empty/blank**: Use latest nightly release from GitHub (fast mode - no build required)
 
-**示例**：
+**Examples**:
 
 ```yaml
-# 使用最新夜间发布（快速 - 无需构建）
+# Use latest nightly release (FAST - no build required)
 server_repo: ""
 
-# 使用 dev 分支
+# Use the dev branch
 server_repo: dev
 
-# 使用特定分支
+# Use a specific branch
 server_repo: feature/new-player
 
-# 测试拉取请求
+# Test a pull request
 server_repo: pr-456
 
-# 测试分叉
+# Test a fork
 server_repo: someuser/server@experimental-feature
 
-# 使用特定提交
+# Use a specific commit
 server_repo: abc123def456...
 ```
 
-**默认值**： `""`（空 - 使用 GitHub 上的最新夜间发布）
+**Default**: `""` (empty - uses latest nightly release from GitHub)
 
-> **注意**： 当 `server_repo` 留空或为空时，附加组件将从 GitHub 发布中安装最新的夜间发布轮。这是最快的选项，因为无需服务器构建。
+> **Note**: When `server_repo` is left empty or blank, the add-on will install the latest nightly release wheel from GitHub releases. This is the fastest option as no server build is required.
 
-### 前端仓库配置
+### Frontend Repository Configuration
 
-使用 `frontend_repo` 选项指定要安装的 Music Assistant 前端的版本：
+Use the `frontend_repo` option to specify which version of the Music Assistant frontend to install:
 
-**格式**： 与服务器仓库相同 - `owner/repo@reference` 或仅 `reference`
+**Format**: Same as server_repo - `owner/repo@reference` or just `reference`
 
-- **分支**： `main`、`dev` 或任何分支名称
-- **拉取请求**： `pr-789`（将检出 PR #789）
-- **分叉**： `username/frontend@branch-name`
-- **提交**： 完整的提交 SHA
-- **空/空白**： 跳过前端构建（使用捆绑前端）
+- **Branch**: `main`, `dev`, or any branch name
+- **Pull Request**: `pr-789` (will checkout PR #789)
+- **Fork**: `username/frontend@branch-name`
+- **Commit**: Full commit SHA
+- **Empty/blank**: Skip frontend build (use bundled frontend)
 
-**示例**：
+**Examples**:
 
 ```yaml
-# 跳过前端构建（快速 - 使用捆绑前端）
+# Skip frontend build (FAST - use bundled frontend)
 frontend_repo: ""
 
-# 使用 main 分支
+# Use the main branch
 frontend_repo: main
 
-# 使用特定分支
+# Use a specific branch
 frontend_repo: feature/new-ui
 
-# 测试拉取请求
+# Test a pull request
 frontend_repo: pr-789
 
-# 测试分叉
+# Test a fork
 frontend_repo: someuser/frontend@redesign
 
-# 使用特定提交
+# Use a specific commit
 frontend_repo: abc123def456...
 ```
 
-**默认值**： `""`（空 - 使用捆绑前端，无需构建）
+**Default**: `""` (empty - uses bundled frontend, no build)
 
-> **注意**： 当 `frontend_repo` 留空或为空时，前端构建将**完全跳过**。这显著减少了启动时间，并且当您只需测试后端功能时是理想的。将使用服务器安装时捆绑的前端。
+> **Note**: When `frontend_repo` is left empty or blank, the frontend build will be **skipped entirely**. This significantly reduces startup time and is ideal when you only need to test backend features. The frontend bundled with the server installation will be used instead.
 
-## 完整配置示例
+## Full Configuration Examples
 
-### 快速模式（仅后端测试）
+### Fast Mode (Backend Testing Only)
 ```yaml
 log_level: info
 safe_mode: false
 server_repo: ""
 frontend_repo: ""
 ```
-使用 GitHub 上的最新夜间发布，无需构建。启动时间最快。
+Uses latest nightly release from GitHub, no builds required. Fastest startup time.
 
-### 后端开发模式
+### Backend Development Mode
 ```yaml
 log_level: debug
 safe_mode: false
 server_repo: dev
 frontend_repo: ""
 ```
-从 `dev` 分支构建服务器，跳过前端构建。快速测试后端更改。
+Builds server from the `dev` branch, skips frontend build. Good for testing backend changes quickly.
 
-### 完全开发模式
+### Full Development Mode
 ```yaml
 log_level: debug
 safe_mode: false
 server_repo: pr-456
 frontend_repo: pr-789
 ```
-从源代码构建服务器（PR #456）和前端（PR #789）。完全控制，用于全面测试。
+Builds both server (PR #456) and frontend (PR #789) from source. Full control for comprehensive testing.
 
-## 重要提示
+## Important Notes
 
-### 构建时间
+### Build Time
 
-构建时间根据您的配置而变化：
-- **两者都为空** (`server_repo: ""` 和 `frontend_repo: ""`)：最快 - 无需构建，使用最新夜间发布
-- **仅指定 `server_repo`**：中等 - 仅构建服务器，跳过前端（适合后端测试）
-- **两者都指定**：最慢 - 从源代码构建服务器和前端（完全开发模式）
+Build time varies depending on your configuration:
+- **Both empty** (`server_repo: ""` and `frontend_repo: ""`): Fastest - no builds, uses latest nightly release
+- **Only `server_repo` specified**: Medium - builds server only, skips frontend (ideal for backend testing)
+- **Both specified**: Slowest - builds both server and frontend from source (full development mode)
 
-**提示**： 当仅测试后端功能时，留空 `frontend_repo` 以显著减少启动时间！
+**Tip**: Leave `frontend_repo` empty when only testing backend features to significantly reduce startup time!
 
-### 安全模式
+### Safe Mode
 
-- 如果您需要在不加载提供程序的情况下启动 Music Assistant，请设置 `safe_mode: true`
-- 用于调试任何启动问题
+- Set `safe_mode: true` if you need to start Music Assistant without loading providers
+- Useful for debugging any startup issues
 
-### 拉取请求语法
+### Pull Request Syntax
 
-指定拉取请求时，使用 `pr-NUMBER`（例如，`pr-123`、`pr-456`）。附加组件将自动获取并检出 PR。
+When specifying a pull request, use `pr-NUMBER` (e.g., `pr-123`, `pr-456`). The add-on will automatically fetch and checkout the PR for you.
 
-## 故障排除
+## Troubleshooting
 
-### 附加组件无法启动
+### Add-on won't start
 
-1. 检查附加组件日志中的构建错误
-2. 验证分支/PR/分叉是否存在且可访问
-3. 尝试使用 `dev` 或 `main` 等已知良好分支
-4. 启用 `safe_mode: true` 以绕过提供程序加载
+1. Check the add-on logs for build errors
+2. Verify the branch/PR/fork exists and is accessible
+3. Try using a known-good branch like `dev` or `main`
+4. Enable `safe_mode: true` to bypass provider loading
 
-### 构建失败
+### Build failures
 
-- 确保指定的 Git 引用存在
-- 检查分支中是否存在依赖冲突
-- 前端构建需要 Node.js - 构建失败可能表示前端代码不兼容
+- Ensure the specified Git reference exists
+- Check if there are dependency conflicts in the branch
+- Frontend build requires Node.js - build failures may indicate incompatible frontend code
 
-### 性能问题
+### Performance issues
 
-- 从源代码构建使用更多资源
-- 仅将此附加组件用于开发测试，而不是日常使用
+- Building from source uses more resources
+- Only use this add-on for development testing, not as a daily driver
 
-## 开发者工作流程
+## Developer Workflow
 
-### 测试 PR
+### Testing a PR
 
-1. 找到 PR 编号（例如，#456）
-2. 配置：`server_repo: pr-456`
-3. 重新启动附加组件
-4. 测试更改
+1. Find the PR number (e.g., #456)
+2. Configure: `server_repo: pr-456`
+3. Restart the add-on
+4. Test the changes
 
-### 开发功能
+### Developing Features
 
-1. 将您的分支推送到您的分叉
-2. 配置：`server_repo: yourusername/server@your-branch`
-3. 重新启动附加组件
-4. 测试并迭代
+1. Push your branch to your fork
+2. Configure: `server_repo: yourusername/server@your-branch`
+3. Restart the add-on
+4. Test and iterate
 
-### 测试服务器和前端更改
+### Testing Both Server and Frontend Changes
 
 ```yaml
 server_repo: pr-456
 frontend_repo: pr-789
 ```
 
-这允许您测试两个仓库之间的协调更改。
+This allows you to test coordinated changes across both repositories.
 
-## 支持
+## Support
 
-这是一个开发者工具，不适用于普通用户。如果您遇到问题：
+This is a developer tool and is not supported for regular users. If you encounter issues:
 
-- 检查附加组件日志
-- 验证您的 Git 引用是否正确
-- 首先使用默认分支进行测试
-- 在 Music Assistant 开发者 Discord 频道中提问
+- Check the add-on logs
+- Verify your Git references are correct
+- Test with the default branches first
+- Ask in the Music Assistant developer Discord channel
 
-## 与常规附加组件的差异
+## Differences from Regular Add-on
 
-| 功能      | 常规附加组件    | DEV Add-on（夜间模式） | DEV Add-on（源代码模式） |
+| Feature      | Regular Add-on    | DEV Add-on (Nightly mode) | DEV Add-on (Source mode) |
 | ------------ | ----------------- | ------------------------- | ------------------------ |
-| 安装      | 预构建发布      | 最新夜间轮              | 从源代码构建            |
-| 启动时间 | 快速            | 快速                      | 更慢（构建时间）        |
-| 稳定性    | 稳定发布        | 夜间构建                | 开发代码                |
-| 前端      | 捆绑            | 捆绑                      | 从源代码构建            |
-| 更新      | 自动            | 手动（重启）            | 手动（更改配置）        |
-| 用途      | 生产            | 快速后端测试             | 全面开发/测试           |
+| Installation | Pre-built release | Latest nightly wheel      | Built from source        |
+| Startup time | Fast              | Fast                      | Slower (build time)      |
+| Stability    | Stable releases   | Nightly builds            | Development code         |
+| Frontend     | Bundled           | Bundled                   | Built from source        |
+| Updates      | Automatic         | Manual (restart)          | Manual (change config)   |
+| Use case     | Production        | Quick backend testing     | Full development/testing |
 
-**配置模式**：
-- **快速模式**： 两个仓库都为空 - 使用最新夜间发布，无需构建
-- **后端开发模式**： 仅指定 `server_repo` - 构建服务器，使用捆绑前端
-- **完全开发模式**： 两个仓库都指定 - 从源代码构建所有内容
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
-
-## 📱 关注我
-
-扫描下面二维码，关注我。有需要可以随时给我留言：
-
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
-
-## ☕ 赞助支持
-
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
-
-感谢您的支持与鼓励！
+**Configuration Modes:**
+- **Fast mode**: Both repos empty - Uses latest nightly release, no builds
+- **Backend dev mode**: Only `server_repo` specified - Builds server, uses bundled frontend
+- **Full dev mode**: Both repos specified - Builds everything from source

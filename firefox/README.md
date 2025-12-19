@@ -1,6 +1,6 @@
-# Home Assistant Add-on: Firefox
+# Home Assistant 添加组件：Firefox
 
-在 Home Assistant 中运行 Firefox 作为浏览器，以从家中访问本地或外部网站。
+在 Home Assistant 中以浏览器形式运行 Firefox，以便从家中访问本地或外部网站。
 
 ![支持 aarch64 架构][aarch64-shield]
 ![支持 amd64 架构][amd64-shield]
@@ -9,11 +9,11 @@
 
 ## 关于
 
-Mozilla Firefox 是由 Mozilla 基金会和其子公司 Mozilla Corporation 开发的免费和开源的网页浏览器。
+Mozilla Firefox 是由 Mozilla 基金会和其子公司 Mozilla Corporation 开发的免费开源网络浏览器。
 
-此插件基于 [docker 镜像](https://github.com/jlesage/docker-firefox) 来自 [Jocelyn Le Sage](https://github.com/jlesage)。
+此添加组件基于 [docker 镜像](https://github.com/jlesage/docker-firefox) 来自 [Jocelyn Le Sage](https://github.com/jlesage)。
 
-非常感谢他创建了并维护了这些优秀的容器。
+非常感谢他创建了并维护了这些出色的容器。
 他是需要被 [支持](https://github.com/sponsors/jlesage) 的真正英雄。
 
 ## 与原始容器的区别
@@ -22,22 +22,43 @@ Mozilla Firefox 是由 Mozilla 基金会和其子公司 Mozilla Corporation 开�
 
 ## 如何使用
 
-只需安装，启动容器，然后点击“打开 Web UI”。您可以使用“在侧边栏中显示”以方便访问。您在 Firefox 中所做的所有操作都会被持久化。即使您停止插件或重新启动 Home Assistant 主机操作系统。
+只需安装，启动容器，然后点击“打开 Web UI”。您可以使用“在侧边栏中显示”进行轻松访问。您在 Firefox 中所做的所有操作都会被持久化。即使您停止添加组件或重新启动 Home Assistant 主机操作系统。
 
 ## 下载
 
-在 Firefox 中下载的文件会自动存储到您的 `/share/firefox` 文件夹中。
+在 Firefox 中下载的文件将自动存储到您的 `/share/firefox` 文件夹中。
 
 ## 上传
 
-如果您需要通过 Firefox 插件上传文件，您可以使用 [文件编辑器插件](https://github.com/home-assistant/addons/blob/master/configurator/) 将文件上传到您的 `/share/firefox` 文件夹。
-文件将在插件的 `downloads` 文件夹中可用。当您选择要上传的文件时，您可以浏览到此位置。
+如果您需要通过 Firefox 添加组件上传文件，您可以使用 [文件编辑器添加组件](https://github.com/home-assistant/addons/blob/master/configurator/) 将文件上传到您的 `/share/firefox` 文件夹。
+文件将在添加组件的 `downloads` 文件夹中可用。您可以在选择要上传的文件时浏览到此位置。
 
 ## 导入书签
 
-您可以通过将文件拖放到您的 `/share/firefox` 文件夹中来导入 `bookmarks.html` 文件，并在 Firefox 中导入 `bookmarks.html` 文件。
+您可以通过将它们放入您的 `/share/firefox` 文件夹中来导入 `bookmarks.html` 文件，并在 Firefox 中导入 `bookmarks.html` 文件。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
+---
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

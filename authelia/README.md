@@ -1,10 +1,14 @@
-# Home Assistant Add-on: Authelia
+# Home Assistant 拓展：Authelia
 
-Web应用的单一登录多因素门户
+为Web应用提供单一登录多因素认证的门户
 
 ## 关于
 
-Authelia是一个开源的身份验证和授权服务器，通过一个Web门户为您的应用程序提供双因素认证和单一登录（SSO）。它作为反向代理的伴侣，允许、拒绝或重定向请求。
+Authelia是一个开源的认证和授权服务器，通过Web门户为您的应用程序提供双因素认证和单一登录（SSO）。它作为反向代理的伴侣，允许、拒绝或重定向请求。
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

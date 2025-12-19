@@ -2,9 +2,9 @@
 
 SiYuan 是一个注重隐私的个人知识管理系统，支持细粒度的块级引用和 Markdown WYSIWYG。
 
-看起来很受欢迎，但有订阅制的 add-on，并且有可选的中国数据中心。请谨慎使用
+看起来很受欢迎，但提供订阅制的 add-on 和可选的中国数据中心。请谨慎使用
 
-_感谢大家给我的仓库添加了星标！要添加星标，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_感谢所有 Star 我仓库的人！要 Star 它，请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
@@ -21,7 +21,7 @@ _感谢大家给我的仓库添加了星标！要添加星标，请点击下面�
 1. 设置访问码和端口
 1. 点击 `保存` 按钮来存储你的配置。
 1. 启动 add-on。
-1. 检查 add-on 的日志，看看一切是否正常。
+1. 检查 add-on 的日志，看看是否一切顺利。
 1. 应该可以通过 <your-ip>:port 打开 WebUI。
 1. 数据应该存储在 /addon_config/2effc9b9_siyuan
 
@@ -34,9 +34,10 @@ port : 6806 #你想要运行的端口。
 Webui 可以在 `<your-ip>:port` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

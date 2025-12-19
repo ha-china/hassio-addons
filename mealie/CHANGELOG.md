@@ -1,3 +1,17 @@
+## v3.6.1-5 (12-12-2025)
+- Minor bugs fixed
+## v3.6.1-4 (12-12-2025)
+- Minor bugs fixed
+## v3.6.1-3 (12-12-2025)
+- Minor bugs fixed
+## v3.6.1-2 (08-12-2025)
+- Allow to start with sign up disabled
+
+## v3.6.1 (06-12-2025)
+- Update to latest version from mealie-recipes/mealie (changelog : https://github.com/mealie-recipes/mealie/releases)
+## v3.5.0-2 (06-12-2025)
+- Allow configuring Gunicorn's `--forwarded-allow-ips` value to support OIDC behind reverse proxies
+- The Home Assistant project has deprecated support for the armv7, armhf and i386 architectures. Support wil be fully dropped in the upcoming Home Assistant 2025.12 release
 
 ## v3.5.0 (15-11-2025)
 - Update to latest version from mealie-recipes/mealie (changelog : https://github.com/mealie-recipes/mealie/releases)

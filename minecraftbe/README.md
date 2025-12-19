@@ -1,37 +1,37 @@
 # Home assistant add-on: Minecraft Dedicated Server Bedrock Edition
 一种在 Home Assistant 上快速运行 Minecraft Dedicated Server Bedrock Edition 的方法。
 
-_感谢大家给我的仓库点赞！要点赞请点击下面的图片，它将会出现在右上角。谢谢！_
+_感谢大家给我的仓库加星！要加星，请点击下面的图片，它将在右上角显示。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## About
+## 关于
 
-这个插件使用的是 [itzg/docker-minecraft-bedrock-server](https://github.com/itzg/docker-minecraft-bedrock-server/) 的 docker 镜像。
+这个 add-on 使用了 [itzg/docker-minecraft-bedrock-server](https://github.com/itzg/docker-minecraft-bedrock-server/) 的 docker 镜像。
 
-在重启插件时，它将自动获取最新版本的 Minecraft。
+当重新启动 add-on 时，它将自动获取最新版本的 Minecraft。
 
-你的世界、设置和服务器可执行文件都存储在 /share/minecraftbe
+你的世界、设置和服务器可执行文件存储在 /share/minecraftbe
 
-你可能想要在半夜创建一个服务来重启插件，以便更新 Minecraft 版本（见下文）
+你可能想要在半夜创建一个服务来重新启动 add-on，以便更新 Minecraft 版本（见下文）
 
-如果你想在 Home Assistant 中监控你的 Bedrock 服务器，请安装这个集成，因为内置的只监控 Java：https://github.com/jdeath/Bedrock-Homeassistant
+如果你想在 Home Assistant 中监控你的 Bedrock 服务器，请安装这个集成，因为内置的 only 监控 java：https://github.com/jdeath/Bedrock-Homeassistant
 
-## Installation
+## 安装
 
-这个插件的安装非常简单，与安装任何其他 Hass.io 插件没有什么不同。
+这个 add-on 的安装非常简单，与安装任何其他 Hass.io add-on 没有区别。
 
-1. [将我的 Hass.io 插件仓库][repository] 添加到你的 Hass.io 实例。
-1. 安装这个插件。
+1. [将我的 Hass.io add-ons 仓库][repository] 添加到你的 Hass.io 实例。
+1. 安装这个 add-on。
 2. 如有需要，更改 API 端口（默认为标准的 Minecraft 端口）
-3. 点击 `保存` 按钮来保存你的配置。
+3. 点击 `保存` 按钮以保存你的配置。
 4. 创建目录 /share/minecraftbe
-5. 启动插件。
-6. 检查插件的日志，看看是否一切正常。
-7. 编辑你想要在 /share/minecraftbe/ 中的任何服务器/权限/白名单属性，并重启插件。注意你不能更改 server.properties 中的端口，因为它会被某种原因覆盖。然而，你可以在 Home Assistant 中的插件配置选项卡中更改端口。我只暴露了 IP4 端口。如果需要 IP6，请告诉我。
-8. 如果你想要外部访问，请确保将你的外部端口转发到你的 Home Assistant IP。
+5. 启动 add-on。
+6. 检查 add-on 的日志，看看是否一切正常。
+7. 编辑你想要在 /share/minecraftbe/ 中的任何服务器/权限/白名单属性，并重新启动 add-on。注意，你不能在 server.properties 中更改端口，因为它会被某种原因覆盖。然而，你可以在 Home Assistant 中的 add-on 配置选项卡中更改端口。我只暴露了 IP4 端口。如果需要 IP6，请告诉我。
+8. 如果你想外部访问，请确保将你的外部端口转发到你的 Home Assistant IP。
 
-## Restart Automation
+## 重启自动化
 
 ```
 alias: Restart Minecraft Server
@@ -54,6 +54,11 @@ action:
 mode: single
 ```
 [repository]: https://github.com/jdeath/homeassistant-addons
+---
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

@@ -2,11 +2,16 @@
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/zigbee2mqtt/zigbee2mqtt-amd64.svg?style=flat-square&logo=docker)](https://cloud.docker.com/u/dwelch2101/repository/docker/zigbee2mqtt/zigbee2mqtt-amd64)
 
-允许您在**无需**供应商桥接或网关的情况下使用 Zigbee 设备。
+允许您**无需**设备供应商的桥接器或网关使用您的 Zigbee 设备。
 
-它桥接事件，并允许您通过 MQTT 控制您的 Zigbee 设备。通过这种方式，您可以将您的 Zigbee 设备与您正在使用的任何智能家居基础设施集成。
+它桥接事件，并允许您通过 MQTT 控制您的 Zigbee 设备。通过这种方式，您可以将与您正在使用的任何智能家居基础设施集成您的 Zigbee 设备。
 
 有关更多详细信息，请查看文档选项卡。
+---
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

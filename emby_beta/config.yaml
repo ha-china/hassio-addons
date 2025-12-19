@@ -5,8 +5,7 @@ backup_exclude:
   - "*/cache/"
   - "*/transcoding-temp/"
   - "*/logs/*"
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：一个让你掌控管理和流式传输你媒体的自由软件媒体系统（测试版）'
+description: '[老王杂谈说]：一个免费的软件媒体系统，让你掌控管理和流式传输你的媒体（测试版）'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -85,6 +84,7 @@ map:
   - ssl:rw
 name: Emby Beta
 options:
+  env_vars: []
   PGID: 0
   PUID: 0
   silent: true
@@ -104,6 +104,9 @@ privileged:
   - SYS_ADMIN
   - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   PGID: int
   PUID: int
   TZ: str?
@@ -117,5 +120,5 @@ schema:
 slug: emby_nas
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/emby
-version: "4.9.2.6"
+version: "4.9.2.8"
 video: true

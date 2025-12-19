@@ -1,6 +1,20 @@
+# v2.1
+
+## Changelog
+
+## New Features
+- Multi-language Support: Added full support for Spanish, German, French, Dutch, and Italian.
+- Docker Images: Automated Docker image builds are now available on GitHub Container Registry (GHCR).
+- Docker Compose: Added compose.yaml file for simplified Docker deployment with a single command.
+
+## Improvements
+- Restore Logic: Restoring automations and scripts now preserves their original position instead of moving them to the bottom.
+- Performance: Significant optimizations for faster load times and smoother operation.
+
 # v2.0.2
 
 ## Changelog
+
 - Minor tweaks and bug fixes.
 
 # v2.0

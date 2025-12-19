@@ -1,5 +1,23 @@
 # Changelog
 
+## 3.0.0-beta.87 - 2025-12-10
+
+### Change
+
+- Added an optional poll sensor for callstate, for devices running newer firmware 3.7.x, where ringing event is not in the SDK anymore
+
+## 3.0.0-beta.85 - 2025-12-10
+
+### Fix
+
+- fix unique loops for scene / alarm mode
+
+## 3.0.0-beta.80 - 2025-12-04
+
+### Test
+
+- Added close button for com ports on indoor
+
 ## 3.0.0-beta.78 - 2025-11-25
 
 ### Test

@@ -6,8 +6,6 @@ url: https://ghfast.top/github.com/erik73/hassio-addons
 arch:
   - aarch64
   - amd64
-  - armv7
-  - i386
 init: false
 ingress: true
 ingress_stream: true

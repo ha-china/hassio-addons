@@ -1,5 +1,109 @@
 # TOMMY
 
+## 1.0.3
+
+### Minor Changes
+
+- Minor UI improvements
+
+## 1.0.2
+
+### Minor Changes
+
+- Memory optimizations
+- Added Bluetooth Proxy compatibility warning to ESPHome documentation and flasher dialog, including PSRAM recommendations for memory-constrained setups
+
+## 1.0.1
+
+### Minor Changes
+
+- Removed 'Tips' button and replaced with 'Device Placement Guide' in header
+
+## 1.0.0
+
+### Major Changes
+- Home Assistant Integration. A button is now added to the dashboard with information on how to install the integration. It automatically keeps TOMMY zones in sync with Home Assistant and exposes a device for each zone with a motion sensor entity. This feature is exclusive to the Pro Edition. The Matter integration is still available for users of the Community Edition.
+
+### Minor Changes
+
+- Added more information to the license error message
+- Fixed a bug where the logs for an ESP32 would be flooded with "PACKET_SENDER: Failed to send packet: ESP_ERR_ESPNOW_NOT_FOUND" when a sensor wasn't added to a zone yet.
+
+## 0.26.0
+
+### Major Changes
+- Added a balanced boundary mode, which is now default for new zones
+
+## 0.25.2
+
+### Minor Changes
+
+- Improvements to detection algorithm
+
+## 0.25.1
+
+### Minor Changes
+
+- Fixed mismatched glibc crash
+- Included hold time in total motion statistics
+
+## 0.25.0
+
+### Major Changes
+- Internal preparations for native Home Assistant Integration
+
+## 0.24.3
+
+### Minor Changes
+
+- Minor UI fixes
+
+## 0.24.2
+
+### Minor Changes
+
+- Minor UI fixes
+
+## 0.24.1
+
+### Minor Changes
+
+- Fixed missing default for hold time, which could cause crashes
+
+## 0.24.0
+
+### Major Changes
+- Added hold time support
+- Added option for online license activation
+- BREAKING CHANGE: Offline license activation is no longer supported for Docker installations. After careful consideration, we have determined that the license server solution has become too complex to maintain and support. If you were using the license server, you can remove it using `sudo dpkg -r tommy-license-server`. Docker installation users can switch to online activation, or use the Home Assistant Add-on for offline activation. If neither option works for your setup, we recommend staying on version 0.23.0. We apologize for any inconvenience this may cause.
+
+## 0.23.0
+
+### Major Changes
+- Improvements to motion detection algorithm
+
+### Minor Changes
+
+- Minor UI changes
+
+## 0.22.3
+
+### Minor Changes
+
+- Minor UI improvements
+
+## 0.22.2
+
+### Minor Changes
+
+- Minor UI improvements
+
+## 0.22.1
+
+### Minor Changes
+
+- Minor UI improvements
+
 ## 0.22.0
 
 ### Major Changes
