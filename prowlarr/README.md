@@ -1,8 +1,7 @@
 # Home assistant add-on: Prowlarr
 
-## 💖 Support development
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the add-ons
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
 If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
@@ -32,46 +31,46 @@ _Thanks to everyone having starred my repo! To star it click on the image below,
 
 ---
 
-[Prowlarr](https://github.com/Prowlarr/Prowlarr) is an indexer manager/proxy built on the popular arr .net/reactjs base stack to integrate with your various PVR apps.
-This add-on is based on the docker image https://github.com/linuxserver/docker-prowlarr
+[Prowlarr](https://github.com/Prowlarr/Prowlarr) 是一个基于流行的 arr .net/reactjs 基础栈构建的索引器管理器/代理，用于与您的各种 PVR 应用集成。
+此插件基于以下 Docker 镜像：https://github.com/linuxserver/docker-prowlarr
 
-## Installation
+## 安装
 
 ---
 
-The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
+此插件的安装过程非常简单，与安装其他插件的过程没有区别。
 
-1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
-   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Set the add-on options to your preferences
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Open the webUI and adapt the software options
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 supervisor 插件商店的右上角，或点击下方按钮如果您已配置我的 HA）
+   [![打开您的 Home Assistant 实例并显示具有特定仓库 URL 预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此插件。
+1. 点击 `保存` 按钮以保存您的配置。
+1. 设置插件选项以符合您的偏好。
+1. 启动插件。
+1. 检查插件的日志以查看是否一切正常。
+1. 打开 WebUI 并调整软件选项
 
-## Configuration
+## 配置
 
-Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+使用插件 `env_vars` 选项传递额外的环境变量（名称大小写均可）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-Webui can be found at <http://homeassistant:PORT> or through the sidebar using Ingress.
-Configurations can be done through the app webUI, except for the following options.
+Webui 可以在 <http://homeassistant:PORT> 或通过 Ingress 通过侧边栏访问。
+配置可以通过应用 WebUI 进行，以下选项除外。
 
-### Options
+### 选项
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `PGID` | int | `0` | Group ID for file permissions |
-| `PUID` | int | `0` | User ID for file permissions |
-| `TZ` | str | | Timezone (e.g., `Europe/London`) |
-| `localdisks` | str | | Local drives to mount (e.g., `sda1,sdb1,MYNAS`) |
-| `networkdisks` | str | | SMB shares to mount (e.g., `//SERVER/SHARE`) |
-| `cifsusername` | str | | SMB username for network shares |
-| `cifspassword` | str | | SMB password for network shares |
-| `cifsdomain` | str | | SMB domain for network shares |
-| `smbv1` | bool | `false` | Enable SMB v1 protocol |
+| 选项 | 类型 | 默认值 | 描述 |
+|------|------|--------|-------|
+| `PGID` | 整数 | `0` | 文件权限的组 ID |
+| `PUID` | 整数 | `0` | 文件权限的用户 ID |
+| `TZ` | 字符串 | | 时区（例如，`Europe/London`） |
+| `localdisks` | 字符串 | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
+| `networkdisks` | 字符串 | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | 字符串 | | SMB 网络共享的用户名 |
+| `cifspassword` | 字符串 | | SMB 网络共享的密码 |
+| `cifsdomain` | 字符串 | | SMB 网络共享的域 |
+| `smbv1` | 布尔值 | `false` | 启用 SMB v1 协议 |
 
-### Example Configuration
+### 示例配置
 
 ```yaml
 PGID: 0
@@ -85,27 +84,28 @@ cifsdomain: "workgroup"
 smbv1: false
 ```
 
-### Mounting Drives
+### 挂载驱动器
 
-This add-on supports mounting both local drives and remote SMB shares:
+此插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-## Support
+## 支持
 
-Create an issue on github
+在 github 上创建问题
 
-## Illustration
+## 说明
 
 ---
 
 ![illustration](https://wiki.servarr.com/assets/prowlarr/hist_1_history.png)
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 
