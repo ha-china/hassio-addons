@@ -1,8 +1,8 @@
 ---
 name: AegisBot
-version: "0.1.3"
+version: "0.1.4"
 slug: aegisbot
-description: '[老王杂谈说]：生产就绪的Telegram moderation bot，具有AI驱动的FAQ和安全功能'
+description: '[老王杂谈说]：具备AI驱动的FAQ和安全功能的可生产就绪的Telegram管理机器人'
 url: https://ghfast.top/github.com/FaserF/AegisBot
 arch:
   - aarch64
@@ -34,6 +34,8 @@ options:
   secret_key: ""
   project_name: "AegisBot"
   debug: false
+  demo_mode: false
+  demo_mode_type: ephemeral
 schema:
   version: str
   github_token: password?
@@ -51,3 +53,5 @@ schema:
   secret_key: password?
   project_name: str?
   debug: bool?
+  demo_mode: bool
+  demo_mode_type: list(ephemeral|persistent)?

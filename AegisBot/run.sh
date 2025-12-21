@@ -112,6 +112,22 @@ else
     export DEBUG="false"
 fi
 
+# Demo Mode
+if bashio::config.true 'demo_mode'; then
+    export DEMO_MODE="True"
+    bashio::log.info "Demo mode: ENABLED"
+else
+    export DEMO_MODE="False"
+fi
+
+# Demo Mode Type
+if bashio::config.has_value 'demo_mode_type'; then
+    export DEMO_MODE_TYPE=$(bashio::config 'demo_mode_type')
+    bashio::log.info "Demo mode type: $DEMO_MODE_TYPE"
+else
+    export DEMO_MODE_TYPE="ephemeral"
+fi
+
 # GitHub OAuth (Optional) - Removed from Env, driven by DB/UI now
 bashio::log.info "Note: Authentication settings are now configured via Web UI."
 
@@ -309,6 +325,9 @@ if [ ! -f "/app/backend/app/main.py" ] || [ ! -f "/app/frontend/index.html" ]; t
 
             bashio::log.info "Running 'npm install'..."
             if npm install; then
+                bashio::log.info "Configuring relative paths for Ingress..."
+                sed -i "s|defineConfig({|defineConfig({ base: './',|g" vite.config.ts
+                sed -i "s|const API_BASE = '.*'|const API_BASE = './api/v1'|g" src/api/client.ts
                 bashio::log.info "Running 'npm run build'..."
                 if npm run build; then
                     bashio::log.info "Frontend build successful. Installing..."
@@ -377,6 +396,9 @@ if [ ! -f "/app/backend/app/main.py" ] || [ ! -f "/app/frontend/index.html" ]; t
 
                     bashio::log.info "Running 'npm install'..."
                     if npm install; then
+                        bashio::log.info "Configuring relative paths for Ingress..."
+                        sed -i "s|defineConfig({|defineConfig({ base: './',|g" vite.config.ts
+                        sed -i "s|const API_BASE = '.*'|const API_BASE = './api/v1'|g" src/api/client.ts
                         bashio::log.info "Running 'npm run build'..."
                         if npm run build; then
                             bashio::log.info "Frontend build successful. Installing..."
@@ -470,6 +492,9 @@ if bashio::config.true 'developer_mode' && [ "${INITIAL_DOWNLOAD_DONE:-false}" !
 
             bashio::log.info "Running 'npm install'..."
             if npm install; then
+                bashio::log.info "Configuring relative paths for Ingress..."
+                sed -i "s|defineConfig({|defineConfig({ base: './',|g" vite.config.ts
+                sed -i "s|const API_BASE = '.*'|const API_BASE = './api/v1'|g" src/api/client.ts
                 bashio::log.info "Running 'npm run build'..."
                 if npm run build; then
                     bashio::log.info "Frontend build successful. Updating files..."
@@ -529,6 +554,8 @@ cat > /app/backend/.env <<EOF
 SECRET_KEY=${SECRET_KEY}
 DATABASE_URL=${DATABASE_URL}
 DEBUG=${DEBUG}
+DEMO_MODE=${DEMO_MODE}
+DEMO_MODE_TYPE=${DEMO_MODE_TYPE}
 EOF
 
 # --- BACKEND START ---
