@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.5.6
+
+- Automatically updated Solumati to version v2025.12.3b1
+
+## 1.5.5
+
+- Fixed build error by targeting correct `vite.config.js` filename.
+
+## 1.5.4
+
+- Switched to local build (removed pre-built image dependency)
+
 ## 1.5.3
 
 - Improved Ingress support with relative paths and dynamic port handling

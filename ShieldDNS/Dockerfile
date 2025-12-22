@@ -7,7 +7,8 @@ COPY --from=coredns/coredns:latest /coredns /usr/bin/coredns
 COPY --from=cloudflare/cloudflared:latest /usr/local/bin/cloudflared /usr/bin/cloudflared
 
 # Install dependencies (if any extra needed beyond base)
-RUN apk add --no-cache bind-tools openssl nginx
+# We add netcat-openbsd for port checking (nc) and net-tools for netstat
+RUN apk add --no-cache bind-tools openssl nginx netcat-openbsd net-tools
 
 # Create web root and required directories
 RUN mkdir -p /var/www/html /run/nginx
@@ -21,4 +22,4 @@ COPY www/logo.png /var/www/html/logo.png
 # preventing the "s6-overlay-suexec: fatal: can only run as pid 1" error
 RUN mkdir -p /etc/services.d/shielddns
 COPY run.sh /etc/services.d/shielddns/run
-RUN chmod +x /etc/services.d/shielddns/run
+RUN dos2unix /etc/services.d/shielddns/run && chmod +x /etc/services.d/shielddns/run

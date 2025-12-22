@@ -26,7 +26,7 @@ RUN \
 
 # --- SOURCE CODE FETCH STAGE ---
 # Download the specific release tarball
-ARG SOLUMATI_VERSION="vv2025.12.3b0"
+ARG SOLUMATI_VERSION="v2025.12.3b1"
 WORKDIR /tmp
 RUN curl -L "https://ghfast.top/github.com/FaserF/Solumati/archive/refs/tags/${SOLUMATI_VERSION}.tar.gz" -o solumati.tar.gz && \
     tar -xzf solumati.tar.gz && \
@@ -40,7 +40,7 @@ RUN cp /tmp/src/frontend/package.json . && \
     (cp /tmp/src/frontend/package-lock.json* . || true) && \
     npm install && \
     cp -r /tmp/src/frontend/. . && \
-    sed -i "s|defineConfig({|defineConfig({ base: './',|g" vite.config.ts && \
+    sed -i "s|defineConfig({|defineConfig({ base: './',|g" vite.config.js && \
     sed -i "s|const API_URL = '.*'|const API_URL = './api'|g" src/config.js && \
     npm run build
 
