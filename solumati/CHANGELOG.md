@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.5.9
+
+- Automatically updated Solumati to version v2025.12.3b1
+
+## 1.5.8
+
+- Improved build script robustness: now checks for `vite.config.ts` or `vite.config.js` automatically.
+- Enhanced API URL replacement to handle different syntax variations.
+
+## 1.5.7
+
+- Fixed connection refused error by correcting build script to target `vite.config.ts`.
+- Fixed API URL replacement in frontend config.
+
 ## 1.5.6
 
 - Automatically updated Solumati to version v2025.12.3b1

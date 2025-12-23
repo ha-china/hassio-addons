@@ -1,14 +1,14 @@
 # Music Assistant (NIGHTLY) Add-on
 
-Music Assistant的 bleeding edge 开发版本。
+处于开发前沿的 Music Assistant 构建版本。
 
-## ⚠️ WARNING - 仅限高级用户使用 ⚠️
+## ⚠️ 警告 - 仅限高级用户使用 ⚠️
 
-这是 Music Assistant 的一个**NIGHTLY**（开发）版本。它包含了最新的代码更改，并且**不推荐日常使用**。
+这是 Music Assistant 的一个 **NIGHTLY**（开发）版本。它包含了最新的代码更改，并且**不推荐日常使用**。
 
 ### 🔴 重要信息
 
-这个 add-on 是：
+**此插件：**
 
 - ❌ **不稳定** - 可能随时崩溃
 - ❌ **未经测试** - 直接从开发版本推送更改
@@ -25,19 +25,19 @@ Music Assistant的 bleeding edge 开发版本。
 
 ## 什么是 NIGHTLY？
 
-NIGHTLY 版本是从 Music Assistant 的 `dev` 分支自动构建的。它们包括：
+NIGHTLY 构建是从 Music Assistant 的 `dev` 分支自动构建的。它们包含：
 
 - 🚧 进行中的功能
 - 🔬 实验性代码
-- 🐛 未验证的 Bug 修复
+- 🐛 未经验证的错误修复
 - ⚡ 24 小时内的最新代码更改
-- 💥 可能会破坏的更改
+- 💥 可能会引入破坏性更改
 
 ## 发布频率
 
 - **更新**：每日（当更改推送到 dev 分支时）
-- **测试**：极少或无
-- **质量**：差异很大
+- **测试**：最少或无
+- **质量**：变化很大
 - **稳定性**：⚠️ 本质上不稳定
 
 ## 对比矩阵
@@ -45,28 +45,28 @@ NIGHTLY 版本是从 Music Assistant 的 `dev` 分支自动构建的。它们包
 | 功能          | 稳定     | BETA     | NIGHTLY       |
 | ------------- | -------- | -------- | ------------- |
 | 稳定性        | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐            |
-| 功能         | 发布     | 测试    | 最新          |
-| 更新          | 每月    | 每周    | 每日          |
-| 破坏性更改    | 罕见     | 可能    | 可能          |
+| 功能         | 发布     | 测试    | 最新        |
+| 更新          | 每月     | 每周    | 每日         |
+| 破坏性更改 | 很少     | 可能    | 可能        |
 | 数据丢失风险   | 非常低   | 低      | **高**      |
-| 使用场景         | 生产环境 | 测试    | 实验用        |
+| 使用场景       | 生产环境 | 测试    | 实验阶段     |
 
 ## 报告问题
 
 ### 报告问题前
 
-1. ⚠️ 确认你故意使用 NIGHTLY
-2. 检查问题是否存在于 BETA 或 Stable 版本中
+1. ⚠️ 确认你是在有意使用 NIGHTLY
+2. 检查问题是否存在于 BETA 或稳定版本中
 3. 搜索现有问题
 4. 尝试使用最小配置重现问题
 
-### 需要包含的内容
+### 应包含的内容
 
 - **版本**：确切的 NIGHTLY 版本号和日期
 - **日志**：完整的调试日志
-- **上下文**：当它崩溃时你在做什么
+- **上下文**：崩溃时你在做什么
 - **环境**：Home Assistant 版本，硬件规格
-- **重现步骤**：按步骤重现问题的详细步骤
+- **重现步骤**：逐步重现问题的步骤
 
 ### 报告地点
 
@@ -76,29 +76,29 @@ NIGHTLY 版本是从 Music Assistant 的 `dev` 分支自动构建的。它们包
 
 ### 如果出现问题
 
-1. **停止 add-on**
-2. **从备份恢复**（你做了备份，对吧？）
+1. **停止插件**
+2. **从备份恢复**（你备份了吗？）
 3. **报告问题**
 
 ## 贡献
 
 运行 NIGHTLY 并发现问题是种贡献！你也可以：
 
-- 🐛 [使用详细日志报告 Bug](https://github.com/music-assistant/support)
-- 🔧 提交包含修复的拉取请求
+- 🐛 [通过详细日志报告错误](https://github.com/music-assistant/support)
+- 🔧 提交带修复的拉取请求
 - 📝 记录问题和解决方案
 - 💬 在 [Discord](https://discord.gg/PZQ6RWbfeS) 帮助其他 NIGHTLY 用户
 - 🧪 测试特定功能
 
 访问 GitHub 上的 [Music Assistant 组织](https://github.com/music-assistant) 进行贡献。
 
-## 最终警告
+## 最后警告
 
 ```
  _____________________________________
-/ 你已经被多次警告了。 \
-\ 如果这个版本出问题，你只能保留两 /
-  个碎片。
+/ 你已经被警告多次。 \
+\ 如果这坏了，你只能保留两块碎片 /
+  。
  -------------------------------------
         \   ^__^
          \  (oo)\_______
@@ -109,13 +109,13 @@ NIGHTLY 版本是从 Music Assistant 的 `dev` 分支自动构建的。它们包
 
 ## 你还在这里？
 
-如果你已经读到这一步，仍然想使用 NIGHTLY，你可能就是合适的使用者。欢迎来到 bleeding edge！ 🚀
+如果你已经读到这一步，仍然想使用 NIGHTLY，你可能就是合适的用户。欢迎来到前沿开发！ 🚀
 
-请记住：**备份所有东西** 💾
+记住：**备份所有东西** 💾
 
 ## 许可证
 
-Music Assistant 是在 Apache License 2.0 下许可的。
+Music Assistant 在 Apache License 2.0 下授权。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
