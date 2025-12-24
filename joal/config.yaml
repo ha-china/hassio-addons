@@ -1,9 +1,7 @@
 arch:
   - aarch64
   - amd64
-  - armv7
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：一个开源的命令行RatioMaster带Web界面'
+description: '[老王杂谈说]：一个开源的命令行RatioMaster带有Web界面'
 hassio_api: true
 image: ghcr.nju.edu.cn/alexbelgium/joal-{arch}
 ingress: true
@@ -11,6 +9,7 @@ map:
   - config:rw
 name: Joal
 options:
+  env_vars: []
   run_duration: 12h
   secret_token: lrMY24Byhx
   ui_path: joal
@@ -23,6 +22,9 @@ ports_description:
   49152/tcp: torrent port (not required)
   8081/tcp: Web UI port (required)
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   run_duration: str?
   secret_token: str
   ui_path: str
@@ -30,4 +32,4 @@ schema:
 slug: joal
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 2.1.36-3
+version: "2.1.37"

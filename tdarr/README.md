@@ -1,9 +1,16 @@
 # Home assistant add-on: Tdarr
 
-[![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ftdarr%2Fconfig.yaml)
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## Addon informations
+
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ftdarr%2Fconfig.yaml)
 ![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ftdarr%2Fconfig.yaml)
 ![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ftdarr%2Fconfig.yaml)
 
@@ -11,58 +18,59 @@
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我仓库点赞的人！点击下面的图片即可点赞，点赞后会出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
 ![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/tdarr/stats.png)
 
-## 关于
+## About
 
-[Tdarr](https://tdarr.io) 是一个分布式转码系统，使用 FFmpeg/HandBrake 自动管理媒体库的转码/重新封装。它确保您的文件在编解码器、流和容器方面完全符合您的需求。Tdarr 支持分布式处理，允许您使用 Tdarr 节点将您的闲置硬件用于 Windows、Linux（包括 ARM）和 macOS。
+[Tdarr](https://tdarr.io) is a distributed transcoding system for automating media library transcode/remux management using FFmpeg/HandBrake. It ensures your files are exactly how you need them to be in terms of codecs, streams, and containers. Tdarr supports distributed processing, allowing you to put your spare hardware to use with Tdarr Nodes for Windows, Linux (including ARM), and macOS.
 
-主要功能：
-- 跨多个节点的分布式转码
-- 自动媒体库管理
-- 支持 FFmpeg 和 HandBrake
-- 硬件加速支持
-- 基于网络的管理界面
-- 基于插件的流程系统
+Key features:
+- Distributed transcoding across multiple nodes
+- Automated media library management
+- Support for FFmpeg and HandBrake
+- Hardware acceleration support
+- Web-based management interface
+- Plugin-based workflow system
 
-此插件基于 [docker 镜像](https://hub.docker.com/r/hurlenko/Tdarr)。
+This addon is based on the [docker image](https://hub.docker.com/r/hurlenko/Tdarr) from hurlenko.
 
-## 安装
+## Installation
 
-此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. [将我的 Hass.io 插件仓库][repository] 添加到您的 Hass.io 实例。
-2. 安装此插件。
-3. 点击 `保存` 按钮以保存您的配置。
-4. 启动插件。
-5. 检查插件的日志以查看是否一切正常。
-6. 仔细配置插件以满足您的偏好，请参阅官方文档。
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Carefully configure the add-on to your preferences, see the official documentation for that.
 
-## 配置
+## Configuration
 
-Web UI 可以在 `<your-ip>:8265` 或通过 Ingress 侧边栏访问。
-服务器端口为 `8266`，用于连接外部 Tdarr 节点。
+Web UI can be found at `<your-ip>:8265` or through the sidebar using Ingress.
+The server port is `8266` for connecting external Tdarr nodes.
 
-### 选项
+### Options
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
-| `CONFIG_LOCATION` | str | `/config/addons_config/tdarr` | Tdarr 配置存储的路径 |
-| `TZ` | str | | 时区（例如，`Europe/London`） |
-| `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | str | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | str | | SMB 共享的网络用户名 |
-| `cifspassword` | str | | SMB 共享的网络密码 |
-| `cifsdomain` | str | | SMB 共享的域 |
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `CONFIG_LOCATION` | str | `/config/addons_config/tdarr` | Path where Tdarr config is stored |
+| `TZ` | str | | Timezone (e.g., `Europe/London`) |
+| `localdisks` | str | | Local drives to mount (e.g., `sda1,sdb1,MYNAS`) |
+| `networkdisks` | str | | SMB shares to mount (e.g., `//SERVER/SHARE`) |
+| `cifsusername` | str | | SMB username for network shares |
+| `cifspassword` | str | | SMB password for network shares |
+| `cifsdomain` | str | | SMB domain for network shares |
 
-### 示例配置
+### Example Configuration
 
 ```yaml
 CONFIG_LOCATION: "/config/addons_config/tdarr"
@@ -74,70 +82,52 @@ cifspassword: "password123"
 cifsdomain: "workgroup"
 ```
 
-### 设置分布式转码
+### Setting up Distributed Transcoding
 
-1. **配置服务器**：
-   - 访问 Web UI at `<your-ip>:8265`
-   - 设置您的媒体库和转码设置
-   - 根据需要配置插件和工作流程
+1. **Configure the Server**:
+   - Access the Web UI at `<your-ip>:8265`
+   - Set up your media libraries and transcoding settings
+   - Configure plugins and workflows as needed
 
-2. **添加外部节点**：
-   - 在其他机器上安装 Tdarr 节点
-   - 将它们指向您的 Home Assistant IP 端口 `8266`
-   - 节点将自动注册并在 Web UI 中显示
+2. **Add External Nodes**:
+   - Install Tdarr Node on additional machines
+   - Point them to your Home Assistant IP on port `8266`
+   - Nodes will automatically register and appear in the Web UI
 
-3. **硬件加速**：
-   - 插件包含硬件加速支持
-   - 在 Tdarr Web UI 设置中配置 GPU 转码
-   - 支持的加速：Intel QuickSync、NVIDIA NVENC、AMD VCE
+3. **Hardware Acceleration**:
+   - The addon includes hardware acceleration support
+   - Configure GPU transcoding in the Tdarr Web UI settings
+   - Supported acceleration: Intel QuickSync, NVIDIA NVENC, AMD VCE
 
-### 挂载驱动器
+### Mounting Drives
 
-此插件支持挂载本地驱动器和远程 SMB 共享：
+This addon supports mounting both local drives and remote SMB shares:
 
-- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-### 自定义脚本和环境变量
+### Custom Scripts and Environment Variables
 
-此插件支持通过 `addon_config` 映射自定义脚本和环境变量：
+This addon supports custom scripts and environment variables through the `addon_config` mapping:
 
-- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（大小写名称）。参见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-### 硬件加速说明
+### Hardware Acceleration Notes
 
-插件包含硬件加速的设备访问：
-- Intel QuickSync：`/dev/dri` 设备被映射
-- NVIDIA：设置了环境变量用于 GPU 检测
-- AMD：通过可用设备支持硬件加速
+The addon includes device access for hardware acceleration:
+- Intel QuickSync: `/dev/dri` devices are mapped
+- NVIDIA: Environment variables are set for GPU detection
+- AMD: Hardware acceleration supported through available devices
 
-在 Tdarr Web UI 的设置 > FFmpeg/HandBrake 设置中配置硬件加速。
+Configure hardware acceleration in the Tdarr Web UI under Settings > FFmpeg/HandBrake settings.
 
-## 支持
+## Support
 
-- 官方 Tdarr 文档：[https://docs.tdarr.io/](https://docs.tdarr.io/)
-- 在 [GitHub](https://github.com/alexbelgium/hassio-addons/issues) 上创建问题
-- 在 [Home Assistant 社区线程](https://community.home-assistant.io/t/home-assistant-addon-tdarr/282108/3) 上提问
+- Official Tdarr documentation: [https://docs.tdarr.io/](https://docs.tdarr.io/)
+- Create an issue on [GitHub](https://github.com/alexbelgium/hassio-addons/issues)
+- Ask on the [Home Assistant Community thread](https://community.home-assistant.io/t/home-assistant-addon-tdarr/282108/3)
 
 [repository]: https://github.com/alexbelgium/hassio-addons
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 
 
-
-## 📱 关注我
-
-扫描下面二维码，关注我。有需要可以随时给我留言：
-
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
-
-## ☕ 赞助支持
-
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
-
-感谢您的支持与鼓励！

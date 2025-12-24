@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：高性能文件同步和共享，同时支持Markdown所见即所得编辑、维基、文件标签等知识管理功能'
+description: '[老王杂谈说]：高性能文件同步和共享，同时支持Markdown所见即所得编辑、维基、文件标签及其他知识管理功能'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -126,5 +126,5 @@ services:
 slug: seafile
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/seafile
-version: 12.0.16
+version: ""
 webui: http://[HOST]:[PORT:8000]

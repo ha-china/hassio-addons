@@ -1,9 +1,15 @@
 # Home assistant add-on: Joal
 
-[![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoal%2Fconfig.yaml)
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## Addon informations
+
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoal%2Fconfig.yaml)
 ![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoal%2Fconfig.yaml)
 ![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoal%2Fconfig.yaml)
 
@@ -11,36 +17,38 @@
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库加星的人！要加星，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
 ![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/joal/stats.png)
 
-## 关于
+## About
 
-一个开源的命令行RatioMaster，带有Web界面。
-这个插件基于Anthony Raymond的[docker镜像](https://hub.docker.com/r/anthonyraymond/joal)。
-这个应用的所有功劳都归功于Anthony Raymond，请访问他的仓库：https://github.com/anthonyraymond/joal
+An open source command line RatioMaster with WebUI.
+This addon is based on the [docker image](https://hub.docker.com/r/anthonyraymond/joal) from Anthony Raymond.
+All credits for the app go to Anthony Raymond, please visit his repository here : https://github.com/anthonyraymond/joal
 
-## 配置
+## Configuration
 
-Web界面可以在<http://homeassistant:PORT>找到，或者通过Ingress在侧边栏中访问。
-配置详情可以在插件日志中找到。
+Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-### 选项
+Webui can be found at <http://homeassistant:PORT> or through the sidebar using Ingress.
+Configuration details are available in the addon logs.
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
-| `secret_token` | 字符串 | `lrMY24Byhx` | Web界面的认证令牌 |
-| `ui_path` | 字符串 | `joal` | Web界面路径 |
-| `run_duration` | 字符串 | `12h` | 运行时长（例如，5s, 2m, 12h, 5d） |
-| `verbose` | 布尔值 | | 启用详细日志 |
+### Options
 
-### 示例配置
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `secret_token` | str | `lrMY24Byhx` | Authentication token for the web interface |
+| `ui_path` | str | `joal` | Web UI path |
+| `run_duration` | str | `12h` | Runtime duration (e.g., 5s, 2m, 12h, 5d) |
+| `verbose` | bool | | Enable verbose logging |
+
+### Example Configuration
 
 ```yaml
 secret_token: "your-custom-token-here"
@@ -49,25 +57,47 @@ run_duration: "24h"
 verbose: true
 ```
 
-## 安装
+## Installation
 
-这个插件的安装非常简单，与其他Hass.io插件的安装方式相同。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. 将我的Hass.io插件仓库[repository]添加到你的Hass.io实例中。
-1. 安装这个插件。
-1. 点击`保存`按钮以保存你的配置。
-1. 确保你的路由器上开放了两个端口。
-1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 仔细配置插件以符合你的偏好，请参考官方文档进行配置。
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Make sure that the two ports are open on your router
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Carefully configure the add-on to your preferences, see the official documentation for for that.
 
-## 支持
+## Support
 
-对于HA：在github上创建问题
-对于Joal：请访问上游仓库：https://github.com/anthonyraymond/joal
+For HA : create an issue on github
+For Joal : see the upstream repo here https://github.com/anthonyraymond/joal
 
-## 插图
+## Illustration
 
 ![image](https://user-images.githubusercontent.com/44178713/117990142-29c3b200-b33d-11eb-86c8-a3007d73c3da.png)
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+---
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

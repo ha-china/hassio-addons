@@ -1,93 +1,122 @@
 # Home assistant add-on: Zoneminder
 
-[![Donate][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![Donate][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the add-ons
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fzoneminder%2Fconfig.yaml)
-![Ingress](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fzoneminder%2Fconfig.yaml)
-![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fzoneminder%2Fconfig.yaml)
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## Addon informations
+
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fzoneminder%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fzoneminder%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fzoneminder%2Fconfig.yaml)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建者)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/zoneminder/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/zoneminder/stats.png)
 
-## 关于
+## About
 
-["Zoneminder"](https://zoneminder.com/) 是一个功能齐全、开源的、最先进的视频监控系统软件。
+["Zoneminder"](https://zoneminder.com/) is a full-featured, open source, state-of-the-art video surveillance software system.
 
-这个插件基于 Docker 镜像 https://github.com/ZoneMinder/zmdockerfiles/blob/master/utils/entrypoint.sh
+This add-on is based on the docker image https://github.com/ZoneMinder/zmdockerfiles/blob/master/utils/entrypoint.sh
 
-## 配置
+## Configuration
 
-Webui 可以在 <http://homeassistant:3778/zm> 找到。
+Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-### 设置步骤
+Webui can be found at <http://homeassistant:3778/zm>.
 
-1. 启动插件后访问网页界面
-2. 通过网页界面配置摄像头
-3. 设置运动检测区域和警报
-4. 配置录制存储位置
-5. 需要 MariaDB 插件用于数据库存储
+### Setup Steps
 
-### 选项
+1. Access the web interface after starting the add-on
+2. Configure cameras through the web interface
+3. Set up motion detection zones and alerts
+4. Configure storage locations for recordings
+5. Requires MariaDB add-on for database storage
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
-| `Images_location` | 字符串 | `/config/addons_config/zoneminder/images` | 存储摄像头图像的路径 |
+### Options
 
-### 示例配置
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `Images_location` | str | `/config/addons_config/zoneminder/images` | Path for storing camera images |
+
+### Example Configuration
 
 ```yaml
 Images_location: "/share/zoneminder/images"
 ```
 
-### 数据库需求
+### Database Requirements
 
-ZoneMinder 需要一个 MySQL/MariaDB 数据库。安装 MariaDB 插件并配置 Zoneminder 使用它。
+ZoneMinder requires a MySQL/MariaDB database. Install the MariaDB add-on and configure Zoneminder to use it.
 
-### 存储路径
+### Storage Paths
 
-- 图像：通过 `Images_location` 选项配置
-- 事件：`/var/cache/zoneminder/events2`
-- 声音：`/var/cache/zoneminder/sounds2`
-- 配置：`/config/addons_config/zoneminder`
+- Images: Configured via `Images_location` option
+- Events: `/var/cache/zoneminder/events2`
+- Sounds: `/var/cache/zoneminder/sounds2`
+- Config: `/config/addons_config/zoneminder`
 
-### 额外资源
+### Additional Resources
 
-详细配置：https://github.com/ZoneMinder/zmdockerfiles/blob/master/utils/entrypoint.sh
+For detailed configuration: https://github.com/ZoneMinder/zmdockerfiles/blob/master/utils/entrypoint.sh
 
-## 安装
+## Installation
 
-这个插件的安装非常简单，与安装任何其他插件没有区别。
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
 
-1. 将我的插件仓库添加到您的 home assistant 实例中（在 supervisor 插件商店的右上角，或点击下面的按钮如果您已经配置了我的 HA）
-   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装这个插件。
-1. 点击 `保存` 按钮保存您的配置。
-1. 设置插件选项以符合您的偏好。
-1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 打开 WebUI 并调整软件选项
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Set the add-on options to your preferences
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open the webUI and adapt the software options
 
-## 在 home assistant 中的集成
+## Integration in home assistant
 
 https://www.home-assistant.io/integrations/zoneminder/
 
-## 支持
+## Support
 
-在 github 上创建问题
+Create an issue on github
 
-## 插图
+## Illustration
 
 ![viewmonitor-stream](https://user-images.githubusercontent.com/44178713/157933856-33ed3d44-6b91-4ce2-8a9b-daf9b618176c.png)
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+---
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！
