@@ -1,80 +1,78 @@
-# Home assistant add-on: Ente
+# Home assistant 添加程序：Ente
 
-## 💖 Support development
+我利用业余时间维护这个和其他 Home Assistant 添加程序：跟上上游的变化、HA 的变化，并在真实硬件上测试需要大量时间（和一些金钱）。我大约使用我 110 多个添加程序中的 5-10 个，因此我安装了测试机器（和一些我自己不使用的测试服务，如 VPN）来排错和改进添加程序。
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the add-ons
+如果这个添加程序为您节省了时间或使您的设置更简单，我将非常感谢您的支持！
 
-If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+[![给我买咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+## 添加程序信息
 
-## Addon informations
-
-![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fente%2Fconfig.yaml)
+![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fente%2Fconfig.yaml)
 ![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fente%2Fconfig.yaml)
 ![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fente%2Fconfig.yaml)
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有给我的仓库点赞的人！点击下面的图片来点赞，它将在右上角显示。谢谢！_
 
-[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![@alexbelgium/hassio-addons 的星标者仓库名册](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/ente/stats.png)
+![下载量变化](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/ente/stats.png)
 
-## About
-
----
-
-[Ente](https://github.com/ente-io/ente) is a self-hosted, end-to-end encrypted photo and video storage solution. This add-on provides a complete Ente server setup including the museum API server and MinIO S3-compatible storage backend.
-
-Ente offers:
-- End-to-end encrypted photo and video backup
-- Face recognition and search
-- Cross-platform mobile and desktop apps
-- Automatic photo backup from mobile devices
-- Album sharing with family and friends
-- Full control over your data with self-hosting
-
-This add-on is based on the official Ente server: https://github.com/ente-io/ente/tree/main/server
-
-## Configuration
+## 关于
 
 ---
 
-Webui can be found at <http://homeassistant:PORT>.
+[Ente](https://github.com/ente-io/ente) 是一个自托管、端到端加密的照片和视频存储解决方案。这个添加程序提供了一个完整的 Ente 服务器设置，包括博物馆 API 服务器和 MinIO S3 兼容的存储后端。
 
-### Options
+Ente 提供：
+- 端到端加密的照片和视频备份
+- 人脸识别和搜索
+- 跨平台的移动和桌面应用程序
+- 从移动设备自动备份照片
+- 与家人和朋友共享相册
+- 自托管下对数据的完全控制
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `ENTE_ENDPOINT_URL` | str | `http://homeassistant.local:8280` | The URL where Ente API will be accessible |
-| `MINIO_ROOT_USER` | str | `minioadmin` | MinIO root username |
-| `MINIO_ROOT_PASSWORD` | str | `minioadmin` | MinIO root password |
-| `MINIO_DATA_LOCATION` | str | `/config/minio-data` | Path where MinIO stores data |
-| `DB_PASSWORD` | str | `ente` | Database password for internal PostgreSQL |
-| `DISABLE_WEB_UI` | bool | `true` | Disable the web UI (use mobile/desktop apps) |
-| `USE_EXTERNAL_DB` | bool | `false` | Use external PostgreSQL database |
-| `TZ` | str | `Europe/Paris` | Timezone setting |
+这个添加程序基于官方 Ente 服务器：https://github.com/ente-io/ente/tree/main/server
 
-### External Database Configuration
+## 配置
 
-If you want to use an external PostgreSQL database, set `USE_EXTERNAL_DB: true` and configure:
+---
 
-| Option | Type | Description |
-|--------|------|-------------|
-| `DB_HOSTNAME` | str | PostgreSQL server hostname |
-| `DB_PORT` | int | PostgreSQL server port (default: 5432) |
-| `DB_USERNAME` | str | PostgreSQL username |
-| `DB_DATABASE_NAME` | str | PostgreSQL database name |
+Webui 可以在 <http://homeassistant:PORT> 找到。
 
-### Example Configuration
+### 选项
+
+| 选项 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `ENTE_ENDPOINT_URL` | 字符串 | `http://homeassistant.local:8280` | Ente API 可访问的 URL |
+| `MINIO_ROOT_USER` | 字符串 | `minioadmin` | MinIO 根用户名 |
+| `MINIO_ROOT_PASSWORD` | 字符串 | `minioadmin` | MinIO 根密码 |
+| `MINIO_DATA_LOCATION` | 字符串 | `/config/minio-data` | MinIO 存储数据的路径 |
+| `DB_PASSWORD` | 字符串 | `ente` | 内部 PostgreSQL 数据库的密码 |
+| `DISABLE_WEB_UI` | 布尔值 | `true` | 禁用 Web UI（使用移动/桌面应用程序） |
+| `USE_EXTERNAL_DB` | 布尔值 | `false` | 使用外部 PostgreSQL 数据库 |
+| `TZ` | 字符串 | `Europe/Paris` | 时区设置 |
+
+### 外部数据库配置
+
+如果您想使用外部 PostgreSQL 数据库，设置 `USE_EXTERNAL_DB: true` 并配置：
+
+| 选项 | 类型 | 描述 |
+|------|------|------|
+| `DB_HOSTNAME` | 字符串 | PostgreSQL 服务器主机名 |
+| `DB_PORT` | 整数 | PostgreSQL 服务器端口（默认：5432） |
+| `DB_USERNAME` | 字符串 | PostgreSQL 用户名 |
+| `DB_DATABASE_NAME` | 字符串 | PostgreSQL 数据库名 |
+
+### 示例配置
 
 ```yaml
 ENTE_ENDPOINT_URL: "http://homeassistant.local:8280"
@@ -86,88 +84,89 @@ DISABLE_WEB_UI: false
 TZ: "America/New_York"
 ```
 
-### Custom Scripts and Environment Variables
+### 自定义脚本和环境变量
 
-This add-on supports custom scripts and environment variables through the `addon_config` mapping:
+这个添加程序通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+- **自定义脚本**：参见 [在添加程序中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用添加程序的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。参见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
-### Mounting Drives
+### 挂载驱动器
 
-This add-on supports mounting both local drives and remote SMB shares:
+这个添加程序支持挂载本地驱动器和远程 SMB 共享：
 
-- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见 [在添加程序中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见 [在添加程序中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-## Installation
-
----
-
-The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
-
-1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
-   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Set the add-on options to your preferences
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-
-## First Time Setup
+## 安装
 
 ---
 
-After starting the add-on for the first time:
+这个添加程序的安装非常简单，与安装任何其他添加程序没有区别。
 
-1. Download the Ente mobile app from:
+1. 将我的添加程序仓库添加到您的 Home Assistant 实例（在 Supervisor 添加程序商店的右上角，或者如果您已经配置了我的 HA，点击下面的按钮）
+   [![打开您的 Home Assistant 实例并显示添加添加程序仓库对话框，并预填充特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装这个添加程序。
+1. 点击 `保存` 按钮以存储您的配置。
+1. 设置添加程序选项以符合您的偏好。
+1. 启动添加程序。
+1. 检查添加程序的日志以查看是否一切正常。
+
+## 首次设置
+
+---
+
+首次启动添加程序后：
+
+1. 从以下地方下载 Ente 移动应用程序：
    - [iOS App Store](https://apps.apple.com/app/ente-photos/id1542026904)
    - [Google Play Store](https://play.google.com/store/apps/details?id=io.ente.photos)
    - [F-Droid](https://f-droid.org/packages/io.ente.photos.fdroid/)
 
-2. During app setup, select "Use custom server" and enter your add-on URL: `http://your-homeassistant-ip:8280`
+2. 在应用程序设置过程中，选择 "使用自定义服务器" 并输入您的添加程序 URL：`http://your-homeassistant-ip:8280`
 
-3. Create a new account using the mobile app
+3. 使用移动应用程序创建新账户
 
-4. **Important**: Subscription codes cannot be sent by email for self-hosted instances. Check the add-on logs for verification codes:
+4. **重要**：对于自托管实例，订阅代码不能通过电子邮件发送。检查添加程序日志以获取验证码：
    ```
-   Verification code: xxxxxx
+   验证码：xxxxxx
    ```
 
-5. Use the verification code from the logs to complete account setup
+5. 使用日志中的验证码完成账户设置
 
-## Ports
+## 端口
 
-The add-on exposes three ports:
+添加程序公开三个端口：
 
-- **8300** (3000/tcp): Ente web UI (if enabled)
-- **8280** (8080/tcp): Ente API server (museum) - Main endpoint for apps
-- **8320** (3200/tcp): MinIO S3 endpoint (for storage backend)
+- **8300** (3000/tcp)：Ente Web UI（如果启用）
+- **8280** (8080/tcp)：Ente API 服务器（博物馆）- 应用程序的主要端点
+- **8320** (3200/tcp)：MinIO S3 端点（用于存储后端）
 
-## Data Storage
+## 数据存储
 
-By default, photos and videos are stored in `/config/minio-data`. You can change this location using the `MINIO_DATA_LOCATION` option or mount external storage for larger capacity.
+默认情况下，照片和视频存储在 `/config/minio-data`。您可以使用 `MINIO_DATA_LOCATION` 选项更改此位置或挂载外部存储以获得更大的容量。
 
-The add-on includes:
-- PostgreSQL database for metadata
-- MinIO S3-compatible storage for actual photos/videos
-- Ente museum API server for client communication
+添加程序包括：
+- 用于元数据的 PostgreSQL 数据库
+- 用于实际照片/视频的 MinIO S3 兼容存储
+- 用于客户端通信的 Ente 博物馆 API 服务器
 
-## Backup Recommendations
+## 备份建议
 
-For data safety, regularly backup:
-- `/config/minio-data` (or your custom storage location) - Contains all photos/videos
-- PostgreSQL database (handled automatically by the add-on)
-- Addon configuration
+为了数据安全，定期备份：
+- `/config/minio-data`（或您的自定义存储位置）- 包含所有照片/视频
+- PostgreSQL 数据库（由添加程序自动处理）
+- 添加程序配置
 
-## Support
+## 支持
 
-Create an issue on github
+在 GitHub 上创建问题
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

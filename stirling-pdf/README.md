@@ -1,33 +1,33 @@
-# Home assistant 添加组件：Stirling-pdf
+# Home assistant 添加程序：Stirling-pdf
 
-这是一个基于 Docker 的本地托管 PDF 操作工具。它使您能够在 PDF 文件上执行各种操作，包括拆分、合并、转换、重新组织、添加图像、旋转、压缩等。这个本地托管的 Web 应用程序已经发展成为包含全面功能集，满足您所有 PDF 需求。
+这是一个基于 Docker 的本地托管 PDF 操作工具。它允许您对 PDF 文件执行各种操作，包括拆分、合并、转换、重新组织、添加图片、旋转、压缩等。这个本地托管的 Web 应用程序已经发展成为一个功能全面的工具集，满足您所有的 PDF 需求。
 
-Stirling PDF 不会进行任何用于记录或跟踪目的的外出调用。
+Stirling PDF 不会为了记录或跟踪目的发起任何出站调用。
 
-所有文件和 PDF 要么完全存在于客户端，要么仅在任务执行期间驻留在服务器内存中，或者仅在任务执行期间临时驻留在文件中。用户下载的任何文件在该点之前都将从服务器中删除。
+所有文件和 PDF 要么完全存储在客户端，要么仅在执行任务时驻留在服务器内存中，或者仅在执行任务时临时驻留在文件中。用户下载的任何文件在该点之前都会从服务器中删除。
 
 有点耗内存。
 
-_感谢大家给我的仓库点赞！要点赞，请点击下面的图片，它就会出现在右上角。谢谢！_
+_感谢大家给我的仓库点赞！要点赞，请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
-[![@jdeath/homeassistant-addons 的 Stirling-PDF 仓库 Star 列表](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![@jdeath/homeassistant-addons 的 Starazers 仓库列表](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
-此添加组件使用 [docker 镜像](https://github.com/Stirling-Tools/Stirling-PDF)。
+这个添加程序使用了 [Docker 镜像](https://github.com/Stirling-Tools/Stirling-PDF)。
 
 ## 安装
 
-此添加组件的安装非常简单，与安装任何其他 Hass.io 添加组件没有区别。
+这个添加程序的安装非常简单，与安装任何其他 Hass.io 添加程序没有区别。
 
-1. 将我的 Hass.io 添加组件仓库 [repository] 添加到您的 Hass.io 实例。
-1. 安装此添加组件。750 MB 的镜像需要一些时间来下载
-1. 点击 `保存` 按钮以保存您的配置。
-1. 启动添加组件。
-1. 检查添加组件的日志，以查看是否一切顺利。
-1. 应该可以通过 <your-ip>:port 打开 WebUI。
+1. [将我的 Hass.io 添加程序仓库][repository] 添加到您的 Hass.io 实例。
+1. 安装这个添加程序。750 MB 的镜像需要一段时间来下载
+1. 点击 `保存` 按钮来存储您的配置。
+1. 启动添加程序。
+1. 检查添加程序的日志，看看一切是否正常。
+1. WebUI 应该可以通过 <your-ip>:port 来访问。
 1. 设置将在 /addon_configs/2effc9b9_stirling-pdf 中。
-1. 停止添加组件，编辑 settings.yaml 文件以更改任何您需要的内容
+1. 停止添加程序，编辑 settings.yaml 文件来更改任何您需要的内容
 ## 配置
 
 ```

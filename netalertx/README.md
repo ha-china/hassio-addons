@@ -1,8 +1,8 @@
 # Home assistant add-on: NetAlertX
 
-我利用业余时间维护这个以及其他Home Assistant add-on：跟上上游变化、HA变化，并在真实硬件上进行测试需要大量时间（并且需要一些钱）。我大约使用我超过110个add-on中的5-10个，因此我安装了一些我自己的测试机器（以及购买了一些测试服务，如VPN），以用来调试和改进这些add-on。
+我利用业余时间维护这个和其他 Home Assistant add-ons：跟上上游变化、HA 变化以及在真实硬件上测试需要大量时间（并且需要一些钱）。我大约使用我超过 110 个 add-ons 中的 5-10 个，因此我安装了一些我自己的测试机器（并且购买了一些测试服务，例如 VPN），以便我能够解决和改进这些 add-ons。
 
-如果这个add-on能为您节省时间或使您的设置更简单，我将非常感谢您的支持！
+如果这个 add-on 节省了你的时间或简化了你的设置，我将非常感谢你的支持！
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -21,7 +21,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我仓库加星的贡献者！点击下面的图片加星，它将出现在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它将在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -29,29 +29,29 @@ _感谢所有给我仓库加星的贡献者！点击下面的图片加星，它�
 
 ## About
 
-网络存在和入侵检测器。扫描您网络中连接的设备，并在发现新的未知设备时向您发出警报。
-此add-on基于jokob-sk的[docker镜像](https://github.com/jokob-sk/NetAlertX/tree/main/dockerfiles)。
+网络存在和入侵检测器。扫描连接到您网络的设备，并在发现新的未知设备时向您发出警报。
+这个 add-on 基于 jokob-sk 的 [docker image](https://github.com/jokob-sk/NetAlertX/tree/main/dockerfiles)。
 
 ## Installation
 
-这个add-on的安装非常简单，与安装任何其他Hass.io add-on没有区别。
+这个 add-on 的安装非常简单，与安装任何其他 Hass.io add-on 没有区别。
 
-1. [将我的Hass.io add-ons仓库][repository]添加到您的Hass.io实例中。
-1. 安装此add-on。
-1. 点击`Save`按钮以保存您的配置。
-1. 启动add-on。
-1. 检查add-on的日志，看看是否一切正常。
-1. 仔细配置add-on以满足您的偏好，请参阅官方文档以了解如何进行配置。
+1. 将我的 Hass.io add-ons 仓库 [repository] 添加到您的 Hass.io 实例中。
+1. 安装这个 add-on。
+1. 点击 `Save` 按钮以保存您的配置。
+1. 启动 add-on。
+1. 检查 add-on 的日志，看看是否一切正常。
+1. 仔细配置 add-on 以满足您的偏好，请参阅官方文档以了解详细信息。
 
 ## Configuration
 
-1. 如果不可用，应用程序在首次运行时将生成默认的`app.conf`和`app.db`文件。
-1. 更好的方式是通过UI中的设置部分管理配置，如果UI不可用，您可以直接在`/config/config/`文件夹中修改`app.conf`。
-1. 您需要指定要扫描哪些网络。这是通过输入从主机可以访问的子网来完成的。如果您使用默认的`ARPSCAN`插件，您必须在`SCAN_SUBNETS`设置中指定至少一个有效的子网和接口。请参阅[关于如何设置多个SUBNETS、VLANs以及限制的文档](https://github.com/jokob-sk/NetAlertX/blob/main/docs/SUBNETS.md)以及故障排除和更高级的场景。
-1. 阅读如何通过MQTT插件将设备添加到您的[Home Assistant实例](https://github.com/jokob-sk/NetAlertX/blob/main/docs/HOME_ASSISTANT.md)
-1. 按照[备份文档](https://github.com/jokob-sk/NetAlertX/blob/main/docs/BACKUPS.md)备份所有内容。
+1. 如果不可用，应用程序在首次运行时生成默认的 `app.conf` 和 `app.db` 文件。
+1. 推荐的方式是通过 UI 中的设置部分管理配置，如果 UI 不可访问，您可以直接修改 `/config/config/` 文件夹中的 `app.conf`。
+1. 您必须指定要扫描哪些网络。这是通过输入主机可以访问的子网来完成的。如果您使用默认的 `ARPSCAN` 插件，您必须在 `SCAN_SUBNETS` 设置中指定至少一个有效的子网和接口。请参阅 [如何设置多个 SUBNETS、VLANs 以及限制的文档](https://github.com/jokob-sk/NetAlertX/blob/main/docs/SUBNETS.md) 以及故障排除和更高级的情景。
+1. 阅读 [通过 MQTT 插件将设备添加到 Home Assistant 实例的方法](https://github.com/jokob-sk/NetAlertX/blob/main/docs/HOME_ASSISTANT.md)
+1. 按照 [备份文档](https://github.com/jokob-sk/NetAlertX/blob/main/docs/BACKUPS.md) 备份所有内容。
 
-Webui可以在<http://homeassistant:20211>或使用HA ingress找到
+Webui 可以在 <http://homeassistant:20211> 或使用 HA ingress 找到
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/fd74af43-091a-4f38-9879-037ca64cfab9" />
 
@@ -62,10 +62,10 @@ GPID: user
 
 ### Custom Scripts and Environment Variables
 
-此add-on通过`addon_config`映射支持自定义脚本和环境变量：
+这个 add-on 通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **Custom scripts**：请参阅[在add-on中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars选项**：使用add-on的`env_vars`选项传递额外的环境变量（大写或小写名称）。请参阅https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2以获取详细信息。
+- **Custom scripts**: 查看 [在 Addons 中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: 使用 add-on 的 `env_vars` 选项来传递额外的环境变量（大小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详细信息。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 ---

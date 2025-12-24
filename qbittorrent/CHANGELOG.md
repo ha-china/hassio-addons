@@ -1,3 +1,11 @@
+## 5.1.4-4 (30-12-2025)
+- Allow WireGuard to continue when src_valid_mark sysctl cannot be set on read-only hosts
+
+## 5.1.4-3 (22-12-2025)
+- Minor bugs fixed
+
+## 5.1.4-1 (21-12-2025)
+- Fix WireGuard sysctl wrapper paths to resolve #2289.
 
 ## 5.1.4 (29-11-2025)
 - Update to latest version from linuxserver/docker-qbittorrent (changelog : https://github.com/linuxserver/docker-qbittorrent/releases)

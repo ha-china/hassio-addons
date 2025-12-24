@@ -1,8 +1,6 @@
 arch:
   - aarch64
   - amd64
-  - armv7
-codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：高性能文件同步和共享，同时支持Markdown所见即所得编辑、维基、文件标签及其他知识管理功能'
 devices:
   - /dev/dri
@@ -67,9 +65,9 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment:
-  NOSWAG: '1'
-  PGID: '1000'
-  PUID: '1000'
+  NOSWAG: "1"
+  PGID: "1000"
+  PUID: "1000"
 image: ghcr.nju.edu.cn/alexbelgium/seafile-{arch}
 map:
   - config:rw
@@ -77,10 +75,11 @@ map:
   - ssl
 name: Seafile
 options:
+  env_vars: []
   CONFIG_LOCATION: /config/addons_config/seafile/config.yaml
   FILE_SERVER_ROOT: http://homeassistant.local:8082
   PGID: 1000
-  PORT: '8082'
+  PORT: "8082"
   PUID: 1000
   SEAFILE_ADMIN_EMAIL: me@example.com
   SEAFILE_ADMIN_PASSWORD: a_very_secret_password
@@ -102,6 +101,9 @@ privileged:
   - DAC_READ_SEARCH
   - NET_ADMIN
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   CONFIG_LOCATION: str?
   FILE_SERVER_ROOT: str
   PGID: int
@@ -124,5 +126,5 @@ services:
 slug: seafile
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/seafile
-version: 12.0.14
+version: ""
 webui: http://[HOST]:[PORT:8000]

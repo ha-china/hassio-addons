@@ -1,4 +1,5 @@
-#!/usr/bin/env bashio
+#!/usr/bin/with-contenv bash
+source /usr/lib/bashio/bashio.sh
 
 # Define local paths
 COREFILE_PATH="/etc/Corefile"
@@ -12,6 +13,10 @@ CERT_FILE=$(bashio::config 'certfile')
 KEY_FILE=$(bashio::config 'keyfile')
 TUNNEL_TOKEN=$(bashio::config 'cloudflare_tunnel_token')
 LOG_LEVEL=$(bashio::config 'log_level')
+ENABLE_INFO_PAGE=$(bashio::config 'enable_info_page')
+
+# Default for Info Page
+if ! bashio::config.has_value 'enable_info_page'; then ENABLE_INFO_PAGE="false"; fi
 
 # Retrieve Certs
 # Bashio handles /ssl mount automatically
@@ -110,14 +115,62 @@ fi
 # Read port configuration
 DOT_PORT=$(bashio::config 'dot_port')
 DOH_PORT=$(bashio::config 'doh_port')
-DOH_ALT1=$(bashio::config 'doh_alt_port_1')
-DOH_ALT2=$(bashio::config 'doh_alt_port_2')
 
 bashio::log.info "Configuration:"
 bashio::log.info "  Upstream: ${UPSTREAM_DNS}"
 bashio::log.info "  Cert:     ${FULL_CERT_PATH}"
 bashio::log.info "  Level:    ${LOG_LEVEL}"
-bashio::log.info "  Ports:    DoT:${DOT_PORT}, DoH:${DOH_PORT}, Alt:${DOH_ALT1}/${DOH_ALT2}"
+bashio::log.info "  Ports (Initial): DoT:${DOT_PORT}, DoH:${DOH_PORT}"
+
+# ------------------------------------------------------------------------------
+# Pre-flight Check: Port Availability
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# Pre-flight Check: Port Availability & Smart Fallback
+# ------------------------------------------------------------------------------
+is_port_busy() {
+    local PORT=$1
+    if [ -n "$PORT" ] && [ "$PORT" != "null" ]; then
+        if nc -z 127.0.0.1 "$PORT" 2>/dev/null; then
+            return 0 # Busy
+        fi
+    fi
+    return 1 # Free
+}
+
+bashio::log.info "🔍 Checking port availability..."
+
+# Auto-Fallback for DoT Port (853 -> 8853)
+if is_port_busy "${DOT_PORT}"; then
+    if [ "${DOT_PORT}" == "853" ]; then
+        bashio::log.warning "⚠️  Port 853 is BUSY (likely AdGuard Home)."
+        bashio::log.warning "🔄 Switching DoT to Fallback Port: 8853"
+        DOT_PORT="8853"
+
+        # Check fallback port
+        if is_port_busy "${DOT_PORT}"; then
+             bashio::log.fatal "❌ Fallback Port 8853 is ALSO busy! Cannot start DoT."
+             exit 1
+        fi
+    else
+        bashio::log.fatal "❌ Port ${DOT_PORT} is ALREADY IN USE!"
+        # Try to identify process
+        local PROC_INFO=$(netstat -tulpn 2>/dev/null | grep ":$DOT_PORT " | head -n 1)
+        if [ -n "$PROC_INFO" ]; then bashio::log.fatal "   Conflict: $PROC_INFO"; fi
+        sleep 30
+        exit 1
+    fi
+fi
+
+if is_port_busy "${DOH_PORT}"; then
+    if [ "${ENABLE_INFO_PAGE}" != "true" ]; then
+         bashio::log.fatal "❌ DoH Port ${DOH_PORT} is ALREADY IN USE!"
+         sleep 30
+         exit 1
+    fi
+fi
+
+bashio::log.info "✅ Ports confirmed: DoT:${DOT_PORT}, DoH:${DOH_PORT}"
 
 # ... (cert logic) ...
 
@@ -126,8 +179,7 @@ bashio::log.info "  Ports:    DoT:${DOT_PORT}, DoH:${DOH_PORT}, Alt:${DOH_ALT1}/
 # ------------------------------------------------------------------------------
 # Web Server & Single Port Logic (v1.3.0)
 # ------------------------------------------------------------------------------
-ENABLE_INFO_PAGE=$(bashio::config 'enable_info_page')
-if ! bashio::config.has_value 'enable_info_page'; then ENABLE_INFO_PAGE="false"; fi
+# ENABLE_INFO_PAGE already defined at top
 
 # Define internal port for CoreDNS if Nginx is fronting it
 INTERNAL_DOH_PORT="5553"
@@ -153,7 +205,8 @@ if [ "${ENABLE_INFO_PAGE}" = "true" ]; then
     # Nginx Config: Terminates TLS, Serves HTML, Proxies DNS
     cat <<EOF > /etc/nginx/http.d/default.conf
 server {
-    listen ${DOH_PORT} ssl http2;
+    listen ${DOH_PORT} ssl;
+    http2 on;
     server_name _;
     root /var/www/html;
     index index.html;
@@ -190,7 +243,7 @@ server {
 EOF
 
     # Start Nginx in background
-    nginx &
+    nginx -g 'daemon off;' &
     NGINX_PID=$!
     bashio::log.info "   Nginx started with PID ${NGINX_PID} (Listening on ${DOH_PORT})"
 else
@@ -201,6 +254,9 @@ fi
 # Generate Corefile
 bashio::log.info "📝 Generating Corefile..."
 
+# Ensure fresh Corefile
+echo "" > ${COREFILE_PATH}
+
 # Validation: At least one port must be active
 if [ -z "${DOT_PORT}" ] && [ -z "${DOH_PORT}" ]; then
     bashio::log.fatal "❌ CRITICAL: Neither DOT_PORT nor DOH_PORT is set! ShieldDNS must listen on at least one port."
@@ -208,7 +264,7 @@ if [ -z "${DOT_PORT}" ] && [ -z "${DOH_PORT}" ]; then
 fi
 
 # DoT Block
-if [ -n "${DOT_PORT}" ]; then
+if [ -n "${DOT_PORT}" ] && [ "${DOT_PORT}" != "null" ]; then
     bashio::log.info "  Exposing DoT on Port: ${DOT_PORT}"
     cat <<EOF >> ${COREFILE_PATH}
 tls://.:${DOT_PORT} {
@@ -236,37 +292,15 @@ EOF
     fi
 fi
 
-# Append Alt Ports if they are set (Always direct to CoreDNS for now, unless we want Nginx on those too?
-# For simplicity, Alt ports remain pure CoreDNS for now as user only mentioned main DOH)
-if bashio::config.has_value 'doh_alt_port_1'; then
-    bashio::log.info "  Exposing Alt DoH Port 1: ${DOH_ALT1}"
-    cat <<EOF >> ${COREFILE_PATH}
-https://.:${DOH_ALT1} {
-    tls ${FULL_CERT_PATH} ${FULL_KEY_PATH}
-    forward . ${ACTIVE_DNS_SERVER}
-    $(echo -e ${DNS_LOG_CONFIG})
-}
-EOF
-fi
 
-if bashio::config.has_value 'doh_alt_port_2'; then
-    bashio::log.info "  Exposing Alt DoH Port 2: ${DOH_ALT2}"
-    cat <<EOF >> ${COREFILE_PATH}
-https://.:${DOH_ALT2} {
-    tls ${FULL_CERT_PATH} ${FULL_KEY_PATH}
-    forward . ${ACTIVE_DNS_SERVER}
-    $(echo -e ${DNS_LOG_CONFIG})
-}
-EOF
-fi
 
 # Start CoreDNS (Foreground or Wait)
-if [ -n "$TUNNEL_PID" ] || [ -n "$NGINX_PID" ]; then
+if [ -n "${TUNNEL_PID:-}" ] || [ -n "${NGINX_PID:-}" ]; then
     /usr/bin/coredns -conf ${COREFILE_PATH} &
     DNS_PID=$!
 
     # Wait for ANY
-    PIDS="$DNS_PID $TUNNEL_PID $NGINX_PID"
+    PIDS="$DNS_PID ${TUNNEL_PID:-} ${NGINX_PID:-}"
     # Clean PIDS list (remove empty)
     PIDS=$(echo $PIDS | xargs)
 

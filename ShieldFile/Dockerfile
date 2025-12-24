@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:14.1.0
+ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/amd64-base:alpine
 FROM ${BUILD_FROM}
 
 # Install necessary tools
@@ -13,15 +13,9 @@ RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh |
 # Create database directory
 RUN mkdir -p /data/database
 
-# Copy Addon run script
+# Copy Addon run script to S6 services directory
+# Copy Run Script
 COPY run.sh /run.sh
+RUN dos2unix /run.sh && chmod a+x /run.sh
 
-# Fix permissions and line endings (CRLF -> LF)
-RUN dos2unix /run.sh && chmod +x /run.sh
-
-# Start the addon
-# We explicitly inherit the S6 entrypoint from the base image
-ENTRYPOINT [ "/init" ]
-
-# The CMD is passed to the entrypoint
-CMD [ "/run.sh" ]
+ENTRYPOINT [ "/run.sh" ]

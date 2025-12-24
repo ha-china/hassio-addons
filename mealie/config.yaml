@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：麦片是一个基于Vue构建的、自托管的食谱管理和餐食规划应用。'
+description: '[老王杂谈说]：Mealie是一个基于Vue构建的、可自托管的食谱管理和餐食规划应用。'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -114,4 +114,4 @@ schema:
 slug: mealie
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: v3.6.1-5
+version: "v3.8.0"

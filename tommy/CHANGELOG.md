@@ -1,5 +1,11 @@
 # TOMMY
 
+## 1.0.4
+
+### Minor Changes
+
+- Performance improvements to Raw Signal Visualizer
+
 ## 1.0.3
 
 ### Minor Changes
