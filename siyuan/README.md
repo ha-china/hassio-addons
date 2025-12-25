@@ -2,9 +2,9 @@
 
 SiYuan 是一个注重隐私的个人知识管理系统，支持细粒度的块级引用和 Markdown WYSIWYG。
 
-看起来很受欢迎，但提供订阅制的 add-on 和可选的中国数据中心。请谨慎使用
+看起来很受欢迎，但有订阅制的 add-on，以及可选的中国数据中心。请谨慎使用
 
-_感谢所有 Star 我仓库的人！要 Star 它，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_感谢大家给我的仓库加星！要加星，请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
@@ -14,14 +14,14 @@ _感谢所有 Star 我仓库的人！要 Star 它，请点击下面的图片，�
 
 ## 安装
 
-这个 add-on 的安装非常简单，与安装任何其他 Hass.io add-on 没有区别。
+这个 add-on 的安装非常直接，与其他任何 Hass.io add-on 的安装方式没有不同。
 
 1. [将我的 Hass.io add-ons 仓库][repository] 添加到你的 Hass.io 实例。
 1. 安装这个 add-on。
 1. 设置访问码和端口
 1. 点击 `保存` 按钮来存储你的配置。
 1. 启动 add-on。
-1. 检查 add-on 的日志，看看是否一切顺利。
+1. 检查 add-on 的日志，看看一切是否正常。
 1. 应该可以通过 <your-ip>:port 打开 WebUI。
 1. 数据应该存储在 /addon_config/2effc9b9_siyuan
 
