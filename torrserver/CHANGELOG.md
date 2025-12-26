@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.5.0-MatriX.137 [2025-12-25]
+
+### ✨ New features
+
+- 🕶 Upgraded TorrServer to **MatriX.137** ([changes](https://github.com/YouROK/TorrServer/releases/tag/MatriX.137))
+- 🐕 Added **Watchdog** support to monitor addon health via the `/echo` endpoint.
+- 📜 Added **Weblog** configuration option to enable/disable web access logging.
+
+### 🐛 Fixes
+
+- 🧹 Fixed Supervisor validation errors by removing the deprecated `codenotary` field.
+
+### ⬆️ Dependency updates
+
+- 📦 Update `ghcr.io/hassio-addons/base` Docker tag to **v19.0.0**
+
+### 🚨 Breaking changes
+
+- 🗑️ Drop support for `armhf`, `armv7`, and `i386` systems
+
 ## 1.4.0-MatriX.136 [2025-08-15]
 
 ### ✨ New features
