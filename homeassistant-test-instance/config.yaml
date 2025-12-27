@@ -1,17 +1,13 @@
 name: "Home Assistant Test Instance"
-version: "0.1.1"
+version: "0.1.2"
 slug: "ha_test_instance"
 description: "[老王杂谈说]：一个用于测试的独立Home Assistant Core实例。"
 url: "https://ghfast.top/github.com/home-assistant/home-assistant"
-startup: application
 arch:
   - aarch64
   - amd64
-  - armv7
 ports:
   8123/tcp: 8124
 map:
-  - config:rw
-options: {}
-schema: {}
+  - homeassistant_config:rw
 init: false

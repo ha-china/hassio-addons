@@ -1,18 +1,14 @@
 ---
 name: AegisBot
-version: "0.1.4"
+version: "0.1.5"
 slug: aegisbot
-description: '[老王杂谈说]：具备AI驱动的FAQ和安全功能的可生产就绪的Telegram管理机器人'
+description: '[老王杂谈说]：生产就绪的Telegram moderation bot，具有AI驱动的FAQ和安全功能'
 url: https://ghfast.top/github.com/FaserF/AegisBot
 arch:
   - aarch64
   - amd64
-  - armv7
-startup: application
-boot: auto
 init: false
 ingress: true
-ingress_port: 8099
 ingress_stream: true
 panel_icon: mdi:robot
 ports:

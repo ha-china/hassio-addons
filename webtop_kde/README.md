@@ -1,8 +1,8 @@
 # Home assistant add-on: Webtop KDE Alpine
 
-我利用业余时间维护这个 Home Assistant add-on 以及其他的 add-on：跟上上游的变更、Home Assistant 的变更以及在真实硬件上测试都需要大量的时间（并且需要一些金钱）。我大约使用我超过 110 个 add-on 中的 5-10 个非常频繁，所以我安装了一些用于测试的机器（并且购买了一些我自己不使用的测试服务，比如 VPN），以便于调试和改进这些 add-on。
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-如果这个 add-on 帮助了你或者让你的设置更简单，我将非常感谢你的支持！
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -20,7 +20,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我仓库点赞的人！要点赞，请点击下面的图片，然后它将出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,24 +28,24 @@ _感谢所有给我仓库点赞的人！要点赞，请点击下面的图片，�
 
 ## About
 
-[webtop](https://github.com/webtop/webtop) 是一个可以通过任何现代的 web 浏览器访问的完整桌面环境。
-这个 add-on 基于 https://github.com/linuxserver/docker-webtop 的 docker 镜像。
+[webtop](https://github.com/webtop/webtop) is a full desktop environments accessible via any modern web browser.
+This addon is based on the docker image https://github.com/linuxserver/docker-webtop
 
 ## Configuration
 
-使用 add-on 的 `env_vars` 选项来传递额外的环境变量（大写或小写名称）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-Webui 可以通过 ingress 访问，或者访问 <http://homeassistant:PORT>。默认情况下端口是禁用的，但可以通过 add-on 选项来启用。
+Webui can be found with ingress or at <http://homeassistant:PORT>. The port is by default disabled but can be enabled through the addon options.
 
-默认情况下，镜像是基于用户 abc 的，我们建议使用这个用户，因为所有的 init/config 都是基于它的。默认密码也是 abc。如果你想要更改这个密码并在访问界面时需要认证，可以在 webtop 中的 gui 终端里运行 passwd 命令。然后，在访问 web 界面时使用以下路径：
+By default the image is based around the abc user and we recommend using this user as all of the init/config is based around it. The default password is also abc . If you want to change this password and require authentication when accessing the interface simply issue passwd inside a gui terminal in the webtop. Then when accessing the web interface use the path:
 
 http://localhost:3000/?login=true
 
-应用程序的安装不是持久的，你需要通过 add-on 选项来安装。然而，它们的配置是持久的。
+Apps installations are not remanent, you need to do it via addon options. Their config, however, is.
 
-如果图形设备不工作，使用 DRINODE 功能来选择你的图形设备。
+If graphics don't work, use the DRINODE feature to select your graphic device.
 
-所有可能的 ENV 变量请在这里查看：https://docs.linuxserver.io/images/docker-webtop#optional-environment-variables
+See all potential ENV variables here : https://docs.linuxserver.io/images/docker-webtop#optional-environment-variables
 
 ```yaml
 TZ: timezone ; Country/City according to https://manpages.ubuntu.com/manpages/trusty/man3/DateTime::TimeZone::Catalog.3pm.html
@@ -61,20 +61,20 @@ cifsdomain: "domain" # optional, allow setting the domain for the smb share
 
 ## Installation
 
-这个 add-on 的安装非常直接，与安装其他任何 add-on 没有区别。
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
 
-1. 将我的 add-ons 仓库添加到你的 Home Assistant 实例中（在 supervisor addons store 的右上角，或者如果你已经配置了我的 HA，点击下面的按钮）
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
    [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装这个 add-on。
-1. 点击 `Save` 按钮来保存你的配置。
-1. 设置 add-on 选项以符合你的偏好。
-1. 启动 add-on。
-1. 检查 add-on 的日志，看看一切是否正常。
-1. 打开 webUI 并调整软件选项。
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Set the add-on options to your preferences
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open the webUI and adapt the software options
 
 ## Support
 
-在 github 上创建一个 issue。
+Create an issue on github
 
 ## Illustration
 

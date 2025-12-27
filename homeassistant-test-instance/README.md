@@ -14,8 +14,8 @@
 > [!CAUTION]
 > **实验性 / Beta 状态**
 >
-> 该附加组件仍在开发中，且主要开发用于个人使用。
-> 它尚未经过广泛测试，但预计基本功能可以正常工作。
+> 此附加组件仍在开发中，或主要开发用于个人使用。
+> 它尚未经过广泛测试，但预计可以基本工作。
 
 ---
 
@@ -37,15 +37,11 @@
 
 ### 选项
 
-```yaml
-{}
-```
-
 ---
 
 ## 👨‍💻 致谢 & 许可证
 
-本项目是开源的，并在 MIT 许可证下提供。
+此项目是开源的，并在 MIT 许可证下提供。
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
