@@ -1,22 +1,22 @@
 # Home Assistant Add-on: FreshRSS
 
-一个免费、可自托管的聚合器。
+A free, self-hostable feed aggregator.
 
-## 安装
+## Installation
 
-将此存储库添加到您的 [Hass.io](https://home-assistant.io/hassio/) 实例：
+Add this repository to your [Hass.io](https://home-assistant.io/hassio/) instance:
 
 `https://github.com/einschmidt/hassio-addons`
 
-如果您遇到问题，可以参考 [官方文档](https://home-assistant.io/hassio/installing_third_party_addons/)。
+If you have trouble you can follow the [official docs](https://home-assistant.io/hassio/installing_third_party_addons/).
 
-然后安装 "FreshRSS" add-on。
+Then install the "FreshRSS" add-on.
 
-## 配置
+## Configuration
 
-**注意**: _更改配置时，请记得重启 add-on。_
+**Note**: _Remember to restart the add-on when the configuration is changed._
 
-示例 add-on 配置：
+Example add-on configuration:
 
 ```yaml
 log_level: info
@@ -26,45 +26,52 @@ certfile: fullchain.pem
 keyfile: privkey.pem
 ```
 
-### 选项: `log_level`
+### Option: `log_level`
 
-`log_level` 选项控制 add-on 的日志输出级别，可以设置为更详细或更简洁，这在处理未知问题时可能很有用。可能的值有：
+The `log_level` option controls the level of log output by the addon and can
+be changed to be more or less verbose, which might be useful when you are
+dealing with an unknown issue. Possible values are:
 
-- `trace`: 显示所有细节，例如所有调用的内部函数。
-- `debug`: 显示详细的调试信息。
-- `info`: 通常（正常）有趣的事件。
-- `warning`: 非常规的异常情况，但不是错误。
-- `error`: 运行时错误，不需要立即采取行动。
-- `fatal`: 发生了严重错误。Add-on 变得无法使用。
+- `trace`: Show every detail, like all called internal functions.
+- `debug`: Shows detailed debug information.
+- `info`: Normal (usually) interesting events.
+- `warning`: Exceptional occurrences that are not errors.
+- `error`: Runtime errors that do not require immediate action.
+- `fatal`: Something went terribly wrong. Add-on becomes unusable.
 
-请注意，每个级别自动包含更严重级别的日志消息，例如，`debug` 也显示 `info` 消息。默认情况下，`log_level` 设置为 `info`，这是推荐设置，除非您正在排错。
+Please note that each level automatically includes log messages from a
+more severe level, e.g., `debug` also shows `info` messages. By default,
+the `log_level` is set to `info`, which is the recommended setting unless
+you are troubleshooting.
 
-### 选项: `base_url`
+### Option: `base_url``
 
-FreshRSS 实例可访问的地址。
+Address at which the FreshRSS instance will be reachable.
 
-### 选项: `ssl`
+### Option: `ssl`
 
-在 Web 界面上启用/禁用 SSL (HTTPS)！设置为 `true` 以启用，否则设置为 `false`。
+Enables/Disables SSL (HTTPS) on the web interface!
+Set it `true` to enable it, `false` otherwise.
 
-### 选项: `certfile`
+### Option: `certfile`
 
-用于 SSL 的证书文件。
+The certificate file to use for SSL.
 
-**注意**: _文件必须存储在 `/ssl/`，这是默认设置_。
+**Note**: _The file MUST be stored in `/ssl/`, which is the default_
 
-### 选项: `keyfile`
+### Option: `keyfile`
 
-用于 SSL 的私钥文件。
+The private key file to use for SSL.
 
-**注意**: _文件必须存储在 `/ssl/`，这是默认设置_。
+**Note**: _The file MUST be stored in `/ssl/`, which is the default_
 
-## 第三方扩展
+## Third-Party Extensions
 
-此 add-on 允许您使用 **addon_config** 文件夹存储和管理 FreshRSS 扩展。
+This add-on allows you to store and manage FreshRSS extensions using the **addon_config** folder.
 
-- 此文件夹在 add-on 内部映射自 **Home Assistant addon_config 目录**。
-- 如果从 GitHub 存储库安装，则存储在：
+- This folder is mapped inside the add-on from the **Home Assistant addon_config directory**.
+- If installed from a GitHub repository, it is stored under:
 
 ```
 /addon_configs/{REPO}_freshrss/extensions
+```

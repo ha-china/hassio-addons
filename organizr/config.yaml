@@ -1,8 +1,6 @@
 arch:
   - aarch64
   - amd64
-  - armv7
-codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：一个用PHP编写的HTPC/家庭实验室服务组织程序'
 devices:
   - /dev/dri
@@ -72,17 +70,21 @@ map:
   - ssl
 name: Organizr
 options:
-  PGID: '0'
-  PUID: '0'
+  env_vars: []
+  PGID: "0"
+  PUID: "0"
 ports:
   80/tcp: 88
 ports_description:
   80/tcp: web interface
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   PGID: int
   PUID: int
 slug: organizr
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 1.90-bugfix2
-webui: '[PROTO:ssl]://[HOST]:[PORT:80]'
+version: "1.601"
+webui: "[PROTO:ssl]://[HOST]:[PORT:80]"

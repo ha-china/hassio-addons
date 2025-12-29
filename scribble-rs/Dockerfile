@@ -1,5 +1,5 @@
 ARG BUILD_VERSION
-FROM docker.1ms.run/biosmarcel/scribble.rs
+FROM biosmarcel/scribble.rs
 
 
 ### LABELS

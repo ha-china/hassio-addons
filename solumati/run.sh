@@ -1,4 +1,5 @@
 #!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
 
 # --- CONFIGURATION ---
 DATA_DIR="/data/postgresql"
@@ -61,11 +62,11 @@ if bashio::config.has_value 'log_level'; then
 	LOG_LEVEL=$(bashio::config 'log_level' | tr '[:lower:]' '[:upper:]')
 	# Map HA log levels to Python log levels
 	case "$LOG_LEVEL" in
-		TRACE|DEBUG) LOG_LEVEL="DEBUG" ;;
-		NOTICE|INFO) LOG_LEVEL="INFO" ;;
-		WARNING) LOG_LEVEL="WARNING" ;;
-		ERROR|FATAL) LOG_LEVEL="ERROR" ;;
-		*) LOG_LEVEL="INFO" ;;
+	TRACE | DEBUG) LOG_LEVEL="DEBUG" ;;
+	NOTICE | INFO) LOG_LEVEL="INFO" ;;
+	WARNING) LOG_LEVEL="WARNING" ;;
+	ERROR | FATAL) LOG_LEVEL="ERROR" ;;
+	*) LOG_LEVEL="INFO" ;;
 	esac
 	export LOG_LEVEL
 	bashio::log.info "Log level set to: $LOG_LEVEL"
@@ -135,6 +136,7 @@ if bashio::config.true 'dev_use_main_branch'; then
 		# -L: Follow redirects
 		# -s: Silent mode
 		# -S: Show error message if it fails
+		# shellcheck disable=SC2086
 		if eval curl -fL -s -S $HEADER_ARGS "$URL" -o main.tar.gz; then
 			return 0
 		else

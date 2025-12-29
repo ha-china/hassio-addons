@@ -1,45 +1,81 @@
-# AegisBot Home Assistant Add-on
+# AegisBot
+
+![Logo](logo.png)
+
+[![打开你的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_AegisBot)
+[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![GitHub 发布](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+
+> 生产就绪的 Telegram 调制机器人，具有 AI 驱动的 FAQ 和安全功能
+
+---
+
+> [!警告]
+> **实验性 / Beta 状态**
+>
+> 该附加组件仍在开发中，且主要开发用于个人使用。
+> 它尚未经过广泛测试，但预计基本功能可以正常工作。
+
+---
+
+## 📖 关于
 
 ![AegisBot Logo](icon.png)
 
-适用于生产环境的Telegram管理机器人，具备AI驱动的FAQ和安全功能。
+生产就绪的 Telegram 调制机器人，具有 AI 驱动的 FAQ 和安全功能。
 
 ## 功能
 
-- 🛡️ **高级管理**：具有RBAC的自动警告、踢出和封禁系统
-- 🧠 **AI意图分析**：启发式引擎检测诈骗和恶意意图
-- 🔄 **实时仪表盘**：基于WebSocket的实时事件流
+- 🛡️ **高级调制**：具有 RBAC 的自动警告、踢出和封禁系统
+- 🧠 **AI 意图分析**：检测诈骗和恶意意图的启发式引擎
+- 🔄 **实时仪表板**：基于 WebSocket 的实时事件流
 - 📈 **高级分析**：交互式安全趋势和可视化
-- 🌍 **完整国际化**：多语言支持（EN/DE）
-- 🚫 **智能过滤**：自动学习的黑名单建议
+- 🌍 **完全国际化**：多语言支持（EN/DE）
+- 🚫 **智能过滤**：自动学习黑名单建议
 
 ## 安装
 
-请参阅[文档](DOCS.md)以获取详细的安装说明。
+请参阅 [文档](DOCS.md) 获取详细的安装说明。
 
-## 快速入门
+## 快速开始
 
-1. 将此仓库添加到Home Assistant
-2. 安装AegisBot插件
-3. 配置您的Telegram Bot Token
-4. 启动插件
-5. 通过Ingress访问
+1. 将此仓库添加到 Home Assistant
+2. 安装 AegisBot 附加组件
+3. 配置你的 Telegram 机器人令牌
+4. 启动附加组件
+5. 通过 Ingress 访问
 
-## 配置
+---
 
-| 选项                  | 是否必需 | 描述                          |
-| ----------------------- | -------- | ------------------------------------ |
-| `telegram_bot_token`    | ✅       | 来自@BotFather的Bot API Token        |
-| `telegram_bot_username` | ✅       | Bot用户名（不含@）             |
-| `github_token`          | ❌\*     | 私有仓库访问所需的token     |
-| `version`               | ❌       | 要安装的版本（默认：最新） |
+## ⚙️ 配置
 
-\*如果仓库是私有的，则必需
+通过 Home Assistant 附加组件页面中的 **配置** 标签配置附加组件。
 
-## 支持
+### 选项
 
-- [GitHub Issues](https://github.com/FaserF/AegisBot/issues)
-- [文档](DOCS.md)
+```yaml
+database:
+  type: sqlite
+debug: false
+demo_mode: false
+demo_mode_type: ephemeral
+developer_mode: false
+github_repo: FaserF/AegisBot
+github_token: ''
+log_level: info
+project_name: AegisBot
+reset_database: false
+secret_key: ''
+version: latest
+```
+
+---
+
+## 👨‍💻 致谢 & 许可证
+
+本项目是开源的，并在 MIT 许可下提供。
+由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

@@ -1,3 +1,46 @@
+# [2.8.0.dev2025122604] - 26.12.2025
+
+## 📦 Nightly Release
+
+_Changes since [2.8.0.dev2025122504](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2025122504)_
+
+### 🎨 Frontend Changes
+
+- Fix Auto focus search box (by @OzGav in [#1334](https://github.com/music-assistant/frontend/pull/1334))
+
+### 🧰 Maintenance and dependency bumps
+
+- ⬆️ Update music-assistant-frontend to 2.17.60 (by @music-assistant-machine in #2890)
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@OzGav
+
+
+# [2.8.0.dev2025122504] - 25.12.2025
+
+## 📦 Nightly Release
+
+_Changes since [2.8.0.dev2025122404](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2025122404)_
+
+### 🎨 Frontend Changes
+
+- Refacto User management page (by @stvncode in [#1336](https://github.com/music-assistant/frontend/pull/1336))
+- Refacto Profile settings page with new ui components (by @stvncode in [#1333](https://github.com/music-assistant/frontend/pull/1333))
+
+### 🧰 Maintenance and dependency bumps
+
+- ⬆️ Update music-assistant-frontend to 2.17.59 (by @music-assistant-machine in #2888)
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@stvncode
+
+
 # [2.8.0.dev2025122404] - 24.12.2025
 
 ## 📦 Nightly Release
@@ -25,47 +68,5 @@ _Changes since [2.8.0.dev2025122304](https://github.com/music-assistant/server/r
 Special thanks to the following contributors who helped with this release:
 
 @MarvinSchenkel, @Thyraz, @arturpragacz, @stvncode
-
-
-# [2.8.0.dev2025122304] - 23.12.2025
-
-## 📦 Nightly Release
-
-_Changes since [2.8.0.dev2025122104](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2025122104)_
-
-### 🎨 Frontend Changes
-
-- Auto-focus on search box in add provider dialog (by @OzGav in [#1318](https://github.com/music-assistant/frontend/pull/1318))
-
-### 🧰 Maintenance and dependency bumps
-
-- ⬆️ Update music-assistant-frontend to 2.17.57 (by @music-assistant-machine in #2872)
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@OzGav
-
-
-# [2.8.0.dev2025122104] - 21.12.2025
-
-## 📦 Nightly Release
-
-_Changes since [2.8.0.dev2025122101](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2025122101)_
-
-### 🎨 Frontend Changes
-
-- Various small usability fixes (by @marcelveldt in [#1317](https://github.com/music-assistant/frontend/pull/1317))
-
-### 🧰 Maintenance and dependency bumps
-
-- ⬆️ Update music-assistant-frontend to 2.17.56 (by @music-assistant-machine in #2865)
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@marcelveldt
 
 
