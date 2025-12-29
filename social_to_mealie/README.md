@@ -1,8 +1,8 @@
 # Home assistant add-on: Social to Mealie
 
-我利用业余时间维护这个和其他 Home Assistant 插件：跟上上游的更改、HA 的更改，并在真实硬件上测试需要大量时间（和一些金钱）。我大约使用我超过 110 个插件中的 5-10 个，因此我安装了测试机器（并购买了一些我自己不使用的测试服务，例如 VPN），以便调试和改进插件。
+我利用业余时间维护这个和其他的Home Assistant add-on：跟上上游的变更、HA的变更以及在真实硬件上测试都需要大量的时间（和一些金钱）。我大约使用我超过110个add-on中的5-10个，因此我安装了测试机器（和一些我自身不使用的测试服务，例如vpn），以便于调试和改进这些add-on。
 
-如果这个插件为您节省了时间或简化了设置，我将非常感谢您的支持！
+如果这个add-on为你节省了时间或简化了你的设置，我将非常感谢你的支持！
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -20,7 +20,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它将在右上角。谢谢！_
+_感谢所有给我的仓库加星的人！要加星，请点击下面的图片，然后它就会在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,9 +28,9 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 ## About
 
-[Social to Mealie](https://github.com/GerardPolloRebozado/social-to-mealie) 允许您将社交媒体视频中的食谱直接导入到您的 Mealie 实例中。
+[Social to Mealie](https://github.com/GerardPolloRebozado/social-to-mealie) 允许你直接从社交媒体视频导入食谱到你的 Mealie 实例。
 
-这个插件基于 https://github.com/GerardPolloRebozado/social-to-mealie 的 Docker 镜像
+这个add-on基于以下docker镜像：https://github.com/GerardPolloRebozado/social-to-mealie
 
 ## Configuration
 
@@ -38,21 +38,21 @@ Webui 可以在 <http://homeassistant:3000> 找到。
 
 ### Options
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
-| `OPENAI_URL` | 字符串 | `https://api.openai.com/v1` | OpenAI 兼容端点的 URL |
-| `OPENAI_API_KEY` | 字符串 | `` | OpenAI 兼容提供者的 API 密钥 |
-| `TRANSCRIPTION_MODEL` | 字符串 | `whisper-1` | 用于转录的 Whisper 模型 |
-| `TEXT_MODEL` | 字符串 | `gpt-4o-mini` | 用于构建食谱的文本模型 |
-| `MEALIE_URL` | 字符串 | `https://mealie.example.com` | 您的 Mealie 实例的 URL |
-| `MEALIE_API_KEY` | 字符串 | `` | Mealie 的 API 密钥 |
-| `MEALIE_GROUP_NAME` | 字符串 | `home` | 可选的 Mealie 组名 |
-| `EXTRA_PROMPT` | 字符串 | `` | 附加指令用于 AI |
-| `YTDLP_VERSION` | 字符串 | `latest` | 启动时下载的 yt-dlp 版本 |
-| `COOKIES` | 字符串 | `` | 可选的 yt-dlp 的 cookies 字符串 |
-| `env_vars` | 列表 | `[]` | 需要导出的附加环境变量 |
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `OPENAI_URL` | str | `https://api.openai.com/v1` | OpenAI 兼容端点的URL |
+| `OPENAI_API_KEY` | str | `` | OpenAI 兼容提供者的API密钥 |
+| `TRANSCRIPTION_MODEL` | str | `whisper-1` | 用于转录的Whisper模型 |
+| `TEXT_MODEL` | str | `gpt-4o-mini` | 用于构建食谱的文本模型 |
+| `MEALIE_URL` | str | `https://mealie.example.com` | 你的 Mealie 实例的URL |
+| `MEALIE_API_KEY` | str | `` | Mealie的API密钥 |
+| `MEALIE_GROUP_NAME` | str | `home` | 可选的 Mealie 组名 |
+| `EXTRA_PROMPT` | str | `` | AI的额外指令 |
+| `YTDLP_VERSION` | str | `latest` | 启动时下载的yt-dlp版本 |
+| `COOKIES` | str | `` | 可选的yt-dlp的cookies字符串 |
+| `env_vars` | list | `[]` | 要导出的额外环境变量 |
 
-### 示例配置
+### Example Configuration
 
 ```yaml
 OPENAI_URL: https://api.openai.com/v1
@@ -68,11 +68,11 @@ COOKIES: ""
 env_vars: []
 ```
 
-### 注意事项
+### Notes
 
-- 需要 Mealie 1.9.0+ 并配置了 AI 提供者。
-- 可以通过设置 `YTDLP_VERSION` 预先下载 yt-dlp（例如 `latest` 或 `2025.11.01`）。
-- 如果您需要使用 yt-dlp 访问受保护的社交媒体内容，请提供 cookies 字符串。
+- 需要Mealie 1.9.0+并配置了AI提供者。
+- 可以通过设置 `YTDLP_VERSION` 预先下载yt-dlp（例如 `latest` 或 `2025.11.01`）。
+- 如果需要使用yt-dlp访问受保护的社交媒体内容，请提供cookies字符串。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

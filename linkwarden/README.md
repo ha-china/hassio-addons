@@ -1,4 +1,4 @@
-## ⚠️ Open Issue : [🐛 [LINKWARDEN] Never use STORAGE_FOLDER (opened 2025-10-11)](https://github.com/alexbelgium/hassio-addons/issues/2137) by [@guimex22](https://github.com/guimex22)
+## &#9888; Open Issue : [🐛 [LINKWARDEN] Never use STORAGE_FOLDER (opened 2025-10-11)](https://github.com/alexbelgium/hassio-addons/issues/2137) by [@guimex22](https://github.com/guimex22)
 
 # Home assistant add-on: Linkwarden
 
@@ -31,34 +31,34 @@ _Thanks to everyone having starred my repo! To star it click on the image below,
 
 ## About
 
-[Linkwarden](https://linkwarden.app/) 是一个协作式书签管理器，用于收集、组织和保存网页和文章。它允许团队和个人保存、分类和管理书签，具有标签、收藏和全文搜索等功能。
+[Linkwarden](https://linkwarden.app/) is a collaborative bookmark manager to collect, organize, and preserve webpages and articles. It allows teams and individuals to save, categorize, and manage bookmarks with features like tags, collections, and full-text search capabilities.
 
-此插件基于 [官方 Linkwarden Docker 镜像](https://github.com/linkwarden/linkwarden)。
+This addon is based on the [official Linkwarden Docker image](https://github.com/linkwarden/linkwarden).
 
-## 配置
+## Configuration
 
-Webui 可以在 `<your-ip>:3000` 或通过 Ingress 在侧边栏中访问。
-您需要在启动时创建一个新的用户帐户。
+Webui can be found at `<your-ip>:3000` or through the sidebar using Ingress.
+You'll need to create a new user account at startup.
 
-### 选项
+### Options
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
-| `NEXTAUTH_SECRET` | 字符串 | **必需** | NextAuth.js 认证的秘密密钥（必须在启动时填写） |
-| `NEXTAUTH_URL` | 字符串 | | 自定义 NextAuth URL（可选，仅当 Linkwarden 保持在外部时） |
-| `NEXT_PUBLIC_DISABLE_REGISTRATION` | 布尔值 | `false` | 禁用新用户注册 |
-| `NEXT_PUBLIC_CREDENTIALS_ENABLED` | 布尔值 | `true` | 启用用户名/密码登录 |
-| `STORAGE_FOLDER` | 字符串 | `/config/library` | 存储数据文件的目录 |
-| `DATABASE_URL` | 字符串 | | 外部 PostgreSQL 数据库 URL（留空以使用内部数据库） |
-| `NEXT_PUBLIC_AUTHENTIK_ENABLED` | 布尔值 | `false` | 启用 Authentik SSO 集成 |
-| `AUTHENTIK_CUSTOM_NAME` | 字符串 | `Authentik` | Authentik 按钮的自定义提供者名称 |
-| `AUTHENTIK_ISSUER` | 字符串 | | Authentik OpenID 配置发行者 URL |
-| `AUTHENTIK_CLIENT_ID` | 字符串 | | 从 Authentik 提供者概览中获取的客户端 ID |
-| `AUTHENTIK_CLIENT_SECRET` | 字符串 | | 从 Authentik 提供者概览中获取的客户端密钥 |
-| `NEXT_PUBLIC_OLLAMA_ENDPOINT_URL` | 字符串 | | 用于 AI 功能的 Ollama 端点 URL |
-| `OLLAMA_MODEL` | 字符串 | | 用于 AI 处理的 Ollama 模型名称 |
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `NEXTAUTH_SECRET` | str | **Required** | Secret key for NextAuth.js authentication (must be filled at start) |
+| `NEXTAUTH_URL` | str | | Custom NextAuth URL (optional, only if Linkwarden is kept externally) |
+| `NEXT_PUBLIC_DISABLE_REGISTRATION` | bool | `false` | Disable new user registration |
+| `NEXT_PUBLIC_CREDENTIALS_ENABLED` | bool | `true` | Enable username/password login |
+| `STORAGE_FOLDER` | str | `/config/library` | Directory for storing data files |
+| `DATABASE_URL` | str | | External PostgreSQL database URL (leave blank for internal database) |
+| `NEXT_PUBLIC_AUTHENTIK_ENABLED` | bool | `false` | Enable Authentik SSO integration |
+| `AUTHENTIK_CUSTOM_NAME` | str | `Authentik` | Custom provider name for Authentik button |
+| `AUTHENTIK_ISSUER` | str | | Authentik OpenID Configuration Issuer URL |
+| `AUTHENTIK_CLIENT_ID` | str | | Client ID from Authentik Provider Overview |
+| `AUTHENTIK_CLIENT_SECRET` | str | | Client Secret from Authentik Provider Overview |
+| `NEXT_PUBLIC_OLLAMA_ENDPOINT_URL` | str | | Ollama endpoint URL for AI features |
+| `OLLAMA_MODEL` | str | | Ollama model name for AI processing |
 
-### 示例配置
+### Example Configuration
 
 ```yaml
 NEXTAUTH_SECRET: "your-very-long-secret-key-here-at-least-32-characters"
@@ -73,50 +73,51 @@ AUTHENTIK_CLIENT_ID: "your-client-id"
 AUTHENTIK_CLIENT_SECRET: "your-client-secret"
 ```
 
-### 设置步骤
+### Setup Steps
 
-1. **首次设置**：启动插件后，访问 Web 界面并创建您的第一个用户帐户
-2. **NEXTAUTH_SECRET**：为 `NEXTAUTH_SECRET` 选项生成一个安全的随机字符串（至少 32 个字符）
-3. **数据库**：默认情况下，Linkwarden 使用内部 SQLite 数据库。对于生产使用，请考虑设置 PostgreSQL
-4. **认证**：如果您想要 SSO 功能，请配置 Authentik 集成
-5. **存储**：书签数据和文件存储在配置的 `STORAGE_FOLDER` 中
+1. **First Time Setup**: After starting the addon, visit the web interface and create your first user account
+2. **NEXTAUTH_SECRET**: Generate a secure random string (at least 32 characters) for the `NEXTAUTH_SECRET` option
+3. **Database**: By default, Linkwarden uses an internal SQLite database. For production use, consider setting up PostgreSQL
+4. **Authentication**: Configure Authentik integration if you want SSO capabilities
+5. **Storage**: Bookmark data and files are stored in the configured `STORAGE_FOLDER`
 
-### 自定义脚本和环境变量
+### Custom Scripts and Environment Variables
 
-此插件支持通过 `addon_config` 映射自定义脚本和环境变量：
+This addon supports custom scripts and environment variables through the `addon_config` mapping:
 
-- **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（名称可以是大小写）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详情。
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-### Authentik 集成
+### Authentik Integration
 
-要使用 Authentik 进行单点登录集成：
+To integrate with Authentik for Single Sign-On:
 
-1. 按照 [Linkwarden 文档](https://docs.linkwarden.app/self-hosting/sso-oauth#authentik) 中的说明进行操作
-2. 将 `NEXT_PUBLIC_AUTHENTIK_ENABLED` 设置为 `true`
-3. 使用 Authentik 提供者概览中的值配置 Authentik 特定的选项
-4. 注意：从 `AUTHENTIK_ISSUER` URL 中删除尾随的 "/" 
+1. Follow the instructions from the [Linkwarden documentation](https://docs.linkwarden.app/self-hosting/sso-oauth#authentik)
+2. Set `NEXT_PUBLIC_AUTHENTIK_ENABLED` to `true`
+3. Configure the Authentik-specific options with values from your Authentik Provider Overview
+4. Note: Remove the trailing "/" from the `AUTHENTIK_ISSUER` URL
 
-### 额外配置
+### Additional Configuration
 
-对于高级配置选项，请参阅 [Linkwarden 文档](https://docs.linkwarden.app/self-hosting/environment-variables) 中完整的环境变量列表。
+For advanced configuration options, refer to the complete list of environment variables in the [Linkwarden documentation](https://docs.linkwarden.app/self-hosting/environment-variables).
 
-## 安装
+## Installation
 
-此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. 将我的 Hass.io 插件存储库 [repository] 添加到您的 Hass.io 实例。[![在我的 Home Assistant 中添加存储库][repository-badge]][repository-url]
-1. 安装此插件。
-1. 点击 `保存` 按钮以保存您的配置。
-1. 将 `NEXTAUTH_SECRET` 选项设置为安全的随机字符串。
-1. 根据需要配置其他选项。
-1. 启动插件。
-1. 检查插件的日志，看看是否一切正常。
-1. 打开 WebUI 并创建您的第一个用户帐户。
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance. [![Add repository on my Home Assistant][repository-badge]][repository-url]
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Set the `NEXTAUTH_SECRET` option to a secure random string.
+1. Configure other options as needed.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open the webUI and create your first user account.
 
-## 支持
+## Support
 
-在 github 上创建问题，或在 [home assistant thread](https://community.home-assistant.io/t/home-assistant-addon-linkwarden/279247) 上提问。
+Create an issue on github, or ask on the [home assistant thread](https://community.home-assistant.io/t/home-assistant-addon-linkwarden/279247).
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 [repository-badge]: https://img.shields.io/badge/Add%20repository%20to%20my-Home%20Assistant-41BDF5?logo=home-assistant&style=for-the-badge
@@ -125,24 +126,5 @@ AUTHENTIK_CLIENT_SECRET: "your-client-secret"
 ---
 
 ![illustration](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/linkwarden/illustration.png)
----
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
----
 
-## 📱 关注我
 
-扫描下面二维码，关注我。有需要可以随时给我留言：
-
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
-
-## ☕ 赞助支持
-
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
-
-感谢您的支持与鼓励！

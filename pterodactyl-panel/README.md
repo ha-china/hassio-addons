@@ -1,130 +1,72 @@
-# Home Assistant Community Add-on: pterodactyl Panel
-![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
-![Project Maintenance][maintenance-shield]
+# pterodactyl Panel Gameserver - BETA
 
-pterodactyl Panel Gameserver for Homeassistant OS
+![Logo](logo.png)
 
-![Ingress Support](../_images/pterodactyl/ingress.png)
+[![打开您的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_pterodactyl-panel)
+[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![GitHub 发布](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-## About
+> 开源游戏服务器 - 目前尚未完全可用
 
-**WARNING: Currently only limited working. Right now it can be considered beta and unstable. Don't blame me if your gameservers would be lost etc.**
-**For me I am unable to login until now. Seems to have something to do with redis, but I dont get what exactly.**
+---
 
-Pterodactyl® is a free, open-source game server management panel built with PHP, React, and Go. Designed with security in mind, Pterodactyl runs all game servers in isolated Docker containers while exposing a beautiful and intuitive UI to end users.<br />
-Stop settling for less. Make game servers a first class citizen on your platform.
+> [!警告]
+> **实验性 / Beta 状态**
+>
+> 此附加组件仍在开发中，或主要开发用于个人使用。
+> 它尚未经过广泛测试，但预计基本功能可以正常工作。
 
-## Installation
+---
 
-[![FaserF Homeassistant Addons](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FFaserF%2Fhassio-addons)
-<br />
-The installation of this add-on is pretty straightforward and not different in comparison to installing any other custom Home Assistant add-on.<br />
-Just click the link above or add my repo to the hassio addons repositorys: <https://github.com/FaserF/hassio-addons>
+## 📖 关于
 
-## Configuration
+适用于 Homeassistant OS 的 pterodactyl Panel Gameserver
 
-The MariaDB Integration is needed before installing this one!
+![Ingress 支持](../_images/pterodactyl/ingress.png)
 
-Afterwards create a new user in the MariaDB Addon called "pterodactyl" with full permissions on the database "panel"
+> [!警告]
+> 目前仅部分可用。目前可以将其视为 Beta 版且不稳定。
+> 如果您的游戏服务器丢失等，不要怪我。
+>
+> 对我来说，我目前无法登录。似乎与 redis 有关，但我不知道具体是什么。
 
-**Note**: _Remember to restart the add-on when the configuration is changed._
+Pterodactyl® 是一个免费、开源的游戏服务器管理面板，使用 PHP、React 和 Go 构建。
+考虑到安全性，Pterodactyl 在隔离的 Docker 容器中运行所有游戏服务器，同时为最终用户提供一个美观且直观的 UI。
+停止妥协。让游戏服务器成为您平台的一流成员。
 
-Example add-on configuration:
+## 安装
+
+此附加组件的安装非常简单，与安装任何其他自定义 Home Assistant 附加组件没有区别。
+只需点击上面的链接或将我的仓库添加到 hassio 附加组件仓库：
+<https://github.com/FaserF/hassio-addons>
+
+---
+
+## ⚙️ 配置
+
+通过 Home Assistant 附加组件页面中的 **配置** 选项卡配置附加组件。
+
+### 选项
 
 ```yaml
-password: your_MariaDB_password
-ssl: false
-certfile: itdoesntmatter_as_ssl_is_set_to_false
-keyfile: itdoesntmatter_as_ssl_is_set_to_false
-```
-<br />
-Recommended Example add-on configuration:
-
-```yaml
-password: your_MariaDB_password
-ssl: true
 certfile: fullchain.pem
 keyfile: privkey.pem
+log_level: info
+password: ''
+ssl: true
 ```
 
-**Note**: _This is just an example, don't copy and paste it! Create your own!_
+---
 
-### Option: `password`
+## 👨‍💻 致谢 & 许可证
 
-This option is required. The password for the mariadb "pterodactyl" user.
-
-### Option: `ssl`
-
-Enables/Disables SSL (HTTPS) on the web interface.
-
-If you need a self-signed certificate, have a look at my openssl addon: <https://github.com/FaserF/hassio-addons>
-
-**Note**: _The files MUST be stored in `/ssl/`, which is the default_
-
-### Option: `reset_database`
-
-Enables it to reset the database files for pterodactyl. Please not this action can not be undone! Use it with care.
-
-### Option: `password`
-
-This option is required. Your MariaDB password for the pterodactyl user.
-
-**Note**: _The file MUST be stored somewhere within the `/share/` folder_
-
-## Default Login Credentials
-
-E-Mail: <admin@example.com>
-Username: admin
-Password: the password defined in the option `password`
-
-## Ingress
-
-This addon will support Homeassistant Ingress. Until now it is work in progress!
-
-## Support
-
-Got questions or problems?
-
-You can [open an issue here][issue] GitHub.
-Please keep in mind, that this software is only tested on armv7 running on a Raspberry Pi 4.
-
-## Authors & contributors
-
-The original program is from the pterodactyl Project. For more informatios please visit this page: <https://pterodactyl.io/>
-The hassio addon is brought to you by [FaserF].
-
-## License
-
-MIT License
-
-Copyright (c) 2019-2025 FaserF & pterodactyl Project
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2024.svg
-[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
-[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
-[FaserF]: https://github.com/FaserF/
-[issue]: https://github.com/FaserF/hassio-addons/issues
+此项目是开源的，并根据 MIT 许可证提供。
+由 **FaserF** 维护。
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

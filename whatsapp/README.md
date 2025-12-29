@@ -2,57 +2,51 @@
 
 ![Logo](logo.png)
 
-[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_whatsapp)
-[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![GitHub Release](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
-![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![打开你的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_whatsapp)
+[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![GitHub 发布](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> Home Assistant WhatsApp Backend (Baileys/Node.js)
+> Home Assistant WhatsApp 后端 (Baileys/Node.js)
 
 ---
 
 > [!CAUTION]
-> **Experimental / Beta Status**
+> **实验性 / Beta 状态**
 >
-> This add-on is still in development and/or primarily developed for personal use.
-> It is not extensively tested yet, but is expected to work fundamentally.
+> 此附加组件仍在开发中，并且主要用于个人使用。
+> 它尚未经过广泛测试，但预计基本功能可以正常工作。
 
 ---
 
-## 📖 About
+## 📖 关于
 
-> **A lightweight, robust backend for the WhatsApp Integration in Home Assistant.**
-> Powered by [Baileys](https://github.com/WhiskeySockets/Baileys) and Node.js. 🚀
+> **Home Assistant WhatsApp 集成的一个轻量级、强大的后端。**
+> 由 [Baileys](https://github.com/WhiskeySockets/Baileys) 和 Node.js 驱动。 🚀
 
-This addon acts as a bridge between Home Assistant and the WhatsApp Web
-protocol. It runs a high-performance Node.js application that simulates a real
-WhatsApp client (like a browser), allowing you to send messages, images, and
-notifications directly from your smart home.
+此附加组件充当 Home Assistant 和 WhatsApp Web 协议之间的桥梁。它运行一个高性能的 Node.js 应用程序，模拟一个真实的 WhatsApp 客户端（如浏览器），允许您直接从智能家居发送消息、图片和通知。
 
-### ✨ Key Features
+### ✨ 主要功能
 
-- **🚀 Ultra Fast**: Built on Node.js 22 and the lightweight Baileys library
-  (no heavy Chrome/Puppeteer required!).
-- **🔒 Secure & Private**: Runs locally on your device. No cloud bridge, no
-  external API costs.
-- **💾 Persistent Session**: Stays logged in even after restarts.
-- **🐳 Docker Optimized**: Platinum Quality image (S6 Overlay, Alpine Base).
+- **🚀 超快**: 基于 Node.js 22 和轻量级的 Baileys 库（无需沉重的 Chrome/Puppeteer！）。
+- **🔒 安全与隐私**: 在您的设备本地运行。无云桥接，无外部 API 成本。
+- **💾 持久会话**: 即使在重启后也能保持登录状态。
+- **🐳 Docker 优化**: 白金质量镜像（S6 Overlay，Alpine 基础）。
 
-## 🛠️ Installation
+## 🛠️ 安装
 
-1. **Add Repository**: Add this repository to your Home Assistant Add-on Store.
-1. **Install**: Search for **"WhatsApp"** and click **Install**.
-1. **Start**: Click **Start**. Wait a few seconds for the logs to show "API
-   listening".
-1. **Watchdog**: Enable "Watchdog" to ensure high availability.
+1. **添加仓库**: 将此仓库添加到您的 Home Assistant 附加组件商店。
+1. **安装**: 搜索 **"WhatsApp"** 并点击 **安装**。
+1. **启动**: 点击 **启动**。等待几秒钟，直到日志显示 "API 监听"。
+1. **看门狗**: 启用 "看门狗" 以确保高可用性。
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ 配置
 
-Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
+通过 Home Assistant 附加组件页面中的 **配置** 选项卡配置附加组件。
 
-### Options
+### 选项
 
 ```yaml
 log_level: info
@@ -60,10 +54,10 @@ log_level: info
 
 ---
 
-## 👨‍💻 Credits & License
+## 👨‍💻 致谢与许可
 
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
+本项目是开源的，并在 MIT 许可证下提供。
+由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
