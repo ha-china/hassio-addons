@@ -69,5 +69,6 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
     /usr/bin/taptap/taptap ix,
     /run/taptap/** w,
     /dev/tty?* rw,
+    /data/** rw,
   }
 }

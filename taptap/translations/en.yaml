@@ -29,9 +29,9 @@ configuration:
   taptap_port:
     name: Modbus to Ethernet convertor port
     description: If you use Modbus to Ethernet convertor connected to Home assistant server this will be its TCP port, default is '502'.
-  taptap_modules_serials:
-    name: Tigo modules names and serial numbers
-    description: Tuple of modules friendly names as defined by user and modules serial numbers in the format 'NAME1:SERIAL1, NAME2:SERIAL2,...' Tigo modules serial numbers can be found on the modules barcode stickers or in the Tigo cloud. Serials have 'X-XXXXXX' format. Program will log any unknown serial number so you can use it to discover serials if you do not know them. Be aware that messages with serial numbers are emitted rarely, very often only during night time! Wait as lest 24hrs for the complete discovery! To allow for monitoring to start as soon as possible (before receiving all serials), addon will temporarily assign Tigo modules to the user names randomly at the first run. Once serials are received, addon will enumerate all sensors to match user defined names. Once detected serial numbers and mapping to user names are stored in the addon persistent storage in HA and stored information will be reused for any future addon runs.
+  taptap_modules:
+    name: Tigo modules strings name, modules names and serial numbers
+    description: Tigo modules string name, module names and serial number in the [STRING]:NAME:[SERIAL] format. Please see Documentation for detailed explanation.
   taptap_topic_name:
     name: MQTT topic and device name
     description: Name to be used as device name in the Home Assistant, default is 'tigo'. This will be also used as MQTT topic (together with topic prefix) to post messages on MQTT to Home Assistant.
@@ -44,18 +44,33 @@ configuration:
   taptap_timeout:
     name: Availability timeout
     description: If no message is received within last X seconds from the node and 'Entities unavailable if node is offline' is set to true then corresponding entities are set to 'Unavailable' state. If your entities have flapping 'Unavailable' status during the day increase this number. Default is '180' seconds.
-  ha_node_availability_online:
+  ha_nodes_availability_online:
     name: Node entities unavailable if node is offline
     description: To render Home Assistant node entities 'UNAVAILABLE' if no message received within TIMEOUT, set to 'true' or 'false'. Default is 'true'.
-  ha_node_availability_serial:
-    name: Node entities unavailable if node serial is not yet discovered
-    description: To render Home Assistant node entities 'UNAVAILABLE' if node serial is not yet discovered, set to 'true' or 'false'. Default is 'false'.
+  ha_nodes_availability_identified:
+    name: Node entities unavailable if node serial is not yet known
+    description: Render Home Assistant node entities 'UNAVAILABLE' if node serial is not yet known, set to 'true' or 'false'. Default is 'false'.
+  ha_strings_availability_online:
+    name: String statistical entities unavailable if all string nodes are offline
+    description: Render Home Assistant string statistical entities 'UNAVAILABLE' if there are not any nodes online, set to 'true' or 'false'.
+  ha_strings_availability_identified:
+    name: String statistical entities unavailable if not all string node serials are yet known
+    description: Render Home Assistant string statistical entities 'UNAVAILABLE' if not all node serials are yet known, set to 'true' or 'false'. Default is 'false'.
   ha_stats_availability_online:
-    name: Statistical entities unavailable if all nodes are offline
-    description: To render Home Assistant statistical entities 'UNAVAILABLE' if there is not any node online, set to 'true' or 'false'. Default is 'false'.
-  ha_stats_availability_serial:
-    name: Statistical entities unavailable if all node serials are not yet discovered
-    description: To render Home Assistant statistical entities 'UNAVAILABLE' if not all node serials are not yet discovered, set to 'true' or 'false'. Default is 'false'.
+    name: Total statistical entities unavailable if all nodes are offline
+    description: Render Home Assistant total statistical entities 'UNAVAILABLE' if there are not any node online, set to 'true' or 'false'.
+  ha_stats_availability_identified:
+    name: Total statistical entities unavailable if not all node serials are yet known
+    description: Render Home Assistant total statistical entities 'UNAVAILABLE' if not all node serials are yet known, set to 'true' or 'false'. Default is 'false'.
+  ha_nodes_sensors_recorder:
+    name: Node sensors statistic recorder
+    description: List of the node sensors entities which shall have Home Assistant statistic recorder enabled
+  ha_strings_sensors_recorder:
+    name: String sensors statistic recorder
+    description: List of the string statistic sensors entities which shall have Home Assistant statistic recorder enabled
+  ha_stats_sensors_recorder:
+    name: Total statistics sensors statistic recorder
+    description: List of the total statistic sensors entities which shall have Home Assistant statistic recorder enabled
   ha_discovery_prefix:
     name: Home assistant MQTT discovery prefix
     description: MQTT prefix Home Assistant is subscribed for auto discovery of the new devices and entities. Please refer to HA MQTT documentation, default is 'homeassistant'. There is typically no need to change this setting.

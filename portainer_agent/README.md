@@ -1,12 +1,12 @@
 # Home assistant add-on: Portainer_agent
 
 
-我利用业余时间维护这个和其他Home Assistant add-ons：跟上上游的更改、HA的更改，并在真实硬件上测试需要大量时间（和一些钱）。我大约使用我超过110个add-ons中的5-10个，因此我安装了测试机器（和一些我自己的测试服务，例如VPN），以便我不用来调试和改进add-ons。
+我利用业余时间维护这个和其他 Home Assistant add-ons：跟上上游的变化、HA 的变化，并在真实硬件上测试需要大量时间（和一些钱）。我大约使用我超过 110 个 add-ons 中的 5-10 个，所以我会安装测试机器（和购买一些我自己不使用的测试服务，如 VPN），以便调试和改进 add-ons。
 
-如果这个add-on节省了你的时间或使你的设置更简单，我将非常感谢你的支持！
+如果这个 add-on 为您节省了时间或使您的设置更简单，我将非常感谢您的支持！
 
-[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![给我买咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## Addon informations
 
@@ -21,7 +21,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！点击下面的图片来点赞它，然后它会在右上角。谢谢！_
+_感谢大家给我的仓库加星！要加星，请点击下面的图片，然后它会在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -31,51 +31,51 @@ _感谢所有给我的仓库点赞的人！点击下面的图片来点赞它，�
 
 ---
 
-Portainer Agent是一个针对使用Docker API管理Docker环境的Docker API限制的解决方案。用户与特定资源（容器、网络、卷和镜像）的交互仅限于Docker API请求的目标节点上可用的资源。
+Portainer Agent 是一个针对 Docker API 在使用 Docker API 管理 Docker 环境时的限制的解决方案。用户与特定资源（容器、网络、卷和镜像）的交互仅限于 Docker API 请求所指向的节点上可用的资源。
 
-这个容器基于官方的docker镜像（https://github.com/portainer/agent），并使用@homecentr逻辑（https://github.com/homecentr/docker-portainer-agent）进行修改，以便在homeassistant基础镜像中使用。
+这个容器基于官方的 docker 镜像（https://github.com/portainer/agent），并使用 @homecentr 逻辑（https://github.com/homecentr/docker-portainer-agent）进行修改，以便在 homeassistant 基础镜像中使用。
 
 ## WARNING
 
-portainer_agent add-on非常强大，几乎可以让你访问整个系统。虽然这个add-on是精心创建和维护的，并且考虑了安全性，但在错误或不熟悉的人手中，
-它可能会损坏你的系统。
+portainer_agent add-on 非常强大，几乎可以访问您的整个系统。虽然这个 add-on 是在仔细和安全的前提下创建和维护的，但在错误或不熟悉的情况下，
+它可能会损坏您的系统。
 
 ## Installation
 
 ---
 
-这个add-on的安装非常简单，与安装任何其他add-on没有区别。
+这个 add-on 的安装非常简单，与安装任何其他 add-on 没有区别。
 
-1. 将我的add-ons仓库添加到你的home assistant实例中（在supervisor add-ons商店的右上角，或者如果你已经配置了我的HA，点击下面的按钮）
-   [![打开你的Home Assistant实例并显示带有特定仓库URL预填的添加add-on仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装这个add-on。
-1. 点击`Save`按钮以保存你的配置。
-1. 根据你的偏好设置add-on选项
-1. 启动add-on。
-1. 检查add-on的日志以查看是否一切正常。
-1. 打开webUI并调整软件选项
+1. 将我的 add-ons 仓库添加到您的 home assistant 实例中（在 supervisor add-ons 存储库的右上角，或者如果您已经配置了我的 HA，请点击下面的按钮）
+   [![打开您的 Home Assistant 实例并显示添加 add-on 仓库对话框，其中包含特定的仓库 URL 预先填写。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装这个 add-on。
+1. 点击 `Save` 按钮以保存您的配置。
+1. 设置 add-on 选项以符合您的偏好
+1. 启动 add-on。
+1. 检查 add-on 的日志以查看是否一切正常。
+1. 打开 webUI 并调整软件选项
 
-说明（感谢@Mincka）：
-禁用保护模式，然后从其他Portainer集群中，添加一个新的环境，类型为"Agent"，IP地址为HA，端口为9001
+说明（感谢 @Mincka）：
+禁用保护模式，然后从其他 Portainer 集群中，添加一个类型为 "Agent" 的新环境，IP 地址为 HA，端口为 9001
 
 ![image](https://github.com/alexbelgium/hassio-addons/assets/6184289/f5c5f264-69d0-4d3c-b900-476e21aef05a)
 
 ## Configuration
 
-使用add-on的`env_vars`选项传递额外的环境变量（大小写名称）。详细信息请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+使用 add-on 的 `env_vars` 选项传递额外的环境变量（名称大小写均可）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
 ---
 
 主要选项：
 ```yaml
-    "PORTAINER_AGENT_ARGS": 传递给portainer-agent可执行文件的命令行参数
+    "PORTAINER_AGENT_ARGS": 传递给 portainer-agent 可执行文件的命令行参数
 ```
 
-其他选项：请参阅 https://github.com/portainer/agent#deployment-options
+其他选项：请见 https://github.com/portainer/agent#deployment-options
 
 ## Support
 
-在github上创建问题
+在 github 上创建问题
 
 
 
