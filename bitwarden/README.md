@@ -1,16 +1,16 @@
 # Home assistant add-on: Vaultwarden (Bitwarden RS)
 
-使用 `env_vars` 选项来传递额外的环境变量（名称可以是大小写）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+使用 `env_vars` 选项来传递额外的环境变量（名称大小写均可）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-# ⚠️ 建议使用官方插件（https://github.com/hassio-addons/addon-bitwarden）而不是这个分支。这个分支的唯一好处是自动发布，现在官方插件已经实现了这个功能。 ⚠️
+# ⚠️ 建议使用官方插件（https://github.com/hassio-addons/addon-bitwarden）而不是这个分支。这个分支的唯一优势是自动发布，现在官方插件也已实现了这一功能。 ⚠️
 
 
-我在空闲时间维护这个和其他的 Home Assistant 插件：跟上上游的变化、HA 的变化，以及在真实硬件上测试都需要大量的时间（和一些金钱）。我大约使用我超过 110 个插件中的 5-10 个，因此我安装了一些测试机器（和一些我自身不使用的测试服务，如 VPN）来调试和改进插件。
+我业余时间维护这个和其他 Home Assistant 插件：跟上上游的变更、Home Assistant 的变更，并在真实硬件上测试都需要大量时间（和一些金钱）。我大约使用我超过 110 个插件中的 5-10 个非常频繁，因此我安装了一些测试机器（和一些我本人不使用的测试服务，如 VPN），以便于调试和改进插件。
 
-如果这个插件为你节省了时间或简化了你的设置，我将非常感谢你的支持！
+如果这个插件为您节省了时间或简化了您的设置，我将非常感谢您的支持！
 
-[![给我买咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![赞助我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过 PayPal 赞助][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
 
@@ -25,15 +25,15 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我仓库点赞的人！点击下面的图片给它点赞，它就会出现在右上角。谢谢！_
+_感谢所有给我的仓库加星！要加星，请点击下面的图片，然后它就会在右上角。谢谢！_
 
-[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![@alexbelgium/hassio-addons 的星标者仓库列表](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
 ![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/bitwarden/stats.png)
 
 ## 关于
 
-由 Frenck 创建，请查看文档：https://github.com/hassio-addons/addon-bitwarden
+由 Frenck 创建，请在此处查看文档：https://github.com/hassio-addons/addon-bitwarden
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 ---

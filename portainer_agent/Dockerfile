@@ -2,11 +2,11 @@
 #  ALEXBELGIUM'S DOCKERFILE  #
 #============================#
 #           _.------.
-#       _.-`    ('>.-`"alpine-sts""-.
+#       _.-`    ('>.-`"""-.
 # '.--'`       _'`   _ .--.)
 #    -'         '-.-';`   `
 #    ' -      _.'  ``'--.
-#        '---`    .-'"alpine-sts"`
+#        '---`    .-'""`
 #               /`
 #=== Home Assistant Addon ===#
 
@@ -19,7 +19,7 @@ ARG BUILD_FROM
 
 # Get agent
 FROM portainer/agent:alpine as original_agent
-ENV PORTAINER_AGENT_ARGS="alpine-sts"
+ENV PORTAINER_AGENT_ARGS=""
 
 # Build using base
 FROM $BUILD_FROM
@@ -79,14 +79,12 @@ ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/mast
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint_modif.sh" "/ha_entrypoint_modif.sh"
 RUN chmod 777 /ha_entrypoint.sh /ha_entrypoint_modif.sh && /ha_entrypoint_modif.sh && rm /ha_entrypoint_modif.sh
 
-# Standalone bashio command
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/.bashio-standalone.sh"
-RUN chmod 777 /.bashio-standalone.sh
-
 RUN chmod a+x /usr/sbin/healthcheck && \
     chmod a+x /usr/sbin/wait-for-signal
 WORKDIR "/app"
-ENTRYPOINT [ "/init" ]
+
+ENTRYPOINT [ "/usr/bin/env" ]
+CMD [ "/ha_entrypoint.sh" ]
 
 ############
 # 5 Labels #
@@ -139,8 +137,8 @@ RUN \
         mv /etc/nginx/nginx.conf.new /etc/nginx/nginx.conf; \
     fi
 
-ENV HEALTH_PORT="alpine-sts" \
-    HEALTH_URL="alpine-sts"
+ENV HEALTH_PORT="" \
+    HEALTH_URL=""
 HEALTHCHECK \
     --interval=5s \
     --retries=5 \

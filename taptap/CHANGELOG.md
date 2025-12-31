@@ -1,5 +1,12 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.3.0
+
+- BREAKING CHANGE - new configuration structure, backup your configuration first, especially modules serials
+- added support for multiple PV strings
+- updated taptap-mqtt to v0.2.1 - string support, modules serials discovery
+- dropped Hassio deprecated architectures
+
 ## 0.2.4
 
 - fixed persistent nodes identification storage in the HA addon data

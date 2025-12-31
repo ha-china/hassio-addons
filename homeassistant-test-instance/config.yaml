@@ -1,7 +1,7 @@
 name: "Home Assistant Test Instance"
-version: "0.1.4"
+version: "0.1.6"
 slug: "ha_test_instance"
-description: "[老王杂谈说]：一个用于测试的独立Home Assistant Core实例。"
+description: "[老王杂谈说]：null"
 url: "https://ghfast.top/github.com/home-assistant/home-assistant"
 arch:
   - aarch64

@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/home-assistant:2025.12.4
+ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/home-assistant:2025.12.5
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 ARG BUILD_DATE="unknown"
