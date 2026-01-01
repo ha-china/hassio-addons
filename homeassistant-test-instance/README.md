@@ -2,7 +2,7 @@
 
 ![Logo](logo.png)
 
-[![打开您的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_homeassistant-test-instance)
+[![打开你的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_homeassistant-test-instance)
 [![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
 [![GitHub 发布](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
@@ -14,8 +14,8 @@
 > [!CAUTION]
 > **实验性 / Beta 状态**
 >
-> 该附加组件仍在开发中，或主要开发用于个人使用。
-> 它尚未经过广泛测试，但预计基本功能可以正常工作。
+> 此附加组件仍在开发中，且主要用于个人使用。
+> 目前尚未进行广泛测试，但预计可以基本工作。
 
 ---
 
