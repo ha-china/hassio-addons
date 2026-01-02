@@ -14,24 +14,48 @@
 # 1 Build Image #
 #################
 
-ARG BUILD_FROM
-ARG BUILD_VERSION
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base:9.1.0
+###############################################################################
+# Get prebuild containers from Vaultwarden
+###############################################################################
+FROM "vaultwarden/server:latest" AS vaultwarden
+
+###############################################################################
+# Build the actual add-on.
+###############################################################################
+# hadolint ignore=DL3006
 FROM ${BUILD_FROM}
+
+# Set shell
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# Get the Bitwarden from official images
+COPY --from=vaultwarden /vaultwarden /opt/vaultwarden
+COPY --from=vaultwarden /web-vault /opt/web-vault
+
+RUN \
+    apt-get update \
+    \
+    && apt-get install -y --no-install-recommends \
+        libmariadb-dev-compat \
+        libpq5 \
+        nginx \
+        sqlite3 \
+    && apt-get clean \
+    && rm -f -r \
+        /etc/nginx \
+    \
+    && mkdir -p /var/log/nginx \
+    && touch /var/log/nginx/error.log
 
 ##################
 # 2 Modify Image #
 ##################
 
 # Set S6 wait time
-ENV DOTNET_USE_POLLING_FILE_WATCHER=1 \
-    S6_CMD_WAIT_FOR_SERVICES=1 \
+ENV S6_CMD_WAIT_FOR_SERVICES=1 \
     S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
     S6_SERVICES_GRACETIME=0
-
-# Global LSIO modifications
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_lsio.sh" "/ha_lsio.sh"
-ARG CONFIGLOCATION="/config/addons_config/ombi"
-RUN chmod 744 /ha_lsio.sh && if grep -qr "lsio" /etc; then /ha_lsio.sh "$CONFIGLOCATION"; fi && rm /ha_lsio.sh
 
 ##################
 # 3 Install apps #
@@ -39,6 +63,8 @@ RUN chmod 744 /ha_lsio.sh && if grep -qr "lsio" /etc; then /ha_lsio.sh "$CONFIGL
 
 # Add rootfs
 COPY rootfs/ /
+
+RUN chmod +x /etc/s6-overlay/s6-rc.d/*/run
 
 # Uses /bin for compatibility purposes
 # hadolint ignore=DL4005
@@ -53,7 +79,7 @@ ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/mast
 RUN chmod 744 /ha_automodules.sh && /ha_automodules.sh "$MODULES" && rm /ha_automodules.sh
 
 # Manual apps
-ENV PACKAGES="jq curl"
+ENV PACKAGES=""
 
 # Automatic apps & bashio
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_autoapps.sh" "/ha_autoapps.sh"
@@ -112,6 +138,31 @@ LABEL \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}
 
-####################
-# 6 HealthcheckNOT #
-####################
+#################
+# 6 Healthcheck #
+#################
+
+# Avoid spamming logs
+# hadolint ignore=SC2016
+RUN \
+    # Handle Apache configuration
+    if [ -d /etc/apache2/sites-available ]; then \
+        for file in /etc/apache2/sites-*/*.conf; do \
+            sed -i '/<VirtualHost/a \ \n    # Match requests with the custom User-Agent "HealthCheck" \n    SetEnvIf User-Agent "HealthCheck" dontlog \n    # Exclude matching requests from access logs \n    CustomLog ${APACHE_LOG_DIR}/access.log combined env=!dontlog' "$file"; \
+        done; \
+    fi && \
+    \
+    # Handle Nginx configuration
+    if [ -f /etc/nginx/nginx.conf ]; then \
+        awk '/http \{/{print; print "map $http_user_agent $dontlog {\n  default 0;\n  \"~*HealthCheck\" 1;\n}\naccess_log /var/log/nginx/access.log combined if=$dontlog;"; next}1' /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.new && \
+        mv /etc/nginx/nginx.conf.new /etc/nginx/nginx.conf; \
+    fi
+
+ENV HEALTH_PORT="80" \
+    HEALTH_URL=""
+HEALTHCHECK \
+    --interval=5s \
+    --retries=5 \
+    --start-period=30s \
+    --timeout=25s \
+    CMD curl -A "HealthCheck: Docker/1.0" -s -f "http://127.0.0.1:${HEALTH_PORT}${HEALTH_URL}" &>/dev/null || exit 1
