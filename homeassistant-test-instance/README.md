@@ -2,8 +2,8 @@
 
 ![Logo](logo.png)
 
-[![打开您的 Home Assistant 实例并显示插件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_homeassistant-test-instance)
-[![Home Assistant 插件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![打开您的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_homeassistant-test-instance)
+[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
 [![GitHub 发布](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
@@ -14,26 +14,26 @@
 > [!CAUTION]
 > **实验性 / Beta 状态**
 >
-> 此插件仍在开发中，并且主要开发用于个人使用。
-> 它尚未经过广泛测试，但预计可以基本工作。
+> 此附加组件仍在开发中，或主要开发用于个人使用。
+> 它尚未经过广泛测试，但预计基本功能可以正常工作。
 
 ---
 
 ## 📖 关于
 
-一个用于测试目的的独立 Home Assistant Core 实例，作为插件运行。
+一个用于测试目的的独立 Home Assistant Core 实例，以附加组件的形式运行。
 
 ## 安装
 
-1. 安装插件。
-2. 启动插件。
+1. 安装附加组件。
+2. 启动附加组件。
 3. 在 `http://homeassistant.local:8124` 访问新的实例。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 插件页面中的 **配置** 选项卡配置插件。
+通过 Home Assistant 附加组件页面中的 **配置** 选项卡配置附加组件。
 
 ### 选项
 

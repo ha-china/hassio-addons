@@ -1,16 +1,15 @@
 # Hass.io Add-ons: Mealie
 
+我利用业余时间维护这个及其他 Home Assistant 插件：跟进上游更改、Home Assistant 更改以及在真实硬件上测试都需要大量时间（并且需要一些资金）。我大约使用我超过 110 个插件中的 5 到 10 个，因此我安装了一些测试机器（并购买了一些我本人不使用的测试服务，如 VPN）来调试和改进这些插件。
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
-
-If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+如果这个插件节省了您的时间或使您的设置更简单，我将非常感谢您的支持！
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## Addon informations
+## 插件信息
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmealie%2Fconfig.yaml)
+![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmealie%2Fconfig.yaml)
 ![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmealie%2Fconfig.yaml)
 ![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmealie%2Fconfig.yaml)
 
@@ -21,46 +20,46 @@ If this add-on saves you time or makes your setup easier, I would be very gratef
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-Warning : armv7 only supported up to version 0.4.3! It won't be updated with later versions
+警告：仅支持 armv7 到版本 0.4.3！它不会随着后续版本的更新而更新
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有给我的仓库加星！要加星，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/mealie/stats.png)
+![下载量变化](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/mealie/stats.png)
 
-## About
+## 关于
 
-Mealie is a self hosted recipe manager and meal planner with a RestAPI backend and a reactive frontend application built in Vue for a pleasant user experience for the whole family.
-This addon for mealie 1.0 is based on the combined [docker image](https://hub.docker.com/r/hendrix04/mealie-combined) from hendrix04.
-This addon is based on the [docker image](https://hub.docker.com/r/hkotel/mealie) from hay-kot.
+Mealie 是一个自托管食谱管理器和餐计划器，具有 REST API 后端和基于 Vue 的反应式前端应用程序，为整个家庭提供愉悦的用户体验。
+这个 Mealie 1.0 的插件基于 hendrix04 的 [docker 镜像](https://hub.docker.com/r/hendrix04/mealie-combined)。
+这个插件基于 hay-kot 的 [docker 镜像](https://hub.docker.com/r/hkotel/mealie)。
 
-## Configuration
+## 配置
 
-Webui can be found at <http://homeassistant:PORT> or through the sidebar using Ingress.
-Configurations can be done through the app webUI, except for the following options.
+Web UI 可以在 <http://homeassistant:PORT> 或通过 Ingress 在侧边栏中访问。
+配置可以通过应用程序的 Web UI 进行，以下选项除外。
 
-- Start the addon. Wait a while and check the log for any errors.
-- Default credentials:
-  - Username: changeme@example.com
-  - Password: MyPassword
+- 启动插件。等待一段时间并检查日志中的任何错误。
+- 默认凭证：
+  - 用户名：changeme@example.com
+  - 密码：MyPassword
 
-### Options
+### 选项
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `PGID` | int | `1000` | Group ID for file permissions |
-| `PUID` | int | `1000` | User ID for file permissions |
-| `ssl` | bool | `false` | Enable HTTPS for the web interface |
-| `certfile` | str | `fullchain.pem` | SSL certificate file (must be in /ssl) |
-| `keyfile` | str | `privkey.pem` | SSL key file (must be in /ssl) |
-| `BASE_URL` | str | | Optional external base URL |
-| `DATA_DIR` | str | `/config` | Data directory path |
-| `ALLOW_SIGNUP` | bool | `true` | Allow new user signup |
+| 选项 | 类型 | 默认 | 描述 |
+|------|------|------|------|
+| `PGID` | int | `1000` | 文件权限的组 ID |
+| `PUID` | int | `1000` | 文件权限的用户 ID |
+| `ssl` | bool | `false` | 为 Web 界面启用 HTTPS |
+| `certfile` | str | `fullchain.pem` | SSL 证书文件（必须位于 /ssl） |
+| `keyfile` | str | `privkey.pem` | SSL 密钥文件（必须位于 /ssl） |
+| `BASE_URL` | str | | 可选的外部基本 URL |
+| `DATA_DIR` | str | `/config` | 数据目录路径 |
+| `ALLOW_SIGNUP` | bool | `true` | 允许新用户注册 |
 
-To configure Gunicorn's `--forwarded-allow-ips` setting for trusted reverse proxies, manually add a `FORWARDED_ALLOW_IPS` entry to your add-on configuration (comma-separated IPs). It is optional and hidden from the default options tab. For example: `FORWARDED_ALLOW_IPS: "192.168.1.1,10.0.0.1"`
+要配置 Gunicorn 的 `--forwarded-allow-ips` 设置以用于受信任的反向代理，请手动在您的插件配置中添加 `FORWARDED_ALLOW_IPS` 条目（以逗号分隔的 IP）。这是可选的，并且默认选项卡中隐藏。例如：`FORWARDED_ALLOW_IPS: "192.168.1.1,10.0.0.1"`
 
-### Example Configuration
+### 示例配置
 
 ```yaml
 PGID: 1000
@@ -73,22 +72,22 @@ DATA_DIR: "/config"
 ALLOW_SIGNUP: false
 ```
 
-### Custom Scripts and Environment Variables
+### 自定义脚本和环境变量
 
-This addon supports custom scripts and environment variables through the `addon_config` mapping:
+此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。参见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详情。
 
-You can add environment variables by creating `/homeassistant/addons_config/xxx-mealie/config.yaml`.
+您可以通过创建 `/homeassistant/addons_config/xxx-mealie/config.yaml` 来添加环境变量。
 
-The complete list of options can be found here: https://nightly.mealie.io/documentation/getting-started/installation/backend-config/
+完整的选项列表可以在这里找到：https://nightly.mealie.io/documentation/getting-started/installation/backend-config/
 
-## Integration with HA
+## 与 HA 集成
 
-### Detailed infos (Thanks @michelangelonz)
+### 详细信息（感谢 @michelangelonz）
 
-Create a restful sensor
+创建一个 RESTful 传感器
 
 ```yaml
 sensor:
@@ -97,7 +96,7 @@ sensor:
     method: GET
     name: Mealie todays meal
     headers:
-      Authorization: Bearer <put  auth here>
+      Authorization: Bearer <在此处放置认证>
     value_template: "{{ value_json.value }}"
     json_attributes_path: $..recipe
     json_attributes:
@@ -110,7 +109,7 @@ sensor:
       - slug
 ```
 
-Create template sensors from attributes
+从属性创建模板传感器
 
 ```yaml
 - name: TodaysDinner
@@ -127,29 +126,47 @@ Create template sensors from attributes
   state: "{{ state_attr('sensor.mealie_todays_meal', 'id') }}"
 ```
 
-Add a generic camera for image
+添加一个通用相机以获取图像
 http://###.###.#.#:9090/api/media/recipes/{{ state_attr('sensor.mealie_todays_meal', 'id') }}/images/min-original.webp
 
-### Global infos
+### 全局信息
 
-Read here : https://hay-kot.github.io/mealie/documentation/community-guide/home-assistant/
+在这里阅读：https://hay-kot.github.io/mealie/documentation/community-guide/home-assistant/
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+这个插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Carefully configure the add-on to your preferences, see the official documentation for for that.
+1. [将我的 Hass.io 插件仓库][repository] 添加到您的 Hass.io 实例。
+2. 安装此插件。
+3. 点击 `保存` 按钮以保存您的配置。
+4. 启动插件。
+5. 检查插件的日志以查看是否一切正常。
+6. 仔细配置插件以满足您的偏好，请参阅官方文档进行配置。
 
-## Support
+## 支持
 
-If you have in issue with your installation, please be sure to checkout github.
+如果您在安装中遇到问题，请务必查看 GitHub。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+---
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
+## 📱 关注我
 
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！
