@@ -1,91 +1,48 @@
-# Home Assistant Community Add-on: Nintendo Switch LAN-Play Client
-![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield] ![Supports armhf Architecture][armhf-shield] ![Supports armv7 Architecture][armv7-shield] ![Supports i386 Architecture][i386-shield]
-![Project Maintenance][maintenance-shield]
+# 开关LAN游戏客户端
 
-Nintendo Switch LAN-Play Client for Homeassistant OS
+<img src="logo.png" alt="Logo" width="200">
 
-![The Lan-Play Home Home Assistant Add-on](../_images/switch_lan_play/screenshot.png)
+[![打开您的Home Assistant实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_switch_lan_play)
+[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-附加组件-blue.svg)](https://www.home-assistant.io/addons/)
+[![GitHub 发布](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-## About
+> 任天堂Switch LAN游戏客户端
 
-To play with your CFW Nintendo Switch online, you can use this add-on + a public or private Server. This add-on can be used to stop running the lan play client on a Desktop PC/Laptop.
-This is just the Client Software and NOT the Server Software. To use a lan-play server with Homeassistant OS, please have a look at my other add-on: <https://github.com/FaserF/hassio-addons/switch_lan_play_server>
+如果您在使用此附加组件时遇到任何问题，请使用下面的链接进行报告。问题表单将预填入附加组件信息，以帮助我们更快地解决问题。
 
-This docker image will self-compile the latest lan-play software and run it based on your architecture. More information can be found here: <https://drive.google.com/file/d/1A_4o8HCAfDBFsePcGL3utG-LfzMUovcx/view>
-The first installation can take up to 10 minutes because of this! Depending on your hardware.
+如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入附加组件信息。
 
-## Installation
+---
 
-[![FaserF Homeassistant Addons](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FFaserF%2Fhassio-addons)
-<br />
-The installation of this add-on is pretty straightforward and not different in comparison to installing any other custom Home Assistant add-on.<br />
-Just click the link above or add my repo to the hassio addons repositorys: <https://github.com/FaserF/hassio-addons>
+## 🐛 报告错误
 
-## Configuration
+如果您在使用此附加组件时遇到任何问题，请使用下面的链接进行报告。问题表单将预填入附加组件信息，以帮助我们更快地解决问题。
 
-**Note**: _Remember to restart the add-on when the configuration is changed._
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=2.0.0&log_information=请在此处粘贴附加组件日志输出%3A%0A%0A)**
 
-Example add-on configuration:
+> [!NOTE]
+> 请使用上面的链接报告问题。这确保了所有必要信息（附加组件名称、版本等）会自动包含在您的错误报告中。
 
-```yaml
-server: switch.lan-play.com:11452
-```
+## 💡 功能请求
 
-**Note**: _This is just an example, don't copy and paste it! Create your own!_
+如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入附加组件信息。
 
-### Option: `server`
+**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=switch_lan_play)**
 
-This option is mandatory. Please write here your server you want to connect to with the port added.
+> [!NOTE]
+> 请使用上面的链接请求功能。这确保了附加组件名称会自动包含在您的功能请求中。
 
-**Note**: If you leave this empty there will be issues.
+---
 
-## Support
+## 👨‍💻 致谢 & 许可证
 
-Got questions?
-
-You could [open an issue here][issue] GitHub.
-Please keep in mind, that this software is only tested on armv7 running on a Raspberry Pi 4.
-
-## Authors & contributors
-
-The original program is from spacemeowx2. For more informatios please visit this github: <https://github.com/spacemeowx2/switch-lan-play>
-The hassio addon is brought to you by [FaserF].
-
-## License
-
-MIT License
-
-Copyright (c) 2019-2025 FaserF & spacemeowx2
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
-[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
-[armhf-shield]: https://img.shields.io/badge/armhf-yes-green.svg
-[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
-[FaserF]: https://github.com/FaserF/
-[i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
-[issue]: https://github.com/FaserF/hassio-addons/issues
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
+本项目是开源的，并在MIT许可证下提供。
+由 **FaserF** 维护。
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

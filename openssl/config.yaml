@@ -1,12 +1,13 @@
+---
 name: OpenSSL
-version: 1.8.1
+version: 2.0.0
 slug: openssl
 description: '[老王杂谈说]：生成自签名证书'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/openssl
 arch:
   - aarch64
   - amd64
-image: ghcr.nju.edu.cn/faserf/openssl-{arch}
+image: ghcr.nju.edu.cn/faserf/hassio-addons-openssl-{arch}
 map:
   - ssl:rw
 init: false

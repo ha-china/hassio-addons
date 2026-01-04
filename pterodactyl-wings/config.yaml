@@ -1,13 +1,14 @@
+---
 name: pterodactyl Wings Gameserver
-version: 1.5.1
+version: 2.0.0
 slug: pterodactyl_wings
 description: '[老王杂谈说]：开源游戏服务器'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/pterodactyl-wings
 arch:
   - aarch64
   - amd64
-image: ghcr.nju.edu.cn/faserf/pterodactyl-wings-{arch}
-#webui: "[PROTO:ssl]://[HOST]:[PORT:8080]"
+image: ghcr.nju.edu.cn/faserf/hassio-addons-pterodactyl_wings-{arch}
+# webui: "[PROTO:ssl]://[HOST]:[PORT:8080]"
 map:
   - share:rw
 ingress: true

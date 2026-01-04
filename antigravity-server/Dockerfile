@@ -5,6 +5,7 @@ FROM ${BUILD_FROM}
 
 # renovate: datasource=github-releases depName=Eidolf/Docker-AntiGravity versioning=loose
 ARG ANTIGRAVITY_VERSION="2025.12.0-nightly.20251226.1451"
+ENV ANTIGRAVITY_VERSION=${ANTIGRAVITY_VERSION}
 ARG LAZYGIT_VERSION=0.40.2
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
 
@@ -13,7 +14,22 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install dependencies for NoVNC and VNC server
 # Install dependencies and tools
-# hadolint ignore=DL3008,DL3013,DL4006
+# hadolint ignore=DL3008,DL3013,DL4006,SC1091
+
+
+
+
+
+
+
+
+
+# Addon metadata (injected by CI)
+ENV ADDON_VERSION="0.2.0"
+ENV ADDON_NAME="Antigravity-Server"
+ENV ADDON_SLUG="antigravity-server"
+ENV ADDON_UNSUPPORTED="false"
+
 RUN \
     apt-get update \
     && apt-get install -y --no-install-recommends \

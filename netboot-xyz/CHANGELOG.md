@@ -1,139 +1,31 @@
 # Changelog
-## 1.10.1
-- Automatically updated addon-base to version v19.0.0
 
-## 1.10.0
-- Automatically updated addon-base to version v19.0.0
-- Drop support for armhf, armv7, and i386 systems
+## 2.0.0 (2026-01-03)
 
-## 1.9.2
-- Test
+🎉 **Happy New Year 2026!** 🎉
 
-## 1.9.1
-- Automatically updated addon-base to version v18.2.1
+### 🎉 Major Release - Unified Addon Update
 
-## 1.9.0
-- Automatically updated addon-base to version v18.0.1
+All addons have been unified, updated, and many bugs have been fixed. Many addons have been partially or completely rewritten to improve stability, performance, and maintainability.
 
-## 1.8.7
-- Automatically updated netboot-xyz to version 0.7.6
+#### Important Information
 
-## 1.8.6
-- Fixed an error while updating / installing the latest version
-  - This happened due to a faulty image building process
-  - Since this issue has been in the last few updates, I have stopped the automatic update and release workflow for now
+- **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel.
+- **Unsupported Branch**: A new `unsupported` branch has been created for addons that no longer receive direct manual support. These addons are still maintained but may have limited support compared to the main addons.
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the addons.
 
-## 1.8.5
-- Automatically updated addon-base to version v17.2.5
+This release represents a significant effort to standardize and improve all addons in the repository.
 
-## 1.8.4
-- Automatically updated addon-base to version v17.2.2
+---
 
-## 1.8.3
-- Automatically updated addon-base to version v17.2.1
+### 📦 Dependencies
+- 📝 release(apache2-minimal): update changelog [skip-tests] ([`bb9feed`](https://github.com/FaserF/hassio-addons/commit/bb9feed1d85cbb4f602c85fed4846f536129ec69))
 
-## 1.8.2
-- Automatically updated addon-base to version v17.2.1
+### 🎉 Major Release - Unified Addon Update
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the addons. (Manual)
+- **Unsupported Branch**: A new `unsupported` branch has been created for addons that no longer receive direct manual support. These addons are still maintained but may have limited support compared to the main addons. (Manual)
+- **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel. (Manual)
 
-## 1.8.1
-- enabled the usage of own GitHub images
+### 📌 Release Note
+- Manual release via Orchestrator
 
-## 1.8.0
-- Prepared using own GitHub image for backups & addon building
--> This lowers the backup sizes for this addon
--> Not yet activated, only everything has been prepared
-
-## 1.7.10
-- Automatically updated addon-base to version v17.2.1
-
-## 1.7.9
-- automatically update netboot-xyz to version 0.7.5
-
-## 1.7.8
-- automatically update netboot-xyz to version 0.7.4
-
-## 1.7.7
-- automatically update addon-base to version v17.0.1
-
-## 1.7.6
-
-- automatically update addon-base to version v17.0.0
-
-## 1.7.5
-- automatically update addon-base to version v16.3.6
-
-## 1.7.4
-- automatically update addon-base to version v16.3.5
-
-## 1.7.3
-- automatically update addon-base to version v16.3.4
-
-## 1.7.2
-- automatically update addon-base to version v16.3.3
-
-## 1.7.1
-- automatically update addon-base to version v16.3.2
-
-## 1.7.0
-- automatically update addon-base to version v16.3.1
-
-## 1.6.9
-- automatically update addon-base to version v16.3.0
-
-## 1.6.8
-- automatically update addon-base to version v16.2.1
-
-## 1.6.7
-- automatically update netboot-xyz to version 0.7.3
-
-## 1.6.6
-- automatically update addon-base to version v16.1.3
-
-## 1.6.5
-- automatically update addon-base to version v16.0.0
-
-## 1.6.4
-- bump hassio-addon-base to version v15.0.8
-
-## 1.6.3
-- automatically update netboot-xyz to version 0.7.1
-
-## 1.6.2
-- bump hassio-addon-base to version v15.0.5
-
-## 1.6.1
-- automatically update netboot-xyz to version 0.7.0
-- automatically update hassio-addon-base to version v14.3.2
-- fix permission issues after starting addon - thanks to Nicolas Guilloux
-
-## 1.5.7
-- automatically update hassio-addon-base to version v14.3.1
-
-## 1.5.6
-- automatically update hassio-addon-base to version v14.2.2
-- update netbootxyz to 0.6.9
-
-## 1.5.1 - 1.5.5
-- automatically update hassio-addon-base to the latest versions
-
-## 1.5.0
-- bump hassio-addon-base to V14.0.0
-- autorelease new version updates on addon base updates
-- auto bump dependency updates for netboot-xyz module
-- update netboot-xyz to V0.6.7
-
-## 1.4.1
-- bump hassio-addon-base to latest release
-- fix installation
-
-## 1.1.0 - 1.4.0
-- bump hassio-addon-base to latest versions
-
-## 1.0.2
-- Fixed permission issues
-
-## 1.0.1
-- Implemented PXE boot with dnsmasq
-
-## 1.0.0
-- Initial release

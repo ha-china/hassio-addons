@@ -1,18 +1,31 @@
 # Changelog
 
-## 0.1.0
+## 0.2.0 (2026-01-03)
 
-- Initial stable release
-- Full Antigravity IDE integration
-- Idempotent autostart implementation (Kiosk Mode)
-- Robust VNC/NoVNC configuration with persistent password logic
+🎉 **Happy New Year 2026!** 🎉
 
-## 0.0.1 (Pre-release)
+### 🎉 Major Release - Unified Addon Update
 
-- Initial development release
-- Based on Docker-AntiGravity 2025.12.0-nightly.20251226.1451
-- Features:
-  - NoVNC browser-based desktop access
-  - Home Assistant Ingress support
-  - XFCE4 desktop environment
-  - Pre-installed: Chrome, Git, Node.js, Python, Docker
+All add-ons have been unified, updated, and many bugs have been fixed. Many add-ons have been partially or completely rewritten to improve stability, performance, and maintainability.
+
+#### Important Information
+
+- **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel.
+- **Unsupported Branch**: A new `unsupported` branch has been created for add-ons that no longer receive direct manual support. These add-ons are still maintained but may have limited support compared to the main add-ons.
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the add-ons.
+
+This release represents a significant effort to standardize and improve all add-ons in the repository.
+
+---
+
+### 📦 Dependencies
+- Update orchestrator-release.yaml ([`7a24246`](https://github.com/FaserF/hassio-addons/commit/7a242460b96217f93ad561bfa6ebe99e6a8066ce))
+
+### 🎉 Major Release - Unified Addon Update
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the add-ons. (Manual)
+- **Unsupported Branch**: A new `unsupported` branch has been created for add-ons that no longer receive direct manual support. These add-ons are still maintained but may have limited support compared to the main add-ons. (Manual)
+- **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel. (Manual)
+
+### 📌 Release Note
+- Manual release via Orchestrator
+

@@ -1,67 +1,43 @@
 # pterodactyl Panel Gameserver - BETA
 
-![Logo](logo.png)
+<img src="logo.png" alt="Logo" width="200">
 
-[![打开您的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_pterodactyl-panel)
-[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![GitHub 发布](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
-![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_pterodactyl-panel)
+[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![GitHub Release](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
+![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > 开源游戏服务器 - 目前尚未完全可用
 
----
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填写插件的详细信息，以帮助我们更快地解决问题。
 
-> [!警告]
-> **实验性 / Beta 状态**
->
-> 此附加组件仍在开发中，或主要开发用于个人使用。
-> 它尚未经过广泛测试，但预计基本功能可以正常工作。
+如果您有任何新功能或改进的建议，请使用下面的链接提交功能请求。表单将预填写插件的详细信息。
 
 ---
 
-## 📖 关于
+## 🐛 报告错误
 
-适用于 Homeassistant OS 的 pterodactyl Panel Gameserver
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填写插件的详细信息，以帮助我们更快地解决问题。
 
-![Ingress 支持](../_images/pterodactyl/ingress.png)
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.10.0&log_information=请在此处粘贴插件日志输出：%0A%0A)**
 
-> [!警告]
-> 目前仅部分可用。目前可以将其视为 Beta 版且不稳定。
-> 如果您的游戏服务器丢失等，不要怪我。
->
-> 对我来说，我目前无法登录。似乎与 redis 有关，但我不知道具体是什么。
+> [!NOTE]
+> 请使用上面的链接报告问题。这确保了所有必要的信息（插件名称、版本等）将自动包含在您的错误报告中。
 
-Pterodactyl® 是一个免费、开源的游戏服务器管理面板，使用 PHP、React 和 Go 构建。
-考虑到安全性，Pterodactyl 在隔离的 Docker 容器中运行所有游戏服务器，同时为最终用户提供一个美观且直观的 UI。
-停止妥协。让游戏服务器成为您平台的一流成员。
+## 💡 功能请求
 
-## 安装
+如果您有任何新功能或改进的建议，请使用下面的链接提交功能请求。表单将预填写插件的详细信息。
 
-此附加组件的安装非常简单，与安装任何其他自定义 Home Assistant 附加组件没有区别。
-只需点击上面的链接或将我的仓库添加到 hassio 附加组件仓库：
-<https://github.com/FaserF/hassio-addons>
+**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=pterodactyl-panel)**
+
+> [!NOTE]
+> 请使用上面的链接请求功能。这确保了插件名称将自动包含在您的功能请求中。
 
 ---
 
-## ⚙️ 配置
+## 👨‍💻 致谢与许可证
 
-通过 Home Assistant 附加组件页面中的 **配置** 选项卡配置附加组件。
-
-### 选项
-
-```yaml
-certfile: fullchain.pem
-keyfile: privkey.pem
-log_level: info
-password: ''
-ssl: true
-```
-
----
-
-## 👨‍💻 致谢 & 许可证
-
-此项目是开源的，并根据 MIT 许可证提供。
+本项目是开源的，并在MIT许可证下提供。
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

@@ -15,7 +15,7 @@ import crypto from 'crypto';
 const app = express();
 app.use(express.json());
 
-const PORT = 8099;
+const PORT = process.env.PORT || 8099;
 // Adapt path for local Windows testing vs Docker
 const IS_WIN = process.platform === 'win32';
 const DATA_DIR = IS_WIN ? path.resolve('data') : '/data';
@@ -65,20 +65,42 @@ let isConnected = false;
 
 // --- mDNS / Bonjour ---
 // Advertise service for Home Assistant Discovery
-try {
-  // Use dynamic import to avoid crashes if dependency is missing during dev/build
-  const { Bonjour } = await import('bonjour-service');
-  const instance = new Bonjour();
-  instance.publish({
-    name: 'WhatsApp Addon',
-    type: 'ha-whatsapp',
-    protocol: 'tcp',
-    port: PORT,
-  });
-  console.log(`📢 Publishing mDNS service: _ha-whatsapp._tcp.local on port ${PORT}`);
-} catch (e) {
-  console.warn('mDNS advertisement failed:', e);
+async function publishMDNS(name, attempt = 0) {
+  try {
+    const { Bonjour } = await import('bonjour-service');
+    const instance = new Bonjour();
+    const serviceName = attempt === 0 ? name : `${name} ${attempt}`;
+
+    const service = instance.publish({
+      name: serviceName,
+      type: 'ha-whatsapp',
+      protocol: 'tcp',
+      port: PORT,
+    });
+
+    service.on('error', (err) => {
+      if (err.message.includes('already in use') && attempt < 10) {
+        console.warn(`⚠️ mDNS name "${serviceName}" in use, retrying with incremented name...`);
+        instance.destroy();
+        publishMDNS(name, attempt + 1);
+      } else {
+        console.warn(`⚠️ mDNS advertisement error for "${serviceName}":`, err.message);
+        addLog(`mDNS error: ${err.message}`, 'warning');
+      }
+    });
+
+    service.on('up', () => {
+      console.log(
+        `📢 Publishing mDNS service: ${serviceName} (_ha-whatsapp._tcp.local) on port ${PORT}`
+      );
+    });
+  } catch (e) {
+    console.warn('mDNS advertisement failed to initialize:', e);
+  }
 }
+
+const baseMDNSName = process.env.MDNS_NAME || 'WhatsApp Addon';
+publishMDNS(baseMDNSName);
 
 // --- Status & Logs ---
 let connectionLogs = [];
@@ -245,7 +267,13 @@ app.post('/send_message', async (req, res) => {
   }
 });
 
+// GET /health - Simple health check endpoint for ingress readiness
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', service: 'whatsapp-addon' });
+});
+
 // --- Dashboard (Server-Side Rendered) ---
+// Root endpoint (/) is handled by the catch-all below
 app.get(/(.*)/, (req, res) => {
   if (
     req.path.startsWith('/api') ||
@@ -254,7 +282,8 @@ app.get(/(.*)/, (req, res) => {
     req.path === '/session/start' ||
     req.path === '/send_message' ||
     req.path === '/session' ||
-    req.path === '/logs'
+    req.path === '/logs' ||
+    req.path === '/health'
   ) {
     return res.status(404).send('Not Found');
   }
@@ -390,6 +419,11 @@ app.get(/(.*)/, (req, res) => {
     `);
 });
 
+// Listen on all interfaces in the container (0.0.0.0)
+// This is safe because each addon runs in its own isolated Docker container
+// Ports are isolated by Docker's network namespace, so no conflicts between addons
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`WhatsApp API listening on 0.0.0.0:${PORT}`);
+  // Log that service is ready for health checks
+  console.log('✅ Service ready - Health check available at /health');
 });

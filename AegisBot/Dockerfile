@@ -14,8 +14,23 @@ ENV PYTHONUNBUFFERED=1
 
 # Install System Requirements including Node.js
 # hadolint ignore=DL3018,DL3017
+
+
+
+
+
+
+
+
+
+# Addon metadata (injected by CI)
+ENV ADDON_VERSION="0.2.1"
+ENV ADDON_NAME="AegisBot"
+ENV ADDON_SLUG="aegisbot"
+ENV ADDON_UNSUPPORTED="false"
+
+# hadolint ignore=DL3018
 RUN \
-    apk upgrade --no-cache && \
     apk add --no-cache \
     musl \
     nginx \
@@ -37,6 +52,7 @@ RUN \
 # CR-Skip-TarballIntegrity: Dynamic tarball from GitHub API, checksum not applicable
 
 ARG AEGISBOT_VERSION="latest"
+ENV AEGISBOT_VERSION=${AEGISBOT_VERSION}
 
 WORKDIR /tmp/build
 # hadolint ignore=DL3003,DL3018

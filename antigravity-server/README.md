@@ -1,61 +1,37 @@
 # Antigravity-Server
 
-![Logo](logo.png)
+<img src="logo.png" alt="Logo" width="200">
 
-[![打开你的 Home Assistant 实例并显示添加项仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_antigravity-server)
-[![Home Assistant 添加项](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![打开你的 Home Assistant 实例并显示插件控制面板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_antigravity-server)
+[![Home Assistant 插件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
 [![GitHub 发布](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 通过 NoVNC 在你的浏览器中流式传输 Antigravity AI IDE（Linux 桌面版，使用 XFCE4）。
+> 通过 NoVNC 在浏览器中流式传输 Antigravity AI IDE（Linux 桌面版，XFCE4）。
+
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填充插件信息，以帮助我们更快地解决问题。
+
+如果您有新的功能或改进的想法，请使用下面的链接提交功能请求。表单将预填充插件信息。
 
 ---
 
-> [!CAUTION]
-> **实验性 / Beta 状态**
->
-> 该添加项仍在开发中，或主要为个人使用而开发。
-> 它尚未经过广泛测试，但预计可以基本工作。
+## 🐛 报告错误
 
----
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填充插件信息，以帮助我们更快地解决问题。
 
-## 📖 关于
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.2.0&log_information=请在此处粘贴插件日志输出%3A%0A%0A)**
 
-- **🖥️ 基于浏览器的桌面**: 通过 NoVNC 访问完整的 XFCE4 桌面
-- **🔒 入口支持**: 通过 Home Assistant 侧边栏安全访问
-- **🛠️ 预安装工具**:
-  - Google Chrome
-  - Git & LazyGit
-  - Node.js v22.x
-  - Python 3.13
-  - Docker-in-Docker 支持
-- **💾 持久化存储**: 用户设置和文件得以保留
+> [!NOTE]
+> 请使用上面的链接报告问题。这确保了所有必要信息（插件名称、版本等）将自动包含在您的错误报告中。
 
-## ⚠️ 要求
+## 💡 功能请求
 
-> **架构**: 该添加项仅支持 **amd64** 系统。
-> ARM 设备（如 Raspberry Pi 等）不受上游项目的支持。
+如果您有新的功能或改进的想法，请使用下面的链接提交功能请求。表单将预填充插件信息。
 
-## 🚀 安装
+**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=antigravity-server)**
 
-1. 将此仓库添加到你的 **Home Assistant 添加项商店**。
-1. 安装 **Antigravity-Server** 添加项。
-1. 查看下方的 **配置** 选项。
-1. 启动添加项。
-1. 点击 **"打开 Web UI"** 以启动桌面界面。
-
----
-
-## ⚙️ 配置
-
-通过 Home Assistant 添加项页面中的 **配置** 标签配置添加项。
-
-### 选项
-
-```yaml
-log_level: info
-vnc_password: ''
-```
+> [!NOTE]
+> 请使用上面的链接请求功能。这确保了插件名称将自动包含在您的功能请求中。
 
 ---
 

@@ -1,5 +1,5 @@
 name: "ShieldFile"
-version: "1.0.14"
+version: "2.0.0"
 slug: "shieldfile"
 description: "[老王杂谈说]：基于Web的安全文件管理器（通过HTTPS的SFTP）"
 url: "https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/ShieldFile"
@@ -32,4 +32,4 @@ schema:
   base_directory: str
   port: port
   log_level: list(debug|info|error|warning)
-# image: "ghcr.nju.edu.cn/faserf/shieldfile-{arch}" # Disabled for local dev / bashio build
+image: ghcr.nju.edu.cn/faserf/hassio-addons-shieldfile-{arch}

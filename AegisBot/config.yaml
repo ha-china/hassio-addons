@@ -1,8 +1,9 @@
 ---
 name: AegisBot
-version: "0.1.5"
+version: "0.2.1"
 slug: aegisbot
-description: '[老王杂谈说]：生产就绪的Telegram moderation bot，具有AI驱动的FAQ和安全功能'
+image: ghcr.nju.edu.cn/faserf/hassio-addons-aegisbot-{arch}
+description: '[老王杂谈说]：一个具备AI驱动的FAQ和安全功能的可生产就绪的Telegram moderation bot'
 url: https://ghfast.top/github.com/FaserF/AegisBot
 arch:
   - aarch64
@@ -38,6 +39,7 @@ schema:
   github_repo: str?
   developer_mode: bool
   reset_database: bool
+  reset_database_confirm: bool?
   log_level: list(trace|debug|info|warning|error|fatal)?
   database:
     type: list(sqlite|postgresql)
