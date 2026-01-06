@@ -1,8 +1,8 @@
 name: "Firefox (Edge)"
-version: "1.9.0"
+version: "1.9.1"
 slug: "firefox_edge"
 panel_icon: "mdi:firefox"
-description: '[老王杂谈说]：为Firefox准备的Docker容器。在容器启动时更新到最新版本的Firefox。'
+description: '[老王杂谈说]：为Firefox准备的Docker容器。在容器启动时更新到最新的Firefox版本。'
 url: "https://ghfast.top/github.com/mincka/ha-addons/tree/main/firefox_edge"
 arch:
   - aarch64

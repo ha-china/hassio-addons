@@ -1,54 +1,54 @@
-# Home assistant add-on: Joal
+# Home assistant插件：Joal
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+我利用业余时间维护这个和其他Home Assistant插件：跟上上游的变更、HA的变更，以及在真实硬件上测试都需要大量的时间（和一些金钱）。我大约使用我超过110个插件中的5-10个非常频繁，因此我安装了测试机器（和购买了一些我自己不使用的测试服务，例如VPN），以用于调试和改进插件。
 
-If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+如果这个插件节省了你的时间或使你的设置更容易，我将非常感谢你的支持！
 
-[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![给我买咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过PayPal捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## Addon informations
+## 插件信息
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoal%2Fconfig.yaml)
-![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoal%2Fconfig.yaml)
-![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoal%2Fconfig.yaml)
+![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoal%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoal%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoal%2Fconfig.yaml)
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![构建器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建器)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有给我仓库点赞的人！点击下面的图片给它点赞，它就会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/joal/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/joal/stats.png)
 
-## About
+## 关于
 
-An open source command line RatioMaster with WebUI.
-This addon is based on the [docker image](https://hub.docker.com/r/anthonyraymond/joal) from Anthony Raymond.
-All credits for the app go to Anthony Raymond, please visit his repository here : https://github.com/anthonyraymond/joal
+一个开源的命令行RatioMaster，带有WebUI。
+这个插件基于Anthony Raymond的[docker镜像](https://hub.docker.com/r/anthonyraymond/joal)。
+这个应用的所有功劳都归于Anthony Raymond，请访问他的仓库：https://github.com/anthonyraymond/joal
 
-## Configuration
+## 配置
 
-Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+使用插件的`env_vars`选项来传递额外的环境变量（大小写名称）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-Webui can be found at <http://homeassistant:PORT> or through the sidebar using Ingress.
-Configuration details are available in the addon logs.
+Webui可以在<http://homeassistant:PORT>或通过Ingress在侧边栏中找到。
+配置详情可以在插件日志中找到。
 
-### Options
+### 选项
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `secret_token` | str | `lrMY24Byhx` | Authentication token for the web interface |
-| `ui_path` | str | `joal` | Web UI path |
-| `run_duration` | str | `12h` | Runtime duration (e.g., 5s, 2m, 12h, 5d) |
-| `verbose` | bool | | Enable verbose logging |
+| 选项 | 类型 | 默认值 | 描述 |
+|------|------|--------|-------|
+| `secret_token` | str | `lrMY24Byhx` | Web界面的认证令牌 |
+| `ui_path` | str | `joal` | Web UI路径 |
+| `run_duration` | str | `12h` | 运行时长（例如，5s, 2m, 12h, 5d） |
+| `verbose` | bool | | 启用详细日志 |
 
-### Example Configuration
+### 示例配置
 
 ```yaml
 secret_token: "your-custom-token-here"
@@ -57,25 +57,24 @@ run_duration: "24h"
 verbose: true
 ```
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+这个插件的安装非常直接，与其他Hass.io插件的安装方式相同。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Make sure that the two ports are open on your router
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Carefully configure the add-on to your preferences, see the official documentation for for that.
+1. [将我的Hass.io插件仓库][repository]添加到你的Hass.io实例。
+1. 安装这个插件。
+1. 点击`保存`按钮来存储你的配置。
+1. 确保你的路由器上开放了这两个端口。
+1. 启动插件。
+1. 检查插件的日志，看看是否一切正常。
+1. 仔细配置插件以符合你的偏好，参考官方文档进行配置。
 
-## Support
+## 支持
 
-For HA : create an issue on github
-For Joal : see the upstream repo here https://github.com/anthonyraymond/joal
+对于HA：在github上创建一个问题
+对于Joal：请查看上游仓库：https://github.com/anthonyraymond/joal
 
-## Illustration
+## 插图
 
 ![image](https://user-images.githubusercontent.com/44178713/117990142-29c3b200-b33d-11eb-86c8-a3007d73c3da.png)
 

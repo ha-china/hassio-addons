@@ -2,7 +2,7 @@ ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:19.0.0
 # Use official image pinned to digest to ensure integrity (CodeRabbit: reproducible builds)
 # Note: This uses Wiki.js V3 Beta/Alpha - update digest when new versions are released
 # The digest is tracked by Renovate via custom manager in .github/renovate.json
-FROM ghcr.nju.edu.cn/requarks/wiki:3@sha256:6335f9dd790f1c973ffd48e0c45ae201739e98f8d332b495a6cc159d3cdcfaa6 AS wiki_release
+FROM ghcr.nju.edu.cn/requarks/wiki:3.0.0-alpha@sha256:6335f9dd790f1c973ffd48e0c45ae201739e98f8d332b495a6cc159d3cdcfaa6 AS wiki_release
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
@@ -12,15 +12,26 @@ ARG BUILD_DATE="unknown"
 # hadolint ignore=DL3018
 
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="4.0.0"
+ENV ADDON_VERSION="0.2.0"
 ENV ADDON_NAME="Wiki.JS V3 (Beta)"
 ENV ADDON_SLUG="wikijs3"
 ENV ADDON_UNSUPPORTED="false"
 
-RUN apk add --no-cache nodejs npm yarn wget dos2unix mariadb-client
+RUN apk add --no-cache \
+    --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main \
+    --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community \
+    nodejs npm yarn wget dos2unix postgresql postgresql-client postgresql-contrib \
+    && mkdir -p /var/lib/postgresql/data /run/postgresql \
+    && chown -R postgres:postgres /var/lib/postgresql /run/postgresql
 
 WORKDIR /wiki
 COPY --from=wiki_release /wiki .
+# Reinstall dependencies for Node 24 compatibility
+RUN apk add --no-cache --virtual .build-deps build-base python3 && \
+    rm -rf node_modules && \
+    yarn install --production && \
+    yarn cache clean && \
+    apk del .build-deps
 # Extract and persist Wiki.js version for runtime banner
 RUN WIKIJS_VERSION=$(node -p "require('./package.json').version" 2>/dev/null || echo "unknown") && \
     echo "WIKIJS_VERSION=${WIKIJS_VERSION}" >> /etc/environment && \

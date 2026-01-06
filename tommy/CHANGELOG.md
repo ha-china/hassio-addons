@@ -1,5 +1,20 @@
 # TOMMY
 
+## 1.1.0
+
+### Major Changes
+- Added Enhanced detection mode alongside the existing Basic detection mode. Enhanced mode is a state-of-the-art detection mode that can capture micro-movements and breathing with optimal device placement. This mode is being developed with the goal of evolving into full stationary presence detection. Enhanced mode is only supported on ESP32-C3, ESP32-C5, ESP32-C6, and ESP32-S3 devices and requires a Pro Edition license.
+
+### Minor Changes
+
+- Added automatic connection recovery to the online licensing system, eliminating the need for restarting after a temporary network interruption
+
+## 1.0.5
+
+### Minor Changes
+
+- Fix MQTT reconnection issue
+
 ## 1.0.4
 
 ### Minor Changes
