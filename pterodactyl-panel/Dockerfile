@@ -9,6 +9,8 @@ FROM ${BUILD_FROM} as base
 
 
 
+
+
 # Addon metadata (injected by CI)
 ENV ADDON_VERSION="0.10.0"
 ENV ADDON_NAME="pterodactyl Panel Gameserver - BETA"
@@ -43,6 +45,8 @@ RUN apk add --no-cache \
     php83-zip \
     php83-xmlwriter \
     tini \
+    su-exec \
+    openssl \
     && mkdir -p /var/www/html /run/nginx /etc/nginx/conf.d/ \
     && ln -sf /usr/bin/php83 /usr/bin/php
 

@@ -3,10 +3,16 @@ arch:
   - amd64
 description: "[老王杂谈说]：\U0001F5A7\U0001F50D WiFi / LAN扫描器、入侵者检测器和存在检测器"
 environment:
-  PGID: "102"
+  PGID: "20211"
   PORT: "20211"
-  PUID: "102"
+  PUID: "20211"
   TZ: Europe/Berlin
+  NETALERTX_DATA: /config
+  NETALERTX_CONFIG: /config/config
+  NETALERTX_DB: /config/db
+  TMP_DIR: /tmp/tmp
+  NETALERTX_CONFIG_FILE: /config/config/app.conf
+  NETALERTX_DB_FILE: /config/db/app.db
 full_access: true
 hassio_api: true
 host_network: true
@@ -47,4 +53,4 @@ slug: netalertx_fa
 tmpfs: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 25.10.1
+version: 25.10.1-2

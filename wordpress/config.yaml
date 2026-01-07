@@ -1,8 +1,8 @@
 ---
 name: Wordpress
-version: 0.0.1
+version: 0.1.0
 slug: wordpress
-description: "[老王杂谈说]：null"
+description: "[老王杂谈说]：Web上最受欢迎的出版物平台。"
 url: "https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/wordpress"
 arch:
   - aarch64
@@ -12,6 +12,7 @@ services:
   - mysql:need
 panel_icon: mdi:wordpress
 ingress: true
+ingress_port: 80
 init: false
 map:
   - ssl:rw
@@ -25,13 +26,13 @@ options:
   wordpress_admin_password: ""
   wordpress_admin_email: "admin@example.com"
 schema:
-  database_host: str
-  database_name: str
-  database_user: str
-  database_password: str
+  database_host: str?
+  database_name: str?
+  database_user: str?
+  database_password: password
   wordpress_title: str
   wordpress_admin_user: str
-  wordpress_admin_password: str
+  wordpress_admin_password: password
   wordpress_admin_email: email
 ports:
   80/tcp: 8099

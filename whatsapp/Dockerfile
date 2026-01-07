@@ -11,6 +11,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 
 
+
+
 # Addon metadata (injected by CI)
 ENV ADDON_VERSION="0.3.0"
 ENV ADDON_NAME="WhatsApp"
@@ -87,4 +89,4 @@ LABEL \
 
 # Healthcheck - reduced start-period since service starts quickly
 HEALTHCHECK --interval=10s --timeout=5s --start-period=5s --retries=2 \
-    CMD curl --fail -s http://127.0.0.1:8099/health || exit 1
+    CMD curl --fail -s http://127.0.0.1:8066/health || exit 1

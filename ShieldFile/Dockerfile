@@ -25,28 +25,30 @@ ENV FILEBROWSER_VERSION="v2.53.1"
 
 
 
+
+
 # Addon metadata (injected by CI)
 ENV ADDON_VERSION="2.0.0"
 ENV ADDON_NAME="ShieldFile"
 ENV ADDON_SLUG="shieldfile"
 ENV ADDON_UNSUPPORTED="false"
 
-RUN apk add --no-cache curl bash dos2unix openssl \
+RUN apk add --no-cache curl bash dos2unix openssl nginx \
     && mkdir -p /data/database
 
 COPY --from=filebrowser /bin/filebrowser /usr/local/bin/filebrowser
 
-# Copy Addon run script to S6 services directory
-# Copy Run Script
-COPY run.sh /run.sh
-RUN dos2unix /run.sh && chmod a+x /run.sh
+# Copy rootfs
+COPY rootfs /
+
+# Set executable permissions
+RUN chmod +x /etc/cont-init.d/*.sh /etc/services.d/*/run
 
 # Healthcheck
 HEALTHCHECK \
     --interval=5m --timeout=3s \
-    CMD curl --fail http://127.0.0.1:80/ || exit 1
+    CMD curl --fail http://127.0.0.1:8099/ || exit 1
 
-CMD [ "/run.sh" ]
 
 # Labels
 LABEL org.opencontainers.image.title="ShieldFile"

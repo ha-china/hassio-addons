@@ -1,9 +1,9 @@
 ---
 name: AegisBot
-version: "0.2.1"
+version: "0.3.0"
 slug: aegisbot
 image: ghcr.nju.edu.cn/faserf/hassio-addons-aegisbot-{arch}
-description: '[老王杂谈说]：一个具备AI驱动的FAQ和安全功能的可生产就绪的Telegram moderation bot'
+description: '[老王杂谈说]：可用于生产的Telegram管理机器人，具有AI驱动的FAQ和安全功能'
 url: https://ghfast.top/github.com/FaserF/AegisBot
 arch:
   - aarch64
@@ -13,7 +13,7 @@ ingress: true
 ingress_stream: true
 panel_icon: mdi:robot
 ports:
-  8099/tcp: 8099
+  8099/tcp: 8098
 ports_description:
   8099/tcp: Web Interface (HTTP)
 map:

@@ -16,7 +16,7 @@ _show_startup_banner() {
     # Extract base version and commit from dev versions (1.2.3-dev+abc123)
     local BASE_VERSION="${VERSION%%-dev*}"
     local DEV_COMMIT=""
-    if [[ "$VERSION" == *"+"* ]]; then
+    if [[ "$VERSION" == *"+""*" ]]; then
         DEV_COMMIT="${VERSION##*+}"
     fi
 
@@ -126,19 +126,13 @@ fi
 
 
 
+
+
 # Enable strict mode
 set -e
 # shellcheck disable=SC1091
 
-# Start PHP-FPM in background
-# Check if php-fpm84 exists, otherwise try php-fpm
-if command -v php-fpm84 >/dev/null 2>&1; then
-    php-fpm84 -D
-elif command -v php-fpm >/dev/null 2>&1; then
-    php-fpm -D
-else
-    bashio::log.warning "PHP-FPM not found, PHP support may not work"
-fi
+
 
 # Get local IP
 # We can use the Supervisor API to get the Host IP

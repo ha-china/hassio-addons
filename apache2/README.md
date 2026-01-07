@@ -1,43 +1,70 @@
 # Apache2
 
-<img src="logo.png" alt="Logo" width="200">
+![Logo](logo.png)
 
-[![打开你的 Home Assistant 实例并显示插件控制面板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_apache2)
+[![打开你的 Home Assistant 实例并显示添加的插件界面。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_apache2)
 [![Home Assistant 插件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![GitHub 发布](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
+[![Docker 镜像](https://img.shields.io/badge/docker-3.1.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-apache2)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 带有 PHP 和 MariaDB 的开源 Web 服务器。
-
-如果你在使用这个插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填入插件信息，以帮助我们更快地解决问题。
-
-如果你有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入插件信息。
+> 开源 Web 服务器，支持 PHP 和 MariaDB。
 
 ---
 
+## 📖 关于
+
+如果你在使用这个插件时遇到任何问题，请使用下面的链接进行报告。问题表单会预填入插件信息，以帮助我们更快地解决问题。
+
+如果你有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单会预填入插件信息。
+
 ## 🐛 报告错误
 
-如果你在使用这个插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填入插件信息，以帮助我们更快地解决问题。
+如果你在使用这个插件时遇到任何问题，请使用下面的链接进行报告。问题表单会预填入插件信息，以帮助我们更快地解决问题。
 
 **[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=3.0.0&log_information=请在此处粘贴插件日志输出：%0A%0A)**
 
 > [!NOTE]
-> 请使用上面的链接报告问题。这确保了所有必要的信息（插件名称、版本等）会自动包含在你的错误报告中。
+> 请使用上面的链接报告问题。这确保了所有必要信息（插件名称、版本等）会自动包含在你的错误报告中。
 
 ## 💡 功能请求
 
-如果你有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入插件信息。
+如果你有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单会预填入插件信息。
 
 **[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=apache2)**
 
 > [!NOTE]
 > 请使用上面的链接请求功能。这确保了插件名称会自动包含在你的功能请求中。
 
+这个项目是开源的，并且根据 MIT 许可证提供。
+
+由 **FaserF** 维护。
+
 ---
 
-## 👨‍💻 致谢 & 许可证
+## ⚙️ 配置
 
-这个项目是开源的，并在 MIT 许可证下提供。
+通过 Home Assistant 插件页面中的 **配置** 标签来配置插件。
+
+### 选项
+
+```yaml
+certfile: fullchain.pem
+default_conf: default
+default_ssl_conf: default
+document_root: /share/htdocs
+init_commands: []
+keyfile: privkey.pem
+php_ini: default
+ssl: true
+website_name: web.local
+```
+
+---
+
+## 👨‍💻 致谢与许可证
+
+这个项目是开源的，并且根据 MIT 许可证提供。
+
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

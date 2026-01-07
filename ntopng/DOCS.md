@@ -1,24 +1,29 @@
 # Li Tin O`ve Weedle Assistant Add-on: ntopng
 
-这是一个用于Home Assistant的ntopng插件。
-它包括开源社区版本的ntopng
-和开源的netflow收集器实现netflow2ng。
+This is an ntopng add-on for Home Assistant.
+It includes opensource community version of ntopng
+and opensource netflow collector implementation netflow2ng
 
-## 安装
 
-在您的Home Assistant中安装ntopng插件。
+## Installation
 
-1. 点击下面的Home Assistant My按钮以在您的Home Assistant实例中打开该插件。
+Install ntopng addon in your Home Assistant
 
-   [![在您的Home Assistant实例中打开此插件。][addon-badge]][addon]
+1. Click the Home Assistant My button below to open the add-on on your Home
+   Assistant instance.
 
-2. 点击“安装”按钮以安装该插件。
-3. 启动“示例”插件。
-4. 检查“示例”插件的日志，查看它的运行情况。
+   [![Open this add-on in your Home Assistant instance.][addon-badge]][addon]
 
-## 配置
+2. Click the "Install" button to install the add-on.
+2. Configure addon - see bellow section configuration
+3. Start the add-on.
+4. Check the logs of the add-on to see it in action.
+5. Configure your Netflow exporter device (i.e. router) to publish to the Hassio IP ntopng addon port 2055
 
-ntopng插件配置：
+
+## Configuration
+
+ntopng add-on configuration:
 
 ```yaml
 log_level: info
@@ -27,84 +32,127 @@ certfile: certfile.pem
 keyfile: keyfile.pem
 leave_front_door_open: false
 ntop_auth: false
+zmq_loc_port: 5556
+ntopng_loc_port: 3000
+netflow2ng_loc_port: 8080
+redis_loc_port: 6379
 custom_scripts: false
 dns_mode: 1
 local_net:
-  - 192.168.1.0/24
-  - 192.168.30.0/22
-export_flows: mysql;127.0.0.1;ntopng;user;secret_password
+  - 192.168.1.0/24=LAN
+  - 192.168.30.0/22=MGMT
+dump_flows: mysql;127.0.0.1;ntopng;user;secret_password
 geoip_account_id: 123456
 geoip_license_key: "Kdsalhdsl_lshahc_hskljd_as"
 ```
 
-### 选项: `log_level`
+### Option: `log_level`
 
-`log_level`选项控制插件的日志输出级别，可以更改为更详细或更简洁，这在处理未知问题时可能很有用。可能的值有：
+The `log_level` option controls the level of log output by the add-on and can
+be changed to be more or less verbose, which might be useful when you are
+dealing with an unknown issue. Possible values are:
 
-- `trace`: 显示每个细节，例如所有调用的内部函数。
-- `debug`: 显示详细的调试信息。
-- `info`: 正常（通常）感兴趣的事件。
-- `warning`: 不是错误的异常情况。
-- `error`: 不需要立即采取行动的运行时错误。
-- `fatal`: 出现严重错误。插件变得不可用。
+- `trace`: Show every detail, like all called internal functions.
+- `debug`: Shows detailed debug information.
+- `info`: Normal (usually) interesting events.
+- `warning`: Exceptional occurrences that are not errors.
+- `error`: Runtime errors that do not require immediate action.
+- `fatal`: Something went terribly wrong. Add-on becomes unusable.
 
-请注意，每个级别会自动包括更严重级别的日志消息，例如，`debug`也会显示`info`消息。默认情况下，`log_level`设置为`info`，这是推荐的设置，除非您在进行故障排除。
+Please note that each level automatically includes log messages from a
+more severe level, e.g., `debug` also shows `info` messages. By default,
+the `log_level` is set to `info`, which is the recommended setting unless
+you are troubleshooting.
 
-### 选项: `ssl`
+### Option: `ssl`
+If to enable HTTPS encryption, not used when using Hassio Ingress
 
-### 选项: `certfile`
+### Option: `certfile`
+SSL/HTTPS private, not used when using Hassio Ingress
 
-### 选项: `keyfile`
+### Option: `keyfile`
+SSL/HTTPS private key, not used when using Hassio Ingress
 
-### 选项: `leave_front_door_open`
+### Option: `leave_front_door_open`
+If to open ntopng http/s ports from outside (i.e. do not use Hassio Ingress)
 
-### 选项: `ntop_auth`
+### Option: `ntop_auth`
+To switch on/off ntopng user authentication - can be set to false when using Hassio Ingress, as basic level of the authentication (all HA users will get ntopng admin access) will be provide by Hassio.
 
-### 选项: `custom_scripts`
+### Option: `zmq_loc_port`
+Internal localhost only port for communication from ntopng to NetFlow2NG. Default is `5556` change only in the case of the collision with other addons.
 
-### 选项: `dns_mode`
+### Option: `ntopng_loc_port`
+Internal localhost only port for ntopng user web interface (accessible by ingress). Default is `3000` change only in the case of the collision with other addons.
 
-### 选项: `local_net`
+### Option: `netflow2ng_loc_port`
+Internal localhost only port for NetFlow2NG statistic web interface (accessible by ingress). Default is `8080` change only in the case of the collision with other addons.
 
-### 选项: `export_flows`
+### Option: `redis_loc_port`
+Internal localhost only port for communication from ntopng to Redis. Default is `6379` change only in the case of the collision with other addons.
 
-### 选项: `geoip_account_id`
+### Option: `custom_scripts`
+Default ntopng script are copied during the start to the addon persistent data storage, new custom script can be added.
 
-### 选项: `geoip_license_key`
+### Option: `dns_mode`
+DNS address resolution mode, see [ntopng cli -n options](https://www.ntop.org/guides/ntopng/cli_options/cli_options.html)
+- 0 - Decode DNS responses and resolve local numeric IPs only (default)
+- 1 - Decode DNS responses and resolve all numeric IPs
+- 2 - Decode DNS responses but don't resolve numeric IPs
+- 3 - Don't decode DNS/MDNS/HTTP/TLS responses and don't resolve numeric IPs (all hosts)
+- 4 - Don't decode DNS/MDNS/HTTP/TLS responses and don't resolve numeric IPs (localhost only)
 
-## 更新日志与发布
+### Option: `local_net`
+List of local networks, can be followed by [=NAME] for network description.
 
-此存储库使用[GitHub的发布][releases]功能保持变更日志。
+### Option: `dump_flows`
+See Dump Flows [ntopng cli -F options](https://www.ntop.org/guides/ntopng/cli_options/cli_options.html) and [Flows Dumps](https://www.ntop.org/guides/ntopng/flow_dump/index.html) documentation.
 
-发布基于[语义化版本控制][semver]，并使用`MAJOR.MINOR.PATCH`的格式。简而言之，版本将根据以下内容递增：
+### Option: `geoip_account_id`
+Account id for the [MaxMind](https://www.maxmind.com/en/locate-my-ip-address) GeoIP database account.
 
-- `MAJOR`：不兼容或重大变更。
-- `MINOR`：向后兼容的新功能和增强。
-- `PATCH`：向后兼容的错误修复和包更新。
+### Option: `geoip_license_key`
+Password for the [MaxMind](https://www.maxmind.com/en/locate-my-ip-address) GeoIP database account.
 
-## 支持
+## Changelog & Releases
 
-有问题吗？
+This repository keeps a change log using [GitHub's releases][releases]
+functionality.
 
-您有几种选择可以获得答案：
+Releases are based on [Semantic Versioning][semver], and use the format
+of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented
+based on the following:
 
-- Home Assistant [社区论坛][forum]。
-- 您还可以在这里[打开一个问题][issue] GitHub。
+- `MAJOR`: Incompatible or major changes.
+- `MINOR`: Backwards-compatible new features and enhancements.
+- `PATCH`: Backwards-compatible bugfixes and package updates.
 
-您还可以在这里[打开一个问题][issue] GitHub。
 
-## 作者与贡献者
+## Support
 
-该存储库的最初设置由[Li Tin O`ve Weedle][litin]完成。
+Got questions?
 
-## 许可证
+You have several options to get them answered:
+
+- The Home Assistant [Community Forum][forum].
+- You could also [open an issue here][issue] GitHub.
+
+You could also [open an issue here][issue] GitHub.
+
+
+## Authors & contributors
+
+The original setup of this repository is by [Li Tin O`ve Weedle][litin].
+
+
+## License
 
 Apache 2.0
 
-版权 (c) 2023 Dominik Strnad
+Copyright (c) 2025 Dominik Strnad
 
 [addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
-[addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=a0d7b954_example&repository_url=https%3A%2F%2Fgithub.com%2Flitinoveweedle%2Fhassio-addons
+[addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=ntopng&repository_url=https%3A%2F%2Fgithub.com%2Flitinoveweedle%2Fhassio-addons
 [contributors]: https://github.com/litinoveweedle/hassio-addons/graphs/contributors
 [forum]: https://community.home-assistant.io/t/foss-ntopng-with-netflow-collector-hassio-addon/603491
 [litin]: https://github.com/litinoveweedle

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0 (2026-01-06)
+
+### 📦 Dependencies
+
+- Update run.sh ([`b3fc648`](https://github.com/FaserF/hassio-addons/commit/b3fc648923c63183c25fd720abd47c88112bc5b3))
+
+### 📌 Release Note
+
+- Manual release via Orchestrator
+
 ## 0.0.1
 
 - Initial release
@@ -11,8 +21,9 @@
 - Ingress support
 
 ### 📦 Dependencies
+
 - 📝 release(apache2-minimal): update changelog [skip-tests] ([`bb9feed`](https://github.com/FaserF/hassio-addons/commit/bb9feed1d85cbb4f602c85fed4846f536129ec69))
 
 ### 📌 Release Note
-- Manual release via Orchestrator
 
+- Manual release via Orchestrator

@@ -15,7 +15,7 @@ import crypto from 'crypto';
 const app = express();
 app.use(express.json());
 
-const PORT = process.env.PORT || 8099;
+const PORT = process.env.PORT || 8066;
 // Adapt path for local Windows testing vs Docker
 const IS_WIN = process.platform === 'win32';
 const DATA_DIR = IS_WIN ? path.resolve('data') : '/data';

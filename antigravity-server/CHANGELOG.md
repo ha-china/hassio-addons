@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0 (2026-01-06)
+
+### 📦 Dependencies
+
+- Update run.sh ([`b3fc648`](https://github.com/FaserF/hassio-addons/commit/b3fc648923c63183c25fd720abd47c88112bc5b3))
+
+### 📌 Release Note
+
+- Manual release via Orchestrator
+
 ## 0.2.0 (2026-01-03)
 
 🎉 **Happy New Year 2026!** 🎉
@@ -19,13 +29,15 @@ This release represents a significant effort to standardize and improve all add-
 ---
 
 ### 📦 Dependencies
+
 - Update orchestrator-release.yaml ([`7a24246`](https://github.com/FaserF/hassio-addons/commit/7a242460b96217f93ad561bfa6ebe99e6a8066ce))
 
-### 🎉 Major Release - Unified Addon Update
+### 📋 Major Release - Changes
+
 - **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the add-ons. (Manual)
 - **Unsupported Branch**: A new `unsupported` branch has been created for add-ons that no longer receive direct manual support. These add-ons are still maintained but may have limited support compared to the main add-ons. (Manual)
 - **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel. (Manual)
 
 ### 📌 Release Note
-- Manual release via Orchestrator
 
+- Manual release via Orchestrator

@@ -1,8 +1,8 @@
 name: "WhatsApp"
-version: "0.3.0"
+version: "0.4.0"
 slug: "whatsapp"
 image: ghcr.nju.edu.cn/faserf/hassio-addons-whatsapp-{arch}
-description: "[老王杂谈说]：家助手WhatsApp后端（Baileys/Node.js）"
+description: "[老王杂谈说]：Home Assistant WhatsApp 后端 (Baileys/Node.js)"
 url: "https://ghfast.top/github.com/FaserF/ha-whatsapp"
 arch:
   - aarch64
@@ -18,8 +18,8 @@ schema:
   log_level: str
   mdns_name: str
 ports:
-  8099/tcp: 8099
+  8066/tcp: 8066
 ports_description:
-  8099/tcp: WhatsApp API (for Integration)
+  8066/tcp: WhatsApp API (for Integration)
 ingress: true
 ingress_entry: /

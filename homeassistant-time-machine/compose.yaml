@@ -1,6 +1,6 @@
 services:
   ha-time-machine:
-    image: ghcr.nju.edu.cn/saihgupr/homeassistanttimemachine:latest
+    image: ghcr.nju.edu.cn/diggingfordinos/homeassistanttimemachine:latest
     container_name: ha-time-machine
     ports:
       - "54000:54000"

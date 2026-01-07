@@ -7,6 +7,8 @@ ARG BUILD_DATE="1970-01-01T00:00:00Z"
 
 
 
+
+
 # Addon metadata (injected by CI)
 ENV ADDON_VERSION="2.0.0"
 ENV ADDON_NAME="pterodactyl Wings Gameserver"
@@ -30,6 +32,9 @@ RUN set -o pipefail && \
     curl -L -o /usr/local/bin/wings "https://ghfast.top/github.com/pterodactyl/wings/releases/download/${WINGS_VERSION}/wings_linux_${ARCH}" && \
     echo "${CHECKSUM}  /usr/local/bin/wings" | sha256sum -c - && \
     chmod u+x /usr/local/bin/wings
+
+# Copy rootfs
+COPY rootfs /
 
 # Copy data for add-on
 COPY run.sh /

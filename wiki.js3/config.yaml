@@ -1,6 +1,6 @@
 ---
 name: Wiki.JS V3 (Beta)
-version: 0.2.0
+version: 0.3.0
 slug: wikijs3
 image: ghcr.nju.edu.cn/faserf/hassio-addons-wikijs3-{arch}
 description: '[老王杂谈说]：最强大和可扩展的开源Wiki软件（版本3 - Beta）'
@@ -26,7 +26,7 @@ schema:
   log_level: list(error|warn|info|debug)?
   reset_database: bool?
   reset_database_confirm: bool?
-  db_password: str?
+  db_password: password?
 ports:
   3000/tcp: 3000
   3443/tcp: 3443

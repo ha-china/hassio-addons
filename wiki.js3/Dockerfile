@@ -11,8 +11,12 @@ ARG BUILD_DATE="unknown"
 # Install Node.js, Yarn and MariaDB client via APK
 # hadolint ignore=DL3018
 
+
+
+
+
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.2.0"
+ENV ADDON_VERSION="0.2.1"
 ENV ADDON_NAME="Wiki.JS V3 (Beta)"
 ENV ADDON_SLUG="wikijs3"
 ENV ADDON_UNSUPPORTED="false"
@@ -20,7 +24,7 @@ ENV ADDON_UNSUPPORTED="false"
 RUN apk add --no-cache \
     --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main \
     --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community \
-    nodejs npm yarn wget dos2unix postgresql postgresql-client postgresql-contrib \
+    nodejs npm yarn wget dos2unix postgresql postgresql-client postgresql-contrib su-exec \
     && mkdir -p /var/lib/postgresql/data /run/postgresql \
     && chown -R postgres:postgres /var/lib/postgresql /run/postgresql
 

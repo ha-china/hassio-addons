@@ -1,43 +1,64 @@
 # Tado Auto Assist
 
-<img src="logo.png" alt="Logo" width="200">
+![Logo](logo.png)
 
-[![打开您的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_tado_aa)
-[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![GitHub 发布](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
+[![打开您的 Home Assistant 实例并显示插件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_tado_aa)
+[![Home Assistant 插件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.1.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-tado_aa)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > Tado Auto-Assist 用于地理围栏和开窗检测
 
-如果您在使用此附加组件时遇到任何问题，请使用下面的链接报告它们。问题表单将预先填写附加组件信息，以帮助我们更快地解决问题。
-
-如果您有新功能或改进的建议，请使用下面的链接提交功能请求。表单将预先填写附加组件信息。
-
 ---
+
+## 📖 关于
+
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填写插件的详细信息，以帮助我们更快地解决问题。
+
+如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填写插件的详细信息。
 
 ## 🐛 报告错误
 
-如果您在使用此附加组件时遇到任何问题，请使用下面的链接报告它们。问题表单将预先填写附加组件信息，以帮助我们更快地解决问题。
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填写插件的详细信息，以帮助我们更快地解决问题。
 
-**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=2.0.0&log_information=请在此处粘贴附加组件的日志输出：%0A%0A)**
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=2.0.0&log_information=请在此处粘贴插件日志输出：%0A%0A)**
 
 > [!NOTE]
-> 请使用上面的链接报告问题。这确保了所有必要信息（附加组件名称、版本等）将自动包含在您的问题报告中。
+> 请使用上面的链接报告问题。这确保了所有必要信息（插件名称、版本等）会自动包含在您的错误报告中。
 
 ## 💡 功能请求
 
-如果您有新功能或改进的建议，请使用下面的链接提交功能请求。表单将预先填写附加组件信息。
+如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填写插件的详细信息。
 
 **[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=tado_aa)**
 
 > [!NOTE]
-> 请使用上面的链接请求功能。这确保了附加组件名称将自动包含在您的功能请求中。
+> 请使用上面的链接请求功能。这确保了插件名称会自动包含在您的功能请求中。
+
+此项目是开源的，并在 MIT 许可证下提供。
+由 **FaserF** 维护。
 
 ---
 
-## 👨‍💻 致谢 & 许可证
+## ⚙️ 配置
 
-本项目是开源的，并根据 MIT 许可证提供。
+通过 Home Assistant 插件页面中的 **配置** 选项卡配置插件。
+
+### 选项
+
+```yaml
+log_level: info
+maxTemp: 25
+minTemp: 5
+password: ''
+username: ''
+```
+
+---
+
+## 👨‍💻 致谢与许可证
+
+此项目是开源的，并在 MIT 许可证下提供。
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

@@ -4,77 +4,77 @@
 
 [![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_wordpress)
 [![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker Image](https://img.shields.io/badge/docker-0.0.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-wordpress)
+[![Docker Image](https://img.shields.io/badge/docker-0.1.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-wordpress)
 ![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> Web上最受欢迎的发布平台。
+> 网络上最受欢迎的发布平台。
 
 ---
 
 > [!CAUTION]
-> **实验性/测试版状态**
+> **实验性 / Beta状态**
 >
-> 此插件仍在开发中，或主要为个人使用而开发。
+> 该插件仍在开发中，或主要开发用于个人使用。
 > 它尚未经过广泛测试，但预计基本功能可以正常工作。
 
 ---
 
 ## 📖 关于
 
-Web上最受欢迎的发布平台。
+网络上最受欢迎的发布平台。
 
-WordPress是一个开源软件，您可以使用它来创建一个漂亮的网站、博客或应用程序。
+WordPress 是一种开源软件，您可以用来创建一个美丽的网站、博客或应用程序。
 
-此插件将WordPress带到Home Assistant，允许您直接在您的Home Assistant实例上托管您自己的网站。
+此插件将 WordPress 带到 Home Assistant，允许您直接在您的 Home Assistant 实例上托管自己的网站。
 
 ## 安装
 
-1. 在Supervisor插件商店中搜索“WordPress”插件并安装它。
-1. 在“配置”选项卡中配置`database`设置。您必须有一个MariaDB/MySQL数据库可用。
-1. 启动“WordPress”插件。
-1. 检查“WordPress”插件的日志，看看是否一切正常。
-1. 点击“打开Web界面”按钮以访问您的WordPress站点。
+1. 在 Supervisor 插件商店中搜索 "WordPress" 插件并安装它。
+1. 在 `配置` 选项卡中配置 `数据库` 设置。您需要有一个 MariaDB/MySQL 数据库可用。
+1. 启动 "WordPress" 插件。
+1. 检查 "WordPress" 插件的日志，看看是否一切正常。
+1. 点击 "打开 Web UI" 按钮访问您的 WordPress 网站。
 
-### 选项：`database_host`
+### 选项: `database_host`
 
-您的MariaDB/MySQL数据库的主机名。
+您的 MariaDB/MySQL 数据库的主机名。
 
-### 选项：`database_name`
+### 选项: `database_name`
 
 要使用的数据库的名称。
 
-### 选项：`database_password`
+### 选项: `database_password`
 
 数据库用户的密码。
 
-### 选项：`database_user`
+### 选项: `database_user`
 
 数据库的用户名。
 
-### 选项：`wordpress_admin_email`
+### 选项: `wordpress_admin_email`
 
 管理员账户的电子邮件地址。
 
-### 选项：`wordpress_admin_password`
+### 选项: `wordpress_admin_password`
 
 管理员账户的密码。
 
-### 选项：`wordpress_admin_user`
+### 选项: `wordpress_admin_user`
 
 管理员账户的用户名。
 
-### 选项：`wordpress_title`
+### 选项: `wordpress_title`
 
-您的WordPress站点的标题。
+您的 WordPress 网站的标题。
 
-此项目是开源的，并在MIT许可证下提供。
+此项目是开源的，并在 MIT 许可证下提供。
 由 **FaserF** 维护。
 
 ---
 
 ## ⚙️ 配置
 
-通过Home Assistant插件页面中的**配置**选项卡配置插件。
+通过 Home Assistant 插件页面中的 **配置** 选项卡配置插件。
 
 ### 选项
 
@@ -91,9 +91,9 @@ wordpress_title: My Blog
 
 ---
 
-## 👨‍💻 致谢与许可证
+## 👨‍💻 致谢 & 许可证
 
-此项目是开源的，并在MIT许可证下提供。
+此项目是开源的，并在 MIT 许可证下提供。
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

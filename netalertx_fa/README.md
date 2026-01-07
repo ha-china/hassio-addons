@@ -1,36 +1,36 @@
-# Home assistant 添加组件：NetAlertX 全功能访问
+# Home assistant 插件：NetAlertX 全访问
 
-我利用业余时间维护这个和其他 Home Assistant 添加组件：跟上上游变化、HA 变化，并在真实硬件上测试需要大量时间（和一些金钱）。我大约使用我超过 110 个添加组件中的 5-10 个，所以我会安装一些我不使用的测试机器（和一些测试服务，如 VPN）来调试和改进这些添加组件。
+我在业余时间维护这个和其他 Home Assistant 插件：跟上上游的变化、HA 的变化，并在真实硬件上测试需要大量时间（和一些钱）。我大约使用我 >110 个插件中的 5-10 个，所以我安装了一些我自己的测试机器（和购买了一些测试服务，如 VPN）来调试和改进插件。
 
-如果这个添加组件节省了你的时间或使你的设置更简单，我将非常感谢你的支持！
+如果这个插件节省了你的时间或使你的设置更容易，我将非常感谢你的支持！
 
 [![给我买咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## 添加组件信息
+## 插件信息
 
 ![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnetalertx_fa%2Fconfig.yaml)
-![入口](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnetalertx_fa%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnetalertx_fa%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnetalertx_fa%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnetalertx_fa%2Fconfig.yaml)
 
 [![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![构建器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建器)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它会在右上角。谢谢！_
+_感谢所有星标我的仓库的人！要星标它，请点击下面的图片，然后它将在右上角。谢谢！_
 
 [![@alexbelgium/hassio-addons 的星标者仓库列表](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/netalertx_fa/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/netalertx_fa/stats.png)
 
 ## 关于
 
 [NetAlertX](https://github.com/jokob-sk/NetAlertX) 是一个 WIFI / LAN 扫描器、入侵者和存在检测器，帮助你监控你的网络以发现新设备和潜在的安全威胁。
 
-**这是全功能版本**，与标准 NetAlertX 添加组件相比，它提供了额外的权限和网络访问功能。
+**这是全访问版本**，与标准的 NetAlertX 插件相比，它提供了额外的权限和网络访问功能。
 
 主要功能：
 - 网络设备发现和监控
@@ -46,10 +46,10 @@ Webui 可以在 `<your-ip>:20211` 或通过 Ingress 在侧边栏中找到。
 
 ### 选项
 
-| 选项 | 类型 | 默认 | 描述 |
-|------|------|------|------|
-| `TZ` | str | `Europe/Berlin` | 时区（例如，`Europe/London`） |
-| `APP_CONF_OVERRIDE` | str | | 额外的应用配置覆盖 |
+| 选项 | 类型 | 默认值 | 描述 |
+|------|------|--------|-------|
+| `TZ` | 字符串 | `Europe/Berlin` | 时区（例如，`Europe/London`） |
+| `APP_CONF_OVERRIDE` | 字符串 | | 额外的应用配置覆盖 |
 
 ### 示例配置
 
@@ -60,35 +60,35 @@ APP_CONF_OVERRIDE: "SCAN_SUBNETS=['192.168.1.0/24']"
 
 ### MQTT 集成
 
-这个添加组件支持 MQTT 集成，如果可用，将自动连接到你的 Home Assistant MQTT 中继。NetAlertX 可以将设备存在信息发布到 MQTT 主题，以便与 Home Assistant 自动化集成。
+这个插件支持 MQTT 集成，如果可用，将自动连接到你的 Home Assistant MQTT 中继。NetAlertX 可以将设备存在信息发布到 MQTT 主题，以与 Home Assistant 自动化集成。
 
 ### 自定义脚本和环境变量
 
-这个添加组件通过 `addon_config` 映射支持自定义脚本和环境变量：
+这个插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **自定义脚本**：参见 [在添加组件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用添加组件的 `env_vars` 选项来传递额外的环境变量（大小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详细信息。
+- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。参见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
 ## 安装
 
-这个添加组件的安装非常简单，与安装任何其他 Hass.io 添加组件没有区别。
+这个插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. [将我的 Hass.io 添加组件仓库][repository] 添加到你的 Hass.io 实例。
-1. 安装这个添加组件。
+1. [将我的 Hass.io 插件仓库][repository] 添加到你的 Hass.io 实例。
+1. 安装这个插件。
 1. 点击 `保存` 按钮来保存你的配置。
-1. 启动添加组件。
-1. 检查添加组件的日志，看看是否一切顺利。
+1. 启动插件。
+1. 检查插件的日志以查看是否一切正常。
 1. 打开 WebUI 来配置你的网络扫描偏好设置。
 
-## 全功能版本与标准版本
+## 全访问版本与标准版本的区别
 
-这个 **全功能版本** 提供：
+这个 **全访问** 版本提供：
 - `full_access: true` - 完整的系统访问
 - `host_network: true` - 直接主机网络访问
 - 增强权限 (`SYS_ADMIN`, `NET_ADMIN`, `NET_RAW`)
 - `udev: true` - 硬件设备访问
 
-如果你需要增强的网络扫描功能，或者标准 NetAlertX 添加组件不能为你的设置提供足够的网络访问，请使用这个版本。
+如果你需要增强的网络扫描功能，或者标准的 NetAlertX 插件不能为你的设置提供足够的网络访问，请使用这个版本。
 
 ## 支持
 

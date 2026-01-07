@@ -6,12 +6,10 @@
 set -euo pipefail
 # shellcheck disable=SC1091
 
-
-
 ssl=$(bashio::config 'ssl')
 website_name=$(bashio::config 'website_name')
 if [ -z "$website_name" ] || [ "$website_name" = "null" ]; then
-    website_name="web.local"
+	website_name="web.local"
 fi
 certfile=$(bashio::config 'certfile')
 keyfile=$(bashio::config 'keyfile')
@@ -61,6 +59,12 @@ if [ -d "$document_root" ]; then
 		chown -R "$username":www-data "$webrootdocker"
 	else
 		echo "No username and/or password was provided. Skipping account set up."
+		if ! grep -q "^www-data:" /etc/group; then
+			addgroup -S www-data
+		fi
+		if ! id www-data &>/dev/null; then
+			adduser -S -G www-data www-data
+		fi
 		chown -R www-data:www-data "$webrootdocker"
 	fi
 fi

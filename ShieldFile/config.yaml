@@ -1,13 +1,17 @@
 name: "ShieldFile"
-version: "2.0.0"
+version: "2.1.0"
 slug: "shieldfile"
-description: "[老王杂谈说]：基于Web的安全文件管理器（通过HTTPS的SFTP）"
+description: "[老王杂谈说]：基于Web的安全文件管理器（SFTP over HTTPS）"
 url: "https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/ShieldFile"
 arch:
   - aarch64
   - amd64
 init: false
-host_network: true
+ingress: true
+ports:
+  8443/tcp: 8443
+ports_description:
+  8443/tcp: "Direct Secure Access (HTTPS)"
 map:
   - homeassistant_config:rw
   - ssl:rw

@@ -1,6 +1,5 @@
 ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:19.0.0
 # Use official image pinned to digest to ensure integrity (CodeRabbit: reproducible builds)
-# renovate: datasource=docker depName=ghcr.nju.edu.cn/requarks/wiki
 FROM ghcr.nju.edu.cn/requarks/wiki:2@sha256:f7e92a711280e75d88e5c0892af15ccbf53d64b7963e3da9911cbb053d79698d AS wiki_release
 
 # hadolint ignore=DL3006
@@ -9,6 +8,8 @@ ARG BUILD_DATE="unknown"
 
 # Install Node.js, Yarn and MariaDB client via APK
 # hadolint ignore=DL3018
+
+
 
 
 

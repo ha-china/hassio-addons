@@ -16,7 +16,7 @@ webrootdocker=/var/www/localhost/htdocs/
 phppath=/etc/php84/php.ini
 
 if [ -z "$website_name" ] || [ "$website_name" = "null" ]; then
-    website_name="web.local"
+	website_name="web.local"
 fi
 
 if [ "$phpini" = "get_file" ]; then
@@ -72,6 +72,12 @@ EOF
 		chown -R "$username":www-data "$webrootdocker"
 	else
 		echo "No username and/or password was provided. Skipping account set up."
+		if ! grep -q "^www-data:" /etc/group; then
+			addgroup -S www-data
+		fi
+		if ! id www-data &>/dev/null; then
+			adduser -S -G www-data www-data
+		fi
 		chown -R www-data:www-data "$webrootdocker"
 	fi
 fi
@@ -102,7 +108,7 @@ if [ "$ssl" = "true" ] && [ "$default_conf" = "default" ]; then
 	fi
 
 	# HTTP server block with redirect to HTTPS
-	cat > /etc/nginx/sites-enabled/default.conf <<EOF
+	cat >/etc/nginx/sites-enabled/default.conf <<EOF
 server {
     listen 80;
     server_name ${website_name};
@@ -113,7 +119,7 @@ server {
 EOF
 
 	# HTTPS server block
-	cat > /etc/nginx/sites-enabled/default-ssl.conf <<EOF
+	cat >/etc/nginx/sites-enabled/default-ssl.conf <<EOF
 server {
     listen 443 ssl http2;
     server_name ${website_name};
@@ -150,7 +156,7 @@ EOF
 else
 	echo "SSL is deactivated and/or you are using a custom config."
 	# HTTP only configuration
-	cat > /etc/nginx/sites-enabled/default.conf <<EOF
+	cat >/etc/nginx/sites-enabled/default.conf <<EOF
 server {
     listen 80;
     server_name ${website_name};
@@ -180,12 +186,15 @@ fi
 
 # Include sites-enabled in main nginx.conf
 if ! grep -q "include /etc/nginx/sites-enabled" /etc/nginx/nginx.conf; then
-	# Add include directive in http block (after existing includes if any, or after http {)
-	if grep -q "include /etc/nginx/conf.d/\*.conf;" /etc/nginx/nginx.conf; then
-		sed -i '/include \/etc\/nginx\/conf.d\/\*\.conf;/a\    include /etc/nginx/sites-enabled/*.conf;' /etc/nginx/nginx.conf
+	# Add include directive in http block
+	# Check for active include directives (ignore comments by requiring start of line anchor with optional space)
+	if grep -E -q "^[[:space:]]*include[[:space:]]+/etc/nginx/http\.d/\*\.conf;" /etc/nginx/nginx.conf; then
+		sed -i -E '/^[[:space:]]*include[[:space:]]+\/etc\/nginx\/http\.d\/\*\.conf;/a\    include /etc/nginx/sites-enabled/*.conf;' /etc/nginx/nginx.conf
+	elif grep -E -q "^[[:space:]]*include[[:space:]]+/etc/nginx/conf\.d/\*\.conf;" /etc/nginx/nginx.conf; then
+		sed -i -E '/^[[:space:]]*include[[:space:]]+\/etc\/nginx\/conf\.d\/\*\.conf;/a\    include /etc/nginx/sites-enabled/*.conf;' /etc/nginx/nginx.conf
 	else
-		# If no conf.d include, add after http { line
-		sed -i '/^http {/a\    include /etc/nginx/sites-enabled/*.conf;' /etc/nginx/nginx.conf
+		# Fallback: find http block, handling potential whitespace
+		sed -i -E '/^http[[:space:]]*\{/a\    include /etc/nginx/sites-enabled/*.conf;' /etc/nginx/nginx.conf
 	fi
 fi
 
@@ -254,7 +263,7 @@ mkdir -p /etc/php84/php-fpm.d
 # Ensure PHP-FPM listens on TCP socket (needed for nginx)
 if [ ! -f /etc/php84/php-fpm.d/www.conf ]; then
 	# Create minimal www.conf if it doesn't exist
-	cat > /etc/php84/php-fpm.d/www.conf <<'PHPFPM_EOF'
+	cat >/etc/php84/php-fpm.d/www.conf <<'PHPFPM_EOF'
 [www]
 listen = 127.0.0.1:9000
 PHPFPM_EOF
@@ -265,13 +274,13 @@ else
 		sed -i 's/^listen\s*=.*/listen = 127.0.0.1:9000/' /etc/php84/php-fpm.d/www.conf
 	else
 		# Append listen directive if not present
-		echo "listen = 127.0.0.1:9000" >> /etc/php84/php-fpm.d/www.conf
+		echo "listen = 127.0.0.1:9000" >>/etc/php84/php-fpm.d/www.conf
 	fi
 fi
 
 # Ensure fastcgi_params exists (should be in nginx package, but verify)
 if [ ! -f /etc/nginx/fastcgi_params ]; then
-	cat > /etc/nginx/fastcgi_params <<'FASTCGI_EOF'
+	cat >/etc/nginx/fastcgi_params <<'FASTCGI_EOF'
 fastcgi_param  QUERY_STRING       $query_string;
 fastcgi_param  REQUEST_METHOD    $request_method;
 fastcgi_param  CONTENT_TYPE      $content_type;
@@ -301,3 +310,15 @@ fi
 
 echo "Here is your web file architecture."
 ls -l "$webrootdocker"
+
+# Verify Nginx configuration
+if ! nginx -t; then
+	echo "❌ Nginx configuration Check Failed!"
+	echo "Dump of /etc/nginx/nginx.conf:"
+	cat /etc/nginx/nginx.conf
+	if [ -f /etc/nginx/sites-enabled/default.conf ]; then
+		echo "Dump of /etc/nginx/sites-enabled/default.conf:"
+		cat /etc/nginx/sites-enabled/default.conf
+	fi
+	exit 1
+fi

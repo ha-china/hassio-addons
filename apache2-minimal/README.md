@@ -1,43 +1,67 @@
 # Apache2 Minimal
 
-<img src="logo.png" alt="Logo" width="200">
+![Logo](logo.png)
 
-[![打开您的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_apache2-minimal)
-[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![GitHub 发布](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
-![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_apache2-minimal)
+[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker Image](https://img.shields.io/badge/docker-3.1.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-apache2-minimal)
+![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 无 PHP 的开源 Web 服务器，以及最小的额外模块。
-
-如果您在使用此附加组件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填入附加组件信息，以帮助我们更快地解决问题。
-
-如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入附加组件信息。
+> 开源Web服务器，不包含PHP和最小的额外模块。
 
 ---
 
+## 📖 关于
+
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预先填写插件的详细信息，以帮助我们更快地解决问题。
+
+如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预先填写插件的详细信息。
+
 ## 🐛 报告错误
 
-如果您在使用此附加组件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填入附加组件信息，以帮助我们更快地解决问题。
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预先填写插件的详细信息，以帮助我们更快地解决问题。
 
-**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=3.0.0&log_information=请在此处粘贴附加组件日志输出%3A%0A%0A)**
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=3.0.0&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
 
 > [!NOTE]
-> 请使用上面的链接报告问题。这确保了所有必要信息（附加组件名称、版本等）将自动包含在您的错误报告中。
+> 请使用上面的链接报告问题。这确保了所有必要的信息（插件名称、版本等）会自动包含在您的错误报告中。
 
 ## 💡 功能请求
 
-如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入附加组件信息。
+如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预先填写插件的详细信息。
 
 **[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=apache2-minimal)**
 
 > [!NOTE]
-> 请使用上面的链接请求功能。这确保了附加组件名称将自动包含在您的功能请求中。
+> 请使用上面的链接请求功能。这确保了插件名称会自动包含在您的功能请求中。
+
+这个项目是开源的，并在MIT许可证下提供。
+由 **FaserF** 维护。
+
+---
+
+## ⚙️ 配置
+
+通过Home Assistant插件页面中的**配置**选项卡配置插件。
+
+### 选项
+
+```yaml
+certfile: fullchain.pem
+default_conf: default
+default_ssl_conf: default
+document_root: /share/htdocs
+init_commands: []
+keyfile: privkey.pem
+ssl: true
+website_name: web.local
+```
 
 ---
 
 ## 👨‍💻 致谢与许可证
 
-本项目是开源的，并在 MIT 许可证下提供。
+这个项目是开源的，并在MIT许可证下提供。
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
