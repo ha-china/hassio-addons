@@ -1,7 +1,10 @@
-## 2025.12.3
+## 2025.12.5
 
 [**Read release announcement**](https://beta.esphome.io/changelog/2025.12.0)
 
-- [lvgl] Fix lambdas in canvas actions called from outside LVGL context [esphome#12671](https://github.com/esphome/esphome/pull/12671) by [@bdraco](https://github.com/bdraco)
-- [core] Fix incremental build failures when adding components on ESP32-Arduino [esphome#12745](https://github.com/esphome/esphome/pull/12745) by [@bdraco](https://github.com/bdraco)
+- [lvgl] Fix arc background angles [esphome#12773](https://github.com/esphome/esphome/pull/12773) by [@clydebarrow](https://github.com/clydebarrow)
+- [sn74hc595]: fix 'Attempted read from write-only channel' when using esp-idf framework [esphome#12801](https://github.com/esphome/esphome/pull/12801) by [@aanikei](https://github.com/aanikei)
+- [wts01] Fix negative values for WTS01 sensor [esphome#12835](https://github.com/esphome/esphome/pull/12835) by [@cnrd](https://github.com/cnrd)
+- [esp32_ble] Remove requirement for configured network [esphome#12891](https://github.com/esphome/esphome/pull/12891) by [@clydebarrow](https://github.com/clydebarrow)
+- [cc1101] Add PLL lock verification and retry support [esphome#13006](https://github.com/esphome/esphome/pull/13006) by [@swoboda1337](https://github.com/swoboda1337)
 

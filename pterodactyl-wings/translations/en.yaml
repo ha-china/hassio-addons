@@ -1,0 +1,4 @@
+configuration:
+  config_file:
+    name: "Configuration File"
+    description: "Path to the configuration file."

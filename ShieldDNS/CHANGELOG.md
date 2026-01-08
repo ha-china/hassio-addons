@@ -1,91 +1,43 @@
 # Changelog
 
-## 1.3.16
+## 2.1.0 (2026-01-06)
 
-- General addon improvements
+### 📦 Dependencies
 
-## 1.3.15
+- Update run.sh ([`b3fc648`](https://github.com/FaserF/hassio-addons/commit/b3fc648923c63183c25fd720abd47c88112bc5b3))
 
-- **Improvement**: Implemented intentional "Smart Fallback" for DoT Port.
-  Default is now `853` (Standard), but if blocked (e.g. by AdGuard), it
-  automatically switches to `8853`. This fixes CI/CD tests while maintaining
-  ease of use.
+### 📌 Release Note
 
-## 1.3.14
+- Manual release via Orchestrator
 
-- **Fix**: Resolved "unbound variable" startup crash by correcting variable
-  initialization order in `run.sh`.
-- **Change**: Changed default `dot_port` to `8853` to prevent boot loops if AdGuard
-  Home (port 853) is active.
-- **Improvement**: Added robust pre-flight port checks using `netstat`.
-  Conflicts now pause startup and show the conflicting process name instead of
-  crashing.
-- **Cleanup**: Removed unused "Alternative DoH Ports" (784, 2443) to simplify
-  configuration.
+## 2.0.0 (2026-01-03)
 
-## 1.3.13
+🎉 **Happy New Year 2026!** 🎉
 
-- Fixed Nginx exiting immediately (daemon mode) by forcing `daemon off;`, resolving
-  the restart loop.
+### 🎉 Major Release - Unified Addon Update
 
-## 1.3.12
+All addons have been unified, updated, and many bugs have been fixed. Many addons have been partially or completely rewritten to improve stability, performance, and maintainability.
 
-- Fixed CoreDNS startup crash by explicitly clearing `Corefile` before generation
-  (preventing duplicate config entries).
+#### Important Information
 
-## 1.3.11
+- **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel.
+- **Unsupported Branch**: A new `unsupported` branch has been created for addons that no longer receive direct manual support. These addons are still maintained but may have limited support compared to the main addons.
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the addons.
 
-- Fixed CoreDNS crash caused by "null" string in port configuration.
-- Updated Nginx SSL config to remove deprecated `http2` directive.
+This release represents a significant effort to standardize and improve all addons in the repository.
 
-## 1.3.10
+---
 
-- Re-release to ensure all previous fixes (unbound variables, shebangs) are propagated.
+### 📦 Dependencies
 
-## 1.3.9
+- Update orchestrator-release.yaml ([`4774494`](https://github.com/FaserF/hassio-addons/commit/477449414ddf817f9297c2ac38ade8009b69ae12))
 
-- Reverted shebang to `with-contenv` to restore Supervisor API access
-  (fixing "Forbidden" error).
+### 📋 Major Release - Changes
 
-## 1.3.8
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the addons. (Manual)
+- **Unsupported Branch**: A new `unsupported` branch has been created for addons that no longer receive direct manual support. These addons are still maintained but may have limited support compared to the main addons. (Manual)
+- **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel. (Manual)
 
-- Fixed "unbound variable" crash when optional features are disabled.
-- Removed `with-contenv` from shebang to prevent S6 context conflicts.
+### 📌 Release Note
 
-## 1.3.7
-
-- Fixed startup error "unable to exec bashio" by correcting shebang to `with-contenv`
-
-## 1.3.6
-
-- Fixed s6-overlay-suexec "can only run as pid 1" error by adding `init: false`
-
-## 1.3.3 & 1.3.4 & 1.3.5
-
-- **Fix**: Critical startup fix. Refactored Container structure (CMD vs S6
-  services.d) to resolve s6 loop error.
-
-## 1.3.1
-
-- **Refinement**: Made `dot_port` and `doh_port` optional. You can now run DoT-only
-  or DoH-only.
-- **Fix**: Startup script now verifies at least one port is active.
-- **New**: Added functional Status Indicator to the Info Page (checks /dns-query).
-- **Fix**: Fixed S6 startup error by restoring correct shebang.
-
-## 1.3.0
-
-- **Feature**: Optional "Single Port" Info Page (Serve Web + DoH on same port).
-- **Config**: Added `enable_info_page` option.
-
-## 1.2.0
-
-- **Feature**: Host Network Mode (`host_network: true`) for Source IP visibility.
-- **Refinement**: Made alternative DoH ports optional (removed from default config).
-- **Change**: Changed default DoT port to `8853` to avoid AdGuard Home conflict.
-
-## 1.1.0
-
-- **Feature**: Added DoH (DNS-over-HTTPS) support.
-- **New**: Added ShieldDNS Logo.
-- **Docs**: Cloudflare Tunnel integration guide.
+- Manual release via Orchestrator

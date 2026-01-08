@@ -8,6 +8,17 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # 1. Install Node.js & Git (Using standard repos for stability)
 # hadolint ignore=DL3018
+
+
+
+
+
+# Addon metadata (injected by CI)
+ENV ADDON_VERSION="0.3.0"
+ENV ADDON_NAME="WhatsApp"
+ENV ADDON_SLUG="whatsapp"
+ENV ADDON_UNSUPPORTED="false"
+
 RUN \
     apk add --no-cache \
         nodejs \
@@ -42,6 +53,9 @@ RUN \
         # FORCE CLEAN INSTALL: Delete lockfile and node_modules to avoid version conflicts
         rm -rf package-lock.json node_modules; \
         npm install; \
+        # Extract Baileys version for runtime banner
+        BAILEYS_VERSION=$(node -p "require('./node_modules/@whiskeysockets/baileys/package.json').version" 2>/dev/null || echo "unknown"); \
+        echo "BAILEYS_VERSION=${BAILEYS_VERSION}" >> /etc/environment; \
     fi
 
 # Build arguments
@@ -73,6 +87,6 @@ LABEL \
     org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/whatsapp/README.md" \
     org.opencontainers.image.created="${BUILD_DATE}"
 
-# Healthcheck
-HEALTHCHECK --interval=30s --timeout=15s --start-period=30s --retries=3 \
-    CMD curl --fail http://127.0.0.1:8099/ || exit 1
+# Healthcheck - reduced start-period since service starts quickly
+HEALTHCHECK --interval=10s --timeout=5s --start-period=5s --retries=2 \
+    CMD curl --fail -s http://127.0.0.1:8066/health || exit 1

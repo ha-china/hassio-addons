@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.5.2-MatriX.137 [2026-01-06]
+
+### 🐛 Fixes
+
+- 🛡️ Rollback apparmor
+
+## 1.5.1-MatriX.137 [2026-01-05]
+
+### 🐛 Fixes
+
+- ⚡ Changed password config type to `str` and disabled startup safety checks to prevent timeouts caused by unreachable external APIs. [#89](https://github.com/aatrubilin/hassio-torrserver/issues/89)
+- 🛡️ Replace incorrect AppArmor placeholder with a valid profile.
+
 ## 1.5.0-MatriX.137 [2025-12-25]
 
 ### ✨ New features

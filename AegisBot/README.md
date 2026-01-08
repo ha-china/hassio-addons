@@ -2,55 +2,55 @@
 
 ![Logo](logo.png)
 
-[![打开你的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_AegisBot)
-[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![GitHub 发布](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
+[![在您的 Home Assistant 实例中打开并显示插件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_AegisBot)
+[![Home Assistant 插件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker 镜像](https://img.shields.io/badge/docker-0.3.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-aegisbot)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > 生产就绪的 Telegram 调制机器人，具有 AI 驱动的 FAQ 和安全功能
 
 ---
 
-> [!警告]
+> [!CAUTION]
 > **实验性 / Beta 状态**
 >
-> 该附加组件仍在开发中，且主要开发用于个人使用。
-> 它尚未经过广泛测试，但预计基本功能可以正常工作。
+> 该插件仍在开发中，或主要开发用于个人使用。
+> 尚未进行广泛测试，但预计基本功能可以正常工作。
 
 ---
 
 ## 📖 关于
 
-![AegisBot Logo](icon.png)
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填写插件的详细信息，以帮助我们更快地解决问题。
 
-生产就绪的 Telegram 调制机器人，具有 AI 驱动的 FAQ 和安全功能。
+如果您有新的功能或改进的想法，请使用下面的链接提交功能请求。表单将预填写插件的详细信息。
 
-## 功能
+## 🐛 报告错误
 
-- 🛡️ **高级调制**：具有 RBAC 的自动警告、踢出和封禁系统
-- 🧠 **AI 意图分析**：检测诈骗和恶意意图的启发式引擎
-- 🔄 **实时仪表板**：基于 WebSocket 的实时事件流
-- 📈 **高级分析**：交互式安全趋势和可视化
-- 🌍 **完全国际化**：多语言支持（EN/DE）
-- 🚫 **智能过滤**：自动学习黑名单建议
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填写插件的详细信息，以帮助我们更快地解决问题。
 
-## 安装
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.2.1&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
 
-请参阅 [文档](DOCS.md) 获取详细的安装说明。
+> [!NOTE]
+> 请使用上面的链接报告问题。这确保了所有必要信息（插件名称、版本等）将自动包含在您的错误报告中。
 
-## 快速开始
+## 💡 功能请求
 
-1. 将此仓库添加到 Home Assistant
-2. 安装 AegisBot 附加组件
-3. 配置你的 Telegram 机器人令牌
-4. 启动附加组件
-5. 通过 Ingress 访问
+如果您有新的功能或改进的想法，请使用下面的链接提交功能请求。表单将预填写插件的详细信息。
+
+**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=AegisBot)**
+
+> [!NOTE]
+> 请使用上面的链接请求功能。这确保了插件名称将自动包含在您的功能请求中。
+
+此项目是开源的，并在 MIT 许可证下提供。
+由 **FaserF** 维护。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 附加组件页面中的 **配置** 标签配置附加组件。
+通过 Home Assistant 插件页面中的 **配置** 选项卡配置插件。
 
 ### 选项
 
@@ -74,7 +74,7 @@ version: latest
 
 ## 👨‍💻 致谢 & 许可证
 
-本项目是开源的，并在 MIT 许可下提供。
+此项目是开源的，并在 MIT 许可证下提供。
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

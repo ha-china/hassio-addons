@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：开源密码管理解决方案'
 image: ghcr.nju.edu.cn/alexbelgium/vaultwarden-{arch}
 init: false
 map:
@@ -28,5 +28,5 @@ schema:
 slug: bitwarden
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/bitwarden
-version: 1.35.0-6
+version: "1.35.1"
 webui: "[PROTO:ssl]://[HOST]:[PORT:7277]"

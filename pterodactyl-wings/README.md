@@ -1,92 +1,65 @@
-# Home Assistant Community Add-on: pterodactyl Wings (Daemon)
-![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
-![Project Maintenance][maintenance-shield]
+# pterodactyl Wings Gameserver
 
-pterodactyl Wings (Daemon) Gameserver for Homeassistant OS
+![Logo](logo.png)
 
-![Ingress Support](../_images/pterodactyl/ingress.png)
+[![打开你的 Home Assistant 实例并显示添加项仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_pterodactyl-wings)
+[![Home Assistant 添加项](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.1.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-pterodactyl_wings)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-## About
+> 开源游戏服务器
 
-Pterodactyl® is a free, open-source game server management panel built with PHP, React, and Go. Designed with security in mind, Pterodactyl runs all game servers in isolated Docker containers while exposing a beautiful and intuitive UI to end users.<br />
-Stop settling for less. Make game servers a first class citizen on your platform.
+---
 
-## Installation
+## 📖 关于
 
-[![FaserF Homeassistant Addons](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FFaserF%2Fhassio-addons)
-<br />
-The installation of this add-on is pretty straightforward and not different in comparison to installing any other custom Home Assistant add-on.<br />
-Just click the link above or add my repo to the hassio addons repositorys: <https://github.com/FaserF/hassio-addons>
+如果你在使用这个添加项时遇到任何问题，请使用下面的链接报告它们。问题表单将预填入添加项信息，以帮助我们更快地解决问题。
 
-The MariaDB Integration is needed before installing this one!
+如果你有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入添加项信息。
 
-## Configuration
+## 🐛 报告错误
 
-**Note**: _Remember to restart the add-on when the configuration is changed._
+如果你在使用这个添加项时遇到任何问题，请使用下面的链接报告它们。问题表单将预填入添加项信息，以帮助我们更快地解决问题。
 
-Example add-on configuration:
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=2.0.0&log_information=请在此处粘贴添加项日志输出：%0A%0A)**
+
+> [!NOTE]
+> 请使用上面的链接报告问题。这确保了所有必要的信息（添加项名称、版本等）会自动包含在你的错误报告中。
+
+## 💡 功能请求
+
+如果你有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入添加项信息。
+
+**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=pterodactyl-wings)**
+
+> [!NOTE]
+> 请使用上面的链接请求功能。这确保了添加项名称会自动包含在你的功能请求中。
+
+这个项目是开源的，并在 MIT 许可证下提供。
+由 **FaserF** 维护。
+
+---
+
+## ⚙️ 配置
+
+通过 Home Assistant 添加项页面中的 **配置** 选项卡配置添加项。
+
+### 选项
 
 ```yaml
-config_file: /share/path/to/config.yml
+config_file: /share/pterodactyl/config.yml
 ```
-<br />
 
-**Note**: _This is just an example, don't copy and paste it! Create your own!_
+---
 
-### Option: `config_file`
+## 👨‍💻 致谢 & 许可证
 
-This option is required. The path to your config.yml file.
-
-**Note**: _The file MUST be stored somewhere within the `/share/` folder_
-
-## Ingress
-
-This addon will support Homeassistant Ingress. Until now it is work in progress!
-
-## Support
-
-Got questions or problems?
-
-You can [open an issue here][issue] GitHub.
-Please keep in mind, that this software is only tested on armv7 running on a Raspberry Pi 4.
-
-## Authors & contributors
-
-The original program is from the pterodactyl Project. For more informatios please visit this page: <https://pterodactyl.io/>
-The hassio addon is brought to you by [FaserF].
-
-## License
-
-MIT License
-
-Copyright (c) 2019-2025 FaserF & pterodactyl Project
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
-[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
-[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
-[FaserF]: https://github.com/FaserF/
-[issue]: https://github.com/FaserF/hassio-addons/issues
+这个项目是开源的，并在 MIT 许可证下提供。
+由 **FaserF** 维护。
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

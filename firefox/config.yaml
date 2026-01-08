@@ -1,8 +1,8 @@
 name: "Firefox"
-version: "1.9.0"
+version: "1.9.1"
 slug: "firefox"
 panel_icon: "mdi:firefox"
-description: '[老王杂谈说]：Firefox的Docker容器'
+description: '[老王杂谈说]：Firefox 的 Docker 容器'
 url: "https://ghfast.top/github.com/mincka/ha-addons/tree/main/firefox"
 arch:
   - aarch64

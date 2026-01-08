@@ -26,9 +26,9 @@ configuration:
   local_net:
     name: local networks
     description: list of subnets which are considered local network
-  export_flows:
-    name: export flows
-    description: Expired flows will be stored in the given system (MySQL/MariaDB, ELK)
+  dump_flows:
+    name: dump flows
+    description: Dump expired flows into the given system (ClickHouse, Kafka, ES)
   geoip_account_id:
     name: geoip account id
     description: MaxMind GeoIp database account id (https://www.maxmind.com/en/accounts/current/license-key)

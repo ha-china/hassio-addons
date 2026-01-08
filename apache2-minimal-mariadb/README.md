@@ -1,8 +1,73 @@
-请查看 Apache2 完整插件包的 README 获取更多信息。
-[README](https://github.com/FaserF/hassio-addons/blob/master/apache2/README.md)
+# Apache2 Minimal with MariaDB Client
+
+![Logo](logo.png)
+
+[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_apache2-minimal-mariadb)
+[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker Image](https://img.shields.io/badge/docker-3.1.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-apache2-minimal-mariadb)
+![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+
+> 开源Web服务器，带有MariaDB客户端和一些PHP模块。
+
+---
+
+## 📖 关于
+
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填充插件的详细信息，以帮助我们更快地解决问题。
+
+如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填充插件的详细信息。
+
+## 🐛 报告错误
+
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填充插件的详细信息，以帮助我们更快地解决问题。
+
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=3.0.0&log_information=请在此处粘贴插件日志输出%3A%0A%0A)**
+
+> [!NOTE]
+> 请使用上面的链接报告问题。这确保了所有必要的信息（插件名称、版本等）将自动包含在您的错误报告中。
+
+## 💡 功能请求
+
+如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填充插件的详细信息。
+
+**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=apache2-minimal-mariadb)**
+
+> [!NOTE]
+> 请使用上面的链接请求功能。这确保了插件名称将自动包含在您的功能请求中。
+
+此项目是开源的，并在MIT许可证下提供。
+由 **FaserF** 维护。
+
+---
+
+## ⚙️ 配置
+
+通过Home Assistant插件页面中的**配置**选项卡配置插件。
+
+### 选项
+
+```yaml
+certfile: fullchain.pem
+default_conf: default
+default_ssl_conf: default
+document_root: /share/htdocs
+init_commands: []
+keyfile: privkey.pem
+php_ini: default
+ssl: true
+website_name: web.local
+```
+
+---
+
+## 👨‍💻 致谢与许可证
+
+此项目是开源的，并在MIT许可证下提供。
+由 **FaserF** 维护。
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

@@ -1,32 +1,43 @@
-<!-- markdownlint-disable MD024 -->
-
 # Changelog
 
-## [0.1.5] - 2025-12-25
+## 0.3.0 (2026-01-06)
 
-- General addon improvements
+### 📦 Dependencies
 
-## [0.1.4] - 2025-12-20
+- Update run.sh ([`b3fc648`](https://github.com/FaserF/hassio-addons/commit/b3fc648923c63183c25fd720abd47c88112bc5b3))
 
-### Added
+### 📌 Release Note
 
-- Added `demo_mode` and `demo_mode_type` configuration options
-- Improved environment variable passing for demo state
+- Manual release via Orchestrator
 
-## [0.1.1]
+## 0.2.0 (2026-01-03)
 
-- Small fixes preventing addon start
+🎉 **Happy New Year 2026!** 🎉
 
-## [0.1.0] - 2025-12-19
+### 🎉 Major Release - Unified Addon Update
 
-### Added
+All addons have been unified, updated, and many bugs have been fixed. Many addons have been partially or completely rewritten to improve stability, performance, and maintainability.
 
-- Initial release of AegisBot Home Assistant Add-on
-- Telegram Bot integration with token configuration
-- GitHub OAuth support for dashboard authentication
-- SQLite and PostgreSQL database support
-- Developer mode for main branch updates
-- Database reset functionality
-- Multi-architecture support (aarch64, amd64, armv7)
-- Ingress support for Home Assistant integration
-- Nginx reverse proxy for frontend/backend
+#### Important Information
+
+- **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel.
+- **Unsupported Branch**: A new `unsupported` branch has been created for addons that no longer receive direct manual support. These addons are still maintained but may have limited support compared to the main addons.
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the addons.
+
+This release represents a significant effort to standardize and improve all addons in the repository.
+
+---
+
+### 📦 Dependencies
+
+- Update orchestrator-release.yaml ([`4774494`](https://github.com/FaserF/hassio-addons/commit/477449414ddf817f9297c2ac38ade8009b69ae12))
+
+### 📋 Major Release - Changes
+
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the addons. (Manual)
+- **Unsupported Branch**: A new `unsupported` branch has been created for addons that no longer receive direct manual support. These addons are still maintained but may have limited support compared to the main addons. (Manual)
+- **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel. (Manual)
+
+### 📌 Release Note
+
+- Manual release via Orchestrator

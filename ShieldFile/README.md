@@ -2,64 +2,47 @@
 
 ![Logo](logo.png)
 
-[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_ShieldFile)
-[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![GitHub Release](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
-![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![打开您的 Home Assistant 实例并显示插件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_ShieldFile)
+[![Home Assistant 插件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.1.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-shieldfile)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 安全的、基于Web的文件管理器（通过HTTPS的SFTP）
+> 安全的基于 Web 的文件管理器 (SFTP over HTTPS)
 
 ---
 
 ## 📖 关于
 
-## 安全的、基于Web的文件管理器（通过HTTPS的SFTP）
+如果您在使用此插件时遇到任何问题，请使用下面的链接进行报告。问题表单将预先填写插件的详细信息，以帮助我们更快地解决问题。
 
-主要项目：[ShieldFile](https://github.com/FaserF/ShieldFile)
+如果您有任何新功能或改进的想法，请使用下面的链接提交功能请求。表单将预先填写插件的详细信息。
 
-ShieldFile 提供了一种现代、快速且安全的方法来管理您的 Home Assistant 主机（例如 `/share`、`/media`、`/config`）上的文件。
+## 🐛 报告错误
 
-> **由 [Filebrowser](https://filebrowser.org/) 支持 ❤️**
-> ShieldFile 将出色的 Filebrowser 项目包装在一个为 Home Assistant 优化的“默认安全”容器中。
+如果您在使用此插件时遇到任何问题，请使用下面的链接进行报告。问题表单将预先填写插件的详细信息，以帮助我们更快地解决问题。
 
-<!-- markdownlint-disable MD013 MD026 -->
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=2.0.0&log_information=请在此处粘贴插件日志输出：%0A%0A)**
 
-## ❓ 为什么选择 "ShieldFile" 而不是普通的 Filebrowser
+> [!NOTE]
+> 请使用上面的链接报告问题。这确保了所有必要的信息（插件名称、版本等）将自动包含在您的错误报告中。
 
-<!-- markdownlint-enable MD026 -->
+## 💡 功能请求
 
-ShieldFile 专为 **Home Assistant** 和 **安全性** 设计：
+如果您有任何新功能或改进的想法，请使用下面的链接提交功能请求。表单将预先填写插件的详细信息。
 
-1. **🔐 安全默认设置**：ShieldFile 强制使用 HTTPS。如果您没有自己的证书，它会自动生成自签名证书，确保您的文件传输永远不会是明文。
-1. **🏠 HA 集成**：它预挂载您的关键 Home Assistant 文件夹（`/config`、`/media`、`/share`、`/backup`），以便您可以立即管理它们。
-1. **🛡️ 身份**：它与“Shield”生态系统（如 ShieldDNS）完美契合，为您的私有云提供一致、品牌化的体验。
+**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=ShieldFile)**
 
-## 🤝 兼容性
+> [!NOTE]
+> 请使用上面的链接请求功能。这确保了插件名称将自动包含在您的功能请求中。
 
-ShieldFile 可以完美地与其他官方和社区插件协同工作：
-
-- **高级 SSH & Web 终端**：您可以通过命令行管理文件，同时使用 ShieldFile 获得视觉界面。两者都访问相同的 `/share`、`/config` 等目录。
-- **FTP**：您可以使用 FTP 客户端传输批量文件，并使用 ShieldFile 从浏览器管理它们。
-
-## 功能
-
-- **HTTPS**：通过浏览器进行安全的文件传输。
-- **可配置**：选择要提供哪个目录。
-- **多用户**：在 `config.yaml` 中定义主要用户，在 UI 中管理强大的权限。
-- **主机网络**：高性能的直接绑定。
-
-## 安装
-
-1. 在插件商店中安装此仓库。
-2. 安装 **ShieldFile**。
-3. 配置选项。
-4. 启动！
+此项目是开源的，并在 MIT 许可证下提供。
+由 **FaserF** 维护。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 插件页面中的 **配置** 标签配置插件。
+通过 Home Assistant 插件页面中的 **配置** 选项卡配置插件。
 
 ### 选项
 

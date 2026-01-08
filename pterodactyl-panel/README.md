@@ -2,52 +2,57 @@
 
 ![Logo](logo.png)
 
-[![打开您的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_pterodactyl-panel)
-[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![GitHub 发布](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
-![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_pterodactyl-panel)
+[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker Image](https://img.shields.io/badge/docker-0.11.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-pterodactyl_panel)
+![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 开源游戏服务器 - 目前尚未完全可用
+> Open-Source Gameserver - Currently not fully working
 
 ---
 
-> [!警告]
-> **实验性 / Beta 状态**
+> [!CAUTION]
+> **Experimental / Beta Status**
 >
-> 此附加组件仍在开发中，或主要开发用于个人使用。
-> 它尚未经过广泛测试，但预计基本功能可以正常工作。
+> This add-on is still in development and/or primarily developed for personal use.
+> It is not extensively tested yet, but is expected to work fundamentally.
 
 ---
 
-## 📖 关于
+## 📖 About
 
-适用于 Homeassistant OS 的 pterodactyl Panel Gameserver
+If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
 
-![Ingress 支持](../_images/pterodactyl/ingress.png)
+If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
 
-> [!警告]
-> 目前仅部分可用。目前可以将其视为 Beta 版且不稳定。
-> 如果您的游戏服务器丢失等，不要怪我。
->
-> 对我来说，我目前无法登录。似乎与 redis 有关，但我不知道具体是什么。
+## 🐛 Report a Bug
 
-Pterodactyl® 是一个免费、开源的游戏服务器管理面板，使用 PHP、React 和 Go 构建。
-考虑到安全性，Pterodactyl 在隔离的 Docker 容器中运行所有游戏服务器，同时为最终用户提供一个美观且直观的 UI。
-停止妥协。让游戏服务器成为您平台的一流成员。
+If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
 
-## 安装
+**[Report a Bug](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.10.0&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
 
-此附加组件的安装非常简单，与安装任何其他自定义 Home Assistant 附加组件没有区别。
-只需点击上面的链接或将我的仓库添加到 hassio 附加组件仓库：
-<https://github.com/FaserF/hassio-addons>
+> [!NOTE]
+> Please use the link above to report problems. This ensures that all necessary information (add-on name, version, etc.) is automatically included in your bug report.
+
+## 💡 Feature Request
+
+If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
+
+**[Request a Feature](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=pterodactyl-panel)**
+
+> [!NOTE]
+> Please use the link above to request features. This ensures that the add-on name is automatically included in your feature request.
+
+This project is open-source and available under the MIT License.
+Maintained by **FaserF**.
 
 ---
 
-## ⚙️ 配置
+## ⚙️ Configuration
 
-通过 Home Assistant 附加组件页面中的 **配置** 选项卡配置附加组件。
+Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
 
-### 选项
+### Options
 
 ```yaml
 certfile: fullchain.pem
@@ -59,10 +64,10 @@ ssl: true
 
 ---
 
-## 👨‍💻 致谢 & 许可证
+## 👨‍💻 Credits & License
 
-此项目是开源的，并根据 MIT 许可证提供。
-由 **FaserF** 维护。
+This project is open-source and available under the MIT License.
+Maintained by **FaserF**.
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

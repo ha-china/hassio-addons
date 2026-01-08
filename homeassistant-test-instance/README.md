@@ -1,6 +1,6 @@
 # Home Assistant 测试实例
 
-![Logo](logo.png)
+<img src="logo.png" alt="Logo" width="200">
 
 [![打开您的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_homeassistant-test-instance)
 [![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
@@ -9,33 +9,29 @@
 
 > 一个用于测试目的的独立 Home Assistant Core 实例。
 
----
+如果您遇到此附加组件的任何问题，请使用下面的链接进行报告。问题表单将预先填写附加组件信息，以帮助我们更快地解决问题。
 
-> [!CAUTION]
-> **实验性 / Beta 状态**
->
-> 该附加组件仍在开发中，或主要开发用于个人使用。
-> 它尚未经过广泛测试，但预计基本功能可以正常工作。
+如果您有新的功能或改进的想法，请使用下面的链接提交功能请求。表单将预先填写附加组件信息。
 
 ---
 
-## 📖 关于
+## 🐛 报告错误
 
-一个用于测试目的的独立 Home Assistant Core 实例，作为附加组件运行。
+如果您遇到此附加组件的任何问题，请使用下面的链接进行报告。问题表单将预先填写附加组件信息，以帮助我们更快地解决问题。
 
-## 安装
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.2.0&log_information=请在此处粘贴附加组件日志输出：%0A%0A)**
 
-1. 安装附加组件。
-2. 启动附加组件。
-3. 在 `http://homeassistant.local:8124` 访问新的实例。
+> [!NOTE]
+> 请使用上面的链接报告问题。这确保了所有必要信息（附加组件名称、版本等）会自动包含在您的错误报告中。
 
----
+## 💡 功能请求
 
-## ⚙️ 配置
+如果您有新的功能或改进的想法，请使用下面的链接提交功能请求。表单将预先填写附加组件信息。
 
-通过 Home Assistant 附加组件页面中的 **配置** 选项卡配置附加组件。
+**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=homeassistant-test-instance)**
 
-### 选项
+> [!NOTE]
+> 请使用上面的链接请求功能。这确保了附加组件名称会自动包含在您的功能请求中。
 
 ---
 

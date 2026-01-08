@@ -1,39 +1,39 @@
 # Home assistant add-on: Vaultwarden (Bitwarden RS)
 
-使用 `env_vars` 选项来传递额外的环境变量（名称大小写均可）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-# ⚠️ 建议使用官方插件（https://github.com/hassio-addons/addon-bitwarden）而不是这个分支。这个分支的唯一优势是自动发布，现在官方插件也已实现了这一功能。 ⚠️
+# ⚠️ It is recommended to use the official add-on (https://github.com/hassio-addons/addon-bitwarden) instead of this fork. The only benefit of this fork is automated releases, now implemented in the official one. ⚠️
 
 
-我业余时间维护这个和其他 Home Assistant 插件：跟上上游的变更、Home Assistant 的变更，并在真实硬件上测试都需要大量时间（和一些金钱）。我大约使用我超过 110 个插件中的 5-10 个非常频繁，因此我安装了一些测试机器（和一些我本人不使用的测试服务，如 VPN），以便于调试和改进插件。
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 add-ons so regularly that I install test machines (and purchase some test services such as VPN) that I don't use myself to troubleshoot and improve the add-ons
 
-如果这个插件为您节省了时间或简化了您的设置，我将非常感谢您的支持！
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
-[![赞助我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 赞助][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## 插件信息
+## Addon informations
 
-![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbitwarden%2Fconfig.yaml)
-![入口](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbitwarden%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbitwarden%2Fconfig.yaml)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbitwarden%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbitwarden%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbitwarden%2Fconfig.yaml)
 
-[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![构建者](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建者)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库加星！要加星，请点击下面的图片，然后它就会在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
-[![@alexbelgium/hassio-addons 的星标者仓库列表](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/bitwarden/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/bitwarden/stats.png)
 
-## 关于
+## About
 
-由 Frenck 创建，请在此处查看文档：https://github.com/hassio-addons/addon-bitwarden
+Created by Frenck, please see documentation here : https://github.com/hassio-addons/addon-bitwarden
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 ---

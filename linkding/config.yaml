@@ -1,9 +1,9 @@
 name: "linkding"
-version: "1.44.2"
-upstream: "1.44.2"
+version: "1.45.0"
+upstream: "1.45.0"
 slug: linkding
 description: >-
-  [老王杂谈说]：Linkding 是一个你可以自行托管的收藏夹管理器。它被设计得简约、快速，并易于使用 Docker 设置。
+  [老王杂谈说]：Linkding 是一个你可以自行托管的书签管理器。它设计得简约、快速，并使用 Docker 易于设置。
 arch:
   - amd64
   - aarch64

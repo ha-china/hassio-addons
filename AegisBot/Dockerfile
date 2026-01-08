@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:19.0.0
+ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/amd64-base-python:3.14-alpine3.21
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
@@ -14,8 +14,25 @@ ENV PYTHONUNBUFFERED=1
 
 # Install System Requirements including Node.js
 # hadolint ignore=DL3018,DL3017
+
+
+
+
+
+
+
+
+
+
+# hadolint ignore=DL3018
+
+# Addon metadata (injected by CI)
+ENV ADDON_VERSION="0.2.1"
+ENV ADDON_NAME="AegisBot"
+ENV ADDON_SLUG="aegisbot"
+ENV ADDON_UNSUPPORTED="false"
+
 RUN \
-    apk upgrade --no-cache && \
     apk add --no-cache \
     musl \
     nginx \
@@ -25,7 +42,8 @@ RUN \
     curl \
     postgresql-client \
     xz \
-    python3 \
+    postgresql-client \
+    xz \
     nodejs \
     npm && \
     # Verify Node.js version
@@ -37,6 +55,7 @@ RUN \
 # CR-Skip-TarballIntegrity: Dynamic tarball from GitHub API, checksum not applicable
 
 ARG AEGISBOT_VERSION="latest"
+ENV AEGISBOT_VERSION=${AEGISBOT_VERSION}
 
 WORKDIR /tmp/build
 # hadolint ignore=DL3003,DL3018
@@ -112,7 +131,7 @@ RUN chmod a+x /run.sh
 
 # Health check - faster detection with startup grace period
 HEALTHCHECK --interval=30s --timeout=3s --start-period=60s --retries=3 \
-    CMD curl --fail http://127.0.0.1:8000/api/health || exit 1
+    CMD curl --fail http://127.0.0.1:8099/ || exit 1
 
 CMD [ "/run.sh" ]
 

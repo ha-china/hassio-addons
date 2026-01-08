@@ -12,6 +12,17 @@ ENV PIP_BREAK_SYSTEM_PACKAGES=1
 
 # Install System Requirements
 # hadolint ignore=DL3018
+
+
+
+
+
+# Addon metadata (injected by CI)
+ENV ADDON_VERSION="2.0.0"
+ENV ADDON_NAME="Solumati"
+ENV ADDON_SLUG="solumati"
+ENV ADDON_UNSUPPORTED="false"
+
 RUN \
     apk add --no-cache \
     nodejs \
@@ -31,6 +42,7 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 # --- SOURCE CODE FETCH STAGE ---
 # Download the specific release tarball
 ARG SOLUMATI_VERSION="v2025.12.4b0"
+ENV SOLUMATI_VERSION=${SOLUMATI_VERSION}
 # renovate: datasource=github-releases depName=FaserF/Solumati
 ARG SOLUMATI_SHA256="fd5be5ca00e1f00a6205f15517f5fb3bad15ac7183e51ae5a8fdae2cab37e218"
 WORKDIR /tmp

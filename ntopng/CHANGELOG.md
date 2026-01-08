@@ -1,5 +1,14 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.3.0
+
+- updated ntopng to 6.6
+- updated nDPI to 5.0
+- updated netflow2ng to 0.2.2
+- GeoIP database persistent storage
+- fixed ntopng redirect urls
+- fixed ntopng requires restart loop
+
 ## 0.2.0
 
 - updated ntopng to 6.4

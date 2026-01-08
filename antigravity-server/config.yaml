@@ -1,12 +1,12 @@
 ---
 name: Antigravity-Server
-version: "0.1.0"
+version: "0.3.0"
 slug: antigravity-server
-description: '[老王杂谈说]：通过浏览器使用NoVNC流式传输Antigravity AI IDE（Linux桌面，XFCE4版）。'
+description: '[老王杂谈说]：通过浏览器使用NoVNC流式传输Antigravity AI IDE（Linux桌面版，使用XFCE4）。'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/antigravity-server
 arch:
   - amd64
-image: ghcr.nju.edu.cn/faserf/antigravity-server-{arch}
+image: ghcr.nju.edu.cn/faserf/hassio-addons-antigravity-server-{arch}
 init: false
 ingress: true
 panel_icon: mdi:rocket-launch

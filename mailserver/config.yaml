@@ -1,5 +1,5 @@
 name: Mailserver
-version: 5.0.1
+version: 6.0.2
 slug: mailserver
 description: '[老王杂谈说]：为Home Assistant配置Postfix和Dovecot邮件服务器，并使用Postfix Admin网页界面'
 url: https://ghfast.top/github.com/erik73/hassio-addons

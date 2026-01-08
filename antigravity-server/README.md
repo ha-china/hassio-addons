@@ -2,53 +2,55 @@
 
 ![Logo](logo.png)
 
-[![打开你的 Home Assistant 实例并显示添加项仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_antigravity-server)
-[![Home Assistant 添加项](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![GitHub 发布](https://img.shields.io/github/v/release/FaserF/hassio-addons?include_prereleases&style=flat-square)](https://github.com/FaserF/hassio-addons/releases)
+[![打开你的 Home Assistant 实例并显示添加组件的仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_antigravity-server)
+[![Home Assistant 添加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker 镜像](https://img.shields.io/badge/docker-0.3.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-antigravity-server)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 通过 NoVNC 在你的浏览器中流式传输 Antigravity AI IDE（Linux 桌面版，使用 XFCE4）。
+> 通过浏览器中的 NoVNC 流式传输 Antigravity AI IDE（Linux 桌面版，XFCE4）。
 
 ---
 
 > [!CAUTION]
 > **实验性 / Beta 状态**
 >
-> 该添加项仍在开发中，或主要为个人使用而开发。
+> 此添加组件仍在开发中，且主要开发用于个人使用。
 > 它尚未经过广泛测试，但预计可以基本工作。
 
 ---
 
 ## 📖 关于
 
-- **🖥️ 基于浏览器的桌面**: 通过 NoVNC 访问完整的 XFCE4 桌面
-- **🔒 入口支持**: 通过 Home Assistant 侧边栏安全访问
-- **🛠️ 预安装工具**:
-  - Google Chrome
-  - Git & LazyGit
-  - Node.js v22.x
-  - Python 3.13
-  - Docker-in-Docker 支持
-- **💾 持久化存储**: 用户设置和文件得以保留
+如果您在使用此添加组件时遇到任何问题，请使用下面的链接报告。问题表单将预填写添加组件信息，以帮助我们更快地解决问题。
 
-## ⚠️ 要求
+如果您有新功能或改进的建议，请使用下面的链接提交功能请求。表单将预填写添加组件信息。
 
-> **架构**: 该添加项仅支持 **amd64** 系统。
-> ARM 设备（如 Raspberry Pi 等）不受上游项目的支持。
+## 🐛 报告错误
 
-## 🚀 安装
+如果您在使用此添加组件时遇到任何问题，请使用下面的链接报告。问题表单将预填写添加组件信息，以帮助我们更快地解决问题。
 
-1. 将此仓库添加到你的 **Home Assistant 添加项商店**。
-1. 安装 **Antigravity-Server** 添加项。
-1. 查看下方的 **配置** 选项。
-1. 启动添加项。
-1. 点击 **"打开 Web UI"** 以启动桌面界面。
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.2.0&log_information=请在此处粘贴添加组件的日志输出：%0A%0A)**
+
+> [!NOTE]
+> 请使用上面的链接报告问题。这确保了所有必要信息（添加组件名称、版本等）将自动包含在您的错误报告中。
+
+## 💡 功能请求
+
+如果您有新功能或改进的建议，请使用下面的链接提交功能请求。表单将预填写添加组件信息。
+
+**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=antigravity-server)**
+
+> [!NOTE]
+> 请使用上面的链接请求功能。这确保了添加组件名称将自动包含在您的功能请求中。
+
+此项目是开源的，并遵循 MIT 许可证。
+由 **FaserF** 维护。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 添加项页面中的 **配置** 标签配置添加项。
+通过 Home Assistant 添加组件页面中的 **配置** 标签配置添加组件。
 
 ### 选项
 
@@ -59,9 +61,9 @@ vnc_password: ''
 
 ---
 
-## 👨‍💻 致谢与许可证
+## 👨‍💻 致谢 & 许可证
 
-本项目是开源的，并在 MIT 许可证下提供。
+此项目是开源的，并遵循 MIT 许可证。
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

@@ -1,12 +1,14 @@
+---
 name: Bash Script Executer
-version: 1.9.1
+version: 2.1.0
 slug: bashscriptexecuter
-description: '[老王杂谈说]：在此 Homeassistant 插件环境中执行您自己的 bash 脚本。'
+description: >-
+  [老王杂谈说]：在这个Homeassistant插件环境中执行你自己的bash脚本。
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/bash_script_executer
 arch:
   - aarch64
   - amd64
-image: ghcr.nju.edu.cn/faserf/bash_script_executer-{arch}
+image: ghcr.nju.edu.cn/faserf/hassio-addons-bashscriptexecuter-{arch}
 map:
   - share:rw
 init: false

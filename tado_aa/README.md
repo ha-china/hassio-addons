@@ -1,75 +1,69 @@
-# Home Assistant 社区插件：Tado 自动辅助地理围栏和开窗检测
-![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield] ![支持 armhf 架构][armhf-shield] ![支持 armv7 架构][armv7-shield]
-![项目维护][maintenance-shield]
+# Tado Auto Assist
 
-适用于 Home Assistant OS 的 Tado 自动辅助地理围栏和开窗检测
+![Logo](logo.png)
 
-## 关于
+[![打开您的 Home Assistant 实例并显示插件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_tado_aa)
+[![Home Assistant 插件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.1.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-tado_aa)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-一个 Python 脚本，根据您的存在（到达或离开）自动调整家中的温度，使用 Tado 应用的设置。它还会在 Tado TRV 检测到任何房间有开窗时关闭供暖（激活开窗模式）。
+> Tado Auto-Assist 用于地理围栏和开窗检测
 
-## 安装
+---
 
-[![FaserF Home Assistant 插件](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FFaserF%2Fhassio-addons)
+## 📖 关于
 
-此插件的安装非常简单，类似于安装任何其他自定义 Home Assistant 插件。
-只需点击上面的链接或手动将此仓库添加到您的 Home Assistant 插件仓库：
-<https://github.com/FaserF/hassio-addons>
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填写插件的详细信息，以帮助我们更快地解决问题。
 
-## 配置
+如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填写插件的详细信息。
 
-示例插件配置：
+## 🐛 报告错误
+
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填写插件的详细信息，以帮助我们更快地解决问题。
+
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=2.0.0&log_information=请在此处粘贴插件日志输出：%0A%0A)**
+
+> [!NOTE]
+> 请使用上面的链接报告问题。这确保了所有必要信息（插件名称、版本等）会自动包含在您的错误报告中。
+
+## 💡 功能请求
+
+如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填写插件的详细信息。
+
+**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=tado_aa)**
+
+> [!NOTE]
+> 请使用上面的链接请求功能。这确保了插件名称会自动包含在您的功能请求中。
+
+此项目是开源的，并在 MIT 许可证下提供。
+由 **FaserF** 维护。
+
+---
+
+## ⚙️ 配置
+
+通过 Home Assistant 插件页面中的 **配置** 选项卡配置插件。
+
+### 选项
 
 ```yaml
-username: my@email.com
-password: mySecretPassword
-minTemp: 5       # 可选 – 设置的最小温度
-maxTemp: 25      # 可选 – 设置的最大温度
+log_level: info
+maxTemp: 25
+minTemp: 5
+password: ''
+username: ''
 ```
 
-> **注意**：_这只是一个示例。请使用您自己的凭证和所需的温度设置。_
+---
 
-### 选项：`username`
+## 👨‍💻 致谢与许可证
 
-定义您的 Tado 用户名（通常是您的电子邮件地址）。
-
-### 选项：`password`
-
-定义您的 Tado 密码。
-
-### 选项：`minTemp`
-
-可选。定义当您离开时 Tado 应该设置的最小温度。
-
-### 选项：`maxTemp`
-
-可选。定义当您回家时 Tado 应该设置的最大温度。
-
-## 支持
-
-有问题或问题？
-如果您遇到任何问题或有建议，可以在 GitHub 上[打开问题][issue]。
-
-⚠️ **请注意**：此插件仅在 `armv7`（Raspberry Pi 4）上进行了测试。
-
-## 致谢
-
-此插件基于 [adrianslabu] 的工作，他创建了原始的 Python 脚本：
-➡️ <https://github.com/adrianslabu/tado_aa>
-
-Home Assistant 插件包装器由 [FaserF] 创建和维护。
-
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
-[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
-[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
-[armhf-shield]: https://img.shields.io/badge/armhf-yes-green.svg
-[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
-[FaserF]: https://github.com/FaserF/
-[issue]: https://github.com/FaserF/hassio-addons/issues
-[adrianslabu]: https://github.com/adrianslabu
+此项目是开源的，并在 MIT 许可证下提供。
+由 **FaserF** 维护。
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

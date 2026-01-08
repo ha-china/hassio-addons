@@ -1,31 +1,31 @@
 # Home assistant插件：CommaFeed
 
-受Google Reader启发的自托管RSS阅读器，基于Quarkus和React/TypeScript。
+一个受Google Reader启发的自托管RSS阅读器，基于Quarkus和React/TypeScript。
 
-_感谢所有将我的仓库标记为星标的人！要标记它，请点击下面的图片，它将在右上角显示。谢谢！_
+_感谢大家给我的仓库加星！要给仓库加星，请点击下面的图片，它就会出现在右上角。谢谢！_
 
-[![@jdeath/homeassistant-addons的星标者仓库列表](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![@jdeath/homeassistant-addons仓库的Star贡献者](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
-这个插件使用[docker镜像](https://github.com/Athou/commafeed/)。
+这个插件使用了[docker镜像](https://github.com/Athou/commafeed/)。
 
 ## 安装
 
-这个插件的安装非常简单，与安装任何其他Hass.io插件没有什么不同。
+这个插件的安装非常简单，与安装任何其他Hass.io插件的方式没有不同。
 
-1. 将我的Hass.io插件仓库[repository]添加到您的Hass.io实例中。
-1. 点击`保存`按钮以保存您的配置。
+1. 将我的Hass.io插件仓库[repository]添加到你的Hass.io实例。
+1. 点击`保存`按钮来存储你的配置。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 应该可以通过`<your-ip>:port`和ingress打开WebUI。默认用户名:密码是admin:admin
+1. 检查插件的日志，看看是否一切顺利。
+1. 通过`<your-ip>:port`和ingress，应该可以打开WebUI。默认用户名:密码是admin:admin
 1. 设置将在`/addon_configs/2effc9b9_commafeed`中。
 
 ## 配置
-您可以设置插件使用环境文件。注意使用'/commafeed/data'作为基本路径，这将映射到`/addon_configs/2effc9b9_commafeed`。
+你可以设置插件使用一个环境文件。注意使用'/'commafeed/data'作为基本路径，这将映射到'/addon_configs/2effc9b9_commafeed'。
 
-UI中的配置文件将是`/commafeed/data/config.env`，但你可以在` addon_configs/2effc9b9_commafeed/config.env` 创建文件。
-你需要自己创建文件，并使其成为你想要设置的列表，例如：
+UI中的配置文件将是`/commafeed/data/config.env`，但你也可以创建文件`addon_configs/2effc9b9_commafeed/config.env`。
+你需要自己创建这个文件，并使其成为你想要设置的列表，例如：
 ```
 COMMAFEED_USERS_ALLOW_REGISTRATIONS=true
 ```
@@ -36,9 +36,10 @@ port : 8082 #你想要运行的端口。
 Webui可以在`<your-ip>:port`找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

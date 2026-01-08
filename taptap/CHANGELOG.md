@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.3.1
+
+- updated taptap-mqtt to v0.2.2 - fix node sensors getting intermittently unavailable and internal data cache corruption
+
 ## 0.3.0
 
 - BREAKING CHANGE - new configuration structure, backup your configuration first, especially modules serials

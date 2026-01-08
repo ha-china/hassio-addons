@@ -23,4 +23,4 @@ ruamel.yaml==0.17.21
 ruamel.yaml.clib==0.2.7
 tomli==2.0.1
 typing_extensions==4.5.0
-urllib3==2.6.0
+urllib3==2.6.3

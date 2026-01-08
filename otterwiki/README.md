@@ -1,48 +1,48 @@
-# 家居助手插件：Otter Wiki
+# Home assistant插件：Otter Wiki
 
-# 一个 Otter Wiki
+# 一个Otter Wiki
 
-Otter Wiki 是基于 Python 的协作内容管理软件，称为 [维基](https://en.wikipedia.org/wiki/Wiki)。内容存储在 git 仓库中，该仓库跟踪所有更改。[Markdown](https://daringfireball.net/projects/markdown) 用作标记语言。Otter Wiki 是使用微框架 [Flask](http://flask.pocoo.org/) 以 [python](https://www.python.org/) 编写的。[halfmoon](https://www.gethalfmoon.com) 用作 CSS 框架，[CodeMirror](https://codemirror.net/) 用作编辑器。[Font Awesome Free](https://fontawesome.com/license/free) 提供图标。
+Otter Wiki是一个基于Python的协作内容管理软件，称为[维基](https://en.wikipedia.org/wiki/Wiki)。内容存储在git仓库中，它跟踪所有更改。[Markdown](https://daringfireball.net/projects/markdown)用作标记语言。Otter Wiki是用[python](https://www.python.org/)编写的，使用微框架[Flask](http://flask.pocoo.org/)。[halfmoon](https://www.gethalfmoon.com)用作CSS框架，[CodeMirror](https://codemirror.net/)用作编辑器。[Font Awesome Free](https://fontawesome.com/license/free)提供图标。
 
 ## 显著特性
 
 - 极简界面（带暗黑模式）
-- 支持表格的 Markdown 高亮编辑器
+- 支持Markdown高亮和表格的编辑器
 - 可定制的侧边栏：菜单和/或页面索引
-- 完整的变更日志和页面历史记录
-- 用户身份验证
+- 完整的变更日志和页面历史
+- 用户认证
 - 页面附件
-- 扩展 Markdown：表格、脚注、精美块、警报和 mermaid 图表
-- （实验性）Git http 服务器：克隆、拉取和推送您的维基内容
-- 非常可爱的海獭作为标志（由 [Christy Presler](http://christypresler.com/) 绘制，CC BY 3.0 许可）
+- 扩展Markdown：表格、脚注、花哨块、警告和mermaid图表
+- （实验性）Git http服务器：克隆、拉取和推送你的维基内容
+- 一个非常可爱的海獭作为标志（由[Christy Presler](http://christypresler.com/) CC BY 3.0绘制）
 
-_感谢所有给我的仓库点赞的人！点击下面的图片点赞，它就会出现在右上角。谢谢！_
+_感谢所有给我的仓库加星标的人！要加星标，请点击下面的图片，它将在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
-这个插件使用了 [docker 镜像](https://github.com/redimp/otterwiki)。
+这个插件使用[docker镜像](https://github.com/redimp/otterwiki)。
 
 ## 安装
 
-这个插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
+这个插件的安装非常简单，与安装任何其他Hass.io插件没有区别。
 
-1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例。
+1. 将我的Hass.io插件仓库[repository]添加到你的Hass.io实例。
 1. 安装这个插件。
-1. 点击 `保存` 按钮以保存您的配置。
+1. 点击`保存`按钮来存储你的配置。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. WebUI 应该可以通过 <your-ip>:port 访问。
-1. 设置将在 /addon_configs/2effc9b9_otterwiki 中。
+1. 检查插件的日志，看看是否一切正常。
+1. WebUI应该可以通过<你的IP>:端口访问。
+1. 设置将在 /addon_configs/2effc9b9_otterwiki
 
 ## 配置
 
 ```
-port : 8084 #您想要运行的端口。
+port : 8084 #你想运行的端口。
 ```
 
-Webui 可以在 `<your-ip>:port` 找到。
+Webui可以在<你的IP>:端口找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---

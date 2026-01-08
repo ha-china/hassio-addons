@@ -1,78 +1,76 @@
-# [2.8.0.dev2025123104] - 31.12.2025
+# [2.8.0.dev2026010804] - 08.01.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.8.0.dev2025123004](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2025123004)_
-
-### 🐛 Bugfixes
-
-- Improve single artist detection when splitting (by @OzGav in #2899)
-- Fix base queries to work with provider mapping filters (by @MarvinSchenkel in #2900)
+_Changes since [2.8.0.dev2026010704](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2026010704)_
 
 ### 🎨 Frontend Changes
 
-- Lokalise translations update (by @[github-actions[bot]](https://github.com/apps/github-actions) in [#1340](https://github.com/music-assistant/frontend/pull/1340))
+- Lokalise translations update (by @[github-actions[bot]](https://github.com/apps/github-actions) in [#1354](https://github.com/music-assistant/frontend/pull/1354))
 
 ### 🧰 Maintenance and dependency bumps
 
-- ⬆️ Update music-assistant-frontend to 2.17.61 (by @music-assistant-machine in #2902)
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@MarvinSchenkel, @OzGav
+- ⬆️ Update music-assistant-frontend to 2.17.66 (by @music-assistant-machine in #2952)
 
 
-# [2.8.0.dev2025123004] - 30.12.2025
+# [2.8.0.dev2026010704] - 07.01.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.8.0.dev2025122904](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2025122904)_
+_Changes since [2.8.0.dev2026010604](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2026010604)_
 
 ### 🐛 Bugfixes
 
-- Audible: Fix authentication for new API token format (by @ztripez in #2875)
-- Fix spotify podcast thumb image quality (by @OzGav in #2885)
+- Fix Music Assistant playlist not being removed (by @OzGav in #2931)
+- fix: MusicCast: Handle a failed poll more gracefully (by @fmunkes in #2944)
+
+### 🎨 Frontend Changes
+
+- Add debug logging to debug the imageproxy 404 issues (by @MarvinSchenkel in [#1355](https://github.com/music-assistant/frontend/pull/1355))
 
 ### 🧰 Maintenance and dependency bumps
 
-- Update OpenSubsonic Library (by @khers in #2895)
+- Add ISC001 PYI036 SIM113 mypy rules (by @OzGav in #2936)
+- Chore(deps-dev): Bump pytest from 8.4.2 to 9.0.2 (by @dependabot[bot] in #2939)
+- ⬆️ Update music-assistant-frontend to 2.17.65 (by @music-assistant-machine in #2948)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@OzGav, @khers, @ztripez
+@MarvinSchenkel, @OzGav, @fmunkes
 
 
-# [2.8.0.dev2025122904] - 29.12.2025
+# [2.8.0.dev2026010604] - 06.01.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.8.0.dev2025122604](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2025122604)_
+_Changes since [2.8.0.dev2026010504](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2026010504)_
 
 ### 🚀 Features and enhancements
 
-- Enable multi-instance support for Audible provider (by @ztripez in #2879)
+- Plex Connect: Ungroup player before starting playback (by @anatosun in #2877)
 
 ### 🐛 Bugfixes
 
-- Fix link in Roku manifest (by @OzGav in #2866)
-- Plex Connect: Fix Plex Connect timeline reporting (by @anatosun in #2876)
-- Fix issue with remote_progress if user not logged in (by @jfeil in #2882)
-- Add 2 guards for queue missing after client disconnect (by @balloob in #2884)
-- Fix OpenSubsonic ReplayGain loudness calculation (by @OzGav in #2893)
+- Fix webserver base url not persisting (by @MarvinSchenkel in #2935)
 
 ### 🧰 Maintenance and dependency bumps
 
-- Chore(deps): Bump websocket-client from 1.8.0 to 1.9.0 (by @dependabot[bot] in #2811)
-- Chore(deps): Bump deno from 2.5.6 to 2.6.3 (by @dependabot[bot] in #2870)
+<details>
+<summary>4 changes</summary>
+
+- Bump pytest-cov from 2.11.1 to 2.12.1 (by @dependabot[bot] in #117)
+- Bump aiosendspin to 2.0.0 (by @balloob in #2925)
+- Chore(deps): Bump aiohttp from 3.13.2 to 3.13.3 (by @dependabot[bot] in #2940)
+- ⬆️ Update music-assistant-frontend to 2.17.64 (by @music-assistant-machine in #2942)
+
+</details>
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@OzGav, @anatosun, @balloob, @jfeil, @ztripez
+@MarvinSchenkel, @anatosun, @balloob
 
 

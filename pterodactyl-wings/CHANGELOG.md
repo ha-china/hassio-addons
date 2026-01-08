@@ -1,128 +1,43 @@
 # Changelog
-## 1.5.1
-- Automatically updated addon-base to version v19.0.0
 
-## 1.5.0
-- Automatically updated addon-base to version v19.0.0
-- Drop support for armhf, armv7, and i386 systems
+## 2.1.0 (2026-01-06)
 
-## 1.4.2
-- Test
+### 📦 Dependencies
 
-## 1.4.1
-- Automatically updated addon-base to version v18.2.1
+- Update run.sh ([`b3fc648`](https://github.com/FaserF/hassio-addons/commit/b3fc648923c63183c25fd720abd47c88112bc5b3))
 
-## 1.4.0
-- Automatically updated addon-base to version v18.0.1
+### 📌 Release Note
 
-## 1.3.6
-- Fixed an error while updating / installing the latest version
-  - This happened due to a faulty image building process
-  - Since this issue has been in the last few updates, I have stopped the automatic update and release workflow for now
+- Manual release via Orchestrator
 
-## 1.3.5
-- Automatically updated addon-base to version v17.2.5
+## 2.0.0 (2026-01-03)
 
-## 1.3.4
-- Automatically updated addon-base to version v17.2.2
+🎉 **Happy New Year 2026!** 🎉
 
-## 1.3.3
-- Automatically updated addon-base to version v17.2.1
+### 🎉 Major Release - Unified Addon Update
 
-## 1.3.2
-- Automatically updated addon-base to version v17.2.1
+All addons have been unified, updated, and many bugs have been fixed. Many addons have been partially or completely rewritten to improve stability, performance, and maintainability.
 
-## 1.3.1
-- enabled the usage of own GitHub images
+#### Important Information
 
-## 1.3.0
-- Prepared using own GitHub image for backups & addon building
--> This lowers the backup sizes for this addon
--> Not yet activated, only everything has been prepared
+- **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel.
+- **Unsupported Branch**: A new `unsupported` branch has been created for addons that no longer receive direct manual support. These addons are still maintained but may have limited support compared to the main addons.
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the addons.
 
-## 1.2.24
-- Automatically updated addon-base to version v17.2.1
+This release represents a significant effort to standardize and improve all addons in the repository.
 
-## 1.2.23
-- automatically update addon-base to version v17.0.1
+---
 
-## 1.2.22
-- automatically update addon-base to version v17.0.0
+### 📦 Dependencies
 
-## 1.2.21
-- automatically update addon-base to version v16.3.6
+- Update orchestrator-release.yaml ([`4774494`](https://github.com/FaserF/hassio-addons/commit/477449414ddf817f9297c2ac38ade8009b69ae12))
 
-## 1.2.20
-- automatically update addon-base to version v16.3.5
+### 📋 Major Release - Changes
 
-## 1.2.19
-- automatically update addon-base to version v16.3.4
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the addons. (Manual)
+- **Unsupported Branch**: A new `unsupported` branch has been created for addons that no longer receive direct manual support. These addons are still maintained but may have limited support compared to the main addons. (Manual)
+- **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel. (Manual)
 
-## 1.2.18
-- automatically update addon-base to version v16.3.3
+### 📌 Release Note
 
-## 1.2.17
-- automatically update addon-base to version v16.3.2
-
-## 1.2.16
-- automatically update addon-base to version v16.3.1
-
-## 1.2.15
-- automatically update addon-base to version v16.3.0
-
-## 1.2.14
-- automatically update addon-base to version v16.2.1
-
-## 1.2.13
-- automatically update addon-base to version v16.1.3
-
-## 1.2.12
-- link fixes
-
-## 1.2.11
-- automatically update addon-base to version v16.0.0
-
-## 1.2.10
-- bump hassio-addon-base to version v15.0.8
-
-## 1.2.9
-- bump hassio-addon-base to version v15.0.5
-
-## 1.2.8
-- automatically update hassio-addon-base to version v14.3.2
-
-## 1.2.7
-- automatically update hassio-addon-base to version v14.3.1
-
-## 1.2.6
-- automatically update hassio-addon-base to version v14.2.2
-
-## 1.2.5
-- automatically update hassio-addon-base to version v14.1.3
-
-## 1.2.4
-- automatically update hassio-addon-base to version v14.0.8
-
-## 1.2.3
-- automatically update hassio-addon-base to version v14.0.8
-
-## 1.2.2
-- automatically update hassio-addon-base to the latest version
-
-## 1.2.1
-- automatically update hassio-addon-base to the latest version
-
-## 1.2.0
-- bump hassio-addon-base to V14.0.0
-- autorelease new version updates on addon base updates
-- auto bump dependency updates for pterodactyl module
-
-## 1.1.1
-- bump hassio-addon-base to latest release
-
-## 1.1.0
-- Bump hassio addon base to 13.0.0
-- update pterodactyl-wings to use the latest version available
-
-## 1.0.0
-- Initial release
+- Manual release via Orchestrator

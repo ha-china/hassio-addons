@@ -1,11 +1,14 @@
 ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:19.0.0
 # hadolint ignore=DL3006
 # renovate: datasource=docker depName=filebrowser/filebrowser
-FROM filebrowser/filebrowser:v2.32.0 AS filebrowser
+FROM filebrowser/filebrowser:v2.53.1 AS filebrowser
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
+
+# Software version (from image tag above)
+ENV FILEBROWSER_VERSION="v2.53.1"
 
 # Install necessary tools
 # 'curl' and 'bash' for installing filebrowser (kept for compatibility if needed, but binary is copied)
@@ -13,22 +16,39 @@ ARG BUILD_DATE="1970-01-01T00:00:00Z"
 # Setup Filebrowser
 # We grab the binary from the official image
 # hadolint ignore=DL3018,DL4006
-RUN apk add --no-cache curl bash dos2unix openssl \
+
+
+
+
+
+
+
+
+
+
+
+# Addon metadata (injected by CI)
+ENV ADDON_VERSION="2.0.0"
+ENV ADDON_NAME="ShieldFile"
+ENV ADDON_SLUG="shieldfile"
+ENV ADDON_UNSUPPORTED="false"
+
+RUN apk add --no-cache curl bash dos2unix openssl nginx \
     && mkdir -p /data/database
 
-COPY --from=filebrowser /filebrowser /usr/local/bin/filebrowser
+COPY --from=filebrowser /bin/filebrowser /usr/local/bin/filebrowser
 
-# Copy Addon run script to S6 services directory
-# Copy Run Script
-COPY run.sh /run.sh
-RUN dos2unix /run.sh && chmod a+x /run.sh
+# Copy rootfs
+COPY rootfs /
+
+# Set executable permissions
+RUN chmod +x /etc/cont-init.d/*.sh /etc/services.d/*/run
 
 # Healthcheck
 HEALTHCHECK \
     --interval=5m --timeout=3s \
-    CMD curl --fail http://127.0.0.1:80/ || exit 1
+    CMD curl --fail http://127.0.0.1:8099/ || exit 1
 
-CMD [ "/run.sh" ]
 
 # Labels
 LABEL org.opencontainers.image.title="ShieldFile"
