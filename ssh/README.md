@@ -1,6 +1,6 @@
 # Home Assistant Add-on: SSH server
 
-允许使用 SSH 或仅使用 Ingress 通过网络终端远程登录 Home Assistant。
+允许使用 SSH 或仅通过 Ingress 使用 Web 终端远程登录 Home Assistant。
 
 ![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield]
 

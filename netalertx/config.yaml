@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: "[老王杂谈说]：\U0001F5A7\U0001F50D WIFI / LAN扫描器、入侵者检测器和存在检测器"
+description: "[老王杂谈说]：\U0001F5A7\U0001F50D WiFi / LAN扫描器、入侵者检测器和存在检测器"
 environment:
   PGID: "20211"
   PORT: "20211"
@@ -36,8 +36,6 @@ ports_description:
   20211/tcp: WebUI port
   20212/tcp: GraphQL port
 privileged:
-  - SYS_ADMIN
-  - DAC_READ_SEARCH
   - NET_ADMIN
   - NET_RAW
 schema:
@@ -52,4 +50,4 @@ slug: netalertx
 tmpfs: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 25.11.29-2
+version: 25.11.29-3

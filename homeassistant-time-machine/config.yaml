@@ -1,9 +1,9 @@
-name: Home Assistant Time Machine
-version: 2.2.0
-slug: homeassistant-time-machine
+name: Home Assistant Time Machine Beta
+version: 2.1.2
+slug: homeassistant-time-machine-beta
 description: '[老王杂谈说]：浏览和恢复 Home Assistant 配置备份'
-url: https://ghfast.top/github.com/diggingfordinos/HomeAssistantTimeMachine
-changelog: https://ghfast.top/github.com/diggingfordinos/HomeAssistantTimeMachine/blob/main/homeassistant-time-machine/CHANGELOG.md
+url: https://ghfast.top/github.com/diggingfordinos/HomeAssistantTimeMachineBeta
+changelog: https://ghfast.top/github.com/diggingfordinos/HomeAssistantTimeMachineBeta/blob/main/homeassistant-time-machine/CHANGELOG.md
 arch:
   - amd64
   - aarch64
