@@ -1,6 +1,6 @@
 ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:19.0.0
-# Use official image pinned to digest to ensure integrity (CodeRabbit: reproducible builds)
-FROM ghcr.nju.edu.cn/requarks/wiki:2@sha256:f7e92a711280e75d88e5c0892af15ccbf53d64b7963e3da9911cbb053d79698d AS wiki_release
+ARG WIKIJS_VERSION=2.5.311
+FROM ghcr.nju.edu.cn/requarks/wiki:${WIKIJS_VERSION} AS wiki_release
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
@@ -9,14 +9,10 @@ ARG BUILD_DATE="unknown"
 # Install Node.js, Yarn and MariaDB client via APK
 # hadolint ignore=DL3018
 
-
-
-
-
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="3.0.0"
+ENV ADDON_VERSION="3.1.0"
 ENV ADDON_NAME="Wiki.JS"
-ENV ADDON_SLUG="wikijs"
+ENV ADDON_SLUG="wiki.js"
 ENV ADDON_UNSUPPORTED="false"
 
 RUN apk add --no-cache nodejs npm yarn wget dos2unix mariadb-client

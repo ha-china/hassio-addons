@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：可以监控多个RSS源以获取您喜爱的节目新集数，并将它们抓取、排序和重命名'
+description: '[老王杂谈说]：可以监控多个RSS源以获取您喜爱的节目新集，并会抓取、排序和重命名它们'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -72,7 +72,8 @@ ingress: true
 ingress_entry: sonarr
 init: false
 map:
-  - config:rw
+  - addon_config:rw
+  - homeassistant_config:rw
   - share:rw
   - media:rw
   - ssl
@@ -107,4 +108,4 @@ schema:
 slug: sonarr_nas
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/sonarr
-version: "4.0.16.2946"
+version: "4.0.16.2946-1"

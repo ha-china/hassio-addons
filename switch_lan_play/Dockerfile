@@ -7,11 +7,8 @@ FROM ${BUILD_FROM} AS builder
 # hadolint ignore=DL3018
 
 
-
-
-
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="2.0.0"
+ENV ADDON_VERSION="2.1.0"
 ENV ADDON_NAME="Switch LAN Play Client"
 ENV ADDON_SLUG="switch-lan-play"
 ENV ADDON_UNSUPPORTED="false"

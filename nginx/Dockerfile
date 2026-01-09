@@ -14,11 +14,8 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3018,DL3047
 
 
-
-
-
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.0.1"
+ENV ADDON_VERSION="0.1.0"
 ENV ADDON_NAME="NGINX"
 ENV ADDON_SLUG="nginx"
 ENV ADDON_UNSUPPORTED="false"

@@ -6,12 +6,18 @@ ENV HA_VERSION="2025.12.5"
 EXPOSE 8123
 
 # Copy and setup the run script
+
+# Addon metadata (injected by CI)
+ENV ADDON_VERSION="0.2.0"
+ENV ADDON_NAME="Home Assistant Test Instance"
+ENV ADDON_SLUG="ha_test_instance"
+ENV ADDON_UNSUPPORTED="false"
+
 COPY run.sh /run.sh
 RUN chmod a+x /run.sh
 
 # Persist data in the add-on data directory
 CMD [ "/run.sh" ]
-
 
 # Health check
 HEALTHCHECK --interval=60s --timeout=15s --start-period=60s --retries=3 \

@@ -1,48 +1,57 @@
-# 家居助手插件：n8n
+# N8n
 
-n8n 是一个可扩展的工作流自动化工具。凭借公平的代码分发模式，n8n 将始终拥有可见的源代码，可以自行托管，并允许您添加自己的自定义函数、逻辑和应用。n8n 的基于节点的方法使其高度通用，使您能够将任何事物连接到任何其他事物。
+![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield]
 
-功能尚未测试，但插件可以运行
+> 工作流自动化工具。N8n 通过强大的工作流自动化扩展您的 Home Assistant。
 
-_感谢大家给我的仓库点赞！要点赞，请点击下面的图片，然后它将出现在右上角。谢谢！_
+---
 
-[![@jdeath/homeassistant-addons 仓库的 Star 者名册](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+## 📖 关于
 
-## 关于
+N8n (Nodemation) 是一个可扩展的工作流自动化工具。通过公平的代码分发模型，n8n 将始终有可见的源代码，可以自行托管，并允许您添加自己的自定义函数、逻辑和应用。
 
-此插件使用 [docker 镜像](https://github.com/n8n-io/n8n)。
+---
 
-## 安装
+## 🐛 报告错误
 
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预先填写插件的详细信息，以帮助我们更快地解决问题。
 
-1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例。
-1. 点击 `保存` 按钮以存储您的配置。
-1. 启动插件。
-1. 插件将失败，这是可以接受的
-1. 通过 ssh 进入您的 homeassistant 并运行 `chmod 2777 /addon_configs/2effc9b9_n8n`
-1. 重新启动插件
-1. 检查插件的日志以查看是否一切正常。
-1. 应该可以通过 <your-ip>:port 打开 WebUI。
-1. 设置管理员账户
-1. 设置将在 /addon_configs/2effc9b9_n8n 中
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&addon_name=n8n&log_information=请在此处粘贴插件日志输出：%0A%0A)**
 
-## 配置
+> [!NOTE]
+> 请使用上面的链接报告问题。这确保了所有必要的信息（插件名称、版本等）将自动包含在您的问题报告中。
 
-您可以选择让插件使用环境文件。注意使用 '/home/node' 作为基本路径，这将映射到 /addon_configs/2effc9b9_n8n 
+## 💡 功能请求
 
-您需要自己创建该文件，并使其成为您想要设置的环境的列表，例如：
+如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预先填写插件的详细信息。
+
+**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=n8n)**
+
+> [!NOTE]
+> 请使用上面的链接请求功能。这确保了插件名称将自动包含在您的功能请求中。
+
+## ⚙️ 配置
+
+通过 Home Assistant 插件页面中的 **配置** 选项卡配置插件。
+
+### 选项
+
+```yaml
+ssl: false # 启用 SSL/TLS（可选）
+certfile: fullchain.pem # 证书文件路径（可选）
+keyfile: privkey.pem # 私钥文件路径（可选）
+log_level: info # 日志级别（trace, debug, info, warning, error）
 ```
-DB_SQLITE_POOL_SIZE=10
-N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
-```
 
-```
-port : 5678 #您想要运行的端口。
-```
+---
 
-Webui 可以在 `<your-ip>:port` 找到。
+## 👨‍💻 致谢与许可证
 
-[repository]: https://github.com/jdeath/homeassistant-addons
+该项目是开源的，并在 MIT 许可证下提供。
+由 **FaserF** 维护。
+
+[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
+[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

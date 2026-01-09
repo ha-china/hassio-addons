@@ -15,19 +15,11 @@ ENV PYTHONUNBUFFERED=1
 # Install System Requirements including Node.js
 # hadolint ignore=DL3018,DL3017
 
-
-
-
-
-
-
-
-
-
 # hadolint ignore=DL3018
 
+
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.2.1"
+ENV ADDON_VERSION="0.3.0"
 ENV ADDON_NAME="AegisBot"
 ENV ADDON_SLUG="aegisbot"
 ENV ADDON_UNSUPPORTED="false"
@@ -131,7 +123,7 @@ RUN chmod a+x /run.sh
 
 # Health check - faster detection with startup grace period
 HEALTHCHECK --interval=30s --timeout=3s --start-period=60s --retries=3 \
-    CMD curl --fail http://127.0.0.1:8099/ || exit 1
+    CMD curl --fail http://127.0.0.1:8077/ || exit 1
 
 CMD [ "/run.sh" ]
 

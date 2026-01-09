@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：一个免费且开源的个人财务管理器'
+description: '[老王杂谈说]：null'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -104,5 +104,5 @@ slug: fireflyiii
 startup: services
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "20260101.1"
+version: "6.4.15"
 webui: "[PROTO:ssl]://[HOST]:[PORT:8080]"

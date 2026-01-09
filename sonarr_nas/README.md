@@ -30,52 +30,52 @@ _Thanks to everyone having starred my repo! To star it click on the image below,
 
 ---
 
-[Sonarr](https://sonarr.tv/) is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.
-This addon is based on the docker image https://github.com/linuxserver/docker-sonarr
+[Sonarr](https://sonarr.tv/) 是一个 Usenet 和 BitTorrent 用户的 PVR（个人视频录像机）。它可以监控多个 RSS 订阅源，以获取你最喜欢的节目的新剧集，并会自动抓取、排序和重命名它们。它还可以配置为在更好的质量格式可用时自动升级已下载文件的格式质量。
+这个插件基于 https://github.com/linuxserver/docker-sonarr 的 docker 镜像。
 
-## Installation
+## 安装
 
 ---
 
-The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
+这个插件的安装非常简单，与安装其他插件没有什么不同。
 
-1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
-   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Set the add-on options to your preferences
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Open the webUI and adapt the software options
+1. 将我的插件仓库添加到你的 Home Assistant 实例中（在 supervisor add-ons store 的右上角，或者如果你已经配置了我的 HA，点击下面的按钮）
+   [![打开你的 Home Assistant 实例并显示添加插件仓库对话框，并预填特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装这个插件。
+1. 点击 `保存` 按钮来保存你的配置。
+1. 设置插件的选项以符合你的偏好。
+1. 启动插件。
+1. 检查插件的日志，看看是否一切正常。
+1. 打开 WebUI 并调整软件选项。
 
-## Configuration
+## 配置
 
-Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+使用插件的 `env_vars` 选项来传递额外的环境变量（名称可以是大小写）。详细说明请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-Webui can be found at <http://homeassistant:PORT> or through the sidebar using Ingress.
-Configurations can be done through the app webUI, except for the following options.
+Webui 可以在 <http://homeassistant:PORT> 或通过 Ingress 在侧边栏中找到。
+配置可以通过应用 WebUI 进行，除了以下选项。
 
-### Options
+### 选项
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `PGID` | int | `0` | Group ID for file permissions |
-| `PUID` | int | `0` | User ID for file permissions |
-| `TZ` | str | | Timezone (e.g., `Europe/London`) |
-| `connection_mode` | list | `ingress_noauth` | Connection mode (ingress_noauth/noingress_auth/ingress_auth) |
-| `localdisks` | str | | Local drives to mount (e.g., `sda1,sdb1,MYNAS`) |
-| `networkdisks` | str | | SMB shares to mount (e.g., `//SERVER/SHARE`) |
-| `cifsusername` | str | | SMB username for network shares |
-| `cifspassword` | str | | SMB password for network shares |
-| `cifsdomain` | str | | SMB domain for network shares |
+| 选项 | 类型 | 默认值 | 描述 |
+|------|------|--------|-------|
+| `PGID` | 整数 | `0` | 文件权限的组 ID |
+| `PUID` | 整数 | `0` | 文件权限的用户 ID |
+| `TZ` | 字符串 | | 时区（例如，`Europe/London`） |
+| `connection_mode` | 列表 | `ingress_noauth` | 连接模式（ingress_noauth/noingress_auth/ingress_auth） |
+| `localdisks` | 字符串 | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
+| `networkdisks` | 字符串 | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | 字符串 | | SMB 网络共享的用户名 |
+| `cifspassword` | 字符串 | | SMB 网络共享的密码 |
+| `cifsdomain` | 字符串 | | SMB 网络共享的域 |
 
-### Connection Modes
+### 连接模式
 
-- `ingress_noauth` - Default, disables authentication for seamless ingress integration
-- `noingress_auth` - Disables ingress for external URL, enables authentication
-- `ingress_auth` - Enables both ingress and authentication
+- `ingress_noauth` - 默认，禁用认证以实现无缝的 Ingress 集成
+- `noingress_auth` - 禁用 Ingress 以使用外部 URL，启用认证
+- `ingress_auth` - 启用 Ingress 和认证
 
-### Example Configuration
+### 示例配置
 
 ```yaml
 PGID: 0
@@ -89,18 +89,18 @@ cifspassword: "password123"
 cifsdomain: "workgroup"
 ```
 
-### Mounting Drives
+### 挂载驱动器
 
-This addon supports mounting both local drives and remote SMB shares:
+这个插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-## Support
+## 支持
 
-Create an issue on github
+在 github 上创建问题
 
-## Illustration
+## 插图
 
 ---
 

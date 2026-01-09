@@ -16,7 +16,7 @@
 
 ARG BUILD_FROM
 ARG BUILD_VERSION
-ARG BUILD_UPSTREAM="1.5.3"
+ARG BUILD_UPSTREAM="1.5.4"
 FROM ${BUILD_FROM}
 
 ##################
@@ -30,7 +30,7 @@ ENV S6_CMD_WAIT_FOR_SERVICES=1 \
 
 # Global LSIO modifications
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_lsio.sh" "/ha_lsio.sh"
-ARG CONFIGLOCATION="/config/addons_config/bazarr"
+ARG CONFIGLOCATION="/config"
 RUN chmod 744 /ha_lsio.sh && if grep -qr "lsio" /etc; then /ha_lsio.sh "$CONFIGLOCATION"; fi && rm /ha_lsio.sh
 
 ##################

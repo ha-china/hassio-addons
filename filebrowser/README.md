@@ -1,11 +1,12 @@
 # Home assistant add-on: Filebrowser
 
-我利用业余时间维护这个Home Assistant插件和其他插件：跟上上游的更改、HA的更改，并在真实硬件上测试需要大量时间（和一些钱）。我大约使用了我超过110个插件中的5到10个，因此我安装了测试机器（并购买了一些我自己不使用的测试服务，如VPN），以便调试和改进插件。
 
-如果这个插件节省了您的时间或使您的设置更简单，我将非常感谢您的支持！
+我利用业余时间维护这个Home Assistant插件以及其他插件：跟进上游变化、Home Assistant的变化，并在真实硬件上测试，这需要大量时间（并且需要一些钱）。我大约使用了我超过110个插件中的5到10个，因此我安装了测试机器（并购买了一些我自己不使用的测试服务，如VPN）来调试和改进插件。
 
-[![请给我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过PayPal捐款][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+如果这个插件为您节省了时间或简化了设置，我将非常感谢您的支持！
+
+[![买我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过PayPal捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
 
@@ -20,32 +21,32 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！点击下面的图片点赞，它将出现在右上角。谢谢！_
+_感谢所有给我仓库点赞的人！要点赞，请点击下面的图片，然后它将在右上角。谢谢！_
 
-[![@alexbelgium/hassio-addons的星标仓库列表](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
 ![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/filebrowser/stats.png)
 
 ## 关于
 
-基于官方Filebrowser项目的[docker镜像](https://hub.docker.com/r/filebrowser/filebrowser)的基于Web的文件管理界面，提供了一种安全的方式来浏览、上传、下载、编辑和管理您的Home Assistant系统中的文件。Filebrowser通过Web浏览器提供了一种干净、现代的界面来处理文件，支持多种文件格式、预览功能和全面的文件操作。
+基于Web的文件管理界面，提供了一种安全的方式，用于在您的Home Assistant系统上浏览、上传、下载、编辑和管理文件。Filebrowser提供了一个干净、现代的界面，通过Web浏览器处理文件，支持多种文件格式、预览功能和全面的文件操作。
 
-此插件基于官方Filebrowser项目的[docker镜像](https://hub.docker.com/r/filebrowser/filebrowser)。
+这个插件基于官方Filebrowser项目的[docker镜像](https://hub.docker.com/r/filebrowser/filebrowser)。
 
 ## 安装
 
-此插件的安装非常简单，与安装任何其他Home Assistant插件没有区别。
+这个插件的安装非常简单，与安装任何其他Home Assistant插件没有区别。
 
 1. 将我的Home Assistant插件仓库[repository]添加到您的Home Assistant实例中。
-1. 安装此插件。
-1. 点击“保存”按钮以保存您的配置。
-1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 通过侧边栏或在`<your-ip>:8071`处访问Web界面。
+2. 安装这个插件。
+3. 点击`保存`按钮以保存您的配置。
+4. 启动插件。
+5. 检查插件的日志以查看是否一切正常。
+6. 通过侧边栏或在`<your-ip>:8071`访问Web界面。
 
 ## 配置
 
-Web界面位于`<your-ip>:8071`或通过使用入口在Home Assistant侧边栏中访问。
+Web界面可以在`<your-ip>:8071`或使用入口时通过Home Assistant侧边栏访问。
 
 **默认凭证：**
 - 用户名：`admin`
@@ -55,15 +56,15 @@ Web界面位于`<your-ip>:8071`或通过使用入口在Home Assistant侧边栏�
 
 ### 选项
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
+| 选项 | 类型 | 默认 | 描述 |
+|------|------|------|------|
 | `ssl` | 布尔 | `false` | 为Web界面启用HTTPS |
-| `certfile` | 字符串 | `fullchain.pem` | SSL证书文件（位于`/ssl/`） |
-| `keyfile` | 字符串 | `privkey.pem` | SSL私钥文件（位于`/ssl/`） |
+| `certfile` | 字符串 | `fullchain.pem` | SSL证书文件（在`/ssl/`中） |
+| `keyfile` | 字符串 | `privkey.pem` | SSL私钥文件（在`/ssl/`中） |
 | `NoAuth` | 布尔 | `true` | 禁用身份验证（更改时重置数据库） |
 | `disable_thumbnails` | 布尔 | `true` | 禁用缩略图生成以提高性能 |
 | `base_folder` | 字符串 | _(可选)_ | 文件浏览器的根文件夹（默认为所有映射文件夹） |
-| `localdisks` | 字符串 | _(可选)_ | 挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
+| `localdisks` | 字符串 | _(可选)_ | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
 | `networkdisks` | 字符串 | _(可选)_ | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
 | `cifsusername` | 字符串 | _(可选)_ | SMB网络共享的用户名 |
 | `cifspassword` | 字符串 | _(可选)_ | SMB网络共享的密码 |
@@ -88,31 +89,31 @@ cifsdomain: "workgroup"
 ## 设置
 
 1. 启动插件并等待其初始化。
-1. 通过Home Assistant侧边栏或在`<your-ip>:8071`处访问Web界面。
-1. 使用默认凭证登录：
+2. 通过Home Assistant侧边栏或在`<your-ip>:8071`访问Web界面。
+3. 使用默认凭证登录：
    - 用户名：`admin`
    - 密码：`admin`
-1. **重要：**点击“设置”>“用户管理”立即更改默认密码。
-1. 通过Web界面配置您喜欢的设置。
-1. 如果禁用身份验证（`NoAuth: true`），则将跳过登录屏幕。
+4. **重要：**通过点击“设置”>“用户管理”立即更改默认密码。
+5. 通过Web界面配置您喜欢的设置。
+6. 如果禁用身份验证（`NoAuth: true`），将跳过登录屏幕。
 
 ### 挂载驱动器
 
-此插件支持挂载本地驱动器和远程SMB共享：
+这个插件支持挂载本地驱动器和远程SMB共享：
 
 - **本地驱动器**：参见[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
 - **远程共享**：参见[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### 自定义脚本和环境变量
 
-此插件通过`addon_config`映射支持自定义脚本和环境变量：
+这个插件支持通过` addon_config`映射自定义脚本和环境变量：
 
 - **自定义脚本**：参见[在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars选项**：使用插件的`env_vars`选项传递额外的环境变量（大写或小写名称）。参见https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2以获取详细信息。
+- **env_vars选项**：使用插件的`env_vars`选项传递额外的环境变量（大小写名称）。参见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
 ## 支持
 
-在GitHub上创建问题，或在[Home Assistant社区讨论板](https://community.home-assistant.io/t/home-assistant-addon-filebrowser/282108/3)上提问。
+在GitHub上创建问题，或在[Home Assistant社区讨论](https://community.home-assistant.io/t/home-assistant-addon-filebrowser/282108/3)上提问。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
