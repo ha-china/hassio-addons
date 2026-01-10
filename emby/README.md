@@ -1,51 +1,57 @@
-# Home assistant 添加组件：emby
+# Home assistant插件：emby
 
-[![捐赠][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+我利用业余时间维护这个和其他Home Assistant插件：跟进上游变化、HA变化以及在真实硬件上测试都需要大量时间（和一些金钱）。我大约使用我超过110个插件中的5-10个，因此我安装了一些我自身不使用的测试机器（和一些测试服务，如VPN）来调试和改进这些插件。
+
+如果这个插件为您节省了时间或简化了您的设置，我将非常感谢您的支持！
+
+[![给我买咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过PayPal捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## 插件信息
 
 ![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Femby%2Fconfig.yaml)
-![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Femby%2Fconfig.yaml)
-![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Femby%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Femby%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Femby%2Fconfig.yaml)
 
-[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![构建器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建器)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它会在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它将在右上角。谢谢！_
 
-[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![@alexbelgium/hassio-addons的starers仓库列表](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/emby/stats.png)
+![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/emby/stats.png)
 
 ## 关于
 
-[emby](https://emby.media/) 组织视频、音乐、直播电视和照片，来自个人媒体库并流式传输到智能电视、流媒体盒子和移动设备。这个容器作为一个独立的 emby 媒体服务器进行打包。
+[emby](https://emby.media/)组织个人媒体库中的视频、音乐、直播电视和照片，并将它们流式传输到智能电视、流媒体盒子和移动设备。这个容器作为独立的emby媒体服务器进行打包。
 
-这个添加组件基于 linuxserver.io 的 [docker 镜像](https://github.com/linuxserver/docker-emby)。
-初始添加组件版本：[https://github.com/petersendev/hassio-addons](https://github.com/petersendev/hassio-addons)
+这个插件基于linuxserver.io的[docker镜像](https://github.com/linuxserver/docker-emby)。
+初始插件版本：https://github.com/petersendev/hassio-addons
 
 ## 配置
 
-使用添加组件的 `env_vars` 选项来传递额外的环境变量（大写或小写名称）。详情请参考：[https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2)。
+使用插件的`env_vars`选项来传递额外的环境变量（大小写名称）。有关详细信息，请参阅https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-Webui 可以在 `<你的IP>:8096` 找到，或者通过 Ingress 在 Home Assistant 中找到。
+Webui可以在`<你的IP>:8096`或通过Ingress在Home Assistant中找到。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
-| `PGID` | 整数 | `0` | 文件权限的组 ID |
-| `PUID` | 整数 | `0` | 文件权限的用户 ID |
+|------|------|--------|------|
+| `PGID` | 整数 | `0` | 文件权限的组ID |
+| `PUID` | 整数 | `0` | 文件权限的用户ID |
 | `TZ` | 字符串 | | 时区（例如，`Europe/London`） |
 | `localdisks` | 字符串 | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | 字符串 | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | 字符串 | | SMB 网络共享的用户名 |
-| `cifspassword` | 字符串 | | SMB 网络共享的密码 |
-| `cifsdomain` | 字符串 | | SMB 网络共享的域 |
-| `smbv1` | 布尔值 | `false` | 启用 SMB v1 协议 |
+| `networkdisks` | 字符串 | | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | 字符串 | | 网络共享的SMB用户名 |
+| `cifspassword` | 字符串 | | 网络共享的SMB密码 |
+| `cifsdomain` | 字符串 | | 网络共享的SMB域 |
+| `smbv1` | 布尔值 | `false` | 启用SMB v1协议 |
 | `silent` | 布尔值 | `false` | 抑制调试消息 |
 
 ### 示例配置
@@ -64,23 +70,28 @@ silent: false
 
 ### 挂载驱动器
 
-这个添加组件支持挂载本地驱动器和远程 SMB 共享：
+这个插件支持挂载本地驱动器和远程SMB共享：
 
-- **本地驱动器**：参考 [在添加组件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：参考 [在添加组件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ## 安装
 
-这个添加组件的安装非常简单，与安装任何其他 Hass.io 添加组件没有区别。
+这个插件的安装非常简单，与安装任何其他Hass.io插件没有区别。
 
-1. [将我的 Hass.io 添加组件仓库][repository] 添加到你的 Hass.io 实例。
-1. 安装这个添加组件。
-1. 点击 `Save` 按钮保存你的配置。
-1. 启动添加组件。
-1. 检查添加组件的日志，看看是否一切正常。
-1. 仔细配置添加组件以符合你的偏好，参考官方文档进行配置。
+1. [将我的Hass.io插件仓库][repository]添加到您的Hass.io实例。
+1. 安装这个插件。
+1. 点击`保存`按钮以保存您的配置。
+1. 启动插件。
+1. 检查插件的日志以查看是否一切正常。
+1. 仔细配置插件以满足您的偏好，请参阅官方文档进行配置。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+---
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

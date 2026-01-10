@@ -13,12 +13,8 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
 # hadolint ignore=DL3018
 
-
-
-
-
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="2.0.0"
+ENV ADDON_VERSION="2.1.2"
 ENV ADDON_NAME="Netboot.xyz"
 ENV ADDON_SLUG="netboot-xyz"
 ENV ADDON_UNSUPPORTED="false"
@@ -31,6 +27,7 @@ RUN \
     dnsmasq \
     nginx \
     nodejs \
+    procps \
     tftp-hpa && \
   echo "**** install build packages ****" && \
   apk add --no-cache --virtual=build-dependencies \
@@ -57,7 +54,7 @@ EXPOSE 3000
 RUN chmod a+x /etc/cont-init.d/* /etc/services.d/*/run
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --retries=3 --start-period=30s \
+HEALTHCHECK --interval=30s --timeout=10s --retries=5 --start-period=120s \
   CMD curl --fail http://127.0.0.1:3000 || exit 1
 
 # Labels

@@ -2,18 +2,15 @@ ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:19.0.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} as base
 
-
 # Install system requirements
 # Pterodactyl Panel v1.11+ requires PHP 8.2/8.3
 # hadolint ignore=DL3018
 
-
-
-
+ENV PTERODACTYL_VERSION="v1.12.0"
 
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.10.0"
-ENV ADDON_NAME="pterodactyl Panel Gameserver - BETA"
+ENV ADDON_VERSION="1.0.0"
+ENV ADDON_NAME="pterodactyl Panel Gameserver"
 ENV ADDON_SLUG="pterodactyl_panel"
 ENV ADDON_UNSUPPORTED="false"
 
@@ -44,6 +41,7 @@ RUN apk add --no-cache \
     php83-ctype \
     php83-zip \
     php83-xmlwriter \
+    php83-iconv \
     tini \
     su-exec \
     openssl \
@@ -60,7 +58,7 @@ WORKDIR /var/www/html
 RUN apk add --no-cache \
     yarn \
     git \
-    && git clone https://ghfast.top/github.com/pterodactyl/panel ./ --depth 1 --branch release/v1.11.11 \
+    && git clone https://ghfast.top/github.com/pterodactyl/panel ./ --depth 1 --branch "release/${PTERODACTYL_VERSION}" \
     && rm -rf .git \
     && chmod -R 755 storage/* bootstrap/cache \
     && find storage -type d > .storage.tmpl \
@@ -81,7 +79,6 @@ RUN apk add --no-cache \
 # All build requirements get scrapped as to maintain a small image
 FROM base as production
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
-ENV PTERODACTYL_VERSION="v1.11.11"
 
 WORKDIR /var/www/html
 
@@ -94,14 +91,13 @@ RUN chmod a+x /run.sh \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 CMD [ "/run.sh" ]
 
-
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --retries=3 --start-period=60s \
+HEALTHCHECK --interval=30s --timeout=10s --retries=5 --start-period=120s \
   CMD curl --fail http://127.0.0.1:80 || exit 1
 
 # Labels
-LABEL org.opencontainers.image.title="pterodactyl Panel Gameserver - BETA"
-LABEL org.opencontainers.image.description="Open-Source Gameserver - Currently not fully working"
+LABEL org.opencontainers.image.title="pterodactyl Panel Gameserver"
+LABEL org.opencontainers.image.description="Open-Source Gameserver Management Panel"
 LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons"
 LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"

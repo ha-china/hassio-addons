@@ -1,4 +1,36 @@
+<!-- markdownlint-disable MD024 -->
+
 # Changelog
+
+## 1.0.1 (2026-01-10)
+
+### 🎨 Style
+
+- auto-fix (prettier,markdownlint) ([`9d0bb13`](https://github.com/FaserF/hassio-addons/commit/9d0bb134235785ead2aeaee2553b8011acd52478))
+
+### 📌 Release Note
+
+- general addon improvements & startup fixes
+
+## 0.11.2 (2026-01-09)
+
+### 📦 Dependencies
+
+- 🚀 release(n8n): version bump [skip-tests] ([`09fb196`](https://github.com/FaserF/hassio-addons/commit/09fb1968338774fcd193caa4e33f80a7cb5cad81))
+
+### 📌 Release Note
+
+- bug fixes and startup improvements
+
+## 0.11.1 (2026-01-09)
+
+### 🎨 Style
+
+- auto-fix (shfmt, black, isort, prettier, markdownlint) ([`72718f5`](https://github.com/FaserF/hassio-addons/commit/72718f5cfc149f65ec936797326b6782ef996461))
+
+### 📌 Release Note
+
+- General add-on structure improvements and startup bug fixes
 
 ## 0.11.0 (2026-01-06)
 
@@ -16,15 +48,23 @@
 
 ### 🎉 Major Release - Unified Addon Update
 
-All addons have been unified, updated, and many bugs have been fixed. Many addons have been partially or completely rewritten to improve stability, performance, and maintainability.
+All add-ons have been unified, updated, and many bugs have been fixed. Many add-ons have
+been partially or completely rewritten to improve stability, performance, and
+maintainability.
 
 #### Important Information
 
-- **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel.
-- **Unsupported Branch**: A new `unsupported` branch has been created for addons that no longer receive direct manual support. These addons are still maintained but may have limited support compared to the main addons.
-- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the addons.
+- **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to
+  test the latest features and improvements before they are released to the stable
+  channel.
+- **Unsupported Branch**: A new `unsupported` branch has been created for add-ons that
+  no longer receive direct manual support. These add-ons are still maintained but may
+  have limited support compared to the main add-ons.
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as
+  usual. Your feedback helps us improve the add-ons.
 
-This release represents a significant effort to standardize and improve all addons in the repository.
+This release represents a significant effort to standardize and improve all add-ons in
+the repository.
 
 ---
 
@@ -34,9 +74,14 @@ This release represents a significant effort to standardize and improve all addo
 
 ### 📋 Major Release - Changes
 
-- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the addons. (Manual)
-- **Unsupported Branch**: A new `unsupported` branch has been created for addons that no longer receive direct manual support. These addons are still maintained but may have limited support compared to the main addons. (Manual)
-- **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel. (Manual)
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as
+  usual. Your feedback helps us improve the addons. (Manual)
+- **Unsupported Branch**: A new `unsupported` branch has been created for addons that
+  no longer receive direct manual support. These addons are still maintained but may
+  have limited support compared to the main addons. (Manual)
+- **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to
+  test the latest features and improvements before they are released to the stable
+  channel. (Manual)
 
 ### 📌 Release Note
 

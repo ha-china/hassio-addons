@@ -1,57 +1,48 @@
-# N8n
+# Home assistant add-on: n8n
 
-![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield]
+n8n is an extendable workflow automation tool. With a fair-code distribution model, n8n will always have visible source code, be available to self-host, and allow you to add your own custom functions, logic and apps. n8n's node-based approach makes it highly versatile, enabling you to connect anything to everything.
 
-> 工作流自动化工具。N8n 通过强大的工作流自动化扩展您的 Home Assistant。
+Functionality not tested, but addon does run
 
----
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
-## 📖 关于
+[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-N8n (Nodemation) 是一个可扩展的工作流自动化工具。通过公平的代码分发模型，n8n 将始终有可见的源代码，可以自行托管，并允许您添加自己的自定义函数、逻辑和应用。
+## About
 
----
+This addon uses the [docker image](https://github.com/n8n-io/n8n).
 
-## 🐛 报告错误
+## Installation
 
-如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预先填写插件的详细信息，以帮助我们更快地解决问题。
 
-**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&addon_name=n8n&log_information=请在此处粘贴插件日志输出：%0A%0A)**
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Add-on will fail, that is ok
+1. ssh into your homeassistant and run `chmod 2777 /addon_configs/2effc9b9_n8n`
+1. start add-on
+1. Check the logs of the add-on to see if everything went well.
+1. Open WebUI should work via <your-ip>:port.
+1. Setup administrator account
+1. Settings will be in /addon_configs/2effc9b9_n8n
+## Configuration
 
-> [!NOTE]
-> 请使用上面的链接报告问题。这确保了所有必要的信息（插件名称、版本等）将自动包含在您的问题报告中。
+You can set the addon to use a environment file if you choose. Note use '/home/node' as base path which will map to /addon_configs/2effc9b9_n8n 
 
-## 💡 功能请求
-
-如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预先填写插件的详细信息。
-
-**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=n8n)**
-
-> [!NOTE]
-> 请使用上面的链接请求功能。这确保了插件名称将自动包含在您的功能请求中。
-
-## ⚙️ 配置
-
-通过 Home Assistant 插件页面中的 **配置** 选项卡配置插件。
-
-### 选项
-
-```yaml
-ssl: false # 启用 SSL/TLS（可选）
-certfile: fullchain.pem # 证书文件路径（可选）
-keyfile: privkey.pem # 私钥文件路径（可选）
-log_level: info # 日志级别（trace, debug, info, warning, error）
+You need to create the file yourself and make it a list of environments you want to set, like:
+```
+DB_SQLITE_POOL_SIZE=10
+N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 ```
 
----
+```
+port : 5678 #port you want to run on.
+```
 
-## 👨‍💻 致谢与许可证
+Webui can be found at `<your-ip>:port`.
 
-该项目是开源的，并在 MIT 许可证下提供。
-由 **FaserF** 维护。
+[repository]: https://github.com/jdeath/homeassistant-addons
 
-[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
-[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

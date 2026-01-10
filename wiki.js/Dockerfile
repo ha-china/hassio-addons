@@ -10,7 +10,7 @@ ARG BUILD_DATE="unknown"
 # hadolint ignore=DL3018
 
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="3.1.0"
+ENV ADDON_VERSION="3.1.3"
 ENV ADDON_NAME="Wiki.JS"
 ENV ADDON_SLUG="wiki.js"
 ENV ADDON_UNSUPPORTED="false"
@@ -29,7 +29,7 @@ RUN chmod a+x /run.sh \
     && dos2unix /run.sh
 # Healthcheck (use wget since it's available in base image)
 HEALTHCHECK --interval=30s --timeout=15s --start-period=30s --retries=3 \
-    CMD wget --spider -q http://127.0.0.1:3000/ || exit 1
+    CMD wget --spider -q http://127.0.0.1:3010/ || exit 1
 
 CMD [ "/run.sh" ]
 

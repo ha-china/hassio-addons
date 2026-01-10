@@ -7,7 +7,7 @@ backup_exclude:
   - "**/transcode/"
 breaking_versions:
   - 10.10.6*
-description: '[老王杂谈说]：一个让您掌控媒体管理和流媒体的自由软件媒体系统'
+description: '[老王杂谈说]：一个让您掌控管理和流式传输您媒体的自由软件媒体系统'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -70,6 +70,8 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
+environment:
+  - ATTACHED_DEVICES_PERMS: "/dev/dri /dev/dvb /dev/vchiq /dev/vc-mem /dev/video1? -type c -o -type f"
 host_dbus: true
 host_network: true
 image: ghcr.nju.edu.cn/alexbelgium/jellyfin-{arch}
@@ -117,11 +119,10 @@ schema:
   cifspassword: str?
   cifsusername: str?
   data_location: str
-  i915_enable_guc: int?
   localdisks: str?
   networkdisks: str?
 slug: jellyfin
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "10.11.5"
+version: 10.11.5-2
 video: true

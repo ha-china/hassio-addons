@@ -1,13 +1,12 @@
 name: BentoPDF
-version: 0.1.0
+version: "1.0.1"
 slug: bentopdf
+image: ghcr.nju.edu.cn/faserf/hassio-addons-bentopdf-{arch}
 description: '[老王杂谈说]：自托管，注重隐私的PDF工具包'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/bentopdf
-startup: services
 arch:
   - aarch64
   - amd64
-image: ghcr.nju.edu.cn/faserf/hassio-addons/bentopdf/{arch}
 init: false
 map:
   - ssl:rw

@@ -1,5 +1,5 @@
 name: "WhatsApp"
-version: "0.4.0"
+version: "0.4.3"
 slug: "whatsapp"
 image: ghcr.nju.edu.cn/faserf/hassio-addons-whatsapp-{arch}
 description: "[老王杂谈说]：Home Assistant WhatsApp 后端 (Baileys/Node.js)"
@@ -13,13 +13,11 @@ map:
 panel_icon: mdi:whatsapp
 options:
   log_level: info
-  mdns_name: "WhatsApp Addon"
 schema:
   log_level: str
-  mdns_name: str
 ports:
   8066/tcp: 8066
-ports_description:
-  8066/tcp: WhatsApp API (for Integration)
+hassio_api: true
 ingress: true
+ingress_port: 8066
 ingress_entry: /

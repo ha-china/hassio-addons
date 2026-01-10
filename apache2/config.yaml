@@ -1,8 +1,8 @@
 ---
 name: Apache2
-version: 3.1.0
+version: 3.1.3
 slug: apache2
-description: '[老王杂谈说]：使用PHP和MariaDB的开源Web服务器。'
+description: '[老王杂谈说]：null'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/apache2
 arch:
   - aarch64
@@ -14,6 +14,7 @@ map:
   - media:rw
   - share:rw
 ingress: true
+ingress_port: 80
 init: false
 panel_icon: mdi:web-box
 options:

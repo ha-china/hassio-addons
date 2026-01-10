@@ -1,5 +1,16 @@
 # TOMMY
 
+## 1.2.0
+
+### Major Changes
+- Improved motion detection algorithm (both basic and enhanced mode)
+- Allowed High Performance mode for other devices than ESP32-C5
+- **ESPHome users: Please update your devices with the latest TOMMY firmware**
+
+### Minor Changes
+- Improved explanations of the different performance modes
+- Removed experimental "False positive filtering" as it's redundant after the latest improvements to the algorithm
+
 ## 1.1.0
 
 ### Major Changes

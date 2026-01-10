@@ -9,24 +9,19 @@ if bashio::addon.protected; then
 fi
 
 nginx_uid=abc
-declare nginx_port
-declare tftp_port
-nginx_port=$(bashio::addon.port 85)
-tftp_port=$(bashio::addon.port "69/udp")
+# Force ports to required values for host_network mode
+# These ports MUST remain fixed: 85 (NGINX), 3000 (Web UI), 69 (TFTP)
+nginx_port=85
+tftp_port=69
 dhcp_range=$(bashio::config 'dhcp_range')
 path=$(bashio::config 'path')
 path_config=$(bashio::config 'path_config')
 
-# Validate critical ports for PXE boot
-if bashio::var.has_value "${nginx_port}" && [ "${nginx_port}" != "85" ]; then
-	bashio::log.warning "NGINX port changed from 85 to ${nginx_port}!"
-	bashio::log.warning "PXE boot clients expect assets on port 85. This may cause boot failures!"
-fi
-
-if bashio::var.has_value "${tftp_port}" && [ "${tftp_port}" != "69" ]; then
-	bashio::log.warning "TFTP port changed from 69 to ${tftp_port}!"
-	bashio::log.warning "PXE boot requires TFTP on port 69. Network boot will NOT work!"
-fi
+# Note: With host_network: true, ports are fixed and cannot be changed
+# The config.yaml defines "85": 85 and "69/udp": 69, which means internal=external
+# We don't need to validate via bashio::addon.port as it may return empty with host_network
+# Instead, we just use the fixed values directly
+bashio::log.info "Using fixed ports for host_network mode: NGINX=85, TFTP=69, Web UI=3000"
 
 echo "Creating user $nginx_uid and setting permissions..."
 
@@ -37,25 +32,15 @@ adduser "$nginx_uid" "$nginx_uid"
 adduser "$nginx_uid" nginx
 
 echo "Generating nginx config..."
-if bashio::var.has_value "${nginx_port}"; then
-	bashio::log.info "Using NGINX port: ${nginx_port}"
-	echo "server {" >/defaults/default
-	echo "	listen ${nginx_port};" >>/defaults/default
-	echo "	location / {" >>/defaults/default
-	echo "		root /assets;" >>/defaults/default
-	echo "		autoindex on;" >>/defaults/default
-	echo "	}" >>/defaults/default
-	echo "}" >>/defaults/default
-else
-	bashio::log.info "NGINX port not mapped externally, using default port 85"
-	echo "server {" >/defaults/default
-	echo "	listen 85;" >>/defaults/default
-	echo "	location / {" >>/defaults/default
-	echo "		root /assets;" >>/defaults/default
-	echo "		autoindex on;" >>/defaults/default
-	echo "	}" >>/defaults/default
-	echo "}" >>/defaults/default
-fi
+# Always use port 85 (fixed for host_network mode and PXE boot requirements)
+bashio::log.info "Using NGINX port: 85 (fixed for host_network mode)"
+echo "server {" >/defaults/default
+echo "	listen 85;" >>/defaults/default
+echo "	location / {" >>/defaults/default
+echo "		root /assets;" >>/defaults/default
+echo "		autoindex on;" >>/defaults/default
+echo "	}" >>/defaults/default
+echo "}" >>/defaults/default
 
 echo "Linking folder $path to /assets and $path_config to /config."
 

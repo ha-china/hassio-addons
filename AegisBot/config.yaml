@@ -1,9 +1,9 @@
 ---
 name: AegisBot
-version: "0.3.1"
+version: "0.3.4"
 slug: aegisbot
 image: ghcr.nju.edu.cn/faserf/hassio-addons-aegisbot-{arch}
-description: '[老王杂谈说]：用于生产环境的Telegram管理机器人，具有AI驱动的FAQ和安全功能'
+description: '[老王杂谈说]：生产就绪的Telegram管理机器人，具有AI驱动的FAQ和安全功能'
 url: https://ghfast.top/github.com/FaserF/AegisBot
 arch:
   - aarch64

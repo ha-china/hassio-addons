@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.3.3 (2026-01-10)
+
+### 🎨 Style
+
+- auto-fix (prettier,markdownlint) ([`9d0bb13`](https://github.com/FaserF/hassio-addons/commit/9d0bb134235785ead2aeaee2553b8011acd52478))
+
+### 📌 Release Note
+
+- general addon improvements & startup fixes
+
+## 0.3.2 (2026-01-09)
+
+### 📦 Dependencies
+
+- 🚀 release(n8n): version bump [skip-tests] ([`09fb196`](https://github.com/FaserF/hassio-addons/commit/09fb1968338774fcd193caa4e33f80a7cb5cad81))
+
+### 📌 Release Note
+
+- bug fixes and startup improvements
+
+## 0.3.1 (2026-01-09)
+
+### 🎨 Style
+
+- auto-fix (shfmt,black,isort,prettier,markdownlint) ([`72718f5`](https://github.com/FaserF/hassio-addons/commit/72718f5cfc149f65ec936797326b6782ef996461))
+
+### 📌 Release Note
+
+- Improved Docker healthchecks (start-period 120s, retries 5), dynamic version detection, and startup banner fixes
+
 ## 0.3.0 (2026-01-06)
 
 ### 📦 Dependencies

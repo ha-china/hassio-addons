@@ -1,12 +1,12 @@
 # Hass.io Add-ons: Flexget
 
 
-我在业余时间维护这个和其他的Home Assistant插件：跟上上游的变化、HA的变化，并在真实硬件上测试需要花费很多时间（并且一些钱）。我大约使用我超过110个插件中的5-10个，因此我安装了一些我自己的测试机器（并且购买了一些测试服务，如VPN）来调试和提高插件。
+我利用业余时间维护这个和其他的Home Assistant插件：跟上上游的变化、HA的变化以及在真实硬件上测试需要大量时间（和一些金钱）。我大约使用我超过110个插件中的5-10个，因此我安装了一些我自身不使用的测试机器（和一些测试服务，如VPN）来调试和改进插件。
 
 如果这个插件为您节省了时间或使您的设置更简单，我将非常感谢您的支持！
 
-[![请给我买咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过PayPal捐款][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![买我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过PayPal捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
 
@@ -21,18 +21,18 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我仓库星标的人！要星标它，请点击下面的图片，然后它将在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！点击下面的图片点赞，它就会在右上角。谢谢！_
 
-[![@alexbelgium/hassio-addons的星标者仓库名单](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![@alexbelgium/hassio-addons的星标者仓库列表](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载演变](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/flexget/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/flexget/stats.png)
 
 ## 关于
 
-[FlexGet](https://flexget.com/)是一个用于所有媒体的多功能自动化工具。它可以支持种子、NZB、播客、漫画、电视、电影、RSS、HTML、CSV等。
+[FlexGet](https://flexget.com/)是一个多用途的自动化工具，适用于您的所有媒体。它可以支持种子、NZB、播客、漫画、电视、电影、RSS、HTML、CSV等。
 
 主要功能：
-- 强大的插件系统，超过300个插件
+- 强大的插件系统，拥有300多个插件
 - RSS源处理和过滤
 - 与下载客户端的集成
 - 基于Web的管理界面
@@ -40,41 +40,41 @@ _感谢所有给我仓库星标的人！要星标它，请点击下面的图片�
 
 ## 安装
 
-这个插件的安装非常直接，与安装任何其他插件没有不同。
+这个插件的安装非常简单，与安装任何其他插件没有什么不同。
 
-1. 将我的插件仓库添加到您的Home Assistant实例（在右上角的supervisor插件商店，或者如果您已经配置了我的HA，点击下面的按钮）
-   [![打开您的Home Assistant实例并显示带有特定仓库URL预填充的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的Home Assistant实例中（在supervisor插件商店的右上角，或者如果您已经配置了我的HA，点击下面的按钮）
+   [![打开您的Home Assistant实例并显示带有特定仓库URL预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装这个插件。
 1. 点击`保存`按钮以保存您的配置。
-1. 设置插件的选项以符合您的偏好
+1. 根据您的偏好设置插件选项。
 1. 启动插件。
-1. 检查插件的日志以查看一切是否正常。
+1. 检查插件的日志以查看是否一切正常。
 1. 打开WebUI并调整软件选项
 
 ## 配置
 
-使用插件的`env_vars`选项传递额外的环境变量（大写或小写名称）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+使用插件的`env_vars`选项传递额外的环境变量（大小写名称）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-Webui位于 <http://homeassistant:5050>。
+Webui可以在<http://homeassistant:5050>找到。
 默认密码：`homeassistant123`（通过插件选项更改）。
 
-### 设置步骤
+### 配置步骤
 
 1. 启动插件后访问Web界面
 2. 创建或编辑您的FlexGet配置文件
 3. 设置RSS源和下载源
-4. 配置输出插件以用于您的下载客户端
+4. 配置用于下载客户端的输出插件
 5. 测试配置并启用计划任务
 
 ### 选项
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
-| `PGID` | 整数 | `0` | 文件权限的组ID |
-| `PUID` | 整数 | `0` | 文件权限的用户ID |
-| `WebuiPass` | 字符串 | `homeassistant123` | Web界面密码 |
-| `FG_PLUGINS` | 字符串 | | 需要安装的额外插件 |
-| `FG_LOG_LEVEL` | 列表 | | 日志级别（critical/error/warning/info/verbose/debug/trace） |
+| 选项 | 类型 | 默认 | 描述 |
+|------|------|------|------|
+| `PGID` | int | `0` | 文件权限的组ID |
+| `PUID` | int | `0` | 文件权限的用户ID |
+| `WebuiPass` | str | `homeassistant123` | Web界面密码 |
+| `FG_PLUGINS` | str | | 需要安装的额外插件 |
+| `FG_LOG_LEVEL` | list | | 日志级别（critical/error/warning/info/verbose/debug/trace） |
 
 ### 示例配置
 
@@ -102,11 +102,11 @@ tasks:
       port: 9091
 ```
 
-完整的配置文档，请参阅：https://flexget.com/Configuration
+完整的配置文档请见：https://flexget.com/Configuration
 
 ## 支持
 
-如果您在安装中遇到问题，请务必查看github。
+如果您在安装中遇到问题，请确保查看github。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

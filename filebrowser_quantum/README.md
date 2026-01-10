@@ -1,57 +1,57 @@
 # Home assistant add-on: FileBrowser Quantum
 
-我利用业余时间维护这个Home Assistant插件及其他插件：跟进上游变化、Home Assistant的变化，并在真实硬件上进行测试，这需要花费大量时间（和一些金钱）。我大约使用我超过110个插件中的5-10个，因此我安装了一些我本人不使用的测试机器（和一些测试服务，如VPN）来调试和改进插件。
+我利用业余时间维护这个Home Assistant插件和其他插件：跟上上游的变更、Home Assistant的变更，并在真实硬件上测试，这需要花费大量时间（和一些金钱）。我大约使用我超过110个插件中的5到10个，因此我安装了一些我自身不使用的测试机器（和一些测试服务，如VPN）来调试和改进插件。
 
 如果这个插件节省了您的时间或简化了您的设置，我将非常感谢您的支持！
 
-[![请给我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过PayPal捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
 
 ![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffilebrowser_quantum%2Fconfig.yaml)
-![入口](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffilebrowser_quantum%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffilebrowser_quantum%2Fconfig.yaml)
 ![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffilebrowser_quantum%2Fconfig.yaml)
 
-[![Codacy徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![构建者](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建者)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![构建器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建器)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！点击下面的图片来点赞，它将会出现在右上角。谢谢！_
+_感谢所有给我仓库点赞的人！点击下面的图片进行点赞，它将出现在右上角。谢谢！_
 
-[![@alexbelgium/hassio-addons的星标者仓库列表](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/filebrowser_quantum/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/filebrowser_quantum/stats.png)
 
 ## 关于
 
-FileBrowser Quantum是一个现代、响应式、多源文件管理器，具有实时索引、高级共享和扩展的认证选项（密码、代理、OIDC或不认证）。它是原始Filebrowser项目的重大分支，设计用于更快的浏览和更丰富的预览。
+FileBrowser Quantum是一个现代化的、响应式的、多源文件管理器，具有实时索引、高级共享和扩展的认证选项（密码、代理、OIDC或不认证）。它是原始Filebrowser项目的重大分支，设计用于更快的浏览和更丰富的预览。
 
 这个插件基于FileBrowser Quantum项目的[docker镜像](https://hub.docker.com/r/gtstef/filebrowser)。
 
 ## 安装
 
-这个插件的安装非常直接，与安装任何其他Home Assistant插件没有区别。
+这个插件的安装非常简单，与安装任何其他Home Assistant插件没有区别。
 
 1. 将我的Home Assistant插件仓库[repository]添加到您的Home Assistant实例中。
 1. 安装这个插件。
-1. 点击“保存”按钮以存储您的配置。
+1. 点击“保存”按钮以保存您的配置。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 通过侧边栏或`<your-ip>:8071`访问Web UI。
+1. 检查插件的日志，看看是否一切正常。
+1. 通过侧边栏或`<your-ip>:8071`访问Web界面。
 
 ## 配置
 
-Web UI位于`<your-ip>:8071`或通过Ingress在Home Assistant侧边栏中访问。
+Web界面可以在`<your-ip>:8071`或使用Ingress通过Home Assistant侧边栏访问。
 
 **默认凭证：**
 - 用户名：`admin`
 - 密码：`admin`
 
-**重要：**首次登录后立即更改默认凭证以提高安全性。
+**重要提示：**首次登录后立即更改默认凭证以提高安全性。
 
 ### 选项
 
@@ -66,12 +66,12 @@ Web UI位于`<your-ip>:8071`或通过Ingress在Home Assistant侧边栏中访问�
 
 ## 设置
 
-1. 启动插件并等待它初始化。
+1. 启动插件并等待其初始化。
 1. 通过Home Assistant侧边栏或`<your-ip>:8071`访问Web界面。
 1. 使用默认凭证登录：
    - 用户名：`admin`
    - 密码：`admin`
-1. **重要：**通过点击“设置”>“用户管理”立即更改默认密码。
+1. **重要提示：**通过点击“设置”>“用户管理”立即更改默认密码。
 1. 通过插件选项或Web界面配置其他源和认证设置。
 
 ### 挂载驱动器
@@ -83,7 +83,7 @@ Web UI位于`<your-ip>:8071`或通过Ingress在Home Assistant侧边栏中访问�
 
 ### 自定义脚本和环境变量
 
-这个插件支持通过`addon_config`映射进行自定义脚本和环境变量：
+这个插件通过`addon_config`映射支持自定义脚本和环境变量：
 
 - **自定义脚本**：参见[在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
 - **env_vars选项**：使用插件的`env_vars`选项传递额外的环境变量（大小写名称）。参见https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2以获取详细信息。

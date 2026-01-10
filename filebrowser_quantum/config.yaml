@@ -107,4 +107,4 @@ schema:
 slug: filebrowser_quantum
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "1.1.6b0"
+version: "1.1.0"

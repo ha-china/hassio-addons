@@ -1,6 +1,7 @@
 # Home assistant add-on: Photoprism
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the add-ons
+
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
 If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
@@ -75,7 +76,6 @@ Configurations can be done through the app webUI, except for the following optio
 | `IMPORT_PATH` | str | `/share/photoprism/import` | Import files path |
 | `BACKUP_PATH` | str | `/share/photoprism/backup` | Backup storage path |
 | `UPLOAD_NSFW` | bool | `true` | Allow uploads that may be offensive |
-| `CONFIG_LOCATION` | str | | Location of additional config.yaml |
 | `graphic_drivers` | list | | Graphics driver (mesa) |
 | `ingress_disabled` | bool | | Disable ingress for direct IP:port access |
 | `localdisks` | str | | Local drives to mount (e.g., `sda1,sdb1,MYNAS`) |
@@ -83,6 +83,8 @@ Configurations can be done through the app webUI, except for the following optio
 | `cifsusername` | str | | SMB username for network shares |
 | `cifspassword` | str | | SMB password for network shares |
 | `cifsdomain` | str | | SMB domain for network shares |
+
+⚠ **Migration notice**: Configuration files now live under `/addon_configs/xxx-photoprism/`. The add-on will attempt to migrate files from the old `/config/addons_config/photoprism/` location automatically, but any hard-coded paths, scripts, or backups pointing at the old location will need to be updated. Make a backup before upgrading in case custom paths or permissions cause the migration to fail.
 
 ### Example Configuration
 
@@ -105,12 +107,12 @@ cifsdomain: "workgroup"
 
 ### Advanced Configuration
 
-Additional options can be configured in `/config/addons_config/photoprism/config.yaml`.
+Additional options can be configured in `/addon_configs/xxx-photoprism/config.yaml`.
 Complete list: https://github.com/photoprism/photoprism/blob/develop/docker-compose.yml
 
 ### External Database Setup
 
-For external database, add to `addons_config/photoprism/config.yaml`:
+For external database, add to `/addon_configs/xxx-photoprism/config.yaml`:
 
 ```yaml
 PHOTOPRISM_DATABASE_DRIVER: "mysql"
@@ -145,25 +147,3 @@ You can access it via portainer addon or executing `docker exec -it <photoprism 
 Create an issue on github
 
 [repository]: https://github.com/alexbelgium/hassio-addons
-
----
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
----
-
-## 📱 关注我
-
-扫描下面二维码，关注我。有需要可以随时给我留言：
-
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
-
-## ☕ 赞助支持
-
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
-
-感谢您的支持与鼓励！

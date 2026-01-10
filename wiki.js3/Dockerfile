@@ -1,8 +1,8 @@
 ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:19.0.0
 # Use official image pinned to digest to ensure integrity (CodeRabbit: reproducible builds)
-# Note: This uses Wiki.js V3 Beta/Alpha - update digest when new versions are released
-# The digest is tracked by Renovate via custom manager in .github/renovate.json
-FROM ghcr.nju.edu.cn/requarks/wiki:3.0.0-alpha@sha256:6335f9dd790f1c973ffd48e0c45ae201739e98f8d332b495a6cc159d3cdcfaa6 AS wiki_release
+# Note: This uses Wiki.js V3 Beta/Alpha - Renovate tracks ARG WIKIJS_VERSION
+ARG WIKIJS_VERSION=3.0.0-alpha.413
+FROM ghcr.nju.edu.cn/requarks/wiki:${WIKIJS_VERSION} AS wiki_release
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
@@ -11,14 +11,10 @@ ARG BUILD_DATE="unknown"
 # Install Node.js, Yarn and MariaDB client via APK
 # hadolint ignore=DL3018
 
-
-
-
-
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.2.1"
+ENV ADDON_VERSION="0.3.2"
 ENV ADDON_NAME="Wiki.JS V3 (Beta)"
-ENV ADDON_SLUG="wikijs3"
+ENV ADDON_SLUG="wiki.js3"
 ENV ADDON_UNSUPPORTED="false"
 
 RUN apk add --no-cache \
@@ -41,14 +37,14 @@ RUN WIKIJS_VERSION=$(node -p "require('./package.json').version" 2>/dev/null || 
     echo "WIKIJS_VERSION=${WIKIJS_VERSION}" >> /etc/environment && \
     rm -f /wiki/config.sample.yml
 
-COPY run.sh /
-RUN chmod a+x /run.sh \
-    && dos2unix /run.sh
-# Healthcheck (use wget since it's available in base image)
-HEALTHCHECK --interval=30s --timeout=15s --start-period=30s --retries=3 \
-    CMD wget --spider -q http://127.0.0.1:3000/ || exit 1
+COPY rootfs /
 
-CMD [ "/run.sh" ]
+RUN chmod +x /etc/cont-init.d/*.sh /etc/services.d/*/run \
+    && dos2unix /etc/cont-init.d/*.sh /etc/services.d/*/run
+
+# Healthcheck
+HEALTHCHECK --interval=30s --timeout=15s --start-period=120s --retries=5 \
+    CMD wget --spider -q http://127.0.0.1:3011/ || exit 1
 
 # Labels
 LABEL \

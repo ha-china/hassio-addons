@@ -1,7 +1,39 @@
 # Changelog
 
-## 0.1.1 (2026-01-08)
+## 0.1.4 (2026-01-10)
 
+### 🎨 Style
+
+- auto-fix (prettier,markdownlint) ([`9d0bb13`](https://github.com/FaserF/hassio-addons/commit/9d0bb134235785ead2aeaee2553b8011acd52478))
+
+### 📌 Release Note
+
+- general addon improvements & startup fixes
+
+## 0.1.3 (2026-01-09)
+
+### 📦 Dependencies
+
+- 🚀 release(n8n): version bump [skip-tests] ([`09fb196`](https://github.com/FaserF/hassio-addons/commit/09fb1968338774fcd193caa4e33f80a7cb5cad81))
+
+### 📌 Release Note
+
+- bug fixes and startup improvements
+
+## 0.1.2 (2026-01-09)
+
+### 🎨 Style
+
+- auto-fix (shfmt, black, isort, prettier, markdownlint) ([`72718f5`](https://github.com/FaserF/hassio-addons/commit/72718f5cfc149f65ec936797326b6782ef996461))
+
+### 📌 Release Note
+
+- Dynamic version sourcing via `bashio::addon.version` for accurate runtime version display
+- Healthcheck timing adjustments for improved reliability
+- Startup script improvements and bug fixes
+- Auto-formatting applied (shfmt, prettier, markdownlint)
+
+## 0.1.1 (2026-01-08)
 
 ## 0.1.0 (2026-01-06)
 

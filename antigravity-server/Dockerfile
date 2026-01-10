@@ -1,5 +1,5 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base:9.1.0
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base:9.1.0 # hadolint ignore=DL3008
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -17,8 +17,10 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # hadolint ignore=DL3008,SC1091
 
+# hadolint ignore=DL3008,SC1091
+
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.3.0"
+ENV ADDON_VERSION="1.0.0"
 ENV ADDON_NAME="Antigravity-Server"
 ENV ADDON_SLUG="antigravity-server"
 ENV ADDON_UNSUPPORTED="false"

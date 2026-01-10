@@ -1,7 +1,38 @@
 # Changelog
 
-## 2.1.1 (2026-01-08)
+## 2.1.5 (2026-01-10)
 
+### 🎨 Style
+
+- auto-fix (prettier,markdownlint) ([`9d0bb13`](https://github.com/FaserF/hassio-addons/commit/9d0bb134235785ead2aeaee2553b8011acd52478))
+
+### 📌 Release Note
+
+- general addon improvements & startup fixes
+
+## 2.1.4 (2026-01-09)
+
+### 📦 Dependencies
+
+- 🚀 release(n8n): version bump [skip-tests] ([`09fb196`](https://github.com/FaserF/hassio-addons/commit/09fb1968338774fcd193caa4e33f80a7cb5cad81))
+
+### 📌 Release Note
+
+- bug fixes and startup improvements
+
+## 2.1.3 (2026-01-09)
+
+### 🎨 Style
+
+- auto-fix (shfmt,black,isort,prettier,markdownlint) ([`72718f5`](https://github.com/FaserF/hassio-addons/commit/72718f5cfc149f65ec936797326b6782ef996461))
+
+### 📌 Release Note
+
+- General addon structure improvements and startup bug fixes
+
+## 2.1.2 (2026-01-09)
+
+## 2.1.1 (2026-01-08)
 
 ## 2.1.0 (2026-01-06)
 
