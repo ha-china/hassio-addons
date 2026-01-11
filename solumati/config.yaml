@@ -1,8 +1,8 @@
 ---
 name: "Solumati"
-version: "2.1.3"
+version: "2.1.4"
 slug: "solumati"
-description: "[老王杂谈说]：反滑动革命 - 专注于有意义匹配的自托管约会平台。"
+description: "[老王杂谈说]：null"
 url: "https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/solumati"
 arch:
   - aarch64

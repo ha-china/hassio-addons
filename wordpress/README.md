@@ -14,8 +14,8 @@
 > [!CAUTION]
 > **实验性 / Beta 状态**
 >
-> 该插件仍在开发中，主要用于个人使用。
-> 目前尚未进行广泛测试，但预计基本功能可以正常工作。
+> 此插件仍在开发中，并且主要开发用于个人使用。
+> 它尚未经过广泛测试，但预计可以基本运行。
 
 ---
 
@@ -23,7 +23,7 @@
 
 网络上最受欢迎的发布平台。
 
-WordPress 是一种开源软件，您可以使用它来创建一个漂亮的网站、博客或应用程序。
+WordPress 是一款开源软件，您可以使用它来创建一个漂亮的网站、博客或应用程序。
 
 此插件将 WordPress 带到 Home Assistant，允许您直接在您的 Home Assistant 实例上托管您自己的网站。
 
@@ -41,7 +41,7 @@ keyfile: privkey.pem
 ssl: false
 wordpress_admin_email: admin@example.com
 wordpress_admin_user: admin
-wordpress_title: My Blog
+wordpress_title: 我的博客
 wordpress_url: http://wordpress.local
 ```
 
@@ -49,7 +49,7 @@ wordpress_url: http://wordpress.local
 
 ## 👨‍💻 致谢 & 许可证
 
-该项目是开源的，并遵循 MIT 许可证。
+此项目是开源的，并根据 MIT 许可证提供。
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

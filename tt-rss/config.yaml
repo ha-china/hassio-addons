@@ -1,18 +1,30 @@
 name: Tiny Tiny RSS
-version: 0.1.1
+version: 0.1.2
 slug: tt-rss
-description: '[老王杂谈说]：基于网络的新闻源阅读器和聚合器'
+description: '[老王杂谈说]：null'
 url: https://tt-rss.org
 arch:
   - aarch64
   - amd64
 startup: services
+map:
+  - ssl:rw
 options:
   self_url: ""
+  ssl: false
+  certfile: fullchain.pem
+  keyfile: privkey.pem
 schema:
   self_url: str?
+  ssl: bool
+  certfile: str
+  keyfile: str
 init: false
+hassio_api: true
+ports:
+  8280/tcp: 8280
+  8281/tcp: 8281
 ingress: true
-ingress_port: 80
+ingress_port: 8280
 panel_icon: mdi:rss
 image: ghcr.nju.edu.cn/faserf/hassio-addons-tt-rss-{arch}

@@ -7,44 +7,44 @@
 [![Docker Image](https://img.shields.io/badge/docker-2.1.3-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-openssl)
 ![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> Generate self-signed certificates
+> 生成自签名证书
 
 ---
 
-## 📖 About
+## 📖 关于
 
-If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填写插件信息，以帮助我们更快地解决问题。
 
-If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
+如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填写插件信息。
 
-## 🐛 Report a Bug
+## 🐛 报告错误
 
-If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填写插件信息，以帮助我们更快地解决问题。
 
-**[Report a Bug](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=2.1.1&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
-
-> [!NOTE]
-> Please use the link above to report problems. This ensures that all necessary information (add-on name, version, etc.) is automatically included in your bug report.
-
-## 💡 Feature Request
-
-If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
-
-**[Request a Feature](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=openssl)**
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=2.1.1&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
 
 > [!NOTE]
-> Please use the link above to request features. This ensures that the add-on name is automatically included in your feature request.
+> 请使用上面的链接报告问题。这确保了所有必要信息（插件名称、版本等）会自动包含在您的错误报告中。
 
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
+## 💡 功能请求
+
+如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填写插件信息。
+
+**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=openssl)**
+
+> [!NOTE]
+> 请使用上面的链接请求功能。这确保了插件名称会自动包含在您的功能请求中。
+
+此项目是开源的，并在MIT许可证下提供。
+由 **FaserF** 维护。
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ 配置
 
-Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
+通过 Home Assistant 插件页面中的 **配置** 选项卡配置插件。
 
-### Options
+### 选项
 
 ```yaml
 website_name: null
@@ -52,10 +52,10 @@ website_name: null
 
 ---
 
-## 👨‍💻 Credits & License
+## 👨‍💻 致谢与许可证
 
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
+此项目是开源的，并在MIT许可证下提供。
+由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

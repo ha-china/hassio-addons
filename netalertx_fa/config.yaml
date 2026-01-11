@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: "[老王杂谈说]：\U0001F5A7\U0001F50D WIFI / LAN扫描器，入侵者检测器和存在检测器"
+description: "[老王杂谈说]：\U0001F5A7\U0001F50D WIFI / LAN扫描器、入侵者和存在检测器"
 environment:
   PGID: "20211"
   PORT: "20211"
@@ -51,4 +51,4 @@ slug: netalertx_fa
 tmpfs: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 25.10.1-3
+version: 25.10.1-7

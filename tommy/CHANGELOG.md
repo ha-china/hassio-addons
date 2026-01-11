@@ -1,5 +1,12 @@
 # TOMMY
 
+## 1.2.1
+
+### Minor Changes
+- Fixed a bug causing ESPHome devices to enter bootloop or send wrong relay data
+- Fixed a bug causing ESPHome devices to report IP: 0.0.0.0 in the dashboard
+- **ESPHome users: Please update your devices with the latest TOMMY firmware**
+
 ## 1.2.0
 
 ### Major Changes

@@ -1,48 +1,48 @@
 # Home assistant add-on: n8n
 
-n8n is an extendable workflow automation tool. With a fair-code distribution model, n8n will always have visible source code, be available to self-host, and allow you to add your own custom functions, logic and apps. n8n's node-based approach makes it highly versatile, enabling you to connect anything to everything.
+n8n 是一个可扩展的工作流自动化工具。凭借公平的代码分发模型，n8n 将始终拥有可见的源代码，可以自行托管，并允许您添加自己的自定义函数、逻辑和应用程序。n8n 的基于节点的方法使其具有高度的多功能性，使您能够将任何事物连接到任何其他事物。
 
-Functionality not tested, but addon does run
+功能尚未测试，但插件确实可以运行
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有给我的仓库添加星标的人！要添加星标，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## About
+## 关于
 
-This addon uses the [docker image](https://github.com/n8n-io/n8n).
+此插件使用 [docker 镜像](https://github.com/n8n-io/n8n)。
 
-## Installation
+## 安装
 
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Click the `Save` button to store your configuration.
-1. Start the add-on.
-1. Add-on will fail, that is ok
-1. ssh into your homeassistant and run `chmod 2777 /addon_configs/2effc9b9_n8n`
-1. start add-on
-1. Check the logs of the add-on to see if everything went well.
-1. Open WebUI should work via <your-ip>:port.
-1. Setup administrator account
-1. Settings will be in /addon_configs/2effc9b9_n8n
-## Configuration
+1. [将我的 Hass.io 插件仓库][repository] 添加到您的 Hass.io 实例中。
+1. 点击 `保存` 按钮以存储您的配置。
+1. 启动插件。
+1. 插件将失败，这是可以接受的
+1. 通过 ssh 进入您的 homeassistant 并运行 `chmod 2777 /addon_configs/2effc9b9_n8n`
+1. 重新启动插件
+1. 检查插件的日志以查看是否一切顺利。
+1. 应该可以通过 <your-ip>:port 打开 WebUI。
+1. 设置管理员账户
+1. 设置将在 /addon_configs/2effc9b9_n8n 中
 
-You can set the addon to use a environment file if you choose. Note use '/home/node' as base path which will map to /addon_configs/2effc9b9_n8n 
+## 配置
 
-You need to create the file yourself and make it a list of environments you want to set, like:
+您可以选择设置插件以使用环境文件。注意使用 '/home/node' 作为基本路径，这将映射到 /addon_configs/2effc9b9_n8n 
+
+您需要自行创建该文件并使其成为您想要设置的环境的列表，例如：
 ```
 DB_SQLITE_POOL_SIZE=10
 N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 ```
 
 ```
-port : 5678 #port you want to run on.
+port : 5678 #您想要运行的端口。
 ```
 
-Webui can be found at `<your-ip>:port`.
+Webui 可以在 `<your-ip>:port` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
-
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

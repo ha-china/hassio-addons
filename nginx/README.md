@@ -2,55 +2,55 @@
 
 ![Logo](logo.png)
 
-[![打开你的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_nginx)
-[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker 镜像](https://img.shields.io/badge/docker-0.1.4-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-nginx)
-![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_nginx)
+[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker Image](https://img.shields.io/badge/docker-0.1.4-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-nginx)
+![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 开源 Web 服务器，支持 PHP 和 MariaDB。
+> 开源Web服务器，支持PHP和MariaDB。
 
 ---
 
 > [!CAUTION]
-> **实验性 / Beta 状态**
+> **实验性/测试版状态**
 >
-> 此附加组件仍在开发中，并且主要开发用于个人使用。
+> 该插件仍在开发中，或主要开发用于个人使用。
 > 它尚未经过广泛测试，但预计可以基本工作。
 
 ---
 
 ## 📖 关于
 
-如果您遇到此附加组件的任何问题，请使用下面的链接进行报告。问题表单将预填充附加组件信息，以帮助我们更快地解决问题。
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预先填写插件的详细信息，以帮助我们更快地解决问题。
 
-如果您有新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填充附加组件信息。
+如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预先填写插件的详细信息。
 
 ## 🐛 报告错误
 
-如果您遇到此附加组件的任何问题，请使用下面的链接进行报告。问题表单将预填充附加组件信息，以帮助我们更快地解决问题。
+如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预先填写插件的详细信息，以帮助我们更快地解决问题。
 
-**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.0.1&log_information=请在此处粘贴附加组件日志输出：%0A%0A)**
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.0.1&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
 
 > [!NOTE]
-> 请使用上面的链接报告问题。这确保了所有必要信息（附加组件名称、版本等）将自动包含在您的错误报告中。
+> 请使用上面的链接报告问题。这确保了所有必要的信息（插件名称、版本等）将自动包含在您的错误报告中。
 
 ## 💡 功能请求
 
-如果您有新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填充附加组件信息。
+如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预先填写插件的详细信息。
 
 **[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=nginx)**
 
 > [!NOTE]
-> 请使用上面的链接请求功能。这确保了附加组件名称将自动包含在您的功能请求中。
+> 请使用上面的链接请求功能。这确保了插件名称将自动包含在您的功能请求中。
 
-此项目是开源的，并在 MIT 许可证下提供。
+此项目是开源的，并在MIT许可证下提供。
 由 **FaserF** 维护。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 附加组件页面中的 **配置** 选项卡配置附加组件。
+通过Home Assistant插件页面中的**配置**选项卡配置插件。
 
 ### 选项
 
@@ -70,7 +70,7 @@ website_name: web.local
 
 ## 👨‍💻 致谢 & 许可证
 
-此项目是开源的，并在 MIT 许可证下提供。
+此项目是开源的，并在MIT许可证下提供。
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

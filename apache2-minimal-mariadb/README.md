@@ -15,27 +15,27 @@
 
 如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填入插件信息，以帮助我们更快地解决问题。
 
-如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入插件信息。
+如果您有新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入插件信息。
 
 ## 🐛 报告错误
 
 如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填入插件信息，以帮助我们更快地解决问题。
 
-**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=3.0.0&log_information=请在此处粘贴插件日志输出：%0A%0A)**
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=3.0.0&log_information=请在此处粘贴插件日志输出%3A%0A%0A)**
 
 > [!NOTE]
 > 请使用上面的链接报告问题。这确保了所有必要信息（插件名称、版本等）将自动包含在您的错误报告中。
 
 ## 💡 功能请求
 
-如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入插件信息。
+如果您有新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入插件信息。
 
 **[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=apache2-minimal-mariadb)**
 
 > [!NOTE]
 > 请使用上面的链接请求功能。这确保了插件名称将自动包含在您的功能请求中。
 
-此项目是开源的，并在MIT许可证下提供。
+该项目是开源的，并遵循MIT许可证。
 由 **FaserF** 维护。
 
 ---
@@ -62,7 +62,7 @@ website_name: web.local
 
 ## 👨‍💻 致谢与许可证
 
-此项目是开源的，并在MIT许可证下提供。
+该项目是开源的，并遵循MIT许可证。
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

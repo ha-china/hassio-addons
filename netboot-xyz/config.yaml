@@ -1,8 +1,8 @@
 ---
 name: Netboot.xyz
-version: 2.1.3
+version: 2.1.4
 slug: netboot-xyz
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：PXE服务器在您的本地网络中部署操作系统'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/netboot-xyz
 arch:
   - aarch64

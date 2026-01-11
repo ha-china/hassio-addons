@@ -7,10 +7,12 @@ FROM ${BUILD_FROM}
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base system
+
+
 # hadolint ignore=DL3013
 
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.1.0"
+ENV ADDON_VERSION="0.1.1"
 ENV ADDON_NAME="Planka"
 ENV ADDON_SLUG="planka"
 ENV ADDON_UNSUPPORTED="false"
@@ -27,7 +29,6 @@ RUN \
         curl \
         su-exec \
         openssl \
-    # hadolint ignore=DL3013
     && pip3 install --no-cache-dir --break-system-packages setuptools
 
 # Copy Planka

@@ -4,8 +4,10 @@ FROM $BUILD_FROM
 # Setup base
 # hadolint ignore=DL3003
 
+
+
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.1.0"
+ENV ADDON_VERSION="0.1.1"
 ENV ADDON_NAME="Tiny Tiny RSS"
 ENV ADDON_SLUG="tt-rss"
 ENV ADDON_UNSUPPORTED="false"
@@ -61,8 +63,7 @@ RUN if [ -d /etc/php ]; then cp -r /etc/php/* /etc/php84/ && rm -rf /etc/php; fi
 # Set permissions
 RUN \
     find /etc/s6-overlay/s6-rc.d -type f -name "*" -exec sed -i 's/\r$//' {} + \
-    && chmod a+x /etc/s6-overlay/s6-rc.d/*/run /etc/s6-overlay/s6-rc.d/*/up \
-    && { chmod a+x /etc/s6-overlay/s6-rc.d/*/*.sh 2>/dev/null || true; }
+    && chmod -R 755 /etc/s6-overlay/s6-rc.d
 
 # Build arguments
 ARG BUILD_ARCH
@@ -94,4 +95,4 @@ LABEL \
     org.opencontainers.image.version="${BUILD_VERSION}"
 
 HEALTHCHECK \
-    CMD curl --fail http://127.0.0.1:80/ || exit 1
+    CMD curl --fail http://127.0.0.1:8280/ || exit 1

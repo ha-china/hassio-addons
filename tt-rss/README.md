@@ -7,31 +7,31 @@
 [![Docker Image](https://img.shields.io/badge/docker-0.1.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-tt-rss)
 ![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 一个基于网络的新闻聚合（RSS/Atom）阅读器和聚合器
+> 一个基于网络的新闻订阅（RSS/Atom）阅读器和聚合器
 
 ---
 
 > [!CAUTION]
-> **实验性 / Beta 状态**
+> **实验性/测试版状态**
 >
-> 该插件仍在开发中，或主要开发用于个人使用。
-> 它尚未经过广泛测试，但预计可以基本运行。
+> 此插件仍在开发中，且主要开发用于个人使用。
+> 它尚未经过广泛测试，但预计基本功能可以正常工作。
 
 ---
 
 ## 📖 关于
 
-Tiny Tiny RSS 是一个免费且开源的基于网络的新闻聚合（RSS/Atom）阅读器和聚合器。
+Tiny Tiny RSS 是一个免费且开源的基于网络的新闻订阅（RSS/Atom）阅读器和聚合器。
 
-该插件提供了一个自托管的 Tiny Tiny RSS (TT-RSS) 实例。它设计得轻量级且快速，使用 Alpine Linux、Nginx 和 PHP 8.3。
+此插件提供了一个自托管的 Tiny Tiny RSS (TT-RSS) 实例。它设计得轻量级且快速，使用 Alpine Linux、Nginx 和 PHP 8.3。
 
-**注意:** 该插件需要一个数据库。您应该将其配置为连接到 MariaDB 或 PostgreSQL 实例（可以是另一个插件或外部实例）。
+**注意：** 此插件需要一个数据库。您应该将其配置为连接到 MariaDB 或 PostgreSQL 实例（可以是另一个插件或外部实例）。
 
 ## 安装
 
 1. 在 Home Assistant 插件商店中搜索 "Tiny Tiny RSS"。
 2. 安装插件。
-3. 配置数据库连接设置（见下方配置部分）。
+3. 配置数据库连接设置（见下方配置）。
 4. 启动插件。
 
 ---
@@ -43,7 +43,10 @@ Tiny Tiny RSS 是一个免费且开源的基于网络的新闻聚合（RSS/Atom�
 ### 选项
 
 ```yaml
+certfile: fullchain.pem
+keyfile: privkey.pem
 self_url: ''
+ssl: false
 ```
 
 ---
