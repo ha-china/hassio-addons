@@ -1,6 +1,6 @@
 ---
 name: pterodactyl Wings Gameserver
-version: 2.1.6
+version: 2.2.0
 slug: pterodactyl_wings
 description: '[老王杂谈说]：开源游戏服务器'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/pterodactyl-wings
@@ -21,5 +21,7 @@ privileged:
 panel_icon: mdi:controller
 options:
   config_file: /share/pterodactyl/config.yml
+  log_level: info
 schema:
   config_file: str
+  log_level: list(debug|info)

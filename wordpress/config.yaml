@@ -1,8 +1,8 @@
 ---
 name: Wordpress
-version: 0.1.4
+version: 0.2.0
 slug: wordpress
-description: "[老王杂谈说]：网页上最受欢迎的出版物平台。"
+description: "[老王杂谈说]：Web上最受欢迎的出版物平台。"
 url: "https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/wordpress"
 arch:
   - aarch64
@@ -24,6 +24,7 @@ options:
   ssl: false
   certfile: fullchain.pem
   keyfile: privkey.pem
+  log_level: info
 schema:
   wordpress_title: str
   wordpress_admin_user: str
@@ -32,6 +33,9 @@ schema:
   ssl: bool
   certfile: str
   keyfile: str
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
+  reset_database: bool?
+  reset_database_confirm: bool?
 ports:
   80/tcp: 8099
   443/tcp: 8449

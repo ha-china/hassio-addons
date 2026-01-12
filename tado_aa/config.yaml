@@ -1,8 +1,8 @@
 ---
 name: Tado Auto Assist
-version: 2.1.4
+version: 2.2.0
 slug: tado_aa
-description: '[老王杂谈说]：Tado 地理围栏和开窗检测自动辅助功能'
+description: '[老王杂谈说]：Tado 地理围栏和开窗检测自动辅助'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/tado_aa
 arch:
   - aarch64
@@ -20,4 +20,4 @@ schema:
   password: password
   minTemp: int
   maxTemp: int
-  log_level: list(info|minimal)?
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?

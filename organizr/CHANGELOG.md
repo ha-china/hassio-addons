@@ -1,3 +1,12 @@
+## v2-4 (11-01-2026)
+- Minor bugs fixed
+## v2-3 (11-01-2026)
+- Minor bugs fixed
+## v2-2 (18-03-2026)
+- Ensure folder permissions use configured PUID/PGID values
+
+## v2 (11-01-2026)
+- Minor bugs fixed
 
 ## 1.601 (2025-12-27)
 - Update to latest version from causefx/organizr (changelog : https://github.com/causefx/organizr/releases)

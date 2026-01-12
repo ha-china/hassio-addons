@@ -4,22 +4,14 @@
 
 [![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_tt-rss)
 [![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker Image](https://img.shields.io/badge/docker-0.1.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-tt-rss)
+[![Docker Image](https://img.shields.io/badge/docker-1.1.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-tt-rss)
 ![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 一个基于网络的新闻订阅（RSS/Atom）阅读器和聚合器
+> A web-based news feed (RSS/Atom) reader and aggregator
 
 ---
 
-> [!CAUTION]
-> **实验性/测试版状态**
->
-> 此插件仍在开发中，且主要开发用于个人使用。
-> 它尚未经过广泛测试，但预计基本功能可以正常工作。
-
----
-
-## 📖 关于
+## 📖 About
 
 Tiny Tiny RSS 是一个免费且开源的基于网络的新闻订阅（RSS/Atom）阅读器和聚合器。
 
@@ -27,7 +19,7 @@ Tiny Tiny RSS 是一个免费且开源的基于网络的新闻订阅（RSS/Atom�
 
 **注意：** 此插件需要一个数据库。您应该将其配置为连接到 MariaDB 或 PostgreSQL 实例（可以是另一个插件或外部实例）。
 
-## 安装
+## Installation
 
 1. 在 Home Assistant 插件商店中搜索 "Tiny Tiny RSS"。
 2. 安装插件。
@@ -36,7 +28,7 @@ Tiny Tiny RSS 是一个免费且开源的基于网络的新闻订阅（RSS/Atom�
 
 ---
 
-## ⚙️ 配置
+## ⚙️ Configuration
 
 通过 Home Assistant 插件页面中的 **配置** 选项卡配置插件。
 
@@ -45,15 +37,16 @@ Tiny Tiny RSS 是一个免费且开源的基于网络的新闻订阅（RSS/Atom�
 ```yaml
 certfile: fullchain.pem
 keyfile: privkey.pem
+log_level: info
 self_url: ''
 ssl: false
 ```
 
 ---
 
-## 👨‍💻 致谢 & 许可证
+## 👨‍💻 Credits & License
 
-本项目是开源的，并在 MIT 许可证下提供。
+该项目是开源的，并根据 MIT 许可证提供。
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

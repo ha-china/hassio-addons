@@ -4,26 +4,18 @@
 
 [![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_planka)
 [![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker Image](https://img.shields.io/badge/docker-0.1.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-planka)
+[![Docker Image](https://img.shields.io/badge/docker-1.1.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-planka)
 ![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> Planka 是一个优雅的开源项目跟踪工具
-
----
-
-> [!CAUTION]
-> **实验性 / Beta 状态**
->
-> 此插件仍在开发中，或主要用于个人使用。
-> 它尚未经过广泛测试，但预计可以基本运行。
+> 精美的开源项目跟踪工具
 
 ---
 
 ## 📖 关于
 
-Planka 是一个优雅的开源项目跟踪工具（看板），帮助你组织项目和任务。
+Planka 是一个精美、开源的项目跟踪工具（看板），帮助你组织你的项目和任务。
 
-Planka 提供了一种现代化、协作的方式来管理任务，具有以下功能：
+Planka 提供了一种现代、协作的方式来管理任务，具有以下功能：
 
 - 看板
 - 实时更新
@@ -42,11 +34,12 @@ Planka 提供了一种现代化、协作的方式来管理任务，具有以下�
 
 ## ⚙️ 配置
 
-通过 Home Assistant 插件页面中的 **配置** 选项卡配置插件。
+通过 Home Assistant 插件页面中的 **配置** 标签配置插件。
 
 ### 选项
 
 ```yaml
+base_url: ''
 certfile: fullchain.pem
 keyfile: privkey.pem
 log_level: info
@@ -56,9 +49,9 @@ ssl: false
 
 ---
 
-## 👨‍💻 致谢与许可证
+## 👨‍💻 致谢与许可
 
-此项目是开源的，并在 MIT 许可证下提供。
+此项目是开源的，并在 MIT 许可下提供。
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

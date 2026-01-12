@@ -1,9 +1,9 @@
 # Home assistant add-on: Organizr
 
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+我利用业余时间维护这个和其他 Home Assistant add-ons：跟进上游变化、HA 变化，并在真实硬件上测试需要大量时间（和一些金钱）。我大约使用我超过 110 个 add-ons 中 5-10 个，所以我安装测试机器（和一些我自己的测试服务，如 vpn）来调试和提高 add-ons。
 
-If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+如果这个 add-on 帮助你节省时间或使你的设置更简单，我将非常感谢你的支持！
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -21,7 +21,7 @@ If this add-on saves you time or makes your setup easier, I would be very gratef
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它将在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -29,63 +29,59 @@ _Thanks to everyone having starred my repo! To star it click on the image below,
 
 ## About
 
-An HTPC/Homelab services organizer that is written in PHP.
-This addon is based on the [docker image](https://hub.docker.com/r/organizr/organizr) from linuxserver.io.
+一个用 PHP 编写的 HTPC/Homelab 服务组织者。
+这个 add-on 基于 linuxserver.io 的 [docker image](https://hub.docker.com/r/organizr/organizr)。
 
 ## Installation
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+这个 add-on 的安装非常简单，与其他 Hass.io add-on 的安装没有区别。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Carefully configure the add-on to your preferences, see the official documentation for for that.
+1. 将我的 Hass.io add-ons 仓库 [repository] 添加到你的 Hass.io 实例。
+1. 安装这个 add-on。
+1. 点击 `Save` 按钮以保存你的配置。
+1. 启动 add-on。
+1. 检查 add-on 的日志以查看是否一切顺利。
+1. 仔细配置 add-on 以符合你的偏好，查看官方文档以了解详细信息。
 
 ## Configuration
 
-Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+使用 add-on 的 `env_vars` 选项传递额外的环境变量（名称大小写均可）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-Webui can be found at <http://homeassistant:80> or through the sidebar using Ingress.
-Configurations can be done through the app webUI, except for the following options.
+Webui 可以在 <http://homeassistant:80> 或通过 Ingress 通过侧边栏访问。
+配置可以通过 app webUI 进行，除了以下选项。
 
 ### Setup Steps
 
-1. Start the addon and access the web interface
-2. Follow the setup wizard to create admin account
-3. Configure your services and tabs through the web interface
-4. Database files are stored in `/data/` directory
+1. 启动 add-on 并访问 Web 界面
+2. 按照设置向导创建管理员账户
+3. 通过 Web 界面配置你的服务和选项卡
+4. 数据库文件存储在 `/data/` 目录
 
 ### Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `PGID` | int | `0` | Group ID for file permissions |
-| `PUID` | int | `0` | User ID for file permissions |
+| 选项 | 类型 | 默认值 | 描述 |
+|------|------|--------|-------|
+| `PGID` | 整数 | `0` | 文件权限的组 ID |
+| `PUID` | 整数 | `0` | 文件权限的用户 ID |
 
-### Example Configuration
+### 示例配置
 
 ```yaml
 PGID: 1000
 PUID: 1000
 ```
 
-**Note**: Organizr requires minimal configuration through the addon options. Most settings are configured through the web interface including service integration, authentication, and theming.
+**注意**：Organizr 通过 add-on 选项需要最少量的配置。大多数设置通过 Web 界面进行配置，包括服务集成、身份验证和主题。
 
 ## Support
 
-Create an issue on github
+在 github 上创建问题
 
 ## Illustration
 
 ![bjaSt3fTfdXhw5vyl-7Lqz1EOjJIyh8lrdqxA53qO6E](https://user-images.githubusercontent.com/44178713/123061812-43601b00-d40c-11eb-993c-2aed31072775.jpg)
 
 [repository]: https://github.com/alexbelgium/hassio-addons
-
-
-
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

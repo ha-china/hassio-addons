@@ -5,10 +5,8 @@ ARG BUILD_DATE="unknown"
 
 # hadolint ignore=DL3018
 
-
-
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="2.1.3"
+ENV ADDON_VERSION="2.1.4"
 ENV ADDON_NAME="Bash Script Executer"
 ENV ADDON_SLUG="bashscriptexecuter"
 ENV ADDON_UNSUPPORTED="false"

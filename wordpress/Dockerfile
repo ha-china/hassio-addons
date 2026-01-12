@@ -14,7 +14,7 @@ ARG WORDPRESS_VERSION="6.8"
 
 
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.1.3"
+ENV ADDON_VERSION="0.1.4"
 ENV ADDON_NAME="Wordpress"
 ENV ADDON_SLUG="wordpress"
 ENV ADDON_UNSUPPORTED="false"

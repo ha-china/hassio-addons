@@ -32,6 +32,68 @@ while [ ! -f /var/www/tt-rss/config.php ]; do
     count=$((count + 1))
 done
 
+# Database Reset Check (Two-Step)
+if bashio::config.true 'reset_database'; then
+	if ! bashio::config.true 'reset_database_confirm'; then
+		bashio::log.error "Database reset requires both 'reset_database' and 'reset_database_confirm' to be enabled!"
+		bashio::log.error "This is a DESTRUCTIVE operation that will DELETE ALL DATA!"
+		bashio::log.error "Set 'reset_database_confirm: true' in your configuration to proceed."
+		bashio::exit.nok "Database reset confirmation required"
+	fi
+
+	bashio::log.warning "=========================================="
+	bashio::log.warning "   ⚠️  DATABASE RESET ENABLED  ⚠️"
+	bashio::log.warning "=========================================="
+	bashio::log.warning "ALL TT-RSS DATA WILL BE PERMANENTLY DELETED!"
+	bashio::log.warning "This includes:"
+	bashio::log.warning "  - All feeds and subscriptions"
+	bashio::log.warning "  - All articles and starred items"
+	bashio::log.warning "  - All user preferences and filters"
+	bashio::log.warning "=========================================="
+
+	# Create timestamped backup before deleting
+	BACKUP_DIR="/data/backups"
+	mkdir -p "$BACKUP_DIR"
+	TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+	BACKUP_FILE="$BACKUP_DIR/ttrss_backup_${TIMESTAMP}.sql"
+
+	bashio::log.info "Creating backup before database reset..."
+	bashio::log.info "Backup location: $BACKUP_FILE"
+
+	# Create backup using pg_dump
+	if psql -U postgres -lqt | cut -d \| -f 1 | grep -qw ttrss; then
+		if pg_dump -U postgres ttrss > "$BACKUP_FILE" 2>/dev/null; then
+			bashio::log.info "Backup created successfully: $BACKUP_FILE"
+		else
+			bashio::log.warning "Backup failed, continuing with reset..."
+		fi
+	else
+		bashio::log.info "Database does not exist yet, skipping backup..."
+	fi
+
+	# Wait 3 seconds to give user time to cancel
+	bashio::log.warning "Starting reset in 3 seconds... (Stop add-on NOW to abort)"
+	sleep 3
+
+	bashio::log.info "Proceeding with database reset..."
+
+	# Drop database if it exists
+	psql -U postgres -c "DROP DATABASE IF EXISTS ttrss;" || bashio::log.warning "Failed to drop database"
+
+	bashio::log.info "=========================================="
+	bashio::log.info "   ✅ DATABASE RESET COMPLETE"
+	bashio::log.info "=========================================="
+	bashio::log.info "Database has been dropped."
+	bashio::log.info "It will be recreated on next step."
+	bashio::log.warning "IMPORTANT: Disable 'reset_database' and 'reset_database_confirm' in the add-on settings!"
+	bashio::log.warning "Otherwise, the database will be wiped again on next restart."
+	bashio::log.info "=========================================="
+
+	# Remove reset_database options
+	bashio::addon.option 'reset_database'
+	bashio::addon.option 'reset_database_confirm'
+fi
+
 # Securely Create Database and User
 bashio::log.info "Ensuring TT-RSS database and user exist..."
 
@@ -41,7 +103,6 @@ if [ "$(psql -U postgres -v ON_ERROR_STOP=1 -tAc "SELECT 1 FROM pg_database WHER
 fi
 
 # Create User if missing and Grant Privileges
-<<<<<<< Updated upstream
 # Use psql with escaped password (avoid embedding quotes in -v)
 USER_EXISTS=$(psql -U postgres -v ON_ERROR_STOP=1 -tAc "SELECT 1 FROM pg_roles WHERE rolname = 'ttrss'" 2>/dev/null || echo "0")
 if [ "$USER_EXISTS" != "1" ]; then
@@ -54,26 +115,11 @@ else
 fi
 
 psql -U postgres -v ON_ERROR_STOP=1 -c "GRANT ALL PRIVILEGES ON DATABASE ttrss TO ttrss;"
-=======
-# Use psql with escaped password (avoid embedding quotes incorrectly)
-USER_EXISTS=$(psql -h localhost -U postgres -v ON_ERROR_STOP=1 -tAc "SELECT 1 FROM pg_roles WHERE rolname = 'ttrss'" 2>/dev/null || echo "0")
-if [ "$USER_EXISTS" != "1" ]; then
-    bashio::log.info "Creating ttrss database user..."
-    psql -h localhost -U postgres -v ON_ERROR_STOP=1 -c "CREATE USER ttrss WITH PASSWORD '${TTRSS_DB_PASSWORD//\'/\'\'}'"
-else
-    # User exists - update password to ensure it matches the password file
-    bashio::log.info "Updating ttrss database user password..."
-    psql -h localhost -U postgres -v ON_ERROR_STOP=1 -c "ALTER USER ttrss WITH PASSWORD '${TTRSS_DB_PASSWORD//\'/\'\'}'"
-fi
-
-# Grant privileges on database
-psql -h localhost -U postgres -v ON_ERROR_STOP=1 -c "GRANT ALL PRIVILEGES ON DATABASE ttrss TO ttrss;"
->>>>>>> Stashed changes
 
 # PostgreSQL 15+ requires explicit schema permissions
 # Grant permissions on public schema and make ttrss the owner of objects
-psql -h localhost -U postgres -d ttrss -v ON_ERROR_STOP=1 -c "GRANT ALL ON SCHEMA public TO ttrss;"
-psql -h localhost -U postgres -d ttrss -v ON_ERROR_STOP=1 -c "ALTER SCHEMA public OWNER TO ttrss;"
+psql -U postgres -d ttrss -v ON_ERROR_STOP=1 -c "GRANT ALL ON SCHEMA public TO ttrss;"
+psql -U postgres -d ttrss -v ON_ERROR_STOP=1 -c "ALTER SCHEMA public OWNER TO ttrss;"
 
 # Schema Update
 bashio::log.info "Updating TT-RSS schema..."

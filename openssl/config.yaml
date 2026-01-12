@@ -1,6 +1,6 @@
 ---
 name: OpenSSL
-version: 2.1.4
+version: 2.2.0
 slug: openssl
 description: '[老王杂谈说]：生成自签名证书'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/openssl
@@ -13,5 +13,7 @@ map:
 init: false
 options:
   website_name:
+  log_level: info
 schema:
   website_name: str
+  log_level: list(trace|debug|info|notice|warning|error|fatal)

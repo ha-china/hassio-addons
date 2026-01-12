@@ -1,5 +1,5 @@
 name: BentoPDF
-version: "1.0.2"
+version: "1.1.0"
 slug: bentopdf
 image: ghcr.nju.edu.cn/faserf/hassio-addons-bentopdf-{arch}
 description: '[老王杂谈说]：自托管、注重隐私的PDF工具包'
@@ -14,10 +14,12 @@ options:
   ssl: false
   certfile: fullchain.pem
   keyfile: privkey.pem
+  log_level: info
 schema:
   ssl: bool
   certfile: str?
   keyfile: str?
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
 ports:
   8035/tcp: 8035
 ports_description:

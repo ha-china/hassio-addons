@@ -1,31 +1,31 @@
-# Home assistant插件：CommaFeed
+# Home assistant add-on: CommaFeed
 
 一个受Google Reader启发的自托管RSS阅读器，基于Quarkus和React/TypeScript。
 
-_感谢大家给我的仓库加星！要给仓库加星，请点击下面的图片，它就会出现在右上角。谢谢！_
+_感谢大家给我的仓库点赞！点击下面的图片点赞，它将出现在右上角。谢谢！_
 
-[![@jdeath/homeassistant-addons仓库的Star贡献者](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
-这个插件使用了[docker镜像](https://github.com/Athou/commafeed/)。
+这个插件使用的是 [docker镜像](https://github.com/Athou/commafeed/)。
 
 ## 安装
 
-这个插件的安装非常简单，与安装任何其他Hass.io插件的方式没有不同。
+这个插件的安装非常简单，与安装任何其他Hass.io插件没有区别。
 
-1. 将我的Hass.io插件仓库[repository]添加到你的Hass.io实例。
-1. 点击`保存`按钮来存储你的配置。
+1. [将我的Hass.io插件仓库][repository]添加到你的Hass.io实例中。
+1. 点击`保存`按钮以保存你的配置。
 1. 启动插件。
-1. 检查插件的日志，看看是否一切顺利。
-1. 通过`<your-ip>:port`和ingress，应该可以打开WebUI。默认用户名:密码是admin:admin
+1. 检查插件的日志以查看是否一切顺利。
+1. 通过`<你的IP>:端口`和ingress可以打开WebUI。默认用户名:密码是admin:admin
 1. 设置将在`/addon_configs/2effc9b9_commafeed`中。
 
 ## 配置
-你可以设置插件使用一个环境文件。注意使用'/'commafeed/data'作为基本路径，这将映射到'/addon_configs/2effc9b9_commafeed'。
+你可以选择让插件使用一个环境文件。注意使用`/commafeed/data`作为基本路径，这将映射到`/addon_configs/2effc9b9_commafeed`。
 
-UI中的配置文件将是`/commafeed/data/config.env`，但你也可以创建文件`addon_configs/2effc9b9_commafeed/config.env`。
-你需要自己创建这个文件，并使其成为你想要设置的列表，例如：
+UI中的配置文件将是`/commafeed/data/config.env`，但你可以在`addon_configs/2effc9b9_commafeed/config.env`中创建这个文件。
+你需要自己创建这个文件，并设置你想要的配置项，例如：
 ```
 COMMAFEED_USERS_ALLOW_REGISTRATIONS=true
 ```
@@ -33,7 +33,7 @@ COMMAFEED_USERS_ALLOW_REGISTRATIONS=true
 port : 8082 #你想要运行的端口。
 ```
 
-Webui可以在`<your-ip>:port`找到。
+Webui可以在`<你的IP>:端口`找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---

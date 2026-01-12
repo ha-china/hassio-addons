@@ -66,13 +66,14 @@ devices:
   - /dev/nvme2
 image: ghcr.nju.edu.cn/alexbelgium/organizr-{arch}
 map:
-  - config:rw
+  - addon_config:rw:rw
   - ssl
 name: Organizr
 options:
   env_vars: []
-  PGID: "0"
-  PUID: "0"
+  branch: "v2-master"
+  PGID: "1000"
+  PUID: "1000"
 ports:
   80/tcp: 88
 ports_description:
@@ -81,10 +82,11 @@ schema:
   env_vars:
     - name: match(^[A-Za-z0-9_]+$)
       value: str?
+  branch: list(v2-master|v2-develop)
   PGID: int
   PUID: int
 slug: organizr
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "1.90-bugfix2"
+version: "v2-4"
 webui: "[PROTO:ssl]://[HOST]:[PORT:80]"

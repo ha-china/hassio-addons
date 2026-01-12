@@ -1,8 +1,8 @@
 ---
 name: SAP ABAP Cloud Developer Trial
-version: 0.0.5
+version: 0.1.0
 slug: sap-abap-cloud-dev
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：SAP ABAP 平台本地开发试用'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/sap-abap-cloud-dev
 image: ghcr.nju.edu.cn/faserf/hassio-addons-sap-abap-cloud-dev-{arch}
 arch:
@@ -14,9 +14,11 @@ map:
 options:
   agree_to_license: false
   ignore_requirements: false
+  log_level: info
 schema:
   agree_to_license: bool
   ignore_requirements: bool
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
 ports:
   3200/tcp: 3200
   3300/tcp: 3300

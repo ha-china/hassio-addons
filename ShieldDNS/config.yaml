@@ -1,7 +1,7 @@
 name: "ShieldDNS"
-version: "2.1.4"
+version: "2.2.0"
 slug: "shielddns"
-description: "[老王杂谈说]：AdGuard Home的高性能DoT代理"
+description: "[老王杂谈说]：AdGuard Home 的高性能 DoT 代理"
 url: "https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/ShieldDNS"
 arch:
   - aarch64
@@ -31,7 +31,7 @@ schema:
   keyfile: str
   cloudflare_tunnel_token: str?
   enable_info_page: bool?
-  log_level: list(debug|info|error|warning)
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
   dot_port: port?
   doh_port: port?
   fallback_dns: bool?

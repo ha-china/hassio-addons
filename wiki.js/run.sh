@@ -175,7 +175,27 @@ set -e
 ssl=$(bashio::config 'ssl')
 certfile=$(bashio::config 'certfile')
 keyfile=$(bashio::config 'keyfile')
-log_level=$(bashio::config 'log_level')
+
+if ! log_level=$(bashio::config 'log_level') || [ -z "$log_level" ]; then
+	bashio::log.warning "Failed to fetch log_level configuration. Using default: info"
+	log_level="info"
+fi
+
+# Map Bashio log_level to Wiki.js log_level
+# Bashio: trace, debug, info, notice, warning, error, fatal
+# Wiki.js: error, warn, info, verbose, debug, silly
+# We map loosely:
+wiki_log_level="info"
+case "${log_level}" in
+trace) wiki_log_level="silly" ;;
+debug) wiki_log_level="debug" ;;
+info) wiki_log_level="info" ;;
+notice) wiki_log_level="info" ;;
+warning) wiki_log_level="warn" ;;
+error) wiki_log_level="error" ;;
+fatal) wiki_log_level="error" ;;
+*) wiki_log_level="info" ;;
+esac
 
 declare host
 declare password
@@ -293,8 +313,10 @@ ssl:
   cert: /ssl/${certfile}
 pool:
 bindIP: 0.0.0.0
-logLevel: ${log_level}
+
+logLevel: ${wiki_log_level}
 offline: false
+
 ha: false
 dataPath: ./data
 EOF
