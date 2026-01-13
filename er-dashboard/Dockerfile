@@ -2,11 +2,11 @@ ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:19.0.0
 
 # Stage 1: Get Frontend Assets
 # renovate: datasource=docker depName=ghcr.nju.edu.cn/eidolf/er-startseite/frontend
-FROM ghcr.nju.edu.cn/eidolf/er-startseite/frontend:v2026.1.5 AS frontend
+FROM ghcr.nju.edu.cn/eidolf/er-startseite/frontend:v2026.1.7 AS frontend
 
 # Stage 2: Get Backend Assets
 # renovate: datasource=docker depName=ghcr.nju.edu.cn/eidolf/er-startseite/backend
-FROM ghcr.nju.edu.cn/eidolf/er-startseite/backend:v2026.1.5 AS backend
+FROM ghcr.nju.edu.cn/eidolf/er-startseite/backend:v2026.1.7 AS backend
 
 # Stage 3: Build Add-on
 # hadolint ignore=DL3006
@@ -18,8 +18,10 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Setup base system
 # hadolint ignore=DL3008,DL3013,DL3018,DL3042
 
+
+
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="1.0.1"
+ENV ADDON_VERSION="1.1.1"
 ENV ADDON_NAME="ER-Startseite (Dashboard)"
 ENV ADDON_SLUG="er-dashboard"
 ENV ADDON_UNSUPPORTED="false"

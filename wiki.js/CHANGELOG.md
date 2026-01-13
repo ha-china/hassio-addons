@@ -1,19 +1,47 @@
 # Changelog
 
-## 3.2.0 (2026-01-11)
-
-### 🎨 Style
-- auto-fix (shfmt,black,isort,prettier,markdownlint) ([`5e6ebbf`](https://github.com/FaserF/hassio-addons/commit/5e6ebbf2398fcf8db79dea411c701782712868c5))
-
-### 📌 Release Note
-- new db reset option & log level improved/added
-
-
-## 3.1.5 (2026-01-10)
+## 3.3.0 (2026-01-12)
 
 ### 📦 Dependencies
 
-- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v19 [skip-tests] (#570) ([`d88f413`](https://github.com/FaserF/hassio-addons/commit/d88f4135478d4f590536c80863200a37e0e49f58))
+- auto-update documentation standards ([`39f34409`](https://github.com/FaserF/hassio-addons/commit/39f34409fbdcbd69318f2dac6da3f31047126e4e))
+
+### 🚀 Other
+
+- small fixes & improvements ([`ce7a62e4`](https://github.com/FaserF/hassio-addons/commit/ce7a62e43eb50c87458588df6581b8ed3a741c9d))
+- Add git support to wiki.js (#577) [skip-tests] ([`26d63775`](https://github.com/FaserF/hassio-addons/commit/26d63775544a3971fcd0ed8dfb43a981fa27b323))
+- handle empty log level variable ([`568bbe5b`](https://github.com/FaserF/hassio-addons/commit/568bbe5bce289563264d87f55e8da35b9d508041))
+- New/improved log level option ([`73d8e254`](https://github.com/FaserF/hassio-addons/commit/73d8e254b10e01aaffc474d22192d2b8deea4c79))
+- small fixes ([`60c5ddf4`](https://github.com/FaserF/hassio-addons/commit/60c5ddf4fede8242031082aa8e7fa0d057c0087f))
+
+## 3.2.0 (2026-01-11)
+
+### 🎨 Style
+
+- auto-fix (shfmt,black,isort,prettier,markdownlint) ([`5e6ebbf2`](https://github.com/FaserF/hassio-addons/commit/5e6ebbf2398fcf8db79dea411c701782712868c5))
+- auto-fix (shfmt,black,isort,prettier,markdownlint) ([`1838d16f`](https://github.com/FaserF/hassio-addons/commit/1838d16fd800bde467c70b033ad03e9e600e2891))
+- auto-fix (shfmt,black,isort,prettier,markdownlint) ([`cdc7143c`](https://github.com/FaserF/hassio-addons/commit/cdc7143ca2531fdf41778e43e852faee4cd49880))
+
+### 🚀 Other
+
+- handle empty log level variable ([`568bbe5b`](https://github.com/FaserF/hassio-addons/commit/568bbe5bce289563264d87f55e8da35b9d508041))
+- more CI fixes & addon db reset improvements ([`fc27cc3b`](https://github.com/FaserF/hassio-addons/commit/fc27cc3bee4a9a34fd573f38e870ff921b3f7d3d))
+- CI fixes ([`4e31bcdc`](https://github.com/FaserF/hassio-addons/commit/4e31bcdc3025f30797b5ce1f0b220d06b22db35f))
+- New/improved log level option ([`73d8e254`](https://github.com/FaserF/hassio-addons/commit/73d8e254b10e01aaffc474d22192d2b8deea4c79))
+
+### 📌 Release Note
+
+- new db reset option & log level improved/added
+
+## 3.1.5 (2026-01-10)
+
+### 🎨 Style
+
+- auto-fix (shfmt,black,isort,prettier,markdownlint) ([`b8c86b04`](https://github.com/FaserF/hassio-addons/commit/b8c86b04f6c1aa1763bf7c7c57072bd2b7591b10))
+
+### 🚀 Other
+
+- small fixes ([`60c5ddf4`](https://github.com/FaserF/hassio-addons/commit/60c5ddf4fede8242031082aa8e7fa0d057c0087f))
 
 ### 📌 Release Note
 
@@ -23,7 +51,12 @@
 
 ### 🎨 Style
 
-- auto-fix (prettier,markdownlint) ([`9d0bb13`](https://github.com/FaserF/hassio-addons/commit/9d0bb134235785ead2aeaee2553b8011acd52478))
+- auto-fix (shfmt,black,isort,prettier,markdownlint) ([`33ae28f8`](https://github.com/FaserF/hassio-addons/commit/33ae28f8207916318cc9a4e306c6b460e771c809))
+
+### 🚀 Other
+
+- small addon fixes ([`76a46480`](https://github.com/FaserF/hassio-addons/commit/76a46480bd599064f48041baed3b8b34e871eebd))
+- CI fixes ([`97345da9`](https://github.com/FaserF/hassio-addons/commit/97345da944580528955f6e0d0263cd86e2c27cc4))
 
 ### 📌 Release Note
 

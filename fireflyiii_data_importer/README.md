@@ -1,8 +1,8 @@
 # Home assistant add-on: Fireflyiii data importer
 
-我利用业余时间维护这个Home Assistant插件以及其他插件：跟进上游变化、Home Assistant变化，并在真实硬件上进行测试都需要大量时间（和一些金钱）。我大约使用我超过110个插件中的5-10个，因此我安装了测试机器（并购买了一些我本人不使用的测试服务，如VPN），以便进行插件故障排除和改进。
+我利用业余时间维护这个Home Assistant插件以及其他插件：跟进上游变化、Home Assistant的变化，并在真实硬件上进行测试都需要大量时间（并且需要一些金钱）。我大约使用我超过110个插件中的5-10个，因此我安装了一些我本人不使用的测试机器（并购买了一些测试服务，如VPN）来调试和改进插件。
 
-如果这个插件为您节省了时间或简化了设置，我将非常感谢您的支持！
+如果这个插件能为您节省时间或使您的设置更简单，我将非常感谢您的支持！
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -20,7 +20,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！点击下面的图片点赞，它将出现在右上角。谢谢！_
+_感谢所有星标我的仓库的人！要星标它，请点击下面的图片，然后它就会在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,39 +28,39 @@ _感谢所有给我的仓库点赞的人！点击下面的图片点赞，它将�
 
 ## About
 
-["Firefly III"](https://www.firefly-iii.org) 是一个（自托管）个人财务管理工具。它可以帮助您跟踪支出和收入，以便您少花钱多存钱。数据导入器旨在帮助您将交易导入Firefly III。出于安全和维护的原因，它与Firefly III是分开的。
+["Firefly III"](https://www.firefly-iii.org) 是一个（自托管）的个人财务管理工具。它可以帮助您跟踪支出和收入，以便您少花钱多存钱。数据导入器旨在帮助您将交易导入Firefly III。出于安全和维护的原因，它与Firefly III是分开的。
 
-此插件基于Docker镜像 https://hub.docker.com/r/fireflyiii/data-importer
+这个插件基于Docker镜像 https://hub.docker.com/r/fireflyiii/data-importer
 
 ## Configuration
 
-Webui位于 <http://homeassistant:3474>。
+Webui 可以在 <http://homeassistant:3474> 找到。
 
 ### Setup
 
-1. 确保您有一个运行的Firefly III实例
-2. 配置数据导入器以连接到您的Firefly III安装
+1. 确保您有一个运行的 Firefly III 实例
+2. 配置数据导入器以连接到您的 Firefly III 安装
 3. 根据需要设置导入配置和文件
 
-完整的设置文档，请参阅：https://docs.firefly-iii.org/data-importer
+有关完整的设置文档，请参阅：https://docs.firefly-iii.org/data-importer
 
 ### Options
 
 | Option | Type | Required | Description |
 |--------|------|----------|-------------|
-| `FIREFLY_III_URL` | str | Yes | 您的Firefly III实例的URL |
-| `FIREFLY_III_ACCESS_TOKEN` | str | Yes | 来自Firefly III的个人访问令牌 |
+| `FIREFLY_III_URL` | str | Yes | 您的 Firefly III 实例的 URL |
+| `FIREFLY_III_ACCESS_TOKEN` | str | Yes | 来自 Firefly III 的个人访问令牌 |
 | `CONFIG_LOCATION` | str | Yes | 配置文件的位置 |
-| `FIREFLY_III_CLIENT_ID` | str | No | OAuth客户端ID（访问令牌的替代方案） |
-| `NORDIGEN_ID` | str | No | 用于银行集成的Nordigen客户端ID |
-| `NORDIGEN_KEY` | str | No | Nordigen客户端密钥 |
-| `SPECTRE_APP_ID` | str | No | Spectre/Salt Edge客户端ID |
-| `SPECTRE_SECRET` | str | No | Spectre/Salt Edge客户端密钥 |
-| `AUTO_IMPORT_SECRET` | str | No | 自动导入webhook的秘密 |
+| `FIREFLY_III_CLIENT_ID` | str | No | OAuth 客户端 ID（访问令牌的替代方案） |
+| `NORDIGEN_ID` | str | No | 用于银行集成的 Nordigen 客户端 ID |
+| `NORDIGEN_KEY` | str | No | Nordigen 客户端密钥 |
+| `SPECTRE_APP_ID` | str | No | Spectre/Salt Edge 客户端 ID |
+| `SPECTRE_SECRET` | str | No | Spectre/Salt Edge 客户端密钥 |
+| `AUTO_IMPORT_SECRET` | str | No | 自动导入 webhook 的密钥 |
 | `CAN_POST_AUTOIMPORT` | bool | No | 允许自动导入功能 |
 | `CAN_POST_FILES` | bool | No | 允许文件上传 |
 | `Updates` | list | No | 自动导入计划（每小时、每天、每周） |
-| `silent` | bool | No | 隐藏调试消息 |
+| `silent` | bool | No | 静默调试消息 |
 
 ### Example Configuration
 
@@ -78,42 +78,42 @@ silent: false
 
 - **Configurations**: `/addon_configs/xxx-fireflyiii_data_importer/configurations/`
   - 在这里存储导入配置文件
-  - 请参阅：https://docs.firefly-iii.org/data-importer/help/config/
+  - 参考文档：https://docs.firefly-iii.org/data-importer/help/config/
 
 - **Import Files**: `/addon_configs/xxx-fireflyiii_data_importer/import_files/`
-  - 在这里放置CSV文件以进行自动导入
-  - 请参阅：https://docs.firefly-iii.org/data-importer/usage/command_line/
+  - 在这里放置 CSV 文件以进行自动导入
+  - 参考文档：https://docs.firefly-iii.org/data-importer/usage/command_line/
 
 ### Getting a Firefly III Access Token
 
-1. 登录到您的Firefly III实例
+1. 登录到您的 Firefly III 实例
 2. 转到选项 → 个人资料 → OAuth → 个人访问令牌
-3. 创建一个新的具有适当权限的令牌
+3. 创建一个具有适当权限的新令牌
 4. 复制令牌并在 `FIREFLY_III_ACCESS_TOKEN` 选项中使用它
 
 ### Custom Scripts and Environment Variables
 
-此插件支持自定义脚本和环境变量，通过 `addon_config` 映射：
+这个插件支持自定义脚本和环境变量通过 `addon_config` 映射：
 
-- **Custom scripts**: 请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars option**: 使用插件的 `env_vars` 选项传递额外的环境变量（大小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 以获取详细信息。
+- **Custom scripts**: 参考 [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: 使用插件 `env_vars` 选项传递额外的环境变量（大写或小写名称）。详情请参考 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2
 
 ## Installation
 
-此插件的安装非常简单，与安装任何其他插件没有区别。
+这个插件的安装非常简单，与安装其他插件没有什么不同。
 
-1. 将我的插件仓库添加到您的Home Assistant实例（在supervisor插件商店的右上角，或者如果您已经配置了我的HA，请点击下面的按钮）
-   [![打开您的Home Assistant实例并显示带有特定仓库URL预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此插件。
-1. 点击 `Save` 按钮以保存您的配置。
-1. 设置插件选项以符合您的偏好
-1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 打开WebUI并调整软件选项
+1. 将我的插件仓库添加到您的 Home Assistant 实例（在 supervisor 插件商店的右上角，或者如果您已经配置了我的 HA，请点击下面的按钮）
+   [![打开您的 Home Assistant 实例并显示添加插件仓库对话框，其中包含特定仓库 URL 预填充。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+2. 安装这个插件。
+3. 点击 `Save` 按钮以保存您的配置。
+4. 设置插件选项以符合您的偏好。
+5. 启动插件。
+6. 检查插件的日志以查看是否一切正常。
+7. 打开 WebUI 并调整软件选项
 
 ## Support
 
-在github上创建问题
+在 github 上创建问题
 
 ## Illustration
 

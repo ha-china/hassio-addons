@@ -1,17 +1,18 @@
 ---
 name: Wiki.JS
-version: 3.2.0
+version: 3.3.0
 slug: wiki.js
 image: ghcr.nju.edu.cn/faserf/hassio-addons-wiki-{arch}
-description: '[老王杂谈说]：最强大和可扩展的开源Wiki软件'
+description: '[老王杂谈说]：null'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/wiki.js
 arch:
-  # - aarch64 (nodejs does support aarch64, but nodejs musl not?)
+  - aarch64
   - amd64
 services:
   - mysql:need
 map:
   - ssl
+  - addon_config:rw
 ingress: true
 ingress_port: 3010
 init: false

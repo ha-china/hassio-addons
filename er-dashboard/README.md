@@ -2,24 +2,24 @@
 
 ![Logo](logo.png)
 
-[![在您的 Home Assistant 实例中打开并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_er-dashboard)
+[![打开您的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_er-dashboard)
 [![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker 镜像](https://img.shields.io/badge/docker-1.1.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-er-dashboard)
+[![Docker 镜像](https://img.shields.io/badge/docker-1.1.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-er-dashboard)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 一个现代、高度可定制的带有霓虹美学的仪表板。
+> 一个现代、高度可定制的具有霓虹美学的仪表板。
 
 ---
 
 ## 📖 关于
 
-一个现代、高度可定制的带有霓虹美学的仪表板，支持视频背景和强大的应用集成。
+一个现代、高度可定制的具有霓虹美学的仪表板，视频背景和强大的应用集成。
 
 ER-Startseite 是一个自托管的仪表板应用程序，具有以下特点：
 
-- **霓虹/暗黑主题**：令人惊叹的视觉设计。
-- **动态背景**：支持视频和图片背景。
-- **应用集成**：添加/自定义应用和小部件。
+- **霓虹/暗黑主题**：令人惊叹的视觉效果。
+- **动态背景**：支持视频和图像背景。
+- **应用集成**：添加/自定义应用和组件。
 
 ## 安装
 
@@ -32,7 +32,7 @@ ER-Startseite 是一个自托管的仪表板应用程序，具有以下特点：
 
 ## ⚙️ 配置
 
-通过 Home Assistant 附加组件页面中的 **配置** 选项卡配置附加组件。
+通过 Home Assistant 附加组件页面中的 **配置** 标签配置附加组件。
 
 ### 选项
 
@@ -47,7 +47,7 @@ ssl: false
 
 ## 👨‍💻 致谢 & 许可证
 
-本项目是开源的，并遵循 MIT 许可证。
+本项目是开源的，并根据 MIT 许可证提供。
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

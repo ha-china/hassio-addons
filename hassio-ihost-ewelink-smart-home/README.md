@@ -4,26 +4,26 @@
 
 ## 关于
 
-**eWeLink 智能家居**旨在取代传统的 [eWeLink 智能家居](https://github.com/CoolKit-Technologies/ha-addon)。它允许您通过 **MQTT** 将 eWeLink 账户下的设备集成到 **Home Assistant** 中，从而直接在 Home Assistant 中进行设备控制和自动化。只需使用您的 eWeLink 账户登录，即可将您的设备同步到 Home Assistant。
+**eWeLink 智能家居** 旨在取代旧版 [eWeLink 智能家居](https://github.com/CoolKit-Technologies/ha-addon)。它允许您通过 **MQTT** 将您 eWeLink 账户下的设备集成到 **Home Assistant** 中，从而在 Home Assistant 内直接进行设备控制和自动化。只需使用您的 eWeLink 账户登录，即可将您的设备同步到 Home Assistant。
 
-传统的 [eWeLink 智能家居](https://github.com/CoolKit-Technologies/ha-addon) 插件将 **不再维护或更新**。其中一些实体实现依赖于已弃用的方法，而新项目提供了更健壮和面向未来的设备支持。
-如果您目前正在使用旧插件，请不用担心——新插件包括一个 **数据迁移功能**。迁移后，Home Assistant 中的现有设备和自动化将继续按原样工作。请参考 **第 5 步**进行迁移过程。
+旧版 [eWeLink 智能家居](https://github.com/CoolKit-Technologies/ha-addon) 插件将 **不再维护或更新**。其中一些实体实现依赖于过时的方法，而新项目提供了更健壮和面向未来的设备支持。
+如果您目前正在使用旧插件，不用担心——新插件包含 **数据迁移功能**。迁移后，您在 Home Assistant 中的现有设备和自动化将照常工作。请参考 **第 5 步** 了解迁移过程。
 
 ---
 
-## 新旧 eWeLink 智能家居插件的主要区别
+## 新版与旧版 eWeLink 智能家居插件的差异
 
-1. 新插件为同步到 Home Assistant 的设备提供了 **更多实体**，其实现方式更符合 Home Assistant 标准。它将继续扩展对更多设备和功能的支持，包括对新 SONOFF 产品的快速支持。
-2. 新插件 **不提供设备控制的界面**。所有控制和自动化都在 Home Assistant 中直接进行。
-3. 新插件 **不再支持将 Home Assistant 设备同步回 eWeLink 云端**，这一功能在传统插件中存在。
+1. 新插件为同步到 Home Assistant 的设备提供了 **更多实体**，其实现更好地符合 Home Assistant 标准。它将继续扩展对更多设备和功能的支持，包括对新 SONOFF 产品的快速支持。
+2. 新插件 **不提供设备控制的 UI**。所有控制和自动化都在 Home Assistant 内直接进行。
+3. 新插件 **不再支持将 Home Assistant 设备同步回 eWeLink 云**，这一功能在旧插件中存在。
 
 ---
 
 ## 前提条件
 
 1. 在 Home Assistant 中安装并启用了 **MQTT 集成和 MQTT 代理插件**。
-2. 您已注册一个 **eWeLink 账户**并通过 eWeLink 移动应用添加了设备。
-3. **如果您正在使用传统的 eWeLink 智能家居插件并希望迁移其数据**，请首先将其升级到 **版本 1.4.6**，然后停止传统插件。在迁移过程中，如果传统插件仍在运行，系统将自动停止。详情请参考 **第 5 步**。
+2. 您已注册 **eWeLink 账户** 并通过 eWeLink 移动应用添加了设备。
+3. 如果您正在使用旧版 eWeLink 智能家居插件并希望迁移其数据，请首先将其升级到 **版本 1.4.6**，然后停止旧插件。在迁移过程中，如果旧插件仍在运行，系统将自动停止它。详情请参考 **第 5 步**。
 
 ## 安装
 1. 前往插件商店 → 点击右上角的 **更多** 按钮 (⋮) → 选择 **仓库**  
@@ -33,9 +33,9 @@
 
 [![添加仓库](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FiHost-Open-Source-Project%2Fhassio-ihost-addon)
 
-## 使用方法
+## 如何使用
 
-有关如何使用 eWeLink 智能家居插件的详细信息，请参阅“文档”。
+请查看“文档”以了解如何使用 eWeLink 智能家居插件。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

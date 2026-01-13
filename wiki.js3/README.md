@@ -1,56 +1,56 @@
-# Wiki.JS V3 (Beta)
+# Wiki.JS (版本 3 - Alpha)
 
 ![Logo](logo.png)
 
 [![打开你的 Home Assistant 实例并显示插件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_wiki.js3)
 [![Home Assistant 插件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker 镜像](https://img.shields.io/badge/docker-0.4.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-wiki)
+[![Docker 镜像](https://img.shields.io/badge/docker-0.5.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-wiki)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 最强大和可扩展的开源 Wiki 软件（版本 3 - Beta）
+> 最强大和可扩展的开源 Wiki 软件（版本 3 - Alpha）
 
 ---
 
-> [!CAUTION]
+> [!警告]
 > **实验性 / Beta 状态**
 >
-> 此插件仍在开发中，或主要为个人使用而开发。
-> 它尚未经过广泛测试，但预计基本功能可以正常工作。
+> 此插件仍在开发中，主要用于个人使用。
+> 目前尚未进行广泛测试，但预计可以基本运行。
 
 ---
 
 ## 📖 关于
 
-如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填写插件信息，以帮助我们更快地解决问题。
+如果您在使用此插件时遇到任何问题，请使用下面的链接进行报告。问题表单将预填入插件信息，以帮助我们更快地解决问题。
 
-如果您有新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填写插件信息。
+如果您有新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入插件信息。
 
 ## 🐛 报告错误
 
-如果您在使用此插件时遇到任何问题，请使用下面的链接报告它们。问题表单将预填写插件信息，以帮助我们更快地解决问题。
+如果您在使用此插件时遇到任何问题，请使用下面的链接进行报告。问题表单将预填入插件信息，以帮助我们更快地解决问题。
 
 **[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.2.0&log_information=请在此处粘贴插件的日志输出：%0A%0A)**
 
-> [!NOTE]
-> 请使用上面的链接报告问题。这确保了所有必要信息（插件名称、版本等）将自动包含在您的错误报告中。
+> [!注意]
+> 请使用上面的链接报告问题。这确保了所有必要信息（插件名称、版本等）会自动包含在您的错误报告中。
 
 ## 💡 功能请求
 
-如果您有新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填写插件信息。
+如果您有新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入插件信息。
 
 **[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=wiki.js3)**
 
-> [!NOTE]
-> 请使用上面的链接请求功能。这确保了插件名称将自动包含在您的功能请求中。
+> [!注意]
+> 请使用上面的链接请求功能。这确保了插件名称会自动包含在您的功能请求中。
 
-这个项目是开源的，并在 MIT 许可证下提供。
+本项目是开源的，并在 MIT 许可证下提供。
 由 **FaserF** 维护。
 
 ## 🏁 首次启动
 
-首次启动时，您将看到一个管理设置向导。向导将引导您完成 Wiki 连接的初始配置以及创建您的管理员账户。
+首次启动时，系统将提示您进行管理设置向导。向导将指导您完成 Wiki 连接的初始配置以及管理员账户的创建。
 
-在此过程中，请创建您自己的 **管理员账户**（电子邮件 / 密码）。
+在此过程中，请创建您自己的 **管理员账户**（邮箱 / 密码）。
 
 ### 默认数据库凭证
 
@@ -62,7 +62,7 @@
 
 ## ⚙️ 配置
 
-通过 Home Assistant 插件页面中的 **配置** 标签配置插件。
+通过 Home Assistant 插件页面中的 **配置** 选项卡配置插件。
 
 ### 选项
 
@@ -80,7 +80,7 @@ ssl: true
 
 ## 👨‍💻 致谢 & 许可证
 
-这个项目是开源的，并在 MIT 许可证下提供。
+本项目是开源的，并在 MIT 许可证下提供。
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
