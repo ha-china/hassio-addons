@@ -5,25 +5,31 @@
 [![GitHub stars][github-stars-shield]][repository]
 [![Discord][discord-shield]][discord]
 
-## 关于
+## About
 
-这个插件允许您编写配置，并通过 Home Assistant 将您的微控制器直接变成智能家居设备，**无需编程经验**。您需要做的就是编写 YAML 配置文件；其余部分（空中更新、编译）都由 ESPHome 处理。
+This add-on allows you to write configurations and turn your microcontrollers
+into smart home devices directly through Home Assistant **with no programming experience required**.
+All you need to do is write YAML configuration files; the rest (over-the-air updates, compiling) is all
+handled by ESPHome.
 
 <p align="center">
-<img title="ESPHome Device Builder 屏幕截图" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome-beta/images/screenshot.png" width="700px"></img>
+<img title="ESPHome Device Builder screenshot" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome-beta/images/screenshot.png" width="700px"></img>
 </p>
 
-[查看 ESPHome 文档][website]
+[View the ESPHome documentation][website]
 
-## 示例
+## Example
 
-使用 ESPHome，您可以从几行 YAML 直接到定制固件。例如，要包含一个 [DHT22][dht22] 温度和湿度传感器，您只需要在配置文件中包含 8 行 YAML：
+With ESPHome, you can go from a few lines of YAML straight to a custom-made
+firmware. For example, to include a [DHT22][dht22]
+temperature and humidity sensor, you just need to include 8 lines of YAML
+in your configuration file:
 
-<img title="ESPHome DHT 配置示例" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome-beta/images/dht-example.png" width="500px"></img>
+<img title="ESPHome DHT configuration example" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome-beta/images/dht-example.png" width="500px"></img>
 
-然后只需点击上传，传感器就会神奇地出现在 Home Assistant 中：
+Then just click UPLOAD and the sensor will magically appear in Home Assistant:
 
-<img title="ESPHome Home Assistant 发现" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome-beta/images/temperature-humidity.png" width="600px"></img>
+<img title="ESPHome Home Assistant discovery" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome-beta/images/temperature-humidity.png" width="600px"></img>
 
 [discord]: https://discord.gg/KhAMKrd
 [repository]: https://github.com/esphome/esphome
@@ -33,6 +39,7 @@
 [releases]: https://beta.esphome.io/changelog/index.html
 [logo]: https://github.com/esphome/home-assistant-addon/raw/main/esphome-beta/logo.png
 [website]: https://beta.esphome.io/
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

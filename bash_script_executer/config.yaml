@@ -1,6 +1,6 @@
 ---
 name: Bash Script Executer
-version: 2.2.0
+version: 2.2.1
 slug: bashscriptexecuter
 description: >-
   [老王杂谈说]：在这个 Homeassistant 插件环境中执行您自己的 bash 脚本。

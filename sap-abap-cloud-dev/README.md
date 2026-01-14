@@ -2,75 +2,75 @@
 
 ![Logo](logo.png)
 
-[![打开您的 Home Assistant 实例并显示插件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_sap-abap-cloud-dev)
-[![Home Assistant 插件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker 镜像](https://img.shields.io/badge/docker-0.1.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-sap-abap-cloud-dev)
-![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_sap-abap-cloud-dev)
+[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker Image](https://img.shields.io/badge/docker-0.1.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-sap-abap-cloud-dev)
+![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> SAP ABAP 平台试用，用于本地 ABAP 开发
+> SAP ABAP Platform Trial for local ABAP development
 
 ---
 
 > [!CAUTION]
-> **实验性/测试版状态**
+> **Experimental / Beta Status**
 >
-> 此插件仍在开发中，并且主要开发用于个人使用。
-> 它尚未经过广泛测试，但预计基本功能可以正常工作。
+> This add-on is still in development and/or primarily developed for personal use.
+> It is not extensively tested yet, but is expected to work fundamentally.
 
 ---
 
-## 📖 关于
+## 📖 About
 
-适用于 Home Assistant OS 的 SAP ABAP Cloud Developer Trial
+SAP ABAP Cloud Developer Trial for Home Assistant OS
 
-## ⚠️ 重要免责声明
+## ⚠️ IMPORTANT DISCLAIMERS
 
-> **未提供许可证**: 此插件不包含任何 SAP 许可证。您必须从 SAP 获取自己的许可证并同意 SAP 的使用条款。
+> **NO LICENSE PROVIDED**: This add-on does NOT include any SAP license. You must obtain your own license from SAP and agree to SAP's terms of use.
 >
-> **无担保**: 此插件按“原样”提供，没有任何担保。维护者对数据丢失、系统损坏或使用此插件引起的任何其他问题概不负责。
+> **NO WARRANTY**: This add-on is provided "AS IS" without any warranty. The maintainer assumes NO LIABILITY for data loss, system damage, or any other issues arising from the use of this add-on.
 >
-> **仅供测试**: 此插件仅用于个人学习、技能开发和测试 SAP ABAP。它**不**用于生产环境。
+> **FOR TESTING ONLY**: This add-on is intended solely for personal learning, skill development, and testing SAP ABAP. It is NOT intended for production use.
 >
-> **SAP 许可证条款**: 您必须遵守所有 SAP 许可证条款和条件。详情请访问 [SAP 的条款](https://hub.docker.com/r/sapse/abap-cloud-developer-trial#licenses)。
+> **SAP LICENSE TERMS**: You must comply with all SAP licensing terms and conditions. Visit [SAP's Terms](https://hub.docker.com/r/sapse/abap-cloud-developer-trial#licenses) for details.
 
-此插件提供了官方的 SAP ABAP Cloud Developer Trial 环境，允许您直接从 Home Assistant 在 SAP HANA 2.0 上运行完整的 SAP ABAP 平台。
+This add-on provides the official SAP ABAP Cloud Developer Trial environment, allowing you to run a complete SAP ABAP Platform on SAP HANA 2.0 directly from Home Assistant.
 
-**功能:**
+**Features:**
 
-- SAP ABAP 平台试用，含 SAP HANA 数据库
+- SAP ABAP Platform Trial with SAP HANA database
 - SAP Fiori Launchpad
-- 用于学习 ABAP 的示例应用程序
+- Sample applications for learning ABAP
 
-**使用场景:**
+**Use Cases:**
 
-- 学习 ABAP 编程
-- 提升 SAP 开发技能
-- 在沙盒环境中测试 SAP 集成
+- Learn ABAP programming
+- Improve SAP development skills
+- Test SAP integrations in a sandbox environment
 
-## 要求
+## Requirements
 
-> ⚠️ **硬件要求:**
+> ⚠️ **Hardware Requirements:**
 >
-> - **最小 RAM:** 16 GB（推荐 32 GB）
-> - **最小 CPU:** 4
-> - **最小磁盘:** 150 GB 可用空间
-> - **架构:** 仅限 amd64 (x86_64)
+> - **Minimum RAM:** 16 GB (32 GB recommended)
+> - **Minimum CPUs:** 4
+> - **Minimum Disk:** 150 GB free space
+> - **Architecture:** amd64 only (x86_64)
 
-## 安装
+## Installation
 
-1. 将此仓库添加到您的 Home Assistant 插件商店
-2. 安装“SAP ABAP Cloud Developer Trial”插件
-3. **阅读并接受** SAP 许可证条款
-4. 在配置中设置 `agree_to_license: true`
-5. 启动插件（首次启动需要 5-10 分钟）
+1. Add this repository to your Home Assistant add-on store
+2. Install the "SAP ABAP Cloud Developer Trial" add-on
+3. **READ AND ACCEPT** the SAP license terms
+4. Set `agree_to_license: true` in the configuration
+5. Start the add-on (initial startup takes 5-10 minutes)
 
 ---
 
-## ⚙️ 配置
+## ⚙️ Configuration
 
-通过 Home Assistant 插件页面中的**配置**选项卡配置插件。
+Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
 
-### 选项
+### Options
 
 ```yaml
 agree_to_license: false
@@ -80,10 +80,11 @@ log_level: info
 
 ---
 
-## 👨‍💻 致谢 & 许可证
+## 👨‍💻 Credits & License
 
-本项目是开源的，并在 MIT 许可证下提供。
-由 **FaserF** 维护。
+This project is open-source and available under the MIT License.
+Maintained by **FaserF**.
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

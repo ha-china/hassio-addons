@@ -1,6 +1,6 @@
 ---
 name: NGINX
-version: 0.2.0
+version: 0.2.1
 slug: nginx
 description: '[老王杂谈说]：使用PHP和MariaDB的开源Web服务器。'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/nginx
@@ -11,7 +11,6 @@ image: ghcr.nju.edu.cn/faserf/hassio-addons-nginx-{arch}
 # webui: http://[HOST]:[PORT:80]
 map:
   - ssl:rw
-  - media:rw
   - share:rw
 ingress: true
 ingress_port: 80

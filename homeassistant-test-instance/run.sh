@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bashio
+#!/usr/bin/env bash
 # Home Assistant Test Instance - Startup Script
 # This wrapper ensures proper logging to the add-on log viewer
 
@@ -15,6 +15,7 @@ _show_startup_banner() {
 	if [ -z "$VERSION" ]; then
 		VERSION="unknown"
 	fi
+	local NAME="Home Assistant Test Instance"
 	local SLUG="ha_test_instance"
 	local UNSUPPORTED="false"
 	local MAINTAINER="FaserF"
@@ -164,6 +165,10 @@ if type bashio::log.blue &>/dev/null 2>&1; then
 fi
 
 # </ADDON_BANNER_INJECTION>
+
+# Source bashio manually (S6-overlay not available in HA Core image)
+# shellcheck source=/dev/null
+source /usr/lib/bashio/bashio.sh || true
 
 CONFIG_DIR="/data/homeassistant"
 

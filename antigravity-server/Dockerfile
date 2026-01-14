@@ -15,11 +15,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install dependencies for NoVNC and VNC server
 # Install dependencies and tools
 
-
 # hadolint ignore=DL3008,SC1091
 
+
+
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="1.0.2"
+ENV ADDON_VERSION="1.1.0"
 ENV ADDON_NAME="Antigravity-Server"
 ENV ADDON_SLUG="antigravity-server"
 ENV ADDON_UNSUPPORTED="false"
@@ -46,27 +47,35 @@ RUN \
         tigervnc-standalone-server \
         tigervnc-common \
         tigervnc-tools \
+        xdg-utils \
+        # Common Dev Tools
+        ripgrep \
+        fd-find \
+        zip \
+        unzip \
+        nano \
+        vim \
+        htop \
+        jq \
+        build-essential \
+        openssh-client \
         novnc \
         websockify \
         nginx \
         fonts-noto \
         fonts-noto-color-emoji \
-        \
         # Python
         python3 \
         python3-pip \
         python3-numpy \
         python3-venv \
-    \
     # Install Node.js v22
     && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y --no-install-recommends nodejs \
-    \
     # Install Google Chrome Stable
     && curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg \
     && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
     && apt-get update && apt-get install -y --no-install-recommends google-chrome-stable \
-    \
     # Install Docker CLI (Adapted for Debian)
     && install -m 0755 -d /etc/apt/keyrings \
     && curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg \
@@ -75,22 +84,25 @@ RUN \
     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" > /etc/apt/sources.list.d/docker.list \
     && apt-get update && apt-get install -y --no-install-recommends docker-ce-cli docker-compose-plugin \
-    \
     # Install Google AntiGravity
     && curl -fsSL https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg | gpg --dearmor --yes -o /etc/apt/keyrings/antigravity-repo-key.gpg \
     && echo "deb [signed-by=/etc/apt/keyrings/antigravity-repo-key.gpg] https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main" > /etc/apt/sources.list.d/antigravity.list \
     && apt-get update && apt-get install -y --no-install-recommends antigravity \
-    \
     # Install LazyGit
     && curl -Lo lazygit.tar.gz "https://ghfast.top/github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" \
     && tar xf lazygit.tar.gz lazygit \
     && install lazygit /usr/local/bin \
     && rm lazygit.tar.gz lazygit \
-    \
     # Cleanup
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && mkdir -p /run/nginx /root/.vnc
+    && mkdir -p /run/nginx /root/.vnc \
+    # Symlink fdfind to fd
+    && ln -s $(which fdfind) /usr/local/bin/fd \
+    # Create a wrapper for Chrome to run with --no-sandbox
+    && echo '#!/bin/bash\nexec /usr/bin/google-chrome-stable --no-sandbox "$@"' > /usr/local/bin/google-chrome \
+    && chmod +x /usr/local/bin/google-chrome \
+    && ln -s /usr/local/bin/google-chrome /usr/local/bin/google-chrome-stable
 
 # Setup NoVNC
 RUN ln -sf /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html

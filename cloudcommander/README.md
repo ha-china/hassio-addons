@@ -1,56 +1,56 @@
 # Home assistant add-on: Cloudcommander
 
 
-我利用业余时间维护这个Home Assistant插件和其他插件：跟进上游变更、Home Assistant的变更，以及在真实硬件上测试都需要大量时间（并且需要一些钱）。我大约使用了我超过110个插件中的5-10个，因此我安装了一些我自身不使用的测试机器（并购买了一些测试服务，如VPN），以便进行插件的故障排除和改进。
+我利用业余时间维护这个和其他 Home Assistant add-ons：跟上上游变化、HA 变化以及在真实硬件上测试需要大量时间（和一些钱）。我大约使用我超过 110 个 add-ons 中的 5-10 个，因此我安装了测试机器（并购买了一些我自己不使用的测试服务，如 VPN）来调试和改进这些 add-ons。
 
-如果这个插件能帮到你，节省你的时间或使你的设置更简单，我将非常感谢你的支持！
+如果这个 add-on 节省了您的时间或使您的设置更简单，我将非常感谢您的支持！
 
-[![请给我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过PayPal捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## 插件信息
+## Addon informations
 
-![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcloudcommander%2Fconfig.yaml)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcloudcommander%2Fconfig.yaml)
 ![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcloudcommander%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcloudcommander%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcloudcommander%2Fconfig.yaml)
 
-[![Codacy徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![构建器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建器)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我仓库星标的人！要星标它，请点击下面的图片，然后它将出现在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！点击下面的图片给它点赞，它就会出现在右上角。谢谢！_
 
-[![@alexbelgium/hassio-addons的星标者仓库名单](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载量变化](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/cloudcommander/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/cloudcommander/stats.png)
 
-## 关于
+## About
 
 [Cloud Commander](https://github.com/coderaiser/cloudcmd) 是一个带有控制台和编辑器的网页文件管理器。
-这个插件基于 [Docker镜像](https://hub.docker.com/r/coderaiser/cloudcmd)。
+这个 add-on 基于 [docker image](https://hub.docker.com/r/coderaiser/cloudcmd)。
 
-## 配置
+## Configuration
 
-Webui可以在 <http://homeassistant:8000> 或通过Ingress在侧边栏中找到。
-配置可以通过应用WebUI完成，除了以下选项。
+Webui 可以在 <http://homeassistant:8000> 或通过 Ingress 在侧边栏中找到。
+配置可以通过应用 webUI 进行，但以下选项除外。
 
-### 选项
+### Options
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
-| `CUSTOM_OPTIONS` | 字符串 | | 自定义CLI选项（例如，`--name Homeassistant`) |
-| `DROPBOX_TOKEN` | 字符串 | | Dropbox集成令牌（见 https://cloudcmd.io/） |
-| `localdisks` | 字符串 | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`) |
-| `networkdisks` | 字符串 | | 要挂载的SMB共享（例如，`//SERVER/SHARE`) |
-| `cifsusername` | 字符串 | | SMB网络共享的用户名 |
-| `cifspassword` | 字符串 | | SMB网络共享的密码 |
-| `cifsdomain` | 字符串 | | SMB网络共享的域 |
-| `smbv1` | 布尔值 | `false` | 启用SMB v1协议 |
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `CUSTOM_OPTIONS` | str | | 自定义 CLI 选项（例如，`--name Homeassistant`) |
+| `DROPBOX_TOKEN` | str | | Dropbox 集成令牌（见 https://cloudcmd.io/) |
+| `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`) |
+| `networkdisks` | str | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`) |
+| `cifsusername` | str | | SMB 网络共享的用户名 |
+| `cifspassword` | str | | SMB 网络共享的密码 |
+| `cifsdomain` | str | | SMB 网络共享的域 |
+| `smbv1` | bool | `false` | 启用 SMB v1 协议 |
 
-### 示例配置
+### Example Configuration
 
 ```yaml
 CUSTOM_OPTIONS: "--name Homeassistant"
@@ -63,29 +63,29 @@ cifsdomain: "workgroup"
 smbv1: false
 ```
 
-### 挂载驱动器
+### Mounting Drives
 
-这个插件支持挂载本地驱动器和远程SMB共享：
+这个 add-on 支持挂载本地驱动器和远程 SMB 共享：
 
-- **本地驱动器**：参见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：参见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：见 [在 Add-ons 中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：见 [在 Add-ons 中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-### 自定义脚本和环境变量
+### Custom Scripts and Environment Variables
 
-这个插件支持自定义脚本和环境变量：
+这个 add-on 支持自定义脚本和环境变量：
 
-- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars选项**：使用插件的 `env_vars` 选项来传递额外的环境变量（大小写名称均可）。参见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详情。
+- **自定义脚本**：见 [在 Add-ons 中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用 add-on 的 `env_vars` 选项传递额外的环境变量（大小写名称）。见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
-## 安装
+## Installation
 
-这个插件的安装非常简单，与安装任何其他Hass.io插件没有区别。
+这个 add-on 的安装非常简单，与安装任何其他 Hass.io add-on 没有区别。
 
-1. [将我的Hass.io插件仓库][repository]添加到你的Hass.io实例。
-1. 安装这个插件。
-1. 点击 `保存` 按钮以保存你的配置。
-1. 启动插件。
-1. 检查插件的日志，以查看是否一切正常。
+1. [将我的 Hass.io add-ons 仓库][repository] 添加到您的 Hass.io 实例。
+1. 安装这个 add-on。
+1. 点击 `Save` 按钮以保存您的配置。
+1. 启动 add-on。
+1. 检查 add-on 的日志以查看是否一切正常。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 ---

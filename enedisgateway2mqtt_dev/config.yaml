@@ -1,9 +1,7 @@
 arch:
   - aarch64
   - amd64
-  - armv7
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：使用Enedis网关API将数据发送到您的MQTT代理（开发频道）'
+description: '[老王杂谈说]：null'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -72,6 +70,7 @@ map:
   - config:rw
 name: MyElectricalData Dev
 options:
+  env_vars: []
   CONFIG_LOCATION: /config/myelectricaldata_dev/config.yaml
   TZ: Europe/Paris
   mqtt_autodiscover: true
@@ -83,6 +82,9 @@ ports:
 ports_description:
   5000/tcp: Portail
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   CONFIG_LOCATION: str
   TZ: str?
   mqtt_autodiscover: bool
@@ -92,4 +94,4 @@ services:
 slug: enedisgateway2mqtt_dev
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 1.0.0rc14
+version: "0.13.3"

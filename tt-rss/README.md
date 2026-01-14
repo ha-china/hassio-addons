@@ -15,20 +15,20 @@
 
 Tiny Tiny RSS 是一个免费且开源的基于网络的新闻订阅（RSS/Atom）阅读器和聚合器。
 
-此插件提供了一个自托管的 Tiny Tiny RSS (TT-RSS) 实例。它设计得轻量级且快速，使用 Alpine Linux、Nginx 和 PHP 8.3。
+这个插件提供了一个自托管的 Tiny Tiny RSS (TT-RSS) 实例。它被设计为轻量级且快速，使用 Alpine Linux、Nginx 和 PHP 8.3。
 
-**注意：** 此插件需要一个数据库。您应该将其配置为连接到 MariaDB 或 PostgreSQL 实例（可以是另一个插件或外部实例）。
+**注意:** 这个插件需要一个数据库。你应该配置它以连接到 MariaDB 或 PostgreSQL 实例（可以是另一个插件或外部实例）。
 
-## Installation
+## 安装
 
 1. 在 Home Assistant 插件商店中搜索 "Tiny Tiny RSS"。
 2. 安装插件。
-3. 配置数据库连接设置（见下方配置）。
+3. 配置数据库连接设置（见下文配置）。
 4. 启动插件。
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ 配置
 
 通过 Home Assistant 插件页面中的 **配置** 选项卡配置插件。
 
@@ -44,9 +44,9 @@ ssl: false
 
 ---
 
-## 👨‍💻 Credits & License
+## 👨‍💻 致谢 & 许可证
 
-该项目是开源的，并根据 MIT 许可证提供。
+本项目是开源的，并在 MIT 许可下提供。
 由 **FaserF** 维护。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

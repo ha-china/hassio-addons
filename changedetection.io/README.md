@@ -1,6 +1,6 @@
 # Home assistant add-on: changedetection.io
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the add-ons.
 
 If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
@@ -30,7 +30,7 @@ _Thanks to everyone having starred my repo! To star it click on the image below,
 
 [Changedetection.io](https://github.com/dgtlmoon/changedetection.io) provides free, open-source web page monitoring, notification and change detection.
 
-This addon is based on the [docker image](https://github.com/linuxserver/docker-changedetection.io) from linuxserver.io.
+This add-on is based on the [docker image](https://github.com/linuxserver/docker-changedetection.io) from linuxserver.io.
 
 ## Configuration
 
@@ -92,7 +92,6 @@ comparison to installing any other Hass.io add-on.
 1. Carefully configure the add-on to your preferences, see the official documentation for for that.
 
 [repository]: https://github.com/alexbelgium/hassio-addons
-
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

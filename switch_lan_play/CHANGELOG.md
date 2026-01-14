@@ -1,19 +1,32 @@
 # Changelog
 
+## 2.2.1 (2026-01-14)
+
+### 🚀 Other
+- fixed logo in Homeassistant Addon UI ([`f053f7b0`](https://github.com/FaserF/hassio-addons/commit/f053f7b0b0c43df32e122ba054ba6118379ab959))
+- small fixes & improvements ([`ce7a62e4`](https://github.com/FaserF/hassio-addons/commit/ce7a62e43eb50c87458588df6581b8ed3a741c9d))
+- New/improved log level option ([`73d8e254`](https://github.com/FaserF/hassio-addons/commit/73d8e254b10e01aaffc474d22192d2b8deea4c79))
+
+
 ## 2.2.0 (2026-01-11)
 
 ### 🎨 Style
-- auto-fix (shfmt,black,isort,prettier,markdownlint) ([`5e6ebbf`](https://github.com/FaserF/hassio-addons/commit/5e6ebbf2398fcf8db79dea411c701782712868c5))
+
+### ✨ Features
+
+- New/improved log level option ([`73d8e254`](https://github.com/FaserF/hassio-addons/commit/73d8e254b10e01aaffc474d22192d2b8deea4c79))
+
+### 🚀 Other
+
+- CI fixes ([`4e31bcdc`](https://github.com/FaserF/hassio-addons/commit/4e31bcdc3025f30797b5ce1f0b220d06b22db35f))
 
 ### 📌 Release Note
-- new db reset option & log level improved/added
 
+- new db reset option & log level improved/added
 
 ## 2.1.5 (2026-01-10)
 
-### 📦 Dependencies
-
-- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v19 [skip-tests] (#570) ([`d88f413`](https://github.com/FaserF/hassio-addons/commit/d88f4135478d4f590536c80863200a37e0e49f58))
+### 🎨 Style
 
 ### 📌 Release Note
 
@@ -23,7 +36,9 @@
 
 ### 🎨 Style
 
-- auto-fix (prettier,markdownlint) ([`9d0bb13`](https://github.com/FaserF/hassio-addons/commit/9d0bb134235785ead2aeaee2553b8011acd52478))
+### 🚀 Other
+
+- CI fixes ([`97345da9`](https://github.com/FaserF/hassio-addons/commit/97345da944580528955f6e0d0263cd86e2c27cc4))
 
 ### 📌 Release Note
 
@@ -33,8 +48,6 @@
 
 ### 📦 Dependencies
 
-- 🚀 release(n8n): version bump [skip-tests] ([`09fb196`](https://github.com/FaserF/hassio-addons/commit/09fb1968338774fcd193caa4e33f80a7cb5cad81))
-
 ### 📌 Release Note
 
 - bug fixes and startup improvements
@@ -42,8 +55,6 @@
 ## 2.1.2 (2026-01-09)
 
 ### 🎨 Style
-
-- auto-fix (shfmt,black,isort,prettier,markdownlint) ([`72718f5`](https://github.com/FaserF/hassio-addons/commit/72718f5cfc149f65ec936797326b6782ef996461))
 
 ### 📌 Release Note
 

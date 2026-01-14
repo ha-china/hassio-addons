@@ -1,8 +1,8 @@
 ---
 name: Wordpress
-version: 0.2.0
+version: 0.2.1
 slug: wordpress
-description: "[老王杂谈说]：Web上最受欢迎的出版物平台。"
+description: "[老王杂谈说]：null"
 url: "https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/wordpress"
 arch:
   - aarch64

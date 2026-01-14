@@ -1,3 +1,9 @@
+## v2-7 (13-01-2026)
+- Minor bugs fixed
+## v2-6 (13-01-2026)
+- Minor bugs fixed
+## v2-5 (13-01-2026)
+- Minor bugs fixed
 ## v2-4 (11-01-2026)
 - Minor bugs fixed
 ## v2-3 (11-01-2026)

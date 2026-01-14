@@ -1,10 +1,21 @@
 # Changelog
 
+## 2.2.1 (2026-01-14)
+
+### 🚀 Other
+- fixed logo in Homeassistant Addon UI ([`f053f7b0`](https://github.com/FaserF/hassio-addons/commit/f053f7b0b0c43df32e122ba054ba6118379ab959))
+- small fixes & improvements ([`ce7a62e4`](https://github.com/FaserF/hassio-addons/commit/ce7a62e43eb50c87458588df6581b8ed3a741c9d))
+- handle empty log level variable ([`568bbe5b`](https://github.com/FaserF/hassio-addons/commit/568bbe5bce289563264d87f55e8da35b9d508041))
+- New/improved log level option ([`73d8e254`](https://github.com/FaserF/hassio-addons/commit/73d8e254b10e01aaffc474d22192d2b8deea4c79))
+
+
 ## 2.2.0 (2026-01-11)
 
-### 🎨 Style
+### 🚀 Other
 
-- auto-fix (shfmt,black,isort,prettier,markdownlint) ([`5e6ebbf`](https://github.com/FaserF/hassio-addons/commit/5e6ebbf2398fcf8db79dea411c701782712868c5))
+- ✨ Feature: New/improved log level option ([`73d8e254`](https://github.com/FaserF/hassio-addons/commit/73d8e254b10e01aaffc474d22192d2b8deea4c79))
+- 🐛 Fix: Handle empty log level variable ([`568bbe5b`](https://github.com/FaserF/hassio-addons/commit/568bbe5bce289563264d87f55e8da35b9d508041))
+- CI improvements and addon db reset fixes ([`fc27cc3b`](https://github.com/FaserF/hassio-addons/commit/fc27cc3bee4a9a34fd573f38e870ff921b3f7d3d), [`4e31bcdc`](https://github.com/FaserF/hassio-addons/commit/4e31bcdc3025f30797b5ce1f0b220d06b22db35f))
 
 ### 📌 Release Note
 
@@ -12,19 +23,15 @@
 
 ## 2.1.4 (2026-01-10)
 
-### 📦 Dependencies
-
-- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v19 [skip-tests] (#570) ([`d88f413`](https://github.com/FaserF/hassio-addons/commit/d88f4135478d4f590536c80863200a37e0e49f58))
-
 ### 📌 Release Note
 
 - general background fixes and stability improvements
 
 ## 2.1.3 (2026-01-10)
 
-### 🎨 Style
+### 🚀 Other
 
-- auto-fix (prettier,markdownlint) ([`9d0bb13`](https://github.com/FaserF/hassio-addons/commit/9d0bb134235785ead2aeaee2553b8011acd52478))
+- CI fixes ([`97345da9`](https://github.com/FaserF/hassio-addons/commit/97345da944580528955f6e0d0263cd86e2c27cc4))
 
 ### 📌 Release Note
 
@@ -34,17 +41,11 @@
 
 ### 📦 Dependencies
 
-- 🚀 release(n8n): version bump [skip-tests] ([`09fb196`](https://github.com/FaserF/hassio-addons/commit/09fb1968338774fcd193caa4e33f80a7cb5cad81))
-
 ### 📌 Release Note
 
 - bug fixes and startup improvements
 
 ## 2.1.1 (2026-01-09)
-
-### 🎨 Style
-
-- auto-fix (shfmt,black,isort,prettier,markdownlint) ([`72718f5`](https://github.com/FaserF/hassio-addons/commit/72718f5cfc149f65ec936797326b6782ef996461))
 
 ### 📌 Release Note
 

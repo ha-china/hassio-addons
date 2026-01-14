@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：FileBrowser Quantum 提供一个现代、响应式的文件管理器，支持多源，具有高级认证选项，并为您 Home Assistant 文件提供实时索引。'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -107,4 +107,4 @@ schema:
 slug: filebrowser_quantum
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "1.1.0"
+version: "1.1.1"
