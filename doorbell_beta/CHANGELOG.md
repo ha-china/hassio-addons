@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.0.0-beta.95 - 2026-01-14
+
+### Test
+
+- added outdoor_ip as optional to the addon confog to configure on indoor stations ONLY, as a test to make a snapshot from outdoor stations
+
+## 3.0.0-beta.94 - 2026-01-14
+
+### Test
+
+- Add snapshot from outdoor to hardcoded IP address : 192.168.10.100
+
 ## 3.0.0-beta.87 - 2025-12-10
 
 ### Change

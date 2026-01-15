@@ -1,9 +1,9 @@
 # Home assistant add-on: Filebrowser
 
 
-我利用业余时间维护这个和其他Home Assistant add-on：跟上上游的变更、HA的变更，并在真实硬件上测试都需要大量的时间（和一些金钱）。我大约使用我超过110个add-on中的5-10个，因此我安装了测试机器（和一些我自己不使用的测试服务，如VPN）来调试和改进这些add-on。
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-如果这个add-on节省了你的时间或使你的设置更简单，我将非常感谢你的支持！
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -21,7 +21,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库星标的人！要星标它，点击下面的图片，它就会在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -29,46 +29,47 @@ _感谢所有给我的仓库星标的人！要星标它，点击下面的图片�
 
 ## About
 
-基于Web的文件管理界面，提供了一种安全的方式，通过它你可以浏览、上传、下载、编辑和管理你的Home Assistant系统上的文件。Filebrowser提供了一个干净、现代的界面，通过Web浏览器处理你的文件，支持多种文件格式、预览功能以及全面的文件操作。
+Web-based file management interface that provides a secure way to browse, upload, download, edit and manage files on your Home Assistant system. Filebrowser offers a clean, modern interface for handling your files through a web browser, with support for multiple file formats, preview capabilities, and comprehensive file operations.
 
-这个add-on基于官方Filebrowser项目的[docker镜像](https://hub.docker.com/r/filebrowser/filebrowser)。
+This addon is based on the [docker image](https://hub.docker.com/r/filebrowser/filebrowser) from the official Filebrowser project.
 
 ## Installation
 
-这个add-on的安装非常简单，与安装任何其他Home Assistant add-on没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Home Assistant add-on.
 
-1. [将我的Home Assistant add-on仓库][repository]添加到你的Home Assistant实例中。
-1. 安装这个add-on。
-1. 点击`保存`按钮以存储你的配置。
-1. 启动add-on。
-1. 检查add-on的日志，看看是否一切正常。
-1. 通过侧边栏或在`<你的IP>:8071`访问Web UI。
+1. [Add my Home Assistant add-ons repository][repository] to your Home Assistant instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Access the web UI through the sidebar or at `<your-ip>:8071`.
 
 ## Configuration
 
-Web UI可以在`<你的IP>:8071`或使用Ingress通过Home Assistant侧边栏访问。
+The web UI can be found at `<your-ip>:8071` or through the Home Assistant sidebar when using Ingress.
 
-**默认凭证：**
-- 用户名：`admin`
-- 密码：`admin`
+**Default credentials:**
+- Username: `admin`
+- Password: `admin`
 
-**重要提示：**首次登录后立即更改默认凭证以确保安全。
+**Important:** Change the default credentials immediately after first login for security.
 
 ### Options
 
-| Option | Type | Default | 描述 |
-|--------|------|---------|-------|
-| `ssl` | bool | `false` | 为Web界面启用HTTPS |
-| `certfile` | str | `fullchain.pem` | SSL证书文件（在`/ssl/`中） |
-| `keyfile` | str | `privkey.pem` | SSL私钥文件（在`/ssl/`中） |
-| `NoAuth` | bool | `true` | 禁用认证（更改时重置数据库） |
-| `disable_thumbnails` | bool | `true` | 禁用缩略图生成以提高性能 |
-| `base_folder` | str | _(可选)_ | 文件浏览器的根文件夹（默认为所有映射文件夹） |
-| `localdisks` | str | _(可选)_ | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | str | _(可选)_ | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | str | _(可选)_ | SMB网络共享的用户名 |
-| `cifspassword` | str | _(可选)_ | SMB网络共享的密码 |
-| `cifsdomain` | str | _(可选)_ | SMB网络共享的域 |
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `ssl` | bool | `false` | Enable HTTPS for web interface |
+| `certfile` | str | `fullchain.pem` | SSL certificate file (in `/ssl/`) |
+| `keyfile` | str | `privkey.pem` | SSL private key file (in `/ssl/`) |
+| `NoAuth` | bool | `true` | Disable authentication (resets database when changed) |
+| `disable_thumbnails` | bool | `true` | Disable thumbnail generation for improved performance |
+| `base_folder` | str | _(optional)_ | Root folder for file browser (defaults to all mapped folders) |
+| `localdisks` | str | _(optional)_ | Local drives to mount (e.g., `sda1,sdb1,MYNAS`) |
+| `networkdisks` | str | _(optional)_ | SMB shares to mount (e.g., `//SERVER/SHARE`) |
+| `cifsusername` | str | _(optional)_ | SMB username for network shares |
+| `cifspassword` | str | _(optional)_ | SMB password for network shares |
+| `cifsdomain` | str | _(optional)_ | SMB domain for network shares |
 
 ### Example Configuration
 
@@ -88,37 +89,40 @@ cifsdomain: "workgroup"
 
 ## Setup
 
-1. 启动add-on并等待它初始化。
-1. 通过Home Assistant侧边栏或在`<你的IP>:8071`访问Web界面。
-1. 使用默认凭证登录：
-   - 用户名：`admin`
-   - 密码：`admin`
-1. **重要提示：**点击“设置”>“用户管理”立即更改默认密码。
-1. 通过Web界面配置你的首选设置。
-1. 如果禁用认证（`NoAuth: true`），将跳过登录屏幕。
+1. Start the add-on and wait for it to initialize.
+1. Access the web interface through the Home Assistant sidebar or at `<your-ip>:8071`.
+1. Log in using the default credentials:
+   - Username: `admin`
+   - Password: `admin`
+1. **Important:** Immediately change the default password by clicking on "Settings" > "User Management".
+1. Configure your preferred settings through the web interface.
+1. If authentication is disabled (`NoAuth: true`), the login screen will be bypassed.
 
 ### Mounting Drives
 
-这个add-on支持挂载本地驱动器和远程SMB共享：
+This addon supports mounting both local drives and remote SMB shares:
 
-- **本地驱动器**：参见[在add-on中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：参见[在add-on中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### Custom Scripts and Environment Variables
 
-这个add-on支持通过`addon_config`映射自定义脚本和环境变量：
+This addon supports custom scripts and environment variables through the `addon_config` mapping:
 
-- **自定义脚本**：参见[在add-on中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars选项**：使用add-on的`env_vars`选项传递额外的环境变量（大小写名称）。参见https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2以获取详细信息。
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
 ## Support
 
-在GitHub上创建问题，或在[Home Assistant社区讨论](https://community.home-assistant.io/t/home-assistant-addon-filebrowser/282108/3)中提问。
+Create an issue on GitHub, or ask on the [Home Assistant Community thread](https://community.home-assistant.io/t/home-assistant-addon-filebrowser/282108/3).
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
+
+
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

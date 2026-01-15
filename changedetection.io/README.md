@@ -1,65 +1,65 @@
 # Home assistant add-on: changedetection.io
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the add-ons.
+我利用业余时间维护这个Home Assistant插件和其他插件：跟进上游变化、Home Assistant的变化，以及在真实硬件上测试需要大量时间（和一些金钱）。我大约使用我超过110个插件中的5到10个，因此我安装了一些我本人不使用的测试机器（和购买了一些测试服务，如VPN），以用来调试和改进插件。
 
-If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+如果这个插件能帮到你节省时间或简化你的设置，我将非常感谢你的支持！
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## Addon informations
+## 插件信息
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fchangedetection.io%2Fconfig.yaml)
+![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fchangedetection.io%2Fconfig.yaml)
 ![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fchangedetection.io%2Fconfig.yaml)
-![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fchangedetection.io%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fchangedetection.io%2Fconfig.yaml)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![构建者](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建者)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有给我仓库加星的人！要加星，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://reporoster.com/stars/alexbelgium/hassio-addons)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/changedetection.io/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/changedetection.io/stats.png)
 
-## About
+## 关于
 
-[Changedetection.io](https://github.com/dgtlmoon/changedetection.io) provides free, open-source web page monitoring, notification and change detection.
+[Changedetection.io](https://github.com/dgtlmoon/changedetection.io) 提供免费的、开源的网页监控、通知和变化检测服务。
 
-This add-on is based on the [docker image](https://github.com/linuxserver/docker-changedetection.io) from linuxserver.io.
+这个插件基于 linuxserver.io 的 [Docker 镜像](https://github.com/linuxserver/docker-changedetection.io)。
 
-## Configuration
+## 配置
 
-Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+使用插件的 `env_vars` 选项来传递额外的环境变量（大小写名称都可以）。详情请查看 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-### Main app
+### 主应用程序
 
-Web UI can be found at `<your-ip>:5000`, also accessible from the add-on page.
+Web 界面可以在 `<你的IP>:5000` 访问，也可以从插件页面或通过 Ingress 访问。
 
-#### Sidebar shortcut
+#### 侧边栏快捷方式
 
-You can add a shortcut pointing to your Changedetection.io instance with the following steps:
-1. Go to <kbd>⚙ Settings</kbd> > <kbd>Dashboards</kbd>
-2. Click <kbd>➕ Add Dashboard</kbd> at the bottom corner
-3. Select the <kbd>Webpage</kbd> option, and paste the Web UI URL you got from the add-on page.
-4. Fill in the title for the sidebar item, an icon (suggestion: `mdi:vector-difference`), and a **relative URL** for that panel (e.g. `change-detection`). Lastly, confirm it.
+你可以通过以下步骤添加一个指向你的 Changedetection.io 实例的快捷方式：
+1. 转到 <kbd>⚙ 设置</kbd> > <kbd>仪表板</kbd>
+2. 点击右下角的 <kbd>➕ 添加仪表板</kbd>
+3. 选择 <kbd>网页</kbd> 选项，并粘贴从插件页面获取的 Web UI URL。
+4. 为侧边栏项目填写标题、图标（建议：`mdi:vector-difference`），并为该面板填写**相对 URL**（例如 `change-detection`）。最后，确认它。
 
-### Options
+### 选项
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `PGID` | int | `0` | Group ID for file permissions |
-| `PUID` | int | `0` | User ID for file permissions |
-| `TZ` | str | | Timezone (e.g., `Europe/London`) |
-| `BASE_URL` | str | | Full URL when running behind reverse proxy |
-| `PLAYWRIGHT_DRIVER_URL` | str | | Playwright driver WebSocket URL |
-| `TIMEOUT` | int | `60000` | Request timeout in milliseconds |
+| 选项 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `PGID` | 整数 | `0` | 文件权限的组ID |
+| `PUID` | 整数 | `0` | 文件权限的用户ID |
+| `TZ` | 字符串 | | 时区（例如，`Europe/London`） |
+| `BASE_URL` | 字符串 | | 当在反向代理后面运行时的完整URL |
+| `PLAYWRIGHT_DRIVER_URL` | 字符串 | | Playwright 驱动 WebSocket URL |
+| `TIMEOUT` | 整数 | `60000` | 毫秒内的请求超时 |
 
-### Example Configuration
+### 示例配置
 
 ```yaml
 PGID: 0
@@ -70,26 +70,25 @@ PLAYWRIGHT_DRIVER_URL: "ws://db21ed7f-browserless-chrome:3000/chromium?headless=
 TIMEOUT: 60000
 ```
 
-### Connect to browserless Chrome (from @RhysMcW)
+### 连接到 Browserless Chrome（来自 @RhysMcW）
 
-Install and start the Browserless Chrome add-on, then use the `PLAYWRIGHT_DRIVER_URL` option to connect to it. This option must be filled with the Browserless Chrome URL: "ws://db21ed7f-browserless-chrome:3000/chromium?headless=true&stealth=true&blockAds=true"
+安装并启动 Browserless Chrome 插件，然后使用 `PLAYWRIGHT_DRIVER_URL` 选项连接到它。这个选项必须填写 Browserless Chrome URL： "ws://db21ed7f-browserless-chrome:3000/chromium?headless=true&stealth=true&blockAds=true"
 
-The `db21ed7f-browserless-chrome` hostname is displayed in the UI, on the Browserless Chromium addon page:
+`db21ed7f-browserless-chrome` 主机名显示在 UI 中，在 Browserless Chromium 插件页面：
 ![image](https://github.com/user-attachments/assets/a63514f6-027a-4361-a33f-0d8f87461279)
 
-Then restart the Changedetection.io add-on - after that you can use the browser options in Changedetection.io.
+然后重启 Changedetection.io 插件 - 之后你就可以在 Changedetection.io 中使用浏览器选项了。
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+这个插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Carefully configure the add-on to your preferences, see the official documentation for for that.
+1. 将我的 Hass.io 插件仓库 [repository] 添加到你的 Hass.io 实例。
+2. 安装这个插件。
+3. 点击 `保存` 按钮来保存你的配置。
+4. 启动插件。
+5. 检查插件的日志，看看是否一切正常。
+6. 仔细配置插件以满足你的偏好，请参考官方文档。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 ---
