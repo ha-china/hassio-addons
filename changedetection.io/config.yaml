@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：网页监控、通知和变更检测'
 environment:
   LC_ALL: en_US.UTF-8
   TIMEOUT: "60000"
@@ -34,5 +34,4 @@ schema:
 slug: changedetection.io
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/changedetection.io
-version: "0.52.4"
-webui: http://[HOST]:[PORT:5000]
+version: "0.52.4-3"

@@ -1,6 +1,6 @@
 arch:
   - amd64
-description: '[老王杂谈说]：Home Assistant 的 WhatsApp'
+description: '[老王杂谈说]：Whatshaper for Home Assistant'
 image: ghcr.nju.edu.cn/alexbelgium/whatsapper-{arch}
 map:
   - addon_config:rw
@@ -19,4 +19,4 @@ schema:
 slug: whatsapper
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/whatsapper
-version: 1.1.0
+version: 1.1.1

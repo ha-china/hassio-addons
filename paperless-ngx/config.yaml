@@ -1,0 +1,36 @@
+name: Paperless-ngx
+version: 0.0.1
+slug: paperless-ngx
+description: '[老王杂谈说]：社区支持的Home Assistant Paperless-ngx插件'
+url: https://ghfast.top/github.com/paperless-ngx/paperless-ngx
+arch:
+  - aarch64
+  - amd64
+init: false
+map:
+  - share:rw
+  - media:rw
+  - ssl
+ports:
+  8000/tcp: 8000
+ports_description:
+  8000/tcp: Web Interface
+ingress: true
+ingress_port: 8000
+options:
+  url: ''
+  filename_format: '{created_year}/{correspondent}/{title}'
+  time_zone: Europe/Berlin
+  ocr_language: deu
+  admin_user: admin
+  log_level: info
+schema:
+  url: url?
+  filename_format: str
+  time_zone: str
+  ocr_language: str
+  admin_user: str?
+  admin_password: password
+  secret_key: password
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
+image: ghcr.nju.edu.cn/faserf/hassio-addons-paperless-ngx-{arch}

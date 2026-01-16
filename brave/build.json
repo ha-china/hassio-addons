@@ -1,0 +1,6 @@
+{
+  "build_from": {
+    "aarch64": "docker.1ms.run/linuxserver/brave:arm64v8-latest",
+    "amd64": "docker.1ms.run/linuxserver/brave:amd64-latest"
+  }
+}
