@@ -1,8 +1,9 @@
 # Home assistant add-on: Collabora
 
-我利用业余时间维护这个和其他Home Assistant add-ons：跟上上游的变化、HA的变化，并在真实硬件上进行测试需要大量时间（和一些钱）。我大约使用我超过110个add-ons中的5-10个，所以我安装了一些我自己不使用的测试机器（和一些测试服务，如VPN）来调试和提高这些add-ons。
 
-如果这个add-on为你节省了时间或使你的设置更简单，我将非常感谢你的支持！
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -20,7 +21,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有star了我的repo的人！要star它，请点击下面的图片，然后它将在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,38 +29,38 @@ _感谢所有star了我的repo的人！要star它，请点击下面的图片，�
 
 ## About
 
-Collabora Online是一个基于LibreOffice技术的协作办公套件。
+Collabora Online is a collaborative office suite based on LibreOffice technology.
 
 ## Installation
 
 ---
 
-1. 将我的add-ons仓库添加到你的Home Assistant实例中，或点击下面的My链接。
-1. 安装add-on。
-1. 启动add-on。
-1. 检查add-on日志以验证成功启动。
+1. Add my add-ons repository to your Home Assistant instance or click the My link below.
+1. Install the add-on.
+1. Start the add-on.
+1. Check the add-on logs to verify successful startup.
 
-<a href="https://my.home-assistant.io/redirect/supervisor_addon/?addon=local_collabora" target="_blank"><img src="https://my.home-assistant.io/badges/supervisor_addon.svg" alt="打开你的Home Assistant实例并显示添加add-on仓库对话框"/></a>
+<a href="https://my.home-assistant.io/redirect/supervisor_addon/?addon=local_collabora" target="_blank"><img src="https://my.home-assistant.io/badges/supervisor_addon.svg" alt="Open your Home Assistant instance and show the add add-on repository dialog"/></a>
 
 ## Configuration
 
 ---
 
-Webui可以在`https://homeassistant:9980/browser/dist/admin/admin.html`找到。
+Webui can be found at `https://homeassistant:9980/browser/dist/admin/admin.html`.
 
 ### Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `aliasgroup1` | str | | Nextcloud外部域名，使用两个反斜杠转义点（例如`nextcloud_domain\\.com`） |
-| `domain1` | str | | Collabora外部域名，使用两个反斜杠转义点（例如`code_domain\\.com`） |
-| `extra_params` | str | | 传递给Collabora启动脚本的额外参数 |
-| `ssl` | bool | `false` | 使用来自/ssl的证书启用SSL |
-| `certfile` | str | `fullchain.pem` | 位于/ssl中的证书文件名 |
-| `keyfile` | str | `privkey.pem` | 位于/ssl中的私钥文件名 |
-| `username` | str | | Collabora管理控制台的用户名 |
-| `password` | str | | Collabora管理控制台的密码 |
-| `dictionaries` | str | | 要安装的字典语言的空格分隔列表 |
+| `aliasgroup1` | str | | Nextcloud external domain with escaped dots using two \ (e.g. `nextcloud_domain\\.com`) |
+| `domain1` | str | | Collabora external domain with escaped dots using two \ (e.g. `code_domain\\.com`) |
+| `extra_params` | str | | Extra parameters passed to the Collabora start script |
+| `ssl` | bool | `false` | Enable SSL using certificates from /ssl |
+| `certfile` | str | `fullchain.pem` | Certificate file name located in /ssl |
+| `keyfile` | str | `privkey.pem` | Private key file name located in /ssl |
+| `username` | str | | Username for the Collabora admin console |
+| `password` | str | | Password for the Collabora admin console |
+| `dictionaries` | str | | Space-separated list of dictionary languages to install |
 
 ### Example configuration
 
@@ -74,24 +75,24 @@ username: admin
 password: changeme
 ```
 
-### 使用Nextcloud的Collabora
+### Using Collabora with Nextcloud
 
-1. 安装Collabora add-on并配置上述选项。
-1. 启动add-on并将Collabora服务器暴露到外部域名。
-1. 安装并配置Nextcloud add-on。
-1. 在Nextcloud中，安装**Nextcloud Office**应用。
-1. 在Nextcloud **管理设置→Office**中，将Collabora服务器URL设置为`https://yourdomain:9980`并启用**禁用证书验证**。
+1. Install the Collabora add-on and configure the options above.
+1. Start the add-on and expose the Collabora server to an external domain.
+1. Install and configure the Nextcloud add-on.
+1. Inside Nextcloud, install the **Nextcloud Office** app.
+1. In Nextcloud **Administration Settings → Office**, set the Collabora server URL to `https://yourdomain:9980` and enable **Disable certificate validation**.
 
-### 自定义脚本和环境变量
+### Custom Scripts and Environment Variables
 
-这个add-on通过`addon_config`映射支持自定义脚本和环境变量：
+This addon supports custom scripts and environment variables through the `addon_config` mapping:
 
-- **自定义脚本**：参见[在Addons中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars选项**：使用add-on的`env_vars`选项传递额外的环境变量（大小写名称均可）。参见https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2了解详情。
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
 ## Support
 
-在GitHub上创建问题
+Create an issue on GitHub
 
 
 

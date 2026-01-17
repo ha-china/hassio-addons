@@ -1,8 +1,6 @@
 arch:
   - aarch64
   - amd64
-  - armv7
-codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：网络领先的在线协作家谱应用程序'
 devices:
   - /dev/dri
@@ -69,10 +67,10 @@ devices:
   - /dev/nvme2
 environment:
   LANG: en-US
-  PGID: '1000'
-  PORT: '80'
-  PRETTY_URLS: '1'
-  PUID: '1000'
+  PGID: "1000"
+  PORT: "80"
+  PRETTY_URLS: "1"
+  PUID: "1000"
   WEBTREES_HOME: /var2/www/webtrees
 image: ghcr.nju.edu.cn/alexbelgium/webtrees-{arch}
 init: false
@@ -83,6 +81,7 @@ map:
   - ssl
 name: Webtrees
 options:
+  env_vars: []
   BASE_URL: http://192.168.178.23
   DATA_LOCATION: /config/data
   certfile: fullchain.pem
@@ -98,6 +97,9 @@ privileged:
   - SYS_ADMIN
   - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   BASE_URL: url
   DATA_LOCATION: str
   base_url_portless: bool?
@@ -115,5 +117,5 @@ services:
 slug: webtrees
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 2.2.4-2
-webui: '[PROTO:ssl]://[HOST]:[PORT:80]'
+version: "2.2.5"
+webui: "[PROTO:ssl]://[HOST]:[PORT:80]"

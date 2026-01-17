@@ -1,9 +1,9 @@
 name: Bedrock Server Manager
-version: "3.7.1"
+version: "3.7.2"
 upstream: 3.7.1
 slug: bedrockservermanager
 description: >-
-  [老王杂谈说]：Bedrock Server Manager是一个全面的Python服务器，旨在轻松安装、管理和维护Minecraft Bedrock专用服务器
+  [老王杂谈说]：Bedrock Server Manager是一款全面的Python服务器，专为轻松安装、管理和维护Minecraft Bedrock专用服务器而设计。
 arch:
   - amd64
   - aarch64

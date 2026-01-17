@@ -2,13 +2,13 @@
 
 Bedrock Server Manager 是一个全面的 Python 服务器，专为轻松安装、管理和维护 Minecraft Bedrock 专用服务器而设计
 
-_感谢所有给我的仓库添加星标的人！要添加星标，请点击下面的图片，它将在右上角显示。谢谢！_
+_感谢所有星标我的仓库！要星标它，请点击下面的图片，它将在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
-这个插件使用了 [docker 镜像](https://github.com/DMedina559/bedrock-server-manager)。
+这个插件使用的是 [docker 镜像](https://github.com/DMedina559/bedrock-server-manager)。
 
 ## 安装
 
@@ -17,16 +17,16 @@ _感谢所有给我的仓库添加星标的人！要添加星标，请点击下�
 1. [将我的 Hass.io 插件仓库][repository] 添加到你的 Hass.io 实例。
 1. 点击 `保存` 按钮来存储你的配置。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切顺利。
-1. 前往你配置的本地 IP 地址和端口（默认为 11325）。
-1. 设置将在 /addon_configs/2effc9b9_bedrockservermanager 中。
-1. 在 bedrock-server-manager 的文档中，这个文件夹将是 /root/。
+1. 检查插件的日志，看看是否一切顺利。
+1. 进入你配置的本地 IP 地址和端口（默认为 11325）
+1. 设置将在 /addon_configs/2effc9b9_bedrockservermanager 中
+1. 在 bedrock-server-manager 的文档中，这个文件夹将是 /root/
 
 ```
 port : 11325 #你想要运行的端口。
 ```
 
-Web UI 可以在 `<你的 IP>:端口` 找到。
+Webui 可以在 `<你的-ip>:端口` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---

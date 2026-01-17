@@ -1,8 +1,8 @@
 # Home assistant add-on: changedetection.io
 
-我利用业余时间维护这个以及其他的Home Assistant add-on：跟进上游的变化、HA的变化，并在真实硬件上进行测试，这需要花费大量时间（和一些金钱）。我大约使用我超过110个add-on中的5-10个，因此我安装了一些我自身不使用的测试机器（以及购买了一些测试服务，如VPN），以用来调试和改进这些add-on。
+我利用业余时间维护这个及其他Home Assistant add-on：跟上上游变化、HA变化，并在真实硬件上测试都需要大量时间（和一些金钱）。我大约使用我超过110个add-on中的5-10个，因此我安装了一些我本人不使用的测试机器（和购买了一些测试服务，如VPN）来调试和改进这些add-on。
 
-如果这个add-on节省了你的时间或简化了你的设置，我将非常感谢你的支持！
+如果这个add-on节省了你的时间或使你的设置更简单，我将非常感谢你的支持！
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -20,7 +20,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库加星的贡献者！要加星，请点击下面的图片，然后它会在右上角显示。谢谢！_
+_感谢所有给我仓库星标的人！要星标它，请点击下面的图片，它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://reporoster.com/stars/alexbelgium/hassio-addons)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,25 +28,25 @@ _感谢所有给我的仓库加星的贡献者！要加星，请点击下面的�
 
 ## About
 
-[Changedetection.io](https://github.com/dgtlmoon/changedetection.io) 提供免费的、开源的网页监控、通知和变化检测服务。
+[Changedetection.io](https://github.com/dgtlmoon/changedetection.io) 提供免费的、开源的网页监控、通知和变化检测。
 
-这个add-on基于 [linuxserver.io的docker镜像](https://github.com/linuxserver/docker-changedetection.io)。
+这个add-on基于linuxserver.io的[docker镜像](https://github.com/linuxserver/docker-changedetection.io)。
 
 ## Configuration
 
-使用add-on的 `env_vars` 选项来传递额外的环境变量（大小写名称都可以）。详细信息请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+使用add-on的`env_vars`选项来传递额外的环境变量（大小写名称）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
 ### Main app
 
-Web UI 可以在 `<your-ip>:5000` 访问，也可以通过add-on页面或使用Ingress从侧边栏访问。
+Web UI 可以在 `<your-ip>:5000` 找到，也可以通过add-on页面或使用Ingress从侧边栏访问。
 
 #### Sidebar shortcut
 
-你可以通过以下步骤添加一个指向你的 Changedetection.io 实例的快捷方式：
-1. 进入 <kbd>⚙ 设置</kbd> > <kbd>仪表盘</kbd>
-2. 点击底部角落的 <kbd>➕ 添加仪表盘</kbd>
-3. 选择 <kbd>Webpage</kbd> 选项，并粘贴从add-on页面获取的Web UI URL。
-4. 为侧边栏项填写标题、图标（建议：`mdi:vector-difference`），并为该面板填写一个**相对URL**（例如 `change-detection`）。最后，确认它。
+你可以通过以下步骤添加一个指向你的Changedetection.io实例的快捷方式：
+1. 进入 <kbd>⚙ 设置</kbd> > <kbd>Dashboard</kbd>
+2. 点击底部角落的 <kbd>➕ 添加Dashboard</kbd>
+3. 选择 <kbd>Webpage</kbd> 选项，并粘贴你从add-on页面获得的Web UI URL。
+4. 为侧边栏项目填写标题、图标（建议：`mdi:vector-difference`），并为该面板填写一个**相对URL**（例如 `change-detection`）。最后，确认它。
 
 ### Options
 
@@ -55,9 +55,9 @@ Web UI 可以在 `<your-ip>:5000` 访问，也可以通过add-on页面或使用I
 | `PGID` | int | `0` | 文件权限的组ID |
 | `PUID` | int | `0` | 文件权限的用户ID |
 | `TZ` | str | | 时区（例如，`Europe/London`） |
-| `BASE_URL` | str | | 在反向代理后面运行时的完整URL |
-| `PLAYWRIGHT_DRIVER_URL` | str | | Playwright驱动WebSocket URL |
-| `TIMEOUT` | int | `60000` | 请求超时时间（毫秒） |
+| `BASE_URL` | str | | 当在反向代理后面运行时的完整URL |
+| `PLAYWRIGHT_DRIVER_URL` | str | | Playwright驱动程序的WebSocket URL |
+| `TIMEOUT` | int | `60000` | 请求超时（毫秒） |
 
 ### Example Configuration
 
@@ -72,23 +72,23 @@ TIMEOUT: 60000
 
 ### Connect to browserless Chrome (from @RhysMcW)
 
-安装并启动 Browserless Chrome add-on，然后使用 `PLAYWRIGHT_DRIVER_URL` 选项连接到它。这个选项必须填写Browserless Chrome的URL： "ws://db21ed7f-browserless-chrome:3000/chromium?headless=true&stealth=true&blockAds=true"
+安装并启动Browserless Chrome add-on，然后使用 `PLAYWRIGHT_DRIVER_URL` 选项连接到它。这个选项必须填写Browserless Chrome的URL："ws://db21ed7f-browserless-chrome:3000/chromium?headless=true&stealth=true&blockAds=true"
 
-`db21ed7f-browserless-chrome` 主机名在UI中显示，在Browserless Chromium add-on页面上：
+`db21ed7f-browserless-chrome` 主机名显示在UI中，在Browserless Chromium add-on页面上：
 ![image](https://github.com/user-attachments/assets/a63514f6-027a-4361-a33f-0d8f87461279)
 
-然后重启 Changedetection.io add-on - 之后你就可以在 Changedetection.io 中使用浏览器选项了。
+然后重启Changedetection.io add-on - 之后你就可以在Changedetection.io中使用浏览器选项。
 
 ## Installation
 
-这个add-on的安装过程非常简单，与安装任何其他Hass.io add-on没有区别。
+这个add-on的安装非常简单，与其他任何Hass.io add-on的安装方式没有不同。
 
-1. 将我的Hass.io add-ons仓库[repository]添加到你的Hass.io实例。
+1. [将我的Hass.io add-ons仓库][repository]添加到你的Hass.io实例。
 1. 安装这个add-on。
 1. 点击 `保存` 按钮来保存你的配置。
 1. 启动add-on。
 1. 检查add-on的日志，看看是否一切顺利。
-1. 仔细配置add-on以符合你的偏好，请参阅官方文档进行配置。
+1. 小心配置add-on以满足你的偏好，请参考官方文档进行配置。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 ---

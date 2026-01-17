@@ -1,55 +1,55 @@
 # Home assistant add-on: Openproject
 
+我利用业余时间维护这个和其他 Home Assistant add-ons：跟上上游的变化、HA 的变化，并在真实硬件上测试需要大量时间（和一些钱）。我大约使用我超过 110 个 add-ons 中的 5-10 个，因此我安装了一些用于测试的机器（和一些我自己的测试服务，如 VPN），以便我可以在不使用的情况下进行故障排除和改进 add-ons。
 
-我利用业余时间维护这个Home Assistant插件和其他插件：跟进上游更改、HA更改以及在真实硬件上测试需要大量时间（并且需要一些金钱）。我大约使用我超过110个插件中的5-10个，因此我安装了测试机器（并购买了一些我自己不使用的测试服务，例如VPN），以便调试和改进插件。
-
-如果这个插件节省了您的时间或简化了您的设置，我将非常感谢您的支持！
+如果这个 add-on 为您节省了时间或简化了您的设置，我将非常感谢您的支持！
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## 插件信息
+## Addon informations
 
-![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fopenproject%2Fconfig.yaml)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fopenproject%2Fconfig.yaml)
 ![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fopenproject%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fopenproject%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fopenproject%2Fconfig.yaml)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![构建者](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建者)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20Paypal-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！点击下面的图片点赞，它就会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/openproject/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/openproject/stats.png)
 
-## 关于
+## About
 
-这个插件基于[docker镜像](https://hub.docker.com/r/openproject/openproject)。
+这个 add-on 基于 [docker image](https://hub.docker.com/r/openproject/openproject)。
 
-## 配置
+## Configuration
 
-使用插件的`env_vars`选项来传递额外的环境变量（大小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详细信息。
+使用 add-on 的 `env_vars` 选项来传递额外的环境变量（大写或小写名称）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-填写默认插件选项以启动插件。务必特别配置主机名，使用您的homeassistant IP + 插件暴露端口。对于其他选项，请使用config.yaml系统：https://github.com/alexbelgium/hassio-addons/wiki/Addons-feature:-add-env-variables
+填写默认的 add-on 选项以启动 add-on。务必特别配置主机名，使用您的 homeassistant IP + add-on 暴露的端口。
+对于附加选项，使用 config.yaml 系统：https://github.com/alexbelgium/hassio-addons/wiki/Addons-feature:-add-env-variables
 
-Webui可以在`<你的IP>:端口`找到。
+Webui 可以在 `<your-ip>:port` 找到。
 
-## 安装
+## Installation
 
-这个插件的安装非常简单，与安装任何其他Hass.io插件没有区别。
+这个 add-on 的安装非常简单，与安装任何其他 Hass.io add-on 没有区别。
 
-1. [将我的Hass.io插件仓库][repository]添加到您的Hass.io实例。
-1. 安装这个插件。
-1. 点击`保存`按钮以保存您的配置。
-1. 启动插件。
-1. 检查插件的日志，看看是否一切正常。
-1. 进入Webui，在那里您将初始化应用程序
-1. 重新启动插件，以应用任何应该应用的选项
+1. [将我的 Hass.io add-ons 仓库][repository] 添加到您的 Hass.io 实例。
+1. 安装这个 add-on。
+1. 点击 `Save` 按钮以保存您的配置。
+1. 启动 add-on。
+1. 检查 add-on 的日志以查看是否一切顺利。
+1. 进入 webui，在那里您将初始化应用程序
+1. 重新启动 add-on，以应用任何应应用的选项
 
 默认管理密码（登录：admin，密码：admin）。
 

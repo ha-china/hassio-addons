@@ -16,11 +16,11 @@
 
 - URL: `http://76e18fb5-ollama:11434`
 
-如果您想更改模型，请删除集成（不是插件！）并重新启动配置集成的过程。
+如果您想更改模型，请删除集成（不是插件！）并重新启动集成配置过程。
 
 ## UI 链接的说明
 
-UI 链接仅用于检查 Ollama 的 API 是否可用。官方的 Ollama 图像中不包含聊天功能。
+UI 链接仅用于检查 ollama 的 API 是否可用。官方 ollama 图像中不包含聊天功能。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
