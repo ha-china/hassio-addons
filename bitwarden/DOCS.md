@@ -1,4 +1,4 @@
-# Home Assistant Community Add-on: Vaultwarden (Bitwarden)
+# Home Assistant Community Add-on: Bitwarden RS
 
 Bitwarden is an open-source password manager that can store sensitive
 information such as website credentials in an encrypted vault.
@@ -7,7 +7,7 @@ The Bitwarden platform offers a variety of client applications including
 a web interface, desktop applications, browser extensions and mobile apps.
 
 This add-on is based upon the lightweight and opensource
-[Vaultwarden][vaultwarden] implementation, allowing you to self-host
+[Bitwarden RS][bitwarden-rs] implementation, allowing you to self-host
 this amazing password manager.
 
 Password theft is a serious problem. The websites and apps that you use are
@@ -20,24 +20,19 @@ email, bank, and other important accounts. USE A PASSWORD MANAGER!
 The installation of this add-on is pretty straightforward and not different in
 comparison to installing any other Home Assistant add-on.
 
-1. Click the Home Assistant My button below to open the add-on on your Home
-   Assistant instance.
-
-   [![Open this add-on in your Home Assistant instance.][addon-badge]][addon]
-
-1. Click the "Install" button to install the add-on.
-1. Start the "Vaultwarden (Bitwarden)" add-on.
-1. Check the logs of the "Vaultwarden (Bitwarden)" add-on to see if everything
-   went well and to get the admin token/password.
-1. Click the "OPEN WEB UI" button to open Vaultwarden.
+1. Search for the "Bitwarden RS" add-on in the Supervisor add-on store and
+   install it.
+1. Start the "Bitwarden RS" add-on.
+1. Check the logs of the "Bitwarden RS" add-on to see if everything went
+   well and to get the admin token/password.
+1. Click the "OPEN WEB UI" button to open Bitwarden RS.
 1. Add `/admin` to the URL to access the admin panel, e.g.,
    `http://hassio.local:7277/admin`. Log in using the admin token you got
-   in step 4.
+   in step 3.
 1. The admin/token in the logs is only shown until it is saved or changed.
    Hit save in the admin panel to use the randomly generated password or
    change it to one of your choosing.
-1. Be sure to store your admin token somewhere safe. **The add-on will never
-   show it again!**
+1. Be sure to store your admin token somewhere safe.
 
 ## Configuration
 
@@ -114,7 +109,8 @@ To set the limit, you can use this setting: 10MB would be `10485760`.
 ## Changelog & Releases
 
 This repository keeps a change log using [GitHub's releases][releases]
-functionality.
+functionality. The format of the log is based on
+[Keep a Changelog][keepchangelog].
 
 Releases are based on [Semantic Versioning][semver], and use the format
 of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented
@@ -150,7 +146,7 @@ check [the contributor's page][contributors].
 
 MIT License
 
-Copyright (c) 2019-2025 Franck Nijhof
+Copyright (c) 2019-2020 Franck Nijhof
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -170,15 +166,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-[addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
-[addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=a0d7b954_bitwarden&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository
+[bitwarden-rs]: https://github.com/dani-garcia/bitwarden_rs
 [contributors]: https://github.com/hassio-addons/addon-bitwarden/graphs/contributors
 [discord-ha]: https://discord.gg/c5DvZ4e
 [discord]: https://discord.me/hassioaddons
 [forum]: https://community.home-assistant.io/t/home-assistant-community-add-on-bitwarden-rs/115573?u=frenck
 [frenck]: https://github.com/frenck
 [issue]: https://github.com/hassio-addons/addon-bitwarden/issues
+[keepchangelog]: http://keepachangelog.com/en/1.0.0/
 [reddit]: https://reddit.com/r/homeassistant
 [releases]: https://github.com/hassio-addons/addon-bitwarden/releases
-[semver]: https://semver.org/spec/v2.0.0.html
-[vaultwarden]: https://github.com/dani-garcia/vaultwarden
+[semver]: http://semver.org/spec/v2.0.0.htm

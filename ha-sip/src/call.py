@@ -129,6 +129,9 @@ class Call(pj.Call):
         pj.Call.__init__(self, sip_account, call_id)
         self.player: Optional[player.Player] = None
         self.audio_media: Optional[pj.AudioMedia] = None
+        self.recorder: Optional[pj.AudioMediaRecorder] = None
+        self.recording_file: Optional[str] = None
+        self.requested_recording_filename: Optional[str] = None
         self.connected = False
         self.current_input = ''
         self.end_point = end_point
@@ -275,6 +278,7 @@ class Call(pj.Call):
             self.call_settled_at = time.time() + self.settle_time
         elif ci.state == pj.PJSIP_INV_STATE_DISCONNECTED:
             log(self.account.config.index, 'Call disconnected')
+            self.stop_recording()
             self.trigger_webhook({
                 'event': 'call_disconnected',
                 'caller': self.call_info['remote_uri'],
@@ -299,6 +303,8 @@ class Call(pj.Call):
             if media.type == pj.PJMEDIA_TYPE_AUDIO and (media.status == pj.PJSUA_CALL_MEDIA_ACTIVE or media.status == pj.PJSUA_CALL_MEDIA_REMOTE_HOLD):
                 log(self.account.config.index, 'Connected media %s' % media.status)
                 self.audio_media = self.getAudioMedia(media_index)
+                if self.requested_recording_filename and not self.recorder:
+                    self.start_recording(self.requested_recording_filename)
 
     def onDtmfDigit(self, prm: pj.OnDtmfDigitParam) -> None:
         if not self.playback_is_done and self.wait_for_audio_to_finish:
@@ -424,11 +430,19 @@ class Call(pj.Call):
             self.set_current_playback({'type': 'audio_file', 'audio_file': audio_file})
             self.play_wav_file(cached_file, False, wait_for_audio_to_finish)
             return
-        sound_file_name = audio.convert_audio_to_wav(audio_file)
-        if sound_file_name:
-            self.set_current_playback({'type': 'audio_file', 'audio_file': audio_file})
-            audio_cache.cache_file(should_cache, self.ha_config.cache_dir, 'audio_file', audio_file, sound_file_name)
-            self.play_wav_file(sound_file_name, True, wait_for_audio_to_finish)
+        file_format = audio.audio_format_from_filename(audio_file)
+        if not file_format:
+            log(None, 'Error getting audio format from filename: %s' % audio_file)
+            return
+        with open(audio_file, 'rb') as f:
+            audio_file_content = f.read()
+            sound_file_name = audio.convert_audio_stream_to_wav_file(audio_file_content, file_format)
+        if not sound_file_name:
+            log(None, 'Could not convert to wav: %s' % audio_file)
+            return
+        self.set_current_playback({'type': 'audio_file', 'audio_file': audio_file})
+        audio_cache.cache_file(should_cache, self.ha_config.cache_dir, 'audio_file', audio_file, sound_file_name)
+        self.play_wav_file(sound_file_name, True, wait_for_audio_to_finish)
 
     def play_wav_file(self, sound_file_name: str, must_be_deleted: bool, wait_for_audio_to_finish: bool) -> None:
         if self.audio_media:
@@ -477,6 +491,75 @@ class Call(pj.Call):
                 self.player = None
             self.playback_is_done = True
 
+    def start_recording(self, record_filename: str) -> None:
+        if self.recorder:
+            assert self.audio_media is not None
+            assert self.call_info is not None
+            log(self.account.config.index, 'Recording already running -> reattaching')
+            try:
+                self.audio_media.stopTransmit(self.recorder)
+            except Exception:
+                pass
+            try:
+                self.audio_media.startTransmit(self.recorder)
+            except Exception as e:
+                log(self.account.config.index, f'Error: Could not reattach recorder: {e}')
+            return
+        if not self.audio_media:
+            log(self.account.config.index, 'Audio media not connected yet. Recording will start once media is available')
+            self.requested_recording_filename = record_filename
+            return
+        self.requested_recording_filename = None
+        target_file = record_filename
+        target_dir = os.path.dirname(target_file)
+        if not os.path.isdir(target_dir):
+            log(self.account.config.index, 'Error: Call recordings directory not found: %s' % target_dir)
+            return
+        self.recorder = pj.AudioMediaRecorder()
+        try:
+            self.recorder.createRecorder(target_file)
+            self.audio_media.startTransmit(self.recorder)
+        except Exception as e:
+            log(self.account.config.index, 'Error: Failed to start call recording: %s' % e)
+            self.stop_recording()
+            return
+        self.recording_file = target_file
+        log(self.account.config.index, 'Call recording started: %s' % target_file)
+        assert self.call_info is not None
+        self.trigger_webhook({
+            'event': 'recording_started',
+            'caller': self.call_info['remote_uri'],
+            'parsed_caller': self.call_info['parsed_caller'],
+            'sip_account': self.account.config.index,
+            'call_id': self.call_info['call_id'],
+            'recording_file': self.recording_file,
+            'internal_id': self.callback_id,
+        })
+
+    def stop_recording(self) -> None:
+        self.requested_recording_filename = None
+        if not self.recorder:
+            return
+        try:
+            if self.audio_media:
+                self.audio_media.stopTransmit(self.recorder)
+        except Exception as e:
+            log(self.account.config.index, 'Error: Failed to stop call recording: %s' % e)
+        if self.recording_file:
+            log(self.account.config.index, 'Call recording stopped: %s' % self.recording_file)
+            assert self.call_info is not None
+            self.trigger_webhook({
+                'event': 'recording_stopped',
+                'caller': self.call_info['remote_uri'],
+                'parsed_caller': self.call_info['parsed_caller'],
+                'sip_account': self.account.config.index,
+                'call_id': self.call_info['call_id'],
+                'recording_file': self.recording_file,
+                'internal_id': self.callback_id,
+            })
+        self.recorder = None
+        self.recording_file = None
+
     def accept(self, answer_mode: CallHandling, answer_after: float) -> None:
         call_prm = pj.CallOpParam()
         call_prm.statusCode = 180
@@ -516,6 +599,9 @@ class Call(pj.Call):
         self.reset_timeout()
         log(self.account.config.index, 'Sending DTMF %s' % digits)
         if method == 'in_band':
+            if not self.audio_media:
+                log(self.account.config.index, 'Audio media not connected. Cannot send DTMF in-band!')
+                return
             if not self.tone_gen:
                 self.tone_gen = pj.ToneGenerator()
                 self.tone_gen.createToneGenerator()
@@ -574,8 +660,10 @@ class Call(pj.Call):
                 return PostActionReturn(action='return', level=level)
             elif action.startswith('jump'):
                 _, *params = action.split(None)
-                menu_id = utils.safe_list_get(params, 0, None)
-                return PostActionJump(action='jump', menu_id=menu_id)
+                jump_to = utils.safe_list_get(params, 0, '')
+                if not jump_to:
+                    log(self.account.config.index, 'Error: jump action requires a menu id as parameter')
+                return PostActionJump(action='jump', menu_id=jump_to.strip())
             else:
                 log(self.account.config.index, 'Unknown post_action: %s' % action)
                 return PostActionNoop(action='noop')
@@ -597,8 +685,9 @@ class Call(pj.Call):
                 else:
                     return Call.get_timeout_menu(parent_menu_for_choice)
 
+        menu_id = menu.get('id')
         normalized_menu: Menu = {
-            'id': menu.get('id'),
+            'id': menu_id.strip() if menu_id else None,
             'message': menu.get('message'),
             'audio_file': menu.get('audio_file'),
             'language': menu.get('language') or self.ha_config.tts_config['language'],

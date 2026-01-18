@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import os
 import json
-from urllib.parse import urlparse, urlunparse
 from typing import Union, Optional, Dict, Any
 from typing_extensions import TypedDict, Literal
 
@@ -103,6 +102,25 @@ class PlaybackDoneMessage(TypedDict):
     internal_id: str
 
 
+class RecordingStarted(TypedDict):
+    event: Literal['recording_started']
+    caller: str
+    parsed_caller: Optional[str]
+    sip_account: int
+    recording_file: str
+    call_id: Optional[str]
+    internal_id: str
+
+
+class RecordingStopped(TypedDict):
+    event: Literal['recording_stopped']
+    caller: str
+    parsed_caller: Optional[str]
+    sip_account: int
+    recording_file: str
+    call_id: Optional[str]
+    internal_id: str
+
 WebhookEvent = Union[
     IncomingCallEvent,
     CallEstablishedEvent,
@@ -112,7 +130,9 @@ WebhookEvent = Union[
     Timeout,
     RingTimeout,
     PlaybackDoneAudioFile,
-    PlaybackDoneMessage
+    PlaybackDoneMessage,
+    RecordingStarted,
+    RecordingStopped
 ]
 
 
@@ -213,10 +233,11 @@ def create_and_get_tts(ha_config: HaConfig, message: str, language: str) -> tupl
     except Exception as e:
         log(None, 'Error getting tts audio: %s' % e)
         return error_file_name, False, False
-    if tts_url.endswith('.mp3'):
-        wav_file_name = audio.convert_mp3_stream_to_wav_file(tts_response.content)
-    else:
-        wav_file_name = audio.write_wav_stream_to_wav_file(tts_response.content)
+    file_format = audio.audio_format_from_filename(tts_url)
+    if not file_format:
+        log(None, 'Error getting audio format from filename: %s' % tts_url)
+        return error_file_name, False, False
+    wav_file_name = audio.convert_audio_stream_to_wav_file(tts_response.content, file_format)
     if not wav_file_name:
         log(None, 'Error converting to wav: %s' % wav_file_name)
         return error_file_name, False, False
