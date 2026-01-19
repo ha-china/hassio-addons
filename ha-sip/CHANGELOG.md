@@ -2,6 +2,10 @@
 
 If you find ha-sip useful, consider starring ⭐ the [GitHub repo](https://github.com/arnonym/ha-plugins)!
 
+## 5.3
+- Make entity_id optional for home-assistant service calls
+- Fix bug with jump action from manually answered calls
+
 ## 5.2
 - Add recording support for calls (thanks dirtyharryiv@github for implementing this!)
 - Allow /media to be used inside add-on
