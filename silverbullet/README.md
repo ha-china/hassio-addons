@@ -1,40 +1,43 @@
-# Home assistant插件：SilverBullet
+# Home assistant add-on: SilverBullet
 
-SilverBullet是一个为具有黑客思维的人优化的笔记应用。我们都记笔记。现在有成千上万的笔记应用。字面意义上的。如果有一个笔记应用，让你的笔记不仅仅是纯文本文件，让你的笔记本质上成为一个你可以查询的数据库；你可以在其上构建自定义知识应用？一个可定制的笔记本，如果你愿意的话？
+SilverBullet is a note-taking application optimized for people with a hacker mindset. We all take notes. There’s a million note taking applications out there. Literally. Wouldn’t it be nice to have one where your notes are more than plain text files? Where your notes essentially become a database that you can query; that you can build custom knowledge applications on top of? A hackable notebook, if you will?
 
-_感谢大家给我的仓库加星！要加星，请点击下面的图片，它将在右上角。谢谢！_
 
-[![@jdeath/homeassistant-addons仓库的Star列表](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
-## 关于
+[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-这个插件基于[docker镜像](https://github.com/silverbulletmd/silverbullet)。
+## About
 
-## 安装
+This addon is based on the [docker image](https://github.com/silverbulletmd/silverbullet).
 
-这个插件的安装非常直接，与安装任何其他Hass.io插件没有什么不同。
+## Installation
 
-1. 将我的Hass.io插件仓库[repository]添加到你的Hass.io实例。
-1. 安装这个插件。
-1. 点击“保存”按钮以保存你的配置。
-1. 如果你想设置密码保护，将SB_HOME字段设置为用户名：密码，例如Mike:Pass123
-1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 应该可以通过ingress或<your-ip>:port打开WebUI。
-1. 数据应该存储在/addon_config/2effc9b9_silverbullet
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-## 配置
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. If you want to password protection, set SB_HOME field to UserName:Password, eg. Mike:Pass123
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open WebUI should work via ingress or <your-ip>:port.
+1. Data should live in /addon_config/2effc9b9_silverbullet
+## Configuration
 
 ```
-port : 8081 #你想要运行的端口。
+port : 8081 #port you want to run on.
 ```
 
-Webui可以在<your-ip>:port找到。
+Webui can be found at `<your-ip>:port`.
 
 [repository]: https://github.com/jdeath/homeassistant-addons
+
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

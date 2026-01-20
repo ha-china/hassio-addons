@@ -1,64 +1,66 @@
 # Home assistant add-on: jackett
 
 
-我利用业余时间维护这个Home Assistant插件和其他插件：跟进上游更改、HA更改，并在真实硬件上测试，这需要大量时间（并且需要一些金钱）。我大约使用我超过110个插件中的5-10个，因此我安装了一些我自己的测试机器（并购买了一些测试服务，如VPN），以便我能够调试和改进这些插件。
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-如果这个插件能节省您的时间或使您的设置更简单，我将非常感谢您的支持！
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
-[![给我买咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过PayPal捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## 插件信息
+## Addon informations
 
-![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjackett%2Fconfig.yaml)
-![入口](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjackett%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjackett%2Fconfig.yaml)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjackett%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjackett%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjackett%2Fconfig.yaml)
 
-[![Codacy徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![构建器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建器)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它会在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/jackett/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/jackett/stats.png)
 
-## 关于
+## About
 
-[jackett](https://github.com/jackett/jackett) - 一个用于像Couchpotato这样的电影的jackett分支。
+[Jackett](https://github.com/Jackett/Jackett) works as a proxy server: it translates queries from supported apps into tracker-site-specific HTTP queries, parses the responses, and then sends results back to the requesting software.
 
-这个插件基于linuxserver.io的[docker镜像](https://github.com/linuxserver/docker-jackett)。
+This addon is based on the [docker image](https://github.com/linuxserver/docker-jackett) from linuxserver.io.
 
-## 配置
+## Configuration
 
-使用插件的`env_vars`选项来传递额外的环境变量（名称大小写均可）。有关详细信息，请参阅[将环境变量添加到您的插件](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2)。
+Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-Webui可以在配置的端口上找到，或通过使用Ingress在侧边栏中找到。
-配置可以通过应用程序WebUI完成，以下选项除外。
+Webui can be found at the configured port or through the sidebar using Ingress.
+Configurations can be done through the app webUI, except for the following options.
 
-### 选项
+### Options
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `PGID` | 整数 | `0` | 文件权限的组ID |
-| `PUID` | 整数 | `0` | 文件权限的用户ID |
-| `TZ` | 字符串 | | 时区（例如，`Europe/London`） |
-| `localdisks` | 字符串 | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | 字符串 | | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | 字符串 | | 网络共享的SMB用户名 |
-| `cifspassword` | 字符串 | | 网络共享的SMB密码 |
-| `cifsdomain` | 字符串 | | 网络共享的SMB域 |
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `PGID` | int | `0` | Group ID for file permissions |
+| `PUID` | int | `0` | User ID for file permissions |
+| `TZ` | str | | Timezone (e.g., `Europe/London`) |
+| `connection_mode` | list | `ingress_noauth` | Connection mode (ingress_noauth/noingress_auth/ingress_auth) |
+| `localdisks` | str | | Local drives to mount (e.g., `sda1,sdb1,MYNAS`) |
+| `networkdisks` | str | | SMB shares to mount (e.g., `//SERVER/SHARE`) |
+| `cifsusername` | str | | SMB username for network shares |
+| `cifspassword` | str | | SMB password for network shares |
+| `cifsdomain` | str | | SMB domain for network shares |
 
-### 示例配置
+### Example Configuration
 
 ```yaml
 PGID: 0
 PUID: 0
 TZ: "Europe/London"
+connection_mode: "ingress_noauth"
 localdisks: "sda1,sdb1"
 networkdisks: "//192.168.1.100/downloads"
 cifsusername: "mediauser"
@@ -66,25 +68,28 @@ cifspassword: "password123"
 cifsdomain: "workgroup"
 ```
 
-### 挂载驱动器
+### Mounting Drives
 
-这个插件支持挂载本地驱动器和远程SMB共享：
+This addon supports mounting both local drives and remote SMB shares:
 
-- **本地驱动器**：参见[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：参见[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-## 安装
+## Installation
 
-这个插件的安装非常简单，与安装任何其他Hass.io插件没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. [将我的Hass.io插件仓库][repository]添加到您的Hass.io实例。
-1. 安装这个插件。
-1. 点击`保存`按钮以保存您的配置。
-1. 启动插件。
-1. 检查插件的日志以查看一切是否正常。
-1. 仔细配置插件以满足您的偏好，请参阅官方文档以获取相关信息。
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Carefully configure the add-on to your preferences, see the official documentation for for that.
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
