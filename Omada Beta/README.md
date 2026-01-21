@@ -1,14 +1,26 @@
 # Home Assistant Omada Add-On Beta
 
-这个插件将 Omada 控制器直接引入在 64 位 ARM 或 x64 处理器上运行的 Home Assistant。
+This add-on brings the Omada Controller directly into Home Assistant running on an 64 bit ARM or a x64 processor.
 
-Omada Beta 包含了 [docker-omada-controller](https://github.com/mbentley/docker-omada-controller) 的最新版本。如果你需要更新的版本，请打开一个问题，或者更好的是提交一个拉取请求。
+Omada Beta contains the most recent port of the
+[docker-omada-controller](https://github.com/mbentley/docker-omada-controller).
+If you need a more recent version, open an issue, or better submit a pull request.
 
-从 v5 升级到 v6，请阅读 [docker-omada-controller](https://github.com/mbentley/docker-omada-controller) 上的说明。
+For upgrade from v5 to v6 please read the notes on [docker-omada-controller](https://github.com/mbentley/docker-omada-controller).
 
-## 贡献
+## Contribution
 
-这个插件是 Matt Bentley 的 [docker-omada-controller](https://github.com/mbentley/docker-omada-controller) 的分支，如果没有他们的出色工作，jkunczik 的 [home-assistant-omada](https://github.com/jkunczik/home-assistant-omada) 是不可能实现的。除了原始的 docker omada 控制器之外，这个插件将所有持久数据存储在 /data 目录中，以便与 Home Assistant 兼容。如果没有其他人的努力，这个插件是不可能的。欢迎为版本更新或新功能提交拉取请求。特别感谢 DraTrav 推动这个插件向前发展！
+This add-on is a fork of Matt Bentleys
+[docker-omada-controller](https://github.com/mbentley/docker-omada-controller),
+and jkunczik [home-assistant-omada](https://github.com/jkunczik/home-assistant-omada)
+would not have been possible without their excellent work.
+Other than in the original docker omada controller,
+this add-on stores all persistent data in the /data directory,
+so that it is compatible with Home assistant.
+This Add-On would not be possible without the effort of other people.
+Pull requests for version updates or new features are always more than welcome.
+Special thanks goes to DraTrav for pushing this Add-On forward!
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

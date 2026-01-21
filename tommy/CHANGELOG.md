@@ -1,5 +1,19 @@
 # TOMMY
 
+## 1.3.0
+
+### Major Changes
+- Added Custom Boundary Mode. This gives you fine-grained control over how different links contribute to the final motion prediction. Great for environments prone to false positives.
+- Removed the option to do manual discovery through the dashboard. This will free up a substantial amount of memory during the startup phase. Please refer to the documentation for other methods of manual discovery.
+- Improved memory usage for ESPHome, which may allow some devices to run the BLE stack (e.g., Bluetooth proxy) alongside TOMMY even without PSRAM
+- **ESPHome users: Please update your devices with the latest TOMMY firmware**
+
+### Minor Changes
+- Fixed a bug causing hold time to not be applied for Matter integrations
+- Fixed a bug causing ESPHome devices to keep restarting if the TOMMY server isn't running during boot
+- Channel information per device is now shown in the dashboard
+- A warning is shown if all devices aren't on the same channel
+
 ## 1.2.1
 
 ### Minor Changes

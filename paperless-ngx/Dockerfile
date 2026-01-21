@@ -15,6 +15,8 @@ ENV \
 # Install Alpine dependencies
 # hadolint ignore=DL3018,DL3013
 
+# hadolint ignore=DL3013
+
 # Addon metadata (injected by CI)
 ENV ADDON_VERSION="0.0.1"
 ENV ADDON_NAME="Paperless-ngx"
@@ -106,8 +108,8 @@ RUN \
         fribidi-dev \
         xcb-util-image-dev \
         mariadb-dev \
-        libpq-dev
-RUN find /usr/lib/python3* -name '__pycache__' -exec rm -rf {} + || true
+        libpq-dev \
+    && (find /usr/lib/python3* -name '__pycache__' -exec rm -rf {} + || true)
 
 # Copy root filesystem
 COPY rootfs /

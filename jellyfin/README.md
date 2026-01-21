@@ -1,16 +1,16 @@
 # Home assistant add-on: jellyfin
 
 
-我利用业余时间维护这个和其他 Home Assistant add-ons：跟进上游更改、HA 更改，并在真实硬件上测试需要大量时间（和一些金钱）。我大约使用我超过 110 个 add-ons 中 5-10 个，所以我会安装一些我不使用的测试机器（和一些测试服务如 VPN）来调试和改进 add-ons。
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-如果这个 add-on 节省了您的时间或简化了您的设置，我将非常感谢您的支持！
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## Addon informations
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjellyfin%2Fconfig.yaml)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjellyfin%2Fconfig.yaml)
 ![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjellyfin%2Fconfig.yaml)
 ![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjellyfin%2Fconfig.yaml)
 
@@ -21,7 +21,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它将在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -29,29 +29,29 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 
 ## About
 
-[jellyfin](https://jellyfin.org/) 整理个人媒体库中的视频、音乐、直播电视和照片，并将它们流式传输到智能电视、流媒体盒子和移动设备。这个容器作为一个独立的 jellyfin 媒体服务器进行打包。
+[jellyfin](https://jellyfin.org/) organizes video, music, live TV, and photos from personal media libraries and streams them to smart TVs, streaming boxes and mobile devices. This container is packaged as a standalone jellyfin Media Server.
 
-这个 add-on 基于 linuxserver.io 的 [docker image](https://github.com/linuxserver/docker-jellyfin)。
+This addon is based on the [docker image](https://github.com/linuxserver/docker-jellyfin) from linuxserver.io.
 
 ## Configuration
 
-Webui 可以在 `<你的IP>:8096` 或通过 Ingress 在侧边栏中找到。
+Webui can be found at `<your-ip>:8096` or through the sidebar using Ingress.
 
 ### Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `PGID` | int | `0` | 文件权限的组 ID |
-| `PUID` | int | `0` | 文件权限的用户 ID |
-| `TZ` | str | | 时区（例如，`Europe/London`） |
-| `data_location` | str | `/share/jellyfin` | Jellyfin 数据存储的路径 |
-| `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | str | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | str | | SMB 网络共享的用户名 |
-| `cifspassword` | str | | SMB 网络共享的密码 |
-| `cifsdomain` | str | | SMB 网络共享的域 |
-| `i915_enable_guc` | int | | 可选的 Intel iGPU `enable_guc` 参数（0-3）在启动时应用以提高硬件编码兼容性。不会重新配置内核；主机必须已经暴露 `/sys/module/i915/parameters/enable_guc`。 |
-| `DOCKER_MODS` | list | | 用于硬件加速的额外 Docker mods |
+| `PGID` | int | `0` | Group ID for file permissions |
+| `PUID` | int | `0` | User ID for file permissions |
+| `TZ` | str | | Timezone (e.g., `Europe/London`) |
+| `data_location` | str | `/share/jellyfin` | Path where Jellyfin data is stored |
+| `localdisks` | str | | Local drives to mount (e.g., `sda1,sdb1,MYNAS`) |
+| `networkdisks` | str | | SMB shares to mount (e.g., `//SERVER/SHARE`) |
+| `cifsusername` | str | | SMB username for network shares |
+| `cifspassword` | str | | SMB password for network shares |
+| `cifsdomain` | str | | SMB domain for network shares |
+| `i915_enable_guc` | int | | Optional Intel iGPU `enable_guc` parameter (0-3) applied at startup for improved hardware encoding compatibility. Does not reconfigure the kernel; the host must already expose `/sys/module/i915/parameters/enable_guc`. |
+| `DOCKER_MODS` | list | | Additional Docker mods for hardware acceleration |
 
 ### Example Configuration
 
@@ -72,57 +72,61 @@ DOCKER_MODS:
 
 ### Hardware Acceleration
 
-可用于硬件加速的 Docker mods：
-- `linuxserver/mods:jellyfin-opencl-intel` - Intel OpenCL 支持
-- `linuxserver/mods:jellyfin-amd` - AMD 硬件加速
-- `linuxserver/mods:jellyfin-rffmpeg` - 自定义 FFmpeg 构建
+Available Docker mods for hardware acceleration:
+- `linuxserver/mods:jellyfin-opencl-intel` - Intel OpenCL support
+- `linuxserver/mods:jellyfin-amd` - AMD hardware acceleration
+- `linuxserver/mods:jellyfin-rffmpeg` - Custom FFmpeg build
 
-对于需要 GuC 提交以实现稳定硬件编码的 Intel 系统（例如，N6005），将 `i915_enable_guc` 设置为 `2` 以在容器启动时应用内核参数。这个 add-on 仅写入现有的运行时模块参数；不会尝试重新构建内核或更改启动参数。如果主机内核上缺少或只读 `/sys/module/i915/parameters/enable_guc` 路径，这个 add-on 会记录警告并继续而不进行修改。
+For Intel systems that require GuC submission for stable hardware encoding (e.g., N6005), set `i915_enable_guc` to `2` to apply the kernel parameter at container startup. The add-on only writes to the existing runtime module parameter; no kernel rebuild or boot parameter change is attempted. If the path `/sys/module/i915/parameters/enable_guc` is missing or read-only on the host kernel, the add-on logs a warning and continues without modification.
 
 ### Mounting Drives
 
-这个 add-on 支持挂载本地驱动器和远程 SMB 共享：
+This addon supports mounting both local drives and remote SMB shares:
 
-- **本地驱动器**：参见 [在 Addons 中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：参见 [在 Addons 中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### Custom Scripts and Environment Variables
 
-这个 add-on 通过 `addon_config` 映射支持自定义脚本和环境变量：
+This addon supports custom scripts and environment variables through the `addon_config` mapping:
 
-- **自定义脚本**：参见 [在 Addons 中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用 add-on 的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。参见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详情。
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
 ### Enable ssl
 #### Creating the PFX certificate file first
-1. 这部分假设您已经使用 Let's Encrypt add on 获得了 PEM 格式的 SSL 证书
-2. 运行命令 `openssl pkcs12 -export -in fullchain.pem -inkey private_key.pem -passout pass: -out server.pfx`
-3. 使用 `chmod 0700 server.pfx` 设置权限
-> 注意：
-> 上述命令创建了一个没有密码的 PFX 文件，您可以使用 `-passout pass:"your-password"` 填写密码
-> 但也必须向 Jellyfin 的配置提供 `your-password`
+1. This part assumes you already have SSL certs in PEM format using the Let's Encrypt add on
+2. Run this command `openssl pkcs12 -export -in fullchain.pem -inkey private_key.pem -passout pass: -out server.pfx`
+3. Set the permission using `chmod 0700 server.pfx`
+> Note:
+> The above command creates a PFX file without a password, you can fill in a password with `-passout pass:"your-password"`
+> but will also have to provide `your-password` to Jellyfin's configuration
 
 #### Automating the PFX certificate
 
 #### Jellyfin configuration
-1. 从侧边栏中，点击 `Administration` -> `Dashboard`
-2. 在 `Networking` 下，`Server Address Settings`，勾选 `Enable HTTPS`
-3. 在 `HTTPS Settings` 下，勾选 `Require HTTPS`
-4. 对于 `Custom SSL certificate path:`，指向您的 PFX 文件，如果需要，填写 `Certificate password`
-5. 滚动到底部并 `Save`
+1. From the sidebar, click on `Administration` -> `Dashboard`
+2. Under `Networking`, `Server Address Settings`, tick `Enable HTTPS`
+3. Under `HTTPS Settings`, tick `Require HTTPS`
+4. For `Custom SSL certificate path:`, point it to your PFX file and fill in the `Certificate password` if required
+5. Scroll to the bottom and `Save`
 
 ## Installation
 
-这个 add-on 的安装非常简单，与安装任何其他 Hass.io add-on 没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. [添加我的 Hass.io add-ons 仓库][repository] 到您的 Hass.io 实例。
-1. 安装这个 add-on。
-1. 点击 `Save` 按钮保存您的配置。
-1. 启动 add-on。
-1. 检查 add-on 的日志，看看是否一切顺利。
-1. 仔细配置 add-on 以符合您的喜好，参见官方文档了解详情。
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Carefully configure the add-on to your preferences, see the official documentation for for that.
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+
+
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
