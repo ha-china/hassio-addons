@@ -2,56 +2,56 @@
 
 ![Logo](logo.png)
 
-[![打开你的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_netboot-xyz)
-[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker 镜像](https://img.shields.io/badge/docker-2.2.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-netboot-xyz)
-![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_netboot-xyz)
+[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker Image](https://img.shields.io/badge/docker-2.2.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-netboot-xyz)
+![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> PXE-Server 用于在本地网络中部署操作系统
-
----
-
-## 📖 关于
-
-## 示例配置
-
-一个示例 `menu.ipxe` 配置文件可以在 [示例目录中找到](examples/menu.ipxe)。
-该文件演示了如何为 Windows 11、Linux Mint 和 SystemRescue 配置自定义启动条目。
-
-> PXE-Server 用于在本地网络中部署操作系统
-
-如果你在使用此附加组件时遇到任何问题，请使用下面的链接报告它们。问题表单将预先填写附加组件信息，以帮助我们更快地解决问题。
-
-如果你有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预先填写附加组件信息。
-
-## 🐛 报告错误
-
-如果你在使用此附加组件时遇到任何问题，请使用下面的链接报告它们。问题表单将预先填写附加组件信息，以帮助我们更快地解决问题。
-
-**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=2.0.0&log_information=请在此处粘贴附加组件日志输出：%0A%0A)**
-
-> [!NOTE]
-> 请使用上面的链接报告问题。这确保了所有必要信息（附加组件名称、版本等）将自动包含在你的错误报告中。
-
-## 💡 功能请求
-
-如果你有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预先填写附加组件信息。
-
-**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=netboot-xyz)**
-
-> [!NOTE]
-> 请使用上面的链接请求功能。这将确保附加组件名称将自动包含在你的功能请求中。
-
-此项目是开源的，并在 MIT 许可证下提供。
-由 **FaserF** 维护。
+> PXE-Server to deploy a OS inside your local network
 
 ---
 
-## ⚙️ 配置
+## 📖 About
 
-通过 Home Assistant 附加组件页面中的 **配置** 标签配置附加组件。
+## Example Configuration
 
-### 选项
+An example `menu.ipxe` configuration file can be found [in the examples directory](examples/menu.ipxe).
+This file demonstrates how to configure custom boot entries for Windows 11, Linux Mint, and SystemRescue.
+
+> PXE-Server to deploy a OS inside your local network
+
+If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
+
+If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
+
+## 🐛 Report a Bug
+
+If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
+
+**[Report a Bug](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=2.0.0&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
+
+> [!NOTE]
+> Please use the link above to report problems. This ensures that all necessary information (add-on name, version, etc.) is automatically included in your bug report.
+
+## 💡 Feature Request
+
+If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
+
+**[Request a Feature](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=netboot-xyz)**
+
+> [!NOTE]
+> Please use the link above to request features. This ensures that the add-on name is automatically included in your feature request.
+
+This project is open-source and available under the MIT License.
+Maintained by **FaserF**.
+
+---
+
+## ⚙️ Configuration
+
+Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
+
+### Options
 
 ```yaml
 dhcp_range: 192.168.1.200
@@ -62,10 +62,11 @@ path_config: /media/netboot/config
 
 ---
 
-## 👨‍💻 致谢与许可证
+## 👨‍💻 Credits & License
 
-此项目是开源的，并在 MIT 许可证下提供。
-由 **FaserF** 维护。
+This project is open-source and available under the MIT License.
+Maintained by **FaserF**.
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

@@ -1,2 +1,3 @@
-FROM ghcr.nju.edu.cn/gethomepage/homepage:v1.8.0
+FROM ghcr.nju.edu.cn/gethomepage/homepage:v1.9.0
+
 

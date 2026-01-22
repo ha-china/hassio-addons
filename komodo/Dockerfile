@@ -9,6 +9,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install requirements
 # hadolint ignore=DL3008
 
+
+
 # Addon metadata (injected by CI)
 ENV ADDON_VERSION="0.0.1"
 ENV ADDON_NAME="Komodo"
@@ -22,6 +24,7 @@ RUN \
         curl \
         gnupg \
         netcat-traditional \
+        sudo \
     && curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | \
        gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg --dearmor \
     && echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/debian bookworm/mongodb-org/7.0 main" | \
@@ -72,3 +75,5 @@ LABEL \
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
     CMD curl --fail http://localhost:9120 || exit 1
+
+RUN chmod a+x /etc/s6-overlay/s6-rc.d/*/run /etc/s6-overlay/s6-rc.d/*/up /etc/s6-overlay/s6-rc.d/*/down || true

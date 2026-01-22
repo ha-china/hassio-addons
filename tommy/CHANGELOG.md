@@ -1,5 +1,21 @@
 # TOMMY
 
+## 1.4.1
+
+### Minor Changes
+- Fixed a bug causing Wi-Fi connection issues with C6 devices
+- **ESPHome users: Please update your devices with the latest TOMMY firmware**
+
+## 1.4.0
+
+### Major Changes
+- Updated the firmware to use ESP-IDF 5.5.2 to match ESPHome version 2026.1.0.
+- **ESPHome users: It is now required to use the latest ESPHome version 2026.1.0**
+- **ESPHome users: Please update your devices with the latest TOMMY firmware**
+
+### Minor Changes
+- Fixed a bug introduced in 1.3.0 causing Wi-Fi connection issues with C6 devices
+
 ## 1.3.0
 
 ### Major Changes

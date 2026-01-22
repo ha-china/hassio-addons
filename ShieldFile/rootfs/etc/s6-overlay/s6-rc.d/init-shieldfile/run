@@ -2,6 +2,8 @@
 # shellcheck disable=SC1091
 
 bashio::log.info "🛡️ Initializing ShieldFile..."
+echo "DEBUG: ShieldFile Init Script Starting..."
+
 
 # Define paths
 DB_DIR="/data/shieldfile"
@@ -126,14 +128,14 @@ mkdir -p /run/nginx /etc/nginx/http.d
 cat <<EOF >/etc/nginx/http.d/default.conf
 # Ingress Server
 server {
-    listen 8099;
+    listen 8098;
     server_name _;
 
     # Allow large file uploads
     client_max_body_size 0;
 
     location / {
-        proxy_pass http://127.0.0.1:8080${INGRESS_ENTRY}/;
+        proxy_pass http://127.0.0.1:8080\${INGRESS_ENTRY}/;
         proxy_set_header Host \$host;
         proxy_set_header X-Real-IP \$remote_addr;
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
@@ -145,11 +147,11 @@ server {
 
 # Direct Access Server (HTTPS)
 server {
-    listen ${PORT} ssl;
+    listen \${PORT} ssl;
     server_name _;
 
-    ssl_certificate ${FULL_CERT_PATH};
-    ssl_certificate_key ${FULL_KEY_PATH};
+    ssl_certificate \${FULL_CERT_PATH};
+    ssl_certificate_key \${FULL_KEY_PATH};
     ssl_protocols TLSv1.2 TLSv1.3;
 
     # Allow large file uploads
@@ -158,11 +160,11 @@ server {
     # Redirect Root to BaseURL (Ingress Path)
     # This ensures directly accessing https://IP:PORT/ works by jumping to the correct path
     location = / {
-        return 301 ${INGRESS_ENTRY}/;
+        return 301 \${INGRESS_ENTRY}/;
     }
 
     # Handle the App Path
-    location ${INGRESS_ENTRY} {
+    location \${INGRESS_ENTRY} {
         proxy_pass http://127.0.0.1:8080;
         proxy_set_header Host \$host;
         proxy_set_header X-Real-IP \$remote_addr;

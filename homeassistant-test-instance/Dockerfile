@@ -1,4 +1,4 @@
-ARG HA_VERSION=2026.1.1
+ARG HA_VERSION=2026.1.2
 ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/home-assistant:${HA_VERSION}
 # hadolint ignore=DL3006
 FROM ghcr.nju.edu.cn/hassio-addons/base:19.0.0 AS addon-base
@@ -13,8 +13,10 @@ ENV TERM="xterm-256color"
 
 # Install dependencies for Bashio (use default shell for Alpine)
 
+
+
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.2.2"
+ENV ADDON_VERSION="0.2.3"
 ENV ADDON_NAME="Home Assistant Test Instance"
 ENV ADDON_SLUG="ha_test_instance"
 ENV ADDON_UNSUPPORTED="false"

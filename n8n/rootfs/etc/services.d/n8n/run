@@ -1,5 +1,8 @@
 #!/usr/bin/with-contenv bashio
-# shellcheck disable=SC1091
+# ==============================================================================
+# Home Assistant Add-on: N8n
+# Runs N8n
+# ==============================================================================
 
 # <ADDON_BANNER_INJECTION>
 
@@ -14,8 +17,8 @@ _show_startup_banner() {
     if [ -z "$VERSION" ]; then
         VERSION="unknown"
     fi
-    local NAME="ShieldFile"
-    local SLUG="shieldfile"
+    local NAME="N8n"
+    local SLUG="n8n"
     local UNSUPPORTED="false"
     local MAINTAINER="FaserF"
     local REPO="$MAINTAINER/hassio-addons"
@@ -180,24 +183,96 @@ fi
 
 
 
-bashio::log.info "🚀 Starting Nginx..."
 
-# Configure Nginx log level
-if ! LOG_LEVEL=$(bashio::config 'log_level') || [ -z "$LOG_LEVEL" ]; then
-    bashio::log.warning "Failed to fetch log_level configuration. Using default: info"
-    LOG_LEVEL="info"
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Ensure persistence directory exists
+if ! bashio::fs.directory_exists "/data/n8n"; then
+    bashio::log.info "Creating persistent storage directory..."
+    mkdir -p -m 755 /data/n8n
+    chown -R root:root /data/n8n
 fi
-# Map Bashio levels to Nginx levels (debug, info, notice, warn, error, crit, alert, emerg)
-case "${LOG_LEVEL}" in
-        trace|debug) NGINX_LOG_LEVEL="debug" ;;
-        info)        NGINX_LOG_LEVEL="info" ;;
-        notice)      NGINX_LOG_LEVEL="notice" ;;
-        warning)     NGINX_LOG_LEVEL="warn" ;;
-        error)       NGINX_LOG_LEVEL="error" ;;
-        fatal)       NGINX_LOG_LEVEL="crit" ;;
-        *)           NGINX_LOG_LEVEL="warn" ;;
+
+# Export necessary environment variables
+export N8N_USER_FOLDER="/data/n8n"
+
+if bashio::config.has_value 'port'; then
+    N8N_PORT=$(bashio::config 'port')
+else
+    N8N_PORT="5678"
+fi
+export N8N_PORT
+
+if bashio::config.has_value 'listen_address'; then
+    N8N_LISTEN_ADDRESS=$(bashio::config 'listen_address')
+else
+    N8N_LISTEN_ADDRESS="0.0.0.0"
+fi
+export N8N_LISTEN_ADDRESS
+
+# SSL Configuration
+if bashio::config.true 'ssl'; then
+    bashio::log.info "SSL is enabled"
+    export N8N_PROTOCOL="https"
+
+    certfile=$(bashio::config 'certfile')
+    keyfile=$(bashio::config 'keyfile')
+
+    # Use defaults if not provided
+    if bashio::var.is_empty "${certfile}"; then
+        certfile="fullchain.pem"
+    fi
+    if bashio::var.is_empty "${keyfile}"; then
+        keyfile="privkey.pem"
+    fi
+
+    export N8N_SSL_CERT="/ssl/${certfile}"
+    export N8N_SSL_KEY="/ssl/${keyfile}"
+
+    if ! bashio::fs.file_exists "${N8N_SSL_CERT}"; then
+        bashio::log.error "Certificate file '${N8N_SSL_CERT}' not found!"
+        bashio::exit.nok
+    fi
+
+    if ! bashio::fs.file_exists "${N8N_SSL_KEY}"; then
+        bashio::log.error "Key file '${N8N_SSL_KEY}' not found!"
+        bashio::exit.nok
+    fi
+else
+    # Explicitly set http if ssl is false/missing to be safe
+    export N8N_PROTOCOL="http"
+fi
+
+# Set Log Level from config (with fallback and mapping)
+if bashio::config.has_value 'log_level'; then
+    LOG_LEVEL="$(bashio::config 'log_level')"
+    case "${LOG_LEVEL}" in
+        trace|debug) N8N_LOG_LEVEL="debug" ;;
+        info|notice) N8N_LOG_LEVEL="info" ;;
+        warning)     N8N_LOG_LEVEL="warn" ;;
+        error|fatal) N8N_LOG_LEVEL="error" ;;
+        *)           N8N_LOG_LEVEL="info" ;;
     esac
-    sed -i -E "s/error_log .*/error_log \/dev\/stderr ${NGINX_LOG_LEVEL};/g" /etc/nginx/nginx.conf
+    export N8N_LOG_LEVEL
+else
+    export N8N_LOG_LEVEL="info"
+fi
 
+bashio::log.info "Starting N8n..."
+bashio::log.info "User folder: ${N8N_USER_FOLDER}"
+bashio::log.info "Port: ${N8N_PORT}"
+bashio::log.info "Log level: ${N8N_LOG_LEVEL}"
 
-exec nginx -g 'daemon off;'
+# Execute n8n
+exec n8n start
