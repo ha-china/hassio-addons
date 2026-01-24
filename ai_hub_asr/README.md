@@ -1,4 +1,4 @@
-# SenseVoice STT - 多语言离线语音转文本服务
+# AI Hub ASR - Home Assistant Add-on
 
 基于 **SenseVoice** 模型，支持中文、英文、日语、韩语、粤语，集成情感识别和事件检测功能。
 
