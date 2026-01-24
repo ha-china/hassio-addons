@@ -1,5 +1,5 @@
 {
-  "version": "v1.0.4",
+  "version": "v1.0.5",
   "slug": "ai_hub_tts",
   "name": "AI Hub TTS",
   "description": "离线语音合成，基于 Kokoro 多语言模型，支持中英文语音合成，兼容 Wyoming 协议",
