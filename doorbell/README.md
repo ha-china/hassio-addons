@@ -12,59 +12,60 @@
    </a>
 </p>
 
-将您的 Hikvision IP 门铃与 Home Assistant 连接，以接收事件（如移动检测或来电）并发送回命令（如打开与门铃中继器连接的门或拒绝来电）。
+Connect your Hikvision IP door stations to Home Assistant to receive events (like motion detection or incoming calls) and send back commands (like opening a door connected to the door station relay or rejecting a call).
 
-__注意__：这是该插件的稳定版本。
-非常欢迎您的反馈！如果您有任何疑问，希望报告问题或只是发表意见，请查看 [Github Issues 页面](https://github.com/pergolafabio/Hikvision-Addons/issues) 并留言！
+__NOTE__: This is the stable version of the addon.
+You feedback is very welcome! If you have any doubt, would like to report an issue or to simply chime in, please have a look at the [Github Issues page](https://github.com/pergolafabio/Hikvision-Addons/issues) and drop us a note!
 
-## 功能
-- 捕获门铃**事件**：_门铃响_ /_移动检测_ /_门已解锁_ / _篡改警报_
-- **打开**与门铃连接的门（_适用于较旧设备，端口 80 被封锁且 `ISAPI` 不可用的情况_）
-- 远程操作，如**接听**/**拒绝**来电、**挂断**。
 
-   _这可以在 Home Assistant 自动化中加以利用。例如，当 Zigbee 门传感器指示门已打开时，室内站和 Hik-Connect 设备上的铃声会停止。查看文档以获取更多详细信息。_
-- **重启**门铃站
-- 远程场景支持，如 **atHome**/**goOut**/**goToBed**/**自定义**
+## Features
+- Capture doorbell **events**: _doorbell ringing_ /_motion detection_ /_door unlocked_ / _tamper alarm_
+- **Open doors** connected to the doorbell (_useful for older devices where port 80 is blocked and `ISAPI` is not available_)
+- Remote actions such as **answering**/**rejecting** the call, **hanging** up.
 
-### 示例
+   _This can be exploited in an HA automation. When for example a Zigbee door sensor signals a door opened, the ringing on the indoor stations and on the Hik-Connect devices is stopped. Se the documentation for more details._
+- **Reboot** the door station
+- Remote scenes support such as **atHome**/**goOut**/**goToBed**/**custom**
 
-这是一个显示两个门铃的示例设置，一个室内单元和一个室外单元：
+### Example
+
+Here is an example setup showing two doorbells, an indoor and an outdoor unit:
 
 <p align="center">
    <img src="https://raw.githubusercontent.com/pergolafabio/Hikvision-Addons/dev/hikvision-doorbell/assets/docs_sensors.png" width="500px">
 </p>
 
-请务必在此处阅读完整文档！[Readme](DOCS.md)
+Make sure to read the full documentation here! [Readme](DOCS.md)
 
-## 入门指南
+## Getting started
 
-**注意**：**Hikvision Doorbell** 需要一个 MQTT 中继器才能正常运行。请参考插件的 **文档** 标签，了解如何设置官方的 **Mosquitto 插件**。
+**Note**: **Hikvision Doorbell** requires an MQTT broker to function correctly. Refer to the **Documentation** tab of the add-on to learn how to setup the official **Mosquitto add-on**.
 
-__注意__：要使用此 _稳定_ 版本，请在您的 Home Assistant 配置文件中启用 __高级模式__：
-   - 点击您的用户名（在 Home Assistant UI 的左下角）
-   - 向下滚动配置文件页面并切换 __高级模式__
+__NOTE__: To use this _stable_ version, enable __Advanced mode__ in you Home Assistant profile:
+   - Click on you user name (in the lower-left corner of Home Assistant UI)
+   - Scroll down the profile page and toggle __Advanced Mode__
      <p align="center">
      <img src="https://user-images.githubusercontent.com/4510647/221361317-a9076a72-9762-4320-8302-24414e6019f2.png" width="600">
      </p>
-- 点击以下按钮自动在您的 Home Assistant UI 中打开插件：
+- Click the following button to automatically open the add-on in you Home Assistance UI:
    <p align="center">
       <a href="https://my.home-assistant.io/redirect/supervisor_addon/?addon=aff2db71_hikvision_doorbell_beta&repository_url=https%3A%2F%2Fgithub.com%2Fpergolafabio%2FHikvision-Addons" target="_blank">
          <img src="https://my.home-assistant.io/badges/supervisor_addon.svg" alt="Open your Home Assistant instance and show the dashboard of a Supervisor add-on." />
       </a>
    </p>
 
-   如果您遇到问题，请查看以下手动步骤：
-   - 打开您的 Home Assistant 界面，导航到 `设置` -> `插件` -> `插件商店` -> `仓库`（在右上角）
-   - 在输入框中粘贴以下 URL：`https://github.com/pergolafabio/Hikvision-Addons`
-   - 通过点击 **添加** 确认对话框。
-   - **Hikvision Doorbell (Beta)** 应在您的 Home Assistant 的 _插件商店_ 中可用。（如果几分钟内不可见，请通过导航到 _设置_ -> _插件_ -> _插件商店_ 重新加载商店页面）。
-- 选择 **Hikvision Doorbell (Beta)** 插件，然后点击 **安装**。
-- 查看插件的 **文档** 标签，了解如何设置所需的配置以及如何将此插件集成到 Home Assistant 中
-（文档也可以在 [Github 仓库](DOCS.md) 中在线浏览）。
+   If you are having problems, here are the manual steps:
+   - Open you Home Assistance interface, and navigate to `Settings` -> `Add-ons` -> `Add-on store` -> `Repositories` (in the upper-right corner)
+   - Paste the following URL in the input field: `https://github.com/pergolafabio/Hikvision-Addons`
+   - Confirm the dialog by clicking **ADD**.
+   - **Hikvision Doorbell (Beta)** should be available in the _Add-on store_ of your Home Assistant. (If it is not visible after some minutes, reload the store page by navigating to _Settings_ -> _Add-ons_ -> _Add-on store_).
+- Select the **Hikvision Doorbell (Beta)** add-on, then click **INSTALL**.
+- Have a look at the **Documentation** tab of the add-on to setup the required configuration and to understand how this addon can be integrated in Home Assistant
+(The documentation can also be browsed online in the [Github repository](DOCS.md)).
 
-## 支持的设备
-其他 Home Assistant 用户报告这些设备可以正常工作。
-如果您的设备不在列表中，我们很乐意将其加入。请在 GitHub 上 [打开一个问题](https://github.com/pergolafabio/Hikvision-Addons/issues) 并告诉我们您拥有的设备类型。
+## Supported devices
+This devices has been reported to be working from other HA users.
+If your device is not on the list, we are happy to include it. Just [open an issue here](https://github.com/pergolafabio/Hikvision-Addons/issues) on GitHub and let us know the kind of device you have.
 
 - DS-KV8413
 - DS-KD8003
@@ -75,36 +76,38 @@ __注意__：要使用此 _稳定_ 版本，请在您的 Home Assistant 配置�
 - DS-K1T67X
 - DS-K1T670M
 - DS-KB8113
-- DS-KV9503（无来电事件）
-- 看起来其他品牌确认可以正常工作的设备，如 Metzler 生产的 VDM10
+- DS-KV9503 (no call event)
+- Seems other rebranded devices confirmed working like: VDM10 made by Metzler 
 - ...
-- 这只是一个确认的列表，可能还有其他设备也可以正常工作...
-- DS-KV8102-IM（第一代不支持，只有开锁功能）
-- DS-K1T502DBFWX（完全不支持）
-- DS-HD1 和 DS-HD2 不支持？它们不支持 ISAPI？
+- This is just a confirmed list, probably other devices are working too...
+- DS-KV8102-IM (First generation not supported, only open lock works)
+- DS-K1T502DBFWX (Not supported at all)
+- DS-HD1 and DS-HD2 not supported? They dont support ISAPI?
 
-请务必在此处阅读完整文档！[Readme](DOCS.md)
+Make sure to read the full documentation here! [Readme](DOCS.md)
 
-## 额外资源
-- [Home Assistant 社区论坛](https://community.home-assistant.io/t/add-on-hikvision-doorbell-integration/532796)
+## Additional resources
+- [Home Assistant community forum](https://community.home-assistant.io/t/add-on-hikvision-doorbell-integration/532796)
 
-## 贡献
+## Contributing
 
-这是一个活跃的开源项目。我们始终欢迎想要使用代码或为其做出贡献的人。感谢您的参与！ :heart_eyes:
+This is an active open-source project. We are always open to people who want to
+use the code or contribute to it. Thank you for being involved! :heart_eyes:
 
 
-### 贡献者
+### Contributors
 <a href="https://github.com/pergolafabio/Hikvision-Addons/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=pergolafabio/Hikvision-Addons" />
 </a>
 
-由 [contrib.rocks](https://contrib.rocks) 制作。
+Made with [contrib.rocks](https://contrib.rocks).
 
-## 捐赠
-喜欢我的工作吗？您可以随时 [向我捐款](https://paypal.me/pergolafabio)。
+## Donations
+ Like my work? You can always [send me a donation](https://paypal.me/pergolafabio).
 
-## 致谢
-此插件最初受 [此脚本](https://github.com/laszlojakab/hikvision-intercom-python-demo) 启发。
+## Credits
+This add-on was initially inspired by [this script](https://github.com/laszlojakab/hikvision-intercom-python-demo).
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

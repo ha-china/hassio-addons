@@ -1,20 +1,21 @@
 # Home Assistant Omada Add-On v6
 
-这个插件将 Omada Controller v6 直接集成到在 ARM、x64 或 x86 处理器上运行的 Home Assistant 中。
-由于新的 Mongo DB 版本与 Raspberry Pi 4 的指令集不兼容，版本 6 不再适用于 Raspberry Pi 4。
+This add-on brings the Omada Controller v6 directly into Home Assistant running on an ARM, x64 or x86 processor.
+Version 6 no longer works on a Raspberry Pi 4 due to the new Mongo DB version being not compatible with that instruction set.
 
-## 贡献
+## Contribution
 
-这个插件是 Matt Bentley 的
+This add-on was originally inspired by Matt Bentleys
 [docker-omada-controller](https://github.com/mbentley/docker-omada-controller)
-的分支，而 jkunczik 的 [home-assistant-omada](https://github.com/jkunczik/home-assistant-omada)
-如果没有他们的出色工作将不可能实现。
-除了原始的 docker Omada Controller 之外，
-这个插件将所有持久数据存储在 /data 目录中，
-以便与 Home Assistant 兼容。
-没有其他人的努力，这个插件将不可能实现。
-欢迎为版本更新或新功能提交拉取请求。
-特别感谢 DraTrav 推动了这个插件的进展！
+and jkunczik [home-assistant-omada](https://github.com/jkunczik/home-assistant-omada)
+would not have been possible without their excellent work.
+Other than in the original docker omada controller,
+this add-on stores all persistent data in the /data directory,
+so that it is compatible with Home Assistant.
+This Add-On would not be possible without the effort of other people.
+Pull requests for version updates or new features are always more than welcome.
+Special thanks goes to DraTrav for pushing this Add-On forward!
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

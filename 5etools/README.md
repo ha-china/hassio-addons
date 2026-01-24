@@ -1,53 +1,33 @@
 # Home assistant add-on: 5etools
 
-一套基于浏览器的工具，适用于D&D 5e的玩家和地下城主。从5etools GitHub上发布图像。没有图像或内容在jdeath的仓库中托管/发布。不提供支持，因为Home Assistant Addon创建者不使用这个。自托管图像可能比5etools网站落后一个版本。图像是4 GB，所以安装需要很长时间，请耐心等待。
+A suite of browser-based tools for players and DMs of D&D 5e. Downloads posted image from 5etools GitHub. No image or content is hosted/posted on jdeath's repo. No support given as Home Assistant Addon creator does not use this. Self-hosted image can be a revision behind the 5etools website. Image is 4 GB, so will take a long time to install, be patient.
 
-_感谢大家给我的仓库加星！要加星，请点击下面的图像，然后它就会在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## 关于
+## About
 
-这个插件使用的是 [docker镜像](https://github.com/5etools-mirror-2/5etools-mirror-2.github.io)。
+This addon uses the [docker image](https://github.com/5etools-mirror-2/5etools-mirror-2.github.io).
 
-## 安装
+## Installation
 
-这个插件的安装非常简单，与其他Hass.io插件的安装方式相同。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. [将我的Hass.io插件仓库][repository]添加到你的Hass.io实例中。
-1. 安装这个插件。4 GB的图像下载需要一段时间
-1. 点击`保存`按钮来存储你的配置。
-1. 启动插件。
-1. 检查插件的日志以查看是否一切顺利。
-1. 应该可以通过ingress或<your-ip>:port打开WebUI。
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on. 4 GB image will take a while to download
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open WebUI should work via ingress or <your-ip>:port.
 
-## 配置
+## Configuration
 
 ```
-port : 8080 #你想要运行的端口。
+port : 8080 #port you want to run on.
 ```
 
-Webui可以在<your-ip>:port找到。
+Webui can be found at `<your-ip>:port`.
 
 [repository]: https://github.com/jdeath/homeassistant-addons
----
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
----
-
-## 📱 关注我
-
-扫描下面二维码，关注我。有需要可以随时给我留言：
-
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
-
-## ☕ 赞助支持
-
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
-
-感谢您的支持与鼓励！

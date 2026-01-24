@@ -1,6 +1,6 @@
 # Home assistant add-on: Brave
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the add-ons
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
 If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
@@ -29,19 +29,19 @@ _Thanks to everyone having starred my repo! To star it click on the image below,
 ## About
 
 [Brave](https://brave.com/) is a fast, private and secure web browser for PC, Mac and mobile.
-This add-on is based on the docker image https://github.com/linuxserver/docker-brave
+This addon is based on the docker image https://github.com/linuxserver/docker-brave
 
 ## Configuration
 
 Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-Webui can be found with ingress or at <http://homeassistant:PORT>. The port is by default disabled but can be enabled through the add-on options.
+Webui can be found with ingress or at <http://homeassistant:PORT>. The port is by default disabled but can be enabled through the addon options.
 
 By default the image is based around the abc user and we recommend using this user as all of the init/config is based around it. The default password is also abc . If you want to change this password and require authentication when accessing the interface simply issue passwd inside a GUI terminal in the container. Then when accessing the web interface use the path:
 
 http://localhost:3000/?login=true
 
-Apps installations are not remanent, you need to do it via add-on options. Their config, however, is.
+Apps installations are not remanent, you need to do it via addon options. Their config, however, is.
 
 If graphics don't work, use the DRINODE feature to select your graphic device.
 

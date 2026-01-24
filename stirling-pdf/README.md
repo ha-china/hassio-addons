@@ -1,42 +1,44 @@
 # Home assistant add-on: Stirling-pdf
 
-这是一个使用 Docker 的本地托管 Web 基于的 PDF 操作工具。它允许您对 PDF 文件执行各种操作，包括拆分、合并、转换、重新组织、添加图像、旋转、压缩等。这个本地托管的 Web 应用程序已经发展到包含一套全面的功能，满足您所有的 PDF 需求。
+This is a robust, locally hosted web-based PDF manipulation tool using Docker. It enables you to carry out various operations on PDF files, including splitting, merging, converting, reorganizing, adding images, rotating, compressing, and more. This locally hosted web application has evolved to encompass a comprehensive set of features, addressing all your PDF requirements.
 
-Stirling PDF 不会发起任何用于记录或跟踪目的的外出调用。
+Stirling PDF does not initiate any outbound calls for record-keeping or tracking purposes.
 
-所有文件和 PDF 都仅存在于客户端，仅在任务执行期间驻留在服务器内存中，或仅在任务执行期间临时驻留在文件中。用户下载的任何文件在该点之前都将从服务器中删除。
+All files and PDFs exist either exclusively on the client side, reside in server memory only during task execution, or temporarily reside in a file solely for the execution of the task. Any file downloaded by the user will have been deleted from the server by that point.
 
-有点耗内存。
+A bit of a memory hog.
 
-_感谢大家给我的仓库加星！要加星，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## 关于
+## About
 
-这个 add-on 使用了 [docker 镜像](https://github.com/Stirling-Tools/Stirling-PDF)。
+This addon uses the [docker image](https://github.com/Stirling-Tools/Stirling-PDF).
 
-## 安装
+## Installation
 
-这个 add-on 的安装非常简单，与安装任何其他 Hass.io add-on 没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. [将我的 Hass.io add-ons 仓库][repository] 添加到您的 Hass.io 实例。
-1. 安装这个 add-on。750 MB 的镜像需要一段时间来下载
-1. 点击 `保存` 按钮来保存您的配置。
-1. 启动 add-on。
-1. 检查 add-on 的日志，看看一切是否正常。
-1. WebUI 应该可以通过 <your-ip>:port 工作。
-1. 设置将在 /addon_configs/2effc9b9_stirling-pdf 中。
-1. 停止 add-on，编辑 settings.yaml 文件来更改任何您需要的内容
-## 配置
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on. 750 MB image will take a while to download
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open WebUI should work via <your-ip>:port.
+1. Settings will be in /addon_configs/2effc9b9_stirling-pdf
+1. Stop addon, edit settings.yaml file to change anything you need
+## Configuration
 
 ```
-port : 8080 #您想要运行的端口。
+port : 8080 #port you want to run on.
 ```
 
-Webui 可以在 `<your-ip>:port` 找到。
+Webui can be found at `<your-ip>:port`.
 
 [repository]: https://github.com/jdeath/homeassistant-addons
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

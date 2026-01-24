@@ -1,9 +1,9 @@
 ---
 name: Omada Controller Stable v6
 image: jeruntu/home-assistant-omada-stable-v6
-version: 6.0.0.25-ha1
+version: 6.1.0.19
 slug: omada_controller_stable_v6
-description: '[老王杂谈说]：TP-Link Omada 控制器软件'
+description: '[老王杂谈说]：null'
 webui: https://[HOST]:[PORT:8043]
 startup: application
 arch:
@@ -17,11 +17,12 @@ options:
   enable_hass_ssl: false
   certfile: /ssl/fullchain.pem
   keyfile: /ssl/privkey.pem
-  enable_workaround_509: false
+  upgrade_https_port: 8043
 schema:
   enable_hass_ssl: bool
   certfile: str
   keyfile: str
+  upgrade_https_port: int
 ports:
   8088/tcp: 8088
   8043/tcp: 8043

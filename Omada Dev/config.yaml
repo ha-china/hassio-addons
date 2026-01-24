@@ -1,8 +1,8 @@
 ---
 name: Omada Controller Dev
-version: beta-6.0.0.23
+version: beta-6.1.0.19
 slug: omada_controller_dev
-description: '[老王杂谈说]：TP-Link Omada 控制器软件'
+description: '[老王杂谈说]：null'
 webui: https://[HOST]:[PORT:8043]
 startup: application
 arch:
@@ -16,10 +16,12 @@ options:
   enable_hass_ssl: false
   certfile: /ssl/fullchain.pem
   keyfile: /ssl/privkey.pem
+  upgrade_https_port: 8043
 schema:
   enable_hass_ssl: bool
   certfile: str
   keyfile: str
+  upgrade_https_port: int
 ports:
   8088/tcp: 8088
   8043/tcp: 8043
@@ -37,3 +39,5 @@ ports:
   29815/udp: 29815
   29816/tcp: 29816
   29816/udp: 29816
+  29817/tcp: 29817
+  29817/udp: 29817
