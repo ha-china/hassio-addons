@@ -1,8 +1,9 @@
 # Home assistant add-on: changedetection.io
 
-我利用业余时间维护这个及其他Home Assistant add-on：跟上上游变化、HA变化，并在真实硬件上测试都需要大量时间（和一些金钱）。我大约使用我超过110个add-on中的5-10个，因此我安装了一些我本人不使用的测试机器（和购买了一些测试服务，如VPN）来调试和改进这些add-on。
 
-如果这个add-on节省了你的时间或使你的设置更简单，我将非常感谢你的支持！
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -20,7 +21,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我仓库星标的人！要星标它，请点击下面的图片，它将出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://reporoster.com/stars/alexbelgium/hassio-addons)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,36 +29,36 @@ _感谢所有给我仓库星标的人！要星标它，请点击下面的图片�
 
 ## About
 
-[Changedetection.io](https://github.com/dgtlmoon/changedetection.io) 提供免费的、开源的网页监控、通知和变化检测。
+[Changedetection.io](https://github.com/dgtlmoon/changedetection.io) provides free, open-source web page monitoring, notification and change detection.
 
-这个add-on基于linuxserver.io的[docker镜像](https://github.com/linuxserver/docker-changedetection.io)。
+This addon is based on the [docker image](https://github.com/linuxserver/docker-changedetection.io) from linuxserver.io.
 
 ## Configuration
 
-使用add-on的`env_vars`选项来传递额外的环境变量（大小写名称）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
 ### Main app
 
-Web UI 可以在 `<your-ip>:5000` 找到，也可以通过add-on页面或使用Ingress从侧边栏访问。
+Web UI can be found at `<your-ip>:5000`, also accessible from the add-on page or through the sidebar using Ingress.
 
 #### Sidebar shortcut
 
-你可以通过以下步骤添加一个指向你的Changedetection.io实例的快捷方式：
-1. 进入 <kbd>⚙ 设置</kbd> > <kbd>Dashboard</kbd>
-2. 点击底部角落的 <kbd>➕ 添加Dashboard</kbd>
-3. 选择 <kbd>Webpage</kbd> 选项，并粘贴你从add-on页面获得的Web UI URL。
-4. 为侧边栏项目填写标题、图标（建议：`mdi:vector-difference`），并为该面板填写一个**相对URL**（例如 `change-detection`）。最后，确认它。
+You can add a shortcut pointing to your Changedetection.io instance with the following steps:
+1. Go to <kbd>⚙ Settings</kbd> > <kbd>Dashboards</kbd>
+2. Click <kbd>➕ Add Dashboard</kbd> at the bottom corner
+3. Select the <kbd>Webpage</kbd> option, and paste the Web UI URL you got from the add-on page.
+4. Fill in the title for the sidebar item, an icon (suggestion: `mdi:vector-difference`), and a **relative URL** for that panel (e.g. `change-detection`). Lastly, confirm it.
 
 ### Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `PGID` | int | `0` | 文件权限的组ID |
-| `PUID` | int | `0` | 文件权限的用户ID |
-| `TZ` | str | | 时区（例如，`Europe/London`） |
-| `BASE_URL` | str | | 当在反向代理后面运行时的完整URL |
-| `PLAYWRIGHT_DRIVER_URL` | str | | Playwright驱动程序的WebSocket URL |
-| `TIMEOUT` | int | `60000` | 请求超时（毫秒） |
+| `PGID` | int | `0` | Group ID for file permissions |
+| `PUID` | int | `0` | User ID for file permissions |
+| `TZ` | str | | Timezone (e.g., `Europe/London`) |
+| `BASE_URL` | str | | Full URL when running behind reverse proxy |
+| `PLAYWRIGHT_DRIVER_URL` | str | | Playwright driver WebSocket URL |
+| `TIMEOUT` | int | `60000` | Request timeout in milliseconds |
 
 ### Example Configuration
 
@@ -72,25 +73,27 @@ TIMEOUT: 60000
 
 ### Connect to browserless Chrome (from @RhysMcW)
 
-安装并启动Browserless Chrome add-on，然后使用 `PLAYWRIGHT_DRIVER_URL` 选项连接到它。这个选项必须填写Browserless Chrome的URL："ws://db21ed7f-browserless-chrome:3000/chromium?headless=true&stealth=true&blockAds=true"
+Install and start the Browserless Chrome add-on, then use the `PLAYWRIGHT_DRIVER_URL` option to connect to it. This option must be filled with the Browserless Chrome URL: "ws://db21ed7f-browserless-chrome:3000/chromium?headless=true&stealth=true&blockAds=true"
 
-`db21ed7f-browserless-chrome` 主机名显示在UI中，在Browserless Chromium add-on页面上：
+The `db21ed7f-browserless-chrome` hostname is displayed in the UI, on the Browserless Chromium addon page:
 ![image](https://github.com/user-attachments/assets/a63514f6-027a-4361-a33f-0d8f87461279)
 
-然后重启Changedetection.io add-on - 之后你就可以在Changedetection.io中使用浏览器选项。
+Then restart the Changedetection.io add-on - after that you can use the browser options in Changedetection.io.
 
 ## Installation
 
-这个add-on的安装非常简单，与其他任何Hass.io add-on的安装方式没有不同。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. [将我的Hass.io add-ons仓库][repository]添加到你的Hass.io实例。
-1. 安装这个add-on。
-1. 点击 `保存` 按钮来保存你的配置。
-1. 启动add-on。
-1. 检查add-on的日志，看看是否一切顺利。
-1. 小心配置add-on以满足你的偏好，请参考官方文档进行配置。
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Carefully configure the add-on to your preferences, see the official documentation for for that.
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

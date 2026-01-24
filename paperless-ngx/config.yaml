@@ -1,7 +1,7 @@
 name: Paperless-ngx
-version: 0.0.2
+version: 0.0.3
 slug: paperless-ngx
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：Home Assistant 的社区支持 Paperless-ngx 插件'
 url: https://ghfast.top/github.com/paperless-ngx/paperless-ngx
 arch:
   - aarch64

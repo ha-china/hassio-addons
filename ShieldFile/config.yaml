@@ -1,13 +1,14 @@
 name: "ShieldFile"
-version: "2.2.2"
+version: "2.2.3"
 slug: "shieldfile"
-description: "[老王杂谈说]：null"
+description: "[老王杂谈说]：安全、基于Web的文件管理器（SFTP over HTTPS）"
 url: "https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/ShieldFile"
 arch:
   - aarch64
   - amd64
 init: false
 ingress: true
+ingress_port: 8098
 panel_icon: mdi:shield-lock
 ports:
   8443/tcp: 8443

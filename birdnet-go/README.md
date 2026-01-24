@@ -1,115 +1,116 @@
-# Home assistant 添加组件：Birdnet-Go
+# Home assistant add-on: Birdnet-Go
 
-我在空闲时间维护这个和其它 Home Assistant 添加组件：跟上上游变化、HA 变化，并在真实硬件上测试需要大量时间（和一些金钱）。我大约使用我 110 多个组件中的 5-10 个，所以我会安装测试机器（和一些我自己不使用的测试服务如 VPN）来调试和改进这些组件。
 
-如果这个添加组件能帮你节省时间或使你的设置更简单，我将非常感谢你的支持！
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-[![给我买咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
-## 添加组件信息
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbirdnet-go%2Fconfig.yaml)
+## Addon informations
+
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbirdnet-go%2Fconfig.yaml)
 ![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbirdnet-go%2Fconfig.yaml)
 ![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbirdnet-go%2Fconfig.yaml)
 
-[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它就会在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
-[![@alexbelgium/hassio-addons 的星标者仓库名册](https://reporoster.com/stars/alexbelgium/hassio-addons)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://reporoster.com/stars/alexbelgium/hassio-addons)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/birdnet-go/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/birdnet-go/stats.png)
 
-## 关于
+## About
 
-[BirdNET-Go](https://github.com/tphakala/birdnet-go/tree/main) 是一个由 @tphakala 开发的用于持续鸟类监测和识别的 AI 解决方案。
+[BirdNET-Go](https://github.com/tphakala/birdnet-go/tree/main) is an AI solution for continuous avian monitoring and identification developed by @tphakala
 
-这个添加组件基于他们的 Docker 镜像。
+This addon is based on their docker image.
 
-## 配置
+## Configuration
 
-安装并首次启动添加组件。Web UI 可以在 <http://homeassistant:8080> 找到。
-你需要一个麦克风：要么使用连接到 HA 的麦克风，要么使用 RTP 摄像机的音频流。
+Install, then start the addon a first time. Webui can be found at <http://homeassistant:8080>.
+You'll need a microphone : either use one connected to HA or the audio stream of a rstp camera.
 
-音频片段文件夹可以通过在添加组件选项中挂载它来存储在外部或 SMB 驱动器上，然后指定路径而不是 "clips/"。例如，"/mnt/NAS/Birdnet/"
+The audio clips folder can be stored on an external or SMB drive by mounting it from the addon options, then specifying the path instead of "clips/". For example, "/mnt/NAS/Birdnet/"
 
-选项可以通过三种方式配置：
+Options can be configured through three ways :
 
-- 添加组件选项
+- Addon options
 
 ```yaml
-ALSA_CARD : 卡的编号（通常是 0 或 1），请查看 https://github.com/tphakala/birdnet-go/blob/main/doc/installation.md#deciding-alsa_card-value
-TZ: Etc/UTC 指定一个时区来使用，请查看 https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
-COMMAND : realtime --rtsp url # 允许为 birdnet-go 提供参数
+ALSA_CARD : number of the card (0 or 1 usually), see https://github.com/tphakala/birdnet-go/blob/main/doc/installation.md#deciding-alsa_card-value
+TZ: Etc/UTC specify a timezone to use, see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
+COMMAND : realtime --rtsp url # allows to provide arguments to birdnet-go
 ```
 
-- config.yaml
-使用 Filebrowser 添加组件在 /config/db21ed7f_birdnet-go/config.yaml 文件中配置额外的变量
+- Config.yaml
+Additional variables can be configured using the config.yaml file found in /config/db21ed7f_birdnet-go/config.yaml using the Filebrowser addon
 
-- config_env.yaml
-在那里可以配置额外的环境变量
+- Config_env.yaml
+Additional environment variables can be configured there
 
-### 挂载驱动器
+### Mounting Drives
 
-这个添加组件支持挂载本地驱动器和远程 SMB 共享：
+This addon supports mounting both local drives and remote SMB shares:
 
-- **本地驱动器**：请查看 [在添加组件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：请查看 [在添加组件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-### 自定义脚本和环境变量
+### Custom Scripts and Environment Variables
 
-这个添加组件通过 `addon_config` 映射支持自定义脚本和环境变量：
+This addon supports custom scripts and environment variables through the `addon_config` mapping:
 
-- **自定义脚本**：请查看 [在添加组件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用添加组件的 `env_vars` 选项传递额外的环境变量（大小写名称）。请查看 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-## 安装
+## Installation
 
-这个添加组件的安装非常简单，与安装任何其他添加组件没有区别。
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
 
-1. 将我的添加组件仓库添加到你的 Home Assistant 实例（在 supervisor 添加组件商店在右上角，或者如果你已经配置了我的 HA 点击下面的按钮）
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
 
-   [![打开你的 Home Assistant 实例并显示添加添加组件仓库对话框，预填充特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装这个添加组件。
-1. 点击 `保存` 按钮来存储你的配置。
-1. 设置添加组件选项以符合你的偏好。
-1. 启动添加组件。
-1. 检查添加组件的日志以查看是否一切正常。
-1. 打开 Web UI 并调整软件选项
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Set the add-on options to your preferences
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open the webUI and adapt the software options
 
-## 与 HA 集成
+## Integration with HA
 
-Home Assistant 集成说明在这里，[Birdnet-Go 添加组件：Home Assistant 集成](./HAINTEGRATION.md)
+Home Assistant Integration instructions are found here, [Birdnet-Go Addon: Home Assistant Integration](./HAINTEGRATION.md)
 
-## 使用 VLC 设置 RTSP 源
+## Setting up a RTSP Source using VLC
 
-VLC 打开一个 TCP 端口，但流是 UDP。因此需要配置 Birdnet-Go 使用 UDP。调整 config.yaml 文件到 UDP 或使用 birdnet-go 命令行选项：
+VLC opens a TCP port but the stream is udp. Because of this will need to configure Birdnet-Go to use udp. Adjust the config.yaml file to udp or use the birdnet-go command line option:
 
 `--rtsptransport udp --rtsp rtsp://192.168.1.21:8080/stream.sdp`
 
-### Linux 说明
+### Linux instructions
 
-使用以下命令之一在不使用界面的情况下运行 vlc：
+Run vlc without an interface using one of these commands:
 
 ```bash
-# 这应该适用于大多数设备
+# This should work for most devices
 /usr/bin/vlc -I dummy -vvv alsa://hw:0,0 --no-sout-all --sout-keep --sout '#transcode{acodec=mpga}:rtp{sdp=rtsp://:8080/stream.sdp}'
 
-# 如果第一个命令不起作用，请尝试这个
+# Try this if the first command does not work
 /usr/bin/vlc -I dummy -vvv alsa://hw:4,0 --no-sout-all --sout-keep --sout '#rtp{sdp=rtsp://:8080/stream.sdp}'
 ```
 
-运行 `arecord -l` 获取麦克风硬件信息
+Run `arecord -l` to get microphone hardware info
 
 ```text
-**** CAPTURE 硬件设备列表 ****
+**** List of CAPTURE Hardware Devices ****
 card 0: PCH [HDA Intel PCH], device 0: ALC3220 Analog [ALC3220 Analog]
   Subdevices: 1/1
   Subdevice #0: subdevice #0
@@ -126,11 +127,11 @@ card 4: Device [USB PnP Sound Device], device 0: USB Audio [USB Audio]
 
 hw:4,0 = **card 4**: Device [USB PnP Sound Device], **device 0**: USB Audio [USB Audio]
 
-Systemd 服务文件示例。根据情况调整用户:组。如果你想要以 root 用户运行，你可能需要运行 vlc-wrapper 而不是 vlc。
+Systemd service file example. Adjust the user:group accordingly. If you want to run as root, you will likely need to run vlc-wrapper instead of vlc.
 
 ```text
 [Unit]
-Description=VLC Birdnet RTSP 服务器
+Description=VLC Birdnet RTSP Server
 Wants=network-online.target
 After=network-online.target
 
@@ -145,17 +146,21 @@ Group=somegroup
 WantedBy=multi-user.target
 ```
 
-## 常见问题
+## Common issues
 
-尚未提供
+Not yet available
 
-## 支持
+## Support
 
-在 github 上创建问题
+Create an issue on github
 
 ---
 
-![插图](https://raw.githubusercontent.com/tphakala/birdnet-go/main/doc/BirdNET-Go-dashboard.webp)
+![illustration](https://raw.githubusercontent.com/tphakala/birdnet-go/main/doc/BirdNET-Go-dashboard.webp)
+
+
+
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

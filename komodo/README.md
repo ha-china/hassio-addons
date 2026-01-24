@@ -2,43 +2,43 @@
 
 ![Logo](logo.png)
 
-[![打开你的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_komodo)
-[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker 镜像](https://img.shields.io/badge/docker-0.0.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-komodo)
-![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_komodo)
+[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker Image](https://img.shields.io/badge/docker-0.0.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-komodo)
+![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 一个用于在多台服务器上构建和部署软件的工具
+> A tool to build and deploy software on many servers
 
 ---
 
 > [!CAUTION]
-> **实验性 / Beta 状态**
+> **Experimental / Beta Status**
 >
-> 此附加组件仍在开发中，或主要为个人使用而开发。
-> 它尚未经过广泛测试，但预计可以基本工作。
+> This add-on is still in development and/or primarily developed for personal use.
+> It is not extensively tested yet, but is expected to work fundamentally.
 
 ---
 
-## 📖 关于
+## 📖 About
 
-🦎 一个用于在多台服务器上构建和部署软件的工具 🦎
+🦎 a tool to build and deploy software on many servers 🦎
 
-Komodo 是一个用于在多台服务器上构建和部署软件的工具。它通过 SSH 连接到您的服务器，并允许您定义“构建器”和“外围设备”。
+Komodo is a tool to build and deploy software on many servers. It connects to your servers via SSH and allows you to define "Builders" and "Peripheries".
 
-## 安装
+## Installation
 
-1. 在 Home Assistant 附加组件商店中搜索“Komodo”。
-2. 安装附加组件。
-3. 启动附加组件。
-4. 打开 Web UI。
+1. Search for "Komodo" in the Home Assistant Add-on Store.
+2. Install the add-on.
+3. Start the add-on.
+4. Open the Web UI.
 
 ---
 
-## ⚙️ 配置
+## ⚙️ Configuration
 
-通过 Home Assistant 附加组件页面中的**配置**选项卡配置附加组件。
+Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
 
-### 选项
+### Options
 
 ```yaml
 log_level: info
@@ -46,10 +46,11 @@ log_level: info
 
 ---
 
-## 👨‍💻 致谢 & 许可证
+## 👨‍💻 Credits & License
 
-此项目是开源的，并在 MIT 许可证下提供。
-由 **FaserF** 维护。
+This project is open-source and available under the MIT License.
+Maintained by **FaserF**.
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

@@ -4,67 +4,67 @@
 
 [![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_wiki.js3)
 [![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker Image](https://img.shields.io/badge/docker-0.5.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-wiki)
+[![Docker Image](https://img.shields.io/badge/docker-0.5.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-wiki)
 ![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 最强大和可扩展的开源 Wiki 软件（版本 3 - Alpha）
+> The most powerful and extensible open source Wiki software (Version 3 - Alpha)
 
 ---
 
 > [!CAUTION]
-> **实验性 / Beta 状态**
+> **Experimental / Beta Status**
 >
-> 此插件仍在开发中，主要用于个人使用。
-> 它尚未经过广泛测试，但预计基本功能可以正常工作。
+> This add-on is still in development and/or primarily developed for personal use.
+> It is not extensively tested yet, but is expected to work fundamentally.
 
 ---
 
-## 📖 关于
+## 📖 About
 
-如果您在使用此插件时遇到任何问题，请使用下面的链接报告。问题表单将预填入插件信息，以帮助我们更快地解决问题。
+If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
 
-如果您有任何新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入插件信息。
+If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
 
-## 🐛 报告错误
+## 🐛 Report a Bug
 
-如果您在使用此插件时遇到任何问题，请使用下面的链接报告。问题表单将预填入插件信息，以帮助我们更快地解决问题。
+If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
 
-**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.2.0&log_information=请在此处粘贴插件日志输出：%0A%0A)**
-
-> [!NOTE]
-> 请使用上面的链接报告问题。这确保了所有必要信息（插件名称、版本等）将自动包含在您的错误报告中。
-
-## 💡 功能请求
-
-如果您有任何新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填入插件信息。
-
-**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=wiki.js3)**
+**[Report a Bug](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.2.0&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
 
 > [!NOTE]
-> 请使用上面的链接请求功能。这将确保插件名称将自动包含在您的功能请求中。
+> Please use the link above to report problems. This ensures that all necessary information (add-on name, version, etc.) is automatically included in your bug report.
 
-此项目是开源的，并在 MIT 许可下提供。
-由 **FaserF** 维护。
+## 💡 Feature Request
 
-## 🏁 首次启动
+If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
 
-在首次启动时，系统将提示您进行管理设置向导。向导将引导您完成 Wiki 连接的初始配置以及管理员账户的创建。
+**[Request a Feature](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=wiki.js3)**
 
-在此过程中，请创建您自己的 **管理员账户**（电子邮件 / 密码）。
+> [!NOTE]
+> Please use the link above to request features. This ensures that the add-on name is automatically included in your feature request.
 
-### 默认数据库凭证
+This project is open-source and available under the MIT License.
+Maintained by **FaserF**.
 
-插件预配置了一个本地 PostgreSQL 数据库。`wiki` 数据库用户的默认密码是：
+## 🏁 First Startup
 
-- **密码**：`wikijs`（这是数据库密码，不是您的管理员登录密码）
+On the first startup, you will be prompted with an administration setup wizard. The wizard will guide you through the initial configuration of your wiki connection and the creation of your administrator account.
+
+Please create your own **Administrator Account** (Email / Password) during this process.
+
+### Default Database Credentials
+
+The add-on comes pre-configured with a local PostgreSQL database. The default password for the `wiki` database user is:
+
+- **Password**: `wikijs` (This is the database password, NOT your admin login)
 
 ---
 
-## ⚙️ 配置
+## ⚙️ Configuration
 
-通过 Home Assistant 插件页面中的 **配置** 选项卡配置插件。
+Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
 
-### 选项
+### Options
 
 ```yaml
 certfile: fullchain.pem
@@ -78,10 +78,11 @@ ssl: true
 
 ---
 
-## 👨‍💻 致谢 & 许可证
+## 👨‍💻 Credits & License
 
-此项目是开源的，并在 MIT 许可下提供。
-由 **FaserF** 维护。
+This project is open-source and available under the MIT License.
+Maintained by **FaserF**.
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

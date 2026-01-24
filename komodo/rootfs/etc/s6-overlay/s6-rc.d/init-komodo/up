@@ -1,1 +1,1 @@
-./run
+/etc/s6-overlay/s6-rc.d/init-komodo/run

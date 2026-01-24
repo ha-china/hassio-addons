@@ -1,5 +1,56 @@
 # TOMMY
 
+## 1.5.4
+
+### Minor Changes
+- Fixed a bug where larger configurations resulted in an error on the ESP32
+- Removed the OTA loop and replaced it with a single OTA at TOMMY server startup
+- **ESPHome users: Please update your devices with the latest TOMMY firmware**
+
+## 1.5.3
+
+### Minor Changes
+- Fixed a bug causing some devices to enter bootloop if BSSID was not set
+
+## 1.5.2
+
+### Minor Changes
+- Fixed a bug which could cause a crash when sending a heartbeat from ESP32s
+- Updated documentation regarding usage of BSSID when flashing through ESPHome
+- **ESPHome users: Please update your devices with the latest TOMMY firmware**
+
+## 1.5.1
+
+### Minor Changes
+- Increased timeout before disabling a node
+
+## 1.5.0
+
+### Major Changes
+- Added ability to enter BSSID during provisioning to pin devices in a zone to the same access point. This is required for mesh networks. Please refer to the [information about mesh networks](https://tommysense.com/docs/system-requirements) in system requirements.
+- **ESPHome users: Please update your devices with the latest TOMMY firmware**
+
+### Minor Changes
+- Now shows a warning if multiple access points are detected in a zone
+- Fixed bug where a disconnected device during initialization would cause the rest of the devices to halt packet processing
+- Updated the documentation with information about how to use HACS to install the Home Assistant integration
+
+## 1.4.1
+
+### Minor Changes
+- Fixed a bug causing Wi-Fi connection issues with C6 devices
+- **ESPHome users: Please update your devices with the latest TOMMY firmware**
+
+## 1.4.0
+
+### Major Changes
+- Updated the firmware to use ESP-IDF 5.5.2 to match ESPHome version 2026.1.0.
+- **ESPHome users: It is now required to use the latest ESPHome version 2026.1.0**
+- **ESPHome users: Please update your devices with the latest TOMMY firmware**
+
+### Minor Changes
+- Fixed a bug introduced in 1.3.0 causing Wi-Fi connection issues with C6 devices
+
 ## 1.3.0
 
 ### Major Changes

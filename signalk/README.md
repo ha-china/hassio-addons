@@ -1,8 +1,9 @@
 # Home assistant add-on: signalk
 
-我利用业余时间维护这个及其他Home Assistant插件：跟进上游变化、HA变化，并在真实硬件上测试，这需要大量时间（和一些金钱）。我大约使用我超过110个插件中的5-10个，因此我安装了用于测试（和一些我自身不使用的测试服务，如VPN）的测试机器，以调试和改进插件。
 
-如果这个插件为您节省了时间或简化了设置，我将非常感谢您的支持！
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -20,7 +21,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢大家给我的仓库加星！要加星，请点击下面的图片，然后它将出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,36 +29,37 @@ _感谢大家给我的仓库加星！要加星，请点击下面的图片，然�
 
 ## About
 
-[Signal K Server](https://github.com/SignalK/signalk-server) 是一个在船的中心枢纽上运行的服务器应用程序。如果您使用或开发海洋电子设备，Signal K Server 对您来说有很多有用的功能。
+[Signal K Server](https://github.com/SignalK/signalk-server) is a server application that runs on a central hub in a boat. If you use or develop marine electronics, Signal K Server has something to offer for you.
 
 ## Configuration
 
 ### Options
 
-- `env_vars`: 传递给 SignalK 的额外环境变量。
+- `env_vars`: Extra environment variables passed to SignalK.
 
 ## Installation
 
-这个插件的安装非常简单，与安装任何其他插件没有什么不同。
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的 supervisor 插件商店中，或如果您已配置我的 HA，请点击下面的按钮）
-   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装这个插件。
-1. 点击 `Save` 按钮以保存您的配置。
-1. 设置插件选项以符合您的偏好
-1. 启动插件。
-1. 检查插件的日志，看看是否一切正常。
-1. 打开 WebUI 并调整软件选项
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Set the add-on options to your preferences
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open the webUI and adapt the software options
 
 ### Environment variables
 
-使用插件的 `env_vars` 选项传递额外的环境变量（大小写名称）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
 ## Support
 
-在 github 上创建问题
+Create an issue on github
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

@@ -1,7 +1,7 @@
 name: Pocket ID
-version: 1.2.0
+version: 1.3.0
 slug: pocket-id
-description: '[老王杂谈说]：用于passkey认证的简单OIDC提供程序'
+description: '[老王杂谈说]：null'
 url: https://ghfast.top/github.com/einschmidt/addon-pocket-id
 arch:
   - amd64
@@ -21,4 +21,6 @@ init: false
 map:
   - type: data
     path: /app/data
+breaking_versions:
+  - v1.3.0
 image: ghcr.nju.edu.cn/einschmidt/pocket-id/{arch}

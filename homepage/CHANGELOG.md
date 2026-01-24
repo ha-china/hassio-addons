@@ -1,3 +1,12 @@
+## [1.9.0-0] - 2026-01-21
+
+### Changed
+
+- Bumped Homepage version to : 1.9.0
+   - Homepage changelog: https://github.com/gethomepage/homepage/releases/tag/v1.9.0
+- Bumped HA addon version to : 1.9.0-0
+
+
 ## [1.8.0-0] - 2025-12-11
 
 ### Changed

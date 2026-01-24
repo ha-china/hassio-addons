@@ -1,10 +1,12 @@
 # Home Assistant Add-on: Pocket ID
 
-基于 [Pocket ID](https://pocket-id.org/) 的 Home Assistant 插件，用于通过 OIDC 进行 Passkey 身份验证。
+Home Assistant add-on for passkey authentication via OIDC based on [Pocket ID](https://pocket-id.org/).
 
-## 关于
+## About
 
-Pocket ID 是一个简单的 **OIDC 提供商**，用于 **Passkey 身份验证**。此插件允许您使用 WebAuthn/FIDO2 集成无密码登录，提供无缝且安全的身份验证体验。
+Pocket ID is a simple **OIDC provider** for **passkey authentication**. This add-on allows you to integrate passwordless login using WebAuthn/FIDO2, providing a seamless and secure authentication experience.
+
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
