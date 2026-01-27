@@ -1,5 +1,29 @@
 # Changelog
 
+## grafana-promtail 5.0.0 - 2026-01-24
+
+### Changes
+
+#### 🚨 Breaking changes
+
+- Remove unsupported architectures and codenotary @bluemaex (#477)
+
+#### ⬆️ Dependency updates
+
+- ⏫ Update mikefarah/yq Docker tag to v4.46.1 @[renovate[bot]](https://github.com/apps/renovate) (#410)
+- ⏫ Update grafana/promtail Docker tag to v3.5.2 @[renovate[bot]](https://github.com/apps/renovate) (#412)
+- ⏫ Update grafana/promtail Docker tag to v3.5.3 @[renovate[bot]](https://github.com/apps/renovate) (#417)
+- ⏫ Update mikefarah/yq Docker tag to v4.47.1 @[renovate[bot]](https://github.com/apps/renovate) (#418)
+- ⏫ Update grafana/promtail Docker tag to v3.5.4 @[renovate[bot]](https://github.com/apps/renovate) (#433)
+- ⏫ Update mikefarah/yq Docker tag to v4.47.2 @[renovate[bot]](https://github.com/apps/renovate) (#435)
+- ⏫ Update grafana/promtail Docker tag to v3.5.5 @[renovate[bot]](https://github.com/apps/renovate) (#437)
+- ⏫ Update grafana/promtail Docker tag to v3.5.6 @[renovate[bot]](https://github.com/apps/renovate) (#444)
+- ⏫ Update mikefarah/yq Docker tag to v4.48.1 @[renovate[bot]](https://github.com/apps/renovate) (#445)
+- ⏫ Update grafana/promtail Docker tag to v3.5.7 @[renovate[bot]](https://github.com/apps/renovate) (#447)
+- ⏫ Update grafana/promtail Docker tag to v3.5.8 @[renovate[bot]](https://github.com/apps/renovate) (#454)
+- ⏫ Update grafana/promtail Docker tag to v3.6.4 @[renovate[bot]](https://github.com/apps/renovate) (#461)
+- ⏫ Update mikefarah/yq Docker tag to v4.50.1 @[renovate[bot]](https://github.com/apps/renovate) (#458)
+
 ## grafana-promtail 4.0.0 - 2025-06-21
 
 ### Changes

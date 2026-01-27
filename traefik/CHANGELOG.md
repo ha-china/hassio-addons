@@ -1,5 +1,23 @@
 # Changelog
 
+## traefik 5.0.0 - 2026-01-24
+
+### Changes
+
+#### 🚨 Breaking changes
+
+- Remove unsupported architectures and codenotary @bluemaex (#477)
+
+#### ⬆️ Dependency updates
+
+- ⏫ Update traefik Docker tag to v2.11.26 @[renovate[bot]](https://github.com/apps/renovate) (#405)
+- ⏫ Update traefik Docker tag to v2.11.27 @[renovate[bot]](https://github.com/apps/renovate) (#413)
+- ⏫ Update traefik Docker tag to v2.11.28 @[renovate[bot]](https://github.com/apps/renovate) (#419)
+- ⏫ Update traefik Docker tag to v2.11.29 @[renovate[bot]](https://github.com/apps/renovate) (#430)
+- ⏫ Update traefik Docker tag to v2.11.30 @[renovate[bot]](https://github.com/apps/renovate) (#450)
+- ⏫ Update traefik Docker tag to v2.11.35 @[renovate[bot]](https://github.com/apps/renovate) (#457)
+- ⏫ Update HomeAssistant Add-on base image to v3.23 @[renovate[bot]](https://github.com/apps/renovate) (#468)
+
 ## traefik 4.2.6 - 2025-06-21
 
 ### Changes

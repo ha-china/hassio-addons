@@ -1,19 +1,23 @@
-# 非官方 Home Assistant 插件：Traefik
+# Unofficial Home Assistant Add-ons: Traefik
 
-Traefik 作为 Home Assistant 插件捆绑。
+Traefik bundled as an Home Assistant add-on.
 
-## 关于
+## About
 
-Traefik 是一个现代的 HTTP 反向代理和负载均衡器，使得微服务的部署变得简单。这个插件提供基于文件的动态 Traefik 配置。
+Traefik is a modern HTTP reverse proxy and load balancer that makes deploying
+microservices easy. This add-on provides dynamic Traefik configuration based on
+files.
 
-[点击这里查看完整的 Traefik 文档](https://docs.traefik.io/)
+[Click here for the full Treafik documentation](https://docs.traefik.io/)
 
-## 已知问题和限制
+## Known issues and limitations
 
-- 默认端口 80 可能与其他端口发生冲突
+- Default port 80 can conflict with other ports
 
-## 最后说明
+## Final notes
 
-这个项目与 Traefik、Traefik 维护团队或 Containous 并没有关联，仅仅是一个社区的努力。Traefik 本身是在 [MIT 许可证](https://github.com/containous/traefik/blob/master/LICENSE.md) 下分发的。
+This project is not affiliated with Traefik, the Traefik Maintainer Team or
+Containous, but simply a community effort. Traefik itself is distributed under
+the [MIT License](https://github.com/containous/traefik/blob/master/LICENSE.md).
 
-从 ![https://github.com/alex3305/home-assistant-addons](https://github.com/alex3305/home-assistant-addons) 分叉而来。
+Forked from ![https://github.com/alex3305/home-assistant-addons](https://github.com/alex3305/home-assistant-addons)

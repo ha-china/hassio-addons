@@ -1,3 +1,3 @@
-# 非官方 Home Assistant 插件：syslog-ng
+# Unofficial Home Assistant Add-ons: syslog-ng
 
-syslog-ng 打包为 Home Assistant 插件。
+syslog-ng bundled as an Home Assistant add-on.

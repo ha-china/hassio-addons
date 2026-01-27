@@ -1,27 +1,32 @@
-# 非官方 Home Assistant 附加组件：Traefik
+# Unofficial Home Assistant Add-ons: Traefik
 
-Traefik 打包为 Home Assistant 附加组件。
+Traefik bundled as an Home Assistant add-on.
 
-## 安装
+## Installation
 
-按照以下步骤在您的系统上安装附加组件：
+Follow these steps to get the add-on installed on your system:
 
-1. 在您的 Home Assistant 前端导航到 **Supervisor -> Add-on Store**
-1. 通过 URL 添加这个新的存储库 (`https://github.com/bluemaex/home-assistant-addons`)
-1. 找到 "Traefik" 附加组件并点击它。
-1. 点击 "INSTALL" 按钮
+1. Navigate in your Home Assistant frontend to **Supervisor -> Add-on Store**
+1. Add this new repository by URL (`https://github.com/bluemaex/home-assistant-addons`)
+1. Find the "Traefik" add-on and click it.
+1. Click on the "INSTALL" button
 
-## 如何使用
+## How to use
 
-在配置部分，您需要设置所需的配置路径。这个路径可以是您 Home Assistant 配置或 Hass.io 共享目录中的一个目录，因为这两者都是以只读方式挂载到该附加组件中的。
+In the configuration section you will need to set the required configuration
+path. This can be a directory within your Home Assistant config or Hass.io share
+directories, since both are read-only mounted on this add-on.
 
-您放置在那里的任何 Traefik 端点配置将会被该附加组件自动识别。更新也将由 Traefik 自动处理。
+Any Traefik endpoint configuration you put in there will be automatically picked
+up by this add-on. Updates will also be automatically processed by Traefik.
 
-您还可以在配置中启用 Let's Encrypt 支持，并在需要时设置其他环境变量。
+You can also enable Let's Encrypt support within the configuration and set
+additional environment variables when those are needed.
 
-该附加组件提供两个 Traefik 入口点。`web` 在端口 80 上，`web-secure` 在端口 443 上。
+This add-on provides two Traefik entrypoints. `web` on port 80 and `web-secure`
+on port 443.
 
-### 示例动态 Traefik 配置
+### Example dynamic Traefik configuration
 
 ```yaml
 http:
@@ -63,9 +68,10 @@ http:
           - url: "http://homeassistant:8123"
 ```
 
-## 配置
+## Configuration
 
-完整的附加组件示例配置，用于 Let's Encrypt 配合 Cloudflare DNS 代理，在您的 Home Assistant 配置目录中的动态配置：
+Full add-on example configuration for Let's Encrypt with Cloudflare DNS proxy
+and dynamic configuration within your Home Assistant configuration directory:
 
 ```yaml
 log_level: INFO
@@ -86,80 +92,110 @@ env_vars:
   - ANOTHER_ENV_VARIABLE=SOME-VALUE
 ```
 
-### 选项 `log_level`（必填）
+### Option `log_level` (required)
 
-`log_level` 选项控制附加组件的日志输出级别，可以更改为更详细或更简单的输出，这在处理未知问题时可能很有用。可能的值包括：
+The `log_level` option controls the level of log output by the addon and can be
+changed to be more or less verbose, which might be useful when you are dealing
+with an unknown issue. Possible values are:
 
-- `trace`: 显示每一个细节，例如所有调用的内部函数。
-- `debug`: 显示详细的调试信息。
-- `info`: 正常（通常）有趣的事件。
-- `warning`: 非错误的异常情况。
-- `error`: 不需要立即处理的运行时错误。
-- `fatal`: 出现了严重问题，附加组件变得无法使用。
+- `trace`: Show every detail, like all called internal functions.
+- `debug`: Shows detailed debug information.
+- `info`: Normal (usually) interesting events.
+- `warning`: Exceptional occurrences that are not errors.
+- `error`: Runtime errors that do not require immediate action.
+- `fatal`: Something went terribly wrong. Add-on becomes unusable.
 
-请注意，每个级别会自动包含更严重级别的日志消息，例如 `debug` 还显示 `info` 消息。默认情况下，`log_level` 设置为 `info`，这是推荐的设置，除非您在进行故障排除。
+Please note that each level automatically includes log messages from a more
+severe level, e.g., `debug` also shows `info` messages. By default, the
+`log_level` is set to `info`, which is the recommended setting unless you are
+troubleshooting.
 
-### 选项 `access_logs`（必填）
+### Option `access_logs` (required)
 
-是否启用访问日志以输出到标准输出。这些日志将显示在 Hass.io 附加组件面板中。
+Whether to enable access logging to standard out. These logs will be shown in
+the Hass.io Add-On panel.
 
-### 选项 `forwarded_headers_insecure`（必填）
+### Option `forwarded_headers_insecure` (required)
 
-启用不安全的转发头。当启用此选项时，转发头（`X-Forwarded-*`）将不会被 Traefik 头替换。仅在您信任您所转发的代理时启用此选项。
+Enables insecure forwarding headers. When this option is enabled, the forwarded
+headers (`X-Forwarded-*`) will not be replaced by Traefik headers. Only enable
+this option when you trust your forwarding proxy.
 
-> **\_注意** 如果要使 Cloudflare 的 `X-Forwarded-*` 代理头正常工作，必须启用此选项。\_
+> **\_Note** for Cloudflare `X-Forwarded-*` proxied headers to work, this must
+> be enabled.\_
 
-### 选项 `dynamic_configuration_path`（必填）
+### Option `dynamic_configuration_path` (required)
 
-动态端点配置的目录路径。请参见上面的示例。
+Path to the directory with the dynamic endpoint configuration. See the example
+above.
 
-### 选项 `letsencrypt.enabled`（必填）
+### Option `letsencrypt.enabled` (required)
 
-是否启用 Let's Encrypt。当启用此选项时，将激活 `le` certResolver 以供使用。您还需要设置 Let's Encrypt 的电子邮件和挑战类型。否则，Traefik 将无法启动。
+Whether or not to enable Let's Encrypt. When this is enabled the `le`
+certResolver will be activated for you to use. You will also have to set the
+Let's Encrypt e-mail and challange type. Otherwise Traefik will fail to start.
 
-### 选项 `letsencrypt.email`
+### Option `letsencrypt.email`
 
-您希望用于 Let's Encrypt 的个人电子邮件。
+Your personal e-mail that you want to use for Let's Encrypt.
 
-> _**注意** 启用 Let's Encrypt 时这是必需的。_
+> _**Note** This is required when Let's Encrypt is enabled._
 
-### 选项 `letsencrypt.challenge_type`
+### Option `letsencrypt.challenge_type`
 
-您希望用于 Let's Encrypt 的挑战类型。有效的选项有：
+A challange type you want to use for Let's Encrypt. Valid options are:
 
 - `tlsChallenge`
 - `httpChallenge`
 - `dnsChallenge`
 
-有关挑战类型及选择建议的更多信息，请参见 Traefik 文档中[ACME 部分](https://docs.traefik.io/https/acme/)。
+For more information on challange types and which one to choose, please see the
+[ACME section](https://docs.traefik.io/https/acme/) of the Treafik documentation
+regarding this subject.
 
-### 选项 `letsencrypt.provider`
+### Option `letsencrypt.provider`
 
-在使用 `dnsChallenge` 时，您还需要设置一个提供程序。提供程序列表可以在 Traefik 文档中的[Let's Encrypt 提供程序部分](https://docs.traefik.io/https/acme/#providers)中找到。
+When using the `dnsChallange` you will also need to set a provider to use. The
+list of providers can be found in the
+[Let's Encrypt provider section](https://docs.traefik.io/https/acme/#providers)
+of the Traefik documentation.
 
-### 选项 `letsencrypt.delayBeforeCheck`
+### Option `letsencrypt.delayBeforeCheck`
 
-默认情况下，提供程序将在允许 ACME 验证之前验证 TXT DNS 挑战记录。如果 `delayBeforeCheck` 被设置且大于零，则此检查会延迟配置的秒数。
+By default, the provider will verify the TXT DNS challenge record before letting
+ACME verify. If `delayBeforeCheck` is set and greater than zero, this check is
+delayed for the configured duration in seconds.
 
-此设置在内部网络阻止外部 DNS 查询时很有用。有关更多信息，请查看 Traefik 文档中关于此主题的[内容](https://docs.traefik.io/https/acme/#dnschallenge)。
+This setting can be useful if internal networks block external DNS queries. For
+more information, check the
+[Traefik documentation](https://docs.traefik.io/https/acme/#dnschallenge)
+regarding this subject.
 
-### 选项 `letsencrypt.resolvers`
+### Option `letsencrypt.resolvers`
 
-手动设置在执行验证步骤时要使用的 DNS 服务器。对于内部 DNS 解析地址与公共互联网地址不一致的情况（例如，使用 FQDN 作为主机名的局域网），此选项非常有用。
+Manually set the DNS servers to use when performing the verification step.
+Useful for situations where internal DNS does not resolve to the same addresses
+as the public internet (e.g. on a LAN using a FQDN as part of hostnames).
 
-有关更多信息，请参见 Traefik 文档中关于此主题的[内容](https://docs.traefik.io/https/acme/#resolvers)。
+For more information, see the
+[Traefik documentation](https://docs.traefik.io/https/acme/#resolvers) regarding
+this subject.
 
-### 选项 `pilot_token`
+### Option `pilot_token`
 
-手动设置 Traefik pilot token，以将实例连接到您的 pilot 帐户进行监控。
+Manually set the Traefik pilot token to connect the instance to your pilot
+account for monitoring.
 
-有关更多信息，请访问[Traefik pilot 网站](https://https://pilot.traefik.io/)。
+For more information, go on the
+[Traefik pilot website](https://https://pilot.traefik.io/).
 
-### 选项 `metrics`
+### Option `metrics`
 
-您可以启用 Traefik 的 prometheus 指标服务。如果您启用它，则需要在配置文件中添加相应的路由器。
+You can enable the prometheus metrics service from Traefik. If you enable it,
+you need to add the corresponding router to your config file.
 
-有关更多信息，请参见[Traefik Prometheus 文档](https://doc.traefik.io/traefik/observability/metrics/prometheus/)。
+For more information, go on the
+[Traefik Prometheus Documentation](https://doc.traefik.io/traefik/observability/metrics/prometheus/).
 
 ```yaml
 metricsRouter:
@@ -170,20 +206,26 @@ metricsRouter:
   service: prometheus@internal
 ```
 
-### 选项 `env_vars`
+### Option `env_vars`
 
-可以添加的可选环境变量。这些额外的配置值对于 Let's Encrypt DNS 挑战提供者可能是必要的。有关具体示例，请参见上面的示例配置。
+Optional environment variables that can be added. These additional configuration
+values can be necessary for example for the Let's Encrypt DNS challange
+provider. See the example configuration above for an concrete example.
 
-## 入口点
+## Entrypoints
 
-此映像公开了两个 HTTP(S) 访问端口。这些也在 Traefik 中配置为入口点。您可以在动态配置中使用这些端口。
+This image exposes two ports for HTTP(S) access. These are also configured
+within Traefik as entrypoints. You can use these within your dynamic
+configuration.
 
-### 入口点 `web`，端口 `80`
+### EntryPoint `web`, port `80`
 
-端口 80 用于 HTTP 访问。
+Port 80 is used for HTTP access.
 
-当使用支持的 Let's Encrypt 提供者（即 Cloudflare）并使用 DNS Challenge 时，您也可以将该端口映射到另一个随机端口，让 CloudFlare 进行 HTTP 到 HTTPS 的转发。
+When using a supported Let's Encrypt provider (ie. Cloudflare) with DNS
+Challange you can also map this port to another, random port and let CloudFlare
+do the HTTP to HTTPS forwarding.
 
-### 入口点 `web-secure`，端口 `443`
+### EntryPoint `web-secure`, port `443`
 
-端口 443 用于 HTTPS 访问。
+Port 443 is used for HTTPS access.

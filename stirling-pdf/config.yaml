@@ -1,9 +1,9 @@
 name: "Stirling-PDF"
-version: "2.3.1"
-upstream: "2.3.1"
+version: "2.4.0"
+upstream: "2.4.0"
 slug: stirling-pdf
 description: >-
-  [老王杂谈说]：null
+  [老王杂谈说]：一个健壮的、本地托管的网页版PDF处理工具
 arch:
   - amd64
   - aarch64

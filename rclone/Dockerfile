@@ -1,6 +1,6 @@
 ARG BUILD_FROM
 
-FROM rclone/rclone:1.70.1 as rclone-base
+FROM rclone/rclone:1.72.0 as rclone-base
 FROM ${BUILD_FROM} AS final
 
 COPY rootfs /
