@@ -2,12 +2,43 @@
 
 Home Assistant WhatsApp Backend (Baileys/Node.js)
 
+> [!WARNING]
+> **Legal Disclaimer / Haftungsausschluss**
+>
+> This project is **not** affiliated with WhatsApp or Meta. Using automated messaging on a WhatsApp account may lead to its permanent ban. The developers assume no responsibility for any such damage.
+>
+> Official WhatsApp Policy: **[WhatsApp Terms of Service](https://www.whatsapp.com/legal/terms-of-service/)**
+
 ## Architecture
 
 This add-on is a "bridge". It does **not** communicate with Home Assistant directly via the Event Bus. Instead, it acts as a server that the **WhatsApp Custom Component** connects to.
 
 **Flow:**
 `Home Assistant` -> `WhatsApp Integration` -> `HTTP (Port 8099)` -> `This Addon` -> `Baileys (Node.js)` -> `WhatsApp Web`
+
+## 🌐 Network & Discovery
+
+By default, this add-on uses **Host Network Mode** (`host_network: true`).
+
+### Why is this enabled?
+
+- **Auto-Discovery:** It allows the add-on to broadcast its presence via **mDNS/Zeroconf** (`_ha-whatsapp._tcp.local`).
+- **Ease of Use:** Home Assistant will automatically find the add-on and prompt you to configure it ("New devices found"), pre-filling the URL and Port.
+
+### Can I disable it?
+
+Yes. If you prefer strictly isolated networking, you can disable the **"Use Host Network"** toggle in the add-on's configuration tab.
+
+**If you disable Host Network:**
+
+1. **No Auto-Discovery:** Home Assistant will not "see" the add-on automatically.
+2. **Manual Config:** You must manually enter the URL (e.g., `http://<your-ha-ip>:8066`) when setting up the integration.
+
+## 🚀 Getting Started with Automations
+
+Once the addon and integration are configured, check out the following resource to start building:
+
+- **[Official Documentation & Examples](https://faserf.github.io/ha-whatsapp/)** (Buttons, Polls, Reactions, etc.)
 
 ## ⚙️ Configuration
 
@@ -17,8 +48,20 @@ Configure the add-on via the **Configuration** tab in the Home Assistant add-on 
 
 ```yaml
 log_level: info
-mdns_name: 'WhatsApp Addon'
+send_message_timeout: 25000
+keep_alive_interval: 30000
+mask_sensitive_data: false
 ```
+
+### Configuration Options
+
+- `log_level`: Level of logs to output (trace, debug, info, warning, error, fatal).
+- `send_message_timeout`: Time (in ms) to wait for WhatsApp acknowledgement before timing out. Increase if you have slow network.
+- `keep_alive_interval`: Time (in ms) between connection checks to prevent "Stale Connection".
+- `mask_sensitive_data`: If true, `+491761234567` becomes `491*****67` in logs.
+
+> [!WARNING]
+> **Privacy Trade-off:** Enabling `mask_sensitive_data` will also mask Group IDs (e.g. `123*****89@g.us`). If you are trying to find out the ID of a new group to send messages to, you MUST temporarily **disable** this option to see the full ID in the logs.
 
 ## 📂 Folder Usage
 

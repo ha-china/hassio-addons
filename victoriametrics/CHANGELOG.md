@@ -1,5 +1,30 @@
 # Changelog
 
+## victoriametrics 3.0.0 - 2026-01-24
+
+### Changes
+
+#### 🚨 Breaking changes
+
+- Remove unsupported architectures and codenotary @bluemaex (#477)
+
+#### ⬆️ Dependency updates
+
+- ⏫ Update VictoriaMetrics to v1.120.0 @[renovate[bot]](https://github.com/apps/renovate) (#404)
+- ⏫ Update VictoriaMetrics to v1.121.0 @[renovate[bot]](https://github.com/apps/renovate) (#408)
+- ⏫ Update VictoriaMetrics to v1.122.0 @[renovate[bot]](https://github.com/apps/renovate) (#416)
+- ⏫ Update VictoriaMetrics to v1.123.0 @[renovate[bot]](https://github.com/apps/renovate) (#423)
+- ⏫ Update VictoriaMetrics to v1.124.0 @[renovate[bot]](https://github.com/apps/renovate) (#426)
+- ⏫ Update VictoriaMetrics to v1.125.1 @[renovate[bot]](https://github.com/apps/renovate) (#434)
+- ⏫ Update VictoriaMetrics to v1.126.0 @[renovate[bot]](https://github.com/apps/renovate) (#438)
+- ⏫ Update victoriametrics/victoria-metrics Docker tag to v1.127.0 @[renovate[bot]](https://github.com/apps/renovate) (#441)
+- ⏫ Update victoriametrics/vmagent Docker tag to v1.127.0 @[renovate[bot]](https://github.com/apps/renovate) (#442)
+- ⏫ Update VictoriaMetrics to v1.128.0 @[renovate[bot]](https://github.com/apps/renovate) (#449)
+- ⏫ Update VictoriaMetrics to v1.129.0 @[renovate[bot]](https://github.com/apps/renovate) (#451)
+- ⏫ Update VictoriaMetrics to v1.129.1 @[renovate[bot]](https://github.com/apps/renovate) (#452)
+- ⏫ Update VictoriaMetrics to v1.134.0 @[renovate[bot]](https://github.com/apps/renovate) (#462)
+- ⏫ Update HomeAssistant Add-on base image to v3.23 @[renovate[bot]](https://github.com/apps/renovate) (#468)
+
 ## victoriametrics 2.0.7 - 2025-06-21
 
 ### Changes

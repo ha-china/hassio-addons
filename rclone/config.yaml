@@ -1,15 +1,12 @@
 ---
 name: Rclone
-version: 3.1.6
+version: 4.0.0
 slug: rclone
-description: Rclone 是一个用于同步文件和目录到各种提供者的命令行程序。
-  Rclone is a command line program to sync files and directories to and
-  from various providers.
+description: |-
+  [老王杂谈说]：null
 arch:
   - aarch64
   - amd64
-  - armv7
-  - i386
 image: "ghcr.nju.edu.cn/bluemaex/ha-addons-rclone-{arch}"
 startup: once
 boot: manual

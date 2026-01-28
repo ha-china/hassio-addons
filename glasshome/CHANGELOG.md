@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.6.0
+
+### Features
+
+- Add theme customization with presets, color editing, and auto-save functionality
+- Add animated background support with new themes and a geometric houses animation
+- Add widget configuration versioning and migration system for safer upgrades
+- Enhance clock widget with preset themes, date display, auto layout, and visual glow effects
+- Add card layout and display options to the batteries widget
+- Add skip controls (next/previous) to media player widget in small layout
+- Add safe config loading with validation helpers and fallback defaults
+
+### Improvements
+
+- Migrate all widgets to a new unified widget framework (Light, Clock, Batteries, Switch, Binary Sensor, Media Player, Weather, Camera)
+- Introduce aggregation presets and entity state utilities for cleaner widget code
+- Implement shared state colors theming system across all widgets
+- Enhance config schemas with proper fallbacks for missing or invalid values
+- Remove primaryEntity anti-pattern from all widgets for better consistency
+- Standardize widget configurations and improve code organization
+
+### Bug Fixes
+
+- Fix session/login bugs including OAuth callback parameter cleanup and disconnect before reconnect behavior
+- Fix Next.js server binding to 0.0.0.0 for VM compatibility
+- Fix clock widget creation dialog with proper V2 fields
+- Fix TypeScript build errors and Zod v4 compatibility issues
+- Fix widget gradient and glow format issues in button and switch widgets
+
 ## 0.5.0
 
 ### Features

@@ -4,7 +4,7 @@ ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base:9.1.0 # hadolint ignore
 FROM ${BUILD_FROM}
 
 # renovate: datasource=github-releases depName=Eidolf/Docker-AntiGravity versioning=loose
-ARG ANTIGRAVITY_VERSION="2025.12.0-nightly.20251226.1451"
+ARG ANTIGRAVITY_VERSION="2026.1.2"
 ENV ANTIGRAVITY_VERSION=${ANTIGRAVITY_VERSION}
 ARG LAZYGIT_VERSION=0.40.2
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
@@ -16,8 +16,6 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install dependencies and tools
 
 # hadolint ignore=DL3008,SC1091
-
-
 
 # Addon metadata (injected by CI)
 ENV ADDON_VERSION="1.1.2"

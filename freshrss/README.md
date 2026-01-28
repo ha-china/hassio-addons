@@ -1,6 +1,6 @@
-# Home Assistant Add-on: freshrss
+# Home Assistant 插件：freshrss
 
-一个免费、可自托管的聚合器。
+一个免费的、可自行托管的聚合器。
 
 ## 关于
 

@@ -1,5 +1,5 @@
-# 非官方 Home Assistant 插件: Loki
+# Unofficial Home Assistant Add-ons: Loki
 
-Loki 被打包为一个 Home Assistant 插件。
+Loki bundled as an Home Assistant add-on.
 
-## 如何使用
+## How to use

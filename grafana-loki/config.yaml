@@ -1,9 +1,9 @@
 ---
 name: Grafana Loki
-version: 4.0.1
+version: 5.0.0
 slug: grafana-loki
-description: Grafana Loki 是一个基于 Prometheus 启发的可水平扩展、高可用性、多租户日志聚合系统。
-  Grafana Loki is a horizontally-scalable, highly-available, multi-tenant log aggregation system inspired by Prometheus
+description: |-
+  [老王杂谈说]：Grafana Loki 是一个受 Prometheus 启发的、水平可扩展的、高可用的、多租户的日志聚合系统。
 arch:
   - aarch64
   - amd64

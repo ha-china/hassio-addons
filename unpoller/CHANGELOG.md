@@ -1,5 +1,19 @@
 # Changelog
 
+## unpoller 4.0.0 - 2026-01-24
+
+### Changes
+
+#### 🚨 Breaking changes
+
+- Remove unsupported architectures and codenotary @bluemaex (#477)
+
+#### ⬆️ Dependency updates
+
+- ⏫ Update ghcr.io/unpoller/unpoller Docker tag to v2.15.4 @[renovate[bot]](https://github.com/apps/renovate) (#427)
+- ⏫ Update ghcr.io/unpoller/unpoller Docker tag to v2.21.0 @[renovate[bot]](https://github.com/apps/renovate) (#466)
+- ⏫ Update HomeAssistant Add-on base image to v3.23 @[renovate[bot]](https://github.com/apps/renovate) (#468)
+
 ## unpoller 3.0.13 - 2025-06-21
 
 ### Changes

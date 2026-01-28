@@ -1,20 +1,32 @@
-# 非官方 Home Assistant 插件：Promtail
+# Unofficial Home Assistant Add-ons: Promtail
 
-Promtail 被打包为 Home Assistant 插件。
+Promtail bundled as an Home Assistant add-on.
 
-## 默认设置
+## Default Setup
 
-默认情况下，此插件版本的 Promtail 将从 systemd 日志中获取日志。这将包括来自所有插件、管理程序、Home Assistant、Docker 和主机系统本身的所有日志。如果你安装了 Loki 插件，它会将这些日志发送到同一存储库中的 Loki 插件。如果这是你想要的设置，则无需额外配置。
+By default this addon version of Promtail will tail logs from the systemd
+journal. This will include all logs from all addons, supervisor, home assistant,
+docker, and the host system itself. It will then ship them to the Loki add-on in
+this same repository if you have it installed. No additional configuration is
+required if this is the setup you want.
 
-如果你调整了 Loki 插件的配置，或者有一个单独的 Loki 插件，或者有其他日志文件希望 Promtail 监控，请看下面的配置选项。
+If you adjusted the configuration of the Loki add-on, have a separate Loki
+add-on or have other log files you want Promtail to monitor then see below for
+the configuration options.
 
-## 配置
+## Configuration
 
-### 选项：`additional_pipeline_stages`
+### Option: `additional_pipeline_stages`
 
-指向包含额外管道阶段列表的 YAML 文件的绝对路径，这些阶段将应用于 [默认日志抓取配置][addon-default-config]。这个选项的主要用途是对你使用的特定插件的日志进行额外处理，如果它们比较嘈杂或难以阅读。
+The absolute path to a YAML file with a list of additional pipeline stages to
+apply to the [default journal scrape config][addon-default-config]. The primary
+use of this is to apply additional processing to logs from particular add-ons
+you use if they are noisy or difficult to read.
 
-此文件必须仅包含一个 YAML 列表的管道阶段。它们将被添加到已列出的阶段末尾。如果你不喜欢已列出的阶段，请使用 `skip_default_scrape_config` 和 `additional_scrape_configs` 来自己编写配置。以下是此文件内容的示例：
+This file must contain only a YAML list of pipeline stages. They will be added
+to the end of the ones already listed. If you don't like the ones listed, use
+`skip_default_scrape_config` and `additional_scrape_configs` to write your own
+instead. Here's an example of the contents of this file:
 
 ```yaml
 - match:
@@ -24,23 +36,42 @@ Promtail 被打包为 Home Assistant 插件。
           firstline: '^\x{001b}'
 ```
 
-这个特定示例适用于 [google drive backup 插件][addon-google-drive-backup]。它使用与 Home Assistant 相同的日志格式，在每个日志行的开头输出转义字符，以便在终端中进行颜色编码。在多行阶段中查找该字符，可以使追踪信息与导致错误的日志条目包括在同一日志条目中，从而更易于阅读。
+This particular example applies to the [google drive backup
+addon][addon-google-drive-backup]. It uses the same log format as Home Assistant
+and outputs the escape character at the start of each log line for color-coding
+in terminals. Looking for that in a multiline stage makes it so tracebacks are
+included in the same log entry as the error that caused them for easier
+readability.
 
-有关如何配置管道阶段的更多信息，请参见 [promtail 文档][promtail-doc-stages]。
+See the [promtail documentation][promtail-doc-stages] for more information on
+how to configure pipeline stages.
 
-**注意**：此插件可以访问 `/ssl`、`/share` 和 `/config/promtail`。请将文件放在这些位置之一，其他位置将无法工作。
+**Note**: This addon has access to `/ssl`, `/share` and `/config/promtail`.
+Place the file in one of these locations, others will not work.
 
-### 选项：`skip_default_scrape_config`
+### Option: `skip_default_scrape_config`
 
-Promtail 将使用预定义配置抓取 `systemd journal`，你可以在 [这里][addon-default-config] 找到。如果你只想查看你指定的特定日志文件，或者不喜欢默认配置并想调整，可以将此设置为 `true`。然后，使用的唯一抓取配置将是你在 `additional_scrape_configs` 文件中指定的那些。
+Promtail will scrape the `systemd journal` using a pre-defined config you can
+find [here][addon-default-config]. If you only want it to look at specific log
+files you specify or you don't like the default config and want to adjust it,
+set this to `true`. Then the only scrape configs used will be the ones you
+specify in the `additional_scrape_configs` file.
 
-**注意**：此插件可以访问 `/ssl`、`/share` 和 `/config/promtail`。请将文件放在这些位置之一，其他位置将无法工作。
+**Note**: This addon has access to `/ssl`, `/share` and `/config/promtail`.
+Place the file in one of these locations, others will not work.
 
-### 选项：`additional_scrape_configs`
+### Option: `additional_scrape_configs`
 
-指向包含 Promtail 使用的额外抓取配置列表的 YAML 文件的绝对路径。这个选项的主要用途是指向由于不使用 `stdout` 进行所有日志记录而由插件创建的额外日志文件。你还可以使用此选项结合 `skip_default_scrape_config` 更改抓取的系统日志。**注意**：如果 `skip_default_scrape_config` 为 `true`，则此字段变为必需（否则将没有抓取配置）。
+The absolute path to a YAML file with a list of additional scrape configs for
+Promtail to use. The primary use of this is to point Promtail at additional log
+files created by add-ons which don't use `stdout` for all logging. You an also
+change the system journal is scraped by using this in conjunction with
+`skip_default_scrape_config`. **Note**: If `skip_default_scrape_config` is
+`true` then this field becomes required (otherwise there would be no scrape
+configs)
 
-该文件必须仅包含一个 YAML 列表的抓取配置。以下是此文件内容的示例：
+The file must contain only a YAML list of scrape configs. Here's an example of
+the contents of this file:
 
 ```yaml
 - job_name: zigbee2mqtt_messages
@@ -53,38 +84,59 @@ Promtail 将使用预定义配置抓取 `systemd journal`，你可以在 [这里
         __path__: /share/zigbee2mqtt/log/**.txt
 ```
 
-这个特定示例将导致 Promtail 抓取 [Zigbee2MQTT 插件][addon-z2m] 默认生成的 MQTT 日志。
+This particular example would cause Promtail to scrape up the logs MQTT that the
+[Zigbee2MQTT add-on][addon-z2m] makes by default.
 
-Promtail 提供了很多配置抓取配置的选项。有关可用选项及其配置方式的更多信息，请参见 [scrape_configs][promtail-doc-scrape-configs] 文档。文档还提供了 [其他示例][promtail-doc-examples]，供你使用。
+Promtail provides a lot of options for configuring scrape configs. See the
+documentation on [scrape_configs][promtail-doc-scrape-configs] for more info on
+the options available and how to configure them. The documentation also provides
+[other examples][promtail-doc-examples] you can use.
 
-我还建议在制作自定义抓取配置之前阅读 [Loki 最佳实践][loki-doc-best-practices] 指南。管道功能非常强大，但应避免创建过多标签，这样会适得其反。相反，可以考虑在另一端使用 [LogQL][logql] 的功能。
+I would also recommend reading the [Loki best
+practices][loki-doc-best-practices] guide before making custom scrape configs.
+Pipelines are pretty powerful but avoid making too many labels, it does more
+harm then good. Instead look into what you can do with [LogQL][logql] can do at
+the other end.
 
-**注意**：此插件可以访问 `/ssl`、`/share` 和 `/config/promtail`。请将文件放在这些位置之一，其他位置将无法工作。
+**Note**: This addon has access to `/ssl`, `/share` and `/config/promtail`.
+Place the file in one of these locations, others will not work.
 
-### 端口：`9080/tcp`
+### Port: `9080/tcp`
 
-Promtail 在此端口上公开一个 [API][api]。这主要用于由管理程序监视器进行健康检查，不需要在主机上公开。大多数用户应该将此选项保持禁用，除非你有外部应用程序进行健康检查。
+Promtail expose an [API][api] on this port. This is primarily used for
+healthchecks by the supervisor watchdog which does not require exposing it on
+the host. Most users should leave this option disabled unless you have an
+external application doing healthchecks.
 
-对于创建自定义抓取配置的高级用户，此 API 的另一个目的，是公开由 [metrics][promtail-doc-metrics] 管道阶段生成的指标。公开此端口将允许你从网络上的其他系统读取这些指标。
+For advanced users creating custom scrape configs the other purpose of this API
+is to expose metrics created by the [metrics][promtail-doc-metrics] pipeline
+stage. Exposing this port would then allow you to read those metrics from
+another system on your network.
 
-### 选项：`log_level`
+### Option: `log_level`
 
-`log_level` 选项控制插件的日志输出级别，可以更改为更详细或更简洁，这在处理未知问题时可能很有用。可能的值有：
+The `log_level` option controls the level of log output by the addon and can be
+changed to be more or less verbose, which might be useful when you are dealing
+with an unknown issue. Possible values are:
 
-- `debug`：显示详细的调试信息。
-- `info`：正常（通常）有趣的事件。
-- `warning`：不错误的异常情况。
-- `error`：不需要立即处理的运行时错误。
+- `debug`: Shows detailed debug information.
+- `info`: Normal (usually) interesting events.
+- `warning`: Exceptional occurrences that are not errors.
+- `error`: Runtime errors that do not require immediate action.
 
-请注意，每个级别自动包含更严重级别的日志消息，例如，`debug` 也会显示 `info` 消息。默认情况下，`log_level` 设置为 `info`，这是推荐的设置，除非你正在进行故障排除。
+Please note that each level automatically includes log messages from a more
+severe level, e.g., `debug` also shows `info` messages. By default, the
+`log_level` is set to `info`, which is the recommended setting unless you are
+troubleshooting.
 
-## PLG 堆栈（Promtail、Loki 和 Grafana）
+## PLG Stack (Promtail, Loki and Grafana)
 
-Promtail 不是一个独立应用程序，它的任务是查找日志、处理日志并将其发送到 Loki。你可能想要完整的 PLG 堆栈：
+Promtail isn't a standalone application, it's job is to find logs, process them
+and ship them to Loki. Most likely you want the full PLG stack:
 
-- Promtail 用于处理和发送日志
-- Loki 用于聚合和索引它们
-- Grafana 用于可视化和监控它们
+- Promtail to process and ship logs
+- Loki to aggregate and index them
+- Grafana to visualize and monitor them
 
 [addon-default-config]: https://github.com/mdegat01/addon-promtail/blob/main/promtail/rootfs/etc/promtail/default-scrape-config.yaml
 [addon-google-drive-backup]: https://github.com/sabeechen/hassio-google-drive-backup

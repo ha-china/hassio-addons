@@ -12,6 +12,7 @@ import QRCode from 'qrcode';
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import http from 'http';
 
 const app = express();
 app.use(express.json());
@@ -22,6 +23,69 @@ const IS_WIN = process.platform === 'win32';
 const DATA_DIR = IS_WIN ? path.resolve('data') : '/data';
 const AUTH_DIR = path.join(DATA_DIR, 'auth_info_baileys');
 const TOKEN_FILE = path.join(DATA_DIR, 'api_token.txt');
+
+// --- Startup Reset ---
+const SHOULD_RESET = process.env.RESET_SESSION === 'true';
+if (SHOULD_RESET) {
+  console.log('⚠️ RESET_SESSION ENABLED - Clearing authentication data...');
+  if (fs.existsSync(AUTH_DIR)) {
+    fs.rmSync(AUTH_DIR, { recursive: true, force: true });
+    console.log('✅ Authentication directory cleared.');
+  }
+
+  // Automatically disable the toggle in Addon Config
+  disableResetSession();
+}
+
+/**
+ * Calls the Home Assistant Supervisor API to set reset_session to false.
+ */
+async function disableResetSession() {
+  const token = process.env.SUPERVISOR_TOKEN;
+  if (!token) {
+    console.debug('No SUPERVISOR_TOKEN found, skipping auto-disable of reset_session.');
+    return;
+  }
+
+  const data = JSON.stringify({
+    options: {
+      reset_session: false,
+    },
+  });
+
+  const options = {
+    hostname: 'supervisor',
+    port: 80,
+    path: '/addons/self/options',
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'Content-Length': data.length,
+    },
+  };
+
+  return new Promise((resolve) => {
+    const req = http.request(options, (res) => {
+      if (res.statusCode === 200) {
+        console.log('✅ Successfully disabled reset_session via Supervisor API.');
+      } else {
+        console.error(
+          `❌ Failed to disable reset_session via Supervisor API. Status: ${res.statusCode}`
+        );
+      }
+      resolve();
+    });
+
+    req.on('error', (error) => {
+      console.error('❌ Error calling Supervisor API:', error);
+      resolve();
+    });
+
+    req.write(data);
+    req.end();
+  });
+}
 
 // Ensure data root exists
 if (IS_WIN && !fs.existsSync(DATA_DIR)) {
@@ -58,6 +122,15 @@ const LOG_LEVEL_MAP = {
 const LOG_LEVEL = LOG_LEVEL_MAP[RAW_LOG_LEVEL.toLowerCase()] || 'info';
 console.log(`📝 Log Level set to: ${LOG_LEVEL} (from: ${RAW_LOG_LEVEL})`);
 
+// --- Configuration ---
+const SEND_MESSAGE_TIMEOUT = parseInt(process.env.SEND_MESSAGE_TIMEOUT || '25000', 10);
+const KEEP_ALIVE_INTERVAL = parseInt(process.env.KEEP_ALIVE_INTERVAL || '30000', 10);
+const MASK_SENSITIVE_DATA = process.env.MASK_SENSITIVE_DATA === 'true';
+
+console.log(`⏱️  Send Message Timeout set to: ${SEND_MESSAGE_TIMEOUT} ms`);
+console.log(`💓 Keep Alive Interval set to: ${KEEP_ALIVE_INTERVAL} ms`);
+console.log(`🔒 Mask Sensitive Data: ${MASK_SENSITIVE_DATA ? 'ENABLED' : 'DISABLED'}`);
+
 // Ensure auth dir exists
 if (!fs.existsSync(AUTH_DIR)) {
   fs.mkdirSync(AUTH_DIR, { recursive: true });
@@ -82,8 +155,36 @@ let eventQueue = []; // Queue for polling events
 
 // --- Helper Functions ---
 function getJid(number) {
+  if (!number) return '';
+  if (typeof number !== 'string') number = String(number);
+
+  // 1. If it already has a domain, return it as is.
   if (number.includes('@')) return number;
-  return `${number}@s.whatsapp.net`;
+
+  // 2. If it has a dash, it's an old-style group ID (creator-timestamp)
+  if (number.includes('-')) {
+    const cleanGroup = number.replace(/[^\d-]/g, '');
+    return `${cleanGroup}@g.us`;
+  }
+
+  // 3. Clean all non-numeric characters (e.g. + for phone numbers)
+  const cleanNumber = number.replace(/\D/g, '');
+
+  // 4. Heuristic for Group IDs vs Personal Numbers
+  // Modern Group IDs (numeric only) are typically much longer than E.164 phone numbers (max 15 digits).
+  // Most group IDs are 16-20 digits.
+  if (cleanNumber.length >= 16) {
+    return `${cleanNumber}@g.us`;
+  }
+
+  // 5. Default to the standard WhatsApp user domain
+  return `${cleanNumber}@s.whatsapp.net`;
+}
+
+function maskData(str) {
+  if (!MASK_SENSITIVE_DATA || !str) return str;
+  if (str.length <= 4) return '****';
+  return str.substring(0, 3) + '****' + str.substring(str.length - 2);
 }
 
 // --- mDNS / Bonjour ---
@@ -132,6 +233,22 @@ publishMDNS(baseMDNSName);
 
 // --- Status & Logs ---
 let connectionLogs = [];
+const stats = {
+  sent: 0,
+  received: 0,
+  failed: 0,
+  last_sent_message: 'None',
+  last_sent_target: 'None',
+  last_received_message: 'None',
+  last_received_sender: 'None',
+  last_failed_message: 'None',
+  last_failed_target: 'None',
+  last_error_reason: 'None',
+  start_time: Date.now(),
+  my_number: 'Unknown',
+  version: 'Unknown',
+};
+
 function addLog(msg, type = 'info') {
   const timestamp = new Date().toLocaleTimeString();
   connectionLogs.unshift({ timestamp, msg, type });
@@ -167,7 +284,23 @@ app.use('/send_location', authMiddleware);
 app.use('/send_reaction', authMiddleware);
 app.use('/send_buttons', authMiddleware);
 app.use('/set_presence', authMiddleware);
+app.use('/groups', authMiddleware);
 app.use('/logs', authMiddleware);
+
+// --- Store Initialization ---
+// Custom In-Memory Store to handle message retries
+const messageStore = new Map();
+
+// Helper to bind store to events
+function bindStore(ev) {
+  ev.on('messages.upsert', ({ messages }) => {
+    for (const msg of messages) {
+      if (msg.key.id) {
+        messageStore.set(msg.key.id, msg);
+      }
+    }
+  });
+}
 
 async function connectToWhatsApp() {
   addLog('Starting request for new session...', 'info');
@@ -175,10 +308,28 @@ async function connectToWhatsApp() {
 
   sock = makeWASocket({
     auth: state,
-    logger: pino({ level: NORMALIZED_LOG_LEVEL }),
+    auth: state,
+    logger: pino({ level: 'warn' }), // Force cleaner logs, use 'warn' instead of global LOG_LEVEL
     browser: Browsers.macOS('Chrome'),
     syncFullHistory: false,
+    markOnlineOnConnect: true,
+    keepAliveIntervalMs: KEEP_ALIVE_INTERVAL,
+    connectTimeoutMs: 60000,
+    defaultQueryTimeoutMs: 60000,
+    retryRequestDelayMs: 5000,
+    getMessage: async (key) => {
+      // Check our custom store
+      if (messageStore.has(key.id)) {
+        console.debug(`[Store] Retrieving message ${key.id} from store`);
+        return messageStore.get(key.id).message;
+      }
+      console.debug(`[Store] Message ${key.id} not found in store`);
+      return undefined;
+    },
   });
+
+  // Bind custom store to events
+  bindStore(sock.ev);
 
   sock.ev.on('creds.update', saveCreds);
 
@@ -217,6 +368,10 @@ async function connectToWhatsApp() {
       addLog('WhatsApp Connection Established! 🟢', 'success');
       isConnected = true;
       currentQR = null;
+      if (sock && sock.user) {
+        stats.my_number = sock.user.id.split(':')[0]; // Extract number from JID
+        stats.version = BAILEYS_VERSION;
+      }
     } else if (connection === 'connecting') {
       addLog('Connecting to WhatsApp...', 'info');
     }
@@ -224,10 +379,35 @@ async function connectToWhatsApp() {
 
   // Handle Incoming Messages
   sock.ev.on('messages.upsert', async (m) => {
-    // Add simplified event to queue
-    // The integration expects a list of event objects
     if (m.messages && m.messages.length > 0) {
-      eventQueue.push(...m.messages);
+      stats.received += m.messages.length;
+
+      const events = m.messages
+        .filter((msg) => !msg.key.fromMe && msg.key.remoteJid !== 'status@broadcast')
+        .map((msg) => {
+          let text =
+            msg.message?.conversation ||
+            msg.message?.extendedTextMessage?.text ||
+            msg.message?.buttonsResponseMessage?.selectedDisplayText ||
+            msg.message?.templateButtonReplyMessage?.selectedId ||
+            'Media/Special Message';
+          const senderJid = msg.key.remoteJid;
+          const senderNumber = senderJid.split('@')[0];
+          const isGroup = senderJid.endsWith('@g.us');
+
+          // Update global stats with the latest message detail
+          stats.last_received_message = maskData(text);
+          stats.last_received_sender = maskData(senderNumber);
+
+          return {
+            content: text,
+            sender: senderJid,
+            sender_number: senderNumber,
+            is_group: isGroup,
+            raw: msg, // Keep raw for power users
+          };
+        });
+      eventQueue.push(...events);
     }
   });
 }
@@ -240,7 +420,7 @@ app.post('/session/start', (req, res) => {
   if (isConnected) {
     return res.json({ status: 'connected', message: 'Already connected' });
   }
-  if (sock && !sock.ws.isClosed) {
+  if (sock && !sock.ws?.isClosed) {
     return res.json({
       status: 'scanning',
       message: 'Session negotiation in progress',
@@ -257,7 +437,12 @@ app.delete('/session', async (req, res) => {
   console.log('Received DELETE /session request (Logout)');
   try {
     if (sock) {
-      await sock.logout();
+      // Baileys logout can sometimes hang if connection is bad
+      await Promise.race([
+        sock.logout(),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('Logout timeout')), 5000)),
+      ]).catch((e) => console.warn('Logout failed or timed out:', e.message));
+
       sock.end(undefined);
       sock = undefined;
     }
@@ -308,6 +493,14 @@ app.get('/logs', (req, res) => {
   res.json(connectionLogs);
 });
 
+// GET /stats
+app.get('/stats', (req, res) => {
+  res.json({
+    ...stats,
+    uptime: Math.floor((Date.now() - stats.start_time) / 1000),
+  });
+});
+
 // POST /send_message
 app.post('/send_message', async (req, res) => {
   const { number, message } = req.body;
@@ -315,9 +508,50 @@ app.post('/send_message', async (req, res) => {
 
   try {
     const jid = getJid(number);
-    await sock.sendMessage(jid, { text: message });
+    console.debug(
+      `[SendMessage] Input: ${maskData(number)} -> JID: ${maskData(jid)}. Socket state: ${sock ? 'exists' : 'null'}, Connected: ${isConnected}`
+    );
+
+    if (!sock) {
+      throw new Error('Socket not initialized');
+    }
+
+    if (!sock) {
+      throw new Error('Socket not initialized');
+    }
+
+    // Try to wake up connection with presence update
+    await sock.sendPresenceUpdate('composing', jid);
+    await delay(250);
+
+    await Promise.race([
+      sock.sendMessage(jid, { text: message }),
+      new Promise((_, reject) =>
+        setTimeout(() => {
+          console.error(
+            `[SendMessage] Timeout reached for ${maskData(number)}. Triggering forced reconnect.`
+          );
+          // Force close the socket to trigger a reconnect if Baileys is deadlocked
+          sock.end(
+            new Error(`Send message timeout (${SEND_MESSAGE_TIMEOUT}ms) - Connection stale`)
+          );
+          reject(
+            new Error(
+              `Send message timeout (${SEND_MESSAGE_TIMEOUT}ms) - Connection stale, reconnecting...`
+            )
+          );
+        }, SEND_MESSAGE_TIMEOUT)
+      ),
+    ]);
+    stats.sent += 1;
+    stats.last_sent_message = maskData(message);
+    stats.last_sent_target = maskData(number);
     res.json({ status: 'sent' });
   } catch (e) {
+    stats.failed += 1;
+    stats.last_failed_message = maskData(message);
+    stats.last_failed_target = maskData(number);
+    stats.last_error_reason = e.message || e.toString();
     addLog(`Failed to send message: ${e.message}`, 'error');
     res.status(500).json({ detail: e.toString() });
   }
@@ -335,8 +569,15 @@ app.post('/send_image', async (req, res) => {
       image: { url: url },
       caption: caption,
     });
+    stats.sent += 1;
+    stats.last_sent_message = 'Image';
+    stats.last_sent_target = number;
     res.json({ status: 'sent' });
   } catch (e) {
+    stats.failed += 1;
+    stats.last_failed_message = caption ? `Image: ${maskData(caption)}` : 'Image';
+    stats.last_failed_target = maskData(number);
+    stats.last_error_reason = e.message || e.toString();
     addLog(`Failed to send image: ${e.message}`, 'error');
     res.status(500).json({ detail: e.toString() });
   }
@@ -356,8 +597,15 @@ app.post('/send_poll', async (req, res) => {
         selectableCount: 1, // Single select by default, maybe expose this?
       },
     });
+    stats.sent += 1;
+    stats.last_sent_message = `Poll: ${question}`;
+    stats.last_sent_target = number;
     res.json({ status: 'sent' });
   } catch (e) {
+    stats.failed += 1;
+    stats.last_failed_message = `Poll: ${maskData(question)}`;
+    stats.last_failed_target = maskData(number);
+    stats.last_error_reason = e.message || e.toString();
     addLog(`Failed to send poll: ${e.message}`, 'error');
     res.status(500).json({ detail: e.toString() });
   }
@@ -378,8 +626,15 @@ app.post('/send_location', async (req, res) => {
         address: description,
       },
     });
+    stats.sent += 1;
+    stats.last_sent_message = `Location: ${title || 'Pinned'}`;
+    stats.last_sent_target = number;
     res.json({ status: 'sent' });
   } catch (e) {
+    stats.failed += 1;
+    stats.last_failed_message = `Location: ${maskData(title) || 'Pinned'}`;
+    stats.last_failed_target = maskData(number);
+    stats.last_error_reason = e.message || e.toString();
     addLog(`Failed to send location: ${e.message}`, 'error');
     res.status(500).json({ detail: e.toString() });
   }
@@ -395,22 +650,19 @@ app.post('/send_reaction', async (req, res) => {
     await sock.sendMessage(jid, {
       react: {
         text: reaction, // use empty string to remove reaction
-        key: { id: messageId }, // Assuming remoteJid is implicit if not provided, or better provided?
-        // Baileys needs `remoteJid` in `key` usually?
-        // `sock.sendMessage(jid, { react: { text: "👍", key: { remoteJid: jid, fromMe: false, id: "..." } } })`
+        key: {
+          remoteJid: jid,
+          fromMe: false, // We're reacting to an incoming message
+          id: messageId,
+        },
       },
     });
-    // Note: For a precise reaction, we might need `fromMe` or the full key object.
-    // But Baileys docs say `key` only usually needs `id` if passing to `sendMessage(jid, ...)`
-    // However, it's safer if we knew if it was fromMe or not.
-    // For now, we try with just ID. If it fails, we might need more info from integration (which it doesn't send).
-    // Actually, integration only sends `message_id`.
-
-    // Wait, correct usage is:
-    // await sock.sendMessage(jid, { react: { text: reaction, key: { remoteJid: jid, id: messageId } } })
-
     res.json({ status: 'sent' });
   } catch (e) {
+    stats.failed += 1;
+    stats.last_failed_message = `Reaction: ${maskData(reaction)}`;
+    stats.last_failed_target = maskData(number);
+    stats.last_error_reason = e.message || e.toString();
     addLog(`Failed to send reaction: ${e.message}`, 'error');
     res.status(500).json({ detail: e.toString() });
   }
@@ -431,8 +683,15 @@ app.post('/send_buttons', async (req, res) => {
       buttons: buttons,
       headerType: 1,
     });
+    stats.sent += 1;
+    stats.last_sent_message = `Buttons: ${message}`;
+    stats.last_sent_target = number;
     res.json({ status: 'sent' });
   } catch (e) {
+    stats.failed += 1;
+    stats.last_failed_message = `Buttons: ${maskData(message)}`;
+    stats.last_failed_target = maskData(number);
+    stats.last_error_reason = e.message || e.toString();
     addLog(`Failed to send buttons: ${e.message}`, 'error');
     res.status(500).json({ detail: e.toString() });
   }
@@ -450,6 +709,27 @@ app.post('/set_presence', async (req, res) => {
     res.json({ status: 'sent' });
   } catch (e) {
     addLog(`Failed to set presence: ${e.message}`, 'error');
+    res.status(500).json({ detail: e.toString() });
+  }
+});
+
+// GET /groups
+app.get('/groups', async (req, res) => {
+  if (!isConnected) return res.status(503).json({ detail: 'Not connected' });
+
+  try {
+    if (!sock) throw new Error('Socket not initialized');
+
+    const groups = await sock.groupFetchAllParticipating();
+    const result = Object.values(groups).map((g) => ({
+      id: g.id,
+      name: g.subject,
+      participants: g.participants.length,
+    }));
+
+    res.json(result);
+  } catch (e) {
+    console.error('Failed to fetch groups:', e);
     res.status(500).json({ detail: e.toString() });
   }
 });
@@ -616,4 +896,13 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`WhatsApp API listening on 0.0.0.0:${PORT}`);
   // Log that service is ready for health checks
   console.log('✅ Service ready - Health check available at /health');
+
+  // Auto-start session if credentials exist
+  const credsFile = path.join(AUTH_DIR, 'creds.json');
+  if (fs.existsSync(credsFile)) {
+    console.log('📦 Existing authentication found, auto-starting session...');
+    connectToWhatsApp().catch((err) => {
+      console.error('❌ Failed to auto-start session:', err);
+    });
+  }
 });

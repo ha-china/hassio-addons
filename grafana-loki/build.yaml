@@ -1,10 +1,7 @@
 ---
 build_from:
-  aarch64: "ghcr.nju.edu.cn/home-assistant/aarch64-base:3.22"
-  amd64: "ghcr.nju.edu.cn/home-assistant/amd64-base:3.22"
-codenotary:
-  signer: homeassistant@blmx.de
-  base_image: notary@home-assistant.io
+  aarch64: "ghcr.nju.edu.cn/home-assistant/aarch64-base:3.23"
+  amd64: "ghcr.nju.edu.cn/home-assistant/amd64-base:3.23"
 labels:
   maintainer: "bluemaex <homeassistant@blmx.de>"
   org.opencontainers.image.authors: "bluemaex <homeassistant@blmx.de>"
@@ -13,6 +10,6 @@ labels:
   org.opencontainers.image.url: https://ghfast.top/github.com/bluemaex/home-assistant-addons
   org.opencontainers.image.source: https://ghfast.top/github.com/bluemaex/home-assistant-addons/grafana-loki
   org.opencontainers.image.documentation: https://ghfast.top/github.com/bluemaex/home-assistant-addons/grafana-loki/README.md
-  org.opencontainers.image.created: "2025-06-22T19:55:36Z"
-  org.opencontainers.image.revision: 754f7623ae4f824609b754748028f35786baa5e6
-  org.opencontainers.image.version: 4.0.1
+  org.opencontainers.image.created: "2026-01-24T20:27:44Z"
+  org.opencontainers.image.revision: 4a4efce129d21968c40df7f942bedf6e367d3aa5
+  org.opencontainers.image.version: 5.0.0

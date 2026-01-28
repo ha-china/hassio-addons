@@ -1,5 +1,23 @@
 # Changelog
 
+## rclone 4.0.0 - 2026-01-24
+
+### Changes
+
+#### 🚨 Breaking changes
+
+- Remove unsupported architectures and codenotary @bluemaex (#477)
+
+#### ⬆️ Dependency updates
+
+- ⏫ Update rclone/rclone Docker tag to v1.70.2 @[renovate[bot]](https://github.com/apps/renovate) (#406)
+- ⏫ Update rclone/rclone Docker tag to v1.70.3 @[renovate[bot]](https://github.com/apps/renovate) (#409)
+- ⏫ Update rclone/rclone Docker tag to v1.71.0 @[renovate[bot]](https://github.com/apps/renovate) (#428)
+- ⏫ Update rclone/rclone Docker tag to v1.71.1 @[renovate[bot]](https://github.com/apps/renovate) (#439)
+- ⏫ Update rclone/rclone Docker tag to v1.71.2 @[renovate[bot]](https://github.com/apps/renovate) (#448)
+- ⏫ Update rclone/rclone Docker tag to v1.72.0 @[renovate[bot]](https://github.com/apps/renovate) (#463)
+- ⏫ Update HomeAssistant Add-on base image to v3.23 @[renovate[bot]](https://github.com/apps/renovate) (#468)
+
 ## rclone 3.1.6 - 2025-06-21
 
 ### Changes
