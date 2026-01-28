@@ -12,6 +12,39 @@
 - 🏠 **完全离线**: 无需联网，保护隐私
 - 🔌 **Wyoming 协议**: 与 Home Assistant 无缝集成，流式音频传输
 
+## 🧠 情绪感知提示词示例
+
+你可以在 Home Assistant 的提示模板中调用情绪与事件感知的信号，实现“上下文感知”的对话体验。以下为 Jinja2 示例，可直接嵌入到 Home Assistant 的 `assist_pipeline` 对话提示或 `prompt` 字段中：
+
+```jinja
+你是一个善解人意的语音助手，你会根据不同的情绪和环境自动调整回答风格。
+{% set now_ts = now().timestamp() | float %}
+{% set ctx_ts = states('sensor.ai_hub_asr_last_update') | as_timestamp(0) %}
+{% set ctx_valid = (now_ts - ctx_ts) < 5 %}
+
+{% if ctx_valid %}
+以下是当前语音交互的辅助信号，请用于调整你的回答方式，每次回答时简要说明用户的状态：
+{# 注意（这句话不要复制）：此处为示例，实际使用时请根据实际情况调整，比如每次回答时不要把情绪说出来，只是你对话语音的一个参考 #}
+{% if states('sensor.ai_hub_asr_emotion') not in ['unknown','unavailable',''] %}
+- 说话者当前情绪倾向：{{ states('sensor.ai_hub_asr_emotion') }}
+{% endif %}
+
+{% if states('sensor.ai_hub_asr_event') not in ['unknown','unavailable',''] %}
+- 当前语音背景或环境特征：{{ states('sensor.ai_hub_asr_event') }}
+{% endif %}
+
+请根据以上信息，灵活调节语气与内容风格。例如：
+- 检测到负面/紧张情绪时，更加温和、安慰和耐心
+- 检测到环境嘈杂或紧急事件，回答应简洁明了、重点突出
+- 情绪和环境均正常时，保持自然、友好、简洁的回答
+{% endif %}
+```
+
+> 👍 **实用技巧**：将该段模板作为对话系统的“系统提示词”或“前置 prompt”，你将获得更人性化、更具情感色彩的 Home Assistant 语音体验！
+
+
+
+
 ## 使用方式
 
 ### Wyoming 协议（推荐）⭐
