@@ -1,14 +1,14 @@
 # Home Assistant 的 Ollama 插件
 
-请注意，此插件以 CPU 加速运行或支持实验性的 Nvidia GPU（如果对您有效，请报告！）。对于 ROCm，支持仍在等待中。
+请注意，此插件支持使用 CPU 加速或实验性的 NVIDIA GPU 支持（如果对您有效，请反馈！）。对于 ROCm，支持仍在进行中。
 
 ## 模型目录
 
-默认情况下，所有下载的模型都存储在 `/share/ollama`。出于历史原因，您也可以将其配置为 `/config/ollama`。请确保您有足够的空间可用。
+默认情况下，所有下载的模型都存储在 `/share/ollama`。由于历史原因，您也可以将其配置为 `/config/ollama`。请确保您有足够的空间可用。
 
 ## Ollama 集成
 
-要下载任何模型，请使用 Ollama 的 API 或与 Home Assistant 集成 [Ollama](https://www.home-assistant.io/integrations/ollama/)：
+要下载任何模型，请使用 Ollama 的 API 或集成 Home Assistant 集成 [Ollama](https://www.home-assistant.io/integrations/ollama/)：
 
 [![添加 Ollama 集成](https://my.home-assistant.io/badges/brand.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=ollama)
 
@@ -16,11 +16,11 @@
 
 - URL: `http://76e18fb5-ollama:11434`
 
-如果您想更改模型，请删除集成（不是插件！）并重启集成配置过程。
+如果您想更改模型，请删除集成（不是插件！）并重启集成配置流程。
 
 ## 关于 UI 链接的说明
 
-UI 链接仅用于检查 Ollama API 是否可用。Ollama 的官方镜像中不包含聊天功能。
+UI 链接仅用于检查 Ollama 的 API 是否可用。官方 Ollama 镜像中不包含聊天功能。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

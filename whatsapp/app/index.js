@@ -14,6 +14,27 @@ import path from 'path';
 import crypto from 'crypto';
 import http from 'http';
 
+// --- Log Level ---
+const RAW_LOG_LEVEL = process.env.LOG_LEVEL || 'info';
+const LOG_LEVEL_MAP = {
+  trace: 'trace',
+  debug: 'debug',
+  info: 'info',
+  notice: 'info',
+  warning: 'warn',
+  error: 'error',
+  fatal: 'fatal',
+};
+const LOG_LEVEL = LOG_LEVEL_MAP[RAW_LOG_LEVEL.toLowerCase()] || 'info';
+
+// --- Global Logger ---
+const logger = pino({
+  level: LOG_LEVEL,
+  base: null, // Remove pid/hostname for cleaner logs
+});
+
+logger.info(`📝 Log Level set to: ${LOG_LEVEL} (from: ${RAW_LOG_LEVEL})`);
+
 const app = express();
 app.use(express.json());
 
@@ -27,10 +48,10 @@ const TOKEN_FILE = path.join(DATA_DIR, 'api_token.txt');
 // --- Startup Reset ---
 const SHOULD_RESET = process.env.RESET_SESSION === 'true';
 if (SHOULD_RESET) {
-  console.log('⚠️ RESET_SESSION ENABLED - Clearing authentication data...');
+  logger.warn('⚠️ RESET_SESSION ENABLED - Clearing authentication data...');
   if (fs.existsSync(AUTH_DIR)) {
     fs.rmSync(AUTH_DIR, { recursive: true, force: true });
-    console.log('✅ Authentication directory cleared.');
+    logger.info('✅ Authentication directory cleared.');
   }
 
   // Automatically disable the toggle in Addon Config
@@ -43,7 +64,7 @@ if (SHOULD_RESET) {
 async function disableResetSession() {
   const token = process.env.SUPERVISOR_TOKEN;
   if (!token) {
-    console.debug('No SUPERVISOR_TOKEN found, skipping auto-disable of reset_session.');
+    logger.debug('No SUPERVISOR_TOKEN found, skipping auto-disable of reset_session.');
     return;
   }
 
@@ -68,17 +89,18 @@ async function disableResetSession() {
   return new Promise((resolve) => {
     const req = http.request(options, (res) => {
       if (res.statusCode === 200) {
-        console.log('✅ Successfully disabled reset_session via Supervisor API.');
+        logger.info('✅ Successfully disabled reset_session via Supervisor API.');
       } else {
-        console.error(
-          `❌ Failed to disable reset_session via Supervisor API. Status: ${res.statusCode}`
+        logger.error(
+          { statusCode: res.statusCode },
+          '❌ Failed to disable reset_session via Supervisor API.'
         );
       }
       resolve();
     });
 
     req.on('error', (error) => {
-      console.error('❌ Error calling Supervisor API:', error);
+      logger.error({ error: error.message }, '❌ Error calling Supervisor API');
       resolve();
     });
 
@@ -92,6 +114,45 @@ if (IS_WIN && !fs.existsSync(DATA_DIR)) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
 }
 
+// --- Configuration ---
+const SEND_MESSAGE_TIMEOUT = parseInt(process.env.SEND_MESSAGE_TIMEOUT || '25000', 10);
+const KEEP_ALIVE_INTERVAL = parseInt(process.env.KEEP_ALIVE_INTERVAL || '30000', 10);
+const MASK_SENSITIVE_DATA = process.env.MASK_SENSITIVE_DATA === 'true';
+
+// --- Webhook Configuration ---
+let WEBHOOK_ENABLED = process.env.WEBHOOK_ENABLED === 'true';
+let WEBHOOK_URL = process.env.WEBHOOK_URL || '';
+let WEBHOOK_TOKEN = process.env.WEBHOOK_TOKEN || '';
+const WEBHOOK_CONFIG_FILE = path.join(DATA_DIR, 'webhook.json');
+
+// Load persistent webhook config
+if (fs.existsSync(WEBHOOK_CONFIG_FILE)) {
+  try {
+    const savedConfig = JSON.parse(fs.readFileSync(WEBHOOK_CONFIG_FILE, 'utf8'));
+    if (savedConfig.enabled !== undefined) WEBHOOK_ENABLED = savedConfig.enabled;
+    if (savedConfig.url !== undefined) WEBHOOK_URL = savedConfig.url;
+    if (savedConfig.token !== undefined) WEBHOOK_TOKEN = savedConfig.token;
+    logger.info('📂 Loaded specific webhook configuration from storage.');
+  } catch (e) {
+    logger.error({ error: e.message }, '❌ Failed to load saved webhook config');
+  }
+}
+
+const UI_AUTH_ENABLED = process.env.UI_AUTH_ENABLED === 'true';
+const UI_AUTH_PASSWORD = process.env.UI_AUTH_PASSWORD || '';
+
+logger.info(`⏱️  Send Message Timeout set to: ${SEND_MESSAGE_TIMEOUT} ms`);
+logger.info(`💓 Keep Alive Interval set to: ${KEEP_ALIVE_INTERVAL} ms`);
+logger.info(`🔒 Mask Sensitive Data: ${MASK_SENSITIVE_DATA ? 'ENABLED' : 'DISABLED'}`);
+logger.info(
+  `🔗 Webhook: ${WEBHOOK_ENABLED ? 'ENABLED' : 'DISABLED'} ${WEBHOOK_URL ? `(${WEBHOOK_URL})` : ''}`
+);
+if (UI_AUTH_ENABLED) {
+  logger.info('🔒 UI Authentication: ENABLED');
+} else {
+  logger.info('🔓 UI Authentication: DISABLED');
+}
+
 // --- Authorization Logic ---
 let API_TOKEN = '';
 
@@ -102,56 +163,9 @@ if (fs.existsSync(TOKEN_FILE)) {
   fs.writeFileSync(TOKEN_FILE, API_TOKEN);
 }
 
-console.log('---------------------------------------------------');
-console.log('🔒 Secure API Token generated/loaded:');
-console.log(API_TOKEN);
-console.log('---------------------------------------------------');
-
-// --- Log Level ---
-// Map addon log levels to pino-compatible levels
-const RAW_LOG_LEVEL = process.env.LOG_LEVEL || 'info';
-const LOG_LEVEL_MAP = {
-  trace: 'trace',
-  debug: 'debug',
-  info: 'info',
-  notice: 'info', // pino doesn't have 'notice', map to info
-  warning: 'warn',
-  error: 'error',
-  fatal: 'fatal',
-};
-const LOG_LEVEL = LOG_LEVEL_MAP[RAW_LOG_LEVEL.toLowerCase()] || 'info';
-console.log(`📝 Log Level set to: ${LOG_LEVEL} (from: ${RAW_LOG_LEVEL})`);
-
-// --- Configuration ---
-const SEND_MESSAGE_TIMEOUT = parseInt(process.env.SEND_MESSAGE_TIMEOUT || '25000', 10);
-const KEEP_ALIVE_INTERVAL = parseInt(process.env.KEEP_ALIVE_INTERVAL || '30000', 10);
-const MASK_SENSITIVE_DATA = process.env.MASK_SENSITIVE_DATA === 'true';
-
-console.log(`⏱️  Send Message Timeout set to: ${SEND_MESSAGE_TIMEOUT} ms`);
-console.log(`💓 Keep Alive Interval set to: ${KEEP_ALIVE_INTERVAL} ms`);
-console.log(`🔒 Mask Sensitive Data: ${MASK_SENSITIVE_DATA ? 'ENABLED' : 'DISABLED'}`);
-
-// Ensure auth dir exists
-if (!fs.existsSync(AUTH_DIR)) {
-  fs.mkdirSync(AUTH_DIR, { recursive: true });
-}
-
-// --- Version Check ---
-let BAILEYS_VERSION = 'Unknown';
-try {
-  const pkgPath = path.resolve('node_modules', '@whiskeysockets', 'baileys', 'package.json');
-  if (fs.existsSync(pkgPath)) {
-    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
-    BAILEYS_VERSION = pkg.version;
-  }
-} catch (e) {
-  console.warn('Could not read Baileys version:', e);
-}
-
-let sock;
-let currentQR = null;
-let isConnected = false;
-let eventQueue = []; // Queue for polling events
+logger.info('---------------------------------------------------');
+logger.info(`🔒 Secure API Token loaded (Masked: ${maskData(API_TOKEN)})`);
+logger.info('---------------------------------------------------');
 
 // --- Helper Functions ---
 function getJid(number) {
@@ -178,13 +192,95 @@ function getJid(number) {
   }
 
   // 5. Default to the standard WhatsApp user domain
-  return `${cleanNumber}@s.whatsapp.net`;
+  return number.endsWith('@s.whatsapp.net') || number.endsWith('@g.us')
+    ? number
+    : `${number}@s.whatsapp.net`;
+}
+
+async function triggerWebhook(data) {
+  if (!WEBHOOK_ENABLED || !WEBHOOK_URL) return;
+
+  try {
+    const payload = JSON.stringify(data);
+    const url = new URL(WEBHOOK_URL);
+    const options = {
+      hostname: url.hostname,
+      port: url.port,
+      path: url.pathname + url.search,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload),
+        'X-Webhook-Token': WEBHOOK_TOKEN,
+      },
+    };
+
+    const protocol = url.protocol === 'https:' ? await import('https') : http;
+    const req = protocol.request(options, (res) => {
+      logger.debug({ statusCode: res.statusCode }, '[Webhook] Message forwarded');
+    });
+
+    req.on('error', (e) => {
+      logger.error({ error: e.message }, '[Webhook] Failed to forward message');
+    });
+
+    req.write(payload);
+    req.end();
+  } catch (e) {
+    logger.error({ error: e.message }, '[Webhook] Error during trigger');
+  }
 }
 
 function maskData(str) {
   if (!MASK_SENSITIVE_DATA || !str) return str;
   if (str.length <= 4) return '****';
   return str.substring(0, 3) + '****' + str.substring(str.length - 2);
+}
+
+// --- Global State ---
+let sock;
+let currentQR = null;
+let isConnected = false;
+let eventQueue = []; // Queue for polling events
+let connectionLogs = [];
+const stats = {
+  sent: 0,
+  received: 0,
+  failed: 0,
+  last_sent_message: 'None',
+  last_sent_target: 'None',
+  last_received_message: 'None',
+  last_received_sender: 'None',
+  last_failed_message: 'None',
+  last_failed_target: 'None',
+  last_error_reason: 'None',
+  start_time: Date.now(),
+  my_number: 'Unknown',
+  version: 'Unknown',
+};
+
+function addLog(msg, type = 'info') {
+  const timestamp = new Date().toLocaleTimeString();
+  connectionLogs.unshift({ timestamp, msg, type });
+  if (connectionLogs.length > 50) connectionLogs.pop();
+}
+
+// Ensure auth dir exists
+if (!fs.existsSync(AUTH_DIR)) {
+  fs.mkdirSync(AUTH_DIR, { recursive: true });
+}
+
+// --- Version Check ---
+let BAILEYS_VERSION = 'Unknown';
+try {
+  const pkgPath = path.resolve('node_modules', '@whiskeysockets', 'baileys', 'package.json');
+  if (fs.existsSync(pkgPath)) {
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+    BAILEYS_VERSION = pkg.version;
+    stats.version = BAILEYS_VERSION; // Update stats object with early version info
+  }
+} catch (e) {
+  logger.warn({ error: e.message }, 'Could not read Baileys version');
 }
 
 // --- mDNS / Bonjour ---
@@ -209,60 +305,70 @@ async function publishMDNS(name, attempt = 0) {
 
     service.on('error', (err) => {
       if (err.message.includes('already in use') && attempt < 10) {
-        console.warn(`⚠️ mDNS name "${serviceName}" in use, retrying with incremented name...`);
+        logger.warn({ serviceName }, 'mDNS name in use, retrying with incremented name...');
         instance.destroy();
         publishMDNS(name, attempt + 1);
       } else {
-        console.warn(`⚠️ mDNS advertisement error for "${serviceName}":`, err.message);
+        logger.error({ serviceName, error: err.message }, 'mDNS advertisement error');
         addLog(`mDNS error: ${err.message}`, 'warning');
       }
     });
 
     service.on('up', () => {
-      console.log(
-        `📢 Publishing mDNS service: ${serviceName} (_ha-whatsapp._tcp.local) on port ${PORT}`
-      );
+      logger.info({ serviceName, port: PORT }, '📢 Publishing mDNS service');
     });
   } catch (e) {
-    console.warn('mDNS advertisement failed to initialize:', e);
+    logger.warn({ error: e.message }, 'mDNS advertisement failed to initialize');
   }
 }
 
 const baseMDNSName = process.env.MDNS_NAME || 'WhatsApp Addon';
 publishMDNS(baseMDNSName);
 
-// --- Status & Logs ---
-let connectionLogs = [];
-const stats = {
-  sent: 0,
-  received: 0,
-  failed: 0,
-  last_sent_message: 'None',
-  last_sent_target: 'None',
-  last_received_message: 'None',
-  last_received_sender: 'None',
-  last_failed_message: 'None',
-  last_failed_target: 'None',
-  last_error_reason: 'None',
-  start_time: Date.now(),
-  my_number: 'Unknown',
-  version: 'Unknown',
+// --- Middleware ---
+const ipFilterMiddleware = (req, res, next) => {
+  // If UI Auth is enabled, we allow access from everywhere (protected by password)
+  if (UI_AUTH_ENABLED) return next();
+
+  let ip = req.ip || req.connection.remoteAddress;
+
+  // Normalize IPv6 mapped IPv4 addresses
+  if (ip.startsWith('::ffff:')) {
+    ip = ip.substr(7);
+  }
+
+  // Allow Localhost
+  if (ip === '127.0.0.1' || ip === '::1') return next();
+
+  // Allow Private Networks
+  // 10.0.0.0/8
+  // 172.16.0.0/12
+  // 192.168.0.0/16
+  // fc00::/7 (Unique Local Address IPv6)
+  const isPrivate = /^(10)\.|^(172\.(1[6-9]|2[0-9]|3[0-1]))\.|^(192\.168)\.|^fc[0-9a-f]{2}:/.test(
+    ip
+  );
+
+  if (isPrivate) return next();
+
+  // Allow Docker internal ranges (often 172.x but covered above) or Hassio specific
+  // For standard "Host Network" addons, requests from other containers might appear as public IP or gateway?
+  // But usually Home Assistant Addons on Host Network see the real modification IP.
+
+  addLog(`Blocked external access attempt from ${ip}`, 'warning');
+  logger.warn({ ip }, '[SECURITY] Blocked external access attempt (UI Auth Disabled)');
+  return res
+    .status(403)
+    .send('Forbidden: External access is disabled when UI Authentication is off.');
 };
 
-function addLog(msg, type = 'info') {
-  const timestamp = new Date().toLocaleTimeString();
-  connectionLogs.unshift({ timestamp, msg, type });
-  if (connectionLogs.length > 50) connectionLogs.pop();
-}
-
-// --- Middleware ---
 const authMiddleware = (req, res, next) => {
   const providedToken = req.header('X-Auth-Token');
   if (providedToken !== API_TOKEN) {
-    addLog(`Unauthorized API access attempt from ${req.ip} to ${req.originalUrl}`, 'error');
-    console.warn(`[AUTH] Unauthorized access attempt from ${req.ip} to ${req.originalUrl}`);
-    console.warn(
-      `[AUTH] Token Mismatch - Expected: "${API_TOKEN.substring(0, 5)}...", Received: "${providedToken ? providedToken.substring(0, 5) + '...' : 'None'}"`
+    addLog(`Unauthorized API access attempt from ${req.ip}`, 'error');
+    logger.warn(
+      { ip: req.ip, path: req.originalUrl, tokenProvided: !!providedToken },
+      '[AUTH] Unauthorized access attempt'
     );
     return res.status(401).json({
       error: 'Unauthorized',
@@ -271,6 +377,30 @@ const authMiddleware = (req, res, next) => {
   }
   next();
 };
+
+const uiAuthMiddleware = (req, res, next) => {
+  if (!UI_AUTH_ENABLED) return next();
+
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    res.setHeader('WWW-Authenticate', 'Basic realm="WhatsApp Addon"');
+    return res.status(401).send('Unauthorized');
+  }
+
+  const auth = Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
+  const user = auth[0];
+  const pass = auth[1];
+
+  if (user === 'admin' && pass === UI_AUTH_PASSWORD) {
+    next();
+  } else {
+    res.setHeader('WWW-Authenticate', 'Basic realm="WhatsApp Addon"');
+    return res.status(401).send('Unauthorized');
+  }
+};
+
+// Global IP Filter
+app.use(ipFilterMiddleware);
 
 // Protect API routes exclusively
 app.use('/session', authMiddleware);
@@ -283,8 +413,17 @@ app.use('/send_poll', authMiddleware);
 app.use('/send_location', authMiddleware);
 app.use('/send_reaction', authMiddleware);
 app.use('/send_buttons', authMiddleware);
+app.use('/send_document', authMiddleware);
+app.use('/send_video', authMiddleware);
+app.use('/send_video', authMiddleware);
+app.use('/send_audio', authMiddleware);
+app.use('/send_list', authMiddleware);
+app.use('/send_contact', authMiddleware);
+app.use('/revoke_message', authMiddleware);
+app.use('/edit_message', authMiddleware);
 app.use('/set_presence', authMiddleware);
 app.use('/groups', authMiddleware);
+app.use('/mark_as_read', authMiddleware);
 app.use('/logs', authMiddleware);
 
 // --- Store Initialization ---
@@ -308,8 +447,7 @@ async function connectToWhatsApp() {
 
   sock = makeWASocket({
     auth: state,
-    auth: state,
-    logger: pino({ level: 'warn' }), // Force cleaner logs, use 'warn' instead of global LOG_LEVEL
+    logger: logger.child({ module: 'baileys' }, { level: 'warn' }), // Use child logger, suppress Baileys noise
     browser: Browsers.macOS('Chrome'),
     syncFullHistory: false,
     markOnlineOnConnect: true,
@@ -320,10 +458,10 @@ async function connectToWhatsApp() {
     getMessage: async (key) => {
       // Check our custom store
       if (messageStore.has(key.id)) {
-        console.debug(`[Store] Retrieving message ${key.id} from store`);
+        logger.debug({ msgId: key.id }, '[Store] Retrieving message from store');
         return messageStore.get(key.id).message;
       }
-      console.debug(`[Store] Message ${key.id} not found in store`);
+      logger.debug({ msgId: key.id }, '[Store] Message not found in store');
       return undefined;
     },
   });
@@ -337,7 +475,7 @@ async function connectToWhatsApp() {
     const { connection, lastDisconnect, qr } = update;
 
     if (qr) {
-      console.log('QR Code received');
+      logger.info('QR Code received');
       addLog('QR Code generated. Waiting for scan...', 'success');
       currentQR = await QRCode.toDataURL(qr);
     }
@@ -345,15 +483,10 @@ async function connectToWhatsApp() {
     if (connection === 'close') {
       const shouldReconnect =
         lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut;
-      const reason = lastDisconnect.error ? lastDisconnect.error.toString() : 'Unknown';
+      const reason = lastDisconnect.error?.message || lastDisconnect.error?.toString() || 'Unknown';
       addLog(`Connection closed: ${reason}`, 'warning');
 
-      console.log(
-        'Connection closed due to ',
-        lastDisconnect.error,
-        ', reconnecting ',
-        shouldReconnect
-      );
+      logger.warn({ reason, shouldReconnect }, 'Connection closed');
       isConnected = false;
 
       if (shouldReconnect) {
@@ -361,10 +494,10 @@ async function connectToWhatsApp() {
         setTimeout(connectToWhatsApp, 1000);
       } else {
         addLog('Session logged out. Clean up metadata required.', 'error');
-        console.log('Logged out. Please delete /data/auth_info_baileys to re-pair.');
+        logger.error('Logged out. Please delete /data/auth_info_baileys to re-pair.');
       }
     } else if (connection === 'open') {
-      console.log('Opened connection');
+      logger.info('WhatsApp connection opened');
       addLog('WhatsApp Connection Established! 🟢', 'success');
       isConnected = true;
       currentQR = null;
@@ -408,6 +541,36 @@ async function connectToWhatsApp() {
           };
         });
       eventQueue.push(...events);
+
+      // --- Webhook Integration ---
+      for (const event of events) {
+        triggerWebhook(event);
+
+        // --- Native Command Handling ---
+        if (event.content && typeof event.content === 'string' && event.content.startsWith('/')) {
+          const body = event.content.trim();
+          const sender = event.sender;
+
+          try {
+            if (body === '/ping') {
+              await sock.sendMessage(sender, { text: 'Pong! 🏓' });
+              addLog(`Processed command /ping from ${maskData(sender)}`, 'info');
+            } else if (body === '/id') {
+              await sock.sendMessage(sender, { text: `Chat ID: \`${sender}\`` });
+              addLog(`Processed command /id from ${maskData(sender)}`, 'info');
+            } else if (body === '/restart') {
+              await sock.sendMessage(sender, { text: '🔄 Restarting WhatsApp connection...' });
+              addLog(`Processed command /restart from ${maskData(sender)}`, 'warning');
+              // Graceful restart
+              setTimeout(() => {
+                sock.end(new Error('User requested restart'));
+              }, 1000);
+            }
+          } catch (cmdErr) {
+            logger.error({ error: cmdErr.message }, 'Failed to process native command');
+          }
+        }
+      }
     }
   });
 }
@@ -434,14 +597,14 @@ app.post('/session/start', (req, res) => {
 // DELETE /session
 app.delete('/session', async (req, res) => {
   addLog('Received Logout/Reset request', 'warning');
-  console.log('Received DELETE /session request (Logout)');
+  logger.info('Received DELETE /session request (Logout)');
   try {
     if (sock) {
       // Baileys logout can sometimes hang if connection is bad
       await Promise.race([
         sock.logout(),
         new Promise((_, reject) => setTimeout(() => reject(new Error('Logout timeout')), 5000)),
-      ]).catch((e) => console.warn('Logout failed or timed out:', e.message));
+      ]).catch((e) => logger.warn({ error: e.message }, 'Logout failed or timed out'));
 
       sock.end(undefined);
       sock = undefined;
@@ -458,7 +621,7 @@ app.delete('/session', async (req, res) => {
     res.json({ status: 'success', message: 'Session deleted and logged out' });
   } catch (e) {
     addLog(`Logout failed: ${e.toString()}`, 'error');
-    console.error('Error during session delete:', e);
+    logger.error({ error: e.message }, 'Error during session delete');
     res.status(500).json({ error: e.toString() });
   }
 });
@@ -508,13 +671,10 @@ app.post('/send_message', async (req, res) => {
 
   try {
     const jid = getJid(number);
-    console.debug(
-      `[SendMessage] Input: ${maskData(number)} -> JID: ${maskData(jid)}. Socket state: ${sock ? 'exists' : 'null'}, Connected: ${isConnected}`
+    logger.debug(
+      { input: maskData(number), jid: maskData(jid), socketExists: !!sock, isConnected },
+      '[SendMessage] Processing request'
     );
-
-    if (!sock) {
-      throw new Error('Socket not initialized');
-    }
 
     if (!sock) {
       throw new Error('Socket not initialized');
@@ -528,8 +688,9 @@ app.post('/send_message', async (req, res) => {
       sock.sendMessage(jid, { text: message }),
       new Promise((_, reject) =>
         setTimeout(() => {
-          console.error(
-            `[SendMessage] Timeout reached for ${maskData(number)}. Triggering forced reconnect.`
+          logger.error(
+            { target: maskData(number) },
+            'Send message timeout reached. Triggering forced reconnect.'
           );
           // Force close the socket to trigger a reconnect if Baileys is deadlocked
           sock.end(
@@ -697,6 +858,151 @@ app.post('/send_buttons', async (req, res) => {
   }
 });
 
+// POST /send_document
+app.post('/send_document', async (req, res) => {
+  const { number, url, fileName, caption } = req.body;
+  if (!isConnected) return res.status(503).json({ detail: 'Not connected' });
+
+  try {
+    const jid = getJid(number);
+    await sock.sendMessage(jid, {
+      document: { url: url },
+      fileName: fileName,
+      caption: caption,
+      mimetype: 'application/octet-stream',
+    });
+    stats.sent += 1;
+    stats.last_sent_message = `Document: ${fileName || 'unnamed'}`;
+    stats.last_sent_target = number;
+    res.json({ status: 'sent' });
+  } catch (e) {
+    stats.failed += 1;
+    stats.last_failed_message = `Document: ${maskData(fileName) || 'unnamed'}`;
+    stats.last_failed_target = maskData(number);
+    stats.last_error_reason = e.message || e.toString();
+    addLog(`Failed to send document: ${e.message}`, 'error');
+    res.status(500).json({ detail: e.toString() });
+  }
+});
+
+// POST /send_video
+app.post('/send_video', async (req, res) => {
+  const { number, url, caption } = req.body;
+  if (!isConnected) return res.status(503).json({ detail: 'Not connected' });
+
+  try {
+    const jid = getJid(number);
+    await sock.sendMessage(jid, {
+      video: { url: url },
+      caption: caption,
+    });
+    stats.sent += 1;
+    stats.last_sent_message = caption ? `Video: ${maskData(caption)}` : 'Video';
+    stats.last_sent_target = number;
+    res.json({ status: 'sent' });
+  } catch (e) {
+    stats.failed += 1;
+    stats.last_failed_message = caption ? `Video: ${maskData(caption)}` : 'Video';
+    stats.last_failed_target = maskData(number);
+    stats.last_error_reason = e.message || e.toString();
+    addLog(`Failed to send video: ${e.message}`, 'error');
+    res.status(500).json({ detail: e.toString() });
+  }
+});
+
+// POST /send_audio
+app.post('/send_audio', async (req, res) => {
+  const { number, url, ptt } = req.body;
+  if (!isConnected) return res.status(503).json({ detail: 'Not connected' });
+
+  try {
+    const jid = getJid(number);
+    await sock.sendMessage(jid, {
+      audio: { url: url },
+      ptt: !!ptt,
+      mimetype: 'audio/mp4',
+    });
+    stats.sent += 1;
+    stats.last_sent_message = ptt ? 'Voice Note' : 'Audio';
+    stats.last_sent_target = number;
+    res.json({ status: 'sent' });
+  } catch (e) {
+    stats.failed += 1;
+    stats.last_failed_message = ptt ? 'Voice Note' : 'Audio';
+    stats.last_failed_target = maskData(number);
+    stats.last_error_reason = e.message || e.toString();
+    addLog(`Failed to send audio: ${e.message}`, 'error');
+    res.status(500).json({ detail: e.toString() });
+  }
+});
+
+// POST /revoke_message
+app.post('/revoke_message', async (req, res) => {
+  const { number, message_id } = req.body;
+  if (!isConnected) return res.status(503).json({ detail: 'Not connected' });
+
+  try {
+    const jid = getJid(number);
+    // Deleting for everyone requires the key including remoteJid, id, and fromMe=true (usually)
+    // However, Baileys usually handles this if we pass the key structure.
+    // For sending a delete, we need to send a protocol message.
+    // sock.sendMessage(jid, { delete: key })
+
+    // We assume we are deleting our OWN message, so fromMe is true.
+    const key = {
+      remoteJid: jid,
+      fromMe: true,
+      id: message_id,
+    };
+
+    await sock.sendMessage(jid, { delete: key });
+
+    stats.sent += 1;
+    stats.last_sent_message = `Revoke: ${message_id}`;
+    stats.last_sent_target = number;
+    res.json({ status: 'sent' });
+  } catch (e) {
+    stats.failed += 1;
+    stats.last_failed_message = `Revoke: ${message_id}`;
+    stats.last_failed_target = maskData(number);
+    stats.last_error_reason = e.message || e.toString();
+    addLog(`Failed to revoke message: ${e.message}`, 'error');
+    res.status(500).json({ detail: e.toString() });
+  }
+});
+
+// POST /edit_message
+app.post('/edit_message', async (req, res) => {
+  const { number, message_id, new_content } = req.body;
+  if (!isConnected) return res.status(503).json({ detail: 'Not connected' });
+
+  try {
+    const jid = getJid(number);
+    const key = {
+      remoteJid: jid,
+      fromMe: true,
+      id: message_id,
+    };
+
+    await sock.sendMessage(jid, {
+      text: new_content,
+      edit: key,
+    });
+
+    stats.sent += 1;
+    stats.last_sent_message = `Edit: ${message_id}`;
+    stats.last_sent_target = number;
+    res.json({ status: 'sent' });
+  } catch (e) {
+    stats.failed += 1;
+    stats.last_failed_message = `Edit: ${message_id}`;
+    stats.last_failed_target = maskData(number);
+    stats.last_error_reason = e.message || e.toString();
+    addLog(`Failed to edit message: ${e.message}`, 'error');
+    res.status(500).json({ detail: e.toString() });
+  }
+});
+
 // POST /set_presence
 app.post('/set_presence', async (req, res) => {
   const { number, presence } = req.body;
@@ -729,7 +1035,28 @@ app.get('/groups', async (req, res) => {
 
     res.json(result);
   } catch (e) {
-    console.error('Failed to fetch groups:', e);
+    logger.error({ error: e.message }, 'Failed to fetch groups');
+    res.status(500).json({ detail: e.toString() });
+  }
+});
+
+// POST /mark_as_read
+app.post('/mark_as_read', async (req, res) => {
+  const { number, messageId } = req.body;
+  if (!isConnected) return res.status(503).json({ detail: 'Not connected' });
+
+  try {
+    const jid = getJid(number);
+    await sock.readMessages([
+      {
+        remoteJid: jid,
+        id: messageId,
+        fromMe: false, // Mark incoming messages
+      },
+    ]);
+    res.json({ status: 'success' });
+  } catch (e) {
+    addLog(`Failed to mark read: ${e.message}`, 'error');
     res.status(500).json({ detail: e.toString() });
   }
 });
@@ -741,7 +1068,7 @@ app.get('/health', (req, res) => {
 
 // --- Dashboard (Server-Side Rendered) ---
 // Root endpoint (/) is handled by the catch-all below
-app.get(/(.*)/, (req, res) => {
+app.get(/(.*)/, uiAuthMiddleware, (req, res) => {
   if (
     req.path.startsWith('/api') ||
     req.path === '/qr' ||
@@ -877,7 +1204,7 @@ app.get(/(.*)/, (req, res) => {
             </script>
 
             <div class="footer">
-                Addon v0.3.0 • Node.js ${process.version} • Baileys v${BAILEYS_VERSION}
+                Addon v${process.env.ADDON_VERSION || '1.0.3'} • Node.js ${process.version} • Baileys v${BAILEYS_VERSION}
             </div>
 
             <div class="refresh-hint">
@@ -889,20 +1216,114 @@ app.get(/(.*)/, (req, res) => {
     `);
 });
 
+// POST /settings/webhook
+app.post('/settings/webhook', authMiddleware, (req, res) => {
+  const { url, enabled, token } = req.body;
+
+  if (enabled !== undefined) WEBHOOK_ENABLED = Boolean(enabled);
+  if (url !== undefined) WEBHOOK_URL = url;
+  if (token !== undefined) WEBHOOK_TOKEN = token;
+
+  const configToSave = {
+    enabled: WEBHOOK_ENABLED,
+    url: WEBHOOK_URL,
+    token: WEBHOOK_TOKEN,
+  };
+
+  try {
+    fs.writeFileSync(WEBHOOK_CONFIG_FILE, JSON.stringify(configToSave, null, 2));
+    logger.info('💾 Webhook configuration updated and saved.');
+    addLog('Webhook configuration updated', 'info');
+    res.json({ status: 'success', config: configToSave });
+  } catch (e) {
+    logger.error({ error: e.message }, '❌ Failed to save webhook config');
+    res.status(500).json({ error: 'Failed to save configuration' });
+  }
+});
+
+// POST /send_list
+app.post('/send_list', async (req, res) => {
+  const { number, title, text, button_text, sections } = req.body;
+  if (!isConnected) return res.status(503).json({ detail: 'Not connected' });
+
+  try {
+    const jid = getJid(number);
+
+    // Construct List Message
+    // Note: 'sections' must be an array of objects { title, rows: [ { title, rowId, description? } ] }
+    await sock.sendMessage(jid, {
+      text: text || title || 'Menu', // Required content
+      footer: title ? text : undefined, // WhatsApp UI quirk logic
+      title: title,
+      buttonText: button_text || 'Menu',
+      sections: sections,
+    });
+
+    stats.sent += 1;
+    stats.last_sent_message = `List: ${title || text}`;
+    stats.last_sent_target = number;
+    res.json({ status: 'sent' });
+  } catch (e) {
+    stats.failed += 1;
+    stats.last_failed_message = `List: ${title || text}`;
+    stats.last_failed_target = maskData(number);
+    stats.last_error_reason = e.message || e.toString();
+    addLog(`Failed to send list: ${e.message}`, 'error');
+    res.status(500).json({ detail: e.toString() });
+  }
+});
+
+// POST /send_contact
+app.post('/send_contact', async (req, res) => {
+  const { number, contact_name, contact_number } = req.body;
+  if (!isConnected) return res.status(503).json({ detail: 'Not connected' });
+
+  try {
+    const jid = getJid(number);
+
+    // Construct VCard v3.0
+    const vcard =
+      'BEGIN:VCARD\n' + // metadata of the contact card
+      'VERSION:3.0\n' +
+      `FN:${contact_name}\n` + // full name
+      `ORG:Home Assistant;\n` + // organization (optional)
+      `TEL;type=CELL;type=VOICE;waid=${contact_number}:${contact_number}\n` + // WhatsApp ID and number
+      'END:VCARD';
+
+    await sock.sendMessage(jid, {
+      contacts: {
+        displayName: contact_name,
+        contacts: [{ vcard }],
+      },
+    });
+
+    stats.sent += 1;
+    stats.last_sent_message = `Contact: ${contact_name}`;
+    stats.last_sent_target = number;
+    res.json({ status: 'sent' });
+  } catch (e) {
+    stats.failed += 1;
+    stats.last_failed_message = `Contact: ${contact_name}`;
+    stats.last_failed_target = maskData(number);
+    stats.last_error_reason = e.message || e.toString();
+    addLog(`Failed to send contact: ${e.message}`, 'error');
+    res.status(500).json({ detail: e.toString() });
+  }
+});
+
 // Listen on all interfaces in the container (0.0.0.0)
 // This is safe because each addon runs in its own isolated Docker container
 // Ports are isolated by Docker's network namespace, so no conflicts between addons
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`WhatsApp API listening on 0.0.0.0:${PORT}`);
-  // Log that service is ready for health checks
-  console.log('✅ Service ready - Health check available at /health');
+  logger.info({ port: PORT }, 'WhatsApp API listening');
+  logger.info('✅ Service ready - Health check available at /health');
 
   // Auto-start session if credentials exist
   const credsFile = path.join(AUTH_DIR, 'creds.json');
   if (fs.existsSync(credsFile)) {
-    console.log('📦 Existing authentication found, auto-starting session...');
+    logger.info('📦 Existing authentication found, auto-starting session...');
     connectToWhatsApp().catch((err) => {
-      console.error('❌ Failed to auto-start session:', err);
+      logger.error({ error: err.message }, '❌ Failed to auto-start session');
     });
   }
 });
