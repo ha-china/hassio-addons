@@ -4,11 +4,11 @@
     "aarch64"
   ],
   "boot": "auto",
-  "description": "null",
+  "description": "[老王杂谈说]：null",
   "environment": {},
   "map": [],
   "image": "ghcr.nju.edu.cn/gchq/cyberchef",
-  "version": "10.19.4",
+  "version": "10.20.0",
   "name": "CyberChef",
   "options": {},
   "ports": {
@@ -20,7 +20,7 @@
   "schema": {},
   "slug": "cyberchef",
   "startup": "services",
-  "upstream": "10.19.4",
+  "upstream": "10.20.0",
   "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8081]",
   "panel_admin": false,

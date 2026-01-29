@@ -2,16 +2,16 @@
 
 ![Logo](logo.png)
 
-[![打开您的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_whatsapp)
-[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker 镜像](https://img.shields.io/badge/docker-1.0.5-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-whatsapp)
-![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_whatsapp)
+[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker Image](https://img.shields.io/badge/docker-1.1.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-whatsapp)
+![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> Home Assistant WhatsApp 后端 (Baileys/Node.js)。使用主机网络 (端口 8066 无法更改)。
+> Home Assistant WhatsApp Backend (Baileys/Node.js). Uses Host Network (Port 8066 cannot be changed).
 
 ---
 
-## 📖 关于
+## 📖 About
 
 <a href="https://github.com/FaserF/ha-whatsapp">
 </a>
@@ -19,46 +19,46 @@
 <a href="https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_whatsapp" target="_blank">
 </a>
 
-> Home Assistant WhatsApp 后端 (Baileys/Node.js)。使用主机网络 (端口 8066 无法更改)。
+> Home Assistant WhatsApp Backend (Baileys/Node.js). Uses Host Network (Port 8066 cannot be changed).
 
-如果您在使用此附加组件时遇到任何问题，请使用下面的链接进行报告。问题表单将预填充附加组件信息，以帮助我们更快地解决问题。
+If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
 
-如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填充附加组件信息。
+If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
 
-## 🐛 报告错误
+## 🐛 Report a Bug
 
-如果您在使用此附加组件时遇到任何问题，请使用下面的链接进行报告。问题表单将预填充附加组件信息，以帮助我们更快地解决问题。
+If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
 
-**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.3.0&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
+**[Report a Bug](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.3.0&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
 
 > [!TIP]
-> **自动发现：** 此附加组件默认使用 `host_network: true`，通过 mDNS 在 Home Assistant 中启用 **"发现新设备"** 通知。这简化了设置过程，因为 HA 会自动找到该附加组件。
+> **Auto-Discovery:** This add-on uses `host_network: true` by default to enable **"New devices found"** notifications in Home Assistant via mDNS. This simplifies the setup process as HA will find the add-on automatically.
 
-## 💡 功能请求
+## 💡 Feature Request
 
-如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填充附加组件信息。
+If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
 
-**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=whatsapp)**
+**[Request a Feature](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=whatsapp)**
 
 > [!NOTE]
-> 请使用上面的链接请求功能。这确保附加组件名称会自动包含在您的功能请求中。
+> Please use the link above to request features. This ensures that the add-on name is automatically included in your feature request.
 
-本项目是开源的，可在 MIT 许可证下使用。
-由 **FaserF** 维护。
+This project is open-source and available under the MIT License.
+Maintained by **FaserF**.
 
-## 🛠️ 使用与集成
+## 🛠️ Usage & Integration
 
-要实际发送消息并自动化 WhatsApp，您需要 Home Assistant 的 **WhatsApp 自定义集成**。
+To actually send messages and automate WhatsApp, you need the **WhatsApp Custom Integration** for Home Assistant.
 
-- **[官方文档与示例](https://faserf.github.io/ha-whatsapp/)**：关于如何使用 `notify` 服务、发送按钮、投票、图片以及创建机器人自动化的综合指南。
+- **[Official Documentation & Examples](https://faserf.github.io/ha-whatsapp/)**: Comprehensive guide on how to use the `notify` service, send buttons, polls, images, and creating bot automations.
 
 ---
 
-## ⚙️ 配置
+## ⚙️ Configuration
 
-通过 Home Assistant 附加组件页面上的 **Configuration** (配置) 标签页来配置附加组件。
+Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
 
-### 选项
+### Options
 
 ```yaml
 keep_alive_interval: 30000
@@ -75,10 +75,11 @@ webhook_url: ''
 
 ---
 
-## 👨‍💻 致谢与许可
+## 👨‍💻 Credits & License
 
-本项目是开源的，可在 MIT 许可证下使用。
-由 **FaserF** 维护。
+This project is open-source and available under the MIT License.
+Maintained by **FaserF**.
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
