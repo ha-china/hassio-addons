@@ -1,10 +1,10 @@
 # Tiny Tiny RSS
 
-![Logo](logo.png)
+<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/tt-rss/logo.png" width="100" />
 
 [![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_tt-rss)
 [![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker Image](https://img.shields.io/badge/docker-1.1.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-tt-rss)
+[![Docker Image](https://img.shields.io/badge/docker-1.2.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-tt-rss)
 ![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > A web-based news feed (RSS/Atom) reader and aggregator
@@ -13,26 +13,26 @@
 
 ## 📖 About
 
-Tiny Tiny RSS 是一个免费且开源的基于网络的新闻订阅（RSS/Atom）阅读器和聚合器。
+Tiny Tiny RSS is a free and open-source web-based news feed (RSS/Atom) reader and aggregator.
 
-这个插件提供了一个自托管的 Tiny Tiny RSS (TT-RSS) 实例。它被设计为轻量级且快速，使用 Alpine Linux、Nginx 和 PHP 8.3。
+This add-on provides a self-hosted instance of Tiny Tiny RSS (TT-RSS). It is designed to be lightweight and fast, using Alpine Linux, Nginx, and PHP 8.3.
 
-**注意:** 这个插件需要一个数据库。你应该配置它以连接到 MariaDB 或 PostgreSQL 实例（可以是另一个插件或外部实例）。
+**Note:** This add-on requires a database. You should configure it to connect to a MariaDB or PostgreSQL instance (either another add-on or external).
 
-## 安装
+## Installation
 
-1. 在 Home Assistant 插件商店中搜索 "Tiny Tiny RSS"。
-2. 安装插件。
-3. 配置数据库连接设置（见下文配置）。
-4. 启动插件。
+1. Search for "Tiny Tiny RSS" in the Home Assistant Add-on Store.
+2. Install the add-on.
+3. Configure the database connection settings (see Configuration below).
+4. Start the add-on.
 
 ---
 
-## ⚙️ 配置
+## ⚙️ Configuration
 
-通过 Home Assistant 插件页面中的 **配置** 选项卡配置插件。
+Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
 
-### 选项
+### Options
 
 ```yaml
 certfile: fullchain.pem
@@ -44,10 +44,11 @@ ssl: false
 
 ---
 
-## 👨‍💻 致谢 & 许可证
+## 👨‍💻 Credits & License
 
-本项目是开源的，并在 MIT 许可下提供。
-由 **FaserF** 维护。
+This project is open-source and available under the MIT License.
+Maintained by **FaserF**.
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

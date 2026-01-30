@@ -1,7 +1,7 @@
 name: Example
-version: 13.0.0
+version: 13.0.1
 slug: example
-description: '[老王杂谈说]：Home Assistant 社区应用提供的示例应用'
+description: '[老王杂谈说]：null'
 url: https://ghfast.top/github.com/hassio-addons/app-example
 init: false
 arch:

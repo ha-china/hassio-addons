@@ -1,24 +1,33 @@
-# Home Assistant App (插件): Cloudflared
+# Home Assistant App (Add-on): Cloudflared
 
-[![GitHub 发布][releases-shield]][releases]
-![项目阶段][project-stage-shield]
-![项目维护][maintenance-shield]
-![已报告的安装][installations-shield-stable]
+[![GitHub Release][releases-shield]][releases]
+![Project Stage][project-stage-shield]
+![Project Maintenance][maintenance-shield]
+![Reported Installations][installations-shield-stable]
 
-使用 Cloudflared 无需打开任何端口，即可远程连接到您的 Home Assistant 实例。
+Connect remotely to your Home Assistant instance without opening any ports using
+Cloudflared.
 
-## 关于
+## About
 
-Cloudflared 通过安全的隧道连接您的 Home Assistant 实例到 Cloudflare 的域名或子域名。这样做，您可以在不打开路由器端口的情况下将 Home Assistant 暴露给互联网。此外，您还可以利用 Cloudflare Teams 及其零信任平台来进一步保护您的 Home Assistant 连接。
+Cloudflared connects your Home Assistant Instance via a secure tunnel to a domain
+or subdomain at Cloudflare. Doing that, you can expose your Home Assistant to the
+Internet without opening ports in your router. Additionally, you can utilize
+Cloudflare Teams, their Zero Trust platform to further secure your Home Assistant
+connection.
 
-**要使用此应用（插件），您必须拥有一个使用 Cloudflare 进行其 DNS 条目的域名（例如 example.com）。您可以在我们的 [Wiki][wiki] 中找到更多相关信息**。
+**To use this app (add-on), you have to own a domain name (e.g. example.com) that is
+using Cloudflare for its DNS entries. You can find more information about that
+in our [Wiki][wiki]**.
 
-## 免责声明
+## Disclaimer
 
-在使用此应用（插件）时，请确保遵守 [Cloudflare 自服务订阅协议][cloudflare-sssa]。
+Please make sure to be compliant with the
+[Cloudflare Self-Serve Subscription Agreement][cloudflare-sssa] when using this
+app (add-on).
 
 [cloudflare-sssa]: https://www.cloudflare.com/terms/
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
 [releases-shield]: https://img.shields.io/github/v/release/homeassistant-apps/app-cloudflared?include_prereleases
 [releases]: https://github.com/homeassistant-apps/app-cloudflared/releases

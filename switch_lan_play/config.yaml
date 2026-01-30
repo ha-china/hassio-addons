@@ -1,8 +1,8 @@
 ---
 name: Switch LAN Play Client
-version: 2.2.1
+version: 2.3.0
 slug: switch-lan-play
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：任天堂 Switch 局域网联机 - 客户端'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/switch_lan_play
 arch:
   - amd64
@@ -17,5 +17,5 @@ options:
   log_level: info
 schema:
   server: str
-  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
 ports: {}

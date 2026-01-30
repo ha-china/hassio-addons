@@ -1,50 +1,50 @@
 # Solumati
 
-![Logo](logo.png)
+<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/solumati/logo.png" width="100" />
 
-[![在您的 Home Assistant 实例中打开 Home Assistant 添加项仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_solumati)
-[![Home Assistant 添加项](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker 镜像](https://img.shields.io/badge/docker-2.2.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-solumati)
-![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_solumati)
+[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker Image](https://img.shields.io/badge/docker-2.3.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-solumati)
+![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 反滑动革命 - 专注于有意义匹配的自托管约会平台。
-
----
-
-## 📖 关于
-
-如果您遇到此添加项的任何问题，请使用下面的链接报告它们。问题表单将预填入添加项信息，以帮助我们更快地解决问题。
-
-如果您有新功能或改进的建议，请使用下面的链接提交功能请求。表单将预填入添加项信息。
-
-## 🐛 报告错误
-
-如果您遇到此添加项的任何问题，请使用下面的链接报告它们。问题表单将预填入添加项信息，以帮助我们更快地解决问题。
-
-**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=2.0.0&log_information=请在此处粘贴添加项日志输出：%0A%0A)**
-
-> [!NOTE]
-> 请使用上面的链接报告问题。这确保了所有必要信息（添加项名称、版本等）会自动包含在您的错误报告中。
-
-## 💡 功能请求
-
-如果您有新功能或改进的建议，请使用下面的链接提交功能请求。表单将预填入添加项信息。
-
-**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=solumati)**
-
-> [!NOTE]
-> 请使用上面的链接请求功能。这确保了添加项名称会自动包含在您的功能请求中。
-
-此项目是开源的，并在 MIT 许可下提供。
-由 **FaserF** 维护。
+> The Anti-Swipe Revolution - Self-hosted dating platform focused on meaningful matches.
 
 ---
 
-## ⚙️ 配置
+## 📖 About
 
-通过 Home Assistant 添加项页面中的 **配置** 选项卡配置添加项。
+If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
 
-### 选项
+If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
+
+## 🐛 Report a Bug
+
+If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
+
+**[Report a Bug](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=2.0.0&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
+
+> [!NOTE]
+> Please use the link above to report problems. This ensures that all necessary information (add-on name, version, etc.) is automatically included in your bug report.
+
+## 💡 Feature Request
+
+If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
+
+**[Request a Feature](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=solumati)**
+
+> [!NOTE]
+> Please use the link above to request features. This ensures that the add-on name is automatically included in your feature request.
+
+This project is open-source and available under the MIT License.
+Maintained by **FaserF**.
+
+---
+
+## ⚙️ Configuration
+
+Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
+
+### Options
 
 ```yaml
 app_base_url: ''
@@ -58,28 +58,7 @@ test_mode: false
 
 ---
 
-## 👨‍💻 致谢与许可证
+## 👨‍💻 Credits & License
 
-此项目是开源的，并在 MIT 许可下提供。
-由 **FaserF** 维护。
----
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
----
-
-## 📱 关注我
-
-扫描下面二维码，关注我。有需要可以随时给我留言：
-
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
-
-## ☕ 赞助支持
-
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
-
-感谢您的支持与鼓励！
+This project is open-source and available under the MIT License.
+Maintained by **FaserF**.

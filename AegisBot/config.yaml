@@ -1,9 +1,9 @@
 ---
 name: AegisBot
-version: "0.4.1"
+version: "0.5.0"
 slug: aegisbot
 image: ghcr.nju.edu.cn/faserf/hassio-addons-aegisbot-{arch}
-description: '[老王杂谈说]：适用于生产的Telegram管理机器人，具有AI驱动的FAQ和安全功能'
+description: '[老王杂谈说]：生产就绪的 Telegram 监管机器人，具备 AI 驱动的常见问题解答和安全功能。'
 url: https://ghfast.top/github.com/FaserF/AegisBot
 arch:
   - aarch64
@@ -40,7 +40,7 @@ schema:
   developer_mode: bool
   reset_database: bool
   reset_database_confirm: bool?
-  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
   database:
     type: list(sqlite|postgresql)
     postgresql_host: str?

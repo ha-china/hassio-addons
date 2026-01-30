@@ -142,6 +142,7 @@ if (fs.existsSync(WEBHOOK_CONFIG_FILE)) {
 
 const UI_AUTH_ENABLED = process.env.UI_AUTH_ENABLED === 'true';
 const UI_AUTH_PASSWORD = process.env.UI_AUTH_PASSWORD || '';
+const MARK_ONLINE = process.env.MARK_ONLINE === 'true';
 
 logger.info(`⏱️  Send Message Timeout set to: ${SEND_MESSAGE_TIMEOUT} ms`);
 logger.info(`💓 Keep Alive Interval set to: ${KEEP_ALIVE_INTERVAL} ms`);
@@ -149,6 +150,8 @@ logger.info(`🔒 Mask Sensitive Data: ${MASK_SENSITIVE_DATA ? 'ENABLED' : 'DISA
 logger.info(
   `🔗 Webhook: ${WEBHOOK_ENABLED ? 'ENABLED' : 'DISABLED'} ${WEBHOOK_URL ? `(${WEBHOOK_URL})` : ''}`
 );
+logger.info(`🌐 Mark Online on Connect: ${MARK_ONLINE ? 'ENABLED' : 'DISABLED'}`);
+
 if (UI_AUTH_ENABLED) {
   logger.info('🔒 UI Authentication: ENABLED');
 } else {
@@ -482,7 +485,8 @@ async function connectToWhatsApp() {
     logger: logger.child({ module: 'baileys' }, { level: 'warn' }), // Use child logger, suppress Baileys noise
     browser: Browsers.macOS('Chrome'),
     syncFullHistory: false,
-    markOnlineOnConnect: true,
+    markOnlineOnConnect: MARK_ONLINE,
+
     keepAliveIntervalMs: KEEP_ALIVE_INTERVAL,
     connectTimeoutMs: 60000,
     defaultQueryTimeoutMs: 60000,
@@ -557,8 +561,19 @@ async function connectToWhatsApp() {
             msg.message?.templateButtonReplyMessage?.selectedId ||
             '';
 
-          const senderJid = msg.key.remoteJid;
-          const senderNumber = senderJid.split('@')[0];
+          // Check for alternative JID (useful when primary is LID but we want Phone JID)
+          const remoteJidAlt = msg.key.remoteJidAlt;
+
+          if (
+            senderJid.endsWith('@lid') &&
+            remoteJidAlt &&
+            remoteJidAlt.endsWith('@s.whatsapp.net')
+          ) {
+            // Swap them: Use Phone JID as primary sender for HA compatibility
+            senderJid = remoteJidAlt;
+          }
+
+          let senderNumber = senderJid.split('@')[0];
           const isGroup = senderJid.endsWith('@g.us');
 
           // Check for media
@@ -605,10 +620,6 @@ async function connectToWhatsApp() {
                 mediaPath = savePath;
 
                 // Construct accessible URL
-                // Note: This relies on the container's hostname/IP visible to HA
-                // Since we don't know our own external IP easily, we provide a relative path
-                // that HA can reconstruct if they know the addon address or use the absolute path if mapped.
-                // Best effort: usage of relative path for webhook payload.
                 mediaUrl = `/media/${filename}`;
               }
             } catch (err) {
@@ -627,7 +638,7 @@ async function connectToWhatsApp() {
 
           // Determine effective sender number (handle Groups and LIDs)
           // For groups: remoteJid = group, participant = sender (phone JID typically)
-          // For 1:1 LID: remoteJid = LID, participant may be empty or phone JID
+          // For 1:1 LID: remoteJid = LID (or swapped above), participant may be empty or phone JID
           const participant = msg.key.participant || msg.participant;
           let effectiveSenderJid = senderJid;
 
@@ -643,8 +654,9 @@ async function connectToWhatsApp() {
 
           return {
             content: text,
-            sender: senderJid, // origin (Group or User JID)
+            sender: senderJid, // origin (Group or Phone JID, preferred over LID)
             sender_number: senderNumber, // The actual user phone number (best effort)
+            sender_lid: msg.key.remoteJid.endsWith('@lid') ? msg.key.remoteJid : undefined, // Expose raw LID if available
             is_group: isGroup,
             media_url: mediaUrl,
             media_path: mediaPath,

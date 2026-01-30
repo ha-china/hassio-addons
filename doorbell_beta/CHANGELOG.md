@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.0.0-beta.124 - 2026-01-29
+
+### Changes
+
+- No more timestamp on the snapshot image, since we are now using the image mqtt entity
+- Added a backlight control mode for outdoor stations
+- TEST: add control_source_decoded  card_user_id and unlock_type to attributes when door was opened
+- TEST: add dev number to logging on incoming ring event, to hopefull identify what button on outdoor station was pressed
+
 ## 3.0.0-beta.116 - 2026-01-27
 
 ### Test

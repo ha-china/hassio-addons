@@ -1,5 +1,38 @@
 # Changelog
 
+## 1.2.2 (2026-01-29)
+
+### 📦 Dependencies
+
+- ⬆️ Update dependency globals to v17 [skip-tests] (#620) [skip-tests] ([`dd8268fa`](https://github.com/FaserF/hassio-addons/commit/dd8268fa9ef57754a337889a65121019ce94e281))
+
+### 🚀 Other
+
+- Fix notification marked as read wrongly ([`47fd27c5`](https://github.com/FaserF/hassio-addons/commit/47fd27c5e3974f8078812e5f2b1e79b873c39ae9))
+- Link fixes ([`80a29ecd`](https://github.com/FaserF/hassio-addons/commit/80a29ecd14061b993f8fcde6d8c1865d15cce14e))
+
+## 1.2.1 (2026-01-29)
+
+### 🚀 Other
+
+- startup hotfix #612 ([`7308f907`](https://github.com/FaserF/hassio-addons/commit/7308f9072c909e4b94eeaca049992cc8181ecf22))
+
+## 1.2.0 (2026-01-29)
+
+### 📦 Dependencies
+
+- fix addon startups after base image update 20.0.0 (#617) [skip-tests] ([`04c90f6d`](https://github.com/FaserF/hassio-addons/commit/04c90f6d2ea1a75af00b8f6d80ed170271f144d1))
+- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v[20.0.1](https://github.com/hassio-addons/addon-base/releases/tag/20.0.1) [skip-tests] (#618) ([`62a7ed57`](https://github.com/FaserF/hassio-addons/commit/62a7ed5794451961add1f8ec065f5cbe863d1623))
+- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v20 [skip-tests] (#616) ([`09e8340b`](https://github.com/FaserF/hassio-addons/commit/09e8340b06c4263037fab6cf6d90fc913c7f99d5))
+
+### 📝 Documentation
+
+- Readme improvements ([`8a12ebd4`](https://github.com/FaserF/hassio-addons/commit/8a12ebd40149adb39f056b7dc3e10f1dd02853cb))
+
+### 🚀 Other
+
+- fix crash on startup #612 ([`4adf7948`](https://github.com/FaserF/hassio-addons/commit/4adf7948df868a37885e3701cdb3620184624b8f))
+
 ## 1.1.1 (2026-01-28)
 
 ### 🚀 Other

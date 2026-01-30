@@ -1,7 +1,7 @@
 name: Paperless-ngx
-version: 0.0.3
+version: 0.1.0
 slug: paperless-ngx
-description: '[老王杂谈说]：Home Assistant 的社区支持 Paperless-ngx 插件'
+description: '[老王杂谈说]：Home Assistant 的社区支持的 Paperless-ngx 附加组件'
 url: https://ghfast.top/github.com/paperless-ngx/paperless-ngx
 arch:
   - aarch64
@@ -25,6 +25,7 @@ options:
   time_zone: Europe/Berlin
   ocr_language: deu
   admin_user: admin
+  admin_password: ""
   secret_key: changeme
   log_level: info
   reset_database: false
@@ -35,6 +36,7 @@ schema:
   time_zone: str
   ocr_language: str
   admin_user: str?
+  admin_password: password?
   secret_key: password
   log_level: list(trace|debug|info|notice|warning|error|fatal)
   reset_database: bool?

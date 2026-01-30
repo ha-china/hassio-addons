@@ -1,6 +1,6 @@
 ---
 name: Wiki.JS
-version: 3.3.2
+version: 3.4.0
 slug: wiki.js
 image: ghcr.nju.edu.cn/faserf/hassio-addons-wiki-{arch}
 description: '[老王杂谈说]：最强大且可扩展的开源 Wiki 软件'
@@ -28,7 +28,7 @@ schema:
   ssl: bool
   certfile: str
   keyfile: str
-  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
   reset_database: bool?
   reset_database_confirm: bool?
 ports:

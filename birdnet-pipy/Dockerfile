@@ -44,6 +44,12 @@ ENV S6_CMD_WAIT_FOR_SERVICES=1 \
 
 USER root
 
+# Global LSIO modifications
+ENV LSIO_NON_ROOT_USER=1
+ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_lsio.sh" "/ha_lsio.sh"
+ARG CONFIGLOCATION="/config"
+RUN chmod 744 /ha_lsio.sh && if grep -qr "lsio" /etc; then /ha_lsio.sh "$CONFIGLOCATION"; fi && rm /ha_lsio.sh
+
 ##################
 # 3 Install apps #
 ##################
@@ -51,6 +57,7 @@ USER root
 # Copy local files
 COPY rootfs/ /
 RUN find /etc -type f \( -name "*.sh" -o -path "*/services.d/*/run" \) -exec chmod +x {} \;
+COPY --from=frontend-builder /src/frontend/nginx.conf /etc/nginx/servers/nginx.conf
 
 # Uses /bin for compatibility purposes
 # hadolint ignore=DL4005
@@ -73,6 +80,9 @@ RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.
 
 RUN mkdir -p /app
 COPY --from=frontend-builder /src/backend/ /app/
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv "${VIRTUAL_ENV}"
+ENV PATH="${VIRTUAL_ENV}/bin:${PATH}"
 RUN pip install --no-cache-dir --extra-index-url https://www.piwheels.org/simple -r /app/requirements.txt
 
 # Patch service hostnames for single-container usage
@@ -95,8 +105,11 @@ ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" "/ha_entrypoint.sh"
 RUN chmod 777 /ha_entrypoint.sh
 
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/.bashio-standalone.sh"
-RUN chmod 777 /.bashio-standalone.sh
+# Install bashio
+#ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/usr/local/lib/bashio-standalone.sh"
+#RUN chmod 0755 /usr/local/lib/bashio-standalone.sh
+#ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-router.sh" "/usr/bin/bashio"
+#RUN chmod 0755 /usr/bin/bashio
 
 ENTRYPOINT [ "/usr/bin/env" ]
 CMD [ "/ha_entrypoint.sh" ]

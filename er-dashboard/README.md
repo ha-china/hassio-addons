@@ -1,40 +1,41 @@
 # ER-Startseite (Dashboard)
 
-![Logo](logo.png)
+<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/er-dashboard/logo.png" width="100" />
 
-[![在您的 Home Assistant 实例中打开并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_er-dashboard)
-[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker 镜像](https://img.shields.io/badge/docker-1.2.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-er-dashboard)
-![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_er-dashboard)
+[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker Image](https://img.shields.io/badge/docker-1.3.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-er-dashboard)
+![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 一个现代、高度可定制的、具有霓虹灯美学的仪表板。
-
----
-
-## 📖 关于
-
-一个现代、高度可定制的、具有霓虹灯美学的仪表板，支持视频背景和强大的应用集成。
-
-ER-Startseite 是一个自托管的仪表板应用程序，具有以下特点：
-
-- **霓虹/暗黑主题**：令人惊叹的视觉设计。
-- **动态背景**：支持视频和图片背景。
-- **应用集成**：添加/自定义应用和组件。
-
-## 安装
-
-1. 在 Home Assistant 附加组件商店中搜索 "ER-Startseite"。
-2. 点击 **安装**。
-3. 启动附加组件。
-4. 点击 **打开 Web UI**。
+> A modern, highly customizable dashboard with a neon aesthetic.
 
 ---
 
-## ⚙️ 配置
+## 📖 About
 
-通过 Home Assistant 附加组件页面中的 **配置** 标签配置附加组件。
+A modern, highly customizable dashboard with a neon aesthetic,
+video backgrounds, and robust app integration.
 
-### 选项
+ER-Startseite is a self-hosted dashboard application featuring:
+
+- **Neon/Dark Theme**: Stunning visual design.
+- **Dynamic Backgrounds**: Support for video and image backgrounds.
+- **App Integration**: Add/Customize apps and widgets.
+
+## Installation
+
+1. Search for "ER-Startseite" in the Home Assistant Add-on Store.
+2. Click **Install**.
+3. Start the add-on.
+4. Click **Open Web UI**.
+
+---
+
+## ⚙️ Configuration
+
+Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
+
+### Options
 
 ```yaml
 certfile: fullchain.pem
@@ -45,10 +46,11 @@ ssl: false
 
 ---
 
-## 👨‍💻 致谢 & 许可证
+## 👨‍💻 Credits & License
 
-本项目是开源的，并遵循 MIT 许可证。
-由 **FaserF** 维护。
+This project is open-source and available under the MIT License.
+Maintained by **FaserF**.
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
