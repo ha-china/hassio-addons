@@ -1,9 +1,9 @@
 # Home assistant add-on: emby
 
 
-我利用业余时间维护这个和其他Home Assistant add-ons：跟进上游变化、HA变化，并在真实硬件上测试，这需要花费大量时间（和一些金钱）。我大约使用我超过110个add-ons中的5-10个，因此我安装了测试机器（和一些我自己不使用的测试服务，例如VPN），以排除故障并改进这些add-ons。
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-如果这个add-on为您节省了时间或简化了您的设置，我将非常感谢您的支持！
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -21,7 +21,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我仓库点赞的人！点击下面的图片为其点赞，它将出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -29,41 +29,45 @@ _感谢所有给我仓库点赞的人！点击下面的图片为其点赞，它�
 
 ## About
 
-[emby](https://emby.media/)组织个人媒体库的视频、音乐、直播电视和照片，并将它们流式传输到智能电视、流媒体盒子和移动设备。这个容器作为一个独立的emby Media Server进行打包。
+[emby](https://emby.media/) organizes video, music, live TV, and photos from personal media libraries and streams them to smart TVs, streaming boxes and mobile devices. This container is packaged as a standalone emby Media Server.
 
-这个add-on基于linuxserver.io的[docker镜像](https://github.com/linuxserver/docker-emby)。
-初始add-on版本：https://github.com/petersendev/hassio-addons
+This addon is based on the [docker image](https://github.com/linuxserver/docker-emby) from linuxserver.io.
+Inital addon version : https://github.com/petersendev/hassio-addons
 
 ## Configuration
 
-使用add-on的`env_vars`选项来传递额外的环境变量（大小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-Webui可以在`<your-ip>:8096`找到，或者在Home Assistant通过Ingress访问。
+Webui can be found at `<your-ip>:8096`, or within Home Assistant through Ingress.
 
 ```yaml
 PGID: user
 GPID: user
 TZ: timezone
-localdisks: sda1 #将您的驱动硬件名称用逗号分隔，或其标签。例如。 sda1, sdb1, MYNAS...
-networkdisks: "//SERVER/SHARE" #可选，要挂载的smb服务器列表，用逗号分隔
-cifsusername: "username" #可选，smb用户名，所有smb共享相同
-cifspassword: "password" #可选，smb密码
-cifsdomain: "domain" #可选，允许为smb共享设置域
-silent: true #抑制调试消息
+localdisks: sda1 #put the hardware name of your drive to mount separated by commas, or its label. ex. sda1, sdb1, MYNAS...
+networkdisks: "//SERVER/SHARE" # optional, list of smb servers to mount, separated by commas
+cifsusername: "username" # optional, smb username, same for all smb shares
+cifspassword: "password" # optional, smb password
+cifsdomain: "domain" # optional, allow setting the domain for the smb share
+silent: true #suppresses debug messages
 ```
 
 ## Installation
 
-这个add-on的安装非常简单，与安装任何其他Hass.io add-on没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. 将我的Hass.io add-ons仓库[repository]添加到您的Hass.io实例。
-1. 安装这个add-on。
-1. 点击`Save`按钮以保存您的配置。
-1. 启动add-on。
-1. 检查add-on的日志，看看是否一切顺利。
-1. 仔细配置add-on以满足您的偏好，请参阅官方文档以获取相关信息。
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Carefully configure the add-on to your preferences, see the official documentation for for that.
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+
+
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

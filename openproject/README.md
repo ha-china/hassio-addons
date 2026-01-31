@@ -1,8 +1,9 @@
 # Home assistant add-on: Openproject
 
-我利用业余时间维护这个和其他 Home Assistant add-ons：跟上上游的变化、HA 的变化，并在真实硬件上测试需要大量时间（和一些钱）。我大约使用我超过 110 个 add-ons 中的 5-10 个，因此我安装了一些用于测试的机器（和一些我自己的测试服务，如 VPN），以便我可以在不使用的情况下进行故障排除和改进 add-ons。
 
-如果这个 add-on 为您节省了时间或简化了您的设置，我将非常感谢您的支持！
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -20,7 +21,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20Paypal-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！点击下面的图片点赞，它就会出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,32 +29,36 @@ _感谢所有给我的仓库点赞的人！点击下面的图片点赞，它就�
 
 ## About
 
-这个 add-on 基于 [docker image](https://hub.docker.com/r/openproject/openproject)。
+This addon is based on the [docker image](https://hub.docker.com/r/openproject/openproject).
 
 ## Configuration
 
-使用 add-on 的 `env_vars` 选项来传递额外的环境变量（大写或小写名称）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-填写默认的 add-on 选项以启动 add-on。务必特别配置主机名，使用您的 homeassistant IP + add-on 暴露的端口。
-对于附加选项，使用 config.yaml 系统：https://github.com/alexbelgium/hassio-addons/wiki/Addons-feature:-add-env-variables
+Fill the default addon options to be able to start the addon. Be sure especially to configure the hostname with your homeassistant ip + addon exposed port
+For additional options, use the config.yaml system : https://github.com/alexbelgium/hassio-addons/wiki/Addons-feature:-add-env-variables
 
-Webui 可以在 `<your-ip>:port` 找到。
+Webui can be found at `<your-ip>:port`.
 
 ## Installation
 
-这个 add-on 的安装非常简单，与安装任何其他 Hass.io add-on 没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. [将我的 Hass.io add-ons 仓库][repository] 添加到您的 Hass.io 实例。
-1. 安装这个 add-on。
-1. 点击 `Save` 按钮以保存您的配置。
-1. 启动 add-on。
-1. 检查 add-on 的日志以查看是否一切顺利。
-1. 进入 webui，在那里您将初始化应用程序
-1. 重新启动 add-on，以应用任何应应用的选项
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Go to the webui, where you will initialize the app
+1. Restart the addon, to apply any option that should be applied
 
-默认管理密码（登录：admin，密码：admin）。
+Default administration password (login: admin, password: admin).
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+
+
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
