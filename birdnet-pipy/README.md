@@ -1,55 +1,54 @@
-# Home assistant add-on: BirdNET-PiPy
+# Home Assistant 插件：BirdNET-PiPy
 
-BirdNET-PiPy is a self-hosted system that uses the BirdNET deep-learning model to identify birds from their sounds, with a modern web dashboard for monitoring detections. This add-on packages the upstream project for Home Assistant with ingress support.
+BirdNET-PiPy 是一个自托管系统，使用 BirdNET 深度学习模型根据声音识别鸟类，拥有现代化的 Web 仪表盘用于监控检测。该插件将上游项目打包到 Home Assistant 中，并支持 Ingress。
 
-## About
+## 关于
 
-- Upstream project: https://github.com/Suncuss/BirdNET-PiPy
-- This add-on runs the BirdNET-PiPy backend services, Icecast audio stream, and Vue.js frontend in a single container.
+- 上游项目：https://github.com/Suncuss/BirdNET-PiPy
+- 该插件在一个容器中运行 BirdNET-PiPy 后端服务、Icecast 音频流和 Vue.js 前端。
 
-## Configuration
+## 配置
 
-Install, then start the add-on a first time. Open the Web UI from Home Assistant (Ingress) or directly at `http://<host>:8011` (or the port you configure).
-Configure location, audio source, and other settings in the BirdNET-PiPy UI after the container starts.
+先安装，然后首次启动插件。从 Home Assistant (Ingress) 或直接通过 `http://<host>:8011`（或您配置的端口）打开 Web 界面。
+容器启动后，请在 BirdNET-PiPy 界面中配置位置、音频源和其他设置。
 
-Options can be configured through three ways:
+可以通过三种方式配置选项：
 
-- Add-on options
+- 插件选项
 
 ```yaml
-TZ: Etc/UTC # Timezone, see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
-ICECAST_PASSWORD: "" # Optional: set a persistent password for the audio stream
-STREAM_BITRATE: 320k # Bitrate for the mp3 stream
+TZ: Etc/UTC # 时区，参见 https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
+ICECAST_PASSWORD: "" # 可选：为音频流设置持久密码
+STREAM_BITRATE: 320k # mp3 流的比特率
 RECORDING_MODE: rtsp # pulseaudio | http_stream | rtsp
-RTSP_URL: "" # Required if RECORDING_MODE is rtsp
-data_location: /config/data # Persistent data location for BirdNET-PiPy
+RTSP_URL: "" # 如果 RECORDING_MODE 是 rtsp，则必填
+data_location: /config/data # BirdNET-PiPy 的持久数据位置
 ```
 
 - Config.yaml
-Additional variables can be configured using the config.yaml file found in `/config/birdnet-pipy/config.yaml` using the Filebrowser add-on.
+可以使用 Filebrowser 插件中找到的 `/config/birdnet-pipy/config.yaml` 文件来配置额外的变量。
 
 - Config_env.yaml
-Additional environment variables can be configured there.
+可以在那里配置额外的环境变量。
 
-### Mounting Drives
+### 挂载驱动器
 
-This add-on supports mounting both local drives and remote SMB shares:
+该插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：请参阅 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：请参阅 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-### Custom Scripts and Environment Variables
+### 自定义脚本和环境变量
 
-This add-on supports custom scripts and environment variables through the `addon_config` mapping:
+该插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+- **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。详见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-## Notes
+## 注意事项
 
-- Audio input uses Home Assistant's PulseAudio server by default.
-- Ingress is enabled; direct access is available on the configured port.
-
+- 默认情况下，音频输入使用 Home Assistant 的 PulseAudio 服务器。
+- 已启用 Ingress；可以通过配置的端口直接访问。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

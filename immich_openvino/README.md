@@ -1,75 +1,76 @@
 # Home assistant add-on: Immich OpenVINO
 
-⚠️ 项目正在非常活跃地开发中。请预期会有错误和变更。不要将其作为您照片和视频的唯一存储方式！（来自开发者）
+⚠️ The project is under very active development. Expect bugs and changes. Do not use it as the only way to store your photos and videos! (from the developer)
 
-我利用业余时间维护这个及其他Home Assistant add-on：跟上上游更改、HA更改，并在真实硬件上测试需要大量时间（和一些金钱）。我大约使用我超过110个add-on中的5-10个，因此我安装了测试机器（并购买了一些我本人不使用的测试服务，如vpn）来调试和改进add-on。
 
-如果这个add-on为您节省了时间或简化了设置，我将非常感谢您的支持！
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## Addon信息
+## Addon informations
 
-![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_openvino%2Fconfig.yaml)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_openvino%2Fconfig.yaml)
 ![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_openvino%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_openvino%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_openvino%2Fconfig.yaml)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![构建器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建器)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我仓库星标的人！要星标它，请点击下面的图片，然后它将出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/immich_openvino/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/immich_openvino/stats.png)
 
-## 关于
+## About
 
-直接从您的手机上自托管照片和视频备份解决方案，支持OpenVINO硬件加速。这是OpenVINO启用的Immich变体，它为使用Intel GPU和CPU的机器学习任务提供硬件加速。
+Self-hosted photo and video backup solution directly from your mobile phone with OpenVINO hardware acceleration support. This is the OpenVINO-enabled variant of Immich that provides hardware acceleration for machine learning tasks using Intel GPUs and CPUs.
 
-此add-on基于imagegenius的[docker镜像](https://github.com/imagegenius/docker-immich)，并启用了OpenVINO支持，以在Intel硬件上增强性能。
+This addon is based on the [docker image](https://github.com/imagegenius/docker-immich) from imagegenius with OpenVINO support enabled for enhanced performance on Intel hardware.
 
-## 硬件要求
+## Hardware Requirements
 
-- **Intel硬件**：兼容的Intel CPU或Intel集成/离散GPU
-- **OpenVINO支持**：具有OpenVINO工具包兼容性的Intel硬件
-- **架构**：仅AMD64（OpenVINO支持针对Intel x86-64架构进行了优化）
-- **Intel GPU驱动程序**：在主机系统上正确安装的Intel GPU驱动程序（如果使用Intel GPU加速）
+- **Intel Hardware**: Compatible Intel CPU or Intel integrated/discrete GPU
+- **OpenVINO Support**: Intel hardware with OpenVINO toolkit compatibility
+- **Architecture**: AMD64 only (OpenVINO support optimized for Intel x86-64 architectures)
+- **Intel GPU Drivers**: Intel GPU drivers properly installed on the host system (for Intel GPU acceleration)
 
-## 配置
+## Configuration
 
-Webui位于`<your-ip>:8080`。PostgreSQL可以是内部的或外部的。
+Webui can be found at `<your-ip>:8080`. PostgreSQL can be either internal or external.
 
-### 选项
+### Options
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `data_location` | str | `/share/immich` | Immich数据存储的路径 |
-| `library_location` | str | | 照片/视频库的路径 |
-| `TZ` | str | | 时区（例如，`Europe/London`） |
-| `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | str | | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | str | | SMB网络共享的用户名 |
-| `cifspassword` | str | | SMB网络共享的密码 |
-| `cifsdomain` | str | | SMB网络共享的域 |
-| `DB_HOSTNAME` | str | `homeassistant.local` | 数据库主机名 |
-| `DB_USERNAME` | str | `postgres` | 数据库用户名 |
-| `DB_PASSWORD` | str | `homeassistant` | 数据库密码 |
-| `DB_DATABASE_NAME` | str | `immich` | 数据库名称 |
-| `DB_PORT` | int | `5432` | 数据库端口 |
-| `DB_ROOT_PASSWORD` | str | | 数据库根密码 |
-| `JWT_SECRET` | str | | 用于认证的JWT密钥 |
-| `DISABLE_MACHINE_LEARNING` | bool | `false` | 禁用ML功能（不推荐用于OpenVINO变体） |
-| `MACHINE_LEARNING_WORKERS` | int | `1` | ML工作者的数量（可以随着OpenVINO增加） |
-| `MACHINE_LEARNING_WORKER_TIMEOUT` | int | `120` | ML工作者超时（秒） |
-| `skip_permissions_check` | bool | `false` | 跳过文件权限检查 |
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `data_location` | str | `/share/immich` | Path where Immich data is stored |
+| `library_location` | str | | Path to photo/video library |
+| `TZ` | str | | Timezone (e.g., `Europe/London`) |
+| `localdisks` | str | | Local drives to mount (e.g., `sda1,sdb1,MYNAS`) |
+| `networkdisks` | str | | SMB shares to mount (e.g., `//SERVER/SHARE`) |
+| `cifsusername` | str | | SMB username for network shares |
+| `cifspassword` | str | | SMB password for network shares |
+| `cifsdomain` | str | | SMB domain for network shares |
+| `DB_HOSTNAME` | str | `homeassistant.local` | Database hostname |
+| `DB_USERNAME` | str | `postgres` | Database username |
+| `DB_PASSWORD` | str | `homeassistant` | Database password |
+| `DB_DATABASE_NAME` | str | `immich` | Database name |
+| `DB_PORT` | int | `5432` | Database port |
+| `DB_ROOT_PASSWORD` | str | | Database root password |
+| `JWT_SECRET` | str | | JWT secret for authentication |
+| `DISABLE_MACHINE_LEARNING` | bool | `false` | Disable ML features (not recommended for OpenVINO variant) |
+| `MACHINE_LEARNING_WORKERS` | int | `1` | Number of ML workers (can be increased with OpenVINO) |
+| `MACHINE_LEARNING_WORKER_TIMEOUT` | int | `120` | ML worker timeout (seconds) |
+| `skip_permissions_check` | bool | `false` | Skip file permissions checking |
 
-### 示例配置
+### Example Configuration
 
 ```yaml
 data_location: "/share/immich"
@@ -89,46 +90,50 @@ MACHINE_LEARNING_WORKERS: 2
 MACHINE_LEARNING_WORKER_TIMEOUT: 180
 ```
 
-### 挂载驱动器
+### Mounting Drives
 
-此add-on支持挂载本地驱动器和远程SMB共享：
+This addon supports mounting both local drives and remote SMB shares:
 
-- **本地驱动器**：参阅[Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：参阅[Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-### 自定义脚本和环境变量
+### Custom Scripts and Environment Variables
 
-此add-on通过`addon_config`映射支持自定义脚本和环境变量：
+This addon supports custom scripts and environment variables through the `addon_config` mapping:
 
-- **自定义脚本**：参阅[Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars选项**：使用add-on的`env_vars`选项传递额外的环境变量（名称大小写均可）。详情请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-## 安装
+## Installation
 
-此add-on的安装非常简单，与安装任何其他Hass.io add-on没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-**前提条件：**
-- Intel CPU或Intel GPU以进行OpenVINO加速
-- AMD64架构（ARM不受支持）
-- 安装了Intel GPU驱动程序（如果使用Intel GPU加速）
+**Prerequisites:**
+- Intel CPU or Intel GPU for OpenVINO acceleration
+- AMD64 architecture (ARM not supported)
+- Intel GPU drivers installed (if using Intel GPU acceleration)
 
-**步骤：**
-1. 将我的Hass.io add-ons仓库[repository]添加到您的Hass.io实例。
-1. 安装此add-on。
-1. 点击“保存”按钮以保存您的配置。
-1. 启动add-on。
-1. 检查add-on的日志以查看是否一切正常。
-1. 仔细配置add-on以满足您的偏好，请参阅官方文档以获取相关说明。
+**Steps:**
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Carefully configure the add-on to your preferences, see the official documentation for for that.
 
-**数据库设置：**
-请注意，您需要安装一个单独的postgres add-on才能连接数据库。您可以在我的仓库中安装postgres add-on。
-请注意在启动之前更改密码；之后将无法更改
+**Database Setup:**
+Beware that you need to install a separate postgres addon to be able to connect the database. You can install the postgres addon already in my repository.
+Beware to change the password BEFORE starting it ; it won't change afterwards
 
-## 支持
+## Support
 
-在github上创建问题，或在[home assistant thread](https://community.home-assistant.io/t/home-assistant-addon-immich/282108/3)上提问
+Create an issue on github, or ask on the [home assistant thread](https://community.home-assistant.io/t/home-assistant-addon-immich/282108/3)
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+
+
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

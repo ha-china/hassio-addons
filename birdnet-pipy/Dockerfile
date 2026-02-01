@@ -72,7 +72,7 @@ ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/mast
 RUN chmod 744 /ha_automodules.sh && /ha_automodules.sh "$MODULES" && rm /ha_automodules.sh
 
 # Manual apps
-ENV PACKAGES="python3 python3-pip python3-venv build-essential ffmpeg sox libpulse0 icecast2 nginx jq curl"
+ENV PACKAGES="python3 python3-pip python3-venv build-essential ffmpeg sox libpulse0 icecast2 nginx jq curl gosu"
 
 # Automatic apps & bashio
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_autoapps.sh" "/ha_autoapps.sh"
@@ -92,7 +92,7 @@ RUN sed -i \
     /app/config/settings.py
 
 COPY --from=frontend-builder /src/deployment/audio/scripts/start-icecast.sh /usr/local/bin/start-icecast.sh
-RUN chmod 755 /usr/local/bin/start-icecast.sh
+RUN chown icecast2 /usr/local/bin/start-icecast.sh && chmod 755 /usr/local/bin/start-icecast.sh
 
 COPY --from=frontend-builder /src/frontend/dist /usr/share/nginx/html
 
