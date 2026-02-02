@@ -1,36 +1,39 @@
-# Home Assistant 插件：MeTube
+# Home assistant add-on: MeTube
 
-用于 youtube-dl 的 Web 界面（使用 yt-dlp 分支）并支持播放列表。允许您从 YouTube 以及几十个其他网站下载视频 (https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md)。
+Web GUI for youtube-dl (using the yt-dlp fork) with playlist support. Allows you to download videos from YouTube and dozens of other sites (https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md).
 
-_感谢所有给我的仓库点星的人！要给它点星，请点击下面的图片，它就会出现在右上角。谢谢！_
+
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## 关于
+## About
 
-此插件基于 [Docker 镜像](https://github.com/alexta69/metube) 构建。
+This addon is based on the [docker image](https://github.com/alexta69/metube).
 
-## 安装
+## Installation
 
-此插件的安装非常简单，与其他 Hass.io 插件的安装过程并无二致。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. 将我的 Hass.io 插件仓库添加到您的 Hass.io 实例中。
-1. 安装此插件。
-1. 点击 `Save` 按钮以保存您的配置。
-1. 下载目录默认为 `/share/metube`，可以更改为 share 中的任意路径。
-1. 启动此插件。
-1. 检查插件的日志，查看一切是否正常。
-1. 打开 WebUI，应能通过 ingress 或 `<您的IP>:端口` 访问。
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Download directory defaults to /share/metube, can be changed to anything in share
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open WebUI should work via ingress or <your-ip>:port.
 
-## 配置
+## Configuration
 
-```text
-port : 8081 # 运行端口。
+```
+port : 8081 #port you want to run on.
 ```
 
-WebUI 可以通过 `<您的IP>:端口` 访问。
+Webui can be found at `<your-ip>:port`.
 
 [repository]: https://github.com/jdeath/homeassistant-addons
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

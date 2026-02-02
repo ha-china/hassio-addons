@@ -14,112 +14,69 @@ import utils
 from log import log
 
 
-class IncomingCallEvent(TypedDict):
-    event: Literal['incoming_call']
+class WebhookBaseFields(TypedDict):
     caller: str
+    called: str
     parsed_caller: Optional[str]
+    parsed_called: Optional[str]
     sip_account: int
     call_id: Optional[str]
     internal_id: str
+    headers: Dict[str, Optional[str]]
+
+
+class IncomingCallEvent(TypedDict):
+    event: Literal['incoming_call']
 
 
 class CallEstablishedEvent(TypedDict):
     event: Literal['call_established']
-    caller: str
-    parsed_caller: Optional[str]
-    sip_account: int
-    call_id: Optional[str]
-    internal_id: str
 
 
 class CallDisconnectedEvent(TypedDict):
     event: Literal['call_disconnected']
-    caller: str
-    parsed_caller: Optional[str]
-    sip_account: int
-    call_id: Optional[str]
-    internal_id: str
 
 
 class EnteredMenuEvent(TypedDict):
     event: Literal['entered_menu']
-    caller: str
-    parsed_caller: Optional[str]
     menu_id: str
-    sip_account: int
-    call_id: Optional[str]
-    internal_id: str
 
 
 class DtmfDigitEvent(TypedDict):
     event: Literal['dtmf_digit']
-    caller: str
-    parsed_caller: Optional[str]
     digit: str
-    sip_account: int
-    call_id: Optional[str]
-    internal_id: str
 
 
 class Timeout(TypedDict):
     event: Literal['timeout']
-    caller: str
-    parsed_caller: Optional[str]
-    sip_account: int
     menu_id: Optional[str]
-    call_id: Optional[str]
-    internal_id: str
 
 
 class RingTimeout(TypedDict):
     event: Literal['ring_timeout']
-    caller: str
-    parsed_caller: Optional[str]
-    sip_account: int
-    call_id: Optional[str]
-    internal_id: str
 
 
 class PlaybackDoneAudioFile(TypedDict):
     event: Literal['playback_done']
     type: Literal['audio_file']
-    caller: str
-    parsed_caller: Optional[str]
-    sip_account: int
     audio_file: str
-    call_id: Optional[str]
-    internal_id: str
 
 
 class PlaybackDoneMessage(TypedDict):
     event: Literal['playback_done']
     type: Literal['message']
-    caller: str
-    parsed_caller: Optional[str]
-    sip_account: int
     message: str
-    call_id: Optional[str]
-    internal_id: str
 
 
 class RecordingStarted(TypedDict):
     event: Literal['recording_started']
-    caller: str
-    parsed_caller: Optional[str]
-    sip_account: int
     recording_file: str
-    call_id: Optional[str]
-    internal_id: str
 
 
 class RecordingStopped(TypedDict):
     event: Literal['recording_stopped']
-    caller: str
-    parsed_caller: Optional[str]
-    sip_account: int
     recording_file: str
-    call_id: Optional[str]
-    internal_id: str
+
 
 WebhookEvent = Union[
     IncomingCallEvent,
@@ -197,6 +154,9 @@ class HaConfig(object):
     def get_tts_url(self) -> str:
         return self.base_url + '/tts_get_url'
 
+    def get_template_url(self) -> str:
+        return self.base_url + '/template'
+
     def get_service_url(self, domain: str, service: str) -> str:
         return self.base_url + '/services/' + domain + '/' + service
 
@@ -219,29 +179,37 @@ def create_and_get_tts(ha_config: HaConfig, message: str, language: str) -> tupl
     options = { 'options': { 'voice': ha_config.tts_config['voice'] } } if ha_config.tts_config['voice'] else {}
     payload = options | message_and_language | engine_or_platform
     if ha_config.tts_config['debug_print']:
-        log(None, 'TTS payload: %r' % payload)
+        log(None, f'TTS payload: {payload!r}')
     create_response = requests.post(ha_config.get_tts_url(), json=payload, headers=headers)
     if create_response.status_code != 200:
-        log(None, 'Error getting tts file %r %r' % (create_response.status_code, create_response.content))
+        log(None, f'Error getting tts file {create_response.status_code!r} {create_response.content!r}')
         error_file_name = os.path.join(constants.ROOT_PATH, 'sound/error.wav')
         return error_file_name, False, False
     response_deserialized = create_response.json()
     tts_url = response_deserialized['url']
-    log(None, 'Getting audio from "%s"' % tts_url)
+    log(None, f'Getting audio from "{tts_url}"')
     try:
         tts_response = requests.get(tts_url, headers=headers)
     except Exception as e:
-        log(None, 'Error getting tts audio: %s' % e)
+        log(None, f'Error getting tts audio: {e}')
         return error_file_name, False, False
     file_format = audio.audio_format_from_filename(tts_url)
     if not file_format:
-        log(None, 'Error getting audio format from filename: %s' % tts_url)
+        log(None, f'Error getting audio format from filename: {tts_url}')
         return error_file_name, False, False
     wav_file_name = audio.convert_audio_stream_to_wav_file(tts_response.content, file_format)
     if not wav_file_name:
-        log(None, 'Error converting to wav: %s' % wav_file_name)
+        log(None, f'Error converting to wav: {wav_file_name}')
         return error_file_name, False, False
     return wav_file_name, True, True
+
+
+def render_template(ha_config: HaConfig, text: str) -> str:
+    log(None, f'Rendering template: {text}')
+    headers = ha_config.create_headers()
+    template_response = requests.post(ha_config.get_template_url(), json={'template': text}, headers=headers)
+    log(None, f'Template response {template_response.status_code!r} {template_response.content!r}')
+    return template_response.text if template_response.ok else text
 
 
 def call_service(ha_config: HaConfig, domain: str, service: str, entity_id: Optional[str], service_data: Optional[Dict[str, Any]]) -> None:
@@ -252,18 +220,18 @@ def call_service(ha_config: HaConfig, domain: str, service: str, entity_id: Opti
     if service_data:
         payload.update(service_data)
     service_response = requests.post(ha_config.get_service_url(domain, service), json=payload, headers=headers)
-    log(None, 'Service response %r %r' % (service_response.status_code, service_response.content))
+    log(None, f'Service response {service_response.status_code!r} {service_response.content!r}')
 
 
-def trigger_webhook(ha_config: HaConfig, event: WebhookEvent, overwrite_webhook_id: Optional[str] = None) -> None:
+def trigger_webhook(ha_config: HaConfig, event: Any, overwrite_webhook_id: Optional[str] = None) -> None:
     webhook_id = overwrite_webhook_id or ha_config.webhook_id
     if not webhook_id:
         log(None, 'Warning: No webhook defined.')
         return
-    log(None, 'Calling webhook %s with data %s' % (webhook_id, event))
+    log(None, f'Calling webhook {webhook_id} with data {event}')
     headers = ha_config.create_headers()
     service_response = requests.post(ha_config.get_webhook_url(webhook_id), json=event, headers=headers)
-    log(None, 'Webhook response %r %r' % (service_response.status_code, service_response.content))
+    log(None, f'Webhook response {service_response.status_code!r} {service_response.content!r}')
 
 
 async def print_tts_providers(ha_config: HaConfig) -> None:

@@ -1,39 +1,38 @@
-# Home assistant add-on: Homebox
+# Home Assistant 附加组件：Homebox
 
-Homebox 是为家庭用户构建的库存和组织系统！Homebox 以简单易用为焦点，是您家庭库存、组织和管理的完美解决方案。在开发这个项目时，我试图遵循以下原则：
+Homebox 是为家庭用户打造的库存和组织系统！专注于简单和易用，Homebox 是满足您的家庭库存、组织和管理的完美解决方案。在开发这个项目时，我尝试牢记以下原则：
 
-- _简单_ - Homebox 设计得简单易用。无需复杂的设置或配置。您可以使用单个 Docker 容器，或者通过为您的首选平台编译二进制文件来部署自己。
-- _极快_ - Homebox 是用 Go 编写的，这使得它非常快速，并且部署所需的资源很少。通常，整个容器的空闲内存使用量不到 50MB。
-- _便携_ - Homebox 设计得便携，可以在任何地方运行。我们使用 SQLite 和嵌入式 Web UI，使其易于部署、使用和备份。
+- **简单** - Homebox 旨在简单易用。无需复杂的设置或配置。使用单个 Docker 容器，或者通过为您的首选平台编译二进制文件自行部署。
+- **极快** - Homebox 使用 Go 语言编写，这使得它极快且部署所需的资源极少。通常情况下，整个容器的空闲内存使用量小于 50MB。
+- **便携** - Homebox 旨在便携并在任何地方运行。我们使用 SQLite 和嵌入式 Web UI，使其易于部署、使用和备份。
 
-_感谢大家给我的仓库加星！要加星，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_感谢所有给我的仓库点星的人！要给它点星，请点击下方的图片，它就会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
-这个 add-on 使用了 [docker 镜像](https://github.com/sysadminsmedia/homebox)。
+此附加组件使用 [docker 镜像](https://github.com/sysadminsmedia/homebox)。
 
 ## 安装
 
-这个 add-on 的安装非常直接，与安装任何其他 Hass.io add-on 没有区别。
+此附加组件的安装非常简单，与其他任何 Hass.io 附加组件的安装相比没有区别。
 
-1. 将我的 Hass.io add-ons 仓库 [repository] 添加到您的 Hass.io 实例。
-1. 安装这个 add-on。
-1. 点击 `保存` 按钮来存储您的配置。
-1. 启动 add-on。
-1. 检查 add-on 的日志，看看是否一切正常。
-1. WebUI 应该可以通过 ingress 或 <your-ip>:port 来工作。
+1. 将 [我的 Hass.io 附加组件仓库][repository] 添加到您的 Hass.io 实例中。
+1. 安装此附加组件。
+1. 点击 `保存` 按钮以存储您的配置。
+1. 启动附加组件。
+1. 检查附加组件的日志以查看一切是否正常。
+1. 打开 WebUI 应该可以通过 ingress 或 <your-ip>:port 访问。
 1. 注册一个用户
-1. 转到 add-on 配置并禁用用户注册（如果您需要）
-
+1. 如果您希望的话，请转到附加组件配置并禁用用户注册
 ## 配置
 
 ```
-port : 7745 #您想要运行的端口。
+port : 7745 # 您想要运行的端口。
 ```
 
-Webui 可以在 `<your-ip>:port` 找到。
+WebUI 可以在 `<your-ip>:port` 处找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---

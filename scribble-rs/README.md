@@ -1,34 +1,35 @@
 # Home assistant add-on: Scribble-rs
 
-Scribble.rs 是一个基于网络的绘图游戏 skribbl.io 的替代品。我对 skribbl.io 的主要问题是有广告，而且断开连接会导致你失去你的分数。除此之外，自动选择单词也很烦人，并且引起了一些挫败感。
+Scribble.rs is an alternative to the web-based drawing game skribbl.io. My main problems with skribbl.io were the ads and the fact that a disconnect would cause you to lose your points. On top of that, the automatic word choice was quite annoying and caused some frustration.
 
-_感谢 everyone 星标了我的仓库！要星标它，请点击下面的图片，然后它会在右上角。谢谢！_
+
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## 关于
+## About
 
-这个 add-on 基于https://github.com/scribble-rs/scribble.rs。
+This addon is based on https://github.com/scribble-rs/scribble.rs.
 
-## 安装
+## Installation
 
-这个 add-on 的安装非常直接，与安装任何其他 Hass.io add-on 没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. [将我的 Hass.io add-ons 仓库][repository] 添加到你的 Hass.io 实例。
-1. 安装这个 add-on。
-1. 启动 add-on。
-1. 检查 add-on 的日志，看看是否一切正常。
-1. WebUI 应该可以通过 ingress 或 <your-ip>:port 工作。
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open WebUI should work via ingress or <your-ip>:port.
 
-## 配置
+## Configuration
 
 ```
-port : 8080 #你想要运行的端口。
+port : 8080 #port you want to run on.
 ```
 
-Webui 可以在 `<your-ip>:port` 找到。
+Webui can be found at `<your-ip>:port`.
 
-[repository]: https://github.com/jdeath/homeassistant-addons "Add my Hass.io add-ons repository"
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
