@@ -91,7 +91,7 @@ RUN \
 ##################
 # Copy local files
 COPY rootfs/ /
-RUN find . -type f \( -name "*.sh" -o -name "run" \) -print -exec chmod +x {} \;
+RUN find /etc -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -exec chmod +x {} +
 
 # Uses /bin for compatibility purposes
 # hadolint ignore=DL4005
@@ -133,11 +133,9 @@ ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" "/ha_entrypoint.sh"
 RUN chmod 777 /ha_entrypoint.sh
 
-COPY rootfs/ /
-RUN find . -type f \( -name "*.sh" -o -name "run" \) -print -exec chmod +x {} \;
-
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/.bashio-standalone.sh"
-RUN chmod 777 /.bashio-standalone.sh
+# Install bashio
+ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/usr/local/lib/bashio-standalone.sh"
+RUN chmod 0755 /usr/local/lib/bashio-standalone.sh
 
 ############
 # 5 Labels #

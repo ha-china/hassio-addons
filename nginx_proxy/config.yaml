@@ -1,16 +1,13 @@
 ---
-version: 3.14.0
+version: 4.0.0
 hassio_api: true
 slug: nginx_proxy
 name: NGINX Home Assistant SSL proxy
-description: '[老王杂谈说]：一个SSL/TLS代理'
+description: '[老王杂谈说]：null'
 url: https://ghfast.top/github.com/home-assistant/addons/tree/master/nginx_proxy
 arch:
-  - armhf
-  - armv7
   - aarch64
   - amd64
-  - i386
 image: docker.1ms.run/homeassistant/{arch}-addon-nginx_proxy
 init: false
 map:
@@ -29,6 +26,7 @@ options:
   real_ip_from: []
 ports:
   443/tcp: 443
+  443/udp: null
   80/tcp: null
 schema:
   domain: str

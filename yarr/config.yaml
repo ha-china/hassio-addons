@@ -1,8 +1,8 @@
 name: yarr!
-version: 1.0.0
+version: 1.0.1
 slug: yarr
-description: '[老王杂谈说]：又一个 RSS 阅读器'
-url: https://ghfast.top/github.com/einschmidt/addon-yarr
+description: '[老王杂谈说]：null'
+url: https://ghfast.top/github.com/einschmidt/app-yarr
 panel_icon: mdi:rss-box
 arch:
   - amd64

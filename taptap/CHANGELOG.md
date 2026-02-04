@@ -1,5 +1,12 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.3.2
+
+- update taptap-mqtt to v0.2.4 
+  - fix jinja json parsing for string and node names starting with numbers
+  - fix serial RS485 convertor device path
+  - fix timestamp with UTC timezone parsing
+
 ## 0.3.1
 
 - updated taptap-mqtt to v0.2.2 - fix node sensors getting intermittently unavailable and internal data cache corruption
