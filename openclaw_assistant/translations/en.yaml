@@ -1,0 +1,48 @@
+configuration:
+  timezone:
+    name: Timezone
+    description: Timezone for the add-on (e.g., Europe/Sofia, America/New_York)
+  
+  enable_terminal:
+    name: Enable Web Terminal
+    description: Enable web terminal Button inside Home Assistant (Ingress) via ttyd
+  
+  gateway_public_url:
+    name: Gateway Public URL
+    description: Public base URL for opening the Gateway Web UI in a new tab (not embedded). Example - https://example.duckdns.org:12345 or http://192.168.1.10:18789
+  
+  homeassistant_token:
+    name: Home Assistant Token
+    description: Optional - Home Assistant long-lived token for local HA API scripts/tools
+  
+  router_ssh_host:
+    name: Router SSH Host
+    description: Optional - Router/firewall SSH hostname or IP address
+  
+  router_ssh_user:
+    name: Router SSH User
+    description: Optional - Router/firewall SSH username
+  
+  router_ssh_key_path:
+    name: Router SSH Key Path
+    description: Path to SSH private key for router access (default - /data/keys/router_ssh)
+  
+  clean_session_locks_on_start:
+    name: Clean Session Locks on Start
+    description: Cleanup stale session lock files left after crashes/restarts when add-on starts
+  
+  clean_session_locks_on_exit:
+    name: Clean Session Locks on Exit
+    description: Cleanup session lock files when add-on stops gracefully
+  
+  gateway_bind_mode:
+    name: Gateway Bind Mode
+    description: Network bind mode - loopback (127.0.0.1 only, more secure) or lan (all interfaces, accessible from local network)
+  
+  gateway_port:
+    name: Gateway Port
+    description: Port number for the OpenClaw gateway to listen on (default - 18789)
+  
+  allow_insecure_auth:
+    name: Allow Insecure HTTP Auth
+    description: Allow HTTP authentication for gateway access on LAN. WARNING - Only enable if using HTTP (not HTTPS) for gateway_public_url. Required for browser access over HTTP.

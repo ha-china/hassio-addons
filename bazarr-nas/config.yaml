@@ -5,7 +5,7 @@ backup_exclude:
   - "**/Backups/*"
   - "**/logs/*"
   - "**/MediaCover/*"
-description: '[老王杂谈说]：Sonarr和Radarr的配套应用程序，用于下载字幕'
+description: '[老王杂谈说]：Sonarr 和 Radarr 下载字幕的配套应用'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -106,5 +106,5 @@ schema:
 slug: bazarr_nas
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/bazarr
-version: "1.5.4-1"
+version: "1.5.5"
 webui: "[PROTO:ssl]://[HOST]:[PORT:6767]"

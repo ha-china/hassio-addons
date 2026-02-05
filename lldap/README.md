@@ -1,12 +1,14 @@
-# Home Assistant 插件：LLDAP
+# Home Assistant App: LLDAP
 
-基于 [LLDAP](https://github.com/lldap/lldap) 的 Home Assistant LDAP 插件。
+Home Assistant app for LDAP based on [LLDAP](https://github.com/lldap/lldap).
 
-## 关于
+## About
 
-LLDAP 是一个轻量级认证服务器，提供了一个主观的、简化的 LDAP 接口用于认证。
+LLDAP is a lightweight authentication server that provides an opinionated, simplified LDAP interface for authentication.
 
-更多信息：https://github.com/lldap/lldap
+For more information: https://github.com/lldap/lldap
+
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

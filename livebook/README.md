@@ -1,35 +1,36 @@
-# Home assistant 插件：Livebook
+# Home assistant add-on: Livebook
 
-Livebook 是一个用于编写交互式和协作代码笔记本的 Web 应用程序
+Livebook is a web application for writing interactive and collaborative code notebooks
 
-_感谢大家给我的仓库加星！要加星，请点击下面的图片，它将会出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## 关于
+## About
 
-这个插件使用的是 [docker 镜像](https://github.com/livebook-dev/livebook)。
+This addon uses the [docker image](https://github.com/livebook-dev/livebook).
 
-## 安装
+## Installation
 
-这个插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. 将我的 Hass.io 插件仓库 [repository] 添加到你的 Hass.io 实例。
-1. 点击 `保存` 按钮来存储你的配置。
-1. 启动插件。
-1. 检查插件的日志，看看是否一切正常。
-1. WebUI 应该可以通过 <你的IP>:端口 访问。
-1. 数据将存储在 /addon_configs/2effc9b9_livebook
-
-## 配置
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open WebUI should work via <your-ip>:port.
+1. data will be in /addon_configs/2effc9b9_livebook
+## Configuration
 
 ```
-port : 8080 # 你想要运行的端口。
+port : 8080 #port you want to run on.
 ```
 
-WebUI 可以在 `<你的IP>:端口` 找到。
+Webui can be found at `<your-ip>:port`.
 
 [repository]: https://github.com/jdeath/homeassistant-addons
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

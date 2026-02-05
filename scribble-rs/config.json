@@ -4,7 +4,7 @@
     "aarch64"
   ],
   "boot": "auto",
-  "description": "[老王杂谈说]：Scribble.rs 是网页绘画游戏 skribbl.io 的替代品。我对 skribbl.io 的主要问题是广告以及断开连接会导致失去积分。此外，自动选词相当令人厌烦，也造成了一些挫败感。",
+  "description": "[老王杂谈说]：Scribble.rs 是基于网络的绘画游戏 skribbl.io 的替代方案，我对 skribbl.io 的主要不满在于广告以及断线会导致失去分数这一事实，除此之外，自动选词非常令人恼火，引起了一些挫败感。",
   "name": "scribble-rs",
   "options": {},
   "ports": {
@@ -18,7 +18,7 @@
   "startup": "services",
   "upstream": "1.0",
   "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
-  "version": "v0.9.10",
+  "version": "v0.9.11",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8080]",
   "ingress": false
 }

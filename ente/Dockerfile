@@ -102,7 +102,7 @@ COPY --from=web-builder /src/web/apps/cast/out      /www/cast
 # 3) Install add-on helpers #
 ############################
 COPY rootfs/ /
-RUN find . -type f \( -name "*.sh" -o -name "run" \) -print -exec chmod +x {} \;
+RUN find . -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -exec chmod +x {} \;
 
 ARG MODULES="00-banner.sh 01-custom_script.sh 00-global_var.sh 00-local_mounts.sh 00-smb_mounts.sh"
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_automodules.sh" /ha_automodules.sh
@@ -123,11 +123,7 @@ RUN set -eux; \
 ###############
 ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" /ha_entrypoint.sh
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint_modif.sh" /ha_entrypoint_modif.sh
-RUN set -eux; \
-    chmod 777 /ha_entrypoint.sh /ha_entrypoint_modif.sh; \
-    /ha_entrypoint_modif.sh; \
-    rm /ha_entrypoint_modif.sh
+RUN chmod +x /ha_entrypoint.sh
 
 ENTRYPOINT ["/usr/bin/env"]
 CMD ["/ha_entrypoint.sh"]

@@ -1,0 +1,48 @@
+configuration:
+  timezone:
+    name: Часова зона
+    description: Часова зона за добавката (напр. Europe/Sofia, America/New_York)
+  
+  enable_terminal:
+    name: Активиране на уеб терминал
+    description: Активиране на уеб терминал бутона в Home Assistant (Ingress) чрез ttyd
+  
+  gateway_public_url:
+    name: Публичен URL на Gateway
+    description: Публичен базов URL за отваряне на Gateway уеб интерфейса в нов таб (не вграден). Пример - https://example.duckdns.org:12345 или http://192.168.1.10:18789
+  
+  homeassistant_token:
+    name: Home Assistant токен
+    description: Опционално - дълготраен токен на Home Assistant за локални API скриптове/инструменти
+  
+  router_ssh_host:
+    name: SSH хост на рутер
+    description: Опционално - SSH име на хост или IP адрес на рутер/защитна стена
+  
+  router_ssh_user:
+    name: SSH потребител на рутер
+    description: Опционално - SSH потребителско име за рутер/защитна стена
+  
+  router_ssh_key_path:
+    name: Път до SSH ключ на рутер
+    description: Път до SSH частен ключ за достъп до рутер (по подразбиране - /data/keys/router_ssh)
+  
+  clean_session_locks_on_start:
+    name: Изчистване на заключвания при стартиране
+    description: Изчистване на остарели заключващи файлове на сесии след срив/рестарт при стартиране на добавката
+  
+  clean_session_locks_on_exit:
+    name: Изчистване на заключвания при изход
+    description: Изчистване на заключващи файлове на сесии при нормално спиране на добавката
+  
+  gateway_bind_mode:
+    name: Режим на свързване на Gateway
+    description: Режим на мрежово свързване - loopback (само 127.0.0.1, по-сигурно) или lan (всички интерфейси, достъпно от локалната мрежа)
+  
+  gateway_port:
+    name: Порт на Gateway
+    description: Номер на порт, на който OpenClaw gateway да слуша (по подразбиране - 18789)
+  
+  allow_insecure_auth:
+    name: Разрешаване на HTTP автентикация
+    description: Разрешаване на HTTP автентикация за достъп до gateway в локалната мрежа. ВНИМАНИЕ - Активирайте само ако използвате HTTP (не HTTPS) за gateway_public_url. Необходимо за достъп от браузър през HTTP.

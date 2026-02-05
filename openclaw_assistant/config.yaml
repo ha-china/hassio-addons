@@ -1,0 +1,65 @@
+name: OpenClaw Assistant
+version: "0.5.33"
+slug: openclaw_assistant
+description: '[老王杂谈说]：作为 Home Assistant 附加组件运行 OpenClaw 助手（OpenClaw 兼容的）。'
+url: https://ghfast.top/github.com/techartdev/OpenClawHomeAssistant
+arch:
+  - amd64
+  - aarch64
+  - armv7
+startup: services
+boot: auto
+init: false
+hassio_api: false
+homeassistant_api: false
+host_network: true
+# Home Assistant Ingress (UI inside the add-on page)
+ingress: true
+ingress_port: 8099
+panel_title: OpenClaw Assistant
+panel_icon: mdi:robot
+map:
+  - addon_config:rw
+options:
+  timezone: "Europe/Sofia"
+  # Enable web terminal inside Home Assistant (Ingress) via ttyd
+  enable_terminal: true
+  # Public base URL for opening the Gateway Web UI in a new tab (not embedded).
+  # Recommended: NO trailing slash.
+  # Example: "https://example.duckdns.org:12345" or "http://192.168.1.10:18789"
+  gateway_public_url: ""
+  # Optional: Home Assistant long-lived token (for local HA API scripts/tools)
+  homeassistant_token: ""
+  # Optional: Router SSH defaults (leave empty if you don't need router automation)
+  # This is a generic SSH configuration intended for a router/firewall or any network device
+  # reachable from inside the HA host LAN.
+  router_ssh_host: ""
+  router_ssh_user: ""
+  router_ssh_key_path: "/data/keys/router_ssh"
+  # Cleanup stale session lock files left after crashes/restarts
+  clean_session_locks_on_start: true
+  clean_session_locks_on_exit: true
+  # Gateway network bind mode:
+  # - loopback: bind to 127.0.0.1 only (local access only, more secure)
+  # - lan: bind to all interfaces (accessible from local network)
+  # Default is loopback for security.
+  gateway_bind_mode: loopback
+  # Gateway port to listen on
+  gateway_port: 18789
+  # Allow insecure HTTP authentication (required for HTTP gateway access on LAN)
+  # WARNING: Only enable if you're using HTTP (not HTTPS) for gateway_public_url
+  # Default is false for security.
+  allow_insecure_auth: false
+schema:
+  timezone: str
+  enable_terminal: bool?
+  gateway_public_url: str?
+  homeassistant_token: str?
+  router_ssh_host: str
+  router_ssh_user: str
+  router_ssh_key_path: str
+  clean_session_locks_on_start: bool?
+  clean_session_locks_on_exit: bool?
+  gateway_bind_mode: list(loopback|lan)?
+  gateway_port: int(1,65535)?
+  allow_insecure_auth: bool?

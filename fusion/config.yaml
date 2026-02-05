@@ -1,11 +1,11 @@
 name: Fusion
-version: 0.1.0
+version: 0.1.2
 slug: fusion
-description: 轻量级RSS聚合器和阅读器。
-url: https://ghfast.top/github.com/einschmidt/addon-fusion
+description: '[老王杂谈说]：轻量级 RSS 订阅源聚合器和阅读器'
+url: https://ghfast.top/github.com/einschmidt/app-fusion
 arch:
-- amd64
-- aarch64
+  - amd64
+  - aarch64
 ports:
   7080/tcp: 7080
 ports_description:
@@ -17,4 +17,4 @@ options:
 schema:
   password: password?
   log_level: list(debug|info|warn|error)
-image: ghcr.nju.edu.cn/einschmidt/fusion/{arch}
+image: ghcr.nju.edu.cn/einschmidt/fusion

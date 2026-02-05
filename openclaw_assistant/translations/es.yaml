@@ -1,0 +1,48 @@
+configuration:
+  timezone:
+    name: Zona horaria
+    description: Zona horaria para el complemento (ej. Europe/Sofia, America/New_York)
+  
+  enable_terminal:
+    name: Activar terminal web
+    description: Activar botón de terminal web dentro de Home Assistant (Ingress) mediante ttyd
+  
+  gateway_public_url:
+    name: URL pública del Gateway
+    description: URL base pública para abrir la interfaz web del Gateway en una nueva pestaña (no integrada). Ejemplo - https://example.duckdns.org:12345 o http://192.168.1.10:18789
+  
+  homeassistant_token:
+    name: Token de Home Assistant
+    description: Opcional - Token de larga duración de Home Assistant para scripts/herramientas de API local
+  
+  router_ssh_host:
+    name: Host SSH del router
+    description: Opcional - Nombre de host SSH o dirección IP del router/firewall
+  
+  router_ssh_user:
+    name: Usuario SSH del router
+    description: Opcional - Nombre de usuario SSH del router/firewall
+  
+  router_ssh_key_path:
+    name: Ruta de clave SSH del router
+    description: Ruta a la clave privada SSH para acceso al router (predeterminado - /data/keys/router_ssh)
+  
+  clean_session_locks_on_start:
+    name: Limpiar bloqueos de sesión al iniciar
+    description: Limpiar archivos de bloqueo de sesión obsoletos dejados después de fallos/reinicios cuando se inicia el complemento
+  
+  clean_session_locks_on_exit:
+    name: Limpiar bloqueos de sesión al salir
+    description: Limpiar archivos de bloqueo de sesión cuando el complemento se detiene correctamente
+  
+  gateway_bind_mode:
+    name: Modo de enlace del Gateway
+    description: Modo de enlace de red - loopback (solo 127.0.0.1, más seguro) o lan (todas las interfaces, accesible desde la red local)
+  
+  gateway_port:
+    name: Puerto del Gateway
+    description: Número de puerto en el que el gateway de OpenClaw escuchará (predeterminado - 18789)
+  
+  allow_insecure_auth:
+    name: Permitir autenticación HTTP insegura
+    description: Permitir autenticación HTTP para acceso al gateway en LAN. ADVERTENCIA - Solo habilitar si usa HTTP (no HTTPS) para gateway_public_url. Requerido para acceso desde navegador por HTTP.

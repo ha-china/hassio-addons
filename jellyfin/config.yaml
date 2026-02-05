@@ -5,7 +5,7 @@ backup_exclude:
   - "**/cache/"
   - "**/log/"
   - "**/transcode/"
-description: '[老王杂谈说]：一个让您掌控管理和流式传输您媒体的自由软件媒体系统'
+description: '[老王杂谈说]：一个让你掌控媒体管理和流媒体播放的免费开源媒体系统'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -122,5 +122,5 @@ schema:
 slug: jellyfin
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "10.11.6-5"
+version: "10.11.6-6"
 video: true

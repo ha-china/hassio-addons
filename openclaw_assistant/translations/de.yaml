@@ -1,0 +1,48 @@
+configuration:
+  timezone:
+    name: Zeitzone
+    description: Zeitzone für das Add-on (z.B. Europe/Sofia, America/New_York)
+  
+  enable_terminal:
+    name: Web-Terminal aktivieren
+    description: Web-Terminal-Schaltfläche in Home Assistant (Ingress) über ttyd aktivieren
+  
+  gateway_public_url:
+    name: Öffentliche Gateway-URL
+    description: Öffentliche Basis-URL zum Öffnen der Gateway-Weboberfläche in einem neuen Tab (nicht eingebettet). Beispiel - https://example.duckdns.org:12345 oder http://192.168.1.10:18789
+  
+  homeassistant_token:
+    name: Home Assistant Token
+    description: Optional - Langlebiger Home Assistant Token für lokale API-Skripte/Tools
+  
+  router_ssh_host:
+    name: Router SSH-Host
+    description: Optional - SSH-Hostname oder IP-Adresse des Routers/der Firewall
+  
+  router_ssh_user:
+    name: Router SSH-Benutzer
+    description: Optional - SSH-Benutzername für Router/Firewall
+  
+  router_ssh_key_path:
+    name: Router SSH-Schlüsselpfad
+    description: Pfad zum privaten SSH-Schlüssel für Router-Zugriff (Standard - /data/keys/router_ssh)
+  
+  clean_session_locks_on_start:
+    name: Sitzungssperren beim Start bereinigen
+    description: Veraltete Sitzungssperrdateien nach Abstürzen/Neustarts beim Start des Add-ons bereinigen
+  
+  clean_session_locks_on_exit:
+    name: Sitzungssperren beim Beenden bereinigen
+    description: Sitzungssperrdateien beim ordnungsgemäßen Stoppen des Add-ons bereinigen
+  
+  gateway_bind_mode:
+    name: Gateway-Bindungsmodus
+    description: Netzwerk-Bindungsmodus - loopback (nur 127.0.0.1, sicherer) oder lan (alle Schnittstellen, vom lokalen Netzwerk aus zugänglich)
+  
+  gateway_port:
+    name: Gateway-Port
+    description: Portnummer, auf der das OpenClaw-Gateway lauscht (Standard - 18789)
+  
+  allow_insecure_auth:
+    name: Unsichere HTTP-Authentifizierung erlauben
+    description: HTTP-Authentifizierung für Gateway-Zugriff im LAN erlauben. WARNUNG - Nur aktivieren, wenn HTTP (nicht HTTPS) für gateway_public_url verwendet wird. Erforderlich für Browser-Zugriff über HTTP.
