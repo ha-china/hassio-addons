@@ -1,4 +1,4 @@
-# Home Assistant Community Add-on: AirSonos
+# Home Assistant Community App: AirSonos
 
 [![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
 
@@ -8,17 +8,22 @@
 
 [![Support Frenck on Patreon][patreon-shield]][patreon]
 
-AirPlay功能，适用于您的Sonos（和UPnP）播放器。
+AirPlay capabilities for your Sonos (and UPnP) players.
 
-## 关于
+## About
 
-Apple设备使用AirPlay将音频发送到其他设备，但这与Sonos播放器不兼容。这个插件试图解决这种兼容性问题。
+Apple devices use AirPlay to send audio to other devices, but this is not
+compatible with Sonos players. This app tries to solve this
+compatibility gap.
 
-它检测您网络中的Sonos播放器，并为每个播放器创建虚拟AirPlay设备。它充当AirPlay客户端和真实Sonos设备之间的桥梁。
+It detects Sonos players in your network and creates virtual AirPlay
+devices for each of them. It acts as a bridge between the AirPlay client
+and the real Sonos device.
 
-由于Sonos使用UPnP，插件也可能适用于其他UPnP播放器（例如，新款三星电视）。
+Since Sonos uses UPnP, the app might also work for other UPnP players
+(e.g., newer Samsung televisions).
 
-AirCast插件基于优秀的[AirConnect][airconnect]项目。
+The AirCast app is based on the excellent [AirConnect][airconnect] project.
 
 [airconnect]: https://github.com/philippe44/AirConnect
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
@@ -27,15 +32,16 @@ AirCast插件基于优秀的[AirConnect][airconnect]项目。
 [forum]: https://community.home-assistant.io/t/home-assistant-community-add-on-airsonos/36796?u=frenck
 [github-sponsors-shield]: https://frenck.dev/wp-content/uploads/2019/12/github_sponsor.png
 [github-sponsors]: https://github.com/sponsors/frenck
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v5.0.2-blue.svg
-[release]: https://github.com/hassio-addons/addon-airsonos/tree/v5.0.2
+[release-shield]: https://img.shields.io/badge/version-v5.1.0-blue.svg
+[release]: https://github.com/hassio-addons/app-airsonos/tree/v5.1.0
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

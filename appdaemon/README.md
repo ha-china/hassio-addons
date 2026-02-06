@@ -1,4 +1,4 @@
-# Home Assistant Community Add-on: AppDaemon
+# Home Assistant Community App: AppDaemon
 
 [![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
 
@@ -12,9 +12,12 @@ Python Apps and HADashboard for Home Assistant
 
 ## About
 
-[AppDaemon][appdaemon] 是一个松散耦合、多线程、沙盒化的 Python 执行环境，用于为 Home Assistant 家庭自动化软件编写自动化应用。它还提供了一个可配置的仪表板 (HADashboard)，适合安装在墙壁上的平板电脑上。
+[AppDaemon][appdaemon] is a loosely coupled, multithreaded, sandboxed Python
+execution environment for writing automation apps for Home Assistant home
+automation software. It also provides a configurable dashboard (HADashboard)
+suitable for wall mounted tablets.
 
-![HADashboard 截图][screenshot]
+![HADashboard screenshot][screenshot]
 
 [appdaemon]: https://appdaemon.readthedocs.io
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
@@ -23,16 +26,17 @@ Python Apps and HADashboard for Home Assistant
 [forum]: https://community.home-assistant.io/t/home-assistant-community-add-on-appdaemon-4/163259?u=frenck
 [github-sponsors-shield]: https://frenck.dev/wp-content/uploads/2019/12/github_sponsor.png
 [github-sponsors]: https://github.com/sponsors/frenck
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.17.13-blue.svg
-[release]: https://github.com/hassio-addons/addon-appdaemon/tree/v0.17.13
-[screenshot]: https://github.com/hassio-addons/addon-appdaemon/raw/main/images/screenshot.png
+[release-shield]: https://img.shields.io/badge/version-v0.18.0-blue.svg
+[release]: https://github.com/hassio-addons/app-appdaemon/tree/v0.18.0
+[screenshot]: https://github.com/hassio-addons/app-appdaemon/raw/main/images/screenshot.png
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

@@ -7,6 +7,10 @@ configuration:
     name: Web-Terminal aktivieren
     description: Web-Terminal-Schaltfläche in Home Assistant (Ingress) über ttyd aktivieren
   
+  terminal_port:
+    name: Terminal-Port
+    description: Portnummer für das Web-Terminal (Standard - 7681). Ändern Sie diese, wenn dieser Port mit einem anderen Dienst in Konflikt steht.
+  
   gateway_public_url:
     name: Öffentliche Gateway-URL
     description: Öffentliche Basis-URL zum Öffnen der Gateway-Weboberfläche in einem neuen Tab (nicht eingebettet). Beispiel - https://example.duckdns.org:12345 oder http://192.168.1.10:18789

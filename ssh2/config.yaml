@@ -1,7 +1,7 @@
 name: Advanced SSH & Web Terminal
-version: 23.0.0
+version: 23.0.1
 slug: ssh2
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：为你的 Home Assistant 实例提供增强的 SSH 和 Web 终端访问'
 url: https://ghfast.top/github.com/hassio-addons/app-ssh
 startup: services
 ingress: true

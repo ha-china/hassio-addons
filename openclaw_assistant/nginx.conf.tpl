@@ -31,7 +31,7 @@ http {
     # Proxy everything under /terminal/ (including websocket /terminal/ws)
     location ^~ /terminal/ {
       # IMPORTANT: no trailing slash in proxy_pass so nginx preserves the full URI
-      proxy_pass http://127.0.0.1:7681;
+      proxy_pass http://127.0.0.1:__TERMINAL_PORT__;
       proxy_http_version 1.1;
       proxy_set_header Upgrade $http_upgrade;
       proxy_set_header Connection "upgrade";

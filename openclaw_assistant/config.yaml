@@ -1,7 +1,7 @@
 name: OpenClaw Assistant
-version: "0.5.33"
+version: "0.5.34"
 slug: openclaw_assistant
-description: '[老王杂谈说]：作为 Home Assistant 附加组件运行 OpenClaw 助手（OpenClaw 兼容的）。'
+description: '[老王杂谈说]：将 OpenClaw Assistant (OpenClaw-compatible) 作为 Home Assistant 插件运行。'
 url: https://ghfast.top/github.com/techartdev/OpenClawHomeAssistant
 arch:
   - amd64
@@ -24,6 +24,8 @@ options:
   timezone: "Europe/Sofia"
   # Enable web terminal inside Home Assistant (Ingress) via ttyd
   enable_terminal: true
+  # Terminal port (change if 7681 conflicts with another service)
+  terminal_port: 7681
   # Public base URL for opening the Gateway Web UI in a new tab (not embedded).
   # Recommended: NO trailing slash.
   # Example: "https://example.duckdns.org:12345" or "http://192.168.1.10:18789"
@@ -53,6 +55,7 @@ options:
 schema:
   timezone: str
   enable_terminal: bool?
+  terminal_port: int(1024,65535)?
   gateway_public_url: str?
   homeassistant_token: str?
   router_ssh_host: str

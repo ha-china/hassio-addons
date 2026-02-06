@@ -7,6 +7,10 @@ configuration:
     name: Enable Web Terminal
     description: Enable web terminal Button inside Home Assistant (Ingress) via ttyd
   
+  terminal_port:
+    name: Terminal Port
+    description: Port number for the web terminal (default - 7681). Change if this port conflicts with another service.
+  
   gateway_public_url:
     name: Gateway Public URL
     description: Public base URL for opening the Gateway Web UI in a new tab (not embedded). Example - https://example.duckdns.org:12345 or http://192.168.1.10:18789

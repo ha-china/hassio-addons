@@ -7,6 +7,10 @@ configuration:
     name: Activar terminal web
     description: Activar botón de terminal web dentro de Home Assistant (Ingress) mediante ttyd
   
+  terminal_port:
+    name: Puerto del terminal
+    description: Número de puerto para el terminal web (predeterminado - 7681). Cambie si este puerto entra en conflicto con otro servicio.
+  
   gateway_public_url:
     name: URL pública del Gateway
     description: URL base pública para abrir la interfaz web del Gateway en una nueva pestaña (no integrada). Ejemplo - https://example.duckdns.org:12345 o http://192.168.1.10:18789

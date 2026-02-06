@@ -1,15 +1,15 @@
-# Home Assistant 插件：freshrss
+# Home Assistant App: freshrss
 
-一个免费的、可自行托管的聚合器。
+A free, self-hostable feed aggregator.
 
-## 关于
+## About
 
-FreshRSS 是一个自托管的 RSS 和 Atom 聚合器。
-它轻量级、易于使用、功能强大且可定制。
+FreshRSS is a self-hosted RSS and Atom feed aggregator.
+It is lightweight, easy to work with, powerful, and customizable.
 
-![freshrss 预览][preview]
+![freshrss preview][preview]
 
-[preview]: https://github.com/einschmidt/addon-freshrss/raw/main/images/freshrss.webp
+[preview]: https://github.com/einschmidt/app-freshrss/raw/main/images/freshrss.webp
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

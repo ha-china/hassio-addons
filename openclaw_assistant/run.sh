@@ -21,6 +21,19 @@ TZNAME=$(jq -r '.timezone // "Europe/Sofia"' "$OPTIONS_FILE")
 GW_PUBLIC_URL=$(jq -r '.gateway_public_url // empty' "$OPTIONS_FILE")
 HA_TOKEN=$(jq -r '.homeassistant_token // empty' "$OPTIONS_FILE")
 ENABLE_TERMINAL=$(jq -r '.enable_terminal // true' "$OPTIONS_FILE")
+TERMINAL_PORT_RAW=$(jq -r '.terminal_port // 7681' "$OPTIONS_FILE")
+
+# SECURITY: Validate TERMINAL_PORT to prevent nginx config injection
+# Only allow numeric values in valid port range (1024-65535)
+if [[ "$TERMINAL_PORT_RAW" =~ ^[0-9]+$ ]] && [ "$TERMINAL_PORT_RAW" -ge 1024 ] && [ "$TERMINAL_PORT_RAW" -le 65535 ]; then
+  TERMINAL_PORT="$TERMINAL_PORT_RAW"
+else
+  echo "ERROR: Invalid terminal_port '$TERMINAL_PORT_RAW'. Must be numeric 1024-65535. Using default 7681."
+  TERMINAL_PORT="7681"
+fi
+
+echo "DEBUG: enable_terminal config value: '$ENABLE_TERMINAL'"
+echo "DEBUG: terminal_port config value: '$TERMINAL_PORT' (validated)"
 
 # Generic router SSH settings
 ROUTER_HOST=$(jq -r '.router_ssh_host // empty' "$OPTIONS_FILE")
@@ -239,12 +252,29 @@ openclaw gateway run &
 GW_PID=$!
 
 # Start web terminal (optional)
-if [ "$ENABLE_TERMINAL" = "true" ]; then
-  echo "Starting web terminal (ttyd) on 127.0.0.1:7681 ..."
-  ttyd -W -i 127.0.0.1 -p 7681 -b /terminal bash &
+TTYD_PID_FILE="/var/run/openclaw-ttyd.pid"
+
+# Clean up stale ttyd process from previous run using PID file
+if [ -f "$TTYD_PID_FILE" ]; then
+  OLD_PID=$(cat "$TTYD_PID_FILE" 2>/dev/null || echo "")
+  if [ -n "$OLD_PID" ] && kill -0 "$OLD_PID" 2>/dev/null; then
+    echo "Stopping previous ttyd process (PID $OLD_PID)..."
+    kill "$OLD_PID" 2>/dev/null || true
+    sleep 1
+    # Force kill if still running
+    kill -9 "$OLD_PID" 2>/dev/null || true
+  fi
+  rm -f "$TTYD_PID_FILE"
+fi
+
+if [ "$ENABLE_TERMINAL" = "true" ] || [ "$ENABLE_TERMINAL" = "1" ]; then
+  echo "Starting web terminal (ttyd) on 127.0.0.1:${TERMINAL_PORT} ..."
+  ttyd -W -i 127.0.0.1 -p "${TERMINAL_PORT}" -b /terminal bash &
   TTYD_PID=$!
+  echo "$TTYD_PID" > "$TTYD_PID_FILE"
+  echo "ttyd started with PID $TTYD_PID"
 else
-  echo "Terminal disabled (enable_terminal=false)"
+  echo "Terminal disabled (enable_terminal=$ENABLE_TERMINAL)"
 fi
 
 # Start ingress reverse proxy (nginx). This provides the add-on UI inside HA.
@@ -254,20 +284,22 @@ fi
 # The gateway token is NOT managed by the add-on; OpenClaw will generate/store it.
 # Best-effort: query it via CLI (works even if openclaw.json is JSON5). If unknown, we hide the button.
 GW_TOKEN="$(timeout 2s openclaw config get gateway.auth.token 2>/dev/null | tr -d '\n' || true)"
-GW_PUBLIC_URL="$GW_PUBLIC_URL" GW_TOKEN="$GW_TOKEN" python3 - <<'PY'
+GW_PUBLIC_URL="$GW_PUBLIC_URL" GW_TOKEN="$GW_TOKEN" TERMINAL_PORT="$TERMINAL_PORT" python3 - <<'PY'
 import os
 from pathlib import Path
 
 tpl = Path('/etc/nginx/nginx.conf.tpl').read_text()
 landing_tpl = Path('/etc/nginx/landing.html.tpl').read_text()
 public_url = os.environ.get('GW_PUBLIC_URL','')
+terminal_port = os.environ.get('TERMINAL_PORT', '7681')
 
 # Token comes from environment (best-effort CLI query in run.sh)
 token = os.environ.get('GW_TOKEN','')
 
 gw_path = '' if public_url.endswith('/') else '/'
 
-conf = tpl
+# Replace terminal port placeholder in nginx config
+conf = tpl.replace('__TERMINAL_PORT__', terminal_port)
 Path('/etc/nginx/nginx.conf').write_text(conf)
 
 landing = landing_tpl.replace('__GATEWAY_TOKEN__', token)

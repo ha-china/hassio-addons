@@ -1,4 +1,4 @@
-# Home Assistant Community Add-on: AdGuard Home
+# Home Assistant 社区应用：AdGuard Home
 
 [![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
 
@@ -8,15 +8,15 @@
 
 [![Support Frenck on Patreon][patreon-shield]][patreon]
 
-网络范围的广告和跟踪器阻止DNS服务器。
+全网广告及追踪器拦截 DNS 服务器。
 
 ## 关于
 
-AdGuard Home 是一个具有家长控制（成人内容阻止）功能的网络范围广告和跟踪器阻止DNS服务器。它的目的是让您控制整个网络和所有您的设备，并且不需要使用客户端程序。
+AdGuard Home 是一个具有家长控制（成人内容拦截）功能的全网广告和追踪器拦截 DNS 服务器。它的目的是让你能够控制整个网络以及所有设备，并且不需要使用客户端程序。
 
-AdGuard Home 提供了一个美观、简单且功能丰富的网络界面，以便轻松管理过滤过程及其设置。
+AdGuard Home 提供了一个美观、简单且功能丰富的 Web 界面，以便轻松管理过滤过程及其设置。
 
-![AdGuard Home 在 Home Assistant 前端][screenshot]
+![Home Assistant 前端中的 AdGuard Home][screenshot]
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -24,13 +24,13 @@ AdGuard Home 提供了一个美观、简单且功能丰富的网络界面，以�
 [forum]: https://community.home-assistant.io/t/home-assistant-community-add-on-adguard-home/90684?u=frenck
 [github-sponsors-shield]: https://frenck.dev/wp-content/uploads/2019/12/github_sponsor.png
 [github-sponsors]: https://github.com/sponsors/frenck
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v6.0.3-blue.svg
-[release]: https://github.com/hassio-addons/addon-adguard-home/tree/v6.0.3
-[screenshot]: https://github.com/hassio-addons/addon-adguard-home/raw/v6.0.3/images/screenshot.png
+[release-shield]: https://img.shields.io/badge/version-v6.1.0-blue.svg
+[release]: https://github.com/hassio-addons/app-adguard-home/tree/v6.1.0
+[screenshot]: https://github.com/hassio-addons/app-adguard-home/raw/v6.1.0/images/screenshot.png
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

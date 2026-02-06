@@ -7,6 +7,10 @@ configuration:
     name: Активиране на уеб терминал
     description: Активиране на уеб терминал бутона в Home Assistant (Ingress) чрез ttyd
   
+  terminal_port:
+    name: Порт на терминал
+    description: Номер на порт за уеб терминала (по подразбиране - 7681). Променете, ако този порт е в конфликт с друга услуга.
+  
   gateway_public_url:
     name: Публичен URL на Gateway
     description: Публичен базов URL за отваряне на Gateway уеб интерфейса в нов таб (не вграден). Пример - https://example.duckdns.org:12345 или http://192.168.1.10:18789

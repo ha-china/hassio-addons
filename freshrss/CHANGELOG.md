@@ -1,5 +1,9 @@
 ## What’s changed
 
+## Bugfix
+
+- Changed the php call in the refresh script
+
 ## ⬆️ Dependency updates
 
-- ⬆️ Update FreshRSS/FreshRSS to v1.28.1 @[renovate[bot]](https://github.com/apps/renovate) (#155)
+- ⬆️ Update alpine_3_23/nginx to v1.28.2-r0 @[renovate[bot]](https://github.com/apps/renovate) (#160)
