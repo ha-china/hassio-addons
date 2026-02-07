@@ -8,6 +8,28 @@ configuration:
     name: Service Region
     description: >-
       The region you set up you Speech Service instance in (e.g. uksouth).
+  rate:
+    name: Speaking rate
+    description: >-
+      Speaking rate, as a percentage or description (e.g. "80%" or "slow").
+  pitch:
+    name: Speaking pitch
+    description: >-
+      Speaking pitch, as a percentage or description (e.g. "80%" or "low").
+  volume:
+    name: Speaking volume
+    description: >-
+      Speaking volume, as a percentage or description (e.g. "80%" or "soft").
+  style:
+    name: Speaking style
+    description: >-
+      Speaking style, as a description (e.g. "cheerful").  Supported styles
+      depend on the voice, and not all voices support styles.  See the
+      Microsoft documentation for more details.
+  style_degree:
+    name: Speaking style degree
+    description: >-
+      Speaking style intensity from 0.01 to 2.00.
   update_voices:
     name: Update voices
     description: >-

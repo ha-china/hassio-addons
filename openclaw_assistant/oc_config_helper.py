@@ -57,15 +57,21 @@ def set_gateway_setting(key, value):
     return write_config(cfg)
 
 
-def apply_gateway_settings(bind_mode: str, port: int, allow_insecure_auth: bool):
+def apply_gateway_settings(mode: str, bind_mode: str, port: int, allow_insecure_auth: bool):
     """
     Apply gateway settings to OpenClaw config.
     
     Args:
+        mode: "local" or "remote"
         bind_mode: "loopback" or "lan"
         port: Port number to listen on (must be 1-65535)
         allow_insecure_auth: Allow insecure HTTP authentication
     """
+    # Validate gateway mode
+    if mode not in ["local", "remote"]:
+        print(f"ERROR: Invalid mode '{mode}'. Must be 'local' or 'remote'")
+        return False
+    
     # Validate bind mode
     if bind_mode not in ["loopback", "lan"]:
         print(f"ERROR: Invalid bind_mode '{bind_mode}'. Must be 'loopback' or 'lan'")
@@ -91,11 +97,16 @@ def apply_gateway_settings(bind_mode: str, port: int, allow_insecure_auth: bool)
     
     control_ui = gateway["controlUi"]
     
+    current_mode = gateway.get("mode", "")
     current_bind = gateway.get("bind", "")
     current_port = gateway.get("port", 18789)
     current_insecure = control_ui.get("allowInsecureAuth", False)
     
     changes = []
+    
+    if current_mode != mode:
+        gateway["mode"] = mode
+        changes.append(f"mode: {current_mode} -> {mode}")
     
     if current_bind != bind_mode:
         gateway["bind"] = bind_mode
@@ -130,13 +141,14 @@ def main():
     cmd = sys.argv[1]
     
     if cmd == "apply-gateway-settings":
-        if len(sys.argv) != 5:
-            print("Usage: oc_config_helper.py apply-gateway-settings <loopback|lan> <port> <true|false>")
+        if len(sys.argv) != 6:
+            print("Usage: oc_config_helper.py apply-gateway-settings <local|remote> <loopback|lan> <port> <true|false>")
             sys.exit(1)
-        bind_mode = sys.argv[2]
-        port = int(sys.argv[3])
-        allow_insecure_auth = sys.argv[4].lower() == "true"
-        success = apply_gateway_settings(bind_mode, port, allow_insecure_auth)
+        mode = sys.argv[2]
+        bind_mode = sys.argv[3]
+        port = int(sys.argv[4])
+        allow_insecure_auth = sys.argv[5].lower() == "true"
+        success = apply_gateway_settings(mode, bind_mode, port, allow_insecure_auth)
         sys.exit(0 if success else 1)
     
     elif cmd == "get":

@@ -48,7 +48,6 @@ RUN \
 RUN sed -i '/no-first-run/a\  --remote-debugging-address=0.0.0.0 --remote-debugging-port=9221 \\' /usr/bin/wrapped-*
 
 # Global LSIO modifications
-ENV LSIO_NON_ROOT_USER=1
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_lsio.sh" "/ha_lsio.sh"
 ARG CONFIGLOCATION="/config"
 RUN chmod 744 /ha_lsio.sh && if grep -qr "lsio" /etc; then /ha_lsio.sh "$CONFIGLOCATION"; fi && rm /ha_lsio.sh
@@ -59,7 +58,7 @@ RUN chmod 744 /ha_lsio.sh && if grep -qr "lsio" /etc; then /ha_lsio.sh "$CONFIGL
 
 # Add rootfs
 COPY rootfs/ /
-RUN find . -type f \( -name "*.sh" -o -name "run" \) -print -exec chmod +x {} \;
+RUN find . -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -exec chmod +x {} \;
 
 RUN chmod 777 /etc/usr/bin/wrapped-*
 

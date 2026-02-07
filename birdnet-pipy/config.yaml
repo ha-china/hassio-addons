@@ -2,7 +2,7 @@ arch:
   - aarch64
   - amd64
 audio: true
-description: '[老王杂谈说]：带有现代 Web 仪表盘的 BirdNET-PiPy 鸟类识别'
+description: '[老王杂谈说]：具有现代网页仪表盘的 BirdNET-PiPy 鸟类检测'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -99,5 +99,5 @@ schema:
   ssl: bool?
 slug: birdnet-pipy
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/birdnet-pipy
-version: "0.3.2-6"
+version: "0.4.0"
 webui: "[PROTO:ssl]://[HOST]:[PORT:80]"

@@ -39,6 +39,10 @@ configuration:
     name: Limpiar bloqueos de sesión al salir
     description: Limpiar archivos de bloqueo de sesión cuando el complemento se detiene correctamente
   
+  gateway_mode:
+    name: Modo del Gateway
+    description: Modo de operación del Gateway - local (ejecutar gateway localmente, recomendado) o remote (conectar a un gateway remoto)
+  
   gateway_bind_mode:
     name: Modo de enlace del Gateway
     description: Modo de enlace de red - loopback (solo 127.0.0.1, más seguro) o lan (todas las interfaces, accesible desde la red local)

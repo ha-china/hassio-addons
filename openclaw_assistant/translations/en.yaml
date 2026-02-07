@@ -39,6 +39,10 @@ configuration:
     name: Clean Session Locks on Exit
     description: Cleanup session lock files when add-on stops gracefully
   
+  gateway_mode:
+    name: Gateway Mode
+    description: Gateway operation mode - local (run gateway locally, recommended) or remote (connect to a remote gateway)
+  
   gateway_bind_mode:
     name: Gateway Bind Mode
     description: Network bind mode - loopback (127.0.0.1 only, more secure) or lan (all interfaces, accessible from local network)

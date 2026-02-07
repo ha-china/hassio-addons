@@ -1,7 +1,7 @@
 name: OpenClaw Assistant
-version: "0.5.34"
+version: "0.5.35"
 slug: openclaw_assistant
-description: '[老王杂谈说]：将 OpenClaw Assistant (OpenClaw-compatible) 作为 Home Assistant 插件运行。'
+description: '[老王杂谈说]：作为 Home Assistant 附加组件运行 OpenClaw 助手 (OpenClaw 兼容)。'
 url: https://ghfast.top/github.com/techartdev/OpenClawHomeAssistant
 arch:
   - amd64
@@ -41,6 +41,11 @@ options:
   # Cleanup stale session lock files left after crashes/restarts
   clean_session_locks_on_start: true
   clean_session_locks_on_exit: true
+  # Gateway mode:
+  # - local: Run gateway locally (recommended for most users)
+  # - remote: Connect to a remote gateway
+  # Default is local.
+  gateway_mode: local
   # Gateway network bind mode:
   # - loopback: bind to 127.0.0.1 only (local access only, more secure)
   # - lan: bind to all interfaces (accessible from local network)
@@ -63,6 +68,7 @@ schema:
   router_ssh_key_path: str
   clean_session_locks_on_start: bool?
   clean_session_locks_on_exit: bool?
+  gateway_mode: list(local|remote)?
   gateway_bind_mode: list(loopback|lan)?
   gateway_port: int(1,65535)?
   allow_insecure_auth: bool?

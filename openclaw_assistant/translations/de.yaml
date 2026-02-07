@@ -39,6 +39,10 @@ configuration:
     name: Sitzungssperren beim Beenden bereinigen
     description: Sitzungssperrdateien beim ordnungsgemäßen Stoppen des Add-ons bereinigen
   
+  gateway_mode:
+    name: Gateway-Modus
+    description: Gateway-Betriebsmodus - local (Gateway lokal ausführen, empfohlen) oder remote (mit einem entfernten Gateway verbinden)
+  
   gateway_bind_mode:
     name: Gateway-Bindungsmodus
     description: Netzwerk-Bindungsmodus - loopback (nur 127.0.0.1, sicherer) oder lan (alle Schnittstellen, vom lokalen Netzwerk aus zugänglich)

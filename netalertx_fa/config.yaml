@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: "[老王杂谈说]：WIFI / LAN 扫描器、入侵者和存在检测器"
+description: "[老王杂谈说]：WiFi / 局域网扫描器、入侵者及存在检测器"
 environment:
   PGID: "20211"
   PORT: "20211"
@@ -51,4 +51,4 @@ slug: netalertx_fa
 tmpfs: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "26.2.4"
+version: "26.2.6"

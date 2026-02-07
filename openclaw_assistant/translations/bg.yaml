@@ -39,6 +39,10 @@ configuration:
     name: Изчистване на заключвания при изход
     description: Изчистване на заключващи файлове на сесии при нормално спиране на добавката
   
+  gateway_mode:
+    name: Режим на Gateway
+    description: Режим на работа на Gateway - local (локално изпълнение на gateway, препоръчително) или remote (свързване към отдалечен gateway)
+  
   gateway_bind_mode:
     name: Режим на свързване на Gateway
     description: Режим на мрежово свързване - loopback (само 127.0.0.1, по-сигурно) или lan (всички интерфейси, достъпно от локалната мрежа)
