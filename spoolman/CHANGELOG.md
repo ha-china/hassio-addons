@@ -1,3 +1,9 @@
+## [0.23.1-0] - 2026-02-08
+
+- Bumped Spoolman version to : 0.23.1
+   - Spoolman changelog: https://github.com/Donkie/Spoolman/releases/tag/v0.23.1
+- Bumped HA addon version to : 0.23.1-0
+
 ## [0.23.0-0] - 2026-01-27
 
 - Bumped Spoolman version to : 0.23.0

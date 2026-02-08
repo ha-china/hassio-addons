@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.7.0
+
+### Features
+
+- Add custom background images per dashboard with upload and blur/effects options
+- Add delete button to remove widgets from any widget type
+- Add configurable metrics in area cards (e.g. battery levels, entity counts)
+- Add FPS, memory, and network monitoring plus stress test controls in the debug panel
+- Simplify widget config by removing size and layout fields
+- Update demo dashboard with new widget examples
+
+### Improvements
+
+- Use popover for background selection instead of inline dropdown
+- Improve area card gradients and icon display
+
+### Bug Fixes
+
+- Fix orphaned references when deleting custom background images
+- Fix extra separator above background effects section
+- Fix area widget showing wrong values for numeric metrics (e.g. battery percentages)
+- Fix light widget classic-glass variant not applying blur correctly
+- Fix errors when toggling light groups with missing or unavailable entities
+- Fix slide gestures on mobile locking to single axis to avoid scroll conflicts
+- Fix area cards not navigating to the correct dashboard when tapped
+
 ## 0.6.0
 
 ### Features

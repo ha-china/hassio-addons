@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM ghcr.nju.edu.cn/donkie/spoolman:0.23.0
+FROM ghcr.nju.edu.cn/donkie/spoolman:0.23.1
 
 # Expose port
 EXPOSE 7912

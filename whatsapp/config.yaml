@@ -1,8 +1,8 @@
 name: "WhatsApp"
-version: "1.2.2"
+version: "1.2.3"
 slug: "whatsapp"
 image: ghcr.nju.edu.cn/faserf/hassio-addons-whatsapp-{arch}
-description: "[老王杂谈说]：Home Assistant WhatsApp 后端 (Baileys/Node.js)。使用宿主机网络（端口 8066 无法更改）。"
+description: "[老王杂谈说]：Home Assistant WhatsApp 应用程序 (Baileys/Node.js)。使用主机网络（端口 8066 无法更改）。"
 url: "https://ghfast.top/github.com/FaserF/ha-whatsapp"
 arch:
   - aarch64

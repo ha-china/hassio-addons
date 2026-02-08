@@ -43,6 +43,9 @@ RUN ARCH=$(echo ${TARGETARCH:-$(dpkg --print-architecture)} | sed 's|arm64|aarch
 
 RUN node -v && npm -v
 
+# Install pnpm globally (required by some OpenClaw skills like clawhub)
+RUN npm install -g pnpm && pnpm -v
+
 # Install Chromium for website automation tasks
 # Includes necessary dependencies for headless browser operation
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -83,7 +86,7 @@ USER root
 
 # Install OpenClaw globally
 RUN npm config set fund false && npm config set audit false \
- && npm install -g openclaw@2026.2.3-1
+ && npm install -g openclaw@2026.2.6-3
 
 COPY run.sh /run.sh
 COPY oc_config_helper.py /oc_config_helper.py

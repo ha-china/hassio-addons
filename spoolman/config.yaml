@@ -1,7 +1,7 @@
 name: Spoolman
-version: "0.23.0-0"
+version: "0.23.1-0"
 slug: spoolman
-description: "[老王杂谈说]：追踪你的3D打印耗材卷轴库存。"
+description: "[老王杂谈说]：跟踪你的3D打印机耗材线轴库存。"
 arch:
   - amd64
   - aarch64
