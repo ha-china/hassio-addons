@@ -2,7 +2,7 @@ apparmor: false
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：一个用于船只的 Signal K 中央服务器实现'
+description: '[老王杂谈说]：一个用于船舶的 Signal K 中央服务器实现。'
 devices:
   - /dev/can
   - /dev/can0
@@ -11,6 +11,10 @@ devices:
   - /dev/ttyUSB1
   - /dev/ttyACM0
   - /dev/ttyACM1
+  - /dev/i2c-0
+  - /dev/i2c-1
+  - /dev/i2c-13
+  - /dev/i2c-14
 environment:
   HOME: /config
   NMEA0183PORT: "10110"
@@ -53,5 +57,5 @@ uart: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
 usb: true
-version: "2.20.3"
+version: "2.20.3-2"
 webui: http://[HOST]:[PORT:3000]

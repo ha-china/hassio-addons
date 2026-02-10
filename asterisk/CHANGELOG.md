@@ -3,6 +3,25 @@
 
 # Changelog
 
+## 6.2.0
+
+### New Features
+
+- The `additional_sounds` option will now also download `g722` sounds ([#434](https://github.com/TECH7Fox/asterisk-hass-addons/pull/434))
+  - Additionally, this option has been reworked so that instead of converting the sound files from `sln16`, it directly downloads the variants from https://downloads.asterisk.org/pub/telephony/sounds.
+
+## 6.1.0
+
+### New Features
+
+- Enable `res_pjsip_messaging` module for SIP MESSAGE support ([#423](https://github.com/TECH7Fox/asterisk-hass-addons/pull/423))
+
+### Upgrades
+
+- Update Asterisk from 22.6.0 to 22.8.2 ([#431](https://github.com/TECH7Fox/asterisk-hass-addons/pull/431))
+- Update app_rtsp_sip from 2.0 to 3.1 ([#421](https://github.com/TECH7Fox/asterisk-hass-addons/pull/421))
+- Update debian-base from 9.0.0 to 9.2.0 ([#431](https://github.com/TECH7Fox/asterisk-hass-addons/pull/431))
+
 ## 6.0.0
 
 ### Breaking Changes

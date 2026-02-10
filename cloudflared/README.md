@@ -1,30 +1,21 @@
-# Home Assistant App (Add-on): Cloudflared
+# Home Assistant 应用（附加组件）：Cloudflared
 
-[![GitHub Release][releases-shield]][releases]
-![Project Stage][project-stage-shield]
-![Project Maintenance][maintenance-shield]
-![Reported Installations][installations-shield-stable]
+[![GitHub 发布版][releases-shield]][releases]
+![项目阶段][project-stage-shield]
+![项目维护][maintenance-shield]
+![报告安装数][installations-shield-stable]
 
-Connect remotely to your Home Assistant instance without opening any ports using
-Cloudflared.
+使用 Cloudflared 远程连接您的 Home Assistant 实例，而无需打开任何端口。
 
-## About
+## 关于
 
-Cloudflared connects your Home Assistant Instance via a secure tunnel to a domain
-or subdomain at Cloudflare. Doing that, you can expose your Home Assistant to the
-Internet without opening ports in your router. Additionally, you can utilize
-Cloudflare Teams, their Zero Trust platform to further secure your Home Assistant
-connection.
+Cloudflared 通过安全的隧道将您的 Home Assistant 实例连接到 Cloudflare 的域名或子域名。这样，您就可以在不打开路由器端口的情况下，将 Home Assistant 暴露在互联网上。此外，您还可以利用 Cloudflare Teams（他们的零信任平台）来进一步保护您的 Home Assistant 连接。
 
-**To use this app (add-on), you have to own a domain name (e.g. example.com) that is
-using Cloudflare for its DNS entries. You can find more information about that
-in our [Wiki][wiki]**.
+**要使用此应用（附加组件），您必须拥有一个使用 Cloudflare 管理 DNS 记录的域名（例如 example.com）。您可以在我们的 [操作指南][wiki] 中找到更多相关信息。**
 
-## Disclaimer
+## 免责声明
 
-Please make sure to be compliant with the
-[Cloudflare Self-Serve Subscription Agreement][cloudflare-sssa] when using this
-app (add-on).
+使用此应用（附加组件）时，请确保您符合 [Cloudflare 自助订阅协议][cloudflare-sssa]。
 
 [cloudflare-sssa]: https://www.cloudflare.com/terms/
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg

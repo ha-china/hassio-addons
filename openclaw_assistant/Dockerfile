@@ -55,7 +55,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && rm -rf /var/lib/apt/lists/*
 
 # Install Homebrew (Linuxbrew) for OpenClaw skill dependencies
-# Homebrew is required for installing CLI tools like gemini, aider, etc.
+# Homebrew is optional - some skills need CLI tools like gemini, aider, etc.
+# NOTE: Homebrew requires CPU with SSSE3 support (Intel Core 2 or newer, ~2006+)
+# If installation fails (e.g., older CPUs), the add-on will still work but some skills may not install
 ENV HOMEBREW_NO_AUTO_UPDATE=1 \
     HOMEBREW_NO_INSTALL_CLEANUP=1 \
     HOMEBREW_NO_ANALYTICS=1
@@ -65,13 +67,17 @@ RUN useradd -m -s /bin/bash linuxbrew \
  && chown -R linuxbrew:linuxbrew /home/linuxbrew
 
 USER linuxbrew
-RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
- && cd /home/linuxbrew/.linuxbrew/Homebrew \
- && git config --global --add safe.directory /home/linuxbrew/.linuxbrew/Homebrew \
- && /home/linuxbrew/.linuxbrew/bin/brew update --force
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || \
+    (echo "WARNING: Homebrew installation failed (likely unsupported CPU - requires SSSE3). Some skills may not work." && exit 0)
+RUN if [ -d /home/linuxbrew/.linuxbrew/Homebrew ]; then \
+        cd /home/linuxbrew/.linuxbrew/Homebrew && \
+        git config --global --add safe.directory /home/linuxbrew/.linuxbrew/Homebrew && \
+        /home/linuxbrew/.linuxbrew/bin/brew update --force || true; \
+    fi
 USER root
 
 # Add Homebrew to PATH for all users (wrapper comes first to intercept root calls)
+# PATH is set even if brew failed - wrapper will handle missing brew gracefully
 ENV PATH="/usr/local/bin:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
 
 # Copy brew wrapper that allows root to run brew by delegating to linuxbrew user
@@ -79,9 +85,14 @@ COPY brew-wrapper.sh /usr/local/bin/brew
 RUN chmod +x /usr/local/bin/brew
 
 # Verify brew is available and install gcc (needed for compiling some brew packages)
-# Must run as linuxbrew user - Homebrew refuses to run as root
+# Skip if brew installation failed
 USER linuxbrew
-RUN /home/linuxbrew/.linuxbrew/bin/brew --version && /home/linuxbrew/.linuxbrew/bin/brew install gcc
+RUN if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then \
+        /home/linuxbrew/.linuxbrew/bin/brew --version && \
+        /home/linuxbrew/.linuxbrew/bin/brew install gcc || true; \
+    else \
+        echo "Skipping gcc installation - Homebrew not available"; \
+    fi
 USER root
 
 # Install OpenClaw globally

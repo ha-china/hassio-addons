@@ -1,5 +1,36 @@
 # TOMMY
 
+## 2.1.0
+
+### Major Changes
+- Performance and stability improvements
+
+## 2.0.2
+
+### Minor Changes
+- Minor improvements to motion detection for ESP32 and ESP32-C3
+
+## 2.0.1
+
+### Minor Changes
+- Fixed missing version number in dashboard
+
+## 2.0.0
+
+### Major Changes
+- Added status indicator for stationary presence detection capabilities (see [requirements](https://www.tommysense.com/docs/detection-mode))
+- Improved motion detection
+- TOMMY version now appears in the dashboard with a button to check for updates; a warning is shown if devices are not on the same version as the server
+- **Breaking change:** It is necessary to flash devices (both TOMMY flasher and ESPHome) again. Please follow the installation instructions carefully, as some parameters have changed. Sorry for the inconvenience.
+
+### Minor Changes
+- Fixed connectivity issues with some devices
+- Fixed an issue where Matter was broadcasting mDNS on all interfaces, causing high CPU usage
+- Decreased max TX power on ESP32-C3 to 8.5 dBm to increase connection stability when using the TOMMY flasher. For ESPHome, TX power can be set in the ESPHome config.
+- Reduced memory usage on ESP32s
+- Removed the OTA checker loop. OTA is now requested from the server if a version mismatch is detected
+- Improved configuration fetching, leading to reduced memory usage
+
 ## 1.5.4
 
 ### Minor Changes

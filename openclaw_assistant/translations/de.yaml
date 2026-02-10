@@ -51,6 +51,10 @@ configuration:
     name: Gateway-Port
     description: Portnummer, auf der das OpenClaw-Gateway lauscht (Standard - 18789)
   
+  enable_openai_api:
+    name: OpenAI API aktivieren
+    description: OpenAI-kompatiblen Chat Completions Endpunkt aktivieren. Ermöglicht die Verwendung von OpenClaw als Gesprächsagent in der HA Assist Pipeline über Extended OpenAI Conversation (HACS) oder jeden OpenAI-kompatiblen Client.
+  
   allow_insecure_auth:
     name: Unsichere HTTP-Authentifizierung erlauben
     description: HTTP-Authentifizierung für Gateway-Zugriff im LAN erlauben. WARNUNG - Nur aktivieren, wenn HTTP (nicht HTTPS) für gateway_public_url verwendet wird. Erforderlich für Browser-Zugriff über HTTP.

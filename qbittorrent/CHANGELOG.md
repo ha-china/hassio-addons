@@ -1,7 +1,12 @@
-## 5.1.4-11 (05-02-2026)
-- Minor bugs fixed
-## 5.1.4-10 (05-02-2026)
-- Minor bugs fixed
+## 5.1.4-15 (08-02-2026)
+- Support preshared keys (airvpn for example)
+- Support multiple address fields
+
+## 5.1.4-12 (08-02-2026)
+- Prefer ipv4 to resolve over ipv6
+- Fix ipv6 resolve address on some wireguard configurations
+- Fix issues with interfaces names longer than 15 characters
+
 ## 5.1.4-9 (05-02-2026)
 - Move OpenVPN/WireGuard config filename validation from schema to runtime scripts
 - Validate config name only when the related VPN mode is enabled

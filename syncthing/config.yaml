@@ -1,7 +1,7 @@
 name: Syncthing
-version: 1.19.13
+version: 1.19.14
 slug: syncthing
-description: '[老王杂谈说]：Syncthing 是一种以去中心化方式实现的持续文件同步程序'
+description: '[老王杂谈说]：Syncthing 是一个去中心化的持续文件同步程序。'
 url: https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/syncthing
 arch:
   - armhf
@@ -12,14 +12,12 @@ arch:
 homeassistant: 0.115.0
 image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/syncthing-{arch}
 init: false
+schema:
+  state_dir: str?
 ports:
   8384/tcp: null
   22000/tcp: 22000
   21027/udp: 21027
-ports_description:
-  8384/tcp: Web frontend (not needed with Ingress)
-  22000/tcp: Sync protocol
-  21027/udp: Discovery broadcast
 ingress: true
 ingress_port: 8384
 panel_title: Syncthing

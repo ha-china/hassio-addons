@@ -1,130 +1,188 @@
-# 家用助手插件：Scrutiny
+# Home assistant add-on: Scrutiny
 
-[![捐赠][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fscrutiny%2Fconfig.yaml)
-![入口](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fscrutiny%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fscrutiny%2Fconfig.yaml)
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## Addon informations
+
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fscrutiny%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fscrutiny%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fscrutiny%2Fconfig.yaml)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![构建器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建器)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库星标的人！要给星标，请点击下面的图片，然后它会在右上角显示。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
-[![@alexbelgium/hassio-addons 仓库星标罗盘](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/scrutiny/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/scrutiny/stats.png)
 
-## 关于
-
----
-
-[Scrutiny](https://github.com/AnalogJ/scrutiny) 是一个硬盘健康仪表盘和监控解决方案，将制造商提供的 S.M.A.R.T 指标与现实世界的故障率相结合。这个插件基于 [docker 镜像](https://hub.docker.com/r/linuxserver/scrutiny) 由 [linuxserver.io](https://www.linuxserver.io/) 提供。
-
-特性：
-
-- S.M.A.R.T 监控
-- 自动添加本地驱动器
-- 每小时更新
-- 入口
-- 自动上游更新
-
-## 配置
+## About
 
 ---
 
-Webui 可以在 <http://homeassistant:8080> 找到，或者通过入口访问。
-它自动挂载所有本地驱动器。
+[Scrutiny](https://github.com/AnalogJ/scrutiny) is a Hard Drive Health Dashboard & Monitoring solution, merging manufacturer provided S.M.A.R.T metrics with real-world failure rates. This addon is based on the [docker image](https://hub.docker.com/r/linuxserver/scrutiny) from [linuxserver.io](https://www.linuxserver.io/).
 
-仅在遇到问题时启用完全访问权限。在其他所有情况下，S.M.A.R.T 访问应该可以在不需要完全访问的情况下工作。
+Features :
+
+- SMART monitoring
+- Automatic addition of local drives
+- Hourly updates
+- Ingress
+- Automatic upstream updates
+
+## Configuration
+
+Webui can be found at <http://homeassistant:8080> or through the sidebar using Ingress.
+Configurations can be done through the app webUI, except for the following options.
+It automatically mounts all local drives.
+
+**Note**: Enable full access only if encountering issues. SMART access should work without full access in all scenarios.
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `Updates` | list | `Hourly` | Update schedule (Quarterly/Hourly/Daily/Weekly/Custom) |
+| `Updates_custom_time` | str | | Custom update interval (e.g., "5m", "2h", "1w", "2mo") |
+| `TZ` | str | | Timezone (e.g., `Europe/London`) |
+| `Mode` | list | | Operating mode (Collector+WebUI or Collector only) |
+| `COLLECTOR_API_ENDPOINT` | str | | Collector API endpoint URL |
+| `COLLECTOR_HOST_ID` | str | | Host identifier for collector |
+| `SMARTCTL_COMMAND_DEVICE_TYPE` | list | | Device type for SMARTCTL commands |
+| `SMARTCTL_MEGARAID_DISK_NUM` | int | | MegaRAID disk number |
+| `expose_collector` | bool | | Expose collector port externally |
+
+### Example Configuration
 
 ```yaml
-Updates: 每小时, 每日, 每周
-Updates_custom_time : 如果你选择 "自定义" 作为 "Updates" 变量，你可以在 "Updates_custom_time" 字段中用自然语言定义特定的更新。示例：选择 "自定义" 作为 "Updates"，然后输入自定义间隔，如 "5m", "2h", "1w"，或 "2mo"，以每 5 分钟，或每 2 小时，或每周，或每 2 个月更新一次
-TZ: 时区
-Mode: 收集器+WebUI 或仅收集器
+Updates: "Daily"
+Updates_custom_time: "12h"
+TZ: "Europe/London"
+Mode: "Collector+WebUI"
+COLLECTOR_API_ENDPOINT: "http://localhost:8080"
+COLLECTOR_HOST_ID: "home_assistant"
+SMARTCTL_COMMAND_DEVICE_TYPE: "auto"
+expose_collector: false
 ```
 
-## 安装
+### Custom Scripts and Environment Variables
+
+This addon supports custom scripts and environment variables:
+
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+
+## Installation
 
 ---
 
-这个插件的安装非常简单，与其他插件的安装方式没有不同。
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
 
-1. [将我的 Hass.io 插件仓库][repository] 添加到你的家用助手实例中。
-2. 安装这个插件。
-3. 点击 `保存` 按钮以保存你的配置。
-4. 设置插件的选项以符合你的偏好
-5. 启动插件。
-6. 检查插件的日志以查看一切是否正常。
-7. 打开 WebUI（基于入口）并调整软件选项
+1. [Add my Hass.io add-ons repository][repository] to your home assistant instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Set the add-on options to your preferences
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open the webUI (Ingress based) and adapt the software options
 
-# 在家用助手中的集成
+# Integration in home assistant
 
 ---
 
-与 HA 的集成可以通过配置文件中的 [rest 平台](https://www.home-assistant.io/integrations/rest) 完成。
+Integration with HA can be done with the [rest platform](https://www.home-assistant.io/integrations/rest) in configuration.yaml.
 
-有两种类型的 API 端点可用：
+The API is available on Home Assistant's internal network even when the port is not exposed. Use the add-on's internal
+domain name (`http://db21ed7f-scrutiny:8080`) to query it from Home Assistant or other add-ons. If you need to reach the API from your local network, expose the port in the add-on options and replace the domain with your Home Assistant IP address.
 
-- 摘要数据：http://YOURIP:ADDONPORT/api/summary
-- 详细数据：http://YOURIP:ADDONPORT/api/device/WWN/details
+Two types of API endpoints are available:
 
-对于详细数据，每个硬盘在 scrutiny 应用程序中都可以找到 WWN。例如：http://192.168.178.23:8086/api/device/0x50014ee606c14537/details
+- Summary data: <http://db21ed7f-scrutiny-fa:8080/api/summary>
+- Detailed data: <http://db21ed7f-scrutiny-fa:8080/api/device/WWN/details>
 
-获取第一个硬盘数据的示例。
+For the detailed data, wwn can be found for each HDD within the Scrutiny app. For example: <http://db21ed7f-scrutiny-fa:8080/api/device/0x50014ee606c14537/details>
+
+Example to get data from the first hdd.
 
 ```yaml
 rest:
   - verify_ssl: false
     scan_interval: 60
-    resource: http://192.168.178.4:8086/api/device/0x57c35481f82a7a9c/details
+    resource: http://db21ed7f-scrutiny-fa:8080/api/device/0x57c35481f82a7a9c/details
     sensor:
       - name: "HDD - WWN"
         value_template: "{{ value_json.data.smart_results[0].device_wwn }}"
-      - name: "HDD - 最后更新"
+      - name: "HDD - Last Update"
         value_template: "{{ value_json.data.smart_results[0].date }}"
         device_class: timestamp
-      - name: "HDD - 温度"
+      - name: "HDD - Temperature"
         value_template: "{{ value_json.data.smart_results[0].temp }}"
         device_class: temperature
         unit_of_measurement: "°C"
         state_class: measurement
-      - name: "HDD - 电源周期"
+      - name: "HDD - Power Cycles"
         value_template: "{{ value_json.data.smart_results[0].power_cycle_count }}"
-      - name: "HDD - 电源小时"
+      - name: "HDD - Power Hours"
         value_template: "{{ value_json.data.smart_results[0].power_on_hours }}"
-      - name: "HDD - 协议"
+      - name: "HDD - Protocol"
         value_template: "{{ value_json.data.smart_results[0].device_protocol }}"
-      - name: "HDD - 重新分配扇区计数"
+      - name: "HDD - Reallocated Sectors Count"
         value_template: '{{ value_json.data.smart_results[0].attrs["5"].raw_value }}'
-      - name: "HDD - 重新分配事件计数"
+      - name: "HDD - Reallocation Event Count"
         value_template: '{{ value_json.data.smart_results[0].attrs["196"].raw_value }}'
-      - name: "HDD - 当前待处理扇区计数"
+      - name: "HDD - Current Pending Sector Count"
         value_template: '{{ value_json.data.smart_results[0].attrs["197"].raw_value }}'
-      - name: "HDD - (离线) 不可纠正扇区计数"
+      - name: "HDD - (Offline) Uncorrectable Sector Count"
         value_template: '{{ value_json.data.smart_results[0].attrs["198"].raw_value }}'
     binary_sensor:
-      - name: "HDD - SMART 状态"
+      - name: "HDD - SMART Status"
         value_template: "{{ 1 if value_json.data.smart_results[0].Status in [1, 2] else 0 }}"
         device_class: problem
 ```
 
-## 说明
+## Illustration
 
 ---
 
-![说明](https://github.com/AnalogJ/scrutiny/raw/master/docs/dashboard.png)
+![Illustration](https://github.com/AnalogJ/scrutiny/raw/master/docs/dashboard.png)
 
-## 支持
+## Support
 
-在 github 上创建问题，或在 [家用助手讨论区](https://community.home-assistant.io/t/home-assistant-addon-scrutiny-smart-dashboard/295747) 上提问
+Create an issue on github, or ask on the [home assistant thread](https://community.home-assistant.io/t/home-assistant-addon-scrutiny-smart-dashboard/295747)
 
-https://github.com/alexbelgium/hassio-addons
+<https://github.com/alexbelgium/hassio-addons>
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+
+---
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

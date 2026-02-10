@@ -57,7 +57,7 @@ def set_gateway_setting(key, value):
     return write_config(cfg)
 
 
-def apply_gateway_settings(mode: str, bind_mode: str, port: int, allow_insecure_auth: bool):
+def apply_gateway_settings(mode: str, bind_mode: str, port: int, enable_openai_api: bool, allow_insecure_auth: bool):
     """
     Apply gateway settings to OpenClaw config.
     
@@ -65,6 +65,7 @@ def apply_gateway_settings(mode: str, bind_mode: str, port: int, allow_insecure_
         mode: "local" or "remote"
         bind_mode: "loopback" or "lan"
         port: Port number to listen on (must be 1-65535)
+        enable_openai_api: Enable OpenAI-compatible Chat Completions endpoint
         allow_insecure_auth: Allow insecure HTTP authentication
     """
     # Validate gateway mode
@@ -95,11 +96,21 @@ def apply_gateway_settings(mode: str, bind_mode: str, port: int, allow_insecure_
     if "controlUi" not in gateway:
         gateway["controlUi"] = {}
     
+    # http.endpoints.chatCompletions should be nested inside gateway
+    if "http" not in gateway:
+        gateway["http"] = {}
+    if "endpoints" not in gateway["http"]:
+        gateway["http"]["endpoints"] = {}
+    if "chatCompletions" not in gateway["http"]["endpoints"]:
+        gateway["http"]["endpoints"]["chatCompletions"] = {}
+    
     control_ui = gateway["controlUi"]
+    chat_completions = gateway["http"]["endpoints"]["chatCompletions"]
     
     current_mode = gateway.get("mode", "")
     current_bind = gateway.get("bind", "")
     current_port = gateway.get("port", 18789)
+    current_openai_api = chat_completions.get("enabled", False)
     current_insecure = control_ui.get("allowInsecureAuth", False)
     
     changes = []
@@ -116,6 +127,10 @@ def apply_gateway_settings(mode: str, bind_mode: str, port: int, allow_insecure_
         gateway["port"] = port
         changes.append(f"port: {current_port} -> {port}")
     
+    if current_openai_api != enable_openai_api:
+        chat_completions["enabled"] = enable_openai_api
+        changes.append(f"chatCompletions.enabled: {current_openai_api} -> {enable_openai_api}")
+    
     if current_insecure != allow_insecure_auth:
         control_ui["allowInsecureAuth"] = allow_insecure_auth
         changes.append(f"allowInsecureAuth: {current_insecure} -> {allow_insecure_auth}")
@@ -128,7 +143,7 @@ def apply_gateway_settings(mode: str, bind_mode: str, port: int, allow_insecure_
             print("ERROR: Failed to write config")
             return False
     else:
-        print(f"INFO: Gateway settings already correct (bind={bind_mode}, port={port}, allowInsecureAuth={allow_insecure_auth})")
+        print(f"INFO: Gateway settings already correct (mode={mode}, bind={bind_mode}, port={port}, chatCompletions={enable_openai_api}, allowInsecureAuth={allow_insecure_auth})")
         return True
 
 
@@ -141,14 +156,15 @@ def main():
     cmd = sys.argv[1]
     
     if cmd == "apply-gateway-settings":
-        if len(sys.argv) != 6:
-            print("Usage: oc_config_helper.py apply-gateway-settings <local|remote> <loopback|lan> <port> <true|false>")
+        if len(sys.argv) != 7:
+            print("Usage: oc_config_helper.py apply-gateway-settings <local|remote> <loopback|lan> <port> <enable_openai_api:true|false> <allow_insecure:true|false>")
             sys.exit(1)
         mode = sys.argv[2]
         bind_mode = sys.argv[3]
         port = int(sys.argv[4])
-        allow_insecure_auth = sys.argv[5].lower() == "true"
-        success = apply_gateway_settings(mode, bind_mode, port, allow_insecure_auth)
+        enable_openai_api = sys.argv[5].lower() == "true"
+        allow_insecure_auth = sys.argv[6].lower() == "true"
+        success = apply_gateway_settings(mode, bind_mode, port, enable_openai_api, allow_insecure_auth)
         sys.exit(0 if success else 1)
     
     elif cmd == "get":

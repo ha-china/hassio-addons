@@ -1,9 +1,9 @@
 name: WG Easy 15+
-version: "15.2.1"
+version: "15.2.2"
 upstream: 15.2.1
 slug: wgeasy15plus
 description: >-
-  [老王杂谈说]：WireGuard Easy 15+：集WireGuard和UI于一体
+  [老王杂谈说]：WireGuard Easy 15+: 集成了 WireGuard 和 UI
 arch:
   - amd64
   - aarch64
@@ -23,8 +23,8 @@ environment:
   INSECURE: "true"
 boot: auto
 startup: services
-ingress: true
-ingress_port: "51821"
+ingress: false
+webui: http://[HOST]:[PORT:51821]
 privileged:
   - "NET_ADMIN"
 devices:
