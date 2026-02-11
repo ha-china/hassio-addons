@@ -1,8 +1,8 @@
 ---
-version: 2.16.1
+version: 2.16.2
 slug: openthread_border_router
 name: OpenThread Border Router
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：OpenThread 边界路由器插件'
 url: >-
   https://ghfast.top/github.com/home-assistant/addons/tree/master/openthread_border_router
 arch:

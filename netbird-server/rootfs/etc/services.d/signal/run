@@ -10,7 +10,7 @@ set -euo pipefail
 SIGNAL_PORT=8083
 LOG_LEVEL="info"
 
-bashio::log.info "Starting NetBird Signal on port ${SIGNAL_PORT}..."
+bashio::log.info "Starting NetBird Signal on port ${SIGNAL_PORT} (legacy gRPC on 10000)..."
 exec /usr/local/bin/netbird-signal run \
   --port "$SIGNAL_PORT" \
   --log-level "$LOG_LEVEL" \

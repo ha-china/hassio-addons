@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.0.0-beta.126 - 2026-02-10
+
+### Fix
+
+- Improve offline device handling
+
+## 3.0.0-beta.125 - 2026-02-10
+
+### Fix
+
+- Fix for dev number, when not able to parse
+
 ## 3.0.0-beta.124 - 2026-01-29
 
 ### Changes

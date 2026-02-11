@@ -1,5 +1,13 @@
 # TOMMY
 
+## 2.2.0
+
+### Major Changes
+- Improvements to false positive filtering for ESP32-C3. It should now be possible to lower the motion threshold.
+
+### Minor Changes
+- Improved out of memory handling
+ 
 ## 2.1.0
 
 ### Major Changes
