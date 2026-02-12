@@ -1,5 +1,26 @@
 # TOMMY
 
+## 2.2.4
+
+### Minor Changes
+- Fixed socket error in Matter Occupancy Sensor
+
+## 2.2.3
+
+### Minor Changes
+- Improved error handling in Matter Occupancy Sensor
+
+## 2.2.2
+
+### Minor Changes
+- Fixed a bug causing the zone selector to be hidden when no zones were added
+
+## 2.2.1
+
+### Minor Changes
+- Improved false positive filtering
+- Switched to fast scan for WiFi connections
+
 ## 2.2.0
 
 ### Major Changes
