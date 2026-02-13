@@ -1,7 +1,7 @@
 name: OpenClaw Assistant
-version: "0.5.41"
+version: "0.5.42"
 slug: openclaw_assistant
-description: '[老王杂谈说]：将 OpenClaw Assistant（兼容 OpenClaw）作为 Home Assistant 插件运行。'
+description: '[老王杂谈说]：作为 Home Assistant 插件运行 OpenClaw 助手 (OpenClaw 兼容)'
 url: https://ghfast.top/github.com/techartdev/OpenClawHomeAssistant
 arch:
   - amd64
@@ -15,7 +15,7 @@ homeassistant_api: false
 host_network: true
 # Home Assistant Ingress (UI inside the add-on page)
 ingress: true
-ingress_port: 8099
+ingress_port: 48099
 panel_title: OpenClaw Assistant
 panel_icon: mdi:robot
 map:

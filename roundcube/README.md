@@ -13,8 +13,8 @@ that connects to the Mailserver app from this repo
 
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v2.0.1-blue.svg
-[release]: https://github.com/erik73/app-roundcube/tree/v2.0.1
+[release-shield]: https://img.shields.io/badge/version-v2.0.2-blue.svg
+[release]: https://github.com/erik73/app-roundcube/tree/v2.0.2
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

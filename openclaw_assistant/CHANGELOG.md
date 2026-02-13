@@ -1,6 +1,19 @@
 # Changelog
 
-All notable changes to the OpenClaw Assistant Home Assistant Add-on will be documented in this file.
+## [0.5.42] - 2026-02-12
+
+### Changed
+- Change nginx ingress port from 8099 to 48099 to avoid conflicts with NextCloud and other services
+- Persist Homebrew and brew-installed packages across container rebuilds (symlink to `/config/.linuxbrew/`)
+
+### Added
+- SECURITY.md with risk documentation and disclaimer
+
+### Improved
+- Comprehensive DOCS.md overhaul (architecture, use cases, persistence, troubleshooting, FAQ)
+- README.md rewritten as concise landing page with quick start guide
+- New branding assets (icon.png, logo.png)
+- Added Discord server link to README
 
 ## [0.5.41] - 2026-02-11
 

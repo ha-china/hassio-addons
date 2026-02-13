@@ -114,6 +114,45 @@ export PNPM_HOME="${PERSISTENT_NODE_GLOBAL}/pnpm"
 mkdir -p "$PNPM_HOME"
 export PATH="${PNPM_HOME}:${PATH}"
 
+# ------------------------------------------------------------------------------
+# Persist Linuxbrew/Homebrew across Docker image rebuilds
+# Homebrew installs to /home/linuxbrew/.linuxbrew/ which is ephemeral.
+# We sync it to /config/.linuxbrew and symlink back so brew-installed CLI
+# tools (gog, gh, bw, etc.) survive add-on updates.
+# ------------------------------------------------------------------------------
+IMAGE_BREW_DIR="/home/linuxbrew/.linuxbrew"
+PERSISTENT_BREW_DIR="/config/.linuxbrew"
+
+if [ -d "$IMAGE_BREW_DIR" ] && [ ! -L "$IMAGE_BREW_DIR" ]; then
+  # Image has a real Homebrew install — sync to persistent storage
+  if [ -d "$PERSISTENT_BREW_DIR" ]; then
+    # Persistent copy exists: sync new/updated files from image (upgrades),
+    # but preserve user-installed packages already in persistent storage.
+    if command -v rsync >/dev/null 2>&1; then
+      rsync -a --update "$IMAGE_BREW_DIR/" "$PERSISTENT_BREW_DIR/" 2>/dev/null || true
+    else
+      cp -ru "$IMAGE_BREW_DIR/"* "$PERSISTENT_BREW_DIR/" 2>/dev/null || true
+    fi
+    echo "INFO: Synced Homebrew updates to persistent storage"
+  else
+    # First time: copy entire Homebrew install to persistent storage
+    cp -a "$IMAGE_BREW_DIR" "$PERSISTENT_BREW_DIR" 2>/dev/null || true
+    echo "INFO: Copied Homebrew to persistent storage at $PERSISTENT_BREW_DIR"
+  fi
+  # Replace image dir with symlink to persistent copy
+  rm -rf "$IMAGE_BREW_DIR"
+  ln -sf "$PERSISTENT_BREW_DIR" "$IMAGE_BREW_DIR"
+elif [ -L "$IMAGE_BREW_DIR" ]; then
+  echo "INFO: Homebrew already linked to persistent storage"
+elif [ -d "$PERSISTENT_BREW_DIR" ]; then
+  # Image doesn't have Homebrew (failed install?) but persistent copy exists
+  mkdir -p "$(dirname "$IMAGE_BREW_DIR")"
+  ln -sf "$PERSISTENT_BREW_DIR" "$IMAGE_BREW_DIR"
+  echo "INFO: Restored Homebrew symlink from persistent storage"
+else
+  echo "INFO: Homebrew not available (install may have failed during image build)"
+fi
+
 # Back-compat: some docs/scripts assume /data; point it at /config.
 if [ ! -e /data ]; then
   ln -s /config /data || true
@@ -341,14 +380,14 @@ if [ -f "$NGINX_PID_FILE" ]; then
   fi
   rm -f "$NGINX_PID_FILE"
 fi
-# Also kill any orphaned nginx workers that might hold port 8099
+# Also kill any orphaned nginx workers that might hold port 48099
 if command -v pkill >/dev/null 2>&1; then
   pkill -f "nginx.*-c /etc/nginx/nginx.conf" 2>/dev/null || true
   sleep 1
 fi
-# Verify port 8099 is actually free before proceeding
-if command -v ss >/dev/null 2>&1 && ss -tlnp 2>/dev/null | grep -q ':8099 '; then
-  echo "WARN: Port 8099 still in use after cleanup; nginx may fail to start"
+# Verify port 48099 is actually free before proceeding
+if command -v ss >/dev/null 2>&1 && ss -tlnp 2>/dev/null | grep -q ':48099 '; then
+  echo "WARN: Port 48099 still in use after cleanup; nginx may fail to start"
 fi
 
 # Render nginx config from template.
@@ -390,7 +429,7 @@ except Exception:
     pass
 PY
 
-echo "Starting ingress proxy (nginx) on :8099 ..."
+echo "Starting ingress proxy (nginx) on :48099 ..."
 nginx -g 'daemon off;' &
 NGINX_PID=$!
 sleep 1

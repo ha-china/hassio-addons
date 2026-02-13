@@ -1,5 +1,11 @@
 # TOMMY
 
+## 2.2.5
+
+### Minor Changes
+- Show TOMMY version on ESP32 boot
+- Switched WiFi scan to all channels
+
 ## 2.2.4
 
 ### Minor Changes
