@@ -1,5 +1,18 @@
 # TOMMY
 
+## 2.3.0
+
+### Major Changes
+- Reverted ESP-IDF from 5.5.2 to 5.5.1. Version 5.5.2 introduced a memory leak in the WiFi TX buffer, causing intermittent connection issues
+
+> **ESPHome Users:** If you are using the ESPHome integration, please update the `framework` version in your ESPHome configuration from `5.5.2` to `5.5.1`. Please clean the ESPHome build cache first. Refer to the [ESPHome integration docs](https://www.tommysense.com/docs/flashing-devices/esphome) for the updated configuration.
+
+## 2.2.6
+
+### Minor Changes
+- Improved false positives filtering
+- Fixed a bug causing high motion level when a disabled pair was re-enabled
+
 ## 2.2.5
 
 ### Minor Changes

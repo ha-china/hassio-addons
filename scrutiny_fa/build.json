@@ -1,1 +1,6 @@
-../scrutiny/build.json
+{
+  "build_from": {
+    "aarch64": "ghcr.nju.edu.cn/starosdev/scrutiny:latest-omnibus",
+    "amd64": "ghcr.nju.edu.cn/starosdev/scrutiny:latest-omnibus"
+  }
+}

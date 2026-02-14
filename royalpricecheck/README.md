@@ -1,32 +1,30 @@
-# Home assistant add-on: Royal Price Check
+# Home Assistant 插件：皇家加勒比价格检查
 
-## Description
-Notify if Royal Caribbean Cruise addons get cheaper. Can reprice the cruise, just drink package, internet, excursions, etc
+## 描述
+当皇家加勒比邮轮插件降价时进行通知。可以重新计算邮轮、饮料套餐、互联网、游览项目等的价格。
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有给我的仓库加星标的人！要给仓库加星标，请点击下方的图片，它就会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 
-## Installation
+## 安装
+安装此插件非常简单，与其他 Hass.io 插件的安装过程没有区别。
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
-
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Start the add-on. It will fail, this is ok
-1. go to /addon-configs/2effc9b9_royalpricecheck
-1. Edit `/addon-configs/2effc9b9_royalpricecheck/config.yaml` (see below)
-1. Run the addon again and check the logs
-1. After confirmed working, use an automation to run this once a day
+1. [将我的 Hass.io 插件仓库][repository] 添加到你的 Hass.io 实例中。
+1. 安装此插件。
+1. 点击 `Save` 按钮保存你的配置。
+1. 启动插件。它可能会失败，这是正常的
+1. 访问 /addon-configs/2effc9b9_royalpricecheck
+1. 编辑 `/addon-configs/2effc9b9_royalpricecheck/config.yaml`（见下文）
+1. 再次运行插件并检查日志
+1. 确认工作正常后，使用一个自动化流程每天运行一次
 
 ## Config.yaml
-See `https://github.com/jdeath/CheckRoyalCaribbeanPrice`
+请参阅 `https://github.com/jdeath/CheckRoyalCaribbeanPrice`
 
-## Automatic Running
-1. Create an automation to run this addon once a day (at a random time)
+## 自动运行
+1. 创建一个自动化流程，每天运行一次此插件（在随机时间）
 
 ```
 alias: Start Royal Price Check
@@ -43,24 +41,24 @@ action:
 mode: single
 ```
 
-# Sending a notification.
-1. edit `/addon-configs/2effc9b9_royalpricecheck/config.yaml`
-1. Configure the line for a notification
+# 发送通知
+1. 编辑 `/addon-configs/2effc9b9_royalpricecheck/config.yaml`
+1. 配置通知那一行
 
-It should look something like this for homeassistant notification:
+对于 Home Assistant 通知，它应该看起来像这样：
 ```
 # config.yaml
 apprise:
   urls:
     - 'hassio://192.168.X.XX/eyXXXXXXXXXXXXXXXX.eyXXXXXXXXXXXXXXXXXxx'
 ```
-Where the `eyXXX.eyXXX` string is a Home Assistant Long-Lived Token. Long-lived access tokens can be created using the "Long-Lived Access Tokens" section at the bottom of a user's Home Assistant profile page.
+其中 `eyXXX.eyXXX` 字符串是 Home Assistant 长期令牌。可以使用用户 Home Assistant 个人资料页面底部的“长期访问令牌”部分创建长期访问令牌。
 
-More details here: `https://github.com/caronc/apprise/wiki/Notify_homeassistant`
+更多详情请见：`https://github.com/caronc/apprise/wiki/Notify_homeassistant`
 
-More details here: `https://github.com/caronc/apprise` You can include multiple URL lines to send emails, etc
-# Add To Sidebar
-Since there is no WebUI, this cannot be shown in the sidebar. However you can add the following code to your Home Assistant `configuration.yaml` to show the log via a sidebar entry
+更多详情请见：`https://github.com/caronc/apprise` 您可以包含多行 URL 来发送邮件等
+# 添加到侧边栏
+由于没有 WebUI，无法在侧边栏中显示。但是，您可以将以下代码添加到 Home Assistant 的 `configuration.yaml` 中，通过侧边栏条目显示日志
 
 ```
 panel_custom:
@@ -77,9 +75,6 @@ panel_custom:
 
 
 [repository]: https://github.com/jdeath/homeassistant-addons
-
-
-
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

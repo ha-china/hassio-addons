@@ -1,6 +1,8 @@
+
 # Home assistant add-on: Epic Games Free
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the add-ons.
+
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
 If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
@@ -29,7 +31,7 @@ _Thanks to everyone having starred my repo! To star it click on the image below,
 ## About
 
 [Epic Games Store Weekly Free Games](https://github.com/claabs/epicgames-freegames-node) : automatically login and redeem promotional free games from the Epic Games Store. Handles multiple accounts, 2FA, captcha bypass, captcha notifications, and scheduled runs.
-This add-on is based on the docker image https://hub.docker.com/r/charlocharlie/epicgames-freegames
+This addon is based on the docker image https://hub.docker.com/r/charlocharlie/epicgames-freegames
 
 ## Configuration
 
@@ -141,7 +143,7 @@ notifications:
 ### Important Notes
 
 - **Automatic Redemption**: Due to Epic Games' improved automation detection, automatic redemption is no longer possible
-- **Notification System**: The add-on now sends redemption links via your preferred notification method instead of automatically claiming games
+- **Notification System**: The addon now sends redemption links via your preferred notification method instead of automatically claiming games
 - **2FA Support**: TOTP (Time-based One-Time Password) is supported for accounts with two-factor authentication
 - **Multiple Accounts**: You can configure multiple Epic Games accounts
 
@@ -165,7 +167,7 @@ Add the following to your config.json:
 1. Check your credentials are correct
 2. Verify 2FA/TOTP configuration if enabled
 3. Consider importing browser cookies
-4. Check the add-on logs for specific error messages
+4. Check the addon logs for specific error messages
 
 ## Installation
 
@@ -191,6 +193,7 @@ Please try adding `"browserNavigationTimeout": 300000,` to your config.json (htt
 Create an issue on github
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

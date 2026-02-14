@@ -1,0 +1,60 @@
+configuration:
+  timezone:
+    name: Fuso Horário
+    description: Fuso horário do add-on (ex., America/Sao_Paulo, America/Fortaleza)
+  
+  enable_terminal:
+    name: Habilitar Terminal Web
+    description: Habilitar botão do terminal web dentro do Home Assistant (Ingress) via ttyd
+  
+  terminal_port:
+    name: Porta do Terminal
+    description: Número da porta para o terminal web (padrão - 7681). Altere se esta porta conflitar com outro serviço.
+  
+  gateway_public_url:
+    name: URL Pública do Gateway
+    description: URL base pública para abrir a interface web do Gateway em uma nova aba (não incorporada). Exemplo - https://exemplo.duckdns.org:12345 ou http://192.168.1.10:18789
+  
+  homeassistant_token:
+    name: Token do Home Assistant
+    description: Opcional - Token de longa duração do Home Assistant para scripts/ferramentas da API local do HA
+  
+  router_ssh_host:
+    name: Host SSH do Roteador
+    description: Opcional - Nome do host ou endereço IP do roteador/firewall via SSH
+  
+  router_ssh_user:
+    name: Usuário SSH do Roteador
+    description: Opcional - Nome de usuário SSH do roteador/firewall
+  
+  router_ssh_key_path:
+    name: Caminho da Chave SSH do Roteador
+    description: Caminho para a chave privada SSH para acesso ao roteador (padrão - /data/keys/router_ssh)
+  
+  clean_session_locks_on_start:
+    name: Limpar Bloqueios de Sessão ao Iniciar
+    description: Limpar arquivos de bloqueio de sessão obsoletos deixados após falhas/reinicializações quando o add-on iniciar
+  
+  clean_session_locks_on_exit:
+    name: Limpar Bloqueios de Sessão ao Sair
+    description: Limpar arquivos de bloqueio de sessão quando o add-on parar normalmente
+  
+  gateway_mode:
+    name: Modo do Gateway
+    description: Modo de operação do gateway - local (executar gateway localmente, recomendado) ou remote (conectar a um gateway remoto)
+  
+  gateway_bind_mode:
+    name: Modo de Vinculação do Gateway
+    description: Modo de vinculação de rede - loopback (somente 127.0.0.1, mais seguro) ou lan (todas as interfaces, acessível pela rede local)
+  
+  gateway_port:
+    name: Porta do Gateway
+    description: Número da porta para o gateway do OpenClaw escutar (padrão - 18789)
+  
+  enable_openai_api:
+    name: Habilitar API OpenAI
+    description: Habilitar endpoint de Chat Completions compatível com OpenAI. Permite usar o OpenClaw como agente de conversação no pipeline do HA Assist via Extended OpenAI Conversation (HACS) ou qualquer cliente compatível com OpenAI.
+  
+  allow_insecure_auth:
+    name: Permitir Autenticação HTTP Insegura
+    description: Permitir autenticação HTTP para acesso ao gateway na LAN. AVISO - Habilite somente se estiver usando HTTP (não HTTPS) para gateway_public_url. Necessário para acesso pelo navegador via HTTP.

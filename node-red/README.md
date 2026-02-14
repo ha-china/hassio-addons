@@ -1,24 +1,25 @@
-# Home Assistant 社区应用：Node-RED
+# Home Assistant Community App: Node-RED
 
-[![发布版本][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护状态][maintenance-shield]
+[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
 
-[![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
+[![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
 
-[![通过 GitHub Sponsors 赞助 Frenck][github-sponsors-shield]][github-sponsors]
+[![Sponsor Frenck via GitHub Sponsors][github-sponsors-shield]][github-sponsors]
 
-[![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
+[![Support Frenck on Patreon][patreon-shield]][patreon]
 
-基于流程的物联网编程。
+Flow-based programming for the Internet of Things.
 
-## 关于
+## About
 
-[Node-RED][nodered] 是一个编程工具，用于将硬件设备、
-API 和在线服务以新颖且有趣的方式连接在一起。
+[Node-RED][nodered] is a programming tool for wiring together hardware devices,
+APIs and online services in new and interesting ways.
 
-它提供了一个基于浏览器的编辑器，可以轻松地利用调色板中广泛的节点，将流程连接在一起，
-并一键部署到其运行时。
+It provides a browser-based editor that makes it easy to wire together flows
+using the wide range of nodes in the palette that can be deployed to its
+runtime in a single click.
 
-![Home Assistant 前端中的 Node-RED][screenshot]
+![Node-RED in the Home Assistant Frontend][screenshot]
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -31,8 +32,8 @@ API 和在线服务以新颖且有趣的方式连接在一起。
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v21.0.0-blue.svg
-[release]: https://github.com/hassio-addons/app-node-red/tree/v21.0.0
+[release-shield]: https://img.shields.io/badge/version-v21.0.1-blue.svg
+[release]: https://github.com/hassio-addons/app-node-red/tree/v21.0.1
 [screenshot]: https://github.com/hassio-addons/app-node-red/raw/main/images/screenshot.png
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

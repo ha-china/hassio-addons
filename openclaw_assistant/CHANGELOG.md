@@ -1,5 +1,15 @@
 # Changelog
 
+All notable changes to the OpenClaw Assistant Home Assistant Add-on will be documented in this file.
+
+## [0.5.43] - 2026-02-13
+
+### Changed
+- Bump OpenClaw to 2026.2.12
+
+### Added
+- Portuguese (Brazil) translation (`pt-BR.yaml`) by medeirosiago
+
 ## [0.5.42] - 2026-02-12
 
 ### Changed

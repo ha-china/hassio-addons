@@ -1,8 +1,7 @@
 arch:
   - aarch64
   - amd64
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：用于更新电影、节目和收藏的元数据信息以及自动构建收藏的Python脚本'
+description: '[老王杂谈说]：用于更新电影、剧集和合集的元数据信息，以及自动构建合集的 Python 脚本。'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -73,6 +72,7 @@ map:
   - media:rw
 name: Kometa
 options:
+  env_vars: []
   KOMETA_CONFIG: /config/addons_config/kometa/config.yml
   PGID: 0
   PUID: 0
@@ -80,6 +80,9 @@ privileged:
   - SYS_ADMIN
   - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   KOMETA_CONFIG: str
   KOMETA_NO_MISSING: bool?
   KOMETA_RUN: bool?
@@ -91,4 +94,4 @@ schema:
 slug: kometa
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/kometa
-version: 2.2.2
+version: "2.3.0"
