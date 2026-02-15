@@ -1,7 +1,7 @@
 name: OpenClaw Assistant
-version: "0.5.43"
+version: "0.5.44"
 slug: openclaw_assistant
-description: '[老王杂谈说]：将 OpenClaw 助手（OpenClaw 兼容的）作为 Home Assistant 附加组件运行。'
+description: '[老王杂谈说]：将 OpenClaw Assistant（OpenClaw 兼容）作为 Home Assistant 附加组件运行。'
 url: https://ghfast.top/github.com/techartdev/OpenClawHomeAssistant
 arch:
   - amd64
