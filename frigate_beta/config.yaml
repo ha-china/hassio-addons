@@ -1,14 +1,14 @@
 name: Frigate Beta
-version: 0.17.0-rc1
+version: 0.17.0-rc2
 breaking_versions:
-  - 0.17.0-beta1
+  - 0.17.0
   - 0.16.0
   - 0.15.0
   - 0.14.0
 panel_icon: "mdi:cctv"
 panel_title: Frigate
 slug: frigate-beta
-description: '[老王杂谈说]：具备实时本地目标检测功能的网络录像机'
+description: '[老王杂谈说]：用于 IP 摄像机的具有实时本地目标检测功能的网络录像机'
 url: "https://ghfast.top/github.com/blakeblackshear/frigate"
 image: ghcr.nju.edu.cn/blakeblackshear/frigate
 startup: application

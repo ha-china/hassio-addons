@@ -1,5 +1,13 @@
 # TOMMY
 
+## 2.4.0
+
+### Major Changes
+- Switched to serial provisioning instead of Wi-Fi provisioning when using the TOMMY Flasher, enabling much faster device flashing
+
+### Minor Changes
+- Added optional max TX power input during device provisioning (dBm, 2–20, rounds to nearest 0.25 dBm)
+
 ## 2.3.0
 
 ### Major Changes
