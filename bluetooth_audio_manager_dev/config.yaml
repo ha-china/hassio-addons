@@ -1,7 +1,7 @@
 name: "Bluetooth Audio Manager (Dev)"
-version: "sha-506d2fb"
+version: "sha-f795433"
 slug: bluetooth_audio_manager_dev
-description: "[老王杂谈说]：Development build - may be unstable. 具备持久配对和自动重连功能的蓝牙 A2DP 音频设备管理。"
+description: "[老王杂谈说]：开发版 - 可能不稳定。支持持久配对和自动重连的蓝牙 A2DP 音频设备管理。"
 url: "https://ghfast.top/github.com/scyto/ha-bluetooth-audio-manager"
 image: "ghcr.nju.edu.cn/scyto/ha-bluetooth-audio-manager-dev/{arch}"
 arch:

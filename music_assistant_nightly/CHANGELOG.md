@@ -1,3 +1,50 @@
+# [2.8.0.dev2026021704] - 17.02.2026
+
+## 📦 Nightly Release
+
+_Changes since [2.8.0.dev2026021609](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2026021609)_
+
+### 🐛 Bugfixes
+
+- abs: report correct time_listened in sessions (by @fmunkes in #3163)
+- fix: adapt playlog for all users if no user present (by @fmunkes in #3169)
+- fix: add name back to abs/itunes recommendation folders (by @fmunkes in #3170)
+- Auto cleanup cache db when it grows >= 2GB (by @MarvinSchenkel in #3174)
+
+### 🎨 Frontend Changes
+
+- [Bug] Fix player settings filters lost on save (by @chrisuthe in [#1458](https://github.com/music-assistant/frontend/pull/1458))
+- Restrict images and provider details sections to admins (by @OzGav in [#1457](https://github.com/music-assistant/frontend/pull/1457))
+
+### 🧰 Maintenance and dependency bumps
+
+- ⬆️ Update music-assistant-frontend to 2.17.88 (by @music-assistant-machine in #3178)
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@MarvinSchenkel, @OzGav, @chrisuthe, @fmunkes
+
+
+# [2.8.0.dev2026021609] - 16.02.2026
+
+## 📦 Nightly Release
+
+_Changes since [2.8.0.dev2026021605](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2026021605)_
+
+### 🐛 Bugfixes
+
+- Fix AttributeError when provider is temporarily unavailable (by @teancom in #3157)
+- Fix index_in_buffer or current_index treating index 0 as unset (by @teancom in #3160)
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@teancom
+
+
 # [2.8.0.dev2026021605] - 16.02.2026
 
 ## 📦 Nightly Release
@@ -25,36 +72,5 @@ _Changes since [2.8.0.dev2026021407](https://github.com/music-assistant/server/r
 Special thanks to the following contributors who helped with this release:
 
 @chrisuthe, @claude-goomba, @marcelveldt
-
-
-# [2.8.0.dev2026021407] - 14.02.2026
-
-* No changes
-
-
-# [2.8.0.dev2026021404] - 14.02.2026
-
-## 📦 Nightly Release
-
-_Changes since [2.8.0.dev2026021305](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2026021305)_
-
-### 🐛 Bugfixes
-
-- Always cleanup smart fades tmp files (by @MarvinSchenkel in #3143)
-- Fix case-sensitive comparison in compare_strings fuzzy matching (by @teancom in #3151)
-- Fix M3U parser truncating EXTINF duration to single character (by @teancom in #3152)
-- Fix operator precedence and inverted dedup logic in audiobooks playlog (by @teancom in #3153)
-- Fix for Spotify returning endless tracks from playlist (by @MarvinSchenkel in #3155)
-
-### 🧰 Maintenance and dependency bumps
-
-- Chore(deps): Bump docker/build-push-action from 6.19.1 to 6.19.2 (by @dependabot[bot] in #3148)
-- ⬆️ Update music-assistant-frontend to 2.17.86 (by @music-assistant-machine in #3162)
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@MarvinSchenkel, @teancom
 
 
