@@ -1,3 +1,9 @@
+## 26.2.6-4 (18-02-2026)
+- Minor bugs fixed
+## 26.2.6-3 (17-02-2026)
+- Minor bugs fixed
+## 26.2.6-2 (17-02-2026)
+- Minor bugs fixed
 ## 26.2.6 (16-02-2026)
 - Minor bugs fixed
 ## 26.2.4 (04-02-2026)

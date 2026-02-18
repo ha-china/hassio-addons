@@ -14,39 +14,10 @@
 # 1 Build Image #
 #################
 
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base:9.1.0
-###############################################################################
-# Get prebuild containers from Vaultwarden
-###############################################################################
-FROM "vaultwarden/server:latest" AS vaultwarden
-
-###############################################################################
-# Build the actual add-on.
-###############################################################################
-# hadolint ignore=DL3006
+ARG BUILD_FROM
+ARG BUILD_VERSION
 FROM ${BUILD_FROM}
-
-# Set shell
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-# Get the Bitwarden from official images
-COPY --from=vaultwarden /vaultwarden /opt/vaultwarden
-COPY --from=vaultwarden /web-vault /opt/web-vault
-
-RUN \
-    apt-get update \
-    \
-    && apt-get install -y --no-install-recommends \
-        libmariadb-dev-compat \
-        libpq5 \
-        nginx \
-        sqlite3 \
-    && apt-get clean \
-    && rm -f -r \
-        /etc/nginx \
-    \
-    && mkdir -p /var/log/nginx \
-    && touch /var/log/nginx/error.log
+ENV BASHIO_VERSION=1.29.1
 
 ##################
 # 2 Modify Image #
@@ -57,15 +28,18 @@ ENV S6_CMD_WAIT_FOR_SERVICES=1 \
     S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
     S6_SERVICES_GRACETIME=0
 
+# Global LSIO modifications
+ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_lsio.sh" "/ha_lsio.sh"
+ARG CONFIGLOCATION="/config"
+RUN chmod 744 /ha_lsio.sh && if grep -qr "lsio" /etc; then /ha_lsio.sh "$CONFIGLOCATION"; fi && rm /ha_lsio.sh
+
 ##################
 # 3 Install apps #
 ##################
 
-# Add rootfs
+# Copy local files
 COPY rootfs/ /
 RUN find . -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -exec chmod +x {} \;
-
-RUN chmod +x /etc/s6-overlay/s6-rc.d/*/run
 
 # Uses /bin for compatibility purposes
 # hadolint ignore=DL4005
@@ -73,7 +47,7 @@ RUN if [ ! -f /bin/sh ] && [ -f /usr/bin/sh ]; then ln -s /usr/bin/sh /bin/sh; f
     if [ ! -f /bin/bash ] && [ -f /usr/bin/bash ]; then ln -s /usr/bin/bash /bin/bash; fi
 
 # Modules
-ARG MODULES="00-banner.sh 01-custom_script.sh"
+ARG MODULES="00-banner.sh 01-custom_script.sh 00-local_mounts.sh 00-smb_mounts.sh"
 
 # Automatic modules download
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_automodules.sh" "/ha_automodules.sh"
@@ -103,7 +77,6 @@ RUN chmod 0755 /usr/local/lib/bashio-standalone.sh
 #WORKDIR /
 #ENTRYPOINT [ "/usr/bin/env" ]
 #CMD [ "/ha_entrypoint.sh" ]
-#SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 ############
 # 5 Labels #
@@ -136,31 +109,6 @@ LABEL \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}
 
-#################
-# 6 Healthcheck #
-#################
-
-# Avoid spamming logs
-# hadolint ignore=SC2016
-RUN \
-    # Handle Apache configuration
-    if [ -d /etc/apache2/sites-available ]; then \
-        for file in /etc/apache2/sites-*/*.conf; do \
-            sed -i '/<VirtualHost/a \ \n    # Match requests with the custom User-Agent "HealthCheck" \n    SetEnvIf User-Agent "HealthCheck" dontlog \n    # Exclude matching requests from access logs \n    CustomLog ${APACHE_LOG_DIR}/access.log combined env=!dontlog' "$file"; \
-        done; \
-    fi && \
-    \
-    # Handle Nginx configuration
-    if [ -f /etc/nginx/nginx.conf ]; then \
-        awk '/http \{/{print; print "map $http_user_agent $dontlog {\n  default 0;\n  \"~*HealthCheck\" 1;\n}\naccess_log /var/log/nginx/access.log combined if=$dontlog;"; next}1' /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.new && \
-        mv /etc/nginx/nginx.conf.new /etc/nginx/nginx.conf; \
-    fi
-
-ENV HEALTH_PORT="80" \
-    HEALTH_URL=""
-HEALTHCHECK \
-    --interval=5s \
-    --retries=5 \
-    --start-period=30s \
-    --timeout=25s \
-    CMD curl -A "HealthCheck: Docker/1.0" -s -f "http://127.0.0.1:${HEALTH_PORT}${HEALTH_URL}" &>/dev/null || exit 1
+####################
+# 6 HealthcheckNOT #
+####################

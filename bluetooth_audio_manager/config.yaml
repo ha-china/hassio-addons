@@ -1,9 +1,9 @@
 name: "Bluetooth Audio Manager"
-version: "1.0.0"
+version: "1.0.1"
 slug: bluetooth_audio_manager
-description: "[老王杂谈说]：使用持久配对、自动重连和 AppArmor 安全来管理蓝牙音频设备连接 (A2DP)。"
+description: "[老王杂谈说]：使用持久配对、自动重连和 AppArmor 安全管理蓝牙音频设备连接（A2DP）。"
 url: "https://ghfast.top/github.com/scyto/ha-bluetooth-audio-manager"
-image: "ghcr.nju.edu.cn/scyto/ha-bluetooth-audio-manager/{arch}"
+image: "ghcr.nju.edu.cn/scyto/ha-bluetooth-audio-manager"
 arch:
   - aarch64
   - amd64

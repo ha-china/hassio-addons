@@ -31,15 +31,20 @@ Bluetooth integration (used for BLE sensors, beacons, etc.):
   never affect HA's scanning
 - The adapter's power, discoverable, and pairable states are never modified
 
-## Configuration
+## App Configuration
 
 | Option | Default | Description |
 |--------|---------|-------------|
 | `log_level` | `info` | Logging verbosity (debug, info, warning, error) |
-| `auto_reconnect` | `true` | Automatically reconnect disconnected devices |
+| `audio device` | `default` | Do NOT touch this setting, it is not usedd |
+
+## In App Settings
+| Option | Default | Description |
+|--------|---------|-------------|
 | `reconnect_interval_seconds` | `30` | Initial reconnection delay |
 | `reconnect_max_backoff_seconds` | `300` | Maximum reconnection delay |
 | `scan_duration_seconds` | `15` | How long to scan for devices |
+
 
 ### Per-device keep-alive
 
@@ -77,7 +82,7 @@ when MPD starts. MPD's software volume then acts as the single volume knob — s
 | **HA automation** `media_player.volume_set` | MPD software volume changes → effective output = that % |
 | **TTS with volume preset** | Automation sets volume then speaks → plays at that level |
 
-## Usage
+## General Usage
 
 1. Open the app from the Home Assistant sidebar ("BT Audio")
 2. Click **Scan for Devices** (make sure your speaker is in pairing mode)
@@ -85,6 +90,16 @@ when MPD starts. MPD's software volume then acts as the single volume knob — s
 4. Click **Connect** — the device will appear as a PulseAudio audio sink
 5. Go to **Settings > System > Audio** to see/select the Bluetooth speaker
 6. Use TTS, media player, or automations to play audio through it
+
+## MPD Integration
+1. Get the hostname of the app from the app page in HAOS app manager (e.g. d4261985-bluetooth-audio-manager)
+2. In devices and integration click add integration
+3. Find the MPD integration
+4. fill in the fields:
+   - hostname (use the one you got in step one)
+   - password - leave blank
+   - port - the port shown in the config for the player 
+
 
 ## Requirements
 
@@ -115,8 +130,8 @@ pairing mode). Then scan and pair again from the app.
 
 **`Authentication Rejected` when pairing**: The speaker still has old pairing
 keys for your system's Bluetooth address and is refusing the new pairing
-attempt. Clear the speaker's paired-device list (hold the Bluetooth button for
-~10 seconds) so both sides start fresh, then re-pair from the app.
+attempt. Clear the speaker's paired-device list (e.g hold the Bluetooth button for
+~10 seconds or more) so both sides start fresh, then re-pair from the app.
 
 **Existing BLE integrations stopped working**: This should not happen by
 design. Check the app logs for errors and file an issue on GitHub.
