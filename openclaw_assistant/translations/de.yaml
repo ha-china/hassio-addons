@@ -58,3 +58,7 @@ configuration:
   allow_insecure_auth:
     name: Unsichere HTTP-Authentifizierung erlauben
     description: HTTP-Authentifizierung für Gateway-Zugriff im LAN erlauben. WARNUNG - Nur aktivieren, wenn HTTP (nicht HTTPS) für gateway_public_url verwendet wird. Erforderlich für Browser-Zugriff über HTTP.
+
+  force_ipv4_dns:
+    name: IPv4-DNS-Reihenfolge erzwingen
+    description: Erzwingt IPv4-vorrangige DNS-Auflösung für Node-Netzwerkaufrufe. Nützlich, wenn IPv6-DNS aufgelöst wird, aber IPv6-Internet-Routing nicht funktioniert (kann Telegram-API-Polling beeinträchtigen).

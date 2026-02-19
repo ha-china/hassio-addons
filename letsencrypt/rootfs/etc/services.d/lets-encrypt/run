@@ -34,6 +34,7 @@ LEGACY_PROVIDERS="dns-eurodns dns-gehirn dns-noris"
 DEPRECATED_PROVIDERS="dns-azure dns-he"
 
 if [ "${CHALLENGE}" == "dns" ]; then
+    bashio::config.require 'dns.provider'
     bashio::log.info "Selected DNS Provider: ${DNS_PROVIDER}"
 
     PROPAGATION_SECONDS=60
@@ -554,8 +555,7 @@ if bashio::config.has_value 'acme_server'; then
         echo "${ACME_ROOT_CA_CERT}" \
           | sed 's/----- /-----\n/g' | sed 's/ -----/\n-----/g' \
           | openssl x509  > /usr/local/share/ca-certificates/acme_root_ca.crt \
-          && update-ca-certificates --fresh \
-          && export REQUESTS_CA_BUNDLE=/etc/ssl/cert.pem
+          && update-ca-certificates --fresh
     fi
 else
     # Relevant only for default Let's Encrypt servers.

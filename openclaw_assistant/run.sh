@@ -50,11 +50,23 @@ GATEWAY_BIND_MODE=$(jq -r '.gateway_bind_mode // "loopback"' "$OPTIONS_FILE")
 GATEWAY_PORT=$(jq -r '.gateway_port // 18789' "$OPTIONS_FILE")
 ENABLE_OPENAI_API=$(jq -r '.enable_openai_api // false' "$OPTIONS_FILE")
 ALLOW_INSECURE_AUTH=$(jq -r '.allow_insecure_auth // false' "$OPTIONS_FILE")
+FORCE_IPV4_DNS=$(jq -r '.force_ipv4_dns // false' "$OPTIONS_FILE")
 
 export TZ="$TZNAME"
 
 # Reduce risk of secrets ending up in logs
 set +x
+
+# Optional network hardening/workaround: force IPv4-first DNS ordering for Node.js.
+# Helps in environments where IPv6 resolves but has no working egress.
+if [ "$FORCE_IPV4_DNS" = "true" ] || [ "$FORCE_IPV4_DNS" = "1" ]; then
+  if [ -n "${NODE_OPTIONS:-}" ]; then
+    export NODE_OPTIONS="${NODE_OPTIONS} --dns-result-order=ipv4first"
+  else
+    export NODE_OPTIONS="--dns-result-order=ipv4first"
+  fi
+  echo "INFO: Enabled IPv4-first DNS ordering (NODE_OPTIONS=--dns-result-order=ipv4first)"
+fi
 
 # HA add-ons mount persistent storage at /config (maps to /addon_configs/<slug> on the host).
 export HOME=/config
@@ -356,6 +368,21 @@ if [ -f "$TTYD_PID_FILE" ]; then
 fi
 
 if [ "$ENABLE_TERMINAL" = "true" ] || [ "$ENABLE_TERMINAL" = "1" ]; then
+  # Check if the terminal port is already in use before starting ttyd
+  if command -v ss >/dev/null 2>&1 && ss -tlnp 2>/dev/null | grep -q ":${TERMINAL_PORT} "; then
+    echo ""
+    echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    echo "!!  WARNING: terminal_port ${TERMINAL_PORT} IS ALREADY IN USE  !!"
+    echo "!!                                                             !!"
+    echo "!!  The web terminal (ttyd) may FAIL to start because port     !!"
+    echo "!!  ${TERMINAL_PORT} appears to be in use by another process.  !!"
+    echo "!!                                                             !!"
+    echo "!!  ACTION REQUIRED: If the terminal does not work, go to      !!"
+    echo "!!  Add-on Configuration and change 'terminal_port' to a free  !!"
+    echo "!!  port, then restart the add-on.                             !!"
+    echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    echo ""
+  fi
   echo "Starting web terminal (ttyd) on 127.0.0.1:${TERMINAL_PORT} ..."
   ttyd -W -i 127.0.0.1 -p "${TERMINAL_PORT}" -b /terminal bash &
   TTYD_PID=$!

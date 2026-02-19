@@ -1,5 +1,5 @@
 ---
-version: 2.16.3
+version: 2.16.4
 slug: openthread_border_router_network
 name: OpenThread Border Router (Network device)
 description: '[老王杂谈说]：用于网络设备的 OpenThread 边界路由器附加组件'

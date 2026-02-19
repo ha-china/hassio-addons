@@ -58,3 +58,7 @@ configuration:
   allow_insecure_auth:
     name: Permitir Autenticação HTTP Insegura
     description: Permitir autenticação HTTP para acesso ao gateway na LAN. AVISO - Habilite somente se estiver usando HTTP (não HTTPS) para gateway_public_url. Necessário para acesso pelo navegador via HTTP.
+
+  force_ipv4_dns:
+    name: Forçar ordem DNS IPv4
+    description: Força a ordem de DNS com prioridade para IPv4 nas chamadas de rede do Node. Útil quando o DNS IPv6 resolve, mas o roteamento IPv6 para a internet está quebrado (pode afetar o polling da API do Telegram).

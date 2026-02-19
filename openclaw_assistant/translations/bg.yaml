@@ -58,3 +58,7 @@ configuration:
   allow_insecure_auth:
     name: Разрешаване на HTTP автентикация
     description: Разрешаване на HTTP автентикация за достъп до gateway в локалната мрежа. ВНИМАНИЕ - Активирайте само ако използвате HTTP (не HTTPS) за gateway_public_url. Необходимо за достъп от браузър през HTTP.
+
+  force_ipv4_dns:
+    name: Принудителен IPv4 DNS ред
+    description: Принудително задава IPv4-приоритет при DNS резолв за Node мрежови заявки. Полезно е, когато IPv6 DNS се резолвира, но IPv6 интернет маршрутизацията е неработеща (може да влияе на Telegram API polling).

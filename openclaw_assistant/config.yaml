@@ -1,7 +1,7 @@
 name: OpenClaw Assistant
-version: "0.5.45"
+version: "0.5.46"
 slug: openclaw_assistant
-description: '[老王杂谈说]：作为 Home Assistant 附加组件运行 OpenClaw 助手（OpenClaw 兼容）。'
+description: '[老王杂谈说]：将 OpenClaw 助手 (OpenClaw 兼容) 作为 Home Assistant 插件运行。'
 url: https://ghfast.top/github.com/techartdev/OpenClawHomeAssistant
 arch:
   - amd64
@@ -61,6 +61,10 @@ options:
   # WARNING: Only enable if you're using HTTP (not HTTPS) for gateway_public_url
   # Default is false for security.
   allow_insecure_auth: false
+  # Force IPv4-first DNS result ordering for Node fetch/network calls.
+  # Useful on networks where IPv6 resolution exists but IPv6 egress is broken
+  # (can affect Telegram API polling in some HAOS/VM setups).
+  force_ipv4_dns: false
 schema:
   timezone: str
   enable_terminal: bool?
@@ -77,3 +81,4 @@ schema:
   gateway_port: int(1,65535)?
   enable_openai_api: bool?
   allow_insecure_auth: bool?
+  force_ipv4_dns: bool?
