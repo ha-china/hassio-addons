@@ -1,35 +1,35 @@
-# Home Assistant 附加组件：Seerr
+# Home Assistant add-on: Seerr
 
-## 关于
+## About
 
-此附加组件打包了 [Seerr](https://seerr.dev/)，这是一个用于 Jellyfin、Plex 和 Emby 的开源媒体请求和发现管理器。
+This add-on packages [Seerr](https://seerr.dev/), an open-source media request and discovery manager for Jellyfin, Plex, and Emby.
 
-此附加组件基于现有的 Overseerr 附加组件结构，针对 Seerr 上游项目和容器镜像进行了适配。
+This add-on is based on the existing Overseerr add-on structure, adapted for the Seerr upstream project and container image. It supports Home Assistant Ingress via an internal NGINX reverse proxy.
 
-上游仓库参考：
+Upstream repositories reviewed:
 - Overseerr: https://github.com/sct/overseerr
 - Seerr: https://github.com/seerr-team/seerr
 
-## 安装
+## Installation
 
-1. 将此仓库添加到 Home Assistant。
-2. 安装 **Seerr**。
-3. 配置选项，然后启动附加组件。
-4. 在端口 `5055` 上打开 Web 界面。
+1. Add this repository to Home Assistant.
+2. Install **Seerr**.
+3. Configure options, then start the add-on.
+4. Open the Web UI on port `5055` or via Home Assistant Ingress.
 
-## 配置
+## Configuration
 
-使用 `env_vars` 在需要时传递额外的环境变量。Seerr 配置存储在 `/config` 中。
+Use `env_vars` to pass extra environment variables when needed. Seerr configuration is stored in `/config`.
 
-### 选项
+### Options
 
-| 选项 | 类型 | 默认值 | 描述 |
+| Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `PGID` | int | `0` | 文件权限的组 ID |
-| `PUID` | int | `0` | 文件权限的用户 ID |
-| `TZ` | str | | 时区（例如 `Europe/London`） |
+| `PGID` | int | `0` | Group ID for file permissions |
+| `PUID` | int | `0` | User ID for file permissions |
+| `TZ` | str | | Timezone (e.g. `Europe/London`) |
 
-### 示例
+### Example
 
 ```yaml
 env_vars: []
@@ -38,9 +38,10 @@ PUID: 0
 TZ: Europe/London
 ```
 
-## 支持
+## Support
 
-如果你发现错误，请在此仓库中提交 Issue。
+If you find a bug, open an issue in this repository.
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

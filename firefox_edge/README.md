@@ -1,49 +1,50 @@
-# Home Assistant 添加组件：Firefox (Edge)
+# Home Assistant Add-on: Firefox (Edge)
 
-在 Home Assistant 中以浏览器身份运行 Firefox，以便从家中访问本地或外部网站。
+_Run Firefox as a browser inside Home Assistant to access local or external web sites from your home._
 
-![支持 aarch64 架构][aarch64-shield]
-![支持 amd64 架构][amd64-shield]
-![支持 armv7 架构][armv7-shield]
-![支持 i386 架构][i386-shield]
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+![Supports armv7 Architecture][armv7-shield]
+![Supports i386 Architecture][i386-shield]
 
-## 关于
+## About
 
-Mozilla Firefox 是由 Mozilla 基金会及其子公司 Mozilla 公司开发的一款免费且开源的网页浏览器。
+Mozilla Firefox is a free and open-source web browser developed by Mozilla Foundation and its subsidiary, Mozilla Corporation.
 
-此添加组件基于 [Docker 镜像](https://github.com/jlesage/docker-firefox) 来自 [Jocelyn Le Sage](https://github.com/jlesage)。
+This add-on is based on the [docker image](https://github.com/jlesage/docker-firefox) from [Jocelyn Le Sage](https://github.com/jlesage).
 
-非常感谢他为创建和维护出色的容器所做的贡献。
-他是需要被 [支持](https://github.com/sponsors/jlesage) 的真正英雄。
+A huge thank to him for the great containers created and maintained.
+He's the real hero who needs to be [supported](https://github.com/sponsors/jlesage).
 
-## 与原始容器的差异
+## Differences with the original container
 
-有一些差异是此容器作为添加组件运行所必需的，或者只是基于我个人偏好的调整：
+There are a few differences that were either required for this container to work as an Add-on or just my own tweaks based on my preferences:
 
-- Edge 版本：此容器不是基于 Alpine **稳定版**，而是基于 Alpine **边缘版**。主要原因是为了受益于最新的 Firefox 版本。在启动时，容器可能会在日志中显示较旧版本的 Firefox，可以忽略。每次容器启动时，它都会尝试更新 Firefox。
-- 为了使其与 Home Assistant 持久化兼容，我需要重新映射文件夹，为此，启动脚本以 `root` 身份运行。我将在未来尽量避免这种情况。
+- Edge version: this container is not based on Alpine **Stable** but Alpine **Edge**. The main reason was to benefit from the latest Firefox version available. During the startup, the container may show in the log an older version of Firefox, it can be ignored. It attempts to update Firefox each time the container starts.
+- To make it compatible with Home Assistant persistence, I needed to remap folders and to do so, the startup script runs as `root`. I will try to avoid this in the future.
 
-## 如何使用
+## How to use
 
-只需安装，启动容器，然后点击“打开 Web UI”。您可以使用“在侧边栏中显示”以方便访问。您在 Firefox 中所做的所有操作都会被持久化。即使您停止添加组件或重新启动 Home Assistant 主机操作系统。
+Just install, start the container and click on "Open Web UI". You can use "Show in sidebar" for easy access. Everything you do is persisted in Firefox. Even if you stop the Add-on or restart Home Assistant host OS.
 
-## 下载
+## Downloads
 
-在 Firefox 中下载的文件将自动存储到您的 `/share/firefox` 文件夹中。
+The files downloaded in Firefox are automatically stored to your `/share/firefox` folder.
 
-## 上传
+## Uploads
 
-如果您需要通过 Firefox 添加组件上传文件，您可以使用 [文件编辑器添加组件](https://github.com/home-assistant/addons/blob/master/configurator/) 将文件上传到您的 `/share/firefox` 文件夹。
-文件将在添加组件的 `downloads` 文件夹中可用。当您选择要上传的文件时，可以浏览到此位置。
+If you need to upload files through the Firefox add-on, you can use the [File editor add-on](https://github.com/home-assistant/addons/blob/master/configurator/) to upload the files to your `/share/firefox` folder.
+The files will be available in the `downloads` folder of the add-on. You can browse to this location when you select the files to upload.
 
-## 导入书签
+## Import bookmarks
 
-您可以通过将它们放入您的 `/share/firefox` 文件夹中导入 `bookmarks.html` 文件，并在 Firefox 中导入 `bookmarks.html` 文件。
+You can import `bookmarks.html` file by dropping them in your `/share/firefox` folder and import the `bookmarks.html` file in Firefox.
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

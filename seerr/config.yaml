@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：用于 Jellyfin、Plex 和 Emby 的开源媒体请求与发现管理器'
+description: '[老王杂谈说]：用于 Jellyfin、Plex 和 Emby 的开源媒体请求和发现管理器'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -66,6 +66,8 @@ devices:
   - /dev/nvme2
 environment: {}
 image: ghcr.nju.edu.cn/alexbelgium/seerr-{arch}
+ingress: true
+ingress_stream: true
 init: false
 map:
   - addon_config:rw
@@ -89,5 +91,4 @@ schema:
 slug: seerr
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/seerr
-version: "3.0.1"
-webui: "[PROTO:ssl]://[HOST]:[PORT:5055]"
+version: "3.0.1-5"

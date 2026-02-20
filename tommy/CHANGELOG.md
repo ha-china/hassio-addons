@@ -1,5 +1,13 @@
 # TOMMY
 
+## 2.4.1
+
+### Minor Changes
+- Improved WebSocket performance between the server and dashboard
+- Fixed a bug that caused the WebSocket send buffer to grow unbounded during reconnection
+- Minor UI improvements
+- Added a welcome message
+
 ## 2.4.0
 
 ### Major Changes

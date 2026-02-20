@@ -468,34 +468,41 @@ const getReqSession = (req) => {
 };
 
 // --- Media Support ---
-const MEDIA_DIR = path.join(process.cwd(), 'media');
+const MEDIA_DIR = process.env.MEDIA_FOLDER || path.join(process.cwd(), 'media');
 if (!fs.existsSync(MEDIA_DIR)) {
   fs.mkdirSync(MEDIA_DIR, { recursive: true });
 }
+logger.info(`📂 Media Directory: ${MEDIA_DIR}`);
+
 // Serve media files publicly (or protected if needed, but usually HA needs access)
 // We use a random token in the filename to provide obscure URLs instead of full auth complexity specific for HA
 app.use('/media', express.static(MEDIA_DIR));
 
 // Clean up old media files every hour (keep for 24h)
-setInterval(
-  () => {
-    const now = Date.now();
-    const maxAge = 24 * 60 * 60 * 1000;
-    fs.readdir(MEDIA_DIR, (err, files) => {
-      if (err) return;
-      files.forEach((file) => {
-        const filePath = path.join(MEDIA_DIR, file);
-        fs.stat(filePath, (err, stats) => {
-          if (err) return;
-          if (now - stats.mtimeMs > maxAge) {
-            fs.unlink(filePath, () => {});
-          }
+// ONLY if not using a custom media folder (to prevent deleting user data)
+if (!process.env.MEDIA_FOLDER) {
+  setInterval(
+    () => {
+      const now = Date.now();
+      const maxAge = 24 * 60 * 60 * 1000;
+      fs.readdir(MEDIA_DIR, (err, files) => {
+        if (err) return;
+        files.forEach((file) => {
+          const filePath = path.join(MEDIA_DIR, file);
+          fs.stat(filePath, (err, stats) => {
+            if (err) return;
+            if (now - stats.mtimeMs > maxAge) {
+              fs.unlink(filePath, () => {});
+            }
+          });
         });
       });
-    });
-  },
-  60 * 60 * 1000
-);
+    },
+    60 * 60 * 1000
+  );
+} else {
+  logger.info('⚠️  Custom Media Folder in use - Automatic cleanup DISABLED.');
+}
 
 // --- Store Initialization ---
 // Session-specific message stores are managed within the session object.
@@ -865,8 +872,21 @@ app.get('/stats', (req, res) => {
 // POST /send_message
 app.post('/send_message', async (req, res) => {
   const session = getReqSession(req);
-  const { number, message } = req.body;
+  const { number, message, quotedMessageId } = req.body;
   if (!session.isConnected) return res.status(503).json({ detail: 'Not connected' });
+
+  let quoted = undefined;
+  if (quotedMessageId) {
+    // Note: messageStore is in-memory and ephemeral. It only contains messages
+    // received/sent during the current session. If the addon restarts,
+    // quoting will fall back to unquoted if the ID is not in the new store.
+    const rawMsg = session.messageStore.get(quotedMessageId);
+    if (rawMsg) {
+      quoted = rawMsg;
+    } else {
+      logger.warn({ quotedMessageId, sessionId: session.id }, 'Quoted message not found in store');
+    }
+  }
 
   try {
     const jid = getJid(number);
@@ -890,7 +910,7 @@ app.post('/send_message', async (req, res) => {
     await delay(250);
 
     await Promise.race([
-      session.sock.sendMessage(jid, { text: message }),
+      session.sock.sendMessage(jid, { text: message }, { quoted }),
       new Promise((_, reject) =>
         setTimeout(() => {
           logger.error(

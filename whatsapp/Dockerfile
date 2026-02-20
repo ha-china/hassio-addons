@@ -7,14 +7,16 @@ ARG BUILD_DATE="unknown"
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # 1. Install Node.js & Git (Using standard repos for stability)
+
+# 1. Install Node.js & Git (Using standard repos for stability)
+# hadolint ignore=DL3018
+
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="1.2.2"
+ENV ADDON_VERSION="1.2.3"
 ENV ADDON_NAME="WhatsApp"
 ENV ADDON_SLUG="whatsapp"
 ENV ADDON_UNSUPPORTED="false"
 
-# 1. Install Node.js & Git (Using standard repos for stability)
-# hadolint ignore=DL3018
 RUN \
  apk add --no-cache -u libssl3 libcrypto3 \
         nodejs \
@@ -75,7 +77,7 @@ LABEL \
 LABEL \
     org.opencontainers.image.title="WhatsApp" \
     org.opencontainers.image.description="Home Assistant WhatsApp Backend (Baileys/Node.js)" \
-    org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons" \
+    org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
     org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/whatsapp" \
