@@ -16,7 +16,7 @@
 
 ARG BUILD_FROM
 ARG BUILD_VERSION
-ARG BUILD_UPSTREAM="2.0.5"
+ARG BUILD_UPSTREAM="2.1.1"
 FROM ${BUILD_FROM}
 
 ##################
@@ -47,6 +47,7 @@ ENV S6_CMD_WAIT_FOR_SERVICES=1 \
 
 # Copy local files
 COPY rootfs/ /
+RUN find . -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -exec chmod +x {} \;
 
 # Uses /bin for compatibility purposes
 # hadolint ignore=DL4005
@@ -76,9 +77,9 @@ RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" "/ha_entrypoint.sh"
 RUN chmod 777 /ha_entrypoint.sh
 
-# Standalone bashio command
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/.bashio-standalone.sh"
-RUN chmod 777 /.bashio-standalone.sh
+# Install bashio
+ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/usr/local/lib/bashio-standalone.sh"
+RUN chmod 0755 /usr/local/lib/bashio-standalone.sh
 
 # Adapt shebang
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]

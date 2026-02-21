@@ -1,35 +1,35 @@
-# Home Assistant add-on: Seerr
+# Home Assistant 插件：Seerr
 
-## About
+## 关于
 
-This add-on packages [Seerr](https://seerr.dev/), an open-source media request and discovery manager for Jellyfin, Plex, and Emby.
+此插件打包了 [Seerr](https://seerr.dev/)，一个用于 Jellyfin、Plex 和 Emby 的开源媒体请求和发现管理器。
 
-This add-on is based on the existing Overseerr add-on structure, adapted for the Seerr upstream project and container image. It supports Home Assistant Ingress via an internal NGINX reverse proxy.
+此插件基于现有的 Overseerr 插件结构，针对 Seerr 上游项目和容器镜像进行了适配。它通过内部 NGINX 反向代理支持 Home Assistant Ingress。
 
-Upstream repositories reviewed:
+上游仓库已审核：
 - Overseerr: https://github.com/sct/overseerr
 - Seerr: https://github.com/seerr-team/seerr
 
-## Installation
+## 安装
 
-1. Add this repository to Home Assistant.
-2. Install **Seerr**.
-3. Configure options, then start the add-on.
-4. Open the Web UI on port `5055` or via Home Assistant Ingress.
+1. 将此仓库添加到 Home Assistant。
+2. 安装 **Seerr**。
+3. 配置选项，然后启动插件。
+4. 在端口 `5055` 上打开 Web UI 或通过 Home Assistant Ingress。
 
-## Configuration
+## 配置
 
-Use `env_vars` to pass extra environment variables when needed. Seerr configuration is stored in `/config`.
+使用 `env_vars` 在需要时传递额外的环境变量。Seerr 配置存储在 `/config`。
 
-### Options
+### 选项
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `PGID` | int | `0` | Group ID for file permissions |
-| `PUID` | int | `0` | User ID for file permissions |
-| `TZ` | str | | Timezone (e.g. `Europe/London`) |
+| 选项 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `PGID` | 整数 | `0` | 文件权限的组 ID |
+| `PUID` | 整数 | `0` | 文件权限的用户 ID |
+| `TZ` | 字符串 | | 时区（例如 `Europe/London`） |
 
-### Example
+### 示例
 
 ```yaml
 env_vars: []
@@ -38,10 +38,46 @@ PUID: 0
 TZ: Europe/London
 ```
 
-## Support
+## 迁移
 
-If you find a bug, open an issue in this repository.
+### 从 Overseerr
 
+Seerr 与 Overseerr 的数据格式兼容。要迁移现有配置：
+
+1. 停止 **Overseerr** 插件。
+2. 安装并启动 **Seerr** 插件一次以创建其配置目录（`/addon_configs/db21ed7f_seerr/`），然后停止它。
+3. 打开 **[Filebrowser](https://github.com/alexbelgium/hassio-addons/tree/master/filebrowser)** 插件（或任何可以访问 `/addon_configs/` 的文件管理器）。
+4. 导航到 `/addon_configs/db21ed7f_overseerr/` 并将所有文件复制到 `/addon_configs/db21ed7f_seerr/`。
+5. 启动 **Seerr** 插件。您的现有设置、用户和请求将被保留。
+
+---
+
+### 从 Jellyseerr
+
+Seerr 与 Jellyseerr 的数据格式兼容。要迁移现有配置：
+
+1. 停止 **Jellyseerr** 插件。
+2. 安装并启动 **Seerr** 插件一次以创建其配置目录（`/addon_configs/db21ed7f_seerr/`），然后停止它。
+3. 打开 **[Filebrowser](https://github.com/alexbelgium/hassio-addons/tree/master/filebrowser)** 插件（或任何可以访问 `/addon_configs/` 的文件管理器）。
+4. 导航到 `/addon_configs/db21ed7f_jellyseerr/` 并将所有文件复制到 `/addon_configs/db21ed7f_seerr/`。
+5. 启动 **Seerr** 插件。您的现有设置、用户和请求将被保留。
+
+---
+
+### 从 Ombi
+
+Ombi 使用不同的数据格式，并且没有到 Seerr 的自动迁移路径。您需要从零开始配置 Seerr：
+
+1. 记下您的 Ombi 配置（媒体服务器、用户、通知设置等）。
+2. 停止 **Ombi** 插件。
+3. 安装并启动 **Seerr** 插件。
+4. 使用 Seerr 的 Web UI 重新连接您的媒体服务器并重新配置您的偏好设置。
+
+---
+
+## 支持
+
+如果您发现一个错误，请在该仓库中打开一个问题。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

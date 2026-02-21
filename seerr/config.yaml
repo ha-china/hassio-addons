@@ -76,6 +76,7 @@ options:
   env_vars: []
   PGID: "0"
   PUID: "0"
+panel_icon: mdi:movie-search
 ports:
   5055/tcp: 5055
 ports_description:
@@ -91,4 +92,4 @@ schema:
 slug: seerr
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/seerr
-version: "3.0.1-5"
+version: "3.0.1"
