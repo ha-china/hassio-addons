@@ -1,21 +1,20 @@
-# Home Assistant Add-on: Frigate (Full Access) Beta
+# Home Assistant 插件：Frigate (完全访问) Beta
 
-Please reference the [release notes](https://github.com/blakeblackshear/frigate/releases) for breaking changes.
+请参考 [发布说明](https://github.com/blakeblackshear/frigate/releases) 以了解重大变更。
 
-![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield] ![Supports armv7 Architecture][armv7-shield]
+![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield] ![支持 armv7 架构][armv7-shield]
 
-NVR with realtime local object detection for IP cameras.
+支持 IP 摄像头的实时本地目标检测 NVR。
 
-You must create a config file as `config.yml` in your add-on configuration folder.
+您必须在您的插件配置文件夹中创建一个名为 `config.yml` 的配置文件。
 
-This version of the add-on requests full device access in order to turn off protection mode for those devices which don't work with protection mode enabled.
+此版本的插件请求完全设备访问权限，以便关闭那些在启用保护模式时无法正常工作的设备的保护模式。
 
-[Documentation](https://docs.frigate.video)
+[文档](https://docs.frigate.video)
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
-
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
