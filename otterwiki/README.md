@@ -2,15 +2,7 @@
 
 # An Otter Wiki
 
-An Otter Wiki is Python-based software for collaborative content
-management, called a [wiki](https://en.wikipedia.org/wiki/Wiki). The
-content is stored in a git repository, which keeps track of all changes.
-[Markdown](https://daringfireball.net/projects/markdown) is used as
-Markup language. An Otter Wiki is written in [python](https://www.python.org/)
-using the microframework [Flask](http://flask.pocoo.org/).
-[halfmoon](https://www.gethalfmoon.com) is used as CSS framework
-and [CodeMirror](https://codemirror.net/) as editor.
-[Font Awesome Free](https://fontawesome.com/license/free) serves the icons.
+An Otter Wiki is a Python-based software for collaborative content management, called a [wiki](https://en.wikipedia.org/wiki/Wiki). The content is stored in a git repository, which keeps track of all changes. [Markdown](https://daringfireball.net/projects/markdown) is used as the Markup language. An Otter Wiki is written in [python](https://www.python.org/) using the microframework [Flask](http://flask.pocoo.org/). [halfmoon](https://www.gethalfmoon.com) is used as the CSS framework and [CodeMirror](https://codemirror.net/) as the editor. [Font Awesome Free](https://fontawesome.com/license/free) serves the icons.
 
 ## Notable Features
 
@@ -31,12 +23,11 @@ _Thanks to everyone having starred my repo! To star it click on the image below,
 
 ## About
 
-This addon uses the [docker image](https://github.com/redimp/otterwiki).
+This add-on uses the [docker image](https://github.com/redimp/otterwiki).
 
 ## Installation
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other Hass.io add-on.
 
 1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
 1. Install this add-on. 
@@ -54,7 +45,6 @@ port : 8084 #port you want to run on.
 Webui can be found at `<your-ip>:port`.
 
 [repository]: https://github.com/jdeath/homeassistant-addons
-
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

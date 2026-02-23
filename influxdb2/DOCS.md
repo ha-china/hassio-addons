@@ -9,6 +9,8 @@ This app runs the InfluxDB v2.x build channel. \
 For InfluxDB v1.x build channel, remove this app and install
 https://github.com/hassio-addons/addon-influxdb
 
+![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
+
 ## Installation
 
 Follow these steps to get the app installed on your system:
@@ -144,7 +146,7 @@ way as the export works
 replace @token@ and @orgid@ with your values
 
 ```bash
-docker exec -it addon_ec9cbdb7_influxdb2 /bin/bash
+docker exec -it addon_32b8266a_influxdb2 /bin/bash
 export INFLUX_TOKEN=@token@
 export INFLUX_ORG_ID=@orgid@
 
@@ -153,7 +155,7 @@ influx write \
   --file "/share/influxdb/home_assistant/export" \
 ```
 
-## V1 comatibility
+## V1 compatibility
 
 If you need v1.x compatiblity for e.g. grafana, you have to create a retention
 policy for the database and a user for authentification.
@@ -229,7 +231,7 @@ from(bucket: "homeassistant")
     |> filter(fn: (r) => r["_field"] == "value")
     |> aggregateWindow(every: 1h, fn: mean, createEmpty: false)
     |> to(bucket: "homeassistant_60m", org: "privat")
-`
+```
 
 ## Support
 
@@ -241,4 +243,3 @@ You could [open an issue here][issue] GitHub.
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [issue]: https://github.com/erik73/app-influxdb2/issues
 [repository]: https://github.com/erik73/hassio-addons
-```

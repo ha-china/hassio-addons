@@ -4,13 +4,13 @@
     "aarch64"
   ],
   "boot": "auto",
-  "description": "[老王杂谈说]：youtube-dl 的 Web 图形界面",
+  "description": "[老王杂谈说]：用于 youtube-dl 的 Web GUI",
   "map": [
     "share:rw",
     "addon_config:rw",
     "media:rw"
   ],
-  "version": "v1.2.4",
+  "version": "v1.2.6",
   "name": "ytptube",
   "environment": {
     "PUID": "1000",

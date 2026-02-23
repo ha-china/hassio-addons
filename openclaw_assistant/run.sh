@@ -20,6 +20,7 @@ fi
 TZNAME=$(jq -r '.timezone // "Europe/Sofia"' "$OPTIONS_FILE")
 GW_PUBLIC_URL=$(jq -r '.gateway_public_url // empty' "$OPTIONS_FILE")
 HA_TOKEN=$(jq -r '.homeassistant_token // empty' "$OPTIONS_FILE")
+ADDON_HTTP_PROXY=$(jq -r '.http_proxy // empty' "$OPTIONS_FILE")
 ENABLE_TERMINAL=$(jq -r '.enable_terminal // true' "$OPTIONS_FILE")
 TERMINAL_PORT_RAW=$(jq -r '.terminal_port // 7681' "$OPTIONS_FILE")
 
@@ -56,6 +57,26 @@ export TZ="$TZNAME"
 
 # Reduce risk of secrets ending up in logs
 set +x
+
+# Optional outbound proxy from add-on settings.
+# If set, apply it to both HTTP and HTTPS for Node/undici/OpenClaw tooling.
+if [ -n "$ADDON_HTTP_PROXY" ]; then
+  if [[ "$ADDON_HTTP_PROXY" =~ ^https?://[^[:space:]]+$ ]]; then
+    # Keep local traffic direct to avoid accidental proxying of loopback/LAN services.
+    DEFAULT_NO_PROXY="localhost,127.0.0.1,::1,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,.local"
+
+    export HTTP_PROXY="$ADDON_HTTP_PROXY"
+    export HTTPS_PROXY="$ADDON_HTTP_PROXY"
+    export http_proxy="$ADDON_HTTP_PROXY"
+    export https_proxy="$ADDON_HTTP_PROXY"
+    export NO_PROXY="${NO_PROXY:+${NO_PROXY},}${DEFAULT_NO_PROXY}"
+    export no_proxy="${no_proxy:+${no_proxy},}${DEFAULT_NO_PROXY}"
+    echo "INFO: Outbound HTTP/HTTPS proxy enabled from add-on configuration."
+    echo "INFO: Applied NO_PROXY defaults for localhost/private network ranges."
+  else
+    echo "WARN: Invalid http_proxy value in add-on options; expected URL like http://host:port"
+  fi
+fi
 
 # Optional network hardening/workaround: force IPv4-first DNS ordering for Node.js.
 # Helps in environments where IPv6 resolves but has no working egress.
@@ -345,6 +366,20 @@ if [ -f "$OPENCLAW_CONFIG_PATH" ]; then
 else
   echo "WARN: OpenClaw config not found at $OPENCLAW_CONFIG_PATH, cannot apply gateway settings"
   echo "INFO: Run 'openclaw onboard' first, then restart the add-on"
+fi
+
+# ------------------------------------------------------------------------------
+# Proxy shim for undici/OpenClaw startup
+# Keep official OpenClaw npm release while enabling HTTP(S)_PROXY support.
+# ------------------------------------------------------------------------------
+OPENCLAW_GLOBAL_NODE_MODULES="$(HOME=/root npm root -g 2>/dev/null || true)"
+if [ -f /usr/local/lib/openclaw-proxy-shim.cjs ]; then
+  if [ -n "${NODE_OPTIONS:-}" ]; then
+    export NODE_OPTIONS="--require /usr/local/lib/openclaw-proxy-shim.cjs ${NODE_OPTIONS}"
+  else
+    export NODE_OPTIONS="--require /usr/local/lib/openclaw-proxy-shim.cjs"
+  fi
+  export OPENCLAW_GLOBAL_NODE_MODULES
 fi
 
 echo "Starting OpenClaw Assistant gateway (openclaw)..."

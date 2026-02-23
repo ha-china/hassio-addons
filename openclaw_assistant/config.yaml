@@ -1,7 +1,7 @@
 name: OpenClaw Assistant
-version: "0.5.46"
+version: "0.5.49"
 slug: openclaw_assistant
-description: '[老王杂谈说]：将 OpenClaw 助手 (OpenClaw 兼容) 作为 Home Assistant 插件运行。'
+description: '[老王杂谈说]：将 OpenClaw Assistant (OpenClaw兼容) 作为 Home Assistant 插件运行。'
 url: https://ghfast.top/github.com/techartdev/OpenClawHomeAssistant
 arch:
   - amd64
@@ -20,6 +20,8 @@ panel_title: OpenClaw Assistant
 panel_icon: mdi:robot
 map:
   - addon_config:rw
+  - share:rw
+  - media:rw
 options:
   timezone: "Europe/Sofia"
   # Enable web terminal inside Home Assistant (Ingress) via ttyd
@@ -32,6 +34,9 @@ options:
   gateway_public_url: ""
   # Optional: Home Assistant long-lived token (for local HA API scripts/tools)
   homeassistant_token: ""
+  # Optional: outbound HTTP/HTTPS proxy for OpenClaw network access.
+  # Example: "http://192.168.2.1:3128"
+  http_proxy: ""
   # Optional: Router SSH defaults (leave empty if you don't need router automation)
   # This is a generic SSH configuration intended for a router/firewall or any network device
   # reachable from inside the HA host LAN.
@@ -47,8 +52,10 @@ options:
   # Default is local.
   gateway_mode: local
   # Gateway network bind mode:
-  # - loopback: bind to 127.0.0.1 only (local access only, more secure)
+  # - loopback: bind to 127.0.0.1 only (local access only, most secure)
   # - lan: bind to all interfaces (accessible from local network)
+  # - tailnet: bind to Tailscale IP only (accessible only via Tailscale — recommended for remote access)
+  # - auto: prefer loopback; use tailnet if Tailscale is available
   # Default is loopback for security.
   gateway_bind_mode: loopback
   # Gateway port to listen on
@@ -71,13 +78,14 @@ schema:
   terminal_port: int(1024,65535)?
   gateway_public_url: str?
   homeassistant_token: str?
+  http_proxy: str?
   router_ssh_host: str
   router_ssh_user: str
   router_ssh_key_path: str
   clean_session_locks_on_start: bool?
   clean_session_locks_on_exit: bool?
   gateway_mode: list(local|remote)?
-  gateway_bind_mode: list(loopback|lan)?
+  gateway_bind_mode: list(auto|loopback|lan|tailnet)?
   gateway_port: int(1,65535)?
   enable_openai_api: bool?
   allow_insecure_auth: bool?

@@ -18,6 +18,10 @@ configuration:
   homeassistant_token:
     name: Home Assistant Token
     description: Optional - Langlebiger Home Assistant Token für lokale API-Skripte/Tools
+
+  http_proxy:
+    name: Ausgehender HTTP-Proxy
+    description: Optional - Proxy-URL für ausgehende HTTP/HTTPS-Anfragen (Beispiel - http://192.168.2.1:3128)
   
   router_ssh_host:
     name: Router SSH-Host
@@ -45,7 +49,7 @@ configuration:
   
   gateway_bind_mode:
     name: Gateway-Bindungsmodus
-    description: Netzwerk-Bindungsmodus - loopback (nur 127.0.0.1, sicherer) oder lan (alle Schnittstellen, vom lokalen Netzwerk aus zugänglich)
+    description: Netzwerk-Bindungsmodus - auto (OpenClaw wählt), loopback (nur 127.0.0.1, sicherer), lan (alle Schnittstellen) oder tailnet (nur Tailscale-Schnittstelle).
   
   gateway_port:
     name: Gateway-Port

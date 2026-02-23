@@ -1,43 +1,41 @@
-# Home assistant add-on: CommaFeed
+# Home assistant插件：CommaFeed
 
-Google Reader inspired self-hosted RSS reader, based on Quarkus and React/TypeScript.
+受Google Reader启发的自托管RSS阅读器，基于Quarkus和React/TypeScript。
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有将我的仓库加入收藏的人！要收藏它，请点击下面的图片，它将出现在右上角。谢谢！_
 
-[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![@jdeath/homeassistant-addons的Stargazers仓库成员](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## About
+## 关于
 
-This addon uses the [docker image](https://github.com/Athou/commafeed/).
+此插件使用[docker镜像](https://github.com/Athou/commafeed/)。
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+此插件的安装非常简单，与其他Hass.io插件的安装方式相同。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Click the `Save` button to store your configuration.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Open WebUI should work via <your-ip>:port and ingress. Default user:password is admin:admin
-1. Settings will be in /addon_configs/2effc9b9_commafeed
+1. [将我的Hass.io插件仓库][repository]添加到您的Hass.io实例。
+1. 点击`保存`按钮以保存您的配置。
+1. 启动插件。
+1. 检查插件的日志以查看是否一切正常。
+1. 应该可以通过<your-ip>:port和ingress打开WebUI。默认用户名:密码是admin:admin
+1. 设置将在 /addon_configs/2effc9b9_commafeed
 
-## Configuration
-You can set the addon to use a environment file if you choose. Note use '/commafeed/data' as base path which will map to /addon_configs/2effc9b9_commafeed 
+## 配置
+您可以设置插件使用环境文件。注意使用'/commafeed/data'作为基本路径，这将映射到 /addon_configs/2effc9b9_commafeed 
 
-The config file in the UI will `/commafeed/data/config.env` , but you make the file `addon_configs/2effc9b9_commafeed/config.env` 
-You need to create the file yourself and make it a list of environments you want to set, like:
+UI中的配置文件将是 `/commafeed/data/config.env` ，但你可以在 `addon_configs/2effc9b9_commafeed/config.env` 创建文件
+你需要自己创建文件并使其成为你想要设置的列表，例如：
 ```
 COMMAFEED_USERS_ALLOW_REGISTRATIONS=true
 ```
 ```
-port : 8082 #port you want to run on.
+port : 8082 #你想要运行的端口。
 ```
 
-Webui can be found at `<your-ip>:port`.
+Webui可以在 `<your-ip>:port` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
-
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
