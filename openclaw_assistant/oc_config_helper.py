@@ -57,16 +57,17 @@ def set_gateway_setting(key, value):
     return write_config(cfg)
 
 
-def apply_gateway_settings(mode: str, bind_mode: str, port: int, enable_openai_api: bool, allow_insecure_auth: bool):
+def apply_gateway_settings(mode: str, bind_mode: str, port: int, enable_openai_api: bool, auth_mode: str, trusted_proxies_csv: str):
     """
     Apply gateway settings to OpenClaw config.
     
     Args:
         mode: "local" or "remote"
-        bind_mode: "auto", "loopback", "lan", or "tailnet"
+        bind_mode: "loopback", "lan", or "tailnet"
         port: Port number to listen on (must be 1-65535)
         enable_openai_api: Enable OpenAI-compatible Chat Completions endpoint
-        allow_insecure_auth: Allow insecure HTTP authentication
+        auth_mode: Gateway auth mode (token|trusted-proxy)
+        trusted_proxies_csv: Comma-separated trusted proxy IP/CIDR list
     """
     # Validate gateway mode
     if mode not in ["local", "remote"]:
@@ -74,13 +75,18 @@ def apply_gateway_settings(mode: str, bind_mode: str, port: int, enable_openai_a
         return False
     
     # Validate bind mode
-    if bind_mode not in ["auto", "loopback", "lan", "tailnet"]:
-        print(f"ERROR: Invalid bind_mode '{bind_mode}'. Must be 'auto', 'loopback', 'lan', or 'tailnet'")
+    if bind_mode not in ["loopback", "lan", "tailnet"]:
+        print(f"ERROR: Invalid bind_mode '{bind_mode}'. Must be 'loopback', 'lan', or 'tailnet'")
         return False
     
     # Validate port range
     if port < 1 or port > 65535:
         print(f"ERROR: Invalid port {port}. Must be between 1 and 65535")
+        return False
+
+    # Validate auth mode
+    if auth_mode not in ["token", "trusted-proxy"]:
+        print(f"ERROR: Invalid auth_mode '{auth_mode}'. Must be 'token' or 'trusted-proxy'")
         return False
     
     cfg = read_config()
@@ -92,10 +98,10 @@ def apply_gateway_settings(mode: str, bind_mode: str, port: int, enable_openai_a
     
     gateway = cfg["gateway"]
     
-    # controlUi should be nested inside gateway
-    if "controlUi" not in gateway:
-        gateway["controlUi"] = {}
-    
+    # auth should be nested inside gateway
+    if "auth" not in gateway:
+        gateway["auth"] = {}
+
     # http.endpoints.chatCompletions should be nested inside gateway
     if "http" not in gateway:
         gateway["http"] = {}
@@ -104,14 +110,22 @@ def apply_gateway_settings(mode: str, bind_mode: str, port: int, enable_openai_a
     if "chatCompletions" not in gateway["http"]["endpoints"]:
         gateway["http"]["endpoints"]["chatCompletions"] = {}
     
-    control_ui = gateway["controlUi"]
+    auth = gateway["auth"]
     chat_completions = gateway["http"]["endpoints"]["chatCompletions"]
-    
+
+    trusted_proxies = [p.strip() for p in trusted_proxies_csv.split(",") if p.strip()]
+
+    # OpenClaw trusted-proxy mode requires nested auth.trustedProxy config.
+    # Use a sane default user header expected from reverse proxies.
+    trusted_proxy_cfg_default = {"userHeader": "x-forwarded-user"}
+
     current_mode = gateway.get("mode", "")
     current_bind = gateway.get("bind", "")
     current_port = gateway.get("port", 18789)
     current_openai_api = chat_completions.get("enabled", False)
-    current_insecure = control_ui.get("allowInsecureAuth", False)
+    current_auth_mode = auth.get("mode", "token")
+    current_trusted_proxies = gateway.get("trustedProxies", [])
+    current_trusted_proxy_cfg = auth.get("trustedProxy")
     
     changes = []
     
@@ -131,9 +145,18 @@ def apply_gateway_settings(mode: str, bind_mode: str, port: int, enable_openai_a
         chat_completions["enabled"] = enable_openai_api
         changes.append(f"chatCompletions.enabled: {current_openai_api} -> {enable_openai_api}")
     
-    if current_insecure != allow_insecure_auth:
-        control_ui["allowInsecureAuth"] = allow_insecure_auth
-        changes.append(f"allowInsecureAuth: {current_insecure} -> {allow_insecure_auth}")
+    if current_auth_mode != auth_mode:
+        auth["mode"] = auth_mode
+        changes.append(f"auth.mode: {current_auth_mode} -> {auth_mode}")
+
+    if current_trusted_proxies != trusted_proxies:
+        gateway["trustedProxies"] = trusted_proxies
+        changes.append(f"trustedProxies: {current_trusted_proxies} -> {trusted_proxies}")
+
+    if auth_mode == "trusted-proxy":
+        if current_trusted_proxy_cfg != trusted_proxy_cfg_default:
+            auth["trustedProxy"] = trusted_proxy_cfg_default
+            changes.append("auth.trustedProxy: configured default userHeader=x-forwarded-user")
     
     if changes:
         if write_config(cfg):
@@ -143,8 +166,72 @@ def apply_gateway_settings(mode: str, bind_mode: str, port: int, enable_openai_a
             print("ERROR: Failed to write config")
             return False
     else:
-        print(f"INFO: Gateway settings already correct (mode={mode}, bind={bind_mode}, port={port}, chatCompletions={enable_openai_api}, allowInsecureAuth={allow_insecure_auth})")
+        print(f"INFO: Gateway settings already correct (mode={mode}, bind={bind_mode}, port={port}, chatCompletions={enable_openai_api}, authMode={auth_mode}, trustedProxies={trusted_proxies})")
         return True
+
+
+def set_control_ui_origins(origins_csv: str):
+    """
+    Configure gateway.controlUi for the built-in HTTPS proxy.
+
+    Sets:
+      - allowedOrigins: the HTTPS proxy origins so the browser WebSocket
+        is accepted (required since v2026.2.21).
+      - dangerouslyDisableDeviceAuth: true — skips the interactive device
+        pairing ceremony.  In a self-hosted HA add-on the user already
+        controls the gateway token, so the pairing step adds friction
+        without meaningful security benefit.
+
+    Also removes any stale/invalid keys (e.g. pairingMode) that may have
+    been written by earlier add-on versions.
+
+    Args:
+        origins_csv: Comma-separated list of allowed origins.
+                     Pass an empty string to clear / leave unset.
+    """
+    cfg = read_config()
+    if cfg is None:
+        cfg = {}
+
+    if "gateway" not in cfg:
+        cfg["gateway"] = {}
+    gateway = cfg["gateway"]
+
+    if "controlUi" not in gateway:
+        gateway["controlUi"] = {}
+
+    control_ui = gateway["controlUi"]
+    origins = [o.strip() for o in origins_csv.split(",") if o.strip()]
+    changes = []
+
+    # --- allowedOrigins ---
+    current_origins = control_ui.get("allowedOrigins", [])
+    if current_origins != origins:
+        control_ui["allowedOrigins"] = origins
+        changes.append(f"allowedOrigins: {current_origins} -> {origins}")
+
+    # --- dangerouslyDisableDeviceAuth ---
+    # Skips the interactive pairing handshake (error 1008: pairing required).
+    # Token auth is still enforced; this only disables the per-device approval.
+    if control_ui.get("dangerouslyDisableDeviceAuth") is not True:
+        control_ui["dangerouslyDisableDeviceAuth"] = True
+        changes.append("dangerouslyDisableDeviceAuth: True")
+
+    # --- Remove invalid keys from earlier add-on versions ---
+    for stale_key in ("pairingMode",):
+        if stale_key in control_ui:
+            del control_ui[stale_key]
+            changes.append(f"removed invalid key: {stale_key}")
+
+    if not changes:
+        print(f"INFO: controlUi already correct: origins={origins}, deviceAuth=disabled")
+        return True
+
+    if write_config(cfg):
+        print(f"INFO: Updated controlUi: {', '.join(changes)}")
+        return True
+    print("ERROR: Failed to write config")
+    return False
 
 
 def main():
@@ -156,15 +243,16 @@ def main():
     cmd = sys.argv[1]
     
     if cmd == "apply-gateway-settings":
-        if len(sys.argv) != 7:
-            print("Usage: oc_config_helper.py apply-gateway-settings <local|remote> <auto|loopback|lan|tailnet> <port> <enable_openai_api:true|false> <allow_insecure:true|false>")
+        if len(sys.argv) != 8:
+            print("Usage: oc_config_helper.py apply-gateway-settings <local|remote> <loopback|lan|tailnet> <port> <enable_openai_api:true|false> <auth_mode:token|trusted-proxy> <trusted_proxies_csv>")
             sys.exit(1)
         mode = sys.argv[2]
         bind_mode = sys.argv[3]
         port = int(sys.argv[4])
         enable_openai_api = sys.argv[5].lower() == "true"
-        allow_insecure_auth = sys.argv[6].lower() == "true"
-        success = apply_gateway_settings(mode, bind_mode, port, enable_openai_api, allow_insecure_auth)
+        auth_mode = sys.argv[6]
+        trusted_proxies_csv = sys.argv[7]
+        success = apply_gateway_settings(mode, bind_mode, port, enable_openai_api, auth_mode, trusted_proxies_csv)
         sys.exit(0 if success else 1)
     
     elif cmd == "get":
@@ -177,6 +265,14 @@ def main():
             print(value)
         sys.exit(0)
     
+    elif cmd == "set-control-ui-origins":
+        if len(sys.argv) != 3:
+            print("Usage: oc_config_helper.py set-control-ui-origins <origins_csv>")
+            sys.exit(1)
+        origins_csv = sys.argv[2]
+        success = set_control_ui_origins(origins_csv)
+        sys.exit(0 if success else 1)
+
     elif cmd == "set":
         if len(sys.argv) != 4:
             print("Usage: oc_config_helper.py set <key> <value>")

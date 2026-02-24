@@ -2,8 +2,8 @@
 # shellcheck disable=SC2034,SC2129,SC2016
 # shellcheck shell=bash
 
-# Check if protection mode is disabled - this addon requires full system access
-if bashio::addon.protected; then
+# Check if protection mode is disabled - this App requires full system access
+if bashio::app.protected; then
 	touch /run/ABORT_STARTUP
 	bashio::require.unprotected
 fi
@@ -19,7 +19,7 @@ path_config=$(bashio::config 'path_config')
 
 # Note: With host_network: true, ports are fixed and cannot be changed
 # The config.yaml defines "85": 85 and "69/udp": 69, which means internal=external
-# We don't need to validate via bashio::addon.port as it may return empty with host_network
+# We don't need to validate via bashio::app.port as it may return empty with host_network
 # Instead, we just use the fixed values directly
 bashio::log.info "Using fixed ports for host_network mode: NGINX=85, TFTP=69, Web UI=3000"
 
@@ -44,45 +44,45 @@ echo "}" >>/defaults/default
 
 echo "Linking folder $path to /assets and $path_config to /config."
 
-if [ -d /assets ]; then
-	echo "assets exists"
-	ls -l /assets
-fi
-if [ -d /assets/netboot-image ]; then
-	echo "/assets/netboot-image exists"
-	ls -l /assets/netboot-image
-fi
-if [ -d /config ]; then
-	echo "/config exists"
-	ls -l /config
-fi
+# Debug info
+bashio::log.debug "Current /assets state:"
+ls -ld /assets 2>/dev/null || echo "/assets does not exist"
+bashio::log.debug "Current /config state:"
+ls -ld /config 2>/dev/null || echo "/config does not exist"
 
 if [ ! -d "$path" ]; then
-	echo "Looks like the path $path did not exist! We will create it. Copy your installations ISOs etc there."
+	bashio::log.warning "Path $path did not exist! Creating it..."
 	mkdir -p "$path"
 fi
-if [ -L /assets ]; then rm /assets; elif [ -d /assets ]; then rm -rf /assets; else rm -f /assets; fi
-ln -s "$path" /assets
-if [ ! -d "$path_config" ]; then
-	echo "Looks like the path $path_config did not exist! We will still start the addon with default options!"
-	mkdir -p "$path_config"
-fi
-if [ -L /config ]; then
-	rm /config
-elif [ -d /config ]; then
-	# Check if /config is a mount
-	if grep -q " /config " /proc/mounts; then
-		echo "Info: /config is a mount, skipping replacement with symlink."
-	else
-		echo "Info: Removing existing /config directory to replace with symlink..."
-		rm -rf /config
-	fi
+
+# Handle /assets
+if grep -q " /assets " /proc/mounts; then
+	bashio::log.info "/assets is a mount, skipping replacement with symlink."
 else
-	rm -f /config
+	if [ -L /assets ]; then
+		rm /assets
+	elif [ -d /assets ]; then
+		rm -rf /assets
+	fi
+	ln -sf "$path" /assets
 fi
 
-if [ ! -e /config ]; then
-	ln -s "$path_config" /config
+# Handle /config
+if [ ! -d "$path_config" ]; then
+	bashio::log.warning "Path $path_config did not exist! Creating it with default options..."
+	mkdir -p "$path_config"
+fi
+
+if grep -q " /config " /proc/mounts; then
+	bashio::log.info "/config is a mount, skipping replacement with symlink."
+else
+	if [ -L /config ]; then
+		rm /config
+	elif [ -d /config ]; then
+		bashio::log.info "Removing existing /config directory to replace with symlink..."
+		rm -rf /config
+	fi
+	ln -sf "$path_config" /config
 fi
 
 if [ ! -d /config/menus ]; then

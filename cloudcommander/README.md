@@ -1,8 +1,8 @@
 # Home assistant add-on: Cloudcommander
 
-我利用业余时间维护这个和其他 Home Assistant add-ons：跟进上游变化、HA 变化，并在真实硬件上进行测试，这需要大量时间（和一些金钱）。我大约使用我超过 110 个 add-ons 中的 5-10 个，因此我安装了一些我自己不使用的测试机器（和购买了一些测试服务，如 VPN），以调试和改进这些 add-ons。
+我利用业余时间维护这个和其他Home Assistant add-on：跟进上游变化、HA变化，并在真实硬件上测试需要大量时间（和一些金钱）。我大约使用我超过110个add-on中的5-10个，因此我安装了一些我本人不使用的测试机器（和购买了一些测试服务，如vpn）来调试和改进这些add-on。
 
-如果这个 add-on 为您节省了时间或简化了您的设置，我将非常感谢您的支持！
+如果这个add-on节省了您的时间或使您的设置更简单，我将非常感谢您的支持！
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -29,25 +29,25 @@ _感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片�
 ## About
 
 [Cloud Commander](https://github.com/coderaiser/cloudcmd) 是一个带有控制台和编辑器的网页文件管理器。
-这个 add-on 基于这个 [docker 镜像](https://hub.docker.com/r/coderaiser/cloudcmd)。
+这个add-on基于[docker镜像](https://hub.docker.com/r/coderaiser/cloudcmd)。
 
 ## Configuration
 
-Webui 可以在 <http://homeassistant:8000> 或通过 Ingress 在侧边栏中找到。
-配置可以通过应用 webUI 进行，除了以下选项。
+Webui可以在<http://homeassistant:8000>或通过Ingress在侧边栏中找到。
+配置可以通过app webUI进行，除了以下选项。
 
 ### Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `CUSTOM_OPTIONS` | str | | 自定义 CLI 选项（例如，`--name Homeassistant`) |
-| `DROPBOX_TOKEN` | str | | Dropbox 集成令牌（见 https://cloudcmd.io/) |
+| `CUSTOM_OPTIONS` | str | | 自定义CLI选项（例如，`--name Homeassistant`) |
+| `DROPBOX_TOKEN` | str | | Dropbox集成令牌（见https://cloudcmd.io/) |
 | `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`) |
-| `networkdisks` | str | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`) |
-| `cifsusername` | str | | SMB 网络共享的用户名 |
-| `cifspassword` | str | | SMB 网络共享的密码 |
-| `cifsdomain` | str | | SMB 网络共享的域 |
-| `smbv1` | bool | `false` | 启用 SMB v1 协议 |
+| `networkdisks` | str | | 要挂载的SMB共享（例如，`//SERVER/SHARE`) |
+| `cifsusername` | str | | SMB网络共享的用户名 |
+| `cifspassword` | str | | SMB网络共享的密码 |
+| `cifsdomain` | str | | SMB网络共享的域 |
+| `smbv1` | bool | `false` | 启用SMB v1协议 |
 
 ### Example Configuration
 
@@ -64,27 +64,28 @@ smbv1: false
 
 ### Mounting Drives
 
-这个 add-on 支持挂载本地驱动器和远程 SMB 共享：
+这个add-on支持挂载本地驱动器和远程SMB共享：
 
-- **Local drives**: 查看 [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **Remote shares**: 查看 [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：参见[在add-on中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：参见[在add-on中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### Custom Scripts and Environment Variables
 
-这个 add-on 支持自定义脚本和环境变量：
+这个add-on支持自定义脚本和环境变量：
 
-- **Custom scripts**: 查看 [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars option**: 使用 add-on 的 `env_vars` 选项来传递额外的环境变量（大小写名称）。查看 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
+- **自定义脚本**：参见[在add-on中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars选项**：使用add-on的`env_vars`选项来传递额外的环境变量（大写或小写名称）。参见https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2以获取详细信息。
 
 ## Installation
 
-这个 add-on 的安装非常简单，与安装任何其他 Hass.io add-on 没有区别。
+这个add-on的安装过程非常简单，与安装任何其他Hass.io add-on没有区别。
 
-1. [将我的 Hass.io add-ons 仓库][repository] 添加到您的 Hass.io 实例。
-1. 安装这个 add-on。
-1. 点击 `Save` 按钮以保存您的配置。
-1. 启动 add-on。
-1. 检查 add-on 的日志，看看一切是否正常。
+1. 将我的add-on仓库添加到您的Home Assistant实例中（在supervisor add-on商店的右上角，或如果您已经配置了我的HA，请点击下面的按钮）
+   [![打开您的Home Assistant实例并显示带有特定仓库URL预填的添加add-on仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装这个add-on。
+1. 点击`Save`按钮以保存您的配置。
+1. 启动add-on。
+1. 检查add-on的日志以查看一切是否正常。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 ---

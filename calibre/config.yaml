@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：电子书管理器'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -117,5 +117,5 @@ schema:
 slug: calibre
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/calibre
-version: "9.3.0"
+version: "9.3.1"
 video: true

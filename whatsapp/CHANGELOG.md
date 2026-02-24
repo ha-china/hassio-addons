@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.3.1 (2026-02-23)
+
+### 📦 Dependencies
+- ⬆️ Update dependency eslint to v10.0.1 [skip-tests] ([`c461d635`](https://github.com/FaserF/hassio-addons/commit/c461d635ebefc4dc23b559b7e322532618febfd4))
+
+### 🚀 Other
+- another fix for buttons & lists #653 ([`e10b91fa`](https://github.com/FaserF/hassio-addons/commit/e10b91fa33e83745a81d3da524b59677c2399394))
+- try to fix buttons&lists #653 ([`019b3228`](https://github.com/FaserF/hassio-addons/commit/019b32286a879fe9fb9753868620c66eade89882))
+
+
+## 1.3.0 (2026-02-23)
+
+### ✨ Features
+
+- new feat: quoting on replying (#651) [skip-tests] ([`e839f6f1`](https://github.com/FaserF/hassio-addons/commit/e839f6f1165448f7df733d581797c3dad50fff83))
+
+### 📦 Dependencies
+
+- Update README information with support info ([`c70fff01`](https://github.com/FaserF/hassio-addons/commit/c70fff01378d531e3dffc35dc2bf94b49237f541))
+- Update index.js ([`e53e7090`](https://github.com/FaserF/hassio-addons/commit/e53e7090118925ee112df381baabe707025d320d))
+- Update index.js ([`022cbd47`](https://github.com/FaserF/hassio-addons/commit/022cbd479c9a7875893106d101915ec299d97aa8))
+- Update index.js ([`4ee59a06`](https://github.com/FaserF/hassio-addons/commit/4ee59a06a0f1978f66fb8964dfc882f9ae38e7d5))
+
+### 🚀 Other
+
+- add support to track sent to myself ([`829970f4`](https://github.com/FaserF/hassio-addons/commit/829970f48afea122458974494722dc3f27a02c75))
+
 ## 1.2.4 (2026-02-19)
 
 ### ✨ Features

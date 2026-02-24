@@ -46,23 +46,55 @@ configuration:
   gateway_mode:
     name: Gateway-Modus
     description: Gateway-Betriebsmodus - local (Gateway lokal ausführen, empfohlen) oder remote (mit einem entfernten Gateway verbinden)
-  
+    options:
+      local: "Lokal (empfohlen)"
+      remote: "Remote"
+
   gateway_bind_mode:
     name: Gateway-Bindungsmodus
-    description: Netzwerk-Bindungsmodus - auto (OpenClaw wählt), loopback (nur 127.0.0.1, sicherer), lan (alle Schnittstellen) oder tailnet (nur Tailscale-Schnittstelle).
-  
+    description: Netzwerk-Bindungsmodus - loopback (nur 127.0.0.1, am sichersten), lan (alle Schnittstellen) oder tailnet (nur Tailscale-Schnittstelle). Wird durch Zugriffsmodus-Voreinstellungen überschrieben.
+    options:
+      loopback: "Loopback (nur 127.0.0.1, am sichersten)"
+      lan: "LAN (alle Schnittstellen)"
+      tailnet: "Tailnet (nur Tailscale)"
+
   gateway_port:
     name: Gateway-Port
     description: Portnummer, auf der das OpenClaw-Gateway lauscht (Standard - 18789)
-  
+
+  access_mode:
+    name: Zugriffsmodus
+    description: "Vereinfacht die sichere Zugriffskonfiguration. Überschreibt gateway_bind_mode und gateway_auth_mode wenn nicht auf Benutzerdefiniert gesetzt."
+    options:
+      custom: "Benutzerdefiniert (individuelle Einstellungen)"
+      local_only: "Nur lokal (Loopback + Token, nur Ingress)"
+      lan_https: "LAN HTTPS (eingebauter HTTPS-Proxy — empfohlen für Smartphones)"
+      lan_reverse_proxy: "LAN Reverse-Proxy (externer Proxy mit Trusted-Proxy-Auth)"
+      tailnet_https: "Tailscale HTTPS (Tailscale-Bindung + Token)"
+
+  gateway_auth_mode:
+    name: Gateway-Authentifizierungsmodus
+    description: Gateway-Auth-Modus - token (Standard) oder trusted-proxy (für HTTPS-Reverse-Proxys). Wird überschrieben wenn access_mode nicht Benutzerdefiniert ist.
+    options:
+      token: "Token (Standard)"
+      trusted-proxy: "Vertrauenswürdiger Proxy (für Reverse-Proxys)"
+
+  gateway_trusted_proxies:
+    name: Vertrauenswürdige Gateway-Proxys
+    description: Komma-getrennte Liste vertrauenswürdiger Proxy-IPs/CIDRs für den Trusted-Proxy-Modus (Beispiel - 127.0.0.1,192.168.88.0/24).
+
   enable_openai_api:
     name: OpenAI API aktivieren
     description: OpenAI-kompatiblen Chat Completions Endpunkt aktivieren. Ermöglicht die Verwendung von OpenClaw als Gesprächsagent in der HA Assist Pipeline über Extended OpenAI Conversation (HACS) oder jeden OpenAI-kompatiblen Client.
-  
-  allow_insecure_auth:
-    name: Unsichere HTTP-Authentifizierung erlauben
-    description: HTTP-Authentifizierung für Gateway-Zugriff im LAN erlauben. WARNUNG - Nur aktivieren, wenn HTTP (nicht HTTPS) für gateway_public_url verwendet wird. Erforderlich für Browser-Zugriff über HTTP.
-
   force_ipv4_dns:
     name: IPv4-DNS-Reihenfolge erzwingen
-    description: Erzwingt IPv4-vorrangige DNS-Auflösung für Node-Netzwerkaufrufe. Nützlich, wenn IPv6-DNS aufgelöst wird, aber IPv6-Internet-Routing nicht funktioniert (kann Telegram-API-Polling beeinträchtigen).
+    description: Erzwingt IPv4-vorrangige DNS-Auflösung. Die meisten HAOS-VMs haben keinen IPv6-Ausgang — verursacht web_fetch- und Telegram-Timeouts. Empfohlen EIN (Standard).
+  nginx_log_level:
+    name: Nginx Log-Level
+    description: "Ausführlichkeit des Nginx-Zugriffslogs. 'minimal' (Standard) unterdrückt wiederholte HA-Healthcheck- und Polling-Anfragen. 'full' protokolliert alles."
+    options:
+      minimal: "Minimal (HA-Polling-Rauschen unterdrücken)"
+      full: "Vollständig (alle Anfragen protokollieren)"
+  gateway_env_vars:
+    name: Gateway-Umgebungsvariablen
+    description: Umgebungsvariablen, die beim Start an den OpenClaw-Gateway-Prozess übergeben werden (Liste mit name/value-Einträgen in der Home Assistant UI; max. 50 Variablen, Schlüssel bis 255 Zeichen, Werte bis 10.000 Zeichen).

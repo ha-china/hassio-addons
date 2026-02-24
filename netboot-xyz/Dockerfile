@@ -14,7 +14,7 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3018
 
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="2.2.2"
+ENV ADDON_VERSION="2.3.0"
 ENV ADDON_NAME="Netboot.xyz"
 ENV ADDON_SLUG="netboot-xyz"
 ENV ADDON_UNSUPPORTED="false"
@@ -61,7 +61,7 @@ HEALTHCHECK --interval=30s --timeout=10s --retries=5 --start-period=120s \
 LABEL \
   org.opencontainers.image.title="Netboot.xyz" \
   org.opencontainers.image.description="PXE-Server to deploy a OS inside your local network" \
-  org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons" \
+  org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
   org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
   org.opencontainers.image.licenses="MIT" \
   org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/netboot-xyz" \

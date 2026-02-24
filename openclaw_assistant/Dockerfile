@@ -29,6 +29,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rsync \
     bat \
     less \
+    openssl \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -100,9 +101,9 @@ RUN if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then \
     fi
 USER root
 
-# Install OpenClaw globally (official npm release)
+# Install OpenClaw globally
 RUN npm config set fund false && npm config set audit false \
- && npm install -g openclaw@2026.2.21-2
+ && npm install -g openclaw@2026.2.22-2
 
 # Shell aliases and color options for interactive use
 RUN tee -a /etc/bash.bashrc <<'EOF'
@@ -124,10 +125,12 @@ fi
 EOF
 COPY run.sh /run.sh
 COPY oc_config_helper.py /oc_config_helper.py
+COPY render_nginx.py /render_nginx.py
+COPY oc-cleanup.sh /usr/local/bin/oc-cleanup
 COPY openclaw-proxy-shim.cjs /usr/local/lib/openclaw-proxy-shim.cjs
 COPY nginx.conf.tpl /etc/nginx/nginx.conf.tpl
 COPY landing.html.tpl /etc/nginx/landing.html.tpl
-RUN chmod +x /run.sh /oc_config_helper.py \
+RUN chmod +x /run.sh /oc_config_helper.py /render_nginx.py /usr/local/bin/oc-cleanup \
  && mkdir -p /run/nginx
 
 CMD [ "/run.sh" ]

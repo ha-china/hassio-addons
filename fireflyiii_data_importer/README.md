@@ -1,6 +1,6 @@
 # Home assistant add-on: Fireflyiii data importer
 
-我利用业余时间维护这个和其他 Home Assistant add-ons：跟上上游的变化、HA 的变化以及在真实硬件上测试需要大量时间（和一些钱）。我大约使用我超过 110 个 add-ons 中 5-10 个，所以我会安装测试机器（和购买一些我自己不使用的测试服务，例如 VPN）来调试和改进这些 add-ons。
+我利用业余时间维护这个 Home Assistant add-on 以及其他 add-on：跟上上游的变化、HA 的变化，以及在真实硬件上测试需要大量时间（和一些金钱）。我大约使用我超过 110 个 add-on 中的 5-10 个，所以我安装了测试机器（并购买了一些我自己不使用的测试服务，如 VPN），以便我能够调试和改进这些 add-on。
 
 如果这个 add-on 为您节省了时间或使您的设置更简单，我将非常感谢您的支持！
 
@@ -20,7 +20,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库星标的人！要星标它，请点击下面的图片，然后它会在右上角。谢谢！_
+_感谢所有给我的仓库点赞的人！要点赞，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,9 +28,9 @@ _感谢所有给我的仓库星标的人！要星标它，请点击下面的图�
 
 ## About
 
-["Firefly III"](https://www.firefly-iii.org) 是一个（自托管）个人财务管理工具。它可以帮助您跟踪支出和收入，以便您花得更少，存得更多。数据导入器旨在帮助您将交易导入 Firefly III。由于安全和维护的原因，它与 Firefly III 分开。
+["Firefly III"](https://www.firefly-iii.org) 是一个（自托管）个人财务管理工具。它可以帮助您跟踪支出和收入，以便您花得更少，存得更多。数据导入器是为了帮助您将交易导入 Firefly III 而构建的。出于安全和维护的原因，它与 Firefly III 分离。
 
-这个 add-on 基于以下 docker 镜像：https://hub.docker.com/r/fireflyiii/data-importer
+这个 add-on 基于以下 Docker 镜像：https://hub.docker.com/r/fireflyiii/data-importer
 
 ## Configuration
 
@@ -38,7 +38,7 @@ Webui 可以在 <http://homeassistant:3474> 找到。
 
 ### Setup
 
-1. 确保您有一个正在运行的 Firefly III 实例
+1. 确保您有一个运行的 Firefly III 实例
 2. 配置数据导入器以连接到您的 Firefly III 安装
 3. 根据需要设置导入配置和文件
 
@@ -56,11 +56,11 @@ Webui 可以在 <http://homeassistant:3474> 找到。
 | `NORDIGEN_KEY` | str | No | Nordigen 客户端密钥 |
 | `SPECTRE_APP_ID` | str | No | Spectre/Salt Edge 客户端 ID |
 | `SPECTRE_SECRET` | str | No | Spectre/Salt Edge 客户端密钥 |
-| `AUTO_IMPORT_SECRET` | str | No | 自动导入 webhook 的密钥 |
+| `AUTO_IMPORT_SECRET` | str | No | 用于自动导入 webhook 的密钥 |
 | `CAN_POST_AUTOIMPORT` | bool | No | 允许自动导入功能 |
 | `CAN_POST_FILES` | bool | No | 允许文件上传 |
 | `Updates` | list | No | 自动导入计划（每小时、每天、每周） |
-| `silent` | bool | No | 抑制调试消息 |
+| `silent` | bool | No | 阻止调试消息 |
 
 ### Example Configuration
 
@@ -77,7 +77,7 @@ silent: false
 ### File Locations
 
 - **Configurations**: `/addon_configs/xxx-fireflyiii_data_importer/configurations/`
-  - 在这里存储导入配置文件
+  - 将导入配置文件存储在这里
   - 查看：https://docs.firefly-iii.org/data-importer/help/config/
 
 - **Import Files**: `/addon_configs/xxx-fireflyiii_data_importer/import_files/`
@@ -87,29 +87,29 @@ silent: false
 ### Getting a Firefly III Access Token
 
 1. 登录到您的 Firefly III 实例
-2. 转到选项 → 个人资料 → OAuth → 个人访问令牌
-3. 创建一个具有适当权限的新令牌
+2. 转到 Options → Profile → OAuth → Personal Access Tokens
+3. 创建一个新的令牌，并赋予适当的权限
 4. 复制令牌并在 `FIREFLY_III_ACCESS_TOKEN` 选项中使用它
 
 ### Custom Scripts and Environment Variables
 
-这个 add-on 通过 `addon_config` 映射支持自定义脚本和环境变量：
+这个 add-on 支持自定义脚本和环境变量，通过 `addon_config` 映射：
 
 - **Custom scripts**: 查看 [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars option**: 使用 add-on 的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。查看 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
+- **env_vars option**: 使用 add-on 的 `env_vars` 选项传递额外的环境变量（大小写名称）。查看 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
 ## Installation
 
 这个 add-on 的安装非常简单，与安装任何其他 add-on 没有区别。
 
-1. 将我的 add-ons 仓库添加到您的 Home Assistant 实例中（在 supervisor add-ons 存储库的右上角，或者如果您已经配置了我的 HA，请点击下面的按钮）
-   [![打开您的 Home Assistant 实例并显示带有预填写的特定仓库 URL 的添加 add-on 仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的 add-ons 仓库添加到您的 Home Assistant 实例（在 supervisor add-ons store 在右上角，或者如果您已经配置了我的 HA，请点击下面的按钮）
+   [![打开您的 Home Assistant 实例并显示添加 add-on 仓库对话框，其中特定的仓库 URL 已预先填写。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装这个 add-on。
 1. 点击 `Save` 按钮以保存您的配置。
 1. 设置 add-on 选项以符合您的偏好
 1. 启动 add-on。
-1. 检查 add-on 的日志以查看是否一切正常。
-1. 打开 webUI 并调整软件选项
+1. 检查 add-on 的日志，看看是否一切顺利。
+1. 打开 WebUI 并调整软件选项
 
 ## Support
 

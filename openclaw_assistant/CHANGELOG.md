@@ -2,6 +2,72 @@
 
 All notable changes to the OpenClaw Assistant Home Assistant Add-on will be documented in this file.
 
+## [0.5.52] - 2026-02-23
+
+### Added
+- New add-on option `gateway_env_vars` that accepts a list of `{name, value}` objects from Home Assistant UI and safely injects values into the gateway process at startup (max 50 vars, key <=255 chars, value <=10000 chars).
+- Guard `gateway_env_vars` from overriding reserved runtime/proxy/`OPENCLAW_*` keys.
+- Keep legacy string/object input formats for backward compatibility.
+
+## [0.5.51] - 2026-02-23
+
+### Fixed
+- **`web_fetch failed: fetch failed`**: changed `force_ipv4_dns` default to **true**. Node 22 tries IPv6 first; most HAOS VMs lack IPv6 egress, causing outbound `web_fetch` / HTTP tool calls to time out.
+
+### Added
+- **`nginx_log_level` option** (`minimal` / `full`, default `minimal`): suppresses repetitive Home Assistant health-check and polling requests (`GET /`, `GET /v1/models`, `POST /tools/invoke`) from the nginx access log.
+
+## [0.5.50] - 2026-02-23
+
+**[!WARNING!]**
+This update contains lots of changes. It is adviced to backup before installing!
+
+### Changed
+- **Upgraded OpenClaw to v2026.2.22-2** — includes major gateway/auth/pairing fixes and security hardening.
+- Precreate `$OPENCLAW_CONFIG_DIR/identity` on startup to prevent `EACCES` errors on CLI commands that need device identity.
+- Gateway token is auto-constructed from detected LAN IP when `lan_https` is active and `gateway_public_url` is empty.
+- Config helper now receives the effective internal port (gateway_port + 1 in lan_https mode).
+
+### Notes — v2026.2.22 impact on this add-on
+- **Pairing fixes (loopback)**: v2026.2.22 auto-approves loopback scope-upgrade pairing requests, includes `operator.read`/`operator.write` in default scope bundles, and treats `operator.admin` as satisfying other scopes. This greatly improves `local_only` mode reliability.
+- **`dangerouslyDisableDeviceAuth` security warning**: v2026.2.22 now emits a startup warning when this flag is active. The warning is **expected and harmless** for `lan_https` mode — the flag is still required because LAN browser connections through the HTTPS proxy are not considered loopback by the gateway. Token auth remains enforced.
+- **Gateway lock improvements**: stale-lock detection now uses port reachability, reducing false "already running" errors after unclean restarts.
+- **Log file size cap**: new `logging.maxFileBytes` default (500 MB) prevents disk exhaustion from log storms.
+- **`wss://` default for remote onboarding**: validates our HTTPS proxy approach as the correct direction.
+
+### Added
+- **Disk-space monitoring on the landing page** — shows total / used / available with colour-coded indicator (🟢 / 🟡 / 🔴).
+- **Low-disk warning banner** appears automatically when usage exceeds 90 %.
+- **`oc-cleanup` terminal command** — interactive helper that shows cache sizes (npm, pnpm, OpenClaw, Homebrew, pycache, tmp) and lets users reclaim space with a menu-driven cleanup.
+- Startup disk-space check with log warnings when the overlay is above 75 % or 90 %.
+- **`access_mode` preset option** — simplifies secure access configuration with one setting:
+  - `custom` (default, backward-compatible): use individual gateway settings
+  - `local_only`: loopback + token (Ingress/terminal only)
+  - `lan_https`: **built-in HTTPS reverse proxy for LAN access** (recommended for phones/tablets)
+  - `lan_reverse_proxy`: LAN bind + trusted-proxy for external reverse proxy (NPM, Caddy, Traefik)
+  - `tailnet_https`: Tailscale interface bind + token auth
+- **Built-in TLS certificate generation** (`lan_https` mode):
+  - Auto-generates a local CA + server certificate on first startup
+  - Server cert is regenerated automatically when LAN IP changes
+  - CA certificate downloadable from the landing page for one-tap phone trust
+  - nginx HTTPS server block terminates TLS and proxies to the loopback gateway
+- **Overhauled landing page** with:
+  - Real-time status cards (gateway health, secure context, access mode)
+  - Access wizard with step-by-step guidance per mode
+  - Error translation — maps raw errors like `1008: requires device identity` to friendly messages with fixes
+  - CA certificate download button (lan_https mode)
+  - Migration banner for users on `custom` mode recommending a preset
+  - Collapsible reverse-proxy recipes (NPM / Caddy / Traefik / Tailscale)
+- Added `openssl` to Docker image for TLS certificate generation.
+- Translations for `access_mode` in all 6 languages (EN, BG, DE, ES, PL, PT-BR).
+
+### Fixed
+- **`lan_https` — error 1008 "pairing required"**: auto-set `gateway.controlUi.dangerouslyDisableDeviceAuth: true` to skip interactive device pairing (token auth remains enforced). Replaces the invalid `pairingMode` key that caused `Unrecognized key` config errors.
+- Config helper now removes stale/invalid keys (e.g. `pairingMode`) from `controlUi` on startup.
+- Landing page error translation now covers "pairing required" and "origin not allowed" errors with correct fix guidance.
+- Dropdown translations for `access_mode`, `gateway_mode`, `gateway_bind_mode`, and `gateway_auth_mode` now show human-readable labels in all 6 languages.
+- **`lan_https` — error 1008 "origin not allowed"**: auto-configure `gateway.controlUi.allowedOrigins` with the HTTPS proxy origins (LAN IP, `homeassistant.local`, `homeassistant`) so the Control UI WebSocket is accepted.
+
 ## [0.5.49] - 2026-02-22
 
 ### Added

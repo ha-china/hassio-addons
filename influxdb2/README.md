@@ -4,10 +4,10 @@
 
 ## 关于
 
-InfluxDB v2 是一个为高写入量优化的开源时间序列数据库。
-它适用于记录指标、传感器数据、事件，并执行分析。它提供了一个 HTTP API 用于客户端交互，并且经常与 Grafana 结合使用来可视化数据。
+InfluxDB v2 是一个开源的时间序列数据库，专为高写入量优化。
+它适用于记录指标、传感器数据、事件，并执行分析。它提供了一个 HTTP API 用于客户端交互，并且经常与 Grafana 结合使用以可视化数据。
 
-InfluxDB v2 为您提供了一个不错的 InfluxDB 管理界面，用于管理您的用户、数据库、数据保留设置，并允许您使用数据探查器查看数据库内容。
+InfluxDB v2 为您提供了一个不错的 InfluxDB 管理界面，用于管理您的用户、数据库、数据保留设置，并让您可以使用数据探索器查看数据库内容。
 
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg

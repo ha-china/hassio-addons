@@ -46,23 +46,55 @@ configuration:
   gateway_mode:
     name: Gateway Mode
     description: Gateway operation mode - local (run gateway locally, recommended) or remote (connect to a remote gateway)
-  
+    options:
+      local: "Local (recommended)"
+      remote: "Remote"
+
   gateway_bind_mode:
     name: Gateway Bind Mode
-    description: Network bind mode - auto (OpenClaw selects), loopback (127.0.0.1 only, more secure), lan (all interfaces), or tailnet (Tailscale interface only).
-  
+    description: Network bind mode - loopback (127.0.0.1 only, most secure), lan (all interfaces), or tailnet (Tailscale interface only). Overridden by access_mode presets.
+    options:
+      loopback: "Loopback (127.0.0.1 only, most secure)"
+      lan: "LAN (all interfaces)"
+      tailnet: "Tailnet (Tailscale only)"
+
   gateway_port:
     name: Gateway Port
     description: Port number for the OpenClaw gateway to listen on (default - 18789)
-  
+
+  access_mode:
+    name: Access Mode
+    description: "Simplifies secure access setup. Overrides gateway_bind_mode and gateway_auth_mode when not set to Custom."
+    options:
+      custom: "Custom (use individual settings)"
+      local_only: "Local Only (loopback + token, Ingress only)"
+      lan_https: "LAN HTTPS (built-in HTTPS proxy — recommended for phones)"
+      lan_reverse_proxy: "LAN Reverse Proxy (external proxy with trusted-proxy auth)"
+      tailnet_https: "Tailscale HTTPS (Tailscale bind + token)"
+
+  gateway_auth_mode:
+    name: Gateway Auth Mode
+    description: Gateway auth mode - token (default) or trusted-proxy (for HTTPS reverse proxies). Overridden when access_mode is not Custom.
+    options:
+      token: "Token (default)"
+      trusted-proxy: "Trusted Proxy (for reverse proxies)"
+
+  gateway_trusted_proxies:
+    name: Gateway Trusted Proxies
+    description: Comma-separated trusted proxy IP/CIDR list for trusted-proxy mode (example - 127.0.0.1,192.168.88.0/24).
+
   enable_openai_api:
     name: Enable OpenAI API
     description: Enable OpenAI-compatible Chat Completions endpoint. Allows using OpenClaw as a conversation agent in HA Assist pipeline via Extended OpenAI Conversation (HACS) or any OpenAI-compatible client.
-  
-  allow_insecure_auth:
-    name: Allow Insecure HTTP Auth
-    description: Allow HTTP authentication for gateway access on LAN. WARNING - Only enable if using HTTP (not HTTPS) for gateway_public_url. Required for browser access over HTTP.
-
   force_ipv4_dns:
     name: Force IPv4 DNS Order
-    description: Force IPv4-first DNS ordering for Node network calls. Useful when IPv6 DNS resolves but IPv6 internet routing is broken (can affect Telegram API polling).
+    description: Force IPv4-first DNS ordering for Node network calls. Most HAOS VMs lack IPv6 egress, causing web_fetch and Telegram timeouts. Recommended ON (default).
+  nginx_log_level:
+    name: Nginx Log Level
+    description: "Access log verbosity for the built-in nginx proxy. 'minimal' (default) suppresses repetitive HA health-check and polling requests. 'full' logs everything."
+    options:
+      minimal: "Minimal (suppress HA polling noise)"
+      full: "Full (log all requests)"
+  gateway_env_vars:
+    name: Gateway Environment Variables
+    description: Environment variables passed to the OpenClaw gateway process at startup (list entries with name/value in Home Assistant UI; max 50 variables, keys up to 255 characters, values up to 10,000 characters).

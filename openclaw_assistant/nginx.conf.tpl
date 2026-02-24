@@ -9,8 +9,8 @@ http {
   include       /etc/nginx/mime.types;
   default_type  application/octet-stream;
 
-  # Log to stdout/stderr (container-friendly)
-  access_log /dev/stdout;
+  # Logging (configurable via nginx_log_level option)
+  __NGINX_ACCESS_LOG__
   error_log  /dev/stderr notice;
 
   sendfile        on;
@@ -59,4 +59,6 @@ http {
       return 404;
     }
   }
+
+  __HTTPS_GATEWAY_BLOCK__
 }

@@ -1,7 +1,7 @@
 name: OpenClaw Assistant
-version: "0.5.49"
+version: "0.5.52"
 slug: openclaw_assistant
-description: '[老王杂谈说]：将 OpenClaw Assistant (OpenClaw兼容) 作为 Home Assistant 插件运行。'
+description: '[老王杂谈说]：将 OpenClaw 助手（兼容 OpenClaw）作为 Home Assistant 插件运行。'
 url: https://ghfast.top/github.com/techartdev/OpenClawHomeAssistant
 arch:
   - amd64
@@ -55,23 +55,48 @@ options:
   # - loopback: bind to 127.0.0.1 only (local access only, most secure)
   # - lan: bind to all interfaces (accessible from local network)
   # - tailnet: bind to Tailscale IP only (accessible only via Tailscale — recommended for remote access)
-  # - auto: prefer loopback; use tailnet if Tailscale is available
   # Default is loopback for security.
   gateway_bind_mode: loopback
   # Gateway port to listen on
   gateway_port: 18789
+  # Access mode preset — simplifies secure access configuration.
+  # custom: use individual gateway_bind_mode / auth_mode settings (backward compatible)
+  # local_only: loopback + token auth (Ingress / terminal only, most secure)
+  # lan_https: Built-in HTTPS reverse proxy for LAN access (recommended for phones/tablets)
+  # lan_reverse_proxy: LAN bind + trusted-proxy for an external reverse proxy (NPM, Caddy, …)
+  # tailnet_https: Tailscale interface bind + token auth
+  access_mode: custom
+  # Gateway authentication mode:
+  # - token: standard token auth (default)
+  # - trusted-proxy: trust auth headers from configured reverse proxies
+  gateway_auth_mode: token
+  # Comma-separated trusted proxy IP/CIDR list for trusted-proxy mode.
+  # Example: "127.0.0.1,192.168.88.0/24"
+  gateway_trusted_proxies: ""
   # Enable OpenAI-compatible Chat Completions API endpoint
   # When enabled, OpenClaw can be used as a conversation agent in HA Assist pipeline
   # via Extended OpenAI Conversation (HACS) or any OpenAI-compatible client
   enable_openai_api: false
-  # Allow insecure HTTP authentication (required for HTTP gateway access on LAN)
-  # WARNING: Only enable if you're using HTTP (not HTTPS) for gateway_public_url
-  # Default is false for security.
-  allow_insecure_auth: false
   # Force IPv4-first DNS result ordering for Node fetch/network calls.
-  # Useful on networks where IPv6 resolution exists but IPv6 egress is broken
-  # (can affect Telegram API polling in some HAOS/VM setups).
-  force_ipv4_dns: false
+  # Most HAOS VMs lack IPv6 egress, causing web_fetch / Telegram timeouts.
+  # Default: true (recommended). Set to false only if you need IPv6.
+  force_ipv4_dns: true
+  # Nginx access log verbosity:
+  # full: log all requests (useful for debugging)
+  # minimal: suppress repetitive HA health-check and polling requests (default)
+  nginx_log_level: minimal
+  # Environment variables to pass to the gateway process at startup.
+  # Format: list of objects with name/value fields.
+  # Example:
+  #   gateway_env_vars:
+  #     - name: OPENAI_API_KEY
+  #       value: "sk-abc123"
+  #     - name: LOG_LEVEL
+  #       value: "debug"
+  # Reserved keys are blocked to protect runtime/security
+  # (e.g. PATH, HOME, NODE_OPTIONS, NODE_PATH, OPENCLAW_*, proxy vars).
+  # Limits: max 50 variables, max key length 255 chars, max value length 10000 chars
+  gateway_env_vars: []
 schema:
   timezone: str
   enable_terminal: bool?
@@ -85,8 +110,14 @@ schema:
   clean_session_locks_on_start: bool?
   clean_session_locks_on_exit: bool?
   gateway_mode: list(local|remote)?
-  gateway_bind_mode: list(auto|loopback|lan|tailnet)?
+  gateway_bind_mode: list(loopback|lan|tailnet)?
   gateway_port: int(1,65535)?
+  access_mode: list(custom|local_only|lan_https|lan_reverse_proxy|tailnet_https)?
+  gateway_auth_mode: list(token|trusted-proxy)?
+  gateway_trusted_proxies: str?
   enable_openai_api: bool?
-  allow_insecure_auth: bool?
   force_ipv4_dns: bool?
+  gateway_env_vars:
+    - name: "match(^[A-Z_][A-Z0-9_]*$)"
+      value: str
+  nginx_log_level: list(full|minimal)?

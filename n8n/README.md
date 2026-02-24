@@ -1,66 +1,70 @@
-# 家居助手插件：n8n
+# N8n
 
-n8n 是一个可扩展的工作流自动化工具。凭借公平的代码分发模式，n8n 将始终拥有可见的源代码，可以自行托管，并允许您添加自己的自定义函数、逻辑和应用程序。n8n 的基于节点的方法使其具有高度的多功能性，使您能够将任何事物连接到任何其他事物。
+<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/n8n/logo.png" width="100" />
 
-功能尚未测试，但插件确实可以运行
+[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_n8n)
+[![Home Assistant App](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker Image](https://img.shields.io/badge/docker-1.2.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-n8n)
+![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-_感谢所有星标我的仓库！要星标它，请点击下面的图片，然后它将出现在右上角。谢谢！_
+> Workflow automation tool. N8n extends your Home Assistant with powerful workflow automation.
 
-[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
-
-## 关于
-
-此插件使用 [docker 镜像](https://github.com/n8n-io/n8n)。
-
-## 安装
-
-
-1. [将我的 Hass.io 插件仓库][repository] 添加到您的 Hass.io 实例。
-1. 点击 `保存` 按钮以存储您的配置。
-1. 启动插件。
-1. 插件将失败，这是正常的
-1. 通过 ssh 进入您的 homeassistant 并运行 `chmod 2777 /addon_configs/2effc9b9_n8n`
-1. 重新启动插件
-1. 检查插件的日志以查看是否一切正常。
-1. 应该可以通过 <your-ip>:port 打开 WebUI。
-1. 设置管理员账户
-1. 设置将在 /addon_configs/2effc9b9_n8n 中
-
-## 配置
-
-您可以选择让插件使用环境文件。注意使用 '/home/node' 作为基本路径，这将映射到 /addon_configs/2effc9b9_n8n 
-
-您需要自行创建该文件，并使其成为您想要设置的路径列表，例如：
-```
-DB_SQLITE_POOL_SIZE=10
-N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
-```
-
-```
-port : 5678 #您想要运行的端口。
-```
-
-Webui 可以在 `<your-ip>:port` 找到。
-
-[repository]: https://github.com/jdeath/homeassistant-addons
----
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
 ---
 
-## 📱 关注我
+## 📖 About
 
-扫描下面二维码，关注我。有需要可以随时给我留言：
+## ❤️ Support This Project
 
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+> I maintain all these add-ons in my **free time alongside a regular job**. Test devices cost money, and every donation helps me stay independent and invest more time into open-source work.
+>
+> Donations are completely voluntary — but the more support I receive, the less I depend on other income and the more time I can dedicate to these projects.
 
-## ☕ 赞助支持
+<div align="center">
 
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+</div>
 
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
+> Workflow automation tool. N8n extends your Home Assistant with powerful workflow automation.
 
-感谢您的支持与鼓励！
+N8n (Nodemation) is an extendable workflow automation tool. With a fair-code distribution model, n8n will always have visible source code, available to self-host, and allows you to add your own custom functions, logic, and apps.
+
+## 🐛 Report a Bug
+
+If you encounter any issues with this app, please report them using the link below. The issue form will be pre-filled with the app information to help us resolve the problem faster.
+
+**[Report a Bug](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&App_name=n8n&log_information=Please+paste+the+App+log+output+here%3A%0A%0A)**
+
+> [!NOTE]
+> Please use the link above to report problems. This ensures that all necessary information (app name, version, etc.) is automatically included in your bug report.
+
+## 💡 Feature Request
+
+If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the app information.
+
+**[Request a Feature](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&App_name=n8n)**
+
+> [!NOTE]
+> Please use the link above to request features. This ensures that the app name is automatically included in your feature request.
+
+---
+
+## ⚙️ Configuration
+
+Configure the add-on via the **Configuration** tab in the Home Assistant App page.
+
+### Options
+
+```yaml
+certfile: fullchain.pem
+keyfile: privkey.pem
+listen_address: 0.0.0.0
+log_level: info
+port: 5678
+ssl: false
+```
+
+---
+
+## 👨‍💻 Credits & License
+
+This project is open-source and available under the MIT License.
+Maintained by **FaserF**.

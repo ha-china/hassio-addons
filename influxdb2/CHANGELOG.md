@@ -1,5 +1,5 @@
 ## What’s changed
 
-## 🧰 Maintenance
+## 🐛 Bug fixes
 
-- Migrate to new S6-overlay layout @erik73 ([#7](https://github.com/erik73/app-influxdb2/pull/7))
+- Remove tar file after install @erik73 ([#8](https://github.com/erik73/app-influxdb2/pull/8))

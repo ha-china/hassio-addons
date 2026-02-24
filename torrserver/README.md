@@ -1,25 +1,27 @@
-# Home Assistant的TorrServer插件
+# TorrServer app for Home Assistant
 
-[![GitHub仓库星标](https://img.shields.io/github/stars/aatrubilin/hassio-torrserver)](https://github.com/aatrubilin/hassio-torrserver)
+[![GitHub Repo stars](https://img.shields.io/github/stars/aatrubilin/hassio-torrserver)](https://github.com/aatrubilin/hassio-torrserver)
 
-[![GitHub发布](https://img.shields.io/github/v/release/aatrubilin/hassio-torrserver)](https://github.com/aatrubilin/hassio-torrserver/releases)
-![GitHub发布日期](https://img.shields.io/github/release-date/aatrubilin/hassio-torrserver)
+[![GitHub Release](https://img.shields.io/github/v/release/aatrubilin/hassio-torrserver)](https://github.com/aatrubilin/hassio-torrserver/releases)
+![GitHub Release Date](https://img.shields.io/github/release-date/aatrubilin/hassio-torrserver)
 
-![支持aarch64架构](https://img.shields.io/badge/aarch64-yes-green.svg)
-![支持amd64架构](https://img.shields.io/badge/amd64-yes-green.svg)
-![支持armhf架构](https://img.shields.io/badge/armhf-unknown-dbdbdc.svg)
-![支持armv7架构](https://img.shields.io/badge/armv7-more%20likely-blue.svg)
-![支持i386架构](https://img.shields.io/badge/i386-unknown-dbdbdc.svg)
+[![Latest Downloads amd64](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/aatrubilin/hassio-torrserver/refs/heads/badges/amd64.json)](https://github.com/aatrubilin/hassio-torrserver/pkgs/container/hassio-torrserver%2Famd64)
+[![Total Downloads aarch64](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/aatrubilin/hassio-torrserver/refs/heads/badges/aarch64.json)](https://github.com/aatrubilin/hassio-torrserver/pkgs/container/hassio-torrserver%2Faarch64)
 
-请注意，此插件仅在**HA OS**上进行了测试。
+This is a [TorrServer for Home Assistant](https://github.com/aatrubilin/hassio-torrserver).
 
-这是一个用于Home Assistant的[TorrServer插件](https://github.com/aatrubilin/hassio-torrserver)。
-
-🌟 请考虑通过给此项目一个星标来支持[该项目](https://github.com/aatrubilin/hassio-torrserver)。
+🌟 Please consider supporting [this project](https://github.com/aatrubilin/hassio-torrserver) by giving it a star.
 
 [<img src="https://raw.githubusercontent.com/aatrubilin/hassio-torrserver/master/assets/screenshot.png"/>](https://raw.githubusercontent.com/aatrubilin/hassio-torrserver/dev/assets/screenshot.png)
 
-hassio插件由[@aatrubilin](https://github.com/aatrubilin)基于[https://github.com/YouROK/TorrServer](https://github.com/YouROK/TorrServer)开发而来。
+Got questions or problems? You can [open an issue here](https://github.com/aatrubilin/hassio-torrserver/issues) GitHub.
+
+> _Please keep in mind, that this app is tested only with **HA OS**_
+
+----
+
+The hassio app is brought to you by [@aatrubilin](https://github.com/aatrubilin) based on [YouROK/TorrServer](https://github.com/YouROK/TorrServer)
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

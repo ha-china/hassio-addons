@@ -46,23 +46,55 @@ configuration:
   gateway_mode:
     name: Режим на Gateway
     description: Режим на работа на Gateway - local (локално изпълнение на gateway, препоръчително) или remote (свързване към отдалечен gateway)
-  
+    options:
+      local: "Локален (препоръчително)"
+      remote: "Отдалечен"
+
   gateway_bind_mode:
     name: Режим на свързване на Gateway
-    description: Режим на мрежово свързване - auto (OpenClaw избира), loopback (само 127.0.0.1, по-сигурно), lan (всички интерфейси) или tailnet (само Tailscale интерфейс).
-  
+    description: Режим на мрежово свързване - loopback (само 127.0.0.1, най-сигурен), lan (всички интерфейси) или tailnet (само Tailscale интерфейс). Пренебрегва се от предварителните режими на достъп.
+    options:
+      loopback: "Loopback (само 127.0.0.1, най-сигурен)"
+      lan: "LAN (всички интерфейси)"
+      tailnet: "Tailnet (само Tailscale)"
+
   gateway_port:
     name: Порт на Gateway
     description: Номер на порт, на който OpenClaw gateway да слуша (по подразбиране - 18789)
-  
+
+  access_mode:
+    name: Режим на достъп
+    description: "Опростява настройката на сигурен достъп. Пренебрегва gateway_bind_mode и gateway_auth_mode, когато не е зададен на Потребителски."
+    options:
+      custom: "Потребителски (индивидуални настройки)"
+      local_only: "Само локален (loopback + token, само Ingress)"
+      lan_https: "LAN HTTPS (вграден HTTPS прокси — препоръчително за телефони)"
+      lan_reverse_proxy: "LAN Reverse Proxy (външен прокси с trusted-proxy удостоверяване)"
+      tailnet_https: "Tailscale HTTPS (Tailscale + token)"
+
+  gateway_auth_mode:
+    name: Режим на удостоверяване на Gateway
+    description: Режим на удостоверяване - token (по подразбиране) или trusted-proxy (за HTTPS reverse proxy). Пренебрегва се, когато access_mode не е Потребителски.
+    options:
+      token: "Token (по подразбиране)"
+      trusted-proxy: "Доверен прокси (за reverse proxy)"
+
+  gateway_trusted_proxies:
+    name: Доверени прокси на Gateway
+    description: Списък с доверени прокси IP/CIDR, разделени със запетая, за trusted-proxy режим (пример - 127.0.0.1,192.168.88.0/24).
+
   enable_openai_api:
     name: Активиране на OpenAI API
     description: Активиране на OpenAI-съвместим Chat Completions ендпойнт. Позволява използването на OpenClaw като разговорен агент в HA Assist pipeline чрез Extended OpenAI Conversation (HACS) или всеки OpenAI-съвместим клиент.
-  
-  allow_insecure_auth:
-    name: Разрешаване на HTTP автентикация
-    description: Разрешаване на HTTP автентикация за достъп до gateway в локалната мрежа. ВНИМАНИЕ - Активирайте само ако използвате HTTP (не HTTPS) за gateway_public_url. Необходимо за достъп от браузър през HTTP.
-
   force_ipv4_dns:
     name: Принудителен IPv4 DNS ред
-    description: Принудително задава IPv4-приоритет при DNS резолв за Node мрежови заявки. Полезно е, когато IPv6 DNS се резолвира, но IPv6 интернет маршрутизацията е неработеща (може да влияе на Telegram API polling).
+    description: Принудително задава IPv4-приоритет при DNS резолв. Повечето HAOS VM нямат IPv6 изход — предизвиква web_fetch и Telegram грешки. Препоръчително ВКЛЮЧЕНО (по подразбиране).
+  nginx_log_level:
+    name: Nginx ниво на логове
+    description: "Подробност на логовете на nginx проксито. 'minimal' (по подразбиране) потиска повтарящи се HA health-check заявки. 'full' логва всичко."
+    options:
+      minimal: "Минимално (потискане на HA polling шум)"
+      full: "Пълно (логване на всички заявки)"
+  gateway_env_vars:
+    name: Променливи на средата за Gateway
+    description: Променливи на средата, предавани на OpenClaw gateway процеса при стартиране (списък от записи name/value в Home Assistant UI; макс. 50 променливи, ключове до 255 знака, стойности до 10000 знака).
