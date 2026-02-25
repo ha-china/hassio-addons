@@ -47,11 +47,13 @@ CLEAN_LOCKS_ON_EXIT=$(jq -r '.clean_session_locks_on_exit // true' "$OPTIONS_FIL
 
 # Gateway configuration
 GATEWAY_MODE=$(jq -r '.gateway_mode // "local"' "$OPTIONS_FILE")
+GATEWAY_REMOTE_URL=$(jq -r '.gateway_remote_url // empty' "$OPTIONS_FILE")
 GATEWAY_BIND_MODE=$(jq -r '.gateway_bind_mode // "loopback"' "$OPTIONS_FILE")
 GATEWAY_PORT=$(jq -r '.gateway_port // 18789' "$OPTIONS_FILE")
 ENABLE_OPENAI_API=$(jq -r '.enable_openai_api // false' "$OPTIONS_FILE")
 GATEWAY_AUTH_MODE=$(jq -r '.gateway_auth_mode // "token"' "$OPTIONS_FILE")
 GATEWAY_TRUSTED_PROXIES=$(jq -r '.gateway_trusted_proxies // empty' "$OPTIONS_FILE")
+GATEWAY_ADDITIONAL_ALLOWED_ORIGINS=$(jq -r '.gateway_additional_allowed_origins // empty' "$OPTIONS_FILE")
 FORCE_IPV4_DNS=$(jq -r '.force_ipv4_dns // true' "$OPTIONS_FILE")
 ACCESS_MODE=$(jq -r '.access_mode // "custom"' "$OPTIONS_FILE")
 NGINX_LOG_LEVEL=$(jq -r '.nginx_log_level // "minimal"' "$OPTIONS_FILE")
@@ -452,8 +454,10 @@ EOF
 GW_PID=""
 NGINX_PID=""
 TTYD_PID=""
+SHUTTING_DOWN="false"
 
 shutdown() {
+  SHUTTING_DOWN="true"
   echo "Shutdown requested; stopping services..."
 
   if [ -n "${NGINX_PID}" ] && kill -0 "${NGINX_PID}" >/dev/null 2>&1; then
@@ -534,7 +538,7 @@ if [ -f "$OPENCLAW_CONFIG_PATH" ]; then
   if [ -f "$HELPER_PATH" ]; then
     # In lan_https mode the gateway uses an internal port; nginx owns the external one.
     EFFECTIVE_GW_PORT="$GATEWAY_INTERNAL_PORT"
-    if ! python3 "$HELPER_PATH" apply-gateway-settings "$GATEWAY_MODE" "$GATEWAY_BIND_MODE" "$EFFECTIVE_GW_PORT" "$ENABLE_OPENAI_API" "$GATEWAY_AUTH_MODE" "$GATEWAY_TRUSTED_PROXIES"; then
+    if ! python3 "$HELPER_PATH" apply-gateway-settings "$GATEWAY_MODE" "$GATEWAY_REMOTE_URL" "$GATEWAY_BIND_MODE" "$EFFECTIVE_GW_PORT" "$ENABLE_OPENAI_API" "$GATEWAY_AUTH_MODE" "$GATEWAY_TRUSTED_PROXIES"; then
       rc=$?
       echo "ERROR: Failed to apply gateway settings via oc_config_helper.py (exit code ${rc})."
       echo "ERROR: Gateway configuration may be incorrect; aborting startup."
@@ -549,11 +553,18 @@ else
   echo "INFO: Run 'openclaw onboard' first, then restart the add-on"
 fi
 
+if [ "$GATEWAY_AUTH_MODE" = "trusted-proxy" ]; then
+  echo "NOTICE: gateway_auth_mode=trusted-proxy is enabled."
+  echo "NOTICE: Direct local CLI calls to the gateway may return unauthorized (trusted_proxy_user_missing) unless identity headers are injected by your reverse proxy."
+  echo "NOTICE: For local terminal CLI workflows, temporarily switch to token auth or use commands that don't require direct gateway WS auth."
+fi
+
 # ------------------------------------------------------------------------------
 # TLS certificate generation for built-in HTTPS proxy (lan_https mode)
 # Generates a local CA + server cert so phones/tablets get proper HTTPS.
 # The CA cert can be installed once on a device for trusted access.
 # ------------------------------------------------------------------------------
+LAN_IP=""
 if [ "$ENABLE_HTTPS_PROXY" = "true" ]; then
   CERT_DIR="/config/certs"
   mkdir -p "$CERT_DIR"
@@ -573,16 +584,46 @@ if [ "$ENABLE_HTTPS_PROXY" = "true" ]; then
     echo "INFO: Local CA created at $CERT_DIR/ca.crt"
   fi
 
-  # --- Server cert (regenerated when LAN IP changes) ---
-  if [ ! -f "$CERT_DIR/gateway.crt" ] || [ ! -f "$CERT_DIR/gateway.key" ] || [ "$LAN_IP" != "$STORED_IP" ]; then
+  # --- Extra SANs from gateway_additional_allowed_origins + gateway_public_url ---
+  EXTRA_SANS=""
+  EXTRA_SAN_SOURCES="${GATEWAY_ADDITIONAL_ALLOWED_ORIGINS},${GW_PUBLIC_URL}"
+  if [ "$EXTRA_SAN_SOURCES" != "," ]; then
+    EXTRA_SANS="$(python3 - "$EXTRA_SAN_SOURCES" "${LAN_IP:-}" <<'PY'
+import sys, re
+from urllib.parse import urlparse
+raw = sys.argv[1] if len(sys.argv) > 1 else ""
+lan_ip = sys.argv[2] if len(sys.argv) > 2 else ""
+entries = [e.strip() for e in raw.split(",") if e.strip()]
+sans = []
+seen = {"127.0.0.1", "localhost", "homeassistant", "homeassistant.local"}
+if lan_ip:
+    seen.add(lan_ip)
+for entry in entries:
+    if "://" not in entry:
+        entry = "https://" + entry
+    host = urlparse(entry).hostname or ""
+    if host and host not in seen:
+        seen.add(host)
+        if re.match(r"^\d{1,3}(\.\d{1,3}){3}$", host):
+            sans.append(f"IP:{host}")
+        else:
+            sans.append(f"DNS:{host}")
+print(",".join(sans), end="")
+PY
+)"
+  fi
+  STORED_EXTRA_SANS=$(cat "$CERT_DIR/.cert_extra_sans" 2>/dev/null || echo "")
+
+  # --- Server cert (regenerated when LAN IP or SANs change) ---
+  if [ ! -f "$CERT_DIR/gateway.crt" ] || [ ! -f "$CERT_DIR/gateway.key" ] || [ "$LAN_IP" != "$STORED_IP" ] || [ "$EXTRA_SANS" != "$STORED_EXTRA_SANS" ]; then
     echo "INFO: Generating server TLS certificate for IP: ${LAN_IP:-unknown}..."
     openssl genrsa -out "$CERT_DIR/gateway.key" 2048 2>/dev/null
     openssl req -new -key "$CERT_DIR/gateway.key" -out "$CERT_DIR/gateway.csr" \
       -subj "/CN=OpenClaw Gateway" 2>/dev/null
 
-    # SAN extension — include LAN IP, loopback, and common mDNS names
+    # SAN extension — include LAN IP, loopback, common mDNS names + user extras
     cat > "$CERT_DIR/_san.ext" <<SANEOF
-subjectAltName=IP:${LAN_IP:-127.0.0.1},IP:127.0.0.1,DNS:localhost,DNS:homeassistant,DNS:homeassistant.local
+subjectAltName=IP:${LAN_IP:-127.0.0.1},IP:127.0.0.1,DNS:localhost,DNS:homeassistant,DNS:homeassistant.local${EXTRA_SANS:+,${EXTRA_SANS}}
 SANEOF
 
     openssl x509 -req -in "$CERT_DIR/gateway.csr" \
@@ -593,7 +634,8 @@ SANEOF
     rm -f "$CERT_DIR/gateway.csr" "$CERT_DIR/_san.ext" "$CERT_DIR/ca.srl"
     chmod 600 "$CERT_DIR/gateway.key"
     printf '%s' "$LAN_IP" > "$CERT_DIR/.cert_ip"
-    echo "INFO: Server TLS certificate generated (SAN includes IP:${LAN_IP:-127.0.0.1})"
+    printf '%s' "$EXTRA_SANS" > "$CERT_DIR/.cert_extra_sans"
+    echo "INFO: Server TLS certificate generated (SAN: IP:${LAN_IP:-127.0.0.1}${EXTRA_SANS:+,${EXTRA_SANS}})"
   else
     echo "INFO: Reusing existing TLS certificate (IP: $STORED_IP)"
   fi
@@ -603,32 +645,44 @@ SANEOF
   cp "$CERT_DIR/ca.crt" /etc/nginx/html/openclaw-ca.crt 2>/dev/null || true
   echo "INFO: CA certificate available for download at /cert/ca.crt on the HTTPS port"
 
-  # ------------------------------------------------------------------
-  # Configure gateway.controlUi for the HTTPS proxy:
-  #
-  # 1. allowedOrigins — the browser's HTTPS origin must be listed,
-  #    otherwise v2026.2.21+ rejects with 1008 "origin not allowed".
-  #
-  # 2. dangerouslyDisableDeviceAuth — skips the interactive device
-  #    pairing ceremony (1008 "pairing required").  In a self-hosted
-  #    add-on the user already controls the token, so per-device
-  #    approval adds friction without real security benefit.
-  #
-  #    NOTE: v2026.2.22+ emits a startup security warning when this
-  #    flag is active. The warning is expected and harmless for this
-  #    use case — run `openclaw security audit` for details.
-  #
-  # Also cleans up any stale keys (e.g. pairingMode) from older
-  # add-on versions that would cause "Unrecognized key" errors.
-  # ------------------------------------------------------------------
-  if [ -n "$LAN_IP" ] && [ -f "$HELPER_PATH" ] && [ -f "$OPENCLAW_CONFIG_PATH" ]; then
+fi
+
+# ------------------------------------------------------------------
+# Configure gateway.controlUi.allowedOrigins:
+# - In lan_https: include HTTPS proxy defaults (LAN IP + common hostnames)
+# - In all modes: also include origin from gateway_public_url when present
+# - Helper merges with existing origins + user extras and deduplicates
+# ------------------------------------------------------------------
+if [ -f "$HELPER_PATH" ] && [ -f "$OPENCLAW_CONFIG_PATH" ]; then
+  ALLOWED_ORIGINS=""
+
+  if [ "$ENABLE_HTTPS_PROXY" = "true" ] && [ -n "$LAN_IP" ]; then
     ALLOWED_ORIGINS="https://${LAN_IP}:${GATEWAY_PORT}"
-    # Also permit common mDNS/hostname variants so the cert SAN names work too
     ALLOWED_ORIGINS="${ALLOWED_ORIGINS},https://homeassistant.local:${GATEWAY_PORT}"
     ALLOWED_ORIGINS="${ALLOWED_ORIGINS},https://homeassistant:${GATEWAY_PORT}"
-    python3 "$HELPER_PATH" set-control-ui-origins "$ALLOWED_ORIGINS" || \
-      echo "WARN: Could not set controlUi settings — gateway may reject the Control UI"
   fi
+
+  if [ -n "$GW_PUBLIC_URL" ]; then
+    GW_PUBLIC_ORIGIN="$(python3 - "$GW_PUBLIC_URL" <<'PY'
+import sys
+from urllib.parse import urlparse
+u = (sys.argv[1] or '').strip()
+p = urlparse(u)
+if p.scheme in ('http', 'https') and p.netloc:
+    print(f"{p.scheme}://{p.netloc}", end='')
+PY
+)"
+    if [ -n "$GW_PUBLIC_ORIGIN" ]; then
+      if [ -n "$ALLOWED_ORIGINS" ]; then
+        ALLOWED_ORIGINS="${ALLOWED_ORIGINS},${GW_PUBLIC_ORIGIN}"
+      else
+        ALLOWED_ORIGINS="$GW_PUBLIC_ORIGIN"
+      fi
+    fi
+  fi
+
+  python3 "$HELPER_PATH" set-control-ui-origins "$ALLOWED_ORIGINS" "$GATEWAY_ADDITIONAL_ALLOWED_ORIGINS" || \
+    echo "WARN: Could not set controlUi settings — gateway may reject the Control UI"
 fi
 
 # ------------------------------------------------------------------------------
@@ -645,9 +699,53 @@ if [ -f /usr/local/lib/openclaw-proxy-shim.cjs ]; then
   export OPENCLAW_GLOBAL_NODE_MODULES
 fi
 
-echo "Starting OpenClaw Assistant gateway (openclaw)..."
-openclaw gateway run &
-GW_PID=$!
+start_openclaw_runtime() {
+  echo "Starting OpenClaw Assistant runtime (openclaw)..."
+  if [ "$GATEWAY_MODE" = "remote" ]; then
+    # Remote mode: do NOT start a local gateway service.
+    # Start a node/client host that connects to the configured remote gateway URL.
+    REMOTE_URL="$(timeout 2s openclaw config get gateway.remote.url 2>/dev/null | tr -d '\n' || true)"
+    if [ -z "$REMOTE_URL" ]; then
+      echo "ERROR: gateway_mode=remote but gateway.remote.url is empty in openclaw config"
+      echo "ERROR: Configure gateway.remote.url first, then restart the add-on"
+      return 1
+    fi
+
+    NODE_HOST=""
+    NODE_PORT=""
+    NODE_TLS_FLAG=""
+    if ! eval "$(python3 - "$REMOTE_URL" <<'PY'
+import sys
+from urllib.parse import urlparse
+url = (sys.argv[1] or '').strip()
+p = urlparse(url)
+if p.scheme not in ('ws', 'wss') or not p.hostname:
+    print('echo "ERROR: Invalid gateway.remote.url (expected ws:// or wss://): %s"' % url.replace('"', '\\"'))
+    print('exit 1')
+    raise SystemExit(0)
+port = p.port or (443 if p.scheme == 'wss' else 80)
+print(f'NODE_HOST={p.hostname}')
+print(f'NODE_PORT={port}')
+print(f'NODE_TLS_FLAG={"--tls" if p.scheme == "wss" else ""}')
+PY
+)"; then
+      echo "ERROR: Failed to parse gateway.remote.url: $REMOTE_URL"
+      return 1
+    fi
+
+    echo "INFO: gateway_mode=remote detected; starting node host to $NODE_HOST:$NODE_PORT ${NODE_TLS_FLAG}"
+    # shellcheck disable=SC2086
+    openclaw node run --host "$NODE_HOST" --port "$NODE_PORT" $NODE_TLS_FLAG &
+  else
+    openclaw gateway run &
+  fi
+  GW_PID=$!
+  return 0
+}
+
+if ! start_openclaw_runtime; then
+  exit 1
+fi
 
 # Start web terminal (optional)
 TTYD_PID_FILE="/var/run/openclaw-ttyd.pid"
@@ -717,8 +815,12 @@ fi
 
 # Render nginx config from template.
 # The gateway token is NOT managed by the add-on; OpenClaw will generate/store it.
-# Best-effort: query it via CLI (works even if openclaw.json is JSON5). If unknown, we hide the button.
-GW_TOKEN="$(timeout 2s openclaw config get gateway.auth.token 2>/dev/null | tr -d '\n' || true)"
+# Read directly from config file — the CLI redacts secrets since v2026.2.22+.
+GW_TOKEN="$(python3 -c "
+import json, os
+p = os.environ.get('OPENCLAW_CONFIG_PATH', '/config/.openclaw/openclaw.json')
+print(json.load(open(p)).get('gateway',{}).get('auth',{}).get('token',''), end='')
+" 2>/dev/null || true)"
 
 # Collect disk usage for landing page status card
 DISK_TOTAL="" DISK_USED="" DISK_AVAIL="" DISK_PCT=""
@@ -755,5 +857,21 @@ else
   echo "WARN: nginx failed to start (PID $NGINX_PID exited); ingress UI may be unavailable"
 fi
 
-# Wait for gateway; if it exits, shut down others.
-wait "${GW_PID}"
+# Keep add-on alive even if gateway/node runtime restarts itself (e.g. during onboarding).
+# If runtime exits unexpectedly, restart it while nginx/ttyd stay up.
+while true; do
+  GW_EXIT_CODE=0
+  wait "${GW_PID}" || GW_EXIT_CODE=$?
+
+  if [ "$SHUTTING_DOWN" = "true" ]; then
+    break
+  fi
+
+  echo "WARN: OpenClaw runtime exited with code ${GW_EXIT_CODE}. Restarting in 2s..."
+  sleep 2
+
+  if ! start_openclaw_runtime; then
+    echo "ERROR: Failed to restart OpenClaw runtime; retrying in 5s..."
+    sleep 5
+  fi
+done

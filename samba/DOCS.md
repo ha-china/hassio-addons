@@ -1,38 +1,38 @@
-# Home Assistant Add-on: Samba Share
+# Home Assistant App: Samba share
 
-## 安装
+## Installation
 
-按照以下步骤将插件安装到您的系统上：
+Follow these steps to get the app (formerly known as add-on) installed on your system:
 
-1. 在 Home Assistant 前端导航到 **设置** -> **插件** -> **插件商店**。
-2. 查找 "Samba share" 插件并点击它。
-3. 点击 "安装" 按钮。
+1. In Home Assistant, go to **Settings** > **Apps** > **Install app**.
+2. Find the "Samba share" app and click it.
+3. Click on the "INSTALL" button.
 
-## 如何使用
+## How to use
 
-1. 在配置部分，设置用户名和密码。
-   您可以指定任何用户名和密码；这些与您用于登录 Home Assistant 或用于使用 Samba share 的计算机的登录凭据无关。
-2. 查看启用的共享。禁用您不打算使用的任何共享。如果需要，可以稍后重新启用共享。
+1. In the configuration section, set a username and password.
+   You can specify any username and password; these are not related in any way to the login credentials you use to log in to Home Assistant or to log in to the computer with which you will use Samba share.
+2. Review the enabled shares. Disable any you do not plan to use. Shares can be re-enabled later if needed.
 
-## 连接
+## Connection
 
-如果您使用的是 Windows，您使用 `\\<IP_ADDRESS>\`，如果您使用的是 MacOS，您使用 `smb://<IP_ADDRESS>` 来连接到共享。
+If you are on Windows you use `\\<IP_ADDRESS>\`, if you are on MacOS you use `smb://<IP_ADDRESS>` to connect to the shares.
 
-此插件通过 smb（samba）公开以下目录：
+This app exposes the following directories over smb (samba):
 
-| 目录 | 描述 |
-| -- | -- |
-| `addons` | 这用于您的本地插件。 |
-| `addon_configs` | 这用于您的插件配置文件。 |
-| `backup` | 这用于您的备份。 |
-| `config` | 这用于您的 Home Assistant 配置。 |
-| `media` | 这用于本地媒体文件。 |
-| `share` | 这用于在插件和 Home Assistant 之间共享的数据。 |
-| `ssl` | 这用于您的 SSL 证书。 |
+Directory | Description
+-- | --
+`addons` | This is for your local apps.
+`addon_configs` | This is for the configuration files of your apps.
+`backup` | This is for your backups.
+`config` | This is for your Home Assistant configuration.
+`media` | This is for local media files.
+`share` | This is for your data that is shared between apps and Home Assistant.
+`ssl` | This is for your SSL certificates.
 
-## 配置
+## Configuration
 
-插件配置：
+App configuration:
 
 ```yaml
 workgroup: WORKGROUP
@@ -61,64 +61,70 @@ veto_files:
 compatibility_mode: false
 ```
 
-### 选项：`workgroup` (必需)
+### Option: `workgroup` (required)
 
-将 WORKGROUP 更改为反映您的网络需求。
+Change WORKGROUP to reflect your network needs.
 
-### 选项：`local_master` (必需)
+### Option: `local_master` (required)
 
-启用以尝试成为子网上的本地主浏览器。
+Enable to try and become a local master browser on a subnet.
 
-### 选项：`username` (必需)
+### Option: `username` (required)
 
-您希望用于向 Samba 服务器进行身份验证的用户名。
+The username you would like to use to authenticate with the Samba server.
 
-### 选项：`password` (必需)
+### Option: `password` (required)
 
-与用于身份验证配置的用户名对应的密码。
+The password that goes with the username configured for authentication.
 
-### 选项：`enabled_shares` (必需)
+### Option: `enabled_shares` (required)
 
-将要可访问的 Samba 共享的列表。从列表中删除或注释掉的任何共享将不可访问。
+List of Samba shares that will be accessible. Any shares removed or commented out of the list will not be accessible.
 
-### 选项：`allow_hosts` (必需)
+### Option: `allow_hosts` (required)
 
-允许访问共享文件夹的主机/网络列表。
+List of hosts/networks allowed to access the shared folders.
 
-### 选项：`veto_files` (可选)
+### Option: `veto_files` (optional)
 
-既不可见也不可访问的文件列表。用于阻止客户端在共享中堆砌临时隐藏文件（例如 macOS 的 `.DS_Store` 或 Windows 的 `Thumbs.db` 文件）。
+List of files that are neither visible nor accessible. Useful to stop clients
+from littering the share with temporary hidden files
+(e.g., macOS `.DS_Store` or Windows `Thumbs.db` files)
 
-### 选项：`compatibility_mode`
+### Option: `compatibility_mode`
 
-将此选项设置为 `true` 将在 Samba 插件上启用旧的遗留 Samba 协议。这可能解决一些无法处理新协议的客户端的问题，但会降低安全性。仅在绝对需要并了解可能后果的情况下使用。
+Setting this option to `true` will enable old legacy Samba protocols
+on the Samba app. This might solve issues with some clients that cannot
+handle the newer protocols, however, it lowers security. Only use this
+when you absolutely need it and understand the possible consequences.
 
-默认值为 `false`。
+Defaults to `false`.
 
-### 选项：`apple_compatibility_mode`
+### Option: `apple_compatibility_mode`
 
-启用 Samba 配置以提高与 Apple 设备的互操作性。这可能导致不支持 xattr 的文件系统（如 exFAT）出现问题。
+Enable Samba configurations to improve interoperability with Apple devices.
+This can cause issues with file systems that do not support xattr such as exFAT.
 
-默认值为 `true`。
+Defaults to `true`.
 
-### 选项：`server_signing`
+### Option: `server_signing`
 
-配置 SMB 服务器签名要求。此选项可以通过要求消息签名来提高安全性，从而有助于防止中间人攻击。
-有关详细信息的值，请参阅 `smb.conf` 的手册页：**default**、**auto**、**mandatory** 和 **disabled**。
+Configure the SMB server signing requirement. This option can improve security by requiring message signing, which helps prevent man-in-the-middle attacks.
+Refer to the man page for smb.conf for detailed information about the values: **default**, **auto**, **mandatory**, and **disabled**.
 
-默认值为 `default`。
+Defaults to `default`.
 
-## 支持
+## Support
 
-有问题？
+Got questions?
 
-您有几个选项来获得答案：
+You have several options to get them answered:
 
-- [Home Assistant Discord 聊天服务器][discord]。
-- Home Assistant [社区论坛][forum]。
-- 加入 [Reddit 子版块][reddit] 在 [/r/homeassistant][reddit]
+- The [Home Assistant Discord Chat Server][discord].
+- The Home Assistant [Community Forum][forum].
+- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
 
-如果您发现了一个错误，请 [在我们的 GitHub 上打开一个问题][issue]。
+In case you've found a bug, please [open an issue on our GitHub][issue].
 
 [discord]: https://discord.gg/c5DvZ4e
 [forum]: https://community.home-assistant.io

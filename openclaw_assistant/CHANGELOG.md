@@ -2,6 +2,26 @@
 
 All notable changes to the OpenClaw Assistant Home Assistant Add-on will be documented in this file.
 
+## [0.5.54] - 2026-02-25
+
+### Changed
+- Added startup guidance when `gateway_auth_mode=trusted-proxy` is enabled to clarify why direct local CLI gateway calls can show `trusted_proxy_user_missing`/unauthorized.
+- Bump OpenClaw to 2026.2.24.
+
+### Added
+- New add-on option `gateway_additional_allowed_origins` for extra Control UI origins in `lan_https` mode.
+- **Custom SANs in TLS certificate** (`lan_https` mode): hostnames and IPs from `gateway_additional_allowed_origins` and `gateway_public_url` are now included in the server certificate's Subject Alternative Name. The certificate auto-regenerates when SANs change.
+
+### Fixed
+- **Gateway token on landing page**: read token directly from `openclaw.json` instead of via `openclaw config get` which redacts secrets since OpenClaw v2026.2.22+ (fixes "Open Gateway Web UI" button sending `openclaw_redacted` as the token).
+- **Token retrieval instructions**: all "get your token" references in the landing page and DOCS now use `jq -r '.gateway.auth.token' /config/.openclaw/openclaw.json` with a note explaining why the old `openclaw config get` command no longer works.
+- `lan_https` startup no longer overwrites `gateway.controlUi.allowedOrigins` with defaults only.
+- Control UI origins are now merged as: built-in defaults + existing config values + `gateway_additional_allowed_origins` (deduplicated).
+- In `lan_reverse_proxy` and other non-`lan_https` setups, Control UI origins now also include the origin derived from `gateway_public_url`.
+- `gateway.controlUi.allowedOrigins` configuration is now consistently applied via merge logic (defaults + existing values + user extras), reducing manual `openclaw.json` edits after upgrades.
+- Add-on no longer exits/restarts when OpenClaw runtime process is restarted during onboarding or config changes.
+- `run.sh` now supervises the OpenClaw runtime (`openclaw gateway run` / `openclaw node run`) and auto-restarts it while keeping nginx + terminal alive.
+
 ## [0.5.53] - 2026-02-24
 - Bump OpenClaw to 2026.2.23.
 

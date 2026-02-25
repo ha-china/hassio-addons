@@ -43,6 +43,14 @@ configuration:
     name: Wyczyść blokady sesji przy wyjściu
     description: Usuń pliki blokad sesji gdy dodatek zatrzymuje się poprawnie
   
+  gateway_remote_url:
+    name: URL zdalnego Gateway
+    description: Adres WebSocket zdalnego gateway używany gdy Gateway Mode = Remote (przykład - ws://192.168.1.20:18789 lub wss://gateway.example.com:443)
+
+  gateway_additional_allowed_origins:
+    name: Dodatkowe dozwolone origins
+    description: Dodatkowe origins Control UI rozdzielone przecinkami; łączone z gateway.controlUi.allowedOrigins w trybie lan_https (przykład - https://ha.example.com:8443,capacitor://localhost)
+
   gateway_bind_mode:
     name: Tryb bindowania Gateway
     description: Tryb bindowania sieci - loopback (tylko 127.0.0.1, najbezpieczniejszy), lan (wszystkie interfejsy) lub tailnet (tylko interfejs Tailscale). Nadpisywane przez ustawienia trybu dostępu.

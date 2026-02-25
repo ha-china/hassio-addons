@@ -50,6 +50,14 @@ configuration:
       local: "Local (recomendado)"
       remote: "Remoto"
 
+  gateway_remote_url:
+    name: URL do Gateway Remoto
+    description: URL WebSocket do gateway remoto usada quando Gateway Mode está em Remote (exemplo - ws://192.168.1.20:18789 ou wss://gateway.example.com:443)
+
+  gateway_additional_allowed_origins:
+    name: Origens permitidas adicionais
+    description: Origens extras da Control UI separadas por vírgula, mescladas em gateway.controlUi.allowedOrigins no modo lan_https (exemplo - https://ha.example.com:8443,capacitor://localhost)
+
   gateway_bind_mode:
     name: Modo de Vinculação do Gateway
     description: Modo de vinculação de rede - loopback (somente 127.0.0.1, mais seguro), lan (todas as interfaces) ou tailnet (somente interface Tailscale). Substituído pelas predefinições do modo de acesso.

@@ -1,7 +1,7 @@
 name: OpenClaw Assistant
-version: "0.5.53"
+version: "0.5.54"
 slug: openclaw_assistant
-description: '[老王杂谈说]：将 OpenClaw 助手（OpenClaw 兼容）作为 Home Assistant 附加组件运行。'
+description: '[老王杂谈说]：将 OpenClaw 助手 (OpenClaw兼容) 作为 Home Assistant 附加组件运行。'
 url: https://ghfast.top/github.com/techartdev/OpenClawHomeAssistant
 arch:
   - amd64
@@ -51,6 +51,9 @@ options:
   # - remote: Connect to a remote gateway
   # Default is local.
   gateway_mode: local
+  # Remote gateway URL (used when gateway_mode=remote)
+  # Example: "ws://192.168.1.20:18789" or "wss://gateway.example.com:443"
+  gateway_remote_url: ""
   # Gateway network bind mode:
   # - loopback: bind to 127.0.0.1 only (local access only, most secure)
   # - lan: bind to all interfaces (accessible from local network)
@@ -73,6 +76,12 @@ options:
   # Comma-separated trusted proxy IP/CIDR list for trusted-proxy mode.
   # Example: "127.0.0.1,192.168.88.0/24"
   gateway_trusted_proxies: ""
+  # Additional allowed origins for gateway.controlUi.allowedOrigins.
+  # Merged with built-in defaults and existing configured origins.
+  # In lan_https mode, hostnames/IPs from these origins are also added to the
+  # TLS certificate SAN so the cert is valid for custom domains.
+  # Example: "https://ha.example.com:8443,capacitor://localhost"
+  gateway_additional_allowed_origins: ""
   # Enable OpenAI-compatible Chat Completions API endpoint
   # When enabled, OpenClaw can be used as a conversation agent in HA Assist pipeline
   # via Extended OpenAI Conversation (HACS) or any OpenAI-compatible client
@@ -110,11 +119,13 @@ schema:
   clean_session_locks_on_start: bool?
   clean_session_locks_on_exit: bool?
   gateway_mode: list(local|remote)?
+  gateway_remote_url: str?
   gateway_bind_mode: list(loopback|lan|tailnet)?
   gateway_port: int(1,65535)?
   access_mode: list(custom|local_only|lan_https|lan_reverse_proxy|tailnet_https)?
   gateway_auth_mode: list(token|trusted-proxy)?
   gateway_trusted_proxies: str?
+  gateway_additional_allowed_origins: str?
   enable_openai_api: bool?
   force_ipv4_dns: bool?
   gateway_env_vars:

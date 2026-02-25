@@ -3,8 +3,7 @@ arch:
   - amd64
 audio: true
 backup: cold
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：基于BattyBirdNET-Analyzer为Raspberry Pi 4/5构建的实时声学蝙蝠与鸟类分类系统'
+description: '[老王杂谈说]：null'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -69,6 +68,7 @@ map:
   - ssl
 name: BattyBirdNET-Pi
 options:
+  env_vars: []
   BIRDSONGS_FOLDER: /config/BirdSongs
   LIVESTREAM_BOOT_ENABLED: false
   TZ: Europe/Paris
@@ -81,12 +81,15 @@ ports:
   80/tcp: null
   8081/tcp: 8081
 ports_description:
-  80/tcp: 'Optional : set to 80 to use caddy''s automatic ssl'
+  80/tcp: "Optional : set to 80 to use caddy's automatic ssl"
   8081/tcp: Web ui
 privileged:
   - SYS_ADMIN
   - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   BIRDSONGS_FOLDER: str?
   LIVESTREAM_BOOT_ENABLED: bool
   MQTT_DISABLED: bool?
@@ -113,5 +116,5 @@ tmpfs: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/battybirdnet-pi
 usb: true
-version: 2025.06.06
+version: 2026.02.25
 video: true

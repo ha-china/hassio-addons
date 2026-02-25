@@ -1,5 +1,5 @@
 ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.1
-ARG WIKIJS_VERSION=2.5.311
+ARG WIKIJS_VERSION=2.5.312
 FROM ghcr.nju.edu.cn/requarks/wiki:${WIKIJS_VERSION} AS wiki_release
 
 # hadolint ignore=DL3006
@@ -11,8 +11,10 @@ ARG BUILD_DATE="unknown"
 
 ENV S6_CMD_WAIT_FOR_SERVICES=1
 
+
+
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="3.3.2"
+ENV ADDON_VERSION="3.4.0"
 ENV ADDON_NAME="Wiki.JS"
 ENV ADDON_SLUG="wiki.js"
 ENV ADDON_UNSUPPORTED="false"
@@ -49,7 +51,7 @@ CMD [ "/run.sh" ]
 LABEL \
     org.opencontainers.image.title="Wiki.JS" \
     org.opencontainers.image.description="The most powerful and extensible open source Wiki software" \
-    org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons" \
+    org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
     org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/wiki.js" \

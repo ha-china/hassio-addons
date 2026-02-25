@@ -109,8 +109,9 @@
         Set <code>gateway_public_url</code> in add-on options if the button URL is wrong.
       </div>
       <div class="muted" style="margin-top:6px">
-        If the Gateway UI says <b>Unauthorized</b>, get your token in the terminal:
-        <code>openclaw config get gateway.auth.token</code>
+        If the Gateway UI says <b>Unauthorized</b>, get your token from the terminal:<br>
+        <code>jq -r '.gateway.auth.token' /config/.openclaw/openclaw.json</code><br>
+        <small style="color:#6b7280">(Since OpenClaw v2026.2.22+, <code>openclaw config get</code> redacts secrets — read the file directly instead.)</small>
       </div>
     </details>
 

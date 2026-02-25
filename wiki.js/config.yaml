@@ -1,6 +1,6 @@
 ---
 name: Wiki.JS
-version: 3.4.0
+version: 3.4.1
 slug: wiki.js
 image: ghcr.nju.edu.cn/faserf/hassio-addons-wiki-{arch}
 description: '[老王杂谈说]：最强大且可扩展的开源 Wiki 软件'
@@ -12,7 +12,8 @@ services:
   - mysql:need
 map:
   - ssl
-  - addon_config:rw
+  - type: addon_config
+    read_only: false
 ingress: true
 ingress_port: 3010
 init: false
