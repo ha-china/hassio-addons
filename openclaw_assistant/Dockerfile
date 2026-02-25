@@ -103,7 +103,7 @@ USER root
 
 # Install OpenClaw globally
 RUN npm config set fund false && npm config set audit false \
- && npm install -g openclaw@2026.2.22-2
+ && npm install -g openclaw@2026.2.23
 
 # Shell aliases and color options for interactive use
 RUN tee -a /etc/bash.bashrc <<'EOF'

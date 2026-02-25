@@ -1,5 +1,5 @@
 ## What’s changed
 
-## 🐛 Bug fixes
+## ⬆️ Dependency updates
 
-- Fix IPv6 support @8191 ([#398](https://github.com/hassio-addons/app-vaultwarden/pull/398))
+- ⬆️ Update vaultwarden/server Docker tag to v1.35.4 @[renovate[bot]](https://github.com/apps/renovate) ([#404](https://github.com/hassio-addons/app-vaultwarden/pull/404))

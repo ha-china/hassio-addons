@@ -1,14 +1,27 @@
 # Changelog
 
+## 1.3.2 (2026-02-24)
+
+### 📦 Dependencies
+
+- ⬆️ Update dependency uvicorn to v0.41.0 [skip-tests] (#659) [skip-tests] ([`c2069dd2`](https://github.com/FaserF/hassio-addons/commit/c2069dd24ae15b511917d0bad68b48f2c70116aa))
+- ⬆️ Update dependency fastapi to v0.132.0 [skip-tests] (#658) [skip-tests] ([`9f3b2ed5`](https://github.com/FaserF/hassio-addons/commit/9f3b2ed5abeb2bdd74e7116e1846e596822bc901))
+- ⬆️ Update dependency pino to v10.3.1 [skip-tests] (#656) [skip-tests] ([`81d9249f`](https://github.com/FaserF/hassio-addons/commit/81d9249f557722e7421db245110f0302a9c00bb7))
+
+### 🚀 Other
+
+- Workaround for whatsapp login #661 ([`9ec229cc`](https://github.com/FaserF/hassio-addons/commit/9ec229cc3881c9a0494a6e7af5247580f0d9d351))
+
 ## 1.3.1 (2026-02-23)
 
 ### 📦 Dependencies
+
 - ⬆️ Update dependency eslint to v10.0.1 [skip-tests] ([`c461d635`](https://github.com/FaserF/hassio-addons/commit/c461d635ebefc4dc23b559b7e322532618febfd4))
 
 ### 🚀 Other
+
 - another fix for buttons & lists #653 ([`e10b91fa`](https://github.com/FaserF/hassio-addons/commit/e10b91fa33e83745a81d3da524b59677c2399394))
 - try to fix buttons&lists #653 ([`019b3228`](https://github.com/FaserF/hassio-addons/commit/019b32286a879fe9fb9753868620c66eade89882))
-
 
 ## 1.3.0 (2026-02-23)
 

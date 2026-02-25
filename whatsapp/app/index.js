@@ -282,6 +282,9 @@ function getSession(rawSessionId) {
       sock: null,
       currentQR: null,
       isConnected: false,
+      disconnectReason: null,
+      reconnectAttempts: 0,
+      firstFailureTime: null,
       eventQueue: [],
       connectionLogs: [],
       messageStore: new Map(),
@@ -333,6 +336,21 @@ try {
   }
 } catch (e) {
   logger.warn({ error: e.message }, 'Could not read Baileys version');
+}
+
+// --- Baileys 405 Workaround (GitHub Issue #2370) ---
+// Baileys 7.0.0-rc.9 has a bug causing 405 connection errors.
+// Pinning the WA version tuple fixes it. This workaround is ONLY
+// applied for 7.0.0-rc.9; when Renovate bumps Baileys the patch
+// is automatically skipped.
+const BAILEYS_405_AFFECTED_VERSION = '7.0.0-rc.9';
+const BAILEYS_405_VERSION_OVERRIDE = [2, 3000, 1033893291];
+const APPLY_BAILEYS_405_FIX = BAILEYS_VERSION === BAILEYS_405_AFFECTED_VERSION;
+
+if (APPLY_BAILEYS_405_FIX) {
+  logger.warn(`⚠️  Applying Baileys 405 workaround (version override) for v${BAILEYS_VERSION}`);
+} else {
+  logger.info(`✅ Baileys v${BAILEYS_VERSION} — no 405 workaround needed`);
 }
 
 // --- mDNS / Bonjour ---
@@ -545,6 +563,7 @@ async function connectToWhatsApp(sessionId = 'default') {
     auth: state,
     logger: logger.child({ module: `baileys-${sessionId}` }, { level: 'warn' }),
     browser: Browsers.macOS('Chrome'),
+    ...(APPLY_BAILEYS_405_FIX && { version: BAILEYS_405_VERSION_OVERRIDE }),
     syncFullHistory: false,
     markOnlineOnConnect: MARK_ONLINE,
 
@@ -578,25 +597,50 @@ async function connectToWhatsApp(sessionId = 'default') {
     }
 
     if (connection === 'close') {
-      const shouldReconnect =
-        lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut;
+      const isLoggedOut = lastDisconnect.error?.output?.statusCode === DisconnectReason.loggedOut;
+      const shouldReconnect = !isLoggedOut;
       const reason = lastDisconnect.error?.message || lastDisconnect.error?.toString() || 'Unknown';
       addLog(session, `Connection closed: ${reason}`, 'warning');
 
       logger.warn({ reason, shouldReconnect, sessionId }, 'Connection closed');
       session.isConnected = false;
 
-      if (shouldReconnect) {
-        addLog(session, 'Reconnecting...', 'info');
-        setTimeout(() => connectToWhatsApp(sessionId), 1000);
-      } else {
+      if (isLoggedOut) {
+        session.disconnectReason = 'logged_out';
+        session.reconnectAttempts = 0;
+        session.firstFailureTime = null;
         addLog(session, 'Session logged out. Clean up metadata required.', 'error');
         logger.error({ sessionId }, `Logged out. Please delete ${sessionAuthDir} to re-pair.`);
+      } else {
+        session.disconnectReason = 'connection_error';
+        session.reconnectAttempts += 1;
+        if (!session.firstFailureTime) {
+          session.firstFailureTime = Date.now();
+        }
+
+        // Adaptive backoff: escalate to 2min after 15min of sustained failures
+        const baseDelay = APPLY_BAILEYS_405_FIX ? 15000 : 3000;
+        const failDuration = Date.now() - session.firstFailureTime;
+        const reconnectDelay = failDuration > 15 * 60 * 1000 ? 120000 : baseDelay;
+
+        addLog(
+          session,
+          `Reconnecting in ${reconnectDelay / 1000}s... (attempt ${session.reconnectAttempts})`,
+          'info'
+        );
+        logger.info(
+          { sessionId, attempt: session.reconnectAttempts, delayMs: reconnectDelay },
+          'Scheduling reconnect'
+        );
+        setTimeout(() => connectToWhatsApp(sessionId), reconnectDelay);
       }
     } else if (connection === 'open') {
       logger.info({ sessionId }, 'WhatsApp connection opened');
       addLog(session, 'WhatsApp Connection Established! 🟢', 'success');
       session.isConnected = true;
+      session.disconnectReason = null;
+      session.reconnectAttempts = 0;
+      session.firstFailureTime = null;
       session.currentQR = null;
       if (session.sock && session.sock.user) {
         session.stats.my_number = session.sock.user.id.split(':')[0]; // Extract number from JID
@@ -871,7 +915,12 @@ app.get('/qr', (req, res) => {
 // GET /status
 app.get('/status', (req, res) => {
   const session = getReqSession(req);
-  res.json({ connected: session.isConnected, version: BAILEYS_VERSION, session_id: session.id });
+  res.json({
+    connected: session.isConnected,
+    version: BAILEYS_VERSION,
+    session_id: session.id,
+    disconnect_reason: session.isConnected ? null : session.disconnectReason,
+  });
 });
 
 // GET /events (Polling)

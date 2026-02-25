@@ -1,40 +1,39 @@
 # Home assistant add-on: SiYuan
 
-SiYuan is a privacy-first personal knowledge management system, support fine-grained block-level reference and Markdown WYSIWYG.
+SiYuan 是一个注重隐私的个人知识管理系统，支持细粒度的块级引用和 Markdown WYSIWYG。
 
-Seems popular, but has subscription add-ons and optional China datacenter. Use with care
+看起来很受欢迎，但有订阅附加组件和可选的中国数据中心。请谨慎使用
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有将我的仓库加入星标的人！要加入星标，请点击下面的图片，它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## About
+## 关于
 
-This addon is based on the [docker image](https://github.com/siyuan-note/siyuan).
+这个附加组件基于 [docker 镜像](https://github.com/siyuan-note/siyuan)。
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+这个附加组件的安装非常简单，与安装任何其他 Hass.io 附加组件没有区别。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on.
-1. Set the access code and port
-1. Click the `Save` button to store your configuration.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Open WebUI should work via <your-ip>:port.
-1. Data should live in /addon_config/2effc9b9_siyuan
-## Configuration
+1. [将我的 Hass.io 附加组件仓库][repository] 添加到你的 Hass.io 实例。
+1. 安装这个附加组件。
+1. 设置访问码和端口
+1. 点击 `保存` 按钮来存储你的配置。
+1. 启动附加组件。
+1. 检查附加组件的日志以查看是否一切正常。
+1. 应该可以通过 <your-ip>:port 打开 WebUI。
+1. 数据应该存储在 /addon_config/2effc9b9_siyuan
+
+## 配置
 
 ```
-port : 6806 #port you want to run on.
+port : 6806 #你想要运行的端口。
 ```
 
-Webui can be found at `<your-ip>:port`.
+Webui 可以在 `<your-ip>:port` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
-
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
