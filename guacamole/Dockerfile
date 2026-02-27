@@ -2,11 +2,11 @@
 #  ALEXBELGIUM'S DOCKERFILE  #
 #============================#
 #           _.------.
-#       _.-`    ('>.-`"1.6.0-bullseye""-.
+#       _.-`    ('>.-`"""-.
 # '.--'`       _'`   _ .--.)
 #    -'         '-.-';`   `
 #    ' -      _.'  ``'--.
-#        '---`    .-'"1.6.0-bullseye"`
+#        '---`    .-'""`
 #               /`
 #=== Home Assistant Addon ===#
 
@@ -60,6 +60,7 @@ RUN \
 
 # Add rootfs
 COPY rootfs/ /
+RUN find . -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -exec chmod +x {} \;
 
 # Uses /bin for compatibility purposes
 # hadolint ignore=DL4005
@@ -87,10 +88,11 @@ RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.
 # Add entrypoint
 #ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" "/ha_entrypoint.sh"
+RUN chmod 777 /ha_entrypoint.sh
 
-# Entrypoint modifications
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint_modif.sh" "/ha_entrypoint_modif.sh"
-RUN chmod 777 /ha_entrypoint.sh /ha_entrypoint_modif.sh && /ha_entrypoint_modif.sh && rm /ha_entrypoint_modif.sh
+# Install bashio
+ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/usr/local/lib/bashio-standalone.sh"
+RUN chmod 0755 /usr/local/lib/bashio-standalone.sh
 
 #WORKDIR /data
 ENTRYPOINT [ "/usr/bin/env" ]
@@ -132,7 +134,7 @@ LABEL \
 #################
 
 ENV HEALTH_PORT="8080" \
-    HEALTH_URL="1.6.0-bullseye"
+    HEALTH_URL=""
 HEALTHCHECK \
     --interval=5s \
     --retries=5 \

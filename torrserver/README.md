@@ -8,23 +8,25 @@
 [![Latest Downloads amd64](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/aatrubilin/hassio-torrserver/refs/heads/badges/amd64.json)](https://github.com/aatrubilin/hassio-torrserver/pkgs/container/hassio-torrserver%2Famd64)
 [![Total Downloads aarch64](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/aatrubilin/hassio-torrserver/refs/heads/badges/aarch64.json)](https://github.com/aatrubilin/hassio-torrserver/pkgs/container/hassio-torrserver%2Faarch64)
 
-This is a [TorrServer for Home Assistant](https://github.com/aatrubilin/hassio-torrserver).
+这是一个 [Home Assistant 的 TorrServer](https://github.com/aatrubilin/hassio-torrserver)。
 
-🌟 Please consider supporting [this project](https://github.com/aatrubilin/hassio-torrserver) by giving it a star.
+🌟 请考虑通过给它一个 star 来支持 [这个项目](https://github.com/aatrubilin/hassio-torrserver)。
 
 [<img src="https://raw.githubusercontent.com/aatrubilin/hassio-torrserver/master/assets/screenshot.png"/>](https://raw.githubusercontent.com/aatrubilin/hassio-torrserver/dev/assets/screenshot.png)
 
-Got questions or problems? You can [open an issue here](https://github.com/aatrubilin/hassio-torrserver/issues) GitHub.
+有疑问或问题？您可以在 GitHub 上 [提交一个 issue](https://github.com/aatrubilin/hassio-torrserver/issues)。
 
-> _Please keep in mind, that this app is tested only with **HA OS**_
+> _请注意，这个应用仅在 **HA OS** 上进行了测试_
 
 ----
 
-The hassio app is brought to you by [@aatrubilin](https://github.com/aatrubilin) based on [YouROK/TorrServer](https://github.com/YouROK/TorrServer)
-
+这个 hassio 应用是由 [@aatrubilin](https://github.com/aatrubilin) 基于 [YouROK/TorrServer](https://github.com/YouROK/TorrServer) 开发的。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我
