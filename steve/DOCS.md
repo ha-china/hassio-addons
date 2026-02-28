@@ -1,60 +1,64 @@
-# Home Assistant 插件：SteVe
+# Home Assistant App: SteVe
 
-SteVe OCPP 服务器用于与充电点进行通信
+SteVe OCPP server for communicationg with charge points
 
-![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield]
+![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
 
-## 关于
+## About
 
-重要提示：此插件要求 MariaDB 插件已安装并运行！
+Important: This app requires that the MariaDB app is installed and running!
 
-此插件为实验性插件。
-SteVe 是一个用于与充电点进行通信的 OCPP 服务器。
+This app is experimental.
+Steve is an OCPP server for communicationg with charge points
 
-## 安装
+## Installation
 
-按照以下步骤在系统上安装插件：
+Follow these steps to get the app installed on your system:
 
-添加仓库 `https://github.com/erik73/hassio-addons`。
-找到“SteVe”插件并单击它。
-点击“安装”按钮。
+Add the repository `https://github.com/erik73/hassio-addons`.
+Find the "SteVe" app and click it.
+Click on the "INSTALL" button.
 
-## 如何使用
+## How to use
 
-### 启动插件
+### Starting the app
 
-安装后，您将看到默认配置。
+After installation you are presented with a default configuration.
 
-重要提示：此插件要求 MariaDB 插件已安装并运行！
+Important: This app requires that the MariaDB app is installed and running!
 
-所需的唯一配置是提供 admin_user 和 admin_password。
-通过点击“保存”按钮来保存插件配置。
-启动插件。
+The only configuration that is needed is to provide the admin_user and admin_password.
+Save the app configuration by clicking the "SAVE" button.
+Start the app.
 
-## 配置
+## Configuration
 
-重要提示：此插件要求 MariaDB 插件已安装并运行！
+Important: This app requires that theMariaDB app is installed and running!
 
-示例配置：
+Example configuration:
 
 ```yaml
 admin_user: admin
 admin_password: admin
 ```
 
-请注意：此插件消耗大量内存。
-主机上安装的最低要求为 4GB RAM。
-根据其他已安装的插件，4GB 可能不够。
+Please note: This app consumes lots of memory.
+The absolute minimum is 4GB of RAM intsalled in the host.
+Depending on other apps that are installed 4GB might not be enough.
 
-还需注意，admin_user 和 admin_password 在插件第一次启动后无法更改，因为 MariaDB 数据库是在插件首次启动时使用这些凭据创建的。
+It is also important to understand that the admin_user and admin_password can not be
+changed after the first start of the app, since the MariaDB database is created with
+these credentials the first time the app is started.
 
-没有入口支持，因此要访问 SteVe 网络界面，您必须将浏览器指向 http://<your.homeassistant.host.ip>:8180 登录 SteVe。
+There is no ingress support, so to reach the SteVe web interface you have to point your
+browser to http://<your.homeassistant.host.ip>:8180 to login in to SteVe.
 
-## 支持
+## Support
 
-有问题吗？
+Got questions?
 
-您可以在 [GitHub 上这里打开一个问题][issue]。
+You could [open an issue here][issue] GitHub.
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
+[issue]: https://github.com/erik73/app-steve/issues

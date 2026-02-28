@@ -1,18 +1,19 @@
 name: SteVe
-version: 3.0.0
+version: 4.0.0
 slug: steve
-description: 电动汽车充电站的Ocpp服务器
-url: https://ghfast.top/github.com/erik73/addon-steve
+description: '[老王杂谈说]：电动汽车充电站OCPP服务器'
+url: https://ghfast.top/github.com/erik73/app-steve
 arch:
-- aarch64
-- amd64
+  - aarch64
+  - amd64
 stage: experimental
+webui: http://[HOST]:[PORT:8180]/steve
 init: false
 panel_icon: mdi:CarElectric
 map:
-- ssl
+  - ssl
 services:
-- mysql:need
+  - mysql:need
 ports:
   8180/tcp: 8180
   12801/tcp: null

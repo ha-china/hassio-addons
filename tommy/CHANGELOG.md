@@ -1,5 +1,12 @@
 # TOMMY
 
+## 2.5.0
+
+### Major Changes
+- Enabled enhanced detection (and presence sensing) on Community Edition
+- Enabled Home Assistant Integration on Community Edition
+- Increased allowed devices on Community Edition from 3 to 4
+
 ## 2.4.2
 
 ### Minor Changes

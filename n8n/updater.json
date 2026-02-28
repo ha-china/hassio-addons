@@ -3,9 +3,9 @@
   "last_update": "2026-02-27",
   "beta": "false",
   "repository": "jdeath/homeassistant-addons",
-  "slug": "bedrockservermanager",
+  "slug": "n8n",
   "source": "github",
-  "upstream_repo": "DMedina559/bedrock-server-manager",
-  "upstream_version": "3.8.0",
+  "upstream_repo": "n8n-io/n8n",
+  "upstream_version": "2.9.4",
   "paused": "false"
 }
