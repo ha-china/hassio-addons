@@ -7,8 +7,7 @@
 
 ## 关于
 
-此插件允许您通过 Home Assistant **无需编程经验** 直接编写配置，并将您的微控制器转变为智能家居设备。
-您只需编写 YAML 配置文件；其余的（空中更新、编译）都由 ESPHome 处理。
+此插件允许您通过 Home Assistant 将微控制器配置为智能家居设备，无需任何编程经验。您只需编写 YAML 配置文件；其余的（空中更新、编译）都由 ESPHome 处理。
 
 <p align="center">
 <img title="ESPHome 设备构建器截图" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome-dev/images/screenshot.png" width="700px"></img>

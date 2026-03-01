@@ -3,7 +3,7 @@ arch:
   - amd64
 audio: true
 backup: cold
-description: '[老王杂谈说]：基于构建的用于树莓派 4/5 的实时声学蝙蝠与鸟类分类系统'
+description: '[老王杂谈说]：基于 BattyBirdNET-Analyzer 构建的用于树莓派 4/5 的实时声学蝙蝠与鸟类分类系统'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -116,5 +116,5 @@ tmpfs: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/battybirdnet-pi
 usb: true
-version: "2026.02.25-2"
+version: "2026.02.28"
 video: true
