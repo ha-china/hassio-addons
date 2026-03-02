@@ -1,26 +1,19 @@
-# Ollama Addon for Home Assistant
+# App: InfluxDB3
 
-请注意，此插件需要在CPU加速或实验性的Nvidia GPU支持（如果适用，请报告）下运行！对于ROCm，支持仍在等待中。
+适用于指标、事件和实时分析的可扩展数据存储库。
+此版本使用带有免费“在家”许可证的InfluxDB3 Enterprise。
 
-## 模型目录
+## 关于
 
-所有下载的模型默认存储在 `/share/ollama`。由于历史原因，您也可以将其配置为 `/config/ollama`。请确保您有足够的可用空间。
+InfluxDB3是一个针对高写入量优化的时序数据库。
+它适用于记录指标、传感器数据、事件以及执行分析。
+它提供了一个HTTP API以供客户端交互，并且常与Grafana结合使用来可视化数据。
 
-## Ollama 集成
+InfluxDB3的管理必须通过InfluxDB 3 Explorer来执行。
+它可以作为一个Docker容器下载，并在例如Docker Desktop等计算机上安装。
 
-要下载任何模型，请使用Ollama的API或与Home Assistant的集成 [Ollama](https://www.home-assistant.io/integrations/ollama/) 进行集成：
-
-[![添加 Ollama 集成](https://my.home-assistant.io/badges/brand.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=ollama)
-
-使用以下数据：
-
-- URL: `http://76e18fb5-ollama:11434`
-
-如果您想更改模型，请删除集成（而不是插件！）并重新启动集成配置的过程。
-
-## 关于UI链接的说明
-
-UI链接仅用于检查Ollama的API是否可用。在Ollama的官方镜像中不包含聊天功能。
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

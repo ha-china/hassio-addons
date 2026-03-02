@@ -1,40 +1,41 @@
-# Home assistant add-on: 5etools
+# Home Assistant 插件：5etools
 
-A suite of browser-based tools for players and DMs of D&D 5e. Downloads posted image from 5etools GitHub. No image or content is hosted/posted on jdeath's repo. No support given as Home Assistant Addon creator does not use this. Self-hosted image can be a revision behind the 5etools website. Image is 4 GB, so will take a long time to install, be patient.
+一套基于浏览器的工具，适用于 D&D 5e 的玩家和地下城主。从 5etools GitHub 下载上传的图片。jdeath 的仓库中不托管或发布任何图片或内容。由于 Home Assistant 插件创建者不使用此功能，因此不提供支持。自托管的图片可能比 5etools 网站上的版本落后一个修订版。图片大小为 4 GB，因此安装需要很长时间，请耐心等待。
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有为我仓库点星的人！要点星，请点击下面的图片，然后它将显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## About
+## 关于
 
-This addon uses the [docker image](https://github.com/5etools-mirror-2/5etools-mirror-2.github.io).
+此插件使用 [docker 镜像](https://github.com/5etools-mirror-2/5etools-mirror-2.github.io)。
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+此插件的安装相当简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on. 4 GB image will take a while to download
-1. Click the `Save` button to store your configuration.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Open WebUI should work via ingress or <your-ip>:port.
+1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例中。
+1. 安装此插件。4 GB 的镜像下载需要一段时间
+1. 点击 `保存` 按钮以存储您的配置。
+1. 启动插件。
+1. 检查插件的日志以查看一切是否顺利。
+1. 通过 ingress 或 <your-ip>:port 打开 WebUI 应该可以工作。
 
-## Configuration
+## 配置
 
 ```
-port : 8080 #port you want to run on.
+port : 8080 #你想要运行的端口。
 ```
 
-Webui can be found at `<your-ip>:port`.
+WebUI 可以在 `<your-ip>:port` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
-
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我
