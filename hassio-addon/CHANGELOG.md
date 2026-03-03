@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.12.0
+
+- Includes dashboard release `1.12.0`.
+- **Breaking:** Splits Media and SONOS into separate page and card types.
+- Adds dedicated SONOS page creation and SONOS group card creation flows.
+- Updates dashboard routing/rendering so Media and SONOS are handled independently.
+- Refines Room Modal visuals with cleaner media player rows and a flatter Temp Overview layout.
+
+## 1.11.2
+
+- Includes dashboard release `1.11.2`.
+- Adds Room Card door/window status support, including editor domain filter, main-entity selection, and per-card visibility toggle.
+- Improves Room Card pill overflow behavior with progressive label collapse and icon-only size consistency for Cover/Door pills.
+- Fixes duplicate `vacuum.lastCleaned` translation keys across `en`, `nb`, `nn`, `sv`, and `de` locales.
+
+## 1.11.1
+
+- Includes dashboard release `1.11.1`.
+- Adds Simplified Chinese language support (#96).
+- Adds room action buttons to the Vacuum popup for room cleaning (#85).
+- Expands the Vacuum popup with more sensors (#85).
+
 ## 1.11.0
 
 - Includes dashboard release `1.11.0`.

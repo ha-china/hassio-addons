@@ -1,8 +1,8 @@
 # Home Assistant 插件：changedetection.io
 
-我在业余时间维护这个以及其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试需要花费大量时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我自己不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
+我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试需要花费大量时间（还有一些钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我本人不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
 
-如果这个插件为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
+如果这个插件为您节省了时间或使您的设置更加简单，我将非常感激您的支持！
 
 [![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -28,9 +28,9 @@ _感谢所有为我仓库加星的人！要加星，请点击下面的图片，�
 
 ## 关于
 
-[Changedetection.io](https://github.com/dgtlmoon/changedetection.io) 提供免费、开源的网页监控、通知和变更检测。
+[Changedetection.io](https://github.com/dgtlmoon/changedetection.io) 提供免费的、开源的网页监控、通知和变更检测。
 
-此插件基于 [docker 镜像](https://github.com/linuxserver/docker-changedetection.io) from linuxserver.io。
+此插件基于 [docker 镜像](https://github.com/linuxserver/docker-changedetection.io) 来自 linuxserver.io。
 
 ## 配置
 
@@ -44,7 +44,7 @@ Web UI 可在 `<your-ip>:5000` 找到，也可以通过插件页面或使用入�
 
 您可以按照以下步骤添加指向您的 Changedetection.io 实例的快捷方式：
 1. 前往 <kbd>⚙ 设置</kbd> > <kbd>仪表板</kbd>
-2. 点击底角处的 <kbd>➕ 添加仪表板</kbd>
+2. 在底部角落点击 <kbd>➕ 添加仪表板</kbd>
 3. 选择 <kbd>Webpage</kbd> 选项，并粘贴从插件页面获取的 Web UI URL。
 4. 填写侧边栏项的标题，一个图标（建议：`mdi:vector-difference`），以及该面板的 **相对 URL**（例如 `change-detection`）。最后，确认它。
 
@@ -55,7 +55,7 @@ Web UI 可在 `<your-ip>:5000` 找到，也可以通过插件页面或使用入�
 | `PGID` | int | `0` | 文件权限的组 ID |
 | `PUID` | int | `0` | 文件权限的用户 ID |
 | `TZ` | str | | 时区（例如，`Europe/London`） |
-| `BASE_URL` | str | | 在运行在反向代理后面的完整 URL |
+| `BASE_URL` | str | | 运行在反向代理后面的完整 URL |
 | `PLAYWRIGHT_DRIVER_URL` | str | | Playwright 驱动 WebSocket URL |
 | `TIMEOUT` | int | `60000` | 请求超时（毫秒） |
 
@@ -77,18 +77,18 @@ TIMEOUT: 60000
 `db21ed7f-browserless-chrome` 主机名在 UI 中显示，在 Browserless Chromium 插件页面上：
 ![image](https://github.com/user-attachments/assets/a63514f6-027a-4361-a33f-0d8f87461279)
 
-然后重新启动 Changedetection.io 插件 - 之后您就可以在 Changedetection.io 中使用浏览器选项了。
+然后重新启动 Changedetection.io 插件 - 之后您就可以使用 Changedetection.io 中的浏览器选项了。
 
 ## 安装
 
 此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. 将我的插件存储库添加到您的 Home Assistant 实例中（在 supervisor 插件存储库的右上角，或点击下面的按钮如果您已配置我的 HA）
-   [![打开您的 Home Assistant 实例并显示带有特定存储库 URL 预填充的添加插件存储库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件存储库添加到您的 Home Assistant 实例中（在监督器插件存储库的右上角，或点击下面的按钮如果您已配置我的 HA）
+   [![打开您的 Home Assistant 实例并显示带有特定存储库 URL 预填充的添加插件存储库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 2. 点击 `保存` 按钮以存储您的配置。
 3. 启动插件。
-4. 检查插件的日志，以查看是否一切顺利。
+4. 检查插件的日志以查看一切是否顺利。
 5. 仔细配置插件以满足您的偏好，有关详细信息，请参阅官方文档。
 ---
 
