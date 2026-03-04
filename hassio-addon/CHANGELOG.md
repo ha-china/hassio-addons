@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.12.3
+
+- Includes dashboard release `1.12.3`.
+- Improves Car/auto popup layout by reducing map height to leave room for more sensors on vehicles with dense telemetry (#84).
+- Fixes missing car charge-control actions in popup flows configured from Edit Card, with broader control-domain support (#84).
+
+## 1.12.2
+
+- Includes dashboard release `1.12.2`.
+- Improves Climate card fan-speed display by normalizing fan-mode values across integrations, preventing non-auto modes from showing as AUTO (#102).
+- Improves Simplified Chinese translations for alarm/climate flows and corrects multiple machine-translated labels (#101).
+
+## 1.12.1
+
+- Includes dashboard release `1.12.1`.
+- Improves Vacuum popup compatibility for mixed integrations (state labels and capability-aware controls).
+- Adds vacuum sensor-mapping labels/translations across supported locales.
+- Removes the temporary Vacuum image-view toggle and keeps the popup focused on controls and stats.
+
 ## 1.12.0
 
 - Includes dashboard release `1.12.0`.
