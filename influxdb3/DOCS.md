@@ -7,12 +7,12 @@ often used in combination with Grafana to visualize the data.
 
 This app runs the InfluxDB3.x Enterprise build channel.
 
-## Free license required
+## License required
 
-Important: This app requires a free license from InfluxData.
+Important: This app requires a license from InfluxData. It is for free for home/hobbyist use.
 It is required that you provide your email address in the app configuration,
 and once the app it started, you will get an email where you can activate
-your license. It is free as long as it is for home use.
+your license. Please read the Software License Terms in the email before accepting.
 
 ![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
 
