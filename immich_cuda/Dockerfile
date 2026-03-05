@@ -48,6 +48,7 @@ ENV DOCKER_MODS="imagegenius/mods:universal-redis"
 
 # Add rootfs
 COPY rootfs/ /
+RUN find . -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -exec chmod +x {} \;
 
 # Uses /bin for compatibility purposes
 # hadolint ignore=DL4005
@@ -62,7 +63,7 @@ ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/mast
 RUN chmod 744 /ha_automodules.sh && /ha_automodules.sh "$MODULES" && rm /ha_automodules.sh
 
 # Manual apps
-ENV PACKAGES="sudo yamllint pip jq"
+ENV PACKAGES="sudo sed yamllint pip jq"
 
 # Automatic apps & bashio
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_autoapps.sh" "/ha_autoapps.sh"
@@ -75,16 +76,14 @@ RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.
 # Add entrypoint
 ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" "/ha_entrypoint.sh"
+RUN chmod 777 /ha_entrypoint.sh
 
-# Entrypoint modifications
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint_modif.sh" "/ha_entrypoint_modif.sh"
-RUN chmod 777 /ha_entrypoint.sh /ha_entrypoint_modif.sh && /ha_entrypoint_modif.sh && rm /ha_entrypoint_modif.sh
+# Install bashio
+ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/usr/local/lib/bashio-standalone.sh"
+RUN chmod 0755 /usr/local/lib/bashio-standalone.sh
 
-# Standalone bashio command
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/.bashio-standalone.sh"
-RUN chmod 777 /.bashio-standalone.sh
-
-RUN sed -i "s|postgresql-16|postgresql-15|g" /etc/s6-overlay/s6-rc.d/init-test-run/run
+RUN apt-get update && apt-get install -y --no-install-recommends sed \
+    && sed -i "s|postgresql-16|postgresql-15|g" /etc/s6-overlay/s6-rc.d/init-test-run/run
 
 # Install dependencies
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]

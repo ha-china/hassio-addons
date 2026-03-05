@@ -58,7 +58,7 @@ Enables video support for the auto generated extensions, when `auto_add` is enab
 
 ### Option: `additional_sounds`
 
-The additional sounds languages to download from <https://downloads.asterisk.org/pub/telephony/sounds> on add-on startup, skipping when already downloaded. Example: pt-BR.
+The additional sounds languages to download from <https://downloads.asterisk.org/pub/telephony/sounds> on add-on startup, skipping when already downloaded. Examples: `fr`, `en_GB`.
 
 The sounds will be downloaded to `/media/asterisk`.
 
@@ -105,15 +105,15 @@ You can get a key [here](https://cloud.google.com/speech-to-text). Google says i
 
 The log level to configure Asterisk to use. To know more about the existing presets, check [`logger.conf`](./rootfs/usr/share/tempio/logger.conf.gtpl).
 
-## STDIN service
+## STDIN action
 
-You can use the STDIN service to run any Asterisk CLI commands that you want. For example:
+You can use the STDIN action to run any Asterisk CLI commands that you want. For example:
 
 ```yaml
-service: hassio.addon_stdin
-  data:
-    addon: b35499aa_asterisk
-    input: dialplan reload
+action: hassio.addon_stdin
+data:
+  addon: b35499aa_asterisk
+  input: dialplan reload
 ```
 
 **This is only possible when using as an add-on.**

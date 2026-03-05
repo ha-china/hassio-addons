@@ -1,104 +1,104 @@
-# Music Assistant (NIGHTLY) Add-on
+# 音乐助手（夜间版）插件
 
-Bleeding edge development builds of Music Assistant.
+音乐助手的尖端开发构建版本。
 
-## ⚠️ WARNING - FOR ADVANCED USERS ONLY ⚠️
+## ⚠️ 警告 - 仅限高级用户使用 ⚠️
 
-This is a **NIGHTLY** (development) version of Music Assistant. It contains the latest code changes and is **NOT recommended for daily use**.
+这是音乐助手的**夜间版**（开发版）。它包含最新的代码更改，**不建议日常使用**。
 
-### 🔴 Critical Information
+### 🔴 临界信息
 
-**This add-on is:**
+**此插件的特点是：**
 
-- ❌ **NOT stable** - Can break at any time
-- ❌ **NOT tested** - Changes are pushed directly from development
-- ❌ **NOT supported** - Use at your own risk
-- ❌ **NOT for beginners** - Might require technical knowledge to troubleshoot
+- ❌ **不稳定** - 可能随时崩溃
+- ❌ **未经测试** - 更改直接从开发分支推送
+- ❌ **不支持** - 使用风险自负
+- ❌ **不适用于初学者** - 可能需要技术知识来排查问题
 
-**DO NOT use this unless you:**
+**除非您：**
 
-- ✅ Are a developer or advanced user
-- ✅ Understand the risks of running unreleased software
-- ✅ Can debug issues yourself
-- ✅ Have a backup system or test environment
-- ✅ Are willing to lose data or functionality
+- ✅ 是开发者或高级用户
+- ✅ 理解运行未发布软件的风险
+- ✅ 能够自行调试问题
+- ✅ 有备份系统或测试环境
+- ✅ 愿意丢失数据或功能
 
-## What is NIGHTLY?
+## 什么是夜间版？
 
-NIGHTLY builds are automatic builds from the `dev` branch of Music Assistant. They include:
+夜间版构建是从音乐助手的 `dev` 分支自动构建的。它们包括：
 
-- 🚧 Work-in-progress features
-- 🔬 Experimental code
-- 🐛 Unverified bug fixes
-- ⚡ Latest code changes (within 24 hours)
-- 💥 Potentially breaking changes
+- 🚧 进行中的功能
+- 🔬 实验性代码
+- 🐛 未经验证的错误修复
+- ⚡ 最新代码更改（24小时内）
+- 💥 可能破坏性的更改
 
-## Release Frequency
+## 发布频率
 
-- **Updated**: Daily (when changes are pushed to dev branch)
-- **Testing**: Minimal or none
-- **Quality**: Varies significantly
-- **Stability**: ⚠️ Unstable by nature
+- **更新**：每日（当更改推送到dev分支时）
+- **测试**：最少或没有
+- **质量**：差异很大
+- **稳定性**：⚠️ 天生不稳定
 
-## Comparison Matrix
+## 对比矩阵
 
-| Feature          | Stable     | BETA     | NIGHTLY       |
-| ---------------- | ---------- | -------- | ------------- |
-| Stability        | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐            |
-| Features         | Released   | Testing  | Latest        |
-| Updates          | Monthly    | Weekly   | Daily         |
-| Breaking Changes | Rare       | Possible | Possible      |
-| Data Loss Risk   | Very Low   | Low      | **HIGH**      |
-| Use Case         | Production | Testing  | Experimenting |
+| 功能          | 稳定版     | 测试版     | 夜间版       |
+| ------------- | ---------- | -------- | ------------- |
+| 稳定性        | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐            |
+| 功能         | 已发布     | 测试中   | 最新         |
+| 更新         | 每月      | 每周      | 每日         |
+| 破坏性更改   | 很少       | 可能      | 可能         |
+| 数据丢失风险 | 非常低    | 低       | **高**      |
+| 使用场景     | 生产环境  | 测试环境  | 实验         |
 
-## Reporting Issues
+## 报告问题
 
-### Before Reporting
+### 报告之前
 
-1. ⚠️ Verify you're using NIGHTLY intentionally
-2. Check if the issue exists in BETA or Stable
-3. Search existing issues
-4. Try to reproduce with minimal configuration
+1. ⚠️ 确认您有意使用夜间版
+2. 检查问题是否存在于测试版或稳定版
+3. 搜索现有问题
+4. 尝试以最小配置重现
 
-### What to Include
+### 包含的内容
 
-- **Version**: Exact NIGHTLY version number and date
-- **Logs**: Full debug logs
-- **Context**: What you were doing when it broke
-- **Environment**: Home Assistant version, hardware specs
-- **Reproduction**: Step-by-step reproduction steps
+- **版本**：确切的夜间版版本号和日期
+- **日志**：完整的调试日志
+- **上下文**：崩溃时您正在做什么
+- **环境**：Home Assistant 版本，硬件规格
+- **重现**：逐步重现步骤
 
-### Where to Report
+### 报告位置
 
-- 💬 [Discord Server](https://discord.gg/PZQ6RWbfeS)
+- 💬 [Discord 服务器](https://discord.gg/PZQ6RWbfeS)
 
-## Rollback Strategy
+## 回滚策略
 
-### If Things Break
+### 如果出现问题
 
-1. **Stop the add-on**
-2. **Restore from backup** (you made one, right?)
-3. **Report the issue**
+1. **停止插件**
+2. **从备份中恢复**（您做了备份，对吧？）
+3. **报告问题**
 
-## Contributing
+## 贡献
 
-Running NIGHTLY and finding issues is a contribution! You can also:
+运行夜间版并发现问题是一种贡献！您还可以：
 
-- 🐛 [Report bugs with detailed logs](https://github.com/music-assistant/support)
-- 🔧 Submit pull requests with fixes
-- 📝 Document issues and workarounds
-- 💬 Help other NIGHTLY users on [Discord](https://discord.gg/PZQ6RWbfeS)
-- 🧪 Test specific features
+- 🐛 [通过详细日志报告错误](https://github.com/music-assistant/support)
+- 🔧 提交带有修复的拉取请求
+- 📝 记录问题和解决方案
+- 💬 在 [Discord](https://discord.gg/PZQ6RWbfeS) 上帮助其他夜间版用户
+- 🧪 测试特定功能
 
-Visit the [Music Assistant organization](https://github.com/music-assistant) on GitHub to contribute.
+访问 [音乐助手组织](https://github.com/music-assistant) 在 GitHub 上的页面以进行贡献。
 
-## Final Warning
+## 最后的警告
 
 ```
  _____________________________________
-/ You have been warned multiple times. \
-\ If this breaks, you get to keep both  /
-  pieces.
+/ 你已经被多次警告。 \
+\ 如果这破坏了，你将保留两块。  /
+  / pieces.
  -------------------------------------
         \   ^__^
          \  (oo)\_______
@@ -107,12 +107,36 @@ Visit the [Music Assistant organization](https://github.com/music-assistant) on 
                 ||     ||
 ```
 
-## Still Here?
+## 还在吗？
 
-If you've read this far and still want to use NIGHTLY, you're probably the right kind of user. Welcome to the bleeding edge! 🚀
+如果你读到这儿还想使用夜间版，你可能是合适的使用者。欢迎来到尖端！🚀
 
-Just remember: **BACKUP EVERYTHING** 💾
+但请记住：**备份一切** 💾
 
-## License
+## 许可证
 
-Music Assistant is licensed under the Apache License 2.0.
+音乐助手遵循 Apache License 2.0 许可。
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

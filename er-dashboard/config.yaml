@@ -1,8 +1,8 @@
 name: "ER-Startseite (Dashboard)"
-version: "1.2.1"
+version: "1.3.0"
 slug: er-dashboard
 image: ghcr.nju.edu.cn/faserf/hassio-addons-er-dashboard-{arch}
-description: "[老王杂谈说]：null"
+description: "[老王杂谈说]：一个具有霓虹美学的现代、高度可定制仪表板。"
 url: "https://ghfast.top/github.com/Eidolf/ER-Startseite"
 arch:
   - aarch64

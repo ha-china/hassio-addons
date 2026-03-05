@@ -1,40 +1,60 @@
-# Home assistant add-on: Stirling-pdf
+# Home assistant插件：Stirling-pdf
 
-This is a robust, locally hosted web-based PDF manipulation tool using Docker. It enables you to carry out various operations on PDF files, including splitting, merging, converting, reorganizing, adding images, rotating, compressing, and more. This locally hosted web application has evolved to encompass a comprehensive set of features, addressing all your PDF requirements.
+这是一个基于Docker的本地托管PDF操作工具。它允许您对PDF文件执行各种操作，包括拆分、合并、转换、重新组织、添加图片、旋转、压缩等。这个本地托管的Web应用程序已经发展成为一个功能全面的工具集，满足您所有的PDF需求。
 
-Stirling PDF does not initiate any outbound calls for record-keeping or tracking purposes.
+Stirling PDF不会发起任何用于记录或跟踪目的的外出调用。
 
-All files and PDFs exist either exclusively on the client side, reside in server memory only during task execution, or temporarily reside in a file solely for the execution of the task. Any file downloaded by the user will have been deleted from the server by that point.
+所有文件和PDF要么完全存在于客户端，要么仅在执行任务时驻留在服务器内存中，或者仅在执行任务时临时驻留在文件中。用户下载的任何文件在该点之前都会从服务器中删除。
 
-A bit of a memory hog.
+有点耗内存。
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢大家给我的仓库点赞！要点赞，请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
-[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![@jdeath/homeassistant-addons的Stargazers仓库花名册](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## About
+## 关于
 
-This addon uses the [docker image](https://github.com/Stirling-Tools/Stirling-PDF).
+这个插件使用了[docker镜像](https://github.com/Stirling-Tools/Stirling-PDF)。
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+这个插件的安装非常简单，与安装任何其他Hass.io插件没有区别。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on. 750 MB image will take a while to download
-1. Click the `Save` button to store your configuration.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Open WebUI should work via <your-ip>:port.
-1. Settings will be in /addon_configs/2effc9b9_stirling-pdf
-1. Stop addon, edit settings.yaml file to change anything you need
-## Configuration
+1. [将我的Hass.io插件仓库][repository]添加到您的Hass.io实例。
+1. 安装这个插件。750 MB的镜像需要一段时间来下载
+1. 点击`保存`按钮来存储您的配置。
+1. 启动插件。
+1. 检查插件的日志，看看是否一切顺利。
+1. WebUI应该可以通过<your-ip>:port访问。
+1. 设置将在 /addon_configs/2effc9b9_stirling-pdf
+1. 停止插件，编辑settings.yaml文件来更改您需要的任何内容
+## 配置
 
 ```
-port : 8080 #port you want to run on.
+port : 8080 #您想要运行的端口。
 ```
 
-Webui can be found at `<your-ip>:port`.
+Webui可以在<your-ip>:port找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
+---
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

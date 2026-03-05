@@ -1,4 +1,36 @@
 
+## 2.61.0 (2026-02-28)
+- Update to latest version from filebrowser/filebrowser (changelog : https://github.com/filebrowser/filebrowser/releases)
+
+## 2.60.0 (2026-02-23)
+- Update to latest version from filebrowser/filebrowser (changelog : https://github.com/filebrowser/filebrowser/releases)
+
+## 2.59.0 (2026-02-21)
+- Update to latest version from filebrowser/filebrowser (changelog : https://github.com/filebrowser/filebrowser/releases)
+## 2.57.1-3 (14-02-2026)
+- Minor bugs fixed
+## 2.57.1-2 (14-02-2026)
+- Minor bugs fixed
+
+## 2.57.1 (2026-02-14)
+- Update to latest version from filebrowser/filebrowser (changelog : https://github.com/filebrowser/filebrowser/releases)
+## 2.57.0-5 (13-02-2026)
+- Minor bugs fixed
+## 2.57.0-4 (04-02-2026)
+- Minor bugs fixed
+## 2.57.0-3 (04-02-2026)
+- Minor bugs fixed
+## 2.57.0-2 (04-02-2026)
+- Minor bugs fixed
+
+## 2.57.0 (2026-02-04)
+- Update to latest version from filebrowser/filebrowser (changelog : https://github.com/filebrowser/filebrowser/releases)
+## 2.56.0-2 (01-02-2026)
+- Minor bugs fixed
+
+## 2.56.0 (2026-01-30)
+- Update to latest version from filebrowser/filebrowser (changelog : https://github.com/filebrowser/filebrowser/releases)
+
 ## 2.55.0 (2026-01-21)
 - Update to latest version from filebrowser/filebrowser (changelog : https://github.com/filebrowser/filebrowser/releases)
 ## 2.54.0-2 (14-01-2026)

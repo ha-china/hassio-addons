@@ -2,8 +2,7 @@ arch:
   - aarch64
   - amd64
 audio: true
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：可通过任何现代网络浏览器访问的完整Linux桌面环境'
+description: '[老王杂谈说]：完整的 Linux 桌面环境，可通过任意现代网页浏览器访问。'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -69,9 +68,9 @@ devices:
 environment:
   FM_HOME: /share/webtop_kde
   HOME: /share/webtop_kde
-  PGID: '0'
-  PUID: '0'
-  START_DOCKER: 'false'
+  PGID: "0"
+  PUID: "0"
+  START_DOCKER: "false"
   TITLE: Ubuntu XFCE webtop
   shm_size: 1gb
 host_dbus: true
@@ -85,6 +84,7 @@ map:
   - ssl
 name: Webtop xfce
 options:
+  env_vars: []
   DNS_server: 8.8.8.8
   PGID: 0
   PUID: 0
@@ -117,6 +117,9 @@ privileged:
   - SYS_ADMIN
   - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   DNS_server: str?
   DRINODE: list(/dev/dri/card0|/dev/dri/card1|/dev/dri/card2|/dev/dri/renderD128|/dev/dri/renderD129|)?
   KEYBOARD: list(da-dk-qwerty|de-de-qwertz|en-gb-qwerty|en-us-qwerty|es-es-qwerty|fr-ch-qwertz|fr-fr-azerty|it-it-qwerty|ja-jp-qwerty|pt-br-qwerty|sv-se-qwerty|tr-tr-qwerty)?
@@ -135,5 +138,5 @@ slug: webtop-kde
 tmpfs: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: 4.16-r0-ls95-4
+version: 4.16-r0-ls95-5
 video: true

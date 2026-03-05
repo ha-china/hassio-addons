@@ -1,8 +1,8 @@
 name: SQLite Web
-version: 5.0.0
+version: 6.0.0
 slug: sqlite-web
-description: '[老王杂谈说]：探索你的SQLite数据库'
-url: https://ghfast.top/github.com/hassio-addons/addon-sqlite-web/tree/main/README.md
+description: '[老王杂谈说]：探索你的 SQLite 数据库'
+url: https://ghfast.top/github.com/hassio-addons/app-sqlite-web/tree/main/README.md
 ingress: true
 advanced: true
 init: false
@@ -15,4 +15,4 @@ map:
   - share:rw
 schema:
   database: str?
-image: ghcr.nju.edu.cn/hassio-addons/sqlite-web/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/sqlite-web

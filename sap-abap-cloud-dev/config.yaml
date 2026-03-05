@@ -1,8 +1,8 @@
 ---
 name: SAP ABAP Cloud Developer Trial
-version: 0.1.1
+version: 0.2.0
 slug: sap-abap-cloud-dev
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：用于本地 ABAP 开发的 SAP ABAP 平台试用版'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/sap-abap-cloud-dev
 image: ghcr.nju.edu.cn/faserf/hassio-addons-sap-abap-cloud-dev-{arch}
 arch:

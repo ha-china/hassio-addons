@@ -1,35 +1,34 @@
-# Home assistant add-on: Royal Price Check
+# 家居助理插件：皇家价格检查
 
-## Description
-Notify if Royal Caribbean Cruise addons get cheaper. Can reprice the cruise, just drink package, internet, excursions, etc
+## 描述
+当皇家加勒比游轮的附加产品降价时，会发出通知。可以重新定价游轮、仅饮料套餐、网络、游览等。
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有为我仓库点星的人！要为它点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+此插件的安装相当简单，与安装任何其他Hass.io插件没有区别。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Start the add-on. It will fail, this is ok
-1. go to /addon-configs/2effc9b9_royalpricecheck
-1. Edit `/addon-configs/2effc9b9_royalpricecheck/config.yaml` (see below)
-1. Run the addon again and check the logs
-1. After confirmed working, use an automation to run this once a day
+1. 将我的Hass.io插件仓库[仓库](https://github.com/jdeath/homeassistant-addons)添加到您的Hass.io实例中。
+1. 安装此插件。
+1. 点击“保存”按钮以存储您的配置。
+1. 启动插件。它会失败，这是正常的
+1. 前往 /addon-configs/2effc9b9_royalpricecheck
+1. 编辑 `/addon-configs/2effc9b9_royalpricecheck/config.yaml`（见下文）
+1. 再次运行插件并检查日志
+1. 确认工作正常后，使用自动化任务每天运行一次
 
-## Config.yaml
-See `https://github.com/jdeath/CheckRoyalCaribbeanPrice`
+## config.yaml
+请参阅 `https://github.com/jdeath/CheckRoyalCaribbeanPrice`
 
-## Automatic Running
-1. Create an automation to run this addon once a day (at a random time)
+## 自动运行
+1. 创建一个自动化任务，每天运行此插件一次（在随机时间）
 
 ```
-alias: Start Royal Price Check
+alias: 启动皇家价格检查
 description: ""
 trigger:
   - platform: time
@@ -43,29 +42,30 @@ action:
 mode: single
 ```
 
-# Sending a notification.
-1. edit `/addon-configs/2effc9b9_royalpricecheck/config.yaml`
-1. Configure the line for a notification
+# 发送通知。
+1. 编辑 `/addon-configs/2effc9b9_royalpricecheck/config.yaml`
+1. 配置通知的行
 
-It should look something like this for homeassistant notification:
+对于Home Assistant通知，它应该看起来像这样：
 ```
 # config.yaml
 apprise:
   urls:
     - 'hassio://192.168.X.XX/eyXXXXXXXXXXXXXXXX.eyXXXXXXXXXXXXXXXXXxx'
 ```
-Where the `eyXXX.eyXXX` string is a Home Assistant Long-Lived Token. Long-lived access tokens can be created using the "Long-Lived Access Tokens" section at the bottom of a user's Home Assistant profile page.
+其中 `eyXXX.eyXXX` 字符串是Home Assistant的长寿命令牌。长寿命访问令牌可以通过用户Home Assistant个人资料页面的“长寿命访问令牌”部分创建。
 
-More details here: `https://github.com/caronc/apprise/wiki/Notify_homeassistant`
+更多详细信息请参阅 `https://github.com/caronc/apprise/wiki/Notify_homeassistant`
 
-More details here: `https://github.com/caronc/apprise` You can include multiple URL lines to send emails, etc
-# Add To Sidebar
-Since there is no WebUI, this cannot be shown in the sidebar. However you can add the following code to your Home Assistant `configuration.yaml` to show the log via a sidebar entry
+更多详细信息请参阅 `https://github.com/caronc/apprise` 您可以包含多个URL行来发送电子邮件等。
+
+# 添加到侧边栏
+由于没有WebUI，因此无法在侧边栏中显示。但是，您可以将以下代码添加到您的Home Assistant `configuration.yaml` 中，以通过侧边栏条目显示日志
 
 ```
 panel_custom:
   - name: panel_rewards
-    sidebar_title: Rewards
+    sidebar_title: 奖励
     sidebar_icon: mdi:medal
     url_path: 'hassio/addon/2effc9b9_royalpricecheck/logs'
     module_url: /api/hassio/app/entrypoint.js
@@ -73,9 +73,31 @@ panel_custom:
     require_admin: true
 ```
 
-# Issues
+# 问题
 
 
-[repository]: https://github.com/jdeath/homeassistant-addons
+[仓库]: https://github.com/jdeath/homeassistant-addons
+---
 
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

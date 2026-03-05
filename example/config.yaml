@@ -1,8 +1,8 @@
 name: Example
-version: 12.0.1
+version: 13.0.2
 slug: example
-description: '[老王杂谈说]：社区Home Assistant附加组件的示例附加组件'
-url: https://ghfast.top/github.com/hassio-addons/addon-example
+description: '[老王杂谈说]：Home Assistant 社区应用提供的示例应用'
+url: https://ghfast.top/github.com/hassio-addons/app-example
 init: false
 arch:
   - aarch64
@@ -13,4 +13,4 @@ options:
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)
   seconds_between_quotes: int(1,120)
-image: ghcr.nju.edu.cn/hassio-addons/example/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/example

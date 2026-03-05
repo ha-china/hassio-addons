@@ -1,71 +1,72 @@
-# Home assistant 插件：Navidrome
+# Home assistant add-on: Navidrome
 
-我利用业余时间维护这个和其他 Home Assistant 插件：跟上上游的更改、HA 的更改，并在真实硬件上进行测试需要花费大量时间（和一些金钱）。我大约使用我超过 110 个插件中的 5-10 个，因此我安装了测试机器（和购买了一些我自己不使用的测试服务，如 VPN），以用来调试和改进插件。
 
-如果这个插件节省了您的时间或使您的设置更简单，我将非常感谢您的支持！
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-[![给我买咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
-## 插件信息
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnavidrome%2Fconfig.yaml)
+## Addon informations
+
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnavidrome%2Fconfig.yaml)
 ![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnavidrome%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnavidrome%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnavidrome%2Fconfig.yaml)
 
-[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![构建器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建器)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20Paypal-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 
-_感谢所有给我的仓库星标！要给星标，请点击下面的图片，然后它会在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
-[![@alexbelgium/hassio-addons 的星标仓库罗盘](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/navidrome/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/navidrome/stats.png)
 
-## 关于
+## About
 
-各种调整和配置选项的添加。
-这个插件基于 [docker 镜像](https://hub.docker.com/r/deluan/navidrome)。
+Various tweaks and configuration options addition.
+This addon is based on the [docker image](https://hub.docker.com/r/deluan/navidrome).
 
-## 配置
+## Configuration
 
-Webui 可以在 <http://homeassistant:PORT> 或通过 Ingress 在侧边栏中访问。
-配置可以通过应用 WebUI 进行，除了以下选项。
+Webui can be found at <http://homeassistant:PORT> or through the sidebar using Ingress.
+Configurations can be done through the app webUI, except for the following options.
 
-查看 https://www.navidrome.org/docs/usage/configuration-options/ 获取更多配置详细信息。
+See https://www.navidrome.org/docs/usage/configuration-options/ for additional configuration details.
 
-### 选项
+### Options
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
-| `base_url` | 字符串 | `/` | 配置 Navidrome 在代理后面的基本 URL |
-| `music_folder` | 字符串 | `/data/music` | 存储您音乐库的文件夹 |
-| `data_folder` | 字符串 | `/data` | 存储应用程序数据（数据库）的文件夹 |
-| `log_level` | 字符串 | `info` | 日志级别（error, warn, info, debug, trace） |
-| `ssl` | 布尔值 | `false` | 为 Web 界面启用 HTTPS |
-| `certfile` | 字符串 | | TLS 证书的路径 |
-| `keyfile` | 字符串 | | TLS 密钥文件的路径 |
-| `default_language` | 字符串 | | 界面的默认语言 |
-| `image_cache_size` | 字符串 | | 图像缓存的大小 |
-| `transcoding_cache_size` | 字符串 | | 转码缓存的大小 |
-| `scan_schedule` | 字符串 | | 自动库扫描的 Cron 表达式 |
-| `password_encryption_key` | 字符串 | | 密码加密的密钥 |
-| `welcome_message` | 字符串 | | 自定义欢迎消息 |
-| `lastfm_api_key` | 字符串 | | Last.fm API 密钥用于播客 |
-| `lastfm_secret` | 字符串 | | Last.fm 密密用于播客 |
-| `spotify_id` | 字符串 | | Spotify 客户端 ID 用于元数据 |
-| `spotify_secret` | 字符串 | | Spotify 客户端密钥用于元数据 |
-| `localdisks` | 字符串 | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | 字符串 | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | 字符串 | | SMB 用户名用于网络共享 |
-| `cifspassword` | 字符串 | | SMB 密码用于网络共享 |
-| `cifsdomain` | 字符串 | | SMB 域用于网络共享 |
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `base_url` | str | `/` | Base URL to configure Navidrome behind a proxy |
+| `music_folder` | str | `/data/music` | Folder where your music library is stored |
+| `data_folder` | str | `/data` | Folder to store application data (DB) |
+| `log_level` | str | `info` | Log level (error, warn, info, debug, trace) |
+| `ssl` | bool | `false` | Enable HTTPS for the web interface |
+| `certfile` | str | | Path for the TLS certificate |
+| `keyfile` | str | | Path for the TLS key file |
+| `default_language` | str | | Default language for the interface |
+| `image_cache_size` | str | | Size of the image cache |
+| `transcoding_cache_size` | str | | Size of the transcoding cache |
+| `scan_schedule` | str | | Cron expression for automatic library scanning |
+| `password_encryption_key` | str | | Key for password encryption |
+| `welcome_message` | str | | Custom welcome message |
+| `lastfm_api_key` | str | | Last.fm API key for scrobbling |
+| `lastfm_secret` | str | | Last.fm secret for scrobbling |
+| `spotify_id` | str | | Spotify client ID for metadata |
+| `spotify_secret` | str | | Spotify client secret for metadata |
+| `localdisks` | str | | Local drives to mount (e.g., `sda1,sdb1,MYNAS`) |
+| `networkdisks` | str | | SMB shares to mount (e.g., `//SERVER/SHARE`) |
+| `cifsusername` | str | | SMB username for network shares |
+| `cifspassword` | str | | SMB password for network shares |
+| `cifsdomain` | str | | SMB domain for network shares |
 
-### 示例配置
+### Example Configuration
 
 ```yaml
 base_url: "/"
@@ -84,33 +85,37 @@ cifspassword: "password123"
 cifsdomain: "workgroup"
 ```
 
-### 挂载驱动器
+### Mounting Drives
 
-这个插件支持挂载本地驱动器和远程 SMB 共享：
+This addon supports mounting both local drives and remote SMB shares:
 
-- **本地驱动器**：查看 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：查看 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-### 自定义脚本和环境变量
+### Custom Scripts and Environment Variables
 
-这个插件支持自定义脚本和环境变量：
+This addon supports custom scripts and environment variables:
 
-- **自定义脚本**：查看 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项来传递额外的环境变量（大写或小写名称）。查看 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-## 安装
+## Installation
 
-这个插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. [将我的 Hass.io 插件仓库][repository] 添加到您的 Hass.io 实例。
-1. 安装这个插件。
-1. 点击 `保存` 按钮以保存您的配置。
-1. 启动插件。
-1. 检查插件的日志，看看是否一切正常。
-1. 转到 WebUI，您将初始化应用程序
-1. 重新启动插件，以应用任何应该应用的选项
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Go to the webui, where you will initialize the app
+1. Restart the addon, to apply any option that should be applied
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+
+
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

@@ -2,6 +2,20 @@
 
 If you find ha-sip useful, consider starring ⭐ the [GitHub repo](https://github.com/arnonym/ha-plugins)!
 
+# 5.5
+- Add sensors for call and account state
+- Fix bug with post_action for play_message and play_audio_file not working for incoming calls
+
+# 5.4.1
+- Fix crash for outgoing calls
+
+## 5.4
+- Allow templating of messages in `incoming_call_file` or from MQTT (thanks nbe95@github for implementing this!)
+- Add option to extract SIP headers and receive them in webhooks
+- Allow post_action `hangup` for direct messages or audio file playback
+- Improve identification of calls from commands
+- Add incoming number to webhook payload (thanks marn-x@github for the initial implementation!)
+
 ## 5.3
 - Make entity_id optional for home-assistant service calls
 - Fix bug with jump action from manually answered calls

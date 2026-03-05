@@ -10,6 +10,11 @@ configuration:
   flow_control:
     name: Hardware flow control
     description: Enable hardware flow control for serial port.
+  backbone_interface:
+    name: Backbone Network Interface
+    description: >-
+      The network interface used for the backbone network.
+      If not specified, it falls back to the primary interface.
   network_device:
     name: Network Device
     description: >-
@@ -29,6 +34,10 @@ configuration:
     description: >-
       Enable IPv6 to IPv4 network address translation. This allows Thread
       devices to communicate with devices on the Internet.
+  beta:
+    name: Beta
+    description: >-
+      Enable beta mode with Thread 1.4 and native OpenThread mDNS.
 network:
   8080/tcp: OpenThread Web port
   8081/tcp: OpenThread REST API port

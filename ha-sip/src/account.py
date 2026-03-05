@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import re
-from typing import Optional
+from typing import Callable, Dict, List, Optional
 
 import pjsua2 as pj
 
@@ -9,12 +9,16 @@ import call
 import ha
 import incoming_call
 import utils
+import webhook
 from constants import DEFAULT_RING_TIMEOUT
 from event_sender import EventSender
 from log import log
 from command_handler import CommandHandler
 from options_global import GlobalOptions
 from options_sip import SipOptions
+
+# Type for registration state callback: (account_index, code, reason)
+OnRegStateCallback = Callable[[int, int, str], None]
 
 
 class MyAccountConfig(object):
@@ -55,7 +59,8 @@ class Account(pj.Account):
         command_handler: CommandHandler,
         event_sender: EventSender,
         ha_config: ha.HaConfig,
-        make_default=False
+        make_default: bool,
+        on_reg_state_callback: OnRegStateCallback
     ):
         pj.Account.__init__(self)
         self.config = config
@@ -64,6 +69,7 @@ class Account(pj.Account):
         self.event_sender = event_sender
         self.ha_config = ha_config
         self.make_default = make_default
+        self.on_reg_state_callback = on_reg_state_callback
 
     def init(self) -> None:
         account_config = pj.AccountConfig()
@@ -91,7 +97,9 @@ class Account(pj.Account):
         return pj.Account.create(self, account_config, self.make_default)
 
     def onRegState(self, prm) -> None:
-        log(self.config.index, 'OnRegState: %s %s' % (prm.code, prm.reason))
+        log(self.config.index, f'OnRegState: {prm.code} {prm.reason}')
+        if self.on_reg_state_callback:
+            self.on_reg_state_callback(self.config.index, prm.code, prm.reason)
 
     def onIncomingCall(self, prm) -> None:
         if not self.config:
@@ -102,27 +110,32 @@ class Account(pj.Account):
         blocked_numbers = self.config.incoming_call_config.get('blocked_numbers') if self.config.incoming_call_config else None
         answer_after = float(utils.convert_to_int(self.config.incoming_call_config.get('answer_after'), 0)) if self.config.incoming_call_config else 0.0
         webhook_to_call = self.config.incoming_call_config.get('webhook_to_call') if self.config.incoming_call_config else None
+        extract_headers = self.config.options.extract_headers
+        sip_headers: Dict[str, Optional[str]] = {}
+        if self.config.global_options.debug_headers:
+            Account.log_all_sip_headers(self.config.index, prm.rdata.wholeMsg)
+        if extract_headers:
+            sip_headers = Account.parse_sip_headers(prm.rdata.wholeMsg, extract_headers)
         incoming_call_instance = call.Call(
             self.end_point, self, prm.callId, None, menu, self.command_handler, self.event_sender,
-            self.ha_config, DEFAULT_RING_TIMEOUT, webhook_to_call,
+            self.ha_config, DEFAULT_RING_TIMEOUT, webhook_to_call, sip_headers,
         )
         ci = incoming_call_instance.get_call_info()
         answer_mode = self.get_sip_return_code(self.config.mode, allowed_numbers, blocked_numbers, ci['parsed_caller'])
-        log(self.config.index, 'Incoming call  from  \'%s\' to \'%s\' (parsed: \'%s\')' % (ci['remote_uri'], ci['local_uri'], ci['parsed_caller']))
+        log(self.config.index, f"Incoming call  from  '{ci['remote_uri']}' (parsed: '{ci['parsed_caller']}') to '{ci['local_uri']}' (parsed: '{ci['parsed_called']}')")
         if allowed_numbers:
-            log(self.config.index, 'Allowed numbers: %s' % allowed_numbers)
+            log(self.config.index, f'Allowed numbers: {allowed_numbers}')
         if blocked_numbers:
-            log(self.config.index, 'Blocked numbers: %s' % blocked_numbers)
-        log(self.config.index, 'Answer mode: %s' % answer_mode.name)
+            log(self.config.index, f'Blocked numbers: {blocked_numbers}')
+        log(self.config.index, f'Answer mode: {answer_mode.name}')
         incoming_call_instance.accept(answer_mode, answer_after)
-        self.event_sender.send_event({
-            'event': 'incoming_call',
-            'caller': ci['remote_uri'],
-            'parsed_caller': ci['parsed_caller'],
-            'sip_account': self.config.index,
-            'call_id': ci['call_id'],
-            'internal_id': incoming_call_instance.callback_id
-        })
+        webhook.trigger_webhook(
+            {'event': 'incoming_call'},
+            ci,
+            self.config.index,
+            incoming_call_instance.callback_id,
+            self.event_sender,
+        )
 
     def get_sip_return_code(
         self,
@@ -139,6 +152,27 @@ class Account(pj.Account):
         if mode == call.CallHandling.ACCEPT and blocked_numbers:
             return call.CallHandling.ACCEPT if not Account.is_number_in_list(parsed_caller, blocked_numbers) else call.CallHandling.LISTEN
         return mode
+
+    @staticmethod
+    def parse_sip_headers(whole_msg: str, header_names: List[str]) -> Dict[str, Optional[str]]:
+        result: Dict[str, Optional[str]] = {name: None for name in header_names}
+        for line in whole_msg.split('\r\n'):
+            if not line.strip():
+                break  # End of headers
+            for name in header_names:
+                if line.lower().startswith(name.lower() + ':'):
+                    result[name] = line.split(':', 1)[1].strip()
+        return result
+
+    @staticmethod
+    def log_all_sip_headers(account_index: int, whole_msg: str) -> None:
+        log(account_index, 'Available SIP headers:')
+        for line in whole_msg.split('\r\n'):
+            if not line.strip():
+                break  # End of headers
+            if ':' in line:
+                name, value = line.split(':', 1)
+                log(account_index, f'  {name.strip()}: {value.strip()}')
 
     @staticmethod
     def is_number_in_list(number: Optional[str], number_list: list[str]) -> bool:
@@ -166,8 +200,9 @@ def create_account(
     command_handler: CommandHandler,
     event_sender: EventSender,
     ha_config: ha.HaConfig,
-    is_default: bool
+    on_reg_state_callback: OnRegStateCallback,
+    is_default: bool,
 ) -> Account:
-    account = Account(end_point, config, command_handler, event_sender, ha_config, is_default)
+    account = Account(end_point, config, command_handler, event_sender, ha_config, is_default, on_reg_state_callback)
     account.init()
     return account

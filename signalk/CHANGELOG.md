@@ -1,3 +1,20 @@
+## 2.22.1-2 (26-02-2026)
+- Minor bugs fixed
+
+## 2.22.1 (2026-02-21)
+- Update to latest version from SignalK/signalk-server (changelog : https://github.com/SignalK/signalk-server/releases)
+
+## 2.21.3 (2026-02-14)
+- Update to latest version from SignalK/signalk-server (changelog : https://github.com/SignalK/signalk-server/releases)
+## 2.20.3-2 (08-02-2026)
+- Bindings of npm dependencies need to be rebuilt for the system updates @eburi
+- Add I2C device mappings @eburi
+
+## 2.20.3 (2026-02-01)
+- Update to latest version from SignalK/signalk-server (changelog : https://github.com/SignalK/signalk-server/releases)
+
+## 2.20.2 (2026-01-30)
+- Update to latest version from SignalK/signalk-server (changelog : https://github.com/SignalK/signalk-server/releases)
 
 ## 2.20.0 (2026-01-21)
 - Update to latest version from SignalK/signalk-server (changelog : https://github.com/SignalK/signalk-server/releases)

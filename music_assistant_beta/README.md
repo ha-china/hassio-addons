@@ -1,136 +1,136 @@
-# Music Assistant (BETA) Add-on
+# 音乐助手（BETA）插件
 
-The official BETA release channel for Music Assistant.
+音乐助手官方的BETA发布频道。
 
-## ⚠️ Important Notice
+## ⚠️ 重要通知
 
-This is a **BETA** version of Music Assistant. It contains new features and improvements that are being tested before the stable release.
+这是音乐助手的BETA版本。它包含了一些新功能和改进，这些功能和改进将在稳定版发布前进行测试。
 
-**Use this add-on if you:**
+**如果您使用此插件，请确保：**
 
-- Want early access to new features
-- Are willing to help test and report issues
-- Can tolerate occasional bugs or instability
-- Want to contribute to making Music Assistant better
+- 您希望提前访问新功能
+- 您愿意帮助测试和报告问题
+- 您可以容忍偶尔的bug或不稳定情况
+- 您希望为使音乐助手变得更好做出贡献
 
-**DO NOT use this add-on if you:**
+**请不要使用此插件，如果您：**
 
-- Need a stable, production-ready system at all times
-- Are not comfortable troubleshooting issues
-- Cannot afford any downtime in your music setup
+- 需要始终使用稳定、适用于生产的系统
+- 您不习惯于解决问题
+- 您的音乐设置不能承受任何停机时间
 
-## What is BETA?
+## 什么是BETA？
 
-BETA releases are feature-complete versions that are being tested before becoming stable releases. They typically include:
+BETA版本是功能完整的版本，在成为稳定版本之前进行测试。通常包括：
 
-- ✨ New features not yet in stable
-- 🔧 Performance improvements
-- 🐛 Bug fixes from previous versions
-- 🧪 Changes that need real-world testing
+- ✨ 稳定版本中尚未包含的新功能
+- 🔧 性能改进
+- 🐛 之前版本的bug修复
+- 🧪 需要进行现实世界测试的更改
 
-## Differences from Stable
+## 与稳定版的区别
 
-| Aspect    | Stable               | BETA                                  |
-| --------- | -------------------- | ------------------------------------- |
-| Stability | Highly stable        | Generally stable with possible issues |
-| Features  | Well-tested features | New features being tested             |
-| Updates   | Less frequent        | More frequent                         |
-| Use Case  | Production           | Testing & early adoption              |
+| 方面    | 稳定版               | BETA                                  |
+| ------- | -------------------- | ------------------------------------- |
+| 稳定性 | 非常稳定            | 通常稳定，但可能存在问题 |
+| 功能    | 经过充分测试的功能 | 正在测试的新功能             |
+| 更新    | 更新频率较低        | 更新频率较高                         |
+| 用例    | 生产环境            | 测试和早期采用              |
 
-## Reporting Issues
+## 报告问题
 
-As a BETA tester, your feedback is invaluable! Please report issues you encounter:
+作为BETA测试者，您的反馈非常宝贵！请报告您遇到的问题：
 
-### Before Reporting
+### 报告前的准备
 
-1. Check the add-on logs (enable `debug` logging if needed globally or on a per-provider level)
-2. Search [existing issues](https://github.com/music-assistant/support)
-3. Verify the issue doesn't occur in the stable version if possible
+1. 检查插件日志（如果需要，请全局或按提供商级别启用`debug`日志）
+2. 搜索[现有问题](https://github.com/music-assistant/support)
+3. 如果可能，请验证问题是否在稳定版本中发生
 
-### When Reporting
+### 报告时包含以下内容：
 
-Include:
+- 📋 重复问题的步骤
+- 📝 插件的完整日志（或从MA的Web界面下载完整日志文件）
+- 🔢 音乐助手版本（在Web UI中可见）
+- 🎵 您使用的音乐提供商
+- 🔊 受影响的播放器
 
-- 📋 Steps to reproduce the issue
-- 📝 Full logs from the add-on (or download the full logfile from within MA's web interface)
-- 🔢 Music Assistant version (visible in Web UI)
-- 🎵 Which music providers you're using
-- 🔊 Which players are affected
+**报告位置**：[GitHub支持仓库](https://github.com/music-assistant/support)
 
-**Where to report**: [GitHub Support Repository](https://github.com/music-assistant/support)
+## 更新
 
-## Updates
+BETA版本比稳定版本更新得更频繁。一般来说，每周更新一次或更多。
 
-BETA releases are updated more frequently than stable releases. In general, more or less once a week.
+## 已知限制和注意事项
 
-## Known Limitations and notes
+- BETA版本可能会有破坏性更改
+- 一些功能可能只部分实现
+- 之间可能发生数据库迁移
+- 性能优化可能仍在进行中
+- 您无法从稳定版迁移（反之亦然）
 
-- BETA versions may have breaking changes
-- Some features might be partially implemented
-- Database migrations may occur between versions
-- Performance optimizations might still be in progress
-- You can not migrate from the stable version (and vice-versa)
+提示：如果您想测试BETA版本同时保留稳定版本，只需停止稳定插件并运行BETA插件。要恢复到稳定版，只需再次停止BETA插件并启动稳定插件即可。两个插件不能同时激活。
 
-TIP: If you want to test the BETA version while keeping the stable version, simply stop the stable add-on and run the BETA add-on. Reverting back to stable is then as easy as stopping the BETA add-on again and starting stable. Bothg add-ons can not be activate at the same time.
+## 获取帮助
 
-## Getting Help
+- 📖 [BETA文档](https://beta.music-assistant.io)
+- 💬 [社区讨论](https://github.com/orgs/music-assistant/discussions)
+- 🐛 [报告BETA问题](https://github.com/music-assistant/support)
+- � [Discord服务器](https://discord.gg/PZQ6RWbfeS)
 
-- 📖 [BETA Documentation](https://beta.music-assistant.io)
-- 💬 [Community Discussions](https://github.com/orgs/music-assistant/discussions)
-- 🐛 [Report BETA Issues](https://github.com/music-assistant/support)
-- � [Discord Server](https://discord.gg/PZQ6RWbfeS)
+## BETA版本中的新功能
 
-## What's New in BETA
+检查[更改日志](CHANGELOG.md)以获取有关此BETA版本中新增内容的详细信息。
 
-Check the [CHANGELOG](CHANGELOG.md) for detailed information about what's new in this BETA version.
+## BETA测试最佳实践
 
-## Beta Testing Best Practices
+1. **定期备份**：始终保持最近的备份
+2. **监控日志**：注意日志中的问题
+3. **报告问题**：通过报告错误帮助我们改进
+4. **保持耐心**：一些功能可能不会完美工作
+5. **保持更新**：安装更新以获取最新的修复
 
-1. **Regular Backups**: Always maintain recent backups
-2. **Monitor Logs**: Keep an eye on logs for issues
-3. **Report Issues**: Help us improve by reporting bugs
-4. **Be Patient**: Some features might not work perfectly
-5. **Stay Updated**: Install updates to get the latest fixes
+在Home Assistant中对音乐助手插件进行备份也将包括您的音乐助手数据。请确保在更新到新版本之前始终进行备份，以便您可以轻松地回滚到上一个版本！
 
-Making a backup of the Music Assistant add-on within Home Assistant will also include your Music Assistant data. Please ensure to always make a backup before updating to a new version so you can always easily revert to the previous version!
+## 回滚策略
 
-## Rollback Strategy
+### 如果出现问题
 
-### If Things Break
+1. **停止插件**
+2. **从备份中恢复**（您做了备份，对吧？）
+3. **报告问题**
 
-1. **Stop the add-on**
-2. **Restore from backup** (you made one, right?)
-3. **Report the issue**
+## 贡献
 
-## Contributing
+作为BETA测试者，您已经在做出贡献！您还可以：
 
-As a BETA tester, you're already contributing! You can also:
+- 🐛 [报告详细的bug](https://github.com/music-assistant/support)
+- 💡 [提出改进建议](https://github.com/orgs/music-assistant/discussions)
+- 🔧 提交pull请求
+- 📝 协助编写文档
+- 💬 在[Discord](https://discord.gg/PZQ6RWbfeS)上帮助他人
 
-- 🐛 [Report detailed bugs](https://github.com/music-assistant/support)
-- 💡 [Suggest improvements](https://github.com/orgs/music-assistant/discussions)
-- 🔧 Submit pull requests
-- 📝 Help with documentation
-- 💬 Help others on [Discord](https://discord.gg/PZQ6RWbfeS)
+访问GitHub上的[音乐助手组织](https://github.com/music-assistant)以进行贡献。
 
-Visit the [Music Assistant organization](https://github.com/music-assistant) on GitHub to contribute.
-
-## Release Cycle
+## 发布周期
 
 ```
-Development → BETA → Stable
+开发 → BETA → 稳定
      ↓          ↓        ↓
-   Nightly   (You!)   Users
+   夜间版   (您!)   用户
 ```
 
-BETA releases are the final testing stage before stable releases. Your testing helps ensure quality for all users!
+BETA版本是稳定版本发布前的最终测试阶段。您的测试有助于确保所有用户的质量！
 
-## License
+## 许可证
 
-Music Assistant is licensed under the Apache License 2.0.
-
+音乐助手根据Apache License 2.0许可。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

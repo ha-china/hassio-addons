@@ -91,7 +91,8 @@ RUN \
 ##################
 # Copy local files
 COPY rootfs/ /
-RUN find . -type f \( -name "*.sh" -o -name "run" \) -print -exec chmod +x {} \;
+RUN find /etc -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -exec chmod +x {} +
+RUN chmod +x /usr/local/sbin/vpn
 
 # Uses /bin for compatibility purposes
 # hadolint ignore=DL4005
@@ -112,7 +113,7 @@ RUN chmod 744 /ha_automodules.sh && /ha_automodules.sh "$MODULES" && rm /ha_auto
 #    && chmod a+x /etc/s6-overlay/s6-rc.d/$SCRIPTSNAME/* ; done; fi
 
 # Manual apps
-ARG PACKAGES="wireguard-tools iptables ip6tables iptables-legacy"
+ARG PACKAGES="ipcalc wireguard-tools"
 
 # Automatic apps & bashio
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_autoapps.sh" "/ha_autoapps.sh"
@@ -126,18 +127,14 @@ RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.
 # 4 Entrypoint #
 ################
 
-RUN chmod +x /usr/local/bin/* /usr/local/sbin/*
-
 # Add entrypoint
 ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" "/ha_entrypoint.sh"
 RUN chmod 777 /ha_entrypoint.sh
 
-COPY rootfs/ /
-RUN find . -type f \( -name "*.sh" -o -name "run" \) -print -exec chmod +x {} \;
-
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/.bashio-standalone.sh"
-RUN chmod 777 /.bashio-standalone.sh
+# Install bashio
+ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/usr/local/lib/bashio-standalone.sh"
+RUN chmod 0755 /usr/local/lib/bashio-standalone.sh
 
 ############
 # 5 Labels #

@@ -56,6 +56,7 @@ USER 0
 
 # Add rootfs
 COPY rootfs/ /
+RUN find . -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -exec chmod +x {} \;
 
 # Bring in jq + gosu (and their libs). NO apk in final stage.
 COPY --from=ha_tools /out/ /
@@ -98,12 +99,10 @@ RUN chmod 744 /ha_autoapps.sh \
 ################
 ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
 ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" "/ha_entrypoint.sh"
+RUN chmod 777 /ha_entrypoint.sh
 
-# Entrypoint modifications
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint_modif.sh" "/ha_entrypoint_modif.sh"
-RUN chmod 777 /ha_entrypoint.sh /ha_entrypoint_modif.sh \
-    && /ha_entrypoint_modif.sh \
-    && rm /ha_entrypoint_modif.sh
+ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/.bashio-standalone.sh"
+RUN chmod 0644 /.bashio-standalone.sh
 
 #WORKDIR /
 ENTRYPOINT [ "/usr/bin/env" ]

@@ -2,6 +2,7 @@ import argparse
 from argparse import ArgumentParser
 
 from pjsua2 import PJ_TURN_TP_TCP, PJ_TURN_TP_UDP, PJ_TURN_TP_TLS
+from typing import List
 from typing_extensions import Literal, Optional, Any
 
 from log import log
@@ -45,9 +46,9 @@ class TurnServer:
         self.connection_type = turn_server_connection_type_to_int(connection_type)
         self.user = user
         self.password = password
-        log(None, 'TURN server set to: %s' % self.server)
-        log(None, 'TURN connection type set to: %s' % connection_type)
-        log(None, 'TURN user set to: %s' % self.user)
+        log(None, f'TURN server set to: {self.server}')
+        log(None, f'TURN connection type set to: {connection_type}')
+        log(None, f'TURN user set to: {self.user}')
 
 
 class SipOptions:
@@ -58,6 +59,7 @@ class SipOptions:
     via_rewrite_use: bool
     sdp_nat_rewrite_use: bool
     sip_outbound_use: bool
+    extract_headers: List[str]
 
     def __init__(
         self,
@@ -70,6 +72,7 @@ class SipOptions:
         sdp_nat_rewrite_use: bool,
         sip_outbound_use: bool,
         turn_server: Optional[TurnServer],
+        extract_headers: List[str],
         account_index: int,
     ):
         self.proxy = proxy
@@ -81,9 +84,12 @@ class SipOptions:
         self.via_rewrite_use = via_rewrite_use
         self.sdp_nat_rewrite_use = sdp_nat_rewrite_use
         self.sip_outbound_use = sip_outbound_use
-        log(account_index, 'Proxy set to: %s' % self.proxy)
-        log(account_index, 'ICE is enabled: %s' % self.enable_ice)
-        log(account_index, 'TURN server is enabled: %s' % str(self.turn_server is not None))
+        self.extract_headers = extract_headers
+        log(account_index, f'Proxy set to: {self.proxy}')
+        log(account_index, f'ICE is enabled: {self.enable_ice}')
+        log(account_index, f'TURN server is enabled: {self.turn_server is not None}')
+        if self.extract_headers:
+            log(account_index, f'Extract headers: {self.extract_headers}')
 
 
 def create_parser() -> ArgumentParser:
@@ -156,6 +162,11 @@ def create_parser() -> ArgumentParser:
         default=None,
         help='Set the TURN password (default: None)'
     )
+    parser.add_argument(
+        '--extract-headers',
+        default=None,
+        help='Comma-separated list of SIP headers to extract (default: None)'
+    )
     return parser
 
 
@@ -170,15 +181,17 @@ def parse_sip_options(raw: str, account_index: int = 0) -> SipOptions:
     ):
         log(account_index, 'Error: TURN server requires user and password. Disabling TURN server.')
     turn_server = TurnServer(args.turn_server, args.turn_connection_type, args.turn_user, args.turn_password) if args.turn_server else None
+    extract_headers = [h.strip() for h in args.extract_headers.split(',')] if args.extract_headers else []
     return SipOptions(
         proxy=args.proxy,
         enable_ice=is_true(args.ice),
         sip_stun_use=is_true(args.use_stun_for_sip),
         sip_media_use=is_true(args.use_stun_for_media),
         contact_rewrite_use=is_true(args.use_contact_rewrite),
-        via_rewrite_use= is_true(args.use_via_rewrite),
-        sdp_nat_rewrite_use= is_true(args.use_sdp_nat_rewrite),
-        sip_outbound_use= is_true(args.use_sip_outbound),
+        via_rewrite_use=is_true(args.use_via_rewrite),
+        sdp_nat_rewrite_use=is_true(args.use_sdp_nat_rewrite),
+        sip_outbound_use=is_true(args.use_sip_outbound),
         turn_server=turn_server,
+        extract_headers=extract_headers,
         account_index=account_index
     )

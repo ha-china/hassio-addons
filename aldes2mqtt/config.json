@@ -1,8 +1,8 @@
 {
   "name": "Aldes 2 MQTT",
-  "version": "0.1.4",
-  "slug": "alder2mqtt",
-  "description": "[老王杂谈说]：Aldes 2 MQTT 是一个用于将数据发送到 Aldes API 的 MQTT 中继的包装器。",
+  "version": "0.1.6",
+  "slug": "aldes2mqtt",
+  "description": "[老王杂谈说]：Aldes 2 MQTT 是一个用于基于 Aldes API 将数据发送到 MQTT broker 的封装器。",
   "arch": [
     "armhf",
     "armv7",

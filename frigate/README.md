@@ -1,12 +1,12 @@
-# Home Assistant Add-on: Frigate
+# Home Assistant 扩展：Frigate
 
-请参考[发布说明](https://github.com/blakeblackshear/frigate/releases)以了解重大变更。
+请参考[发行说明](https://github.com/blakeblackshear/frigate/releases)了解重大变更。
 
-![支持aarch64架构][aarch64-shield] ![支持amd64架构][amd64-shield] ![支持armv7架构][armv7-shield]
+![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield] ![支持 armv7 架构][armv7-shield]
 
-NVR支持IP摄像头的实时本地物体检测。
+适用于IP摄像头的NVR，带有实时本地目标检测功能。
 
-您必须在您的插件配置文件夹中创建一个名为`config.yml`的配置文件。
+您必须在您的扩展配置文件夹中创建一个名为`config.yml`的配置文件。
 
 [文档](https://docs.frigate.video)
 
@@ -14,8 +14,11 @@ NVR支持IP摄像头的实时本地物体检测。
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

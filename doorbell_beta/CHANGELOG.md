@@ -1,10 +1,49 @@
 # Changelog
 
-## 3.0.0-beta.101 - 2026-01-26
+## 3.0.0-beta.136 - 2026-02-12
+
+### Change
+
+- For snapshot, try first new ISAPI method, then fallback to SDK (villaVTO doesnt support SDK)
+- Better ISAPI handling for indoor stations
+- No more backlog on first start/use of the addon
+
+## 3.0.0-beta.129 - 2026-02-11
+
+### Fix
+
+- Doorbell name failing when spaces are used
+- Improve manual mqtt config for validation errors
+
+## 3.0.0-beta.128 - 2026-02-10
+
+### Fix
+
+- Improve offline device handling
+
+## 3.0.0-beta.125 - 2026-02-10
+
+### Fix
+
+- Fix for dev number, when not able to parse
+
+## 3.0.0-beta.124 - 2026-01-29
+
+### Changes
+
+- No more timestamp on the snapshot image, since we are now using the image mqtt entity
+- Added a backlight control mode for outdoor stations
+- TEST: add control_source_decoded  card_user_id and unlock_type to attributes when door was opened
+- TEST: add dev number to logging on incoming ring event, to hopefull identify what button on outdoor station was pressed
+
+## 3.0.0-beta.116 - 2026-01-27
 
 ### Test
 
-- DONT UPDATE, TEST RELEASE ONLY
+- Updated requirements to offer new functionality!
+- New image entity, take snapshot button updates the image entity
+- Ring event also creates a snapshot automaticly
+- Pressing the call status button manually also updates the call sensor entity
 
 ## 3.0.0-beta.100 - 2026-01-23
 

@@ -1,19 +1,23 @@
 arch:
   - aarch64
   - amd64
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：用于组织您的immich图库的电动工具'
+description: '[老王杂谈说]：组织你的 Immich 库的强力工具'
 hassio_api: true
 image: ghcr.nju.edu.cn/alexbelgium/immich_power_tools-{arch}
 init: false
 map:
   - addon_config:rw
 name: Immich Power Tools
+options:
+  env_vars: []
 ports:
   3000/tcp: 8001
 ports_description:
   3000/tcp: Web UI port
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   DB_DATABASE_NAME: str
   DB_HOST: str
   DB_PASSWORD: str
@@ -26,5 +30,5 @@ schema:
   IMMICH_URL: str
 slug: immich_power_tools
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "0.19.0"
+version: "0.19.1"
 webui: http://[HOST]:[PORT:3000]

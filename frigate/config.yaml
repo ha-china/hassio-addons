@@ -1,18 +1,14 @@
 name: Frigate
-version: 0.16.3
+version: 0.17.0
 breaking_versions:
-  - 0.16.3
-  - 0.16.2
-  - 0.16.1
+  - 0.17.0
   - 0.16.0
-  - 0.15.1
   - 0.15.0
-  - 0.14.1
   - 0.14.0
 panel_icon: "mdi:cctv"
 panel_title: Frigate
 slug: frigate
-description: '[老王杂谈说]：带实时本地物体检测的NVR，适用于IP摄像头'
+description: '[老王杂谈说]：null'
 url: "https://ghfast.top/github.com/blakeblackshear/frigate"
 image: ghcr.nju.edu.cn/blakeblackshear/frigate
 startup: application
@@ -62,6 +58,7 @@ privileged:
   - PERFMON
 schema:
   plus_api_key: password?
+  go2rtc_allow_arbitrary_exec: str?
 services:
   - "mqtt:want"
 arch:

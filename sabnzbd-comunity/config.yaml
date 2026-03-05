@@ -1,8 +1,8 @@
 name: SABnzbd
-version: 0.6.0
+version: 0.7.0
 slug: sabnzbd-0
-description: '[老王杂谈说]：免费轻松的二进制新闻阅读器'
-url: https://ghfast.top/github.com/hassio-addons/addon-sabnzbd/tree/main/README.md
+description: '[老王杂谈说]：免费且简单的二进制新闻阅读器'
+url: https://ghfast.top/github.com/hassio-addons/app-sabnzbd/tree/main/README.md
 ingress: true
 ingress_entry: sabnzbd/
 panel_icon: mdi:arrow-down-bold
@@ -16,4 +16,4 @@ map:
   - media:rw
 ports:
   8080/tcp: null
-image: ghcr.nju.edu.cn/hassio-addons/sabnzbd/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/sabnzbd

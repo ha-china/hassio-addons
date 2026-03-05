@@ -1,4 +1,4 @@
-# Home Assistant Add-on: Mailserver
+# Home Assistant App: Mailserver
 
 Postfix/Dovecot mailserver with Postfixadmin web interface...
 
@@ -6,13 +6,13 @@ Postfix/Dovecot mailserver with Postfixadmin web interface...
 
 ## About
 
-Important: This addon requires that the MariaDB add-on is installed and running!
+Important: This app requires that the MariaDB add-on is installed and running!
 
-This add-on provides a mailserver for your domain.
+This app provides a mailserver for your domain.
 It is also possible to configure additional email domains and accounts in the
 Postfix Admin web interface.
 
-The following ports are used by this addon:
+The following ports are used by this app:
 
 smtp: port 25, 465 and 587
 imap(s): 993
@@ -46,21 +46,21 @@ fullchain.pem and privkey.pem in the /ssl directory in Home Assistant.
 
 ## Installation
 
-Follow these steps to get the add-on installed on your system:
+Follow these steps to get the app installed on your system:
 
 Add the repository `https://github.com/erik73/hassio-addons`.
-Find the "Mailserver" add-on and click it.
+Find the "Mailserver" app and click it.
 Click on the "INSTALL" button.
 
 ## How to use
 
-### Starting the add-on
+### Starting the app
 
 After installation you are presented with a default and example configuration.
 
-Adjust the add-on configuration to match your requirements.
-Save the add-on configuration by clicking the "SAVE" button.
-Start the add-on.
+Adjust the app configuration to match your requirements.
+Save the app configuration by clicking the "SAVE" button.
+Start the app.
 
 ## Configuration
 
@@ -76,12 +76,12 @@ enable_mailfilter: false
 message_size_limit: 10
 ```
 
-Please note: During the startup of the add-on, a database is created in the
-MariaDB add-on. There is currently not possible to change user name or
+Please note: During the startup of the app, a database is created in the
+MariaDB app. There is currently not possible to change user name or
 domain_name after the database is created. The password can be changed.
 The only way to change user and domain name is to drop the Postfix Admin
-datbase and restart the add-on.
-Use the phpMyadmin add-on to drop the database.
+datbase and restart the app.
+Use the phpMyadmin app to drop the database.
 
 ### Option: `my_hostname` (required)
 
@@ -97,7 +97,7 @@ Additional domains can be added in the postfixadmin-interface.
 
 The name of the admin user in postfixadmin. To log in to the web interface
 you have to use FQDN. For example: admin@mydomain.no-ip.com.
-In the current version of the add-on, this can not be changed once the database
+In the current version of the app, this can not be changed once the database
 is created.
 
 #### Option: `admin_password` (required)
@@ -108,7 +108,7 @@ your password!
 
 #### Option: `letsencrypt_certs` (required)
 
-If you use the Let´s Encrypt add-on or by any other means have certs
+If you use the Let´s Encrypt app or by any other means have certs
 installed in the /ssl folder of your HA instance, this options will
 use those certificates for the SMTP and IMAP services.
 
@@ -123,7 +123,7 @@ Default: 10
 
 #### Option: `enable_mailfilter` (required)
 
-This enables communication with the optional Mailfilter add-on in this repository.
+This enables communication with the optional Mailfilter app in this repository.
 It will enable Postfix to scan emails for SPAM and viruses, and includes optional
 DKIM signing. To be able to successfully send email from your host, without risking
 having your outgoing emails being rejected or classified as spam, DKIM signing
@@ -131,7 +131,7 @@ is a must. You also have to configure your DNS server to provide SPF and DMARC.
 If DKIM, SPF and DMARC sounds too complicated, use the smtp_relay option.
 
 The virus scanning requires a lot of memory, and 4-8 GB is recommended.
-Virus scanning is disabled by default in the Mailfilter add-on.
+Virus scanning is disabled by default in the Mailfilter app.
 
 #### Option: `smtp_relayhost` (optional)
 

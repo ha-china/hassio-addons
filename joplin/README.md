@@ -1,74 +1,74 @@
-## ⚠️ 开启请求 : [✨ [请求] [Joplin] 添加网关 (开启于 2025-06-15)](https://github.com/alexbelgium/hassio-addons/issues/1913) 由 [@aluavin](https://github.com/aluavin)
-# Home assistant 插件: Joplin
+## &#9888; Open Request : [✨ [REQUEST] [Joplin] Add Ingress (opened 2025-06-15)](https://github.com/alexbelgium/hassio-addons/issues/1913) by [@aluavin](https://github.com/aluavin)
+# Home assistant add-on: Joplin
 
 
-我在业余时间维护这个和其他 Home Assistant 插件：跟上上游的变化、HA 的变化，并在真实硬件上进行测试需要大量时间（和一些钱）。我大约使用我 >110 个插件中的 5-10 个，因此我安装测试机器（和一些我自己的测试服务，如 VPN）来调试和改进插件。
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-如果这个插件节省了你的时间或使你的设置更容易，我将非常感谢你的支持！
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
-[![给我买咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## 插件信息
+## Addon informations
 
-![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoplin%2Fconfig.yaml)
-![网关](https://img.shields.io/badge/dynamic/yaml?label=网关&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoplin%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoplin%2Fconfig.yaml)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoplin%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoplin%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoplin%2Fconfig.yaml)
 
-[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![构建者](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建者)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点赞的人！点击下面的图片来点赞，它将出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
-[![@alexbelgium/hassio-addons 仓库的星标者名单](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/joplin/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/joplin/stats.png)
 
-## 关于
+## About
 
-[Joplin Server](https://github.com/laurent22/joplin) 是一个免费、开源的笔记和待办事项同步应用程序，可以处理大量组织成笔记本的笔记。使用这个服务器，你可以在所有设备上同步所有你的笔记。Joplin 支持端到端加密、Markdown 编辑、网络剪辑器扩展以及与各种云服务的同步。
+[Joplin Server](https://github.com/laurent22/joplin) is a free, open source note taking and to-do synchronization application, which can handle a large number of notes organized into notebooks. With this server you can sync all your notes across all your devices. Joplin supports end-to-end encryption, markdown editing, web clipper extensions, and synchronization with various cloud services.
 
-这个插件基于 [docker 镜像](https://hub.docker.com/r/etechonomy/joplin-server) 来自 etechonomy。
+This addon is based on the [docker image](https://hub.docker.com/r/etechonomy/joplin-server) from etechonomy.
 
-感谢 @poudenes 帮助开发！
+Thanks to @poudenes for helping with the development!
 
-## 配置
+## Configuration
 
-Webui 可以在 `<你的 IP>:22300` 找到。
+Webui can be found at `<your-ip>:22300`.
 
-### 选项
+### Options
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|-------|
-| `APP_BASE_URL` | 字符串 | `http://你的域名:端口` | 服务将运行的公共基本 URL |
-| `data_location` | 字符串 | `/config/addons_config/joplin` | 存储 Joplin 数据的路径 |
-| `DB_CLIENT` | 字符串 | | 数据库客户端类型（例如，`pg` 用于 PostgreSQL） |
-| `POSTGRES_HOST` | 字符串 | | PostgreSQL 服务器主机名 |
-| `POSTGRES_PORT` | 整数 | | PostgreSQL 服务器端口 |
-| `POSTGRES_DATABASE` | 字符串 | | PostgreSQL 数据库名称 |
-| `POSTGRES_USER` | 字符串 | | PostgreSQL 用户名 |
-| `POSTGRES_PASSWORD` | 字符串 | | PostgreSQL 密码 |
-| `MAILER_ENABLED` | 整数 | | 启用电子邮件服务（1=true, 0=false） |
-| `MAILER_HOST` | 字符串 | | SMTP 服务器主机名 |
-| `MAILER_PORT` | 整数 | | SMTP 服务器端口 |
-| `MAILER_SECURITY` | 字符串 | | SMTP 安全性（none, tls, starttls） |
-| `MAILER_AUTH_USER` | 字符串 | | SMTP 认证用户名 |
-| `MAILER_AUTH_PASSWORD` | 字符串 | | SMTP 认证密码 |
-| `MAILER_NOREPLY_NAME` | 字符串 | | 邮件发送者名称 |
-| `MAILER_NOREPLY_EMAIL` | 字符串 | | 邮件发送者地址 |
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `APP_BASE_URL` | str | `http://your_domain:port` | Base public URL where the service will be running |
+| `data_location` | str | `/config/addons_config/joplin` | Path where Joplin data is stored |
+| `DB_CLIENT` | str | | Database client type. Only `pg` (PostgreSQL) is supported. MariaDB/MySQL is NOT supported. |
+| `POSTGRES_HOST` | str | | PostgreSQL server hostname |
+| `POSTGRES_PORT` | int | | PostgreSQL server port |
+| `POSTGRES_DATABASE` | str | | PostgreSQL database name |
+| `POSTGRES_USER` | str | | PostgreSQL username |
+| `POSTGRES_PASSWORD` | str | | PostgreSQL password |
+| `MAILER_ENABLED` | int | | Enable email service (1=true, 0=false) |
+| `MAILER_HOST` | str | | SMTP server hostname |
+| `MAILER_PORT` | int | | SMTP server port |
+| `MAILER_SECURITY` | str | | SMTP security (none, tls, starttls) |
+| `MAILER_AUTH_USER` | str | | SMTP authentication username |
+| `MAILER_AUTH_PASSWORD` | str | | SMTP authentication password |
+| `MAILER_NOREPLY_NAME` | str | | Email sender name |
+| `MAILER_NOREPLY_EMAIL` | str | | Email sender address |
 
-### 示例配置
+### Example Configuration
 
 ```yaml
 APP_BASE_URL: "http://192.168.1.100:22300"
 data_location: "/config/addons_config/joplin"
 DB_CLIENT: "pg"
-POSTGRES_HOST: "core-mariadb"
-POSTGRES_PORT: 3306
+POSTGRES_HOST: "your-postgres-host"
+POSTGRES_PORT: 5432
 POSTGRES_DATABASE: "joplin"
 POSTGRES_USER: "joplin"
 POSTGRES_PASSWORD: "secure_password"
@@ -82,75 +82,59 @@ MAILER_NOREPLY_NAME: "Joplin Server"
 MAILER_NOREPLY_EMAIL: "noreply@yourdomain.com"
 ```
 
-### 数据库设置
+### Database Setup
 
-Joplin Server 默认使用 SQLite，但对于生产使用，建议使用 PostgreSQL：
+Joplin Server uses SQLite by default, but for production use, PostgreSQL is recommended.
 
-1. 安装和配置 PostgreSQL 插件（例如，MariaDB 插件）
-2. 为 Joplin 创建数据库和用户
-3. 在 Joplin 插件中配置 PostgreSQL 选项
-4. 重启插件
+> **Important:** Joplin Server only supports **PostgreSQL** as an external database. MariaDB/MySQL is **not** supported. You must install a PostgreSQL addon (not the MariaDB addon) and set `DB_CLIENT` to `pg`.
 
-确保提供的数据库和用户存在，因为服务器不会自动创建它们。
+1. Install and configure a PostgreSQL addon
+2. Create a database and user for Joplin in PostgreSQL
+3. Configure the PostgreSQL options in the Joplin addon (use port `5432`, not `3306`)
+4. Restart the addon
 
-### 电子邮件配置
+Make sure the provided database and user exist as the server will not create them automatically.
 
-要启用用户注册和通知的电子邮件功能：
+### Email Configuration
 
-1. 配置你的 SMTP 服务器详细信息
-2. 将 `MAILER_ENABLED` 设置为 `1`
-3. 提供认证凭据
-4. 通过注册新用户来测试配置
+To enable email functionality for user registration and notifications:
 
-### 自定义脚本和环境变量
+1. Configure your SMTP server details
+2. Set `MAILER_ENABLED` to `1`
+3. Provide authentication credentials
+4. Test the configuration by registering a new user
 
-这个插件支持通过 `addon_config` 映射的自定义脚本和环境变量：
+### Custom Scripts and Environment Variables
 
-- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。详情请见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2
+This addon supports custom scripts and environment variables through the `addon_config` mapping:
 
-## 安装
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-这个插件的安装非常简单，与安装任何其他 Hass.io 插件没有不同。
+## Installation
 
-1. 将我的 Hass.io 插件仓库 [repository] 添加到你的 Hass.io 实例。
-1. 安装这个插件。
-1. 点击 `保存` 按钮来保存你的配置。
-1. 启动插件。
-1. 检查插件的日志以查看是否一切正常。
-1. 导航到 Web 界面以完成初始设置。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-## 设置步骤
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Navigate to the web interface to complete the initial setup.
 
-1. **初始设置**：启动插件后，导航到 Web 界面
-2. **创建管理员账户**：创建你的第一个管理员用户账户
-3. **配置同步**：设置你的 Joplin 客户端与服务器同步
-4. **可选数据库**：考虑切换到 PostgreSQL 以获得更好的性能
-5. **电子邮件服务**：配置电子邮件服务以支持用户管理功能
+## Setup Steps
 
-## 支持
+1. **Initial Setup**: After starting the addon, navigate to the web interface
+2. **Create Admin Account**: Create your first admin user account
+3. **Configure Synchronization**: Set up your Joplin clients to sync with the server
+4. **Optional Database**: Consider switching to PostgreSQL for better performance
+5. **Email Service**: Configure email service for user management features
 
-在 [GitHub](https://github.com/alexbelgium/hassio-addons/issues) 上创建问题。
+## Support
+
+Create an issue on [GitHub](https://github.com/alexbelgium/hassio-addons/issues).
 
 [repository]: https://github.com/alexbelgium/hassio-addons
----
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
----
 
-## 📱 关注我
 
-扫描下面二维码，关注我。有需要可以随时给我留言：
-
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
-
-## ☕ 赞助支持
-
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
-
-感谢您的支持与鼓励！

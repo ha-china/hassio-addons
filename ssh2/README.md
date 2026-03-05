@@ -1,70 +1,54 @@
-# Home Assistant Community Add-on: Advanced SSH & Web Terminal
+# Home Assistant 社区应用：高级 SSH & Web 终端
 
-[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
+[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
 
-[![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
+[![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
 
-[![Sponsor Frenck via GitHub Sponsors][github-sponsors-shield]][github-sponsors]
+[![通过 GitHub Sponsors 赞助 Frenck][github-sponsors-shield]][github-sponsors]
 
-[![Support Frenck on Patreon][patreon-shield]][patreon]
+[![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
 
-This add-on allows you to log in to your Home Assistant instance using
-SSH or by using the Web Terminal.
+此应用允许您通过 SSH 或使用 Web 终端登录到您的 Home Assistant 实例。
 
-## About
+## 关于
 
-This add-on allows you to log in to your Home Assistant instance using
-SSH or a Web Terminal, giving you access to your folders and
-also includes a command-line tool to do things like restart, update,
-and check your instance.
+此应用允许您通过 SSH 或 Web 终端登录到您的 Home Assistant 实例，让您访问文件夹，还包括一个命令行工具，可用于重启、更新和检查您的实例。
 
-This is an enhanced version of the provided
-[SSH add-on by Home Assistant][hass-ssh] and focuses on security,
-usability, flexibility and also provides access using a web interface.
+这是 Home Assistant 提供的 [SSH 扩展][hass-ssh] 的增强版本，侧重于安全性、可用性、灵活性，同时也提供通过 Web 界面访问的功能。
 
-![Web Terminal in the Home Assistant Frontend][screenshot]
+![Home Assistant 前端中的 Web 终端][screenshot]
 
-## WARNING
+## 警告
 
-The advanced SSH & Web Terminal add-on is a really powerful and gives you
-virtually access to all tools and almost all hardware of your system.
+高级 SSH & Web 终端应用非常强大，几乎可以访问系统中的所有工具和几乎所有硬件。
 
-While this add-on is created and maintained with care and with security in mind,
-in the wrong or inexperienced hands, it could damage your system.
+虽然此应用经过精心制作和维护，并注重安全性，但在不正确或不熟练的手中，可能会损坏您的系统。
 
-## Features
+## 特性
 
-This add-on, of course, provides an SSH server, based on [OpenSSH][openssh] and
-a web-based Terminal (which can be included in your Home Assistant frontend) as
-well. Additionally, it comes out of the box with the following:
+当然，此应用提供基于 [OpenSSH][openssh] 的 SSH 服务器，以及基于 Web 的终端（可以包含在您的 Home Assistant 前端中），此外，它还自带以下功能：
 
-- Access your command line right from the Home Assistant frontend!
-- A secure default configuration of SSH:
-  - Only allows login by the configured user, even if more users are created.
-  - Only uses known secure ciphers and algorithms.
-  - Limits login attempts to hold off brute-force attacks better.
-- Comes with an SSH compatibility mode option to allow older clients to connect.
-- Support for Mosh allowing roaming and supports intermittent connectivity.
-- SFTP support is disabled by default but is user configurable.
-- Compatible if Home Assistant was installed via the generic Linux installer.
-- Username is configurable, so `root` is no longer mandatory.
-- Persists custom SSH client settings & keys between add-on restarts
-- Log levels for allowing you to triage issues easier.
-- Hardware access to your audio, uart/serial devices and GPIO pins.
-- Runs with more privileges, allowing you to debug and test more situations.
-- Has access to the dbus of the host system.
-- Has the option to access the Docker instance running on the host system.
-- Runs on host level network, allowing you to open ports or run little daemons.
-- Have custom Alpine packages installed on start. This allows you to install
-  your favorite tools, which will be available every single time you log in.
-- Execute custom commands on add-on start so that you can customize the
-  shell to your likings.
-- [ZSH][zsh] as its default shell. Easier to use for the beginner, more advanced
-  for the more experienced user. It even comes preloaded with
-  ["Oh My ZSH"][ohmyzsh], with some plugins enabled as well.
-- Contains a sensible set of tools right out of the box: curl, Wget, RSync, GIT,
-  Nmap, Mosquitto client, MariaDB/MySQL client, Awake (“wake on LAN”), Nano,
-  Vim, tmux, and a bunch commonly used networking tools.
+- 直接从 Home Assistant 前端访问命令行！
+- SSH 的安全默认配置：
+  - 只允许已配置的用户登录，即使创建了更多用户。
+  - 只使用已知的安全密码和算法。
+  - 限制登录尝试，以更好地防止暴力攻击。
+- 提供SSH兼容模式选项，允许旧客户端连接。
+- 支持 Mosh，允许漫游并支持间歇性连接。
+- 默认禁用 SFTP 支持，但用户可自定义配置。
+- 如果通过通用 Linux 安装程序安装了 Home Assistant，则兼容。
+- 用户名可配置，因此不再强制使用 `root`。
+- 在应用重启之间保留自定义 SSH 客户端设置和密钥。
+- 日志级别，以便您更容易分类问题。
+- 访问您的音频、uart/串行设备和 GPIO 引脚的硬件。
+- 以更高权限运行，允许您调试和测试更多情况。
+- 访问主机系统的 dbus。
+- 有选项访问主机系统上运行的 Docker 实例。
+- 在主机级别网络上运行，允许您打开端口或运行小守护程序。
+- 在启动时安装自定义 Alpine 软件包。这允许您安装您最喜欢的工具，每次登录时都将可用。
+- 在应用启动时执行自定义命令，以便您可以根据喜好自定义 shell。
+- 默认 shell 为 [ZSH][zsh]。对于初学者来说更容易使用，对于经验更丰富的用户来说更具高级性。它甚至预装了 ["Oh My ZSH"][ohmyzsh]，并启用了某些插件。
+- 包含一组合理的工具：curl、Wget、RSync、GIT、Nmap、Mosquitto 客户端、MariaDB/MySQL 客户端、Awake（"唤醒网络"）、Nano、Vim、tmux 以及大量常用网络工具。
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -73,19 +57,23 @@ well. Additionally, it comes out of the box with the following:
 [github-sponsors-shield]: https://frenck.dev/wp-content/uploads/2019/12/github_sponsor.png
 [github-sponsors]: https://github.com/sponsors/frenck
 [hass-ssh]: https://home-assistant.io/addons/ssh/
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
-[ohmyzsh]: http://ohmy.sh/
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
+[ohmyzsh]: http://ohmyz.sh/
 [openssh]: https://www.openssh.com/
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v22.0.3-blue.svg
-[release]: https://github.com/hassio-addons/addon-ssh/tree/v22.0.3
-[screenshot]: https://github.com/hassio-addons/addon-ssh/raw/main/images/screenshot.png
+[release-shield]: https://img.shields.io/badge/version-v23.0.3-blue.svg
+[release]: https://github.com/hassio-addons/app-ssh/tree/v23.0.3
+[screenshot]: https://github.com/hassio-addons/app-ssh/raw/main/images/screenshot.png
 [zsh]: https://en.wikipedia.org/wiki/Z_shell
+---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
 
+---
 
 ## 📱 关注我
 

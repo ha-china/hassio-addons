@@ -1,27 +1,31 @@
 #!/usr/bin/env python3
 import asyncio
-import os
 import faulthandler
-from typing import Optional
+import os
 import sys
+from typing import Optional, Any
 
 import yaml
+
 import account
 import call
+import config
 import ha
 import incoming_call
+import mqtt
 import options_global
 import options_sip
 import sip
 import state
 import utils
-import mqtt
 from command_client import CommandClient
 from command_handler import CommandHandler
 from event_sender import EventSender
 from ha import TtsConfigFromEnv
 from log import log
-import config
+from sensor import SensorConfig, SensorUpdater
+from sensor_event_handler import SensorEventHandler
+
 
 def handle_command_list(command_client: CommandClient, command_handler: CommandHandler) -> None:
     command_list = command_client.get_command_list()
@@ -36,10 +40,10 @@ def load_menu_from_file(file_name: Optional[str], sip_account_index: int) -> Opt
     try:
         with open(file_name) as stream:
             content = yaml.safe_load(stream)
-            log(sip_account_index, 'Loaded menu for incoming call from "%s".' % file_name)
+            log(sip_account_index, f'Loaded menu for incoming call from "{file_name}".')
             return content
     except BaseException as e:
-        log(sip_account_index, 'Error loading menu for incoming call: %s' % e)
+        log(sip_account_index, f'Error loading menu for incoming call: {e}')
         return None
 
 
@@ -47,7 +51,7 @@ def get_name_server(raw_name_server: str):
     name_server = [ns.strip() for ns in raw_name_server.split(",")]
     name_server_without_empty = [ns for ns in name_server if ns]
     if name_server_without_empty:
-        log(None, 'Setting name server: %s' % name_server)
+        log(None, f'Setting name server: {name_server}')
     return name_server_without_empty
 
 
@@ -58,7 +62,7 @@ def get_cache_dir(raw_cache_dir: str) -> Optional[str]:
     if not os.path.isdir(raw_cache_dir):
         log(None, 'Error: Cache directory not found.')
         return None
-    log(None, "Found cache directory '%s'" % raw_cache_dir)
+    log(None, f"Found cache directory '{raw_cache_dir}'")
     return raw_cache_dir
 
 
@@ -133,19 +137,44 @@ def main():
     event_sender = EventSender()
     command_client = CommandClient()
     command_handler = CommandHandler(end_point, sip_accounts, call_state, ha_config, event_sender)
+
+    sensor_entity_prefix = config.SENSOR_ENTITY_PREFIX
+    if not sensor_entity_prefix:
+        sensor_entity_prefix = 'ha_sip'
+    sensor_config = SensorConfig(
+        enabled=config.SENSOR_ENABLED.lower() == 'true',
+        entity_prefix=sensor_entity_prefix,
+    )
+    enabled_account_indices = [key for key, acc in account_configs.items() if acc.enabled]
+    sensor_updater = SensorUpdater(ha_config, sensor_config, enabled_account_indices)
+    def on_reg_state_callback(account_index: int, code: int, reason: str) -> None:
+        sensor_updater.update_registration_status(account_index, code, reason)
+
     for key, account_config in account_configs.items():
         if account_config.enabled:
-            sip_accounts[key] = account.create_account(end_point, account_config, command_handler, event_sender, ha_config, is_first_enabled_account)
+            sip_accounts[key] = account.create_account(
+                end_point,
+                account_config,
+                command_handler,
+                event_sender,
+                ha_config,
+                on_reg_state_callback,
+                is_first_enabled_account,
+            )
             is_first_enabled_account = False
+
     mqtt_mode = config.COMMAND_SOURCE.lower().strip() == 'mqtt'
     mqtt_client = mqtt.create_client_and_connect(command_handler) if mqtt_mode else None
-    def trigger_webhook(event: ha.WebhookEvent, webhook_id: Optional[str] = None):
+    def trigger_webhook(event: Any, webhook_id: Optional[str] = None):
         ha.trigger_webhook(ha_config, event, webhook_id)
-    def send_mqtt_event(event: ha.WebhookEvent, webhook_id: Optional[str] = None):
+    def send_mqtt_event(event: Any, webhook_id: Optional[str] = None):
         if mqtt_client:
             mqtt_client.send_event(event)
     event_sender.register_sender(trigger_webhook)
     event_sender.register_sender(send_mqtt_event)
+    sensor_event_handler = SensorEventHandler(sensor_updater)
+    event_sender.register_sender(sensor_event_handler.handle_event)
+    sensor_updater.initialize_sensors()
     while True:
         if mqtt_client:
             mqtt_client.handle()

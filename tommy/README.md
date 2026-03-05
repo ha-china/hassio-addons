@@ -1,20 +1,23 @@
-# TOMMY (Home Assistant Add-on)
+# TOMMY (Home Assistant 插件)
 
-This is the Home Assistant add-on for TOMMY, a Wi-Fi motion detection system that turns ESP32 devices into motion sensors capable of detecting movement through walls and obstacles.
+这是 Home Assistant 的 TOMMY 插件，TOMMY 是一个 Wi-Fi 传感系统，可以将 ESP32 设备转换为能够通过墙壁和障碍物检测运动的动作和存在感传感器。
 
-The add-on integrates TOMMY directly into your Home Assistant instance, allowing you to create motion zones for use with your existing automations. All processing happens locally on your network.
+该插件将 TOMMY 直接集成到您的 Home Assistant 实例中，允许您为现有自动化创建动作区域。所有处理都在您的网络上本地进行。
 
-**Get started:** [Installation Guide](https://www.tommysense.com/docs/installation/homeassistant)  
-**Learn more:** [Full Documentation](https://www.tommysense.com/docs)
+**开始使用：** [安装指南](https://www.tommysense.com/docs/installation/homeassistant)  
+**了解更多：** [完整文档](https://www.tommysense.com/docs)
 
-![Supports aarch64 Architecture][aarch64-shield]
-![Supports amd64 Architecture][amd64-shield]
+![支持 aarch64 架构][aarch64-shield]
+![支持 amd64 架构][amd64-shield]
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

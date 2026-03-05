@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：Collabora Online 办公套件'
+description: '[老王杂谈说]：Collabora 在线办公套件'
 environment:
   PGID: "0"
   PUID: "0"
@@ -43,5 +43,5 @@ schema:
   username: str
 slug: collabora
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "25.4.7"
+version: "25.4.9"
 webui: "[PROTO:ssl]://[HOST]:[PORT:9980]/browser/dist/admin/admin.html"

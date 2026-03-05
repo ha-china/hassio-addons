@@ -1,34 +1,57 @@
-# 家庭助手插件：CyberChef
+# Home assistant add-on: CyberChef
 
-CyberChef 是一个简单、直观的网页应用程序，用于在网络浏览器中执行各种“网络”操作。这些操作包括简单的编码，如 XOR 和 Base64，复杂的加密，如 AES、DES 和 Blowfish，创建二进制和十六进制转储，数据的压缩和解压缩，计算哈希和校验和，IPv6 和 X.509 解析，改变字符编码等。
+CyberChef is a simple, intuitive web app for carrying out all manner of "cyber" operations within a web browser. These operations include simple encoding like XOR and Base64, more complex encryption like AES, DES and Blowfish, creating binary and hexdumps, compression and decompression of data, calculating hashes and checksums, IPv6 and X.509 parsing, changing character encodings, and much more.
 
-该工具旨在使技术和非技术分析师能够以复杂的方式操作数据，而无需处理复杂的工具或算法。它是在分析师的 10% 创新时间中构思、设计、构建并逐步改进的，历时多年。
+The tool is designed to enable both technical and non-technical analysts to manipulate data in complex ways without having to deal with complex tools or algorithms. It was conceived, designed, built and incrementally improved by an analyst in their 10% innovation time over several years.
 
-_感谢所有为我的仓库标星的人！要标星，请点击下面的图片，接着它会出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## 关于
+## About
 
-这个插件基于 [docker 镜像](https://github.com/gchq/CyberChef)。
+This addon is based on the [docker image](https://github.com/gchq/CyberChef).
 
-## 安装
+## Installation
 
-这个插件的安装非常简单，与安装其他任何 Hass.io 插件没有不同。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. [将我的 Hass.io 插件库][repository] 添加到您的 Hass.io 实例。
-1. 安装此插件。
-1. 点击 `保存` 按钮以存储您的配置。
-1. 启动插件。
-1. 检查插件的日志，以查看一切是否正常。
-1. 打开 WebUI 应该可以通过 ingress 或 <your-ip>:port 访问。
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open WebUI should work via ingress or <your-ip>:port.
 
-## 配置
+## Configuration
 
 ```
-port : 80 #您想要运行的端口。
+port : 80 #port you want to run on.
 ```
 
-Webui 可以在 `<your-ip>:port` 找到。
+Webui can be found at `<your-ip>:port`.
 
 [repository]: https://github.com/jdeath/homeassistant-addons
+
+---
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

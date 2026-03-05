@@ -2,7 +2,7 @@ arch:
   - aarch64
   - amd64
 audio: true
-description: '[老王杂谈说]：BirdNET 实时声景分析器'
+description: '[老王杂谈说]：null'
 devices:
   - /dev/dri
   - /dev/snd
@@ -118,4 +118,4 @@ slug: birdnet-go
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/birdnet-go
 usb: true
-version: "nightly-20260118"
+version: "nightly-20260118-2"

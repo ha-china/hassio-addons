@@ -294,6 +294,27 @@ declare -A rf_region_integer_map=(
     ["Default (EU)"]=255
 )
 
+# Migrate any keys in the legacy format (e.g. "0x00, 0x01, 0x02, ...") to the new format ("000102...")
+for config_key in "network_key" "s0_legacy_key" "s2_access_control_key" "s2_authenticated_key" "s2_unauthenticated_key" "lr_s2_access_control_key" "lr_s2_authenticated_key"; do
+    key=$(bashio::config "${config_key}")
+    if [[ "${key}" =~ ^0x[0-9A-Fa-f]{2}(,\ ?0x[0-9A-Fa-f]{2}){15}$ ]]; then
+        bashio::log.info "Migrating ${config_key} from legacy format to new format..."
+        key="${key//0x/}"
+        key="${key//[, ]/}"
+        key=$(bashio::string.upper "${key}")
+        bashio::addon.option "${config_key}" "${key}"
+        flush_to_disk=1
+    fi
+done
+
+# Flush any migrated keys immediately so that bashio::config below reads the
+# migrated values rather than stale on-disk legacy values.
+if [[ ${flush_to_disk:+x} ]]; then
+    bashio::log.info "Flushing config to disk due to legacy key migration..."
+    bashio::addon.options >"/data/options.json"
+    flush_to_disk=
+fi
+
 if bashio::config.has_value 'network_key'; then
     # If both 'network_key' and 's0_legacy_key' are set and keys don't match,
     # we don't know which one to pick so we have to exit. If they are both set
@@ -306,7 +327,7 @@ if bashio::config.has_value 'network_key'; then
         else
             bashio::log.fatal "Both 'network_key' and 's0_legacy_key' are set to different values "
             bashio::log.fatal "so we are unsure which one to use. One needs to be removed from the "
-            bashio::log.fatal "configuration in order to start the addon."
+            bashio::log.fatal "configuration in order to start the app."
             bashio::exit.nok
         fi
     # If we get here, 'network_key' is set and 's0_legacy_key' is not set so we need
@@ -326,18 +347,18 @@ for key in "s0_legacy_key" "s2_access_control_key" "s2_authenticated_key" "s2_un
     network_key_upper=$(bashio::string.upper "${network_key}")
     if [ "${network_key_upper}" == "${DOCS_EXAMPLE_KEY_1}" ] || [ "${network_key_upper}" == "${DOCS_EXAMPLE_KEY_2}" ] || [ "${network_key_upper}" == "${DOCS_EXAMPLE_KEY_3}" ] || [ "${network_key_upper}" == "${DOCS_EXAMPLE_KEY_4}" ] || [ "${network_key_upper}" == "${DOCS_EXAMPLE_KEY_5}" ] || [ "${network_key_upper}" == "${DOCS_EXAMPLE_KEY_6}" ]; then
         bashio::log.fatal
-        bashio::log.fatal "The add-on detected that the Z-Wave network key used"
+        bashio::log.fatal "The app detected that the Z-Wave network key used"
         bashio::log.fatal "is from the documented example."
         bashio::log.fatal
         bashio::log.fatal "Using this key is insecure, because it is publicly"
         bashio::log.fatal "listed in the documentation."
         bashio::log.fatal
-        bashio::log.fatal "Please check the add-on documentation on how to"
+        bashio::log.fatal "Please check the app documentation on how to"
         bashio::log.fatal "create your own, secret, \"${key}\" and replace"
         bashio::log.fatal "the one you have configured."
         bashio::log.fatal
         bashio::log.fatal "Click on the \"Documentation\" tab in the Z-Wave JS"
-        bashio::log.fatal "add-on panel for more information."
+        bashio::log.fatal "app panel for more information."
         bashio::log.fatal
         bashio::exit.nok
     elif ! bashio::var.has_value "${network_key}"; then
@@ -355,10 +376,10 @@ for key in "s0_legacy_key" "s2_access_control_key" "s2_authenticated_key" "s2_un
     fi
 done
 
-# If flush_to_disk is set, it means we have generated new key(s) and they need to get
-# flushed to disk
+# If flush_to_disk is set, it means we have generated new key(s) or migrated old ones
+# and they need to get flushed to disk
 if [[ ${flush_to_disk:+x} ]]; then
-    bashio::log.info "Flushing config to disk due to creation of new key(s)..."
+    bashio::log.info "Flushing config to disk due to creation or migration of network key(s)..."
     bashio::addon.options >"/data/options.json"
 fi
 
@@ -387,10 +408,10 @@ fi
 rf_region_integer=${rf_region_integer_map["${rf_region}"]}
 
 if [[ "${rf_region_integer}" -eq 255 ]]; then
-    rf_json=$(jq -n '{txPower: {powerlevel: "auto"}, maxLongRangePowerlevel: "auto"}')
+    rf_json=$(jq -n '{autoPowerlevels: true}')
     bashio::log.info "Using default RF region settings"
 else
-    rf_json=$(jq -n --argjson region "${rf_region_integer}" '{region: $region, txPower: {powerlevel: "auto"}, maxLongRangePowerlevel: "auto"}')
+    rf_json=$(jq -n --argjson region "${rf_region_integer}" '{region: $region, autoPowerlevels: true}')
     bashio::log.info "Setting RF region to (${rf_region})"
 fi
 
@@ -425,7 +446,7 @@ fi
 
 if bashio::config.true 'disable_controller_recovery'; then
     bashio::log.info "Automatic controller recovery disabled"
-    bashio::log.warning "WARNING: If your controller becomes unresponsive, commands may start to fail and nodes may start to get marked as dead until the controller is able to recover on its own. If it doesn't recover on its own, you will need to restart the add-on manually to try to recover yourself."
+    bashio::log.warning "WARNING: If your controller becomes unresponsive, commands may start to fail and nodes may start to get marked as dead until the controller is able to recover on its own. If it doesn't recover on its own, you will need to restart the app manually to try to recover yourself."
     # Add NO_CONTROLLER_RECOVERY to presets array
     presets_array+=("NO_CONTROLLER_RECOVERY")
 fi
@@ -463,3 +484,23 @@ bashio::var.json \
     tempio \
         -template /usr/share/tempio/zwave_config.conf \
         -out /etc/zwave_config.json
+
+# Create default settings.json in addon config directory if it doesn't exist
+if ! bashio::fs.file_exists "/config/settings.json"; then
+    bashio::log.info "Creating default settings.json..."
+    # Disable MQTT by default
+    mqtt=$(bashio::var.json \
+        disabled "^true" \
+        )
+    # Disable Z-Wave JS UI logs by default
+    gateway=$(bashio::var.json \
+        logEnabled "^false" \
+        logLevel info \
+        logToFile "^false" \
+        )
+
+    bashio::var.json \
+        gateway "^${gateway}" \
+        mqtt "^${mqtt}" \
+        > /config/settings.json
+fi

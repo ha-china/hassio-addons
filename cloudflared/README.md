@@ -1,24 +1,24 @@
-# Home Assistant App (插件): Cloudflared
+# Home Assistant 应用（附加组件）：Cloudflared
 
-[![GitHub 发布][releases-shield]][releases]
+[![GitHub 发布版][releases-shield]][releases]
 ![项目阶段][project-stage-shield]
 ![项目维护][maintenance-shield]
-![已报告的安装][installations-shield-stable]
+![报告安装数][installations-shield-stable]
 
-使用 Cloudflared 无需打开任何端口，即可远程连接到您的 Home Assistant 实例。
+使用 Cloudflared 远程连接您的 Home Assistant 实例，而无需打开任何端口。
 
 ## 关于
 
-Cloudflared 通过安全的隧道连接您的 Home Assistant 实例到 Cloudflare 的域名或子域名。这样做，您可以在不打开路由器端口的情况下将 Home Assistant 暴露给互联网。此外，您还可以利用 Cloudflare Teams 及其零信任平台来进一步保护您的 Home Assistant 连接。
+Cloudflared 通过安全的隧道将您的 Home Assistant 实例连接到 Cloudflare 的域名或子域名。这样，您就可以在不打开路由器端口的情况下，将 Home Assistant 暴露在互联网上。此外，您还可以利用 Cloudflare Teams（他们的零信任平台）来进一步保护您的 Home Assistant 连接。
 
-**要使用此应用（插件），您必须拥有一个使用 Cloudflare 进行其 DNS 条目的域名（例如 example.com）。您可以在我们的 [Wiki][wiki] 中找到更多相关信息**。
+**要使用此应用（附加组件），您必须拥有一个使用 Cloudflare 管理 DNS 记录的域名（例如 example.com）。您可以在我们的 [操作指南][wiki] 中找到更多相关信息。**
 
 ## 免责声明
 
-在使用此应用（插件）时，请确保遵守 [Cloudflare 自服务订阅协议][cloudflare-sssa]。
+使用此应用（附加组件）时，请确保您符合 [Cloudflare 自助订阅协议][cloudflare-sssa]。
 
 [cloudflare-sssa]: https://www.cloudflare.com/terms/
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
 [releases-shield]: https://img.shields.io/github/v/release/homeassistant-apps/app-cloudflared?include_prereleases
 [releases]: https://github.com/homeassistant-apps/app-cloudflared/releases

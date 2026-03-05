@@ -1,9 +1,9 @@
 # Home assistant add-on: Zoneminder
 
 
-我利用业余时间维护这个以及其他 Home Assistant add-ons：跟上上游变化、HA 变化，并在真实硬件上测试需要大量时间（和一些金钱）。我大约使用我 >110 个 add-ons 中的 5-10 个，因此我安装了一些我本人不使用的测试机器（并购买了一些测试服务，如 vpn），以调试和改进这些 add-ons。
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-如果这个 add-on 为您节省了时间或简化了您的设置，我将非常感谢您的支持！
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -21,7 +21,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我仓库点赞的人！点击下面的图片即可点赞，然后它将出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -29,29 +29,29 @@ _感谢所有给我仓库点赞的人！点击下面的图片即可点赞，然�
 
 ## About
 
-["Zoneminder"](https://zoneminder.com/) 是一个功能齐全、开源的、最先进的视频监控软件系统。
+["Zoneminder"](https://zoneminder.com/) is a full-featured, open source, state-of-the-art video surveillance software system.
 
-这个 add-on 基于以下 Docker 镜像：https://github.com/ZoneMinder/zmdockerfiles/blob/master/utils/entrypoint.sh
+This addon is based on the docker image https://github.com/ZoneMinder/zmdockerfiles/blob/master/utils/entrypoint.sh
 
 ## Configuration
 
-使用 add-on 的 `env_vars` 选项传递额外的环境变量（大小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-Webui 可以在 <http://homeassistant:3778/zm> 找到。
+Webui can be found at <http://homeassistant:3778/zm>.
 
 ### Setup Steps
 
-1. 启动 add-on 后访问 Web 界面
-2. 通过 Web 界面配置相机
-3. 设置运动检测区域和警报
-4. 配置录制存储位置
-5. 需要 MariaDB add-on 进行数据库存储
+1. Access the web interface after starting the addon
+2. Configure cameras through the web interface
+3. Set up motion detection zones and alerts
+4. Configure storage locations for recordings
+5. Requires MariaDB addon for database storage
 
 ### Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `Images_location` | str | `/config/addons_config/zoneminder/images` | 存储相机图像的路径 |
+| `Images_location` | str | `/config/addons_config/zoneminder/images` | Path for storing camera images |
 
 ### Example Configuration
 
@@ -61,31 +61,31 @@ Images_location: "/share/zoneminder/images"
 
 ### Database Requirements
 
-ZoneMinder 需要一个 MySQL/MariaDB 数据库。安装 MariaDB add-on 并配置 Zoneminder 使用它。
+ZoneMinder requires a MySQL/MariaDB database. Install the MariaDB addon and configure Zoneminder to use it.
 
 ### Storage Paths
 
-- Images: 通过 `Images_location` 选项配置
+- Images: Configured via `Images_location` option
 - Events: `/var/cache/zoneminder/events2`
 - Sounds: `/var/cache/zoneminder/sounds2`
 - Config: `/config/addons_config/zoneminder`
 
 ### Additional Resources
 
-有关详细配置：https://github.com/ZoneMinder/zmdockerfiles/blob/master/utils/entrypoint.sh
+For detailed configuration: https://github.com/ZoneMinder/zmdockerfiles/blob/master/utils/entrypoint.sh
 
 ## Installation
 
-这个 add-on 的安装过程非常简单，与其他 add-on 的安装方式没有区别。
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
 
-1. 将我的 add-ons 仓库添加到您的 Home Assistant 实例中（在 supervisor add-ons 存储库的右上角，或者如果您已经配置了我的 HA，请点击下面的按钮）
-   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加 add-on 仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装这个 add-on。
-1. 点击 `Save` 按钮保存您的配置。
-1. 根据您的偏好设置 add-on 选项。
-1. 启动 add-on。
-1. 检查 add-on 的日志，查看是否一切正常。
-1. 打开 WebUI 并调整软件选项
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Set the add-on options to your preferences
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open the webUI and adapt the software options
 
 ## Integration in home assistant
 
@@ -93,13 +93,16 @@ https://www.home-assistant.io/integrations/zoneminder/
 
 ## Support
 
-在 github 上创建问题
+Create an issue on github
 
 ## Illustration
 
 ![viewmonitor-stream](https://user-images.githubusercontent.com/44178713/157933856-33ed3d44-6b91-4ce2-8a9b-daf9b618176c.png)
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+
+
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

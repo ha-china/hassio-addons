@@ -1,7 +1,7 @@
 name: OWASP Juice Shop
-version: 1.2.2
+version: 1.2.3
 slug: juice-shop
-description: '[老王杂谈说]：最值得信赖的在线商店。'
+description: '[老王杂谈说]：最值得信赖的网上商店'
 url: https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/juice-shop
 arch:
   - amd64

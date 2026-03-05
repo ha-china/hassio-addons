@@ -1,21 +1,24 @@
-# Home Assistant 插件：OpenThread 边界路由器插件
+# Home Assistant App：OpenThread 边界路由器 App
 
-OpenThread 边界路由器插件。该插件使用上游的 OpenThread 边界路由器实现，并将其封装为 Home Assistant 的插件。
+OpenThread 边界路由器应用（之前称为插件）。该应用使用了上游的 OpenThread 边界路由器实现，并将其包装成适用于 Home Assistant 的应用。
 
-**注意：** 这需要一个支持 802.15.4 并带有 OpenThread RCP 固件的无线电设备。如果你正在使用 [Home Assistant Yellow](https://www.home-assistant.io/yellow/) 或 [Home Assistant Connect ZBT-1](https://www.home-assistant.io/connectzbt1/)（以前称为 SkyConnect），则正确的固件将自动安装。
+**注意：** 这需要一款支持 802.15.4 的具有 OpenThread RCP 固件的无线电。如果您使用的是 [Home Assistant 黄色版](https://www.home-assistant.io/yellow/) 或 [Home Assistant Connect ZBT-1](https://www.home-assistant.io/connectzbt1/)（之前称为 SkyConnect），则正确的固件会自动安装。
 
 ![支持 aarch64 架构][aarch64-shield]
 ![支持 amd64 架构][amd64-shield]
 
 ## 关于
 
-该插件允许你形成或加入一个 Thread 网络，并将 Home Assistant 设为一个 Thread 边界路由器。
+此应用允许您创建或加入一个 Thread 网络，并将 Home Assistant 设置为一个 Thread 边界路由器。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

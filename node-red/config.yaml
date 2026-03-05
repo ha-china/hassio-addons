@@ -1,8 +1,8 @@
 name: Node-RED
-version: 20.2.4
+version: 21.0.3
 slug: nodered
-description: '[老王杂谈说]：基于流的物联网编程'
-url: https://ghfast.top/github.com/hassio-addons/addon-node-red
+description: '[老王杂谈说]：基于流的编程用于物联网'
+url: https://ghfast.top/github.com/hassio-addons/app-node-red
 ingress: true
 ingress_port: 0
 ingress_stream: true
@@ -66,4 +66,4 @@ schema:
   leave_front_door_open: bool?
   safe_mode: bool?
   max_old_space_size: int?
-image: ghcr.nju.edu.cn/hassio-addons/node-red/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/node-red

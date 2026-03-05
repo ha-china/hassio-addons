@@ -1,8 +1,23 @@
 # Changelog
 
+## 2.3.0 (2026-01-29)
+
+### 📦 Dependencies
+
+- fix addon startups after base image update 20.0.0 (#617) [skip-tests] ([`04c90f6d`](https://github.com/FaserF/hassio-addons/commit/04c90f6d2ea1a75af00b8f6d80ed170271f144d1))
+
+### 📝 Documentation
+
+- Readme improvements ([`8a12ebd4`](https://github.com/FaserF/hassio-addons/commit/8a12ebd40149adb39f056b7dc3e10f1dd02853cb))
+
+### 🚀 Other
+
+- fix log level var ([`7f85096a`](https://github.com/FaserF/hassio-addons/commit/7f85096a73b11ea48fa87150def32425ea1e4807))
+
 ## 2.2.1 (2026-01-14)
 
 ### 🚀 Other
+
 - fixed logo in Homeassistant Addon UI ([`f053f7b0`](https://github.com/FaserF/hassio-addons/commit/f053f7b0b0c43df32e122ba054ba6118379ab959))
 - small fixes & improvements ([`ce7a62e4`](https://github.com/FaserF/hassio-addons/commit/ce7a62e43eb50c87458588df6581b8ed3a741c9d))
 - handle empty log level variable ([`568bbe5b`](https://github.com/FaserF/hassio-addons/commit/568bbe5bce289563264d87f55e8da35b9d508041))
@@ -10,7 +25,6 @@
 - small fixes ([`fdea4f47`](https://github.com/FaserF/hassio-addons/commit/fdea4f47070299d2847baa237b82c2a876125ec7))
 - small fixes ([`eee371bd`](https://github.com/FaserF/hassio-addons/commit/eee371bd2cdd4bdd588b7bdb88b88da8440bd50b))
 - small improvements ([`71225476`](https://github.com/FaserF/hassio-addons/commit/712254766409609febf6ab80d451bc580216d990))
-
 
 ## 2.2.0 (2026-01-11)
 

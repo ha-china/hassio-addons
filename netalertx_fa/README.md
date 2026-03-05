@@ -1,9 +1,9 @@
 # Home assistant add-on: NetAlertX Full Access
 
 
-我利用业余时间维护这个和其他Home Assistant add-on：跟进上游变化、HA变化，并在真实硬件上测试需要大量时间（和一些钱）。我大约使用5-10个我的>110个add-on，所以我会安装一些我不用来测试机器（和一些测试服务如vpn）来调试和改进这些add-on。
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-如果这个add-on节省了你的时间或使你的设置更简单，我将非常感谢你的支持！
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -21,7 +21,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我仓库点赞的人！点击下面的图片点赞，它将在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -29,28 +29,28 @@ _感谢所有给我仓库点赞的人！点击下面的图片点赞，它将在�
 
 ## About
 
-[NetAlertX](https://github.com/jokob-sk/NetAlertX) 是一个WIFI / LAN扫描器、入侵者和存在检测器，它可以帮助你监控你的网络以发现新设备和潜在的安全威胁。
+[NetAlertX](https://github.com/jokob-sk/NetAlertX) is a WIFI / LAN scanner, intruder, and presence detector that helps you monitor your network for new devices and potential security threats.
 
-**这是全访问版本**，与标准NetAlertX add-on相比，它提供了额外的权限和网络访问功能。
+**This is the Full Access version** that provides additional privileges and network access capabilities compared to the standard NetAlertX addon.
 
-主要功能：
-- 网络设备发现和监控
-- 已知设备的存在检测
-- 未知设备的入侵检测
-- 基于网络的仪表板，用于网络可视化
-- 与Home Assistant的MQTT集成
-- 增强权限的网络扫描
+Key features:
+- Network device discovery and monitoring
+- Presence detection for known devices
+- Intrusion detection for unknown devices
+- Web-based dashboard for network visualization
+- MQTT integration for Home Assistant
+- Network scanning with enhanced privileges
 
 ## Configuration
 
-Webui可以在`<your-ip>:20211`或通过Ingress在侧边栏中找到。
+Webui can be found at `<your-ip>:20211` or through the sidebar using Ingress.
 
 ### Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `TZ` | str | `Europe/Berlin` | 时区（例如，`Europe/London`） |
-| `APP_CONF_OVERRIDE` | str | | 额外的应用程序配置覆盖 |
+| `TZ` | str | `Europe/Berlin` | Timezone (e.g., `Europe/London`) |
+| `APP_CONF_OVERRIDE` | str | | Additional app configuration overrides |
 
 ### Example Configuration
 
@@ -61,41 +61,44 @@ APP_CONF_OVERRIDE: "SCAN_SUBNETS=['192.168.1.0/24']"
 
 ### MQTT Integration
 
-这个add-on支持MQTT集成，如果可用，它将自动连接到你的Home Assistant MQTT代理。NetAlertX可以发布设备存在信息到MQTT主题，以与Home Assistant自动化集成。
+This addon supports MQTT integration and will automatically connect to your Home Assistant MQTT broker if available. NetAlertX can publish device presence information to MQTT topics for integration with Home Assistant automations.
 
 ### Custom Scripts and Environment Variables
 
-这个add-on通过`addon_config`映射支持自定义脚本和环境变量：
+This addon supports custom scripts and environment variables through the `addon_config` mapping:
 
-- **Custom scripts**：参见[在Addons中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars选项**：使用add-on的`env_vars`选项传递额外的环境变量（大写或小写名称）。参见https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2了解详情。
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
 ## Installation
 
-这个add-on的安装非常简单，与安装任何其他Hass.io add-on没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. [将我的Hass.io add-ons仓库][repository]添加到你的Hass.io实例。
-1. 安装这个add-on。
-1. 点击`Save`按钮以保存你的配置。
-1. 启动add-on。
-1. 检查add-on的日志以查看是否一切顺利。
-1. 打开WebUI以配置你的网络扫描偏好设置。
+1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open the webUI to configure your network scanning preferences.
 
 ## Full Access vs Standard Version
 
-这个**全访问版本**提供：
-- `full_access: true` - 完整的系统访问
-- `host_network: true` - 直接主机网络访问
-- 增强权限 (`SYS_ADMIN`, `NET_ADMIN`, `NET_RAW`)
-- `udev: true` - 硬件设备访问
+This **Full Access** version provides:
+- `full_access: true` - Complete system access
+- `host_network: true` - Direct host network access
+- Enhanced privileges (`SYS_ADMIN`, `NET_ADMIN`, `NET_RAW`)
+- `udev: true` - Hardware device access
 
-如果你需要增强的网络扫描功能，或者标准的NetAlertX add-on无法为你的设置提供足够的网络访问，请使用此版本。
+Use this version if you need enhanced network scanning capabilities or if the standard NetAlertX addon doesn't provide sufficient network access for your setup.
 
 ## Support
 
-在github上创建问题，或在[home assistant社区论坛](https://community.home-assistant.io/)上提问
+Create an issue on github, or ask on the [home assistant community forum](https://community.home-assistant.io/)
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

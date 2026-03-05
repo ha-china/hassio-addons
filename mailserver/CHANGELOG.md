@@ -1,30 +1,24 @@
 ## What’s changed
 
- - Re-release of the 6.x version of this add-on after fixing SSL/TLS errors connecting to the MariaDB database.
- - Update Alpine Linux to 3.23.2
-
-## 🚨 Breaking changes
-
-- Remove deprecated architectures @erik73 ([#427](https://github.com/erik73/addon-mail/pull/427))
-
 ## 🐛 Bug fixes
 
-- Fix ssl errors in postfix @erik73 ([#440](https://github.com/erik73/addon-mail/pull/440))
+- Add service type @erik73 ([#455](https://github.com/erik73/app-mail/pull/455))
+
+## 🧰 Maintenance
+
+- Update to new CI @erik73 ([#444](https://github.com/erik73/app-mail/pull/444))
+- Rename Add-on to App @erik73 ([#446](https://github.com/erik73/app-mail/pull/446))
+- Year 2026 and use app insted of addon @erik73 ([#447](https://github.com/erik73/app-mail/pull/447))
+- Migrate s6 overlay to new layout @erik73 ([#454](https://github.com/erik73/app-mail/pull/454))
 
 ## ⬆️ Dependency updates
 
-- ⬆️ Update PHP to v8.4.14-r0 @[renovate[bot]](https://github.com/apps/renovate) (https://github.com/erik73/addon-mail/pull/417)
-- ⬆️ Update Postfix to v3.10.5-r0 @[renovate[bot]](https://github.com/apps/renovate) (https://github.com/erik73/addon-mail/pull/419)
-- ⬆️ Update Postfix to v3.10.6-r0 @[renovate[bot]](https://github.com/apps/renovate) (https://github.com/erik73/addon-mail/pull/420)
-- ⬆️ Update Postfix to v3.10.7-r0 @[renovate[bot]](https://github.com/apps/renovate) (https://github.com/erik73/addon-mail/pull/425)
-- ⬆️ Update ghcr.io/erik73/base Docker tag to v6 @[renovate[bot]](https://github.com/apps/renovate) (https://github.com/erik73/addon-mail/pull/428)
-- ⬆️ Update alpine_3_23/mariadb-client to v11.4.9-r0 @[renovate[bot]](https://github.com/apps/renovate) (https://github.com/erik73/addon-mail/pull/421)
-- ⬆️ Update alpine_3_23/nginx to v1.28.0-r8 @[renovate[bot]](https://github.com/apps/renovate) (https://github.com/erik73/addon-mail/pull/422)
-- ⬆️ Update Dovecot to v2.4.2-r1 @[renovate[bot]](https://github.com/apps/renovate) (https://github.com/erik73/addon-mail/pull/423)
-- ⬆️ Update PHP to v8.4.15-r0 @[renovate[bot]](https://github.com/apps/renovate) (https://github.com/erik73/addon-mail/pull/424)
-- ⬆️ Update alpine_3_23/rspamd-client to v3.14.0-r0 @[renovate[bot]](https://github.com/apps/renovate) (https://github.com/erik73/addon-mail/pull/426)
-- ⬆️ Update ghcr.io/erik73/base Docker tag to v6 @[renovate[bot]](https://github.com/apps/renovate) (https://github.com/erik73/addon-mail/pull/429)
-- ⬆️ Update PHP to v8.4.14-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#433](https://github.com/erik73/addon-mail/pull/433))
-- ⬆️ Update Postfix to v3.10.7-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#434](https://github.com/erik73/addon-mail/pull/434))
-- ⬆️ Update ghcr.io/erik73/base Docker tag to v6.0.1 @[renovate[bot]](https://github.com/apps/renovate) ([#437](https://github.com/erik73/addon-mail/pull/437))
-- ⬆️ Update PHP to v8.4.16-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#438](https://github.com/erik73/addon-mail/pull/438))
+- ⬆️ Update PHP to v8.4.17-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#441](https://github.com/erik73/app-mail/pull/441))
+- ⬆️ Update just-containers/s6-overlay to v3.2.2.0 @[renovate[bot]](https://github.com/apps/renovate) ([#442](https://github.com/erik73/app-mail/pull/442))
+- ⬆️ Update ghcr.io/erik73/base Docker tag to v6.0.2 @[renovate[bot]](https://github.com/apps/renovate) ([#445](https://github.com/erik73/app-mail/pull/445))
+- ⬆️ Update erik73/workflows action to v1.0.5 @[renovate[bot]](https://github.com/apps/renovate) ([#448](https://github.com/erik73/app-mail/pull/448))
+- ⬆️ Update ghcr.io/erik73/base Docker tag to v6.0.4 @[renovate[bot]](https://github.com/apps/renovate) ([#449](https://github.com/erik73/app-mail/pull/449))
+- ⬆️ Update alpine_3_23/nginx to v1.28.2-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#450](https://github.com/erik73/app-mail/pull/450))
+- ⬆️ Update ghcr.io/erik73/base Docker tag to v6.0.5 @[renovate[bot]](https://github.com/apps/renovate) ([#451](https://github.com/erik73/app-mail/pull/451))
+- ⬆️ Update ghcr.io/erik73/base Docker tag to v6.0.6 @[renovate[bot]](https://github.com/apps/renovate) ([#453](https://github.com/erik73/app-mail/pull/453))
+- ⬆️ Update erik73/workflows action to v1.0.6 @[renovate[bot]](https://github.com/apps/renovate) ([#452](https://github.com/erik73/app-mail/pull/452))

@@ -1,8 +1,8 @@
 ARG BUILD_FROM
-FROM docker.1ms.run/rook1e404/fusion	
+FROM rook1e404/fusion	
 	
 COPY run.sh /
-RUN apt install -y jq
+RUN apk add -U --no-cache jq
 	
 RUN chmod a+x /run.sh
 CMD [ "/run.sh" ]

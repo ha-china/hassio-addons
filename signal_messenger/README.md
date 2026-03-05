@@ -1,28 +1,28 @@
 [![](logo.png)](https://www.signal.org/)
 
-# Signal Messenger
+# Signal 消息
 
-Signal-CLI Home Assistant add-on的REST-API
+Signal-CLI 的 Home Assistant 插件
 
-# 如何使用这个插件
+# 如何使用此插件
 
-安装插件，选择你想要的端口，启动。
+安装插件，选择你想要的端口，然后启动。
 
-启动插件后，请按照以下链接的指示操作，从“注册电话号码”开始：
+插件启动后，请遵循下方链接中的说明，从“注册手机号码”开始操作。
 
 https://github.com/bbernhard/signal-cli-rest-api/blob/master/doc/HOMEASSISTANT.md
 
-然后继续这里：
+然后在此处继续：
 
 https://www.home-assistant.io/integrations/signal_messenger/
 
-# API详细信息
+# API 详情
 
-如果你想要使用REST来在HA中接收消息，你可以在这里找到更多详细信息 [这里](https://bbernhard.github.io/signal-cli-rest-api/)
+如果你想通过 REST 等方式在 HA 中接收消息，可以在此处找到更多详情 [这里](https://bbernhard.github.io/signal-cli-rest-api/)
 
-强烈建议你使用机器IP地址，而不是上游容器文档中提到的回环地址来注册号码。在HAOS中，一切都是容器化的，回环地址仍然在各自的容器内部。
+强烈建议你使用机器 IP 地址，而不是上游容器文档中提到的回环地址来注册号码。在 HAOS 中，一切都是容器化的，回环地址仅保留在各自的容器内部。
 
-所有功劳都归功于 [@bbernhard](https://github.com/bbernhard)，我所做的一切只是采纳了他的 [工作](https://github.com/bbernhard/signal-cli-rest-api) 并制作了一个插件。
+所有功劳归功于 [@bbernhard](https://github.com/bbernhard)，我只是拿了他的 [作品](https://github.com/bbernhard/signal-cli-rest-api) 并将其制作成了一个插件。
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

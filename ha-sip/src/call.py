@@ -4,7 +4,7 @@ import os
 import re
 import time
 from enum import Enum
-from typing import Optional, Callable, Union, Any, List
+from typing import Dict, Optional, Callable, Union, Any, List
 
 import pjsua2 as pj
 import yaml
@@ -16,55 +16,23 @@ import audio_cache
 import ha
 import player
 import utils
+import webhook
 from call_state_change import CallStateChange
 from command_client import Command
 from command_handler import CommandHandler
 from constants import DEFAULT_RING_TIMEOUT, DEFAULT_DTMF_ON, DEFAULT_DTMF_OFF
 from log import log
 from event_sender import EventSender
+from post_action import PostAction, PostActionNoop, PostActionHangup, PostActionRepeatMessage, PostActionReturn, PostActionJump
 
 CallCallback = Callable[[CallStateChange, str, 'Call'], None]
 DtmfMethod = Union[Literal['in_band'], Literal['rfc2833'], Literal['sip_info']]
 
 
-class WebhookToCall(TypedDict):
-    call_established: Optional[str]
-    entered_menu: Optional[str]
-    dtmf_digit: Optional[str]
-    call_disconnected: Optional[str]
-    timeout: Optional[str]
-    ring_timeout: Optional[str]
-    playback_done: Optional[str]
-
-
-class PostActionReturn(TypedDict):
-    action: Literal['return']
-    level: int
-
-
-class PostActionJump(TypedDict):
-    action: Literal['jump']
-    menu_id: str
-
-
-class PostActionHangup(TypedDict):
-    action: Literal['hangup']
-
-
-class PostActionNoop(TypedDict):
-    action: Literal['noop']
-
-
-class PostActionRepeatMessage(TypedDict):
-    action: Literal['repeat_message']
-
-
-PostAction = Union[PostActionReturn, PostActionJump, PostActionHangup, PostActionNoop, PostActionRepeatMessage]
-
-
 class MenuFromStdin(TypedDict):
     id: Optional[str]
     message: Optional[str]
+    handle_as_template: Optional[bool]
     audio_file: Optional[str]
     language: Optional[str]
     action: Optional[Command]
@@ -79,6 +47,7 @@ class MenuFromStdin(TypedDict):
 class Menu(TypedDict):
     id: Optional[str]
     message: Optional[str]
+    handle_as_template: bool
     audio_file: Optional[str]
     language: str
     action: Optional[Command]
@@ -91,13 +60,6 @@ class Menu(TypedDict):
     parent_menu: Optional[Menu]
     cache_audio: bool
     wait_for_audio_to_finish: bool
-
-
-class CallInfo(TypedDict):
-    local_uri: str
-    remote_uri: str
-    parsed_caller: Optional[str]
-    call_id: str
 
 
 class CallHandling(Enum):
@@ -124,7 +86,8 @@ class Call(pj.Call):
         event_sender: EventSender,
         ha_config: ha.HaConfig,
         ring_timeout: float,
-        webhooks: Optional[WebhookToCall]
+        webhooks: Optional[webhook.WebhookToCall],
+        sip_headers: Optional[Dict[str, Optional[str]]] = None,
     ):
         pj.Call.__init__(self, sip_account, call_id)
         self.player: Optional[player.Player] = None
@@ -140,15 +103,7 @@ class Call(pj.Call):
         self.ha_config = ha_config
         self.ring_timeout = ring_timeout
         self.settle_time = sip_account.config.settle_time
-        self.webhooks: WebhookToCall = webhooks or WebhookToCall(
-            call_established=None,
-            entered_menu=None,
-            dtmf_digit=None,
-            call_disconnected=None,
-            timeout=None,
-            ring_timeout=None,
-            playback_done=None,
-        )
+        self.webhooks: Optional[webhook.WebhookToCall] = webhooks
         self.command_handler = command_handler
         self.event_sender = event_sender
         self.scheduled_post_action: Optional[PostAction] = None
@@ -158,27 +113,21 @@ class Call(pj.Call):
         self.call_settled_at: Optional[float] = None
         self.answer_at: Optional[float] = None
         self.tone_gen: Optional[pj.ToneGenerator] = None
-        self.call_info: Optional[CallInfo] = None
+        self.call_info: Optional[webhook.CallInfo] = None
         self.pressed_digit_list: List[str] = []
-        self.callback_id = self.get_callback_id()
         self.current_playback: Optional[ha.CurrentPlayback] = None
-        self.menu = self.normalize_menu(menu) if menu else self.get_standard_menu()
+        self.sip_headers: Dict[str, Optional[str]] = sip_headers if sip_headers is not None else {}
+        self.callback_id, other_ids = self.get_callback_ids()
+        self.menu = self.normalize_menu(menu) if menu else None
         self.menu_map = self.create_menu_map(self.menu)
         Call.pretty_print_menu(self.menu)
-        log(self.account.config.index, 'Registering call with id %s' % self.callback_id)
-        self.command_handler.on_state_change(CallStateChange.CALL, self.callback_id, self)
+        log(self.account.config.index, f'Registering call with id {self.callback_id}')
+        self.command_handler.register_call(self.callback_id, self, other_ids)
 
     def handle_events(self) -> None:
         if not self.connected and time.time() - self.last_seen > self.ring_timeout:
-            self.trigger_webhook({
-                'event': 'ring_timeout',
-                'caller': self.call_info['remote_uri'] if self.call_info else 'unknown',
-                'parsed_caller': self.call_info['parsed_caller'] if self.call_info else None,
-                'sip_account': self.account.config.index,
-                'call_id': self.call_info['call_id'] if self.call_info else None,
-                'internal_id': self.callback_id,
-            })
-            log(self.account.config.index, 'Ring timeout of %s triggered' % self.ring_timeout)
+            self.trigger_webhook({'event': 'ring_timeout'})
+            log(self.account.config.index, f'Ring timeout of {self.ring_timeout} triggered')
             self.hangup_call()
             return
         if not self.connected and self.answer_at and self.answer_at < time.time():
@@ -194,18 +143,12 @@ class Call(pj.Call):
             return
         if not self.connected:
             return
-        if time.time() - self.last_seen > self.menu['timeout']:
-            log(self.account.config.index, 'Timeout of %s triggered' % self.menu['timeout'])
-            self.handle_menu(self.menu['timeout_choice'])
-            self.trigger_webhook({
-                'event': 'timeout',
-                'caller': self.call_info['remote_uri'] if self.call_info else 'unknown',
-                'parsed_caller': self.call_info['parsed_caller'] if self.call_info else None,
-                'sip_account': self.account.config.index,
-                'menu_id': self.menu['id'],
-                'call_id': self.call_info['call_id'] if self.call_info else None,
-                'internal_id': self.callback_id,
-            })
+        timeout = self.menu and self.menu['timeout'] or DEFAULT_RING_TIMEOUT
+        if time.time() - self.last_seen > timeout:
+            log(self.account.config.index, f"Timeout of {timeout} triggered")
+            if self.menu:
+                self.handle_menu(self.menu['timeout_choice'])
+                self.trigger_webhook({'event': 'timeout', 'menu_id': self.menu['id']})
             return
         if self.playback_is_done and self.scheduled_post_action:
             post_action = self.scheduled_post_action
@@ -218,10 +161,13 @@ class Call(pj.Call):
             return
 
     def handle_post_action(self, post_action: PostAction):
-        log(self.account.config.index, 'Scheduled post action: %s' % post_action["action"])
+        log(self.account.config.index, f'Scheduled post action: {post_action["action"]}')
         if post_action["action"] == 'noop':
             pass
         elif post_action["action"] == 'return':
+            if not self.menu:
+                log(self.account.config.index, 'No menu to return to')
+                return
             m = self.menu
             for _ in range(0, post_action['level']):
                 if m:
@@ -229,38 +175,33 @@ class Call(pj.Call):
             if m:
                 self.handle_menu(m)
             else:
-                log(self.account.config.index, 'Could not return %s level in current menu' % post_action["level"])
+                log(self.account.config.index, f'Could not return {post_action["level"]} level in current menu')
         elif post_action["action"] == 'jump':
             new_menu = self.menu_map.get(post_action['menu_id'])
             if new_menu:
                 self.handle_menu(new_menu)
             else:
-                log(self.account.config.index, 'Could not find menu_id: "%s". Valid IDs are %s' % (post_action["menu_id"], self.menu_map.keys()))
+                log(self.account.config.index, f'Could not find menu_id: "{post_action["menu_id"]}". Valid IDs are {self.menu_map.keys()}')
         elif post_action["action"] == 'hangup':
             self.hangup_call()
         elif post_action["action"] == 'repeat_message':
             self.handle_menu(self.menu, send_webhook_event=False, handle_action=False, reset_input=False)
 
     def trigger_webhook(self, event: ha.WebhookEvent):
-        event_id = event.get('event')
-        additional_webhook = self.webhooks.get(event_id)
-        if additional_webhook:
-            log(self.account.config.index, 'Calling additional webhook %s for event %s' % (additional_webhook, event_id))
-            self.event_sender.send_event(event, additional_webhook)
-        self.event_sender.send_event(event)
+        webhook.trigger_webhook(
+            event,
+            self.call_info,
+            self.account.config.index,
+            self.callback_id,
+            self.event_sender,
+            self.webhooks,
+        )
 
     def handle_connected_state(self):
         log(self.account.config.index, 'Call is established.')
         self.connected = True
         self.reset_timeout()
-        self.trigger_webhook({
-            'event': 'call_established',
-            'caller': self.call_info['remote_uri'] if self.call_info else 'unknown',
-            'parsed_caller': self.call_info['parsed_caller'] if self.call_info else None,
-            'sip_account': self.account.config.index,
-            'call_id': self.call_info['call_id'] if self.call_info else None,
-            'internal_id': self.callback_id,
-        })
+        self.trigger_webhook({'event': 'call_established'})
         self.handle_menu(self.menu)
 
     def onCallState(self, prm) -> None:
@@ -275,33 +216,27 @@ class Call(pj.Call):
             log(self.account.config.index, 'Call connecting...')
         elif ci.state == pj.PJSIP_INV_STATE_CONFIRMED:
             log(self.account.config.index, 'Call connected')
+            self.extract_headers_from_response(prm)
             self.call_settled_at = time.time() + self.settle_time
         elif ci.state == pj.PJSIP_INV_STATE_DISCONNECTED:
             log(self.account.config.index, 'Call disconnected')
             self.stop_recording()
-            self.trigger_webhook({
-                'event': 'call_disconnected',
-                'caller': self.call_info['remote_uri'],
-                'parsed_caller': self.call_info['parsed_caller'],
-                'sip_account': self.account.config.index,
-                'call_id': self.call_info['call_id'],
-                'internal_id': self.callback_id,
-            })
+            self.trigger_webhook({'event': 'call_disconnected'})
             self.connected = False
             self.current_input = ''
             self.player = None
             self.audio_media = None
             self.tone_gen = None
-            self.command_handler.on_state_change(CallStateChange.HANGUP, self.callback_id, self)
+            self.command_handler.forget_call(self.callback_id)
         else:
-            log(self.account.config.index, 'Unknown state: %s' % ci.state)
+            log(self.account.config.index, f'Unknown state: {ci.state}')
 
     def onCallMediaState(self, prm) -> None:
         call_info = self.getInfo()
-        log(self.account.config.index, 'onCallMediaState call info state %s' % call_info.state)
+        log(self.account.config.index, f'onCallMediaState call info state {call_info.state}')
         for media_index, media in enumerate(call_info.media):
             if media.type == pj.PJMEDIA_TYPE_AUDIO and (media.status == pj.PJSUA_CALL_MEDIA_ACTIVE or media.status == pj.PJSUA_CALL_MEDIA_REMOTE_HOLD):
-                log(self.account.config.index, 'Connected media %s' % media.status)
+                log(self.account.config.index, f'Connected media {media.status}')
                 self.audio_media = self.getAudioMedia(media_index)
                 if self.requested_recording_filename and not self.recorder:
                     self.start_recording(self.requested_recording_filename)
@@ -315,20 +250,12 @@ class Call(pj.Call):
         self.pressed_digit_list.append(prm.digit)
 
     def handle_dtmf_digit(self, pressed_digit: str) -> None:
-        log(self.account.config.index, 'onDtmfDigit: digit %s' % pressed_digit)
-        self.trigger_webhook({
-            'event': 'dtmf_digit',
-            'caller': self.call_info['remote_uri'] if self.call_info else 'unknown',
-            'parsed_caller': self.call_info['parsed_caller'] if self.call_info else None,
-            'digit': pressed_digit,
-            'sip_account': self.account.config.index,
-            'call_id': self.call_info['call_id'] if self.call_info else None,
-            'internal_id': self.callback_id,
-        })
+        log(self.account.config.index, f'onDtmfDigit: digit {pressed_digit}')
+        self.trigger_webhook({'event': 'dtmf_digit', 'digit': pressed_digit})
         if not self.menu:
             return
         self.current_input += pressed_digit
-        log(self.account.config.index, 'Current input: %s' % self.current_input)
+        log(self.account.config.index, f'Current input: {self.current_input}')
         choices = self.menu.get('choices')
         if choices is not None:
             if self.current_input in choices:
@@ -338,20 +265,20 @@ class Call(pj.Call):
                 # in PIN mode the error message will play if the input has same length than the longest PIN
                 max_choice_length = max(map(lambda choice: len(choice), choices))
                 if len(self.current_input) == max_choice_length:
-                    log(self.account.config.index, 'No PIN matched %s' % self.current_input)
+                    log(self.account.config.index, f'No PIN matched {self.current_input}')
                     self.handle_menu(self.menu['default_choice'])
             else:
                 # in normal mode the error will play as soon as the input does not match any choice
                 still_valid = any(map(lambda choice: choice.startswith(self.current_input), choices))
                 if not still_valid:
-                    log(self.account.config.index, 'Invalid input %s' % self.current_input)
+                    log(self.account.config.index, f'Invalid input {self.current_input}')
                     self.handle_menu(self.menu['default_choice'])
 
     def onCallTransferRequest(self, prm):
         log(self.account.config.index, 'onCallTransferRequest')
 
     def onCallTransferStatus(self, prm):
-        log(self.account.config.index, 'onCallTransferStatus. Status code: %s (%s)' % (prm.statusCode, prm.reason))
+        log(self.account.config.index, f'onCallTransferStatus. Status code: {prm.statusCode} ({prm.reason})')
 
     def onCallReplaceRequest(self, prm):
         log(self.account.config.index, 'onCallReplaceRequest')
@@ -379,18 +306,11 @@ class Call(pj.Call):
         self.menu = menu
         menu_id = menu['id']
         if menu_id and send_webhook_event:
-            self.trigger_webhook({
-                'event': 'entered_menu',
-                'caller': self.call_info['remote_uri'] if self.call_info else 'unknown',
-                'parsed_caller': self.call_info['parsed_caller'] if self.call_info else None,
-                'menu_id': menu_id,
-                'sip_account': self.account.config.index,
-                'call_id': self.call_info['call_id'] if self.call_info else None,
-                'internal_id': self.callback_id,
-            })
+            self.trigger_webhook({'event': 'entered_menu', 'menu_id': menu_id})
         if reset_input:
             self.current_input = ''
         message = menu['message']
+        handle_as_template = menu['handle_as_template']
         audio_file = menu['audio_file']
         language = menu['language']
         action = menu['action']
@@ -398,6 +318,8 @@ class Call(pj.Call):
         should_cache = menu['cache_audio']
         wait_for_audio_to_finish = menu['wait_for_audio_to_finish']
         if message:
+            if handle_as_template:
+                message = ha.render_template(self.ha_config, message)
             self.play_message(message, language, should_cache, wait_for_audio_to_finish)
         if audio_file:
             self.play_audio_file(audio_file, should_cache, wait_for_audio_to_finish)
@@ -412,7 +334,7 @@ class Call(pj.Call):
         self.command_handler.handle_command(action, self)
 
     def play_message(self, message: str, language: str, should_cache: bool, wait_for_audio_to_finish: bool) -> None:
-        log(self.account.config.index, 'Playing message: %s' % message)
+        log(self.account.config.index, f'Playing message: {message}')
         cached_file = audio_cache.get_cached_file(should_cache, self.ha_config.cache_dir, 'message', message)
         if cached_file:
             self.set_current_playback({'type': 'message', 'message': message})
@@ -424,7 +346,7 @@ class Call(pj.Call):
         self.play_wav_file(sound_file_name, must_be_deleted, wait_for_audio_to_finish)
 
     def play_audio_file(self, audio_file: str, should_cache: bool, wait_for_audio_to_finish: bool) -> None:
-        log(self.account.config.index, 'Playing audio file: %s' % audio_file)
+        log(self.account.config.index, f'Playing audio file: {audio_file}')
         cached_file = audio_cache.get_cached_file(should_cache, self.ha_config.cache_dir, 'audio_file', audio_file)
         if cached_file:
             self.set_current_playback({'type': 'audio_file', 'audio_file': audio_file})
@@ -432,13 +354,13 @@ class Call(pj.Call):
             return
         file_format = audio.audio_format_from_filename(audio_file)
         if not file_format:
-            log(None, 'Error getting audio format from filename: %s' % audio_file)
+            log(None, f'Error getting audio format from filename: {audio_file}')
             return
         with open(audio_file, 'rb') as f:
             audio_file_content = f.read()
             sound_file_name = audio.convert_audio_stream_to_wav_file(audio_file_content, file_format)
         if not sound_file_name:
-            log(None, 'Could not convert to wav: %s' % audio_file)
+            log(None, f'Could not convert to wav: {audio_file}')
             return
         self.set_current_playback({'type': 'audio_file', 'audio_file': audio_file})
         audio_cache.cache_file(should_cache, self.ha_config.cache_dir, 'audio_file', audio_file, sound_file_name)
@@ -458,27 +380,9 @@ class Call(pj.Call):
     def on_playback_done(self) -> None:
         log(self.account.config.index, 'Playback done.')
         if self.current_playback and self.current_playback['type'] == 'audio_file':
-            self.trigger_webhook({
-                'event': 'playback_done',
-                'sip_account': self.account.config.index,
-                'caller': self.call_info['remote_uri'] if self.call_info else 'unknown',
-                'parsed_caller': self.call_info['parsed_caller'] if self.call_info else None,
-                'type': 'audio_file',
-                'audio_file': self.current_playback['audio_file'],
-                'call_id': self.call_info['call_id'] if self.call_info else None,
-                'internal_id': self.callback_id,
-            })
+            self.trigger_webhook({'event': 'playback_done', 'type': 'audio_file', 'audio_file': self.current_playback['audio_file']})
         elif self.current_playback and self.current_playback['type'] == 'message':
-            self.trigger_webhook({
-                'event': 'playback_done',
-                'sip_account': self.account.config.index,
-                'caller': self.call_info['remote_uri'] if self.call_info else 'unknown',
-                'parsed_caller': self.call_info['parsed_caller'] if self.call_info else None,
-                'type': 'message',
-                'message': self.current_playback['message'],
-                'call_id': self.call_info['call_id'] if self.call_info else None,
-                'internal_id': self.callback_id,
-            })
+            self.trigger_webhook({'event': 'playback_done', 'type': 'message', 'message': self.current_playback['message']})
         self.current_playback = None
         self.playback_is_done = True
         self.player = None
@@ -513,28 +417,20 @@ class Call(pj.Call):
         target_file = record_filename
         target_dir = os.path.dirname(target_file)
         if not os.path.isdir(target_dir):
-            log(self.account.config.index, 'Error: Call recordings directory not found: %s' % target_dir)
+            log(self.account.config.index, f'Error: Call recordings directory not found: {target_dir}')
             return
         self.recorder = pj.AudioMediaRecorder()
         try:
             self.recorder.createRecorder(target_file)
             self.audio_media.startTransmit(self.recorder)
         except Exception as e:
-            log(self.account.config.index, 'Error: Failed to start call recording: %s' % e)
+            log(self.account.config.index, f'Error: Failed to start call recording: {e}')
             self.stop_recording()
             return
         self.recording_file = target_file
-        log(self.account.config.index, 'Call recording started: %s' % target_file)
+        log(self.account.config.index, f'Call recording started: {target_file}')
         assert self.call_info is not None
-        self.trigger_webhook({
-            'event': 'recording_started',
-            'caller': self.call_info['remote_uri'],
-            'parsed_caller': self.call_info['parsed_caller'],
-            'sip_account': self.account.config.index,
-            'call_id': self.call_info['call_id'],
-            'recording_file': self.recording_file,
-            'internal_id': self.callback_id,
-        })
+        self.trigger_webhook({'event': 'recording_started', 'recording_file': self.recording_file})
 
     def stop_recording(self) -> None:
         self.requested_recording_filename = None
@@ -544,19 +440,11 @@ class Call(pj.Call):
             if self.audio_media:
                 self.audio_media.stopTransmit(self.recorder)
         except Exception as e:
-            log(self.account.config.index, 'Error: Failed to stop call recording: %s' % e)
+            log(self.account.config.index, f'Error: Failed to stop call recording: {e}')
         if self.recording_file:
-            log(self.account.config.index, 'Call recording stopped: %s' % self.recording_file)
+            log(self.account.config.index, f'Call recording stopped: {self.recording_file}')
             assert self.call_info is not None
-            self.trigger_webhook({
-                'event': 'recording_stopped',
-                'caller': self.call_info['remote_uri'],
-                'parsed_caller': self.call_info['parsed_caller'],
-                'sip_account': self.account.config.index,
-                'call_id': self.call_info['call_id'],
-                'recording_file': self.recording_file,
-                'internal_id': self.callback_id,
-            })
+            self.trigger_webhook({'event': 'recording_stopped', 'recording_file': self.recording_file})
         self.recorder = None
         self.recording_file = None
 
@@ -572,7 +460,7 @@ class Call(pj.Call):
         call_prm = pj.CallOpParam(True)
         self.hangup(call_prm)
 
-    def answer_call(self, new_menu: Optional[MenuFromStdin], overwrite_webhooks: Optional[WebhookToCall]) -> None:
+    def answer_call(self, new_menu: Optional[MenuFromStdin], overwrite_webhooks: Optional[webhook.WebhookToCall]) -> None:
         log(self.account.config.index, 'Trigger answer of call (if not established already)')
         if new_menu:
             self.menu = self.normalize_menu(new_menu)
@@ -580,16 +468,20 @@ class Call(pj.Call):
             self.pretty_print_menu(self.menu)
         if overwrite_webhooks:
             self.webhooks = overwrite_webhooks
-        self.answer_at = time.time()
+        if self.connected:
+            if new_menu:
+                self.handle_menu(self.menu)
+        else:
+            self.answer_at = time.time()
 
     def transfer(self, transfer_to):
-        log(self.account.config.index, 'Transfer call to %s' % transfer_to)
+        log(self.account.config.index, f'Transfer call to {transfer_to}')
         xfer_param = pj.CallOpParam(True)
         self.xfer(transfer_to, xfer_param)
 
     def bridge_audio(self, call_two: Call):
         if self.audio_media and call_two.audio_media:
-            log(self.account.config.index, 'Connect audio stream of "%s" and "%s"' % (self.get_callback_id(), call_two.get_callback_id()))
+            log(self.account.config.index, f'Connect audio stream of "{self.callback_id}" and "{call_two.callback_id}"')
             self.audio_media.startTransmit(call_two.audio_media)
             call_two.audio_media.startTransmit(self.audio_media)
             log(self.account.config.index, 'Audio streams connected.')
@@ -598,7 +490,7 @@ class Call(pj.Call):
 
     def send_dtmf(self, digits: str, method: DtmfMethod = 'in_band') -> None:
         self.reset_timeout()
-        log(self.account.config.index, 'Sending DTMF %s' % digits)
+        log(self.account.config.index, f'Sending DTMF {digits}')
         if method == 'in_band':
             if not self.audio_media:
                 log(self.account.config.index, 'Audio media not connected. Cannot send DTMF in-band!')
@@ -622,23 +514,44 @@ class Call(pj.Call):
             dtmf_prm.digits = digits
             self.sendDtmf(dtmf_prm)
 
-    def get_callback_id(self) -> str:
+    def get_callback_ids(self) -> tuple[str, List[str]]:
         if self.uri_to_call:
-            return self.uri_to_call
+            # On outgoing calls we use the uri_to_call, as other info is not available yet
+            parsed_caller = self.parse_caller(self.uri_to_call)
+            return self.uri_to_call, [x for x in [parsed_caller] if x is not None]
         call_info = self.get_call_info()
-        if call_info['parsed_caller']:
-            return call_info['parsed_caller']
-        return call_info['remote_uri']
+        return call_info['remote_uri'], [x for x in [call_info['parsed_caller'], call_info['call_id']] if x is not None]
 
-    def get_call_info(self) -> CallInfo:
+    def get_call_info(self) -> webhook.CallInfo:
         ci = self.getInfo()
         parsed_caller = self.parse_caller(ci.remoteUri)
+        parsed_called = self.parse_caller(ci.localUri)
         return {
             'remote_uri': ci.remoteUri,
             'local_uri': ci.localUri,
             'parsed_caller': parsed_caller,
+            'parsed_called': parsed_called,
             'call_id': ci.callIdString,
+            'headers': self.sip_headers,
         }
+
+    def extract_headers_from_response(self, prm) -> None:
+        extract_headers = self.account.config.options.extract_headers
+        debug_headers = self.account.config.global_options.debug_headers
+        if not extract_headers and not debug_headers:
+            return
+        if self.sip_headers:
+            return
+        try:
+            whole_msg = prm.e.body.tsx_state.src.rdata.wholeMsg
+            if debug_headers:
+                account.Account.log_all_sip_headers(self.account.config.index, whole_msg)
+            if extract_headers:
+                self.sip_headers = account.Account.parse_sip_headers(whole_msg, extract_headers)
+                if self.call_info:
+                    self.call_info['headers'] = self.sip_headers
+        except (AttributeError, TypeError):
+            pass
 
     def reset_timeout(self):
         self.last_seen = time.time()
@@ -666,7 +579,7 @@ class Call(pj.Call):
                     log(self.account.config.index, 'Error: jump action requires a menu id as parameter')
                 return PostActionJump(action='jump', menu_id=jump_to.strip())
             else:
-                log(self.account.config.index, 'Unknown post_action: %s' % action)
+                log(self.account.config.index, f'Unknown post_action: {action}')
                 return PostActionNoop(action='noop')
 
         def normalize_choice(item: tuple[Any, MenuFromStdin], parent_menu_for_choice: Menu) -> tuple[str, Menu]:
@@ -690,6 +603,7 @@ class Call(pj.Call):
         normalized_menu: Menu = {
             'id': menu_id.strip() if menu_id else None,
             'message': menu.get('message'),
+            'handle_as_template': menu.get('handle_as_template') or False,
             'audio_file': menu.get('audio_file'),
             'language': menu.get('language') or self.ha_config.tts_config['language'],
             'action': menu.get('action'),
@@ -713,7 +627,7 @@ class Call(pj.Call):
         return normalized_menu
 
     @staticmethod
-    def create_menu_map(menu: Menu) -> dict[str, Menu]:
+    def create_menu_map(menu: Optional[Menu]) -> dict[str, Menu]:
         def add_to_map(menu_map: dict[str, Menu], m: Menu) -> dict[str, Menu]:
             if m['id']:
                 menu_map[m['id']] = m
@@ -721,6 +635,8 @@ class Call(pj.Call):
                 for m in m['choices'].values():
                     add_to_map(menu_map, m)
             return menu_map
+        if not menu:
+            return {}
         return add_to_map({}, menu)
 
     @staticmethod
@@ -738,6 +654,7 @@ class Call(pj.Call):
         return {
             'id': None,
             'message': 'Unknown option',
+            'handle_as_template': False,
             'audio_file': None,
             'language': 'en',
             'action': None,
@@ -757,6 +674,7 @@ class Call(pj.Call):
         return {
             'id': None,
             'message': None,
+            'handle_as_template': False,
             'audio_file': None,
             'language': 'en',
             'action': None,
@@ -776,6 +694,7 @@ class Call(pj.Call):
         standard_menu: Menu = {
             'id': None,
             'message': None,
+            'handle_as_template': False,
             'audio_file': None,
             'language': 'en',
             'action': None,
@@ -794,7 +713,10 @@ class Call(pj.Call):
         return standard_menu
 
     @staticmethod
-    def pretty_print_menu(menu: Menu) -> None:
+    def pretty_print_menu(menu: Optional[Menu]) -> None:
+        if not menu:
+            print('No menu defined.')
+            return
         lines = yaml.dump(menu, sort_keys=False).split('\n')
         lines_with_pipe = map(lambda line: '| ' + line, lines)
         print('\n'.join(lines_with_pipe))
@@ -809,11 +731,12 @@ def make_call(
     event_sender: EventSender,
     ha_config: ha.HaConfig,
     ring_timeout: float,
-    webhooks: Optional[WebhookToCall],
+    webhooks: Optional[webhook.WebhookToCall],
 ) -> Call:
-    new_call = Call(ep, acc, pj.PJSUA_INVALID_ID, uri_to_call, menu, command_handler, event_sender, ha_config, ring_timeout, webhooks)
+    new_call = Call(ep, acc, pj.PJSUA_INVALID_ID, uri_to_call, menu, command_handler, event_sender, ha_config, ring_timeout, webhooks, {})
     call_param = pj.CallOpParam(True)
     new_call.makeCall(uri_to_call, call_param)
+    new_call.trigger_webhook({'event': 'outgoing_call_initiated'})
     return new_call
 
 

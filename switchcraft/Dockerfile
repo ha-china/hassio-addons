@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base/amd64:9.1.0
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base/amd64:9.2.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -46,7 +46,7 @@ RUN curl -L -o /tmp/switchcraft.tar.gz https://ghfast.top/github.com/FaserF/Swit
     && tar xf /tmp/switchcraft.tar.gz -C /app --strip-components=1 \
     && rm /tmp/switchcraft.tar.gz \
     # Install dependencies (mirroring upstream Dockerfile)
-    && pip3 install --break-system-packages --no-cache-dir .[web-server] flet flet-web flet-charts packaging \
+    && pip3 install --break-system-packages --no-cache-dir .[web-server,ai] flet==0.80.4 flet-web==0.80.4 flet-charts==0.80.4 packaging \
     # Generate Addons
     && python3 src/generate_addons.py \
     # Install bundled addons

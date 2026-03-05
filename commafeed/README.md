@@ -1,39 +1,39 @@
-# Home Assistant 附加组件：CommaFeed
+# Home assistant插件：CommaFeed
 
-基于 Quarkus 和 React/TypeScript 的受 Google Reader 启发的自托管 RSS 阅读器。
+受Google Reader启发的自托管RSS阅读器，基于Quarkus和React/TypeScript。
 
-_感谢所有给我的仓库点星的人！要给它点星，请点击下面的图片，它就会出现在右上角。谢谢！_
+_感谢所有将我的仓库加入收藏的人！要收藏它，请点击下面的图片，它将出现在右上角。谢谢！_
 
-[![@jdeath/homeassistant-addons 的 Star 者列表](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![@jdeath/homeassistant-addons的Stargazers仓库成员](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
-该附加组件使用 [docker 镜像](https://github.com/Athou/commafeed/)。
+此插件使用[docker镜像](https://github.com/Athou/commafeed/)。
 
 ## 安装
 
-该附加组件的安装非常简单，与其他任何 Hass.io 附加组件的安装相比并无不同。
+此插件的安装非常简单，与其他Hass.io插件的安装方式相同。
 
-1. 将我的 Hass.io 附加组件仓库 [添加][repository] 到你的 Hass.io 实例中。
-1. 点击 `保存` 按钮以存储你的配置。
-1. 启动附加组件。
-1. 检查附加组件的日志以查看一切是否顺利。
-1. 打开 WebUI，它应该可以通过 <your-ip>:port 和 ingress 访问。默认用户名:密码 为 admin:admin
+1. [将我的Hass.io插件仓库][repository]添加到您的Hass.io实例。
+1. 点击`保存`按钮以保存您的配置。
+1. 启动插件。
+1. 检查插件的日志以查看是否一切正常。
+1. 应该可以通过<your-ip>:port和ingress打开WebUI。默认用户名:密码是admin:admin
 1. 设置将在 /addon_configs/2effc9b9_commafeed
 
 ## 配置
-如果你愿意，你可以设置附加组件使用环境变量文件。请注意使用 '/commafeed/data' 作为基础路径，它将映射到 /addon_configs/2effc9b9_commafeed
+您可以设置插件使用环境文件。注意使用'/commafeed/data'作为基本路径，这将映射到 /addon_configs/2effc9b9_commafeed 
 
-UI 中的配置文件在 `/commafeed/data/config.env`，但你需要创建文件 `addon_configs/2effc9b9_commafeed/config.env`
-你需要自己创建该文件，并使其成为你想要设置的环境列表，例如：
+UI中的配置文件将是 `/commafeed/data/config.env` ，但你可以在 `addon_configs/2effc9b9_commafeed/config.env` 创建文件
+你需要自己创建文件并使其成为你想要设置的列表，例如：
 ```
 COMMAFEED_USERS_ALLOW_REGISTRATIONS=true
 ```
 ```
-port : 8082 # 你想运行在的端口。
+port : 8082 #你想要运行的端口。
 ```
 
-WebUI 可以在 `<your-ip>:port` 找到。
+Webui可以在 `<your-ip>:port` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---

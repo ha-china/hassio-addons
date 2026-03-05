@@ -1,3 +1,12 @@
+## 2.9.1-1
+- Updated Zigbee2MQTT to version [`2.9.1`](https://github.com/Koenkk/zigbee2mqtt/releases/tag/2.9.1)
+
+## 2.9.0-1
+- Updated Zigbee2MQTT to version [`2.9.0`](https://github.com/Koenkk/zigbee2mqtt/releases/tag/2.9.0)
+
+## 2.8.0-1
+- Updated Zigbee2MQTT to version [`2.8.0`](https://github.com/Koenkk/zigbee2mqtt/releases/tag/2.8.0)
+
 ## 2.7.2-1
 - Updated Zigbee2MQTT to version [`2.7.2`](https://github.com/Koenkk/zigbee2mqtt/releases/tag/2.7.2)
 

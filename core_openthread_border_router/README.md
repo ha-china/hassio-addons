@@ -1,28 +1,33 @@
-# Home Assistant Add-on: OpenThread Border Router Add-on (网络)
+# Home Assistant 扩展：OpenThread 边界路由器扩展（网络）
 
-OpenThread Border Router add-on 不需要USB设备。仅适用于网络设备。
+无需 USB 设备的 OpenThread 边界路由器扩展。仅适用于网络设备。
 
-[!["Buy Me A Coffee"](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/coffee.png)](https://www.buymeacoffee.com/smeagolworms4)
-[!["Buy Me A Coffee"](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/paypal.png)](https://www.paypal.com/donate/?business=SURRPGEXF4YVU&no_recurring=0&item_name=Hello%2C+I%27m+SmeagolWorms4.+For+my+open+source+projects.%0AThanks+you+very+mutch+%21%21%21&currency_code=EUR)
+[![Buy Me A Coffee](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/coffee.png)](https://www.buymeacoffee.com/smeagolworms4)
+[![Buy Me A Coffee](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/paypal.png)](https://www.paypal.com/donate/?business=SURRPGEXF4YVU&no_recurring=0&item_name=Hello%2C+I%27m+SmeagolWorms4.+For+my+open+source+projects.%0AThanks+you+very+mutch+%21%21%21&currency_code=EUR)
 
-## 原始readme。
+原始 Fork Github : https://github.com/Smeagolworms4/core_openthread_border_router
 
-OpenThread Border Router add-on。该add-on使用上游的OpenThread Border Router实现，并将其封装为Home Assistant的add-on。
+## 原始说明。
 
-**注意：** 这需要一个支持802.15.4的无线电设备，并具有OpenThread RCP固件。如果你正在使用[Home Assistant Yellow](https://www.home-assistant.io/yellow/)或[Home Assistant Connect ZBT-1](https://www.home-assistant.io/connectzbt1/)（之前称为SkyConnect），则正确的固件将自动安装。
+OpenThread 边界路由器扩展。此扩展使用上游的 OpenThread 边界路由器实现，并将其作为 Home Assistant 的扩展。
 
-![支持aarch64架构][aarch64-shield]
-![支持amd64架构][amd64-shield]
+**注意：** 此扩展需要支持 802.15.4 的无线电设备，并配备 OpenThread RCP 固件。如果您使用 [Home Assistant 黄金版](https://www.home-assistant.io/yellow/) 或 [Home Assistant Connect ZBT-1](https://www.home-assistant.io/connectzbt1/)（之前称为 SkyConnect），则正确的固件将自动安装。
+
+![支持 aarch64 架构][aarch64-shield]
+![支持 amd64 架构][amd64-shield]
 
 ## 关于
 
-这个add-on允许你形成或加入一个Thread网络，并使Home Assistant成为Thread Border Router。
+此扩展允许您创建或加入 Thread 网络，并将 Home Assistant 设置为 Thread 边界路由器。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

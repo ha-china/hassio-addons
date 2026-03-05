@@ -1,42 +1,44 @@
 # ESPHome 设备构建器
 
-[![ESPHome logo][logo]][website]
+[![ESPHome 标志][logo]][网站]
 
-[![GitHub stars][github-stars-shield]][repository]
+[![GitHub 星标][github-stars-shield]][仓库]
 [![Discord][discord-shield]][discord]
 
 ## 关于
 
-此插件允许您编写配置并将您的微控制器直接转换成智能家居设备，**无需编程经验**。
-您只需要编写 YAML 配置文件；其余工作（OTA 更新、编译）均由 ESPHome 处理。
+此插件允许您通过 Home Assistant **无需编程经验** 直接编写配置，并将您的微控制器变成智能家居设备。您只需编写 YAML 配置文件；其余的（空中更新、编译）都由 ESPHome 处理。
 
 <p align="center">
-<img title="ESPHome Device Builder screenshot" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome/images/screenshot.png" width="700px"></img>
+<img title="ESPHome 设备构建器截图" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome/images/screenshot.png" width="700px"></img>
 </p>
 
-[查看 ESPHome 文档][website]
+[查看 ESPHome 文档][网站]
 
 ## 示例
 
-使用 ESPHome，您可以从几行 YAML 代码直接获得定制的固件。例如，要包含一个 [DHT22][dht22] 温度和湿度传感器，您只需要在配置文件中包含 8 行 YAML 代码：
+使用 ESPHome，您可以从几行 YAML 直接跳转到自定义固件。例如，要包含一个 [DHT22][dht22] 温湿度传感器，您只需在配置文件中包含 8 行 YAML：
 
-<img title="ESPHome DHT configuration example" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome/images/dht-example.png" width="500px"></img>
+<img title="ESPHome DHT 配置示例" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome/images/dht-example.png" width="500px"></img>
 
-然后只需点击 UPLOAD，传感器就会神奇地出现在 Home Assistant 中：
+然后只需点击上传，传感器就会神奇地出现在 Home Assistant 中：
 
-<img title="ESPHome Home Assistant discovery" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome/images/temperature-humidity.png" width="600px"></img>
+<img title="ESPHome Home Assistant 发现" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome/images/temperature-humidity.png" width="600px"></img>
 
 [discord]: https://discord.gg/KhAMKrd
-[repository]: https://github.com/esphome/esphome
+[仓库]: https://github.com/esphome/esphome
 [discord-shield]: https://img.shields.io/discord/429907082951524364.svg
 [github-stars-shield]: https://img.shields.io/github/stars/esphome/esphome.svg?style=social&label=Star&maxAge=2592000
 [dht22]: https://esphome.io/components/sensor/dht.html
-[releases]: https://esphome.io/changelog/index.html
+[发布版本]: https://esphome.io/changelog/index.html
 [logo]: https://github.com/esphome/home-assistant-addon/raw/main/esphome/logo.png
-[website]: https://esphome.io/
+[网站]: https://esphome.io/
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

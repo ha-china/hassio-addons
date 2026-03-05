@@ -1,8 +1,8 @@
 ---
 name: "Solumati"
-version: "2.2.1"
+version: "2.3.0"
 slug: "solumati"
-description: "[老王杂谈说]：null"
+description: "[老王杂谈说]：反滑动革命 - 专注于有意义的匹配的自托管约会平台。"
 url: "https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/solumati"
 arch:
   - aarch64
@@ -29,7 +29,7 @@ options:
   dev_use_main_branch: false
   github_token: ""
 schema:
-  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
   test_mode: bool
   app_base_url: str?
   factory_reset: bool?

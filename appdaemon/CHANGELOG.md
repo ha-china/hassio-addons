@@ -2,4 +2,4 @@
 
 ## ⬆️ Dependency updates
 
-- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v19 @[renovate[bot]](https://github.com/apps/renovate) ([#472](https://github.com/hassio-addons/addon-appdaemon/pull/472))
+- ⬆️ Update alpine_3_23/yq-go to v4.49.2-r3 @[renovate[bot]](https://github.com/apps/renovate) ([#491](https://github.com/hassio-addons/app-appdaemon/pull/491))

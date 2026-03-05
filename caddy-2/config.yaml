@@ -1,11 +1,9 @@
 name: Caddy 2
-version: 2.0.5
+version: 3.0.0
 slug: caddy-2
-description: '[老王杂谈说]：开源的Web和代理服务器，支持自动HTTPS'
-url: https://ghfast.top/github.com/einschmidt/addon-caddy-2
+description: '[老王杂谈说]：支持自动 HTTPS 的开源 Web 和代理服务器'
+url: https://ghfast.top/github.com/einschmidt/app-caddy-2
 arch:
-  - armhf
-  - armv7
   - amd64
   - aarch64
 startup: services
@@ -45,4 +43,4 @@ environment:
 init: false
 breaking_versions:
   - 2.0.0
-image: ghcr.nju.edu.cn/einschmidt/caddy-2/{arch}
+image: ghcr.nju.edu.cn/einschmidt/caddy-2

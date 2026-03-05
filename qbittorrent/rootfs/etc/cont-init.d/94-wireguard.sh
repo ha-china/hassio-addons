@@ -6,39 +6,40 @@ WIREGUARD_STATE_DIR="/var/run/wireguard"
 QBT_CONFIG_FILE="/config/qBittorrent/qBittorrent.conf"
 declare wireguard_config=""
 declare wireguard_runtime_config=""
-declare configured_name
+declare interface_name=""
+
+if bashio::fs.directory_exists "${WIREGUARD_STATE_DIR}"; then
+    bashio::log.warning "Previous WireGuard state directory found, cleaning up."
+    rm -Rf "${WIREGUARD_STATE_DIR}"
+fi
+
+if ! bashio::config.true 'wireguard_enabled'; then
+    bashio::exit.ok 'WireGuard is disabled.'
+elif bashio::config.true 'openvpn_enabled'; then
+    bashio::log.fatal 'OpenVPN and WireGuard cannot be enabled simultaneously. Disable one of them.'
+    bashio::addon.stop
+fi
 
 mkdir -p "${WIREGUARD_STATE_DIR}"
 
-if ! bashio::config.true 'wireguard_enabled'; then
-    rm -f "${WIREGUARD_STATE_DIR}/config" "${WIREGUARD_STATE_DIR}/interface"
-    exit 0
-fi
+bashio::log.info "------------------------------"
+bashio::log.info "Wireguard enabled, configuring"
+bashio::log.info "------------------------------"
 
-if bashio::config.true 'openvpn_enabled'; then
-    bashio::exit.nok 'OpenVPN and WireGuard cannot be enabled simultaneously. Disable one of them.'
-fi
-
-if bashio::config.true 'openvpn_alt_mode'; then
-    bashio::log.warning 'The openvpn_alt_mode option is ignored when WireGuard is enabled.'
-fi
-
-if bashio::config.has_value 'wireguard_config'; then
-    configured_name="$(bashio::config 'wireguard_config')"
-    configured_name="${configured_name##*/}"
-    if [[ -z "${configured_name}" ]]; then
-        bashio::log.info 'wireguard_config option left empty. Attempting automatic selection.'
-    elif bashio::fs.file_exists "/config/wireguard/${configured_name}"; then
-        wireguard_config="/config/wireguard/${configured_name}"
-    else
-        bashio::exit.nok "WireGuard configuration '/config/wireguard/${configured_name}' not found."
+if bashio::config.has_value "wireguard_config"; then
+    wireguard_config="$(bashio::config 'wireguard_config')"
+    wireguard_config="${wireguard_config##*/}"
+    if [[ ! "${wireguard_config}" =~ ^[A-Za-z0-9._-]+\.conf$ ]]; then
+        bashio::log.fatal "Invalid wireguard_config filename '${wireguard_config}'. Allowed characters: letters, numbers, dot, underscore, dash. Extension must be .conf."
+        bashio::addon.stop
     fi
 fi
-
-if [ -z "${wireguard_config:-}" ]; then
-    mapfile -t configs < <(find /config/wireguard -maxdepth 1 -type f -name '*.conf' -print)
+if [[ -z "${wireguard_config}" ]]; then
+    bashio::log.info 'wireguard_config option left empty. Attempting automatic selection.'
+        mapfile -t configs < <(find /config/wireguard -maxdepth 1 -type f -name '*.conf' -print)
     if [ "${#configs[@]}" -eq 0 ]; then
-        bashio::exit.nok 'WireGuard is enabled but no .conf file was found in /config/wireguard.'
+        bashio::log.fatal 'WireGuard is enabled but no .conf file was found in /config/wireguard.'
+        bashio::addon.stop
     elif [ "${#configs[@]}" -eq 1 ]; then
         wireguard_config="${configs[0]}"
         bashio::log.info "WireGuard configuration not specified. Using ${wireguard_config##*/}."
@@ -46,25 +47,47 @@ if [ -z "${wireguard_config:-}" ]; then
         wireguard_config='/config/wireguard/config.conf'
         bashio::log.info 'Using default WireGuard configuration config.conf.'
     else
-        bashio::exit.nok "Multiple WireGuard configuration files detected. Please set the 'wireguard_config' option."
+        bashio::log.fatal "Multiple WireGuard configuration files detected. Please set the 'wireguard_config' option."
+        bashio::addon.stop
     fi
+elif bashio::fs.file_exists "/config/wireguard/${wireguard_config}"; then
+    wireguard_config="/config/wireguard/${wireguard_config}"
+else
+    bashio::log.fatal "WireGuard configuration '/config/wireguard/${wireguard_config}' not found."
+    bashio::addon.stop
 fi
-
-dos2unix "${wireguard_config}" >/dev/null 2>&1 || true
 
 interface_name="$(basename "${wireguard_config}" .conf)"
 if [[ -z "${interface_name}" ]]; then
     interface_name='wg0'
 fi
+if [[ ${#interface_name} -gt 15 ]]; then
+    bashio::log.warning "WireGuard interface name '${interface_name}' exceeds 15 characters; truncating to '${interface_name:0:15}'."
+    interface_name="${interface_name:0:15}"
+fi
 
 wireguard_runtime_config="${WIREGUARD_STATE_DIR}/${interface_name}.conf"
 
 cp "${wireguard_config}" "${wireguard_runtime_config}"
-chmod 600 "${wireguard_runtime_config}" 2>/dev/null || true
+chmod 600 "${wireguard_runtime_config}"
+
+dos2unix "${wireguard_runtime_config}" >/dev/null 2>&1 || true
+sed -i '/^[[:space:]]*[;#]/d' "${wireguard_runtime_config}"
+sed -i 's/#.*//' "${wireguard_runtime_config}"
+sed -i '/^[[:space:]]*$/d' "${wireguard_runtime_config}"
+sed -i '/^[[:blank:]]*$/d' "${wireguard_runtime_config}"
+sed -i '/DNS/d' "${wireguard_runtime_config}"
+sed -i '/PostUp/d' "${wireguard_runtime_config}"
+sed -i '/PostDown/d' "${wireguard_runtime_config}"
+sed -i '/SaveConfig/d' "${wireguard_runtime_config}"
+sed -i "\$q" "${wireguard_runtime_config}"
+
 bashio::log.info 'Prepared WireGuard runtime configuration for initial connection attempt.'
 
 echo "${wireguard_runtime_config}" > "${WIREGUARD_STATE_DIR}/config"
 echo "${interface_name}" > "${WIREGUARD_STATE_DIR}/interface"
+
+bashio::log.info "Using interface binding in the qBittorrent app"
 
 if bashio::fs.file_exists "${QBT_CONFIG_FILE}"; then
     sed -i '/Interface/d' "${QBT_CONFIG_FILE}"

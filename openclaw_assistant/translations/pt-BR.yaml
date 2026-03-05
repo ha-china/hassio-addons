@@ -1,0 +1,108 @@
+configuration:
+  timezone:
+    name: Fuso Horário
+    description: Fuso horário do add-on (ex., America/Sao_Paulo, America/Fortaleza)
+  
+  enable_terminal:
+    name: Habilitar Terminal Web
+    description: Habilitar botão do terminal web dentro do Home Assistant (Ingress) via ttyd
+  
+  terminal_port:
+    name: Porta do Terminal
+    description: Número da porta para o terminal web (padrão - 7681). Altere se esta porta conflitar com outro serviço.
+  
+  gateway_public_url:
+    name: URL Pública do Gateway
+    description: URL base pública para abrir a interface web do Gateway em uma nova aba (não incorporada). Exemplo - https://exemplo.duckdns.org:12345 ou http://192.168.1.10:18789
+  
+  homeassistant_token:
+    name: Token do Home Assistant
+    description: Opcional - Token de longa duração do Home Assistant para scripts/ferramentas da API local do HA
+
+  http_proxy:
+    name: Proxy HTTP de saída
+    description: Opcional - URL de proxy para requisições HTTP/HTTPS de saída (exemplo - http://192.168.2.1:3128)
+  
+  router_ssh_host:
+    name: Host SSH do Roteador
+    description: Opcional - Nome do host ou endereço IP do roteador/firewall via SSH
+  
+  router_ssh_user:
+    name: Usuário SSH do Roteador
+    description: Opcional - Nome de usuário SSH do roteador/firewall
+  
+  router_ssh_key_path:
+    name: Caminho da Chave SSH do Roteador
+    description: Caminho para a chave privada SSH para acesso ao roteador (padrão - /data/keys/router_ssh)
+  
+  clean_session_locks_on_start:
+    name: Limpar Bloqueios de Sessão ao Iniciar
+    description: Limpar arquivos de bloqueio de sessão obsoletos deixados após falhas/reinicializações quando o add-on iniciar
+  
+  clean_session_locks_on_exit:
+    name: Limpar Bloqueios de Sessão ao Sair
+    description: Limpar arquivos de bloqueio de sessão quando o add-on parar normalmente
+  
+  gateway_mode:
+    name: Modo do Gateway
+    description: Modo de operação do gateway - local (executar gateway localmente, recomendado) ou remote (conectar a um gateway remoto)
+    options:
+      local: "Local (recomendado)"
+      remote: "Remoto"
+
+  gateway_remote_url:
+    name: URL do Gateway Remoto
+    description: URL WebSocket do gateway remoto usada quando Gateway Mode está em Remote (exemplo - ws://192.168.1.20:18789 ou wss://gateway.example.com:443)
+
+  gateway_additional_allowed_origins:
+    name: Origens permitidas adicionais
+    description: Origens extras da Control UI separadas por vírgula, mescladas em gateway.controlUi.allowedOrigins no modo lan_https (exemplo - https://ha.example.com:8443,capacitor://localhost)
+
+  gateway_bind_mode:
+    name: Modo de Vinculação do Gateway
+    description: Modo de vinculação de rede - loopback (somente 127.0.0.1, mais seguro), lan (todas as interfaces) ou tailnet (somente interface Tailscale). Substituído pelas predefinições do modo de acesso.
+    options:
+      loopback: "Loopback (somente 127.0.0.1, mais seguro)"
+      lan: "LAN (todas as interfaces)"
+      tailnet: "Tailnet (somente Tailscale)"
+
+  gateway_port:
+    name: Porta do Gateway
+    description: Número da porta para o gateway do OpenClaw escutar (padrão - 18789)
+
+  access_mode:
+    name: Modo de Acesso
+    description: "Simplifica a configuração de acesso seguro. Substitui gateway_bind_mode e gateway_auth_mode quando não definido como Personalizado."
+    options:
+      custom: "Personalizado (configurações individuais)"
+      local_only: "Apenas local (loopback + token, apenas Ingress)"
+      lan_https: "LAN HTTPS (proxy HTTPS integrado — recomendado para celulares)"
+      lan_reverse_proxy: "LAN Reverse Proxy (proxy externo com auth trusted-proxy)"
+      tailnet_https: "Tailscale HTTPS (Tailscale + token)"
+
+  gateway_auth_mode:
+    name: Modo de Autenticação do Gateway
+    description: Modo de autenticação - token (padrão) ou trusted-proxy (para reverse proxies HTTPS). Substituído quando access_mode não é Personalizado.
+    options:
+      token: "Token (padrão)"
+      trusted-proxy: "Proxy Confiável (para reverse proxies)"
+
+  gateway_trusted_proxies:
+    name: Proxies Confiáveis do Gateway
+    description: Lista de IPs/CIDR de proxies confiáveis separados por vírgula para o modo trusted-proxy (exemplo - 127.0.0.1,192.168.88.0/24).
+
+  enable_openai_api:
+    name: Habilitar API OpenAI
+    description: Habilitar endpoint de Chat Completions compatível com OpenAI. Permite usar o OpenClaw como agente de conversação no pipeline do HA Assist via Extended OpenAI Conversation (HACS) ou qualquer cliente compatível com OpenAI.
+  force_ipv4_dns:
+    name: Forçar ordem DNS IPv4
+    description: Força prioridade IPv4 no DNS. A maioria das VMs HAOS não tem saída IPv6 — causa erros em web_fetch e Telegram. Recomendado LIGADO (padrão).
+  nginx_log_level:
+    name: Nível de log Nginx
+    description: "Detalhamento do log de acesso do nginx. 'minimal' (padrão) suprime requisições repetitivas de health-check e polling do HA. 'full' registra tudo."
+    options:
+      minimal: "Mínimo (suprimir ruído de polling HA)"
+      full: "Completo (registrar todas as requisições)"
+  gateway_env_vars:
+    name: Variáveis de Ambiente do Gateway
+    description: Variaveis de ambiente passadas para o processo do gateway OpenClaw na inicializacao (lista de entradas name/value na UI do Home Assistant; maximo de 50 variaveis, chaves com ate 255 caracteres, valores com ate 10.000 caracteres).

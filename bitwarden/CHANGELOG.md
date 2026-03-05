@@ -1,5 +1,5 @@
 ## What’s changed
 
-## 🐛 Bug fixes
+## ⬆️ Dependency updates
 
-- Remove deprecated codenotary fields @frenck ([#375](https://github.com/hassio-addons/addon-bitwarden/pull/375))
+- ⬆️ Update vaultwarden/server Docker tag to v1.35.4 @[renovate[bot]](https://github.com/apps/renovate) ([#404](https://github.com/hassio-addons/app-vaultwarden/pull/404))

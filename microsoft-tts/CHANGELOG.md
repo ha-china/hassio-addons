@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.4.1](https://github.com/hugobloem/wyoming-microsoft-tts/compare/v1.4.0...v1.4.1) (2026-02-06)
+
+
+### 🐛 Bugfixes
+
+* escape percentage signs in argparse help ([#137](https://github.com/hugobloem/wyoming-microsoft-tts/issues/137)) ([a8fc1c7](https://github.com/hugobloem/wyoming-microsoft-tts/commit/a8fc1c7d8f925961ab85a0cbd07a200bdb414e43))
+
+## [1.4.0](https://github.com/hugobloem/wyoming-microsoft-tts/compare/v1.3.5...v1.4.0) (2026-02-05)
+
+
+### 🚀 Features
+
+* additional prosody speech parameters [@rplevka](https://github.com/rplevka) ([#135](https://github.com/hugobloem/wyoming-microsoft-tts/issues/135)) ([721935d](https://github.com/hugobloem/wyoming-microsoft-tts/commit/721935d5a7f12f9cd10785b43ca6ec458b2fedb6))
+
+
+### 🏗️ Maintenance
+
+* **deps:** bump actions/checkout from 5 to 6 ([#133](https://github.com/hugobloem/wyoming-microsoft-tts/issues/133)) ([258c0d3](https://github.com/hugobloem/wyoming-microsoft-tts/commit/258c0d318f6287ed746a80b43188478bcf3caa3d))
+* **deps:** bump azure-cognitiveservices-speech from 1.46.0 to 1.47.0 ([#131](https://github.com/hugobloem/wyoming-microsoft-tts/issues/131)) ([9aa3f2c](https://github.com/hugobloem/wyoming-microsoft-tts/commit/9aa3f2c7918c18c46b4d4a0827e8460bebf7ee13))
+* **deps:** update black requirement from &lt;26,&gt;=24 to &gt;=24,&lt;27 ([#134](https://github.com/hugobloem/wyoming-microsoft-tts/issues/134)) ([960283c](https://github.com/hugobloem/wyoming-microsoft-tts/commit/960283ce0cbfb7b39874fd0936fdf41b7d8b7398))
+
 ## [1.3.5](https://github.com/hugobloem/wyoming-microsoft-tts/compare/v1.3.4...v1.3.5) (2025-10-13)
 
 

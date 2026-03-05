@@ -1,18 +1,19 @@
-# Home Assistant 插件：yarr!
+# Home Assistant Add-on: yarr!
 
-又一个 RSS 阅读器。
+Yet another rss reader.
 
-## 关于
+## About
 
-Yarr 是一个用 Go 编写的 RSS 聚合服务器，前端使用 Vue.js。
-存储支持 SQLite。
+Yarr is an RSS aggregation server written in Go with the frontend in Vue.js.
+The storage is backed by SQLite.
 
-![yarr 预览][promo]
+![yarr preview][promo]
 
-[promo]: https://github.com/einschmidt/addon-yarr/raw/main/images/promo.png
+[promo]: https://github.com/einschmidt/app-yarr/raw/main/images/promo.png
+---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
 
 ## 📱 关注我
 

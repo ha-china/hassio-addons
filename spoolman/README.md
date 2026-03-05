@@ -1,78 +1,81 @@
 # Spoolman HA Add-on
 ![Version][version]
-![Production ready][production-ready]
-![Supports aarch64 Architecture][aarch64-shield]
+![Spoolman-update-shield]
+
 ![Supports amd64 Architecture][amd64-shield]
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports armv7 Architecture][Spoolman-armv7-shield]
 
-## 关于
-这个插件基于 [Spoolman](https://github.com/Donkie/Spoolman)。
+## About
+This add-on is based on [Spoolman](https://github.com/Donkie/Spoolman).
 
-## 注意事项
-1. **时区**
-   - 插件自动使用 Home Assistant 系统时区。
-   - 无需手动配置时区。
-   - 默认回退：`Europe/Stockholm`。
+## Notes
+1. **Timezone**
+   - The add-on automatically uses the Home Assistant system timezone.
+   - No manual timezone configuration is required.  
+   - Default fallback: `Europe/Stockholm`.
 
-2. **端口**
-   - 固定为 `7912`。在插件配置中更改端口无效。
-   - 确保没有其他插件使用此主机端口。
+2. **Port**
+   - Fixed to `7912`. Changing the port in the add-on configuration has no effect.
+   - Ensure no other add-on uses this host port.
 
-3. **数据目录**
-   - `addon_config/<slug>/` → 主插件数据、日志和备份。
-     - `<slug>` 是 Home Assistant 自动创建的插件文件夹名称，例如 `20c49e40_spoolman`。
-   - 插件自动在这个文件夹中创建以下子目录：
-     - `backups/` → 备份存储
-     - `logs/` → 日志文件
-     - `cache/` → 临时缓存文件
-   - 所有目录都具有正确的 Spoolman 进程权限。
-   - **注意：** `/config` 指的是容器内的主 Home Assistant 配置路径，但所有插件文件都位于 `addon_config/<slug>/` 下。
+3. **Data directories**
+   - `addon_config/<slug>/` → main add-on data, logs, and backups.  
+     - `<slug>` is the add-on folder name automatically created by Home Assistant, e.g., `20c49e40_spoolman`.  
+   - The add-on automatically creates the following subdirectories inside this folder:
+     - `backups/` → backup storage
+     - `logs/` → log files
+     - `cache/` → temporary cache files
+   - All directories have correct permissions for the Spoolman process.  
+   - **Note:** `/config` refers to the main Home Assistant configuration path inside the container, but all add-on files live under `addon_config/<slug>/`.
+4. **Version numbering**
+   - Using **x.x.x-x** format.  
+   - The first three numbers match the official Spoolman version (e.g., `0.22.1`).  
+   - The number after the dash (`-X`) is for changes specific to this Home Assistant add-on (e.g., `0.22.1-0`).  
+5. **External DB Sync & Backups**
+   - The add-on automatically syncs filaments and materials from the external SpoolmanDB.  
+   - Automatic database backups are scheduled for midnight.  
+   - No configuration is required; everything runs in the background.
 
-4. **版本编号**
-   - 使用 **x.x.x-x** 格式。
-   - 前三个数字与官方 Spoolman 版本匹配（例如，`0.22.1`）。
-   - 破折号后的数字（-X）是针对此 Home Assistant 插件的特定更改（例如，`0.22.1-0`）。
+## Known issues
+- None so far.
 
-5. **外部数据库同步与备份**
-   - 插件自动从外部 SpoolmanDB 同步线材和材料。
-   - 自动数据库备份计划在午夜执行。
-   - 无需配置；所有操作都在后台运行。
+## Installation
+1. [Add the repository][repository] to your Home Assistant add-ons.  
+2. Install the **Spoolman** add-on.  
+3. Start the add-on.  
+4. Access the WebUI at: `http://<HOME_ASSISTANT_HOST>:7912`.  
 
-## 已知问题
-- 目前无。
 
-## 安装
-1. [将仓库][repository] 添加到您的 Home Assistant 插件。
-2. 安装 **Spoolman** 插件。
-3. 启动插件。
-4. 访问 WebUI：`http://<HOME_ASSISTANT_HOST>:7912`。
+## Troubleshooting
 
-## 故障排除
-
-| 问题 | 可能原因 | 解决方法 |
+| Problem | Possible cause | Solution |
 |---------|----------------|----------|
-| **插件未启动** | 端口 7912 已被占用 | 确保没有其他插件使用端口 7912，或更改冲突插件的端口。 |
-| **日志中时区不正确** | 主机时区配置错误 | 确保 Home Assistant 系统时区在 **设置 → 系统 → 时间与日期** 中正确。 |
-| **数据库未更新** | SQLite 数据库损坏 | 备份并删除 `/config/spoolman.db`，然后重启插件以重新创建数据库。 |
+| **Add-on not starting** | Port 7912 already in use | Make sure no other add-on is using port 7912, or change the conflicting add-on port. |
+| **Time incorrect in logs** | Host timezone misconfigured | Ensure Home Assistant system timezone is correct in **Settings → System → Time & Date**. |
+| **Database not updating** | Corrupted SQLite database | Backup and remove `/config/spoolman.db`, then restart the add-on to recreate the database. |
 
-## 支持
-- 如果您遇到任何问题，请在 [Bytenoodle/hassioaddon GitHub 仓库](https://github.com/bytenoodle/hassioaddon/issues) 上打开问题。
-- 包含您的插件日志（`addon_config/<slug>/addon_log/spoolman.log` 和来自插件页面的日志）以及问题的简要描述。
-- 这有助于更快地诊断和解决问题。
+## Support
+- If you encounter any issues, please open an issue on the [Bytenoodle/hassioaddon GitHub repository](https://github.com/bytenoodle/hassioaddon/issues).  
+- Include your add-on logs (`addon_config/<slug>/addon_log/spoolman.log` and `Log from addon page`) and a brief description of the problem.  
+- This helps to diagnose and fix problems faster.
 
-## 截图
+## Screenshot
 
-![预览][preview]
+![Preview][preview]
 
 <!--
-资源
+Assets
 -->
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
-[version]: https://img.shields.io/badge/version-v0.22.1--1-blue.svg
-[production-ready]: https://img.shields.io/badge/Production%20ready-yes-green.svg
+[Spoolman-armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
+[version]: https://img.shields.io/badge/version-v0.23.1--0-blue.svg
+[Spoolman-update-shield]: https://img.shields.io/badge/Updated%20on-2026--02--08-blue.svg
 [repository]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/bytenoodle/hassioaddon
 [preview]: https://raw.githubusercontent.com/bytenoodle/hassioaddon/refs/heads/main/spoolman/preview.png
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

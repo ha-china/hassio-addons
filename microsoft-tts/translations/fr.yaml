@@ -8,6 +8,28 @@ configuration:
     name: Région de service
     description: >-
       La région dans laquelle vous avez configuré votre instance de service vocal (par exemple uksouth).
+  rate:
+    name: Débit de parole
+    description: >-
+      Débit de parole, en pourcentage ou description (par exemple "80%" ou "lent").
+  pitch:
+    name: Hauteur de la voix
+    description: >-
+      Hauteur de la voix, en pourcentage ou description (par exemple "80%" ou "bas").
+  volume:
+    name: Volume de la parole
+    description: >-
+      Volume de la parole, en pourcentage ou description (par exemple "80%" ou "doux").
+  style:
+    name: Style d'énonciation
+    description: >-
+      Style d'énonciation, en tant que description (par exemple "joyeux"). Les styles pris en charge
+      dépendent de la voix, et toutes les voix ne supportent pas les styles. Consultez la
+      documentation Microsoft pour plus de détails.
+  style_degree:
+    name: Intensité du style d'énonciation
+    description: >-
+      Intensité du style d'énonciation de 0,01 à 2,00.
   update_voices:
     name: Mettre à jour les voix
     description: >-

@@ -1,8 +1,10 @@
-# Home assistant add-on: Autobrr
 
-我利用业余时间维护这个以及其他 Home Assistant add-ons：跟上上游变化、HA 变化，并在真实硬件上测试需要大量时间（和一些金钱）。我大约使用我 110 多个 add-ons 中的 5-10 个，因此我安装了一些测试机器（以及购买了一些我本人不使用的测试服务，如 VPN）来调试和改进这些 add-ons。
+# Home assistant add-on: Autobrrf
 
-如果这个 add-on 为您节省了时间或简化了您的设置，我将非常感谢您的支持！
+
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
 [![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -20,7 +22,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库星标的人！要星标它，请点击下面的图片，然后它就会在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -30,50 +32,50 @@ _感谢所有给我的仓库星标的人！要星标它，请点击下面的图�
 
 ---
 
-[Autobrr](https://autobrr.com/) autobrr 是现代的 torrent 下载自动化工具。受到 trackarr、autodl-irssi 和 flexget 等工具的启发和想法，我们构建了一个可以完成所有这些工作的工具。
+[Autobrr](https://autobrr.com/) autobrr is the modern download automation tool for torrents. With inspiration and ideas from tools like trackarr, autodl-irssi and flexget we built one tool that can do it all, and then some.
 
-这个 add-on 基于 https://github.com/autobrr/autobrr 的 docker 镜像
+This addon is based on the docker image https://github.com/autobrr/autobrr
 
 ## Installation
 
 ---
 
-这个 add-on 的安装非常直接，与安装任何其他 add-on 没有区别。
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
 
-1. 将我的 add-ons 仓库添加到您的 Home Assistant 实例中（在 supervisor add-ons store 的右上角，或者如果您已经配置了我的 HA，请点击下面的按钮）
-   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加 add-on 仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装这个 add-on。
-1. 点击 `Save` 按钮以保存您的配置。
-1. 根据您的偏好设置 add-on 选项。
-1. 启动 add-on。
-1. 检查 add-on 的日志，看看是否一切顺利。
-1. 打开 webUI 并调整软件选项
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Set the add-on options to your preferences
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open the webUI and adapt the software options
 
 ## Configuration
 
-Webui 可以在 <http://homeassistant:7474> 或通过 Ingress 找到。
-默认凭证：`admin` / `password`（首次登录后更改）。
+Webui can be found at <http://homeassistant:7474> or through Ingress.
+Default credentials: `admin` / `password` (change after first login).
 
 ### Setup Steps
 
-1. 启动 add-on 后访问 web 界面
-2. 更改默认登录凭证
-3. 配置 RSS 索引器和下载客户端
-4. 设置自动化规则和过滤器
-5. 使用样本发布进行测试
+1. Access the web interface after starting the addon
+2. Change default login credentials
+3. Configure RSS indexers and download clients
+4. Set up automation rules and filters
+5. Test with sample releases
 
 ### Options
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `PGID` | int | `0` | 文件权限的组 ID |
-| `PUID` | int | `0` | 文件权限的用户 ID |
-| `TZ` | str | | 时区（例如，`Europe/London`） |
-| `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1`） |
-| `networkdisks` | str | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | str | | SMB 网络共享的用户名 |
-| `cifspassword` | str | | SMB 网络共享的密码 |
-| `cifsdomain` | str | | 网络共享的 SMB 域 |
+| `PGID` | int | `0` | Group ID for file permissions |
+| `PUID` | int | `0` | User ID for file permissions |
+| `TZ` | str | | Timezone (e.g., `Europe/London`) |
+| `localdisks` | str | | Local drives to mount (e.g., `sda1,sdb1`) |
+| `networkdisks` | str | | SMB shares to mount (e.g., `//SERVER/SHARE`) |
+| `cifsusername` | str | | SMB username for network shares |
+| `cifspassword` | str | | SMB password for network shares |
+| `cifsdomain` | str | | SMB domain for network shares |
 
 ### Example Configuration
 
@@ -90,23 +92,26 @@ cifsdomain: "workgroup"
 
 ### Mounting Drives
 
-这个 add-on 支持挂载本地驱动器和远程 SMB 共享：
+This addon supports mounting both local drives and remote SMB shares:
 
-- **本地驱动器**：请参阅 [在 Addons 中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：请参阅 [在 Addons 中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### Custom Scripts and Environment Variables
 
-这个 add-on 支持自定义脚本执行和环境变量注入：
+This addon supports custom script execution and environment variable injection:
 
-- **自定义脚本**：请参阅 [在 Addons 中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用 add-on 的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详情。
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
 ## Support
 
-在 github 上创建问题
+Create an issue on github
 
 [repository]: https://github.com/alexbelgium/hassio-addons
+
+
+
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

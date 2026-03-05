@@ -1,5 +1,75 @@
 # Changelog
 
+## 1.0.1
+
+- Migrate security keys from the OZW format to the Z-Wave JS format automatically
+- Configure Z-Wave JS's device config priority dir correctly
+
+### Z-Wave JS 15.21.0
+
+#### Bugfixes
+
+- Most changes to configuration files are now applied without needing to re-interview devices
+- Disconnected batteries no longer expose a battery level of 0% and instead show as unavailable
+- Hide unnecessary Basic CC and Multilevel Switch CC values on some devices
+- Fixed a rare communication issue that could cause unnecessary re-transmissions, mark devices as dead, or fail to send sleeping devices back to sleep
+
+#### Config file changes
+
+- Update Zooz ZSE42 config to firmware 2.30
+- Update Zooz ZEN32 config to the latest firmware
+- Add Zooz ZEN56, update ZEN32, 71, 72, 77
+- Complete device config for Contec/Da Vinci Touch Panel (FW 10.10)
+- Updated several config files to use value ranges with gaps and step sizes instead of mentioning the allowable range in the parameter description
+- Unified the definition of "Basic Set Value" parameters across device files
+
+### Z-Wave JS UI 11.12.0
+
+#### Bugfixes
+
+- Minor UI tweaks to dialogs
+- Prevent fetching Github releases when related features are disabled
+
+### Detailed changelogs
+
+- [Z-Wave JS 15.21.0](https://github.com/zwave-js/zwave-js/releases/tag/v15.21.0)
+- [Z-Wave JS UI 11.12.0](https://github.com/zwave-js/zwave-js-ui/releases/tag/v11.12.0)
+
+## 1.0.0
+
+**NOTE: It is strongly recommended to make a backup before updating to this version.**
+
+This release includes [Z-Wave JS UI](https://github.com/zwave-js/zwave-js-ui) as an optional management UI to support advanced use-cases.
+
+### Breaking changes
+
+- Version 1.0.0 of the add-on requires version 2025.12.0 or higher of Home Assistant Core.
+- Drop support for armhf, armv7 and i386 architectures
+- Remove `emulate_hardware` configuration option
+
+### Other changes
+
+- Update base image to Alpine 3.23
+
+## 0.29.1
+
+### Z-Wave JS 15.20.1
+
+#### Bugfixes
+
+- Clean up unnecessary "device config changed" repairs that could appear after updating to Z-Wave JS 15.20.0 / addon version 0.29.0 without skipping Z-Wave JS 15.20.0 / addon version 0.28.0.
+
+#### Config file changes
+
+- Add Zooz Zen57 240V XS Relay
+- Add MCO Home MH-5900 thermostat
+- Update Zooz ZEN35 configuration for firmware 1.10 and later
+- Update Zooz ZEN14 configuration for firmware 2.20
+
+### Detailed changelogs
+
+- [Z-Wave JS 15.20.0...15.20.1](https://github.com/zwave-js/zwave-js/compare/v15.20.0...v15.20.1)
+
 ## 0.29.0
 
 ### Z-Wave JS 15.20.0
@@ -386,7 +456,6 @@
 - Update Inovelli VZW31-SN to FW 1.04
 - Add param 29 (load sense) to HomePro ZDP100
 - Add Yale YDM3109A Smart Lock
-
 
 ### Detailed changelogs
 

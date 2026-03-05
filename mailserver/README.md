@@ -1,21 +1,22 @@
-# Home Assistant 插件：邮件服务器
+# Home Assistant App: Mailserver
 
-[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
+[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
 
-为 Home Assistant 提供的邮件服务器。
-提供 Postfix、Postfix Admin 网络界面和 Dovecot IMAP。
+A mail server for Home Assistant.
+Provides Postfix, Postfix Admin web interface and Dovecot IMAP.
 
-## 关于
+## About
 
-重要提示：此插件需要 MariaDB 插件已安装并运行！
+Important: This app requires that the MariaDB app is installed and running!
 
-此插件是实验性的，为您的域名提供邮件服务器。
-也可以在 Postfixadmin 网络界面中配置额外的电子邮件域名和账户。
+This app is provides a mailserver for your domain.
+It is also possible to configure additional email domains and accounts in the Postfixadmin
+web interface.
 
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v6.0.2-blue.svg
-[release]: https://github.com/erik73/addon-mail/tree/v6.0.2
+[release-shield]: https://img.shields.io/badge/version-v6.0.3-blue.svg
+[release]: https://github.com/erik73/app-mail/tree/v6.0.3
 ---
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**

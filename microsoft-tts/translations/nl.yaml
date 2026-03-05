@@ -8,6 +8,28 @@ configuration:
     name: Service-regio
     description: >-
       De regio waarin u uw Speech Service-instantie hebt ingesteld (bijv. westeurope).
+  rate:
+    name: Spreeksnelheid
+    description: >-
+      Spreeksnelheid, als percentage of beschrijving (bijv. "80%" of "slow").
+  pitch:
+    name: Toonhoogte
+    description: >-
+      Toonhoogte, als percentage of beschrijving (bijv. "80%" of "low").
+  volume:
+    name: Luistervolume
+    description: >-
+      Spreekvolume, als percentage of beschrijving (bijv. "80%" of "soft").
+  style:
+    name: Spreekstijl
+    description: >-
+      Spreekstijl, als beschrijving (bijv. "cheerful"). Ondersteunde stijlen
+      hangen af van de stem, en niet alle stemmen ondersteunen stijlen.  Zie de
+      Microsoft-documentatie voor meer details.
+  style_degree:
+    name: Intensiteit van spreekstijl
+    description: >-
+      Intensiteit van spreekstijl van 0.01 tot 2.00.
   update_voices:
     name: Stemmen bijwerken
     description: >-

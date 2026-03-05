@@ -1,16 +1,15 @@
 import json
 import time
-from typing import Optional
+from typing import Optional, Any
 
 import paho.mqtt.client as paho_mqtt
 from paho.mqtt.enums import CallbackAPIVersion
 
 import config
-from log import log
+import utils
 from command_client import CommandClient
 from command_handler import CommandHandler
-import utils
-import ha
+from log import log
 
 
 class MqttClient:
@@ -44,14 +43,14 @@ class MqttClient:
         self.client.reconnect()
 
     def on_connect(self, client, userdata, flags, reason_code, properties):
-        log(None, 'Connected to mqtt broker with result code %s' % reason_code)
+        log(None, f'Connected to mqtt broker with result code {reason_code}')
         self.client.subscribe(self.topic)
 
     def on_disconnect(self, client, userdata, flags, reason_code, properties):
-        log(None, 'Lost connection to mqtt broker with reason code %s' % reason_code)
+        log(None, f'Lost connection to mqtt broker with reason code {reason_code}')
 
     def on_message(self, client, userdata, msg):
-        log(None, 'Received mqtt payload: %s on topic: %s' % (msg.payload, msg.topic))
+        log(None, f'Received mqtt payload: {msg.payload} on topic: {msg.topic}')
         command_list = CommandClient.list_to_json([msg.payload])
         for command in command_list:
             self.command_handler.handle_command(command, None)
@@ -68,13 +67,13 @@ class MqttClient:
                 time.sleep(1)
         self.client.loop()
 
-    def send_event(self, event: ha.WebhookEvent):
+    def send_event(self, event: Any):
         if not self.topic_state:
             return
         if not self.client.is_connected():
             log(None, 'Cannot send message, mqtt client is not connected')
             return
-        log(None, 'Sending mqtt message: %s to topic: %s' % (event, self.topic))
+        log(None, f'Sending mqtt message: {event} to topic: {self.topic}')
         self.client.publish(self.topic_state, json.dumps(event))
 
 def create_client_and_connect(command_handler: CommandHandler) -> MqttClient:

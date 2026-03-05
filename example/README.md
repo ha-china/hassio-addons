@@ -1,30 +1,31 @@
-# Home Assistant 社区插件：示例
+# Home Assistant Community App: Example
 
-[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
+[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
 
-[![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
+[![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
 
-[![通过 GitHub Sponsors 支持Frenck][github-sponsors-shield]][github-sponsors]
+[![Sponsor Frenck via GitHub Sponsors][github-sponsors-shield]][github-sponsors]
 
-[![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
+[![Support Frenck on Patreon][patreon-shield]][patreon]
 
-这是一个由社区 Home Assistant 插件提供的示例插件。
+Example app by Home Assistant Community Apps.
 
-## 关于
+## About
 
-这是一个 Home Assistant 的示例插件。启动后，它每 5 秒显示一条随机名言。
+This is an example app for Home Assistant. When started, it displays a
+random quote every 5 seconds.
 
-它展示了多个功能和结构，例如：
+It shows off several features and structures like:
 
-- 完整的 GitHub 仓库。
-- 通用 Dockerfile 结构和设置。
-- 使用 `config.yaml` 和 `build.yaml` 文件。
-- 通用 shell 脚本结构（`run.sh`）。
-- 使用 CodeClimate 进行质量保证。
-- 使用 GitLab 进行持续集成和部署。
-- 使用社区 Home Assistant 插件构建环境。
-- 在基础镜像中少量使用 Bash 函数库。
-- 使用 Docker 标签方案。
+- Full blown GitHub repository.
+- General Dockerfile structure and setup.
+- The use of the `config.yaml` and `build.yaml` files.
+- General shell scripting structure (`run.sh`).
+- Quality assurance using CodeClimate.
+- Continuous integration and deployment using GitLab.
+- Usage of the Home Assistant Community Apps build environment.
+- Small use of the Bash function library in our base images.
+- The use of Docker label schema.
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -32,12 +33,17 @@
 [forum]: https://community.home-assistant.io?u=frenck
 [github-sponsors-shield]: https://frenck.dev/wp-content/uploads/2019/12/github_sponsor.png
 [github-sponsors]: https://github.com/sponsors/frenck
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v12.0.1-blue.svg
-[release]: https://github.com/hassio-addons/addon-example/tree/v12.0.1
+[release-shield]: https://img.shields.io/badge/version-v13.0.2-blue.svg
+[release]: https://github.com/hassio-addons/app-example/tree/v13.0.2
+---
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+---
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：
