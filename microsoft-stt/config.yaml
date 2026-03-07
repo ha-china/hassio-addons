@@ -1,6 +1,6 @@
 name: Microsoft STT
-description: '[老王杂谈说]：使用 Microsoft Azure 进行语音转文字'
-version: 1.3.8
+description: '[老王杂谈说]：使用微软 Azure 进行语音转文字'
+version: 1.3.9
 slug: wyoming_microsoft_stt
 init: false
 arch:

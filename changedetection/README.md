@@ -1,74 +1,75 @@
-# Home assistant 插件：Changedetection.io
+# Home Assistant 插件：Changedetection.io
 
-**最优秀且最简单的自托管免费开源网站变更检测、监控和通知服务。Visualping、Watchtower 等的替代品。设计理念为简洁——主要目标是免费简单地监控哪些网站的文本发生了变更。免费开源的网页变更检测**
+**最佳且最简单的自托管免费开源网站变更检测、监控和通知服务。Visualping、Watchtower 等的替代品。设计理念简单——主要目标是免费简单地监控哪些网站有文本变更。免费开源网页变更检测**
 
-#### 示例用法
+#### 示例用例
 
-- 产品和服务的价格发生变化
-- _缺货通知_ 和 _重新上架通知_
-- 政府部门更新（变更通常只在他们的网站上）
-- 新软件发布，当您不在他们的邮件列表中时，会收到安全警报。
+- 产品和服务价格变更
+- _缺货通知_ 和 _恢复库存通知_
+- 政府部门更新（变更通常仅在其网站上）
+- 新软件发布、安全警告，当你不在他们的邮件列表中时。
 - 节日变更
 - 房地产列表变更
-- 当您喜欢的威士忌特价销售，或宣布其他特别优惠时，在其他人之前知道
-- 来自政府网站的COVID相关新闻
-- 来自大学/组织的网站新闻
-- 检测和监控JSON API响应中的变更
-- JSON API监控和警报
+- 当你喜欢的威士忌打折或宣布其他特别优惠时，你比别人先知道
+- 来自政府网站的 COVID 相关新闻
+- 大学/组织网站的新闻
+- 检测和监控 JSON API 响应中的变更
+- JSON API 监控和警报
 - 法律和其他文件中的变更
-- 当文本出现在网站上时，通过通知触发API调用
-- 使用JSON过滤器和JSON通知将API粘合在一起
-- 根据网页内容的变化创建RSS源
-- 监控HTML源代码的意外变更，加强您的PCI合规性
-- 您有一个非常敏感的URL监控列表，您不想使用付费替代方案。（记住，_您_是产品）
+- 当文本出现在网站上时，通过通知触发 API 调用
+- 使用 JSON 过滤器和 JSON 通知将 API 粘合在一起
+- 根据网页内容变更创建 RSS 源
+- 监控 HTML 源代码的意外变更，加强你的 PCI 合规性
+- 你有一份非常敏感的 URL 列表需要监控，而你又不希望使用付费替代方案。（记住，_你_ 是产品）
 
-_需要实际支持JavaScript的Chrome运行器吗？我们支持通过WebDriver和Playwright进行抓取！<a>_
+_需要实际支持 JavaScript 的 Chrome 运行器吗？我们支持通过 WebDriver 和 Playwright 进行抓取！_
 
 #### 关键特性
 
-- 许多触发过滤器，如“根据文本触发”、“通过选择器移除文本”、“忽略文本”、“提取文本”，还支持正则表达式！
-- 使用xPath和CSS选择器定位目标元素，易于使用JsonPath规则监控复杂的JSON
-- 在快速的非JS和基于Chrome JS的“fetcher”之间切换
-- 容易指定网站应检查的频率
-- 在提取文本之前执行JS（对于登录很有用，UI中有示例！）
-- 覆盖请求头，指定`POST`或`GET`和其他方法
+- 许多触发过滤器，例如“文本触发”、“通过选择器移除文本”、“忽略文本”、“提取文本”，也支持正则表达式！
+- 使用 xPath 和 CSS 选择器定位目标元素，轻松监控复杂的 JSON，使用 JsonPath 规则
+- 在快速的非 JS 和基于 Chrome JS 的“抓取器”之间切换
+- 容易指定网站应该多久检查一次
+- 在提取文本之前执行 JS（对于登录很有用，UI 中的示例！）
+- 覆盖请求头，指定 `POST` 或 `GET` 和其他方法
 - 使用“视觉选择器”帮助定位特定元素
 
-_感谢每一位为我仓库加星的人！要加星，请点击下面的图片，然后它将出现在右上角。谢谢！_
+_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关键特性
 
+
 ## 安装
 
-此插件的安装相当简单，与安装任何其他Hass.io插件没有不同。
+此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. [将我的Hass.io插件仓库添加到您的Hass.io实例][repository]。
+1. 将我的 Hass.io 插件仓库[仓库](https://github.com/jdeath/homeassistant-addons)添加到您的 Hass.io 实例中。
 1. 安装此插件。
-1. 前往ip:port。入口排序功能工作，但页面无法正确渲染
+1. 前往 ip:port。入口排序功能似乎工作正常，但页面无法正确渲染
 
 
-## 如何使用启用了Playwright JS的fetcher而不是内置的Plaintext/HTTP客户端
+## 如何使用 Playwright JS 启用的抓取器而不是内置的纯文本/HTTP 客户端
 
-Changedetection.io插件本身只能使用内置的Plaintext/HTTP客户端抓取网站。
+Changedetection.io 插件本身只能使用内置的纯文本/HTTP 客户端抓取网站。
 
-许多现代网页使用JavaScript来填充内容，它们更加动态，有时需要真实的Chrome浏览器来抓取内容，尽管许多可以使用内置的'fetcher'。
+许多现代网页使用 JavaScript 来填充内容，它们更加动态，有时需要真正的 Chrome 浏览器来抓取内容，尽管许多可能使用内置的 '抓取器'
 
-您可以将Changedetection.io配置为使用Playwright fetcher抓取页面，否则它将使用内置的非JS浏览器进行抓取。使用Playwright fetcher提供了Changedetection.io的全部功能，包括用于抓取内容的JS浏览器步骤和视觉过滤选择器。
+您可以将 Changedetection.io 配置为使用 Playwright 抓取器，否则它将使用纯非 JS 内置浏览器进行抓取。使用 Playwright 抓取器提供完整的 Changedetection.io 功能，包括 JS 浏览器步骤来抓取内容以及视觉过滤选择器。
 
-要使用Playwright fetcher，Changedetection.io插件需要与由alexbelgium制作的Browserless Chrome插件合作。
+要使用 Playwright 抓取器，Changedetection.io 插件需要与由 alexbelgium 制作的 Browserless Chrome 插件合作。
 
-要安装Browserless Chrome插件，请将alexbelgium/hassio-addons仓库（https://github.com/alexbelgium/hassio-addons/）添加到Homeassistant。从Homeassistant界面安装并启动插件。要使用Playwright fetcher，只需在添加新站点进行监控或将其设置为所有监控站点的系统标准时，在“请求”选项卡中勾选“Playwright Chromium/Javascript”，或者在您的Changedetection.io插件的网络界面中>设置>抓取，选择“Playwright Chromium/Javascript”。
+要安装 Browserless Chrome 插件，请将 alexbelgium/hassio-addons 仓库（https://github.com/alexbelgium/hassio-addons/）添加到 Home Assistant。从 Home Assistant 界面安装并启动插件。要使用 Playwright 抓取器，只需在添加新网站进行监控或将其设置为所有监控网站的系统标准时，在“请求”选项卡中勾选“Playwright Chromium/JavaScript”。前往您的 Changedetection.io 插件的 Web 界面 > 设置 > 抓取并选择“Playwright Chromium/JavaScript”。
 
-有关Browserless Chrome插件的更多信息：https://github.com/alexbelgium/hassio-addons/tree/master/browserless_chrome
+更多关于 Browserless Chrome 插件的信息：https://github.com/alexbelgium/hassio-addons/tree/master/browserless_chrome
 
-这两个插件需要在同一台机器上运行。已在Home Assistant 2023.5.3/Supervisor 2023.04.1/操作系统 10.1上的Raspberry Pi 4B上进行测试，但应该适用于任何其他版本，以及amd64设备。
+这两个插件需要在同一台机器上运行。在 Raspberry Pi 4B 上测试了 Home Assistant 2023.5.3/Supervisor 2023.04.1/操作系统 10.1，但应该与其他版本兼容，也支持 amd64 设备。
 
-注意：Browserless Chrome插件在抓取网站时资源消耗很大，包括RAM和CPU。在RPi 4B上运行良好，在较老设备上可能较慢。最大同时抓取次数限制为1。
+注意：Browserless Chrome 插件在抓取网站时非常消耗资源，包括 RAM 和 CPU。在 RPi 4B 上运行良好，在较旧的设备上可能较慢。最大同时抓取次数限制为 1。
 
 
-[repository]: https://github.com/jdeath/homeassistant-addons
+[仓库]: https://github.com/jdeath/homeassistant-addons
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

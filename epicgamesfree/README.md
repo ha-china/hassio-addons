@@ -1,10 +1,10 @@
 # Home Assistant 插件：Epic Games 免费游戏
 
-我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试需要花费大量时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我本人不使用的测试服务，如 VPN），以便进行故障排除和改进插件。
+我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试需要花费大量时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我本人不使用的测试服务，如 VPN）来调试和改进插件。
 
 如果这个插件为您节省了时间或使您的设置更加简单，我将非常感激您的支持！
 
-[![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![请给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
@@ -20,31 +20,31 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点星的人！要点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有为我仓库点星的人！要为它点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
-[![Stargazers 仓库名单 for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
 ![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/epicgamesfree/stats.png)
 
 ## 关于
 
-[Epic Games Store 每周免费游戏](https://github.com/claabs/epicgames-freegames-node) : 自动登录并兑换 Epic Games Store 的促销免费游戏。处理多个账户、2FA、绕过验证码、验证码通知和计划运行。
+[Epic Games Store 每周免费游戏](https://github.com/claabs/epicgames-freegames-node) : 自动登录并兑换 Epic Games Store 的促销免费游戏。支持多个账户、2FA、绕过验证码、验证码通知和计划运行。
 此插件基于 docker 镜像 https://hub.docker.com/r/charlocharlie/epicgames-freegames
 
 ## 配置
 
-插件选项公开了 `env_vars` 字段，用于传递额外的环境变量，以及一个 `disable_cron` 开关，用于停止内置的 cron 服务；所有其他应用程序配置都通过 JSON 文件完成。
+插件选项公开了 `env_vars` 字段，用于传递额外的环境变量，以及一个 `disable_cron` 开关来停止内置的 cron 服务；所有其他应用程序配置都通过 JSON 文件完成。
 
 ### 配置文件
 
 配置文件存储在 `/config/addons_config/epicgamesfree/`：
 
 - **config.json**：主要配置文件
-- **cookies.json**：身份验证 cookies（可选）
+- **cookies.json**：身份验证cookies（可选）
 
 如果这些文件不存在，它们将在第一次启动时创建，并使用默认设置。
 
-- **env_vars 选项**：使用插件的 `env_vars` 选项来传递额外的环境变量（名称为大写或小写）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+- **env_vars 选项**：使用插件的 `env_vars` 选项来传递额外的环境变量（大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
 ### 基本配置
 
@@ -89,11 +89,11 @@ _感谢所有给我的仓库点星的人！要点星，请点击下面的图片�
 |------|------|------|
 | `accounts` | 数组 | Epic Games 账户列表 |
 | `cronSchedule` | 字符串 | 声明游戏的时间表（默认：`0 */6 * * *`） |
-| `runOnStartup` | 布尔值 | 插件启动时运行声明周期 |
+| `runOnStartup` | 布尔型 | 在插件启动时运行声明周期 |
 | `logLevel` | 字符串 | 应用程序日志级别 |
 | `webPortalConfig.baseUrl` | 字符串 | 包含的 Web 站点使用的基 URL |
 | `notifiers` | 数组 | 通知目标，如电子邮件、Discord、Telegram、Apprise 等。 |
-| `disable_cron` | 布尔值 | 如果使用外部调度程序，则禁用插件的 cron 服务 |
+| `disable_cron` | 布尔型 | 如果使用外部调度程序，则禁用插件的 cron 服务 |
 
 ### 账户配置
 
@@ -140,16 +140,16 @@ notifications:
 
 ### 重要提示
 
-- **自动兑换**：由于 Epic Games 改进了自动化检测，自动兑换不再可能
+- **自动兑换**：由于 Epic Games 的改进自动化检测，自动兑换不再可能
 - **通知系统**：插件现在通过您首选的通知方法发送兑换链接，而不是自动兑换游戏
 - **2FA 支持**：支持具有双因素认证的账户的 TOTP（基于时间的单次密码）
 - **多个账户**：您可以配置多个 Epic Games 账户
 
 ### Cookie 导入（可选）
 
-您可以将浏览器 cookies 导入以避免登录问题。创建 `/config/addons_config/epicgamesfree/cookies.json`：
+您可以将浏览器cookies导入以避免登录问题。创建 `/config/addons_config/epicgamesfree/cookies.json`：
 
-有关详细的 cookie 导入说明，请参阅：https://github.com/claabs/epicgames-freegames-node#cookie-import
+有关详细的cookie导入说明，请参阅：https://github.com/claabs/epicgames-freegames-node#cookie-import
 
 ### 故障排除
 
@@ -164,8 +164,8 @@ notifications:
 #### 登录问题
 1. 检查您的凭据是否正确
 2. 如果已启用，请验证 2FA/TOTP 配置
-3. 考虑导入浏览器 cookies
-4. 检查插件日志以获取特定的错误消息
+3. 考虑导入浏览器cookies
+4. 检查插件日志以获取特定错误消息
 
 ## 安装
 
@@ -184,7 +184,7 @@ notifications:
 
 ### 超时错误
 
-请尝试将 `"browserNavigationTimeout": 300000,` 添加到您的 config.json 中（https://github.com/alexbelgium/hassio-addons/issues/675#issuecomment-1407675351）
+请尝试将 `"browserNavigationTimeout": 300000,` 添加到您的 config.json（https://github.com/alexbelgium/hassio-addons/issues/675#issuecomment-1407675351）
 
 ### 其他错误
 

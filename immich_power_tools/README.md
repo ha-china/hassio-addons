@@ -1,66 +1,65 @@
-# Home assistant add-on: Immich Power Tools
+# Home Assistant 插件：Immich Power Tools
 
+我在业余时间维护这个以及其他 Home Assistant 插件：跟进上游更改、Home Assistant 更改以及在真实硬件上进行测试都需要花费大量的时间和金钱。我经常使用大约 5-10 个我 >110 个插件中的几个，所以我安装了测试机器（并购买了一些我本人不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+如果这个插件为您节省了时间或使您的设置更加简单，我将非常感激您的支持！
 
-If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+[![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+## 插件信息
 
-## Addon informations
+![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_power_tools%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_power_tools%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_power_tools%2Fconfig.yaml)
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_power_tools%2Fconfig.yaml)
-![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_power_tools%2Fconfig.yaml)
-![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_power_tools%2Fconfig.yaml)
-
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有为我的仓库点星的人！要为它点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/immich_power_tools/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/immich_power_tools/stats.png)
 
-## About
+## 关于
 
-[Immich Power Tools](https://github.com/varun-raj/immich-power-tools) provides advanced tools for organizing and managing your Immich photo library. This addon extends Immich's capabilities with powerful features for photo organization, analysis, and management.
+[Immich Power Tools](https://github.com/varun-raj/immich-power-tools) 为组织和管理您的 Immich 照片库提供了高级工具。此插件通过强大的照片组织、分析和管理功能扩展了 Immich 的功能。
 
-Key features:
-- Advanced photo organization tools
-- Batch operations for photo management
-- AI-powered photo analysis and tagging
-- Geographic photo mapping with Google Maps integration
-- Duplicate detection and management
-- Advanced search and filtering capabilities
+主要功能：
+- 高级照片组织工具
+- 批量操作照片管理
+- 基于人工智能的图片分析和标记
+- 结合 Google Maps 的地理照片映射
+- 重复检测和管理
+- 先进的搜索和过滤功能
 
-This addon is based on the [immich-power-tools](https://github.com/varun-raj/immich-power-tools) project.
+此插件基于 [immich-power-tools](https://github.com/varun-raj/immich-power-tools) 项目。
 
-## Configuration
+## 配置
 
-Webui can be found at `<your-ip>:8001`.
+Webui 可以在 `<你的-ip>:8001` 找到。
 
-### Options
+### 选项
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `IMMICH_URL` | str | **Required** | Internal Immich server URL (e.g., `http://homeassistant:3001`) |
-| `EXTERNAL_IMMICH_URL` | str | **Required** | External Immich server URL for browser access |
-| `IMMICH_API_KEY` | str | **Required** | Immich API key for authentication |
-| `DB_HOST` | str | **Required** | Database hostname (e.g., `core-mariadb` or `homeassistant`) |
-| `DB_USERNAME` | str | **Required** | Database username |
-| `DB_PASSWORD` | str | **Required** | Database password |
-| `DB_DATABASE_NAME` | str | **Required** | Database name (usually `immich`) |
-| `DB_PORT` | str | **Required** | Database port (usually `5432` for PostgreSQL) |
-| `GOOGLE_MAPS_API_KEY` | str | | Google Maps API key for geographic features |
-| `GEMINI_API_KEY` | str | | Google Gemini API key for AI features |
+| 选项 | 类型 | 默认值 | 描述 |
+|------|------|---------|------|
+| `IMMICH_URL` | str | **必需** | 内部 Immich 服务器 URL（例如，`http://homeassistant:3001`） |
+| `EXTERNAL_IMMICH_URL` | str | **必需** | 外部 Immich 服务器 URL 以供浏览器访问 |
+| `IMMICH_API_KEY` | str | **必需** | Immich 身份验证 API 密钥 |
+| `DB_HOST` | str | **必需** | 数据库主机名（例如，`core-mariadb` 或 `homeassistant`） |
+| `DB_USERNAME` | str | **必需** | 数据库用户名 |
+| `DB_PASSWORD` | str | **必需** | 数据库密码 |
+| `DB_DATABASE_NAME` | str | **必需** | 数据库名（通常是 `immich`） |
+| `DB_PORT` | str | **必需** | 数据库端口（通常是 PostgreSQL 的 `5432`） |
+| `GOOGLE_MAPS_API_KEY` | str | | 用于地理功能的 Google Maps API 密钥 |
+| `GEMINI_API_KEY` | str | | 用于人工智能功能的 Google Gemini API 密钥 |
 
-### Example Configuration
+### 示例配置
 
 ```yaml
 IMMICH_URL: "http://homeassistant:3001"
@@ -75,64 +74,65 @@ GOOGLE_MAPS_API_KEY: "your-google-maps-api-key"
 GEMINI_API_KEY: "your-gemini-api-key"
 ```
 
-### Prerequisites
+### 先决条件
 
-Before using this addon, ensure you have:
+在使用此插件之前，请确保您有：
 
-1. **Immich server running** - This addon requires a working Immich installation
-2. **Database access** - You need direct access to your Immich database
-3. **Immich API key** - Generate an API key from your Immich admin panel
+1. **运行中的 Immich 服务器** - 此插件需要一个有效的 Immich 安装
+2. **数据库访问** - 您需要直接访问您的 Immich 数据库
+3. **Immich API 密钥** - 从 Immich 管理面板生成 API 密钥
 
-### Getting API Keys
+### 获取 API 密钥
 
-**Immich API Key:**
-1. Open your Immich web interface
-2. Go to **Administration** > **API Keys**
-3. Click **Create API Key**
-4. Copy the generated key
+**Immich API 密钥：**
+1. 打开您的 Immich 网页界面
+2. 前往 **管理** > **API 密钥**
+3. 点击 **创建 API 密钥**
+4. 复制生成的密钥
 
-**Google Maps API Key** (optional):
-1. Visit the [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select an existing one
-3. Enable the Maps JavaScript API
-4. Create credentials (API key)
+**Google Maps API 密钥**（可选）：
+1. 访问 [Google Cloud Console](https://console.cloud.google.com/)
+2. 创建一个新的项目或选择一个现有项目
+3. 启用 Maps JavaScript API
+4. 创建凭证（API 密钥）
 
-**Google Gemini API Key** (optional):
-1. Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. Create a new API key for Gemini
+**Google Gemini API 密钥**（可选）：
+1. 访问 [Google AI Studio](https://makersuite.google.com/app/apikey)
+2. 为 Gemini 创建一个新的 API 密钥
 
-### Custom Scripts and Environment Variables
+### 自定义脚本和环境变量
 
-This addon supports custom scripts and environment variables through the `addon_config` mapping:
+此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+- **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+此插件的安装相当简单，与安装任何其他 Hass.io 插件没有太大区别。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on.
-1. Configure all required database and API settings.
-1. Click the `Save` button to store your configuration.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Open the webUI to start using the power tools.
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 supervisor 插件存储的右上角，或点击下面的按钮如果您已配置我的 HA）
+   [![打开您的 Home Assistant 实例并显示具有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此插件。
+2. 配置所有必需的数据库和 API 设置。
+3. 点击 `保存` 按钮以存储您的配置。
+4. 启动插件。
+5. 检查插件的日志以查看一切是否顺利。
+6. 打开 WebUI 以开始使用功能工具。
 
-## Support
+## 支持
 
-Create an issue on github, or ask on the [home assistant community forum](https://community.home-assistant.io/)
+在 github 上创建一个问题，或在 [home assistant 社区论坛](https://community.home-assistant.io/) 上提问。
 
-For more information about Immich Power Tools, visit: https://github.com/varun-raj/immich-power-tools
+有关 Immich Power Tools 的更多信息，请访问：https://github.com/varun-raj/immich-power-tools
 
-[repository]: https://github.com/alexbelgium/hassio-addons
-
-
+[仓库](https://github.com/alexbelgium/hassio-addons)
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

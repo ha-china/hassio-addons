@@ -1,51 +1,50 @@
-# Home assistant add-on: Immich Frame
+# Home Assistant 插件：Immich Frame
 
+我在业余时间维护这个以及其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试都需要花费大量时间（以及一些金钱）。我经常使用大约 5-10 个我超过 110 个插件中的插件，所以我安装了测试机器（并购买了一些我不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+如果这个插件为您节省了时间或使您的设置更简单，我将非常感激您的支持！
 
-If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+[![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+## 插件信息
 
-## Addon informations
+![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_frame%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_frame%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_frame%2Fconfig.yaml)
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_frame%2Fconfig.yaml)
-![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_frame%2Fconfig.yaml)
-![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_frame%2Fconfig.yaml)
-
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有为我仓库点星的人！要星标它，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
-[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers 仓库列表 for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/immich_frame/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/immich_frame/stats.png)
 
-## About
+## 关于
 
-[Immich Frame](https://immichframe.online/) displays your Immich gallery as a digital photo frame. Transform any screen into a beautiful, rotating display of your personal photos and memories stored in Immich.
+[Immich Frame](https://immichframe.online/) 将您的 Immich 相册显示为一个数字相框。将任何屏幕变成一个展示您存储在 Immich 中的个人照片和记忆的美丽、旋转的显示，完美地重新利用旧平板电脑或显示器作为专用的照片展示设备。
 
-This addon allows you to create a digital photo frame that connects to your Immich server and displays your photos in a slideshow format, perfect for repurposing old tablets or monitors as dedicated photo displays.
+此插件允许您创建一个连接到您的 Immich 服务器并以幻灯片形式显示您的照片的数字相框，非常适合将旧平板电脑或显示器作为专用照片展示设备。
 
-## Configuration
+## 配置
 
-Webui can be found at `<your-ip>:8171`.
+Webui 可以在 `<您的 IP>:8171` 找到。
 
-### Options
+### 选项
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `ImmichServerUrl` | str | **Required** | URL of your Immich server (e.g., `http://homeassistant:3001`) |
-| `ApiKey` | str | **Required** | Immich API key for authentication |
-| `TZ` | str | | Timezone (e.g., `Europe/London`) |
+| 选项 | 类型 | 默认 | 描述 |
+|------|------|------|------|
+| `ImmichServerUrl` | str | **必需** | 您 Immich 服务器的 URL（例如，`http://homeassistant:3001`） |
+| `ApiKey` | str | **必需** | Immich 身份验证的 API 密钥 |
+| `TZ` | str | | 时区（例如，`Europe/London`） |
 
-### Example Configuration
+### 示例配置
 
 ```yaml
 ImmichServerUrl: "http://homeassistant:3001"
@@ -53,46 +52,47 @@ ApiKey: "your-immich-api-key-here"
 TZ: "Europe/London"
 ```
 
-### Getting Your Immich API Key
+### 获取您的 Immich API 密钥
 
-1. Open your Immich web interface
-2. Go to **Administration** > **API Keys**
-3. Click **Create API Key**
-4. Give it a descriptive name (e.g., "Photo Frame")
-5. Copy the generated API key and paste it in the addon configuration
+1. 打开您的 Immich 网页界面
+2. 前往 **管理** > **API 密钥**
+3. 点击 **创建 API 密钥**
+4. 给它一个描述性的名称（例如，"Photo Frame"）
+5. 复制生成的 API 密钥并将其粘贴到插件配置中
 
-### Custom Scripts and Environment Variables
+### 自定义脚本和环境变量
 
-This addon supports custom scripts and environment variables through the `addon_config` mapping:
+此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+- **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on.
-1. Configure your Immich server URL and API key.
-1. Click the `Save` button to store your configuration.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Open the webUI to configure your photo frame settings.
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 supervisor 插件存储的右上角，或点击下面的按钮如果您已配置我的 HA）
+   [![打开您的 Home Assistant 实例并显示具有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此插件。
+2. 配置您的 Immich 服务器 URL 和 API 密钥。
+3. 点击 `保存` 按钮以存储您的配置。
+4. 启动插件。
+5. 检查插件的日志以查看一切是否顺利。
+6. 打开 WebUI 以配置您的相框设置。
 
-## Support
+## 支持
 
-Create an issue on github, or ask on the [home assistant community forum](https://community.home-assistant.io/)
+在 github 上创建一个问题，或在 [home assistant 社区论坛](https://community.home-assistant.io/) 上提问。
 
-For more information about Immich Frame, visit: https://immichframe.online/
+有关 Immich Frame 的更多信息，请访问：https://immichframe.online/
 
 [repository]: https://github.com/alexbelgium/hassio-addons
-
-
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

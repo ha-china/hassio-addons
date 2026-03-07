@@ -1,35 +1,35 @@
-# Home Assistant 插件：Minecraft 专用服务器Bedrock 版
-快速在 Home Assistant 上运行 Minecraft 专用服务器Bedrock 版的方法。
+# Home Assistant 扩展：Minecraft 专用服务器 Bedrock 版
+快速在 Home Assistant 上运行 Minecraft 专用服务器 Bedrock 版。
 
-_感谢每一位为我仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
+_感谢 everyone 为我的仓库点赞！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
-![为 @jdeath/homeassistant-addons 点赞](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## 简介
+## 关于
 
-此插件使用 [itzg/docker-minecraft-bedrock-server](https://github.com/itzg/docker-minecraft-bedrock-server/) 的 docker 镜像。
+此扩展使用 [itzg/docker-minecraft-bedrock-server](https://github.com/itzg/docker-minecraft-bedrock-server/) 的 docker 镜像。
 
-重启插件时，它会自动获取 Minecraft 的最新版本。
+当重启扩展时，它将自动获取 Minecraft 的最新版本。
 
 你的世界、设置和服务器可执行文件存储在 /share/minecraftbe。
 
-你可能想要创建一个服务，在半夜重启插件以更新 Minecraft 版本（见下文）。
+你可能想要创建一个服务，在深夜重启扩展以更新 Minecraft 版本（见下文）
 
-如果你想在 Home Assistant 中监控你的 Bedrock 服务器，安装此集成，因为内置的集成仅监控 Java：https://github.com/jdeath/Bedrock-Homeassistant
+如果你想在 Home Assistant 中监控你的 Bedrock 服务器，请安装此集成，因为内置的集成只监控 Java：https://github.com/jdeath/Bedrock-Homeassistant
 
 ## 安装
 
-此插件的安装非常简单，与安装其他 Hass.io 插件没有区别。
+此扩展的安装非常简单，与安装任何其他 Hass.io 扩展没有区别。
 
-1. 将我的 Hass.io 插件仓库 [repository] 添加到你的 Hass.io 实例。
-1. 安装此插件。
-2. 如果需要，更改 API 端口（默认为标准 Minecraft 端口）
-3. 点击“保存”按钮以存储你的配置。
+1. 将我的 Hass.io 扩展仓库 [repository] 添加到你的 Hass.io 实例。
+1. 安装此扩展。
+2. 如有需要，更改 API 端口（默认为标准的 Minecraft 端口）
+3. 点击 `保存` 按钮以存储你的配置。
 4. 创建目录 /share/minecraftbe
-5. 启动插件。
-6. 检查插件的日志，以查看是否一切顺利。
-7. 编辑你想要在 /share/minecraftbe/ 中的 server/permissions/whitelist 属性，并重启插件。注意，你无法在 server.properties 中更改端口，因为它会被某些原因覆盖。然而，你可以在 Home Assistant 的插件配置选项卡中更改端口。我只暴露了 IP4 端口。如果需要 IP6，请告诉我。
-8. 如果你想外部访问，务必将你的外部端口转发到你的 Home Assistant IP。
+5. 启动扩展。
+6. 检查扩展的日志，以查看是否一切顺利。
+7. 编辑你想要在 /share/minecraftbe/ 中的服务器/权限/白名单属性，然后重启扩展。注意，你无法在 server.properties 中更改端口，因为它会被某些原因覆盖。然而，你可以在 Home Assistant 的扩展配置标签中更改端口。我只暴露了 IP4 端口。如果需要 IP6，请告诉我。
+8. 如果你想要外部访问，确保将你的外部端口转发到你的 Home Assistant IP。
 
 ## 重启自动化
 

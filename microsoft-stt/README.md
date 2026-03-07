@@ -1,10 +1,13 @@
-# Wyoming Microsoft STT
-Wyoming protocol server for Microsoft Azure speech-to-text.
+# 魔术师微软STT
+Wyoming协议服务器，用于微软Azure语音转文本。
 
-This add-on provides a Wyoming integration for Microsoft Azure speech-to-text and can be directly used with [Home Assistant](https://www.home-assistant.io/) voice and [Rhasspy](https://github.com/rhasspy/rhasspy3).
+此附加组件提供了Wyoming与微软Azure语音转文本的集成，并可直接与[Home Assistant](https://www.home-assistant.io/)语音和[Rhasspy](https://github.com/rhasspy/rhasspy3)一起使用。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

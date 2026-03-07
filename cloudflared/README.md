@@ -1,21 +1,21 @@
-# Home Assistant 应用（附加组件）：Cloudflared
+# Home Assistant App (附加组件): Cloudflared
 
-[![GitHub 发布版][releases-shield]][releases]
+[![GitHub 发布][releases-shield]][releases]
 ![项目阶段][project-stage-shield]
 ![项目维护][maintenance-shield]
-![报告安装数][installations-shield-stable]
+![报告安装数量][installations-shield-stable]
 
-使用 Cloudflared 远程连接您的 Home Assistant 实例，而无需打开任何端口。
+使用 Cloudflared，无需打开任何端口即可远程连接到您的 Home Assistant 实例。
 
 ## 关于
 
-Cloudflared 通过安全的隧道将您的 Home Assistant 实例连接到 Cloudflare 的域名或子域名。这样，您就可以在不打开路由器端口的情况下，将 Home Assistant 暴露在互联网上。此外，您还可以利用 Cloudflare Teams（他们的零信任平台）来进一步保护您的 Home Assistant 连接。
+Cloudflared 通过安全隧道将您的 Home Assistant 实例连接到 Cloudflare 的一个域名或子域名。这样，您可以在不打开路由器端口的情况下将 Home Assistant 暴露给互联网。此外，您还可以利用 Cloudflare Teams，他们的零信任平台来进一步保护您的 Home Assistant 连接。
 
-**要使用此应用（附加组件），您必须拥有一个使用 Cloudflare 管理 DNS 记录的域名（例如 example.com）。您可以在我们的 [操作指南][wiki] 中找到更多相关信息。**
+**要使用此应用程序（附加组件），您必须拥有一个使用 Cloudflare DNS 条目进行管理的域名（例如 example.com）。有关更多信息，请参阅我们的 [Wiki][wiki]**。
 
 ## 免责声明
 
-使用此应用（附加组件）时，请确保您符合 [Cloudflare 自助订阅协议][cloudflare-sssa]。
+请确保在使用此应用程序（附加组件）时遵守 [Cloudflare 自助服务订阅协议][cloudflare-sssa]。
 
 [cloudflare-sssa]: https://www.cloudflare.com/terms/
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
@@ -26,8 +26,11 @@ Cloudflared 通过安全的隧道将您的 Home Assistant 实例连接到 Cloudf
 [installations-shield-edge]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fanalytics.home-assistant.io%2Faddons.json&query=%24%5B%22ffd6a162_cloudflared%22%5D.total&label=Reported%20Installations&link=https%3A%2F%2Fanalytics.home-assistant.io/add-ons
 [installations-shield-stable]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fanalytics.home-assistant.io%2Faddons.json&query=%24%5B%229074a9fa_cloudflared%22%5D.total&label=Reported%20Installations&link=https%3A%2F%2Fanalytics.home-assistant.io/add-ons
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

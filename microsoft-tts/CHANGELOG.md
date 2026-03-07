@@ -1,5 +1,39 @@
 # Changelog
 
+## [1.4.3](https://github.com/hugobloem/wyoming-microsoft-tts/compare/v1.4.2...v1.4.3) (2026-03-05)
+
+
+### 🏗️ Maintenance
+
+* **deps-dev:** bump pytest from 8.4.1 to 9.0.2 ([#148](https://github.com/hugobloem/wyoming-microsoft-tts/issues/148)) ([fbb389c](https://github.com/hugobloem/wyoming-microsoft-tts/commit/fbb389ce72310a8d61a510ba00343fbc24fb1ef6))
+* **deps-dev:** bump ruff from 0.12.10 to 0.15.4 ([#150](https://github.com/hugobloem/wyoming-microsoft-tts/issues/150)) ([82969fd](https://github.com/hugobloem/wyoming-microsoft-tts/commit/82969fdad0aeb1e79e7f7e503940256178a07fad))
+* **deps:** bump azure-cognitiveservices-speech from 1.45.0 to 1.48.2 ([#154](https://github.com/hugobloem/wyoming-microsoft-tts/issues/154)) ([50d6f81](https://github.com/hugobloem/wyoming-microsoft-tts/commit/50d6f819b3336d7cfe07897bba9fbf0bce902951))
+* **deps:** bump black from 25.1.0 to 26.1.0 ([#152](https://github.com/hugobloem/wyoming-microsoft-tts/issues/152)) ([a4da6dd](https://github.com/hugobloem/wyoming-microsoft-tts/commit/a4da6dd14f34d27b7a770d2094f2a64f307ba8db))
+* **deps:** bump docker/metadata-action from 5 to 6 ([#146](https://github.com/hugobloem/wyoming-microsoft-tts/issues/146)) ([e5b54f4](https://github.com/hugobloem/wyoming-microsoft-tts/commit/e5b54f4a26d13b891f71964ff0c6f3a04a86bc00))
+* **deps:** bump docker/setup-buildx-action from 3 to 4 ([#145](https://github.com/hugobloem/wyoming-microsoft-tts/issues/145)) ([a907421](https://github.com/hugobloem/wyoming-microsoft-tts/commit/a907421abc0a6885b6a38760e419a99283737b72))
+* **deps:** bump lxml from 6.0.1 to 6.0.2 ([#153](https://github.com/hugobloem/wyoming-microsoft-tts/issues/153)) ([608a3c4](https://github.com/hugobloem/wyoming-microsoft-tts/commit/608a3c49dfd6ac2e9eea090b4d4c1a35718bf969))
+* **deps:** bump pycountry from 24.6.1 to 26.2.16 ([#147](https://github.com/hugobloem/wyoming-microsoft-tts/issues/147)) ([836bfc1](https://github.com/hugobloem/wyoming-microsoft-tts/commit/836bfc14e703454bc329132afa25ec90a73c98c2))
+* **deps:** bump regex from 2025.7.34 to 2026.2.28 ([#151](https://github.com/hugobloem/wyoming-microsoft-tts/issues/151)) ([ea9bd76](https://github.com/hugobloem/wyoming-microsoft-tts/commit/ea9bd761ad246011890167985e6bf0ba2fdf5697))
+* **deps:** bump wyoming from 1.7.2 to 1.8.0 ([#149](https://github.com/hugobloem/wyoming-microsoft-tts/issues/149)) ([11428cc](https://github.com/hugobloem/wyoming-microsoft-tts/commit/11428ccf33085bba89be3e7410b9e6fcecee13ca))
+
+
+### 🔧 Miscellaneous Chores
+
+* Delete requirements.txt ([02294fa](https://github.com/hugobloem/wyoming-microsoft-tts/commit/02294faa5db180b192553203f3cd67b68b4ca485))
+
+
+### 👷 Continuous Integration
+
+* change dependabot to uv ([#144](https://github.com/hugobloem/wyoming-microsoft-tts/issues/144)) ([3772a98](https://github.com/hugobloem/wyoming-microsoft-tts/commit/3772a98d4ccb1aef660332de523ff7d59b0eab05))
+
+## [1.4.2](https://github.com/hugobloem/wyoming-microsoft-tts/compare/v1.4.1...v1.4.2) (2026-03-05)
+
+
+### 🏗️ Maintenance
+
+* **deps:** bump azure-cognitiveservices-speech from 1.47.0 to 1.48.2 ([#140](https://github.com/hugobloem/wyoming-microsoft-tts/issues/140)) ([d189946](https://github.com/hugobloem/wyoming-microsoft-tts/commit/d18994698c8c3ee8d7615247e573630a066484ff))
+* **deps:** bump docker/login-action from 3 to 4 ([#141](https://github.com/hugobloem/wyoming-microsoft-tts/issues/141)) ([ce6db9a](https://github.com/hugobloem/wyoming-microsoft-tts/commit/ce6db9a44a168a171eb655c888e990701096fa6f))
+
 ## [1.4.1](https://github.com/hugobloem/wyoming-microsoft-tts/compare/v1.4.0...v1.4.1) (2026-02-06)
 
 
