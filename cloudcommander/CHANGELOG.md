@@ -1,5 +1,10 @@
+## 19.6.8-4 (07-03-2026)
+- Minor bugs fixed
 ## 19.6.8-3 (06-03-2026)
 - Minor bugs fixed
+
+## 19.6.8-2 (2026-03-07)
+- Fix argument quoting in cloudcmd launch command
 
 ## 19.6.8 (2026-02-28)
 - Update to latest version from coderaiser/cloudcmd (changelog : https://github.com/coderaiser/cloudcmd/releases)
