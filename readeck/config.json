@@ -4,7 +4,7 @@
     "aarch64"
   ],
   "boot": "auto",
-  "description": "[老王杂谈说]：一个简单的网页应用，让你保存你喜欢的网页上珍贵的可读内容，并想永远保留。",
+  "description": "[老王杂谈说]：一个简单的 Web 应用程序，允许你保存你喜欢并希望永远保留的网页中的宝贵可读内容。",
   "environment": {
     "READECK_SERVER_HOST": "0.0.0.0"
   },
@@ -12,7 +12,7 @@
     "addon_config:rw"
   ],
   "init": "false",
-  "version": "0.22.0",
+  "version": "0.22.2",
   "name": "readeck",
   "options": {},
   "ports": {
@@ -24,7 +24,7 @@
   "schema": {},
   "slug": "readeck",
   "startup": "services",
-  "upstream": "0.22.0",
+  "upstream": "0.22.2",
   "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8000]",
   "ingress": false,
