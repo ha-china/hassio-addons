@@ -1,5 +1,35 @@
 # TOMMY
 
+## 2.6.4
+
+### Minor Changes
+- Minor UI improvements
+
+## 2.6.3
+
+### Minor Changes
+- Fixed an issue causing UDP connection from server to device to fail in some cases
+
+## 2.6.2
+
+### Minor Changes
+- Improved error handling during heartbeat parsing
+
+## 2.6.1
+
+### Minor Changes
+- Fixed a bug causing devices to stay disconnected in some cases
+
+## 2.6.0
+
+### Major Changes
+- Added the option to reconfigure devices from the dashboard without needing a reflash
+
+### Minor Changes
+- A warning is now shown when the server can't reach the device
+- Fixed a bug causing some devices not to be discovered
+- Minor UI fixes
+
 ## 2.5.0
 
 ### Major Changes

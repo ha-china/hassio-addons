@@ -7,14 +7,14 @@ often used in combination with Grafana to visualize the data.
 
 This app runs the InfluxDB3.x Enterprise build channel.
 
+![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
+
 ## License required
 
 Important: This app requires a license from InfluxData. It is for free for home/hobbyist use.
 It is required that you provide your email address in the app configuration,
 and once the app it started, you will get an email where you can activate
 your license. Please read the Software License Terms in the email before accepting.
-
-![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
 
 ## Installation
 
@@ -44,18 +44,9 @@ need them later in your homeassistant configuration, and for data migration.
 ## Administrative Access
 
 There is no GUI provided with InfluxDB3. To manage the app, you need to
-install InfluxDB 3 Explorer. I used docker desktop on my Windows desktop
-computer and installed it with the following command line input:
+install InfluxDB 3 Explorer. It is available as an app here in this repo.
 
-```yaml
-docker run --detach --name influxdb3-explorer --publish 8888:80 influxdata/influxdb3-ui:latest --mode=admin
-```
-
-Folow this link for more information: https://docs.influxdata.com/influxdb3/explorer/
-
-Start the influxdb3-explorer container.
-Point your broser to `http://localhost:8888/` to connect to the admin interface.
-You will need your token to connect, and point the Explorer to
+You will need your token to connect, and point the Explorer app to
 <your_influxdb2_ip_address>:8181
 
 ## HomeAssistant Configuration

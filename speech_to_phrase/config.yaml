@@ -1,8 +1,8 @@
 ---
-version: 1.4.1
+version: 1.4.2
 slug: speech-to-phrase
 name: Speech-to-Phrase
-description: 快速定制的本地语音转文本
+description: '[老王杂谈说]：null'
 url: http://github.com/OHF-voice/speech-to-phrase
 arch:
   - amd64

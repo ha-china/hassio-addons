@@ -1,0 +1,28 @@
+{{- $options := (ds "options") -}}
+{
+  "ui": true,
+  "api_addr": "http{{ if not $options.tls_disable }}s{{ end }}://0.0.0.0:8200",
+  "cluster_addr": "http{{ if not $options.tls_disable }}s{{ end }}://127.0.0.1:8201",
+  "listener": [
+    {
+      "tcp": {
+        "address": "0.0.0.0:8200",
+        "tls_disable": {{ $options.tls_disable }},
+        {{ if not $options.tls_disable -}}
+        "tls_cert_file": "/ssl/openbao/fullchain.pem",
+        "tls_key_file": "/ssl/openbao/privkey.pem",
+        {{ end -}}
+        "telemetry": {
+          "unauthenticated_metrics_access": false
+        }
+      }
+    }
+  ],
+  "storage": {
+    "raft": {
+      "path": "/data/openbao/data",
+      "node_id": "homeassistant"
+    }
+  },
+  "log_level": "{{ strings.ToUpper $options.log_level }}"
+}

@@ -17,6 +17,7 @@ real-time entity updates, and drag-and-drop customisation.
 ## Features
 
 - **Real-time updates** via Home Assistant WebSocket API.
+- **Trusted Ingress Integration** when running inside the Home Assistant add-on.
 - **PIN Protection** for settings and edit mode.
 - **Drag-and-drop** card layout with multiple pages.
 - **Glassmorphism** UI with multiple themes.
@@ -63,6 +64,11 @@ Tunet add-on builds are now version-resolved from release tags before falling ba
 
 - Press **Ctrl + Shift + R** to hard-refresh and bypass browser cache.
 - Check the add-on **Log** tab for errors.
+
+### Ingress / sidebar access stops working after a custom container change
+
+- The add-on enables trusted Supervisor ingress headers automatically through its launcher.
+- If you rebuild or wrap the container manually, keep the add-on startup flow intact so ingress trust remains limited to the Home Assistant add-on runtime.
 
 ### Cards are not updating
 

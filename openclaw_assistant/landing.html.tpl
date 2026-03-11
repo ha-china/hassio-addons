@@ -117,6 +117,31 @@
 
     <!-- ==================== PROXY RECIPES ==================== -->
     <details>
+      <summary>MCP setup (Home Assistant control)</summary>
+      <div style="margin-top:8px;font-size:13px;color:#9ca3af;line-height:1.7">
+        <p><b>MCP (Model Context Protocol)</b> lets OpenClaw control Home Assistant entities, services, and automations directly.</p>
+
+        <b>Automatic (recommended)</b>
+        <ol style="margin:4px 0;padding-left:22px;line-height:1.8">
+          <li>Create a <b>Long-Lived Access Token</b> in HA: click your profile avatar → scroll to <b>Long-Lived Access Tokens</b> → <b>Create Token</b></li>
+          <li>Paste it into add-on option <code>homeassistant_token</code> in <b>Settings → Add-ons → Configuration</b></li>
+          <li>Set <code>auto_configure_mcp</code> to <b>ON</b> in add-on Configuration</li>
+          <li>Restart the add-on — MCP is configured automatically</li>
+        </ol>
+
+        <b>Manual (terminal)</b>
+        <pre style="background:#0b1220;padding:8px;border-radius:6px;overflow-x:auto;font-size:12px">mcporter config add HA "http://localhost:8123/api/mcp" \
+  --header "Authorization=Bearer YOUR_LONG_LIVED_TOKEN" \
+  --scope home</pre>
+
+        <b>After upgrades</b> — if OpenClaw has stale HA data:
+        <pre style="background:#0b1220;padding:8px;border-radius:6px;overflow-x:auto;font-size:12px">mcporter call home-assistant.GetLiveContext</pre>
+
+        <p><b>Tip:</b> The first MCP session needs a capable model (Gemini 3.1 Pro, Claude Sonnet 4, GPT-4.1). After setup, cheaper models work fine.</p>
+      </div>
+    </details>
+
+    <details>
       <summary>Reverse-proxy recipes (NPM / Caddy / Traefik / Tailscale)</summary>
       <div style="margin-top:8px;font-size:13px;color:#9ca3af;line-height:1.7">
 

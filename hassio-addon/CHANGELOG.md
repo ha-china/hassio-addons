@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.14.7
+
+### Changed
+### Fixed
+- Includes dashboard release `1.14.7`.
+- Preserves working OAuth API calls when proactive refresh fails temporarily and keeps backend validation responses aligned with real auth failures versus reachability errors.
+
+## 1.14.6
+
+### Changed
+- Includes dashboard release `1.14.6`.
+
+### Fixed
+- Keeps long update names inside the Updates panel layout instead of overflowing the action area.
+
+### Security
+- Restricts Supervisor ingress header trust to explicit add-on mode while preserving Home Assistant sidebar ingress access.
+
 ## 1.14.5
 
 ### Fixed

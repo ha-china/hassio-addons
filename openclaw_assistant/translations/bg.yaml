@@ -110,3 +110,6 @@ configuration:
   gateway_env_vars:
     name: Променливи на средата за Gateway
     description: Променливи на средата, предавани на OpenClaw gateway процеса при стартиране (списък от записи name/value в Home Assistant UI; макс. 50 променливи, ключове до 255 знака, стойности до 10000 знака).
+  auto_configure_mcp:
+    name: Автоматично конфигуриране на MCP за Home Assistant
+    description: "Когато е ВКЛ. и Home Assistant Token е зададен, автоматично регистрира Home Assistant като MCP сървър при всяко стартиране. Това позволява на OpenClaw да контролира HA устройства, услуги и автоматизации чрез Model Context Protocol. Изключете само ако управлявате mcporter конфигурацията ръчно."

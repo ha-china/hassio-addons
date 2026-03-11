@@ -1,7 +1,7 @@
 name: OpenClaw Assistant
-version: "0.5.58"
+version: "0.5.62"
 slug: openclaw_assistant
-description: '[老王杂谈说]：作为 Home Assistant 附加组件运行 OpenClaw 助手（兼容 OpenClaw）'
+description: '[老王杂谈说]：作为 Home Assistant 插件运行 OpenClaw Assistant (OpenClaw兼容)。'
 url: https://ghfast.top/github.com/techartdev/OpenClawHomeAssistant
 arch:
   - amd64
@@ -110,6 +110,10 @@ options:
   # (e.g. PATH, HOME, NODE_OPTIONS, NODE_PATH, OPENCLAW_*, proxy vars).
   # Limits: max 50 variables, max key length 255 chars, max value length 10000 chars
   gateway_env_vars: []
+  # Auto-configure MCP (Model Context Protocol) for Home Assistant.
+  # When enabled and homeassistant_token is set, automatically registers HA as an
+  # MCP server in OpenClaw so the AI can control Home Assistant entities/services.
+  auto_configure_mcp: false
 schema:
   timezone: str
   enable_terminal: bool?
@@ -137,3 +141,4 @@ schema:
     - name: "match(^[A-Z_][A-Z0-9_]*$)"
       value: str
   nginx_log_level: list(full|minimal)?
+  auto_configure_mcp: bool?

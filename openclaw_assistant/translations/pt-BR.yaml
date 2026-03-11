@@ -110,3 +110,6 @@ configuration:
   gateway_env_vars:
     name: Variáveis de Ambiente do Gateway
     description: Variaveis de ambiente passadas para o processo do gateway OpenClaw na inicializacao (lista de entradas name/value na UI do Home Assistant; maximo de 50 variaveis, chaves com ate 255 caracteres, valores com ate 10.000 caracteres).
+  auto_configure_mcp:
+    name: Configurar MCP automaticamente para o Home Assistant
+    description: "Quando LIGADO e o token do Home Assistant estiver definido, registra automaticamente o Home Assistant como servidor MCP a cada inicialização. Isso permite que o OpenClaw controle entidades, serviços e automações do HA via Model Context Protocol. Desative apenas se você gerencia a configuração do mcporter manualmente."

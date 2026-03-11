@@ -1,0 +1,31 @@
+---
+name: OpenBao
+version: 0.1.0
+slug: openbao
+description: |-
+  [老王杂谈说]：OpenBao 是一个基于身份的机密和加密管理系统。
+arch:
+  - aarch64
+  - amd64
+image: "ghcr.nju.edu.cn/bluemaex/ha-addons-openbao-{arch}"
+startup: system
+url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/openbao
+init: false
+ports:
+  8200/tcp: 8200
+ports_description:
+  8200/tcp: OpenBao API and UI
+map:
+  - data
+  - ssl
+options:
+  log_level: info
+  auto_unseal: true
+  tls_disable: true
+  env_vars: []
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
+  auto_unseal: bool
+  tls_disable: bool
+  env_vars:
+    - str

@@ -1,5 +1,5 @@
 ## What’s changed
 
-## 📚 Documentation
+## ⬆️ Dependency updates
 
-- Update documentation @erik73 ([#12](https://github.com/erik73/app-influxdb3/pull/12))
+- Update InfluxDB3 Enterprise to 3.8.4 @erik73 ([#15](https://github.com/erik73/app-influxdb3/pull/15))
