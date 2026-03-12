@@ -1,12 +1,51 @@
-ARG BUILD_FROM
-FROM docker.n8n.io/n8nio/n8n
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.1
+# hadolint ignore=DL3006
+FROM ${BUILD_FROM}
 
-USER root
-COPY run.sh /
-RUN chmod a+x /run.sh
-ENTRYPOINT [ "/run.sh" ]
+# Redeclare ARG after FROM for use in build stage
+ARG N8N_VERSION=2.9.2
 
-### LABELS
+# Set shell
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# Setup base
+# hadolint ignore=DL3018
+
+# Addon metadata (injected by CI)
+ENV ADDON_VERSION="1.2.1"
+ENV ADDON_NAME="N8n"
+ENV ADDON_SLUG="n8n"
+ENV ADDON_UNSUPPORTED="false"
+
+RUN apk add --no-cache \
+    curl \
+    nodejs \
+    npm \
+    python3 \
+    sqlite \
+    libc6-compat
+
+# Install n8n
+# hadolint ignore=DL3018
+RUN \
+    apk add --no-cache --virtual .build-dependencies \
+        build-base \
+        python3-dev \
+    && npm install -g "n8n@${N8N_VERSION}" \
+    && apk del --purge .build-dependencies \
+    && rm -rf \
+        /root/.npm \
+        /root/.cache
+
+# Verify installation
+RUN n8n --version
+
+# Copy root filesystem
+# Copy root filesystem
+COPY rootfs /
+RUN chmod a+x /etc/services.d/n8n/run
+
+# Build arguments
 ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_DESCRIPTION
@@ -14,21 +53,30 @@ ARG BUILD_NAME
 ARG BUILD_REF
 ARG BUILD_REPOSITORY
 ARG BUILD_VERSION
+
+# Labels
 LABEL \
     io.hass.name="${BUILD_NAME}" \
     io.hass.description="${BUILD_DESCRIPTION}" \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
-    io.hass.version=${BUILD_VERSION} \
-    maintainer="jdeath (https://ghfast.top/github.com/jdeath)" \
+    io.hass.version="${BUILD_VERSION}" \
+    maintainer="FaserF <https://ghfast.top/github.com/FaserF>" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
-    org.opencontainers.image.vendor="Home Assistant Add-ons" \
-    org.opencontainers.image.authors="jdeath (https://ghfast.top/github.com/jdeath)" \
+    org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
+    org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/jdeath" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/${BUILD_REPOSITORY}" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
-    org.opencontainers.image.created=${BUILD_DATE} \
-    org.opencontainers.image.revision=${BUILD_REF} \
-    org.opencontainers.image.version=${BUILD_VERSION}
+    org.opencontainers.image.url="https://ghfast.top/github.com/faserf/hassio-addons" \
+    org.opencontainers.image.source="https://ghfast.top/github.com/faserf/hassio-addons" \
+    org.opencontainers.image.documentation="https://ghfast.top/github.com/faserf/hassio-addons/blob/master/n8n/README.md" \
+    org.opencontainers.image.created="${BUILD_DATE}" \
+    org.opencontainers.image.revision="${BUILD_REF}" \
+    org.opencontainers.image.version="${BUILD_VERSION}"
+
+# uses s6-overlay from base image
+
+# Health check - using /healthz/readiness which is enabled by default
+# (standard /healthz requires additional environment configuration)
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl --fail http://127.0.0.1:5678/healthz/readiness || exit 1
