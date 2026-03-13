@@ -12,7 +12,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3018
 
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="1.3.1"
+ENV ADDON_VERSION="1.3.2"
 ENV ADDON_NAME="WhatsApp"
 ENV ADDON_SLUG="whatsapp"
 ENV ADDON_UNSUPPORTED="false"

@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：下载自动化'
+description: '[老王杂谈说]：null'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -108,4 +108,4 @@ schema:
 slug: autobrr
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/autobrr
-version: "1.73.0"
+version: "1.74.0"

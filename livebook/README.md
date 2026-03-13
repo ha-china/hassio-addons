@@ -1,8 +1,8 @@
-# Home Assistant 插件：Livebook
+# Home assistant 插件：Livebook
 
-Livebook 是一个用于编写交互式和协作式代码笔记本的 Web 应用程序
+Livebook 是一个用于编写交互式和协作式代码笔记本的网页应用程序
 
-_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
+_感谢 everyone 为我的仓库点赞！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
@@ -17,9 +17,9 @@ _感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，�
 1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例中。
 1. 点击 `保存` 按钮以存储您的配置。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切顺利。
+1. 检查插件的日志，以查看一切是否顺利。
 1. 打开 WebUI 应该可以通过 <your-ip>:port 访问。
-1. 数据将存储在 /addon_configs/2effc9b9_livebook
+1. 数据将位于 /addon_configs/2effc9b9_livebook
 
 ## 配置
 

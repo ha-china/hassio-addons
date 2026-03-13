@@ -2,12 +2,20 @@
 
 This App exposes a REST API that acts as a bridge between Home Assistant (via the [ha-whatsapp integration](https://github.com/FaserF/ha-whatsapp)) and the WhatsApp network using `Baileys`.
 
+- **[Official Documentation & Examples](https://faserf.github.io/ha-whatsapp/)**: Comprehensive guide on how to use the `notify` service, send buttons, polls, images, and creating bot automations.
+
+> [!WARNING]
+> **Interactive Messages (Buttons & Lists)**: These features are increasingly restricted by Meta for unofficial APIs. They may not appear on all devices (especially iOS). If they fail for you, consider using standard text messages or **Polls**, which are much more reliable.
+
 ## Authentication
 
 All API requests (except `/health`) **MUST** include the `X-Auth-Token` header.
 
 - The token is automatically generated on first run.
 - You can view and copy the token from the App Dashboard (Web UI).
+
+> [!WARNING]
+> **Reliability Note**: Interactive messages (Buttons/Lists) are currently unstable due to WhatsApp (Meta) restrictions on unofficial libraries. They may not show up on all devices. Polls are recommended as a more stable alternative.
 
 ## Endpoints
 
@@ -58,6 +66,35 @@ Logs out and deletes the current session data. Useful for resetting connection e
 ```json
 { "status": "success", "message": "Session deleted and logged out" }
 ```
+
+### ⚙️ Configuration
+
+```yaml
+log_level: info
+mark_online: false
+mask_sensitive_data: false
+media_folder: ''
+reset_session: false
+send_message_timeout: 25000
+ui_auth_enabled: false
+ui_auth_password: ''
+webhook_enabled: false
+webhook_token: ''
+webhook_url: ''
+welcome_message_enabled: true
+admin_notifications_enabled: true
+admin_numbers: '491701234567, 491707654321'
+```
+
+### 🗝️ Admin Security & Notifications
+
+To use `ha-app-*` control commands, add your phone number to `admin_numbers`. Numbers are automatically normalized (handling `+`, `0`, and spaces).
+
+**Key Features:**
+
+- **Automated Alerts**: If `admin_notifications_enabled` is on, admins receive proactive messages about WhatsApp disconnection/reconnection, HA Core restarts, and successful updates (detecting Core version changes).
+- **First-Contact Greeting**: If `welcome_message_enabled` is on, users receive a greeting identifying their role (Admin/Standard) on their first message.
+- **Access Control**: Unauthorized users receive a one-time "Permission Denied" warning.
 
 ### 2. Messaging
 
@@ -131,8 +168,14 @@ _Note: Button support varies by device and WhatsApp version._
   "message": "Choose an option",
   "footer": "Select one",
   "buttons": [
-    { "buttonId": "id1", "buttonText": { "displayText": "Button 1" }, "type": 1 },
-    { "buttonId": "id2", "buttonText": { "displayText": "Button 2" }, "type": 1 }
+    {
+      "buttonId": "id1",
+      "displayText": "Button 1"
+    },
+    {
+      "buttonId": "id2",
+      "displayText": "Button 2"
+    }
   ]
 }
 ```
@@ -270,8 +313,16 @@ Sends an interactive List Message (Action Menu).
     {
       "title": "Section 1",
       "rows": [
-        { "title": "Option 1", "rowId": "opt1" },
-        { "title": "Option 2", "rowId": "opt2", "description": "Subtext" }
+        {
+          "title": "Row Title",
+          "description": "Row Description",
+          "id": "rowId1"
+        },
+        {
+          "title": "Option 2",
+          "id": "opt2",
+          "description": "Subtext"
+        }
       ]
     }
   ]
@@ -294,11 +345,30 @@ Sends a VCard contact.
 
 ### 4. Native Commands
 
-The App supports the following native commands via WhatsApp messages (sent to the bot):
+The App supports several commands sent via WhatsApp messages directly to the bot.
 
-- **`/ping`**: Returns "Pong! 🏓" (useful for checking connection).
-- **`/id`**: Returns the current Chat ID (useful for finding Group IDs).
-- **`/restart`**: Restarts the WhatsApp connection.
+#### Public Commands
+
+Available to anyone:
+
+- **`ha-app-ping`**: Returns "Pong! 🏓" (useful for checking connection).
+- **`ha-app-getid`**: Returns the current Chat ID (useful for finding Group IDs).
+- **`ha-app-sponsor`**: Show support links for the project.
+- **`ha-app-status`**: Comprehensive system status report (Includes HA Core & OS versions).
+
+#### Admin Commands (Protected)
+
+Requires the sender's number to be in the `admin_numbers` whitelist.
+
+- **`ha-app-help`**: Lists all available commands and examples.
+- **`ha-app-welcome`**: Manually trigger the role-aware welcome message.
+- **`ha-app-diagnose`**: Run full message type diagnostic.
+- **`ha-app-logs`**: Retrieves the latest 10 connection events.
+- **`ha-app-restart`**: Gracefully restarts the WhatsApp connection.
+- **`ha-app-stats`**: View message statistics.
+
+> [!IMPORTANT]
+> Non-admin users attempting to use protected `ha-app-*` commands will receive a single "Permission Denied" warning.
 
 ### 5. Events & Logs
 

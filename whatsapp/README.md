@@ -1,13 +1,13 @@
 # WhatsApp
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/whatsapp/logo.png" width="100" />
+![WhatsApp Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/whatsapp/logo.png) width="100" />
 
-[![打开您的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_whatsapp)
-[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker 镜像](https://img.shields.io/badge/docker-1.3.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-whatsapp)
+[![打开您的 Home Assistant 实例并显示插件仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_whatsapp)
+[![Home Assistant App](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker 镜像](https://img.shields.io/badge/docker-1.4.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-whatsapp)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> Home Assistant WhatsApp 应用 (Baileys/Node.js)。使用主机网络（端口 8066 不能更改）。
+> Home Assistant WhatsApp App (Baileys/Node.js).
 
 ---
 
@@ -15,9 +15,10 @@
 
 ## ❤️ 支持此项目
 
-> 我在业余时间维护这些附加组件，同时还有一份全职工作。测试设备需要费用，每一笔捐款都能帮助我保持独立并投入更多时间到开源工作中。
+> 我在**兼职工作之余**维护所有这些插件。测试设备需要花费金钱，每一笔捐赠都帮助我保持独立，并能够投入更多时间到开源工作中。
+
 >
-> 捐款完全是自愿的——但我得到的支持越多，我越不依赖其他收入，并有更多时间投入到这些项目中。
+> 捐赠完全是自愿的——但收到的支持越多，我就越少依赖其他收入，就能有更多时间投入到这些项目中。
 
 <div align="center">
 
@@ -29,44 +30,66 @@
 <a href="https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_whatsapp" target="_blank">
 </a>
 
-> Home Assistant WhatsApp 应用 (Baileys/Node.js)。使用主机网络（端口 8066 不能更改）。
+## 🐛 报告一个错误
 
-## 🐛 报告错误
+如果您在此应用程序中遇到任何问题，请使用以下链接报告。问题表单将预先填写应用程序信息，以帮助我们更快地解决问题。
 
-如果您在使用此应用时遇到任何问题，请使用以下链接报告它们。问题表单将预填写应用信息，以帮助我们更快地解决问题。
-
-**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.3.0&log_information=请在此处粘贴应用的日志输出：%0A%0A)**
-
-> [!TIP]
-> **自动发现：** 此应用默认使用 `host_network: true` 来启用 Home Assistant 中的 **“发现新设备”** 通知，通过 mDNS。这简化了设置过程，因为 HA 将自动找到应用。
+**[报告一个错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.3.0&log_information=请+粘贴+应用程序+日志+输出+在这里：%0A%0A)**
 
 ## 💡 功能请求
 
-如果您有新功能或改进的想法，请使用以下链接提交功能请求。表单将预填写应用信息。
+如果您有关于新功能或改进的想法，请使用以下链接提交功能请求。表单将预先填写应用程序信息。
 
-**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&App_name=whatsapp)**
+**[请求一个功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&App_name=whatsapp)**
 
 > [!NOTE]
-> 请使用上述链接请求功能。这确保了应用名称将自动包含在您的功能请求中。
-
-此项目是开源的，并在 MIT 许可证下提供。
-由 **FaserF** 维护。
+> 请使用上面的链接请求功能。这确保了您的功能请求中自动包含应用程序名称。
 
 ## 🛠️ 使用与集成
 
-要实际发送消息并自动化 WhatsApp，您需要 Home Assistant 的 **WhatsApp 自定义集成**。
+要实际发送消息和自动化 WhatsApp，您需要 Home Assistant 的 **WhatsApp 自定义集成**。
 
-- **[官方文档与示例](https://faserf.github.io/ha-whatsapp/)**：关于如何使用 `notify` 服务、发送按钮、投票、图片以及创建机器人自动化的全面指南。
+- **[官方文档与示例](https://faserf.github.io/ha-whatsapp/)**：全面指南，介绍如何使用 `notify` 服务、发送按钮、投票、图片以及创建机器人自动化。
+
+> [!WARNING]
+> **交互式消息（按钮和列表）**：这些功能越来越多地受到 Meta 对非官方 API 的限制。它们可能不会出现在所有设备上（尤其是 iOS）。如果它们对您不起作用，请考虑使用标准文本消息或 **投票**，这些方法更加可靠。
+
+### 🗝️ 原生控制命令
+
+通过 WhatsApp 控制您的插件！
+
+**公共命令：**
+
+- `ha-app-status`：检查健康和版本（包括 HA 核心和 OS 信息）。
+- `ha-app-ping`：基本连接检查（"Pong!"）。
+- `ha-app-getid`：返回当前的聊天 ID（用于群组 ID）。
+- `ha-app-sponsor`：显示支持和捐赠链接。
+
+**管理员命令（受保护）：**
+
+- `ha-app-help`：显示可用命令和示例。
+- `ha-app-welcome`：手动显示基于角色的欢迎信息。
+- `ha-app-diagnose`：运行完整的消息类型诊断（按钮、列表等）。
+- `ha-app-logs`：查看最近的连接事件。
+- `ha-app-restart`：重启 WhatsApp 连接。
+
+> [!TIP]
+> **首次联系**：机器人会自动向新用户在他们的第一条直接消息中发送欢迎信息，并识别他们的角色（管理员/标准）。
+
+> [!TIP]
+> 从管理员号码发送 `ha-app-help` 获取命令和用法示例的完整列表。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 应用页面中的 **配置** 标签配置附加组件。
+通过 Home Assistant App 页面的 **配置** 选项卡配置此插件。
 
 ### 选项
 
 ```yaml
+admin_notifications_enabled: true
+admin_numbers: ''
 keep_alive_interval: 30000
 log_level: info
 mark_online: false
@@ -79,17 +102,21 @@ ui_auth_password: ''
 webhook_enabled: false
 webhook_token: ''
 webhook_url: ''
+welcome_message_enabled: true
 ```
 
 ---
 
 ## 👨‍💻 致谢与许可证
 
-此项目是开源的，并在 MIT 许可证下提供。
+此项目是开源的，并受 MIT 许可证的约束。
 由 **FaserF** 维护。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我
