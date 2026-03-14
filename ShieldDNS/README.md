@@ -1,48 +1,54 @@
 # ShieldDNS
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/ShieldDNS/logo.png" width="100" />
+![ShieldDNS logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/ShieldDNS/logo.png) 
 
-[![打开您的 Home Assistant 实例并显示附加组件仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_ShieldDNS)
-[![Home Assistant 附加组件](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker 镜像](https://img.shields.io/badge/docker-2.3.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-shielddns)
-![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![打开你的 Home Assistant 实例并显示附加组件仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_ShieldDNS)
+[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-shielddns)
+![项目维护者](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 适用于 AdGuard Home 的高性能 DoT 代理
+> 高性能 DoT 代理，用于 AdGuard Home
 
 ---
 
 ## 📖 关于
 
-如果您在使用此附加组件时遇到任何问题，请使用下面的链接报告。问题表单将预填充附加组件信息，以帮助我们更快地解决问题。
+## ❤️ 支持本项目
 
-如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填充附加组件信息。
+> 我在**兼职工作之余**维护所有这些附加组件。测试设备需要花费资金，而每一次的捐赠都帮助我保持独立，并能投入更多时间到开源工作中。
+>
+> 捐赠是完全自愿的——但是，我收到的支持越多，就越少依赖于其他收入，我能投入到这些项目中的时间就越多。
 
-## 🐛 报告 Bug
+<div align="center">
 
-如果您在使用此附加组件时遇到任何问题，请使用下面的链接报告。问题表单将预填充附加组件信息，以帮助我们更快地解决问题。
+</div>
 
-**[报告 Bug](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=2.0.0&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
+## 🐛 报告错误
 
-> [!NOTE]
-> 请使用上面的链接报告问题。这确保了所有必要的信息（附加组件名称、版本等）会自动包含在您的 Bug 报告中。
+如果你在这个应用程序中遇到任何问题，请通过以下链接报告。问题表单将预先填写应用程序信息，以帮助我们更快地解决问题。
 
-## 💡 功能请求
-
-如果您有关于新功能或改进的想法，请使用下面的链接提交功能请求。表单将预填充附加组件信息。
-
-**[请求功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=ShieldDNS)**
+**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=2.0.0&log_information=请+在此处+粘贴+应用程序+日志输出%3A%0A%0A)**
 
 > [!NOTE]
-> 请使用上面的链接请求功能。这确保了附加组件名称会自动包含在您的功能请求中。
+> 请使用上面的链接来报告问题。这确保了所有必要的信息（应用程序名称、版本等）自动包含在你的错误报告中。
 
-本项目是开源的，并在 MIT 许可证下可用。
+## 💡 特性请求
+
+如果你有一个新特性或改进的想法，请使用以下链接提交特性请求。表单将预先填写应用程序信息。
+
+**[请求特性](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&App_name=ShieldDNS)**
+
+> [!NOTE]
+> 请使用上面的链接来请求特性。这确保了应用程序名称自动包含在你的特性请求中。
+
+本项目是开源的，并使用 MIT 许可证。
 由 **FaserF** 维护。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 附加组件页面的 **Configuration** 选项卡配置附加组件。
+通过 Home Assistant 应用程序的**配置**标签配置此附加组件。
 
 ### 选项
 
@@ -61,13 +67,16 @@ upstream_dns: 192.168.1.2
 
 ---
 
-## 👨‍💻 致谢与许可证
+## 👨‍💻 信用与许可
 
-本项目是开源的，并在 MIT 许可证下可用。
+本项目是开源的，并使用 MIT 许可证。
 由 **FaserF** 维护。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

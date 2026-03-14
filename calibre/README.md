@@ -1,10 +1,10 @@
 # Home Assistant 插件：Calibre
 
-我在业余时间维护这个以及其他 Home Assistant 插件：跟踪上游变更、Home Assistant 变更以及在真实硬件上进行测试都需要花费大量的时间（以及一些金钱）。我经常使用大约 5-10 个我 >110 个插件中的几个，所以我安装了测试机器（并购买了某些我本人不使用的测试服务，如 vpn），以用于调试和改进插件。
+我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游变化、Home Assistant 变化以及在真实硬件上进行测试需要花费很多时间（还有一些钱）。我经常使用大约 5-10 个我 >110 个插件，所以我安装了测试机器（并购买了一些我本人不使用的测试服务，如 VPN）来调试和改进插件。
 
-如果这个插件为您节省了时间或使您的设置更加简单，我将非常感激您的支持！
+如果这个插件为您节省了时间或使您的设置更简单，我会非常感激您的支持！
 
-[![请给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![买我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
@@ -20,19 +20,19 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我仓库点星的人！要点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢每一位为我仓库加星的人！要加星，请点击下面的图片，然后它将显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/calibre/stats.png)
+![下载演变](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/calibre/stats.png)
 
 ## 关于
 
 ---
 
-[Calibre](https://calibre-ebook.com/) 是一个强大且易于使用的电子书管理器。用户称其卓越且是必备工具。它几乎可以完成所有事情，并且将事情推进到了普通电子书软件之外。它也是完全免费和开源的，非常适合普通用户和计算机专家。
+[Calibre](https://calibre-ebook.com/) 是一个强大且易于使用的电子书管理器。用户表示它非常出色，是必备工具。它几乎可以做到任何事情，并且超越了普通电子书软件的范畴。它是完全免费和开源的，非常适合普通用户和电脑专家。
 
-此插件基于 docker 镜像 https://github.com/linuxserver/docker-calibre
+此插件基于 docker 图像 https://github.com/linuxserver/docker-calibre
 
 ## 安装
 
@@ -40,33 +40,33 @@ _感谢所有为我仓库点星的人！要点星，请点击下面的图片，�
 
 此插件的安装相当简单，与安装任何其他插件没有太大区别。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 supervisor 插件商店的右上角，或点击下面的按钮如果您已配置我的 HA）
-   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 supervisor 插件商店的右上角，或点击下面的按钮如果您已经配置了我的 HA）
+   [![打开您的 Home Assistant 实例并显示添加插件仓库对话框，其中包含预填充的特定仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
-1. 点击“保存”按钮以存储您的配置。
-1. 将插件选项设置为您的偏好。
+1. 点击 `保存` 按钮以存储您的配置。
+1. 将插件选项设置为您的偏好设置
 1. 启动插件。
-1. 检查插件的日志以查看一切是否顺利。
+1. 检查插件的日志以查看是否一切顺利。
 1. 打开 webUI 并调整软件选项
 
 ## 配置
 
 ---
 
-Webui 可在 <http://homeassistant:PORT> 或通过侧边栏使用入口找到。
-请阅读上游容器文档以获取更多信息：https://github.com/linuxserver/docker-calibre#application-setup
+WebUI 可在 <http://homeassistant:PORT> 或通过侧边栏使用入口找到。
+请阅读上游容器的文档以获取更多信息：https://github.com/linuxserver/docker-calibre#application-setup
 
-**注意**：Web服务器和无线连接需要从桌面应用程序手动启用，分别使用端口 8081 和 9090。
+**注意**：需要从桌面应用程序手动启用 web 服务器和无线路由连接，分别使用端口 8081 和 9090。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+|------|------|---------|-------|
 | `PGID` | int | `0` | 文件权限的组 ID |
 | `PUID` | int | `0` | 文件权限的用户 ID |
 | `TZ` | str | | 时区（例如，`Europe/London`） |
-| `PASSWORD` | str | | 用于 GUI 访问的可选密码 |
-| `CLI_ARGS` | str | | 可选的 Calibre CLI 启动参数 |
+| `PASSWORD` | str | | GUI 访问的可选密码 |
+| `CLI_ARGS` | str | | Calibre 的可选 CLI 启动参数 |
 | `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
 | `networkdisks` | str | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
 | `cifsusername` | str | | 网络共享的 SMB 用户名 |
@@ -97,20 +97,20 @@ cifsdomain: "workgroup"
 
 ### 自定义脚本和环境变量
 
-此插件支持通过 `addon_config` 映射自定义脚本和环境变量：
+此插件支持通过 `addon_config` 映射来使用自定义脚本和环境变量：
 
 - **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+- **env_vars 选项**：使用插件的 `env_vars` 选项来传递额外的环境变量（使用大写或小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 以获取详细信息。
 
 ## 支持
 
-在 github 上创建问题
+在 GitHub 上创建一个问题
 
-## 插图
+## 图解
 
 ---
 
-![插图](https://calibre.com/img/slider/artistdetails.png)
+![图解](https://calibre.com/img/slider/artistdetails.png)
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 ---

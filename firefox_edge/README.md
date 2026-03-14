@@ -1,53 +1,55 @@
-# Home Assistant Add-on: Firefox (Edge)
+# Home Assistant 插件：Firefox (Edge)
 
-_Run Firefox as a browser inside Home Assistant to access local or external web sites from your home._
+在 Home Assistant 内部运行 Firefox 浏览器，以便从您的家中访问本地或外部网站。
 
-![Supports aarch64 Architecture][aarch64-shield]
-![Supports amd64 Architecture][amd64-shield]
-![Supports armv7 Architecture][armv7-shield]
-![Supports i386 Architecture][i386-shield]
+![支持 aarch64 架构][aarch64-shield]
+![支持 amd64 架构][amd64-shield]
+![支持 armv7 架构][armv7-shield]
+![支持 i386 架构][i386-shield]
 
-## About
+## 关于
 
-Mozilla Firefox is a free and open-source web browser developed by Mozilla Foundation and its subsidiary, Mozilla Corporation.
+Mozilla Firefox 是由 Mozilla Foundation 及其子公司 Mozilla Corporation 开发的一款免费开源网络浏览器。
 
-This add-on is based on the [docker image](https://github.com/jlesage/docker-firefox) from [Jocelyn Le Sage](https://github.com/jlesage).
+此插件基于 [docker 镜像](https://github.com/jlesage/docker-firefox) 由 [Jocelyn Le Sage](https://github.com/jlesage) 提供。
 
-A huge thank to him for the great containers created and maintained.
-He's the real hero who needs to be [supported](https://github.com/sponsors/jlesage).
+非常感谢他为创建和维护这些优秀的容器而付出的努力。
+他是真正的英雄，需要得到 [支持](https://github.com/sponsors/jlesage)。
 
-## Differences with the original container
+## 与原始容器的区别
 
-There are a few differences that were either required for this container to work as an Add-on or just my own tweaks based on my preferences:
+以下是一些区别，这些区别要么是使此容器作为插件工作所必需的，要么是基于我的个人偏好的调整：
 
-- Edge version: this container is not based on Alpine **Stable** but Alpine **Edge**. The main reason was to benefit from the latest Firefox version available. During the startup, the container may show in the log an older version of Firefox, it can be ignored. It attempts to update Firefox each time the container starts.
-- To make it compatible with Home Assistant persistence, I needed to remap folders and to do so, the startup script runs as `root`. I will try to avoid this in the future.
+- Edge 版本：此容器不是基于 Alpine **Stable**，而是基于 Alpine **Edge**。主要原因是希望利用可用的最新 Firefox 版本。在启动过程中，容器日志中可能显示较旧的 Firefox 版本，可以忽略。它会在每次容器启动时尝试更新 Firefox。
+- 为了使其与 Home Assistant 持久性兼容，我需要重新映射文件夹，为此，启动脚本以 `root` 用户身份运行。我将在未来尽量避免这样做。
 
-## How to use
+## 使用方法
 
-Just install, start the container and click on "Open Web UI". You can use "Show in sidebar" for easy access. Everything you do is persisted in Firefox. Even if you stop the Add-on or restart Home Assistant host OS.
+只需安装，启动容器，然后点击“打开 Web UI”。您可以使用“在侧边栏显示”以便于访问。您在 Firefox 中所做的所有操作都将持久化。即使您停止插件或重启 Home Assistant 主机操作系统。
 
-## Downloads
+## 下载
 
-The files downloaded in Firefox are automatically stored to your `/share/firefox` folder.
+在 Firefox 中下载的文件将自动存储到您的 `/share/firefox` 文件夹。
 
-## Uploads
+## 上传
 
-If you need to upload files through the Firefox add-on, you can use the [File editor add-on](https://github.com/home-assistant/addons/blob/master/configurator/) to upload the files to your `/share/firefox` folder.
-The files will be available in the `downloads` folder of the add-on. You can browse to this location when you select the files to upload.
+如果您需要通过 Firefox 插件上传文件，您可以使用 [文件编辑器插件](https://github.com/home-assistant/addons/blob/master/configurator/) 将文件上传到您的 `/share/firefox` 文件夹。
+文件将在插件的 `downloads` 文件夹中可用。当您选择上传文件时，您可以浏览到该位置。
 
-## Import bookmarks
+## 导入书签
 
-You can import `bookmarks.html` file by dropping them in your `/share/firefox` folder and import the `bookmarks.html` file in Firefox.
+您可以通过将 `bookmarks.html` 文件拖放到您的 `/share/firefox` 文件夹中，然后在 Firefox 中导入 `bookmarks.html` 文件来导入书签。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
-
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

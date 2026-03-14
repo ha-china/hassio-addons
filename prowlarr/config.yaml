@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：提供无需逐个应用配置即可完整管理 Sonarr、Radarr、Lidarr 和 Readarr 索引器的 Torrent Trackers 和 Usenet 索引器'
+description: '[老王杂谈说]：提供 Sonarr、Radarr、Lidarr 和 Readarr 索引器完整管理的 Torrent 追踪器和 Usenet 索引器，无需逐个应用设置'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -78,6 +78,7 @@ map:
   - media:rw
   - ssl
 name: Prowlarr NAS
+panel_icon: mdi:magnify
 options:
   env_vars: []
   PGID: 0
@@ -107,5 +108,5 @@ schema:
 slug: prowlarr
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "nightly-2.3.3.5292-ls225"
+version: "nightly-2.3.3.5300-ls226"
 webui: "[PROTO:ssl]://[HOST]:[PORT:9696]"

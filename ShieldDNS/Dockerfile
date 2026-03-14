@@ -2,10 +2,10 @@ ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.1
 
 # Define external images as build stages (fixes DL3022)
 # hadolint ignore=DL3007
-FROM coredns/coredns:1.14.1 AS coredns
+FROM coredns/coredns:1.14.2 AS coredns
 
 # hadolint ignore=DL3007
-FROM cloudflare/cloudflared:2026.1.2 AS cloudflared
+FROM cloudflare/cloudflared:2026.3.0 AS cloudflared
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
@@ -18,7 +18,7 @@ ENV CLOUDFLARED_VERSION="2025.11.1"
 # Setup CoreDNS and Cloudflared
 
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="2.2.1"
+ENV ADDON_VERSION="2.3.0"
 ENV ADDON_NAME="ShieldDNS"
 ENV ADDON_SLUG="shielddns"
 ENV ADDON_UNSUPPORTED="false"
@@ -46,7 +46,7 @@ HEALTHCHECK --interval=30s --timeout=10s --retries=3 --start-period=60s \
 # Labels
 LABEL org.opencontainers.image.title="ShieldDNS"
 LABEL org.opencontainers.image.description="High-performance DoT proxy for AdGuard Home"
-LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons"
+LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
 LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/ShieldDNS"

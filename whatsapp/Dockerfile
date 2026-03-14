@@ -6,23 +6,20 @@ ARG BUILD_DATE="unknown"
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# 1. Install Node.js & Git (Using standard repos for stability)
-
-# 1. Install Node.js & Git (Using standard repos for stability)
+# 1. Install Node.js & Git
 # hadolint ignore=DL3018
 
+
+
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="1.3.2"
+ENV ADDON_VERSION="1.4.1"
 ENV ADDON_NAME="WhatsApp"
 ENV ADDON_SLUG="whatsapp"
 ENV ADDON_UNSUPPORTED="false"
 
 RUN \
- apk add --no-cache -u libssl3 libcrypto3 \
-        nodejs \
-        npm \
-        git \
-        curl
+    apk add --no-cache -u libssl3 libcrypto3 git curl && \
+    apk add --no-cache nodejs npm
 
 # 2. Set workdir
 WORKDIR /opt/whatsapp

@@ -1,9 +1,7 @@
 arch:
   - aarch64
   - amd64
-  - armv7
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：在OpenVPN隧道上运行Docker容器，其中包含Transmission torrent客户端和WebUI'
+description: '[老王杂谈说]：通过 OpenVPN 隧道运行 Transmission 种子客户端并带有 WebUI 的 Docker 容器'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -68,9 +66,9 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment:
-  CREATE_TUN_DEVICE: 'false'
-  OPENVPN_OPTS: ''
-  WEBPROXY_PORT: '8118'
+  CREATE_TUN_DEVICE: "false"
+  OPENVPN_OPTS: ""
+  WEBPROXY_PORT: "8118"
 image: ghcr.nju.edu.cn/alexbelgium/transmission_openvpn-{arch}
 ingress: true
 map:
@@ -80,20 +78,20 @@ map:
   - ssl
 name: Transmission Openvpn
 options:
+  env_vars: []
   DEBUG: false
   DNS_server: 8.8.8.8,1.1.1.1
   LOCAL_NETWORK: 192.168.178.0/24
   OPENVPN_PASSWORD: pass
   OPENVPN_USERNAME: user
-  PGID: '0'
-  PUID: '0'
+  PGID: "0"
+  PUID: "0"
   TRANSMISSION_DOWNLOAD_DIR: /share/downloads
   TRANSMISSION_HOME: /config/addons_config/transmission
   TRANSMISSION_INCOMPLETE_DIR: /share/incomplete
-  TRANSMISSION_V3_UPDATE: 'true'
   TRANSMISSION_WATCH_DIR: /share/watch_dir
   TRANSMISSION_WEB_UI: flood-for-transmission
-  WEBPROXY_ENABLED: 'true'
+  WEBPROXY_ENABLED: "true"
 panel_admin: false
 panel_icon: mdi:transmission-tower
 ports:
@@ -111,6 +109,9 @@ privileged:
   - DAC_READ_SEARCH
   - NET_ADMIN
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   DEBUG: bool
   DNS_server: str?
   LOCAL_NETWORK: str
@@ -135,4 +136,4 @@ schema:
 slug: transmission_openvpn
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: v5.3.2
+version: "v5.4.0"
