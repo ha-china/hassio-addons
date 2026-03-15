@@ -1,17 +1,17 @@
 # Home Assistant App: InfluxDB3 探索器
 
-[![发布][发布盾牌]][发布] ![项目阶段][项目阶段盾牌] ![维护状态][维护状态盾牌]
+[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
 
 InfluxDB3 的管理网页界面。
 
 ## 关于
 
-此应用提供位于本存储库中的 InfluxDB3 应用程序的管理网页界面。
+此应用提供对位于本仓库中的 InfluxDB3 应用程序的管理网页界面。
 
-[维护状态盾牌]: https://img.shields.io/maintenance/yes/2026.svg
-[项目阶段盾牌]: https://img.shields.io/badge/project%20stage-%E9%97%A8%E5%B1%80%E5%87%86%E5%A4%87-brightgreen.svg
-[发布盾牌]: https://img.shields.io/badge/version-v0.1.0-%E8%93%9D%E8%89%B2.svg
-[发布]: https://github.com/erik73/app-influxdb3-explorer/tree/v0.1.0
+[项目维护][maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
+[项目阶段][project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
+[发布][release-shield]: https://img.shields.io/badge/version-v0.1.1-blue.svg
+[发布]: https://github.com/erik73/app-influxdb3-explorer/tree/v0.1.1
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

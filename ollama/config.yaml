@@ -1,7 +1,7 @@
 name: "Ollama"
-description: "[老王杂谈说]：快速上手大型语言模型"
+description: "[老王杂谈说]：null"
 # renovate: datasource=github-tags depName=ollama/ollama
-version: "0.17.7"
+version: "0.18.0"
 slug: "ollama"
 arch:
   - aarch64
@@ -32,13 +32,15 @@ options:
   gpus: all
 schema:
   OLLAMA_FLASH_ATTENTION: int
-  OLLAMA_MODELS: list(/config/ollama|/share/ollama)
+  OLLAMA_MODELS: list(/config/ollama|/share/ollama|/data/ollama)
   OLLAMA_KEEP_ALIVE: int
   OLLAMA_KV_CACHE_TYPE: list(f16|q8_0|q4_0)
   OLLAMA_MAX_LOADED_MODELS: int
   OLLAMA_NUM_PARALLEL: int
   OLLAMA_ORIGINS: str
   gpus: str
+backup_exclude:
+  - "ollama/**"
 devices:
   - /dev/dri/renderD128
   - /dev/apex_0

@@ -123,6 +123,13 @@ export async function connectToWhatsApp(sessionId = 'default', sessions, getSess
         if (sessionId !== 'default') {
           logger.info({ sessionId }, 'Auto-cleaning logged out session...');
           deleteSession(sessionId);
+        } else {
+          // For default session, clear creds to allow fresh pairing
+          const authDir = getAuthDir(sessionId);
+          if (fs.existsSync(authDir)) {
+            logger.info({ sessionId }, '🗑️ Clearing credentials for logged out default session...');
+            fs.rmSync(authDir, { recursive: true, force: true });
+          }
         }
       } else {
         session.disconnectReason = 'connection_error';
@@ -177,6 +184,8 @@ export async function connectToWhatsApp(sessionId = 'default', sessions, getSess
 /**
  * mDNS / Bonjour advertisement
  */
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export async function publishMDNS(name, attempt = 0) {
   try {
     const { Bonjour } = await import('bonjour-service');

@@ -1,7 +1,9 @@
 ## What’s changed
 
-- Initial release of InfluxDB3 Explorer for Home Assistant
+## 🚀 Enhancements
 
-## 📚 Documentation
+- Add base image scripts @erik73 ([#4](https://github.com/erik73/app-influxdb3-explorer/pull/4))
 
-- Add documentation @erik73 ([#1](https://github.com/erik73/app-influxdb3-explorer/pull/1))
+## ⬆️ Dependency updates
+
+- ⬆️ Update erik73/workflows action to v1.0.11 @[renovate[bot]](https://github.com/apps/renovate) ([#2](https://github.com/erik73/app-influxdb3-explorer/pull/2))
