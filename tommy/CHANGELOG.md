@@ -1,5 +1,22 @@
 # TOMMY
 
+## 2.7.1
+
+### Minor Changes
+- Minor UI improvements
+
+## 2.7.0
+
+### Major Changes
+- Added a new privacy toggle menu
+- Added a new Coordination Service discovery mode
+- Improvements to mDNS discovery mode
+
+### Minor Changes
+- OTA now uses a rotating self signed SSL certificate
+- Max TX power is now shown in the device info
+- Minor UI improvements
+
 ## 2.6.4
 
 ### Minor Changes

@@ -1,53 +1,56 @@
-# Home assistant add-on: Otter Wiki
+# 家居助手插件：Otter Wiki
 
-# An Otter Wiki
+# Otter Wiki
 
-An Otter Wiki is a Python-based software for collaborative content management, called a [wiki](https://en.wikipedia.org/wiki/Wiki). The content is stored in a git repository, which keeps track of all changes. [Markdown](https://daringfireball.net/projects/markdown) is used as the Markup language. An Otter Wiki is written in [python](https://www.python.org/) using the microframework [Flask](http://flask.pocoo.org/). [halfmoon](https://www.gethalfmoon.com) is used as the CSS framework and [CodeMirror](https://codemirror.net/) as the editor. [Font Awesome Free](https://fontawesome.com/license/free) serves the icons.
+Otter Wiki 是基于 Python 的协作式内容管理系统，被称为 [wiki](https://zh.wikipedia.org/wiki/%E8%A7%86%E5%9B%BE%E5%BA%93)。内容存储在 git 仓库中，记录所有更改。[Markdown](https://daringfireball.net/projects/markdown) 被用作标记语言。Otter Wiki 使用 [python](https://www.python.org/) 编写，采用了微框架 [Flask](http://flask.pocoo.org/)。[halfmoon](https://www.gethalfmoon.com) 被用作 CSS 框架，[CodeMirror](https://codemirror.net/) 作为编辑器。[Font Awesome Free](https://fontawesome.com/license/free) 提供图标。
 
-## Notable Features
+## 突出特性
 
-- Minimalistic interface (with dark-mode)
-- Editor with markdown highlighting and support including tables
-- Customizable Sidebar: Menu and/or Page Index
-- Full changelog and page history
-- User authentication
-- Page Attachments
-- Extended Markdown: tables, footnotes, fancy blocks, alerts and mermaid diagrams
-- (experimental) Git http server: clone, pull and push the content of your wiki
-- A very cute Otter as logo (drawn by [Christy Presler](http://christypresler.com/) CC BY 3.0)
+- 极简界面（包含深色模式）
+- 带有表格支持的 Markdown 高亮编辑器
+- 可定制的侧边栏：菜单和/或页面索引
+- 完整的变更日志和页面历史
+- 用户认证
+- 页面附件
+- 扩展 Markdown：表格、脚注、花哨块、警告和 mermaid 图表
+- （实验性）Git http 服务器：克隆、拉取和推送 wiki 内容
+- 一只非常可爱的海狸作为标志（由 [Christy Presler](http://christypresler.com/) 绘制，CC BY 3.0）
 
-
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有为我仓库点星的人！要点星，请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## About
+## 关于
 
-This add-on uses the [docker image](https://github.com/redimp/otterwiki).
+此插件使用 [docker 镜像](https://github.com/redimp/otterwiki)。
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in comparison to installing any other Hass.io add-on.
+此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on. 
-1. Click the `Save` button to store your configuration.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Open WebUI should work via <your-ip>:port.
-1. Settings will be in /addon_configs/2effc9b9_otterwiki
-## Configuration
+1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例。
+1. 安装此插件。
+1. 点击 `保存` 按钮以存储您的配置。
+1. 启动插件。
+1. 检查插件的日志以查看一切是否顺利。
+1. 通过 <your-ip>:port 打开 WebUI 应该可以工作。
+1. 设置在 /addon_configs/2effc9b9_otterwiki
+
+## 配置
 
 ```
-port : 8084 #port you want to run on.
+port : 8084 # 您希望运行的端口号。
 ```
 
-Webui can be found at `<your-ip>:port`.
+WebUI 可以在 <your-ip>:port 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

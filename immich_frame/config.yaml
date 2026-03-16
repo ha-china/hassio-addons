@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：将 Immich 图库作为数字相框展示。'
+description: '[老王杂谈说]：将你的 Immich 相册作为数字相框展示。'
 hassio_api: true
 image: ghcr.nju.edu.cn/alexbelgium/immich_frame-{arch}
 init: false
@@ -9,19 +9,23 @@ map:
   - addon_config:rw
 name: Immich Frame
 options:
+  Accounts: []
   env_vars: []
 ports:
   8080/tcp: 8171
 ports_description:
   8080/tcp: Web UI port
 schema:
+  Accounts:
+    - ImmichServerUrl: str
+      ApiKey: str
   env_vars:
     - name: match(^[A-Za-z0-9_]+$)
       value: str?
-  ApiKey: str
-  ImmichServerUrl: str
+  ApiKey: str?
+  ImmichServerUrl: str?
   TZ: str?
 slug: immich_frame
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "1.0.32.0"
+version: "1.0.32.0-2"
 webui: http://[HOST]:[PORT:8080]

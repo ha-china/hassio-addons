@@ -1,8 +1,8 @@
 # Home Assistant 插件：Immich Frame
 
-我在业余时间维护这个以及其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试都需要花费大量时间（以及一些金钱）。我经常使用大约 5-10 个我超过 110 个插件中的插件，所以我安装了测试机器（并购买了一些我不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
+我在业余时间维护这个和其他 Home Assistant 插件：跟上上游变更、HA 变更以及在真实硬件上进行测试需要花费很多时间（以及一些金钱）。我经常使用大约 5-10 个我 >110 个插件，所以我安装了测试机器（并购买了一些测试服务，如 vpn），这些服务我自己并不使用，以便调试和改进插件。
 
-如果这个插件为您节省了时间或使您的设置更简单，我将非常感激您的支持！
+如果这个插件为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
 
 [![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -20,31 +20,32 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我仓库点星的人！要星标它，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有为我仓库加星的人！要加星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
-[![Stargazers 仓库列表 for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
 ![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/immich_frame/stats.png)
 
 ## 关于
 
-[Immich Frame](https://immichframe.online/) 将您的 Immich 相册显示为一个数字相框。将任何屏幕变成一个展示您存储在 Immich 中的个人照片和记忆的美丽、旋转的显示，完美地重新利用旧平板电脑或显示器作为专用的照片展示设备。
+[Immich Frame](https://immichframe.online/) 将您的 Immich 相册显示为数字相框。将任何屏幕变成一个美丽、旋转的个人照片和记忆展示，存储在 Immich 中。
 
-此插件允许您创建一个连接到您的 Immich 服务器并以幻灯片形式显示您的照片的数字相框，非常适合将旧平板电脑或显示器作为专用照片展示设备。
+此插件允许您创建一个连接到您的 Immich 服务器并按幻灯片格式显示您照片的数字相框，非常适合将旧平板电脑或显示器改造成专用照片展示设备。
 
 ## 配置
 
-Webui 可以在 `<您的 IP>:8171` 找到。
+Webui 可以在 `<your-ip>:8171` 找到。
 
 ### 选项
 
-| 选项 | 类型 | 默认 | 描述 |
-|------|------|------|------|
-| `ImmichServerUrl` | str | **必需** | 您 Immich 服务器的 URL（例如，`http://homeassistant:3001`） |
-| `ApiKey` | str | **必需** | Immich 身份验证的 API 密钥 |
+| 选项 | 类型 | 默认值 | 描述 |
+|------|------|---------|------|
+| `ImmichServerUrl` | str | | 您 Immich 服务器的 URL（例如，`http://homeassistant:3001`）。用于单个账户设置。 |
+| `ApiKey` | str | | Immich API 密钥用于身份验证。用于单个账户设置。 |
+| `Accounts` | list | `[]` | 支持多个账户的 Immich 账户列表。每个条目都需要 `ImmichServerUrl` 和 `ApiKey`。 |
 | `TZ` | str | | 时区（例如，`Europe/London`） |
 
-### 示例配置
+### 单账户示例
 
 ```yaml
 ImmichServerUrl: "http://homeassistant:3001"
@@ -52,33 +53,50 @@ ApiKey: "your-immich-api-key-here"
 TZ: "Europe/London"
 ```
 
+### 多账户示例
+
+要显示来自多个 Immich 账户的照片（例如，您和您的伴侣），请使用 `Accounts` 列表：
+
+```yaml
+Accounts:
+  - ImmichServerUrl: "http://homeassistant:3001"
+    ApiKey: "api-key-for-user-1"
+  - ImmichServerUrl: "http://homeassistant:3001"
+    ApiKey: "api-key-for-user-2"
+TZ: "Europe/London"
+```
+
+当使用 `Accounts` 列表时，不需要顶级选项 `ApiKey` 和 `ImmichServerUrl`。图像将根据每个账户中存在的图像总数成比例绘制。
+
+有关更多配置选项，请参阅 [ImmichFrame 文档](https://immichframe.dev/docs/getting-started/configuration)。
+
 ### 获取您的 Immich API 密钥
 
 1. 打开您的 Immich 网页界面
 2. 前往 **管理** > **API 密钥**
 3. 点击 **创建 API 密钥**
-4. 给它一个描述性的名称（例如，"Photo Frame"）
+4. 给它一个描述性的名称（例如，“照片相框”）
 5. 复制生成的 API 密钥并将其粘贴到插件配置中
 
 ### 自定义脚本和环境变量
 
-此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
+此插件支持通过 `addon_config` 映射自定义脚本和环境变量：
 
 - **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（名称为大写或小写）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
 ## 安装
 
 此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
 1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 supervisor 插件存储的右上角，或点击下面的按钮如果您已配置我的 HA）
-   [![打开您的 Home Assistant 实例并显示具有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 2. 配置您的 Immich 服务器 URL 和 API 密钥。
 3. 点击 `保存` 按钮以存储您的配置。
 4. 启动插件。
 5. 检查插件的日志以查看一切是否顺利。
-6. 打开 WebUI 以配置您的相框设置。
+6. 打开 WebUI 以配置您的照片相框设置。
 
 ## 支持
 
