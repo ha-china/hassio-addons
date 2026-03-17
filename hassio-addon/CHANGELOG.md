@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.14.8
+
+### Changed
+- Includes dashboard release `1.14.8`.
+
+### Fixed
+- Keeps mobile sensor card titles, controls, and range visuals inside compact card bounds on narrow screens.
+
 ## 1.14.7
 
 ### Changed

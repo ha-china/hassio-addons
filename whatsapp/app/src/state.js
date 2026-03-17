@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import crypto from 'node:crypto';
 import { DATA_DIR, ADDON_VERSION, INTEGRATION_VERSION } from './config.js';
 import { logger } from './logger.js';
 
@@ -30,12 +31,12 @@ export function markUserAsSeen(jid) {
 // --- Persistent System State ---
 const SYSTEM_STATE_FILE = path.join(DATA_DIR, 'system_state.json');
 export let SYSTEM_STATE = {
+  system_id: crypto.randomUUID(), // Stable ID for discovery
   last_addon_version: ADDON_VERSION || 'Unknown',
   last_integration_version: INTEGRATION_VERSION || 'Unknown',
   last_ha_version: 'Unknown',
   last_ha_safe_mode: false,
-  last_whatsapp_online: null,
-  last_ha_online: null,
+  last_ha_disconnect_time: null,
   last_integration_online: null,
 };
 

@@ -1,10 +1,10 @@
 # Home Assistant 插件：Immich Frame
 
-我在业余时间维护这个和其他 Home Assistant 插件：跟上上游变更、HA 变更以及在真实硬件上进行测试需要花费很多时间（以及一些金钱）。我经常使用大约 5-10 个我 >110 个插件，所以我安装了测试机器（并购买了一些测试服务，如 vpn），这些服务我自己并不使用，以便调试和改进插件。
+我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游变更、Home Assistant 变更以及在实际硬件上进行测试需要花费大量时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，因此我安装了测试机器（并购买了一些我自身不使用的测试服务，如 vpn），以用于故障排除和改进插件。
 
 如果这个插件为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
 
-[![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![买我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
@@ -28,21 +28,21 @@ _感谢所有为我仓库加星的人！要加星，请点击下面的图片，�
 
 ## 关于
 
-[Immich Frame](https://immichframe.online/) 将您的 Immich 相册显示为数字相框。将任何屏幕变成一个美丽、旋转的个人照片和记忆展示，存储在 Immich 中。
+[Immich Frame](https://immichframe.online/) 将您的 Immich 相册显示为一个数字照片框。将任何屏幕转换为美丽、旋转显示您存储在 Immich 中的个人照片和记忆的专用显示。
 
-此插件允许您创建一个连接到您的 Immich 服务器并按幻灯片格式显示您照片的数字相框，非常适合将旧平板电脑或显示器改造成专用照片展示设备。
+此插件允许您创建一个数字照片框，该框连接到您的 Immich 服务器，并以幻灯片格式显示您的照片，非常适合将旧平板电脑或显示器重新用作专用照片显示。
 
 ## 配置
 
-Webui 可以在 `<your-ip>:8171` 找到。
+Webui 可在 `<your-ip>:8171` 找到。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|---------|------|
+|------|------|--------|------|
 | `ImmichServerUrl` | str | | 您 Immich 服务器的 URL（例如，`http://homeassistant:3001`）。用于单个账户设置。 |
-| `ApiKey` | str | | Immich API 密钥用于身份验证。用于单个账户设置。 |
-| `Accounts` | list | `[]` | 支持多个账户的 Immich 账户列表。每个条目都需要 `ImmichServerUrl` 和 `ApiKey`。 |
+| `ApiKey` | str | | Immich 身份验证的 API 密钥。用于单个账户设置。 |
+| `Accounts` | list | `[]` | Immich 账户列表，用于多账户支持。每个条目都需要 `ImmichServerUrl` 和 `ApiKey`。 |
 | `TZ` | str | | 时区（例如，`Europe/London`） |
 
 ### 单账户示例
@@ -66,7 +66,7 @@ Accounts:
 TZ: "Europe/London"
 ```
 
-当使用 `Accounts` 列表时，不需要顶级选项 `ApiKey` 和 `ImmichServerUrl`。图像将根据每个账户中存在的图像总数成比例绘制。
+当使用 `Accounts` 列表时，不需要 `ApiKey` 和 `ImmichServerUrl` 顶级选项。图像将按每个账户中图像总数的比例从每个账户中绘制。
 
 有关更多配置选项，请参阅 [ImmichFrame 文档](https://immichframe.dev/docs/getting-started/configuration)。
 
@@ -75,7 +75,7 @@ TZ: "Europe/London"
 1. 打开您的 Immich 网页界面
 2. 前往 **管理** > **API 密钥**
 3. 点击 **创建 API 密钥**
-4. 给它一个描述性的名称（例如，“照片相框”）
+4. 给它一个描述性的名称（例如，"照片框"）
 5. 复制生成的 API 密钥并将其粘贴到插件配置中
 
 ### 自定义脚本和环境变量
@@ -96,11 +96,11 @@ TZ: "Europe/London"
 3. 点击 `保存` 按钮以存储您的配置。
 4. 启动插件。
 5. 检查插件的日志以查看一切是否顺利。
-6. 打开 WebUI 以配置您的照片相框设置。
+6. 打开 WebUI 以配置您的照片框设置。
 
 ## 支持
 
-在 github 上创建一个问题，或在 [home assistant 社区论坛](https://community.home-assistant.io/) 上提问。
+在 github 上创建问题，或在 [home assistant 社区论坛](https://community.home-assistant.io/) 上提问
 
 有关 Immich Frame 的更多信息，请访问：https://immichframe.online/
 

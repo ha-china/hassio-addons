@@ -1,6 +1,6 @@
 name: Microsoft TTS
-description: '[老王杂谈说]：使用 Microsoft Azure 的文本转语音'
-version: 1.4.3
+description: '[老王杂谈说]：使用 Microsoft Azure 进行文本转语音'
+version: 1.4.4
 slug: wyoming_microsoft_tts
 init: false
 arch:

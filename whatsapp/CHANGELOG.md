@@ -1,5 +1,45 @@
 # Changelog
 
+## 1.4.6 (2026-03-17)
+
+### 🚀 Other
+
+- Improved error handling ([`ecd218a9`](https://github.com/FaserF/hassio-addons/commit/ecd218a937dac8dd1d78eb46c03ad7bd839ebb3f))
+- fix index crashing #687 ([`085e87c1`](https://github.com/FaserF/hassio-addons/commit/085e87c15e13b962184202a0d288a5dd2a2b15e6))
+- ⬆️ Update dependency uvicorn to v0.42.0 [skip-tests] ([`e8b29f28`](https://github.com/FaserF/hassio-addons/commit/e8b29f283a78a88b5c76f115ce64c3da3868c491))
+
+## 1.4.5 (2026-03-16)
+
+### 🐛 Bug Fixes
+
+- mDNS stealth mode persistence and QR code staleness ([`b695b181`](https://github.com/FaserF/hassio-addons/commit/b695b1815683c5eb7646fb2a5ff78caab983639f))
+- mDNS discovery cleanup and slug-based naming ([`bcd890bd`](https://github.com/FaserF/hassio-addons/commit/bcd890bded43445d8abbe8c779ab424df66cb5c4))
+- poll vote decryption and message store persistence ([`3b589369`](https://github.com/FaserF/hassio-addons/commit/3b589369a1c182f289b1a3f933bfc4877bc8047a))
+
+### 📦 Dependencies
+
+- ⬆️ Update dependency link-preview-js to v4 [skip-tests] (#682) [skip-tests] ([`9ad7b650`](https://github.com/FaserF/hassio-addons/commit/9ad7b650ae1a00e6c343af80ffb3fb1c64556866))
+
+## 1.4.4 (2026-03-16)
+
+### 📦 Dependencies
+
+- Update README.md ([`e87a0ec7`](https://github.com/FaserF/hassio-addons/commit/e87a0ec727012f813bbe42973d88c5f97910f5c4))
+- ⬆️ Update dependency lru-cache to v11.2.7 [skip-tests] ([`febdf11f`](https://github.com/FaserF/hassio-addons/commit/febdf11f4f077bb7b4aa8e23bfb7175135e2c23b))
+
+### 🚀 Other
+
+- fixed api limit throttling #674 ([`8dfd3687`](https://github.com/FaserF/hassio-addons/commit/8dfd3687f69455f50c47e50523ff0ddc823834a7))
+- secure first setup ([`632c2dd1`](https://github.com/FaserF/hassio-addons/commit/632c2dd1cb59ebcbb55ce49033d5e7b869436481))
+- change baseMDNSName ([`c94f8ccb`](https://github.com/FaserF/hassio-addons/commit/c94f8ccbdbcbfd7ec48a0280d5b0d615df8b50fa))
+- finally fully fix ha integration auto discovery ([`c6643541`](https://github.com/FaserF/hassio-addons/commit/c664354167064eda4237864804b3d30630702ce6))
+- prefil app secret secretly on first setup ([`97bcb06c`](https://github.com/FaserF/hassio-addons/commit/97bcb06c2b52be0c4a185deb8f6af281b7baa350))
+- fix ha integration auto discovery ([`fcac8635`](https://github.com/FaserF/hassio-addons/commit/fcac86358eb64bb00e5645f9cdc679523ca00f75))
+- submit reconnect reason in admin message ([`34f4eafa`](https://github.com/FaserF/hassio-addons/commit/34f4eafa4194a3d92a3f24a7feae199850c17f3e))
+- improved requests from HA bypassing ([`f81b6ab6`](https://github.com/FaserF/hassio-addons/commit/f81b6ab6c38232f1aa88e37ff928813f66c6b377))
+- fixed reacting to polls #678 ([`02f7b3bc`](https://github.com/FaserF/hassio-addons/commit/02f7b3bce1ee02612e739a11caba28349e918bef))
+- fixed trust proxy usage ([`58f158f8`](https://github.com/FaserF/hassio-addons/commit/58f158f895096886d0f7dd47e91475d6ca19f20f))
+
 ## 1.4.3 (2026-03-14)
 
 ### 📦 Dependencies

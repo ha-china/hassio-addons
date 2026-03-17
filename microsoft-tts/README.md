@@ -1,7 +1,7 @@
-# Wyoming Microsoft TTS
-Wyoming协议服务器，用于Microsoft Azure语音合成服务。
+# 魔术师微软TTS
+Wyoming协议服务器，用于微软Azure语音合成。
 
-此插件为Microsoft Azure语音合成服务提供Wyoming集成，并可直接与[Home Assistant](https://www.home-assistant.io/)语音和[Rhasspy](https://github.com/rhasspy/rhasspy3)一起使用。
+此插件提供了Wyoming与微软Azure语音合成的集成，并可直接与[Home Assistant](https://www.home-assistant.io/)语音和[Rhasspy](https://github.com/rhasspy/rhasspy3)一起使用。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
