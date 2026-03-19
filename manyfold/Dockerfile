@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/manyfold3d/manyfold-solo:0.133.1
+ARG BUILD_FROM=ghcr.nju.edu.cn/manyfold3d/manyfold-solo:0.135.0
 FROM ${BUILD_FROM}
 
 # hadolint ignore=DL3041

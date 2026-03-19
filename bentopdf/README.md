@@ -1,76 +1,131 @@
-# BentoPDF
+# 家居助理插件：BentoPDF
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/bentopdf/logo.png" width="100" />
+![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbentopdf%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbentopdf%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbentopdf%2Fconfig.yaml)
 
-[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_bentopdf)
-[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker Image](https://img.shields.io/badge/docker-1.2.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-bentopdf)
-![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Codacy徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=代码基线检查)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建器)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-> Self-hosted, privacy-first PDF toolkit
-
----
-
-## 📖 About
-
-> Self-hosted, privacy-first PDF toolkit
-
-<!-- separator -->
-
-> [!CAUTION]
-> **Experimental / Beta Status**
->
-> This add-on is still in development and/or primarily developed for personal use.
-> It is not extensively tested yet, but is expected to work fundamentally.
-
-BentoPDF is a comprehensive PDF toolkit that runs entirely in your browser. It allows you to merge, split, compress, and convert PDFs without uploading your files to a server, ensuring your data remains private.
-
-## 🐛 Report a Bug
-
-If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
-
-**[Report a Bug](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.1.0&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
-
-> [!NOTE]
-> Please use the link above to report problems. This ensures that all necessary information (add-on name, version, etc.) is automatically included in your bug report.
-
-## 💡 Feature Request
-
-If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
-
-**[Request a Feature](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=bentopdf)**
-
-> [!NOTE]
-> Please use the link above to request features. This ensures that the add-on name is automatically included in your feature request.
-
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
+一个以隐私为首要考虑的PDF工具包，完全在您的浏览器中运行——无上传，无云，无跟踪。所有处理都通过WebAssembly在本地进行。此插件从您的Home Assistant实例中提供BentoPDF网络应用程序，因此您可以从网络上的任何位置访问它。
 
 ---
 
-## ⚙️ Configuration
+## 功能
 
-Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
+### 组织与编辑
 
-### Options
+| 工具 | 工具 | 工具 |
+|------|------|------|
+| 合并PDF | 分割PDF | 组织PDF |
+| 删除页面 | 提取页面 | 反转页面 |
+| 旋转PDF | 定制旋转 | 裁剪PDF |
+| 添加空白页 | 分页 | N-Up PDF |
+| 交替合并 | 合并单页 | PDF手册 |
+| PDF合并与分割 | 修复页面大小 | |
 
-```yaml
-certfile: fullchain.pem
-keyfile: privkey.pem
-log_level: info
-ssl: false
-```
+### 转换为PDF
+
+| 工具 | 工具 | 工具 |
+|------|------|------|
+| Word转PDF | Excel转PDF | PowerPoint转PDF |
+| 图片转PDF | JPG转PDF | PNG转PDF |
+| BMP转PDF | TIFF转PDF | WEBP转PDF |
+| HEIC转PDF | SVG转PDF | PSD转PDF |
+| Markdown转PDF | HTML/电子邮件转PDF | RTF转PDF |
+| TXT转PDF | CSV转PDF | JSON转PDF |
+| XML转PDF | ODT转PDF | ODS转PDF |
+| ODP转PDF | ODG转PDF | EPUB转PDF |
+| MOBI转PDF | FB2转PDF | CBZ转PDF |
+| XPS转PDF | VSD转PDF | PUB转PDF |
+| WPS转PDF | WPD转PDF | Pages转PDF |
+
+### 从PDF转换
+
+| 工具 | 工具 | 工具 |
+|------|------|------|
+| PDF转DOCX | PDF转Excel | PDF转JPG |
+| PDF转PNG | PDF转BMP | PDF转TIFF |
+| PDF转WEBP | PDF转SVG | PDF转文本 |
+| PDF转Markdown | PDF转JSON | PDF转CSV |
+| PDF转PDF/A | PDF转ZIP | PDF转灰度 |
+
+### 安全与元数据
+
+| 工具 | 工具 | 工具 |
+|------|------|------|
+| 加密PDF | 解密PDF | 更改权限 |
+| 移除限制 | 签署PDF | 数字签名PDF |
+| 验证签名 | 编辑元数据 | 查看元数据 |
+| 移除元数据 | 清理PDF | 平坦PDF |
+| 移除注释 | 修复PDF | |
+
+### 增强 & 处理
+
+| 工具 | 工具 | 工具 |
+|------|------|------|
+| 压缩PDF | OCR PDF | 去倾斜PDF |
+| 光栅化PDF | 线性化PDF | PDF转PDF/A |
+| 调整颜色 | 反转颜色 | 文本颜色 |
+| 背景颜色 | 巴特斯编号 | 页码 |
+| 页眉和页脚 | 添加水印 | 添加戳记 |
+| 扫描效果 | 图像分块 | 字体转轮廓 |
+| PDF层 | 比较PDF | 为AI准备 |
+
+### 表单 & 更多
+
+| 工具 | 工具 | 工具 |
+|------|------|------|
+| 表单创建者 | 表单填充器 | 目录 |
+| 书签 | PDF编辑器 | 提取图像 |
+| 提取表格 | 提取附件 | 编辑附件 |
+| 添加附件 | 页面尺寸 | PDF工作流 |
 
 ---
 
-## 👨‍💻 Credits & License
+## 安装
 
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
+1. 将我的插件仓库添加到您的Home Assistant实例中（在管理员控制台右上角的插件存储中，或点击下面的按钮如果您已配置我的HA）
+   [![打开您的Home Assistant实例并显示带有特定仓库URL预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此插件。
+1. 点击`保存`按钮以存储您的配置。
+1. 启动插件。
+1. 检查插件的日志以查看一切是否顺利。
+1. 在`https://<您的HA-IP>:8443`打开webUI。
 
 ---
+
+## 配置
+
+| 选项 | 默认 | 描述 |
+|--------|---------|-------------|
+| `log_level` | `info` | 日志详细程度：`info`、`debug`、`warn`、`error` |
+
+无需其他配置。将您的文件放入即可。
+
+---
+
+## 隐私
+
+- 所有PDF处理均在**浏览器中通过WebAssembly**运行（PyMuPDF、Ghostscript、Tesseract、LibreOffice、CPDF）
+- 文件**永远不会上传**到任何服务器——甚至不是运行此插件的那个服务器
+- 无遥测，无分析，无外部请求
+- 加载后完全**离线**工作
+
+---
+
+## 支持
+
+在[github](https://github.com/alexbelgium/hassio-addons/issues)上创建问题并标记@ToledoEM
+
+- BentoPDF上游 → [github.com/alam00000/bentopdf](https://github.com/alam00000/bentopdf)
+---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

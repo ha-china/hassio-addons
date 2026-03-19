@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.14.9
+
+### Changed
+- Includes dashboard release `1.14.9`.
+
+### Fixed
+- Keeps the Status Pills editor open while creating a new pill so the add-on UI no longer drops the editor pane mid-edit.
+
 ## 1.14.8
 
 ### Changed
