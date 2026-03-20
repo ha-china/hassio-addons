@@ -169,9 +169,9 @@ export function registerAPIRoutes(app) {
       ]);
       session.stats.sent += 1;
       session.stats.last_sent_message = maskData(message);
-      session.stats.last_sent_target = maskData(number);
+      session.stats.last_sent_target = maskData(jid);
       session.stats.last_sent_time = Date.now();
-      trackSent(session, number, message);
+      trackSent(session, jid, message);
       res.json({ status: 'sent', id: sentMsg.key.id });
     } catch (e) {
       session.stats.failed += 1;
@@ -196,9 +196,9 @@ export function registerAPIRoutes(app) {
       );
       session.stats.sent += 1;
       session.stats.last_sent_message = 'Image';
-      session.stats.last_sent_target = maskData(number);
+      session.stats.last_sent_target = maskData(jid);
       session.stats.last_sent_time = Date.now();
-      trackSent(session, number, caption ? `Image: ${caption}` : 'Image');
+      trackSent(session, jid, caption ? `Image: ${caption}` : 'Image');
       res.json({ status: 'sent', id: sentMsg.key.id });
     } catch (e) {
       session.stats.failed += 1;
@@ -220,11 +220,16 @@ export function registerAPIRoutes(app) {
         { poll: { name: question, values: options, selectableCount: 1 } },
         { quoted, ephemeralExpiration: expiration }
       );
+      session.messageStore.set(sentMsg.key.id, sentMsg);
+      logger.info(
+        { pollId: sentMsg.key.id, sessionId: session.id },
+        '💾 Sent poll message saved to store'
+      );
       session.stats.sent += 1;
       session.stats.last_sent_message = `Poll: ${question}`;
-      session.stats.last_sent_target = maskData(number);
+      session.stats.last_sent_target = maskData(jid);
       session.stats.last_sent_time = Date.now();
-      trackSent(session, number, `Poll: ${question}`);
+      trackSent(session, jid, `Poll: ${question}`);
       res.json({ status: 'sent', id: sentMsg.key.id });
     } catch (e) {
       session.stats.failed += 1;
@@ -256,9 +261,9 @@ export function registerAPIRoutes(app) {
       );
       session.stats.sent += 1;
       session.stats.last_sent_message = `Location: ${title || 'Pinned'}`;
-      session.stats.last_sent_target = maskData(number);
+      session.stats.last_sent_target = maskData(jid);
       session.stats.last_sent_time = Date.now();
-      trackSent(session, number, `Location: ${title || 'Pinned'}`);
+      trackSent(session, jid, `Location: ${title || 'Pinned'}`);
       res.json({ status: 'sent', id: sentMsg.key.id });
     } catch (e) {
       session.stats.failed += 1;
@@ -467,6 +472,49 @@ export function registerAPIRoutes(app) {
     }
   });
 
+  app.get('/chats', authMiddleware, async (req, res) => {
+    const session = getReqSession(req);
+    if (!session.isConnected) return res.status(503).json({ detail: 'Not connected' });
+    try {
+      if (!session.sock) throw new Error('Socket not initialized');
+
+      let groups = {};
+      if (
+        !session.groupCache ||
+        session.groupCache.size === 0 ||
+        Date.now() - (session.lastGroupFetch || 0) > 300000
+      ) {
+        try {
+          groups = await session.sock.groupFetchAllParticipating();
+          session.lastGroupFetch = Date.now();
+        } catch (e) {
+          logger.warn({ error: e.message }, 'Failed to fetch groups, using cache');
+        }
+      }
+
+      const groupList = [];
+      for (const g of Object.values(groups)) {
+        groupList.push({ id: g.id, name: g.subject });
+        session.chatCache?.set(g.id, true);
+        session.groupCache?.set(g.id, g.subject);
+      }
+
+      if (groupList.length === 0 && session.groupCache && session.groupCache.size > 0) {
+        for (const [id, name] of session.groupCache.entries()) {
+          groupList.push({ id, name });
+        }
+      }
+
+      res.json({
+        total_chats: session.chatCache ? session.chatCache.size : groupList.length,
+        groups: groupList,
+      });
+    } catch (e) {
+      logger.error({ error: e.message }, 'Fetch chats failed');
+      res.status(500).json({ detail: 'Internal Server Error: Failed to fetch chats' });
+    }
+  });
+
   app.post('/mark_as_read', authMiddleware, async (req, res) => {
     const session = getReqSession(req);
     const { number, messageId } = req.body;
@@ -474,7 +522,12 @@ export function registerAPIRoutes(app) {
     try {
       const jid = getJid(number);
       if (messageId) {
-        await session.sock.readMessages([{ remoteJid: jid, id: messageId, fromMe: false }]);
+        let key = { remoteJid: jid, id: messageId, fromMe: false };
+        const msg = session.messageStore.get(messageId);
+        if (msg && msg.key) {
+          key = { ...msg.key, remoteJid: jid }; // ensure remoteJid matches request
+        }
+        await session.sock.readMessages([key]);
       } else {
         await session.sock.chatModify({ markRead: true, lastMessages: [] }, jid);
       }

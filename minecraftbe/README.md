@@ -1,35 +1,35 @@
-# Home Assistant 扩展：Minecraft 专用服务器 Bedrock 版
-快速在 Home Assistant 上运行 Minecraft 专用服务器 Bedrock 版。
+# Home Assistant 插件：Minecraft 专用服务器 Bedrock 版
+快速在 Home Assistant 上运行 Minecraft 专用服务器 Bedrock 版的方法。
 
-_感谢 everyone 为我的仓库点赞！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有给我的仓库点星的人！要点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
-此扩展使用 [itzg/docker-minecraft-bedrock-server](https://github.com/itzg/docker-minecraft-bedrock-server/) 的 docker 镜像。
+此插件使用 [itzg/docker-minecraft-bedrock-server](https://github.com/itzg/docker-minecraft-bedrock-server/) docker 镜像。
 
-当重启扩展时，它将自动获取 Minecraft 的最新版本。
+重启插件时，它会自动获取 Minecraft 的最新版本。
 
-你的世界、设置和服务器可执行文件存储在 /share/minecraftbe。
+您的世界、设置和服务器可执行文件存储在 /share/minecraftbe 中。
 
-你可能想要创建一个服务，在深夜重启扩展以更新 Minecraft 版本（见下文）
+您可能希望创建一个服务，在深夜重启插件以更新 Minecraft 版本（见下文）
 
-如果你想在 Home Assistant 中监控你的 Bedrock 服务器，请安装此集成，因为内置的集成只监控 Java：https://github.com/jdeath/Bedrock-Homeassistant
+如果您想在 Home Assistant 中监控您的 Bedrock 服务器，请安装此集成，因为内置的集成仅监控 Java：https://github.com/jdeath/Bedrock-Homeassistant
 
 ## 安装
 
-此扩展的安装非常简单，与安装任何其他 Hass.io 扩展没有区别。
+此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. 将我的 Hass.io 扩展仓库 [repository] 添加到你的 Hass.io 实例。
-1. 安装此扩展。
-2. 如有需要，更改 API 端口（默认为标准的 Minecraft 端口）
-3. 点击 `保存` 按钮以存储你的配置。
+1. 将我的 Hass.io 插件仓库[repository]添加到您的 Hass.io 实例中。
+1. 安装此插件。
+2. 如果需要，更改 API 端口（默认为标准 Minecraft 端口）
+3. 点击“保存”按钮以存储您的配置。
 4. 创建目录 /share/minecraftbe
-5. 启动扩展。
-6. 检查扩展的日志，以查看是否一切顺利。
-7. 编辑你想要在 /share/minecraftbe/ 中的服务器/权限/白名单属性，然后重启扩展。注意，你无法在 server.properties 中更改端口，因为它会被某些原因覆盖。然而，你可以在 Home Assistant 的扩展配置标签中更改端口。我只暴露了 IP4 端口。如果需要 IP6，请告诉我。
-8. 如果你想要外部访问，确保将你的外部端口转发到你的 Home Assistant IP。
+5. 启动插件。
+6. 检查插件的日志以查看是否一切顺利。
+7. 编辑您想在 /share/minecraftbe/ 中的服务器/权限/白名单属性，并重启插件。注意，您不能在 server.properties 中更改端口，因为它会由于某些原因被覆盖。但是，您可以在 Home Assistant 的插件配置选项卡中更改端口。我只暴露了 IP4 端口。如果需要 IP6，请告诉我。
+8. 如果您需要外部访问，请确保将外部端口转发到您的 Home Assistant IP。
 
 ## 重启自动化
 

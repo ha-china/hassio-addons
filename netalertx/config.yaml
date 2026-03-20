@@ -1,11 +1,12 @@
 arch:
   - aarch64
   - amd64
-description: "[老王杂谈说]：集中式网络可见性与持续资产发现。"
+description: "[老王杂谈说]：集中式网络可见性和持续资产发现。"
 hassio_api: true
 host_network: true
 image: ghcr.nju.edu.cn/alexbelgium/netalertx-{arch}
 ingress: true
+ingress_entry: devices.php
 ingress_port: 20211
 ingress_stream: true
 init: false
@@ -41,4 +42,4 @@ slug: netalertx
 tmpfs: true
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "26.3.16-3"
+version: "26.3.16-6"

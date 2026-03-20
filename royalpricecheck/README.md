@@ -1,11 +1,11 @@
-# Home Assistant 插件：皇家邮轮价格检查
+# 家居助理插件：皇家邮轮价格检查
 
 ## 描述
-当皇家邮轮的附加套餐价格降低时发出通知。可以重新定价邮轮套餐、仅饮料套餐、网络、观光游览等。
+当皇家邮轮的附加产品价格下降时进行通知。可以重新定价邮轮、仅饮料套餐、网络、远足等活动。
 
-_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有给我的仓库点星的人！要给星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
-![为 @jdeath/homeassistant-addons 点赞的仓库名单](https://reporoster.com/stars/jdeath/homeassistant-addons))(https://github.com/jdeath/homeassistant-addons/stargazers)
+[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 
 ## 安装
@@ -16,50 +16,50 @@ _感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，�
 1. 安装此插件。
 1. 点击“保存”按钮以存储您的配置。
 1. 启动插件。它会失败，这是正常的
-1. 前往 /addon-configs/2effc9b9_royalpricecheck
-1. 编辑 `/addon-configs/2effc9b9_royalpricecheck/config.yaml`（见下文）
+1. 前往/addon-configs/2effc9b9_royalpricecheck
+1. 编辑/addon-configs/2effc9b9_royalpricecheck/config.yaml（见下文）
 1. 再次运行插件并检查日志
-1. 确认工作正常后，使用自动化任务每天运行一次
+1. 确认工作正常后，使用自动化任务每天运行此插件一次
 
 ## config.yaml
-请参阅 `https://github.com/jdeath/CheckRoyalCaribbeanPrice`
+请参阅`https://github.com/jdeath/CheckRoyalCaribbeanPrice`
 
 ## 自动运行
 1. 创建一个自动化任务，每天（在随机时间）运行此插件一次
 
 ```
-别名: 启动皇家价格检查
-描述: 
-触发器:
-  - 平台: 时间
-    在: "06:00:00"
-条件: []
-动作:
-  - 延迟: "{{ (range(0, 1)|random|int) }}:{{ (range(1, 59)|random|int) }}:00"
-  - 服务: hassio.addon_start
-    数据:
+alias: 启动皇家价格检查
+description: ""
+trigger:
+  - platform: time
+    at: "06:00:00"
+condition: []
+action:
+  - delay: "{{ (range(0, 1)|random|int) }}:{{ (range(1, 59)|random|int) }}:00"
+  - service: hassio.addon_start
+    data:
       addon: 2effc9b9_royalpricecheck
-模式: 单个
+mode: single
 ```
 
 # 发送通知。
-1. 编辑 `/addon-configs/2effc9b9_royalpricecheck/config.yaml`
-1. 配置通知行
+1. 编辑/addon-configs/2effc9b9_royalpricecheck/config.yaml
+1. 配置通知的行
 
-对于Home Assistant通知，它应该看起来像这样：
+对于homeassistant通知，它应该看起来像这样：
 ```
 # config.yaml
 apprise:
   urls:
     - 'hassio://192.168.X.XX/eyXXXXXXXXXXXXXXXX.eyXXXXXXXXXXXXXXXXXxx'
 ```
-其中 `eyXXX.eyXXX` 字符串是Home Assistant长期有效令牌。长期有效访问令牌可以通过用户Home Assistant个人资料页面底部的“长期有效访问令牌”部分创建。
+其中`eyXXX.eyXXX`字符串是Home Assistant长生命期令牌。长生命期访问令牌可以通过用户Home Assistant个人资料页面底部的“长生命期访问令牌”部分创建。
 
-更多信息请参阅 `https://github.com/caronc/apprise/wiki/Notify_homeassistant`
+更多详情请参阅`https://github.com/caronc/apprise/wiki/Notify_homeassistant`
 
-更多信息请参阅 `https://github.com/caronc/apprise` 您可以包含多个URL行以发送电子邮件等
+更多详情请参阅`https://github.com/caronc/apprise` 您可以包括多个URL行以发送电子邮件等
 # 添加到侧边栏
-由于没有WebUI，因此无法在侧边栏中显示。但是，您可以将以下代码添加到您的Home Assistant `configuration.yaml` 中，以通过侧边栏条目显示日志
+由于没有WebUI，因此无法在侧边栏中显示。但是您可以将以下代码添加到您的Home Assistant `configuration.yaml`中，以通过侧边栏条目显示日志
 
 ```
 panel_custom:

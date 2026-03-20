@@ -1,5 +1,10 @@
 # TOMMY
 
+## 2.9.0
+
+### Major Changes
+- Allow disabling Matter through environment variable
+
 ## 2.8.1
 
 ### Minor Changes

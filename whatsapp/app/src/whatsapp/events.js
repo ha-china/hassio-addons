@@ -29,14 +29,20 @@ const MEDIA_DIR = process.env.MEDIA_FOLDER || path.join(process.cwd(), 'media');
 /**
  * Resolves encrypted poll votes to human-readable option names.
  */
-function resolvePollVotes(pollUpdate, originalPoll, sessionId) {
+function resolvePollVotes(pollUpdate, originalPoll, session) {
   const update = pollUpdate.message?.pollUpdateMessage;
   if (!update) return [];
 
   if (!originalPoll) {
+    const allKeys = session.messageStore ? Array.from(session.messageStore.keys()) : [];
     logger.warn(
-      { pollCreationId: update.pollCreationMessageKey?.id, sessionId },
-      'Poll vote received but original poll not found in store. Vote cannot be decrypted.'
+      {
+        pollCreationId: update.pollCreationMessageKey?.id,
+        sessionId: session.id,
+        storeSize: allKeys.length,
+        lastKeys: allKeys.slice(-20),
+      },
+      'Poll vote received but original poll not found in store.'
     );
     return [];
   }
@@ -44,13 +50,13 @@ function resolvePollVotes(pollUpdate, originalPoll, sessionId) {
   try {
     const votes = getAggregateVotesInPollMessage({
       message: originalPoll.message,
-      pollUpdates: [pollUpdate],
+      pollUpdates: [update], // 'update' is pollUpdate.message.pollUpdateMessage
     });
 
     return votes.filter((v) => v.voters.length > 0).map((v) => v.name);
   } catch (err) {
     logger.warn(
-      { error: err.message, sessionId, stack: err.stack },
+      { error: err.message, sessionId: session.id, stack: err.stack },
       'Failed to resolve poll votes'
     );
     return [];
@@ -62,6 +68,35 @@ export function bindStore(session, ev) {
     for (const msg of messages) {
       if (msg.key.id) {
         session.messageStore.set(msg.key.id, msg);
+      }
+      if (msg.key.remoteJid) {
+        session.chatCache?.set(msg.key.remoteJid, true);
+      }
+    }
+  });
+
+  ev.on('chats.set', ({ chats }) => {
+    for (const chat of chats) {
+      session.chatCache?.set(chat.id, true);
+    }
+  });
+
+  ev.on('chats.upsert', (chats) => {
+    for (const chat of chats) {
+      session.chatCache?.set(chat.id, true);
+    }
+  });
+
+  ev.on('groups.upsert', (groups) => {
+    for (const group of groups) {
+      session.groupCache?.set(group.id, group.subject);
+    }
+  });
+
+  ev.on('groups.update', (groups) => {
+    for (const group of groups) {
+      if (group.subject) {
+        session.groupCache?.set(group.id, group.subject);
       }
     }
   });
@@ -204,7 +239,7 @@ export function handleIncomingMessages(session) {
           eventType = 'poll_update';
           const pollCreationId = msg.message.pollUpdateMessage.pollCreationMessageKey.id;
           const originalPoll = session.messageStore.get(pollCreationId);
-          vote = resolvePollVotes(msg, originalPoll, session.id);
+          vote = resolvePollVotes(msg, originalPoll, session);
           text =
             vote.length > 0
               ? `[Poll Vote] ${vote.join(', ')}`
@@ -236,6 +271,9 @@ export function handleIncomingMessages(session) {
               const ext = mime.extension(mimeType) || 'bin';
               const filename = `${Date.now()}_${crypto.randomBytes(4).toString('hex')}.${ext}`;
               const savePath = path.join(MEDIA_DIR, filename);
+              if (!fs.existsSync(MEDIA_DIR)) {
+                fs.mkdirSync(MEDIA_DIR, { recursive: true });
+              }
               fs.writeFileSync(savePath, buffer);
               mediaPath = savePath;
               mediaUrl = `/media/${filename}`;
@@ -246,10 +284,10 @@ export function handleIncomingMessages(session) {
           }
         }
 
-        const senderNumber = senderJid.split('@')[0];
-        trackReceived(session, senderNumber, text);
+        const senderDisplay = senderJid.includes('@g.us') ? senderJid : senderJid.split('@')[0];
+        trackReceived(session, senderDisplay, text);
         session.stats.last_received_message = maskData(text);
-        session.stats.last_received_sender = maskData(senderNumber);
+        session.stats.last_received_sender = maskData(senderDisplay);
         session.stats.last_received_time = Date.now();
 
         const participant = msg.key.participant || msg.participant;

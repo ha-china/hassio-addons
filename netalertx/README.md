@@ -1,16 +1,16 @@
-# Home Assistant 扩展：NetAlertX
+# Home Assistant 插件：NetAlertX
 
-我在业余时间维护这个以及其他 Home Assistant 扩展：跟上上游变化、HA 变化以及在真实硬件上进行测试需要花费大量时间（以及一些金钱）。我经常使用 5-10 个我 >110 个扩展，所以我安装了测试机器（并购买了一些我自身不使用的测试服务，如 VPN）来调试和改进扩展。
+我在业余时间维护这个以及其他 Home Assistant 插件：跟进上游更改、Home Assistant 更改以及在真实硬件上进行测试需要花费很多时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了某些我不使用的测试服务，如 vpn），以用于调试和改进插件。
 
-如果这个扩展为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
+如果这个插件为您节省了时间或使您的设置更加简单，我将非常感激您的支持！
 
-[![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![给我买杯咖啡][捐赠徽章]](https://www.buymeacoffee.com/alexbelgium)
+[![通过 PayPal 捐赠][paypal-徽章]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## 扩展信息
+## 插件信息
 
 ![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnetalertx%2Fconfig.yaml)
-![入站](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnetalertx%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnetalertx%2Fconfig.yaml)
 ![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnetalertx%2Fconfig.yaml)
 ![mqtt](https://img.shields.io/badge/Service-MQTT-green.svg?logo=chromecast&logoColor=white)
 
@@ -18,40 +18,41 @@
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+[捐赠徽章]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-徽章]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点星标的人！要给仓库点星标，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_感谢每一位为我仓库点星的人！要为它点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
-[![Stargazers 仓库列表 @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
 ![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/netalertx/stats.png)
 
 ## 关于
 
-网络存在和入侵检测器。扫描连接到您的网络上的设备，并在发现新的未知设备时发出警报。此扩展基于 jokob-sk 的 [docker 镜像](https://github.com/jokob-sk/NetAlertX/tree/main/dockerfiles)。
+网络存在性和入侵检测器。扫描连接到您的网络上的设备，如果发现新的未知设备，则会发出警报。
+此插件基于 jokob-sk 的 [docker 镜像](https://github.com/jokob-sk/NetAlertX/tree/main/dockerfiles)。
 
 ## 安装
 
-此扩展的安装相当简单，与安装任何其他 Hass.io 扩展没有太大区别。
+此插件的安装相当简单，与安装任何其他 Hass.io 插件没有太大区别。
 
-1. 将我的扩展仓库添加到您的 Home Assistant 实例中（在管理员的扩展存储中右上角，或者如果您已经配置了我的 HA，请点击下面的按钮）。
-   [![打开您的 Home Assistant 实例并显示具有特定仓库 URL 预填充的添加扩展仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此扩展。
+1. 将我的插件存储库添加到您的 Home Assistant 实例中（在右上角的 supervisor 插件商店中，或点击下面的按钮如果您已经配置了我的 HA）
+   [![打开您的 Home Assistant 实例并显示带有特定存储库 URL 预填充的添加插件存储库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此插件。
 1. 点击“保存”按钮以存储您的配置。
-1. 启动扩展。
-1. 检查扩展的日志以查看是否一切顺利。
-1. 仔细配置扩展以满足您的需求，有关详细信息请参阅官方文档。
+1. 启动插件。
+1. 检查插件的日志以查看一切是否顺利。
+1. 根据您的偏好仔细配置插件，有关详细信息请参阅官方文档。
 
 ## 配置
 
-1. 如果不可用，应用程序将在首次运行时生成默认的 `app.conf` 和 `app.db` 文件。
-1. 建议通过 UI 中的设置部分管理配置，如果 UI 不可用，您可以直接在 `/config/config/` 文件夹中修改 `app.conf`。
-1. 您必须指定应扫描哪些网络。这通过输入从主机可访问的子网来完成。如果您使用默认的 `ARPSCAN` 插件，必须在 `SCAN_SUBNETS` 设置中指定至少一个有效的子网和接口。有关如何设置多个 SUBNETS、VLAN 以及限制的说明，请参阅 [SUBNETS 文档](https://github.com/jokob-sk/NetAlertX/blob/main/docs/SUBNETS.md)，有关故障排除和更高级场景的信息，请参阅该文档。
+1. 如果不可用，应用程序在首次运行时会在 `/config/config/` 文件夹中生成默认的 `app.conf` 和 `app.db` 文件。
+1. 建议通过 UI 中的设置部分管理配置，如果 UI 不可访问，可以直接在 `/config/config/` 文件夹中修改 `app.conf`。
+1. 您必须指定要扫描哪些网络。这是通过输入从主机可访问的子网来完成的。如果您使用默认的 `ARPSCAN` 插件，必须在 `SCAN_SUBNETS` 设置中指定至少一个有效的子网和接口。有关如何设置多个子网、VLAN 以及限制的文档，请参阅 [如何设置多个 SUBNETS、VLANs 以及限制](https://github.com/jokob-sk/NetAlertX/blob/main/docs/SUBNETS.md)，有关故障排除和更高级的场景，请参阅 [故障排除文档](https://github.com/jokob-sk/NetAlertX/blob/main/docs/BACKUPS.md)。
 1. 有关如何通过 MQTT 插件将设备添加到您的 [Home Assistant 实例](https://github.com/jokob-sk/NetAlertX/blob/main/docs/HOME_ASSISTANT.md) 的说明。
 1. 通过遵循 [备份文档](https://github.com/jokob-sk/NetAlertX/blob/main/docs/BACKUPS.md) 进行备份。
 
-Webui 可在 <http://homeassistant.local:20211> 或使用 HA 入站访问。
+Webui 可以在 <http://homeassistant.local:20211> 或使用 HA 入口访问。
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/fd74af43-091a-4f38-9879-037ca64cfab9" />
 
@@ -62,10 +63,10 @@ GPID: user
 
 ### 自定义脚本和环境变量
 
-此扩展通过 `addon_config` 映射支持自定义脚本和环境变量：
+此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **自定义脚本**：请参阅 [在扩展中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用扩展的 `env_vars` 选项来传递额外的环境变量（使用大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+- **自定义脚本**：有关在插件中运行自定义脚本的说明，请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项来传递额外的环境变量（使用大写或小写名称）。有关详细信息，请参阅 [向您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2)
 
 [仓库](https://github.com/alexbelgium/hassio-addons)
 ---
