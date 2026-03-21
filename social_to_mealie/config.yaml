@@ -1,7 +1,7 @@
 name: Social to Mealie
-version: "1.6.0"
+version: "1.6.1"
 slug: social_to_mealie
-description: '[老王杂谈说]：直接从社交媒体导入菜谱到 Mealie'
+description: '[老王杂谈说]：将菜谱直接从社交媒体导入 Mealie'
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
 arch:
   - aarch64

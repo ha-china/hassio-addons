@@ -1,10 +1,10 @@
 # Home Assistant 插件：Social to Mealie
 
-我在业余时间维护这个以及其他 Home Assistant 插件：跟进上游更改、Home Assistant 更改以及在真实硬件上进行测试都需要花费大量时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，因此我会安装测试机器（并购买一些我自己不使用的测试服务，如 vpn）来调试和改进插件。
+我在业余时间维护这个以及其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试都需要花费大量时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我自身不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
 
-如果这个插件为您节省了时间或使您的设置更加简单，我将非常感激您的支持！
+如果这个插件为您节省了时间或使您的设置变得更加容易，我将非常感谢您的支持！
 
-[![请我喝杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![买我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
@@ -20,22 +20,22 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我的仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
+_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
 
-[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers 仓库清单 for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
 ![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/social_to_mealie/stats.png)
 
 ## 关于
 
-[Social to Mealie](https://github.com/GerardPolloRebozado/social-to-mealie) 允许您直接从社交媒体视频导入菜谱到您的 Mealie 实例。
+[Social to Mealie](https://github.com/GerardPolloRebozado/social-to-mealie) 允许您直接从社交媒体视频中导入菜谱到您的 Mealie 实例。
 
 此插件基于 docker 镜像 https://github.com/GerardPolloRebozado/social-to-mealie
 
 ## 安装
 
 1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的监督器插件商店中，或点击下面的按钮如果您已配置我的 HA）
-   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切顺利。
@@ -55,7 +55,7 @@ Webui 可以在 <http://homeassistant:3000> 找到。
 | `MEALIE_URL` | str | `https://mealie.example.com` | 您的 Mealie 实例的 URL |
 | `MEALIE_API_KEY` | str | `` | Mealie 的 API 密钥 |
 | `MEALIE_GROUP_NAME` | str | `home` | 可选的 Mealie 组名称 |
-| `EXTRA_PROMPT` | str | `` | 供 AI 使用的附加说明 |
+| `EXTRA_PROMPT` | str | `` | AI 的附加说明 |
 | `YTDLP_VERSION` | str | `latest` | 启动时下载的 yt-dlp 版本 |
 | `COOKIES` | str | `` | yt-dlp 的可选 cookies 字符串 |
 | `env_vars` | list | `[]` | 要导出的附加环境变量 |

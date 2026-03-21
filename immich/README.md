@@ -1,69 +1,68 @@
-# Home assistant add-on: immich
+# Home Assistant 插件：immich
 
-⚠️ The project is under very active development. Expect bugs and changes. Do not use it as the only way to store your photos and videos! (from the developer)
+⚠️ 该项目处于非常活跃的开发中。请预期可能出现错误和变更。请不要将其作为存储照片和视频的唯一方式！（来自开发者）
 
+我在业余时间维护这个以及其他 Home Assistant 插件：跟上上游变更、HA 变更以及在真实硬件上测试需要花费大量时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我自己不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+如果这个插件为您节省了时间或使您的设置更加容易，我将非常感激您的支持！
 
-If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+[![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+## 插件信息
 
-## Addon informations
+![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich%2Fconfig.yaml)
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich%2Fconfig.yaml)
-![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich%2Fconfig.yaml)
-![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich%2Fconfig.yaml)
-
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/immich/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/immich/stats.png)
 
-## About
+## 关于
 
-Web based files browser.
-This addon is based on the [docker image](https://github.com/imagegenius/docker-immich) from imagegenius.
+基于 Web 的文件浏览器。
+此插件基于 [docker 镜像](https://github.com/imagegenius/docker-immich) 从 imagegenius。
 
-## Configuration
+## 配置
 
-Webui can be found at `<your-ip>:8080`. PostgreSQL/MySQL can be either internal or external.
+Web 界面可以在 `<您的 IP>:8080` 找到。PostgreSQL/MySQL 可以是内部或外部的。
 
-### Options
+### 选项
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `data_location` | str | `/share/immich` | Path where Immich data is stored |
-| `library_location` | str | | Path to photo/video library |
-| `TZ` | str | | Timezone (e.g., `Europe/London`) |
-| `localdisks` | str | | Local drives to mount (e.g., `sda1,sdb1,MYNAS`) |
-| `networkdisks` | str | | SMB shares to mount (e.g., `//SERVER/SHARE`) |
-| `cifsusername` | str | | SMB username for network shares |
-| `cifspassword` | str | | SMB password for network shares |
-| `cifsdomain` | str | | SMB domain for network shares |
-| `DB_HOSTNAME` | str | `localhost` | Database hostname |
-| `DB_USERNAME` | str | `immich` | Database username |
-| `DB_PASSWORD` | str | | Database password |
-| `DB_DATABASE_NAME` | str | `immich` | Database name |
-| `DB_PORT` | int | `5432` | Database port |
-| `DB_ROOT_PASSWORD` | str | | Database root password |
-| `JWT_SECRET` | str | | JWT secret for authentication |
-| `DISABLE_MACHINE_LEARNING` | bool | `false` | Disable ML features |
-| `MACHINE_LEARNING_WORKERS` | int | `1` | Number of ML workers |
-| `MACHINE_LEARNING_WORKER_TIMEOUT` | int | `120` | ML worker timeout (seconds) |
-| `VIPS_NOVECTOR` | bool | `false` | Set to `true` to export `VIPS_NOVECTOR=1` and work around aarch64 thumbnail generation issues |
-| `skip_permissions_check` | bool | `false` | Skip file permissions checking |
+| 选项 | 类型 | 默认值 | 描述 |
+|------|------|---------|-------------|
+| `data_location` | str | `/share/immich` | Immich 数据存储的路径 |
+| `library_location` | str | | 照片/视频库的路径 |
+| `TZ` | str | | 时区（例如，`Europe/London`） |
+| `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
+| `networkdisks` | str | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | str | | 网络共享的 SMB 用户名 |
+| `cifspassword` | str | | 网络共享的 SMB 密码 |
+| `cifsdomain` | str | | 网络共享的 SMB 域 |
+| `DB_HOSTNAME` | str | `localhost` | 数据库主机名 |
+| `DB_USERNAME` | str | `immich` | 数据库用户名 |
+| `DB_PASSWORD` | str | | 数据库密码 |
+| `DB_DATABASE_NAME` | str | `immich` | 数据库名 |
+| `DB_PORT` | int | `5432` | 数据库端口 |
+| `DB_ROOT_PASSWORD` | str | | 数据库 root 密码 |
+| `JWT_SECRET` | str | | 用于身份验证的 JWT 密钥 |
+| `DISABLE_MACHINE_LEARNING` | bool | `false` | 禁用 ML 功能 |
+| `MACHINE_LEARNING_WORKERS` | int | `1` | ML 工作者数量 |
+| `MACHINE_LEARNING_WORKER_TIMEOUT` | int | `120` | ML 工作者超时（秒） |
+| `VIPS_NOVECTOR` | bool | `false` | 设置为 `true` 以导出 `VIPS_NOVECTOR=1` 并解决 aarch64 缩略图生成问题 |
+| `skip_permissions_check` | bool | `false` | 跳过文件权限检查 |
 
-### Example Configuration
+### 示例配置
 
 ```yaml
 data_location: "/share/immich"
@@ -80,49 +79,49 @@ DB_DATABASE_NAME: "immich"
 JWT_SECRET: "your-secret-key-here"
 ```
 
-### Mounting Drives
+### 挂载驱动器
 
-This addon supports mounting both local drives and remote SMB shares:
+此插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：请参阅 [插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：请参阅 [插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-### Custom Scripts and Environment Variables
+### 自定义脚本和环境变量
 
-This addon supports custom scripts and environment variables through the `addon_config` mapping:
+此插件支持通过 `addon_config` 映射使用自定义脚本和环境变量：
 
-- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+- **自定义脚本**：请参阅 [插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Carefully configure the add-on to your preferences, see the official documentation for for that.
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 supervisor 插件存储的右上角，或单击下面的按钮如果您已配置我的 HA）
+   [![打开您的 Home Assistant 实例并显示具有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此插件。
+1. 单击 `保存` 按钮以存储您的配置。
+1. 启动插件。
+1. 检查插件的日志以查看是否一切顺利。
+1. 仔细配置插件以满足您的偏好，有关详细信息，请参阅官方文档。
 
-Beware that you need to install a separate postgres addon to be able to connect the database. You can install the postgres addon already in my repository.
-Beware to change the password BEFORE starting it ; it won't change afterwards
+请注意，您需要安装一个单独的 postgres 插件才能连接数据库。您可以在我的仓库中安装 postgres 插件。
+请注意，在启动之前更改密码；启动后不会更改
 
-## Support
+## 支持
 
-Create an issue on github, or ask on the [home assistant thread](https://community.home-assistant.io/t/home-assistant-addon-immich/282108/3)
+在 github 上创建一个问题，或在 [home assistant 线程](https://community.home-assistant.io/t/home-assistant-addon-immich/282108/3) 上提问
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
-
-
-
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

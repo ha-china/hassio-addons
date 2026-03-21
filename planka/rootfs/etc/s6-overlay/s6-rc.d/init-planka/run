@@ -1,8 +1,11 @@
 #!/usr/bin/env bashio
+# shellcheck disable=SC1091
+source /usr/lib/bashio/app.sh
 
 # Ensure namespaced data directory exists
 PLANKA_DATA_DIR="/data/planka"
 mkdir -p "${PLANKA_DATA_DIR}"
+mkdir -p /opt/planka/.tmp/public/preloaded-favicons
 
 # Generate password if not exists
 if ! bashio::fs.file_exists "${PLANKA_DATA_DIR}/db_password"; then
@@ -59,7 +62,7 @@ if bashio::config.true 'reset_database'; then
 	fi
 
 	# Wait 3 seconds to give user time to cancel
-	bashio::log.warning "Starting reset in 3 seconds... (Stop add-on NOW to abort)"
+	bashio::log.warning "Starting reset in 3 seconds... (Stop App NOW to abort)"
 	sleep 3
 
 	bashio::log.info "Proceeding with database reset..."
@@ -75,13 +78,13 @@ if bashio::config.true 'reset_database'; then
 	bashio::log.info "=========================================="
 	bashio::log.info "Database has been dropped."
 	bashio::log.info "It will be recreated on next step."
-	bashio::log.warning "IMPORTANT: Disable 'reset_database' and 'reset_database_confirm' in the add-on settings!"
+	bashio::log.warning "IMPORTANT: Disable 'reset_database' and 'reset_database_confirm' in the App settings!"
 	bashio::log.warning "Otherwise, the database will be wiped again on next restart."
 	bashio::log.info "=========================================="
 
 	# Remove reset_database options
-	bashio::addon.option 'reset_database'
-	bashio::addon.option 'reset_database_confirm'
+	bashio::app.option 'reset_database'
+	bashio::app.option 'reset_database_confirm'
 fi
 
 # Create Planka database and user if they don't exist
@@ -114,8 +117,12 @@ if ! bashio::fs.file_exists "${PLANKA_DATA_DIR}/admin_created"; then
 
     # Store credentials for later (after Planka service is running)
     cat > /data/planka/create_admin_user.sh << 'EOFSCRIPT'
-#!/bin/bash
+#!/usr/bin/env bashio
+# shellcheck disable=SC1091
+source /usr/lib/bashio/app.sh
+
 # Wait for Planka to be fully ready
+bashio::log.info "Admin creator: Waiting for Planka to be fully ready..."
 sleep 10
 
 # Read saved password
