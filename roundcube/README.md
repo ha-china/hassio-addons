@@ -1,23 +1,25 @@
 # Home Assistant App: Roundcube
 
-[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
+[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![维护状态][maintenance-shield]
 
-Roundcube web based email client.
+基于Web的Roundcube电子邮件客户端。
 
-## About
+## 关于
 
-Important: This app requires that the MariaDB app is installed and running!
+重要：此应用程序需要安装并运行MariaDB应用程序！
 
-This app is experimental, and provides a Roundcube web based email client
-that connects to the Mailserver app from this repo
+此应用程序提供基于Web的Roundcube电子邮件客户端，可连接到此存储库中的Mailserver应用程序
 
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
-[project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v2.0.2-blue.svg
-[release]: https://github.com/erik73/app-roundcube/tree/v2.0.2
+[维护状态][maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
+[项目阶段][project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
+[发布][release-shield]: https://img.shields.io/badge/version-v2.0.3-blue.svg
+[发布]: https://github.com/erik73/app-roundcube/tree/v2.0.3
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

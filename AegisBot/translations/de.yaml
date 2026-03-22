@@ -21,7 +21,7 @@ configuration:
   developer_mode:
     name: Entwickler-Modus
     description: >-
-      Wenn aktiviert, lädt das Add-on bei jedem Neustart den neuesten Code
+      Wenn aktiviert, lädt das App bei jedem Neustart den neuesten Code
       vom main-Branch herunter. WARNUNG: Kann instabile Features enthalten!
 
   reset_database:
@@ -87,7 +87,7 @@ configuration:
 
   demo_mode_type:
     name: Demo-Modus-Typ
-    description: Wählen Sie zwischen 'ephemeral' (nur UI) oder 'persistent' (Datenbank-Simulationsmodus).
+    description: Wähle zwischen 'ephemeral' (nur UI) oder 'persistent' (Datenbank-Simulationsmodus).
 
   telegram_bot_token:
     name: Telegram Bot Token

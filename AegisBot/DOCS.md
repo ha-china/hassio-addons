@@ -1,21 +1,21 @@
-# Home Assistant Add-on: AegisBot
+# Home Assistant App: AegisBot
 
-Production-ready Telegram Moderation Bot with AI-driven FAQ and Security Features
+Professional Telegram Group Defender — Advanced Security, Automated Moderation, and Community Management.
 for Home Assistant.
 
 ## About
 
 AegisBot is a comprehensive Telegram moderation bot that combines advanced antispam,
-security scanning, and an AI-driven FAQ system based on group context. This add-on
+security scanning, and an AI-driven FAQ system based on group context. This app
 packages the entire application (frontend dashboard and backend) into a single,
-easy-to-install Home Assistant add-on.
+easy-to-install Home Assistant App.
 
 ## Installation
 
-1. Add this repository to your Home Assistant add-on store
-1. Install the "AegisBot" add-on
-1. Configure the add-on (see configuration section below)
-1. Start the add-on
+1. Add this repository to your Home Assistant App store
+1. Install the "AegisBot" app
+1. Configure the app (see configuration section below)
+1. Start the app
 1. Access AegisBot through the Home Assistant interface using Ingress
 
 ## Configuration
@@ -46,7 +46,7 @@ easy-to-install Home Assistant add-on.
 
 1. Visit: [https://github.com/settings/personal-access-tokens/new](https://github.com/settings/personal-access-tokens/new)
 1. Configure:
-   - **Token name**: `aegisbot-homeassistant-addon`
+   - **Token name**: `aegisbot-homeassistant-App`
    - **Repository access**: Select "Only select repositories" → `FaserF/AegisBot`
    - **Permissions**: "Contents" → "Read-only"
 1. Copy the token (starts with `github_pat_`)
@@ -147,27 +147,27 @@ debug: true
 
 ## 📂 Folder Usage
 
-This add-on uses the following folders:
+This app uses the following folders:
 
 - `/data`: Used for persistent storage of the AegisBot application data, including:
   - `database/`: SQLite database file.
   - `plugins/`: Custom plugins for the bot.
   - `uploads/`: Files uploaded through the bot.
   - `.secret_key`: Automatically generated encryption key.
-- `/share`: Mapped for general use, but not used by the add-on by default.
+- `/share`: Mapped for general use, but not used by the app by default.
 
 ## Support
 
 For issues and feature requests:
 
-- [GitHub Issues](https://github.com/FaserF/AegisBot/issues)
+- [GitHub Issues (Add-on Repository)](https://github.com/FaserF/hassio-addons/issues)
 - [Home Assistant Community Forum](https://community.home-assistant.io/)
 
 ## License
 
-This add-on uses the AegisBot project which is licensed under MIT.
+This app uses the AegisBot project which is licensed under MIT.
 
 ## Authors
 
 - Original AegisBot Project: FaserF
-- Home Assistant Add-on: FaserF
+- Home Assistant App: FaserF
