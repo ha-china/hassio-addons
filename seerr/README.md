@@ -1,18 +1,18 @@
 # Home Assistant 插件：Seerr
 
-## 简介
+## 关于
 
-此插件打包了 [Seerr](https://seerr.dev/)，一个用于 Jellyfin、Plex 和 Emby 的开源媒体请求和发现管理器。
+此插件打包了 [Seerr](https://seerr.dev/)，一个开源的媒体请求和发现管理器，适用于 Jellyfin、Plex 和 Emby。
 
 此插件基于现有的 Overseerr 插件结构，针对 Seerr 上游项目和容器镜像进行了适配。它通过内部 NGINX 反向代理支持 Home Assistant Ingress。
 
-审查了上游仓库：
+已审查的上游仓库：
 - Overseerr：https://github.com/sct/overseerr
 - Seerr：https://github.com/seerr-team/seerr
 
 ## 安装
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在管理器右上角的插件商店中，或者如果您已配置我的 HA，则点击下面的按钮）。
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的监督器插件商店中，或如果您已配置我的 HA，则点击下面的按钮）。
    ![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)(https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 2. 安装 **Seerr**。
 3. 配置选项，然后启动插件。
@@ -25,7 +25,8 @@
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|--------|------|---------|-------------|
+|------|------|---------|------|
+| `NODE_MEMORY_LIMIT` | int | `512` | Node.js 堆内存的最大值（以 MB 为单位）。如果 Seerr 因大型库而崩溃，则增加；在内存受限的系统上减少。 |
 | `PGID` | int | `0` | 文件权限的组 ID |
 | `PUID` | int | `0` | 文件权限的用户 ID |
 | `TZ` | str | | 时区（例如 `Europe/London`） |
@@ -33,6 +34,7 @@
 ### 示例
 
 ```yaml
+NODE_MEMORY_LIMIT: 512
 env_vars: []
 PGID: 0
 PUID: 0
@@ -43,11 +45,11 @@ TZ: Europe/London
 
 ### 从 Overseerr 迁移
 
-Seerr 兼容 Overseerr 的数据格式。要迁移现有配置：
+Seerr 与 Overseerr 的数据格式兼容。要迁移现有配置：
 
 1. 停止 **Overseerr** 插件。
-2. 安装并启动 **Seerr** 插件一次，以创建其配置目录 (`/addon_configs/db21ed7f_seerr/`)，然后停止它。
-3. 打开 **[文件浏览器](https://github.com/alexbelgium/hassio-addons/tree/master/filebrowser)** 插件（或任何具有访问 `/addon_configs/` 的文件管理器）。
+2. 安装并启动 **Seerr** 插件一次以创建其配置目录（`/addon_configs/db21ed7f_seerr/`），然后停止它。
+3. 打开 **[文件浏览器](https://github.com/alexbelgium/hassio-addons/tree/master/filebrowser)** 插件（或任何可以访问 `/addon_configs/` 的文件管理器）。
 4. 导航到 `/addon_configs/db21ed7f_overseerr/` 并将所有文件复制到 `/addon_configs/db21ed7f_seerr/`。
 5. 启动 **Seerr** 插件。您的现有设置、用户和请求将被保留。
 
@@ -55,11 +57,11 @@ Seerr 兼容 Overseerr 的数据格式。要迁移现有配置：
 
 ### 从 Jellyseerr 迁移
 
-Seerr 兼容 Jellyseerr 的数据格式。要迁移现有配置：
+Seerr 与 Jellyseerr 的数据格式兼容。要迁移现有配置：
 
 1. 停止 **Jellyseerr** 插件。
-2. 安装并启动 **Seerr** 插件一次，以创建其配置目录 (`/addon_configs/db21ed7f_seerr/`)，然后停止它。
-3. 打开 **[文件浏览器](https://github.com/alexbelgium/hassio-addons/tree/master/filebrowser)** 插件（或任何具有访问 `/addon_configs/` 的文件管理器）。
+2. 安装并启动 **Seerr** 插件一次以创建其配置目录（`/addon_configs/db21ed7f_seerr/`），然后停止它。
+3. 打开 **[文件浏览器](https://github.com/alexbelgium/hassio-addons/tree/master/filebrowser)** 插件（或任何可以访问 `/addon_configs/` 的文件管理器）。
 4. 导航到 `/addon_configs/db21ed7f_jellyseerr/` 并将所有文件复制到 `/addon_configs/db21ed7f_seerr/`。
 5. 启动 **Seerr** 插件。您的现有设置、用户和请求将被保留。
 

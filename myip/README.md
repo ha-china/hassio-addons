@@ -1,38 +1,39 @@
-# Home assistant add-on: MyIP
+# Home Assistant 插件：MyIP
 
-MyIP is an advanced IP utility designed to provide a wide range of information and diagnostics about your IP address. It's perfect for users who need to view and analyze their IP details, check website accessibility, perform DNS leak tests, and more
+MyIP 是一款高级 IP 工具，旨在提供关于您的 IP 地址的广泛信息和诊断。它非常适合需要查看和分析 IP 细节、检查网站可访问性、执行 DNS 泄露测试等用户。
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
 
-[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![Stargazers 仓库列表 for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## About
+## 关于
 
-This addon uses the [docker image](https://github.com/jason5ng32/MyIP).
+此插件使用 [docker 镜像](https://github.com/jason5ng32/MyIP)。
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Open WebUI should work via <your-ip>:port.
+1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例。
+1. 安装此插件。
+1. 点击 `保存` 按钮以存储您的配置。
+1. 打开 WebUI 应该可以通过 <your-ip>:port 访问。
 
-## Configuration
+## 配置
 
 ```
-port : 18966 #port you want to run on.
+port : 18966 #您想要运行的端口。
 ```
 
-Webui can be found at `<your-ip>:port`.
+WebUI 可以在 `<your-ip>:port` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
-
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

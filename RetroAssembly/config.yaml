@@ -1,9 +1,9 @@
 name: Retro Assembly
-version: "v6.260321.1810"
+version: "v0.250616.0154"
 upstream: v6.260321.1810
 slug: retroassembly
 description: >-
-  [老王杂谈说]：RetroAssembly 是你浏览器中的个人复古游戏收藏柜。
+  [老王杂谈说]：null
 arch:
   - amd64
   - aarch64

@@ -1,10 +1,10 @@
 # Home Assistant 扩展：Frigate
 
-请参考[发行说明](https://github.com/blakeblackshear/frigate/releases)了解重大变更。
+请参考[发布说明](https://github.com/blakeblackshear/frigate/releases)以获取重大变更。
 
 ![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield] ![支持 armv7 架构][armv7-shield]
 
-适用于IP摄像头的NVR，带有实时本地目标检测功能。
+支持IP摄像头的NVR实时本地目标检测。
 
 您必须在您的扩展配置文件夹中创建一个名为`config.yml`的配置文件。
 

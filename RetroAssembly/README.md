@@ -1,34 +1,34 @@
-# Home Assistant 插件：RetroAssembly
+# 家居助手插件：RetroAssembly
 
-RetroAssembly 是一个基于网页的个人复古游戏收藏柜，将经典游戏机直接带到您的浏览器中。
+RetroAssembly 是一个基于网页的个人复古游戏收藏柜，可以将经典游戏机直接带到您的浏览器中。
 
-_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢每一位为我的仓库点赞的人！要点赞，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
-此插件使用 [docker 镜像](https://hub.docker.com/r/arianrhodsandlot/retroassembly)。
+此插件使用了 [docker 镜像](https://hub.docker.com/r/arianrhodsandlot/retroassembly)。
 
 ## 安装
 
 此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例。
+1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例中。
 1. 安装此插件。
 1. 点击 `保存` 按钮以存储您的配置。
 1. 启动插件。
-1. 检查插件的日志，以查看是否一切顺利。
-1. 打开 WebUI 应该可以通过 <your-ip>:port 访问。
-1. 入口不会工作，因为它是用糟糕的 npm 编写的。
+1. 检查插件的日志以查看是否一切顺利。
+1. 打开 WebUI 应该可以通过 <您的IP>:端口 访问。
+1. 入站不会工作，因为它是用糟糕的 npm 编写的
 
 ## 配置
 
 ```
-port : 8000 # 您想要运行的端口。
+port : 8000 #您想要运行的端口。
 ```
 
-WebUI 可以在 `<your-ip>:port` 上找到。
+WebUI 可以在 `<您的IP>:端口` 上找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---
