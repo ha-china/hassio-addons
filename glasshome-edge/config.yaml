@@ -1,8 +1,8 @@
 name: "GlassHome Dashboard (Edge)"
-version: "0.8.0-beta.1"
+version: "0.8.0-beta.4"
 slug: glasshome-edge
-description: "[老王杂谈说]：GlassHome 早期测试版仅供测试。日常使用请使用稳定版。"
-url: "https://ghfast.top/github.com/glasshome-labs/glasshome-addon"
+description: "[老王杂谈说]：用于测试的 GlassHome 早期版本。请使用稳定版进行日常使用。"
+url: "https://ghfast.top/github.com/glasshome/glasshome-addon"
 stage: experimental
 arch:
   - amd64
@@ -16,10 +16,12 @@ ports:
   3124/tcp: 3124
 ports_description:
   3124/tcp: "Web interface (Edge)"
+environment:
+  PORT: "3124"
 map:
   - data:rw
 options:
   log_level: info
 schema:
   log_level: list(debug|info|warning|error)
-image: "ghcr.nju.edu.cn/glasshome-labs/{arch}-glasshome"
+image: "ghcr.nju.edu.cn/glasshome/{arch}-glasshome"
