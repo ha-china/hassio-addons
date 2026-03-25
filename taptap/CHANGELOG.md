@@ -1,5 +1,9 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.3.3
+
+- update taptap-mqtt to v0.2.5 - hotfix to in Docker without SYS_RESOURCE capability
+
 ## 0.3.2
 
 - update taptap-mqtt to v0.2.4 

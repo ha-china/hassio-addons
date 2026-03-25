@@ -1,6 +1,7 @@
 # Home Assistant 插件：qbittorrent
 
-我在业余时间维护这个和其他 Home Assistant 插件：跟进上游变更、Home Assistant 变更以及在真实硬件上进行测试需要花费大量时间（以及一些金钱）。我经常使用 5-10 个我的 >110 个插件，所以我安装了测试机器（并购买了一些我不使用的测试服务，如 vpn），用于调试和改进插件。
+
+我在业余时间维护这个以及其他 Home Assistant 插件：跟进上游变更、HA 变更和在实际硬件上进行测试需要花费很多时间（还有一些钱）。我经常使用 5-10 个我 >110 个插件中的几个，所以我安装了测试机器（并购买了某些我不使用的测试服务，如 vpn），用于故障排除和改进插件。
 
 如果这个插件为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
 
@@ -10,8 +11,8 @@
 ## 插件信息
 
 ![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fqbittorrent%2Fconfig.yaml)
-![入口](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fqbittorrent%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fqbittorrent%2Fconfig.yaml)
+![入站](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fqbittorrent%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fqbittorrent%2Fconfig.yaml)
 
 [![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
@@ -20,11 +21,11 @@
 [捐赠徽章]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-徽章]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我仓库点星的人！要点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢每一位为我仓库点星的人！要为它点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载演变](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/qbittorrent/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/qbittorrent/stats.png)
 
 ## 关于
 
@@ -35,10 +36,10 @@ _感谢所有为我仓库点星的人！要点星，请点击下面的图片，�
 
 此插件有多个可配置选项：
 
-- 允许从插件挂载本地外部驱动器或从 smb 共享
+- 允许从插件挂载本地外部驱动器或 SMB 共享
 - [替代 WebUI](https://github.com/qbittorrent/qBittorrent/wiki/List-of-known-alternate-WebUIs)
 - 使用 ssl
-- 入口
+- 入站
 - 可选 OpenVPN 或 WireGuard 支持
 - 允许设置特定的 DNS 服务器
 
@@ -46,15 +47,15 @@ _感谢所有为我仓库点星的人！要点星，请点击下面的图片，�
 
 ---
 
-WebUI 可在 <http://homeassistant:8080> 找到，或通过入口在侧边栏中使用。
+WebUI 可在 <http://homeassistant:8080> 或使用入站在侧边栏中找到。
 默认用户名/密码在启动日志中描述。
 
-网络磁盘挂载到 `/mnt/<share_name>`。您需要将暴露的端口在您的路由器上进行映射，以获得最佳速度和连接性。
+网络磁盘挂载到 `/mnt/<share_name>`。您需要将路由器中公开的端口映射，以获得最佳速度和连接性。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|---------|-------------|
+|--------|------|---------|-------------|
 | `PGID` | int | `0` | 文件权限的组 ID |
 | `PUID` | int | `0` | 文件权限的用户 ID |
 | `TZ` | str | | 时区（例如，`Europe/London`） |
@@ -64,7 +65,7 @@ WebUI 可在 <http://homeassistant:8080> 找到，或通过入口在侧边栏中
 | `certfile` | str | `fullchain.pem` | SSL 证书文件（在 `/ssl/` 中） |
 | `keyfile` | str | `privkey.pem` | SSL 私钥文件（在 `/ssl/` 中） |
 | `whitelist` | str | `localhost,127.0.0.1,...` | 不需要密码的 IP 子网 |
-| `customUI` | list | `vuetorrent` | 替代 WebUI（默认/vuetorrent/qbit-matUI/qb-web/custom） |
+| `customUI` | list | `vuetorrent` | 替代 Web UI（默认/vuetorrent/qbit-matUI/qb-web/custom） |
 | `DNS_server` | str | `8.8.8.8,1.1.1.1` | 自定义 DNS 服务器 |
 | `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
 | `networkdisks` | str | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
@@ -77,15 +78,15 @@ WebUI 可在 <http://homeassistant:8080> 找到，或通过入口在侧边栏中
 | `openvpn_password` | str | | OpenVPN 密码 |
 | `openvpn_alt_mode` | bool | `false` | 在容器级别而不是应用级别绑定 |
 | `wireguard_enabled` | bool | `false` | 启用 WireGuard 隧道 |
-| `wireguard_config` | str | _(空)_ | WireGuard 配置文件名仅（例如 `ABC.conf`，存储在插件内的 `/addon_configs/db21ed7f_qbittorrent/wireguard/`，例如 `/addon_configs/db21ed7f_qbittorrent/wireguard/`） |
+| `wireguard_config` | str | _(empty)_ | WireGuard 配置文件名（例如 `ABC.conf`，存储在插件内部的 `/config/wireguard` 中） |
 | `qbit_manage` | bool | `false` | 启用 qBit Manage 集成 |
 | `run_duration` | str | | 运行持续时间（例如，`12h`，`5d`） |
 | `silent` | bool | `false` | 抑制调试消息 |
 
 ### WireGuard 设置
 
-WireGuard 配置文件必须存储在 `/config/wireguard` **在插件容器内**（在 Home Assistant OS 中这是插件配置共享，通常是 `/addon_configs/<addon_slug>/wireguard/`，例如 `/addon_configs/db21ed7f_qbittorrent/wireguard/`）。
-将 `wireguard_config` 设置为 **文件名仅**（例如 `ABC.conf`，不是完整路径）。如果有多个 `.conf` 文件，则将 `wireguard_config` 设置为要使用的文件名（例如 `wg0.conf`）。在插件选项中暴露 UDP 端口 `51820`，并且仅在您的隧道期望入站对等体时从您的路由器转发它（例如，站点到站点设置）。仅出站的商业 VPN 提供商通常不需要映射端口。运行时配置现在保留 IPv4 和 IPv6 条目，因此当您的端点支持时，您可以使用双栈 WireGuard 对等体。
+WireGuard 配置文件必须存储在 `/config/wireguard` **在插件容器内部**（在 Home Assistant OS 中这是插件配置共享，通常是 `/addon_configs/<addon_slug>/wireguard/`，例如 `/addon_configs/db21ed7f_qbittorrent/wireguard/`）。
+将 `wireguard_config` 设置为 **文件名仅**（例如 `ABC.conf`，不是完整路径）。如果有多个 `.conf` 文件，将 `wireguard_config` 设置为要使用的文件名（例如 `wg0.conf`）。在插件选项中公开 UDP 端口 `51820`，并仅在您的隧道期望入站对等端时从您的路由器转发它（例如，站点到站点设置）。仅出站的企业 VPN 提供商通常不需要映射端口。运行时配置现在保留 IPv4 和 IPv6 条目，因此当您的端点支持时，您可以使用双栈 WireGuard 对等端。
 
 ### 示例配置
 
@@ -102,7 +103,11 @@ whitelist: "localhost,192.168.0.0/16"
 customUI: "vuetorrent"
 DNS_server: "8.8.8.8,1.1.1.1"
 localdisks: "sda1,sdb1"
-networkdisks: "//192.168
+networkdisks: "//192.168.1.100/downloads"
+cifsusername: "username"
+cifspassword: "password"
+openvpn_enabled: false
+wireguard
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
