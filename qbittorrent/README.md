@@ -1,27 +1,26 @@
 # Home Assistant 插件：qbittorrent
 
+我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在实际硬件上进行测试都需要花费大量时间（以及一些金钱）。我经常使用 5-10 个我 >110 个插件中的几个，所以我安装了测试机器（并购买了一些我本人不使用的测试服务，如 vpn），用于故障排除和改进插件。
 
-我在业余时间维护这个以及其他 Home Assistant 插件：跟进上游变更、HA 变更和在实际硬件上进行测试需要花费很多时间（还有一些钱）。我经常使用 5-10 个我 >110 个插件中的几个，所以我安装了测试机器（并购买了某些我不使用的测试服务，如 vpn），用于故障排除和改进插件。
+如果这个插件为您节省了时间或使您的设置更简单，我将非常感激您的支持！
 
-如果这个插件为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
-
-[![买我一杯咖啡][捐赠徽章]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal-徽章]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![请给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
 
 ![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fqbittorrent%2Fconfig.yaml)
-![入站](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fqbittorrent%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fqbittorrent%2Fconfig.yaml)
 ![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fqbittorrent%2Fconfig.yaml)
 
 [![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[捐赠徽章]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-徽章]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢每一位为我仓库点星的人！要为它点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有为我仓库点星的人！要星标它，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -34,12 +33,12 @@ _感谢每一位为我仓库点星的人！要为它点星，请点击下面的�
 [Qbittorrent](https://github.com/qbittorrent/qBittorrent) 是一个跨平台的免费开源 BitTorrent 客户端。
 此插件基于 [linuxserver.io](https://www.linuxserver.io/) 的 docker 镜像。
 
-此插件有多个可配置选项：
+此插件具有几个可配置的选项：
 
-- 允许从插件挂载本地外部驱动器或 SMB 共享
+- 允许从插件挂载本地外部驱动器或 smb 共享
 - [替代 WebUI](https://github.com/qbittorrent/qBittorrent/wiki/List-of-known-alternate-WebUIs)
 - 使用 ssl
-- 入站
+- 入口
 - 可选 OpenVPN 或 WireGuard 支持
 - 允许设置特定的 DNS 服务器
 
@@ -47,15 +46,15 @@ _感谢每一位为我仓库点星的人！要为它点星，请点击下面的�
 
 ---
 
-WebUI 可在 <http://homeassistant:8080> 或使用入站在侧边栏中找到。
+WebUI 可在 <http://homeassistant:8080> 找到，或通过入口在侧边栏中使用。
 默认用户名/密码在启动日志中描述。
 
-网络磁盘挂载到 `/mnt/<share_name>`。您需要将路由器中公开的端口映射，以获得最佳速度和连接性。
+网络磁盘挂载到 `/mnt/<share_name>`。您需要映射路由器中暴露的端口以获得最佳速度和连接性。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|--------|------|---------|-------------|
+|------|------|---------|-------------|
 | `PGID` | int | `0` | 文件权限的组 ID |
 | `PUID` | int | `0` | 文件权限的用户 ID |
 | `TZ` | str | | 时区（例如，`Europe/London`） |
@@ -78,15 +77,15 @@ WebUI 可在 <http://homeassistant:8080> 或使用入站在侧边栏中找到。
 | `openvpn_password` | str | | OpenVPN 密码 |
 | `openvpn_alt_mode` | bool | `false` | 在容器级别而不是应用级别绑定 |
 | `wireguard_enabled` | bool | `false` | 启用 WireGuard 隧道 |
-| `wireguard_config` | str | _(empty)_ | WireGuard 配置文件名（例如 `ABC.conf`，存储在插件内部的 `/config/wireguard` 中） |
+| `wireguard_config` | str | _(空)_ | WireGuard 配置文件名（仅文件名，例如 `ABC.conf`，存储在插件内部的 `/addon_configs/db21ed7f_qbittorrent/wireguard/` 中） |
 | `qbit_manage` | bool | `false` | 启用 qBit Manage 集成 |
 | `run_duration` | str | | 运行持续时间（例如，`12h`，`5d`） |
 | `silent` | bool | `false` | 抑制调试消息 |
 
 ### WireGuard 设置
 
-WireGuard 配置文件必须存储在 `/config/wireguard` **在插件容器内部**（在 Home Assistant OS 中这是插件配置共享，通常是 `/addon_configs/<addon_slug>/wireguard/`，例如 `/addon_configs/db21ed7f_qbittorrent/wireguard/`）。
-将 `wireguard_config` 设置为 **文件名仅**（例如 `ABC.conf`，不是完整路径）。如果有多个 `.conf` 文件，将 `wireguard_config` 设置为要使用的文件名（例如 `wg0.conf`）。在插件选项中公开 UDP 端口 `51820`，并仅在您的隧道期望入站对等端时从您的路由器转发它（例如，站点到站点设置）。仅出站的企业 VPN 提供商通常不需要映射端口。运行时配置现在保留 IPv4 和 IPv6 条目，因此当您的端点支持时，您可以使用双栈 WireGuard 对等端。
+WireGuard 配置文件必须存储在插件容器内的 `/config/wireguard` 中（在 Home Assistant OS 中这是插件配置共享，通常是 `/addon_configs/<addon_slug>/wireguard/`，例如 `/addon_configs/db21ed7f_qbittorrent/wireguard/`）。
+将 `wireguard_config` 设置为 **仅文件名**（例如 `ABC.conf`，不是完整路径）。如果有多个 `.conf` 文件，请将 `wireguard_config` 设置为您要使用的文件名（例如 `wg0.conf`）。在插件选项中暴露 UDP 端口 `51820`，并仅在您的隧道期望传入对等方时从您的路由器转发它（例如，站点到站点设置）。仅出站商业 VPN 提供商通常不需要映射端口。运行时配置现在保留 IPv4 和 IPv6 条目，因此当您的端点支持时，您可以使用双栈 WireGuard 对等方。
 
 ### 示例配置
 
@@ -105,9 +104,7 @@ DNS_server: "8.8.8.8,1.1.1.1"
 localdisks: "sda1,sdb1"
 networkdisks: "//192.168.1.100/downloads"
 cifsusername: "username"
-cifspassword: "password"
-openvpn_enabled: false
-wireguard
+cifspassword
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

@@ -1,5 +1,11 @@
 # TOMMY
 
+## 2.10.2
+
+### Minor Changes
+- Fixed a bug causing MQTT to flood logs after activating license
+- UI improvements
+
 ## 2.10.1
 
 ### Minor Changes

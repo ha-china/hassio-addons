@@ -1,4 +1,4 @@
-# 用于创建 Home Assistant MQTT 发现传感器的 Bash 脚本 for SBFspot。
+# Bash 脚本用于创建 SBFspot 的 Home Assistant MQTT Discovery 传感器
 
 ## MQTT_Date 完整列表
 
@@ -18,7 +18,7 @@ PrgVersion,Plantname,Timestamp,SunRise,SunSet,InvSerial,InvName,InvTime,InvStatu
 homeassistant/sbfspot_Your_Plantname/sbfspot_Inverter_Serial
 ```
 
-当使用多个逆变器时，MQTT 消息发布如下：
+当使用多个逆变器时，MQTT 消息的发布方式如下
 
 逆变器一：
 
@@ -28,7 +28,7 @@ homeassistant/sbfspot_Your_Plantname/sbfspot_Inverter_Serial
             消息：{Inverter:One, Key1:Value1, Key2:Value2}
 ```
 
-逆变器二，然后使用逆变器二的数据将其消息发布到逆变器一的主题上。逆变器三也是同样的情况。
+逆变器二，然后将其消息发布到逆变器一的主题，使用逆变器二的数据。对于逆变器三也是如此
 
 逆变器二：
 
@@ -38,8 +38,32 @@ homeassistant/sbfspot_Your_Plantname/sbfspot_Inverter_Serial
             消息：{Inverter:Two, Key1:Value1, Key2:Value2}
 ```
 
-### MQTT 发现需要为设备和实体提供唯一的消息。
+### MQTT Discovery 需要为设备和实体提供独特的消息。
 
-使用此插件，对于多逆变器设置，传感器生成应该会简化。
+使用此插件，多逆变器设置下的传感器生成应该会简化。
 
-享受
+祝您享受使用！
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

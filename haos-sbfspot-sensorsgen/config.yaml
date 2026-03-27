@@ -1,8 +1,8 @@
 ---
 name: HAOS-SBFspot SensorsGen
-version: 2025.10.1
+version: 2026.03.5
 slug: haos-sbfspot-sensorsgen
-description: '[老王杂谈说]：为SBFspot多逆变器设置创建额外的传感器'
+description: '[老王杂谈说]：为 SBFspot 多逆变器配置创建额外传感器'
 url: "https://ghfast.top/github.com/habuild/hassio/tree/main/haos-sbfspot-sensorsgen"
 image: "ghcr.nju.edu.cn/habuild/{arch}-addon-haos-sbfspot-sensorsgen"
 arch:
@@ -42,6 +42,7 @@ options:
   InvType3: ""
   InvClass3: ""
   DateTimeFormat: "null"
+  MQTT_Host: "null"
   MQTT_User: "!secret mqtt_user"
   MQTT_Pass: "!secret mqtt_pass"
   MQTT_Topic: "homeassistant/sbfspot_{plantname}/sbfspot_{serial}"
@@ -73,6 +74,7 @@ schema:
   InvType3: str?
   InvClass3: str?
   DateTimeFormat: str?
+  MQTT_Host: str?
   MQTT_User: str?
   MQTT_Pass: password?
   MQTT_Topic: str

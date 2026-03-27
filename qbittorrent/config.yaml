@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：带有可选 VPN 的 BitTorrent 客户端'
+description: '[老王杂谈说]：null'
 devices:
   - /dev/net/tun
   - /dev/dri
@@ -143,4 +143,4 @@ schema:
 slug: qbittorrent
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "5.1.4-19"
+version: "5.1.4-20"
