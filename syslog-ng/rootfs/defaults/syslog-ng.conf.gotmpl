@@ -5,7 +5,7 @@
 
 {{- $options := (ds "options") }}
 
-@version: 4.1
+@version: {{ getenv "SYSLOG_VERSION" "4.1" }}
 @include "scl.conf"
 
 source s_local {

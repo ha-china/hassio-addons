@@ -1,12 +1,28 @@
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
 
-# generate config
 mkdir -p /data/log
-gomplate -f /defaults/syslog-ng.conf.gotmpl -d options=/data/options.json -o /data/syslog-ng.conf
 
-CONF_VERSION=$(grep -oP "@version: \K(\d+\.\d+)" "/data/syslog-ng.conf")
+# Detect version before gomplate so the template can stamp the correct @version
 SYSLOG_VERSION=$(syslog-ng --version | grep "Config version" | awk -F ':' '{print $2}' | tr -d '[:space:]')
+export SYSLOG_VERSION
+
+CONFIG_PATH=$(jq --raw-output '.config_path // empty' /data/options.json)
+
+if [[ -n "${CONFIG_PATH}" ]]; then
+  if [[ -f "${CONFIG_PATH}" ]]; then
+    echo "Using custom config from ${CONFIG_PATH}"
+    cp "${CONFIG_PATH}" /data/syslog-ng.conf
+  else
+    echo "WARNING: config_path '${CONFIG_PATH}' does not exist. Falling back to default config."
+    gomplate -f /defaults/syslog-ng.conf.gotmpl -d options=/data/options.json -o /data/syslog-ng.conf
+  fi
+else
+  gomplate -f /defaults/syslog-ng.conf.gotmpl -d options=/data/options.json -o /data/syslog-ng.conf
+fi
+
+# Warn if a user-supplied config declares an older @version than the running binary
+CONF_VERSION=$(grep -oP "@version: \K(\d+\.\d+)" "/data/syslog-ng.conf")
 
 if [[ -f "/data/syslog-ng.conf" ]] && (( $(bc -l <<< "${CONF_VERSION} < ${SYSLOG_VERSION}") )); then
 cat <<-EOF

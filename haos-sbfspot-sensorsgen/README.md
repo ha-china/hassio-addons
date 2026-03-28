@@ -1,24 +1,24 @@
-# Bash 脚本用于创建 SBFspot 的 Home Assistant MQTT Discovery 传感器
+# Bash脚本来创建SBFspot的Home Assistant MQTT Discovery传感器
 
-## MQTT_Date 完整列表
+## MQTT日期完整列表
 
 ```
 PrgVersion,Plantname,Timestamp,SunRise,SunSet,InvSerial,InvName,InvTime,InvStatus,InvSwVer,InvClass,InvType,InvTemperature,InvGridRelay,EToday,ETotal,GridFreq,PACTot,PAC1,PAC2,PAC3,UAC1,UAC2,UAC3,IAC1,IAC2,IAC3,OperTm,FeedTm,PDCTot,PDC1,PDC2,PDC,UDC1,UDC2,UDC,IDC1,IDC2,IDC,BTSignal,BatTmpVal,BatVol,BatAmp,BatChaStt,InvWakeupTm,InvSleepTm,MeteringWOut,MeteringWIn,MeteringWTot
 ```
 
-## MQTT_Data 典型列表
+## MQTT数据典型列表
 
 ```
 PrgVersion,Plantname,Timestamp,SunRise,SunSet,InvSerial,InvName,InvTime,InvStatus,InvSwVer,InvClass,InvType,InvTemperature,InvGridRelay,EToday,ETotal,GridFreq,PACTot,PAC1,UAC1,IAC1,OperTm,FeedTm,PDCTot,UDC1,UDC2,IDC1,IDC2,PDC1,PDC2,BTSignal,InvWakeupTm,InvSleepTm
 ```
 
-### 典型的多逆变器 SBFspot MQTT 消息：
+### 典型多逆变器SBFspot MQTT消息：
 
 ```
 homeassistant/sbfspot_Your_Plantname/sbfspot_Inverter_Serial
 ```
 
-当使用多个逆变器时，MQTT 消息的发布方式如下
+当使用多个逆变器时，MQTT消息将按照以下方式发布
 
 逆变器一：
 
@@ -38,11 +38,11 @@ homeassistant/sbfspot_Your_Plantname/sbfspot_Inverter_Serial
             消息：{Inverter:Two, Key1:Value1, Key2:Value2}
 ```
 
-### MQTT Discovery 需要为设备和实体提供独特的消息。
+### MQTT发现要求为设备和实体提供独特的消息。
 
-使用此插件，多逆变器设置下的传感器生成应该会简化。
+使用此插件，多逆变器设置中的传感器生成应该会简化。
 
-祝您享受使用！
+祝您使用愉快
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

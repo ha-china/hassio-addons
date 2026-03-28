@@ -1,5 +1,13 @@
 # Changelog
 
+## syslog-ng 5.0.7 - 2026-03-27
+
+### Changes
+
+#### 🐛 Bug fixes
+
+- fix not taking configuration into account @bluemaex (#511)
+
 ## syslog-ng 5.0.6 - 2026-01-24
 
 ### Changes

@@ -7,7 +7,7 @@
 
 ## 关于
 
-此应用允许您编写配置，并通过 Home Assistant 将您的微控制器直接转换为智能家居设备，**无需任何编程经验**。您只需编写 YAML 配置文件；其余的（空中更新、编译）都由 ESPHome 处理。
+此应用允许您编写配置，并通过 Home Assistant 将您的微控制器直接转换为智能家居设备，无需任何编程经验。您只需编写 YAML 配置文件；其余的（空中更新、编译）都由 ESPHome 处理。
 
 <p align="center">
 <img title="ESPHome 设备构建器截图" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome-dev/images/screenshot.png" width="700px"></img>
@@ -30,7 +30,7 @@
 [discord-shield]: https://img.shields.io/discord/429907082951524364.svg
 [github-stars-shield]: https://img.shields.io/github/stars/esphome/esphome.svg?style=social&label=Star&maxAge=2592000
 [dht22]: https://next.esphome.io/components/sensor/dht/
-[发布版]: https://next.esphome.io/changelog/
+[发布版本]: https://next.esphome.io/changelog/
 [logo]: https://github.com/esphome/home-assistant-addon/raw/main/esphome-dev/logo.png
 [网站]: https://next.esphome.io/
 ---

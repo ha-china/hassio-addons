@@ -1,6 +1,6 @@
 ---
 name: HAOS-SBFspot SensorsGen
-version: 2026.03.5
+version: 2026.03.01
 slug: haos-sbfspot-sensorsgen
 description: '[老王杂谈说]：为 SBFspot 多逆变器配置创建额外传感器'
 url: "https://ghfast.top/github.com/habuild/hassio/tree/main/haos-sbfspot-sensorsgen"
@@ -16,6 +16,7 @@ panel_icon: mdi:solar-power-variant
 boot: manual_only
 options:
   Make_Sensors: false
+  Make_Second: false
   Make_Third: false
   Test_Msg: false
   MQTT_Data: >-
@@ -29,12 +30,15 @@ options:
   InvName: "Nom1"
   InvSerial: "First_Inverter_Serial"
   Plantname: "First_Inverter_Plantname"
+  InvSwVer: "12.35.45"
+  InvType: "model-number1"
+  InvClass: "Solar Inverter"
   InvName2: "Nom2"
   InvSerial2: "Second_Inverter_Serial"
   Plantname2: "null"
   InvSwVer2: "12.35.45"
-  InvType2: "model-number"
-  InvClass2: "Solar Inverter"
+  InvType2: "model-number2"
+  InvClass2: "Solar Inverter2"
   InvName3: "Nom3"
   InvSerial3: "Third_Inverter_Serial"
   Plantname3: "null"
@@ -49,6 +53,7 @@ options:
   LogLevel: info
 schema:
   Make_Sensors: bool
+  Make_Second: bool
   Make_Third: bool
   Test_Msg: bool
   MQTT_Data: str?
@@ -59,8 +64,11 @@ schema:
   Message3: str
   Send_Message3: bool
   InvName: str?
-  InvSerial: str
-  Plantname: str
+  InvSerial: str?
+  Plantname: str?
+  InvSwVer: str?
+  InvType: str?
+  InvClass: str?
   InvName2: str?
   InvSerial2: str
   Plantname2: str?

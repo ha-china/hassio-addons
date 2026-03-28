@@ -1,6 +1,6 @@
 # Home Assistant 插件：changedetection.io
 
-我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试需要花费大量时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我本人不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
+我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试都需要花费大量时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我本人不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
 
 如果这个插件为您节省了时间或使您的设置更加简单，我将非常感激您的支持！
 
@@ -44,7 +44,7 @@ Web UI 可在 `<your-ip>:5000` 找到，也可以通过插件页面或使用入�
 
 您可以按照以下步骤添加指向您的 Changedetection.io 实例的快捷方式：
 1. 前往 <kbd>⚙ 设置</kbd> > <kbd>仪表板</kbd>
-2. 在底部角落点击 <kbd>➕ 添加仪表板</kbd>
+2. 点击底角处的 <kbd>➕ 添加仪表板</kbd>
 3. 选择 <kbd>Webpage</kbd> 选项，并粘贴从插件页面获取的 Web UI URL。
 4. 填写侧边栏项的标题，一个图标（建议：`mdi:vector-difference`），以及该面板的 **相对 URL**（例如 `change-detection`）。最后，确认它。
 
@@ -70,9 +70,9 @@ PLAYWRIGHT_DRIVER_URL: "ws://db21ed7f-browserless-chrome:3000/chromium?headless=
 TIMEOUT: 60000
 ```
 
-### 连接到 browserless Chrome（由 @RhysMcW 提供）
+### 连接到 browserless Chrome（来自 @RhysMcW）
 
-安装并启动 Browserless Chrome 插件，然后使用 `PLAYWRIGHT_DRIVER_URL` 选项连接到它。此选项必须填写为 Browserless Chrome URL："ws://db21ed7f-browserless-chrome:3000/chromium?headless=true&stealth=true&blockAds=true"
+安装并启动 Browserless Chrome 插件，然后使用 `PLAYWRIGHT_DRIVER_URL` 选项连接到它。此选项必须填写 Browserless Chrome URL："ws://db21ed7f-browserless-chrome:3000/chromium?headless=true&stealth=true&blockAds=true"
 
 `db21ed7f-browserless-chrome` 主机名在 UI 中显示，在 Browserless Chromium 插件页面上：
 ![image](https://github.com/user-attachments/assets/a63514f6-027a-4361-a33f-0d8f87461279)
@@ -89,7 +89,7 @@ TIMEOUT: 60000
 2. 点击 `保存` 按钮以存储您的配置。
 3. 启动插件。
 4. 检查插件的日志以查看一切是否顺利。
-5. 仔细配置插件以符合您的喜好，有关详细信息请参阅官方文档。
+5. 仔细配置插件以满足您的偏好，有关详细信息，请参阅官方文档。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

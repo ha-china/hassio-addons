@@ -4,21 +4,21 @@ Home Assistant 的官方音乐助手插件。
 
 ## 关于音乐助手
 
-音乐助手是一个免费的开源音乐库管理器，可以连接到您的流媒体服务和广泛的连接扬声器。将您的 Home Assistant 实例变成您自己的个人音乐流媒体中心！
+音乐助手是一个免费、开源的音乐库管理器，它可以连接到您的流媒体服务和多种连接的扬声器。将您的 Home Assistant 实例变成您自己的个人音乐流媒体中心！
 
-## 功能
+## 特性
 
 - 🎵 **多源音乐库**：连接 Spotify、YouTube Music、Qobuz、Tidal 以及更多
-- 🔊 **通用播放器支持**：与 Sonos、Chromecast、AirPlay、DLNA、Squeezebox 以及许多其他播放器兼容
-- 🎶 **统一库**：将来自不同源的所有音乐集中在一个地方
+- 🔊 **通用播放器支持**：与 Sonos、Chromecast、AirPlay、DLNA、Squeezebox 等多种播放器兼容
+- 🎶 **统一音乐库**：将来自不同源的所有音乐集中在一个地方
 - 🎯 **智能播放**：无缝播放、淡入淡出和音频归一化
-- 📱 **美观界面**：通过 Home Assistant 访问的现代网页界面
-- 🏠 **Home Assistant 集成**：完全集成到 Home Assistant 的媒体播放平台
+- 📱 **美观界面**：现代网页界面，可通过 Home Assistant 访问
+- 🏠 **Home Assistant 集成**：与 Home Assistant 的媒体播放平台完全集成
 
 ## 安装
 
 1. 在 Home Assistant 中导航到 **设置** → **插件** → **插件商店**
-2. 搜索“音乐助手”
+2. 搜索 "音乐助手"
 3. 点击 **安装**
 4. 等待安装完成
 5. 点击 **启动**
@@ -44,14 +44,13 @@ safe_mode: false
 
 **默认值**：`info`
 
-**建议**：考虑仅将调试级别用于故障排除。
-最好将全局设置保持在仅 `info`。
+**建议**：仅在故障排除时使用 `debug` 级别。最好将全局设置保持为 `info`。
 
-提示：在音乐助手内部，每个提供程序允许您覆盖日志级别。
+提示：在音乐助手内，每个提供程序允许您覆盖日志级别。
 
 #### safe_mode
 
-启用时，音乐助手将不加载任何提供程序启动。这对于故障排除启动问题或提供程序相关的问题很有用。
+启用时，音乐助手启动时不会加载任何提供程序。这对于故障排除启动问题或提供程序相关的问题很有用。
 
 **默认值**：`false`
 
@@ -64,16 +63,16 @@ safe_mode: false
 
 ### 可选：Home Assistant 集成
 
-为了高级自动化和控制，您可以可选地安装 Home Assistant 中的 **音乐助手集成**。此集成允许您：
+为了进行高级自动化和控制，您可以可选地安装 Home Assistant 的 **音乐助手集成**。此集成允许您：
 
 - 🤖 从 Home Assistant 自动化和脚本中自动化音乐播放
 - 🎛️ 使用 Home Assistant 服务控制播放
-- 📊 在仪表板中访问播放器状态和属性
-- 🎵 在 Home Assistant 场景和常规中使用音乐助手
+- 📊 在您的仪表板中访问播放器状态和属性
+- 🎵 在 Home Assistant 的场景和常规中使用音乐助手
 
 **安装集成**：
 
-在您安装插件（或网络中的任何音乐助手服务器）后，Home Assistant 应该会自动检测到音乐助手服务器。在设备与服务页面，您应该会看到一个卡片，用于简单设置集成。
+在您安装插件（或您的网络中的任何音乐助手服务器）后，Home Assistant 应该会自动检测音乐助手服务器。在设备和服务页面，您应该会看到一个用于设置集成的卡片。
 
 **注意**：插件提供了音乐助手服务器，而集成提供了 Home Assistant 实体和自动化功能。如果您只想使用网页界面，则无需集成。
 
@@ -83,35 +82,35 @@ safe_mode: false
 
 - 📖 [官方文档](https://music-assistant.io)
 - 💬 [社区讨论](https://github.com/orgs/music-assistant/discussions)
-- 🐛 [支持与问题追踪](https://github.com/music-assistant/support)
+- 🐛 [支持与问题跟踪](https://github.com/music-assistant/support)
 - 💭 [Discord 服务器](https://discord.gg/PZQ6RWbfeS)
 
 ## 支持
 
 如果您遇到任何问题：
 
-1. 检查插件日志（可在 Home Assistant 插件页面找到）
+1. 检查插件日志（在 Home Assistant 插件页面中可用）
 2. 访问 [文档](https://music-assistant.io)
 3. 在 [music-assistant/support](https://github.com/music-assistant/support) 搜索现有问题
 4. 在 [Discord](https://discord.gg/PZQ6RWbfeS) 或 [GitHub Discussions](https://github.com/orgs/music-assistant/discussions) 上寻求帮助
 
 ## 更新
 
-这是 **稳定** 通道。更新在经过彻底测试后发布，并推荐用于日常使用。
+这是 **稳定** 通道。更新在经过彻底测试后发布，并建议用于日常使用。
 
 ### 更新频率
 
-- 主要版本：每几个月一次（大约每季度一次）
-- 错误修复：按需
+- 主要版本：每隔几个月（大约每季度一次）
+- 错误修复：根据需要
 - 安全更新：立即
 
 ## 版本信息
 
-此插件使用稳定的音乐助手版本。对于最新功能，请考虑 BETA 或 NIGHTLY 版本（自行承担风险）。
+此插件使用音乐助手的稳定版本。要获取最新功能，请考虑使用 BETA 或 NIGHTLY 版本（自行承担风险）。
 
 ## 数据存储
 
-所有音乐助手数据都存储在插件的 数据目录 中：
+所有音乐助手数据都存储在插件的数据库目录中：
 
 - 音乐库数据库
 - 配置设置
@@ -133,11 +132,11 @@ safe_mode: false
 - 🔧 提交拉取请求
 - 📝 改进文档
 
-访问 GitHub 上的 [音乐助手组织](https://github.com/music-assistant) 以进行贡献。
+访问 [音乐助手组织](https://github.com/music-assistant) 的 GitHub 页面以贡献。
 
 ## 许可证
 
-音乐助手根据 Apache License 2.0 许可。
+音乐助手遵循 Apache License 2.0 许可。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
