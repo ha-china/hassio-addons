@@ -1,7 +1,7 @@
 name: "GlassHome Dashboard (Edge)"
-version: "0.8.0-beta.4"
+version: "0.8.0-beta.5"
 slug: glasshome-edge
-description: "[老王杂谈说]：用于测试的 GlassHome 早期版本。请使用稳定版进行日常使用。"
+description: "[老王杂谈说]：用于测试的 GlassHome 早期版本。日常使用请使用稳定版。"
 url: "https://ghfast.top/github.com/glasshome/glasshome-addon"
 stage: experimental
 arch:

@@ -1,5 +1,10 @@
 # TOMMY
 
+## 2.10.3
+
+### Minor Changes
+- Add instructions to error when a mesh network is detected.
+
 ## 2.10.2
 
 ### Minor Changes

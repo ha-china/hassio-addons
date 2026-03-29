@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：组织你的 Immich 库的强大工具'
+description: '[老王杂谈说]：用于整理您的 Immich 媒体库的强力工具'
 hassio_api: true
 image: ghcr.nju.edu.cn/alexbelgium/immich_power_tools-{arch}
 init: false
@@ -30,5 +30,5 @@ schema:
   IMMICH_URL: str
 slug: immich_power_tools
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "0.20.0"
+version: "0.20.1"
 webui: http://[HOST]:[PORT:3000]

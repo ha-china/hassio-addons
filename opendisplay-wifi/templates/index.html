@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenDisplay Wi-Fi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { --ha-blue: #03a9f4; --ha-blue-dark: #0288d1; --ha-blue-light: #4fc3f7; }
+    body { background: linear-gradient(135deg, #03a9f4 0%, #0288d1 100%); min-height: 100vh; }
+    .colour-scheme {
+      display: inline-block; padding: 2px 8px; border-radius: 9999px;
+      font-size: 0.75rem; font-weight: 500; background: #e0f2fe; color: #0369a1;
+    }
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4);
+      z-index: 100; justify-content: center; align-items: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .preview-frame {
+      background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; position: relative; margin: 0 auto;
+    }
+    .preview-frame img { display: block; }
+    .preview-frame .empty-label {
+      color: #94a3b8; font-size: 0.8rem; position: absolute; text-align: center; padding: 0 1rem;
+    }
+    .btn-ha {
+      background: var(--ha-blue); color: #fff; border: none; border-radius: 6px;
+      padding: 8px 16px; cursor: pointer; font-size: 0.85rem; font-weight: 500;
+      transition: background 0.2s;
+    }
+    .btn-ha:hover { background: var(--ha-blue-dark); }
+    .btn-ha:disabled { background: #93c5fd; cursor: not-allowed; }
+    .input-ha {
+      width: 100%; padding: 8px 12px; border: 1px solid var(--ha-blue-light);
+      border-radius: 6px; font-size: 0.9rem;
+    }
+    .input-ha:focus { outline: none; border-color: var(--ha-blue); box-shadow: 0 0 0 2px rgba(3, 169, 244, 0.15); }
+    .album-image-item {
+      display: flex; align-items: center; gap: 10px; padding: 10px;
+      background: #f8fafc; border-radius: 8px; margin-bottom: 8px;
+    }
+    .album-image-item img {
+      width: 52px; height: 52px; object-fit: cover; border-radius: 6px; background: #e2e8f0;
+    }
+    .album-image-item .no-thumb {
+      width: 52px; height: 52px; border-radius: 6px; background: #e2e8f0;
+      display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 0.7rem;
+    }
+    .status-banner {
+      display: none; border-radius: 10px; padding: 10px 14px; font-size: 0.9rem; margin-bottom: 16px;
+    }
+    .status-banner.show { display: block; }
+    .status-banner.info { background: #e0f2fe; color: #0369a1; }
+    .status-banner.error { background: #fee2e2; color: #b91c1c; }
+    .status-banner.success { background: #dcfce7; color: #166534; }
+    .image-gallery {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px;
+    }
+    .image-card {
+      position: relative; overflow: hidden; border: 1px solid #e2e8f0; border-radius: 14px;
+      background: #fff; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+    }
+    .image-card-thumb {
+      width: 100%; aspect-ratio: 4 / 3; background: #f1f5f9; object-fit: cover; display: block;
+    }
+    .image-card-body { padding: 12px; }
+    .image-card-title {
+      font-size: 0.95rem; font-weight: 600; color: #1e293b; overflow: hidden;
+      text-overflow: ellipsis; white-space: nowrap; padding-right: 28px;
+    }
+    .image-card-subtitle {
+      font-size: 0.76rem; color: #64748b; margin-top: 4px; min-height: 2.3em;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .image-type-pill {
+      position: absolute; left: 10px; top: 10px; background: rgba(15, 23, 42, 0.7);
+      color: #fff; border-radius: 9999px; font-size: 0.7rem; padding: 3px 8px;
+    }
+    .image-card-menu { position: absolute; right: 10px; top: 10px; }
+    .image-card-menu summary {
+      list-style: none; width: 28px; height: 28px; border-radius: 9999px; border: none;
+      background: rgba(255, 255, 255, 0.9); color: #334155; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.12);
+    }
+    .image-card-menu summary::-webkit-details-marker { display: none; }
+    .image-menu-popover {
+      position: absolute; right: 0; top: 34px; min-width: 126px; background: #fff;
+      border: 1px solid #e2e8f0; border-radius: 10px; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+      padding: 6px; z-index: 20;
+    }
+    .image-menu-popover button {
+      display: block; width: 100%; text-align: left; padding: 8px 10px; border-radius: 8px;
+      font-size: 0.85rem; color: #334155; border: none; background: transparent; cursor: pointer;
+    }
+    .image-menu-popover button:hover { background: #f8fafc; }
+    .image-menu-popover button.danger { color: #dc2626; }
+    .photo-pick-item {
+      position: relative; cursor: pointer; border-radius: 10px; overflow: hidden;
+      border: 2px solid transparent; transition: border-color 0.15s;
+    }
+    .photo-pick-item.selected { border-color: var(--ha-blue); }
+    .photo-pick-item img {
+      width: 100%; aspect-ratio: 1; object-fit: cover; display: block; background: #f1f5f9;
+    }
+    .photo-pick-item .pick-check {
+      position: absolute; top: 6px; right: 6px; width: 22px; height: 22px;
+      border-radius: 6px; border: 2px solid #fff; background: rgba(0,0,0,0.25);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2); transition: background 0.15s;
+    }
+    .photo-pick-item.selected .pick-check {
+      background: var(--ha-blue); border-color: #fff;
+    }
+    .photo-pick-item .pick-check svg { width: 14px; height: 14px; color: #fff; opacity: 0; }
+    .photo-pick-item.selected .pick-check svg { opacity: 1; }
+    .photo-pick-item .pick-label {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 3px 6px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.6));
+      color: #fff; font-size: 0.65rem; white-space: nowrap; overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .album-chip {
+      display: inline-flex; align-items: center; gap: 4px; padding: 2px 4px 2px 2px;
+      background: #f1f5f9; border-radius: 6px; font-size: 0;
+    }
+    .album-chip img {
+      width: 28px; height: 28px; object-fit: cover; border-radius: 4px; background: #e2e8f0;
+    }
+    .album-chip .chip-name {
+      font-size: 0.7rem; color: #334155; max-width: 80px; overflow: hidden;
+      text-overflow: ellipsis; white-space: nowrap;
+    }
+    .album-chip .chip-remove {
+      font-size: 0.85rem; color: #94a3b8; cursor: pointer; padding: 0 2px;
+      line-height: 1;
+    }
+    .album-chip .chip-remove:hover { color: #dc2626; }
+  </style>
+</head>
+<body class="p-4">
+  <div class="container mx-auto max-w-5xl">
+    <div class="mb-6">
+      <div>
+        <h1 class="text-2xl font-bold text-white">OpenDisplay Wi-Fi</h1>
+        <p class="text-blue-100 text-sm mt-1">
+          Manage your <a href="https://opendisplay.org" target="_blank" class="underline text-white hover:text-blue-200">OpenDisplay</a> e-paper screens
+        </p>
+      </div>
+    </div>
+
+    <div id="images-status" class="status-banner"></div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <h2 class="text-lg font-semibold mb-4" style="color: var(--ha-blue-dark)">Connected Screens</h2>
+      <div id="no-screens" class="text-gray-400 italic py-4">Waiting for screens to connect...</div>
+      <div id="screens-list" class="divide-y divide-gray-100"></div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-semibold" style="color: var(--ha-blue-dark)">Albums</h2>
+        <button onclick="openAlbumEditor()" class="btn-ha text-sm">New Album</button>
+      </div>
+      <div id="no-albums" class="text-gray-400 italic py-4">No albums yet</div>
+      <div id="albums-list" class="divide-y divide-gray-100"></div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between mb-4">
+        <div>
+          <h2 class="text-lg font-semibold" style="color: var(--ha-blue-dark)">Images</h2>
+          <p class="text-sm text-gray-500 mt-1">Upload local files or add image URLs. All images show up here with thumbnails and per-item actions.</p>
+        </div>
+        <div class="flex gap-3 flex-wrap">
+          <button onclick="openFilePicker()" class="btn-ha">Upload image</button>
+          <button onclick="openUrlModal()" class="px-4 py-2 rounded-md text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200">Add URL</button>
+        </div>
+      </div>
+      <input type="file" id="image-upload-input" accept="image/*" multiple hidden>
+      <div id="no-images" class="text-gray-400 italic py-8 text-center">No images yet</div>
+      <div id="images-gallery" class="image-gallery"></div>
+    </div>
+
+    <div class="text-center text-blue-100 text-xs py-4">
+      Powered by <a href="https://opendisplay.org" target="_blank" class="underline text-white">OpenDisplay</a>
+      &middot;
+      <a href="https://github.com/balloob/py-opendisplay/tree/wifi-server" target="_blank" class="underline text-white">py-opendisplay</a>
+      &middot;
+      Server by <a href="https://github.com/balloob/home-assistant-addons/tree/main/opendisplay-wifi" target="_blank" class="underline text-white">balloob</a>
+    </div>
+  </div>
+
+  <div id="assign-overlay" class="modal-overlay">
+    <div class="bg-white rounded-xl shadow-2xl p-6 w-[90%] max-w-lg max-h-[90vh] overflow-y-auto">
+      <h2 class="text-lg font-semibold mb-1" style="color: var(--ha-blue-dark)">
+        Assign to <span id="assign-screen-name"></span>
+      </h2>
+      <p class="text-xs text-gray-400 mb-4" id="assign-screen-dims"></p>
+
+      <div class="mb-4">
+        <div class="preview-frame" id="assign-preview-frame">
+          <span class="empty-label">Select an image to preview</span>
+        </div>
+      </div>
+
+      <div class="flex gap-3 mb-4">
+        <label class="flex items-center gap-1.5 text-sm cursor-pointer">
+          <input type="radio" name="assign-fit" value="contain" checked onchange="updatePreview()">
+          <span>Contain</span>
+          <span class="text-xs text-gray-400">(letterbox)</span>
+        </label>
+        <label class="flex items-center gap-1.5 text-sm cursor-pointer">
+          <input type="radio" name="assign-fit" value="cover" onchange="updatePreview()">
+          <span>Cover</span>
+          <span class="text-xs text-gray-400">(crop)</span>
+        </label>
+      </div>
+
+      <div class="flex mb-4 rounded-lg overflow-hidden border" style="border-color: var(--ha-blue-light)">
+        <button class="assign-tab flex-1 py-2 text-sm font-medium text-white" data-tab="image" onclick="switchAssignTab('image')" style="background: var(--ha-blue)">Image</button>
+        <button class="assign-tab flex-1 py-2 text-sm font-medium text-gray-600 bg-gray-50" data-tab="album" onclick="switchAssignTab('album')">Album</button>
+      </div>
+
+      <div class="tab-content active" id="assign-tab-image">
+        <div class="mb-3">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Select an image</label>
+          <select id="assign-image" class="input-ha" onchange="onAssignImageSelect()"></select>
+        </div>
+        <div class="mb-3" id="assign-poll-row" style="display:none">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Update interval (seconds)</label>
+          <input type="number" id="assign-poll" value="300" min="10" class="input-ha">
+        </div>
+      </div>
+
+      <div class="tab-content" id="assign-tab-album">
+        <div class="mb-3">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Select album</label>
+          <select id="assign-album" class="input-ha" onchange="onAlbumSelect()">
+            <option value="">-- Select an album --</option>
+          </select>
+        </div>
+        <div id="assign-album-info" class="text-sm text-gray-500 mt-2"></div>
+      </div>
+
+      <div class="flex gap-2 justify-end mt-4">
+        <button onclick="closeAssignModal()" class="px-4 py-2 rounded-md text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Cancel</button>
+        <button onclick="submitAssignment()" class="btn-ha">Assign</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="album-overlay" class="modal-overlay">
+    <div class="bg-white rounded-xl shadow-2xl w-[95%] max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
+      <!-- Header with save -->
+      <div class="flex items-center justify-between p-4 pb-0">
+        <h2 class="text-lg font-semibold" style="color: var(--ha-blue-dark)" id="album-editor-title">New Album</h2>
+        <div class="flex gap-2">
+          <button onclick="closeAlbumEditor()" class="px-4 py-2 rounded-md text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Cancel</button>
+          <button onclick="saveAlbum()" class="btn-ha">Save</button>
+        </div>
+      </div>
+
+      <div class="overflow-y-auto flex-1 p-4">
+        <!-- Album info -->
+        <div class="mb-3">
+          <input type="text" id="album-name" class="input-ha" placeholder="Album name">
+        </div>
+        <div class="grid grid-cols-2 gap-3 mb-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Interval (seconds)</label>
+            <input type="number" id="album-interval" class="input-ha" value="60" min="5">
+          </div>
+          <div class="flex items-end pb-1">
+            <label class="flex items-center gap-2 text-sm cursor-pointer">
+              <input type="checkbox" id="album-shuffle" class="w-4 h-4 rounded" style="accent-color: var(--ha-blue)">
+              <span>Shuffle</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Selected images summary -->
+        <div id="album-images-section" class="mb-4" style="display:none">
+          <div class="flex items-center justify-between mb-2">
+            <label class="block text-sm font-medium text-gray-700"><span id="album-images-count">0</span> selected</label>
+            <button onclick="albumClearAll()" class="text-xs text-red-500 hover:text-red-700">Clear all</button>
+          </div>
+          <div id="album-images" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="mb-4 border-gray-200">
+
+        <!-- Photo picker -->
+        <div class="flex items-center justify-between mb-3">
+          <label class="block text-sm font-medium text-gray-700">Add photos</label>
+          <div class="flex gap-2">
+            <button onclick="openFilePicker('album')" class="px-3 py-1.5 rounded-md text-xs font-medium text-gray-700 bg-gray-100 hover:bg-gray-200">Upload</button>
+            <button onclick="openUrlModal('album')" class="px-3 py-1.5 rounded-md text-xs font-medium text-gray-700 bg-gray-100 hover:bg-gray-200">Add URL</button>
+          </div>
+        </div>
+        <div id="album-photo-picker" class="grid grid-cols-3 sm:grid-cols-4 gap-2 min-h-[120px]">
+          <p class="text-gray-400 text-sm italic py-2 col-span-full">No images in library</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="url-overlay" class="modal-overlay">
+    <div class="bg-white rounded-xl shadow-2xl p-6 w-[90%] max-w-md">
+      <h2 class="text-lg font-semibold mb-4" style="color: var(--ha-blue-dark)">Add URL</h2>
+      <div class="mb-3">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
+        <input type="text" id="url-image-input" class="input-ha" placeholder="https://example.com/image.png">
+      </div>
+      <div class="mb-3">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Name (optional)</label>
+        <input type="text" id="url-name-input" class="input-ha" placeholder="Cover photo">
+      </div>
+      <p class="text-xs text-gray-500 mb-4">The add-on fetches the image now and creates a thumbnail. This can take up to 60 seconds for slow servers.</p>
+      <div class="flex gap-2 justify-end">
+        <button onclick="closeUrlModal()" class="px-4 py-2 rounded-md text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Cancel</button>
+        <button id="url-submit-button" onclick="submitUrlImage()" class="btn-ha">Add URL</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const BASE = window.location.pathname.replace(/\/$/, '');
+
+    let allScreens = [];
+    let allAlbums = [];
+    let allImages = [];
+
+    let assignScreenId = null;
+    let assignScreenWidth = 0;
+    let assignScreenHeight = 0;
+    let assignTab = "image";
+
+    let editingAlbumId = null;
+    let albumImages = [];
+    let imagePickerContext = "library";
+    let urlModalContext = "library";
+
+    async function loadScreens() {
+      try {
+        const res = await fetch(`${BASE}/api/screens`);
+        allScreens = await res.json();
+        renderScreens();
+      } catch (e) {
+        console.error("Failed to load screens:", e);
+      }
+    }
+
+    async function loadAlbums() {
+      try {
+        const res = await fetch(`${BASE}/api/albums`);
+        allAlbums = await res.json();
+        renderAlbums();
+        populateAlbumSelect();
+      } catch (e) {
+        console.error("Failed to load albums:", e);
+      }
+    }
+
+    async function loadImages() {
+      try {
+        const res = await fetch(`${BASE}/api/images`);
+        allImages = await res.json();
+        renderImages();
+        populateAssignImageSelect();
+        populateAlbumImagePicker();
+        renderAlbumImages();
+        updatePreview();
+      } catch (e) {
+        console.error("Failed to load images:", e);
+      }
+    }
+
+    function refreshAll() {
+      loadScreens();
+      loadAlbums();
+      loadImages();
+    }
+
+    function setStatus(message, type = "info") {
+      const el = document.getElementById("images-status");
+      if (!message) {
+        el.className = "status-banner";
+        el.textContent = "";
+        return;
+      }
+      el.className = `status-banner show ${type}`;
+      el.textContent = message;
+      clearTimeout(setStatus._timer);
+      if (type !== "error") {
+        setStatus._timer = setTimeout(() => setStatus(""), 3500);
+      }
+    }
+
+    function findImageById(imageId) {
+      return allImages.find((image) => image.id === imageId);
+    }
+
+    function findImageForEntry(entry) {
+      if (!entry) return null;
+      if (entry.image_id) {
+        const direct = findImageById(entry.image_id);
+        if (direct) return direct;
+      }
+      return allImages.find((image) => image.source === entry.source) || null;
+    }
+
+    function imageThumbUrl(imageId) {
+      return `${BASE}/thumbnails/by-id/${encodeURIComponent(imageId)}`;
+    }
+
+    function resolvePreviewSrc(source) {
+      if (!source) return "";
+      if (source.startsWith("http://") || source.startsWith("https://")) return source;
+      const parts = source.split("/");
+      const name = parts[parts.length - 1];
+      return `${BASE}/uploads/${encodeURIComponent(name)}`;
+    }
+
+    function resolveThumbSrc(source, imageId) {
+      if (imageId) return imageThumbUrl(imageId);
+      if (!source) return "";
+      if (source.startsWith("http://") || source.startsWith("https://")) return source;
+      const parts = source.split("/");
+      const name = parts[parts.length - 1];
+      return `${BASE}/thumbnails/${encodeURIComponent(name)}`;
+    }
+
+    function getSelectedFit() {
+      return document.querySelector('input[name="assign-fit"]:checked')?.value || "contain";
+    }
+
+    function colourSchemeName(cs) {
+      return { 0: "B/W", 1: "B/W/R", 2: "B/W/Y", 3: "4-Gray", 4: "7-Color" }[cs] || `scheme ${cs}`;
+    }
+
+    function esc(s) {
+      const d = document.createElement("div");
+      d.textContent = s == null ? "" : String(s);
+      return d.innerHTML;
+    }
+
+    function renderScreens() {
+      const list = document.getElementById("screens-list");
+      const empty = document.getElementById("no-screens");
+      if (allScreens.length === 0) {
+        empty.style.display = "block";
+        list.innerHTML = "";
+        return;
+      }
+      empty.style.display = "none";
+
+      list.innerHTML = allScreens.map((s) => {
+        const cs = colourSchemeName(s.colour_scheme);
+        const seenAgo = s.last_seen_seconds_ago < 60
+          ? `${s.last_seen_seconds_ago}s ago`
+          : `${Math.floor(s.last_seen_seconds_ago / 60)}m ago`;
+
+        let assignHtml = "";
+        let previewSrc = "";
+        if (s.assignment) {
+          const a = s.assignment;
+          if (a.type === "album") {
+            const label = a.album_name || a.source;
+            const nowPlaying = a.current_image_name ? ` — Now: ${esc(a.current_image_name)}` : "";
+            assignHtml = `<div class="text-sm mt-1" style="color: var(--ha-blue)">Album: ${esc(label)}</div>`;
+            if (nowPlaying) assignHtml += `<div class="text-xs text-gray-500 mt-0.5">${nowPlaying}</div>`;
+            if (a.preprocessing?.active && a.preprocessing.pending_images > 0) {
+              const prep = a.preprocessing;
+              const prepText = prep.ready_images > 0
+                ? `Album preprocessing: showing ${prep.ready_images}/${prep.total_images} ready image${prep.ready_images !== 1 ? "s" : ""} while ${prep.pending_images} more finish.`
+                : `Album preprocessing: no album image is ready yet. ${prep.pending_images} image${prep.pending_images !== 1 ? "s are" : " is"} still being prepared.`;
+              assignHtml += `<div class="text-xs mt-1 text-amber-600">${esc(prepText)}</div>`;
+            }
+            if (a.current_image_id || a.current_source) {
+              previewSrc = resolveThumbSrc(a.current_source, a.current_image_id);
+            }
+          } else {
+            const display = a.image_name || a.source;
+            const interval = a.source_type === "url" ? ` (every ${a.poll_interval}s)` : "";
+            assignHtml = `<div class="text-sm mt-1" style="color: var(--ha-blue)">Image: ${esc(display)}${interval}</div>`;
+            previewSrc = resolveThumbSrc(a.source, a.image_id);
+          }
+          const fitLabel = (a.fit || "contain") === "cover" ? "Cover" : "Contain";
+          assignHtml += `<div class="text-xs text-gray-400 mt-0.5">Fit: ${fitLabel}</div>`;
+        }
+
+        const previewMaxW = 160;
+        const aspect = s.width / s.height;
+        const pw = aspect >= 1 ? previewMaxW : Math.round(previewMaxW * aspect);
+        const ph = aspect >= 1 ? Math.round(previewMaxW / aspect) : previewMaxW;
+        const fitMode = s.assignment?.fit || "contain";
+
+        let previewHtml = "";
+        if (previewSrc) {
+          previewHtml = `
+            <div class="preview-frame mt-2" style="width:${pw}px;height:${ph}px;">
+              <img src="${esc(previewSrc)}" style="width:100%;height:100%;object-fit:${fitMode};" onerror="this.style.display='none'">
+            </div>`;
+        }
+
+        return `
+          <div class="py-3">
+            <div class="flex items-start justify-between">
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2">
+                  <span class="font-semibold text-gray-800">${s.width} x ${s.height}</span>
+                  <span class="colour-scheme">${cs}</span>
+                </div>
+                <div class="text-xs text-gray-400 mt-1">FW ${s.firmware_id}.${s.firmware_version} &middot; Last seen ${seenAgo}</div>
+                ${assignHtml}
+              </div>
+              <div class="flex gap-2 ml-3 flex-shrink-0">
+                <button onclick="openAssignModal('${s.id}', ${s.width}, ${s.height})" class="btn-ha text-sm px-3 py-1.5">Assign</button>
+                ${s.assignment?.type === "album" ? `<button onclick="nextAlbumImage('${s.id}')" class="px-3 py-1.5 rounded-md text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200">Next</button>` : ""}
+                ${s.assignment ? `<button onclick="unassign('${s.id}')" class="px-3 py-1.5 rounded-md text-white text-sm font-medium bg-red-500 hover:bg-red-600">Clear</button>` : ""}
+              </div>
+            </div>
+            ${previewHtml}
+          </div>`;
+      }).join("");
+    }
+
+    function renderAlbums() {
+      const list = document.getElementById("albums-list");
+      const empty = document.getElementById("no-albums");
+      if (allAlbums.length === 0) {
+        empty.style.display = "block";
+        list.innerHTML = "";
+        return;
+      }
+      empty.style.display = "none";
+
+      list.innerHTML = allAlbums.map((album) => {
+        const imgs = album.images || [];
+        const shuffleLabel = album.shuffle ? "Shuffle" : "In order";
+        return `
+          <div class="flex items-center justify-between py-3">
+            <div class="flex-1 min-w-0">
+              <span class="font-semibold text-gray-800">${esc(album.name)}</span>
+              <div class="text-xs text-gray-400 mt-1">
+                ${imgs.length} image${imgs.length !== 1 ? "s" : ""} &middot; ${album.transition_interval}s interval &middot; ${shuffleLabel}
+              </div>
+            </div>
+            <div class="flex gap-2 ml-3 flex-shrink-0">
+              <button onclick="openAlbumEditor('${album.id}')" class="px-3 py-1.5 rounded-md text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200">Edit</button>
+              <button onclick="deleteAlbum('${album.id}')" class="px-3 py-1.5 rounded-md text-white text-sm font-medium bg-red-500 hover:bg-red-600">Delete</button>
+            </div>
+          </div>`;
+      }).join("");
+    }
+
+    function renderImages() {
+      const gallery = document.getElementById("images-gallery");
+      const empty = document.getElementById("no-images");
+      if (allImages.length === 0) {
+        gallery.innerHTML = "";
+        empty.style.display = "block";
+        return;
+      }
+
+      empty.style.display = "none";
+      gallery.innerHTML = allImages.map((image) => `
+        <div class="image-card">
+          <img src="${imageThumbUrl(image.id)}" class="image-card-thumb" alt="${esc(image.display_name)}" onerror="this.style.opacity='0.4'">
+          <span class="image-type-pill">${image.type === "url" ? "URL" : "Upload"}</span>
+          <details class="image-card-menu">
+            <summary>&#8942;</summary>
+            <div class="image-menu-popover">
+              <button onclick="renameImage('${image.id}')">Rename</button>
+              <button class="danger" onclick="deleteImage('${image.id}')">Delete</button>
+            </div>
+          </details>
+          <div class="image-card-body">
+            <div class="image-card-title" title="${esc(image.display_name)}">${esc(image.display_name)}</div>
+            <div class="image-card-subtitle" title="${esc(image.subtitle || "")}">${esc(image.subtitle || "")}</div>
+          </div>
+        </div>`).join("");
+    }
+
+    function openAssignModal(screenId, w, h) {
+      assignScreenId = screenId;
+      assignScreenWidth = w;
+      assignScreenHeight = h;
+      document.getElementById("assign-screen-name").textContent = `${w}x${h}`;
+      document.getElementById("assign-screen-dims").textContent = `Screen resolution: ${w} x ${h} pixels`;
+
+      const maxW = 300;
+      const aspect = w / h;
+      const pw = aspect >= 1 ? maxW : Math.round(maxW * aspect);
+      const ph = aspect >= 1 ? Math.round(maxW / aspect) : maxW;
+      const frame = document.getElementById("assign-preview-frame");
+      frame.style.width = `${pw}px`;
+      frame.style.height = `${ph}px`;
+      frame.innerHTML = '<span class="empty-label">Select an image to preview</span>';
+
+      populateAssignImageSelect();
+      populateAlbumSelect();
+      document.querySelector('input[name="assign-fit"][value="contain"]').checked = true;
+      switchAssignTab("image");
+      document.getElementById("assign-overlay").classList.add("open");
+    }
+
+    function closeAssignModal() {
+      document.getElementById("assign-overlay").classList.remove("open");
+      assignScreenId = null;
+    }
+
+    function switchAssignTab(tab) {
+      assignTab = tab;
+      document.querySelectorAll(".assign-tab").forEach((button) => {
+        const active = button.dataset.tab === tab;
+        button.style.background = active ? "var(--ha-blue)" : "#f9fafb";
+        button.className = `assign-tab flex-1 py-2 text-sm font-medium ${active ? "text-white" : "text-gray-600 bg-gray-50"}`;
+      });
+      ["image", "album"].forEach((name) => {
+        document.getElementById(`assign-tab-${name}`).classList.toggle("active", name === tab);
+      });
+      updatePreview();
+    }
+
+    function populateAssignImageSelect() {
+      const sel = document.getElementById("assign-image");
+      if (!sel) return;
+      sel.innerHTML = allImages.length === 0
+        ? '<option value="">No images available</option>'
+        : '<option value="">-- Select an image --</option>' + allImages.map((image) =>
+          `<option value="${image.id}">${esc(image.display_name)}${image.type === "url" ? " (URL)" : ""}</option>`).join("");
+      onAssignImageSelect();
+    }
+
+    function populateAlbumSelect() {
+      const sel = document.getElementById("assign-album");
+      if (!sel) return;
+      sel.innerHTML = '<option value="">-- Select an album --</option>'
+        + allAlbums.map((album) => `<option value="${album.id}">${esc(album.name)} (${album.images.length} images)</option>`).join("");
+    }
+
+    function populateAlbumImagePicker() {
+      renderAlbumPhotoPicker();
+    }
+
+    function onAssignImageSelect() {
+      const sel = document.getElementById("assign-image");
+      const image = findImageById(sel?.value);
+      document.getElementById("assign-poll-row").style.display = image?.type === "url" ? "block" : "none";
+      updatePreview();
+    }
+
+    function onAlbumSelect() {
+      const albumId = document.getElementById("assign-album").value;
+      const album = allAlbums.find((entry) => entry.id === albumId);
+      const info = document.getElementById("assign-album-info");
+      if (album) {
+        const shuffleLabel = album.shuffle ? "shuffle" : "in order";
+        info.textContent = `${album.images.length} images, ${album.transition_interval}s interval, ${shuffleLabel}`;
+      } else {
+        info.textContent = "";
+      }
+      updatePreview();
+    }
+
+    function updatePreview() {
+      const frame = document.getElementById("assign-preview-frame");
+      if (!frame) return;
+
+      const fit = getSelectedFit();
+      let src = "";
+
+      if (assignTab === "image") {
+        const imageId = document.getElementById("assign-image").value;
+        if (imageId) src = imageThumbUrl(imageId);
+      } else {
+        const albumId = document.getElementById("assign-album").value;
+        // If this album is currently assigned to the screen, show the real current image
+        const screen = allScreens.find((s) => s.id === assignScreenId);
+        const a = screen?.assignment;
+        if (a?.type === "album" && a.source === albumId && (a.current_image_id || a.current_source)) {
+          src = resolveThumbSrc(a.current_source, a.current_image_id);
+        } else {
+          const album = allAlbums.find((entry) => entry.id === albumId);
+          const firstEntry = album?.images?.[0];
+          const image = findImageForEntry(firstEntry);
+          if (image) src = imageThumbUrl(image.id);
+          else if (firstEntry?.source) src = resolveThumbSrc(firstEntry.source, firstEntry.image_id);
+        }
+      }
+
+      if (!src) {
+        frame.innerHTML = '<span class="empty-label">Select an image to preview</span>';
+        return;
+      }
+
+      frame.innerHTML = `<img src="${esc(src)}" style="width:100%;height:100%;object-fit:${fit};background:#f1f5f9;" onerror="this.parentElement.innerHTML='<span class=\\'empty-label\\'>Failed to load preview</span>'">`;
+    }
+
+    async function submitAssignment() {
+      const fit = getSelectedFit();
+      let body;
+
+      if (assignTab === "image") {
+        const imageId = document.getElementById("assign-image").value;
+        if (!imageId) {
+          alert("Select an image.");
+          return;
+        }
+        const image = findImageById(imageId);
+        body = {
+          screen_id: assignScreenId,
+          type: "image",
+          image_id: imageId,
+          fit,
+          poll_interval: image?.type === "url" ? (parseInt(document.getElementById("assign-poll").value, 10) || 300) : 5,
+        };
+      } else {
+        const albumId = document.getElementById("assign-album").value;
+        if (!albumId) {
+          alert("Select an album.");
+          return;
+        }
+        body = { screen_id: assignScreenId, type: "album", source: albumId, fit };
+      }
+
+      try {
+        const res = await fetch(`${BASE}/api/assign`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Failed to assign");
+        closeAssignModal();
+        loadScreens();
+      } catch (e) {
+        alert(`Failed: ${e.message}`);
+      }
+    }
+
+    async function unassign(screenId) {
+      await fetch(`${BASE}/api/unassign`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ screen_id: screenId }),
+      });
+      loadScreens();
+    }
+
+    async function nextAlbumImage(screenId) {
+      try {
+        const res = await fetch(`${BASE}/api/album/next`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ screen_id: screenId }),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) throw new Error(data.error || "Failed to advance album");
+        setStatus("Advanced to the next album image.", "success");
+        loadScreens();
+      } catch (e) {
+        setStatus(`Failed to advance album: ${e.message}`, "error");
+      }
+    }
+
+    function openAlbumEditor(albumId) {
+      editingAlbumId = albumId || null;
+      const title = document.getElementById("album-editor-title");
+
+      if (albumId) {
+        const album = allAlbums.find((entry) => entry.id === albumId);
+        if (!album) return;
+        title.textContent = "Edit Album";
+        document.getElementById("album-name").value = album.name;
+        document.getElementById("album-interval").value = album.transition_interval;
+        document.getElementById("album-shuffle").checked = album.shuffle;
+        albumImages = (album.images || []).map((image) => ({ ...image }));
+      } else {
+        title.textContent = "New Album";
+        document.getElementById("album-name").value = "";
+        document.getElementById("album-interval").value = 60;
+        document.getElementById("album-shuffle").checked = false;
+        albumImages = [];
+      }
+
+      populateAlbumImagePicker();
+      renderAlbumImages();
+      document.getElementById("album-overlay").classList.add("open");
+    }
+
+    function closeAlbumEditor() {
+      document.getElementById("album-overlay").classList.remove("open");
+      editingAlbumId = null;
+    }
+
+    function getAlbumImageIds() {
+      return new Set(albumImages.map((e) => e.image_id));
+    }
+
+    function renderAlbumPhotoPicker() {
+      const container = document.getElementById("album-photo-picker");
+      if (!container) return;
+      const addedIds = getAlbumImageIds();
+      const available = allImages.filter((img) => !addedIds.has(img.id));
+
+      if (available.length === 0) {
+        container.innerHTML = '<p class="text-gray-400 text-sm italic py-2 col-span-full">' +
+          (allImages.length === 0 ? 'No images in library' : 'All images added') + '</p>';
+        return;
+      }
+
+      container.innerHTML = available.map((image) => {
+        const thumb = imageThumbUrl(image.id);
+        return `
+          <div class="photo-pick-item" onclick="togglePickImage('${image.id}')" title="${esc(image.display_name)}">
+            <img src="${esc(thumb)}" onerror="this.style.background='#e2e8f0'">
+            <div class="pick-check">
+              <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            </div>
+            <div class="pick-label">${esc(image.display_name)}</div>
+          </div>`;
+      }).join("");
+    }
+
+    function renderAlbumImages() {
+      const container = document.getElementById("album-images");
+      const section = document.getElementById("album-images-section");
+      const countEl = document.getElementById("album-images-count");
+      if (!container) return;
+
+      countEl.textContent = albumImages.length;
+      if (albumImages.length === 0) {
+        section.style.display = "none";
+        return;
+      }
+      section.style.display = "block";
+
+      container.innerHTML = albumImages.map((entry, index) => {
+        const image = findImageForEntry(entry);
+        const label = image?.display_name || entry.source || "Unknown";
+        const thumb = image ? imageThumbUrl(image.id) : resolveThumbSrc(entry.source, entry.image_id);
+        return `
+          <div class="album-chip">
+            <img src="${esc(thumb)}" onerror="this.style.background='#e2e8f0'">
+            <span class="chip-name" title="${esc(label)}">${esc(label)}</span>
+            <span class="chip-remove" onclick="albumRemoveImage(${index})">&times;</span>
+          </div>`;
+      }).join("");
+
+      renderAlbumPhotoPicker();
+    }
+
+    function togglePickImage(imageId) {
+      const addedIds = getAlbumImageIds();
+      if (addedIds.has(imageId)) {
+        // Remove it
+        const idx = albumImages.findIndex((e) => e.image_id === imageId);
+        if (idx >= 0) albumImages.splice(idx, 1);
+      } else {
+        // Add it
+        const image = findImageById(imageId);
+        if (image) {
+          albumImages.push({ image_id: image.id, type: image.type, source: image.source });
+        }
+      }
+      renderAlbumImages();
+    }
+
+    function albumRemoveImage(index) {
+      albumImages.splice(index, 1);
+      renderAlbumImages();
+    }
+
+    function albumClearAll() {
+      albumImages = [];
+      renderAlbumImages();
+    }
+
+    async function saveAlbum() {
+      const name = document.getElementById("album-name").value.trim();
+      if (!name) {
+        alert("Enter a name.");
+        return;
+      }
+
+      const body = {
+        name,
+        images: albumImages,
+        transition_interval: parseInt(document.getElementById("album-interval").value, 10) || 60,
+        shuffle: document.getElementById("album-shuffle").checked,
+      };
+
+      try {
+        let res;
+        if (editingAlbumId) {
+          res = await fetch(`${BASE}/api/albums/${editingAlbumId}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+        } else {
+          res = await fetch(`${BASE}/api/albums`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+        }
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Failed to save album");
+        closeAlbumEditor();
+        loadAlbums();
+      } catch (e) {
+        alert(`Failed: ${e.message}`);
+      }
+    }
+
+    async function deleteAlbum(albumId) {
+      if (!confirm("Delete this album?")) return;
+      await fetch(`${BASE}/api/albums/${albumId}`, { method: "DELETE" });
+      loadAlbums();
+      loadScreens();
+    }
+
+    function addImagesToAlbum(images) {
+      if (!images?.length) return;
+      images.forEach((image) => {
+        albumImages.push({ image_id: image.id, type: image.type, source: image.source });
+      });
+      renderAlbumImages();
+    }
+
+    function openFilePicker(context = "library") {
+      imagePickerContext = context;
+      document.getElementById("image-upload-input").click();
+    }
+
+    async function uploadSelectedFile(file) {
+      const form = new FormData();
+      form.append("image", file);
+      const res = await fetch(`${BASE}/api/upload`, { method: "POST", body: form });
+      const data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error || "Upload failed");
+      return data.image;
+    }
+
+    async function uploadSelectedFiles(files, context = "library") {
+      const validFiles = Array.from(files).filter((file) => !file.type || file.type.startsWith("image/"));
+      if (!validFiles.length) return;
+
+      const uploadedImages = [];
+      setStatus(
+        validFiles.length === 1
+          ? `Uploading ${validFiles[0].name}...`
+          : `Uploading ${validFiles.length} images...`,
+        "info",
+      );
+
+      try {
+        for (const file of validFiles) {
+          const image = await uploadSelectedFile(file);
+          uploadedImages.push(image);
+        }
+        await loadImages();
+        if (context === "album") {
+          addImagesToAlbum(uploadedImages);
+        }
+        setStatus(
+          uploadedImages.length === 1 ? "Image uploaded." : `${uploadedImages.length} images uploaded.`,
+          "success",
+        );
+      } catch (e) {
+        setStatus(`Upload failed: ${e.message}`, "error");
+      }
+    }
+
+    function openUrlModal(context = "library") {
+      urlModalContext = context;
+      document.getElementById("url-image-input").value = "";
+      document.getElementById("url-name-input").value = "";
+      document.getElementById("url-submit-button").disabled = false;
+      document.getElementById("url-overlay").classList.add("open");
+    }
+
+    function closeUrlModal() {
+      document.getElementById("url-overlay").classList.remove("open");
+      urlModalContext = "library";
+    }
+
+    async function submitUrlImage() {
+      const url = document.getElementById("url-image-input").value.trim();
+      const name = document.getElementById("url-name-input").value.trim();
+      if (!url) {
+        alert("Enter a URL.");
+        return;
+      }
+
+      const button = document.getElementById("url-submit-button");
+      button.disabled = true;
+      setStatus("Fetching image URL and generating thumbnail...", "info");
+
+      try {
+        const res = await fetch(`${BASE}/api/images/url`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url, name }),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) throw new Error(data.error || "Failed to add URL");
+        const modalContext = urlModalContext;
+        closeUrlModal();
+        await loadImages();
+        if (modalContext === "album") {
+          addImagesToAlbum([data.image]);
+        }
+        setStatus("URL image added.", "success");
+      } catch (e) {
+        setStatus(`Failed to add URL: ${e.message}`, "error");
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    async function renameImage(imageId) {
+      closeMenus();
+      const image = findImageById(imageId);
+      if (!image) return;
+      const nextName = prompt("Rename image:", image.name || image.display_name);
+      if (nextName === null) return;
+
+      try {
+        const res = await fetch(`${BASE}/api/images/${encodeURIComponent(imageId)}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: nextName.trim() }),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.ok) throw new Error(data.error || "Rename failed");
+        setStatus("Image renamed.", "success");
+        await loadImages();
+        loadScreens();
+      } catch (e) {
+        setStatus(`Rename failed: ${e.message}`, "error");
+      }
+    }
+
+    async function deleteImage(imageId) {
+      closeMenus();
+      const image = findImageById(imageId);
+      if (!image) return;
+      if (!confirm(`Delete ${image.display_name}?`)) return;
+
+      try {
+        const res = await fetch(`${BASE}/api/images/${encodeURIComponent(imageId)}`, { method: "DELETE" });
+        const data = await res.json();
+        if (!res.ok || !data.ok) throw new Error(data.error || "Delete failed");
+        setStatus("Image deleted.", "success");
+        await loadImages();
+        await loadAlbums();
+        await loadScreens();
+      } catch (e) {
+        setStatus(`Delete failed: ${e.message}`, "error");
+      }
+    }
+
+    function closeMenus() {
+      document.querySelectorAll(".image-card-menu[open]").forEach((menu) => {
+        menu.removeAttribute("open");
+      });
+    }
+
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest(".image-card-menu")) closeMenus();
+    });
+
+    document.getElementById("image-upload-input").addEventListener("change", async (event) => {
+      const files = event.target.files;
+      if (files?.length) await uploadSelectedFiles(files, imagePickerContext);
+      event.target.value = "";
+      imagePickerContext = "library";
+    });
+
+    refreshAll();
+    setInterval(loadScreens, 10000);
+  </script>
+</body>
+</html>

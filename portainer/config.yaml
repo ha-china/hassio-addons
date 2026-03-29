@@ -4,7 +4,7 @@ arch:
 backup_exclude:
   - backups
   - docker_config/cli-plugins
-description: '[老王杂谈说]：轻松管理你的 Docker 环境。'
+description: '[老王杂谈说]：轻松管理你的 Docker 环境'
 docker_api: true
 hassio_api: true
 image: ghcr.nju.edu.cn/alexbelgium/portainer-{arch}
@@ -42,4 +42,4 @@ schema:
 slug: portainer
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "2.39.1"
+version: "2.40.0"

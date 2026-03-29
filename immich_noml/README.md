@@ -1,13 +1,14 @@
-# Home assistant 插件：Immich 无机器学习版
+# Home Assistant 插件：Immich 无机器学习版
 
-⚠️ 该项目处于非常活跃的开发中。预期会有bug和变化。请不要将其作为存储照片和视频的唯一方式！（开发者提示）
+⚠️ 该项目处于非常活跃的开发中。请预期可能出现错误和更改。请不要将其作为存储照片和视频的唯一方式！ (来自开发者)
 
-我在业余时间维护这个和其他 Home Assistant 插件：跟进上游更改、HA 更改以及在真实硬件上进行测试需要花费大量时间（以及一些金钱）。我经常使用我 >110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我本人不使用的测试服务，如 vpn）来调试和改进插件。
+
+我在业余时间维护这个和其他 Home Assistant 插件：跟进上游更改、HA 更改以及在真实硬件上进行测试需要花费大量时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我本人不使用的测试服务，如 vpn），以便进行故障排除和改进插件
 
 如果这个插件为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
 
-[![请给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![买我一杯咖啡][捐赠徽章]](https://www.buymeacoffee.com/alexbelgium)
+[![通过 PayPal 捐赠][paypal徽章]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
 
@@ -19,30 +20,30 @@
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+[捐赠徽章]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal徽章]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我仓库点星的人！要星标它，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有为我的仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
 
-[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers 仓库排行榜 for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
 ![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/immich_noml/stats.png)
 
 ## 关于
 
-直接从您的手机中托管的照片和视频备份解决方案。这是 Immich 的 NoML（无机器学习）版本，专为没有机器学习功能或出于性能或资源管理原因希望禁用 ML 功能的用户设计。
+从您的手机直接备份照片和视频的自托管解决方案。这是 Immich 的 NoML（无机器学习）版本，专为没有机器学习功能或出于性能或资源管理原因希望禁用 ML 功能的用户设计。
 
-此插件基于 imagegenius 的 [docker 镜像](https://github.com/imagegenius/docker-immich)，排除了机器学习组件，以减少资源消耗并提高与资源受限系统的兼容性。
+此插件基于 imagegenius 的 [docker 镜像](https://github.com/imagegenius/docker-immich)，已排除机器学习组件，以减少资源消耗并提高与资源受限系统的兼容性。
 
 ## 用例
 
-NoML 变体非常适合：
+NoML 版本非常适合：
 
 - **资源受限的系统**：降低 CPU 和内存使用，无需 ML 负载
-- **注重隐私的部署**：无面部识别或对象检测处理
-- **简单的照片存储**：基本的照片和视频备份，无需高级 AI 功能
-- **旧硬件**：难以处理机器学习负载的系统
-- **极简设置**：喜欢基本照片管理而不需要 AI 增强的用户
+- **注重隐私的部署**：没有面部识别或对象检测处理
+- **简单的照片存储**：基本的照片和视频备份，没有高级 AI 功能
+- **旧硬件**：难以处理机器学习工作负载的系统
+- **简约设置**：更喜欢基本照片管理而不希望使用 AI 优化的用户
 
 ## 配置
 
@@ -51,7 +52,7 @@ Webui 可以在 `<your-ip>:8080` 找到。PostgreSQL 可以是内部的或外部
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|---------|------|
+|--------|------|---------|-------------|
 | `data_location` | str | `/share/immich` | Immich 数据存储的路径 |
 | `library_location` | str | | 照片/视频库的路径 |
 | `TZ` | str | | 时区（例如，`Europe/London`） |
@@ -66,10 +67,10 @@ Webui 可以在 `<your-ip>:8080` 找到。PostgreSQL 可以是内部的或外部
 | `DB_DATABASE_NAME` | str | `immich` | 数据库名 |
 | `DB_PORT` | int | `5432` | 数据库端口 |
 | `DB_ROOT_PASSWORD` | str | | 数据库 root 密码 |
-| `JWT_SECRET` | str | | 身份验证的 JWT 密钥 |
-| `DISABLE_MACHINE_LEARNING` | bool | `false` | 禁用 ML 功能（对于 NoML 变体推荐） |
-| `MACHINE_LEARNING_WORKERS` | int | `1` | ML 工作进程的数量（对于 NoML 保持为 1） |
-| `MACHINE_LEARNING_WORKER_TIMEOUT` | int | `120` | ML 工作进程超时（秒） |
+| `JWT_SECRET` | str | | 用于身份验证的 JWT 密钥 |
+| `DISABLE_MACHINE_LEARNING` | bool | `false` | 禁用 ML 功能（建议用于 NoML 版本） |
+| `MACHINE_LEARNING_WORKERS` | int | `1` | ML 工作者数量（对于 NoML 保持为 1） |
+| `MACHINE_LEARNING_WORKER_TIMEOUT` | int | `120` | ML 工作者超时（秒） |
 | `VIPS_NOVECTOR` | bool | `false` | 设置为 `true` 以导出 `VIPS_NOVECTOR=1` 并解决 aarch64 缩略图生成问题 |
 | `skip_permissions_check` | bool | `false` | 跳过文件权限检查 |
 
@@ -102,7 +103,7 @@ MACHINE_LEARNING_WORKER_TIMEOUT: 120
 
 ### 自定义脚本和环境变量
 
-此插件支持通过 `addon_config` 映射自定义脚本和环境变量：
+此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
 - **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
 - **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
@@ -112,7 +113,7 @@ MACHINE_LEARNING_WORKER_TIMEOUT: 120
 此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
 **步骤**：
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 supervisor 插件存储的右上角，或点击下面的按钮如果您已经配置了 HA）
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 supervisor 插件存储的右上角，或点击下面的按钮如果您已配置我的 HA）
    [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 点击 `保存` 按钮以存储您的配置。
@@ -121,12 +122,12 @@ MACHINE_LEARNING_WORKER_TIMEOUT: 120
 1. 仔细配置插件以满足您的需求，有关详细信息请参阅官方文档。
 
 **数据库设置**：
-请注意，您需要安装一个单独的 postgres 插件才能连接数据库。您可以在我的仓库中安装 postgres 插件。
-请注意，在启动之前更改密码；启动后不会更改。
+请注意，您需要安装一个单独的 postgres 插件才能连接到数据库。您可以在我的仓库中安装 postgres 插件。
+请注意，在启动之前更改密码；之后将无法更改。
 
 ## 支持
 
-在 github 上创建问题，或在 [home assistant 线程](https://community.home-assistant.io/t/home-assistant-addon-immich/282108/3) 上提问。
+在 github 上创建一个问题，或在 [home assistant 线程](https://community.home-assistant.io/t/home-assistant-addon-immich/282108/3) 上提问。
 
 [仓库](https://github.com/alexbelgium/hassio-addons)
 ---

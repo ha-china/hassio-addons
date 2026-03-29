@@ -1,13 +1,13 @@
-# Hass.io 扩展：FlexGet
+# Hass.io 插件：FlexGet
 
-我在业余时间维护这个和其他 Home Assistant 扩展：跟进上游变化、HA 变化以及在真实硬件上进行测试都需要花费大量时间（以及一些金钱）。我经常使用大约 5-10 个我 >110 个扩展，因此我会安装测试机器（并购买一些我自己不使用的测试服务，如 VPN）来调试和改进扩展。
+我在业余时间维护这个以及其他 Home Assistant 插件：跟上上游变更、HA 变更以及在实际硬件上的测试需要花费大量时间（以及一些金钱）。我经常使用大约 5-10 个我的 >110 个插件，因此我会安装测试机器（并购买一些我本人不使用的测试服务，如 VPN）来调试和改进插件。
 
-如果这个扩展为您节省了时间或使您的设置更简单，我将非常感激您的支持！
+如果这个插件为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
 
-[![买我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![请给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## 扩展信息
+## 插件信息
 
 ![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fflexget%2Fconfig.yaml)
 ![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fflexget%2Fconfig.yaml)
@@ -20,59 +20,59 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有给我仓库点星的人！要点星，请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载演变](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/flexget/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/flexget/stats.png)
 
 ## 关于
 
-[FlexGet](https://flexget.com/) 是一个多功能的媒体自动化工具。它可以支持种子、NZBs、播客、漫画、电视、电影、RSS、HTML、CSV 等。
+[FlexGet](https://flexget.com/) 是一个多功能的媒体自动化工具，适用于您所有的媒体。它可以支持种子、NZBs、播客、漫画、电视、电影、RSS、HTML、CSV 等等。
 
 主要特性：
-- 强大的插件系统，拥有 300+ 个插件
-- RSS 源处理和过滤
-- 与下载客户端的集成
+- 强大的插件系统，拥有 300 多个插件
+- RSS 订阅处理和过滤
+- 与下载客户端集成
 - 基于网页的管理界面
 - 定时执行和守护进程模式
 
 ## 安装
 
-此扩展的安装非常简单，与安装任何其他扩展没有不同。
+此插件的安装非常简单，与安装任何其他插件没有太大区别。
 
-1. 将我的扩展仓库添加到您的 Home Assistant 实例中（在管理员的扩展存储中右上角，或点击下面的按钮如果您已配置我的 HA）
-   [![打开您的 Home Assistant 实例并显示添加扩展仓库对话框，其中包含预先填充的特定仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此扩展。
-1. 点击 `保存` 按钮以存储您的配置。
-1. 将扩展选项设置为您的偏好设置
-1. 启动扩展。
-1. 检查扩展的日志以查看是否一切顺利。
-1. 打开 webUI 并调整软件选项
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在管理员的插件商店顶部右侧，或点击下面的按钮如果您已经配置了我的 HA）
+   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此插件。
+1. 点击“保存”按钮以存储您的配置。
+1. 将插件选项设置为您的偏好设置
+1. 启动插件。
+1. 检查插件的日志以查看一切是否顺利。
+1. 打开 WebUI 并调整软件选项
 
 ## 配置
 
-使用扩展的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+使用插件的 `env_vars` 选项来传递额外的环境变量（大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-Webui 可在 <http://homeassistant:5050> 找到。
-默认密码：`homeassistant123`（通过扩展选项更改）。
+WebUI 可以在 <http://homeassistant:5050> 找到。
+默认密码：`homeassistant123`（通过插件选项更改）。
 
 ### 设置步骤
 
-1. 在启动扩展后访问网络界面
+1. 启动插件后访问 Web 界面
 2. 创建或编辑您的 FlexGet 配置文件
-3. 设置 RSS 源和下载源
+3. 设置 RSS 订阅和下载源
 4. 为您的下载客户端配置输出插件
-5. 测试配置并启用计划任务
+5. 测试配置并启用定时任务
 
 ### 选项
 
 | 选项 | 类型 | 默认 | 描述 |
-|------|------|------|------|
+|--------|------|---------|-------------|
 | `PGID` | int | `0` | 文件权限的组 ID |
 | `PUID` | int | `0` | 文件权限的用户 ID |
-| `WebuiPass` | str | `homeassistant123` | 网络界面的密码 |
-| `FG_PLUGINS` | str | | 安装的附加插件 |
+| `WebuiPass` | str | `homeassistant123` | Web 界面密码 |
+| `FG_PLUGINS` | str | | 要安装的额外插件 |
 | `FG_LOG_LEVEL` | list | | 日志级别（critical/error/warning/info/verbose/debug/trace） |
 
 ### 示例配置
