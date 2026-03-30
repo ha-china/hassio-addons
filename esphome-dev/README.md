@@ -1,23 +1,23 @@
 # ESPHome 设备构建器（开发分支）
 
-[![ESPHome 标志][logo]][网站]
+![ESPHome 标志][logo]
 
-[![GitHub 星标][github-stars-shield]][仓库]
+[![GitHub 星标][github-stars-shield]][repository]
 [![Discord][discord-shield]][discord]
 
 ## 关于
 
-此应用程序允许您编写配置，并通过 Home Assistant 将您的微控制器直接转换为智能家居设备，**无需任何编程经验**。您只需编写 YAML 配置文件；其余的（空中更新、编译）都由 ESPHome 处理。
+此应用允许您编写配置，并将您的微控制器直接通过 Home Assistant 转换为智能家居设备**无需任何编程经验**。您只需编写 YAML 配置文件；其余的（空中更新、编译）都由 ESPHome 处理。
 
 <p align="center">
 <img title="ESPHome 设备构建器截图" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome-dev/images/screenshot.png" width="700px"></img>
 </p>
 
-[查看 ESPHome 文档][网站]
+[查看 ESPHome 文档][website]
 
 ## 示例
 
-使用 ESPHome，您可以从几行 YAML 直接过渡到定制的固件。例如，要包含 [DHT22][dht22] 温度和湿度传感器，您只需在配置文件中包含 8 行 YAML：
+使用 ESPHome，您可以从几行 YAML 直接过渡到定制的固件。例如，要包含 [DHT22][dht22] 温度和湿度传感器，您只需在配置文件中包含 8 行 YAML 即可：
 
 <img title="ESPHome DHT 配置示例" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome-dev/images/dht-example.png" width="500px"></img>
 
@@ -26,13 +26,13 @@
 <img title="ESPHome Home Assistant 发现" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome-dev/images/temperature-humidity.png" width="600px"></img>
 
 [discord]: https://discord.gg/KhAMKrd
-[仓库]: https://github.com/esphome/esphome
+[repository]: https://github.com/esphome/esphome
 [discord-shield]: https://img.shields.io/discord/429907082951524364.svg
 [github-stars-shield]: https://img.shields.io/github/stars/esphome/esphome.svg?style=social&label=Star&maxAge=2592000
 [dht22]: https://next.esphome.io/components/sensor/dht/
-[版本]: https://next.esphome.io/changelog/
+[releases]: https://next.esphome.io/changelog/
 [logo]: https://github.com/esphome/home-assistant-addon/raw/main/esphome-dev/logo.png
-[网站]: https://next.esphome.io/
+[website]: https://next.esphome.io/
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

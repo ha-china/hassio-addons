@@ -1,6 +1,6 @@
 name: "OpenDisplay Wi-Fi"
-description: "[老王杂谈说]：为电子纸显示器运行 OpenDisplay Wi-Fi 服务器"
-version: "0.1.10"
+description: "[老王杂谈说]：运行一个用于电子纸显示器的 OpenDisplay Wi-Fi 服务器"
+version: "0.1.11"
 slug: "opendisplay-wifi"
 init: false
 host_network: true

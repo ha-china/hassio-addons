@@ -4,7 +4,7 @@
 
 [![打开您的 Home Assistant 实例并显示一个附加组件的仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=0f1cc410_opendisplay-wifi&repository_url=https%3A%2F%2Fgithub.com%2Fballoob%2Fhome-assistant-addons)
 
-将 OpenDisplay Wi-Fi 服务器作为 Home Assistant 附加组件运行。您的网络中的电子纸显示器将自动通过 mDNS 发现服务器并连接以接收图像。
+运行一个作为 Home Assistant 附加组件的 [OpenDisplay](https://opendisplay.org) Wi-Fi 服务器。您的网络上的电子纸显示器将自动通过 mDNS 发现服务器并连接以接收图像。
 
 此附加组件使用 py-opendisplay 的 `wifi-server` 分支的源安装。
 
@@ -15,7 +15,7 @@
 - 查看连接的屏幕及其尺寸和颜色支持
 - 将图像分配给屏幕：
   - **上传本地图像** - 转换并发送到显示器
-  - **提供 URL** - 服务器按可配置的间隔定期获取它，并在图像更改时更新显示器
+  - **提供 URL** - 服务器按可配置的间隔定期获取它，当图像更改时更新显示器
 
 ## 安装
 
@@ -31,12 +31,12 @@ https://github.com/balloob/home-assistant-addons
 
 1. 启动附加组件
 2. 从附加组件页面（通过 Ingress）打开 Web UI
-3. 打开您的 OpenDisplay 电子纸屏幕 - 连接后它们将出现在 UI 中
+3. 打开您的 OpenDisplay 电子纸屏幕 - 一旦连接，它们将出现在 UI 中
 4. 上传图像或提供 URL 并将其分配给屏幕
 
 ## 本地开发
 
-您还可以在 Home Assistant 外运行服务器：
+您也可以在 Home Assistant 外运行服务器：
 
 ```bash
 cd opendisplay-wifi
@@ -45,7 +45,7 @@ uv sync
 uv run python server.py
 ```
 
-本地运行时，服务器将其数据和配置存储在 `./dev-data` 中：
+本地运行时，服务器将其数据和配置存储在 `./dev-data`：
 
 - `dev-data/assignments.json`
 - `dev-data/albums.json`

@@ -1,7 +1,7 @@
 name: Music Assistant (NIGHTLY)
-version: 2.9.0.dev2026032905
+version: 2.9.0.dev2026033005
 slug: music_assistant_nightly
-description: '[老王杂谈说]：Music Assistant 夜版。如果你想跟上 Music Assistant 最前沿的开发，请安装此版本！由于可能不稳定，风险自负，不建议用于日常或生产环境。'
+description: '[老王杂谈说]：这是 Music Assistant 的夜版。如果你想紧跟 Music Assistant 最前沿的开发，请安装此版本！使用风险自负，因为它可能不稳定，不建议用于日常或生产环境。'
 url: https://music-assistant.io
 arch:
   - amd64
