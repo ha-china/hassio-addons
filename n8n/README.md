@@ -1,43 +1,47 @@
-# N8n
+# 家居助手插件：n8n
 
-![N8n Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/n8n/logo.png)
+n8n 是一款可扩展的工作流自动化工具。采用公平的代码分发模式，n8n 将始终有可见的源代码，可供自托管，并允许您添加自己的自定义函数、逻辑和应用。n8n 基于节点的架构使其非常灵活，让您能够将任何事物连接到任何事物。
 
-[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_n8n)
-[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-1.2.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-n8n)
-![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+功能未经测试，但插件可以运行
 
-> 工作流自动化工具。N8n 通过强大的工作流自动化扩展了您的 Home Assistant。
+_感谢所有星标我的仓库的人！要星标它，请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
----
+[![星标 @jdeath/homeassistant-addons 仓库的星标人数](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## 📖 关于
+## 关于
 
-工作流自动化工具。N8n 通过强大的工作流自动化扩展了您的 Home Assistant。
+此插件使用 [docker 镜像](https://github.com/n8n-io/n8n)。
 
----
+## 安装
 
-## ⚙️ 配置
+1. [将我的 Hass.io 插件仓库添加到您的 Hass.io 实例中][repository]。
+1. 点击 `保存` 按钮以存储您的配置。
+1. 启动插件。
+1. 插件会失败，这是正常的
+1. 使用 ssh 登录您的 homeassistant 并运行 `chmod 2777 /addon_configs/2effc9b9_n8n`
+1. 启动插件
+1. 检查插件的日志，查看一切是否正常。
+1. 打开 WebUI 应该可以通过 <你的IP>:端口号 访问。
+1. 设置管理员账户
+1. 设置将位于 /addon_configs/2effc9b9_n8n
 
-通过 Home Assistant App 页面中的 **配置** 选项卡配置此应用。
+## 配置
 
-### 选项
+您可以选择让插件使用环境文件。注意使用 '/home/node' 作为基础路径，它将映射到 /addon_configs/2effc9b9_n8n
 
-```yaml
-certfile: fullchain.pem
-keyfile: privkey.pem
-listen_address: 0.0.0.0
-log_level: info
-port: 5678
-ssl: false
+您需要自己创建此文件，并将其设置为要设置的环境列表，如下所示：
+```
+DB_SQLITE_POOL_SIZE=10
+N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 ```
 
----
+```
+port : 5678 #您想要运行的端口号。
+```
 
-## 👨‍💻 贡献者 & 许可证
+WebUI 可以在 `<你的IP>:端口号` 找到。
 
-此项目是开源的，并受 MIT 许可证的约束。
-由 **FaserF** 维护。
+[repository]: https://github.com/jdeath/homeassistant-addons
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
