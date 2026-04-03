@@ -1,3 +1,12 @@
+## [1.12.3-0] - 2026-04-02
+
+### Changed
+
+- Bumped Homepage version to : 1.12.3
+   - Homepage changelog 1.12.3: https://github.com/gethomepage/homepage/releases/tag/v1.12.3
+- Bumped HA addon version to : 1.12.3-0
+
+
 ## [1.11.0-0] - 2026-03-17
 
 ### Changed
@@ -13,7 +22,6 @@
 
 - Bumped Homepage version to : 1.10.1
    - Homepage changelog 1.10.0: https://github.com/gethomepage/homepage/releases/tag/v1.10.0
-   - Homepage changelog 1.10.1: https://github.com/gethomepage/homepage/releases/tag/v1.10.1
 - Bumped HA addon version to : 1.10.1-0
 
 

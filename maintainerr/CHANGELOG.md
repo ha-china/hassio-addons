@@ -1,3 +1,16 @@
+## 3.2.0-9 (03-04-2026)
+- Minor bugs fixed
+## 3.2.0-8 (02-04-2026)
+- Minor bugs fixed
+## 3.2.0-7 (02-04-2026)
+- Minor bugs fixed
+## 3.2.0-6 (02-04-2026)
+- Minor bugs fixed
+## 3.2.0-5 (02-04-2026)
+- Add Home Assistant ingress support with nginx reverse proxy
+
+## 3.2.0-4 (02-04-2026)
+- Minor bugs fixed
 
 ## 3.2.0-3 (2026-03-31)
 - Fix addon never starts: symlink contents inside /opt/data instead of replacing the Docker VOLUME directory

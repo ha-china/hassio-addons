@@ -8,15 +8,15 @@
 
 [![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
 
-全网络广告和追踪器阻止 DNS 服务器。
+网络级广告和跟踪器拦截 DNS 服务器。
 
 ## 关于
 
-AdGuard Home 是一个具有家长控制（成人内容阻止）功能的网络级广告和追踪器阻止 DNS 服务器。它的目的是让您控制整个网络和所有设备，且无需使用客户端程序。
+AdGuard Home 是一款网络级广告和跟踪器拦截 DNS 服务器，具有家长控制（成人内容拦截）功能。它的目的是让您控制整个网络和所有设备，而且无需使用客户端程序。
 
-AdGuard Home 提供了一个美观、易用且功能丰富的 Web 界面，以便轻松管理过滤过程及其设置。
+AdGuard Home 提供了一个美观、易于使用且功能丰富的 Web 界面，可以轻松管理过滤过程及其设置。
 
-![AdGuard Home 在 Home Assistant 前端](screenshot)
+![AdGuard Home 在 Home Assistant 前端显示][screenshot]
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -28,9 +28,9 @@ AdGuard Home 提供了一个美观、易用且功能丰富的 Web 界面，以�
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v6.1.1-blue.svg
-[release]: https://github.com/hassio-addons/app-adguard-home/tree/v6.1.1
-[screenshot]: https://github.com/hassio-addons/app-adguard-home/raw/v6.1.1/images/screenshot.png
+[release-shield]: https://img.shields.io/badge/version-v6.1.2-blue.svg
+[release]: https://github.com/hassio-addons/app-adguard-home/tree/v6.1.2
+[screenshot]: https://github.com/hassio-addons/app-adguard-home/raw/v6.1.2/images/screenshot.png
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

@@ -7,19 +7,13 @@ set -e
 # Runs cont-init.d scripts then drops privileges and starts the app.
 ###############################################################################
 
-# ─── Source standalone bashio if available ───────────────────────────────────
-if [ -f /usr/local/lib/bashio-standalone.sh ]; then
-    # shellcheck disable=SC1091
-    source /usr/local/lib/bashio-standalone.sh
-fi
-
 # ─── Run cont-init.d scripts ─────────────────────────────────────────────────
 if [ -d /etc/cont-init.d ]; then
     for script in /etc/cont-init.d/*.sh; do
         [ -f "$script" ] || continue
+        sed -i '1s|.*|#!/usr/bin/env bashio|' "$script"
         echo "[Maintainerr] Running init script: $script"
-        # Use bash directly (no S6 with-contenv available)
-        bash "$script"
+        bash "$script"        # ← bash, not exec
     done
 fi
 
@@ -59,3 +53,4 @@ export DATA_DIR
 # ─── Start Maintainerr as unprivileged node user ─────────────────────────────
 echo "[Maintainerr] Starting application on port ${UI_PORT:-6246}..."
 exec gosu node /opt/app/start.sh
+exec nginx
