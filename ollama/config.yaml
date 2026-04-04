@@ -1,7 +1,7 @@
 name: "Ollama"
-description: "[老王杂谈说]：开始使用大型语言模型。"
+description: "[老王杂谈说]：快速入门大语言模型"
 # renovate: datasource=github-tags depName=ollama/ollama
-version: "0.19.0"
+version: "0.20.0"
 slug: "ollama"
 arch:
   - aarch64
@@ -31,13 +31,23 @@ options:
   OLLAMA_ORIGINS: ""
   gpus: all
 schema:
+  OLLAMA_CONTEXT_LENGTH: int?
   OLLAMA_FLASH_ATTENTION: int
   OLLAMA_MODELS: list(/config/ollama|/share/ollama|/data/ollama)
   OLLAMA_KEEP_ALIVE: int
   OLLAMA_KV_CACHE_TYPE: list(f16|q8_0|q4_0)
   OLLAMA_MAX_LOADED_MODELS: int
   OLLAMA_NUM_PARALLEL: int
+  OLLAMA_VULKAN: bool?
+  OLLAMA_NOPRUNE: bool?
+  OLLAMA_MAX_QUEUE: int?
+  OLLAMA_SCHED_SPREAD: bool?
+  OLLAMA_NO_LOG_STATS: bool?
+  OLLAMA_NO_HISTORY: bool?
+  OLLAMA_NO_CLOUD: bool?
+  OLLAMA_CONTEXT_LENGTH: int?
   OLLAMA_ORIGINS: str
+  HTTPS_PROXY: str?
   gpus: str
 backup_exclude:
   - "ollama/**"

@@ -1,15 +1,15 @@
-# Home Assistant 应用：语音转短语
+# 家居助手应用：语音转短语
 
-![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield]
+![支持aarch64架构][aarch64-shield] ![支持amd64架构][amd64-shield]
 
-一个快速且本地的语音转文本系统，它使用家中物品的名称进行个性化设置。
-[语音转短语](https://github.com/OHF-voice/speech-to-phrase) 针对低端硬件，例如 Raspberry Pi 4 和 Home Assistant Green。
+一个快速且本地的语音转文字系统，可以根据你家中物品的名称进行个性化设置。
+[语音转短语](https://github.com/OHF-voice/speech-to-phrase)旨在面向低端硬件，如Raspberry Pi 4和Home Assistant Green。
 
 请参阅[文档](http://github.com/OHF-voice/speech-to-phrase)了解可用的语音命令。
 
-建立在 [语音年](https://www.home-assistant.io/blog/2022/12/20/year-of-voice/) 之上。
+基于[语音年](https://www.home-assistant.io/blog/2022/12/20/year-of-voice/)构建。
 
-需要 Home Assistant 2023.11 或更高版本。
+需要Home Assistant 2023.11或更高版本。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg

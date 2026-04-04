@@ -13,7 +13,7 @@ if [ -d /etc/cont-init.d ]; then
         [ -f "$script" ] || continue
         sed -i '1s|.*|#!/usr/bin/env bashio|' "$script"
         echo "[Maintainerr] Running init script: $script"
-        bash "$script"        # ← bash, not exec
+        bashio "$script"
     done
 fi
 
@@ -52,5 +52,5 @@ export DATA_DIR
 
 # ─── Start Maintainerr as unprivileged node user ─────────────────────────────
 echo "[Maintainerr] Starting application on port ${UI_PORT:-6246}..."
-exec gosu node /opt/app/start.sh
+exec gosu node /opt/app/start.sh &
 exec nginx

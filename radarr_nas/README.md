@@ -1,10 +1,10 @@
 # Home Assistant 插件：Radarr
 
-我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试都需要花费大量时间（以及一些金钱）。我经常使用大约 5-10 个我 >110 个插件，所以我安装了测试机器（并购买了一些我自己不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
+我在业余时间维护这个和其他 Home Assistant 插件：跟进上游更改、Home Assistant 更改以及在真实硬件上进行测试需要花费大量时间（以及一些金钱）。我经常使用大约 5-10 个我 >110 个插件，所以我安装了测试机器（并购买了某些我本人不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
 
-如果这个插件为您节省了时间或使您的设置更简单，我将非常感激您的支持！
+如果这个插件为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
 
-[![买我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
@@ -20,7 +20,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我仓库加星的人！要加星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有为我仓库加星的人！要加星，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -30,8 +30,8 @@ _感谢所有为我仓库加星的人！要加星，请点击下面的图片，�
 
 ---
 
-[Radarr](https://radarr.video/) Radarr 是一个针对 Usenet 和 BitTorrent 用户的电影收藏管理器。它可以监控多个 RSS 源以获取新电影，并与客户端和索引器接口进行交互，以获取、排序和重命名它们。它还可以配置为在更好的质量格式可用时自动升级库中现有文件的质量。
-此插件基于 docker 图像 https://github.com/linuxserver/docker-radarr
+[Radarr](https://radarr.video/) Radarr 是一个针对 Usenet 和 BitTorrent 用户的电影收藏管理器。它可以监控多个 RSS 源以获取新电影，并与客户端和索引器接口进行交互，以抓取、排序和重命名它们。它还可以配置为在更好的质量格式可用时自动升级库中现有文件的质量。
+此插件基于 docker 镜像 https://github.com/linuxserver/docker-radarr
 
 ## 安装
 
@@ -39,7 +39,7 @@ _感谢所有为我仓库加星的人！要加星，请点击下面的图片，�
 
 此插件的安装相当简单，与安装任何其他插件没有太大区别。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在监督器插件存储的右上角，或点击下面的按钮如果您已配置我的 HA）
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 supervisor 插件商店的右上角，或点击下面的按钮如果您已配置我的 HA）
    [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 点击“保存”按钮以存储您的配置。
@@ -53,7 +53,7 @@ _感谢所有为我仓库加星的人！要加星，请点击下面的图片，�
 使用插件的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
 WebUI 可在 <http://homeassistant:PORT> 或通过侧边栏使用入口找到。
-配置可以通过应用程序 WebUI 进行，除了以下选项之外。
+配置可以通过应用程序 WebUI 进行，但以下选项除外。
 
 ### 选项
 
@@ -98,7 +98,7 @@ cifsdomain: "workgroup"
 
 ## 支持
 
-在 GitHub 上创建一个问题
+在 github 上创建问题
 
 ## 图解
 

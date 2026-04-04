@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：食谱管理器'
+description: '[老王杂谈说]：菜谱管理器'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -112,5 +112,5 @@ services:
 slug: tandoor_recipes
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "2.6.1"
+version: "2.6.4"
 webui: http://[HOST]:[PORT:80]
