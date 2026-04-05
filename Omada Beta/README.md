@@ -1,19 +1,21 @@
-# Home Assistant Omada 插件Beta
+# Home Assistant Omada Add-On 测试版
 
-此插件将 Omada 控制器 Beta 直接集成到 Home Assistant 中。
+此插件将 Omada 控制器测试版直接引入 Home Assistant。
 
-对于从 v5 升级到 v6，请阅读主 README 中的注意事项。
+关于从 v5 升级到 v6，请阅读主 README 中的说明。
 
 ## 贡献
 
 此插件最初受到 Matt Bentleys 的
 [docker-omada-controller](https://github.com/mbentley/docker-omada-controller)
-以及 jkunczik [home-assistant-omada](https://github.com/jkunczik/home-assistant-omada)
+以及 jkunczik 的 [home-assistant-omada](https://github.com/jkunczik/home-assistant-omada)
 的启发，没有他们的出色工作，home-assistant-omada 就不可能实现。
-除了原始的 docker omada 控制器之外，此插件将所有持久数据存储在 /data 目录中，以便与 Home Assistant 兼容。
-没有其他人的努力，此插件就不可能实现。
-欢迎提交版本更新或新功能的拉取请求。
-特别感谢 DraTrav 为推动此插件向前发展做出的贡献！
+除了原始的 docker omada controller，
+此插件将所有持久数据存储在 /data 目录中，
+以便与 Home Assistant 兼容。
+此插件的开发离不开其他人的努力。
+对于版本更新或新功能的拉取请求始终欢迎。
+特别感谢 DraTrav 推动此插件的发展！
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

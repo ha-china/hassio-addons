@@ -1,9 +1,9 @@
 ---
 name: Omada Controller Beta
 image: jeruntu/home-assistant-omada-beta
-version: beta-6.2.10.9
+version: beta-6.2.10.11
 slug: omada_controller_beta
-description: '[老王杂谈说]：TP-Link Omada Controller 软件'
+description: '[老王杂谈说]：TP-Link Omada 控制器软件'
 webui: https://[HOST]:[PORT:8043]
 startup: application
 stop_timeout: 60

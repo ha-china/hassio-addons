@@ -1,7 +1,7 @@
 name: "Ollama"
-description: "[老王杂谈说]：快速入门大语言模型"
+description: "[老王杂谈说]：快速上手大型语言模型。"
 # renovate: datasource=github-tags depName=ollama/ollama
-version: "0.20.0"
+version: "0.20.2"
 slug: "ollama"
 arch:
   - aarch64
