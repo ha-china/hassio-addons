@@ -1,9 +1,9 @@
 name: Otter Wiki
-version: "2.20.0"
+version: "2.20.1"
 upstream: 2.7.0
 slug: otterwiki
 description: >-
-  [老王杂谈说]：null
+  [老王杂谈说]：Otter Wiki 是一种基于 Python 的用于协作内容管理的软件，称为 Wiki。内容存储在 git 仓库中，用于追踪所有更改。使用 Markdown 作为标记语言。Otter Wiki 使用微框架 Flask 用 Python 编写。Halfmoon 用作 CSS 框架，CodeMirror 用作编辑器。Font Awesome Free 提供图标。
 arch:
   - amd64
   - aarch64

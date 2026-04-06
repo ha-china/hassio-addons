@@ -1,47 +1,49 @@
-# 家居助手插件：Trillium
-Trilium Notes 是一个基于树形结构的笔记应用，专注于构建大型个人知识库。
+# Home Assistant 插件：Trillium
 
-_感谢所有为我的仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
+Trilium Notes 是一个面向构建大型个人知识库的分层笔记应用。
 
-![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons))(https://github.com/jdeath/homeassistant-addons/stargazers)
+_感谢每一位为我的仓库点星的伙伴！要为它点星，请点击下方的图片，然后它就会出现在右上角。谢谢！_
+
+![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 功能
 
-* 笔记可以组织成任意深度的树。单个笔记可以放置在树的多个位置（见[克隆笔记](https://github.com/zadam/trilium/wiki/Cloning-notes)）
-* 富文本 WYSIWYG 笔记编辑，包括表格、图片以及[数学公式](https://github.com/zadam/trilium/wiki/Text-notes#math-support)和 markdown [自动格式化](https://github.com/zadam/trilium/wiki/Text-notes#autoformat)
+* 笔记可以排列成任意深度的树状结构。单个笔记可以放置在树的多个位置（见[克隆笔记](https://github.com/zadam/trilium/wiki/Cloning-notes)）
+* 丰富的所见即所得笔记编辑，包括例如表格、图片和[数学](https://github.com/zadam/trilium/wiki/Text-notes#math-support)支持，以及 markdown [自动格式化](https://github.com/zadam/trilium/wiki/Text-notes#autoformat)
 * 支持编辑[带有源代码的笔记](https://github.com/zadam/trilium/wiki/Code-notes)，包括语法高亮
-* 快速轻松地在笔记之间[导航](https://github.com/zadam/trilium/wiki/Note-navigation)，全文搜索和[笔记提升](https://github.com/zadam/trilium/wiki/Note-hoisting)
+* 快速简便地在笔记之间[导航](https://github.com/zadam/trilium/wiki/Note-navigation)，全文搜索和[笔记提升](https://github.com/zadam/trilium/wiki/Note-hoisting)
 * 无缝的[笔记版本控制](https://github.com/zadam/trilium/wiki/Note-revisions)
 * 笔记[属性](https://github.com/zadam/trilium/wiki/Attributes)可用于笔记组织、查询和高级[脚本](https://github.com/zadam/trilium/wiki/Scripts)
 * 与自托管的同步服务器[同步](https://github.com/zadam/trilium/wiki/Synchronization)
-  * 有一个[第三方服务用于托管同步服务器](https://trilium.cc/paid-hosting)
+  * 提供一个[第三方服务来托管同步服务器](https://trilium.cc/paid-hosting)
 * [共享](https://github.com/zadam/trilium/wiki/Sharing)（发布）笔记到公共互联网
-* 强大的[笔记加密](https://github.com/zadam/trilium/wiki/Protected-notes)，每个笔记可独立加密
+* 强大的[笔记加密](https://github.com/zadam/trilium/wiki/Protected-notes)支持，每个笔记粒度
 * 使用内置的 Excalidraw（笔记类型“画布”）绘制图表
 * [关系图](https://github.com/zadam/trilium/wiki/Relation-map)和[链接图](https://github.com/zadam/trilium/wiki/Link-map)用于可视化笔记及其关系
-* [脚本](https://github.com/zadam/trilium/wiki/Scripts) - see [Advanced showcases](https://github.com/zadam/trilium/wiki/Advanced-showcases)
-* [REST API](https://github.com/zadam/trilium/wiki/ETAPI) 用于自动化
-* 可扩展性良好，在可用性和性能方面均适用于超过 100,000 个笔记
-* 优化触摸的[移动前端](https://github.com/zadam/trilium/wiki/Mobile-frontend)适用于智能手机和平板电脑
+* [脚本](https://github.com/zadam/trilium/wiki/Scripts) - 见[高级展示](https://github.com/zadam/trilium/wiki/Advanced-showcases)
+* [REST API](https://github.com/zadam/trilium/wiki/ETAPI)用于自动化
+* 在 100,000 个笔记以上也能很好地在易用性和性能上进行扩展
+* 优化了触控的[移动前端](https://github.com/zadam/trilium/wiki/Mobile-frontend)适用于智能手机和平板电脑
 * [夜间主题](https://github.com/zadam/trilium/wiki/Themes)
-* [Evernote](https://github.com/zadam/trilium/wiki/Evernote-import) 和 [Markdown 导入导出](https://github.com/zadam/trilium/wiki/Markdown)
-* [Web Clipper](https://github.com/zadam/trilium/wiki/Web-clipper) 用于轻松保存网页内容
+* [Evernote](https://github.com/zadam/trilium/wiki/Evernote-import)和[Markdown 导入导出](https://github.com/zadam/trilium/wiki/Markdown)
+* [网页剪裁器](https://github.com/zadam/trilium/wiki/Web-clipper)用于轻松保存网页内容
 
 
 ## 安装
 
-1. 将我的 Hass.io 插件仓库[repository](https://github.com/jdeath/homeassistant-addons)添加到您的 Hass.io 实例中。
+
+1. 将我的 Hass.io 插件仓库[repository][repository]添加到您的 Hass.io 实例中。
 1. 安装此插件。
-1. 点击“保存”按钮以存储您的配置。
+1. 点击 `保存` 按钮以存储您的配置。
 1. 在您的 homeassistant 上创建目录 `/share/trillium/`
-1. 通过 ssh 登录您的 home assistant 并运行 `chmod 2777 /share/trillium`
+1. 通过 ssh 连接到您的 home assistant 并运行 `chmod 2777 /share/trillium`
 1. 启动插件。
-1. 检查插件的日志以查看是否一切顺利。
+1. 检查插件的日志以查看一切是否顺利。
 1. 前往您本地的 homeassistant IP:port 管理端口或入口。
 1. 按照指示操作
 
 ```
-端口 : 8000 #您要在其上运行管理界面的端口号。
+端口 : 8000 #您希望在上面运行管理界面的端口。
 ```
 
 Webui 可在 `<your-ip>:port` 或入口中找到。
