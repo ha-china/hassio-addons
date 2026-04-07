@@ -1,6 +1,6 @@
 # Home Assistant 社区应用：Tailscale
 
-[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
+[![发布状态][release-shield]][release] ![项目阶段][project-stage-shield] ![维护状态][maintenance-shield]
 
 [![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
 
@@ -12,9 +12,9 @@
 
 ## 关于
 
-Tailscale 是一款零配置 VPN，可在几分钟内安装到任何设备上，包括您的 Home Assistant 实例。
+Tailscale 是一款零配置 VPN，可以在几分钟内安装到任何设备上，包括您的 Home Assistant 实例。
 
-在您的服务器、计算机和云实例之间创建一个安全网络。即使它们被防火墙或子网隔开，Tailscale 也能正常工作。Tailscale 会为您管理防火墙规则，并且无论您在哪里都可以使用。
+在您的服务器、计算机和云端实例之间创建一个安全网络。即使被防火墙或子网分隔，Tailscale 也能正常工作。Tailscale 会为您管理防火墙规则，并可在任何地方使用。
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -26,8 +26,8 @@ Tailscale 是一款零配置 VPN，可在几分钟内安装到任何设备上，
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.28.0-blue.svg
-[release]: https://github.com/hassio-addons/app-tailscale/tree/v0.28.0
+[release-shield]: https://img.shields.io/badge/version-v0.28.1-blue.svg
+[release]: https://github.com/hassio-addons/app-tailscale/tree/v0.28.1
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

@@ -1,4 +1,10 @@
+## 2.8.2 (07-04-2026)
+- Minor bugs fixed
 # Changelog
+
+## 2.8.2
+
+- Update to upstream BentoPDF v2.8.2
 
 ## 2.5.0
 

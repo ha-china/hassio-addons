@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.2
+
+### Bug Fixes
+
+- Fix authentication failing when accessing the dashboard via local network IPs outside the 192.168.x range (e.g. 10.x.x.x, 172.x.x.x)
+
 ## 0.8.0-beta.8
 
 - Fixed database migration not completing (missing statement breakpoints in SQLite)

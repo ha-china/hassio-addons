@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.8.2
+
+### Bug Fixes
+
+- Fix authentication failing when accessing the dashboard via local network IPs outside the 192.168.x range (e.g. 10.x.x.x, 172.x.x.x)
+
+## 0.8.1
+
+### Bug Fixes
+
+- Fix authentication for local network access with dynamic host resolution
+
+## 0.8.0
+
+### Features
+
+- New setup wizard: single-screen flow replaces 5-step wizard
+- Upgraded to Vite 8 (Rolldown bundler) for faster builds
+- Instance-wide widget installs (no longer per-user)
+- Simplified demo mode
+
+### Bug Fixes
+
+- Fix database migration issues with SQLite statement breakpoints
+- Fix HA connection lost after update
+- Fix widget install/uninstall errors
+- Fix widgets failing to load in production
+- Fix setup redirect loop for anonymous users
+- Fix device pairing with signed session cookies
+
 ## 0.7.0
 
 ### Features

@@ -1,93 +1,94 @@
-# Home Assistant 插件：qbittorrent
+# Home assistant add-on: qbittorrent
 
-我在业余时间维护这个和其他 Home Assistant 插件：跟进上游更改、Home Assistant 更改以及在真实硬件上进行测试需要花费很多时间（以及一些金钱）。我经常使用大约 5-10 个我 >110 个插件，所以我安装了测试机器（并购买了一些我本人不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
 
-如果这个插件为您节省了时间或使您的设置更简单，我将非常感激您的支持！
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-[![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
-## 插件信息
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fqbittorrent%2Fconfig.yaml)
-![入口](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fqbittorrent%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fqbittorrent%2Fconfig.yaml)
+## Addon informations
 
-[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fqbittorrent%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fqbittorrent%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fqbittorrent%2Fconfig.yaml)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点星的人！要星标它，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/qbittorrent/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/qbittorrent/stats.png)
 
-## 关于
-
----
-
-[Qbittorrent](https://github.com/qbittorrent/qBittorrent) 是一个跨平台的免费开源 BitTorrent 客户端。
-此插件基于 [linuxserver.io](https://www.linuxserver.io/) 的 docker 镜像。
-
-此插件有多个可配置选项：
-
-- 允许从插件挂载本地外部驱动器或 smb 共享
-- [替代 WebUI](https://github.com/qbittorrent/qBittorrent/wiki/List-of-known-alternate-WebUIs)
-- 使用 ssl
-- 入口
-- 可选 OpenVPN 或 WireGuard 支持
-- 允许设置特定的 DNS 服务器
-
-## 配置
+## About
 
 ---
 
-WebUI 可在 <http://homeassistant:8080> 找到，或在侧边栏中使用入口访问。
-默认用户名/密码在启动日志中描述。
+[Qbittorrent](https://github.com/qbittorrent/qBittorrent) is a cross-platform free and open-source BitTorrent client.
+This addon is based on the docker image from [linuxserver.io](https://www.linuxserver.io/).
 
-网络磁盘挂载到 `/mnt/<share_name>`。您需要将暴露的端口在您的路由器上进行映射以获得最佳速度和连接性。
+This addons has several configurable options :
 
-### 选项
+- allowing to mount local external drive, or smb share from the addon
+- [alternative webUI](https://github.com/qbittorrent/qBittorrent/wiki/List-of-known-alternate-WebUIs)
+- usage of ssl
+- ingress
+- optional OpenVPN or WireGuard support
+- allow setting specific DNS servers
 
-| 选项 | 类型 | 默认 | 描述 |
-|------|------|------|------|
-| `PGID` | int | `0` | 文件权限的组 ID |
-| `PUID` | int | `0` | 文件权限的用户 ID |
-| `TZ` | str | | 时区（例如，`Europe/London`） |
-| `Username` | str | `admin` | Web 界面的管理员用户名 |
-| `SavePath` | str | `/share/qBittorrent` | 默认下载目录 |
-| `ssl` | bool | `false` | 启用 Web 界面的 HTTPS |
-| `certfile` | str | `fullchain.pem` | SSL 证书文件（在 `/ssl/` 中） |
-| `keyfile` | str | `privkey.pem` | SSL 私钥文件（在 `/ssl/` 中） |
-| `whitelist` | str | `localhost,127.0.0.1,...` | 不需要密码的 IP 子网 |
-| `customUI` | list | `vuetorrent` | 替代 Web UI（默认/vuetorrent/qbit-matUI/qb-web/custom） |
-| `DNS_server` | str | `8.8.8.8,1.1.1.1` | 自定义 DNS 服务器 |
-| `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
-| `networkdisks` | str | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
-| `cifsusername` | str | | 网络共享的 SMB 用户名 |
-| `cifspassword` | str | | 网络共享的 SMB 密码 |
-| `cifsdomain` | str | | 网络共享的 SMB 域 |
-| `openvpn_enabled` | bool | `false` | 启用 OpenVPN 连接 |
-| `openvpn_config` | str | | OpenVPN 配置文件名（在 `/addon_configs/db21ed7f_qbittorrent/openvpn/` 中） |
-| `openvpn_username` | str | | OpenVPN 用户名 |
-| `openvpn_password` | str | | OpenVPN 密码 |
-| `openvpn_alt_mode` | bool | `false` | 在容器级别而不是应用级别绑定 |
-| `wireguard_enabled` | bool | `false` | 启用 WireGuard 隧道 |
-| `wireguard_config` | str | _(空)_ | WireGuard 配置文件名（仅文件名，例如 `ABC.conf`，存储在插件内的 `/addon_configs/db21ed7f_qbittorrent/wireguard/` 中） |
-| `qbit_manage` | bool | `false` | 启用 qBit Manage 集成 |
-| `run_duration` | str | | 运行持续时间（例如，`12h`，`5d`） |
-| `silent` | bool | `false` | 抑制调试消息 |
+## Configuration
 
-### WireGuard 设置
+---
 
-WireGuard 配置文件必须存储在插件容器内的 `/config/wireguard` 中（在 Home Assistant OS 中这是插件配置共享，通常是 `/addon_configs/<addon_slug>/wireguard/`，例如 `/addon_configs/db21ed7f_qbittorrent/wireguard/`）。
-将 `wireguard_config` 设置为 **仅文件名**（例如 `ABC.conf`，不是完整路径）。如果有多个 `.conf` 文件，将 `wireguard_config` 设置为您想要使用的文件名（例如 `wg0.conf`）。在插件选项中暴露 UDP 端口 `51820`，并且仅在您的隧道期望入站对等体时从您的路由器转发它（例如，站点到站点设置）。仅出站商业 VPN 提供商通常不需要映射端口。运行时配置现在保留 IPv4 和 IPv6 条目，因此当您的端点支持时，您可以使用双栈 WireGuard 对等体。
+Webui can be found at <http://homeassistant:8080>, or in your sidebar using Ingress.
+The default username/password is described in the startup log.
 
-### 示例配置
+Network disk is mounted to `/mnt/<share_name>`. You need to map the exposed port in your router for best speed and connectivity.
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `PGID` | int | `0` | Group ID for file permissions |
+| `PUID` | int | `0` | User ID for file permissions |
+| `TZ` | str | | Timezone (e.g., `Europe/London`) |
+| `Username` | str | `admin` | Admin username for web interface |
+| `SavePath` | str | `/share/qBittorrent` | Default download directory |
+| `ssl` | bool | `false` | Enable HTTPS for web interface |
+| `certfile` | str | `fullchain.pem` | SSL certificate file (in `/ssl/`) |
+| `keyfile` | str | `privkey.pem` | SSL private key file (in `/ssl/`) |
+| `whitelist` | str | `localhost,127.0.0.1,...` | IP subnets that don't need password |
+| `customUI` | list | `vuetorrent` | Alternative web UI (default/vuetorrent/qbit-matUI/qb-web/custom) |
+| `DNS_server` | str | `8.8.8.8,1.1.1.1` | Custom DNS servers |
+| `localdisks` | str | | Local drives to mount (e.g., `sda1,sdb1,MYNAS`) |
+| `networkdisks` | str | | SMB shares to mount (e.g., `//SERVER/SHARE`) |
+| `cifsusername` | str | | SMB username for network shares |
+| `cifspassword` | str | | SMB password for network shares |
+| `cifsdomain` | str | | SMB domain for network shares |
+| `openvpn_enabled` | bool | `false` | Enable OpenVPN connection |
+| `openvpn_config` | str | | OpenVPN config file name (in `/addon_configs/db21ed7f_qbittorrent/openvpn/`) |
+| `openvpn_username` | str | | OpenVPN username |
+| `openvpn_password` | str | | OpenVPN password |
+| `openvpn_alt_mode` | bool | `false` | Bind at container level instead of app level |
+| `wireguard_enabled` | bool | `false` | Enable WireGuard tunnel |
+| `wireguard_config` | str | _(empty)_ | WireGuard config file name only (for example `ABC.conf`, stored in `/addon_configs/db21ed7f_qbittorrent/wireguard/` inside the add-on) |
+| `qbit_manage` | bool | `false` | Enable qBit Manage integration |
+| `run_duration` | str | | Run duration (e.g., `12h`, `5d`) |
+| `silent` | bool | `false` | Suppress debug messages |
+
+### WireGuard Setup
+
+WireGuard configuration files must be stored in `/config/wireguard` **inside the add-on container** (on Home Assistant OS this is the add-on config share, usually `/addon_configs/<addon_slug>/wireguard/`, for example `/addon_configs/db21ed7f_qbittorrent/wireguard/`).
+Set `wireguard_config` to the **file name only** (for example `ABC.conf`, not a full path). If several `.conf` files are present, set `wireguard_config` to the file name you want to use (for example `wg0.conf`). Expose UDP port `51820` in the add-on options and forward it from your router only when your tunnel expects inbound peers (for example, site-to-site setups). Outbound-only commercial VPN providers usually do not require a mapped port. The runtime configuration now preserves both IPv4 and IPv6 entries, so you can use dual-stack WireGuard peers when your endpoint supports them.
+
+### Example Configuration
 
 ```yaml
 PGID: 0
@@ -104,28 +105,168 @@ DNS_server: "8.8.8.8,1.1.1.1"
 localdisks: "sda1,sdb1"
 networkdisks: "//192.168.1.100/downloads"
 cifsusername: "username"
-cifspassword:
+cifspassword: "password"
+openvpn_enabled: false
+wireguard_enabled: false
+```
+
+### Mounting Drives
+
+This addon supports mounting both local drives and remote SMB shares:
+
+- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+
+### Custom Scripts and Environment Variables
+
+This addon supports custom scripts and environment variables through the `addon_config` mapping:
+
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+
+## Installation
+
 ---
 
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
 
-**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Set the add-on options to your preferences
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open the webUI and adapt the software options
+
+## Integration with HA
+
+Use the [qBittorrent integration](https://www.home-assistant.io/integrations/qbittorrent/)
+
+You can use the following snippets to check and set the alternate speeds (the HA integration above is not needed for this)
+
+```bash
+shell_command:
+  toggle_torrent_speed: curl -X POST https://<YOUR HA IP>:8081/api/v2/transfer/toggleSpeedLimitsMode -k
+sensor:
+  - platform: command_line
+    name: get_torrent_speed
+    command: curl https://<YOUR HA IP>:8081/api/v2/transfer/speedLimitsMode -k
+```
+
+If you're not using the SSL option, you can skip the -k parameter and use http instead of https in the URL
+
+These lines will expose a `sensor.get_torrent_speed` that updates every 60 seconds and returns 1 if the alternate speed mode is enabled, 0 otherwise, and a `shell_command.toggle_torrent_speed` that you can call as a Service in your automations
+
+## Common issues
+
+<details>
+  <summary>### ipv6 issues with openvpn (@happycoo)</summary>
+Add this code to your .ovpn config
+
+```bash
+# don't route lan through vpn
+route 192.168.1.0 255.255.255.0 net_gateway
+
+# deactivate ipv6
+pull-filter ignore "dhcp-option DNS6"
+pull-filter ignore "tun-ipv6"
+pull-filter ignore "ifconfig-ipv6"
+```
+
+</details>
+
+<details>
+  <summary>### 100% cpu</summary>
+Delete your nova3 folder in /config and restart qbittorrent
+
+</details>
+
+<details>
+  <summary>### WireGuard connection fails</summary>
+
+- If your deployment expects inbound peers, verify that the UDP port exposed in the add-on options maps 51820/udp and is forwarded by your router. Skip this step for outbound-only commercial VPN providers.
+- Confirm that the selected configuration file in `/config/wireguard` matches the `wireguard_config` option (filename only, for example `ABC.conf`, or leave empty when only one `.conf` file is present).
+- Check the add-on logs for the detailed `wg-quick` error message printed by the startup routine.
+- Hosts missing the iptables `comment` kernel module are automatically retried without comment matches and, when available, using the legacy iptables backend. Inspect the log for messages about these fallbacks if you see iptables-restore errors.
+- Dual-stack WireGuard peers are supported. If you see ip6tables-restore errors, confirm that your host provides IPv6 firewall support or adjust your configuration to match your environment.
+- The startup scripts suppress the `net.ipv4.conf.all.src_valid_mark` sysctl failure emitted by `wg-quick` on some hosts, so persistent errors in the logs typically point to configuration or connectivity issues.
+
+</details>
+
+<details>
+  <summary>### Monitored folders (@FaliseDotCom)</summary>
+
+- go to config\addons_config\qBittorrent
+- find (or create) the file watched_folders.json
+- paste or adjust to the following:
+
+```json
+{
+  "folder/to/watch": {
+    "add_torrent_params": {
+      "category": "",
+      "content_layout": "Original",
+      "download_limit": -1,
+      "download_path": "[folder/for/INCOMPLETE_downloads]",
+      "operating_mode": "AutoManaged",
+      "ratio_limit": -2,
+      "save_path": "[folder/for/COMPLETED_downloads]",
+      "seeding_time_limit": -2,
+      "skip_checking": false,
+      "stopped": false,
+      "tags": [],
+      "upload_limit": -1,
+      "use_auto_tmm": false,
+      "use_download_path": true
+    },
+    "recursive": false
+  }
+}
+```
+
+</details>
+
+<details>
+  <summary>### nginx error code (@Nanianmichaels)</summary>
+
+> [cont-init.d] 30-nginx.sh: executing...
+> [cont-init.d] 30-nginx.sh: exited 1.
+
+Wait a couple minutes and restart addon, it could be a temporary unavailability of github
+
+### Local mount with invalid argument (@antonio1475)
+
+> [cont-init.d] 00-local_mounts.sh: executing...
+> Local Disks mounting...
+> mount: mounting /dev/sda1 on /mnt/sda1 failed: Invalid argument
+> [19:19:44] FATAL: Unable to mount local drives! Please check the name.
+> [cont-init.d] 00-local_mounts.sh: exited 0.
+
+Try to mount by putting the partition label in the "localdisks" options instead of the hardware name
+
+</details>
+
+<details>
+  <summary>### Loss of metadata fetching with openvpn after several days (@almico)</summary>
+
+Add `ping-restart 60` to your config.ovpn
+
+</details>
+
+<details>
+  <summary>### Downloads info are empty on small scale window (@aviadlevy)</summary>
+
+When my window size width is lower than 960 pixels my downloads are empty.
+Solution is to reset the Vuetorrent settings.
+
+</details>
+
+## Support
+
+Create an issue on github, or ask on the [home assistant thread](https://community.home-assistant.io/t/home-assistant-addon-qbittorrent/279247)
 
 ---
 
-## 📱 关注我
+![illustration](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/qbittorrent/illustration.png)
 
-扫描下面二维码，关注我。有需要可以随时给我留言：
-
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
-
-## ☕ 赞助支持
-
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
-
-感谢您的支持与鼓励！
