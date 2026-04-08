@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：获取GRDF数据并将数据发布到MQTT代理'
+description: '[老王杂谈说]：获取GRDF数据并发布数据到MQTT代理'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -88,4 +88,4 @@ services:
 slug: gazpar2mqtt
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "0.2.4"
+version: "0.2.5"

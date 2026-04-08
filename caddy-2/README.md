@@ -1,15 +1,16 @@
-# Home Assistant App: Caddy 2
+# Home Assistant App：Caddy 2
 
-Caddy 2 是一款现代、强大、企业级的开源 Web 服务器，专为简洁性、安全性和灵活性而设计。
-它独特之处在于默认即可自动管理 HTTPS，无需任何复杂的配置。
+Caddy 2 是一款现代化、功能强大的企业级开源 web 服务器，旨在实现简单、安全和灵活。它独特之处在于默认情况下可以自动管理 HTTPS，无需任何复杂的配置。
 
 ## 关于
 
-Caddy 2 通过自动化运行 Web 服务所涉及的许多基础设施管理任务，简化并增强了您的 Home Assistant 体验。
-凭借内置的 HTTPS 管理功能、反向代理能力和模块化扩展性，Caddy 可以处理许多关键任务。
+Caddy 2 通过自动化运行 web 服务所需的大部分基础设施管理，简化并增强了您的 Home Assistant 体验。凭借内置的 HTTPS 管理、反向代理功能以及模块化可扩展性，Caddy 可以处理许多关键任务。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

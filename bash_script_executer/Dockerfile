@@ -4,16 +4,10 @@ FROM ${BUILD_FROM}
 ARG BUILD_DATE="unknown"
 
 # hadolint ignore=DL3018
-
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="2.2.1"
-ENV ADDON_NAME="Bash Script Executer"
-ENV ADDON_SLUG="bashscriptexecuter"
-ENV ADDON_UNSUPPORTED="false"
-
 RUN apk --no-cache -u add libssl3 libcrypto3 busybox-extras curl grep coreutils sed xmlstarlet bash procps
 
 # Copy data for add-on
+COPY integration /integration
 COPY run.sh /
 
 # Health check - verify run.sh process is running
@@ -27,7 +21,7 @@ CMD [ "/run.sh" ]
 LABEL \
     org.opencontainers.image.title="Bash Script Executer" \
     org.opencontainers.image.description="Execute your own bash scripts inside this Homeassistant Addon environment." \
-    org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons" \
+    org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
     org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/bash_script_executer" \

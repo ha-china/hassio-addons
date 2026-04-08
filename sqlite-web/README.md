@@ -1,16 +1,16 @@
-# Home Assistant Community App: SQLite Web
+# Home Assistant 社区应用：SQLite Web
 
-[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
+[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
 
-[![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
+[![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
 
-Explore your Home-Assistant database from your web browser!
+通过您的网页浏览器探索 Home-Assistant 数据库！
 
-## About
+## 关于
 
-This enables you to easily explore all tables and content that is saved in your database.
+此应用使您能够轻松地探索数据库中保存的所有表和内容。
 
-![SQLite Web screenshot][screenshot]
+![SQLite Web 截图][screenshot]
 
 [discord-shield]: https://img.shields.io/discord/330944238910963714.svg
 [discord]: https://discord.gg/c5DvZ4e
@@ -18,12 +18,15 @@ This enables you to easily explore all tables and content that is saved in your 
 [forum]: https://community.home-assistant.io/t/home-assistant-community-add-on-sqlite-web/68912?u=frenck
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v6.0.0-blue.svg
-[release]: https://github.com/hassio-addons/app-sqlite-web/tree/v6.0.0
+[release-shield]: https://img.shields.io/badge/version-v6.0.1-blue.svg
+[release]: https://github.com/hassio-addons/app-sqlite-web/tree/v6.0.1
 [screenshot]: https://github.com/hassio-addons/app-sqlite-web/raw/main/images/sample-view.png
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

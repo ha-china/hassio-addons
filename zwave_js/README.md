@@ -1,16 +1,17 @@
-# Home Assistant App: Z-Wave JS
+# Home Assistant 应用：Z-Wave JS
 
-Allow Home Assistant to talk to a Z-Wave Network via a USB Controller.
+允许 Home Assistant 通过 USB 控制器与 Z-Wave 网络通信。
 
-![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
-
+![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield]
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
-
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

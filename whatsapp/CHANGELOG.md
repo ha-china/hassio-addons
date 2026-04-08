@@ -1,5 +1,130 @@
 # Changelog
 
+## 1.4.8 (2026-03-19)
+
+### ✨ Features
+
+- new feat: sensor to display chats and group informations ([`0659b38d`](https://github.com/FaserF/hassio-addons/commit/0659b38d46d49d1df376eb740b745079bc81d4d4))
+
+### 📦 Dependencies
+
+- build(deps): bump music-metadata from 11.10.3 to 11.12.3 in /whatsapp/app in the npm_and_yarn group across 1 directory (#692) [skip-tests] ([`7856b5a2`](https://github.com/FaserF/hassio-addons/commit/7856b5a228aaa7e2221fad70f706d4d9dcfcb4be))
+
+### 🚀 Other
+
+- small qol improvements ([`b360430f`](https://github.com/FaserF/hassio-addons/commit/b360430fde43d889aeaad09f481ba0d7c682df7e))
+- small fix for polls #678 ([`dc6578fc`](https://github.com/FaserF/hassio-addons/commit/dc6578fc8a5a65868758606d21e280a206fdac06))
+- fix chats not being marked as read ([`b57815de`](https://github.com/FaserF/hassio-addons/commit/b57815de5f61df6c87d9bc41cb8b284a03105e62))
+- Improved polls fetching #678 ([`d630bdcc`](https://github.com/FaserF/hassio-addons/commit/d630bdccf9936e3c09cdc5facb48ab446b83a915))
+- improved poll handling #678 ([`258ed476`](https://github.com/FaserF/hassio-addons/commit/258ed4760894994ed0dcc7c9f15cc39ae0204f33))
+
+## 1.4.7 (2026-03-17)
+
+### ✨ Features
+
+- addon health check ([`cf3ea34e`](https://github.com/FaserF/hassio-addons/commit/cf3ea34e56c603562e09547019d9eb0787026d94))
+
+### 🚀 Other
+
+- fix node module folder not found ([`a161334e`](https://github.com/FaserF/hassio-addons/commit/a161334e1588f3199445f47973bd28158287f782))
+- Release Version 1.4.6 ([`db03032b`](https://github.com/FaserF/hassio-addons/commit/db03032b700f9c7cea86db56d5cb12da36a75ae4))
+- Revise changelog to reflect version 1.4.6 ([`f6bf85c7`](https://github.com/FaserF/hassio-addons/commit/f6bf85c712f93c3d70dae5a3c22830a8432e23c0))
+
+## 1.4.6 (2026-03-17)
+
+### 🚀 Other
+
+- Improved error handling ([`ecd218a9`](https://github.com/FaserF/hassio-addons/commit/ecd218a937dac8dd1d78eb46c03ad7bd839ebb3f))
+- fix index crashing #687 ([`085e87c1`](https://github.com/FaserF/hassio-addons/commit/085e87c15e13b962184202a0d288a5dd2a2b15e6))
+- ⬆️ Update dependency uvicorn to v0.42.0 [skip-tests] ([`e8b29f28`](https://github.com/FaserF/hassio-addons/commit/e8b29f283a78a88b5c76f115ce64c3da3868c491))
+
+## 1.4.5 (2026-03-16)
+
+### 🐛 Bug Fixes
+
+- mDNS stealth mode persistence and QR code staleness ([`b695b181`](https://github.com/FaserF/hassio-addons/commit/b695b1815683c5eb7646fb2a5ff78caab983639f))
+- mDNS discovery cleanup and slug-based naming ([`bcd890bd`](https://github.com/FaserF/hassio-addons/commit/bcd890bded43445d8abbe8c779ab424df66cb5c4))
+- poll vote decryption and message store persistence ([`3b589369`](https://github.com/FaserF/hassio-addons/commit/3b589369a1c182f289b1a3f933bfc4877bc8047a))
+
+### 📦 Dependencies
+
+- ⬆️ Update dependency link-preview-js to v4 [skip-tests] (#682) [skip-tests] ([`9ad7b650`](https://github.com/FaserF/hassio-addons/commit/9ad7b650ae1a00e6c343af80ffb3fb1c64556866))
+
+## 1.4.4 (2026-03-16)
+
+### 📦 Dependencies
+
+- Update README.md ([`e87a0ec7`](https://github.com/FaserF/hassio-addons/commit/e87a0ec727012f813bbe42973d88c5f97910f5c4))
+- ⬆️ Update dependency lru-cache to v11.2.7 [skip-tests] ([`febdf11f`](https://github.com/FaserF/hassio-addons/commit/febdf11f4f077bb7b4aa8e23bfb7175135e2c23b))
+
+### 🚀 Other
+
+- fixed api limit throttling #674 ([`8dfd3687`](https://github.com/FaserF/hassio-addons/commit/8dfd3687f69455f50c47e50523ff0ddc823834a7))
+- secure first setup ([`632c2dd1`](https://github.com/FaserF/hassio-addons/commit/632c2dd1cb59ebcbb55ce49033d5e7b869436481))
+- change baseMDNSName ([`c94f8ccb`](https://github.com/FaserF/hassio-addons/commit/c94f8ccbdbcbfd7ec48a0280d5b0d615df8b50fa))
+- finally fully fix ha integration auto discovery ([`c6643541`](https://github.com/FaserF/hassio-addons/commit/c664354167064eda4237864804b3d30630702ce6))
+- prefil app secret secretly on first setup ([`97bcb06c`](https://github.com/FaserF/hassio-addons/commit/97bcb06c2b52be0c4a185deb8f6af281b7baa350))
+- fix ha integration auto discovery ([`fcac8635`](https://github.com/FaserF/hassio-addons/commit/fcac86358eb64bb00e5645f9cdc679523ca00f75))
+- submit reconnect reason in admin message ([`34f4eafa`](https://github.com/FaserF/hassio-addons/commit/34f4eafa4194a3d92a3f24a7feae199850c17f3e))
+- improved requests from HA bypassing ([`f81b6ab6`](https://github.com/FaserF/hassio-addons/commit/f81b6ab6c38232f1aa88e37ff928813f66c6b377))
+- fixed reacting to polls #678 ([`02f7b3bc`](https://github.com/FaserF/hassio-addons/commit/02f7b3bce1ee02612e739a11caba28349e918bef))
+- fixed trust proxy usage ([`58f158f8`](https://github.com/FaserF/hassio-addons/commit/58f158f895096886d0f7dd47e91475d6ca19f20f))
+
+## 1.4.3 (2026-03-14)
+
+### 📦 Dependencies
+
+- ⬆️ Update dependency globals to v17.4.0 [skip-tests] ([`7f849b46`](https://github.com/FaserF/hassio-addons/commit/7f849b46f81550326e7d9579f1494588029ca2a1))
+- ⬆️ Update dependency fastapi to v0.135.1 [skip-tests] ([`2e785b19`](https://github.com/FaserF/hassio-addons/commit/2e785b198a961c2ecb2e1eeb4336981954f05b82))
+
+### 🚀 Other
+
+- use trust proxy ([`ee0563c4`](https://github.com/FaserF/hassio-addons/commit/ee0563c483227cff436012bd9fbb80f8348a88f9))
+- fix request denied for too many requests #674 ([`549407c6`](https://github.com/FaserF/hassio-addons/commit/549407c6484f6ceaf08d694d67c589e59273f41e))
+
+## 1.4.2 (2026-03-14)
+
+### 📦 Dependencies
+
+- build(deps): bump file-type ([`3722ea7b`](https://github.com/FaserF/hassio-addons/commit/3722ea7b49f0af93417a379bd0717547e8c15433))
+
+## 1.4.1 (2026-03-13)
+
+### 📦 Dependencies
+
+- Update events.js ([`2d379776`](https://github.com/FaserF/hassio-addons/commit/2d37977639682d87adfbcd7bba3dc35f3675034a))
+- Update index.js ([`ea9a0aa9`](https://github.com/FaserF/hassio-addons/commit/ea9a0aa98cea774c693add6539fbc116f9f2ebe1))
+- ⬆️ Update dependency eslint to v10.0.3 [skip-tests] ([`9600b912`](https://github.com/FaserF/hassio-addons/commit/9600b912eaf60cbcc4d0e1e5d3557e3a5dd5bd2b))
+
+### 🚀 Other
+
+- add missing translations & linter fixes ([`125eb268`](https://github.com/FaserF/hassio-addons/commit/125eb2687c6089ba0ef09cbcafd6b217442f24b3))
+- fix token generation ([`5e19f834`](https://github.com/FaserF/hassio-addons/commit/5e19f834d29526c5db89ff0344ddf7c62d91d9bd))
+- small fixes ([`ede97d87`](https://github.com/FaserF/hassio-addons/commit/ede97d87442adae5d68fdae6aab93ddec87f0499))
+- redact username in webhook ([`55e77fa6`](https://github.com/FaserF/hassio-addons/commit/55e77fa6da8765e760e1730ac31b85622e368171))
+- improved options handling ([`aa4c3f25`](https://github.com/FaserF/hassio-addons/commit/aa4c3f25e57c90f05172b755a831594ac636142e))
+- refactor index.js for maintainability ([`afe87306`](https://github.com/FaserF/hassio-addons/commit/afe87306fed869096f4881cc04d9d41ab3ac48eb))
+- Improved bot & admin messages #671 ([`ef24ff09`](https://github.com/FaserF/hassio-addons/commit/ef24ff099e99a63c821687a975c9dcc41779a5af))
+- add dark mode support for dashboard ([`2b84f0b2`](https://github.com/FaserF/hassio-addons/commit/2b84f0b21f8a14b4e3209b72a4035b723d32be6e))
+- small fix ([`913267d0`](https://github.com/FaserF/hassio-addons/commit/913267d07ee175c3b090de681ed4d7a0ac3ce6d6))
+
+## 1.4.0 (2026-03-12)
+
+### ✨ Features
+
+- **Admin Status Notifications**: Automated WhatsApp alerts for connectivity loss, Home Assistant restarts, and successful updates (Core, Addon, Integration).
+- **Persistent State Tracking**: Stores system versions and connection timestamps to provide accurate downtime and update reports.
+- **Smart Welcome Message**: Role-aware greeting for new users (Admin vs Standard) on first contact.
+- **Admin Command Suite**: Expanded `ha-app-*` commands for diagnostics, logs, and status checks.
+- **Rate Limiting**: Improved rolling-window rate limits for status commands for non-admin users.
+
+### 🛠️ Fixes & Improvements
+
+- **Admin Authentication**: Fixed issues with `ADMIN_NUMBERS` environment variable loading and number normalization.
+- **Web UI**: Corrected "Raw Backend Logs" button link for better Ingress compatibility.
+- **Dependencies**: Added `link-preview-js` to resolve Baileys preview generation errors.
+- **Performance**: Optimized memory usage and connection stability.
+
 ## 1.3.2 (2026-02-24)
 
 ### 📦 Dependencies

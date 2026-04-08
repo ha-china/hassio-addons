@@ -4,9 +4,9 @@
 
 ![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield] ![支持 armv7 架构][armv7-shield]
 
-为网络摄像头提供实时本地对象检测的NVR。
+NVR 具有实时本地目标检测功能的 IP 网络摄像头。
 
-您必须在您的扩展配置文件夹中创建一个名为`config.yml`的配置文件。
+您必须在您的扩展配置文件夹中创建一个名为 `config.yml` 的配置文件。
 
 [文档](https://docs.frigate.video)
 

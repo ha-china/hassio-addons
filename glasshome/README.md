@@ -1,54 +1,56 @@
-# GlassHome Dashboard
+# GlassHome 仪表板
 
-Modern, customizable dashboard for Home Assistant with beautiful glassmorphic design.
+为 Home Assistant 提供的现代化、可定制的仪表板，拥有美丽的玻璃形态设计。
 
-## Disclaimer:
-This is a BETA version. It might not work if you have a very custom setup. I don't expect it to crush and burn, as I tested thoroughly on my setup, but please proceed with caution and backup your Home Assistant!
+## 免责声明：
+这是一个测试版本。如果你的设置非常定制化，它可能无法正常工作。我在自己的设置上进行了彻底测试，所以我不期望它会崩溃或损坏，但请谨慎操作，并备份你的 Home Assistant！
 
-## Installation
+## 安装
 
-1. Add this repository to your Home Assistant:
-   - Settings → Add-ons → Add-on Store
-   - Click ⋮ (menu) → Repositories
-   - Add: `https://github.com/IhsenBouallegue/glasshome-addon`
+1. 将此存储库添加到你的 Home Assistant 中：
+   - 设置 → 扩展 → 扩展商店
+   - 点击 ⋮（菜单）→ 存储库
+   - 添加：`https://github.com/glasshome/glasshome-addon`
 
-2. Install "GlassHome Dashboard" from the add-on store
+2. 从扩展商店安装 "GlassHome 仪表板"
 
-3. Start the add-on
+3. 启动扩展
 
-## Features
+## 功能
 
-- 🎨 Beautiful glassmorphic design with dark mode 
-- 🖱️ Drag-and-drop widget customization
-- 🏠 Area-based organization
-- 📊 Multiple widget types:
-  - Lights with color control
-  - Climate controls
-  - Sensors with charts
-  - Cameras with live streams
-  - Weather
-  - Scenes
-  - Battery monitoring
-- 💾 Persistent dashboard configurations
-- 🔐 Secure authentication
+- 🎨 漂亮的玻璃形态设计，支持深色模式
+- 🖱️ 拖放小部件自定义
+- 🏠 基于区域的组织
+- 📊 多种小部件类型：
+  - 带颜色控制的灯光
+  - 气候控制
+  - 带图表的传感器
+  - 带直播流的摄像头
+  - 天气
+  - 场景
+  - 电池监控
+- 💾 持久化的仪表板配置
+- 🔐 安全认证
 
-## Accessing the Dashboard
+## 访问仪表板
 
-After starting the add-on, open your browser and go to:
-- `http://homeassistant.local:3123` (if using .local domain)
-- `http://YOUR_HA_IP:3123` (replace with your HA IP address)
+启动扩展后，打开你的浏览器并访问：
+- `http://homeassistant.local:3123`（如果使用 .local 域名）
+- `http://YOUR_HA_IP:3123`（用你的 HA IP 地址替换）
 
-## Configuration
+## 配置
 
-Currently no configuration options needed - works out of the box!
+目前无需配置选项 - 直接使用！
 
-## Support
+## 支持
 
-For issues or feature requests, visit the [discord channel](https://discord.com/channels/1428131437265289248/1428167573094010930)
-
+对于问题或功能请求，请访问 [discord 频道](https://discord.com/channels/1428131437265289248/1428167573094010930)
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

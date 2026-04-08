@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：filebrowser 提供了指定目录下的文件管理界面，可用来上传、删除、预览、重命名和编辑文件。'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -121,4 +121,4 @@ schema:
 slug: filebrowser
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "2.61.0"
+version: "2.63.1"

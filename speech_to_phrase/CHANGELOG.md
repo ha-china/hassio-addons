@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.4.3
+
+- Fix for empty names in HA 2026.4
+
+## 1.4.2
+
+- Enhance Spanish speech recognition phrases
+- Allow plural usage when asking about cover and lock states
+- Fix formatting in Docker run command example
+- Enhance German speech recognition phrases
+
 ## 1.4.1
 
 - More robust parsing of `ask_question` answers from Home Assistant

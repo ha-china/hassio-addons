@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM ghcr.nju.edu.cn/plankanban/planka:1.26.3 AS planka
+FROM ghcr.nju.edu.cn/plankanban/planka:2.1.0 AS planka
 
 FROM ${BUILD_FROM}
 
@@ -11,7 +11,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3013
 
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="1.1.1"
+ENV ADDON_VERSION="1.2.0"
 ENV ADDON_NAME="Planka"
 ENV ADDON_SLUG="planka"
 ENV ADDON_UNSUPPORTED="false"
@@ -28,6 +28,7 @@ RUN \
         curl \
         su-exec \
         openssl \
+        squid \
     && pip3 install --no-cache-dir --break-system-packages setuptools
 
 # Copy Planka
@@ -47,7 +48,7 @@ RUN \
 LABEL \
     org.opencontainers.image.title="Planka" \
     org.opencontainers.image.description="The elegant open source project tracking tool" \
-    org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons" \
+    org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
     org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/planka" \
@@ -57,4 +58,8 @@ LABEL \
 
 # Healthcheck
 HEALTHCHECK \
+    --interval=30s \
+    --timeout=30s \
+    --start-period=30s \
+    --retries=3 \
     CMD curl --fail http://127.0.0.1:1337 || exit 1

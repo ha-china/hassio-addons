@@ -1,10 +1,36 @@
 # Changelog
 
+## 1.3.0 (2026-03-20)
+
+### 🐛 Bug Fixes
+
+- resolve link validation 404s and typos ([`5c06b173`](https://github.com/FaserF/hassio-addons/commit/5c06b17353ff711a1c9f526ac51f4f8631c76007))
+
+### 📦 Dependencies
+
+- update home-assistant.io/apps/ to /apps/ and remove ignore ([`35318ec8`](https://github.com/FaserF/hassio-addons/commit/35318ec8f6d1c5be470aace8f13a1ac617fd9b85))
+- ⬆️ Update ghcr.io/plankanban/planka Docker tag to v2 [skip-tests] ([`5097daee`](https://github.com/FaserF/hassio-addons/commit/5097daeeb33dc5a00d18233e10fe0df2179810bc))
+- Update README information with support info ([`c70fff01`](https://github.com/FaserF/hassio-addons/commit/c70fff01378d531e3dffc35dc2bf94b49237f541))
+
+### 🚀 Other
+
+- addon startup fixes & improvements ([`7ed60f8c`](https://github.com/FaserF/hassio-addons/commit/7ed60f8c8fbfb387fc602398e191ea2846ade746))
+- fix planka addon start ([`ef5823eb`](https://github.com/FaserF/hassio-addons/commit/ef5823eb08a0716c5c4f5feb9e38a94dfe523b7e))
+- planka startup fixes ([`3cb9ce90`](https://github.com/FaserF/hassio-addons/commit/3cb9ce90218abb477c467a8c5ff3fc7407249edb))
+- handle missing folder preloaded-favicons ([`e2a13a71`](https://github.com/FaserF/hassio-addons/commit/e2a13a711b19832812e3983aa670133ba2e42c3e))
+- fix Planka addon start #647 ([`5ca5e88e`](https://github.com/FaserF/hassio-addons/commit/5ca5e88e87049a5d0f7bf7a83a3f6f3d133f4450))
+- security & docs improvements codeql ([`a4a06f09`](https://github.com/FaserF/hassio-addons/commit/a4a06f09bab3956a81fe1dc81bf3ce991e3c83d1))
+- small fixes & linter improvements ([`33150324`](https://github.com/FaserF/hassio-addons/commit/331503241aa11ccfb398a6cbf5b850aeec084ef2))
+- replace basio addon with bashio apps ([`2caaf920`](https://github.com/FaserF/hassio-addons/commit/2caaf920939dbb61243d2ed1e8f63518a3199aa9))
+- Linter fixes ([`5fa8fca4`](https://github.com/FaserF/hassio-addons/commit/5fa8fca4bfabea6d9334340f98ff57bb89ea9ed5))
+- Follow new Homeassistant Apps naming ([`a63066b1`](https://github.com/FaserF/hassio-addons/commit/a63066b111f275f9b359bf0e1cea3c49a14fb31c))
+- Link fixes ([`80a29ecd`](https://github.com/FaserF/hassio-addons/commit/80a29ecd14061b993f8fcde6d8c1865d15cce14e))
+
 ## 1.2.0 (2026-01-29)
 
 ### 📦 Dependencies
 
-- fix addon startups after base image update 20.0.0 (#617) [skip-tests] ([`04c90f6d`](https://github.com/FaserF/hassio-addons/commit/04c90f6d2ea1a75af00b8f6d80ed170271f144d1))
+- fix App startups after base image update 20.0.0 (#617) [skip-tests] ([`04c90f6d`](https://github.com/FaserF/hassio-addons/commit/04c90f6d2ea1a75af00b8f6d80ed170271f144d1))
 - ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v[20.0.1](https://github.com/hassio-addons/addon-base/releases/tag/20.0.1) [skip-tests] (#618) ([`62a7ed57`](https://github.com/FaserF/hassio-addons/commit/62a7ed5794451961add1f8ec065f5cbe863d1623))
 - ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v20 [skip-tests] (#616) ([`09e8340b`](https://github.com/FaserF/hassio-addons/commit/09e8340b06c4263037fab6cf6d90fc913c7f99d5))
 
@@ -15,14 +41,14 @@
 ### 🚀 Other
 
 - fix log level var ([`7f85096a`](https://github.com/FaserF/hassio-addons/commit/7f85096a73b11ea48fa87150def32425ea1e4807))
-- standardized log level handling between addons ([`cf4bc264`](https://github.com/FaserF/hassio-addons/commit/cf4bc264edca7956fb4ae13ae76b22c8c5afafac))
+- standardized log level handling between Apps ([`cf4bc264`](https://github.com/FaserF/hassio-addons/commit/cf4bc264edca7956fb4ae13ae76b22c8c5afafac))
 
 ## 1.1.1 (2026-01-14)
 
 ### 🚀 Other
 
-- use addon name in data path ([`77dfa357`](https://github.com/FaserF/hassio-addons/commit/77dfa3575c7d7ed6bfac1cb2181fe0025a937f60))
-- fixed logo in Homeassistant Addon UI ([`f053f7b0`](https://github.com/FaserF/hassio-addons/commit/f053f7b0b0c43df32e122ba054ba6118379ab959))
+- use App name in data path ([`77dfa357`](https://github.com/FaserF/hassio-addons/commit/77dfa3575c7d7ed6bfac1cb2181fe0025a937f60))
+- fixed logo in Homeassistant App UI ([`f053f7b0`](https://github.com/FaserF/hassio-addons/commit/f053f7b0b0c43df32e122ba054ba6118379ab959))
 - small fixes & improvements ([`ce7a62e4`](https://github.com/FaserF/hassio-addons/commit/ce7a62e43eb50c87458588df6581b8ed3a741c9d))
 - add planka default user ([`1e49d518`](https://github.com/FaserF/hassio-addons/commit/1e49d518d34aea4736d3fabbe4602b96e3ba812e))
 - handle empty log level variable ([`568bbe5b`](https://github.com/FaserF/hassio-addons/commit/568bbe5bce289563264d87f55e8da35b9d508041))
@@ -45,7 +71,7 @@
 - Improved container logging and diagnostics ([`449ec11b`](https://github.com/FaserF/hassio-addons/commit/449ec11b22864f8e55c35d9ed01e5b373b1d401e))
 - Enhanced s6-overlay service startup sequence ([`3f17abce`](https://github.com/FaserF/hassio-addons/commit/3f17abce25eaf5099af9685ef7eba2a0eb00f205))
 - Refined error handling in run.sh ([`c04e360e`](https://github.com/FaserF/hassio-addons/commit/c04e360e3bf7530edd36673138d448fb056378ad))
-- Standardized addon configuration handling ([`c381a231`](https://github.com/FaserF/hassio-addons/commit/c381a231cae101aeabf1137efe837ed6cdb28ab3))
+- Standardized App configuration handling ([`c381a231`](https://github.com/FaserF/hassio-addons/commit/c381a231cae101aeabf1137efe837ed6cdb28ab3))
 - Minor configuration and metadata fixes ([`5725dfae`](https://github.com/FaserF/hassio-addons/commit/5725dfae4bc9502cc341749612b03a88c05d53b9))
 - Improved Dockerfile maintainability ([`e0b5c15b`](https://github.com/FaserF/hassio-addons/commit/e0b5c15b8023b8aef42b24f77f42bd8d64b0e00b))
 - Repository structure cleanup ([`8d72281f`](https://github.com/FaserF/hassio-addons/commit/8d72281f6ceff1ef2f86b1a23c64c8f073519b6b))
@@ -71,7 +97,7 @@
 
 ### 📌 Release Note
 
-- general addon improvements & startup fixes
+- general App improvements & startup fixes
 
 ## 0.1.0
 

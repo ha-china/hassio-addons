@@ -2,6 +2,71 @@
 
 All notable changes to the OpenClaw Assistant Home Assistant Add-on will be documented in this file.
 
+## [0.5.66] - 2026-04-04
+
+### Fixed
+- **"Open Gateway Web UI" button missing token on first boot / post-onboard** (issue #102): the gateway token was read once at startup, before `openclaw onboard` had a chance to write `openclaw.json`. The landing page now re-renders automatically in the background (up to ~2 min after startup) once the token appears in `openclaw.json`, and nginx is reloaded with SIGHUP — no add-on restart required. Existing installs with a token already present are unaffected.
+
+## [0.5.65] - 2026-04-04
+
+### Changed
+- Bump OpenClaw to 2026.4.2.
+
+## [0.5.63] - 2026-03-14
+
+### Changed
+- Bump OpenClaw to 2026.3.13.
+
+## [0.5.62] - 2026-03-10
+
+### Fixed
+- **Gateway restart loop** (issue #95): `openclaw gateway run` is a thin wrapper that spawns `openclaw-gateway` as a long-running daemon then exits immediately. On self-restart (SIGUSR1 / `openclaw gateway restart`), the old daemon forks a new one and exits — the new PID is not a child of run.sh. The supervisor now uses a 3-tier daemon detection function (`find_gateway_daemon_pid`): (1) port ownership via `ss -tlnp`, (2) process title via `pgrep -f "openclaw-gateway"`, (3) `/proc/*/cmdline` scan for "openclaw" (catches the daemon immediately after fork, even before process.title or port bind — critical on Pi/eMMC where initialization takes 20-30 s). Detection retries up to 10 times with a final port-occupancy guard before any supervisor-initiated restart. Non-child PIDs are monitored with `kill -0` polling instead of `wait`. The loopback relay (tailnet mode) is stopped/restarted around gateway restarts to prevent port conflicts.
+
+## [0.5.60] - 2026-03-10
+
+### Fixed
+- **Session lock cleanup ignored non-default agents**: `cleanup_session_locks` was hardcoded to `agents/main/sessions`, skipping stale locks for any agent with a custom `forcedAgentId`. Stale locks could block the gateway from opening sessions for those agents, causing silent fallback to `main`. Cleanup now scans all `agents/*/sessions/` directories.
+
+## [0.5.59] - 2026-03-10
+
+- **Remote mode URL not propagated** (issue #93): `start_openclaw_runtime` was reading `gateway.remote.url` back via `openclaw config get`, which can time out (2 s limit at startup) or return an empty/redacted result. The function now uses `$GATEWAY_REMOTE_URL` directly from the already-parsed add-on options, which is the same value the config helper writes to `openclaw.json`.
+- **Terminal CLI unreachable in tailnet mode** (issue #90): when `gateway_bind_mode=tailnet` (or `access_mode=tailnet_https`), the gateway binds only to the Tailscale IP. The local CLI always connects via `ws://127.0.0.1:PORT`, causing "Gateway not running" inside the add-on terminal. A lightweight loopback relay (Node.js) is now started automatically to forward `127.0.0.1:PORT → TAILSCALE_IP:PORT`, making all terminal CLI commands work normally. Token auth is still enforced end-to-end by the gateway.
+- **Session lock cleanup ignored non-default agents**: `cleanup_session_locks` was hardcoded to `agents/main/sessions`, skipping stale locks for any agent with a custom `forcedAgentId`. Stale locks could block the gateway from opening sessions for those agents, causing silent fallback to `main`. Cleanup now scans all `agents/*/sessions/` directories.
+
+### Added
+- **MCP auto-configuration for Home Assistant**: new option `auto_configure_mcp` (default: `false`). When enabled and `homeassistant_token` is set, the add-on automatically registers Home Assistant as an MCP server (`mcporter config add HA ...`) on startup. Auto-detects the HA API URL (supervisor proxy or localhost:8123). Re-configures only when the token changes.
+- Landing page: new collapsible **MCP setup** section with automatic and manual setup instructions, post-upgrade refresh command, and model tips.
+- DOCS: new **MCP Integration** guide covering automatic/manual setup, verification, model requirements, and troubleshooting.
+
+### Changed
+- Bump OpenClaw to 2026.3.9.
+
+## [0.5.58] - 2026-03-08
+
+### Changed
+- Bump OpenClaw to 2026.3.7.
+
+## [0.5.57] - 2026-03-07
+
+### Added
+- New add-on option `controlui_disable_device_auth` (default: `true`) to control whether `gateway.controlUi.dangerouslyDisableDeviceAuth` is enabled in `lan_https` mode.
+
+### Changed
+- `set-control-ui-origins` helper now accepts an explicit device-auth toggle and applies `dangerouslyDisableDeviceAuth` accordingly instead of forcing it on.
+- `run.sh` now forwards the add-on option to the config helper.
+- Control UI guidance text and docs were updated to explain when device-pairing bypass should be ON vs OFF.
+
+### Fixed
+- Docker build stability: replaced NodeSource `setup_22.x | bash` installer with explicit keyring + apt source configuration for Node.js 22, avoiding intermittent `apt-get install nodejs` exit code 100 failures.
+
+### Translations
+- Added `controlui_disable_device_auth` labels/descriptions to: `en`, `bg`, `de`, `es`, `pl`, `pt-BR`.
+
+## [0.5.55] - 2026-03-04
+
+### Changed
+- Bump OpenClaw to 2026.3.2.
+
 ## [0.5.54] - 2026-02-25
 
 ### Changed

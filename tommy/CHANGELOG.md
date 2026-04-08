@@ -1,5 +1,104 @@
 # TOMMY
 
+## 2.10.5
+
+### Minor Changes
+- Bug fixes
+
+## 2.10.4
+
+### Minor Changes
+- UI improvements
+
+## 2.10.3
+
+### Minor Changes
+- Add instructions to error when a mesh network is detected.
+
+## 2.10.2
+
+### Minor Changes
+- Fixed a bug causing MQTT to flood logs after activating license
+- UI improvements
+
+## 2.10.1
+
+### Minor Changes
+- Bug fixes
+
+## 2.10.0
+
+### Major Changes
+- Allow disabling HA integration through environment variable
+
+## 2.9.0
+
+### Major Changes
+- Allow disabling Matter through environment variable
+
+## 2.8.1
+
+### Minor Changes
+- Fixed an issue with http_client being undefined in ESPHome 2026.2.4
+- Fixed a reachability status bug
+- Removed redundant logging of unknown udp packets
+
+## 2.8.0
+
+### Major Changes
+- Performance improvements
+
+### Minor Changes
+- Improvements to Online Coordination 
+- UI improvements
+
+## 2.7.1
+
+### Minor Changes
+- Minor UI improvements
+
+## 2.7.0
+
+### Major Changes
+- Added a new privacy toggle menu
+- Added a new Coordination Service discovery mode
+- Improvements to mDNS discovery mode
+
+### Minor Changes
+- OTA now uses a rotating self signed SSL certificate
+- Max TX power is now shown in the device info
+- Minor UI improvements
+
+## 2.6.4
+
+### Minor Changes
+- Minor UI improvements
+
+## 2.6.3
+
+### Minor Changes
+- Fixed an issue causing UDP connection from server to device to fail in some cases
+
+## 2.6.2
+
+### Minor Changes
+- Improved error handling during heartbeat parsing
+
+## 2.6.1
+
+### Minor Changes
+- Fixed a bug causing devices to stay disconnected in some cases
+
+## 2.6.0
+
+### Major Changes
+- Added the option to reconfigure devices from the dashboard without needing a reflash
+
+### Minor Changes
+- A warning is now shown when the server can't reach the device
+- Fixed a bug causing some devices not to be discovered
+- Minor UI fixes
+
 ## 2.5.0
 
 ### Major Changes

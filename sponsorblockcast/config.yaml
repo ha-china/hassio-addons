@@ -1,9 +1,7 @@
 arch:
   - aarch64
   - amd64
-  - armv7
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：跳过所有本地Google Cast设备上的YouTube广告和赞助'
+description: '[老王杂谈说]：跳过所有本地 Google Cast 设备上的 YouTube 广告和赞助'
 environment: {}
 host_network: true
 image: ghcr.nju.edu.cn/alexbelgium/sponsorblockcast-{arch}
@@ -12,8 +10,12 @@ map:
   - addon_config:rw
 name: Castsponsorskip
 options:
+  env_vars: []
   CSS_CATEGORIES: sponsor, intro, outro, selfpromo
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   CSS_CATEGORIES: str
   CSS_DISCOVER_INTERVAL: str?
   CSS_MUTE_ADS: bool?
@@ -23,4 +25,4 @@ schema:
 slug: sponsorblockcast
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/sponsorblockcast
-version: 0.8.2
+version: "0.8.3"

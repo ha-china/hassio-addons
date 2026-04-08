@@ -1,7 +1,7 @@
 name: OpenClaw Assistant
-version: "0.5.55"
+version: "0.5.66"
 slug: openclaw_assistant
-description: '[老王杂谈说]：将 OpenClaw 助手 (OpenClaw 兼容) 作为 Home Assistant 附加组件运行。'
+description: '[老王杂谈说]：将 OpenClaw 助手（OpenClaw 兼容）作为 Home Assistant 附加组件运行。'
 url: https://ghfast.top/github.com/techartdev/OpenClawHomeAssistant
 arch:
   - amd64
@@ -82,6 +82,10 @@ options:
   # TLS certificate SAN so the cert is valid for custom domains.
   # Example: "https://ha.example.com:8443,capacitor://localhost"
   gateway_additional_allowed_origins: ""
+  # In lan_https mode, disable per-device Control UI auth ceremony.
+  # Default true (recommended) to avoid interactive pairing error 1008 on LAN.
+  # Set false only if you explicitly want strict per-device approvals.
+  controlui_disable_device_auth: true
   # Enable OpenAI-compatible Chat Completions API endpoint
   # When enabled, OpenClaw can be used as a conversation agent in HA Assist pipeline
   # via Extended OpenAI Conversation (HACS) or any OpenAI-compatible client
@@ -106,6 +110,10 @@ options:
   # (e.g. PATH, HOME, NODE_OPTIONS, NODE_PATH, OPENCLAW_*, proxy vars).
   # Limits: max 50 variables, max key length 255 chars, max value length 10000 chars
   gateway_env_vars: []
+  # Auto-configure MCP (Model Context Protocol) for Home Assistant.
+  # When enabled and homeassistant_token is set, automatically registers HA as an
+  # MCP server in OpenClaw so the AI can control Home Assistant entities/services.
+  auto_configure_mcp: false
 schema:
   timezone: str
   enable_terminal: bool?
@@ -126,9 +134,11 @@ schema:
   gateway_auth_mode: list(token|trusted-proxy)?
   gateway_trusted_proxies: str?
   gateway_additional_allowed_origins: str?
+  controlui_disable_device_auth: bool?
   enable_openai_api: bool?
   force_ipv4_dns: bool?
   gateway_env_vars:
     - name: "match(^[A-Z_][A-Z0-9_]*$)"
       value: str
   nginx_log_level: list(full|minimal)?
+  auto_configure_mcp: bool?

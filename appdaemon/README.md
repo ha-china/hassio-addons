@@ -1,23 +1,20 @@
-# Home Assistant Community App: AppDaemon
+# Home Assistant 社区应用：AppDaemon
 
-[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
+[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
 
-[![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
+[![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
 
-[![Sponsor Frenck via GitHub Sponsors][github-sponsors-shield]][github-sponsors]
+[![通过 GitHub Sponsors 赞助 Frenck][github-sponsors-shield]][github-sponsors]
 
-[![Support Frenck on Patreon][patreon-shield]][patreon]
+[![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
 
-Python Apps and HADashboard for Home Assistant
+Home Assistant 的 Python 应用和 HADashboard
 
-## About
+## 关于
 
-[AppDaemon][appdaemon] is a loosely coupled, multithreaded, sandboxed Python
-execution environment for writing automation apps for Home Assistant home
-automation software. It also provides a configurable dashboard (HADashboard)
-suitable for wall mounted tablets.
+[AppDaemon][appdaemon] 是一个松散耦合的、多线程的、沙盒化的 Python 执行环境，用于编写 Home Assistant 家居自动化软件的自动化应用。它还提供了一个可配置的仪表板（HADashboard），适用于挂在墙上的平板电脑。
 
-![HADashboard screenshot][screenshot]
+![HADashboard 截图][screenshot]
 
 [appdaemon]: https://appdaemon.readthedocs.io
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
@@ -30,12 +27,15 @@ suitable for wall mounted tablets.
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.18.1-blue.svg
-[release]: https://github.com/hassio-addons/app-appdaemon/tree/v0.18.1
+[release-shield]: https://img.shields.io/badge/version-v0.18.2-blue.svg
+[release]: https://github.com/hassio-addons/app-appdaemon/tree/v0.18.2
 [screenshot]: https://github.com/hassio-addons/app-appdaemon/raw/main/images/screenshot.png
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

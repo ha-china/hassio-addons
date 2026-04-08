@@ -1,9 +1,9 @@
 ## Changes in this version
 
-### 🚀 Enhancements
+### 📚 Documentation
 
-- ✨ Allow to customize `STDATADIR` @salim-b ([#23](https://github.com/Poeschl-HomeAssistant-Addons/syncthing/pull/23))
+- 📝 Remove obsolete insecure admin access note @salim-b ([#32](https://github.com/Poeschl-HomeAssistant-Addons/syncthing/pull/32))
 
 ### ⬆️ Dependency updates
 
-- ⬆️ Update syncthing to 2.0.14-r0 @salim-b ([#31](https://github.com/Poeschl-HomeAssistant-Addons/syncthing/pull/31))
+- ⬆️ Update syncthing to 2.0.15-r0 @salim-b ([#33](https://github.com/Poeschl-HomeAssistant-Addons/syncthing/pull/33))

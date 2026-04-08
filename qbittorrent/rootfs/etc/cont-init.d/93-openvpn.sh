@@ -42,7 +42,7 @@ else
     bashio::addon.stop
 fi
 
-echo -e "${openvpn_username}\n${openvpn_password}" > "${OPENVPN_STATE_DIR}/credentials.conf"
+printf '%s\n%s\n' "${openvpn_username}" "${openvpn_password}" > "${OPENVPN_STATE_DIR}/credentials.conf"
 chmod 600 "${OPENVPN_STATE_DIR}/credentials.conf"
 
 if bashio::config.has_value "openvpn_config"; then
@@ -66,8 +66,8 @@ if [[ -z "${openvpn_config}" ]]; then
         openvpn_config='/config/openvpn/config.conf'
         bashio::log.info 'Using default OpenVPN configuration config.conf.'
     else
-        bashio::log.fatal "Multiple OpenVPN configuration files detected. Please set the 'openvpn_config' option."
-        bashio::addon.stop
+        openvpn_config="${configs[RANDOM % ${#configs[@]}]}"
+        bashio::log.info "Multiple OpenVPN configurations found. Randomly selected: ${openvpn_config##*/}."
     fi
 elif bashio::fs.file_exists "/config/openvpn/${openvpn_config}"; then
     openvpn_config="/config/openvpn/${openvpn_config}"

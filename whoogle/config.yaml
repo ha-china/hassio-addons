@@ -121,4 +121,4 @@ schema:
 slug: whoogle-search
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/whoogle
-version: "1.2.2"
+version: "1.2.3"

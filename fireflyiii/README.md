@@ -1,11 +1,11 @@
-# Home Assistant 插件：Firefly III
+# Home Assistant 插件：fireflyiii
 
-我在业余时间维护这个以及其他 Home Assistant 插件：跟进上游变更、Home Assistant 变更以及在真实硬件上进行测试都需要花费大量时间（以及一些金钱）。我经常使用大约 5-10 个我 >110 个插件中的插件，所以我安装了测试机器（并购买了一些我自身不使用的测试服务，例如 VPN），以便进行故障排除和改进插件。
+我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试需要花费大量时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我自身不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
 
 如果这个插件为您节省了时间或使您的设置更加简单，我将非常感激您的支持！
 
-[![请给我买杯咖啡][捐赠徽章]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal徽章]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![请给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
 
@@ -17,33 +17,33 @@
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[捐赠徽章]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal徽章]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_感谢所有为我仓库加星的人！要加星，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
-[![Stargazers 仓库列表 for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/fireflyiii/stats.png)
+![下载演变](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/fireflyiii/stats.png)
 
 ## 关于
 
-["Firefly III"](https://www.firefly-iii.org) 是一个（自托管的）个人财务管理器。它可以帮助您跟踪您的支出和收入，以便您能花得更少，存得更多。
+["Firefly III](https://www.firefly-iii.org) 是一个（自托管的）个人财务管理器。它可以帮助您跟踪您的支出和收入，以便您能少花钱多存钱。
 此插件基于 docker 镜像 https://hub.docker.com/r/fireflyiii/core
 
 ## 配置
 
 使用插件的 `env_vars` 选项来传递额外的环境变量（大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-WebUI 可在 <http://homeassistant:PORT> 或通过侧边栏使用入口找到。
-配置可以通过应用程序 WebUI 进行，除了以下选项之外。
+WebUI 可以在 <http://homeassistant:PORT> 或通过侧边栏使用入口找到。
+配置可以通过应用程序 WebUI 进行，除了以下选项。
 
 **⚠️ 重要提示**：在首次启动之前更改您的 `APP_KEY`！之后您将无法更改它，除非重置数据库。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|---------|------|
+|------|------|---------|-------------|
 | `APP_KEY` | str | `CHANGEME_32_CHARS_EuC5dfn3LAPzeO` | **关键**：32 位加密密钥 - 在首次运行之前更改！ |
 | `CONFIG_LOCATION` | str | `/config/addons_config/fireflyiii/config.yaml` | 额外配置文件的位置 |
 | `DB_CONNECTION` | list | `sqlite_internal` | 数据库类型（sqlite_internal/mariadb_addon/mysql/pgsql） |
@@ -52,7 +52,7 @@ WebUI 可在 <http://homeassistant:PORT> 或通过侧边栏使用入口找到。
 | `DB_DATABASE` | str | | 数据库名（对于外部数据库） |
 | `DB_USERNAME` | str | | 数据库用户名（对于外部数据库） |
 | `DB_PASSWORD` | str | | 数据库密码（对于外部数据库） |
-| `Updates` | list | | 自动更新计划（每小时/每天/每周） |
+| `Updates` | list | | 自动更新计划（每小时/每日/每周） |
 | `silent` | bool | `true` | 静默模式 - 设置为 false 以获取调试信息 |
 
 ### 示例配置
@@ -80,13 +80,13 @@ silent: false
 
 此插件的安装相当简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 supervisor 插件存储的右上角，或点击下面的按钮如果您已配置我的 HA）
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在监督器插件存储的右上角，或点击下面的按钮如果您已配置我的 HA）
    [![打开您的 Home Assistant 实例并显示具有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 点击“保存”按钮以存储您的配置。
-1. 将插件选项设置为您的偏好设置
+1. 将插件选项设置为您的偏好。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切顺利。
+1. 检查插件的日志以查看一切是否顺利。
 1. 打开 WebUI 并调整软件选项
 
 ## 支持

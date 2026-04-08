@@ -1,8 +1,8 @@
 # Home Assistant 插件：changedetection.io
 
-我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试需要花费大量时间（还有一些钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我本人不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
+我在业余时间维护这个以及其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在实际硬件上的测试需要花费很多时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了某些测试服务，如 vpn），这些服务我自己并不使用，以便调试和改进插件。
 
-如果这个插件为您节省了时间或使您的设置更加简单，我将非常感激您的支持！
+如果这个插件为您节省了时间或使您的设置更简单，我将非常感激您的支持！
 
 [![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -20,7 +20,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我仓库加星的人！要加星，请点击下面的图片，然后它将显示在右上角。谢谢！_
+_感谢所有为我的仓库点星的人！要为它点星，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://reporoster.com/stars/alexbelgium/hassio-addons)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,7 +28,7 @@ _感谢所有为我仓库加星的人！要加星，请点击下面的图片，�
 
 ## 关于
 
-[Changedetection.io](https://github.com/dgtlmoon/changedetection.io) 提供免费的、开源的网页监控、通知和变更检测。
+[Changedetection.io](https://github.com/dgtlmoon/changedetection.io) 提供免费、开源的网页监控、通知和变更检测。
 
 此插件基于 [docker 镜像](https://github.com/linuxserver/docker-changedetection.io) 来自 linuxserver.io。
 
@@ -44,14 +44,14 @@ Web UI 可在 `<your-ip>:5000` 找到，也可以通过插件页面或使用入�
 
 您可以按照以下步骤添加指向您的 Changedetection.io 实例的快捷方式：
 1. 前往 <kbd>⚙ 设置</kbd> > <kbd>仪表板</kbd>
-2. 在底部角落点击 <kbd>➕ 添加仪表板</kbd>
-3. 选择 <kbd>Webpage</kbd> 选项，并粘贴从插件页面获取的 Web UI URL。
-4. 填写侧边栏项的标题，一个图标（建议：`mdi:vector-difference`），以及该面板的 **相对 URL**（例如 `change-detection`）。最后，确认它。
+2. 点击底部角落的 <kbd>➕ 添加仪表板</kbd>
+3. 选择 <kbd>Webpage</kbd> 选项，并将从插件页面获得的 Web UI URL 粘贴进去。
+4. 填写侧边栏项的标题，一个图标（建议：`mdi:vector-difference`），以及该面板的 **相对 URL**（例如 `change-detection`）。最后，确认即可。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
+|------|------|---------|------|
 | `PGID` | int | `0` | 文件权限的组 ID |
 | `PUID` | int | `0` | 文件权限的用户 ID |
 | `TZ` | str | | 时区（例如，`Europe/London`） |
@@ -72,23 +72,23 @@ TIMEOUT: 60000
 
 ### 连接到 browserless Chrome（来自 @RhysMcW）
 
-安装并启动 Browserless Chrome 插件，然后使用 `PLAYWRIGHT_DRIVER_URL` 选项连接到它。此选项必须填写 Browserless Chrome URL："ws://db21ed7f-browserless-chrome:3000/chromium?headless=true&stealth=true&blockAds=true"
+安装并启动 Browserless Chrome 插件，然后使用 `PLAYWRIGHT_DRIVER_URL` 选项连接到它。此选项必须填写为 Browserless Chrome URL："ws://db21ed7f-browserless-chrome:3000/chromium?headless=true&stealth=true&blockAds=true"
 
-`db21ed7f-browserless-chrome` 主机名在 UI 中显示，在 Browserless Chromium 插件页面上：
-![image](https://github.com/user-attachments/assets/a63514f6-027a-4361-a33f-0d8f87461279)
+`db21ed7f-browserless-chrome` 主机名在 UI 中显示，在 Browserless Chromium 插件页面：
+![图片](https://github.com/user-attachments/assets/a63514f6-027a-4361-a33f-0d8f87461279)
 
-然后重新启动 Changedetection.io 插件 - 之后您就可以使用 Changedetection.io 中的浏览器选项了。
+然后重新启动 Changedetection.io 插件 - 之后您就可以在 Changedetection.io 中使用浏览器选项了。
 
 ## 安装
 
 此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. 将我的插件存储库添加到您的 Home Assistant 实例中（在监督器插件存储库的右上角，或点击下面的按钮如果您已配置我的 HA）
-   [![打开您的 Home Assistant 实例并显示带有特定存储库 URL 预填充的添加插件存储库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在监督器插件存储的右上角，或点击下面的按钮如果您已配置我的 HA）
+   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 2. 点击 `保存` 按钮以存储您的配置。
 3. 启动插件。
-4. 检查插件的日志以查看一切是否顺利。
+4. 检查插件的日志，以查看一切是否顺利。
 5. 仔细配置插件以满足您的偏好，有关详细信息，请参阅官方文档。
 ---
 

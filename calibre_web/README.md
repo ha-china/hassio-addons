@@ -1,81 +1,81 @@
-# Home assistant add-on: Calibre-web
+# 家居助理插件：Calibre-web
 
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+我在业余时间维护这个和其他的家居助理插件：跟上上游的变化、家居助理的变化以及在真实硬件上进行测试需要花费很多时间（以及一些金钱）。我经常使用大约5-10个我的>110个插件，所以我安装了测试机器（并购买了一些我不使用的测试服务，如vpn），以便进行故障排除和改进插件。
 
-If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+如果这个插件为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
 
-[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![给我买杯咖啡][捐赠徽章]](https://www.buymeacoffee.com/alexbelgium)
+[![通过PayPal捐赠][paypal徽章]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## Addon informations
+## 插件信息
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcalibre_web%2Fconfig.yaml)
-![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcalibre_web%2Fconfig.yaml)
-![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcalibre_web%2Fconfig.yaml)
+![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcalibre_web%2Fconfig.yaml)
+![入站](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcalibre_web%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcalibre_web%2Fconfig.yaml)
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
-[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![Codacy徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![GitHub超级代码检查器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+[捐赠徽章]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal徽章]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢每一位为我仓库点星的人！要给它点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
-[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers仓库列表 for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/calibre_web/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/calibre_web/stats.png)
 
-## About
-
----
-
-[Calibre-web](https://github.com/janeczku/calibre-web) is a web app providing a clean interface for browsing, reading and downloading eBooks using an existing Calibre database. It is also possible to integrate google drive and edit metadata and your calibre library through the app itself.
-
-This addon is based on the docker image https://github.com/linuxserver/docker-calibre-web
-
-## Installation
+## 关于
 
 ---
 
-The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
+[Calibre-web](https://github.com/janeczku/calibre-web) 是一个网页应用，提供通过现有的Calibre数据库浏览、阅读和下载电子书的干净界面。您还可以通过应用本身集成谷歌驱动并编辑元数据和您的Calibre图书馆。
 
-1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
-   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Set the add-on options to your preferences
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Open the webUI and adapt the software options
+此插件基于docker镜像 https://github.com/linuxserver/docker-calibre-web
 
-## Configuration
+## 安装
 
-Webui can be found at <http://homeassistant:PORT> or through the sidebar using Ingress.
-The default username/password is described in the startup log.
-Configurations can be done through the app webUI, except for the following options.
+---
 
-Default name: admin
-Default password: admin123
+此插件的安装相当简单，与安装任何其他插件没有区别。
 
-### Options
+1. 将我的插件仓库添加到您的家居助理实例中（在管理器插件存储的右上角，或点击下面的按钮如果您已配置我的HA）
+   [![打开您的家居助理实例并显示添加插件仓库对话框，其中包含预填充的特定仓库URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此插件。
+1. 点击“保存”按钮以存储您的配置。
+1. 将插件选项设置为您的偏好。
+1. 启动插件。
+1. 检查插件的日志以查看是否一切顺利。
+1. 打开WebUI并调整软件选项
 
-| Option | Type | Default | Description |
+## 配置
+
+WebUI可以在 <http://homeassistant:PORT> 或通过侧边栏使用入站找到。
+默认用户名/密码在启动日志中描述。
+可以通过应用WebUI进行配置，除了以下选项。
+
+默认名称：admin
+默认密码：admin123
+
+### 选项
+
+| 选项 | 类型 | 默认 | 描述 |
 |--------|------|---------|-------------|
-| `PGID` | int | `0` | Group ID for file permissions |
-| `PUID` | int | `0` | User ID for file permissions |
-| `TZ` | str | | Timezone (e.g., `Europe/London`) |
-| `DOCKER_MODS` | str | | Docker modifications to apply |
-| `OAUTHLIB_RELAX_TOKEN_SCOPE` | str | | OAuth token scope relaxation |
-| `ingress_user` | str | | Username for ingress authentication |
-| `localdisks` | str | | Local drives to mount (e.g., `sda1,sdb1,MYNAS`) |
-| `networkdisks` | str | | SMB shares to mount (e.g., `//SERVER/SHARE`) |
-| `cifsusername` | str | | SMB username for network shares |
-| `cifspassword` | str | | SMB password for network shares |
-| `cifsdomain` | str | | SMB domain for network shares |
+| `PGID` | int | `0` | 文件权限的组ID |
+| `PUID` | int | `0` | 文件权限的用户ID |
+| `TZ` | str | | 时区（例如，`Europe/London`） |
+| `DOCKER_MODS` | str | | 应用Docker修改 |
+| `OAUTHLIB_RELAX_TOKEN_SCOPE` | str | | OAuth令牌范围放宽 |
+| `ingress_user` | str | | 入站认证的用户名 |
+| `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
+| `networkdisks` | str | | 要挂载的SMB共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | str | | 网络共享的SMB用户名 |
+| `cifspassword` | str | | 网络共享的SMB密码 |
+| `cifsdomain` | str | | 网络共享的SMB域 |
 
-### Example Configuration
+### 示例配置
 
 ```yaml
 PGID: 0
@@ -90,37 +90,37 @@ cifspassword: "password123"
 cifsdomain: "workgroup"
 ```
 
-### Mounting Drives
+### 挂载驱动器
 
-This addon supports mounting both local drives and remote SMB shares:
+此插件支持挂载本地驱动器和远程SMB共享：
 
-- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：请参阅[插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：请参阅[插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-### Custom Scripts and Environment Variables
+### 自定义脚本和环境变量
 
-This addon supports custom scripts and environment variables:
+此插件支持自定义脚本和环境变量：
 
-- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+- **自定义脚本**：请参阅[插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars选项**：使用插件的`env_vars`选项传递额外的环境变量（使用大写或小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
-## Support
+## 支持
 
-Create an issue on github
+在GitHub上创建问题
 
-## Illustration
-
----
-
-![illustration](https://calibre-web.com/img/slider/artistdetails.png)
-
-[repository]: https://github.com/alexbelgium/hassio-addons
-
-
+## 图解
 
 ---
+
+![图解](https://calibre-web.com/img/slider/artistdetails.png)
+
+[仓库]: https://github.com/alexbelgium/hassio-addons
+---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

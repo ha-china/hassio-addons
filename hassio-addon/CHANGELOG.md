@@ -1,5 +1,129 @@
 # Changelog
 
+## 1.15.2
+
+### Changed
+- Edit button moved into the settings dropdown on mobile.
+- Sensor card mobile layout improved: name no longer truncates on large cards.
+- Haptic feedback suppressed during scroll gestures.
+
+### Added
+- Toggle to show/hide page pill labels on mobile (Header settings).
+
+## 1.15.1
+
+### Fixed
+- Fixed add-on installation and update failures caused by a build dependency conflict (#128).
+
+## 1.15.0
+
+### Added
+- Battery page, Lights page, and Room Explorer page for dedicated device management.
+- Lava Lamp and Silk animated backgrounds.
+- Toast notifications and PWA support.
+
+### Changed
+- Includes dashboard release `1.15.0`.
+- Restyled page navigation, Add Page dropdown, and modal type tabs.
+
+### Security
+- Hashed auth tokens, added CSP headers, and hardened server routes.
+
+## 1.14.9
+
+### Changed
+- Includes dashboard release `1.14.9`.
+
+### Fixed
+- Keeps the Status Pills editor open while creating a new pill so the add-on UI no longer drops the editor pane mid-edit.
+
+## 1.14.8
+
+### Changed
+- Includes dashboard release `1.14.8`.
+
+### Fixed
+- Keeps mobile sensor card titles, controls, and range visuals inside compact card bounds on narrow screens.
+
+## 1.14.7
+
+### Changed
+### Fixed
+- Includes dashboard release `1.14.7`.
+- Preserves working OAuth API calls when proactive refresh fails temporarily and keeps backend validation responses aligned with real auth failures versus reachability errors.
+
+## 1.14.6
+
+### Changed
+- Includes dashboard release `1.14.6`.
+
+### Fixed
+- Keeps long update names inside the Updates panel layout instead of overflowing the action area.
+
+### Security
+- Restricts Supervisor ingress header trust to explicit add-on mode while preserving Home Assistant sidebar ingress access.
+
+## 1.14.5
+
+### Fixed
+- Report clear error and prevent redirect loops when using an HTTP Home Assistant URL from an HTTPS dashboard (#108).
+
+## 1.14.4
+
+### Fixed
+- Prevent spurious logouts when the backend fails to connect to the Home Assistant URL (#106).
+
+## 1.14.3
+
+### Changed
+- Includes dashboard release `1.14.3`.
+- Improves mobile-friendly layouts for core card types (Alarm, Android TV, Car, Climate, Cover, Cost, Fan, Light, Media, Nordpool, Room, and Vacuum).
+
+## 1.14.2
+
+### Changed
+- Includes dashboard release `1.14.2`.
+- Refreshes Home Assistant OAuth access tokens proactively for protected API calls and restores API auth from stored browser sessions during startup.
+
+### Fixed
+- Reduces repeated invalid-auth websocket validation attempts against Home Assistant when Docker or add-on requests reuse a stale token.
+
+## 1.14.1
+
+### Changed
+- Includes dashboard release `1.14.1`.
+- Restores persistent OAuth browser sessions so login survives closing and reopening the browser.
+
+### Fixed
+- Preserves same-browser OAuth reuse across tabs while keeping refreshed session tokens synchronized.
+
+## 1.14.0
+
+### Changed
+- Includes dashboard release `1.14.0`.
+- Restores Docker and add-on compatibility for protected backend calls with internal and fallback Home Assistant URL handling.
+- Improves multi-device settings sync with revision-checked conflict handling and immediate reconciliation.
+
+### Fixed
+- Reduces lazy-loaded chunk failures by removing asset throttling.
+- Fixes Status Pills editor behavior when reselecting the same pill.
+
+### Security
+- Hardens Profiles and Settings authorization by validating Home Assistant identity on the backend.
+- Limits OAuth token persistence to the browser session.
+
+## 1.13.0
+
+- Includes dashboard release `1.13.0`.
+- Adds Playwright E2E infrastructure (initially 33 tests) for OAuth, drag-and-drop, and modal flows.
+- Improves dashboard runtime performance by memoizing all card components.
+- Improves modal accessibility focus behavior and adds optional Person zone badge icon support.
+- Adds option to hide page pill when only one page exists (outside edit mode).
+
+## Unreleased
+
+- Mobile friendly cards - First batch: Alarm, Android TV, Car, Climate, Cover, Cost, Fan, Light, Media, Nordpool, Room, and Vacuum cards.
+
 ## 1.12.3
 
 - Includes dashboard release `1.12.3`.

@@ -54,9 +54,11 @@ ENABLE_OPENAI_API=$(jq -r '.enable_openai_api // false' "$OPTIONS_FILE")
 GATEWAY_AUTH_MODE=$(jq -r '.gateway_auth_mode // "token"' "$OPTIONS_FILE")
 GATEWAY_TRUSTED_PROXIES=$(jq -r '.gateway_trusted_proxies // empty' "$OPTIONS_FILE")
 GATEWAY_ADDITIONAL_ALLOWED_ORIGINS=$(jq -r '.gateway_additional_allowed_origins // empty' "$OPTIONS_FILE")
+CONTROLUI_DISABLE_DEVICE_AUTH=$(jq -r '.controlui_disable_device_auth // true' "$OPTIONS_FILE")
 FORCE_IPV4_DNS=$(jq -r '.force_ipv4_dns // true' "$OPTIONS_FILE")
 ACCESS_MODE=$(jq -r '.access_mode // "custom"' "$OPTIONS_FILE")
 NGINX_LOG_LEVEL=$(jq -r '.nginx_log_level // "minimal"' "$OPTIONS_FILE")
+AUTO_CONFIGURE_MCP=$(jq -r '.auto_configure_mcp // false' "$OPTIONS_FILE")
 GW_ENV_VARS_TYPE=$(jq -r 'if .gateway_env_vars == null then "null" else (.gateway_env_vars | type) end' "$OPTIONS_FILE")
 GW_ENV_VARS_RAW=$(jq -r '.gateway_env_vars // empty' "$OPTIONS_FILE")
 GW_ENV_VARS_JSON=$(jq -c '.gateway_env_vars // []' "$OPTIONS_FILE")
@@ -372,8 +374,9 @@ if [ ! -e /data ]; then
   ln -s /config /data || true
 fi
 
-# Ensure these exist so cleanup doesn't fail
-mkdir -p /config/.openclaw/agents/main/sessions || true
+# Ensure the agents base directory exists so cleanup scans work even before first run.
+# Do NOT pre-create agent-specific directories; OpenClaw creates them as needed.
+mkdir -p /config/.openclaw/agents || true
 
 # ------------------------------------------------------------------------------
 # SINGLE-INSTANCE GUARD (prevents multiple gateway runs racing each other)
@@ -391,30 +394,43 @@ fi
 # ------------------------------------------------------------------------------
 
 gateway_running() {
-  pgrep -f "openclaw.*gateway.*run" >/dev/null 2>&1
+  pgrep -f "openclaw-gateway" >/dev/null 2>&1
 }
 
 cleanup_session_locks() {
-  local sessions_dir="/config/.openclaw/agents/main/sessions"
-  local glob1="${sessions_dir}"/*.jsonl.lock
+  local agents_dir="/config/.openclaw/agents"
+  local total_locks=0
+  local cleaned_dirs=()
 
+  # Scan all agent session directories, not just 'main'.
+  # This is needed for users who have gateway.forcedAgentId set to a non-default agent.
   shopt -s nullglob
-  local locks=( $glob1 )
+  local all_locks=()
+  for agent_sessions_dir in "${agents_dir}"/*/sessions; do
+    local agent_locks=( "${agent_sessions_dir}"/*.jsonl.lock )
+    if [ ${#agent_locks[@]} -gt 0 ]; then
+      all_locks+=( "${agent_locks[@]}" )
+      cleaned_dirs+=( "$agent_sessions_dir" )
+      total_locks=$(( total_locks + ${#agent_locks[@]} ))
+    fi
+  done
   shopt -u nullglob
 
-  if [ ${#locks[@]} -eq 0 ]; then
+  if [ "$total_locks" -eq 0 ]; then
     return 0
   fi
 
   # If gateway is running, do NOT remove locks automatically (could be real).
   if gateway_running; then
     echo "INFO: Gateway appears to be running; leaving session lock files untouched."
-    echo "INFO: Locks present: ${#locks[@]}"
+    echo "INFO: Locks present: $total_locks"
     return 0
   fi
 
-  echo "INFO: Removing stale session lock files (${#locks[@]}) from ${sessions_dir}"
-  rm -f "${sessions_dir}"/*.jsonl.lock || true
+  echo "INFO: Removing stale session lock files ($total_locks) across agents: ${cleaned_dirs[*]}"
+  for agent_sessions_dir in "${cleaned_dirs[@]}"; do
+    rm -f "${agent_sessions_dir}"/*.jsonl.lock || true
+  done
 }
 
 if [ "$CLEAN_LOCKS_ON_START" = "true" ]; then
@@ -452,6 +468,7 @@ EOF
 # Graceful shutdown handling (PID 1 trap) to reduce stale locks
 # ------------------------------------------------------------------------------
 GW_PID=""
+GW_RELAY_PID=""
 NGINX_PID=""
 TTYD_PID=""
 SHUTTING_DOWN="false"
@@ -472,8 +489,17 @@ shutdown() {
 
   if [ -n "${GW_PID}" ] && kill -0 "${GW_PID}" >/dev/null 2>&1; then
     kill -TERM "${GW_PID}" >/dev/null 2>&1 || true
-    wait "${GW_PID}" || true
+    # wait reaps child PIDs; for non-child (re-tracked) PIDs it fails instantly,
+    # so fall back to a timed kill -0 poll to let the gateway finish cleanly.
+    if ! wait "${GW_PID}" 2>/dev/null; then
+      for _i in 1 2 3 4 5; do
+        kill -0 "${GW_PID}" 2>/dev/null || break
+        sleep 1
+      done
+    fi
   fi
+
+  stop_gw_relay
 
   if [ "$CLEAN_LOCKS_ON_EXIT" = "true" ]; then
     cleanup_session_locks || true
@@ -681,7 +707,7 @@ PY
     fi
   fi
 
-  python3 "$HELPER_PATH" set-control-ui-origins "$ALLOWED_ORIGINS" "$GATEWAY_ADDITIONAL_ALLOWED_ORIGINS" || \
+  python3 "$HELPER_PATH" set-control-ui-origins "$ALLOWED_ORIGINS" "$GATEWAY_ADDITIONAL_ALLOWED_ORIGINS" "$CONTROLUI_DISABLE_DEVICE_AUTH" || \
     echo "WARN: Could not set controlUi settings — gateway may reject the Control UI"
 fi
 
@@ -699,15 +725,61 @@ if [ -f /usr/local/lib/openclaw-proxy-shim.cjs ]; then
   export OPENCLAW_GLOBAL_NODE_MODULES
 fi
 
+# ------------------------------------------------------------------------------
+# Auto-configure MCP (Model Context Protocol) for Home Assistant
+# Registers HA as an MCP server so OpenClaw can control HA entities/services.
+# Requires: homeassistant_token set in add-on options + mcporter CLI available.
+# Runs once; re-runs when the token changes.
+# Auto-detects HA API URL: supervisor proxy if available, else localhost:8123.
+# ------------------------------------------------------------------------------
+if [ "$AUTO_CONFIGURE_MCP" = "true" ] && [ -n "$HA_TOKEN" ]; then
+  if command -v mcporter >/dev/null 2>&1; then
+    # Detect HA API URL: prefer supervisor proxy (works in all add-on network modes),
+    # fall back to localhost:8123 (works with host_network: true).
+    if [ -n "${SUPERVISOR_TOKEN:-}" ]; then
+      MCP_HA_URL="http://supervisor/core/api/mcp"
+    else
+      MCP_HA_URL="http://localhost:8123/api/mcp"
+    fi
+    MCP_FLAG="/config/.openclaw/.mcp_ha_configured"
+    MCP_TOKEN_HASH=$(printf '%s' "$HA_TOKEN" | sha256sum | cut -d' ' -f1)
+
+    if [ -f "$MCP_FLAG" ] && [ "$(cat "$MCP_FLAG" 2>/dev/null)" = "$MCP_TOKEN_HASH" ]; then
+      echo "INFO: MCP Home Assistant server already configured (token unchanged)"
+    else
+      echo "INFO: Configuring MCP for Home Assistant at $MCP_HA_URL ..."
+      # Remove stale entry if present (token may have changed)
+      mcporter config remove HA 2>/dev/null || true
+
+      if mcporter config add HA "$MCP_HA_URL" \
+          --header "Authorization=Bearer $HA_TOKEN" \
+          --scope home 2>&1; then
+        printf '%s' "$MCP_TOKEN_HASH" > "$MCP_FLAG"
+        echo "INFO: MCP server 'HA' registered — OpenClaw can now control Home Assistant"
+      else
+        echo "WARN: MCP auto-configuration failed. Configure manually in the terminal:"
+        echo "WARN:   mcporter config add HA \"$MCP_HA_URL\" --header \"Authorization=Bearer YOUR_TOKEN\" --scope home"
+      fi
+    fi
+  else
+    echo "INFO: mcporter not available; skipping MCP auto-configuration (run 'openclaw onboard' first)"
+  fi
+elif [ "$AUTO_CONFIGURE_MCP" = "true" ] && [ -z "$HA_TOKEN" ]; then
+  echo "INFO: MCP auto-configure enabled but homeassistant_token not set — skipping"
+  echo "INFO: To auto-configure, set homeassistant_token in add-on Configuration, then restart"
+fi
+
 start_openclaw_runtime() {
   echo "Starting OpenClaw Assistant runtime (openclaw)..."
   if [ "$GATEWAY_MODE" = "remote" ]; then
     # Remote mode: do NOT start a local gateway service.
     # Start a node/client host that connects to the configured remote gateway URL.
-    REMOTE_URL="$(timeout 2s openclaw config get gateway.remote.url 2>/dev/null | tr -d '\n' || true)"
+    # Use $GATEWAY_REMOTE_URL directly from add-on options — do NOT read back via
+    # 'openclaw config get' which can time out at startup or return redacted values.
+    REMOTE_URL="$GATEWAY_REMOTE_URL"
     if [ -z "$REMOTE_URL" ]; then
-      echo "ERROR: gateway_mode=remote but gateway.remote.url is empty in openclaw config"
-      echo "ERROR: Configure gateway.remote.url first, then restart the add-on"
+      echo "ERROR: gateway_mode=remote but gateway_remote_url is not set in add-on options"
+      echo "ERROR: Set gateway_remote_url in add-on Configuration (e.g. ws://192.168.1.10:18789), then restart"
       return 1
     fi
 
@@ -743,9 +815,103 @@ PY
   return 0
 }
 
+# --- Loopback relay helpers for tailnet bind mode (issue #90) ---
+# When gateway.bind=tailnet the gateway only listens on the Tailscale IP.
+# The local CLI always tries ws://127.0.0.1:PORT and fails with
+# "Gateway not running" even though the gateway is healthy.
+# These functions start/stop a lightweight Node.js TCP relay on
+# 127.0.0.1:PORT -> TAILSCALE_IP:PORT so terminal CLI commands work.
+# IMPORTANT: stop_gw_relay must be called before restarting the gateway;
+# otherwise the relay holds the loopback port and the new gateway instance
+# detects it as "already listening" and exits with code 1.
+start_gw_relay() {
+  if [ "$GATEWAY_BIND_MODE" != "tailnet" ]; then
+    return 0
+  fi
+  local ts_ip
+  ts_ip=$(ip -4 addr show tailscale0 2>/dev/null \
+    | awk '/inet /{gsub(/\/.*/,"",$2); print $2; exit}' || true)
+  if [[ "${ts_ip:-}" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    echo "INFO: Starting loopback relay for tailnet gateway (127.0.0.1:${GATEWAY_PORT} -> ${ts_ip}:${GATEWAY_PORT})"
+    node -e "
+const net = require('net');
+const TARGET_HOST = '${ts_ip}';
+const TARGET_PORT = ${GATEWAY_PORT};
+const server = net.createServer(function(c) {
+  const t = net.createConnection(TARGET_PORT, TARGET_HOST);
+  c.pipe(t); t.pipe(c);
+  c.on('error', function() { t.destroy(); });
+  t.on('error', function() { c.destroy(); });
+});
+server.listen(TARGET_PORT, '127.0.0.1');" &
+    GW_RELAY_PID=$!
+    echo "INFO: Loopback relay started (PID ${GW_RELAY_PID})"
+  else
+    echo "WARN: tailnet bind mode active but Tailscale IP not found on tailscale0 interface."
+    echo "WARN: Terminal CLI may show gateway as unreachable. Ensure Tailscale is running and restart."
+  fi
+}
+
+stop_gw_relay() {
+  if [ -n "${GW_RELAY_PID}" ] && kill -0 "${GW_RELAY_PID}" >/dev/null 2>&1; then
+    kill -TERM "${GW_RELAY_PID}" >/dev/null 2>&1 || true
+    wait "${GW_RELAY_PID}" 2>/dev/null || true
+    GW_RELAY_PID=""
+  fi
+}
+
+# Find a running gateway daemon's PID using multiple detection methods.
+# Used by the supervisor loop to detect self-restarts (SIGUSR1) without
+# spawning duplicate gateway instances that collide on the port.
+#
+# Three tiers, tried in order of reliability:
+#   1. Port ownership via `ss -tlnp` — authoritative, but only works once
+#      the daemon has bound the port (can take 20+ s on Pi hardware).
+#   2. Process title via `pgrep -f openclaw-gateway` — works after Node.js
+#      sets process.title, which also happens late during init.
+#   3. /proc cmdline scan — catches the daemon IMMEDIATELY after fork,
+#      before title or port bind, by matching "openclaw" in the cmdline.
+#      Excludes known PIDs (nginx, ttyd, relay, our shell, old GW_PID).
+#
+# Returns the PID on stdout and exit 0, or exits with code 1 if nothing found.
+find_gateway_daemon_pid() {
+  local pid=""
+
+  # Tier 1: port ownership (authoritative once port is bound)
+  pid=$(ss -tlnp 2>/dev/null \
+    | grep ":${GATEWAY_INTERNAL_PORT} " \
+    | sed -n 's/.*pid=\([0-9]*\).*/\1/p' \
+    | head -1)
+  [ -n "$pid" ] && { echo "$pid"; return 0; }
+
+  # Tier 2: process title (after Node sets process.title)
+  pid=$(pgrep -f "openclaw-gateway" 2>/dev/null | head -1)
+  [ -n "$pid" ] && { echo "$pid"; return 0; }
+
+  # Tier 3: scan /proc for any openclaw process we don't already know about.
+  # The daemon's cmdline (e.g. node /usr/.../openclaw/...) contains "openclaw"
+  # from the moment it is forked, even before process.title is set.
+  local known=" ${NGINX_PID:-0} ${TTYD_PID:-0} ${GW_RELAY_PID:-0} ${GW_PID:-0} $$ "
+  local f cand
+  for f in /proc/[0-9]*/cmdline; do
+    [ -r "$f" ] || continue
+    if tr '\0' ' ' < "$f" 2>/dev/null | grep -q "openclaw"; then
+      cand="${f#/proc/}"
+      cand="${cand%%/*}"
+      case "$known" in *" $cand "*) continue ;; esac
+      echo "$cand"
+      return 0
+    fi
+  done
+
+  return 1
+}
+
 if ! start_openclaw_runtime; then
   exit 1
 fi
+
+start_gw_relay
 
 # Start web terminal (optional)
 TTYD_PID_FILE="/var/run/openclaw-ttyd.pid"
@@ -813,38 +979,61 @@ if command -v ss >/dev/null 2>&1 && ss -tlnp 2>/dev/null | grep -q ':48099 '; th
   echo "WARN: Port 48099 still in use after cleanup; nginx may fail to start"
 fi
 
-# Render nginx config from template.
-# The gateway token is NOT managed by the add-on; OpenClaw will generate/store it.
-# Read directly from config file — the CLI redacts secrets since v2026.2.22+.
-GW_TOKEN="$(python3 -c "
+# ------------------------------------------------------------------------------
+# render_landing: (re-)render the nginx config + landing page HTML.
+#
+# Called once before nginx starts (token may be empty on first boot/pre-onboard)
+# and again in the background after the gateway comes up so a freshly-generated
+# token is immediately reflected in the "Open Gateway Web UI" button.
+# nginx is sent SIGHUP to reload the updated config without restarting.
+# ------------------------------------------------------------------------------
+render_landing() {
+  local label="${1:-startup}"
+  # Read gateway token directly from openclaw.json (CLI redacts secrets v2026.2.22+)
+  local token
+  token="$(python3 -c "
 import json, os
 p = os.environ.get('OPENCLAW_CONFIG_PATH', '/config/.openclaw/openclaw.json')
 print(json.load(open(p)).get('gateway',{}).get('auth',{}).get('token',''), end='')
 " 2>/dev/null || true)"
 
-# Collect disk usage for landing page status card
-DISK_TOTAL="" DISK_USED="" DISK_AVAIL="" DISK_PCT=""
-if df -h /config >/dev/null 2>&1; then
-  DISK_TOTAL=$(df -h /config | awk 'NR==2{print $2}')
-  DISK_USED=$(df -h /config | awk 'NR==2{print $3}')
-  DISK_AVAIL=$(df -h /config | awk 'NR==2{print $4}')
-  DISK_PCT=$(df -h /config | awk 'NR==2{print $5}')
-  echo "INFO: Disk usage: ${DISK_USED}/${DISK_TOTAL} (${DISK_PCT} used, ${DISK_AVAIL} free)"
-  # Warn early if disk is getting full
-  DISK_PCT_NUM=${DISK_PCT//%/}
-  if [ "$DISK_PCT_NUM" -ge 90 ] 2>/dev/null; then
-    echo "WARNING: Disk is ${DISK_PCT} full! Add-on updates may fail. Run 'oc-cleanup' in the terminal."
-  elif [ "$DISK_PCT_NUM" -ge 75 ] 2>/dev/null; then
-    echo "NOTICE: Disk is ${DISK_PCT} full. Consider running 'oc-cleanup' in the terminal."
+  local disk_total="" disk_used="" disk_avail="" disk_pct=""
+  if df -h /config >/dev/null 2>&1; then
+    disk_total=$(df -h /config | awk 'NR==2{print $2}')
+    disk_used=$(df -h /config  | awk 'NR==2{print $3}')
+    disk_avail=$(df -h /config | awk 'NR==2{print $4}')
+    disk_pct=$(df -h /config   | awk 'NR==2{print $5}')
+    if [ "$label" = "startup" ]; then
+      echo "INFO: Disk usage: ${disk_used}/${disk_total} (${disk_pct} used, ${disk_avail} free)"
+      local pct_num=${disk_pct//%/}
+      if [ "$pct_num" -ge 90 ] 2>/dev/null; then
+        echo "WARNING: Disk is ${disk_pct} full! Add-on updates may fail. Run 'oc-cleanup' in the terminal."
+      elif [ "$pct_num" -ge 75 ] 2>/dev/null; then
+        echo "NOTICE: Disk is ${disk_pct} full. Consider running 'oc-cleanup' in the terminal."
+      fi
+    fi
   fi
-fi
 
-GW_PUBLIC_URL="$GW_PUBLIC_URL" GW_TOKEN="$GW_TOKEN" TERMINAL_PORT="$TERMINAL_PORT" \
-  ENABLE_HTTPS_PROXY="$ENABLE_HTTPS_PROXY" HTTPS_PROXY_PORT="$GATEWAY_PORT" \
-  GATEWAY_INTERNAL_PORT="$GATEWAY_INTERNAL_PORT" ACCESS_MODE="$ACCESS_MODE" \
-  DISK_TOTAL="$DISK_TOTAL" DISK_USED="$DISK_USED" DISK_AVAIL="$DISK_AVAIL" DISK_PCT="$DISK_PCT" \
-  NGINX_LOG_LEVEL="$NGINX_LOG_LEVEL" \
-  python3 /render_nginx.py
+  GW_PUBLIC_URL="$GW_PUBLIC_URL" GW_TOKEN="$token" TERMINAL_PORT="$TERMINAL_PORT" \
+    ENABLE_HTTPS_PROXY="$ENABLE_HTTPS_PROXY" HTTPS_PROXY_PORT="$GATEWAY_PORT" \
+    GATEWAY_INTERNAL_PORT="$GATEWAY_INTERNAL_PORT" ACCESS_MODE="$ACCESS_MODE" \
+    DISK_TOTAL="$disk_total" DISK_USED="$disk_used" DISK_AVAIL="$disk_avail" DISK_PCT="$disk_pct" \
+    NGINX_LOG_LEVEL="$NGINX_LOG_LEVEL" \
+    python3 /render_nginx.py
+
+  if [ "$label" != "startup" ]; then
+    # Signal nginx to reload config/landing HTML without dropping connections.
+    local nginx_pid
+    nginx_pid=$(cat "${NGINX_PID_FILE:-/var/run/openclaw-nginx.pid}" 2>/dev/null || true)
+    if [ -n "$nginx_pid" ] && kill -0 "$nginx_pid" 2>/dev/null; then
+      kill -HUP "$nginx_pid" 2>/dev/null || true
+      echo "INFO: Landing page re-rendered with gateway token (nginx reloaded)."
+    fi
+  fi
+}
+
+# Initial render (token may be absent if openclaw.json does not exist yet)
+render_landing startup
 
 echo "Starting ingress proxy (nginx) on :48099 ..."
 nginx -g 'daemon off;' &
@@ -857,21 +1046,123 @@ else
   echo "WARN: nginx failed to start (PID $NGINX_PID exited); ingress UI may be unavailable"
 fi
 
+# If the token was not available at startup (first boot / pre-onboard), schedule
+# a background re-render so the "Open Gateway Web UI" button gets the real token
+# once openclaw onboard writes openclaw.json (typically within 30-90 s).
+(
+  CONFIG_PATH="${OPENCLAW_CONFIG_PATH:-/config/.openclaw/openclaw.json}"
+  for _i in $(seq 1 24); do
+    sleep 5
+    token=$(python3 -c "
+import json, os
+p='$CONFIG_PATH'
+try:
+    print(json.load(open(p)).get('gateway',{}).get('auth',{}).get('token',''), end='')
+except Exception:
+    pass
+" 2>/dev/null || true)
+    if [ -n "$token" ]; then
+      render_landing post-onboard
+      break
+    fi
+  done
+) &
+
 # Keep add-on alive even if gateway/node runtime restarts itself (e.g. during onboarding).
 # If runtime exits unexpectedly, restart it while nginx/ttyd stay up.
+#
+# Design notes (issue #95):
+#   `openclaw gateway run` is a thin wrapper that spawns `openclaw-gateway` as a
+#   long-running daemon and then exits. When the gateway self-restarts (SIGUSR1 /
+#   `openclaw gateway restart`), the old daemon exits and a NEW daemon is forked —
+#   the new PID is NOT a child of this shell so `wait` cannot block on it.
+#
+#   The new daemon can take 20-30 seconds to initialise on low-power hardware
+#   (Pi / eMMC). During that time its process.title and port binding are not yet
+#   visible, but the process itself exists in /proc with "openclaw" in its cmdline.
+#
+#   Strategy:
+#     1. `wait` for our child (the wrapper). After it exits, use
+#        `find_gateway_daemon_pid` (port → pgrep → /proc scan) with retries
+#        to find the daemon. If found → re-track and poll with `kill -0`.
+#     2. When the re-tracked daemon eventually exits (crash or another restart),
+#        `kill -0` fails, we check again for a live daemon to re-track.
+#     3. Before any supervisor-initiated restart, do a final port-occupancy
+#        guard to prevent launching a duplicate.
+GW_IS_CHILD=true   # true only when GW_PID was started by us (can use `wait`)
+
 while true; do
-  GW_EXIT_CODE=0
-  wait "${GW_PID}" || GW_EXIT_CODE=$?
+  if [ "$GW_IS_CHILD" = "true" ]; then
+    # Efficient blocking wait on our child process.
+    GW_EXIT_CODE=0
+    wait "${GW_PID}" 2>/dev/null || GW_EXIT_CODE=$?
+  else
+    # GW_PID is NOT our child (re-tracked after a self-restart).
+    # Poll with kill -0 until it exits.
+    while kill -0 "$GW_PID" 2>/dev/null; do
+      if [ "$SHUTTING_DOWN" = "true" ]; then break 2; fi
+      sleep 5
+    done
+    GW_EXIT_CODE=0
+  fi
 
   if [ "$SHUTTING_DOWN" = "true" ]; then
     break
   fi
 
+  # --- Detect self-restart ---------------------------------------------------
+  # Try up to 10 times (≈ 20 s) using all 3 tiers of find_gateway_daemon_pid.
+  # Tier 3 (/proc scan) usually finds the daemon on the very first attempt
+  # because the process exists immediately after fork, even before port bind
+  # or process.title. The retries cover edge cases on extremely slow I/O.
+  RESTARTED_PID=""
+  if [ "$GATEWAY_MODE" != "remote" ]; then
+    for _attempt in 1 2 3 4 5 6 7 8 9 10; do
+      RESTARTED_PID=$(find_gateway_daemon_pid 2>/dev/null || true)
+      [ -n "$RESTARTED_PID" ] && break
+      sleep 2
+    done
+  else
+    sleep 2
+    RESTARTED_PID=$(pgrep -f "openclaw.*node.*run" 2>/dev/null | head -1 || true)
+  fi
+
+  if [ -n "$RESTARTED_PID" ]; then
+    echo "INFO: OpenClaw runtime active (PID $RESTARTED_PID); monitoring."
+    GW_PID="$RESTARTED_PID"
+    GW_IS_CHILD=false
+    continue
+  fi
+
+  # --- Final port guard ------------------------------------------------------
+  # Even if all detection methods missed the daemon during the loop above,
+  # the port may now be bound (the daemon finished initialising while we slept).
+  # Never launch a duplicate if the port is occupied.
+  if [ "$GATEWAY_MODE" != "remote" ] && \
+     ss -tlnp 2>/dev/null | grep -q ":${GATEWAY_INTERNAL_PORT} "; then
+    PORT_PID=$(ss -tlnp 2>/dev/null \
+      | grep ":${GATEWAY_INTERNAL_PORT} " \
+      | sed -n 's/.*pid=\([0-9]*\).*/\1/p' \
+      | head -1 || true)
+    echo "INFO: Gateway port ${GATEWAY_INTERNAL_PORT} occupied by PID ${PORT_PID:-unknown}; monitoring."
+    GW_PID="${PORT_PID:-$GW_PID}"
+    GW_IS_CHILD=false
+    continue
+  fi
+
   echo "WARN: OpenClaw runtime exited with code ${GW_EXIT_CODE}. Restarting in 2s..."
   sleep 2
+
+  # Stop the loopback relay BEFORE restarting the gateway (tailnet mode only).
+  # The relay holds 127.0.0.1:GATEWAY_PORT — leaving it up causes the new gateway
+  # to detect the port as occupied and exit with code 1, re-entering the loop.
+  stop_gw_relay
 
   if ! start_openclaw_runtime; then
     echo "ERROR: Failed to restart OpenClaw runtime; retrying in 5s..."
     sleep 5
+  else
+    GW_IS_CHILD=true
+    start_gw_relay
   fi
 done

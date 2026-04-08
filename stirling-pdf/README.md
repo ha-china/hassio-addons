@@ -1,40 +1,41 @@
-# 家居助手插件：Stirling-pdf
+# Home assistant 插件：Stirling-pdf
 
-这是一个功能强大、本地托管的基于Web的PDF操作工具，使用Docker。它允许您对PDF文件执行各种操作，包括拆分、合并、转换、重新组织、添加图片、旋转、压缩等。这个本地托管的Web应用程序已经发展成为一个功能全面的集合，满足您所有的PDF需求。
+这是一个健壮的、本地托管的基于 Web 的 PDF 操作工具，使用 Docker 实现。它允许你对 PDF 文件进行各种操作，包括拆分、合并、转换、重新排列、添加图片、旋转、压缩等。这个本地托管的 Web 应用已经发展成为一个功能全面的集合，满足你所有的 PDF 需求。
 
-Stirling PDF不会发起任何外部的调用，用于记录或追踪目的。
+Stirling PDF 不会发起任何出站调用进行记录或跟踪。
 
-所有文件和PDF要么仅在客户端存在，要么仅在任务执行期间存在于服务器内存中，要么仅临时存储在文件中以便执行任务。用户下载的任何文件在此点之前都将被从服务器删除。
+所有文件和 PDF 文件要么完全存在于客户端，要么仅在任务执行期间位于服务器内存中，要么仅为了执行任务而暂时存在于文件中。任何用户下载的文件在此点之前都会被从服务器删除。
 
-有点内存消耗大。
+有点占用内存。
 
-_感谢所有star我的repo的人！要star它，请点击下面的图片，然后它将显示在右上角。谢谢！_
+_感谢 everyone 为我的仓库 star！要 star 它，请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
-[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons))(https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
-此插件使用[docker镜像](https://github.com/Stirling-Tools/Stirling-PDF)。
+此插件使用 [docker 镜像](https://github.com/Stirling-Tools/Stirling-PDF)。
 
 ## 安装
 
-此插件的安装非常简单，与安装任何其他Hass.io插件没有区别。
+此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. 将我的Hass.io插件仓库[repository]添加到您的Hass.io实例中。
-1. 安装此插件。750 MB的镜像需要一些时间下载
-1. 点击`保存`按钮以存储您的配置。
+1. 将我的 Hass.io 插件仓库 [repository] 添加到你的 Hass.io 实例中。
+1. 安装此插件。750 MB 镜像下载需要一段时间。
+1. 点击 `Save` 按钮以保存你的配置。
 1. 启动插件。
-1. 检查插件的日志，看是否一切顺利。
-1. 打开WebUI应通过<your-ip>:port工作。
-1. 设置在/addon_configs/2effc9b9_stirling-pdf中。
-1. 停止插件，编辑settings.yaml文件以更改所需的任何内容
+1. 检查插件的日志以查看是否一切顺利。
+1. 通过 <your-ip>:port 打开 WebUI 应该可以工作。
+1. 设置位于 /addon_configs/2effc9b9_stirling-pdf。
+1. 停止插件，编辑 settings.yaml 文件以更改所需的内容。
+
 ## 配置
 
 ```
-port : 8080 #您想要运行的端口号。
+port : 8080 # 你想要运行的端口号。
 ```
 
-WebUI可以在<your-ip>:port找到。
+WebUI 可以在 `<your-ip>:port` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---

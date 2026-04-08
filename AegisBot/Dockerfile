@@ -13,26 +13,25 @@ ENV PIP_BREAK_SYSTEM_PACKAGES=1
 ENV PYTHONUNBUFFERED=1
 
 # Install System Requirements including Node.js
-# hadolint ignore=DL3018,DL3017
 
 # hadolint ignore=DL3018
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.4.1"
-ENV ADDON_NAME="AegisBot"
-ENV ADDON_SLUG="aegisbot"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="0.5.2"
+ENV APP_NAME="AegisBot"
+ENV APP_SLUG="aegisbot"
+ENV APP_UNSUPPORTED="false"
 
 RUN \
-    apk add --no-cache -u libssl3 libcrypto3 \
+    apk add --no-cache \
+    libssl3 \
+    libcrypto3 \
     musl \
     nginx \
     gcc \
     musl-dev \
     libffi-dev \
     curl \
-    postgresql-client \
-    xz \
     postgresql-client \
     xz \
     nodejs \
@@ -87,7 +86,7 @@ RUN \
             cd frontend && \
             npm install && \
             sed -i "s|defineConfig({|defineConfig({ base: './',|g" vite.config.ts && \
-            sed -i "s|const API_BASE = '.*'|const API_BASE = './api/v1'|g" src/api/client.ts && \
+            sed -i "s|const API_BASE = .*|const API_BASE = './api/v1'|g" src/api/client.ts && \
             # Verify sed modifications were applied
             grep -q "base: './" vite.config.ts || { echo "Failed to patch vite.config.ts"; exit 1; } && \
             grep -q "API_BASE = './api/v1'" src/api/client.ts || { echo "Failed to patch client.ts"; exit 1; } && \
@@ -129,7 +128,7 @@ CMD [ "/run.sh" ]
 # Labels
 LABEL org.opencontainers.image.title="AegisBot"
 LABEL org.opencontainers.image.description="Production-ready Telegram Moderation Bot with AI-driven FAQ and Security Features"
-LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons"
+LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
 LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/AegisBot"

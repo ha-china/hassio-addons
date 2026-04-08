@@ -58,6 +58,10 @@ configuration:
     name: Допълнителни разрешени origins
     description: Допълнителни origins за Control UI, разделени със запетая; сливат се в gateway.controlUi.allowedOrigins при lan_https (пример - https://ha.example.com:8443,capacitor://localhost)
 
+  controlui_disable_device_auth:
+    name: Изключи device pairing за Control UI (lan_https)
+    description: "Когато е ВКЛ. (препоръчително), задава gateway.controlUi.dangerouslyDisableDeviceAuth=true и пропуска одобрението по устройство, за да избегне error 1008 в LAN HTTPS режим. Остави ВКЛ. за домашна/доверена мрежа. Изключи само ако искаш стриктно pairing потвърждение за всеки нов браузър/устройство."
+
   gateway_bind_mode:
     name: Режим на свързване на Gateway
     description: Режим на мрежово свързване - loopback (само 127.0.0.1, най-сигурен), lan (всички интерфейси) или tailnet (само Tailscale интерфейс). Пренебрегва се от предварителните режими на достъп.
@@ -106,3 +110,6 @@ configuration:
   gateway_env_vars:
     name: Променливи на средата за Gateway
     description: Променливи на средата, предавани на OpenClaw gateway процеса при стартиране (списък от записи name/value в Home Assistant UI; макс. 50 променливи, ключове до 255 знака, стойности до 10000 знака).
+  auto_configure_mcp:
+    name: Автоматично конфигуриране на MCP за Home Assistant
+    description: "Когато е ВКЛ. и Home Assistant Token е зададен, автоматично регистрира Home Assistant като MCP сървър при всяко стартиране. Това позволява на OpenClaw да контролира HA устройства, услуги и автоматизации чрез Model Context Protocol. Изключете само ако управлявате mcporter конфигурацията ръчно."

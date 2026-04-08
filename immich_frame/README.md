@@ -39,19 +39,104 @@ Webui can be found at `<your-ip>:8171`.
 
 ### Options
 
+#### Connection
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `ImmichServerUrl` | str | URL of your Immich server (e.g., `http://homeassistant:3001`). Used for single-account setup. |
+| `ApiKey` | str | Immich API key for authentication. Used for single-account setup. |
+| `Accounts` | list | List of Immich accounts for multi-account support. Each entry requires `ImmichServerUrl` and `ApiKey`, plus optional per-account filters (see below). |
+| `TZ` | str | Timezone (e.g., `Europe/London`) |
+
+#### General (Display) Options
+
+These top-level options map to ImmichFrame's `General` settings and control the display behavior:
+
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `ImmichServerUrl` | str | **Required** | URL of your Immich server (e.g., `http://homeassistant:3001`) |
-| `ApiKey` | str | **Required** | Immich API key for authentication |
-| `TZ` | str | | Timezone (e.g., `Europe/London`) |
+| `Interval` | int | 45 | Image display interval in seconds |
+| `TransitionDuration` | float | 2 | Transition duration in seconds |
+| `ShowClock` | bool | true | Display the current time |
+| `ClockFormat` | str | `hh:mm` | Time format for the clock |
+| `ClockDateFormat` | str | `eee, MMM d` | Date format for the clock |
+| `ShowProgressBar` | bool | true | Display the progress bar |
+| `ShowPhotoDate` | bool | true | Display the date of the current image |
+| `PhotoDateFormat` | str | `MM/dd/yyyy` | Date format for photo dates |
+| `ShowImageDesc` | bool | true | Display image description |
+| `ShowPeopleDesc` | bool | true | Display people names |
+| `ShowTagsDesc` | bool | true | Display tag names |
+| `ShowAlbumName` | bool | true | Display album names |
+| `ShowImageLocation` | bool | true | Display image location |
+| `ShowWeatherDescription` | bool | true | Display weather description |
+| `ImageZoom` | bool | true | Zoom into images for a touch of life |
+| `ImagePan` | bool | false | Pan images in a random direction |
+| `ImageFill` | bool | false | Fill available space (may crop) |
+| `PlayAudio` | bool | false | Play audio for videos with audio tracks |
+| `PrimaryColor` | str | `#f5deb3` | Primary UI color (hex) |
+| `SecondaryColor` | str | `#000000` | Secondary UI color (hex) |
+| `Style` | str | `none` | Background style: `none`, `solid`, `transition`, `blur` |
+| `Layout` | str | `splitview` | Layout: `single` or `splitview` |
+| `BaseFontSize` | str | `17px` | Base font size (CSS format) |
+| `Language` | str | `en` | 2-digit ISO language code |
+| `WeatherApiKey` | str | | OpenWeatherMap API key |
+| `UnitSystem` | str | `imperial` | `imperial` or `metric` |
+| `WeatherLatLong` | str | | Weather location as `lat,lon` |
+| `ImageLocationFormat` | str | `City,State,Country` | Location display format |
+| `DownloadImages` | bool | false | Download images to server |
+| `RenewImagesDuration` | int | 30 | Re-download images after this many days |
+| `RefreshAlbumPeopleInterval` | int | 12 | Hours between album/people refresh |
 
-### Example Configuration
+#### Per-Account Options
+
+These options can be set within each `Accounts` entry to control which images are shown:
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `Albums` | str | Comma-separated album UUIDs |
+| `ExcludedAlbums` | str | Comma-separated excluded album UUIDs |
+| `People` | str | Comma-separated people UUIDs |
+| `Tags` | str | Comma-separated tag paths (e.g., `Vacation,Travel/Europe`) |
+| `ShowFavorites` | bool | Show favorite images |
+| `ShowMemories` | bool | Show memory images |
+| `ShowArchived` | bool | Show archived images |
+| `ShowVideos` | bool | Include video assets |
+| `ImagesFromDays` | int | Show images from the last X days |
+| `ImagesFromDate` | str | Show images after this date |
+| `ImagesUntilDate` | str | Show images before this date |
+| `Rating` | int | Filter by star rating (-1 to 5) |
+
+### Single Account Example
 
 ```yaml
 ImmichServerUrl: "http://homeassistant:3001"
 ApiKey: "your-immich-api-key-here"
 TZ: "Europe/London"
+ShowClock: false
+Interval: 30
+PhotoDateFormat: "dd/MM/yyyy"
 ```
+
+### Multi-Account Example
+
+To display photos from multiple Immich accounts (e.g., you and your partner), use the `Accounts` list:
+
+```yaml
+Accounts:
+  - ImmichServerUrl: "http://homeassistant:3001"
+    ApiKey: "api-key-for-user-1"
+    Albums: "album-uuid-1,album-uuid-2"
+    ShowFavorites: true
+  - ImmichServerUrl: "http://homeassistant:3001"
+    ApiKey: "api-key-for-user-2"
+    People: "person-uuid-1,person-uuid-2"
+ShowClock: false
+Interval: 40
+TZ: "Europe/London"
+```
+
+When using the `Accounts` list, the `ApiKey` and `ImmichServerUrl` top-level options are not needed. Images will be drawn from each account proportionally based on the total number of images present in each account.
+
+For more configuration options, see the [ImmichFrame documentation](https://immichframe.dev/docs/getting-started/configuration).
 
 ### Getting Your Immich API Key
 
@@ -66,14 +151,24 @@ TZ: "Europe/London"
 This addon supports custom scripts and environment variables through the `addon_config` mapping:
 
 - **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+- **env_vars option**: Use the add-on `env_vars` option to pass extra ImmichFrame settings not available in the addon UI. Environment variables are automatically classified as General or Account-level settings and written to `Settings.yaml`. See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+
+**env_vars example** (for settings not in the UI):
+```yaml
+env_vars:
+  - name: AuthenticationSecret
+    value: "my-secret"
+  - name: Webhook
+    value: "http://example.com/notify"
+```
 
 ## Installation
 
 The installation of this add-on is pretty straightforward and not different in
 comparison to installing any other Hass.io add-on.
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. Install this add-on.
 1. Configure your Immich server URL and API key.
 1. Click the `Save` button to store your configuration.
@@ -89,25 +184,3 @@ For more information about Immich Frame, visit: https://immichframe.online/
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 
-
----
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
----
-
-## 📱 关注我
-
-扫描下面二维码，关注我。有需要可以随时给我留言：
-
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
-
-## ☕ 赞助支持
-
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
-
-感谢您的支持与鼓励！

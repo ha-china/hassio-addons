@@ -1,16 +1,18 @@
-# Home Assistant Add-on: taptap - Tigo CCA to MQTT
+# Home Assistant 插件：taptap - Tigo CCA 到 MQTT
 
-Tigo CCA Tap to MQTT implementation to get data from Tigo optimizers locally to Home Assistant. See [docs](https://github.com/litinoveweedle/hassio-addons/blob/main/taptap/DOCS.md) for required HW installation and usage.
+Tigo CCA Tap 到 MQTT 实现以从本地 Tigo 优化器获取数据到 Home Assistant。请参阅[文档](https://github.com/litinoveweedle/hassio-addons/blob/main/taptap/DOCS.md)了解所需的硬件安装和使用说明。
 
-![Supports aarch64 Architecture][aarch64-shield]
-![Supports amd64 Architecture][amd64-shield]
+![支持 aarch64 架构][aarch64-shield]
+![支持 amd64 架构][amd64-shield]
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
-
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

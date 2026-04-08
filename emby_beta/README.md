@@ -1,10 +1,10 @@
 # Home Assistant 插件：Emby
 
-我在业余时间维护这个以及其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试都需要花费大量的时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我自己不使用的测试服务，如 VPN），以便进行故障排除和改进插件。
+我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游更改、HA 更改以及在真实硬件上测试需要花费大量的时间（和一些金钱）。我经常使用我 >110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我自己不使用的测试服务，例如 VPN）来调试和改进插件。
 
 如果这个插件为您节省了时间或使您的设置更简单，我将非常感激您的支持！
 
-[![请给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![买我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
@@ -14,13 +14,13 @@
 ![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Femby%2Fconfig.yaml)
 
 [![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
-[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=代码基检查)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[donation-badge]: https://img.shields.io/badge/请给我买杯咖啡-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-badge]: https://img.shields.io/badge/通过%20PayPal%20捐赠-%230070BA?logo=paypal&style=flat&logoColor=white
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我仓库点星的人！要星标它，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有为我仓库加星的人！要加星，请点击下面的图片，然后它将显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,7 +28,7 @@ _感谢所有为我仓库点星的人！要星标它，请点击下面的图片�
 
 ## 关于
 
-[emby](https://emby.media/) 从个人媒体库组织视频、音乐、直播电视和照片，并将它们流式传输到智能电视、流媒体盒子和移动设备。此容器作为独立的 emby 媒体服务器打包。
+[emby](https://emby.media/) 从个人媒体库组织视频、音乐、直播电视和照片，并通过智能电视、流媒体盒子和移动设备进行流式传输。此容器打包为独立的 emby 媒体服务器。
 
 此插件基于 [docker 镜像](https://github.com/linuxserver/docker-emby) 来自 linuxserver.io。
 初始插件版本：https://github.com/petersendev/hassio-addons
@@ -37,26 +37,26 @@ _感谢所有为我仓库点星的人！要星标它，请点击下面的图片�
 
 使用插件的 `env_vars` 选项来传递额外的环境变量（大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-Webui 可在 `<您的 IP>:8096` 找到，或通过入口在 Home Assistant 中访问。
+Web 界面位于 `<your-ip>:8096`，或者可以通过入口在 Home Assistant 内部访问。
 
 ```yaml
 PGID: user
 GPID: user
 TZ: timezone
-localdisks: sda1 #放置您的驱动器的硬件名称以挂载，用逗号分隔，或其标签。例如：sda1, sdb1, MYNAS...
+localdisks: sda1 #请放置您驱动器的硬件名称以挂载，用逗号分隔，或其标签。例如：sda1, sdb1, MYNAS...
 networkdisks: "//SERVER/SHARE" #可选，挂载的 smb 服务器列表，用逗号分隔
 cifsusername: "username" #可选，smb 用户名，对所有 smb 共享相同
 cifspassword: "password" #可选，smb 密码
-cifsdomain: "domain" #可选，允许设置 smb 共享的域
-silent: true #抑制调试信息
+cifsdomain: "domain" #可选，允许为 smb 共享设置域名
+silent: true #抑制调试消息
 ```
 
 ## 安装
 
 此插件的安装相当简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. 将我的插件存储库添加到您的 Home Assistant 实例中（在监督器插件存储库的右上角，或点击下面的按钮如果您已配置我的 HA）
-   [![打开您的 Home Assistant 实例并显示带有特定存储库 URL 预填充的添加插件存储库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在管理员的插件存储中右上角，或点击下面的按钮如果您已经配置了我的 HA）
+   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 点击“保存”按钮以存储您的配置。
 1. 启动插件。

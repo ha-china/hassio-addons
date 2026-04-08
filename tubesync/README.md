@@ -2,7 +2,7 @@
 
 这只是个测试。不确定是否有效。
 
-TubeSync 是一个 YouTube 的个人视频录制器（PVR）。或者说，就像 Sonarr 但针对 YouTube（内置下载客户端）。它旨在同步频道和播放列表从 YouTube 到本地目录，并在媒体下载后更新您的媒体服务器。
+TubeSync 是一个 YouTube 的个人视频录制器（PVR）。或者说，就像 Sonarr 一样，但针对 YouTube（内置下载客户端）。它旨在同步 YouTube 中的频道和播放列表到本地目录，并在媒体下载后更新您的媒体服务器。
 
 https://github.com/meeb/tubesync
 
@@ -19,7 +19,7 @@ _感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，�
 1. 安装此扩展。
 1. 创建目录 /config/addon_config/tubesync 以存储您的配置。
 1. 启动扩展。
-1. 检查扩展的日志以查看是否一切顺利。
+1. 检查扩展的日志，以查看一切是否顺利。
 1. 在 homeassistant:4848 打开 WebUI
 
 

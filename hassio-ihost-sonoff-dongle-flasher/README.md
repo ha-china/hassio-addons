@@ -1,35 +1,38 @@
 # SONOFF Dongle Flasher
 
-![Supports armv7 Architecture](https://img.shields.io/badge/armv7-yes-green.svg) ![Supports aarch64 Architecture](https://img.shields.io/badge/aarch64-yes-green.svg) ![Supports amd64 Architecture](https://img.shields.io/badge/amd64-yes-green.svg)
+![支持 armv7 架构](https://img.shields.io/badge/armv7-yes-green.svg) ![支持 aarch64 架构](https://img.shields.io/badge/aarch64-yes-green.svg) ![支持 amd64 架构](https://img.shields.io/badge/amd64-yes-green.svg)
  
-## About
+## 关于
 
-SONOFF Dongle Flasher supports online firmware flashing for the iHost MG21 chip and the SONOFF Dongle series (ZBDongle-P, ZBDongle-E, Dongle-M, Dongle-PMG24, Dongle-LMG21 and Dongle-PZG23).
+SONOFF Dongle Flasher 支持对 iHost MG21 芯片和 SONOFF Dongle 系列设备（ZBDongle-P、ZBDongle-E、Dongle-M、Dongle-PMG24、Dongle-LMG21 和 Dongle-PZG23）进行在线固件更新。
 
-In addition to the SONOFF Dongle Flasher add-on, we also provide a [container version](https://hub.docker.com/r/ewelink/sonoff-dongle-flasher).
+除了 SONOFF Dongle Flasher 扩展插件外，我们还提供了 [容器版本](https://hub.docker.com/r/ewelink/sonoff-dongle-flasher)。
 
-## Prerequisites
+## 先决条件
 
-Before using the add-on, please make sure the serial port is not in use (it is commonly occupied by services like Zigbee2MQTT or ZHA).
-During the firmware flashing process, the add-on will attempt to connect to the device and automatically check whether the serial port is occupied.
-If it is, the add-on will try to stop the conflicting service for you.
-[Operation Guide >](https://github.com/iHost-Open-Source-Project/ha-operating-system?tab=readme-ov-file#readme)
+在使用此插件之前，请确保串行端口未被占用（它通常被 Zigbee2MQTT 或 ZHA 等服务占用）。
+在固件更新过程中，插件将尝试连接到设备并自动检查串行端口是否被占用。
+如果被占用，插件将尝试为您停止冲突的服务。
+[操作指南 >](https://github.com/iHost-Open-Source-Project/ha-operating-system?tab=readme-ov-file#readme)
 
 
-## Installation
-1. Go to the Add-on Store → Click the **More** button (⋮) in the upper-right corner → Select **Repositories**  
-2. Paste the following URL:  
+## 安装
+1. 打开插件商店 → 点击右上角的 **更多** 按钮 (⋮) → 选择 **仓库**  
+2. 粘贴以下 URL：  
    [https://github.com/iHost-Open-Source-Project/hassio-ihost-addon](https://github.com/iHost-Open-Source-Project/hassio-ihost-addon)  
-3. Or, simply click the button below to add it automatically:
+3. 或者，直接点击下面的按钮自动添加：
 
-[![Add Repository](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FiHost-Open-Source-Project%2Fhassio-ihost-addon)
+[![添加仓库](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FiHost-Open-Source-Project%2Fhassio-ihost-addon)
 
-## How to use
+## 使用方法
 
-See “Documentation” for details on how to use the SONOFF Dongle Flasher add-on.
+请参阅“文档”部分以获取有关如何使用 SONOFF Dongle Flasher 插件的详细信息。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

@@ -1,7 +1,7 @@
 name: Music Assistant (BETA)
-version: 2.8.0b16
+version: 2.9.0b5
 slug: music_assistant_beta
-description: '[老王杂谈说]：Music Assistant Server Beta 版本'
+description: '[老王杂谈说]：音乐助手服务器 Beta 版本'
 url: https://music-assistant.io
 arch:
   - amd64
@@ -22,7 +22,6 @@ map:
   - media:rw
   - ssl:ro
 init: false
-advanced: false
 backup_exclude:
   - cache.db
   - collage_images/*

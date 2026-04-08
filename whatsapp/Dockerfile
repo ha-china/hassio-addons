@@ -6,23 +6,18 @@ ARG BUILD_DATE="unknown"
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# 1. Install Node.js & Git (Using standard repos for stability)
-
-# 1. Install Node.js & Git (Using standard repos for stability)
+# 1. Install Node.js & Git
 # hadolint ignore=DL3018
 
 # Addon metadata (injected by CI)
-ENV ADDON_VERSION="1.3.1"
+ENV ADDON_VERSION="1.4.7"
 ENV ADDON_NAME="WhatsApp"
 ENV ADDON_SLUG="whatsapp"
 ENV ADDON_UNSUPPORTED="false"
 
 RUN \
- apk add --no-cache -u libssl3 libcrypto3 \
-        nodejs \
-        npm \
-        git \
-        curl
+    apk add --no-cache -u libssl3 libcrypto3 git curl && \
+    apk add --no-cache nodejs npm
 
 # 2. Set workdir
 WORKDIR /opt/whatsapp
@@ -48,9 +43,10 @@ COPY . .
 RUN \
     if [ -d "app" ]; then \
         mv app/* ./; \
+        rm -rf app; \
         # FORCE CLEAN INSTALL: Delete lockfile and node_modules to avoid version conflicts
         rm -rf package-lock.json node_modules; \
-        npm install; \
+        npm install --no-audit --no-fund --legacy-peer-deps; \
         # Extract Baileys version for runtime banner
         BAILEYS_VERSION=$(node -p "require('./node_modules/@whiskeysockets/baileys/package.json').version" 2>/dev/null || echo "unknown"); \
         echo "BAILEYS_VERSION=${BAILEYS_VERSION}" >> /etc/environment; \

@@ -1,7 +1,11 @@
 ---
 configuration:
   Make_Sensors:
-    name: Generate Second Inverter
+    name: Generate Primary Inverter (NOT RECOMMENDED IF EXISTING SENSORS EXIST)
+    description: >-
+      Not needed if previously Generated - Enable Sensor creation - Primary Inverter - MQTT discovery Topics and messages for HAOS-SBFspot
+  Make_Second:
+    name: Generate Second Inverter (DON'T FORGET TO SAVE OPTIONS AFTER USING BUTTONS)
     description: >-
       Enable Sensor creation - Second Inverter - MQTT discovery Topics and messages for HAOS-SBFspot
   Make_Third:
@@ -64,6 +68,18 @@ configuration:
     name: Plantname - Primary Inverter  > Very Important
     description: >-
       Plantname, required for setting Main MQTT topic.
+  InvSwVer:
+    name: Firmware version - Inverter {InvSwVer}
+    description: >-
+      12.35.45 is the typical format.
+  InvType:
+    name: model-number - Inverter {InvType}
+    description: >-
+      Set your Inverter model number. Aesthetic Only. SBFspot should populate it
+  InvClass:
+    name: Defines "Solar Inverter" for Inverter {InvClass}
+    description: >-
+      Defines your Equipment. Aesthetic Only. SBFspot should populate it
   InvName2:
     name: Second Inverter Name {InvName2}
     description: >-

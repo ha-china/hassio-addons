@@ -1,9 +1,9 @@
 ---
 name: Victoria Metrics
-version: 3.0.0
+version: 3.0.1
 slug: victoriametrics
 description: |-
-  [老王杂谈说]：VictoriaMetrics 是一个快速、低成本、可扩展的监控解决方案和时序数据库。
+  [老王杂谈说]：VictoriaMetrics 是一个快速、经济实惠且可扩展的监控解决方案和时序数据库。
 arch:
   - aarch64
   - amd64

@@ -1,22 +1,20 @@
-# Home Assistant Add-on: Matter Server
+# Home Assistant App: Matter 服务器
 
-![Supports aarch64 Architecture][aarch64-shield]
-![Supports amd64 Architecture][amd64-shield]
+![支持 aarch64 架构][aarch64-shield]
+![支持 amd64 架构][amd64-shield]
 
-## About
+## 关于
 
-Matter WebSocket Server for Home Assistant Core. Matter (formerly
-known as Connected Home over IP or CHIP) is an IPv6-based smart home
-standard. This add-on provides a Matter Controller which allows you to
-commission and control Matter devices. The matching Home Assistant Core
-integration communicates via WebSocket with this server.
+Home Assistant Core 的 Matter WebSocket 服务器。Matter（之前被称为基于 IP 的连接式智能家居或 CHIP）是一个基于 IPv6 的智能家居标准。此应用（之前称为附加组件）提供了一个 Matter 控制器，允许您配置和控制 Matter 设备。相应的 Home Assistant Core 集成通过 WebSocket 与此服务器通信。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
-
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

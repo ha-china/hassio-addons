@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.135.0
+
+- Update to upstream Manyfold 0.135.0.
+
 ## 1.0.3
 
 - Added the add-on to this repository under the official add-on folder/slug name `manyfold`.

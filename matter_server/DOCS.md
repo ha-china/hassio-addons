@@ -1,19 +1,19 @@
-# Home Assistant Add-on: Matter Server
+# Home Assistant App: Matter Server
 
 ## Installation
 
-Use the following steps to install this add-on.
+Use the following steps to install this app.
 
-1. Click the Home Assistant My button below to open the add-on page on your
+1. Click the Home Assistant My button below to open the app page on your
    Home Assistant instance.
 
-   [![Open this add-on in your Home Assistant instance.][addon-badge]][addon]
+   [![Open this app in your Home Assistant instance.][addon-badge]][addon]
 
-1. Click the "Install" button to install the add-on.
+1. Click the "Install" button to install the app.
 
 ## How to use
 
-Start the Matter Server add-on to make the WebSocket available to Home
+Start the Matter Server app to make the WebSocket available to Home
 Assistant Core. Install the [Matter integration][matter_integration]
 in Home Assistant Core.
 
@@ -26,7 +26,7 @@ Matter Server WebSocket server port field.
 
 ## Server variants
 
-This add-on runs the Python Matter Server implementation from the
+This app runs the Python Matter Server implementation from the
 [home-assistant-libs/python-matter-server][matter_server_repo] repository by default.
 
 Starting with version 8.2.0 and choosing the "Beta" flag (see below) the new OHF
@@ -34,7 +34,7 @@ Matter(.js) Server is executed instead of the Python Matter Server.
 
 ## Configuration
 
-Add-on configuration:
+App configuration:
 
 | Configuration        | Description                                                                                             |
 |----------------------|---------------------------------------------------------------------------------------------------------|
@@ -43,6 +43,26 @@ Add-on configuration:
 | beta                 | Whether to install the latest beta version on startup (runs matter.js-based Matter Server starting with 8.2.0) |
 | enable_test_net_dcl  | Enable test-net DCL for PAA root certificates, OTA updates and other device information.                |
 | bluetooth_adapter_id | Set BlueZ Bluetooth Controller ID (for local commissioning)                                             |
+| matter_server_env_vars | Extra environment variables exported before start (only relevant for the JavaScript Matter Server / Beta mode). Use `KEY=VALUE` entries. |
+| matter_server_version | Custom Matter Server version. In JavaScript/Beta mode, only `0.x.y` or `1.x.y` values are used; other values are ignored and latest is installed. |
+
+### `matter_server_env_vars` (JavaScript server only)
+
+This option is only relevant when the **Beta** flag is enabled (JavaScript
+Matter Server).
+
+```yaml
+matter_server_env_vars:
+  - NODE_OPTIONS=--max-old-space-size=512
+  - MY_FLAG=true
+```
+
+### `matter_server_version`
+
+- Python mode: installs the configured `python-matter-server` version.
+- JavaScript/Beta mode: uses the configured version only if it matches
+  `0.x.y` or `1.x.y` (for example `1.2.3`); all other values are ignored and
+  `latest` is installed.
 
 ## Support
 

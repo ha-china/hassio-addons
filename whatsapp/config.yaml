@@ -1,8 +1,8 @@
 name: "WhatsApp"
-version: "1.3.2"
+version: "1.4.8"
 slug: "whatsapp"
 image: ghcr.nju.edu.cn/faserf/hassio-addons-whatsapp-{arch}
-description: "[老王杂谈说]：Home Assistant WhatsApp 应用程序（Baileys/Node.js）。使用主机网络（端口 8066 无法更改）。"
+description: "[老王杂谈说]：Home Assistant WhatsApp 应用 (Baileys/Node.js)"
 url: "https://ghfast.top/github.com/FaserF/ha-whatsapp"
 arch:
   - aarch64
@@ -26,6 +26,9 @@ options:
   ui_auth_password: ""
   mark_online: false
   media_folder: ""
+  admin_numbers: ""
+  welcome_message_enabled: true
+  admin_notifications_enabled: true
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)
   reset_session: bool
@@ -39,6 +42,9 @@ schema:
   ui_auth_password: str?
   mark_online: bool
   media_folder: str?
+  admin_numbers: str?
+  welcome_message_enabled: bool
+  admin_notifications_enabled: bool
 ports:
   8066/tcp: 8066
 hassio_api: true

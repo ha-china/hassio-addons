@@ -1,5 +1,13 @@
-## 5.1.4-17 (17-02-2026)
+## 5.1.4-23 (06-04-2026)
 - Minor bugs fixed
+## 5.1.4-22 (06-04-2026)
+- Minor bugs fixed
+## 5.1.4-21 (01-04-2026)
+- Minor bugs fixed
+## 5.1.4-20 (26-03-2026)
+- If multiple openvpn configs are available and none is defined in the options, use a random one
+- Add upnp for vpn
+
 ## 5.1.4-16 (16-02-2026)
 - Fix interface binding when VPN is disabled, so qBittorrent can use all available interfaces instead of staying on a previous VPN interface
 

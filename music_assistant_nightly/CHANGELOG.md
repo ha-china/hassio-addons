@@ -1,84 +1,45 @@
-# [2.8.0.dev2026030504] - 05.03.2026
+# [2.9.0.dev2026040805] - 08.04.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.8.0.dev2026030323](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2026030323)_
-
-### 🚀 New Providers
-
-- Add Dashie Kiosk player provider (by @jwlerch78 in #3180)
+_Changes since [2.9.0.dev2026040712](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026040712)_
 
 ### 🚀 Features and enhancements
 
-- Implement language normalization function to the Alexa provider (by @mericon in #3266)
-- Handle outdated TLS/SSL configuration in radio streams (by @OzGav in #3301)
-- Fix album image missing from queue item responses (by @chrisuthe in #3302)
-- Add missing select_source method for HEOS provider (by @Tommatheussen in #3305)
-- Cleanup genre, alias and media item mapping orphans during sync (by @jozefKruszynski in #3306)
+- Bump base image to 1.0.10 (by @marcelveldt in #1680)
 
 ### 🐛 Bugfixes
 
-- Improve track retrieval for Soundcloud artists with fallback (by @robsonke in #3166)
-- Fix several issues with active source reporting from players (by @marcelveldt in #3309)
+- Fix: flow mode not being applied in all cases (while it should) (by @marcelveldt in #1672)
+- Better handling of Spotify stream error (due to token expiration) (by @marcelveldt in #1676)
 
 ### 🎨 Frontend Changes
 
-- Replace explicit `any` types with proper TypeScript types across code… (by @chrisuthe in [#1533](https://github.com/music-assistant/frontend/pull/1533))
-- Gray out protocol badges when protocol is unavailable (by @MarvinSchenkel in [#1534](https://github.com/music-assistant/frontend/pull/1534))
-- Improve removal of any (by @stvncode in [#1535](https://github.com/music-assistant/frontend/pull/1535))
+- Isolate queue elapsed time from main reactive queue objects (by @apophisnow in [#1672](https://github.com/music-assistant/frontend/pull/1672))
+- Use swiper virtual slides in Carousel (by @apophisnow in [#1682](https://github.com/music-assistant/frontend/pull/1682))
+- Add Audio Analysis providers to the settings menu (by @MarvinSchenkel in [#1673](https://github.com/music-assistant/frontend/pull/1673))
+- Fix hidden player still showing in UI (by @OzGav in [#1686](https://github.com/music-assistant/frontend/pull/1686))
 
-### 🧰 Maintenance and dependency bumps
+### Other Changes
 
-- ⬆️ Update music-assistant-frontend to 2.17.108 (by @music-assistant-machine in #3310)
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@MarvinSchenkel, @OzGav, @Tommatheussen, @chrisuthe, @jozefKruszynski, @jwlerch78, @marcelveldt, @mericon, @robsonke, @stvncode
-
-
-# [2.8.0.dev2026030323] - 03.03.2026
-
-## 📦 Nightly Release
-
-_Changes since [2.8.0.dev2026030304](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2026030304)_
-
-### 🚀 Features and enhancements
-
-- Enhance SoundCloud streams for better seeking/resuming support (by @robsonke in #3298)
-
-### 🐛 Bugfixes
-
-- Fix audiobooks controller's set playlog function if user context missing (by @fmunkes in #3253)
-- Fix group member recursion for Squeezelite devices (by @MarvinSchenkel in #3287)
-- Fix race condition in transfer queue feature (by @marcelveldt in #3289)
-- Fix active source detection (by @marcelveldt in #3290)
-- Guard eventdata snapcast (by @MarvinSchenkel in #3291)
-- Make Snapcast type player instead of protocol (by @marcelveldt in #3292)
-- Improve protocol linking reliability and restart resilience (by @marcelveldt in #3294)
-- Check if HEOS queue exists before clearing (by @Tommatheussen in #3295)
-- Ensure soundcloud playlist genre is added as a list (by @jozefKruszynski in #3296)
-- Fix Google Cast Groups not visible/controllable (by @marcelveldt in #3300)
-
-### 🎨 Frontend Changes
-
-- Align the players controls so they are in more consistent positions (by @radiohe4d in [#1529](https://github.com/music-assistant/frontend/pull/1529))
-- Revert work on the reload toast for chunks (by @stvncode in [#1528](https://github.com/music-assistant/frontend/pull/1528))
-- Lokalise translations update (by @[github-actions[bot]](https://github.com/apps/github-actions) in [#1527](https://github.com/music-assistant/frontend/pull/1527))
-- Do not inline the PlayerMenu on desktop (by @marcelveldt in [#1531](https://github.com/music-assistant/frontend/pull/1531))
-- Few UI scale fixes + fix 1 thumb shown on large screens (by @MarvinSchenkel in [#1530](https://github.com/music-assistant/frontend/pull/1530))
-- Few UI scale fixes + fix 1 thumb shown on large screens (by @MarvinSchenkel in [#1530](https://github.com/music-assistant/frontend/pull/1530))
+- Fix: Disable shuffle for radio mode (by @MarvinSchenkel in #1673)
 
 ### 🧰 Maintenance and dependency bumps
 
 <details>
-<summary>4 changes</summary>
+<summary>11 changes</summary>
 
-- Bump aiosendspin to 4.3.1 (by @Copilot in #3286)
-- Bump aioslimproto to 3.1.7 (by @MarvinSchenkel in #3288)
-- Optimize musiccast device identifieres after player merging (by @fmunkes in #3297)
-- ⬆️ Update music-assistant-frontend to 2.17.107 (by @music-assistant-machine in #3299)
+- Bump pychromecast from 10.1.0 to 10.2.3 (by @dependabot[bot] in #199)
+- Bump pytest from 8.3.2 to 8.3.3 (by @dependabot[bot] in #1668)
+- Maintenance: Replace pylint with ruff (by @marcelveldt in #1675)
+- Bump pypa/gh-action-pypi-publish from 1.10.1 to 1.10.2 (by @dependabot[bot] in #1677)
+- Bump ruff from 0.6.5 to 0.6.7 (by @dependabot[bot] in #1678)
+- Bump docker/build-push-action from 6.7.0 to 6.8.0 (by @dependabot[bot] in #1679)
+- Drop root during base image build and use venv (by @kbirger in #1682)
+- Bump docker/build-push-action from 6.8.0 to 6.9.0 (by @dependabot[bot] in #1684)
+- Bump aiohttp from 3.10.5 to 3.10.8 (by @dependabot[bot] in #1686)
+- ⬆️ Update music-assistant-models to 1.1.111 (by @music-assistant-machine in #3608)
+- ⬆️ Update music-assistant-frontend to 2.17.144 (by @music-assistant-machine in #3612)
 
 </details>
 
@@ -86,29 +47,63 @@ _Changes since [2.8.0.dev2026030304](https://github.com/music-assistant/server/r
 
 Special thanks to the following contributors who helped with this release:
 
-@Copilot, @MarvinSchenkel, @Tommatheussen, @fmunkes, @jozefKruszynski, @marcelveldt, @radiohe4d, @robsonke, @stvncode
+@MarvinSchenkel, @OzGav, @apophisnow, @kbirger, @marcelveldt
 
 
-# [2.8.0.dev2026030304] - 03.03.2026
+# [2.9.0.dev2026040712] - 07.04.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.8.0.dev2026030219](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2026030219)_
+_Changes since [2.9.0.dev2026040705](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026040705)_
+
+### 🚀 New Providers
+
+- Add QQ Music provider (by @xiasi0 in #3511)
+
+### 🚀 Features and enhancements
+
+- Add dynamic leader switching support for Sendspin sync groups (by @marcelveldt in #3603)
 
 ### 🐛 Bugfixes
 
-- Fix userid missing in player queue controller's resolve media item method (by @fmunkes in #3283)
-- Some follow-up fixes for the merged protocols players (by @marcelveldt in #3284)
-- Accept alternative genre tag separators (by @marcelveldt in #3285)
-
-### 🧰 Maintenance and dependency bumps
-
-- Bump xmltodict from 1.0.2 to 1.0.4 (by @dependabot[bot] in #3281)
+- YT Music: Fix syncing 'Episodes for later' in podcast library sync (by @teancom in #3582)
+- Include missing description in automatic artist metadata scan (by @OzGav in #3595)
+- Add protocol awareness and transition guards to sync group player (by @marcelveldt in #3600)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@fmunkes, @marcelveldt
+@OzGav, @marcelveldt, @teancom, @xiasi0
+
+
+# [2.9.0.dev2026040705] - 07.04.2026
+
+## 📦 Nightly Release
+
+_Changes since [2.9.0.dev2026040605](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026040605)_
+
+### 🐛 Bugfixes
+
+- Rewrite tidal stream behaviour to avoid premature cutoff (by @jozefKruszynski in #3369)
+- Revert "Rewrite tidal stream behaviour to avoid premature cutoff (#3369)" (by @jozefKruszynski in #3593)
+- Fix sync group regressions: proper locking and dynamic leader switch (by @marcelveldt in #3594)
+
+### Other Changes
+
+- Add support for m4a audio container (by @marcelveldt in #303)
+- Improve filesystem sync (by @marcelveldt in #304)
+- Add support for volume muting (by @marcelveldt in #305)
+- Add media_item to queue_item (by @marcelveldt in #306)
+
+### 🧰 Maintenance and dependency bumps
+
+- Bump mashumaro from 3.18 to 3.20 (by @dependabot[bot] in #3596)
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@jozefKruszynski, @marcelveldt
 
 

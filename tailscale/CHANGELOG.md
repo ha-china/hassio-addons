@@ -2,4 +2,4 @@
 
 ## 🐛 Bug fixes
 
-- Fix path for ipcalc @bkw ([#612](https://github.com/hassio-addons/app-tailscale/pull/612))
+- Remove service name option @lmagyar ([#658](https://github.com/hassio-addons/app-tailscale/pull/658))
