@@ -1,5 +1,5 @@
 {
-  "version": "v1.0.5",
+  "version": "v1.3.7",
   "slug": "ai_hub_tts",
   "name": "AI Hub TTS",
   "description": "[老王杂谈说]：离线语音合成，基于 Kokoro 多语言模型，支持中英文语音合成，兼容 Wyoming 协议",
@@ -9,7 +9,7 @@
   ],
   "init": false,
   "host_network": true,
-  "image": "ghcr.hasscn.top/desmond-dong/ai_hub_tts/ai_hub_tts-{arch}",
+  "image": "crpi-tuq1xajq0lk6s0kt.cn-shanghai.personal.cr.aliyuncs.com/hachina/ai_hub_tts-{arch}",
   "ports": {
     "10301/tcp": 10301
   },
@@ -23,11 +23,15 @@
     "wyoming"
   ],
   "options": {
-    "voice": "af_heart",
-    "sample_rate": 24000
+    "voice": "ZH_MIX_EN",
+    "sample_rate": 44100,
+    "speed": 1.0,
+    "no_bert": true
   },
   "schema": {
-    "voice": "list(af_heart|af_bella|am_michael|am_adam|bf_emma|bf_george|bm_george|bm_lewis|ef_dora|em_alex|ff_nicole|ff_siwu|fm_dora|fm_sarah|hf_alpha|hf_beta|hm_omega|hm_psi|if_nicole|im_siyu|jf_nezumi|jf_xiaobei|jf_xiaoxiao|jf_yunjian|jm_kumo|jf_takeru)",
-    "sample_rate": "list(24000)"
+    "voice": "list(ZH_MIX_EN)",
+    "sample_rate": "list(44100)",
+    "speed": "float(0.5,2.0)",
+    "no_bert": "bool"
   }
 }
