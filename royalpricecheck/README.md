@@ -1,9 +1,9 @@
-# 家居助手插件：皇家邮轮价格检查
+# 家居助理插件：皇家价格检查
 
 ## 描述
-当皇家加勒比邮轮的附加产品价格降低时进行通知。可以重新定价邮轮、仅限饮料套餐、互联网、远足等活动。
+当皇家加勒比游轮的附加产品价格降低时进行通知。可以重新定价游轮、仅限饮料套餐、网络、远足等。
 
-_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
@@ -25,7 +25,7 @@ _感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，�
 请参阅 `https://github.com/jdeath/CheckRoyalCaribbeanPrice`
 
 ## 自动运行
-1. 创建一个自动化任务，每天（在随机时间）运行此插件一次
+1. 创建一个自动化任务，每天运行此插件一次（在随机时间）
 
 ```
 alias: 启动皇家价格检查
@@ -46,7 +46,7 @@ mode: single
 1. 编辑 `/addon-configs/2effc9b9_royalpricecheck/config.yaml`
 1. 配置通知的行
 
-对于Home Assistant通知，它应该看起来像这样：
+对于homeassistant通知，它应该看起来像这样：
 ```
 # config.yaml
 apprise:

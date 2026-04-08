@@ -1,5 +1,33 @@
 # Changelog
 
+## [2.0.84](https://github.com/SirUli/homeassistant-ollama-addon/compare/v2.0.83...v2.0.84) (2026-04-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ollama/ollama to v0.20.3 ([87d5e6f](https://github.com/SirUli/homeassistant-ollama-addon/commit/87d5e6fcea4b044f256322206d0b6da760293e34))
+
+## [2.0.83](https://github.com/SirUli/homeassistant-ollama-addon/compare/v2.0.82...v2.0.83) (2026-04-06)
+
+
+### Bug Fixes
+
+* **ollama:** Fix environment variable OLLAMA_NUM_THREAD ([ae8b040](https://github.com/SirUli/homeassistant-ollama-addon/commit/ae8b040f12b2f8f53ecaa74536442201c17bd10e))
+
+## [2.0.82](https://github.com/SirUli/homeassistant-ollama-addon/compare/v2.0.81...v2.0.82) (2026-04-06)
+
+
+### Bug Fixes
+
+* **ollama:** Add GGML_VK_DISABLE_INTEGER_DOT_PRODUCT ([82d02c1](https://github.com/SirUli/homeassistant-ollama-addon/commit/82d02c1a19c60e341fcae051e203ede330532e7c)), closes [#159](https://github.com/SirUli/homeassistant-ollama-addon/issues/159)
+
+## [2.0.81](https://github.com/SirUli/homeassistant-ollama-addon/compare/v2.0.80...v2.0.81) (2026-04-06)
+
+
+### Bug Fixes
+
+* **ollama:** Add optional OLLAMA_NUM_THREADS ([00812ad](https://github.com/SirUli/homeassistant-ollama-addon/commit/00812adfaddb8ebc70e1aa657a5a4e0bb6d8c387)), closes [#269](https://github.com/SirUli/homeassistant-ollama-addon/issues/269)
+
 ## [2.0.80](https://github.com/SirUli/homeassistant-ollama-addon/compare/v2.0.79...v2.0.80) (2026-04-04)
 
 

@@ -1,42 +1,43 @@
-# Home assistant add-on: CyberChef
+# 家庭助理插件：CyberChef
 
-CyberChef is a simple, intuitive web app for carrying out all manner of "cyber" operations within a web browser. These operations include simple encoding like XOR and Base64, more complex encryption like AES, DES and Blowfish, creating binary and hexdumps, compression and decompression of data, calculating hashes and checksums, IPv6 and X.509 parsing, changing character encodings, and much more.
+CyberChef是一个简单直观的Web应用，可以在浏览器中执行各种“网络”操作。这些操作包括XOR和Base64等简单编码，AES、DES和Blowfish等更复杂的加密，创建二进制和十六进制转储，数据的压缩和解压缩，计算哈希和校验和，IPv6和X.509解析，更改字符编码等等。
 
-The tool is designed to enable both technical and non-technical analysts to manipulate data in complex ways without having to deal with complex tools or algorithms. It was conceived, designed, built and incrementally improved by an analyst in their 10% innovation time over several years.
+这个工具旨在使技术和非技术分析师都能够以复杂的方式操作数据，而无需处理复杂工具或算法。它是经过数年分析师在10%的创新时间中构思、设计、构建和逐步改进的。
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
-[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![为@jdeath/homeassistant-addons点赞的Stargazers名单](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## About
+## 关于
 
-This addon is based on the [docker image](https://github.com/gchq/CyberChef).
+此插件基于[docker镜像](https://github.com/gchq/CyberChef)。
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+此插件的安装非常简单，与安装任何其他Hass.io插件没有区别。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Open WebUI should work via ingress or <your-ip>:port.
+1. 将我的Hass.io插件仓库[repository]添加到您的Hass.io实例中。
+1. 安装此插件。
+1. 点击`保存`按钮以存储您的配置。
+1. 启动插件。
+1. 检查插件的日志以查看一切是否顺利。
+1. 通过ingress或<您的IP>:端口号打开WebUI。
 
-## Configuration
+## 配置
 
 ```
-port : 80 #port you want to run on.
+port : 80 #您希望运行的端口号。
 ```
 
-Webui can be found at `<your-ip>:port`.
+WebUI可以在`<您的IP>:端口号`找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
-
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

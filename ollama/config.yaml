@@ -1,7 +1,7 @@
 name: "Ollama"
-description: "[老王杂谈说]：快速上手大型语言模型。"
+description: "[老王杂谈说]：开始使用大型语言模型。"
 # renovate: datasource=github-tags depName=ollama/ollama
-version: "0.20.2"
+version: "0.20.3"
 slug: "ollama"
 arch:
   - aarch64
@@ -38,7 +38,10 @@ schema:
   OLLAMA_KV_CACHE_TYPE: list(f16|q8_0|q4_0)
   OLLAMA_MAX_LOADED_MODELS: int
   OLLAMA_NUM_PARALLEL: int
+  OLLAMA_NUM_THREAD: int?
   OLLAMA_VULKAN: bool?
+  # https://ghfast.top/github.com/ollama/ollama/issues/13108
+  GGML_VK_DISABLE_INTEGER_DOT_PRODUCT: bool?
   OLLAMA_NOPRUNE: bool?
   OLLAMA_MAX_QUEUE: int?
   OLLAMA_SCHED_SPREAD: bool?

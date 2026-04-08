@@ -1,41 +1,49 @@
-# Home Assistant 社区应用：Vaultwarden
+# 家居助理插件：Vaultwarden (Bitwarden RS)
 
-[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
+使用插件选项 `env_vars` 来传递额外的环境变量（大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-[![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
+# ⚠️ 建议使用官方插件（https://github.com/hassio-addons/addon-bitwarden）而不是此分支。此分支的唯一好处是自动发布，现在已在官方版本中实现。 ⚠️
 
-[![通过 GitHub Sponsors 支持Frenck][github-sponsors-shield]][github-sponsors]
 
-[![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
+我在业余时间维护这个和其他的Home Assistant插件：跟上上游更改、HA更改以及在真实硬件上测试需要花费大量的时间（和一些金钱）。我经常使用我超过110个插件中的5-10个，所以我安装了测试机器（并购买了某些我本人不使用的测试服务，如vpn）来调试和改进插件
 
-开源密码管理解决方案。
+如果此插件为您节省了时间或使您的设置更加容易，我将非常感谢您的支持！
+
+[![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过PayPal捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## 插件信息
+
+![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbitwarden%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbitwarden%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbitwarden%2Fconfig.yaml)
+
+[![Codacy徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+
+_感谢所有给我仓库加星的人！要加星，请点击下面的图片，然后它将显示在右上角。谢谢！_
+
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+
+![下载演变](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/bitwarden/stats.png)
+
+## 安装
+
+1. 将我的插件存储库添加到您的Home Assistant实例中（在管理员的插件商店右上角，或点击下面的按钮如果您已经配置了我的HA）
+   [![打开您的Home Assistant实例并显示一个带有特定存储库URL的添加插件存储库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此插件。
+1. 启动插件。
+1. 检查插件的日志以查看一切是否顺利。
 
 ## 关于
 
-Bitwarden 是一个开源的密码管理器，可以将敏感信息，如网站凭证，存储在加密的保险库中。
+由Frenck创建，请在此处查看文档：https://github.com/hassio-addons/addon-bitwarden
 
-Bitwarden 平台提供各种客户端应用程序，包括网页界面、桌面应用程序、浏览器扩展和移动应用。
-
-此应用基于轻量级和开源的 [Vaultwarden][vaultwarden] 实现，允许您自行托管这个出色的密码管理器。
-
-密码盗窃是一个严重的问题。您使用的网站和应用每天都在遭受攻击。安全漏洞发生，您的密码被盗。当您在所有地方都使用相同的密码时，黑客可以轻易地访问您的电子邮件、银行和其他重要账户。使用密码管理器吧！
-
-![Bitwarden 预览][screenshot]
-
-[discord-shield]: https://img.shields.io/discord/478094546522079232.svg
-[discord]: https://discord.me/hassioaddons
-[forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
-[forum]: https://community.home-assistant.io/t/home-assistant-community-add-on-bitwarden-rs/115573?u=frenck
-[github-sponsors-shield]: https://frenck.dev/wp-content/uploads/2019/12/github_sponsor.png
-[github-sponsors]: https://github.com/sponsors/frenck
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
-[patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
-[patreon]: https://www.patreon.com/frenck
-[project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.26.4-blue.svg
-[release]: https://github.com/hassio-addons/app-vaultwarden/tree/v0.26.4
-[screenshot]: https://github.com/hassio-addons/app-vaultwarden/raw/main/images/screenshot.png
-[vaultwarden]: https://github.com/dani-garcia/vaultwarden
+[repository]: https://github.com/alexbelgium/hassio-addons
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

@@ -1,5 +1,21 @@
 # Changelog
 
+## grafana-promtail 5.0.1 - 2026-04-07
+
+### Changes
+
+#### ⬆️ Dependency updates
+
+- ⏫ Update mikefarah/yq Docker tag to v4.52.1 @[renovate[bot]](https://github.com/apps/renovate) (#485)
+- ⏫ Update mikefarah/yq Docker tag to v4.52.2 @[renovate[bot]](https://github.com/apps/renovate) (#488)
+- ⏫ Update grafana/promtail Docker tag to v3.6.5 @[renovate[bot]](https://github.com/apps/renovate) (#495)
+- ⏫ Update mikefarah/yq Docker tag to v4.52.4 @[renovate[bot]](https://github.com/apps/renovate) (#497)
+- ⏫ Update grafana/promtail Docker tag to v3.6.6 @[renovate[bot]](https://github.com/apps/renovate) (#502)
+- ⏫ Update grafana/promtail Docker tag to v3.6.7 @[renovate[bot]](https://github.com/apps/renovate) (#504)
+- ⏫ Update grafana/promtail Docker tag to v3.6.8 @[renovate[bot]](https://github.com/apps/renovate) (#520)
+- ⏫ Update mikefarah/yq Docker tag to v4.52.5 @[renovate[bot]](https://github.com/apps/renovate) (#521)
+- ⏫ Update grafana/promtail Docker tag to v3.6.10 @[renovate[bot]](https://github.com/apps/renovate) (#527)
+
 ## grafana-promtail 5.0.0 - 2026-01-24
 
 ### Changes
