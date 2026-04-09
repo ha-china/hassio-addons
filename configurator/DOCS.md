@@ -1,25 +1,25 @@
-# Home Assistant 插件：文件编辑器
+# Home Assistant App: File editor
 
-## 安装
+## Installation
 
-按照以下步骤在您的系统上安装该插件：
+Follow these steps to get the app (formerly known as add-on) installed on your system:
 
-1. 在您的 Home Assistant 前端导航到 **设置** -> **插件** -> **插件商店**。
-2. 找到“文件编辑器”插件并点击它。
-3. 点击“安装”按钮。
+1. Navigate in your Home Assistant frontend to **Settings** > **Apps** > **Install app**.
+2. Find the "File editor" app and click it.
+3. Click on the "INSTALL" button.
 
-## 使用方法
+## How to use
 
-通常情况下，此插件不需要您进行任何配置。
+In general, this app requires no configuration from your end.
 
-1. 切换“在侧边栏显示”选项，这将把文件编辑器添加到主菜单。
-2. 启动插件。
-3. 刷新您的浏览器，侧边栏现在可见“文件编辑器”。
-4. 点击“文件编辑器”菜单选项并开始配置！
+1. Toggle the "Show in sidebar" option, which adds the File editor to the main menu.
+2. Start the app.
+3. Refresh your browser, the "File editor" is now visible in the sidebar.
+4. Click on the "File editor" menu option and start configuring!
 
-## 配置
+## Configuration
 
-插件配置：
+App configuration:
 
 ```yaml
 dirsfirst: false
@@ -30,47 +30,47 @@ ignore_pattern:
 ssh_keys: []
 ```
 
-### 选项：`dirsfirst`（必需）
+### Option: `dirsfirst` (required)
 
-此选项允许您在文件浏览器树中优先列出目录。
+This option allows you to list directories before files in the file browser tree.
 
-将其设置为 `true` 以首先列出目录，否则设置为 `false`。
+Set it to `true` to list directories first, `false` otherwise.
 
-### 选项：`enforce_basepath`（必需）
+### Option: `enforce_basepath` (required)
 
-如果设置为 `true`，则访问限制在 `/homeassistant` 目录内的文件
-（也称为 Home Assistant 本身内部的 `/config` 文件夹）。
+If set to `true`, access is limited to files within the `/homeassistant` directory
+(also known as the `/config` folder inside Home Assistant itself).
 
-### 选项：`git`（必需）
+### Option: `git` (required)
 
-如果设置为 `true`，插件将为支持的目录初始化 git。
+If set to `true`, the app will initialize git for directories that support it.
 
-### 选项：`ignore_pattern`（必需）
+### Option: `ignore_pattern` (required)
 
-此选项允许您在文件浏览器树中隐藏文件和文件夹。
-默认情况下，它隐藏 `__pycache__` 文件夹。
+This option allows you to hide files and folders from the file browser tree.
+By default, it hides the `__pycache__` folders.
 
-### 选项：`ssh_keys`（必需）
+### Option: `ssh_keys` (required)
 
-包含 SSH 私钥的文件名列表。这些可以用于允许访问远程 git 仓库。
+A list of filenames containing SSH private keys. These can be used to allow for access to remote git repositories.
 
-## 已知问题和限制
+## Known issues and limitations
 
-- 此插件只能通过 Ingress 使用，没有直接访问权限。
+- This app can only be used via Ingress and has no direct access.
 
-## 支持
+## Support
 
-有问题吗？
+Got questions?
 
-您有多种方式可以解答您的问题：
+You have several options to get them answered:
 
-- [Home Assistant Discord 聊天服务器][discord]。
-- Home Assistant [社区论坛][forum]。
-- 加入 [Reddit 子版块][reddit] 在 [/r/homeassistant][reddit]
+- The [Home Assistant Discord Chat Server][discord].
+- The Home Assistant [Community Forum][forum].
+- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
 
-如果您发现了一个错误，请 [在我们的 GitHub 上打开一个问题][issue]。
+In case you've found a bug, please [open an issue on our GitHub][issue].
 
-[discord]: https://discord.gg/c5DvZ4e
+[discord]: https://www.home-assistant.io/join-chat
 [forum]: https://community.home-assistant.io
 [issue]: https://github.com/home-assistant/addons/issues
 [reddit]: https://reddit.com/r/homeassistant

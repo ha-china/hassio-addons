@@ -1,8 +1,8 @@
 name: "WhatsApp"
-version: "1.4.8"
+version: "1.4.9"
 slug: "whatsapp"
 image: ghcr.nju.edu.cn/faserf/hassio-addons-whatsapp-{arch}
-description: "[老王杂谈说]：Home Assistant WhatsApp 应用 (Baileys/Node.js)"
+description: "[老王杂谈说]：Home Assistant WhatsApp 应用（Baileys/Node.js）。"
 url: "https://ghfast.top/github.com/FaserF/ha-whatsapp"
 arch:
   - aarch64
@@ -27,7 +27,7 @@ options:
   mark_online: false
   media_folder: ""
   admin_numbers: ""
-  welcome_message_enabled: true
+  welcome_message_enabled: false
   admin_notifications_enabled: true
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)
