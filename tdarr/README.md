@@ -1,10 +1,10 @@
 # Home Assistant 插件：Tdarr
 
-我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试需要花费大量时间（以及一些金钱）。我经常使用大约 5-10 个我 >110 个插件，所以我安装了测试机器（并购买了一些我不使用的测试服务，如 VPN），以便进行故障排除和改进插件。
+我在业余时间维护这个以及其他 Home Assistant 插件：跟进上游更改、Home Assistant 更改以及在实际硬件上的测试都需要花费大量的时间（以及一些金钱）。我经常使用 5-10 个我超过 110 个插件中的部分，所以我安装了测试机器（并购买了一些我自己不用的测试服务，例如 VPN），以便进行故障排除和改进插件。
 
-如果这个插件为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
+如果这个插件为您节省了时间或使您的设置更加容易，我将非常感激您的支持！
 
-[![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![请给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
@@ -20,7 +20,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我仓库点星的人！要星标它，请点击下面的图片，然后它将出现在右上角。谢谢！_
+_感谢所有为我的仓库加星的人！要加星，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,14 +28,14 @@ _感谢所有为我仓库点星的人！要星标它，请点击下面的图片�
 
 ## 关于
 
-[Tdarr](https://tdarr.io) 是一个用于通过 FFmpeg/HandBrake 自动化媒体库转码/复用管理任务的分布式转码系统。它确保您的文件在编解码器、流和容器方面完全符合您的要求。Tdarr 支持分布式处理，允许您使用 Tdarr 节点在 Windows、Linux（包括 ARM）和 macOS 上利用备用硬件。
+[Tdarr](https://tdarr.io) 是一个分布式的媒体库转码/转封装管理系统，用于自动化媒体库的转码管理，它使用 FFmpeg/HandBrake。它确保您的文件在编解码器、流和容器方面完全符合您的需求。Tdarr 支持分布式处理，允许您使用 Tdarr 节点在 Windows、Linux（包括 ARM）和 macOS 上将备用硬件利用起来。
 
 主要功能：
-- 多节点跨节点分布式转码
+- 多节点分布式转码
 - 自动化媒体库管理
 - 支持 FFmpeg 和 HandBrake
 - 硬件加速支持
-- 基于网络的托管管理界面
+- 基于网页的管理界面
 - 基于插件的流程系统
 
 此插件基于 [hurlenko 的 docker 镜像](https://hub.docker.com/r/hurlenko/Tdarr)。
@@ -44,24 +44,24 @@ _感谢所有为我仓库点星的人！要星标它，请点击下面的图片�
 
 此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. 将我的插件存储库添加到您的 Home Assistant 实例中（在监督器插件商店右上角，或点击下面的按钮如果您已配置我的 HA）
+1. 将我的插件存储库添加到您的 Home Assistant 实例中（在 supervisor 插件存储库的右上角，或点击下面的按钮如果您已配置我的 HA）
    [![打开您的 Home Assistant 实例并显示带有特定存储库 URL 预填充的添加插件存储库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 点击“保存”按钮以存储您的配置。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切顺利。
-1. 仔细配置插件以满足您的偏好，有关详情请参阅官方文档。
+1. 检查插件的日志以查看一切是否顺利。
+1. 仔细配置插件以满足您的偏好，有关详细信息请参阅官方文档。
 
 ## 配置
 
 Web UI 可在 `<your-ip>:8265` 或通过侧边栏使用入口找到。
-服务器端口为 `8266`，用于连接外部 Tdarr 节点。
+服务器端口为 `8266` 用于连接外部 Tdarr 节点。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|---------|-------------|
-| `CONFIG_LOCATION` | str | `/config/addons_config/tdarr` | 存储Tdarr配置的路径 |
+|------|------|---------|------|
+| `CONFIG_LOCATION` | str | `/config/addons_config/tdarr` | Tdarr 配置存储的路径 |
 | `TZ` | str | | 时区（例如，`Europe/London`） |
 | `localdisks` | str | | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
 | `networkdisks` | str | | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
@@ -84,17 +84,17 @@ cifsdomain: "workgroup"
 ### 设置分布式转码
 
 1. **配置服务器**：
-   - 访问 Web UI，地址为 `<your-ip>:8265`
+   - 在 `<your-ip>:8265` 访问 Web UI
    - 设置您的媒体库和转码设置
    - 根据需要配置插件和工作流程
 
 2. **添加外部节点**：
    - 在其他机器上安装 Tdarr 节点
-   - 将它们指向您的 Home Assistant IP 地址，端口为 `8266`
-   - 节点将自动注册并显示在 Web UI 中
+   - 将它们指向您的 Home Assistant IP，端口为 `8266`
+   - 节点将自动注册并出现在 Web UI 中
 
 3. **硬件加速**：
-   - 此插件包括硬件加速支持
+   - 此插件包含硬件加速支持
    - 在 Tdarr Web UI 设置中配置 GPU 转码
    - 支持的加速：Intel QuickSync、NVIDIA NVENC、AMD VCE
 
@@ -107,19 +107,19 @@ cifsdomain: "workgroup"
 
 ### 自定义脚本和环境变量
 
-此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
+此插件支持通过 `addon_config` 映射自定义脚本和环境变量：
 
 - **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（名称为大写或小写）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
 ### 硬件加速注意事项
 
-此插件包括用于硬件加速的设备访问：
-- Intel QuickSync：`/dev/dri` 设备被映射
-- NVIDIA：设置环境变量以进行 GPU 检测
-- AMD：通过可用的设备支持硬件加速
+此插件包含硬件加速的设备访问：
+- Intel QuickSync：`/dev/dri` 设备已映射
+- NVIDIA：已设置环境变量以进行 GPU 检测
+- AMD：通过可用设备支持硬件加速
 
-在 Tdarr Web UI 中的设置 > FFmpeg/HandBrake 设置下配置硬件加速。
+在 Tdarr Web UI 的“设置”>“FFmpeg/HandBrake 设置”下配置硬件加速。
 
 ## 支持
 

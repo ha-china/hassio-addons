@@ -1,29 +1,78 @@
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
+ARG TARGETARCH
 # hadolint ignore=DL3006
+
+# --- STAGE 1: CORE DNS BINARY ---
+FROM --platform=$BUILDPLATFORM alpine:3.23 AS binary
+ARG TARGETARCH
+# renovate: datasource=github-releases depName=coredns/coredns
+ARG COREDNS_VERSION="1.14.2"
+
+# App metadata (injected by CI)
+ENV APP_VERSION="2.4.1"
+ENV APP_NAME="ShieldDNS"
+ENV APP_SLUG="shielddns"
+ENV APP_UNSUPPORTED="false"
+
+RUN apk add --no-cache curl \
+    && case "${TARGETARCH}" in \
+        "amd64") \
+            ARCH="amd64" ;; \
+        "arm64") \
+            ARCH="arm64" ;; \
+        *) \
+            echo "Unsupported architecture: ${TARGETARCH}"; exit 1 ;; \
+    esac \
+    && curl -L "https://ghfast.top/github.com/coredns/coredns/releases/download/v${COREDNS_VERSION}/coredns_${COREDNS_VERSION}_linux_${ARCH}.tgz" -o coredns.tgz \
+    && tar -xzf coredns.tgz \
+    && rm coredns.tgz
+
+# --- STAGE 2: BUILD SHIELDDNS ADMIN ---
+FROM --platform=$BUILDPLATFORM golang:1.26-alpine AS admin-build
+ARG TARGETARCH
+# renovate: datasource=github-releases depName=FaserF/ShieldDNS
+ARG SHIELDDNS_VERSION="1.5.0"
+WORKDIR /app
+RUN apk add --no-cache curl \
+    && curl -L "https://ghfast.top/github.com/FaserF/ShieldDNS/archive/refs/tags/v${SHIELDDNS_VERSION}.tar.gz" -o source.tar.gz \
+    && tar -xzf source.tar.gz --strip-components=1
+
+WORKDIR /app/admin
+RUN go mod download \
+    && GOOS=linux GOARCH=$TARGETARCH go build -o shielddns-admin .
+
+# --- STAGE 3: RUNTIME IMAGE ---
 FROM ${BUILD_FROM}
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
 
-# Software versions
-ENV COREDNS_VERSION="1.14.2"
+# App metadata (Single set, consolidated)
 ENV APP_VERSION="2.4.0"
 ENV APP_NAME="ShieldDNS"
 ENV APP_SLUG="shielddns"
 ENV APP_UNSUPPORTED="false"
 
-# Use the official ShieldDNS image as source for binaries and assets
-# This ensures perfect synchronization without manual downloads
-FROM ghcr.nju.edu.cn/faserf/shielddns:${APP_VERSION} AS source
-
 # Setup directories
 RUN mkdir -p /var/www/admin /var/www/html /run/nginx /etc/services.d/shielddns /etc/shielddns
 
-# Copy pre-compiled binaries and assets from the main image
-COPY --from=source /usr/bin/shielddns-admin /usr/bin/shielddns-admin
-COPY --from=source /usr/bin/coredns /usr/bin/coredns
-COPY --from=source /var/www/admin /var/www/admin
+# Copy pre-compiled binaries and assets from build stages
+COPY --from=binary /coredns /usr/bin/coredns
+COPY --from=admin-build /app/admin/shielddns-admin /usr/bin/shielddns-admin
+COPY --from=admin-build /app/admin/www /var/www/admin
 
-# We add netcat-openbsd for port checking (nc) and net-tools for netstat
+# Install dependencies
 # hadolint ignore=DL3018
-RUN apk add --no-cache -u libssl3 libcrypto3 bind-tools openssl nginx netcat-openbsd net-tools dos2unix curl
+RUN apk add --no-cache -u \
+    libssl3 \
+    libcrypto3 \
+    bind-tools \
+    openssl \
+    nginx \
+    netcat-openbsd \
+    net-tools \
+    dos2unix \
+    curl \
+    jq \
+    ca-certificates
 
 # Copy Web Assets
 COPY www/index.html /var/www/html/index.html
@@ -35,7 +84,7 @@ RUN dos2unix /etc/services.d/shielddns/run && chmod +x /etc/services.d/shielddns
 
 # Healthcheck
 HEALTHCHECK --interval=30s --timeout=10s --retries=3 --start-period=60s \
-    CMD curl -fS http://localhost:8080/api/stats || exit 1
+    CMD curl -fS http://localhost:8080/api/health/live || exit 1
 
 # Labels
 LABEL org.opencontainers.image.title="ShieldDNS"

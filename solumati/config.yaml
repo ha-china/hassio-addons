@@ -1,8 +1,8 @@
 ---
 name: "Solumati"
-version: "2.3.0"
+version: "2.3.1"
 slug: "solumati"
-description: "[老王杂谈说]：反滑动革命 - 专注于有意义的匹配的自托管约会平台。"
+description: "[老王杂谈说]：反滑革命 - 专注于有意义的匹配的自托管交友平台"
 url: "https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/solumati"
 arch:
   - aarch64
@@ -13,6 +13,8 @@ ingress: true
 ingress_port: 80
 panel_icon: mdi:heart-multiple
 panel_title: Solumati
+hassio_api: true
+ingress_entry: /
 map:
   - homeassistant_config:rw
   - share:rw
@@ -21,7 +23,7 @@ ports:
 ports_description:
   80/tcp: "Web Interface Port (use Ingress for secure access)"
 options:
-  log_level: info
+  log_level: "info"
   test_mode: false
   app_base_url: ""
   factory_reset: false

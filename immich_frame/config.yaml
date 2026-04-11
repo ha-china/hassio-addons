@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：将你的 Immich 相册显示为数字相框'
+description: '[老王杂谈说]：将你的 Immich 相册展示为数字相框'
 hassio_api: true
 image: ghcr.nju.edu.cn/alexbelgium/immich_frame-{arch}
 init: false
@@ -70,5 +70,5 @@ schema:
   RefreshAlbumPeopleInterval: int?
 slug: immich_frame
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
-version: "1.0.32.0-4"
+version: "1.0.33.0"
 webui: http://[HOST]:[PORT:8080]

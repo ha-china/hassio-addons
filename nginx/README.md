@@ -1,58 +1,44 @@
 # NGINX
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/nginx/logo.png" width="100" />
+![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/nginx/logo.png)
 
-[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_nginx)
-[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker Image](https://img.shields.io/badge/docker-0.3.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-nginx)
-![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_nginx)
+[![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-0.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-nginx)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> Open Source Webserver with PHP and MariaDB.
+> 开源 Web 服务器，支持 PHP 和 MariaDB。
 
 ---
 
-> [!CAUTION]
-> **Experimental / Beta Status**
+> [!注意]
+> **实验性/测试版状态**
 >
-> This add-on is still in development and/or primarily developed for personal use.
-> It is not extensively tested yet, but is expected to work fundamentally.
+> 此应用仍在开发中，或主要用于个人使用。
+> 它尚未经过充分测试，但预期基本功能正常。
 
 ---
 
-## 📖 About
+## 📖 关于
 
-If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
-
-If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
-
-## 🐛 Report a Bug
-
-If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
-
-**[Report a Bug](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.0.1&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
-
-> [!NOTE]
-> Please use the link above to report problems. This ensures that all necessary information (add-on name, version, etc.) is automatically included in your bug report.
-
-## 💡 Feature Request
-
-If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
-
-**[Request a Feature](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=nginx)**
-
-> [!NOTE]
-> Please use the link above to request features. This ensures that the add-on name is automatically included in your feature request.
-
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
+NGINX 是一个高性能的 HTTP 服务器和反向代理，以其稳定性、丰富的功能集和低资源消耗而闻名。此插件为 NGINX 提供了 PHP-FPM 和 MariaDB 客户端支持，提供了一种现代且极快的替代 Apache 的方案，用于托管复杂的 Web 应用程序和处理高并发环境。
 
 ---
 
-## ⚙️ Configuration
+## 🏠 Home Assistant 集成
 
-Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
+此插件支持 Home Assistant 的 **Web服务器应用** 集成。
+集成在插件启动时自动安装/更新。
 
-### Options
+有关更多信息和管理细节，请参阅 [集成 README](../custom_components/webserver_app/README.md)。
+
+---
+
+## ⚙️ 配置
+
+通过 Home Assistant App 页面的 **配置** 选项卡配置应用。
+
+### 选项
 
 ```yaml
 certfile: fullchain.pem
@@ -69,14 +55,16 @@ website_name: web.local
 
 ---
 
-## 👨‍💻 Credits & License
+## 👨‍💻 贡献者与许可证
 
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
-
+此项目是开源的，并可在 MIT 许可证下使用。
+由 **FaserF** 维护。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

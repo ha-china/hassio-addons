@@ -1,48 +1,40 @@
 # SwitchCraft
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/switchcraft/logo.png" width="100" />
+![SwitchCraft Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/switchcraft/logo.png) width="100" alt="Logo" />
 
-[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_switchcraft)
-[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker Image](https://img.shields.io/badge/docker-0.2.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-switchcraft)
-![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![打开您的 Home Assistant 实例并显示应用程序仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_switchcraft)
+[![Home Assistant 应用程序](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-0.2.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-switchcraft)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> SwitchCraft is your powerful, cross-platform tool designed to be a comprehensive packaging assistant for IT Professionals.
+> SwitchCraft 是一款强大且跨平台的工具，专为 IT 专业人士设计，旨在成为全面的打包助手。
 
 ---
 
-> [!CAUTION]
-> **Experimental / Beta Status**
+> [!警告]
+> **实验性/测试版状态**
 >
-> This add-on is still in development and/or primarily developed for personal use.
-> It is not extensively tested yet, but is expected to work fundamentally.
+> 此应用程序仍在开发中，或主要针对个人使用开发。
+> 它尚未经过广泛测试，但预计基本功能将正常工作。
 
 ---
 
-## 📖 About
+## 📖 关于
 
-SwitchCraft is your powerful, cross-platform tool designed to be a comprehensive packaging assistant for IT Professionals.
+## 安装
 
-SwitchCraft goes beyond simple switch identification to streamline your entire application packaging workflow. This add-on brings the SwitchCraft web interface to Home Assistant, allowing you to:
-
-- Analyze application installers
-- Access packaging resources
-- Utilize AI assistance for packaging tasks
-
-## Installation
-
-1. Search for the "SwitchCraft" add-on in the Home Assistant add-on store and install it.
-2. Start the "SwitchCraft" add-on.
-3. Check the logs of the "SwitchCraft" add-on to see if everything went well.
-4. Click "OPEN WEB UI" to access the SwitchCraft interface.
+1. 在 Home Assistant 应用商店中搜索 "SwitchCraft" 应用程序并安装。
+2. 启动 "SwitchCraft" 应用程序。
+3. 检查 "SwitchCraft" 应用程序的日志，以查看一切是否顺利。
+4. 点击 "打开 Web UI" 以访问 SwitchCraft 界面。
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ 配置
 
-Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
+通过 Home Assistant 应用页面中的 **配置** 选项卡配置应用程序。
 
-### Options
+### 选项
 
 ```yaml
 log_level: info
@@ -50,14 +42,16 @@ log_level: info
 
 ---
 
-## 👨‍💻 Credits & License
+## 👨‍💻 致谢与许可
 
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
-
+此项目是开源的，并可在 MIT 许可证下使用。
+由 **FaserF** 维护。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

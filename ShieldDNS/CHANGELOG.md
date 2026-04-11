@@ -1,27 +1,45 @@
 # Changelog
 
-1.
+## 2.4.2 (2026-04-10)
 
-2. ## 2.4.0 (2026-03-25)
+### 📦 Dependencies
+- ⬆️ Update Add-on Softwares [skip-tests] (#734) [skip-tests] ([`a66190c5`](https://github.com/FaserF/hassio-addons/commit/a66190c5cb3a4d4178f11e8e1285fec4c6641210))
 
-3.
 
-4. ### ✨ Features
+## 2.4.1 (2026-04-09)
 
-5.
-6. - 🚀 **Premium Admin Dashboard**: Completely redesigned dark-themed UI with glassmorphism.
-7. - 🛡️ **Setup Wizard**: New multi-step first-run experience for easy configuration.
-8. - 📊 **Traffic Analytics**: Real-time Chart.js integration and hourly query history.
-9. - 📝 **Live Query Log**: Real-time table of all DNS requests and blocking status.
-10. - 🔍 **Blocklist Search**: Verify if domains are blocked directly from the UI.
-11. - 📦 **Suggested Presets**: One-click activation for popular blocklists (OISD, Hagezi, etc.).
-12. - 🔐 **Security**: Mandatory 12-character bcrypt password protection and session management.
-13. - 📋 **Quick-Copy**: Easy configuration for DoT (Android) and DoH (Windows/iOS).
-14. 16: ### 🚀 Other
-    17:
-    18: - 📝 **Docs**: Clarified native dual support for DoT and DoH in README.
-    19: - 🔧 **Backend**: Implemented Go sidecar for CoreDNS management and API.
-    20:
+### 📦 Dependencies
+
+- ⬆️ Update Add-on base images [skip-tests] (#713) ([`9e108e8f`](https://github.com/FaserF/hassio-addons/commit/9e108e8f57386150d955808ab69abf14fca64c0e))
+- ⬆️ Update alpine Docker tag to v3.23 [skip-tests] ([`62d6686b`](https://github.com/FaserF/hassio-addons/commit/62d6686bd7e00833f032ed317b25a078fc0f49ab))
+
+### 🚀 Other
+
+- fix HA list usage ([`e4636cd1`](https://github.com/FaserF/hassio-addons/commit/e4636cd1b2a8e60b1a3c23523b8d08a1a22c24b2))
+- HA list interpretation fixes ([`4159d335`](https://github.com/FaserF/hassio-addons/commit/4159d33573e37cd633c097935a3efa47c84f1728))
+- app version injection improvements ([`63580a20`](https://github.com/FaserF/hassio-addons/commit/63580a201a16724ac7712b1ed52c4f195ab05fe4))
+- use docker WORKDIR ([`928d223a`](https://github.com/FaserF/hassio-addons/commit/928d223a27fbdae3e6e0db8a5d37ef13416e6d6b))
+- remove default config values ([`74346eb7`](https://github.com/FaserF/hassio-addons/commit/74346eb75c99ea420ce8494ad59512c1507cb24f))
+- CI & building fixes ([`9073d6ca`](https://github.com/FaserF/hassio-addons/commit/9073d6cad25ac37bbb8c1373b3fc016ed26b3fd7))
+- Add stage tags ([`75528e61`](https://github.com/FaserF/hassio-addons/commit/75528e6193a0ce55537d2f89fe6069a703f7da88))
+
+## 2.4.0 (2026-03-25)
+
+### ✨ Features
+
+- 🚀 **Premium Admin Dashboard**: Completely redesigned dark-themed UI with glassmorphism.
+- 🛡️ **Setup Wizard**: New multi-step first-run experience for easy configuration.
+- 📊 **Traffic Analytics**: Real-time Chart.js integration and hourly query history.
+- 📝 **Live Query Log**: Real-time table of all DNS requests and blocking status.
+- 🔍 **Blocklist Search**: Verify if domains are blocked directly from the UI.
+- 📦 **Suggested Presets**: One-click activation for popular blocklists (OISD, Hagezi, etc.).
+- 🔐 **Security**: Mandatory 12-character bcrypt password protection and session management.
+- 📋 **Quick-Copy**: Easy configuration for DoT (Android) and DoH (Windows/iOS).
+
+### 🚀 Other
+
+- 📝 **Docs**: Clarified native dual support for DoT and DoH in README.
+- 🔧 **Backend**: Implemented Go sidecar for CoreDNS management and API.
 
 ## 2.3.1 (2026-03-13)
 
@@ -46,7 +64,7 @@
 ### 📦 Dependencies
 
 - fix App startups after base image update 20.0.0 (#617) [skip-tests] ([`04c90f6d`](https://github.com/FaserF/hassio-addons/commit/04c90f6d2ea1a75af00b8f6d80ed170271f144d1))
-- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v[20.0.1](https://github.com/hassio-addons/addon-base/releases/tag/v20.0.1) [skip-tests] (#618) ([`62a7ed57`](https://github.com/FaserF/hassio-addons/commit/62a7ed5794451961add1f8ec065f5cbe863d1623))
+- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v[20.0.1](https://github.com/hassio-addons/app-base/releases/tag/v20.0.1) [skip-tests] (#618) ([`62a7ed57`](https://github.com/FaserF/hassio-addons/commit/62a7ed5794451961add1f8ec065f5cbe863d1623))
 - ⬆️ Update cloudflare/cloudflared Docker tag to v2026.1.2 [skip-tests] (#613) [skip-tests] ([`6a278fce`](https://github.com/FaserF/hassio-addons/commit/6a278fcef3ee9815f0fcfcef47338f06e16cd1f9))
 - Update Dockerfile ([`146116c2`](https://github.com/FaserF/hassio-addons/commit/146116c2fe6cb52ae79ee7b922c730e7a0635f2d))
 - Update Dockerfile ([`5be5adb4`](https://github.com/FaserF/hassio-addons/commit/5be5adb4d4467f068ebf1161c7e6fd9bd64b6777))

@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base/amd64:9.2.0
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base:9.3.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -7,11 +7,11 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup application directory
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.1.0"
-ENV ADDON_NAME="SwitchCraft"
-ENV ADDON_SLUG="switchcraft"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="0.2.1"
+ENV APP_NAME="SwitchCraft"
+ENV APP_SLUG="switchcraft"
+ENV APP_UNSUPPORTED="false"
 
 WORKDIR /app
 
@@ -93,7 +93,7 @@ LABEL \
     maintainer="FaserF" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
-    org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons" \
+    org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
     org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/switchcraft" \

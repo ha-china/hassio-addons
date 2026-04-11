@@ -1,9 +1,9 @@
 ---
-version: 6.3.0
+version: 6.3.1
 breaking_versions: [5.3.0, 6.0.0]
 slug: letsencrypt
 name: Let's Encrypt
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：从 Let''s Encrypt 管理证书'
 url: https://ghfast.top/github.com/home-assistant/addons/tree/master/letsencrypt
 arch:
   - aarch64
@@ -78,6 +78,9 @@ schema:
     he_pass: str?
     he_user: str?
     hetzner_api_token: str?
+    httpreq_endpoint: url?
+    httpreq_password: str?
+    httpreq_username: str?
     infomaniak_api_token: str?
     inwx_password: str?
     inwx_shared_secret: str?
@@ -119,7 +122,7 @@ schema:
     porkbun_key: str?
     porkbun_secret: str?
     propagation_seconds: int(60,3600)?
-    provider: "list(dns-azure|dns-bunny|dns-cloudflare|dns-cloudns|dns-desec|dns-digitalocean|dns-directadmin|dns-dnsimple|dns-dnsmadeeasy|dns-domainoffensive|dns-dreamhost|dns-duckdns|dns-dynu|dns-easydns|dns-eurodns|dns-gandi|dns-gehirn|dns-godaddy|dns-google|dns-he|dns-hetzner|dns-infomaniak|dns-inwx|dns-ionos|dns-joker|dns-lego|dns-linode|dns-loopia|dns-luadns|dns-mijn-host|dns-namecheap|dns-netcup|dns-njalla|dns-noris|dns-nsone|dns-ovh|dns-plesk|dns-porkbun|dns-rfc2136|dns-route53|dns-sakuracloud|dns-simply|dns-transip|dns-websupport)?"
+    provider: "list(dns-azure|dns-bunny|dns-cloudflare|dns-cloudns|dns-desec|dns-digitalocean|dns-directadmin|dns-dnsimple|dns-dnsmadeeasy|dns-domainoffensive|dns-dreamhost|dns-duckdns|dns-dynu|dns-easydns|dns-eurodns|dns-gandi|dns-gehirn|dns-godaddy|dns-google|dns-he|dns-hetzner|dns-httpreq|dns-infomaniak|dns-inwx|dns-ionos|dns-joker|dns-lego|dns-linode|dns-loopia|dns-luadns|dns-mijn-host|dns-namecheap|dns-netcup|dns-njalla|dns-noris|dns-nsone|dns-ovh|dns-plesk|dns-porkbun|dns-rfc2136|dns-route53|dns-sakuracloud|dns-simply|dns-transip|dns-websupport)?"
     rfc2136_algorithm: str?
     rfc2136_name: str?
     rfc2136_port: str?

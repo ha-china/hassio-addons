@@ -1,76 +1,41 @@
 # SAP ABAP Cloud Developer Trial
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/sap-abap-cloud-dev/logo.png" width="100" />
+![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/sap-abap-cloud-dev/logo.png)
 
-[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_sap-abap-cloud-dev)
-[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker Image](https://img.shields.io/badge/docker-0.2.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-sap-abap-cloud-dev)
-![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_sap-abap-cloud-dev)
+[![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-0.2.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-sap-abap-cloud-dev)
+![项目维护者](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> SAP ABAP Platform Trial for local ABAP development
-
----
-
-> [!CAUTION]
-> **Experimental / Beta Status**
->
-> This add-on is still in development and/or primarily developed for personal use.
-> It is not extensively tested yet, but is expected to work fundamentally.
+> SAP ABAP 平台试用版，用于本地 ABAP 开发
 
 ---
 
-## 📖 About
-
-SAP ABAP Cloud Developer Trial for Home Assistant OS
-
-## ⚠️ IMPORTANT DISCLAIMERS
-
-> **NO LICENSE PROVIDED**: This add-on does NOT include any SAP license. You must obtain your own license from SAP and agree to SAP's terms of use.
+> [!注意]
+> **实验性/测试版状态**
 >
-> **NO WARRANTY**: This add-on is provided "AS IS" without any warranty. The maintainer assumes NO LIABILITY for data loss, system damage, or any other issues arising from the use of this add-on.
->
-> **FOR TESTING ONLY**: This add-on is intended solely for personal learning, skill development, and testing SAP ABAP. It is NOT intended for production use.
->
-> **SAP LICENSE TERMS**: You must comply with all SAP licensing terms and conditions. Visit [SAP's Terms](https://hub.docker.com/r/sapse/abap-cloud-developer-trial#licenses) for details.
-
-This add-on provides the official SAP ABAP Cloud Developer Trial environment, allowing you to run a complete SAP ABAP Platform on SAP HANA 2.0 directly from Home Assistant.
-
-**Features:**
-
-- SAP ABAP Platform Trial with SAP HANA database
-- SAP Fiori Launchpad
-- Sample applications for learning ABAP
-
-**Use Cases:**
-
-- Learn ABAP programming
-- Improve SAP development skills
-- Test SAP integrations in a sandbox environment
-
-## Requirements
-
-> ⚠️ **Hardware Requirements:**
->
-> - **Minimum RAM:** 16 GB (32 GB recommended)
-> - **Minimum CPUs:** 4
-> - **Minimum Disk:** 150 GB free space
-> - **Architecture:** amd64 only (x86_64)
-
-## Installation
-
-1. Add this repository to your Home Assistant add-on store
-2. Install the "SAP ABAP Cloud Developer Trial" add-on
-3. **READ AND ACCEPT** the SAP license terms
-4. Set `agree_to_license: true` in the configuration
-5. Start the add-on (initial startup takes 5-10 minutes)
+> 此应用仍在开发中，或主要针对个人使用开发。
+> 它尚未经过广泛测试，但预期基本功能应该可以正常工作。
 
 ---
 
-## ⚙️ Configuration
+## 📖 关于
 
-Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
+## 安装
 
-### Options
+1. 将此存储库添加到您的 Home Assistant 应用商店
+2. 安装 "SAP ABAP Cloud Developer Trial" 应用
+3. **阅读并接受** SAP 许可条款
+4. 在配置中将 `agree_to_license: true` 设置为真
+5. 启动应用（初始启动可能需要 5-10 分钟）
+
+---
+
+## ⚙️ 配置
+
+通过 Home Assistant 应用页面中的 **配置** 选项卡配置应用。
+
+### 选项
 
 ```yaml
 agree_to_license: false
@@ -80,14 +45,16 @@ log_level: info
 
 ---
 
-## 👨‍💻 Credits & License
+## 👨‍💻 致谢与许可
 
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
-
+此项目是开源的，并可在 MIT 许可证下使用。
+由 **FaserF** 维护。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

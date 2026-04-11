@@ -1,64 +1,35 @@
 # Imapsync
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/imapsync/logo.png" width="100" />
+![Imapsync 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/imapsync/logo.png)宽度="100" alt="Logo" />
 
-[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_imapsync)
-[![Home Assistant App](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker Image](https://img.shields.io/badge/docker-0.3.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-imapsync)
-![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_imapsync)
+[![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-0.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-imapsync)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> Sync IMAP accounts easily and reliably.
+> 简单可靠地同步 IMAP 账户。
 
 ---
 
-> [!CAUTION]
-> **Experimental / Beta Status**
+> [!警告]
+> **实验性 / 测试版状态**
 >
-> This add-on is still in development and/or primarily developed for personal use.
-> It is not extensively tested yet, but is expected to work fundamentally.
+> 此应用仍在开发中，或主要用于个人用途。
+> 它尚未经过广泛测试，但预计基本功能能够正常工作。
 
 ---
 
-## 📖 About
+## 📖 关于
 
-## ❤️ Support This Project
-
-> I maintain all these add-ons in my **free time alongside a regular job**. Test devices cost money, and every donation helps me stay independent and invest more time into open-source work.
->
-> Donations are completely voluntary — but the more support I receive, the less I depend on other income and the more time I can dedicate to these projects.
-
-<div align="center">
-
-</div>
-
-This add-on is a Home Assistant wrapper around the industry-standard [imapsync](https://github.com/imapsync/imapsync) tool for IMAP email synchronization.
-
-**Key features:**
-
-- 🔄 **Incremental sync** — only copies new or changed messages, stops and resumes efficiently
-- 📁 **Folder filtering** — sync only selected folders (e.g. just Inbox) or exclude specific ones (e.g. Trash/Spam)
-- 🔐 **OAuth2 support** — works with Google (Gmail) and Microsoft (Office 365/Outlook)
-- 📬 **Multi-job** — run multiple sync jobs sequentially (one after another)
-- ⏱️ **Scheduled** — configure the sync interval (minimum 90 seconds)
-- 📊 **Log summary** — always shows transferred/skipped/error counts after each sync
-
-## 🐛 Report a Bug
-
-If you encounter any issues with this add-on, please report them using the link below.
-
-**[Report a Bug](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&App_name=imapsync)**
-
-## 💡 Feature Request
-
-**[Request a Feature](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&App_name=imapsync)**
+简单可靠地同步 IMAP 账户。
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ 配置
 
-Configure the add-on via the **Configuration** tab in the Home Assistant App page.
+通过 Home Assistant 应用页面中的 **配置** 选项卡配置此应用。
 
-### Options
+### 选项
 
 ```yaml
 jobs:
@@ -94,14 +65,16 @@ sync_interval: 3600
 
 ---
 
-## 👨‍💻 Credits & License
+## 👨‍💻 贡献者与许可证
 
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
-
+此项目是开源的，并遵循 MIT 许可证。
+由 **FaserF** 维护。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

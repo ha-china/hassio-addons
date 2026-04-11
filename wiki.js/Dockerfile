@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.1
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
 ARG WIKIJS_VERSION=2.5.312
 FROM ghcr.nju.edu.cn/requarks/wiki:${WIKIJS_VERSION} AS wiki_release
 
@@ -11,28 +11,17 @@ ARG BUILD_DATE="unknown"
 
 ENV S6_CMD_WAIT_FOR_SERVICES=1
 
-
-
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="3.4.0"
-ENV ADDON_NAME="Wiki.JS"
-ENV ADDON_SLUG="wiki.js"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="3.4.2"
+ENV APP_NAME="Wiki.JS"
+ENV APP_SLUG="wiki.js"
+ENV APP_UNSUPPORTED="false"
 
 RUN apk add --no-cache -u libssl3 libcrypto3 nodejs npm yarn wget dos2unix mariadb-client git openssh-client pandoc libc6-compat
 
 WORKDIR /wiki
 COPY --from=wiki_release /wiki .
 
-# Rebuild dependencies for aarch64 compatibility
-ARG TARGETARCH
-RUN if [ "$TARGETARCH" = "arm64" ]; then \
- apk add --no-cache -u libssl3 libcrypto3 --virtual .build-deps build-base python3 && \
-        rm -rf node_modules && \
-        yarn install --production && \
-        yarn cache clean && \
-        apk del .build-deps; \
-    fi
 # Extract and persist Wiki.js version for runtime banner
 RUN WIKIJS_VERSION=$(node -p "require('./package.json').version" 2>/dev/null || echo "unknown") && \
     echo "WIKIJS_VERSION=${WIKIJS_VERSION}" >> /etc/environment && \

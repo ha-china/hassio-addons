@@ -1,9 +1,9 @@
 ---
 name: UnPoller
-version: 4.0.0
+version: 4.0.1
 slug: unpoller
 description: |-
-  [老王杂谈说]：收集 UniFi 控制器数据并上报至 InfluxDB 实例，或导出供 Prometheus 收集。
+  [老王杂谈说]：收集您的 UniFi 控制器数据并将其上报至 InfluxDB 实例，或者将其导出以供 Prometheus 收集。
 arch:
   - aarch64
   - amd64

@@ -3,6 +3,7 @@ import {
   useMultiFileAuthState,
   DisconnectReason,
   Browsers,
+  fetchLatestBaileysVersion,
 } from '@whiskeysockets/baileys';
 import QRCode from 'qrcode';
 import path from 'path';
@@ -21,11 +22,6 @@ import { notifyAdmins } from './actions.js';
 import { bindStore, handleIncomingMessages, checkSystemUpdates, monitorHACore } from './events.js';
 import { PORT, API_TOKEN } from '../config.js';
 import { isHANetwork } from '../ha.js';
-
-import { BAILEYS_VERSION } from '../config.js';
-const BAILEYS_405_AFFECTED_VERSION = '7.0.0-rc.9';
-const BAILEYS_405_VERSION_OVERRIDE = [2, 3000, 1033893291];
-const APPLY_BAILEYS_405_FIX = BAILEYS_VERSION === BAILEYS_405_AFFECTED_VERSION;
 
 export async function connectToWhatsApp(sessionId = 'default', sessions, getSession) {
   const session = getSession(sessionId);
@@ -47,11 +43,18 @@ export async function connectToWhatsApp(sessionId = 'default', sessions, getSess
   const { state, saveCreds } = await useMultiFileAuthState(sessionAuthDir);
 
   try {
+    const { version, isLatest } = await fetchLatestBaileysVersion().catch((err) => {
+      logger.warn({ error: err.message }, '⚠️ Failed to fetch latest WA version, using fallback.');
+      return { version: [2, 3000, 1015901307], isLatest: false };
+    });
+
+    logger.info({ version, isLatest, sessionId }, '📡 Initializing socket with WA version');
+
     session.sock = makeWASocket({
       auth: state,
+      version,
       logger: logger.child({ module: `baileys-${sessionId}` }, { level: 'warn' }),
       browser: Browsers.ubuntu('Chrome'),
-      ...(APPLY_BAILEYS_405_FIX && { version: BAILEYS_405_VERSION_OVERRIDE }),
       syncFullHistory: false,
       markOnlineOnConnect: MARK_ONLINE,
 
@@ -168,7 +171,7 @@ export async function connectToWhatsApp(sessionId = 'default', sessions, getSess
 
         setHealthStatus('running', `Disconnected: ${disconnectReason}`);
 
-        const baseDelay = APPLY_BAILEYS_405_FIX ? 5000 : 3000;
+        const baseDelay = 3000;
         const failDuration = Date.now() - session.firstFailureTime;
         const reconnectDelay = failDuration > 15 * 60 * 1000 ? 120000 : baseDelay;
 

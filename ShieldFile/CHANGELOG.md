@@ -1,11 +1,47 @@
 # Changelog
 
+## 2.3.1 (2026-04-09)
+
+### 🐛 Bug Fixes
+
+- robust ingress auth and restore /apps/ links ([`1ec04eb3`](https://github.com/FaserF/hassio-addons/commit/1ec04eb3bebea8dcbf983d9d6340d303be6af7d7))
+- resolve link validation 404s and typos ([`5c06b173`](https://github.com/FaserF/hassio-addons/commit/5c06b17353ff711a1c9f526ac51f4f8631c76007))
+
+### 📦 Dependencies
+
+- ⬆️ Update Add-on base images [skip-tests] (#713) ([`9e108e8f`](https://github.com/FaserF/hassio-addons/commit/9e108e8f57386150d955808ab69abf14fca64c0e))
+- ⬆️ Update filebrowser/filebrowser Docker tag to v2.63.1 [skip-tests] (#726) [skip-tests] ([`2c3d00d9`](https://github.com/FaserF/hassio-addons/commit/2c3d00d97085e671e69bf94deb87ad5acde73aab))
+- ⬆️ Update filebrowser/filebrowser Docker tag to v2.63.0 [skip-tests] (#725) [skip-tests] ([`1e3dace2`](https://github.com/FaserF/hassio-addons/commit/1e3dace2227a52a0abd70d71b51ef46e5f2b0a5b))
+- ⬆️ Update filebrowser/filebrowser Docker tag to v2.62.2 [skip-tests] (#710) [skip-tests] ([`7428a46e`](https://github.com/FaserF/hassio-addons/commit/7428a46ea448f86e883b74299d8183676e5d8dee))
+- update home-assistant.io/addons/ to /apps/ and remove ignore ([`35318ec8`](https://github.com/FaserF/hassio-addons/commit/35318ec8f6d1c5be470aace8f13a1ac617fd9b85))
+- ⬆️ Update filebrowser/filebrowser Docker tag to v2.62.1 [skip-tests] ([`f0e95f3e`](https://github.com/FaserF/hassio-addons/commit/f0e95f3ebec1a14f7c4fc3e590a61f4a03ab76b6))
+- Update README information with support info ([`c70fff01`](https://github.com/FaserF/hassio-addons/commit/c70fff01378d531e3dffc35dc2bf94b49237f541))
+- ⬆️ Update filebrowser/filebrowser Docker tag to v2.57.0 [skip-tests] (#632) [skip-tests] ([`677bd541`](https://github.com/FaserF/hassio-addons/commit/677bd54134d224a15f46943a293dc93b54549843))
+
+### 🚀 Other
+
+- fix HA list usage ([`e4636cd1`](https://github.com/FaserF/hassio-addons/commit/e4636cd1b2a8e60b1a3c23523b8d08a1a22c24b2))
+- HA list interpretation fixes ([`4159d335`](https://github.com/FaserF/hassio-addons/commit/4159d33573e37cd633c097935a3efa47c84f1728))
+- Unix LF fixes ([`7ef9b1f5`](https://github.com/FaserF/hassio-addons/commit/7ef9b1f5723dfdbfcca3cbe2de944538bc095fb9))
+- app version injection improvements ([`63580a20`](https://github.com/FaserF/hassio-addons/commit/63580a201a16724ac7712b1ed52c4f195ab05fe4))
+- remove default config values ([`74346eb7`](https://github.com/FaserF/hassio-addons/commit/74346eb75c99ea420ce8494ad59512c1507cb24f))
+- Add stage tags ([`75528e61`](https://github.com/FaserF/hassio-addons/commit/75528e6193a0ce55537d2f89fe6069a703f7da88))
+- fixes for new webserver integration ([`5e1439dd`](https://github.com/FaserF/hassio-addons/commit/5e1439dd399069225f4dcbcc9494000134b8efe0))
+- more small linter improvements ([`c1c2a452`](https://github.com/FaserF/hassio-addons/commit/c1c2a4528971f3fdc96892b37f5f6af6ae246c43))
+- linter fixes & improved default app banner ([`19bc94d9`](https://github.com/FaserF/hassio-addons/commit/19bc94d9e306bb9f425a2a96bbb94dc47809cead))
+- addon startup fixes & improvements ([`7ed60f8c`](https://github.com/FaserF/hassio-addons/commit/7ed60f8c8fbfb387fc602398e191ea2846ade746))
+- security & docs improvements codeql ([`a4a06f09`](https://github.com/FaserF/hassio-addons/commit/a4a06f09bab3956a81fe1dc81bf3ce991e3c83d1))
+- small fixes & linter improvements ([`33150324`](https://github.com/FaserF/hassio-addons/commit/331503241aa11ccfb398a6cbf5b850aeec084ef2))
+- replace basio addon with bashio apps ([`2caaf920`](https://github.com/FaserF/hassio-addons/commit/2caaf920939dbb61243d2ed1e8f63518a3199aa9))
+- CI & Linter fixes ([`f14e1e62`](https://github.com/FaserF/hassio-addons/commit/f14e1e6259a33a82f6321be9a71b9b41b0e82ea2))
+- Follow new Homeassistant Apps naming ([`a63066b1`](https://github.com/FaserF/hassio-addons/commit/a63066b111f275f9b359bf0e1cea3c49a14fb31c))
+
 ## 2.3.0 (2026-01-29)
 
 ### 📦 Dependencies
 
-- fix addon startups after base image update 20.0.0 (#617) [skip-tests] ([`04c90f6d`](https://github.com/FaserF/hassio-addons/commit/04c90f6d2ea1a75af00b8f6d80ed170271f144d1))
-- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v[20.0.1](https://github.com/hassio-addons/addon-base/releases/tag/20.0.1) [skip-tests] (#618) ([`62a7ed57`](https://github.com/FaserF/hassio-addons/commit/62a7ed5794451961add1f8ec065f5cbe863d1623))
+- fix App startups after base image update 20.0.0 (#617) [skip-tests] ([`04c90f6d`](https://github.com/FaserF/hassio-addons/commit/04c90f6d2ea1a75af00b8f6d80ed170271f144d1))
+- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v[20.0.1](https://github.com/hassio-addons/app-base/releases/tag/v20.0.1) [skip-tests] (#618) ([`62a7ed57`](https://github.com/FaserF/hassio-addons/commit/62a7ed5794451961add1f8ec065f5cbe863d1623))
 - ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v20 [skip-tests] (#616) ([`09e8340b`](https://github.com/FaserF/hassio-addons/commit/09e8340b06c4263037fab6cf6d90fc913c7f99d5))
 
 ### 📝 Documentation
@@ -23,8 +59,8 @@
 
 ### 🚀 Other
 
-- Addon startup fixes ([`38972b60`](https://github.com/FaserF/hassio-addons/commit/38972b60651d998bc02a73f0aeaf78e7b4a1c159))
-- fix ShieldFile Addon start ([`ad0a4c47`](https://github.com/FaserF/hassio-addons/commit/ad0a4c478e3ca06a672f47eb83b3880af84e67bc))
+- App startup fixes ([`38972b60`](https://github.com/FaserF/hassio-addons/commit/38972b60651d998bc02a73f0aeaf78e7b4a1c159))
+- fix ShieldFile App start ([`ad0a4c47`](https://github.com/FaserF/hassio-addons/commit/ad0a4c478e3ca06a672f47eb83b3880af84e67bc))
 - small startup fixes ([`2b016551`](https://github.com/FaserF/hassio-addons/commit/2b016551c5bd3c895c9b07a86fdd9cd8ffd99259))
 - Paperless & ShieldFile startup fixes ([`159b13a1`](https://github.com/FaserF/hassio-addons/commit/159b13a1325ad6ccb66bce6fa309b17672a76d91))
 - small fixes ([`3c2e2123`](https://github.com/FaserF/hassio-addons/commit/3c2e2123127a0cdd48d2c16bdd8d71921d794643))
@@ -68,7 +104,7 @@
 - startup fixes ([`c2605eb4`](https://github.com/FaserF/hassio-addons/commit/c2605eb42df0ea94125946cfcb2cbaaff4b3b674))
 - startup fixes ([`5c1befe7`](https://github.com/FaserF/hassio-addons/commit/5c1befe7d74d5eb842ed654d8a9c7ae5a01fee22))
 - fix data not being persistent ([`6c82ed03`](https://github.com/FaserF/hassio-addons/commit/6c82ed037bb028cc2aec435e32e97a8c2e763629))
-- fixed logo in Homeassistant Addon UI ([`f053f7b0`](https://github.com/FaserF/hassio-addons/commit/f053f7b0b0c43df32e122ba054ba6118379ab959))
+- fixed logo in Homeassistant App UI ([`f053f7b0`](https://github.com/FaserF/hassio-addons/commit/f053f7b0b0c43df32e122ba054ba6118379ab959))
 - small fixes & improvements ([`ce7a62e4`](https://github.com/FaserF/hassio-addons/commit/ce7a62e43eb50c87458588df6581b8ed3a741c9d))
 
 ## 2.2.1 (2026-01-14)
@@ -80,7 +116,7 @@
 ### 🚀 Other
 
 - fix data not being persistent ([`6c82ed03`](https://github.com/FaserF/hassio-addons/commit/6c82ed037bb028cc2aec435e32e97a8c2e763629))
-- fixed logo in Homeassistant Addon UI ([`f053f7b0`](https://github.com/FaserF/hassio-addons/commit/f053f7b0b0c43df32e122ba054ba6118379ab959))
+- fixed logo in Homeassistant App UI ([`f053f7b0`](https://github.com/FaserF/hassio-addons/commit/f053f7b0b0c43df32e122ba054ba6118379ab959))
 - small fixes & improvements ([`ce7a62e4`](https://github.com/FaserF/hassio-addons/commit/ce7a62e43eb50c87458588df6581b8ed3a741c9d))
 - handle empty log level variable ([`568bbe5b`](https://github.com/FaserF/hassio-addons/commit/568bbe5bce289563264d87f55e8da35b9d508041))
 - New/improved log level option ([`73d8e254`](https://github.com/FaserF/hassio-addons/commit/73d8e254b10e01aaffc474d22192d2b8deea4c79))
@@ -100,7 +136,7 @@
 ### 🚀 Other
 
 - handle empty log level variable ([`568bbe5b`](https://github.com/FaserF/hassio-addons/commit/568bbe5bce289563264d87f55e8da35b9d508041))
-- more CI fixes & addon db reset improvements ([`fc27cc3b`](https://github.com/FaserF/hassio-addons/commit/fc27cc3bee4a9a34fd573f38e870ff921b3f7d3d))
+- more CI fixes & App db reset improvements ([`fc27cc3b`](https://github.com/FaserF/hassio-addons/commit/fc27cc3bee4a9a34fd573f38e870ff921b3f7d3d))
 - CI fixes ([`4e31bcdc`](https://github.com/FaserF/hassio-addons/commit/4e31bcdc3025f30797b5ce1f0b220d06b22db35f))
 - New/improved log level option ([`73d8e254`](https://github.com/FaserF/hassio-addons/commit/73d8e254b10e01aaffc474d22192d2b8deea4c79))
 
@@ -137,7 +173,7 @@
 
 ### 📌 Release Note
 
-- general addon improvements & startup fixes
+- general App improvements & startup fixes
 
 ## 2.1.2 (2026-01-09)
 
@@ -157,7 +193,7 @@
 
 ### 📌 Release Note
 
-- General add-on structure improvements and startup bug fixes
+- General App structure improvements and startup bug fixes
 
 ## 2.1.0 (2026-01-06)
 
@@ -173,17 +209,17 @@
 
 🎉 **Happy New Year 2026!** 🎉
 
-### 🎉 Major Release - Unified Add-on Update
+### 🎉 Major Release - Unified App Update
 
-All add-ons have been unified, updated, and many bugs have been fixed. Many add-ons have been partially or completely rewritten to improve stability, performance, and maintainability.
+All Apps have been unified, updated, and many bugs have been fixed. Many Apps have been partially or completely rewritten to improve stability, performance, and maintainability.
 
 #### Important Information
 
 - **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel.
-- **Unsupported Branch**: A new `unsupported` branch has been created for add-ons that no longer receive direct manual support. These add-ons are still maintained but may have limited support compared to the main add-ons.
-- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the add-ons.
+- **Unsupported Branch**: A new `unsupported` branch has been created for Apps that no longer receive direct manual support. These Apps are still maintained but may have limited support compared to the main Apps.
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the Apps.
 
-This release represents a significant effort to standardize and improve all add-ons in the repository.
+This release represents a significant effort to standardize and improve all Apps in the repository.
 
 ---
 
@@ -193,8 +229,8 @@ This release represents a significant effort to standardize and improve all add-
 
 ### 📋 Major Release - Changes
 
-- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the add-ons. (Manual)
-- **Unsupported Branch**: A new `unsupported` branch has been created for add-ons that no longer receive direct manual support. These add-ons are still maintained but may have limited support compared to the main add-ons. (Manual)
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the Apps. (Manual)
+- **Unsupported Branch**: A new `unsupported` branch has been created for Apps that no longer receive direct manual support. These Apps are still maintained but may have limited support compared to the main Apps. (Manual)
 - **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel. (Manual)
 
 ### 📌 Release Note
@@ -224,7 +260,7 @@ This release represents a significant effort to standardize and improve all add-
 
 - Switched Base Image to standard `ghcr.io/home-assistant/amd64-base:alpine` to
   resolve S6 overlay conflicts.
-- This aligns the execution environment with other working addons (like Solumati).
+- This aligns the execution environment with other working Apps (like Solumati).
 
 ## 1.0.10
 

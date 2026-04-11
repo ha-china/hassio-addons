@@ -1,8 +1,8 @@
 ---
 name: Apache2 Minimal
-version: 3.3.0
+version: 3.3.1
 slug: apache2-minimal
-description: '[老王杂谈说]：不含 PHP 且附加模块极少，开源 Web 服务器'
+description: '[老王杂谈说]：不含 PHP 且仅有极少量额外模块的开源 Web 服务器。'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/apache2-minimal
 arch:
   - aarch64
@@ -12,6 +12,7 @@ map:
   - ssl:rw
   - media:rw
   - share:rw
+  - config:rw
 ingress: true
 ingress_port: 80
 init: false
@@ -24,7 +25,7 @@ options:
   ssl: true
   certfile: fullchain.pem
   keyfile: privkey.pem
-  log_level: info
+  log_level: "info"
   init_commands: []
 schema:
   document_root: str

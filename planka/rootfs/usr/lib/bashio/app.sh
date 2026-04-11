@@ -1,35 +1,67 @@
 #!/usr/bin/env bashio
 # shellcheck shell=bash
 # ==============================================================================
-# Bashio Custom App Library for Planka
+# Shared Bashio App Library
+# Provides standardized helpers for addon management
 # ==============================================================================
 
 # ------------------------------------------------------------------------------
-# Get the addon version
+# Set an addon option via Supervisor API
 # ------------------------------------------------------------------------------
-bashio::app.version() {
-	bashio::addon.version
-}
+bashio::app.option() {
+	local option=$1
+	local value=${2:-false} # Default to false if not provided
 
-# ------------------------------------------------------------------------------
-# Get the ingress entry path
-# ------------------------------------------------------------------------------
-bashio::app.ingress_entry() {
-	# Try to get from Supervisor API directly if bashio::addon.ingress_path is missing
-	local ingress_entry
-	ingress_entry=$(bashio::config 'ingress_entry' 2>/dev/null)
+	bashio::log.info "Requesting Supervisor to set option '$option' to '$value'..."
 
-	if bashio::var.has_value "${ingress_entry}"; then
-		echo "${ingress_entry}"
+	# Fetch current options from /data/options.json (most robust source)
+	if [ ! -f "/data/options.json" ]; then
+		bashio::log.error "Could not find /data/options.json. Option update failed."
+		return 1
+	fi
+
+	local options
+	options=$(cat /data/options.json)
+
+	local new_options
+	# Use jq to update the specific key. Handle both boolean and string values safely.
+	if [[ "$value" == "true" ]] || [[ "$value" == "false" ]]; then
+		new_options=$(echo "$options" | jq -c ".${option} = ${value}" 2>/dev/null)
 	else
-		# Fallback to / if not set
-		echo "/"
+		new_options=$(echo "$options" | jq -c ".${option} = \"${value}\"" 2>/dev/null)
+	fi
+
+	if [ -n "$new_options" ]; then
+		if bashio::api.supervisor "POST" "/addons/self/options" "{\"options\": ${new_options}}"; then
+			bashio::log.info "Option '$option' successfully updated to '$value'."
+			return 0
+		else
+			bashio::log.error "Supervisor API rejected the option update."
+			return 1
+		fi
+	else
+		bashio::log.error "Failed to process options with jq. Ensure jq is installed in the addon image."
+		return 1
 	fi
 }
 
 # ------------------------------------------------------------------------------
-# Manage App options (Mock/Wrapper)
+# Get the ingress entry point
 # ------------------------------------------------------------------------------
-bashio::app.option() {
-	bashio::log.debug "Option '$1' requested via bashio::app.option"
+bashio::app.ingress_entry() {
+	bashio::addon.ingress_entry "$@"
+}
+
+# ------------------------------------------------------------------------------
+# Get the ingress port
+# ------------------------------------------------------------------------------
+bashio::app.ingress_port() {
+	bashio::addon.ingress_port "$@"
+}
+
+# ------------------------------------------------------------------------------
+# Get the app version
+# ------------------------------------------------------------------------------
+bashio::app.version() {
+	bashio::addon.version "$@"
 }

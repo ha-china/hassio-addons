@@ -3,6 +3,9 @@
 # shellcheck shell=bash
 
 ssl=$(bashio::config 'ssl')
+# Run integration manager
+/usr/bin/webserver_app_integration.sh || true
+
 website_name=$(bashio::config 'website_name')
 certfile=$(bashio::config 'certfile')
 keyfile=$(bashio::config 'keyfile')
@@ -47,9 +50,9 @@ if [ -z "$website_name" ] || [ "$website_name" = "null" ]; then
 fi
 
 if [ "$phpini" = "get_file" ]; then
-	cp "$phppath" /share/nginxaddon_php.ini
-	echo "You have requested a copy of the php.ini file. You will now find your copy at /share/nginxaddon_php.ini"
-	echo "Addon will now be stopped. Please remove the config option and change it to the name of your new config file (for example /share/php.ini)"
+	cp "$phppath" /share/nginxApp_php.ini
+	echo "You have requested a copy of the php.ini file. You will now find your copy at /share/nginxApp_php.ini"
+	echo "App will now be stopped. Please remove the config option and change it to the name of your new config file (for example /share/php.ini)"
 	exit 0
 fi
 
@@ -60,12 +63,16 @@ fi
 # execution within the container environment.
 #
 # USERS MUST ONLY PROVIDE TRUSTED COMMANDS.
-# No further sandboxing or sanitization is performed by the add-on.
+# No further sandboxing or sanitization is performed by the App.
 # Reference: https://github.com/FaserF/hassio-addons/tree/master/nginx#security
 # ------------------------------------------------------------------------------
 if bashio::config.has_value 'init_commands'; then
 	echo "Detected custom init commands. Running them now."
 	while read -r cmd; do
+		# Skip empty or '[]' placeholder (often provided by automated tests)
+		if [ -z "$cmd" ] || [ "$cmd" = "[]" ]; then
+			continue
+		fi
 		eval "${cmd}" ||
 			bashio::exit.nok "Failed executing init command: ${cmd}"
 	done <<<"$(bashio::config 'init_commands')"
@@ -213,6 +220,21 @@ server {
 }
 EOF
 fi
+
+# Enable nginx_status for monitoring
+cat >/etc/nginx/sites-enabled/status.conf <<EOF
+server {
+    listen 8080;
+    server_name localhost;
+    location /nginx_status {
+        stub_status on;
+        access_log off;
+        allow 127.0.0.1;
+        allow 172.30.0.0/16;
+        deny all;
+    }
+}
+EOF
 
 # Include sites-enabled in main nginx.conf
 if ! grep -q "include /etc/nginx/sites-enabled" /etc/nginx/nginx.conf; then

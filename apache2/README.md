@@ -1,50 +1,45 @@
 # Apache2
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/apache2/logo.png" width="100" />
+![Apache2 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/apache2/logo.png)
 
-[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_apache2)
-[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker Image](https://img.shields.io/badge/docker-3.3.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-apache2)
-![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![打开你的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_apache2)
+[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-3.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-apache2)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> Open Source Webserver with PHP and MariaDB.
-
----
-
-## 📖 About
-
-If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
-
-If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
-
-## 🐛 Report a Bug
-
-If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
-
-**[Report a Bug](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=3.0.0&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
-
-> [!NOTE]
-> Please use the link above to report problems. This ensures that all necessary information (add-on name, version, etc.) is automatically included in your bug report.
-
-## 💡 Feature Request
-
-If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
-
-**[Request a Feature](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=apache2)**
-
-> [!NOTE]
-> Please use the link above to request features. This ensures that the add-on name is automatically included in your feature request.
-
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
+> 开源 Web 服务器，包含 PHP 和 MariaDB。
 
 ---
 
-## ⚙️ Configuration
+## 📖 关于
 
-Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
+Apache HTTP Server 是一个强大、灵活、健壮的开源 Web 服务器。此插件提供了一个预配置的 Apache2 环境，支持完整的 PHP 功能和 MariaDB 客户端集成，非常适合在 Home Assistant 中托管动态网站和基于 PHP 的应用程序（如 WordPress 或自定义仪表板）。
 
-### Options
+### Apache2 变体比较
+
+| 功能 | Apache2（完整） | Apache2 最小化 | Apache2 最小化 + MariaDB |
+| :--- | :--- | :--- | :--- |
+| **PHP 支持** | ✅ 是（完整） | ❌ 否 | ✅ 是（基本） |
+| **MariaDB 客户端** | ✅ 是 | ❌ 否 | ✅ 是 |
+| **占用** | 🖥️ 较大 | ⚡ 最小 | ⚖️ 中等 |
+| **适用场景** | WordPress、完整 CMS | 静态站点 | 简单 PHP 应用 |
+
+---
+
+## 🏠 Home Assistant 集成
+
+此插件支持 Home Assistant 的 **Web 服务器应用** 集成。
+集成将在插件启动时自动安装/更新。
+
+有关更多信息和管理细节，请参阅 [集成 README](../custom_components/webserver_app/README.md)。
+
+---
+
+## ⚙️ 配置
+
+通过 Home Assistant App 页面中的 **配置** 选项卡配置应用。
+
+### 选项
 
 ```yaml
 certfile: fullchain.pem
@@ -61,14 +56,16 @@ website_name: web.local
 
 ---
 
-## 👨‍💻 Credits & License
+## 👨‍💻 信用 & 许可证
 
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
-
+此项目是开源的，并受 MIT 许可证的约束。
+由 **FaserF** 维护。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

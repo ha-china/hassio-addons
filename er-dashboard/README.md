@@ -1,35 +1,17 @@
-# ER-Startseite（仪表板）
+# ER-Startseite (仪表盘)
 
-![ER-Startseite Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/er-dashboard/logo.png) 
+![ER-Startseite 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/er-dashboard/logo.png) 
 
-[![打开您的 Home Assistant 实例并显示附加组件仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_er-dashboard)
-[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker 镜像](https://img.shields.io/badge/docker-1.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-er-dashboard)
+[![打开您的 Home Assistant 实例并显示应用仪表盘](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_er-dashboard)
+[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-1.3.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-er-dashboard)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 一个现代、高度可定制的仪表板，具有霓虹美学风格。
+> 一个现代、高度可定制的霓虹美学仪表盘。
 
 ---
 
 ## 📖 关于
-
-## ❤️ 支持此项目
-
-> 我在**兼职工作之余**维护所有这些附加组件。测试设备需要花费金钱，而每一笔捐赠都有助于我保持独立，并将更多时间投入到开源工作中。
-
-> 捐赠完全是自愿的——但收到的支持越多，我就越少依赖其他收入，就能将更多时间投入到这些项目中。
-
-<div align="center">
-
-</div>
-
-一个现代、高度可定制的仪表板，具有霓虹美学风格、视频背景和强大的应用集成。
-
-ER-Startseite 是一个自托管的仪表板应用程序，具有以下特点：
-
-- **霓虹/暗色主题**：惊人的视觉设计。
-- **动态背景**：支持视频和图片背景。
-- **应用集成**：添加/自定义应用和小部件。
 
 ## 安装
 
@@ -42,7 +24,7 @@ ER-Startseite 是一个自托管的仪表板应用程序，具有以下特点：
 
 ## ⚙️ 配置
 
-通过 Home Assistant 应用页面中的 **配置** 选项卡配置此附加组件。
+通过 Home Assistant 应用页面中的 **配置** 选项卡配置应用。
 
 ### 选项
 
@@ -55,9 +37,9 @@ ssl: false
 
 ---
 
-## 👨‍💻 贡献者与许可证
+## 👨‍💻 致谢与许可
 
-此项目是开源的，并受 MIT 许可证的约束。
+此项目是开源的，并采用 MIT 许可证。
 由 **FaserF** 维护。
 ---
 

@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.1
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
 # Use official image pinned to digest to ensure integrity (CodeRabbit: reproducible builds)
 # Note: This uses Wiki.js V3 Beta/Alpha - Renovate tracks ARG WIKIJS_VERSION
 ARG WIKIJS_VERSION=3.0.0-alpha.413
@@ -13,11 +13,11 @@ ARG BUILD_DATE="unknown"
 
 ENV S6_CMD_WAIT_FOR_SERVICES=1
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.5.2"
-ENV ADDON_NAME="Wiki.JS (Version 3 - Alpha)"
-ENV ADDON_SLUG="wiki.js3"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="0.6.1"
+ENV APP_NAME="Wiki.JS (Version 3 - Alpha)"
+ENV APP_SLUG="wiki.js3"
+ENV APP_UNSUPPORTED="false"
 
 RUN apk add --no-cache -u libssl3 libcrypto3 \
     --repository https://dl-cdn.alpinelinux.org/alpine/edge/main \
@@ -41,8 +41,9 @@ RUN WIKIJS_VERSION=$(node -p "require('./package.json').version" 2>/dev/null || 
 
 COPY rootfs /
 
-RUN chmod +x /etc/cont-init.d/*.sh /etc/services.d/*/run \
-    && dos2unix /etc/cont-init.d/*.sh /etc/services.d/*/run
+# Ensure scripts are executable and have Unix line endings (covers v2 and v3 paths)
+RUN find /etc/cont-init.d /etc/services.d /etc/s6-overlay/s6-rc.d -type f -name "*" -exec dos2unix {} + \
+    && find /etc/cont-init.d /etc/services.d /etc/s6-overlay/s6-rc.d -type f \( -name "run" -o -name "*.sh" \) -exec chmod +x {} +
 
 # Healthcheck
 HEALTHCHECK --interval=30s --timeout=15s --start-period=120s --retries=5 \
@@ -52,7 +53,7 @@ HEALTHCHECK --interval=30s --timeout=15s --start-period=120s --retries=5 \
 LABEL \
     org.opencontainers.image.title="Wiki.JS (Version 3 - Alpha)" \
     org.opencontainers.image.description="The most powerful and extensible open source Wiki software (Version 3 - Alpha)" \
-    org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons" \
+    org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
     org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/wiki.js3" \

@@ -1,8 +1,8 @@
 ---
 name: Apache2 Minimal with MariaDB Client
-version: 3.3.0
+version: 3.3.1
 slug: apache2-minimal-mariadb
-description: '[老王杂谈说]：带有 MariaDB 客户端及部分 PHP 模块的开源 Web 服务器。'
+description: '[老王杂谈说]：带有 MariaDB 客户端和一些 PHP 模块的开源 Web 服务器。'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/apache2-minimal-mariadb
 arch:
   - aarch64
@@ -12,6 +12,7 @@ map:
   - ssl:rw
   - media:rw
   - share:rw
+  - config:rw
 ingress: true
 ingress_port: 80
 init: false
@@ -25,7 +26,7 @@ options:
   ssl: true
   certfile: fullchain.pem
   keyfile: privkey.pem
-  log_level: info
+  log_level: "info"
   init_commands: []
 schema:
   document_root: str

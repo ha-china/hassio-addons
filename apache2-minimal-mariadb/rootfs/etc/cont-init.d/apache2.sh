@@ -7,6 +7,9 @@ set -e
 # shellcheck disable=SC1091
 
 ssl=$(bashio::config 'ssl')
+# Run integration manager
+/usr/bin/webserver_app_integration.sh || true
+
 website_name=$(bashio::config 'website_name')
 certfile=$(bashio::config 'certfile')
 keyfile=$(bashio::config 'keyfile')
@@ -40,6 +43,22 @@ else
 	echo "LogLevel ${apache_log_level}" >>/etc/apache2/httpd.conf
 fi
 
+# Enable mod_status for monitoring
+sed -i 's/^#\(LoadModule status_module modules\/mod_status.so\)/\1/' /etc/apache2/httpd.conf
+if ! grep -q "<Location /server-status>" /etc/apache2/httpd.conf; then
+	cat >>/etc/apache2/httpd.conf <<EOF
+<Location /server-status>
+    SetHandler server-status
+    Order deny,allow
+    Deny from all
+    Allow from 127.0.0.1
+    Allow from ::1
+    Allow from 172.30.0.0/16
+</Location>
+ExtendedStatus On
+EOF
+fi
+
 # WARNING: The init_commands option uses `eval`.
 # This executes arbitrary shell commands as the container user/root.
 # Only use trusted input for this option.
@@ -49,6 +68,9 @@ fi
 if bashio::config.has_value 'init_commands'; then
 	echo "Detected custom init commands. Running them now."
 	while read -r cmd; do
+		if [[ -z "${cmd}" || "${cmd}" == "[]" ]]; then
+			continue
+		fi
 		eval "${cmd}" ||
 			bashio::exit.nok "Failed executing init command: ${cmd}"
 	done <<<"$(bashio::config 'init_commands')"
@@ -75,22 +97,32 @@ fi
 
 #Set rights to web folders and create user
 if [ -d "$DocumentRoot" ]; then
-	find "$DocumentRoot" -type d -exec chmod 771 {} +
+	target_user="www-data"
 	if [ -n "$username" ] && [ -n "$password" ] && [ "$username" != "null" ] && [ "$password" != "null" ]; then
-		if ! id "$username" &>/dev/null; then
-			adduser "$username" -G www-data -D
+		target_user="$username"
+	fi
+
+	# Optimization: Only run recursive chown/chmod if the root folder ownership/perms are wrong
+	# This avoids massive IO overhead on shared volumes (especially on Windows hosts)
+	if [ "$(stat -c %U "$DocumentRoot")" != "$target_user" ] || [ "$(stat -c %a "$DocumentRoot")" != "771" ]; then
+		echo "Updating ownership and permissions for $DocumentRoot (this may take a while)..."
+		find "$DocumentRoot" -type d -exec chmod 771 {} +
+		if [ "$target_user" != "www-data" ]; then
+			if ! id "$target_user" &>/dev/null; then
+				adduser "$target_user" -G www-data -D
+			fi
+			echo "$target_user:$password" | chpasswd
+			chown -R "$target_user":www-data "$DocumentRoot"
+		else
+			echo "No username and/or password was provided. Skipping account set up."
+			if ! grep -q "^www-data:" /etc/group; then
+				addgroup -S www-data
+			fi
+			if ! id www-data &>/dev/null; then
+				adduser -S -G www-data www-data
+			fi
+			chown -R www-data:www-data "$DocumentRoot"
 		fi
-		echo "$username:$password" | chpasswd
-		chown -R "$username":www-data "$DocumentRoot"
-	else
-		echo "No username and/or password was provided. Skipping account set up."
-		if ! grep -q "^www-data:" /etc/group; then
-			addgroup -S www-data
-		fi
-		if ! id www-data &>/dev/null; then
-			adduser -S -G www-data www-data
-		fi
-		chown -R www-data:www-data "$DocumentRoot"
 	fi
 fi
 

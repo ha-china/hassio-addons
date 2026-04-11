@@ -210,14 +210,33 @@ export function registerAPIRoutes(app) {
 
   app.post('/send_poll', authMiddleware, async (req, res) => {
     const session = getReqSession(req);
-    const { number, question, options, quotedMessageId, expiration } = req.body;
+    const { number, question, options, quotedMessageId, expiration, selectableCount } = req.body;
     if (!session.isConnected) return res.status(503).json({ detail: 'Not connected' });
     const quoted = getQuotedMessage(session, quotedMessageId);
     try {
       const jid = getJid(number);
+      const optionsValid = Array.isArray(options) && options.length > 0;
+      const optionsLength = optionsValid ? options.length : 0;
+
+      let normalizedSelectableCount = Number(selectableCount ?? 1);
+      if (isNaN(normalizedSelectableCount)) normalizedSelectableCount = 1;
+      normalizedSelectableCount = Math.floor(normalizedSelectableCount);
+
+      if (normalizedSelectableCount < 0) normalizedSelectableCount = 0;
+      if (normalizedSelectableCount > optionsLength) normalizedSelectableCount = optionsLength;
+
+      if (!optionsValid) {
+        normalizedSelectableCount = 0;
+      }
       const sentMsg = await session.sock.sendMessage(
         jid,
-        { poll: { name: question, values: options, selectableCount: 1 } },
+        {
+          poll: {
+            name: question,
+            values: options,
+            selectableCount: normalizedSelectableCount,
+          },
+        },
         { quoted, ephemeralExpiration: expiration }
       );
       session.messageStore.set(sentMsg.key.id, sentMsg);

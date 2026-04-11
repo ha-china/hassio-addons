@@ -1,10 +1,43 @@
 # Changelog
 
+## 2.3.1 (2026-04-09)
+
+### 🐛 Bug Fixes
+
+- robust ingress auth and restore /apps/ links ([`1ec04eb3`](https://github.com/FaserF/hassio-addons/commit/1ec04eb3bebea8dcbf983d9d6340d303be6af7d7))
+
+### 📦 Dependencies
+
+- update home-assistant.io/addons/ to /apps/ and remove ignore ([`35318ec8`](https://github.com/FaserF/hassio-addons/commit/35318ec8f6d1c5be470aace8f13a1ac617fd9b85))
+- Update README information with support info ([`c70fff01`](https://github.com/FaserF/hassio-addons/commit/c70fff01378d531e3dffc35dc2bf94b49237f541))
+- Update auth_bypass.patch ([`3be861f1`](https://github.com/FaserF/hassio-addons/commit/3be861f133316fc071c07f9674c433d4a1e847a1))
+- Update auth_bypass.patch ([`2931443e`](https://github.com/FaserF/hassio-addons/commit/2931443e5101f6b34bb0bca2ed4d13b6ed7da3a3))
+- Update Dockerfile ([`f814cfad`](https://github.com/FaserF/hassio-addons/commit/f814cfad81b0be6a445b99b2179f0e6661404869))
+- Update Dockerfile ([`34edbde3`](https://github.com/FaserF/hassio-addons/commit/34edbde3aee42cbd904ff41578acd09ef4b9a09d))
+
+### 🚀 Other
+
+- fix HA list usage ([`e4636cd1`](https://github.com/FaserF/hassio-addons/commit/e4636cd1b2a8e60b1a3c23523b8d08a1a22c24b2))
+- HA list interpretation fixes ([`4159d335`](https://github.com/FaserF/hassio-addons/commit/4159d33573e37cd633c097935a3efa47c84f1728))
+- app version injection improvements ([`63580a20`](https://github.com/FaserF/hassio-addons/commit/63580a201a16724ac7712b1ed52c4f195ab05fe4))
+- remove default config values ([`74346eb7`](https://github.com/FaserF/hassio-addons/commit/74346eb75c99ea420ce8494ad59512c1507cb24f))
+- Add stage tags ([`75528e61`](https://github.com/FaserF/hassio-addons/commit/75528e6193a0ce55537d2f89fe6069a703f7da88))
+- fixes for new webserver integration ([`5e1439dd`](https://github.com/FaserF/hassio-addons/commit/5e1439dd399069225f4dcbcc9494000134b8efe0))
+- add missing translations ([`52097c11`](https://github.com/FaserF/hassio-addons/commit/52097c11d51d28992ae6b53d3e195702eba9cd24))
+- app code quality improvements ([`f25fbc72`](https://github.com/FaserF/hassio-addons/commit/f25fbc72ebd57406b16f106c94497e3510ac6bff))
+- more small linter improvements ([`c1c2a452`](https://github.com/FaserF/hassio-addons/commit/c1c2a4528971f3fdc96892b37f5f6af6ae246c43))
+- linter fixes & improved default app banner ([`19bc94d9`](https://github.com/FaserF/hassio-addons/commit/19bc94d9e306bb9f425a2a96bbb94dc47809cead))
+- security & docs improvements codeql ([`a4a06f09`](https://github.com/FaserF/hassio-addons/commit/a4a06f09bab3956a81fe1dc81bf3ce991e3c83d1))
+- add better debugging for SV test ([`96f3f54b`](https://github.com/FaserF/hassio-addons/commit/96f3f54b1f4abbfacacf5a05c6d25e6f49255e91))
+- small fix ([`ede074b4`](https://github.com/FaserF/hassio-addons/commit/ede074b45c5bc12410b58e4adb263df90a89d4db))
+- fix patch ([`c5339f06`](https://github.com/FaserF/hassio-addons/commit/c5339f0612a5c0c856b1de356aca28f59452b141))
+- test fixes ([`6aa2141b`](https://github.com/FaserF/hassio-addons/commit/6aa2141b7932f265222ed644f78d0b49b54fcae0))
+
 ## 2.3.0 (2026-01-29)
 
 ### 📦 Dependencies
 
-- fix addon startups after base image update 20.0.0 (#617) [skip-tests] ([`04c90f6d`](https://github.com/FaserF/hassio-addons/commit/04c90f6d2ea1a75af00b8f6d80ed170271f144d1))
+- fix App startups after base image update 20.0.0 (#617) [skip-tests] ([`04c90f6d`](https://github.com/FaserF/hassio-addons/commit/04c90f6d2ea1a75af00b8f6d80ed170271f144d1))
 
 ### 📝 Documentation
 
@@ -18,7 +51,7 @@
 
 ### 🚀 Other
 
-- fixed logo in Homeassistant Addon UI ([`f053f7b0`](https://github.com/FaserF/hassio-addons/commit/f053f7b0b0c43df32e122ba054ba6118379ab959))
+- fixed logo in Homeassistant App UI ([`f053f7b0`](https://github.com/FaserF/hassio-addons/commit/f053f7b0b0c43df32e122ba054ba6118379ab959))
 - small fixes & improvements ([`ce7a62e4`](https://github.com/FaserF/hassio-addons/commit/ce7a62e43eb50c87458588df6581b8ed3a741c9d))
 - handle empty log level variable ([`568bbe5b`](https://github.com/FaserF/hassio-addons/commit/568bbe5bce289563264d87f55e8da35b9d508041))
 - small fixes ([`60c5ddf4`](https://github.com/FaserF/hassio-addons/commit/60c5ddf4fede8242031082aa8e7fa0d057c0087f))
@@ -71,7 +104,7 @@
 
 ### 📌 Release Note
 
-- general addon improvements & startup fixes
+- general App improvements & startup fixes
 
 ## 2.1.2 (2026-01-09)
 
@@ -91,7 +124,7 @@
 
 ### 📌 Release Note
 
-- General addon structure improvements and startup bug fixes
+- General App structure improvements and startup bug fixes
 
 ## 2.1.0 (2026-01-06)
 
@@ -107,17 +140,17 @@
 
 🎉 **Happy New Year 2026!** 🎉
 
-### 🎉 Major Release - Unified Addon Update
+### 🎉 Major Release - Unified App Update
 
-All addons have been unified, updated, and many bugs have been fixed. Many addons have been partially or completely rewritten to improve stability, performance, and maintainability.
+All Apps have been unified, updated, and many bugs have been fixed. Many Apps have been partially or completely rewritten to improve stability, performance, and maintainability.
 
 #### Important Information
 
 - **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel.
-- **Unsupported Branch**: A new `unsupported` branch has been created for addons that no longer receive direct manual support. These addons are still maintained but may have limited support compared to the main addons.
-- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the addons.
+- **Unsupported Branch**: A new `unsupported` branch has been created for Apps that no longer receive direct manual support. These Apps are still maintained but may have limited support compared to the main Apps.
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the Apps.
 
-This release represents a significant effort to standardize and improve all addons in the repository.
+This release represents a significant effort to standardize and improve all Apps in the repository.
 
 ---
 
@@ -127,8 +160,8 @@ This release represents a significant effort to standardize and improve all addo
 
 ### 📋 Major Release - Changes
 
-- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the addons. (Manual)
-- **Unsupported Branch**: A new `unsupported` branch has been created for addons that no longer receive direct manual support. These addons are still maintained but may have limited support compared to the main addons. (Manual)
+- **Bug Reports**: If you encounter any new issues, please report them on GitHub as usual. Your feedback helps us improve the Apps. (Manual)
+- **Unsupported Branch**: A new `unsupported` branch has been created for Apps that no longer receive direct manual support. These Apps are still maintained but may have limited support compared to the main Apps. (Manual)
 - **Edge Branch (Beta)**: A new `edge` branch is now available for those who want to test the latest features and improvements before they are released to the stable channel. (Manual)
 
 ### 📌 Release Note
@@ -137,7 +170,7 @@ This release represents a significant effort to standardize and improve all addo
 
 ## 1.5.11
 
-- General addon improvements
+- General App improvements
 
 ## 1.5.9
 

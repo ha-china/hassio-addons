@@ -1,56 +1,27 @@
 # Tado Auto Assist
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/tado_aa/logo.png" width="100" />
+![Tado Auto Assist 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/tado_aa/logo.png) width="100" alt="Logo" />
 
-[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_tado_aa)
-[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker Image](https://img.shields.io/badge/docker-2.3.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-tado_aa)
-![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_tado_aa)
+[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-tado_aa)
+![项目维护者](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> Tado Auto-Assist for Geofencing and open Window detection
-
----
-
-## 📖 About
-
-If you encounter any issues with this add-on, please report them using the link below. The issue
-form will be pre-filled with the add-on information to help us resolve the problem faster.
-
-If you have an idea for a new feature or improvement, please use the link below to submit a
-feature request. The form will be pre-filled with the add-on information.
-
-## 🐛 Report a Bug
-
-If you encounter any issues with this add-on, please report them using the link below. The issue
-form will be pre-filled with the add-on information to help us resolve the problem faster.
-
-**[Report a Bug](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=2.0.0&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
-
-> [!NOTE]
-> Please use the link above to report problems. This ensures that all necessary information
-> (add-on name, version, etc.) is automatically included in your bug report.
-
-## 💡 Feature Request
-
-If you have an idea for a new feature or improvement, please use the link below to submit a
-feature request. The form will be pre-filled with the add-on information.
-
-**[Request a Feature](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=tado_aa)**
-
-> [!NOTE]
-> Please use the link above to request features. This ensures that the add-on name is
-> automatically included in your feature request.
-
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
+> Tado Auto-Assist 用于地理围栏和开窗检测
 
 ---
 
-## ⚙️ Configuration
+## 📖 关于
 
-Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
+Tado Auto-Assist 用于地理围栏和开窗检测
 
-### Options
+---
+
+## ⚙️ 配置
+
+通过 Home Assistant App 页面的 **配置** 选项卡配置此应用。
+
+### 选项
 
 ```yaml
 log_level: info
@@ -62,14 +33,16 @@ username: ''
 
 ---
 
-## 👨‍💻 Credits & License
+## 👨‍💻 致谢与许可
 
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
-
+本项目是开源的，并遵循 MIT 许可协议。
+由 **FaserF** 维护。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

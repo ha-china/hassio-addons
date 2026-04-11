@@ -1,15 +1,16 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.1
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} AS builder
 
 # Install requirements for building
+
 # hadolint ignore=DL3018
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="2.2.1"
-ENV ADDON_NAME="Switch LAN Play Server"
-ENV ADDON_SLUG="switch-lan-play-server"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="2.3.1"
+ENV APP_NAME="Switch LAN Play Server"
+ENV APP_SLUG="switch-lan-play-server"
+ENV APP_UNSUPPORTED="false"
 
 RUN apk -U --no-cache -u add libssl3 libcrypto3 \
     libpcap-dev \
@@ -63,7 +64,7 @@ CMD [ "/run.sh" ]
 LABEL \
     org.opencontainers.image.title="Switch LAN Play Server" \
     org.opencontainers.image.description="Nintendo Switch Lan Play -Server" \
-    org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons" \
+    org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
     org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/switch_lan_play_server" \

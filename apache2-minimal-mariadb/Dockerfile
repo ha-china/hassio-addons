@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.1
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
@@ -14,17 +14,19 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 # renovate: datasource=github-releases depName=php/php-src
 ARG PHP_VERSION="8.5"
 
-# hadolint ignore=DL4006
+# hadolint ignore=DL4006,DL3018
+# renovate: datasource=repology depName=alpine_3_21/apache2 versioning=loose
+ARG APACHE2_VERSION="2.4.66-r0"
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="3.2.1"
-ENV ADDON_NAME="Apache2 Minimal with MariaDB Client"
-ENV ADDON_SLUG="apache2-minimal-mariadb"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="3.3.1"
+ENV APP_NAME="Apache2 Minimal with MariaDB Client"
+ENV APP_SLUG="apache2-minimal-mariadb"
+ENV APP_UNSUPPORTED="false"
 
 RUN mkdir /run/apache2 \
  && apk --no-cache -u add libcrypto3 libssl3 \
-    apache2 \
+    apache2${APACHE2_VERSION:+=$APACHE2_VERSION} \
     curl \
     jq \
     && PHP_V=$(echo "${PHP_VERSION}" | cut -d. -f1-2 | tr -d '.') \
@@ -56,12 +58,12 @@ HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
 COPY rootfs /
 COPY index.html /
 
-RUN chmod +x /etc/cont-init.d/apache2.sh /etc/services.d/apache2/run
+RUN chmod +x /etc/cont-init.d/apache2.sh /etc/services.d/apache2/run /usr/bin/webserver_app_integration.sh
 
 # Labels
 LABEL org.opencontainers.image.title="Apache2 Minimal with MariaDB Client"
 LABEL org.opencontainers.image.description="Open Source Webserver with MariaDB Client and some PHP Modules."
-LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons"
+LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
 LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/apache2-minimal-mariadb"

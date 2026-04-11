@@ -1,5 +1,10 @@
 # TOMMY
 
+## 2.10.6
+
+### Minor Changes
+- UI improvements
+
 ## 2.10.5
 
 ### Minor Changes

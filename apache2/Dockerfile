@@ -1,29 +1,34 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.1
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
 
 # Create directory for apache2 to store PID file
 # Create directory for apache2 to store PID file and install dependencies
-# hadolint ignore=DL3018,DL3003,DL3047
+# hadolint ignore=DL3018,DL3047
 
 # Set shell with pipefail for Alpine (busybox/ash)
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="3.2.1"
-ENV ADDON_NAME="Apache2"
-ENV ADDON_SLUG="apache2"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="3.3.1"
+ENV APP_NAME="Apache2"
+ENV APP_SLUG="apache2"
+ENV APP_UNSUPPORTED="false"
 
 WORKDIR /tmp
+
 # renovate: datasource=github-releases depName=php/php-src
 ARG PHP_VERSION="8.5"
+
+# renovate: datasource=repology depName=alpine_3_21/apache2 versioning=loose
+ARG APACHE2_VERSION="2.4.66-r0"
+
 # Excluded due to low usage but high increase of image size: libxml2-dev, php85-dev, php85-pecl-xdebug, mosquitto-dev
-# hadolint ignore=DL3003,DL3018,DL3047,DL4006
+# hadolint ignore=DL3018,DL3047,DL4006,DL3003
 RUN mkdir /run/apache2 \
     && apk --no-cache -u add libcrypto3 libssl3 \
-    apache2 \
+    apache2${APACHE2_VERSION:+=$APACHE2_VERSION} \
     curl \
     jq \
     && PHP_V=$(echo "${PHP_VERSION}" | cut -d. -f1-2 | tr -d '.') \
@@ -70,9 +75,8 @@ RUN mkdir /run/apache2 \
     cmake make musl-dev gcc gettext-dev libintl libxml2 \
     && curl -L -o musl-locales-master.zip https://gitlab.com/rilian-la-te/musl-locales/-/archive/master/musl-locales-master.zip \
     && unzip musl-locales-master.zip \
-    && cd musl-locales-master \
-    && cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DLOCALE_PROFILE=OFF -DCMAKE_INSTALL_PREFIX:PATH=/usr . && make && make install \
-    && cd .. && rm -r musl-locales-master \
+    && (cd musl-locales-master && cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DLOCALE_PROFILE=OFF -DCMAKE_INSTALL_PREFIX:PATH=/usr . && make && make install) \
+    && rm -r musl-locales-master \
     && apk del --no-cache cmake make gcc gettext-dev libintl
 
 # Configure Logging
@@ -86,7 +90,7 @@ RUN sed -i -r 's@Errorlog .*@Errorlog /dev/stderr@i' /etc/apache2/httpd.conf \
 COPY rootfs /
 COPY index.html /
 
-RUN chmod +x /etc/cont-init.d/apache2.sh /etc/services.d/apache2/run
+RUN chmod +x /etc/cont-init.d/apache2.sh /etc/services.d/apache2/run /usr/bin/webserver_app_integration.sh
 
 # Health check
 HEALTHCHECK --interval=60s --timeout=15s --retries=3 CMD curl --fail http://127.0.0.1:80 || exit 1
@@ -94,7 +98,7 @@ HEALTHCHECK --interval=60s --timeout=15s --retries=3 CMD curl --fail http://127.
 # Labels
 LABEL org.opencontainers.image.title="Apache2"
 LABEL org.opencontainers.image.description="Open Source Webserver with PHP and MariaDB."
-LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons"
+LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
 LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/apache2"

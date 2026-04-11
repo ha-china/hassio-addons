@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.1
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -11,11 +11,11 @@ ARG WORDPRESS_VERSION="6.8"
 
 # hadolint ignore=DL3018,DL3003
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.2.1"
-ENV ADDON_NAME="Wordpress"
-ENV ADDON_SLUG="wordpress"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="0.3.1"
+ENV APP_NAME="Wordpress"
+ENV APP_SLUG="wordpress"
+ENV APP_UNSUPPORTED="false"
 
 RUN \
  apk add --no-cache -u libssl3 libcrypto3 \
@@ -59,7 +59,9 @@ RUN \
 # Copy root filesystem
 COPY rootfs /
 
-RUN find /etc/s6-overlay/s6-rc.d -mindepth 2 -name run -exec chmod +x {} \;
+# Ensure scripts are executable and have Unix line endings
+RUN find /etc/s6-overlay/s6-rc.d -type f -exec sed -i 's/\r$//' {} + \
+    && find /etc/s6-overlay/s6-rc.d -mindepth 2 -name run -exec chmod +x {} \;
 
 # Build arguments
 ARG BUILD_ARCH

@@ -1,5 +1,24 @@
 # Changelog
 
+## unpoller 4.0.1 - 2026-04-09
+
+### Changes
+
+#### ⬆️ Dependency updates
+
+- ⏫ Update ghcr.io/unpoller/unpoller Docker tag to v2.24.0 @[renovate[bot]](https://github.com/apps/renovate) (#478)
+- ⏫ Update ghcr.io/unpoller/unpoller Docker tag to v2.25.0 @[renovate[bot]](https://github.com/apps/renovate) (#479)
+- ⏫ Update ghcr.io/unpoller/unpoller Docker tag to v2.27.0 @[renovate[bot]](https://github.com/apps/renovate) (#481)
+- ⏫ Update ghcr.io/unpoller/unpoller Docker tag to v2.28.0 @[renovate[bot]](https://github.com/apps/renovate) (#482)
+- ⏫ Update ghcr.io/unpoller/unpoller Docker tag to v2.29.0 @[renovate[bot]](https://github.com/apps/renovate) (#484)
+- ⏫ Update ghcr.io/unpoller/unpoller Docker tag to v2.30.0 @[renovate[bot]](https://github.com/apps/renovate) (#487)
+- ⏫ Update ghcr.io/unpoller/unpoller Docker tag to v2.32.0 @[renovate[bot]](https://github.com/apps/renovate) (#489)
+- ⏫ Update ghcr.io/unpoller/unpoller Docker tag to v2.33.0 @[renovate[bot]](https://github.com/apps/renovate) (#492)
+- ⏫ Update ghcr.io/unpoller/unpoller Docker tag to v2.34.0 @[renovate[bot]](https://github.com/apps/renovate) (#500)
+- ⏫ Update ghcr.io/unpoller/unpoller Docker tag to v2.35.0 @[renovate[bot]](https://github.com/apps/renovate) (#514)
+- ⏫ Update ghcr.io/unpoller/unpoller Docker tag to v2.38.0 @[renovate[bot]](https://github.com/apps/renovate) (#517)
+- ⏫ Update ghcr.io/unpoller/unpoller Docker tag to v2.39.0 @[renovate[bot]](https://github.com/apps/renovate) (#525)
+
 ## unpoller 4.0.0 - 2026-01-24
 
 ### Changes

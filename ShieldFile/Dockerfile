@@ -1,7 +1,7 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.1
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
 # hadolint ignore=DL3006
 # renovate: datasource=docker depName=filebrowser/filebrowser
-FROM filebrowser/filebrowser:v2.56.0 AS filebrowser
+FROM filebrowser/filebrowser:v2.63.1 AS filebrowser
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
@@ -17,11 +17,11 @@ ENV FILEBROWSER_VERSION="v2.53.1"
 # We grab the binary from the official image
 # hadolint ignore=DL3018,DL4006
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="2.2.4"
-ENV ADDON_NAME="ShieldFile"
-ENV ADDON_SLUG="shieldfile"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="2.3.1"
+ENV APP_NAME="ShieldFile"
+ENV APP_SLUG="shieldfile"
+ENV APP_UNSUPPORTED="false"
 
 RUN apk add --no-cache -u libssl3 libcrypto3 curl bash dos2unix openssl nginx \
     && mkdir -p /data/database
@@ -34,8 +34,9 @@ COPY rootfs /
 # Set S6 behavior to fail the container if any service fails
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
-# Set executable permissions
-RUN chmod a+x /etc/s6-overlay/s6-rc.d/*/run /etc/s6-overlay/s6-rc.d/*/up /etc/s6-overlay/s6-rc.d/*/down || true
+# Set executable permissions and fix line endings
+RUN find /etc/s6-overlay/s6-rc.d -type f -exec dos2unix {} + \
+    && chmod a+x /etc/s6-overlay/s6-rc.d/*/run /etc/s6-overlay/s6-rc.d/*/up /etc/s6-overlay/s6-rc.d/*/down || true
 
 # Healthcheck
 HEALTHCHECK \
@@ -45,7 +46,7 @@ HEALTHCHECK \
 # Labels
 LABEL org.opencontainers.image.title="ShieldFile"
 LABEL org.opencontainers.image.description="Secure, Web-based File Manager (SFTP over HTTPS)"
-LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons"
+LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
 LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/ShieldFile"

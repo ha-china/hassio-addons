@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/amd64-base-python:3.14-alpine3.21
+ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/base-python:3.14-alpine3.23
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 ENV PIP_BREAK_SYSTEM_PACKAGES=1
@@ -14,11 +14,11 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # hadolint ignore=DL3018
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="2.2.1"
-ENV ADDON_NAME="Tado Auto Assist"
-ENV ADDON_SLUG="tado_aa"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="2.3.1"
+ENV APP_NAME="Tado Auto Assist"
+ENV APP_SLUG="tado_aa"
+ENV APP_UNSUPPORTED="false"
 
 RUN apk add libssl3 libcrypto3 --no-cache -u curl
 
@@ -54,7 +54,7 @@ CMD [ "/run.sh" ]
 LABEL \
     org.opencontainers.image.title="Tado Auto Assist" \
     org.opencontainers.image.description="Tado Auto-Assist for Geofencing and open Window detection" \
-    org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons" \
+    org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
     org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/tado_aa" \

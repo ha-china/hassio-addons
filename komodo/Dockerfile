@@ -1,5 +1,5 @@
-ARG BUILD_FROM
-ARG KOMODO_VERSION
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base:9.3.0
+ARG KOMODO_VERSION=2.1.1
 FROM ghcr.nju.edu.cn/moghtech/komodo-core:${KOMODO_VERSION} AS komodo
 FROM ${BUILD_FROM}
 
@@ -9,13 +9,11 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install requirements
 # hadolint ignore=DL3008
 
-# hadolint ignore=DL3008
-
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.0.2"
-ENV ADDON_NAME="Komodo"
-ENV ADDON_SLUG="komodo"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="0.1.1"
+ENV APP_NAME="Komodo"
+ENV APP_SLUG="komodo"
+ENV APP_UNSUPPORTED="false"
 
 RUN \
     apt-get update \
@@ -27,7 +25,7 @@ RUN \
         sudo \
     && curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | \
        gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg --dearmor \
-    && echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/debian bookworm/mongodb-org/7.0 main" | \
+    && echo "deb [ arch=amd64 trusted=yes ] https://repo.mongodb.org/apt/debian bookworm/mongodb-org/7.0 main" | \
        tee /etc/apt/sources.list.d/mongodb-org-7.0.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -62,7 +60,7 @@ LABEL \
     maintainer="FaserF <https://ghfast.top/github.com/FaserF>" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
-    org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons" \
+    org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
     org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons" \

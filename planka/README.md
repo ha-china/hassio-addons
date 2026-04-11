@@ -1,50 +1,29 @@
 # Planka
 
-![Planka 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/planka/logo.png) 
+![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/planka/logo.png)
 
-[![打开您的 Home Assistant 实例并显示插件仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_planka)
-[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-1.3.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-planka)
+[![打开你的Home Assistant实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_planka)
+[![Home Assistant应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker镜像](https://img.shields.io/badge/docker-1.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-planka)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 优雅的开源项目跟踪工具
+> 优雅的开源项目管理工具
 
 ---
 
 ## 📖 关于
 
-## ❤️ 支持此项目
-
-> 我在**兼职工作之余**维护所有这些插件。测试设备需要费用，每一笔捐赠都帮助我保持独立，并将更多时间投入到开源工作中。
-
-> 捐赠完全是自愿的——但我会获得的越多支持，我就越少依赖其他收入，就能有更多时间投入到这些项目中。
-
-<div align="center">
-
-</div>
-
-Planka 是一个优雅的开源项目跟踪工具（看板），可以帮助您组织项目和任务。
-
-Planka 提供了一种现代化的协作方式来管理任务，具有以下功能：
-
-- 看板
-- 实时更新
-- 项目管理
-- 用户头像和附件
-
-此应用程序捆绑 PostgreSQL，以提供完整、自托管的解决方案。
-
 ## 安装
 
-1. 在 Home Assistant 应用商店中搜索 "Planka"。
-2. 安装应用程序。
-3. 启动应用程序。
+1. 在Home Assistant应用商店中搜索“Planka”。
+2. 安装应用。
+3. 启动应用。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 应用页面中的**配置**选项卡配置此插件。
+通过Home Assistant应用页面中的**配置**标签来配置应用。
 
 ### 选项
 
@@ -53,16 +32,18 @@ base_url: ''
 certfile: fullchain.pem
 keyfile: privkey.pem
 log_level: info
+reset_database: false
+reset_database_confirm: false
 secret_key: ''
 ssl: false
 ```
 
 ---
 
-## 👨‍💻 致谢与许可
+## 👨‍💻 贡献者 & 许可证
 
-此项目是开源的，并受 MIT 许可证的约束。
-由 **FaserF** 维护。
+本项目是开源的，并遵循MIT许可证。
+由**FaserF**维护。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

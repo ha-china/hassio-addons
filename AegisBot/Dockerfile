@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/amd64-base-python:3.14-alpine3.21
+ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/base-python:3.14-alpine3.23
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
@@ -17,7 +17,7 @@ ENV PYTHONUNBUFFERED=1
 # hadolint ignore=DL3018
 
 # App metadata (injected by CI)
-ENV APP_VERSION="0.5.2"
+ENV APP_VERSION="0.5.3"
 ENV APP_NAME="AegisBot"
 ENV APP_SLUG="aegisbot"
 ENV APP_UNSUPPORTED="false"
@@ -35,7 +35,8 @@ RUN \
     postgresql-client \
     xz \
     nodejs \
-    npm && \
+    npm \
+    jq && \
     # Verify Node.js version
     node --version && \
     npm --version
@@ -48,7 +49,7 @@ ARG AEGISBOT_VERSION="latest"
 ENV AEGISBOT_VERSION=${AEGISBOT_VERSION}
 
 WORKDIR /tmp/build
-# hadolint ignore=DL3003,DL3018
+# hadolint ignore=DL3018
 RUN \
     echo "Attempting to fetch AegisBot version: ${AEGISBOT_VERSION}" && \
     # 1. Resolve Version URL
@@ -83,18 +84,16 @@ RUN \
             \
             # Setup Frontend \
             mkdir -p /app/frontend && \
-            cd frontend && \
-            npm install && \
-            sed -i "s|defineConfig({|defineConfig({ base: './',|g" vite.config.ts && \
-            sed -i "s|const API_BASE = .*|const API_BASE = './api/v1'|g" src/api/client.ts && \
-            # Verify sed modifications were applied
-            grep -q "base: './" vite.config.ts || { echo "Failed to patch vite.config.ts"; exit 1; } && \
-            grep -q "API_BASE = './api/v1'" src/api/client.ts || { echo "Failed to patch client.ts"; exit 1; } && \
-            npm run build && \
-            cp -r dist/* /app/frontend/ && \
+            npm --prefix frontend install && \
+            sed -i "s|defineConfig({|defineConfig({ base: './',|g" frontend/vite.config.ts && \
+            sed -i "s|import.meta.env.VITE_API_URL || '/api/v1'|getApiBase()|g" frontend/src/api/client.ts && \
+            # Verify sed modifications were applied \
+            grep -q "base: './" frontend/vite.config.ts || { echo "Failed to patch vite.config.ts"; exit 1; } && \
+            grep -q "getApiBase()" frontend/src/api/client.ts || { echo "Failed to patch client.ts"; exit 1; } && \
+            npm --prefix frontend run build && \
+            cp -r frontend/dist/* /app/frontend/ && \
             \
             # Cleanup \
-            cd / && \
             rm -rf /tmp/build && \
             echo "✅ Build complete. Image is self-contained."; \
         else \
@@ -116,6 +115,7 @@ RUN \
 COPY nginx.conf /etc/nginx/http.d/default.conf
 
 # Copy Run Script
+COPY rootfs /
 COPY run.sh /run.sh
 RUN chmod a+x /run.sh
 

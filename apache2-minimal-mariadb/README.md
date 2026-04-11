@@ -1,50 +1,45 @@
 # Apache2 Minimal with MariaDB Client
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/apache2-minimal-mariadb/logo.png" width="100" />
+![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/apache2-minimal-mariadb/logo.png) width="100" alt="Logo" />
 
-[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_apache2-minimal-mariadb)
-[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker Image](https://img.shields.io/badge/docker-3.3.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-apache2-minimal-mariadb)
-![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_apache2-minimal-mariadb)
+[![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-3.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-apache2-minimal-mariadb)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> Open Source Webserver with MariaDB Client and some PHP Modules.
-
----
-
-## 📖 About
-
-If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
-
-If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
-
-## 🐛 Report a Bug
-
-If you encounter any issues with this add-on, please report them using the link below. The issue form will be pre-filled with the add-on information to help us resolve the problem faster.
-
-**[Report a Bug](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=3.0.0&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
-
-> [!NOTE]
-> Please use the link above to report problems. This ensures that all necessary information (add-on name, version, etc.) is automatically included in your bug report.
-
-## 💡 Feature Request
-
-If you have an idea for a new feature or improvement, please use the link below to submit a feature request. The form will be pre-filled with the add-on information.
-
-**[Request a Feature](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=apache2-minimal-mariadb)**
-
-> [!NOTE]
-> Please use the link above to request features. This ensures that the add-on name is automatically included in your feature request.
-
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
+> 开源 Web 服务器，带有 MariaDB 客户端和一些 PHP 模块。
 
 ---
 
-## ⚙️ Configuration
+## 📖 关于
 
-Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
+这个版本的 Apache 服务器在性能和功能之间取得了平衡。它包括了 MariaDB 客户端和用于数据库通信的必需 PHP 模块，同时比完整的 Apache2 插件更轻量。推荐用于不需要 Apache 模块完整套件的数据库驱动应用程序。
 
-### Options
+### Apache2 变体比较
+
+| 特性 | Apache2 (完整) | Apache2 最小化 | Apache2 最小化 + MariaDB |
+| :--- | :--- | :--- | :--- |
+| **PHP 支持** | ✅ 是（完整） | ❌ 否 | ✅ 是（基本） |
+| **MariaDB 客户端** | ✅ 是 | ❌ 否 | ✅ 是 |
+| **占用空间** | 🖥️ 大 | ⚡ 最小 | ⚖️ 中等 |
+| **适用场景** | WordPress、完整 CMS | 静态站点 | 简单 PHP 应用 |
+
+---
+
+## 🏠 Home Assistant 集成
+
+此插件支持 Home Assistant 的 **Web 服务器应用** 集成。
+集成在插件启动时会自动安装/更新。
+
+有关更多信息和管理细节，请参阅 [集成 README](../custom_components/webserver_app/README.md)。
+
+---
+
+## ⚙️ 配置
+
+通过 Home Assistant App 页面的 **配置** 选项卡配置应用。
+
+### 选项
 
 ```yaml
 certfile: fullchain.pem
@@ -61,14 +56,16 @@ website_name: web.local
 
 ---
 
-## 👨‍💻 Credits & License
+## 👨‍💻 致谢 & 许可证
 
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
-
+此项目是开源的，并受 MIT 许可证的约束。
+由 **FaserF** 维护。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

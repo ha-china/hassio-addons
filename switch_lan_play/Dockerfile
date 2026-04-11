@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.1
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
 # Build stage
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} AS builder
@@ -6,11 +6,11 @@ FROM ${BUILD_FROM} AS builder
 # Install build dependencies
 # hadolint ignore=DL3018
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="2.2.1"
-ENV ADDON_NAME="Switch LAN Play Client"
-ENV ADDON_SLUG="switch-lan-play"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="2.3.1"
+ENV APP_NAME="Switch LAN Play Client"
+ENV APP_SLUG="switch-lan-play"
+ENV APP_UNSUPPORTED="false"
 
 RUN apk add --no-cache -u libssl3 libcrypto3 \
     libpcap-dev \
@@ -22,16 +22,16 @@ RUN apk add --no-cache -u libssl3 libcrypto3 \
 
 # Pin to specific commit for reproducible builds (v0.2.3)
 WORKDIR /switch-lan-play
-# hadolint ignore=DL3003
 RUN git clone https://ghfast.top/github.com/spacemeowx2/switch-lan-play.git . \
     && git checkout c0c663e3fdc95d6d6e8ab401caa2bfb5b5872e00 \
     && git submodule update --init --recursive \
     && sed -i '/execute_process(COMMAND git submodule update --init -- external\/libuv/,/)/d' external/external.cmake \
     && sed -i '/execute_process(COMMAND git submodule update --init -- external\/uvw/,/)/d' external/external.cmake \
     && find . -name CMakeLists.txt -exec sed -i 's/cmake_minimum_required(VERSION [0-9\.]*)/cmake_minimum_required(VERSION 3.5)/' {} + \
-    && mkdir build \
-    && cd build \
-    && cmake .. \
+    && mkdir build
+
+WORKDIR /switch-lan-play/build
+RUN cmake .. \
     && make
 
 # Runtime stage
@@ -66,7 +66,7 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 # Labels
 LABEL org.opencontainers.image.title="Switch LAN Play Client"
 LABEL org.opencontainers.image.description="Nintendo Switch Lan Play -Client"
-LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons"
+LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
 LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/switch_lan_play"

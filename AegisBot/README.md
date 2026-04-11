@@ -2,26 +2,26 @@
 
 ![AegisBot 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/AegisBot/logo.png) width="100" alt="Logo" />
 
-[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_AegisBot)
+[![打开你的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_AegisBot)
 [![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-0.5.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-aegisbot)
-![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Docker 镜像](https://img.shields.io/badge/docker-0.5.3-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-aegisbot)
+![项目维护者](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 专业 Telegram 群组防御者 — 高级安全，自动化管理，社区管理。
+> 专业 Telegram 群组守护者 — 高级安全、自动管理和社区管理。
 
 ---
 
-> [!注意]
+> [!警告]
 > **实验性/测试版状态**
 >
-> 此应用仍在开发中，或主要用于个人使用。
-> 它尚未经过充分测试，但预期基本功能将正常工作。
+> 此应用仍在开发中，或主要用于个人用途。
+> 它尚未经过充分测试，但预计基本功能应该可以正常工作。
 
 ---
 
 ## 📖 关于
 
-专业 Telegram 群组防御者 — 高级安全，自动化管理，社区管理。
+专业 Telegram 群组守护者 — 高级安全、自动管理和社区管理。
 
 ---
 
@@ -53,9 +53,9 @@ version: latest
 
 ---
 
-## 👨‍💻 信用与许可证
+## 👨‍💻 致谢 & 许可证
 
-此项目是开源的，并遵循 MIT 许可证。
+此项目是开源的，并可在 MIT 许可证下使用。
 由 **FaserF** 维护。
 ---
 

@@ -2,6 +2,9 @@
 # shellcheck disable=SC2034,SC2129,SC2016
 # shellcheck shell=bash
 ssl=$(bashio::config 'ssl')
+# Run integration manager
+/usr/bin/webserver_app_integration.sh || true
+
 website_name=$(bashio::config 'website_name')
 certfile=$(bashio::config 'certfile')
 keyfile=$(bashio::config 'keyfile')
@@ -34,12 +37,29 @@ if grep -i -q "^LogLevel " /etc/apache2/httpd.conf 2>/dev/null; then
 else
 	echo "LogLevel ${apache_log_level}" >>/etc/apache2/httpd.conf
 fi
+
+# Enable mod_status for monitoring
+sed -i 's/^#\(LoadModule status_module modules\/mod_status.so\)/\1/' /etc/apache2/httpd.conf
+if ! grep -q "<Location /server-status>" /etc/apache2/httpd.conf; then
+	cat >>/etc/apache2/httpd.conf <<EOF
+<Location /server-status>
+    SetHandler server-status
+    Order deny,allow
+    Deny from all
+    Allow from 127.0.0.1
+    Allow from ::1
+    Allow from 172.30.0.0/16
+</Location>
+ExtendedStatus On
+EOF
+fi
+
 phppath=/etc/php85/php.ini
 
 if [ "$phpini" = "get_file" ]; then
-	cp "$phppath" /share/apache2addon_php.ini
-	echo "You have requestet a copy of the php.ini file. You will now find your copy at /share/apache2addon_php.ini"
-	echo "Addon will now be stopped. Please remove the config option and change it to the name of your new config file (for example /share/php.ini)"
+	cp "$phppath" /share/apache2App_php.ini
+	echo "You have requestet a copy of the php.ini file. You will now find your copy at /share/apache2App_php.ini"
+	echo "App will now be stopped. Please remove the config option and change it to the name of your new config file (for example /share/php.ini)"
 	exit 0
 fi
 
@@ -50,12 +70,15 @@ fi
 # execution within the container environment.
 #
 # USERS MUST ONLY PROVIDE TRUSTED COMMANDS.
-# No further sandboxing or sanitization is performed by the add-on.
+# No further sandboxing or sanitization is performed by the App.
 # Reference: https://github.com/FaserF/hassio-addons/tree/master/apache2#security
 # ------------------------------------------------------------------------------
 if bashio::config.has_value 'init_commands'; then
 	echo "Detected custom init commands. Running them now."
 	while read -r cmd; do
+		if [[ -z "${cmd}" || "${cmd}" == "[]" ]]; then
+			continue
+		fi
 		eval "${cmd}" ||
 			bashio::exit.nok "Failed executing init command: ${cmd}"
 	done <<<"$(bashio::config 'init_commands')"

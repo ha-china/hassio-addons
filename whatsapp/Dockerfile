@@ -10,7 +10,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3018
 
 # App metadata (injected by CI)
-ENV APP_VERSION="1.4.8"
+ENV APP_VERSION="1.5.0"
 ENV APP_NAME="WhatsApp"
 ENV APP_SLUG="whatsapp"
 ENV APP_UNSUPPORTED="false"
@@ -28,16 +28,18 @@ COPY . .
 # 4. Move rootfs to root (Standard HA Addon structure) & Fix Windows Line Enddings
 # hadolint ignore=DL3018
     RUN \
- apk add --no-cache "dos2unix~=7.5" && \
-    if [ -d "rootfs" ]; then \
-        cp -rv rootfs/* /; \
-        # Fix potential Windows CRLF in s6 scripts
-        find /etc/s6-overlay -type f -exec dos2unix {} \;; \
-        find /etc/s6-overlay -name run -exec chmod +x {} \;; \
-        find /etc/s6-overlay -name finish -exec chmod +x {} \;; \
-        find /etc/services.d -type f -exec dos2unix {} \; || true; \
-        find /etc/services.d -name run -exec chmod +x {} \; || true; \
-    fi
+        apk add --no-cache "dos2unix~=7.5" && \
+        if [ -d "rootfs" ]; then \
+            cp -rv rootfs/* /; \
+            # Fix potential Windows CRLF in s6 scripts
+            find /etc/s6-overlay -type f -exec dos2unix {} \;; \
+            find /etc/s6-overlay -name run -exec chmod +x {} \;; \
+            find /etc/s6-overlay -name finish -exec chmod +x {} \;; \
+            if [ -d "/etc/services.d" ]; then \
+                find /etc/services.d -type f -exec dos2unix {} \; || true; \
+                find /etc/services.d -name run -exec chmod +x {} \; || true; \
+            fi; \
+        fi
 
 # 5. Setup App
 RUN \

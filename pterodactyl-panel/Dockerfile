@@ -1,18 +1,18 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.1
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} as base
+
+ENV PTERODACTYL_VERSION="v1.12.0"
 
 # Install system requirements
 # Pterodactyl Panel v1.11+ requires PHP 8.2/8.3
 # hadolint ignore=DL3018
 
-ENV PTERODACTYL_VERSION="v1.12.0"
-
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="1.1.1"
-ENV ADDON_NAME="pterodactyl Panel Gameserver"
-ENV ADDON_SLUG="pterodactyl_panel"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="1.2.1"
+ENV APP_NAME="pterodactyl Panel Gameserver"
+ENV APP_SLUG="pterodactyl_panel"
+ENV APP_UNSUPPORTED="false"
 
 RUN apk add --no-cache -u libssl3 libcrypto3 \
     redis \
@@ -68,6 +68,7 @@ RUN apk add --no-cache -u libssl3 libcrypto3 \
     && rm /tmp/composer-setup.php \
     && cp .env.example .env \
     && composer install --ansi --no-dev --optimize-autoloader \
+    && rm -rf .git \
     && chown -R nginx:nginx . \
     && yarn install --production \
     && yarn add cross-env \
@@ -83,7 +84,7 @@ ARG BUILD_DATE="1970-01-01T00:00:00Z"
 WORKDIR /var/www/html
 
 COPY --from=build --chown=nginx:nginx /var/www/html /var/www/html
-COPY ./root/ /
+COPY ./rootfs/ /
 
 # Copy data for add-on
 COPY run.sh /
@@ -98,7 +99,7 @@ HEALTHCHECK --interval=30s --timeout=10s --retries=5 --start-period=120s \
 # Labels
 LABEL org.opencontainers.image.title="pterodactyl Panel Gameserver"
 LABEL org.opencontainers.image.description="Open-Source Gameserver Management Panel"
-LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons"
+LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
 LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/pterodactyl-panel"

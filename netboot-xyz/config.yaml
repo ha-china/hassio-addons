@@ -1,8 +1,8 @@
 ---
 name: Netboot.xyz
-version: 2.3.1
+version: 2.3.2
 slug: netboot-xyz
-description: '[老王杂谈说]：PXE-Server 用于在局域网内部署操作系统'
+description: '[老王杂谈说]：PXE服务器用于在本地网络中部署操作系统'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/netboot-xyz
 arch:
   - aarch64
@@ -21,13 +21,13 @@ panel_icon: mdi:download-network
 options:
   path: "/media/netboot/image"
   path_config: "/media/netboot/config"
-  dhcp_range: 192.168.1.200
-  log_level: info
+  dhcp_range: "192.168.1.200"
+  log_level: "info"
 schema:
   path: str
   path_config: str
   dhcp_range: str
-  log_level: list(trace|debug|info|notice|warning|error|fatal)
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
 ports:
   "85": 85
   "3000": 3000

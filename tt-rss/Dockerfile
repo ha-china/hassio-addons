@@ -4,11 +4,11 @@ FROM $BUILD_FROM
 # Setup base
 # hadolint ignore=DL3003
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="1.1.1"
-ENV ADDON_NAME="Tiny Tiny RSS"
-ENV ADDON_SLUG="tt-rss"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="1.2.1"
+ENV APP_NAME="Tiny Tiny RSS"
+ENV APP_SLUG="tt-rss"
+ENV APP_UNSUPPORTED="false"
 
 RUN \
     apk add libssl3 libcrypto3 --no-cache -u \
@@ -83,7 +83,7 @@ LABEL \
     maintainer="FaserF <https://ghfast.top/github.com/FaserF>" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
-    org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons" \
+    org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
     org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://ghfast.top/github.com/${BUILD_REPOSITORY}" \

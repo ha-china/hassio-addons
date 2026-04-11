@@ -1,15 +1,15 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.1
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 ARG BUILD_DATE="unknown"
 
 # hadolint ignore=DL3018
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="2.2.1"
-ENV ADDON_NAME="OpenSSL"
-ENV ADDON_SLUG="openssl"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="2.3.1"
+ENV APP_NAME="OpenSSL"
+ENV APP_SLUG="openssl"
+ENV APP_UNSUPPORTED="false"
 
 RUN apk --no-cache -u add libssl3 libcrypto3 openssl
 
@@ -25,7 +25,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 LABEL \
     org.opencontainers.image.title="OpenSSL" \
     org.opencontainers.image.description="Generate self-signed certificates" \
-    org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons" \
+    org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
     org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/openssl" \

@@ -1,28 +1,27 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.1
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 # Base image includes s6-overlay; services use /usr/bin/with-contenv
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
 
-# renovate: datasource=repology depName=alpine_3_21/nginx versioning=loose
-ARG NGINX_VERSION=""
+# renovate: datasource=repology depName=alpine_edge/nginx versioning=loose
+ARG NGINX_VERSION="1.28.3-r0"
 
 # Set shell with pipefail for Alpine (busybox/ash)
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
-# Create directory for nginx to store PID file and install dependencies
-# hadolint ignore=DL3018,DL3047
-
-# renovate: datasource=github-releases depName=php/php-src
+# renovate: datasource=repology depName=alpine_edge/php85 versioning=loose
 ARG PHP_VERSION="8.5"
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.2.1"
-ENV ADDON_NAME="NGINX"
-ENV ADDON_SLUG="nginx"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="0.3.1"
+ENV APP_NAME="NGINX"
+ENV APP_SLUG="nginx"
+ENV APP_UNSUPPORTED="false"
 
 WORKDIR /tmp
+
+# Create directory for nginx to store PID file and install dependencies
 # hadolint ignore=DL3018,DL3003
 RUN mkdir -p /run/nginx /var/log/nginx /var/lib/nginx \
   && apk --no-cache -u add libssl3 libcrypto3 \
@@ -67,9 +66,8 @@ RUN mkdir -p /run/nginx /var/log/nginx /var/lib/nginx \
     ffmpeg \
     cmake make musl-dev gcc gettext-dev libintl libxml2 git \
     && git clone --depth 1 --branch master https://gitlab.com/rilian-la-te/musl-locales.git musl-locales-master \
-    && cd musl-locales-master \
-    && cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DLOCALE_PROFILE=OFF -DCMAKE_INSTALL_PREFIX:PATH=/usr . && make && make install \
-    && cd .. && rm -rf musl-locales-master \
+    && (cd musl-locales-master && cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DLOCALE_PROFILE=OFF -DCMAKE_INSTALL_PREFIX:PATH=/usr . && make && make install) \
+    && rm -rf musl-locales-master \
     && apk del --no-cache cmake make musl-dev gcc gettext-dev libintl
 
 # Configure Logging
@@ -83,7 +81,7 @@ RUN sed -i 's|access_log /var/log/nginx/access.log;|access_log /dev/stdout;|g' /
 COPY rootfs /
 COPY index.html /
 
-RUN chmod +x /etc/cont-init.d/nginx.sh /etc/services.d/*/run
+RUN chmod +x /etc/cont-init.d/nginx.sh /etc/services.d/*/run /usr/bin/webserver_app_integration.sh
 
 # Health check
 HEALTHCHECK --interval=60s --timeout=15s --retries=3 CMD curl --fail http://127.0.0.1:80 || exit 1
@@ -91,7 +89,7 @@ HEALTHCHECK --interval=60s --timeout=15s --retries=3 CMD curl --fail http://127.
 # Labels
 LABEL org.opencontainers.image.title="NGINX"
 LABEL org.opencontainers.image.description="Open Source Webserver with PHP and MariaDB."
-LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons"
+LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
 LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/nginx"

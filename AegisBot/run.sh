@@ -1,6 +1,7 @@
 #!/usr/bin/with-contenv bashio
 # shellcheck shell=bash
-# Enable strict mode
+# Load custom bashio libraries
+# shellcheck source=/dev/null
 
 # <App_BANNER_INJECTION>
 
@@ -165,6 +166,8 @@ fi
 
 # </App_BANNER_INJECTION>
 
+. /usr/lib/bashio/app.sh
+# Enable strict mode
 set -e
 # shellcheck disable=SC1091
 
@@ -225,8 +228,20 @@ if bashio::config.true 'reset_database'; then
 
 	# Delete all data
 	if [ -d "$DATA_DIR" ]; then
-		bashio::log.info "Deleting all data..."
-		rm -rf "$DATA_DIR"
+		bashio::log.info "Deleting all data in $DATA_DIR..."
+		# Safely delete all contents including hidden files
+		find "$DATA_DIR" -mindepth 1 -delete
+		sync # Ensure filesystem changes are written
+	fi
+
+	# Verify database is gone (check for current filename)
+	if [ -f "$DB_DIR/aegisbot.db" ]; then
+		bashio::log.error "Failed to delete database file! Forced removal..."
+		rm -f "$DB_DIR/aegisbot.db"
+	fi
+	# For legacy reasons, also check for .sqlite
+	if [ -f "$DB_DIR/aegisbot.sqlite" ]; then
+		rm -f "$DB_DIR/aegisbot.sqlite"
 	fi
 
 	bashio::log.info "=================================================="
@@ -240,7 +255,12 @@ if bashio::config.true 'reset_database'; then
 	bashio::log.info "=================================================="
 
 	# Reset database options to false to prevent repeat wipes
-	bashio::api.supervisor "POST" "/addons/self/options" "{\"options\": {\"reset_database\": false, \"reset_database_confirm\": false}}"
+	# This uses the shared bashio::app.option helper for a robust update
+	if bashio::app.option 'reset_database' && bashio::app.option 'reset_database_confirm'; then
+		bashio::log.info "Database reset flags successfully cleared."
+	else
+		bashio::log.error "Failed to clear database reset flags! Loop may occur."
+	fi
 fi
 
 # --- CREATE DATA DIRECTORIES ---
@@ -252,7 +272,7 @@ mkdir -p "$UPLOADS_DIR"
 bashio::log.info "Reading configuration from Home Assistant..."
 
 # Version
-VERSION=$(bashio::config 'version')
+VERSION=$(bashio::config 'version' | xargs)
 bashio::log.info "Target Version: $VERSION"
 
 # Log Level
@@ -383,7 +403,7 @@ bashio::log.info "Note: Authentication settings are now configured via Web UI."
 
 # GitHub Repo Configuration
 if bashio::config.has_value 'github_repo' && [ -n "$(bashio::config 'github_repo')" ]; then
-	GITHUB_REPO=$(bashio::config 'github_repo')
+	GITHUB_REPO=$(bashio::config 'github_repo' | xargs)
 	export GITHUB_REPO
 	bashio::log.info "GitHub Repo set to: $GITHUB_REPO"
 else
@@ -503,11 +523,10 @@ install_from_archive() {
 
 		bashio::log.info "Running 'npm install'..."
 		if npm install; then
-			bashio::log.info "Applying Ingress patches..."
+			# Apply Ingress patches
 			sed -i "s|defineConfig({|defineConfig({ base: './',|g" vite.config.ts
-			sed -i "s|const API_BASE = .*|const API_BASE = './api/v1'|g" src/api/client.ts
-			# Handle official repo's now exported API_BASE
-			sed -i "s|export const API_BASE = .*|export const API_BASE = './api/v1'|g" src/api/client.ts
+			# We now handle API_BASE dynamically in source, but ensure it's not hardcoded to a legacy value
+			sed -i "s|import.meta.env.VITE_API_URL || '/api/v1'|getApiBase()|g" src/api/client.ts
 
 			bashio::log.info "Running 'npm run build'..."
 			if npm run build; then
@@ -762,7 +781,7 @@ cd /app/backend || exit 1
 export PYTHONPATH=/app/backend
 
 # Start Uvicorn in background
-uvicorn app.main:app --host 127.0.0.1 --port 8001 --log-level "$(echo "$LOG_LEVEL" | tr '[:upper:]' '[:lower:]')" &
+uvicorn app.main:app --host 127.0.0.1 --port 8001 --proxy-headers --forwarded-allow-ips="*" --log-level "$(echo "$LOG_LEVEL" | tr '[:upper:]' '[:lower:]')" &
 BACKEND_PID=$!
 
 # --- NGINX START ---

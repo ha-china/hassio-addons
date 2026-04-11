@@ -1,78 +1,50 @@
 # pterodactyl Panel Gameserver
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/pterodactyl-panel/logo.png" width="100" />
+![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/pterodactyl-panel/logo.png)
 
-[![Open your Home Assistant instance and show the add-on dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_pterodactyl-panel)
-[![Home Assistant Add-on](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker Image](https://img.shields.io/badge/docker-1.2.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-pterodactyl_panel)
-![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_pterodactyl-panel)
+[![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-1.2.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-pterodactyl_panel)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> Open-Source Gameserver Management Panel
+> 开源游戏服务器管理面板
 
 ---
 
-## 📖 About
+## 📖 关于
 
-## Installation
+## 安装
 
-1. Search for the "pterodactyl Panel Gameserver - BETA" add-on in the Home Assistant add-on store and install it.
-2. (Optional) Set a **password** in the configuration tab. If left empty, a random password will be generated and shown in the logs.
-3. Start the add-on.
-4. For initial login credentials, please refer to the [Documentation](DOCS.md#%F0%9F%9A%80-first-login).
+1. 在 Home Assistant 应用商店中搜索 "pterodactyl Panel Gameserver - BETA" 应用并安装。
+2. （可选）在配置选项卡中设置一个 **密码**。如果留空，将生成一个随机密码并在日志中显示。
+3. 启动应用。
+4. 初始登录凭据请参阅 [文档](DOCS.md#%F0%9F%9A%80-first-login)。
 
 > [!TIP]
-> **Login Information:**
+> **登录信息：**
 >
-> - **Email:** `admin@example.com`
-> - **Password:** The value you set in the `password` field (or check the logs if you left it empty)
-
-> Open-Source Gameserver - Currently not fully working
-
+> - **邮箱地址:** `admin@example.com`
+> - **密码:** 在 `password` 字段中设置的值（或如果留空，请检查日志）
+>
+> > 开源游戏服务器 - 目前尚未完全工作
+>
 > [!CAUTION]
-> **Experimental / Beta Status**
-> This add-on is still in development and/or primarily developed for personal use.
-> It is not extensively tested yet, but is expected to work fundamentally.
+> **实验性/测试版状态**
+> 此应用仍在开发中，或主要用于个人使用。
+> 它尚未经过广泛测试，但预期基本功能正常。
 
-If you encounter any issues with this add-on, please report them using the link below.
-The issue form will be pre-filled with the add-on information to help us resolve the
-problem faster.
+如果您在此应用中遇到任何问题，请通过以下链接报告。
+问题表单将预先填写应用信息，以帮助我们更快地解决问题。
 
-If you have an idea for a new feature or improvement, please use the link below to
-submit a feature request. The form will be pre-filled with the add-on information.
-
-## 🐛 Report a Bug
-
-If you encounter any issues with this add-on, please report them using the link below.
-The issue form will be pre-filled with the add-on information to help us resolve the
-problem faster.
-
-**[Report a Bug](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.10.0&log_information=Please+paste+the+addon+log+output+here%3A%0A%0A)**
-
-> [!NOTE]
-> Please use the link above to report problems. This ensures that all necessary
-> information (add-on name, version, etc.) is automatically included in your bug report.
-
-## 💡 Feature Request
-
-If you have an idea for a new feature or improvement, please use the link below to
-submit a feature request. The form will be pre-filled with the add-on information.
-
-**[Request a Feature](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&addon_name=pterodactyl-panel)**
-
-> [!NOTE]
-> Please use the link above to request features. This ensures that the add-on name
-> is automatically included in your feature request.
-
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
+如果您有新功能或改进的想法，请使用以下链接提交功能请求。表单将预先填写应用信息。
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ 配置
 
-Configure the add-on via the **Configuration** tab in the Home Assistant add-on page.
+通过 Home Assistant 应用页面中的 **配置** 选项卡配置应用。
 
-### Options
+### 选项
 
 ```yaml
 app_url: http://pterodactyl.local
@@ -85,14 +57,16 @@ ssl: false
 
 ---
 
-## 👨‍💻 Credits & License
+## 👨‍💻 信用 & 许可证
 
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
-
+此项目是开源的，并受 MIT 许可证的约束。
+由 **FaserF** 维护。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

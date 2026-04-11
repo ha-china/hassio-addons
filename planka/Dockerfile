@@ -7,14 +7,13 @@ FROM ${BUILD_FROM}
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup base system
-
 # hadolint ignore=DL3013
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="1.2.0"
-ENV ADDON_NAME="Planka"
-ENV ADDON_SLUG="planka"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="1.3.1"
+ENV APP_NAME="Planka"
+ENV APP_SLUG="planka"
+ENV APP_UNSUPPORTED="false"
 
 RUN \
     apk add --no-cache -u libssl3 libcrypto3 \
@@ -29,7 +28,7 @@ RUN \
         su-exec \
         openssl \
         squid \
-    && pip3 install --no-cache-dir --break-system-packages setuptools
+    && pip3 install --no-cache-dir --break-system-packages setuptools==75.8.0
 
 # Copy Planka
 WORKDIR /opt/planka
@@ -40,7 +39,7 @@ COPY rootfs /
 
 # Set permissions
 RUN \
-    find /etc/s6-overlay/s6-rc.d -type f -name "*" -exec sed -i 's/\r$//' {} + \
+    find /etc/s6-overlay/s6-rc.d /usr/lib/bashio -type f -name "*" -exec sed -i 's/\r$//' {} + \
     && chmod a+x /etc/s6-overlay/s6-rc.d/*/run /etc/s6-overlay/s6-rc.d/*/up \
     && { chmod a+x /etc/s6-overlay/s6-rc.d/*/*.sh 2>/dev/null || true; }
 

@@ -1,11 +1,12 @@
 ---
 name: Antigravity-Server
-version: "1.2.1"
+version: "1.2.2"
 slug: antigravity-server
-description: '[老王杂谈说]：在浏览器中通过 NoVNC 流式传输 Antigravity AI IDE（带有 XFCE4 的 Linux 桌面）'
+description: '[老王杂谈说]：在您的浏览器中通过 NoVNC 流式传输 Antigravity AI IDE（带有 XFCE4 的 Linux 桌面）。'
 url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/antigravity-server
 arch:
   - amd64
+  - aarch64
 image: ghcr.nju.edu.cn/faserf/hassio-addons-antigravity-server-{arch}
 init: false
 ingress: true
@@ -22,9 +23,19 @@ ports_description:
   5901/tcp: "VNC Client Port"
 options:
   vnc_password: ""
-  log_level: info
+  log_level: "info"
   autostart_antigravity: true
+  install_android_tools: false
+  install_dev_tools: false
+  install_windows_tools: false
+  install_linter_tools: false
+  additional_packages: []
 schema:
   vnc_password: match(^.{0,8}$)?
-  log_level: list(trace|debug|info|notice|warning|error|fatal)
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
   autostart_antigravity: bool
+  install_android_tools: bool?
+  install_dev_tools: bool?
+  install_windows_tools: bool?
+  install_linter_tools: bool?
+  additional_packages: list(str)?

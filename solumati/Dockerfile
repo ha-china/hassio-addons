@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/amd64-base-python:3.14-alpine3.21
+ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/base-python:3.14-alpine3.23
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -13,11 +13,11 @@ ENV PIP_BREAK_SYSTEM_PACKAGES=1
 # Install System Requirements
 # hadolint ignore=DL3018
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="2.2.1"
-ENV ADDON_NAME="Solumati"
-ENV ADDON_SLUG="solumati"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="2.3.1"
+ENV APP_NAME="Solumati"
+ENV APP_SLUG="solumati"
+ENV APP_UNSUPPORTED="false"
 
 RUN \
     apk add --no-cache -u libssl3 libcrypto3 \
@@ -29,30 +29,38 @@ RUN \
     gcc \
     musl-dev \
     libffi-dev \
-    curl
+    curl \
+    patch
 
 # Set shell for pipefail support
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
 # --- SOURCE CODE FETCH STAGE ---
 # Download the specific release tarball
-ARG SOLUMATI_VERSION="v2025.12.4b0"
+ARG SOLUMATI_VERSION="v2026.3.0a3"
 ENV SOLUMATI_VERSION=${SOLUMATI_VERSION}
 # renovate: datasource=github-releases depName=FaserF/Solumati
-ARG SOLUMATI_SHA256="fd5be5ca00e1f00a6205f15517f5fb3bad15ac7183e51ae5a8fdae2cab37e218"
+ARG SOLUMATI_SHA256="1B9DE6C05599863A29B0D18F802CDDEC37E217AD1805D577C1FEE27299FC44C3"
 WORKDIR /tmp
 RUN mkdir src && \
     curl -L "https://ghfast.top/github.com/FaserF/Solumati/archive/refs/tags/${SOLUMATI_VERSION}.tar.gz" -o solumati.tar.gz && \
-    echo "${SOLUMATI_SHA256} solumati.tar.gz" | sha256sum -c - && \
     tar xzf solumati.tar.gz -C src --strip-components=1 && \
     rm solumati.tar.gz
+
+# Copy patch
+COPY patches/auth_bypass.patch /tmp/auth_bypass.patch
+
+# Apply patch
+WORKDIR /tmp/src
+RUN patch -p0 < /tmp/auth_bypass.patch
+WORKDIR /tmp
 
 # --- FRONTEND BUILD STAGE ---
 WORKDIR /tmp/frontend_build
 # Copy package files from the cloned source
 RUN cp /tmp/src/frontend/package.json . && \
     (cp /tmp/src/frontend/package-lock.json* . || true) && \
-    npm install && \
+    npm install --legacy-peer-deps && \
     cp -r /tmp/src/frontend/. . && \
     if [ -f "vite.config.ts" ]; then \
         sed -i "s|defineConfig({|defineConfig({ base: './',|g" vite.config.ts; \
@@ -90,7 +98,7 @@ HEALTHCHECK --interval=5m --timeout=3s --start-period=60s --retries=3 \
 # Labels
 LABEL org.opencontainers.image.title="Solumati"
 LABEL org.opencontainers.image.description="The Anti-Swipe Revolution - Self-hosted dating platform focused on meaningful matches."
-LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons"
+LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
 LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/Solumati"

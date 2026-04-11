@@ -1,22 +1,22 @@
 ---
 name: Komodo
-version: 0.1.0
+version: 0.1.1
 slug: komodo
 image: ghcr.nju.edu.cn/faserf/hassio-addons-komodo-{arch}
-description: '[老王杂谈说]：一种用于在多台服务器上构建和部署软件的工具'
+description: '[老王杂谈说]：在多台服务器上构建和部署软件的工具'
 url: https://ghfast.top/github.com/moghtech/komodo
 arch:
-  - aarch64
   - amd64
 init: false
 ingress: true
 ingress_port: 9120
 panel_icon: mdi:lizard
 options:
-  log_level: info
+  log_level: "info"
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)
 ports:
   9120/tcp: 9120
 ports_description:
   9120/tcp: Web Interface
+stage: experimental

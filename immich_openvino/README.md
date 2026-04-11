@@ -1,29 +1,28 @@
 # Home assistant 插件：Immich OpenVINO
 
-⚠️ 该项目正处于非常活跃的开发中。请预期可能出现错误和更改。不要将其作为存储照片和视频的唯一方式！ (来自开发者)
+⚠️ 项目处于非常活跃的开发阶段。预期会有bug和变更。请勿将其作为存储照片和视频的唯一方式！（开发者提醒）
 
+我在业余时间维护这个和其他 Home Assistant 插件：跟上上游变更、Home Assistant 变更以及在真实硬件上进行测试都需要花费大量时间（以及一些金钱）。我经常使用我 >110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我自己不使用的测试服务，如 VPN）来调试和改进插件。
 
-我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在实际硬件上的测试都需要花费大量时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，因此我安装了测试机器（并购买了一些我本人不使用的测试服务，如 VPN），以便进行故障排除和改进插件
+如果这个插件为您节省了时间或使您的设置更加容易，我将非常感激您的支持！
 
-如果这个插件为您节省了时间或使您的设置更加简单，我将非常感激您的支持！
-
-[![给我买杯咖啡][捐赠徽章]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal-徽章]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![买我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
 
 ![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_openvino%2Fconfig.yaml)
-![入口](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_openvino%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_openvino%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_openvino%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fimmich_openvino%2Fconfig.yaml)
 
 [![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[捐赠徽章]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-徽章]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我仓库加星的人！要加星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有给我的仓库点星的人！要星标它，请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
 [![Stargazers 仓库列表 for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -31,25 +30,25 @@ _感谢所有为我仓库加星的人！要加星，请点击下面的图片，�
 
 ## 关于
 
-从您的手机直接备份照片和视频的自托管解决方案，支持 OpenVINO 硬件加速。这是为使用英特尔 GPU 和 CPU 提供硬件加速的 Immich 的 OpenVINO 变体。
+使用 OpenVINO 硬件加速支持从您的手机直接备份照片和视频的自托管解决方案。这是 Immich 的 OpenVINO 版本，它为使用英特尔 GPU 和 CPU 提供了硬件加速，以支持机器学习任务。
 
-此插件基于 imagegenius 的 [docker 镜像](https://github.com/imagegenius/docker-immich)，其中启用了 OpenVINO 支持，以在英特尔硬件上提供增强性能。
+此插件基于 imagegenius 的 [docker 镜像](https://github.com/imagegenius/docker-immich)，已启用 OpenVINO 支持，以在英特尔硬件上提高性能。
 
 ## 硬件要求
 
 - **英特尔硬件**：兼容的英特尔 CPU 或英特尔集成/独立 GPU
 - **OpenVINO 支持**：兼容 OpenVINO 工具包的英特尔硬件
-- **架构**：仅支持 AMD64（OpenVINO 支持针对英特尔 x86-64 架构进行了优化）
+- **架构**：仅限 AMD64（OpenVINO 支持针对英特尔 x86-64 架构进行了优化）
 - **英特尔 GPU 驱动程序**：在主机系统上正确安装了英特尔 GPU 驱动程序（如果使用英特尔 GPU 加速）
 
 ## 配置
 
-Webui 可在 `<your-ip>:8080` 找到。PostgreSQL 可以是内部的，也可以是外部的。
+Webui 可在 `<your-ip>:8080` 找到。PostgreSQL 可以是内部或外部的。
 
 ### 选项
 
 | 选项 | 类型 | 默认值 | 描述 |
-|------|------|---------|-------------|
+|------|------|---------|------|
 | `data_location` | str | `/share/immich` | Immich 数据存储的路径 |
 | `library_location` | str | | 照片/视频库的路径 |
 | `TZ` | str | | 时区（例如，`Europe/London`） |
@@ -64,10 +63,10 @@ Webui 可在 `<your-ip>:8080` 找到。PostgreSQL 可以是内部的，也可以
 | `DB_DATABASE_NAME` | str | `immich` | 数据库名 |
 | `DB_PORT` | int | `5432` | 数据库端口 |
 | `DB_ROOT_PASSWORD` | str | | 数据库 root 密码 |
-| `JWT_SECRET` | str | | 身份验证的 JWT 密钥 |
-| `DISABLE_MACHINE_LEARNING` | bool | `false` | 禁用 ML 功能（不建议在 OpenVINO 变体中使用） |
-| `MACHINE_LEARNING_WORKERS` | int | `1` | ML 工作者数量（可以使用 OpenVINO 增加） |
-| `MACHINE_LEARNING_WORKER_TIMEOUT` | int | `120` | ML 工作者超时（秒） |
+| `JWT_SECRET` | str | | 认证 JWT 密钥 |
+| `DISABLE_MACHINE_LEARNING` | bool | `false` | 禁用 ML 功能（不推荐用于 OpenVINO 变体） |
+| `MACHINE_LEARNING_WORKERS` | int | `1` | ML 工作进程数量（可以使用 OpenVINO 增加） |
+| `MACHINE_LEARNING_WORKER_TIMEOUT` | int | `120` | ML 工作进程超时（秒） |
 | `VIPS_NOVECTOR` | bool | `false` | 设置为 `true` 以导出 `VIPS_NOVECTOR=1` 并解决 aarch64 缩略图生成问题 |
 | `skip_permissions_check` | bool | `false` | 跳过文件权限检查 |
 
@@ -103,33 +102,33 @@ MACHINE_LEARNING_WORKER_TIMEOUT: 180
 此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
 - **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项来传递额外的环境变量（使用大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
 ## 安装
 
 此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
 **先决条件**：
-- 用于 OpenVINO 加速的英特尔 CPU 或英特尔 GPU
+- 用于 OpenVINO 加速的英特尔 CPU 或 GPU
 - AMD64 架构（不支持 ARM）
 - 安装了英特尔 GPU 驱动程序（如果使用英特尔 GPU 加速）
 
 **步骤**：
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 supervisor 插件存储的右上角，或单击下面的按钮如果您已经配置了我的 HA）
-   [![打开您的 Home Assistant 实例并显示具有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在监督器插件存储的右上角，或单击下面的按钮如果您已经配置了我的 HA）
+   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
-1. 单击 `保存` 按钮以存储您的配置。
+1. 单击“保存”按钮以存储您的配置。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切顺利。
-1. 仔细配置插件以满足您的偏好，有关详细信息请参阅官方文档。
+1. 仔细配置插件以符合您的喜好，有关详细信息请参阅官方文档。
 
 **数据库设置**：
-请注意，您需要安装一个单独的 postgres 插件才能连接到数据库。您可以在我的仓库中安装 postgres 插件。
+请注意，您需要安装一个单独的 postgres 插件才能连接数据库。您可以在我的仓库中安装 postgres 插件。
 请注意，在启动之前更改密码；启动后不会更改。
 
 ## 支持
 
-在 github 上创建一个问题，或在 [home assistant 线程](https://community.home-assistant.io/t/home-assistant-addon-immich/282108/3) 上提问。
+在 github 上创建问题，或在 [home assistant 线程](https://community.home-assistant.io/t/home-assistant-addon-immich/282108/3) 上提问
 
 [仓库](https://github.com/alexbelgium/hassio-addons)
 ---

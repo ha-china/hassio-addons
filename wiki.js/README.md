@@ -1,10 +1,10 @@
 # Wiki.JS
 
-![Wiki.JS Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/wiki.js/logo.png)
+![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/wiki.js/logo.png)
 
-[![打开您的 Home Assistant 实例并显示附加组件仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_wiki.js)
-[![Home Assistant App](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
-[![Docker 镜像](https://img.shields.io/badge/docker-3.4.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-wiki)
+[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_wiki.js)
+[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-3.4.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-wiki.js)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > 最强大且可扩展的开源 Wiki 软件
@@ -13,49 +13,17 @@
 
 ## 📖 关于
 
-## ❤️ 支持此项目
-
-> 我在**兼职工作之余**维护所有这些附加组件。测试设备需要费用，每笔捐赠都帮助我保持独立，并投入更多时间到开源工作中。
-
->
-> 捐赠完全自愿——但收到的支持越多，我就越少依赖其他收入，就能投入更多时间到这些项目中。
-
-<div align="center">
-
-</div>
-
-## 🐛 报告一个错误
-
-如果您在此应用程序中遇到任何问题，请使用以下链接报告。问题表单将预先填写应用程序信息，以帮助我们更快地解决问题。
-
-**[报告一个错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=3.0.0&log_information=请+在此处+粘贴+应用程序+日志+输出：%0A%0A)**
-
-> [!NOTE]
-> 请使用上面的链接报告问题。这确保了所有必要的信息（应用程序名称、版本等）都会自动包含在您的错误报告中。
-
-## 💡 功能请求
-
-如果您有关于新功能或改进的想法，请使用以下链接提交功能请求。表单将预先填写应用程序信息。
-
-**[请求一个功能](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&App_name=wiki.js)**
-
-> [!NOTE]
-> 请使用上面的链接请求功能。这确保了应用程序名称会自动包含在您的功能请求中。
-
-此项目是开源的，并受 MIT 许可证的约束。
-由 **FaserF** 维护。
-
 ## 🏁 首次启动
 
-在首次启动时，您将看到一个管理设置向导。向导将引导您完成 Wiki 连接的初始配置和管理员账户的创建。
+首次启动时，您将看到一个管理员设置向导。向导将引导您完成 Wiki 连接的初始配置以及管理员账户的创建。
 
-在此过程中，请创建您自己的**管理员账户**（电子邮件/密码）。
+在此过程中，请创建您自己的 **管理员账户**（邮箱 / 密码）。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant App 页面中的**配置**选项卡配置此附加组件。
+通过 Home Assistant App 页面中的 **配置** 选项卡配置此应用。
 
 ### 选项
 
@@ -72,7 +40,7 @@ ssl: true
 
 ## 👨‍💻 致谢与许可证
 
-此项目是开源的，并受 MIT 许可证的约束。
+此项目是开源的，并遵循 MIT 许可证。
 由 **FaserF** 维护。
 ---
 

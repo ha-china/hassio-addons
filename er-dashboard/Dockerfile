@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.1
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
 
 # Stage 1: Get Frontend Assets
 # renovate: datasource=docker depName=ghcr.nju.edu.cn/eidolf/er-startseite/frontend
@@ -20,11 +20,11 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # hadolint ignore=DL3008,DL3013,DL3018,DL3042
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="1.3.0"
-ENV ADDON_NAME="ER-Startseite (Dashboard)"
-ENV ADDON_SLUG="er-dashboard"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="1.3.2"
+ENV APP_NAME="ER-Startseite (Dashboard)"
+ENV APP_SLUG="er-dashboard"
+ENV APP_UNSUPPORTED="false"
 
 RUN \
  apk add --no-cache -u libssl3 libcrypto3 \
@@ -53,18 +53,18 @@ COPY --from=backend /app/pyproject.toml /app/pyproject.toml
 # Installing directly from the dependencies listed in pyproject.toml
 # hadolint ignore=DL3013
 RUN pip3 install --no-cache-dir --break-system-packages \
-    fastapi \
-    "uvicorn[standard]" \
-    httpx \
-    "pydantic[email]" \
-    pydantic-settings \
-    sqlalchemy \
-    alembic \
-    asyncpg \
-    python-multipart \
-    "python-jose[cryptography]" \
-    "passlib[bcrypt]" \
-    structlog
+    fastapi==0.115.8 \
+    "uvicorn[standard]==0.34.0" \
+    httpx==0.28.1 \
+    "pydantic[email]==2.10.6" \
+    pydantic-settings==2.7.1 \
+    sqlalchemy==2.0.37 \
+    alembic==1.14.1 \
+    asyncpg==0.30.0 \
+    python-multipart==0.0.20 \
+    "python-jose[cryptography]==3.3.0" \
+    "passlib[bcrypt]==1.7.4" \
+    structlog==25.1.0
 
 # Copy root filesystem
 COPY rootfs /
@@ -72,7 +72,7 @@ COPY rootfs /
 # Fix S6 Overlay line endings and force correct type definitions
 # We use sed -i to safely strip \r from all files
 RUN find /etc/s6-overlay/s6-rc.d -type f -exec sed -i 's/\r$//' {} \; && \
-    find /etc/services.d -type f -exec sed -i 's/\r$//' {} \; 2>/dev/null || true && \
+    if [ -d /etc/services.d ]; then find /etc/services.d -type f -exec sed -i 's/\r$//' {} \;; fi && \
     echo "oneshot" > /etc/s6-overlay/s6-rc.d/init-secrets/type && \
     echo "oneshot" > /etc/s6-overlay/s6-rc.d/init-postgres/type && \
     echo "longrun" > /etc/s6-overlay/s6-rc.d/svc-postgres/type && \
