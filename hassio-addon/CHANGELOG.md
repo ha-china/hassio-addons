@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.15.3
+
+### Changed
+- Includes dashboard release `1.15.3`.
+
+### Fixed
+- Restores missing Weather card condition icons by switching to a stable Meteocons CDN path (#134).
+
 ## 1.15.2
 
 ### Changed

@@ -1,13 +1,13 @@
 # Komodo
 
-![Komodo 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/komodo/logo.png) width="100" alt="Logo" />
+![Komodo 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/komodo/logo.png) 
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_komodo)
 [![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
 [![Docker 镜像](https://img.shields.io/badge/docker-0.1.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-komodo)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 一个在多台服务器上构建和部署软件的工具
+> 用于在多台服务器上构建和部署软件的工具
 
 ---
 
@@ -15,7 +15,7 @@
 > **实验性/测试版状态**
 >
 > 此应用仍在开发中，或主要用于个人使用。
-> 它尚未经过广泛测试，但预计基本功能应该可以正常工作。
+> 它尚未经过广泛测试，但预计基本功能正常。
 
 ---
 
@@ -26,13 +26,13 @@
 1. 在 Home Assistant 应用商店中搜索 "Komodo"。
 2. 安装应用。
 3. 启动应用。
-4. 打开 Web UI。
+4. 打开 Web 界面。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 应用页面中的 **配置** 选项卡配置应用。
+通过 Home Assistant 应用页面中的 **配置** 选项卡配置此应用。
 
 ### 选项
 
@@ -42,7 +42,7 @@ log_level: info
 
 ---
 
-## 👨‍💻 贡献者与许可证
+## 👨‍💻 致谢与许可证
 
 此项目是开源的，并受 MIT 许可证的约束。
 由 **FaserF** 维护。

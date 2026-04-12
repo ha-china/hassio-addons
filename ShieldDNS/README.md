@@ -1,13 +1,13 @@
 # ShieldDNS
 
-![ShieldDNS 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/ShieldDNS/logo.png) width="100" alt="Logo" />
+![ShieldDNS Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/ShieldDNS/logo.png)
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_ShieldDNS)
-[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
 [![Docker 镜像](https://img.shields.io/badge/docker-2.4.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-shielddns)
 ![项目维护者](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 高性能 AdGuard Home DoT 代理
+> 高性能的 AdGuard Home DoT 代理
 
 ---
 
@@ -15,15 +15,15 @@
 
 **ShieldDNS** 是一个高性能、注重隐私的 DNS 解决方案，支持 **DNS-over-TLS (DoT)** 和 **DNS-over-HTTPS (DoH)**。
 
-它具有一个高级 **管理仪表板** 用于实时监控，以及一个与 AdGuard、Pi-hole 和 uBlock origin 列表兼容的强大 **过滤引擎**。
+它具有一个高端的 **管理仪表板** 用于实时监控和一个与 AdGuard、Pi-hole 和 uBlock origin 列表兼容的强大 **过滤引擎**。
 
 ## 🚀 关键特性
 
-- 🔒 **全面双支持**：原生支持 **DNS-over-TLS (DoT)**（端口 853）和 **DNS-over-HTTPS (DoH)**（端口 443），具有高效率的处理。
-- 📊 **管理仪表板**：高级网页 UI 用于实时统计和配置。
+- 🔒 **全双工支持**：原生支持 **DNS-over-TLS (DoT)**（端口 853）和 **DNS-over-HTTPS (DoH)**（端口 443），具有高效率的处理。
+- 📊 **管理仪表板**：高端的 Web UI 用于实时统计和配置。
 - 🛡️ **DNS 过滤**：集成的引擎用于块列表，具有自动更新和去重功能。
-- ⚡ **高性能**：基于 CoreDNS 和 Go，实现最大效率。
-- 🔐 **安全访问**：管理 UI 必须强制密码保护（bcrypt）。
+- ⚡ **高性能**：基于 CoreDNS 和 Go，提供最大效率。
+- 🔐 **安全访问**：管理 UI 必须密码保护（bcrypt）。
 - 📱 **多平台**：非常适合 Android 私有 DNS、iOS 配置文件和 Windows 11。
 
 ## 🛠️ 使用方法
@@ -52,7 +52,7 @@ services:
 
 在 `http://YOUR_SERVER_IP:8080` 访问仪表板。
 
-- **初始设置**：首次访问时，您将被提示设置一个 12 位字符的管理员密码。
+- **初始设置**：首次访问时，您将被提示设置一个 12 位的管理员密码。
 - **过滤**：直接从 UI 管理您的块列表（AdGuard、Pi-hole 等）。
 - **统计**：实时查看总查询、阻止请求和阻止比率。
 
@@ -60,19 +60,19 @@ services:
 
 ### DoT (DNS-over-TLS) - 端口 853
 
-- **Android**：转到 **设置 > 网络 > 私有 DNS** 并输入 `dns.example.com`。
+- **Android**：进入 **设置 > 网络 > 私有 DNS**，输入 `dns.example.com`。
 - **iOS/macOS**：使用提供的 `.mobileconfig` 模板。
 
 ### DoH (DNS-over-HTTPS) - 端口 443
 
-- **Windows 11**：**设置 > 网络 > DNS 设置 > 编辑**。将 DNS over HTTPS 设置为“开启（手动）”并输入 `https://dns.example.com/dns-query`。
+- **Windows 11**：进入 **设置 > 网络 > DNS 设置 > 编辑**。将 DNS over HTTPS 设置为“开启（手动）”并输入 `https://dns.example.com/dns-query`。
 - **浏览器**：在浏览器的“安全 DNS”设置中输入 `https://dns.example.com/dns-query`。
 
 ## 🛡️ 安全最佳实践
 
-由于您正在将 DNS 服务器暴露给公众，因此您应该保护它：
+由于您正在公开暴露 DNS 服务器，您应该确保其安全：
 
-1. **使用 WAF**：在 DoH 端点前面放置反向代理或 Cloudflare Tunnel。
+1. **使用 WAF**：在 DoH 端点前放置反向代理或 Cloudflare 通道。
 2. **防火墙**：如果可能，为端口 853 白名单您的移动 IP 范围。
 3. **密码**：为管理 UI 使用强大且唯一的密码（至少 12 个字符）。
 
@@ -81,11 +81,11 @@ services:
 | 协议 | 端口 | 描述 | 支持 |
 | :--- | :--- | :--- | :--- |
 | **DoT** | `853` | 专用安全 DNS 端口。 | **原生**（Android 私有 DNS）。 |
-| **DoH** | `443` | 标准 HTTPS 网页端口。 | **原生**（Windows 11、iOS、浏览器）。 |
+| **DoH** | `443` | 标准 HTTPS 网络端口。 | **原生**（Windows 11、iOS、浏览器）。 |
 
 ## 🏠 Home Assistant 插件
 
-ShieldDNS 作为官方 Home Assistant 插件提供，具有完整的 **入站** 支持用于管理仪表板。
+ShieldDNS 作为官方 Home Assistant 插件提供，具有完整的 **入口** 支持管理仪表板。
 [查看插件仓库](https://github.com/FaserF/hassio-addons/tree/master/ShieldDNS)
 
 ---
@@ -111,7 +111,7 @@ upstream_dot: unfiltered.joindns4.eu dns.quad9.net one.one.one.one dns.google
 
 ---
 
-## 👨‍💻 致谢与许可
+## 👨‍💻 贡献者与许可
 
 此项目是开源的，并受 MIT 许可证的约束。
 由 **FaserF** 维护。
