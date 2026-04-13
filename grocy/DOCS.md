@@ -1,41 +1,45 @@
-# Home Assistant Community Add-on: Grocy
+# Home Assistant Community App: Grocy
 
-[Grocy][grocy] - 超出您冰箱的ERP是一个强大的家庭杂货和家庭管理解决方案，提供以下功能：
+[Grocy][grocy] - ERP beyond your fridge is a powerful groceries & household
+management solution for your home, delivering features like:
 
-- 库存管理
-- 购物清单
-- 食谱
-- 家务和任务
-- 库存
-- 还有更多。
+- Stock management
+- Shopping list
+- Recipes
+- Chores & tasks
+- Inventory
+- and many more.
 
-[试用Grocy的在线演示][grocy-demo]。
+[Try out the online demo of Grocy][grocy-demo].
 
-## 安装
+## Installation
 
-此附加组件的安装非常简单，与安装任何其他Home Assistant附加组件没有区别。
+The installation of this app is pretty straightforward and not different in
+comparison to installing any other Home Assistant app.
 
-1. 点击下面的Home Assistant My按钮以打开您的Home Assistant实例中的附加组件。
+1. Click the Home Assistant My button below to open the app on your Home
+   Assistant instance.
 
-   [![在您的Home Assistant实例中打开此附加组件。][addon-badge]][addon]
+   [![Open this app in your Home Assistant instance.][addon-badge]][addon]
 
-2. 点击“安装”按钮以安装附加组件。
-3. 启动“Grocy”附加组件。
-4. 检查“Grocy”附加组件的日志，以查看一切是否正常。
-5. 点击“打开WEB界面”按钮进入Grocy的界面。
-6. 默认登录为用户：`admin` 密码：`admin`。
-7. 享受此附加组件！
+1. Click the "Install" button to install the app.
+1. Start the "Grocy" app.
+1. Check the logs of the "Grocy" app to see if everything went well.
+1. Click on the "OPEN WEB UI" button to get into the interface of Grocy.
+1. The default login is user: `admin` password: `admin`.
+1. Enjoy the app!
 
-## 配置
+## Configuration
 
-**注意**：_更改配置时，请记得重新启动附加组件。_
+**Note**: _Remember to restart the app when the configuration is changed._
 
-附加组件配置示例：
+Example app configuration:
 
 ```yaml
 culture: en
 currency: USD
 entry_page: stock
+grocycode_type: 2D
 features:
   batteries: true
   calendar: true
@@ -45,6 +49,11 @@ features:
   shoppinglist: true
   stock: true
   tasks: true
+printers:
+  label_printer:
+    enabled: false
+  thermal_printer:
+    enabled: false
 tweaks:
   chores_assignment: true
   multiple_shopping_lists: true
@@ -60,80 +69,92 @@ certfile: fullchain.pem
 keyfile: privkey.pem
 ```
 
-**注意**：_这只是一个示例，请勿复制粘贴！创建您自己的！_
+**Note**: _This is just an example, don't copy and paste it! Create your own!_
 
-### 选项：`log_level`
+### Option: `log_level`
 
-`log_level`选项控制附加组件的日志输出级别，可以更改为更详细或更简洁，这在您处理未知问题时可能很有用。可能值为：
+The `log_level` option controls the level of log output by the addon and can
+be changed to be more or less verbose, which might be useful when you are
+dealing with an unknown issue. Possible values are:
 
-- `trace`：显示每个细节，如所有调用的内部函数。
-- `debug`：显示详细的调试信息。
-- `info`：正常（通常）有趣的事件。
-- `warning`：不属于错误的特殊情况。
-- `error`：运行时错误，不需要立即采取行动。
-- `fatal`：出现严重错误。附加组件变得无法使用。
+- `trace`: Show every detail, like all called internal functions.
+- `debug`: Shows detailed debug information.
+- `info`: Normal (usually) interesting events.
+- `warning`: Exceptional occurrences that are not errors.
+- `error`: Runtime errors that do not require immediate action.
+- `fatal`: Something went terribly wrong. App becomes unusable.
 
-请注意，每个级别自动包括来自更严重级别的日志消息，例如，`debug`还显示`info`消息。默认情况下，`log_level`设置为`info`，这是推荐的设置，除非您正在排查问题。
+Please note that each level automatically includes log messages from a
+more severe level, e.g., `debug` also shows `info` messages. By default,
+the `log_level` is set to `info`, which is the recommended setting unless
+you are troubleshooting.
 
-### 选项：`ssl`
+### Option: `ssl`
 
-启用/禁用Grocy面板的SSL（HTTPS）。设置为`true`以启用，设置为`false`则禁用。
+Enables/Disables SSL (HTTPS) on the web interface of Grocy
+Panel. Set it `true` to enable it, `false` otherwise.
 
-### 选项：`certfile`
+### Option: `certfile`
 
-用于SSL的证书文件。
+The certificate file to use for SSL.
 
-**注意**：_文件必须存储在`/ssl/`中，这是默认值_
+**Note**: _The file MUST be stored in `/ssl/`, which is the default_
 
-### 选项：`keyfile`
+### Option: `keyfile`
 
-用于SSL的私钥文件。
+The private key file to use for SSL.
 
-**注意**：_文件必须存储在`/ssl/`中，这是默认值_
+**Note**: _The file MUST be stored in `/ssl/`, which is the default_
 
-### 选项：`culture`
+### Option: `culture`
 
-用于设置语言。可选择：
+Is used for setting the language. Choose between:
 
-- `ca`（加泰罗尼亚语）
-- `cs`（捷克语）
-- `da`（丹麦语）
-- `de`（德语）
-- `el_GR`（希腊语 - 希腊）
-- `en`（英语）
-- `en_GB`（英语 - 英国）
-- `es`（西班牙语）
-- `fi`（芬兰语）
-- `fr`（法语）
-- `he_IL`（希伯来语 - 以色列）
-- `hu`（匈牙利语）
-- `it`（意大利语）
-- `ja`（日语）
-- `ko_KR`（韩语 - 韩国）
-- `nl`（荷兰语）
-- `no`（挪威语）
-- `pl`（波兰语）
-- `pt_BR`（葡萄牙语 - 巴西）
-- `pt_PT`（葡萄牙语 - 葡萄牙）
-- `ru`（俄语）
-- `sk_SK`（斯洛伐克语 - 斯洛伐克）
-- `sv_SE`（瑞典语 - 瑞典）
-- `ta`（泰米尔语）
-- `tr`（土耳其语）
-- `zh_CN`（中文 - 中国）
-- `zh_TW`（中文 - 台湾）
+- `ca` (Catalan)
+- `cs` (Czech)
+- `da` (Danish)
+- `de` (German)
+- `el_GR` (Greek - Greece)
+- `en` (English)
+- `en_GB` (English - United Kingdom)
+- `es` (Spanish)
+- `et` (Estonian)
+- `fi` (Finnish)
+- `fr` (French)
+- `he_IL` (Hebrew - Israel)
+- `hu` (Hungarian)
+- `it` (Italian)
+- `ja` (Japanese)
+- `ko_KR` (Korean - South Korea)
+- `lt` (Lithuanian)
+- `nl` (Dutch)
+- `no` (Norwegian)
+- `pl` (Polish)
+- `pt_BR` (Portuguese - Brazil)
+- `pt_PT` (Portuguese - Portugal)
+- `ro` (Romanian)
+- `ru` (Russian)
+- `sk_SK` (Slovak - Slovakia)
+- `sl` (Slovenian)
+- `sv_SE` (Swedish - Sweden)
+- `ta` (Tamil)
+- `tr` (Turkish)
+- `uk` (Ukrainian)
+- `zh_CN` (Chinese - China)
+- `zh_TW` (Chinese - Taiwan)
 
-### 选项：`currency`
+### Option: `currency`
 
-确定在Grocy界面中显示的货币，由ISO4217三位数货币代码指定。
+Determines the currency as displayed in the Grocy interface, specified by the
+ISO4217 three digit currency code.
 
-示例：`USD`、`CAD`、`GBP`或`EUR`。
+Examples: `USD`, `CAD`, `GBP` or `EUR`.
 
-### 选项：`entry_page`
+### Option: `entry_page`
 
-如有需要，允许您指定自定义主页。
+Allows you to specify an custom homepage if desired.
 
-您可以使用以下值之一：
+You can use the one of the following values:
 
 - `batteries`
 - `calendar`
@@ -145,11 +166,24 @@ keyfile: privkey.pem
 - `stock`
 - `tasks`
 
-默认情况下，主页设置为库存概览。
+By default the homepage is set to the stock overview.
 
-### 选项：`features`
+### Option: `grocycode_type`
 
-用于启用或禁用Grocy中的功能。禁用的功能在网页界面中隐藏。可以启用或禁用以下功能：
+Allows you to change the barcode type for GrocyCodes. Useful if your barcode scanner doesn't support the default.
+
+You can use the one of the following values:
+
+- `1D` (Code128)
+- `2D` (DataMatrix)
+
+Since v4.5.0 Grocy uses `2D` as the default.
+
+### Option: `features`
+
+Is used for enable or disable features in Grocy. Disabled features
+are hidden from the web interface. The following features can be enabled
+or disabled:
 
 - `batteries`
 - `calendar`
@@ -160,11 +194,12 @@ keyfile: privkey.pem
 - `stock`
 - `tasks`
 
-设置为`true`以启用，设置为`false`则禁用。
+Set it `true` to enable it, `false` otherwise.
 
-### 选项：`tweaks`
+### Option: `tweaks`
 
-这些选项用于调整Grocy的核心行为的某些部分。可以启用或禁用以下子特性：
+These options are used to tweak part of the core behavior of Grocy.
+The following sub features can be enabled or disabled:
 
 - `chores_assignment`
 - `multiple_shopping_lists`
@@ -175,77 +210,135 @@ keyfile: privkey.pem
 - `stock_product_opened_tracking`
 - `stock_count_opened_products_against_minimum_stock_amount`
 
-设置为`true`以启用，设置为`false`则禁用。
+Set it `true` to enable it, `false` otherwise.
 
-以下子特性可指定一个星期几（0-6），其中0表示星期日：
+The following sub features can be set to specify a day (0-6), where 0 would
+equal Sunday:
 
 - `calendar_first_day_of_week`
 - `meal_plan_first_day_of_week`
 
-### 选项：`grocy_ingress_user`
+### Option: `grocy_ingress_user`
 
-允许您指定一个默认的入口用户（例如`admin`）。
+Allows you to specify a default ingress user if desired (e.g. `admin`).
 
-如果未设置入口用户，则使用默认的登录身份验证。
+If no ingress user is set, the default login authentication is used.
 
-## 已知问题和限制
+### Option: `printers`
 
-- Grocy支持提供自定义查找资源，以根据产品条形码在互联网上查找信息。当前尚未得到附加组件的支持。
+Configures label and thermal printer support.
 
-## 更新日志和发布
+#### Label printer
 
-本仓库使用[GitHub的发布][releases]功能来保持变更日志。
+Set `printers.label_printer.enabled` to `true` to enable label printing via a webhook.
 
-发布基于[语义版本控制][semver]，并采用`MAJOR.MINOR.PATCH`格式。简而言之，版本将根据以下内容进行递增：
+- `enabled`: Set to `true` to enable, `false` otherwise.
+- `webhook`: The URI that Grocy will POST to when asked to print a label.
+- `run_server`: Set to `false` to call the webhook client-side instead of server-side.
+- `params`: Additional parameters supplied to the webhook.
+- `hook_json`: Set to `true` to POST as JSON, `false` to use regular form-encoded variables.
 
-- `MAJOR`：不兼容或重大更改。
-- `MINOR`：向后兼容的新功能和增强。
-- `PATCH`：向后兼容的错误修复和软件包更新。
+#### Thermal printer
 
-## 支持
+Thermal printers are receipt printers that support the ESC/POS protocol.
+See [ESC/POS protocol][escpos] for more information.
 
-有问题吗？
+**Note:** _Only network printers are supported when running as a Home Assistant
+add-on. Direct USB/serial printer connections are not available in the
+containerized environment._
 
-您有几种选择可以获得答案：
+Set `printers.thermal_printer.enabled` to `true` to enable thermal printing.
 
--  [Home Assistant Community Add-ons Discord聊天服务器][discord]，用于附加组件支持和功能请求。
--  [Home Assistant Discord聊天服务器][discord-ha]，用于一般的Home Assistant讨论和问题。
--  Home Assistant [社区论坛][forum]。
--  加入[Reddit子版块][reddit]中的[/r/homeassistant][reddit]。
+- `enabled`: Set to `true` to enable, `false` otherwise.
+- `ip`: IP address of the network printer.
+- `port`: Port of the network printer.
+- `print_quantity_name`: Set to `false` to omit quantity names from the printout.
+- `print_notes`: Set to `false` to omit notes from the printout.
 
-您也可以在这里[打开一个问题][issue] GitHub。
+## Known issues and limitations
 
-## 作者与贡献者
+- Grocy support to provide custom lookup resources to lookup information
+  on the internet based on the product barcode. This is currently not yet
+  supported by the app.
 
-本仓库的原始设置由[Franck Nijhof][frenck]完成。
+- The barcode scanner feature requires camera access via the browser.
+  Browsers only allow camera access in a [secure context][secure-context]
+  (HTTPS or localhost). When accessing Grocy via the Home Assistant ingress
+  panel over HTTP, the browser will deny camera access. To use the barcode
+  scanner, enable SSL and access Grocy directly via its port instead of
+  through ingress.
 
-有关所有作者和贡献者的完整列表，
-请查看[贡献者页面][contributors]。
+## Changelog & Releases
 
-## 许可证
+This repository keeps a change log using [GitHub's releases][releases]
+functionality.
 
-MIT许可证
+Releases are based on [Semantic Versioning][semver], and use the format
+of `MAJOR.MINOR.PATCH`. In a nutshell, the version will be incremented
+based on the following:
 
-版权所有 (c) 2019-2025 Franck Nijhof
+- `MAJOR`: Incompatible or major changes.
+- `MINOR`: Backwards-compatible new features and enhancements.
+- `PATCH`: Backwards-compatible bugfixes and package updates.
 
-特此免费授权，任何获得本软件及相关文档文件（“软件”）副本的人，可以不受限制地处理该软件，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或出售该软件的副本，并允许被提供软件的人这样做，前提是满足以下条件：
+## Support
 
-上述版权声明和本权限声明应包含在所有副本或软件的实质性部分中。
+Got questions?
 
-本软件按“原样”提供，不做任何种类的担保，无论明示或暗示，包括但不限于对适销性、特定用途的适用性和不侵权的担保。在任何情况下，作者或版权持有人均不对因使用本软件或与本软件的其他交易而造成的任何索赔、损害或其他责任承担责任，无论是在合同诉讼、侵权诉讼或其他情况下。
+You have several options to get them answered:
+
+- The [Home Assistant Community Apps Discord chat server][discord] for app
+  support and feature requests.
+- The [Home Assistant Discord chat server][discord-ha] for general Home
+  Assistant discussions and questions.
+- The Home Assistant [Community Forum][forum].
+- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
+
+You could also [open an issue here][issue] GitHub.
+
+## Authors & contributors
+
+The original setup of this repository is by [Franck Nijhof][frenck].
+
+For a full list of all authors and contributors,
+check [the contributor's page][contributors].
+
+## License
+
+MIT License
+
+Copyright (c) 2019-2026 Franck Nijhof
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 [addon-badge]: https://my.home-assistant.io/badges/supervisor_addon.svg
+[escpos]: https://github.com/mike42/escpos-php
 [addon]: https://my.home-assistant.io/redirect/supervisor_addon/?addon=a0d7b954_grocy&repository_url=https%3A%2F%2Fgithub.com%2Fhassio-addons%2Frepository
-[alpine-packages]: https://pkgs.alpinelinux.org/packages
-[contributors]: https://github.com/hassio-addons/addon-grocy/graphs/contributors
+[contributors]: https://github.com/hassio-addons/app-grocy/graphs/contributors
 [discord-ha]: https://discord.gg/c5DvZ4e
 [discord]: https://discord.me/hassioaddons
 [forum]: https://community.home-assistant.io/t/home-assistant-community-add-on-grocy/112422?u=frenck
 [frenck]: https://github.com/frenck
 [grocy-demo]: https://demo-en.grocy.info
 [grocy]: https://grocy.info/
-[issue]: https://github.com/hassio-addons/addon-grocy/issues
-[python-packages]: https://pypi.org/
+[issue]: https://github.com/hassio-addons/app-grocy/issues
 [reddit]: https://reddit.com/r/homeassistant
-[releases]: https://github.com/hassio-addons/addon-grocy/releases
+[releases]: https://github.com/hassio-addons/app-grocy/releases
+[secure-context]: https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts
 [semver]: https://semver.org/spec/v2.0.0.html

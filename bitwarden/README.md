@@ -12,13 +12,13 @@
 
 ## 关于
 
-Bitwarden 是一个开源密码管理器，可以存储敏感信息，如网站凭证，在加密的保险库中。
+Bitwarden 是一个开源的密码管理器，可以加密存储敏感信息，如网站凭证。
 
 Bitwarden 平台提供了各种客户端应用程序，包括网页界面、桌面应用程序、浏览器扩展和移动应用。
 
-此应用基于轻量级和开源的 [Vaultwarden][vaultwarden] 实现，允许您自托管这个出色的密码管理器。
+此应用基于轻量级和开源的 [Vaultwarden][vaultwarden] 实现，允许您自行托管这个出色的密码管理器。
 
-密码盗窃是一个严重的问题。您使用的网站和应用每天都在受到攻击。安全漏洞发生，您的密码被窃取。当您在所有地方都使用相同的密码时，黑客可以轻松访问您的电子邮件、银行和其他重要账户。使用密码管理器吧！
+密码盗窃是一个严重的问题。您使用的网站和应用每天都在遭受攻击。安全漏洞发生，您的密码被盗。当您在所有地方都使用相同的密码时，黑客可以轻易地访问您的电子邮件、银行和其他重要账户。请使用密码管理器！
 
 ![Bitwarden 预览][screenshot]
 
@@ -32,8 +32,8 @@ Bitwarden 平台提供了各种客户端应用程序，包括网页界面、桌�
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.26.4-blue.svg
-[release]: https://github.com/hassio-addons/app-vaultwarden/tree/v0.26.4
+[release-shield]: https://img.shields.io/badge/version-v0.26.6-blue.svg
+[release]: https://github.com/hassio-addons/app-vaultwarden/tree/v0.26.6
 [screenshot]: https://github.com/hassio-addons/app-vaultwarden/raw/main/images/screenshot.png
 [vaultwarden]: https://github.com/dani-garcia/vaultwarden
 ---

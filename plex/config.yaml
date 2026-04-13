@@ -1,8 +1,8 @@
 name: Plex Media Server
-version: 4.0.0
+version: 4.1.0
 slug: plex
-description: '[老王杂谈说]：录制媒体、直播电视、在线新闻和播客随时可以流式传输。'
-url: https://ghfast.top/github.com/hassio-addons/addon-plex
+description: '[老王杂谈说]：null'
+url: https://ghfast.top/github.com/hassio-addons/app-plex
 webui: http://[HOST]:[PORT:32400]/web
 startup: services
 init: false
@@ -51,4 +51,4 @@ options:
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   claim_code: str
-image: ghcr.nju.edu.cn/hassio-addons/plex/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/plex

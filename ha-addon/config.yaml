@@ -1,0 +1,91 @@
+---
+name: "Sendspin Bluetooth Bridge"
+version: "2.55.3"
+slug: "sendspin_bt_bridge"
+description: "[老王杂谈说]："
+url: "https://ghfast.top/github.com/trudenboy/sendspin-bt-bridge"
+image: "ghcr.nju.edu.cn/trudenboy/sendspin-bt-bridge"
+homeassistant: "2024.2.0"
+arch:
+  - aarch64
+  - amd64
+  - armv7
+startup: application
+boot: auto
+host_network: true
+host_dbus: true
+hassio_api: true
+hassio_role: default
+homeassistant_api: true
+auth_api: true
+privileged:
+  - NET_ADMIN
+  - NET_RAW
+devices:
+  - /dev/bus/usb
+audio: true
+apparmor: true
+init: false
+ingress: true
+ingress_port: 8080
+panel_icon: mdi:bluetooth-audio
+panel_admin: false
+tmpfs: true
+backup_exclude:
+  - __pycache__/*
+  - "*.pyc"
+options:
+  sendspin_server: "auto"
+  sendspin_port: 9000
+  bridge_name: ""
+  ha_area_name_assist_enabled: true
+  tz: ""
+  pulse_latency_msec: 600
+  startup_banner_grace_seconds: 5
+  recovery_banner_grace_seconds: 15
+  prefer_sbc_codec: false
+  bt_check_interval: 10
+  bt_max_reconnect_fails: 0
+  log_level: "info"
+  ma_api_url: ""
+  ma_api_token: ""
+  ma_auto_silent_auth: true
+  volume_via_ma: true
+  bluetooth_devices: []
+  bluetooth_adapters: []
+schema:
+  sendspin_server: str
+  sendspin_port: port
+  base_listen_port: port?
+  bridge_name: str?
+  ha_area_name_assist_enabled: bool?
+  tz: str?
+  pulse_latency_msec: int?
+  startup_banner_grace_seconds: int?
+  recovery_banner_grace_seconds: int?
+  prefer_sbc_codec: bool?
+  bt_check_interval: int?
+  bt_max_reconnect_fails: int?
+  log_level: "list(info|debug)?"
+  ma_api_url: str?
+  ma_api_token: str?
+  ma_auto_silent_auth: bool?
+  volume_via_ma: bool?
+  bluetooth_devices:
+    - mac: "match(([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2})"
+      player_name: str
+      adapter: str?
+      static_delay_ms: int?
+      listen_host: str?
+      listen_port: port?
+      enabled: bool?
+      preferred_format: str?
+      keepalive_silence: bool?
+      keepalive_interval: int?
+      idle_disconnect_minutes: int?
+      idle_mode: str?
+      power_save_delay_minutes: int?
+  bluetooth_adapters:
+    - id: str
+      mac: str?
+      name: str?

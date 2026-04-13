@@ -1,22 +1,27 @@
-# Home Assistant Community Add-on: UniFi Network Application
+# Home Assistant 社区应用程序：UniFi 网络应用程序
 
-[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
+[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
 
-[![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
+[![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
 
-[![Sponsor Frenck via GitHub Sponsors][github-sponsors-shield]][github-sponsors]
+[![通过 GitHub Sponsors 支持Frenck][github-sponsors-shield]][github-sponsors]
 
-[![Support Frenck on Patreon][patreon-shield]][patreon]
+[![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
 
-UniFi Network Application 允许您使用网络浏览器管理您的 UniFi 网络。
+UniFi 网络应用程序允许您通过网页浏览器管理您的 UniFi 网络。
+
+## 重要通知
+
+**独立的 UniFi 网络应用程序即将退役。**
+Ubiquiti 正在过渡到 UniFi OS 服务器，这意味着它不会转化为 Docker/Home Assistant 应用程序。从本应用程序升级到 UniFi OS 服务器没有可行的路径。只要 Ubiquiti 继续提供独立的应用程序，此应用程序将继续工作，但计划长期使用的用户应考虑迁移到专用机器或虚拟机。
 
 ## 关于
 
-此插件运行 Ubiquiti Networks 的 UniFi Network Application 软件，该软件允许您通过网络浏览器管理您的 UniFi 网络。该插件为 Home Assistant 提供了一键安装和运行解决方案，使用户能够轻松地让他们的网络启动、运行和更新。
+此应用程序运行 Ubiquiti Networks 的 UniFi 网络应用程序软件，允许您通过网页浏览器管理您的 UniFi 网络。该应用程序为 Home Assistant 提供了一个单点安装和运行解决方案，使用户能够轻松地将网络上线、运行和更新。
 
-此插件支持所有 Home Assistant 支持的架构，包括 Raspberry Pi。
+此应用程序支持所有 Home Assistant 支持的架构，包括树莓派。
 
-![UniFi Network Application][screenshot]
+![UniFi 网络应用程序][screenshot]
 
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
@@ -25,16 +30,19 @@ UniFi Network Application 允许您使用网络浏览器管理您的 UniFi 网�
 [forum]: https://community.home-assistant.io/t/home-assistant-community-add-on-unifi-controller/56297?u=frenck
 [github-sponsors-shield]: https://frenck.dev/wp-content/uploads/2019/12/github_sponsor.png
 [github-sponsors]: https://github.com/sponsors/frenck
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v5.0.0-blue.svg
-[release]: https://github.com/hassio-addons/addon-unifi/tree/v5.0.0
-[screenshot]: https://github.com/hassio-addons/addon-unifi/raw/main/images/screenshot.jpg
+[release-shield]: https://img.shields.io/badge/version-v5.1.0-blue.svg
+[release]: https://github.com/hassio-addons/app-unifi/tree/v5.1.0
+[screenshot]: https://github.com/hassio-addons/app-unifi/raw/main/images/screenshot.jpg
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

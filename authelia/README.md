@@ -2,9 +2,9 @@
 
 用于网页应用的单一登录多因素认证门户
 
-## 关于
+## 简介
 
-Authelia是一个开源的认证和授权服务器，通过一个网络门户为您的应用提供双因素认证和单一登录（SSO）。它充当反向代理的伴侣，通过允许、拒绝或重定向请求来实现。
+Authelia是一个开源的认证和授权服务器，它通过一个网络门户为您的应用提供双因素认证和单一登录（SSO）。它充当反向代理的伴侣，允许、拒绝或重定向请求。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
