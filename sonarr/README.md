@@ -1,14 +1,14 @@
-# Home Assistant Community Add-on: Sonarr
+# Home Assistant 社区应用：Sonarr
 
-[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
+[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
 
-[![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
+[![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
 
-为新闻组和BitTorrent用户设计的智能PVR。
+针对新闻组和 BitTorrent 用户的高级 PVR。
 
 ## 关于
 
-[Sonarr] 是一个面向Usenet和BitTorrent用户的PVR。它可以监控多个RSS源以获取您喜爱的节目的新剧集，并会抓取、排序和重命名它们。它还可以配置为在出现更高质量格式时自动升级已下载文件的品质。
+[Sonarr] 是一款针对 Usenet 和 BitTorrent 用户的 PVR。它可以监控多个 RSS 源，寻找您喜欢的电视剧的新剧集，并自动下载、排序和重命名。它还可以配置为在更好的质量格式可用时自动升级已下载文件的画质。
 
 [Sonarr]: https://sonarr.tv/
 
@@ -16,10 +16,18 @@
 [discord]: https://discord.gg/c5DvZ4e
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
 [forum]: https://community.home-assistant.io/t/?u=frenck
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.4.3-blue.svg
-[release]: https://github.com/hassio-addons/addon-sonarr/tree/v0.4.3
+[release-shield]: https://img.shields.io/badge/version-v0.5.0-blue.svg
+[release]: https://github.com/hassio-addons/app-sonarr/tree/v0.5.0
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
 ## 📱 关注我
 
 扫描下面二维码，关注我。有需要可以随时给我留言：

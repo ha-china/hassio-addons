@@ -1,8 +1,8 @@
 name: Radarr
-version: 0.28.0
+version: 0.30.0
 slug: radarr
-description: '[老王杂谈说]：针对usenet和torrent用户的电影组织/管理器'
-url: https://ghfast.top/github.com/hassio-addons/addon-radarr/tree/main/README.md
+description: '[老王杂谈说]：null'
+url: https://ghfast.top/github.com/hassio-addons/app-radarr/tree/main/README.md
 webui: http://[HOST]:[PORT:7878]
 init: false
 arch:
@@ -14,4 +14,4 @@ map:
   - media:rw
 ports:
   7878/tcp: 7878
-image: ghcr.nju.edu.cn/hassio-addons/radarr/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/radarr

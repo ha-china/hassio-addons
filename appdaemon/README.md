@@ -4,15 +4,15 @@
 
 [![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
 
-[![通过 GitHub Sponsors 赞助 Frenck][github-sponsors-shield]][github-sponsors]
+[![通过 GitHub Sponsors 支持Frenck][github-sponsors-shield]][github-sponsors]
 
 [![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
 
-Home Assistant 的 Python 应用和 HADashboard
+Python 应用和 HADashboard 用于 Home Assistant
 
 ## 关于
 
-[AppDaemon][appdaemon] 是一个松散耦合的、多线程的、沙盒化的 Python 执行环境，用于编写 Home Assistant 家居自动化软件的自动化应用。它还提供了一个可配置的仪表板（HADashboard），适用于挂在墙上的平板电脑。
+[AppDaemon][appdaemon] 是一个松散耦合、多线程、沙盒化的 Python 执行环境，用于编写 Home Assistant 家居自动化软件的自动化应用。它还提供了一个可配置的仪表板（HADashboard），适合安装在墙上平板电脑上。
 
 ![HADashboard 截图][screenshot]
 
@@ -27,8 +27,8 @@ Home Assistant 的 Python 应用和 HADashboard
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.18.2-blue.svg
-[release]: https://github.com/hassio-addons/app-appdaemon/tree/v0.18.2
+[release-shield]: https://img.shields.io/badge/version-v0.18.3-blue.svg
+[release]: https://github.com/hassio-addons/app-appdaemon/tree/v0.18.3
 [screenshot]: https://github.com/hassio-addons/app-appdaemon/raw/main/images/screenshot.png
 ---
 

@@ -1,15 +1,12 @@
 ---
-version: "2.5"
+version: "3.0"
 slug: rpc_shutdown
 name: RPC Shutdown
-description: 远程关闭Windows机器
+description: '[老王杂谈说]：远程关闭 Windows 机器'
 url: https://ghfast.top/github.com/home-assistant/addons/tree/master/rpc_shutdown
 arch:
-  - armhf
-  - armv7
   - aarch64
   - amd64
-  - i386
 host_network: true
 image: docker.1ms.run/homeassistant/{arch}-addon-rpc_shutdown
 options:
@@ -18,9 +15,7 @@ options:
       alias: test-pc
       credentials: user%password
       delay: 0
-      message:
-        Home Assistant is shutting down this PC. This cannot be canceled. Please
-        save your work!
+      message: Home Assistant is shutting down this PC. This cannot be canceled. Please save your work!
 schema:
   computers:
     - address: str

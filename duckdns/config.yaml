@@ -1,16 +1,13 @@
 ---
-version: 1.26.0
+version: 2.0.0
 slug: duckdns
 name: Duck DNS
 description: >-
-  [老王杂谈说]：免费动态DNS（DynDNS或DDNS）服务，支持Let's Encrypt
+  [老王杂谈说]：带有 Let's Encrypt 支持的免费动态 DNS (DynDNS 或 DDNS) 服务
 url: https://ghfast.top/github.com/home-assistant/addons/tree/master/duckdns
 arch:
-  - armhf
-  - armv7
   - aarch64
   - amd64
-  - i386
 hassio_api: true
 init: false
 image: docker.1ms.run/homeassistant/{arch}-addon-duckdns

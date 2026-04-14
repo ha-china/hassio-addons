@@ -1,28 +1,32 @@
-# Home Assistant Community Add-on: Radarr
+# Home Assistant Community App: Radarr
 
-[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
+[![发布][发布徽章]][发布] ![项目阶段][项目阶段徽章] ![维护状态][维护状态徽章]
 
-[![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
+[![Discord][Discord徽章]][Discord] [![社区论坛][论坛徽章]][论坛]
 
-用于usenet和torrent用户的电影组织/管理工具。
+为 usenet 和 torrent 用户设计的电影组织/管理器。
 
 ## 关于
 
-[Radarr] 是一个用于usenet和BitTorrent用户的电影集合管理工具。它可以监控多个RSS源以获取新电影，并与客户端和索引器接口以获取、排序和重命名它们。它还可以配置为在更好的质量格式可用时自动升级图书馆中现有文件的质量。
+[Radarr] 是一款针对 Usenet 和 BitTorrent 用户的电影收藏管理器。它可以监控多个 RSS 源以获取新电影，并与客户端和索引器接口，以抓取、排序和重命名它们。它还可以配置为在库中可用更好的质量格式时自动升级现有文件的质量。
 
 [Radarr]: https://radarr.video/
 
-[discord-shield]: https://img.shields.io/discord/330944238910963714.svg
-[discord]: https://discord.gg/c5DvZ4e
-[forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
-[forum]: https://community.home-assistant.io/t/?u=frenck
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
-[project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.28.0-blue.svg
-[release]: https://github.com/hassio-addons/addon-radarr/tree/v0.28.0
+[Discord徽章]: https://img.shields.io/discord/330944238910963714.svg
+[Discord]: https://discord.gg/c5DvZ4e
+[论坛徽章]: https://img.shields.io/badge/community-forum-brightgreen.svg
+[论坛]: https://community.home-assistant.io/t/?u=frenck
+[维护状态徽章]: https://img.shields.io/maintenance/yes/2026.svg
+[项目阶段徽章]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
+[发布徽章]: https://img.shields.io/badge/version-v0.30.0-blue.svg
+[发布]: https://github.com/hassio-addons/app-radarr/tree/v0.30.0
+---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
 
+---
 
 ## 📱 关注我
 

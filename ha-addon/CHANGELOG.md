@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.56.3] - 2026-04-14
+
+### Fixed
+- **Docker build failing on amd64/arm64** — `aiosendspin-mpris` (transitive dep of sendspin) was missing because `--no-deps` blocked pip from resolving it. Now `--no-deps` is only used for armv7 where all deps are listed explicitly
+
+## [2.56.2] - 2026-04-14
+
+### Fixed
+- **armv7 Docker build timing out in CI** — split Dockerfile pip install into two layers so heavy native deps (numpy, PyAV, dbus-python) are cached across releases and not recompiled on every version bump. Added piwheels.org as extra index for pre-built ARM wheels. Increased armv7 build timeout from 45 to 90 min for cold builds
+
+## [2.56.1] - 2026-04-13
+
+### Fixed
+- **Sourceplugin metadata mixing MA data from wrong track** — when daemon provides track title but not artist/album/artwork (typical for sourceplugin/ynison), the UI was falling back to MA now-playing for those fields, showing metadata from a completely different song. Now suppresses MA fallback for artist, album, and artwork when daemon already has a track title, preventing cross-track metadata mixing
+
+## [2.56.0] - 2026-04-13
+
+### Fixed
+- **HA addon ingress port conflict with Matter/Thread** (#138) — switched all addon channels from hardcoded `ingress_port` (8080/8081/8082) to dynamic `ingress_port: 0`. HA Supervisor now auto-assigns a free port via its REST API, eliminating conflicts with other host-network addons. Channel defaults retained as fallback for older Supervisor versions
+- **Incorrect track metadata with sourceplugin providers** — when playing via sourceplugin (e.g. Yandex ynison), MA now-playing returned metadata from its own queue item instead of the actual playing track. Changed metadata priority to daemon-first with MA fallback, matching the existing correct behavior in list view. Affects track title, artist, album, and artwork in all views
+
 ## [2.55.3] - 2026-04-09
 
 ### Added

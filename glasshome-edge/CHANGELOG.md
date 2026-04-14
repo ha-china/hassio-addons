@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.9.0-beta.2
+
+### Zod-first widget config system
+- Widget config driven by Zod schemas — types, defaults, validation, and forms all derived automatically
+- Auto-generated edit forms replace hand-built forms across all 15 widgets
+- EntitySelector and AreaPicker now in @glasshome/ui as proper form components
+- SchemaForm renders consistent forms from JSON Schema (generated from Zod)
+
+### Toast system overhaul
+- Responsive positioning: top-center on mobile, bottom-right on desktop
+- Theme-aware: follows dark/light mode
+- Proper variants: toast.success(), toast.error(), toast.loading(), toast.info()
+- Dock-aware offset so toasts don't overlap navigation
+
+### UX improvements
+- Bottom sheet swipe-to-close on mobile
+- Widget browser blocks incompatible widgets ("Requires newer dashboard")
+- SDK version shown in settings footer
+- Fixed spurious "Main dashboard updated" toast on settings navigation
+- Fixed text selection on widget long-press
+
+### Widget CLI
+- `bun widget publish --name <widget> --bump <patch|minor|major>` for non-interactive publishing
+
 ## 0.8.2
 
 ### Bug Fixes

@@ -1,23 +1,23 @@
-# Home Assistant 插件：远程关机
+# Home Assistant App: RPC Shutdown
 
-## 安装
+## Installation
 
-按照以下步骤在您的系统上安装插件：
+Follow these steps to get the app installed on your system:
 
-1. 在您的 Home Assistant 前端导航到 **设置** -> **插件** -> **插件商店**。
-2. 找到“远程关机”插件并点击它。
-3. 点击“安装”按钮。
+1. In Home Assistant, go to **Settings** > **Apps** > **Install app**.
+2. Find the "RPC Shutdown" app and click it.
+3. Click on the "INSTALL" button.
 
-## 如何使用
+## How to use
 
-在配置部分，定义别名、地址和凭据并保存配置。
+In the configuration section, define alias, address and credentials and save the configuration.
 
-1. 启动插件。
-2. 检查插件日志输出以查看结果。
+1. Start the app.
+2. Check the app log output to see the result.
 
-## 配置
+## Configuration
 
-插件配置：
+App configuration:
 
 ```yaml
 computers:
@@ -25,69 +25,69 @@ computers:
     address: 192.168.0.1
     credentials: user%password
     delay: 0
-    message: Home Assistant 正在关闭这台电脑。此操作无法取消。请保存您的工作！
+    message: Home Assistant is shutting down this PC. This cannot be canceled. Please save your work!
   - alias: test-pc-2
     address: 192.168.0.2
     credentials: user%password
     delay: 0
-    message: Home Assistant 正在关闭这台电脑。此操作无法取消。请保存您的工作！
+    message: Home Assistant is shutting down this PC. This cannot be canceled. Please save your work!
 ```
 
-### 选项：`computers`（必需）
+### Option: `computers` (required)
 
-一个计算机对象的列表，能够从 Home Assistant 进行关机。
+A list of computer objects to be able to shutdown from Home-Assistant.
 
-### 选项：`computers.alias`（必需）
+### Option: `computers.alias` (required)
 
-为此记录设置一个别名，作为输入的名称。
+Set an alias for this record, which becomes the name for the input.
 
-### 选项：`computers.address`（必需）
+### Option: `computers.address` (required)
 
-能够关闭的计算机的 IP 地址或 NetBIOS 名称。
+IP address or NetBIOS name of the computer to be able to shutdown.
 
-### 选项：`computers.credentials`（必需）
+### Option:  `computers.credentials` (required)
 
-登录计算机的凭据。
-使用 `%` 作为用户名和密码的分隔符。
+Credentials for logging into the computer.
+Use a `%` as the delimiter of username and password.
 
-### 选项：`computers.delay`（可选）
+### Option:  `computers.delay` (optional)
 
-关闭计算机前的延迟（以秒为单位）。这给正在使用该计算机的用户留出时间保存他们的工作。
+A delay (in seconds) before shutting down the computer. This gives a user that happens to be using that computer time to save their work.
 
-### 选项：`computers.message`（可选）
+### Option:  `computers.message` (optional)
 
-在将要关闭的计算机屏幕上显示自定义消息。
+Show a custom message on the screen of the computer that will be shutdown.
 
-## Home Assistant 配置
+## Home Assistant configuration
 
-在 Home Assistant 服务调用中使用以下内容：
+Use the following inside Home Assistant action call to use it:
 
 ```yaml
-service: hassio.addon_stdin
+action: hassio.app_stdin
 data:
-  addon: core_rpc_shutdown
+  app: core_rpc_shutdown
   input: test-pc
 ```
 
-每行解释：
+Each line explained:
 
-`service: hassio.addon_stdin`: 使用 hassio.addon_stdin 服务通过 STDIN 向插件发送数据。  
-`data.addon: core_rpc_shutdown`: 告诉服务将命令发送到此插件。  
-`data.input: test-pc`: 在插件配置中为计算机创建的别名，将其关闭。
+`action: hassio.app_stdin`: Use hassio.app_stdin service to send data over STDIN to an app.
+`data.app: core_rpc_shutdown`: Tells the service to send the command to this app.
+`data.input: test-pc`: Alias name created for the computer in the app configuration, and shuts that one down.
 
-## 支持
+## Support
 
-有问题吗？
+Got questions?
 
-您有几种选择可以得到答案：
+You have several options to get them answered:
 
-- [Home Assistant Discord 聊天服务器][discord]。
-- Home Assistant [社区论坛][forum]。
-- 加入 [/r/homeassistant][reddit] 的 [Reddit 子版块][reddit]。
+- The [Home Assistant Discord Chat Server][discord].
+- The Home Assistant [Community Forum][forum].
+- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
 
-如果您发现了一个错误，请 [在我们的 GitHub 上提交问题][issue]。
+In case you've found a bug, please [open an issue on our GitHub][issue].
 
-[forum]: https://community.home-assistant.io  
-[issue]: https://github.com/home-assistant/addons/issues  
-[reddit]: https://reddit.com/r/homeassistant  
-[discord]: https://www.home-assistant.io/join-chat  
+[forum]: https://community.home-assistant.io
+[issue]: https://github.com/home-assistant/addons/issues
+[reddit]: https://reddit.com/r/homeassistant
+[discord]: https://www.home-assistant.io/join-chat

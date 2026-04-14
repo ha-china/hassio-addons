@@ -1,4 +1,11 @@
+## 0.137.0 (13-04-2026)
+- Minor bugs fixed
 # Changelog
+
+## 0.137.0
+
+- Bumped upstream Manyfold image to `ghcr.io/manyfold3d/manyfold-solo:0.137.0` for both `amd64` and `aarch64`.
+- Add funtionalities about sharing and comment federation, some implemented in 0.136.0 
 
 ## 0.135.0
 
