@@ -1,33 +1,33 @@
-# Home Assistant 插件：CEC 扫描器
+# Home Assistant App: CEC Scanner
 
-## 安装
+## Installation
 
-按照以下步骤在系统上安装插件：
+Follow these steps to get the app (formerly known as add-on) installed on your system:
 
-1. 在你的 Home Assistant 前端导航到 **设置** -> **插件** -> **插件商店**。
-2. 找到 "CEC 扫描器" 插件并点击它。
-3. 点击 "安装" 按钮。
+1. Navigate in your Home Assistant frontend to **Settings** > **Apps** > **Install app**.
+2. Find the "CEC Scanner" app and click it.
+3. Click on the "INSTALL" button.
 
-## 如何使用
+## How to use
 
-该插件没有配置，开箱即用。
+This app has no configuration and runs out of the box.
 
-1. 启动插件。
-2. 检查插件日志输出以查看结果。
+1. Start the app.
+2. Check the app log output to see the result.
 
-## 支持
+## Support
 
-有问题吗？
+Got questions?
 
-你有几种方式可以获得答案：
+You have several options to get them answered:
 
-- [Home Assistant Discord 聊天服务器][discord]。
-- Home Assistant [社区论坛][forum]。
-- 加入 [/r/homeassistant][reddit] 的 [Reddit 子版块][reddit]。
+- The [Home Assistant Discord Chat Server][discord].
+- The Home Assistant [Community Forum][forum].
+- Join the [Reddit subreddit][reddit] in [/r/homeassistant][reddit]
 
-如果你发现了一个错误，请 [在我们的 GitHub 上报告问题][issue]。
+In case you've found a bug, please [open an issue on our GitHub][issue].
 
-[discord]: https://discord.gg/c5DvZ4e
+[discord]: https://www.home-assistant.io/join-chat
 [forum]: https://community.home-assistant.io
 [issue]: https://github.com/home-assistant/hassio-addons/issues
 [reddit]: https://reddit.com/r/homeassistant

@@ -1,7 +1,7 @@
 # App: InfluxDB3
 
-用于指标、事件和实时分析的可扩展数据存储库。
-本版本使用带有家庭许可证的InfluxDB3企业版。
+适用于指标、事件和实时分析的可扩展数据存储库。
+本版本使用带有家庭许可的InfluxDB3企业版。
 
 ## 关于
 
@@ -10,13 +10,13 @@ InfluxDB3是一个针对高写入量优化的时序数据库。
 它提供了一个HTTP API以供客户端交互，并且经常与Grafana结合使用来可视化数据。
 
 InfluxDB3的管理必须通过InfluxDB 3 Explorer来执行。
-它可以作为一个Docker容器下载，并在例如Docker Desktop等电脑上安装。
+它可以作为一个docker容器下载，并在例如Docker Desktop等计算机上安装。
 
-# Inluxdata 家庭许可证
+# Inluxdata 家庭许可
 
-为了能够使用此软件，您需要在应用程序配置中提供您的电子邮件地址。
-家庭许可证请求将被发送到Influxdata。家庭使用是免费的。
-在接受许可证之前，请阅读激活电子邮件中的软件许可条款！
+为了能够使用此软件，您必须在应用程序配置中提供您的电子邮件地址。
+家庭许可请求将被发送至Influxdata。家庭使用是免费的。
+在接受许可之前，请阅读激活电子邮件中的软件许可条款！
 
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg

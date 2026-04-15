@@ -1,6 +1,6 @@
 name: 'Tunet'
-description: '[老王杂谈说]：Home Assistant 的现代响应式仪表盘'
-version: "1.15.3"
+description: '[老王杂谈说]：一个用于 Home Assistant 的现代、响应式仪表盘。'
+version: "1.15.4"
 slug: 'tunet'
 url: 'https://ghfast.top/github.com/oyvhov/Tunet'
 init: false

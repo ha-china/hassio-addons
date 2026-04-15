@@ -1,86 +1,97 @@
-# [2.9.0.dev2026041405] - 14.04.2026
+# [2.9.0.dev2026041504] - 15.04.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.9.0.dev2026041315](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026041315)_
+_Changes since [2.9.0.dev2026041415](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026041415)_
+
+### 🚀 Features and enhancements
+
+- Play from here respects user's sort order (by @philjackson in #3663)
+
+### 🐛 Bugfixes
+
+- Fix multiple (virtual) devices on the same host being merged. (by @MarvinSchenkel in #3688)
+- Fix Volume control for Bluesound native devices (by @MarvinSchenkel in #3693)
+- AudioBuffer: Only fire cancel callbacks when stream has not ended naturally (by @MarvinSchenkel in #3694)
+- Fix race condition in AirPlay stream session client removal (by @marcelveldt in #3698)
 
 ### 🎨 Frontend Changes
 
-- Fix single provider stale filter bug (by @OzGav in [#1698](https://github.com/music-assistant/frontend/pull/1698))
-- Fix typo (by @OzGav in [#1696](https://github.com/music-assistant/frontend/pull/1696))
+- Move Sendspin delay configuration to player settings (by @maximmaxim345 in [#1712](https://github.com/music-assistant/frontend/pull/1712))
+- Fix clipping of last player cards on the Players widget of the Discover view (by @BQPVegas in [#1690](https://github.com/music-assistant/frontend/pull/1690))
 
 ### 🧰 Maintenance and dependency bumps
 
-- ⬆️ Update music-assistant-frontend to 2.17.147 (by @music-assistant-machine in #3685)
+<details>
+<summary>4 changes</summary>
+
+- Add devenv Configuration for Consistent Developer Environments (by @staticdev in #3641)
+- Update base image versions to 1.4.14 (by @apophisnow in #3695)
+- Add diagnostics for AirPlay stream stalls and increase flow buffer (by @marcelveldt in #3696)
+- ⬆️ Update music-assistant-frontend to 2.17.148 (by @music-assistant-machine in #3700)
+
+</details>
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@OzGav
+@BQPVegas, @MarvinSchenkel, @apophisnow, @marcelveldt, @maximmaxim345, @philjackson, @staticdev
 
 
-# [2.9.0.dev2026041315] - 13.04.2026
+# [2.9.0.dev2026041415] - 14.04.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.9.0.dev2026041223](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026041223)_
+_Changes since [2.9.0.dev2026041414](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026041414)_
 
 ### 🚀 New Providers
 
-- Add MPD Player Provider (by @OzGav in #3337)
-
-### 🚀 Features and enhancements
-
-- Apple Music: Add Unicode NFC normalization for artist/album/track names (by @jasonhollis in #2631)
-- Add ability to take over Pandora stream during concurrent streaming error (by @cryptk in #3620)
-- Add Tidal starred tracks virtual playlist (by @FL550 in #3653)
-- Apple Music: Add content rating check for explicit tracks (by @LosCV29 in #3669)
+- Smart fades Audio Analysis provider (by @MarvinSchenkel in #3636)
 
 ### 🐛 Bugfixes
 
-- QQMusic: Improve QR auth URL handling behind HA Ingress (by @xiasi0 in #3631)
-- Tweak imageproxy (by @MarvinSchenkel in #3671)
-- Several fixes for synced playback stability (by @marcelveldt in #3672)
-- Change Mother Earth Radio icon URL and corrupt SVGs (by @OzGav in #3674)
-- Fix dynamic playlist refill discarding unplayed buffered tracks (by @dmoo500 in #3675)
+- Fix sync group dissolve+reform race with async providers (by @marcelveldt in #3691)
+- Fix Jellyfin multidisc albums with same named tracks (by @MarvinSchenkel in #3692)
 
 ### 🧰 Maintenance and dependency bumps
 
-- Bump docker/build-push-action from 7.0.0 to 7.1.0 (by @dependabot[bot] in #3638)
-- Bump actions/github-script from 8 to 9 (by @dependabot[bot] in #3639)
+- Bump softprops/action-gh-release from 2 to 3 (by @dependabot[bot] in #3677)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@FL550, @LosCV29, @MarvinSchenkel, @OzGav, @cryptk, @dmoo500, @jasonhollis, @marcelveldt, @xiasi0
+@MarvinSchenkel, @marcelveldt
 
 
-# [2.9.0.dev2026041223] - 13.04.2026
+# [2.9.0.dev2026041414] - 14.04.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.9.0.dev2026041205](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026041205)_
+_Changes since [2.9.0.dev2026041405](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026041405)_
 
 ### 🚀 Features and enhancements
 
-- Subsonic: Cache requests (by @khers in #3662)
+- Add per-player delay configuration for Sendspin players (by @maximmaxim345 in #3689)
 
 ### 🐛 Bugfixes
 
-- Fix 30-second auth delay on startup (HA provider race condition) (by @marcelveldt in #3656)
-- Remove protocol player power control forwarding (by @marcelveldt in #3659)
-- Fix AirPlay late joiner sync issues from insufficient buffer headroom (by @marcelveldt in #3660)
-- Fix sync group members lost after dynamic leader switch (by @marcelveldt in #3665)
-- Fix sync group not resetting active protocol on stop (by @marcelveldt in #3666)
-- Reduce radio stream startup delay on Squeezelite players (by @marcelveldt in #3667)
-- Fix queue items showing zero/unknown duration (by @marcelveldt in #3668)
+- Filter stale podcast episodes (by @OzGav in #3673)
+- Sendspin: guard against negative track_progress in metadata (by @marcelveldt in #3681)
+- Fix sync group session lifecycle and AirPlay late joiner sync (by @marcelveldt in #3682)
+- Automatically clean up loudness measurements on media item deletion (by @MarvinSchenkel in #3687)
+
+### 🧰 Maintenance and dependency bumps
+
+- Bump pyblu from 2.0.5 to 2.0.6 (by @dependabot[bot] in #3678)
+- Bump pillow from 12.1.1 to 12.2.0 (by @dependabot[bot] in #3684)
+- Allow Pipewire devices to be detected by Local Audio when using docker (by @apophisnow in #3686)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@khers, @marcelveldt
+@MarvinSchenkel, @OzGav, @apophisnow, @marcelveldt, @maximmaxim345
 
 

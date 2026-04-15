@@ -1,16 +1,12 @@
 ---
-version: 6.5.2
+version: 7.0.1
 slug: mosquitto
 name: Mosquitto broker
-description: '[老王杂谈说]：一个开源的MQTT代理'
+description: '[老王杂谈说]：一个开源MQTT代理'
 url: https://ghfast.top/github.com/home-assistant/addons/tree/master/mosquitto
-codenotary: notary@home-assistant.io
 arch:
-  - armhf
-  - armv7
   - aarch64
   - amd64
-  - i386
 auth_api: true
 discovery:
   - mqtt
