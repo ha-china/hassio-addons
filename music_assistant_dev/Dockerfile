@@ -2,15 +2,10 @@
 #
 # DEV MASS image: base image + MASS installed from prebuilt wheel
 #
-FROM ghcr.nju.edu.cn/music-assistant/base:1.4.10
+FROM ghcr.nju.edu.cn/music-assistant/base:1.5.0
 
 ENV VIRTUAL_ENV=/app/venv
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
-# Required to build Beat This!
-RUN echo "setuptools>=77.0.0" > /etc/uv-build-constraints.txt
-ENV UV_BUILD_CONSTRAINT=/etc/uv-build-constraints.txt
-ENV UV_INDEX_STRATEGY=unsafe-best-match
 
 # ensure UV is installed
 COPY --from=ghcr.nju.edu.cn/astral-sh/uv:latest /uv /uvx /bin/
@@ -33,6 +28,7 @@ RUN set -x \
   uv pip install \
   --no-cache \
   --link-mode=copy \
+  --index-strategy unsafe-best-match \
   -r "https://raw.githubusercontent.com/music-assistant/server/refs/heads/dev/requirements_all.txt"
 
 VOLUME [ "/data" ]

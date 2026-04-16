@@ -1,6 +1,6 @@
-# Home Assistant 应用：Z-Wave JS
+# Home Assistant App: Z-Wave JS
 
-允许 Home Assistant 通过 USB 控制器与 Z-Wave 网络通信。
+允许 Home Assistant 通过 USB 控制器与 Z-Wave 网络进行通信。
 
 ![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield]
 
