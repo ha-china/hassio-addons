@@ -1,7 +1,7 @@
 name: InfluxDB3 Explorer
-version: 0.1.1
+version: 0.1.2
 slug: influxdb3-explorer
-description: '[老王杂谈说]：Home Assistant 的 InfluxDB3 探索器'
+description: '[老王杂谈说]：null'
 url: https://ghfast.top/github.com/erik73/hassio-addons
 init: false
 arch:

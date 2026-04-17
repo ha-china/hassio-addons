@@ -1,9 +1,9 @@
 name: CommaFeed
-version: "7.0.0-h2"
+version: "7.1.0-h2"
 upstream: 5.3.4-h2
 slug: commafeed
 description: >-
-  [老王杂谈说]：受 Google Reader 启发的自托管 RSS 阅读器，基于 Quarkus 和 React/TypeScript。
+  [老王杂谈说]：null
 arch:
   - amd64
   - aarch64
