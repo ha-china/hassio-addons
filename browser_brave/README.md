@@ -1,26 +1,26 @@
-# Home Assistant 扩展：Brave
+# 家居助理插件：Brave
 
-我在业余时间维护这个和其他 Home Assistant 扩展：跟踪上游变更、HA 变更以及在真实硬件上测试需要花费很多时间（还有一些钱）。我经常使用大约 5-10 个我 >110 个扩展，所以我安装了测试机器（并购买了些我自己不用的测试服务，如 vpn），用于故障排除和改进扩展。
+我在业余时间维护这个和其他的家居助理插件：跟进上游变化、家居助理的变化以及在实际硬件上进行测试需要花费大量的时间和金钱。我经常使用我超过110个插件中的5-10个，所以我安装了测试机器（并购买了如vpn等我不使用的测试服务），以便进行故障排除和改进插件。
 
-如果这个扩展为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
+如果这个插件为您节省了时间或使您的设置变得更加容易，我将非常感激您的支持！
 
-[![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![买我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过PayPal捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## 扩展信息
+## 插件信息
 
 ![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbrave%2Fconfig.yaml)
 ![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbrave%2Fconfig.yaml)
 ![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbrave%2Fconfig.yaml)
 
-[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_感谢所有星标我的仓库的人！要星标它，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,55 +28,55 @@ _感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，�
 
 ## 关于
 
-[Brave](https://brave.com/) 是一个快速、私密且安全的网页浏览器，适用于 PC、Mac 和移动设备。
-此扩展基于 docker 镜像 https://github.com/linuxserver/docker-brave
+[Brave](https://brave.com/) 是一款适用于PC、Mac和移动设备的快速、私密和安全的网页浏览器。
+此插件基于docker镜像 https://github.com/linuxserver/docker-brave
 
 ## 配置
 
-使用扩展的 `env_vars` 选项来传递额外的环境变量（大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+使用插件的 `env_vars` 选项来传递额外的环境变量（大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-Webui 可以通过入口或 <http://homeassistant:PORT> 访问。默认情况下，端口是禁用的，但可以通过扩展选项启用。
+Webui可以通过入口或通过 <http://homeassistant:PORT> 访问。默认情况下，端口号是禁用的，但可以通过插件选项启用。
 
-默认情况下，镜像基于 abc 用户，我们建议使用此用户，因为所有 init/config 都是围绕它设计的。默认密码也是 abc。如果您想更改此密码并在访问界面时需要身份验证，只需在容器中的 GUI 终端中运行 passwd 命令。然后，在访问 Web 界面时使用以下路径：
+默认情况下，镜像基于abc用户，我们建议使用此用户，因为所有的初始化/配置都是围绕它进行的。默认密码也是abc。如果您想更改此密码并在访问界面时需要认证，只需在容器中的GUI终端中运行passwd命令。然后，在访问Web界面时，请使用以下路径：
 
 http://localhost:3000/?login=true
 
-应用程序安装不是持久的，您需要通过扩展选项进行操作。然而，它们的配置是持久的。
+应用程序安装不会持久化，您需要通过插件选项进行安装。然而，它们的配置是会持久化的。
 
-如果图形功能不起作用，请使用 DRINODE 功能来选择您的图形设备。
+如果图形不起作用，请使用DRINODE功能来选择您的图形设备。
 
-有关所有可能的 ENV 变量的详细信息，请参阅：https://docs.linuxserver.io/images/docker-brave#optional-environment-variables
+在此处查看所有可能的ENV变量：https://docs.linuxserver.io/images/docker-brave#optional-environment-variables
 
 ```yaml
 TZ: 时区；国家/城市根据 https://manpages.ubuntu.com/manpages/trusty/man3/DateTime::TimeZone::Catalog.3pm.html
 additional_apps: engrampa,thunderbird # 允许安装应用程序，因为它们不是持久的
 DRINODE: 指定自定义图形设备，默认为 /dev/dri/renderD128
-DNS_servers: 8.8.8.8,1.1.1.1 # 保持空白以使用路由器的 DNS，或设置自定义 DNS 以避免本地 DNS 广告拦截
+DNS_servers: 8.8.8.8,1.1.1.1 # 保持空白以使用路由器的DNS，或者设置自定义DNS以避免本地DNS广告拦截
 localdisks: sda1 # 放置您的驱动器硬件名称以挂载，用逗号分隔，或其标签。例如：sda1, sdb1, MYNAS...
-networkdisks: "//SERVER/SHARE" # 可选，挂载的 smb 服务器列表，用逗号分隔
-cifsusername: "username" # 可选，smb 用户名，对所有 smb 共享相同
-cifspassword: "password" # 可选，smb 密码
-cifsdomain: "domain" # 可选，允许设置 smb 共享的域
+networkdisks: "//SERVER/SHARE" # 可选，挂载smb服务器的列表，用逗号分隔
+cifsusername: "username" # 可选，smb用户名，适用于所有smb共享
+cifspassword: "password" # 可选，smb密码
+cifsdomain: "domain" # 可选，允许为smb共享设置域
 ```
 
 ## 安装
 
-此扩展的安装相当简单，与安装任何其他扩展没有不同。
+此插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的扩展存储库添加到您的 Home Assistant 实例中（在右上角的监督器扩展存储库中，或点击下面的按钮如果您已配置我的 HA）
-   [![打开您的 Home Assistant 实例并显示带有特定存储库 URL 预填充的添加扩展存储库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此扩展。
+1. 将我的插件仓库添加到您的家居助理实例中（在管理员设置中右上角的插件存储中，或点击下面的按钮如果您已配置我的HA）
+   [![打开您的家居助理实例并显示带有特定仓库URL预填充的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此插件。
 1. 点击“保存”按钮以存储您的配置。
-1. 将扩展选项设置为您的偏好设置
-1. 启动扩展。
-1. 检查扩展的日志以查看一切是否顺利。
-1. 打开 WebUI 并调整软件选项
+1. 将插件选项设置为您的偏好。
+1. 启动插件。
+1. 检查插件的日志以查看一切是否顺利。
+1. 打开WebUI并调整软件选项
 
 ## 支持
 
-在 github 上创建一个问题
+在GitHub上创建一个issue
 
-## 示例
+## 示例图片
 
 ---
 

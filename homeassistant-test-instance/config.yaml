@@ -1,5 +1,5 @@
 name: "Home Assistant Test Instance"
-version: "0.2.5"
+version: "0.2.6"
 slug: "ha_test_instance"
 image: ghcr.nju.edu.cn/faserf/hassio-addons-homeassistant-test-instance-{arch}
 description: "[老王杂谈说]：一个用于测试目的的独立 Home Assistant Core 实例"
@@ -15,6 +15,7 @@ ingress: true
 ingress_port: 8123
 init: false
 options:
-  log_level: info
+  log_level: "info"
 schema:
   log_level: list(trace|debug|info|warning|error|fatal)
+stage: experimental

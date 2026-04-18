@@ -1,68 +1,33 @@
 # Home Assistant 测试实例
 
-![Home Assistant 测试实例标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/homeassistant-test-instance/logo.png) 
+![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/homeassistant-test-instance/logo.png) width="100" alt="Logo" />
 
-[![打开您的 Home Assistant 实例并显示附加组件仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=c1e285b7_homeassistant-test-instance)
-[![Home Assistant App](https://img.shields.io/badge/home%20assistant-addon-blue.svg)](https://www.home-assistant.io/addons/)
+[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_homeassistant-test-instance)
+[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
 [![Docker 镜像](https://img.shields.io/badge/docker-0.2.5-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-homeassistant-test-instance)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 用于测试目的的独立 Home Assistant 核心实例。
+> 用于测试目的的独立 Home Assistant Core 实例。
 
 ---
 
 > [!警告]
-> **实验性/测试版状态**
+> **实验性 / 测试状态**
 >
-> 此附加组件仍在开发中，或主要用于个人用途。
-> 它尚未经过广泛测试，但预计在基本功能上能够正常工作。
+> 此应用仍在开发中，或主要针对个人使用进行开发。
+> 它尚未经过广泛测试，但预期基本功能应能正常工作。
 
 ---
 
 ## 📖 关于
 
-## ❤️ 支持此项目
-
-> 我在**空闲时间**和一份正常工作之外维护所有这些附加组件。测试设备需要花费金钱，每笔捐赠都帮助我保持独立，并将更多时间投入到开源工作中。
->
-> 捐赠完全是自愿的——但收到的支持越多，我就越少依赖于其他收入，就能将这些项目投入更多时间。
-
-<div align="center">
-
-</div>
-
-> [!警告]
-> **实验性/测试版状态**
->
-> 此附加组件仍在开发中，或主要用于个人用途。
-> 它尚未经过广泛测试，但预计在基本功能上能够正常工作。
-
-## 🐛 报告错误
-
-如果您在此应用中遇到任何问题，请使用以下链接进行报告。问题表单将预填入应用信息，以帮助我们更快地解决问题。
-
-**[报告错误](https://github.com/FaserF/hassio-addons/issues/new?template=bug_report.yml&version_integration=0.2.0&log_information=请+粘贴+App+日志输出+这里%3A%0A%0A)**
-
-> [!注意]
-> 请使用上面的链接报告问题。这确保了在您的错误报告中自动包含所有必要的信息。
-
-## 💡 特性请求
-
-如果您有关于新特性或改进的想法，请使用以下链接提交特性请求。表单将预填入应用信息。
-
-**[请求特性](https://github.com/FaserF/hassio-addons/issues/new?template=feature_request.yml&App_name=homeassistant-test-instance)**
-
-> [!注意]
-> 请使用上面的链接请求特性。这确保了在您的特性请求中自动包含应用名称。
-
-此项目是开源的，并受 MIT 许可证保护。
-由 **FaserF** 维护。
+一个用于测试目的的独立 Home Assistant Core 实例。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 应用页面中的**配置**选项卡配置此附加组件。
+通过 Home Assistant App 页面中的 **配置** 选项卡配置此应用。
 
 ### 选项
 
@@ -72,9 +37,9 @@ log_level: info
 
 ---
 
-## 👨‍💻 贡献者与许可证
+## 👨‍💻 信用与许可
 
-此项目是开源的，并受 MIT 许可证保护。
+此项目是开源的，可在 MIT 许可证下获得。
 由 **FaserF** 维护。
 ---
 

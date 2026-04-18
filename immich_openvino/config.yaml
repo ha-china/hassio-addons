@@ -2,7 +2,7 @@ arch:
   - amd64
 backup_exclude:
   - "**/machine-learning/*"
-description: '[老王杂谈说]：直接从您的手机进行自托管的照片和视频备份解决方案'
+description: '[老王杂谈说]：直接从手机端进行的自托管照片和视频备份方案。'
 devices:
   - /dev/dri
   - /dev/dxg
@@ -140,6 +140,6 @@ slug: immich_openvino
 udev: true
 url: https://ghfast.top/github.com/alexbelgium/hassio-addons
 usb: true
-version: "2.7.4"
+version: "2.7.5"
 video: true
 webui: http://[HOST]:[PORT:8080]

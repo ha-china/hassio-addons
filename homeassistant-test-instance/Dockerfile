@@ -1,7 +1,7 @@
-ARG HA_VERSION=2026.3.2
+ARG HA_VERSION=2026.4.3
 ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/home-assistant:${HA_VERSION}
 # hadolint ignore=DL3006
-FROM ghcr.nju.edu.cn/hassio-addons/base:20.0.1 AS addon-base
+FROM ghcr.nju.edu.cn/hassio-addons/base:20.0.3 AS addon-base
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
@@ -15,17 +15,22 @@ ENV TERM="xterm-256color"
 
 # hadolint ignore=DL3018
 
-# Addon metadata (injected by CI)
-ENV ADDON_VERSION="0.2.4"
-ENV ADDON_NAME="Home Assistant Test Instance"
-ENV ADDON_SLUG="ha_test_instance"
-ENV ADDON_UNSUPPORTED="false"
+# App metadata (injected by CI)
+ENV APP_VERSION="0.2.5"
+ENV APP_NAME="Home Assistant Test Instance"
+ENV APP_SLUG="ha_test_instance"
+ENV APP_UNSUPPORTED="false"
 
-RUN apk add --no-cache -u libssl3 libcrypto3 \
-    bash \
-    curl \
-    jq \
-    sed
+RUN \
+    apk update \
+    && apk upgrade --no-cache \
+    && apk add --no-cache \
+        bash \
+        curl \
+        jq \
+        sed \
+        libssl3 \
+        libcrypto3
 
 # Set shell to bash after installation
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]

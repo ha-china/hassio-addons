@@ -7,6 +7,86 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.59.0] - 2026-04-17
+
+Stable rollup of the rc.1 → rc.2 series. Headline themes: **operational
+resilience** for PulseAudio and port-collision failure modes surfaced on
+Raspberry Pi 4 / pipewire-pulse deployments, and a **CSP nonce-only
+migration** completing the hardening tracked as a known issue in 2.58.0.
+
+### Security
+- **CSP `script-src` is nonce-only** — `'unsafe-inline'` dropped. Every inline
+  `on*=` handler in Jinja templates and HTML strings produced by
+  `static/app.js` migrated to a delegated dispatcher keyed on `data-action` /
+  `data-arg`. Non-bubbling `<details>` toggle events handled via capture-phase
+  listener to cover dynamically inserted DOM. Regression test scans shipped
+  templates and `app.js` so future PRs can't reintroduce inline handlers.
+
+### Added
+- **`services/port_bind_probe.py`** — `is_port_available()` +
+  `find_available_bind_port()` host-side TCP bind probe (SO_REUSEADDR only).
+  `DEFAULT_MAX_ATTEMPTS=10`.
+- **Port auto-shift on EADDRINUSE** — `SendspinClient._start_sendspin_inner`
+  preflights the listen port before spawning the daemon subprocess; on
+  collision auto-shifts within `DEFAULT_MAX_ATTEMPTS` and records
+  `port_collision: True` + `active_listen_port` on device status. After 5
+  consecutive bind failures the restart loop halts (with an `lsof -i :<port>`
+  hint); halt state auto-clears once the daemon is observed alive.
+- **Preflight port-collision warning** at orchestrator startup
+  (`bridge_orchestrator.py`).
+- **EADDRINUSE stderr classifier** — `services/subprocess_stderr.py` detects
+  `errno 98` / `address already in use` / `eaddrinuse` and extracts the port
+  (1–65535) so the surfaced hint names the actual port.
+
+### Fixed
+- **#156 — SinkMonitor log flood**: `services/sink_monitor.py` now diagnoses
+  the PA connection failure (`socket-missing` / `permission-denied` /
+  `server-not-listening` / `protocol-error` / `unknown`) with an actionable
+  hint on the first WARNING, demotes subsequent attempts to DEBUG, and
+  self-disables after 3 consecutive initial failures so callers fall back to
+  daemon-flag idle detection. Post-success transients use exponential backoff
+  5→10→20→40→60s. `start()` resets state so the monitor can be revived after
+  the operator fixes PA.
+- **#157 — daemon crash on port collision**: see "Port auto-shift" above.
+
+### Notes
+- `find_available_bind_port()` is called with `host="0.0.0.0"` (wildcard) to
+  match the daemon's actual bind behaviour — the subprocess receives only
+  `listen_port` (no `listen_host`), so probing a specific interface would miss
+  collisions on other interfaces.
+
+## [2.58.0] - 2026-04-17
+
+Stable rollup of the rc.1 → rc.5 series. Headline theme: **multi-adapter correctness** across every Bluetooth flow the UI exposes, plus a security-hardening pass on the MA auth surface.
+
+### Security
+- SSRF guard on all MA auth routes (`/api/ma/login`, `/api/ma/ha-auth-page`, `/api/ma/ha-silent-auth`, `/api/ma/ha-login`) via `services.url_safety.is_safe_external_url`; `SENDSPIN_STRICT_SSRF=1` opts into stricter loopback/RFC1918 rejection
+- DNS-rebinding defence on outbound HTTP (`safe_urlopen` / `safe_build_opener` re-check `socket.getpeername()` after connect)
+- XSS hardening on `/api/ma/ha-auth-page` — `ma_url` is `</` → `<\\/` escaped before inline-script injection
+- MA-reported `ha_url` is re-validated through `is_safe_external_url` before the server-side OAuth exchange
+- Session-bound MFA state — `/api/ma/ha-login` step 2 no longer trusts `ha_url`/`client_id`/`flow_id`/`state` from the request body; only `session["_ha_oauth"]` is authoritative
+- Supervisor fallback is opt-in (`ALLOW_SUPERVISOR_FALLBACK=1`) and logs a `WARNING` with "does NOT verify MFA" on each use
+- Logout hardened — `POST /logout` requires CSRF and does a full `session.clear()`; `GET /logout` returns 405 with a small HTML page
+- X-Forwarded-For hardening — rate-limit client ID now uses the rightmost hop that is *not* a trusted proxy
+- X-Frame-Options: SAMEORIGIN in standalone mode; HA-addon mode keeps it off for Ingress framing
+
+### Added
+- **Multi-adapter paired-device management** — `/api/bt/paired` enumerates every adapter via `list_bt_adapters()` and merges results so each device carries `adapters: [<mac>, ...]`. Bonds on a non-default controller are now visible in the UI for the first time
+- **Per-adapter unpair** — `/api/bt/remove` accepts optional `adapter_mac`; the "Already paired" list renders an `hciN`/MAC badge per device
+- **Targeted "enable-linger" hint for headless PipeWire** — preflight audio probe distinguishes "socket path not mounted" from "socket mounted but server refused the connection", and the latter surfaces a dedicated operator-guidance issue with the exact fix (`sudo loginctl enable-linger <user>` + reboot) and a docs link. Gated by `is_ha_addon_runtime()` so HA add-on users (where Supervisor owns audio) still see the generic guidance (fixes #151)
+
+### Fixed
+- **Reset & Reconnect now honours the adapter the device is bonded with** — `/api/bt/reset_reconnect` always threaded `select <adapter>` through remove/power-cycle/pair/trust/connect, but both UI call sites invoked `resetAndReconnect` without an adapter, so bonds on a non-default radio could never be rebuilt through the UI. Fleet row now reads `.bt-adapter`; the "Already paired" list passes `d.adapters[0]`. The backend resolves `hciN` → controller MAC before any `bluetoothctl select` (HAOS/LXC reject raw `select hciN` with `Controller hciN not available`)
+- **"Add & Pair" now remembers the adapter the scan used** — two layered bugs: frontend `btAdapterOptions` never matched the scan-supplied controller MAC against `a.id` (always `hciN`), so the new fleet row's `<select>` defaulted to "default"; backend `_run_standalone_pair` passed the raw adapter straight to `bluetoothctl select` and silently ran the pair on the BlueZ default controller. Dropdown now matches on both `a.id` and `a.mac`; pair backend resolves `hciN` → MAC via `_resolve_adapter_to_mac`
+- **BT Info modal shows only the MAC for devices on the non-default controller** — `_get_bt_device_info` ran `bluetoothctl info` with no `select`, so Yandex mini 2 on `hci1` returned `Device … not available` and the modal fell back to the MAC-only field. The helper now accepts an adapter (resolving `hciN`), and both UI call sites forward it. When no adapter is supplied, every known controller is probed and the first response with real device fields wins — legacy call sites still work
+- **"Already paired" list no longer lists ghost devices** — interactive `bluetoothctl` interleaves async discovery notifications (`[CHG]`/`[NEW]`/`[DEL] Device <mac> RSSI: …`) into the same stdout we pipe `devices Paired` through, so every nearby BLE beacon appeared as "paired" even when `bluetoothctl info` reported `Paired: no`. `_parse_paired_stdout` now strips the prompt echo and accepts only bare `Device <mac> <name>` lines
+- **Preflight audio reachability is now measured by a real probe** — the previous implementation relied on `services.pulse.get_server_name()` raising on connect failure, but that helper swallows connect errors and returns `"not available"`. The preflight now performs an explicit `AF_UNIX` connect to the `PULSE_SERVER` socket: `ConnectionRefusedError` → `unreachable` (linger-specific guidance), `PermissionError`/other `OSError` → generic audio failure with the real error text
+- **500 handler no longer redirects** — `_handle_500` returns plain text instead of `redirect("/")`, eliminating a potential redirect loop when `/` itself is failing
+- **Subprocess stdout stall protection** — `SendspinClient._read_subprocess_output` now wraps `stdout.readline()` in `asyncio.wait_for(timeout=120)`, so a silent-but-alive daemon no longer leaves the reader task blocked forever
+
+### Known issues
+- CSP still ships with `'unsafe-inline'` because several templates use inline `onclick` handlers. The nonce plumbing is in place; full migration is tracked for a follow-up minor release
+
 ## [2.57.1] - 2026-04-16
 
 ### Fixed

@@ -1,39 +1,39 @@
-# Home assistant 插件：Epic Games 免费游戏
+# Home Assistant 插件：Epic Games 免费游戏
 
-我在业余时间维护这个以及其他 Home Assistant 插件：跟进上游变更、Home Assistant 变更以及在真实硬件上进行测试都需要花费大量时间（以及一些金钱）。我经常使用我 >110 个插件中的 5-10 个，所以我安装了测试机器（并购买了某些我不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
+我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游更改、HA 更改以及在真实硬件上进行测试需要花费大量时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我本人不使用的测试服务，如 VPN），以便进行故障排除和改进插件。
 
-如果这个插件为您节省了时间或使您的设置更简单，我将非常感激您的支持！
+如果这个插件为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
 
 [![给我买杯咖啡][捐赠徽章]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal徽章]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![通过 PayPal 捐赠][paypal-徽章]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
 
 ![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fepicgamesfree%2Fconfig.yaml)
-![入口](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fepicgamesfree%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fepicgamesfree%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fepicgamesfree%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fepicgamesfree%2Fconfig.yaml)
 
 [![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
-[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=代码基线检查)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建器)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [捐赠徽章]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal徽章]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+[paypal-徽章]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我仓库点星的人！要点星，请点击下面的图片，然后它将出现在右上角。谢谢！_
+_感谢所有给我的仓库点星的人！要给它点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
-[![Stargazers 仓库列表 @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers 仓库列表 for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载演变](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/epicgamesfree/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/epicgamesfree/stats.png)
 
 ## 关于
 
-[Epic Games Store 每周免费游戏](https://github.com/claabs/epicgames-freegames-node) : 自动登录并兑换 Epic Games Store 中的促销免费游戏。支持多个账户、2FA、绕过验证码、验证码通知和计划运行。
+[Epic Games Store 每周免费游戏](https://github.com/claabs/epicgames-freegames-node) : 自动登录并兑换 Epic Games Store 的促销免费游戏。支持多个账户、2FA、绕过验证码、验证码通知和计划运行。
 此插件基于 docker 镜像 https://hub.docker.com/r/charlocharlie/epicgames-freegames
 
 ## 配置
 
-插件选项公开了 `env_vars` 字段，用于传递额外的环境变量，以及一个 `disable_cron` 开关来停止内置的 cron 服务；所有其他应用程序配置都通过 JSON 文件完成。
+插件选项公开了 `env_vars` 字段，用于传递额外的环境变量，以及一个 `disable_cron` 开关，用于停止内置的 cron 服务；所有其他应用程序配置都通过 JSON 文件完成。
 
 ### 配置文件
 
@@ -42,7 +42,7 @@ _感谢所有为我仓库点星的人！要点星，请点击下面的图片，�
 - **config.json**：主要配置文件
 - **cookies.json**：身份验证cookies（可选）
 
-如果这些文件不存在，它们将在首次启动时创建，并使用默认设置。
+如果这些文件不存在，它们将在第一次启动时创建，并使用默认设置。
 
 - **env_vars 选项**：使用插件的 `env_vars` 选项来传递额外的环境变量（大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
@@ -86,14 +86,14 @@ _感谢所有为我仓库点星的人！要点星，请点击下面的图片，�
 ### 配置选项
 
 | 选项 | 类型 | 描述 |
-|--------|------|-------------|
-| `accounts` | array | Epic Games 账户列表 |
-| `cronSchedule` | string | 声明游戏的时间表（默认：`0 */6 * * *`） |
-| `runOnStartup` | boolean | 当插件启动时运行声明周期 |
-| `logLevel` | string | 应用程序日志级别 |
-| `webPortalConfig.baseUrl` | string | 包含的 Web 站点的基 URL |
-| `notifiers` | array | 通知目标，例如电子邮件、Discord、Telegram、Apprise 等。 |
-| `disable_cron` | boolean | 如果使用外部调度程序，则禁用插件的 cron 服务 |
+|------|------|------|
+| `accounts` | 数组 | Epic Games 账户列表 |
+| `cronSchedule` | 字符串 | 声明游戏的时间表（默认：`0 */6 * * *`） |
+| `runOnStartup` | 布尔值 | 插件启动时运行声明周期 |
+| `logLevel` | 字符串 | 应用程序日志级别 |
+| `webPortalConfig.baseUrl` | 字符串 | 包含的 Web 站点使用的基 URL |
+| `notifiers` | 数组 | 通知目标，如电子邮件、Discord、Telegram、Apprise 等。 |
+| `disable_cron` | 布尔值 | 如果使用外部调度程序，则禁用插件的 cron 服务 |
 
 ### 账户配置
 
@@ -140,16 +140,16 @@ notifications:
 
 ### 重要提示
 
-- **自动兑换**：由于 Epic Games 改进了自动化检测，自动兑换不再可行
-- **通知系统**：插件现在通过您首选的通知方法发送兑换链接，而不是自动声明游戏
-- **2FA 支持**：支持带有两步验证的账户的 TOTP（基于时间的单次密码）
+- **自动兑换**：由于 Epic Games 改进了自动化检测，自动兑换不再可能
+- **通知系统**：插件现在通过您首选的通知方法发送兑换链接，而不是自动兑换游戏
+- **2FA 支持**：支持具有双因素认证的账户的 TOTP（基于时间的单次密码）
 - **多个账户**：您可以配置多个 Epic Games 账户
 
 ### Cookie 导入（可选）
 
-您可以导入浏览器 cookie 以避免登录问题。创建 `/config/addons_config/epicgamesfree/cookies.json`：
+您可以导入浏览器 Cookie 以避免登录问题。创建 `/config/addons_config/epicgamesfree/cookies.json`：
 
-有关详细的 cookie 导入说明，请参阅：https://github.com/claabs/epicgames-freegames-node#cookie-import
+有关详细的 Cookie 导入说明，请参阅：https://github.com/claabs/epicgames-freegames-node#cookie-import
 
 ### 故障排除
 
@@ -164,27 +164,27 @@ notifications:
 #### 登录问题
 1. 检查您的凭据是否正确
 2. 如果已启用，请验证 2FA/TOTP 配置
-3. 考虑导入浏览器 cookie
-4. 检查插件日志以获取特定错误消息
+3. 考虑导入浏览器 Cookie
+4. 检查插件日志以获取特定的错误消息
 
 ## 安装
 
-此插件的安装相当简单，与安装任何其他插件没有区别。
+此插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件存储库添加到您的 Home Assistant 实例中（在 supervisor 插件存储库的右上角，或单击下面的按钮如果您已配置我的 HA）
-   [![打开您的 Home Assistant 实例并显示带有特定存储库 URL 预填充的添加插件存储库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 supervisor 插件存储的右上角，或点击下面的按钮如果您已配置我的 HA）
+   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
-1. 单击“保存”按钮以存储您的配置。
-1. 将插件选项设置为您的偏好
+1. 点击“保存”按钮以存储您的配置。
+1. 将插件选项设置为您的首选设置
 1. 启动插件。
-1. 检查插件的日志以查看一切是否顺利。
+1. 检查插件的日志以查看是否一切顺利。
 1. 打开 WebUI 并调整软件选项
 
 ## 支持
 
 ### 超时错误
 
-请尝试将 `"browserNavigationTimeout": 300000,` 添加到您的 config.json（https://github.com/alexbelgium/hassio-addons/issues/675#issuecomment-1407675351）
+请尝试将 `"browserNavigationTimeout": 300000,` 添加到您的 config.json 中（https://github.com/alexbelgium/hassio-addons/issues/675#issuecomment-1407675351）
 
 ### 其他错误
 
