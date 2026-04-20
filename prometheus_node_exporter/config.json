@@ -1,10 +1,10 @@
 {
   "name": "Prometheus Node Exporter",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "slug": "prometheus_node_exporter",
-  "description": "[老王杂谈说]：用于硬件和操作系统指标的Prometheus节点导出器",
+  "description": "[老王杂谈说]：null",
   "url": "https://ghfast.top/github.com/loganmarchione/hassos-addons/tree/main/prometheus_node_exporter",
-  "image": "ghcr.nju.edu.cn/loganmarchione/hassos-addons/prometheusnodeexporter-{arch}",
+  "image": "ghcr.nju.edu.cn/loganmarchione/hassos-addons/prometheusnodeexporter",
   "arch": [
     "amd64",
     "aarch64"

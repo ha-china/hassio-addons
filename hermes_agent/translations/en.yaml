@@ -1,0 +1,55 @@
+configuration:
+  git_url:
+    name: Git Repository URL
+    description: Hermes Agent git repository URL.
+  git_ref:
+    name: Git Branch/Tag
+    description: >-
+      Branch, tag, or commit hash to check out.
+      Leave empty for the repository's default branch.
+  git_token:
+    name: Git/GitHub Token
+    description: >-
+      Personal access token for private repositories (optional).
+      Also exported as GITHUB_TOKEN for gh CLI and Hermes skills.
+  auto_update:
+    name: Auto Update
+    description: >-
+      Pull latest changes from git on every restart.
+  hass_url:
+    name: Home Assistant URL
+    description: Home Assistant base URL for API access.
+  homeassistant_token:
+    name: Home Assistant Token
+    description: Long-lived access token for HA API integration (optional).
+  enable_dashboard:
+    name: Enable Web Dashboard
+    description: >-
+      ⚠️ Enable web dashboard on direct HTTP/HTTPS ports (configured under Network below).
+      Set an access password to secure these ports.
+  enable_terminal:
+    name: Enable Web Terminal
+    description: >-
+      ⚠️ Enable web terminal on direct HTTP/HTTPS ports (configured under Network below).
+      Set an access password to secure these ports.
+  enable_api:
+    name: Enable API Server
+    description: >-
+      ⚠️ Enable the OpenAI-compatible API server on direct HTTP/HTTPS ports (configured under Network below).
+      The access password doubles as the server API key.
+  access_password:
+    name: Access Password
+    description: >-
+      ⚠️ Password for direct HTTP/HTTPS access. Username: hermes.
+      Also used as the server API key.
+  env_vars:
+    name: Hermes .env Variables
+    description: >-
+      Written to ~/.hermes/.env on each start.
+      Use for API keys (e.g. OPENROUTER_API_KEY).
+      Non-empty values override existing .env entries.
+  hermes_home:
+    name: Hermes Home Directory
+    description: >-
+      Directory name for Hermes Agent data (relative to /config).
+      Default ".hermes". Change to e.g. "amy" for /config/amy/.

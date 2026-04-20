@@ -1,0 +1,55 @@
+name: Hermes Agent
+version: "1.0.2"
+slug: hermes_agent
+description: "[老王杂谈说]：由 Nous Research 构建的自我改进 AI 智能体。Wolfram Ravenwolf 制作的 Home Assistant 插件。"
+url: "https://ghfast.top/github.com/WolframRavenwolf/hermes-ha-addon"
+arch:
+  - amd64
+  - aarch64
+init: false
+startup: application
+boot: auto
+ingress: true
+ingress_port: 49169
+panel_icon: mdi:robot
+panel_title: Hermes Agent
+map:
+  - addon_config:rw
+  - media:rw
+  - share:rw
+ports:
+  8080/tcp: null
+  8443/tcp: 8443
+ports_description:
+  8080/tcp: "HTTP: /hermes/ (agent) · /dashboard/ (web UI) · /terminal/ (shell) · /v1/ (OpenAI API)"
+  8443/tcp: "HTTPS: /hermes/ (agent) · /dashboard/ (web UI) · /terminal/ (shell) · /v1/ (OpenAI API) — TLS (self-signed cert)"
+options:
+  git_url: "https://ghfast.top/github.com/NousResearch/hermes-agent.git"
+  git_ref: ""
+  git_token: ""
+  auto_update: false
+  hass_url: "http://homeassistant.local:8123"
+  homeassistant_token: ""
+  hermes_home: ".hermes"
+  enable_dashboard: false
+  enable_terminal: false
+  enable_api: false
+  access_password: ""
+  env_vars:
+    - name: "OPENROUTER_API_KEY"
+      value: ""
+schema:
+  git_url: "url?"
+  git_ref: "str?"
+  git_token: "password?"
+  auto_update: "bool"
+  hass_url: "url?"
+  homeassistant_token: "password?"
+  hermes_home: "str?"
+  enable_dashboard: "bool"
+  enable_terminal: "bool"
+  enable_api: "bool"
+  access_password: "password?"
+  env_vars:
+    - name: "match(^[A-Z_][A-Z0-9_]{0,254}$)"
+      value: "str"
