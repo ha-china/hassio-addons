@@ -1,15 +1,13 @@
 ---
-version: 2.7.2
+version: 3.0.0
+breaking_versions: [3.0.0]
 slug: mariadb
 name: MariaDB
-description: '[老王杂谈说]：一个SQL数据库服务器'
+description: '[老王杂谈说]：SQL 数据库服务器'
 url: https://ghfast.top/github.com/home-assistant/addons/tree/master/mariadb
 arch:
-  - armhf
-  - armv7
   - aarch64
   - amd64
-  - i386
 backup_post: unlock-tables-for-backup
 backup_pre: lock-tables-for-backup
 image: docker.1ms.run/homeassistant/{arch}-addon-mariadb

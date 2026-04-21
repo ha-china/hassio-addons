@@ -107,7 +107,7 @@
   s.textContent = window.isSecureContext ? '\u2705 Secure' : '\u26A0\uFE0F Not secure';
 
   var g = document.getElementById('statusGateway');
-  fetch('./v1/models', {cache:'no-store'}).then(function(r) {
+  fetch('./v1/health', {cache:'no-store'}).then(function(r) {
     g.textContent = r.ok ? '\u2705 Gateway' : '\uD83D\uDCA4 Gateway';
   }).catch(function() {
     g.textContent = '\uD83D\uDCA4 Gateway';

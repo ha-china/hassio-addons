@@ -1,7 +1,7 @@
 name: Hermes Agent
-version: "1.0.2"
+version: "1.0.3"
 slug: hermes_agent
-description: "[老王杂谈说]：由 Nous Research 构建的自我改进 AI 智能体。Wolfram Ravenwolf 制作的 Home Assistant 插件。"
+description: "[老王杂谈说]：null"
 url: "https://ghfast.top/github.com/WolframRavenwolf/hermes-ha-addon"
 arch:
   - amd64
