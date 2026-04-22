@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.1.0
 # hadolint ignore=DL3006
 FROM $BUILD_FROM
 ARG BUILD_DATE="unknown"
@@ -10,13 +10,17 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3018
 
 # App metadata (injected by CI)
-ENV APP_VERSION="1.5.0"
+ENV APP_VERSION="1.5.1"
 ENV APP_NAME="WhatsApp"
 ENV APP_SLUG="whatsapp"
 ENV APP_UNSUPPORTED="false"
 
 RUN \
-    apk add --no-cache -u libssl3 libcrypto3 git curl && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/main" > /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/community" >> /etc/apk/repositories \
+    && apk add --no-cache musl musl-dev \
+    && apk upgrade --no-cache --available \
+    && apk add --no-cache libssl3 libcrypto3 git curl && \
     apk add --no-cache nodejs npm
 
 # 2. Set workdir

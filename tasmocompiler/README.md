@@ -1,9 +1,9 @@
-# Home Assistant 插件：tasmocompiler
-TasmoCompiler 是一个简单的网页界面，允许您根据自己的设置编译出色的 Tasmota 固件
+# Home assistant 插件：tasmocompiler
+TasmoCompiler 是一个简单的网页图形界面，允许您使用自己的设置编译出色的 Tasmota 固件
 
 _感谢所有为我仓库点星的人！要点星，请点击下面的图片，然后它将显示在右上角。谢谢！_
 
-![@jdeath/homeassistant-addons 的星标仓库列表](https://reporoster.com/stars/jdeath/homeassistant-addons)[@jdeath/homeassistant-addons/stargazers](https://github.com/jdeath/homeassistant-addons/stargazers)
+![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
@@ -11,23 +11,23 @@ _感谢所有为我仓库点星的人！要点星，请点击下面的图片，�
 
 ## 安装
 
-此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
+此插件的安装相当简单，与安装任何其他Hass.io插件没有区别。
 
-1. 将我的 Hass.io 插件仓库[repository]添加到您的 Hass.io 实例中。
+1. 将我的Hass.io插件仓库[repository]添加到您的Hass.io实例中。
 1. 安装此插件。
-1. 点击 `保存` 按钮以存储您的配置。
+1. 点击“保存”按钮以存储您的配置。
 1. 启动插件。
 1. 检查插件的日志，以查看一切是否顺利。
-1. 前往本地 IP:端口。由于某种原因，入口不起作用。
+1. 访问本地IP:端口。由于某些原因，入口不起作用
 1. 咨询官方文档以获取设置支持：https://github.com/benzino77/tasmocompiler
 
 ## 配置
 
 ```
-port: 3000 # 您想要在前端上运行的端口
+port: 3000 # 您希望在前端运行的端口
 ```
 
-Webui 可以在 `<您的 IP>:端口` 找到。
+Webui可以在 `<您的IP>:端口` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---

@@ -1,10 +1,10 @@
 # WhatsApp
 
-![WhatsApp 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/whatsapp/logo.png) width="100" alt="Logo" />
+![WhatsApp Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/whatsapp/logo.png)
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_whatsapp)
-[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-1.5.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-whatsapp)
+[![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-1.5.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-whatsapp)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > Home Assistant WhatsApp 应用 (Baileys/Node.js).
@@ -19,30 +19,30 @@
 
 **公共命令：**
 
-- `ha-app-status`: 检查健康和版本（包括 HA 核心和 OS 信息）。
-- `ha-app-ping`: 基本连接检查（"Pong!"）。
-- `ha-app-getid`: 返回当前聊天 ID（用于群组 ID）。
-- `ha-app-sponsor`: 显示支持和捐赠链接。
+- `ha-app-status`：检查健康状态和版本（包括 HA 核心和 OS 信息）。
+- `ha-app-ping`：基本的连通性检查（"Pong!"）。
+- `ha-app-getid`：返回当前聊天 ID（用于群组 ID）。
+- `ha-app-sponsor`：显示支持和捐赠链接。
 
 **管理员命令（受保护）：**
 
-- `ha-app-help`: 显示可用命令和示例。
-- `ha-app-welcome`: 手动显示角色感知的欢迎信息。
-- `ha-app-diagnose`: 运行完整消息类型诊断（按钮、列表等）。
-- `ha-app-logs`: 查看最近的连接事件。
-- `ha-app-restart`: 重新启动 WhatsApp 连接。
+- `ha-app-help`：显示可用命令和示例。
+- `ha-app-welcome`：手动显示角色感知的欢迎消息。
+- `ha-app-diagnose`：运行完整消息类型诊断（按钮、列表等）。
+- `ha-app-logs`：查看最近的连接事件。
+- `ha-app-restart`：重启 WhatsApp 连接。
 
 > [!TIP]
-> **首次联系：** 机器人会自动向新用户在他们的第一条直接消息中发送欢迎信息，并识别他们的角色（管理员/标准）。
+> **首次联系：** 机器人会自动向新用户在他们的第一条直接消息中发送欢迎消息，并识别他们的角色（管理员/标准）。
 
 > [!TIP]
-> 从管理员号码发送 `ha-app-help` 获取命令和用法示例的完整列表。
+> 从管理员号码发送 `ha-app-help` 以获取完整命令列表和使用示例。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 应用页面中的 **配置** 选项卡配置应用。
+通过 Home Assistant App 页面中的 **配置** 选项卡配置应用。
 
 ### 选项
 
@@ -66,9 +66,9 @@ welcome_message_enabled: false
 
 ---
 
-## 👨‍💻 致谢与许可证
+## 👨‍💻 信用与许可证
 
-本项目是开源的，并受 MIT 许可证的约束。
+此项目是开源的，并可在 MIT 许可证下获得。
 由 **FaserF** 维护。
 ---
 

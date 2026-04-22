@@ -5,7 +5,7 @@
     "armv7"
   ],
   "boot": "auto",
-  "description": "[老王杂谈说]：一个简单的网页界面，允许你使用自定义设置编译出色的 Tasmota 固件。",
+  "description": "[老王杂谈说]：null",
   "environment": {
     "TZ": "America/New_York"
   },
@@ -23,7 +23,7 @@
   "upstream": "1.0",
   "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
   "image": "benzino77/tasmocompiler",
-  "version": "13.3.0",
+  "version": "13.3.1",
   "ingress": false,
   "ingress_port": 3000,
   "webui": "[PROTO:ssl]://[HOST]:[PORT:3000]"

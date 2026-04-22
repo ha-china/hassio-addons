@@ -1,17 +1,14 @@
 ---
-version: 0.4.0
+version: 0.5.0
 slug: silabs_flasher
 name: Silicon Labs Flasher
-description: '[老王杂谈说]：Silicon Labs 固件烧录器附加程序'
+description: '[老王杂谈说]：null'
 url: >
   https://ghfast.top/github.com/home-assistant/addons/tree/master/silabs_flasher
 
 arch:
   - aarch64
   - amd64
-  - armhf
-  - armv7
-  - i386
 gpio: true
 hassio_api: true
 image: docker.1ms.run/homeassistant/{arch}-addon-silabs-flasher

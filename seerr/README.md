@@ -1,32 +1,32 @@
 # Home Assistant 扩展：Seerr
 
-## 简介
+## 关于
 
-此扩展包包含 [Seerr](https://seerr.dev/)，一个开源的媒体请求和发现管理器，适用于 Jellyfin、Plex 和 Emby。
+此扩展包包含了 [Seerr](https://seerr.dev/)，一个开源的媒体请求和发现管理器，适用于 Jellyfin、Plex 和 Emby。
 
 此扩展基于现有的 Overseerr 扩展结构，针对 Seerr 上游项目和容器镜像进行了适配。它通过内部 NGINX 反向代理支持 Home Assistant Ingress。
 
-审查的上游存储库：
-- Overseerr：https://github.com/sct/overseerr
-- Seerr：https://github.com/seerr-team/seerr
+已审查的上游仓库：
+- Overseerr: https://github.com/sct/overseerr
+- Seerr: https://github.com/seerr-team/seerr
 
 ## 安装
 
-1. 将我的扩展库添加到您的 Home Assistant 实例中（在右上角的监督器扩展库中，或如果您已配置我的 HA，则点击下面的按钮）。
-   ![打开您的 Home Assistant 实例并显示具有预填充特定存储库 URL 的添加扩展库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)(https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的扩展仓库添加到您的 Home Assistant 实例中（在右上角的监督器扩展存储中，或如果您已配置我的 HA，则点击下面的按钮）。
+   ![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加扩展仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)(https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 2. 安装 **Seerr**。
 3. 配置选项，然后启动扩展。
-4. 在端口 `5055` 上打开 Web UI 或通过 Home Assistant Ingress 打开。
+4. 在端口 `5055` 或通过 Home Assistant Ingress 打开 Web UI。
 
 ## 配置
 
-使用 `env_vars` 在需要时传递额外的环境变量。Seerr 配置存储在 `/config`。
+使用 `env_vars` 在需要时传递额外的环境变量。Seerr 配置存储在 `/config` 中。
 
 ### 选项
 
-| 选项 | 类型 | 默认 | 描述 |
-|--------|------|---------|-------------|
-| `NODE_MEMORY_LIMIT` | int | `512` | Node.js 堆内存的最大值（以 MB 为单位）。如果 Seerr 在大型库上崩溃，则增加；在内存受限的系统上减少。 |
+| 选项 | 类型 | 默认值 | 描述 |
+|------|------|--------|------|
+| `NODE_MEMORY_LIMIT` | int | `512` | Node.js 堆内存的最大值（以 MB 为单位）。如果 Seerr 因大型库而崩溃，则增加；在内存受限的系统上减少。 |
 | `PGID` | int | `0` | 文件权限的组 ID |
 | `PUID` | int | `0` | 文件权限的用户 ID |
 | `TZ` | str | | 时区（例如 `Europe/London`） |
@@ -48,8 +48,8 @@ TZ: Europe/London
 Seerr 与 Overseerr 的数据格式兼容。要迁移现有配置：
 
 1. 停止 **Overseerr** 扩展。
-2. 安装并启动 **Seerr** 扩展一次以创建其配置目录 (`/addon_configs/db21ed7f_seerr/`)，然后停止它。
-3. 打开 **[文件浏览器](https://github.com/alexbelgium/hassio-addons/tree/master/filebrowser)** 扩展（或任何具有对 `/addon_configs/` 访问权限的文件管理器）。
+2. 安装并启动 **Seerr** 扩展一次以创建其配置目录（`/addon_configs/db21ed7f_seerr/`），然后停止它。
+3. 打开 **[文件浏览器](https://github.com/alexbelgium/hassio-addons/tree/master/filebrowser)** 扩展（或任何可以访问 `/addon_configs/` 的文件管理器）。
 4. 导航到 `/addon_configs/db21ed7f_overseerr/` 并将所有文件复制到 `/addon_configs/db21ed7f_seerr/`。
 5. 启动 **Seerr** 扩展。您的现有设置、用户和请求将被保留。
 
@@ -60,8 +60,8 @@ Seerr 与 Overseerr 的数据格式兼容。要迁移现有配置：
 Seerr 与 Jellyseerr 的数据格式兼容。要迁移现有配置：
 
 1. 停止 **Jellyseerr** 扩展。
-2. 安装并启动 **Seerr** 扩展一次以创建其配置目录 (`/addon_configs/db21ed7f_seerr/`)，然后停止它。
-3. 打开 **[文件浏览器](https://github.com/alexbelgium/hassio-addons/tree/master/filebrowser)** 扩展（或任何具有对 `/addon_configs/` 访问权限的文件管理器）。
+2. 安装并启动 **Seerr** 扩展一次以创建其配置目录（`/addon_configs/db21ed7f_seerr/`），然后停止它。
+3. 打开 **[文件浏览器](https://github.com/alexbelgium/hassio-addons/tree/master/filebrowser)** 扩展（或任何可以访问 `/addon_configs/` 的文件管理器）。
 4. 导航到 `/addon_configs/db21ed7f_jellyseerr/` 并将所有文件复制到 `/addon_configs/db21ed7f_seerr/`。
 5. 启动 **Seerr** 扩展。您的现有设置、用户和请求将被保留。
 
@@ -69,7 +69,7 @@ Seerr 与 Jellyseerr 的数据格式兼容。要迁移现有配置：
 
 ### 从 Ombi 迁移
 
-Ombi 使用不同的数据格式，且没有自动迁移路径到 Seerr。您需要从头开始配置 Seerr：
+Ombi 使用不同的数据格式，没有自动迁移路径到 Seerr。您需要从头配置 Seerr：
 
 1. 记录您的 Ombi 配置（媒体服务器、用户、通知设置等）。
 2. 停止 **Ombi** 扩展。
@@ -80,7 +80,7 @@ Ombi 使用不同的数据格式，且没有自动迁移路径到 Seerr。您需
 
 ## 支持
 
-如果您发现了一个错误，请在本存储库中打开一个 issue。
+如果您发现了一个错误，请在此存储库中打开一个 issue。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
