@@ -1,6 +1,6 @@
 # Home Assistant 社区应用：Z-Wave JS UI
 
-[![发布状态][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
+[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
 
 [![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
 
@@ -8,21 +8,21 @@
 
 [![Patreon赞助Frenck][patreon-shield]][patreon]
 
-完全可定制的Z-Wave JS控制面板和MQTT网关。
+完全可配置的Z-Wave JS控制面板和MQTT网关。
 
 ![Z-Wave JS UI][logo]
 
 ## 关于
 
-Z-Wave JS UI应用提供了一个额外的控制面板，允许您配置Z-Wave网络的各个方面。它提供了一个解耦的网关，可以使用Z-Wave JS WebSockets（由Home Assistant Z-Wave JS集成使用）和MQTT（甚至可以同时使用）进行通信。
+Z-Wave JS UI应用提供额外的控制面板，允许您配置Z-Wave网络的各个方面。它提供了一个解耦的网关，可以使用Z-Wave JS WebSockets（由Home Assistant Z-Wave JS集成使用）和MQTT（甚至可以同时使用）进行通信。
 
 一些优点和用例：
 
 - 与Home Assistant Z-Wave JS集成兼容。
 - 在Home Assistant重启之间，您的Z-Wave网络将继续运行。
-- 您可以直接使用Node-RED等工具与您的Z-Wave网络交互，同时它对Home Assistant也可用。
+- 您可以直接使用Node-RED等工具与您的Z-Wave网络交互，同时它也适用于Home Assistant。
 - 允许基于[ESPHome.io][esphome]的ESP设备直接响应或与您的Z-Wave网络协同工作。
-- 当找到Mosquitto应用时，会自动进行预配置。
+- 当发现Mosquitto应用时，会自动进行预配置。
 
 此应用使用[Z-Wave JS UI][zwave-js-ui]软件。
 
@@ -38,8 +38,8 @@ Z-Wave JS UI应用提供了一个额外的控制面板，允许您配置Z-Wave�
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v7.2.0-blue.svg
-[release]: https://github.com/hassio-addons/app-zwave-js-ui/tree/v7.2.0
+[release-shield]: https://img.shields.io/badge/version-v7.2.1-blue.svg
+[release]: https://github.com/hassio-addons/app-zwave-js-ui/tree/v7.2.1
 [zwave-js-ui]: https://github.com/zwave-js/zwave-js-ui
 ---
 

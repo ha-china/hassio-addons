@@ -8,11 +8,11 @@
 
 [![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
 
-冰箱之外的 ERP！Grocy 是一款针对家庭使用的强大杂货及家务管理解决方案。
+冰箱之外的 ERP！Grocy 是一款针对家庭的 groceries & household management 解决方案。
 
 ## 关于
 
-[Grocy][grocy] - 冰箱之外的 ERP 是一款强大的家庭杂货及家务管理解决方案，提供以下功能：
+[Grocy][grocy] - 冰箱之外的 ERP 是一款强大的 groceries & household management 解决方案，为您提供以下功能：
 
 - 库存管理
 - 购物清单
@@ -21,7 +21,7 @@
 - 库存
 - 以及更多。
 
-[尝试 Grocy 在线演示][grocy-demo]。
+[尝试 Grocy 的在线演示][grocy-demo]。
 
 ![Grocy 截图][screenshot]
 
@@ -37,8 +37,8 @@
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.25.0-blue.svg
-[release]: https://github.com/hassio-addons/app-grocy/tree/v0.25.0
+[release-shield]: https://img.shields.io/badge/version-v0.25.1-blue.svg
+[release]: https://github.com/hassio-addons/app-grocy/tree/v0.25.1
 [screenshot]: https://github.com/hassio-addons/app-grocy/raw/main/images/screenshot.gif
 ---
 
