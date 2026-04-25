@@ -3,7 +3,7 @@ version: 10.1.0
 slug: ssh
 name: Terminal & SSH
 description: '[老王杂谈说]：允许使用 SSH 远程登录 Home Assistant'
-url: https://ghfast.top/github.com/home-assistant/addons/tree/master/ssh
+url: https://gh-proxy.org/github.com/home-assistant/addons/tree/master/ssh
 arch:
   - aarch64
   - amd64

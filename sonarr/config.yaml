@@ -2,7 +2,7 @@ name: Sonarr
 version: 0.5.0
 slug: sonarr
 description: '[老王杂谈说]：供新闻组和 BitTorrent 用户使用的 Smart PVR'
-url: https://ghfast.top/github.com/hassio-addons/app-sonarr/tree/main/README.md
+url: https://gh-proxy.org/github.com/hassio-addons/app-sonarr/tree/main/README.md
 webui: http://[HOST]:[PORT:8989]
 init: false
 arch:
@@ -14,4 +14,4 @@ map:
   - media:rw
 ports:
   8989/tcp: 8989
-image: ghcr.nju.edu.cn/hassio-addons/sonarr
+image: ghcr.1ms.run/hassio-addons/sonarr

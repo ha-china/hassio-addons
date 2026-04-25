@@ -4,7 +4,7 @@
   "version": "1.7.1",
   "slug": "ambianic",
   "description": "[老王杂谈说]：Ambianic 边缘人工智能",
-  "url": "https://ghfast.top/github.com/dcmartin/addon-ambianic",
+  "url": "https://gh-proxy.org/github.com/dcmartin/addon-ambianic",
   "startup": "services",
   "boot": "auto",
   "arch": [

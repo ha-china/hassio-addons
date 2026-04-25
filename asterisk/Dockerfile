@@ -1,9 +1,9 @@
-# https://ghfast.top/github.com/hassio-addons/addon-debian-base/releases
-FROM ghcr.nju.edu.cn/hassio-addons/debian-base:9.2.0 AS base
+# https://gh-proxy.org/github.com/hassio-addons/addon-debian-base/releases
+FROM ghcr.1ms.run/hassio-addons/debian-base:9.2.0 AS base
 
 SHELL [ "/bin/bash", "-euxo", "pipefail", "-c" ]
 
-# https://ghfast.top/github.com/PhracturedBlue/asterisk_mbox_server/commits/master
+# https://gh-proxy.org/github.com/PhracturedBlue/asterisk_mbox_server/commits/master
 ARG ASTERISK_MBOX_SERVER_VERSION="99038a4aa69d30b1deaf7895a868d68f47a3acba"
 RUN export DEBIAN_FRONTEND=noninteractive; \
     apt-get update; \
@@ -62,7 +62,7 @@ RUN export DEBIAN_FRONTEND=noninteractive; \
         # for asterisk_mbox_server \
         lame; \
     \
-    pip3 install --no-cache-dir --break-system-packages https://ghfast.top/github.com/PhracturedBlue/asterisk_mbox_server/archive/${ASTERISK_MBOX_SERVER_VERSION}.tar.gz; \
+    pip3 install --no-cache-dir --break-system-packages https://gh-proxy.org/github.com/PhracturedBlue/asterisk_mbox_server/archive/${ASTERISK_MBOX_SERVER_VERSION}.tar.gz; \
     \
     # Dependencies only used to build asterisk_mbox_server \
     apt-get purge -y --auto-remove gcc g++ libc6-dev python3-dev; \
@@ -111,7 +111,7 @@ RUN ASTERISK_OPUS_VERSION=$(echo "${ASTERISK_OPUS_VERSION}" | sed 's/-[^-]*$//; 
     curl -fsSL "https://salsa.debian.org/pkg-voip-team/asterisk/-/archive/upstream/${ASTERISK_OPUS_VERSION}/asterisk-upstream-${ASTERISK_OPUS_VERSION}.tar.gz?path=Xopus" | \
     tar --strip-components 2 -xz
 
-# https://ghfast.top/github.com/asterisk/asterisk/tags
+# https://gh-proxy.org/github.com/asterisk/asterisk/tags
 # https://www.asterisk.org/downloads/asterisk/all-asterisk-versions/
 ARG ASTERISK_VERSION="22.8.2"
 WORKDIR /usr/src/asterisk
@@ -126,9 +126,9 @@ RUN cp --verbose ../asterisk-opus*/codecs/* codecs; \
 
 ## Install app_rtsp_sip
 WORKDIR /usr/src/app_rtsp_sip
-# https://ghfast.top/github.com/tommyjlong/app_rtsp_sip/releases
+# https://gh-proxy.org/github.com/tommyjlong/app_rtsp_sip/releases
 ARG APP_RTSP_SIP_VERSION="3.1"
-RUN curl -fsSL "https://ghfast.top/github.com/tommyjlong/app_rtsp_sip/archive/v${APP_RTSP_SIP_VERSION}.tar.gz" | \
+RUN curl -fsSL "https://gh-proxy.org/github.com/tommyjlong/app_rtsp_sip/archive/v${APP_RTSP_SIP_VERSION}.tar.gz" | \
         tar --strip-components 1 -xz; \
     cp -f app_rtsp_sip.c /usr/src/asterisk/apps
 
@@ -231,9 +231,9 @@ RUN \
 
 ## Install chan-dongle
 WORKDIR /usr/src/asterisk-chan-dongle
-# https://ghfast.top/github.com/wdoekes/asterisk-chan-dongle/commits/master
+# https://gh-proxy.org/github.com/wdoekes/asterisk-chan-dongle/commits/master
 ARG CHAN_DONGLE_VERSION="13450af5f648ddf4bc279c08e53917f503253bdd"
-RUN curl -fsSL "https://ghfast.top/github.com/wdoekes/asterisk-chan-dongle/archive/${CHAN_DONGLE_VERSION}.tar.gz" | \
+RUN curl -fsSL "https://gh-proxy.org/github.com/wdoekes/asterisk-chan-dongle/archive/${CHAN_DONGLE_VERSION}.tar.gz" | \
     tar --strip-components 1 -xz
 RUN ./bootstrap; \
     ./configure \
@@ -247,9 +247,9 @@ RUN ./bootstrap; \
 ## Install googletts
 WORKDIR /usr/src/asterisk-googletts
 COPY patches/googletts/change_tmp_dir.patch .
-# https://ghfast.top/github.com/zaf/asterisk-googletts/commits/master
+# https://gh-proxy.org/github.com/zaf/asterisk-googletts/commits/master
 ARG GOOGLETTS_VERSION="0592005ed97cf8c83bfacedee933def20307b8a2"
-RUN curl -fsSL "https://ghfast.top/github.com/zaf/asterisk-googletts/archive/${GOOGLETTS_VERSION}.tar.gz" | \
+RUN curl -fsSL "https://gh-proxy.org/github.com/zaf/asterisk-googletts/archive/${GOOGLETTS_VERSION}.tar.gz" | \
     tar --strip-components 1 -xz; \
     patch -p1 < change_tmp_dir.patch
 RUN cp -f googletts.agi "${INSTALL_DIR}/var/lib/asterisk/agi-bin"
@@ -257,15 +257,15 @@ RUN cp -f googletts.agi "${INSTALL_DIR}/var/lib/asterisk/agi-bin"
 ## Install speech-recog
 WORKDIR /usr/src/asterisk-speech-recog
 COPY patches/speech-recog/change_tmp_dir.patch .
-# https://ghfast.top/github.com/zaf/asterisk-speech-recog/commits/master
+# https://gh-proxy.org/github.com/zaf/asterisk-speech-recog/commits/master
 ARG SPEECH_RECOG_VERSION="dbc933bca1074514963a2294c52e617ef539a90a"
-RUN curl -fsSL "https://ghfast.top/github.com/zaf/asterisk-speech-recog/archive/${SPEECH_RECOG_VERSION}.tar.gz" | \
+RUN curl -fsSL "https://gh-proxy.org/github.com/zaf/asterisk-speech-recog/archive/${SPEECH_RECOG_VERSION}.tar.gz" | \
     tar --strip-components 1 -xz; \
     patch -p1 < change_tmp_dir.patch
 RUN cp -f speech-recog.agi "${INSTALL_DIR}/var/lib/asterisk/agi-bin"
 
 # Debian has a symlink from /var/run to /run, so here we move contents
-# directly to /run. Otherwise we run into https://ghfast.top/github.com/docker/buildx/issues/150.
+# directly to /run. Otherwise we run into https://gh-proxy.org/github.com/docker/buildx/issues/150.
 RUN mv -f "${INSTALL_DIR}/var/run" "${INSTALL_DIR}/run"
 
 
@@ -287,5 +287,5 @@ CMD [ "/stdin.sh" ]
 LABEL \
     org.opencontainers.image.title="Home Assistant Add-on: Asterisk" \
     org.opencontainers.image.description="PBX server for SIP devices like doorbells and phones." \
-    org.opencontainers.image.source="https://ghfast.top/github.com/TECH7Fox/asterisk-hass-addons" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/TECH7Fox/asterisk-hass-addons" \
     org.opencontainers.image.licenses="MIT"

@@ -2,7 +2,7 @@ name: pigpio
 version: 2.0.0
 slug: pigpio
 description: '[老王杂谈说]：使用pigpio在Home Assistant上控制PWM LED灯'
-url: https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/pigpio
+url: https://gh-proxy.org/github.com/Poeschl-HomeAssistant-Addons/pigpio
 arch:
   - armv7
   - aarch64
@@ -15,7 +15,7 @@ devices:
   - /dev/vcio
   - /dev/i2c-0
   - /dev/i2c-1
-image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/pigpio-{arch}
+image: ghcr.1ms.run/poeschl-homeassistant-addons/pigpio-{arch}
 init: false
 ports:
   8888/tcp: 8888

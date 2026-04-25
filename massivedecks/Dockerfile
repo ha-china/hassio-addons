@@ -2,7 +2,7 @@ ARG BUILD_FROM
 FROM $BUILD_FROM
 
 RUN apk add curl unzip npm python3 nginx \
-    && curl -LO https://ghfast.top/github.com/Lattyware/massivedecks/archive/refs/tags/v2.6.0.zip \
+    && curl -LO https://gh-proxy.org/github.com/Lattyware/massivedecks/archive/refs/tags/v2.6.0.zip \
     && unzip v2.6.0.zip \
     && rm v2.6.0.zip \
     && apk del curl unzip \
@@ -38,15 +38,15 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="jdeath (https://ghfast.top/github.com/jdeath)" \
+    maintainer="jdeath (https://gh-proxy.org/github.com/jdeath)" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="Home Assistant Add-ons" \
-    org.opencontainers.image.authors="jdeath (https://ghfast.top/github.com/jdeath)" \
+    org.opencontainers.image.authors="jdeath (https://gh-proxy.org/github.com/jdeath)" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/jdeath" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/${BUILD_REPOSITORY}" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/jdeath" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}

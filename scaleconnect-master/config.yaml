@@ -1,6 +1,6 @@
 name: Smart Scale Connect (master)
 description: '[老王杂谈说]：最新不稳定版本'
-url: https://ghfast.top/github.com/AlexxIT/SmartScaleConnect
+url: https://gh-proxy.org/github.com/AlexxIT/SmartScaleConnect
 image: alexxit/smartscaleconnect
 arch: [amd64, aarch64, i386, armv7, armhf]
 # https://developers.home-assistant.io/docs/add-ons/configuration

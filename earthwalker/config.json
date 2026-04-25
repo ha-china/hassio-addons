@@ -16,7 +16,7 @@
   "slug": "earthwalker",
   "startup": "services",
   "upstream": "latest",
-  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
   "image": "registry.gitlab.com/glatteis/earthwalker",
   "version": "latest",
   "panel_admin": false,

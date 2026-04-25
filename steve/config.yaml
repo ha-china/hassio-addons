@@ -2,7 +2,7 @@ name: SteVe
 version: 5.0.0
 slug: steve
 description: '[老王杂谈说]：电动汽车充电站的OCPP服务器'
-url: https://ghfast.top/github.com/erik73/app-steve
+url: https://gh-proxy.org/github.com/erik73/app-steve
 arch:
   - aarch64
   - amd64
@@ -29,4 +29,4 @@ schema:
   admin_user: str
   admin_password: str
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
-image: ghcr.nju.edu.cn/erik73/steve/{arch}
+image: ghcr.1ms.run/erik73/steve/{arch}

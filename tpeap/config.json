@@ -39,7 +39,7 @@
   "startup": "application",
   "timeout": 90,
   "tmpfs": true,
-  "url": "https://ghfast.top/github.com/dcmartin/hassio-addons/tree/master/tpeap/README.md",
+  "url": "https://gh-proxy.org/github.com/dcmartin/hassio-addons/tree/master/tpeap/README.md",
   "version": "0.0.2",
   "webui": "https://[HOST]:[PORT:8043]"
 }

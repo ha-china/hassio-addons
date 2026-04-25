@@ -2,7 +2,7 @@ name: Social to Mealie
 version: "1.6.1"
 slug: social_to_mealie
 description: '[老王杂谈说]：将菜谱直接从社交媒体导入 Mealie'
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 arch:
   - aarch64
   - amd64
@@ -10,7 +10,7 @@ map:
   - addon_config:rw
 environment:
   PORT: "3000"
-image: ghcr.nju.edu.cn/alexbelgium/social_to_mealie-{arch}
+image: ghcr.1ms.run/alexbelgium/social_to_mealie-{arch}
 init: false
 ports:
   3000/tcp: 3000

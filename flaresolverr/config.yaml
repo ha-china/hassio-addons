@@ -64,7 +64,7 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
-image: ghcr.nju.edu.cn/alexbelgium/flaresolverr-{arch}
+image: ghcr.1ms.run/alexbelgium/flaresolverr-{arch}
 name: FlareSolverr
 options:
   env_vars: []
@@ -78,6 +78,6 @@ schema:
       value: str?
 slug: flaresolverr
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "3.4.6"
 webui: "[PROTO:ssl]://[HOST]:[PORT:8191]"

@@ -64,7 +64,7 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
-image: ghcr.nju.edu.cn/alexbelgium/librespeed-{arch}
+image: ghcr.1ms.run/alexbelgium/librespeed-{arch}
 ingress: true
 ingress_port: 80
 ingress_stream: true
@@ -95,5 +95,5 @@ schema:
   PUID: int
   TZ: str?
 slug: librespeed
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "6.1.0"

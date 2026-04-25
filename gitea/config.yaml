@@ -64,7 +64,7 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
-image: ghcr.nju.edu.cn/alexbelgium/gitea-{arch}
+image: ghcr.1ms.run/alexbelgium/gitea-{arch}
 init: false
 map:
   - addon_config:rw
@@ -96,6 +96,6 @@ schema:
   ssl: bool
 slug: gitea
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/gitea
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/gitea
 version: "1.26.1"
 webui: "[PROTO:ssl]://[HOST]:[PORT:3000]"

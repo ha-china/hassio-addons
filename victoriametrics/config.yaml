@@ -7,9 +7,9 @@ description: |-
 arch:
   - aarch64
   - amd64
-image: "ghcr.nju.edu.cn/bluemaex/ha-addons-victoriametrics-{arch}"
+image: "ghcr.1ms.run/bluemaex/ha-addons-victoriametrics-{arch}"
 startup: system
-url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/victoriametrics
+url: https://gh-proxy.org/github.com/bluemaex/home-assistant-addons/tree/master/victoriametrics
 ports:
   8428/tcp: 8428
   2003/udp: null

@@ -55,7 +55,7 @@ RUN mkdir -p /etc/apt/keyrings \
 ARG TARGETARCH
 RUN ARCH=$(echo ${TARGETARCH:-$(dpkg --print-architecture)} | sed 's|arm64|aarch64|;s|arm/v7|armhf|;s|armv7|armhf|;s|amd64|x86_64|') \
     && echo "Downloading ttyd for arch: ${ARCH}" \
-    && curl -fsSL "https://ghfast.top/github.com/tsl0922/ttyd/releases/download/1.7.7/ttyd.${ARCH}" -o /usr/local/bin/ttyd \
+    && curl -fsSL "https://gh-proxy.org/github.com/tsl0922/ttyd/releases/download/1.7.7/ttyd.${ARCH}" -o /usr/local/bin/ttyd \
     && chmod +x /usr/local/bin/ttyd
 
 RUN node -v && npm -v

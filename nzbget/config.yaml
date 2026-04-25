@@ -67,7 +67,7 @@ devices:
 environment:
   PGID: "0"
   PUID: "0"
-image: ghcr.nju.edu.cn/alexbelgium/nzbget-{arch}
+image: ghcr.1ms.run/alexbelgium/nzbget-{arch}
 ingress: true
 init: false
 map:
@@ -103,5 +103,5 @@ schema:
   networkdisks: str?
 slug: nzbget
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "v26.1-ls240"

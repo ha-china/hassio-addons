@@ -2,7 +2,7 @@ name: Mailserver
 version: 6.1.1
 slug: mailserver
 description: '[老王杂谈说]：用于 Home Assistant 的 Postfix 和 Dovecot 邮件服务器，配合 Postfix Admin Web 界面。'
-url: https://ghfast.top/github.com/erik73/hassio-addons
+url: https://gh-proxy.org/github.com/erik73/hassio-addons
 arch:
   - aarch64
   - amd64
@@ -50,4 +50,4 @@ schema:
   message_size_limit: int
   mail_max_userip_connections: int?
   mynetworks: str?
-image: ghcr.nju.edu.cn/erik73/mailserver/{arch}
+image: ghcr.1ms.run/erik73/mailserver/{arch}

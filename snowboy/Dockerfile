@@ -27,11 +27,11 @@ RUN \
         setuptools \
         wheel \
     && .venv/bin/pip3 install --no-cache-dir \
-        "wyoming-snowboy @ https://ghfast.top/github.com/rhasspy/wyoming-snowboy/archive/refs/tags/v${WYOMING_SNOWBOY_VERSION}.tar.gz" \
+        "wyoming-snowboy @ https://gh-proxy.org/github.com/rhasspy/wyoming-snowboy/archive/refs/tags/v${WYOMING_SNOWBOY_VERSION}.tar.gz" \
     && ARCH="${BUILD_ARCH}" \
     && if [[ "${BUILD_ARCH}" = "aarch64" ]]; then ARCH="arm64"; fi \
     && curl --location --output - \
-        "https://ghfast.top/github.com/rhasspy/snowman-enroll/releases/download/v${SNOWMAN_ENROLL_VERSION}/snowman_enroll-${ARCH}.tar.gz" | \
+        "https://gh-proxy.org/github.com/rhasspy/snowman-enroll/releases/download/v${SNOWMAN_ENROLL_VERSION}/snowman_enroll-${ARCH}.tar.gz" | \
         tar -xzf - \
     && apt-get remove --yes build-essential swig \
     && apt-get autoclean \

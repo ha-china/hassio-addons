@@ -3,7 +3,7 @@ version: 1.3.0
 slug: assist_microphone
 name: Assist Microphone
 description: 使用本地麦克风辅助。
-url: https://ghfast.top/github.com/home-assistant/addons/blob/master/assist_microphone
+url: https://gh-proxy.org/github.com/home-assistant/addons/blob/master/assist_microphone
 hassio_api: true
 arch:
   - amd64

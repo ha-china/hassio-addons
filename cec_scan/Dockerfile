@@ -17,7 +17,7 @@ RUN \
         swig \
         linux-headers \
     && git clone --depth 1 -b libcec-${LIBCEC_VERSION} \
-        "https://ghfast.top/github.com/Pulse-Eight/libcec" libcec \
+        "https://gh-proxy.org/github.com/Pulse-Eight/libcec" libcec \
     && mkdir -p libcec/build \
     && cd libcec/build \
     && cmake \

@@ -22,10 +22,10 @@
   "slug": "trilium",
   "startup": "services",
   "upstream": "v0.102.2",
-  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
   "version": "v0.102.2",
   "ingress": true,
   "ingress_port": 8080,
-  "image": "ghcr.nju.edu.cn/triliumnext/trilium",
+  "image": "ghcr.1ms.run/triliumnext/trilium",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8080]"
 }

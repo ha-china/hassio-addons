@@ -3,11 +3,11 @@ name: Netboot.xyz
 version: 2.3.2
 slug: netboot-xyz
 description: '[老王杂谈说]：PXE服务器用于在本地网络中部署操作系统'
-url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/netboot-xyz
+url: https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/netboot-xyz
 arch:
   - aarch64
   - amd64
-image: ghcr.nju.edu.cn/faserf/hassio-addons-netboot-xyz-{arch}
+image: ghcr.1ms.run/faserf/hassio-addons-netboot-xyz-{arch}
 host_network: true
 ingress: true
 ingress_port: 3000

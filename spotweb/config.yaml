@@ -5,7 +5,7 @@ arch:
 codenotary: alexandrep.github@gmail.com
 description: '[老王杂谈说]：Spotweb是一个基于Spotnet协议的分布式usenet社区'
 hassio_api: true
-image: ghcr.nju.edu.cn/alexbelgium/spotweb-{arch}
+image: ghcr.1ms.run/alexbelgium/spotweb-{arch}
 ingress: true
 init: false
 map:
@@ -38,5 +38,5 @@ services:
   - mysql:want
 slug: spotweb
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/spotweb
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/spotweb
 version: 1.5.8-5

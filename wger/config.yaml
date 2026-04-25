@@ -2,7 +2,7 @@ arch:
   - amd64
   - aarch64
 description: '[老王杂谈说]：null'
-image: ghcr.nju.edu.cn/alexbelgium/wger-{arch}
+image: ghcr.1ms.run/alexbelgium/wger-{arch}
 map:
   - share:rw
   - config:rw
@@ -22,6 +22,6 @@ schema:
   CONFIG_LOCATION: str
 slug: wger
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "2.6-dev"
 webui: "[PROTO:ssl]://[HOST]:[PORT:80]"

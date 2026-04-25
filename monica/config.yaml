@@ -71,7 +71,7 @@ environment:
   SCOUT_QUEUE: "false"
   MEILISEARCH_URL: "http://127.0.0.1:7700"
   MEILISEARCH_KEY: "null"
-image: ghcr.nju.edu.cn/alexbelgium/monica-{arch}
+image: ghcr.1ms.run/alexbelgium/monica-{arch}
 init: false
 options:
   env_vars: []
@@ -107,6 +107,6 @@ schema:
 services:
   - mysql:want
 slug: monica
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/monica
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/monica
 version: "5.0.0b5-2"
 webui: "[PROTO:ssl]://[HOST]:[PORT:80]"

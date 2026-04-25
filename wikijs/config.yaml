@@ -6,7 +6,7 @@ description: 一个基于Node.js的现代、轻量级且强大的wiki应用程�
 arch:
   - amd64
   - aarch64
-url: "https://ghfast.top/github.com/jdeath/homeassistant-addons"
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
 ports:
   3000/tcp: 3000 
 ports_description:
@@ -18,7 +18,7 @@ environment:
     CONFIG_FILE: "/config/wikijs-config.yml"
     PUID: "0"
     PGID: "0"
-image: ghcr.nju.edu.cn/requarks/wiki
+image: ghcr.1ms.run/requarks/wiki
 boot: auto
 startup: services
 webui: "[PROTO:ssl]://[HOST]:[PORT:3000]"

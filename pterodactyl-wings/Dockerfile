@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.0.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
@@ -25,7 +25,7 @@ ARG WINGS_SHA256_ARM64=d4cb31482be751a5242f1107feab6c6c4b1fff9626945c574f481f0c3
 # hadolint ignore=DL4006,SC3040,SC2039
 RUN set -o pipefail && \
     if [ "${TARGETARCH}" = "arm64" ]; then ARCH="arm64"; CHECKSUM="${WINGS_SHA256_ARM64}"; else ARCH="amd64"; CHECKSUM="${WINGS_SHA256_AMD64}"; fi && \
-    curl -L -o /usr/local/bin/wings "https://ghfast.top/github.com/pterodactyl/wings/releases/download/${WINGS_VERSION}/wings_linux_${ARCH}" && \
+    curl -L -o /usr/local/bin/wings "https://gh-proxy.org/github.com/pterodactyl/wings/releases/download/${WINGS_VERSION}/wings_linux_${ARCH}" && \
     echo "${CHECKSUM} /usr/local/bin/wings" | sha256sum -c - && \
     chmod u+x /usr/local/bin/wings
 
@@ -44,9 +44,9 @@ HEALTHCHECK --interval=60s --timeout=15s --retries=3 CMD curl --fail http://127.
 LABEL org.opencontainers.image.title="pterodactyl Wings Gameserver"
 LABEL org.opencontainers.image.description="Open Source Gameserver"
 LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
-LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
+LABEL org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/pterodactyl-wings"
-LABEL org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/pterodactyl-wings"
-LABEL org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/pterodactyl-wings/README.md"
+LABEL org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/pterodactyl-wings"
+LABEL org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/pterodactyl-wings"
+LABEL org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/pterodactyl-wings/README.md"
 LABEL org.opencontainers.image.created="${BUILD_DATE}"

@@ -4,7 +4,7 @@ slug: matter_server
 name: Matter Server
 description: '[老王杂谈说]：用于 Home Assistant Matter 支持的 Matter WebSocket 服务器。'
 url: >-
-  https://ghfast.top/github.com/home-assistant/addons/tree/master/matter_server
+  https://gh-proxy.org/github.com/home-assistant/addons/tree/master/matter_server
 arch:
   - aarch64
   - amd64

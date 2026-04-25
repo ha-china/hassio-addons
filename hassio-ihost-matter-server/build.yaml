@@ -1,6 +1,6 @@
 ---
 build_from:
-  armv7: ghcr.nju.edu.cn/ihost-open-source-project/python-matter-server:8.1.1
+  armv7: ghcr.1ms.run/ihost-open-source-project/python-matter-server:8.1.1
 args:
   BASHIO_VERSION: 0.17.1
   TEMPIO_VERSION: 2024.11.2

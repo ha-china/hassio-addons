@@ -67,7 +67,7 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 host_network: true
-image: ghcr.nju.edu.cn/alexbelgium/arpspoof-{arch}
+image: ghcr.1ms.run/alexbelgium/arpspoof-{arch}
 map: []
 name: Arpspoof
 options:
@@ -84,6 +84,6 @@ schema:
   ROUTER_IP: str
 slug: arpspoof
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/arpspoof
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/arpspoof
 version: 1.0.0-2
 webui: '[PROTO:ssl]://[HOST]:[PORT:7022]'

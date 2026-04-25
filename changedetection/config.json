@@ -25,7 +25,7 @@
   "slug": "changedetection",
   "startup": "services",
   "upstream": "0.54.10",
-  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons/tree/main/changedetection",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons/tree/main/changedetection",
   "version": "0.54.10",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:5000]",
   "panel_admin": false,

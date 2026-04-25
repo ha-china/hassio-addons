@@ -4,7 +4,7 @@
   "slug": "ewelink_remote",
   "description": "[老王杂谈说]：eWeLink-Remote网关插件支持将eWeLink-Remote子设备R5、R5W、S-Mate、S-Mate2添加到Home Assistant作为自动化触发条件",
   "startup": "application",
-  "url": "https://ghfast.top/github.com/iHost-Open-Source-Project/hassio-ihost-addon/tree/master/hassio-ihost-ewelink-remote",
+  "url": "https://gh-proxy.org/github.com/iHost-Open-Source-Project/hassio-ihost-addon/tree/master/hassio-ihost-ewelink-remote",
   "boot": "auto",
   "arch": [
     "armv7",
@@ -49,6 +49,6 @@
       "password": "str?"
     }
   },
-  "image": "ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-ewelink-remote-{arch}",
+  "image": "ghcr.1ms.run/ihost-open-source-project/hassio-ihost-ewelink-remote-{arch}",
   "homeassistant": "2025.9.2"
 }

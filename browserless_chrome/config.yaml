@@ -66,7 +66,7 @@ devices:
   - /dev/nvme2
 environment:
   TIMEOUT: "60000"
-image: ghcr.nju.edu.cn/alexbelgium/browserless_chrome-{arch}
+image: ghcr.1ms.run/alexbelgium/browserless_chrome-{arch}
 init: false
 map:
   - addon_config:rw
@@ -85,6 +85,6 @@ schema:
   TIMEOUT: int
 slug: browserless_chrome
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/browserless_chrome
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/browserless_chrome
 version: "2.47.0"
 webui: "[PROTO:ssl]://[HOST]:[PORT:3000]/docs"

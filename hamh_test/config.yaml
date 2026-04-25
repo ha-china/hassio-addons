@@ -1,9 +1,9 @@
 version: "3.0.0-alpha.69"
-image: ghcr.nju.edu.cn/t0bst4r/home-assistant-matter-hub-addon
+image: ghcr.1ms.run/t0bst4r/home-assistant-matter-hub-addon
 slug: hamh_test
 name: Home-Assistant-Matter-Hub (Test Addon // DO NOT USE)
 description: 这是用于测试目的。不要使用这个插件。
-url: https://ghfast.top/github.com/t0bst4r/home-assistant-matter-hub
+url: https://gh-proxy.org/github.com/t0bst4r/home-assistant-matter-hub
 panel_icon: mdi:hub
 panel_title: Matter Hub
 homeassistant: 2024.1.0

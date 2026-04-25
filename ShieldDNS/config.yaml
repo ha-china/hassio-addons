@@ -2,7 +2,7 @@ name: "ShieldDNS"
 version: "2.4.5"
 slug: "shielddns"
 description: "[老王杂谈说]：null"
-url: "https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/ShieldDNS"
+url: "https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/ShieldDNS"
 arch:
   - aarch64
   - amd64
@@ -47,4 +47,4 @@ schema:
 #   # Removing this section avoids the "Network" configuration tab in HA, which is misleading here.
 #   # 853/tcp: 853
 #   # 443/tcp: 3443
-image: ghcr.nju.edu.cn/faserf/hassio-addons-shielddns-{arch}
+image: ghcr.1ms.run/faserf/hassio-addons-shielddns-{arch}

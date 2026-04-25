@@ -1,7 +1,7 @@
-# https://ghfast.top/github.com/AlexxIT/builder/blob/master/builder.sh
+# https://gh-proxy.org/github.com/AlexxIT/builder/blob/master/builder.sh
 name: go2rtc master hardware
 description: 硬件转码Intel（VAAPI/QSV）、AMD（VAAPI）和NVIDIA（CUDA）。
-url: https://ghfast.top/github.com/AlexxIT/go2rtc
+url: https://gh-proxy.org/github.com/AlexxIT/go2rtc
 image: docker.1ms.run/alexxit/go2rtc
 arch: [ amd64 ]
 

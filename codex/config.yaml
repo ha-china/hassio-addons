@@ -61,7 +61,7 @@ environment:
   PUID: "0"
 hassio_api: true
 homeassistant_api: true
-image: ghcr.nju.edu.cn/alexbelgium/codex-{arch}
+image: ghcr.1ms.run/alexbelgium/codex-{arch}
 ingress: true
 ingress_stream: true
 map:
@@ -100,5 +100,5 @@ schema:
   networkdisks: str?
 slug: codex
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "1.10.12"

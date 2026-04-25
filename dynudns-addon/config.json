@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "slug": "dynudns",
   "description": "通过Dynu使用Let's Encrypt支持免费动态DNS。",
-  "url": "https://ghfast.top/github.com/koying/ha-addons/tree/main/dynudns-addon",
+  "url": "https://gh-proxy.org/github.com/koying/ha-addons/tree/main/dynudns-addon",
   "arch": [
     "armhf",
     "armv7",

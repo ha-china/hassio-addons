@@ -14,7 +14,7 @@
 # 1 Build Image #
 #################
 
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base/amd64:11.0.0
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base/amd64:11.0.0
 # hadolint ignore=DL3006
 FROM $BUILD_FROM
 
@@ -76,7 +76,7 @@ RUN apk -U update && \
     \
     && mkdir -p /app \
     # Install latest Spotweb release
-    && git clone --depth=1 https://ghfast.top/github.com/spotweb/spotweb.git /app \
+    && git clone --depth=1 https://gh-proxy.org/github.com/spotweb/spotweb.git /app \
     # spotweb needs a timezone set in the php.ini
     # TODO: Can we dynamically set the correct timezone here ?
     && sed -i "s/;date.timezone =/date.timezone = \"Europe\/Amsterdam\"/g" /etc/php*/php.ini \
@@ -102,14 +102,14 @@ RUN if [ ! -f /bin/sh ] && [ -f /usr/bin/sh ]; then ln -s /usr/bin/sh /bin/sh; f
 ARG MODULES="01-custom_script.sh"
 
 # Automatic modules download
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_automodules.sh" "/ha_automodules.sh"
+ADD "https://gh-proxy.org/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_automodules.sh" "/ha_automodules.sh"
 RUN chmod 744 /ha_automodules.sh && /ha_automodules.sh "$MODULES" && rm /ha_automodules.sh
 
 # Manual apps
 ENV PACKAGES=""
 
 # Automatic apps & bashio
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_autoapps.sh" "/ha_autoapps.sh"
+ADD "https://gh-proxy.org/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_autoapps.sh" "/ha_autoapps.sh"
 RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.sh
 
 ################
@@ -118,14 +118,14 @@ RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.
 
 # Add entrypoint
 ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" "/ha_entrypoint.sh"
+ADD "https://gh-proxy.org/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" "/ha_entrypoint.sh"
 
 # Entrypoint modifications
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint_modif.sh" "/ha_entrypoint_modif.sh"
+ADD "https://gh-proxy.org/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint_modif.sh" "/ha_entrypoint_modif.sh"
 RUN chmod 777 /ha_entrypoint.sh /ha_entrypoint_modif.sh && /ha_entrypoint_modif.sh && rm /ha_entrypoint_modif.sh
 
 # Standalone bashio command
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/.bashio-standalone.sh"
+ADD "https://gh-proxy.org/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/.bashio-standalone.sh"
 RUN chmod 777 /.bashio-standalone.sh
 
 ############
@@ -153,8 +153,8 @@ LABEL \
     org.label-schema.build-date=${BUILD_DATE} \
     org.label-schema.name="${APP_NAME}" \
     org.label-schema.schema-version="1.0" \
-    org.label-schema.url="https://ghfast.top/github.com/alexbelgium/hassio-addons/${APP_ID}" \
-    org.label-schema.usage="https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/${APP_ID}/README.md" \
+    org.label-schema.url="https://gh-proxy.org/github.com/alexbelgium/hassio-addons/${APP_ID}" \
+    org.label-schema.usage="https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/${APP_ID}/README.md" \
     org.label-schema.vcs-ref=${BUILD_REF} \
-    org.label-schema.vcs-url="https://ghfast.top/github.com/alexbelgium/hassio-addons/${APP_ID}" \
+    org.label-schema.vcs-url="https://gh-proxy.org/github.com/alexbelgium/hassio-addons/${APP_ID}" \
     org.label-schema.vendor="Alex Belgium's Add-ons for Home Assistant"

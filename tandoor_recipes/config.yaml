@@ -70,7 +70,7 @@ environment:
   MEDIA_ROOT: ""
   POSTGRES_DB: /config/addons_config/tandoor_recipes/recipes.db
   TRUSTED_PROXIES: "**"
-image: ghcr.nju.edu.cn/alexbelgium/tandoor_recipes-{arch}
+image: ghcr.1ms.run/alexbelgium/tandoor_recipes-{arch}
 map:
   - config:rw
   - share:rw
@@ -111,6 +111,6 @@ services:
   - mysql:want
 slug: tandoor_recipes
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "2.6.9"
 webui: http://[HOST]:[PORT:80]

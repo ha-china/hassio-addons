@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.0.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} as base
 
@@ -59,7 +59,7 @@ WORKDIR /var/www/html
 RUN apk add --no-cache -u libssl3 libcrypto3 \
     yarn \
     git \
-    && git clone https://ghfast.top/github.com/pterodactyl/panel ./ --depth 1 --branch "release/${PTERODACTYL_VERSION}" \
+    && git clone https://gh-proxy.org/github.com/pterodactyl/panel ./ --depth 1 --branch "release/${PTERODACTYL_VERSION}" \
     && rm -rf .git \
     && chmod -R 755 storage/* bootstrap/cache \
     && find storage -type d > .storage.tmpl \
@@ -100,9 +100,9 @@ HEALTHCHECK --interval=30s --timeout=10s --retries=5 --start-period=120s \
 LABEL org.opencontainers.image.title="pterodactyl Panel Gameserver"
 LABEL org.opencontainers.image.description="Open-Source Gameserver Management Panel"
 LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
-LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
+LABEL org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/pterodactyl-panel"
-LABEL org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/pterodactyl-panel"
-LABEL org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/pterodactyl-panel/README.md"
+LABEL org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/pterodactyl-panel"
+LABEL org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/pterodactyl-panel"
+LABEL org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/pterodactyl-panel/README.md"
 LABEL org.opencontainers.image.created="${BUILD_DATE}"

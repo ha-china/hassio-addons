@@ -5,7 +5,7 @@
   "description": "Zigbee2MQTT附加组件的开发构建。",
   "uart": true,
   "udev": true,
-  "url": "https://ghfast.top/github.com/zigbee2mqtt/hassio-zigbee2mqtt/tree/master/zigbee2mqtt-edge",
+  "url": "https://gh-proxy.org/github.com/zigbee2mqtt/hassio-zigbee2mqtt/tree/master/zigbee2mqtt-edge",
   "startup": "application",
   "services": [
     "mqtt:need"
@@ -85,5 +85,5 @@
     "watchdog": "str?",
     "force_onboarding": "bool?"
   },
-  "image": "ghcr.nju.edu.cn/zigbee2mqtt/zigbee2mqtt-edge-{arch}"
+  "image": "ghcr.1ms.run/zigbee2mqtt/zigbee2mqtt-edge-{arch}"
 }

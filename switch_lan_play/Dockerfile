@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.0.2
 # Build stage
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} AS builder
@@ -22,7 +22,7 @@ RUN apk add --no-cache -u libssl3 libcrypto3 \
 
 # Pin to specific commit for reproducible builds (v0.2.3)
 WORKDIR /switch-lan-play
-RUN git clone https://ghfast.top/github.com/spacemeowx2/switch-lan-play.git . \
+RUN git clone https://gh-proxy.org/github.com/spacemeowx2/switch-lan-play.git . \
     && git checkout c0c663e3fdc95d6d6e8ab401caa2bfb5b5872e00 \
     && git submodule update --init --recursive \
     && sed -i '/execute_process(COMMAND git submodule update --init -- external\/libuv/,/)/d' external/external.cmake \
@@ -67,9 +67,9 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 LABEL org.opencontainers.image.title="Switch LAN Play Client"
 LABEL org.opencontainers.image.description="Nintendo Switch Lan Play -Client"
 LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
-LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
+LABEL org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/switch_lan_play"
-LABEL org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/switch_lan_play"
-LABEL org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/switch_lan_play/README.md"
+LABEL org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/switch_lan_play"
+LABEL org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/switch_lan_play"
+LABEL org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/switch_lan_play/README.md"
 LABEL org.opencontainers.image.created="${BUILD_DATE}"

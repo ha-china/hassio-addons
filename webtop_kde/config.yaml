@@ -71,7 +71,7 @@ environment:
   START_DOCKER: "false"
   TITLE: Ubuntu KDE webtop
   shm_size: 1gb
-image: ghcr.nju.edu.cn/alexbelgium/webtop_kde-{arch}
+image: ghcr.1ms.run/alexbelgium/webtop_kde-{arch}
 ingress: true
 init: false
 map:
@@ -142,6 +142,6 @@ schema:
 slug: webtop
 tmpfs: true
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "4.16-r0-ls93"
 video: true

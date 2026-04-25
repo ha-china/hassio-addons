@@ -2,9 +2,9 @@
 name: AegisBot
 version: "0.5.3"
 slug: aegisbot
-image: ghcr.nju.edu.cn/faserf/hassio-addons-aegisbot-{arch}
+image: ghcr.1ms.run/faserf/hassio-addons-aegisbot-{arch}
 description: '[老王杂谈说]：专业 Telegram 群组守护者 —— 高级安全、自动化管理与社区管理。'
-url: https://ghfast.top/github.com/FaserF/AegisBot
+url: https://gh-proxy.org/github.com/FaserF/AegisBot
 arch:
   - aarch64
   - amd64

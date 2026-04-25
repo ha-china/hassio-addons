@@ -3,7 +3,7 @@ version: 1.17.1
 slug: git-exporter
 description: 导出所有您的Home Assistant配置到您选择的Git存储库中。
   your choice
-url: https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/git-exporter
+url: https://gh-proxy.org/github.com/Poeschl-HomeAssistant-Addons/git-exporter
 arch:
 - armhf
 - armv7
@@ -13,7 +13,7 @@ arch:
 startup: once
 boot: manual
 init: false
-image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/git-exporter-{arch}
+image: ghcr.1ms.run/poeschl-homeassistant-addons/git-exporter-{arch}
 hassio_api: true
 hassio_role: manager
 map:

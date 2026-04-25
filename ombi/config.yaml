@@ -64,7 +64,7 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
-image: ghcr.nju.edu.cn/alexbelgium/ombi-{arch}
+image: ghcr.1ms.run/alexbelgium/ombi-{arch}
 init: false
 map:
   - config:rw
@@ -85,6 +85,6 @@ schema:
   PUID: int
 slug: ombi
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/ombi
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/ombi
 version: "4.55.2"
 webui: "[PROTO:ssl]://[HOST]:[PORT:3579]"

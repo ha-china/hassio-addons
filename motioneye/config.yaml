@@ -2,7 +2,7 @@ name: motionEye
 version: 0.23.0
 slug: motioneye
 description: '[老王杂谈说]：简单、优雅且功能丰富的CCTV/NVR，适用于您的摄像头'
-url: https://ghfast.top/github.com/hassio-addons/addon-motioneye
+url: https://gh-proxy.org/github.com/hassio-addons/addon-motioneye
 ingress: true
 ingress_port: 0
 ingress_stream: true
@@ -44,4 +44,4 @@ schema:
     - type: list(lock|unlock|light_on|light_off|alarm_on|alarm_off|up|right|down|left|zoom_in|zoom_out|preset1|preset2|preset3|preset4|preset5|preset6|preset7|preset8|preset9)?
       camera: int?
       command: str?
-image: ghcr.nju.edu.cn/hassio-addons/motioneye/{arch}
+image: ghcr.1ms.run/hassio-addons/motioneye/{arch}

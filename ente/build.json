@@ -1,6 +1,6 @@
 {
   "build_from": {
-    "aarch64": "ghcr.nju.edu.cn/ente-io/server:latest",
-    "amd64": "ghcr.nju.edu.cn/ente-io/server:latest"
+    "aarch64": "ghcr.1ms.run/ente-io/server:latest",
+    "amd64": "ghcr.1ms.run/ente-io/server:latest"
   }
 }

@@ -3,7 +3,7 @@ version: 2.2.2
 slug: piper
 name: Piper
 description: '[老王杂谈说]：基于Piper的文字转语音'
-url: https://ghfast.top/github.com/home-assistant/addons/blob/master/piper
+url: https://gh-proxy.org/github.com/home-assistant/addons/blob/master/piper
 arch:
   - amd64
   - aarch64

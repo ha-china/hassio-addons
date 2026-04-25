@@ -3,7 +3,7 @@ version: 1.2.1
 slug: snowboy
 name: snowboy
 description: 使用怀俄明协议的snowboy唤醒词检测。
-url: https://ghfast.top/github.com/rhasspy/hassio-addons/tree/master/snowboy
+url: https://gh-proxy.org/github.com/rhasspy/hassio-addons/tree/master/snowboy
 arch:
   - amd64
   - aarch64

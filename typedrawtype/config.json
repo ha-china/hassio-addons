@@ -17,7 +17,7 @@
   "slug": "typedrawtype",
   "startup": "services",
   "upstream": "latest",
-  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons/",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons/",
   "image": "bronkoknorb/type-draw-type-game",
   "version": "latest",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8080]",

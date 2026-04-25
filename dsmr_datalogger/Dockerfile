@@ -18,5 +18,5 @@ LABEL \
   io.hass.arch=$BUILD_ARCH \
   org.opencontainers.image.title="Home Assistant Add-on: DSMR Datalogger"  \
   org.opencontainers.image.description="The datalogger only option of DSMR (https://dsmr-reader.readthedocs.io)"  \
-  org.opencontainers.image.source="https://ghfast.top/github.com/sanderdw/hassio-addons" \
+  org.opencontainers.image.source="https://gh-proxy.org/github.com/sanderdw/hassio-addons" \
   org.opencontainers.image.licenses="Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)"

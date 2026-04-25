@@ -3,8 +3,8 @@ name: ntopng
 version: "0.3.0"
 slug: ntopng
 description: '[老王杂谈说]：SoHo 自由及开放源代码 ntopng 与 netflow 收集器'
-url: "https://ghfast.top/github.com/litinoveweedle/hassio-addons/tree/main/ntopng"
-image: "ghcr.nju.edu.cn/litinoveweedle/hassio-addon-ntopng-{arch}"
+url: "https://gh-proxy.org/github.com/litinoveweedle/hassio-addons/tree/main/ntopng"
+image: "ghcr.1ms.run/litinoveweedle/hassio-addon-ntopng-{arch}"
 ingress: true
 ingress_port: 0
 ingress_stream: true

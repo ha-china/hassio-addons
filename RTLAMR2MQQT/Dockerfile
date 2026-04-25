@@ -1,7 +1,7 @@
 # Docker file to create an image for a hass.io add-on that contains enough software to listen to events via RTL_SDR/RTL_433 and then publish them to a MQTT broker.
 # The script resides in a volume and can be modified to meet your needs.
-# This hass.io addon is based on Chris Kacerguis' project here: https://ghfast.top/github.com/chriskacerguis/honeywell2mqtt,
-# which is in turn based on Marco Verleun's rtl2mqtt image here: https://ghfast.top/github.com/roflmao/rtl2mqtt
+# This hass.io addon is based on Chris Kacerguis' project here: https://gh-proxy.org/github.com/chriskacerguis/honeywell2mqtt,
+# which is in turn based on Marco Verleun's rtl2mqtt image here: https://gh-proxy.org/github.com/roflmao/rtl2mqtt
 
 # IMPORTANT: The container needs privileged access to /dev/bus/usb on the host.
 
@@ -20,7 +20,7 @@ LABEL Description="This image is used to start a script that will monitor for RF
 RUN apk add --no-cache --virtual build-deps alpine-sdk cmake git libusb-dev && \
     mkdir /tmp/src && \
     cd /tmp/src && \
-    git clone https://ghfast.top/github.com/osmocom/rtl-sdr.git && \
+    git clone https://gh-proxy.org/github.com/osmocom/rtl-sdr.git && \
     mkdir /tmp/src/rtl-sdr/build && \
     cd /tmp/src/rtl-sdr/build && \
     cmake ../ -DINSTALL_UDEV_RULES=ON -DDETACH_KERNEL_DRIVER=ON -DCMAKE_INSTALL_PREFIX:PATH=/usr/local && \

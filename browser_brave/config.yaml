@@ -22,7 +22,7 @@ environment:
   START_DOCKER: "false"
   TITLE: Brave browser
   shm_size: 1gb
-image: ghcr.nju.edu.cn/alexbelgium/brave-{arch}
+image: ghcr.1ms.run/alexbelgium/brave-{arch}
 ingress: true
 init: false
 map:
@@ -68,6 +68,6 @@ schema:
 slug: brave
 tmpfs: true
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "1.89.143-ls94"
 video: true

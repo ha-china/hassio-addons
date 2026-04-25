@@ -18,7 +18,7 @@ RUN apk add --no-cache make \
 
 ARG BUILD_ARCH
 
-RUN cd / && wget -q -O - "https://ghfast.top/github.com/Netgear/wsdd2/archive/refs/heads/master.tar.gz" | tar zxvf - \
+RUN cd / && wget -q -O - "https://gh-proxy.org/github.com/Netgear/wsdd2/archive/refs/heads/master.tar.gz" | tar zxvf - \
     && cd wsdd2-master \ 
     && wget -q -O - https://raw.githubusercontent.com/openwrt/packages/refs/heads/master/net/wsdd2/patches/010-gcc14.patch | patch -p1 \
     && make
@@ -109,7 +109,7 @@ COPY --from=builder /wsdd2-master/wsdd2 /usr/sbin
 COPY --from=builder /root/.cache/pypoetry /root/.cache/pypoetry
 
 # HA API
-RUN curl -Lso /usr/bin/ha "https://ghfast.top/github.com/home-assistant/cli/releases/download/${CLI_VERSION}/ha_${BUILD_ARCH}" \
+RUN curl -Lso /usr/bin/ha "https://gh-proxy.org/github.com/home-assistant/cli/releases/download/${CLI_VERSION}/ha_${BUILD_ARCH}" \
     && chmod a+x /usr/bin/ha 
 
 # SAMBA Config
@@ -142,9 +142,9 @@ LABEL \
     org.opencontainers.image.vendor="Home Assistant Dianlight Add-ons" \
     org.opencontainers.image.authors="Lucio Tarantino <@dianlight>" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/dianlight/hassio-addons" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/${BUILD_REPOSITORY}" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/dianlight/hassio-addons" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}

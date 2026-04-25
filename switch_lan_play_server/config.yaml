@@ -3,10 +3,10 @@ name: Switch LAN Play Server
 version: 2.3.1
 slug: switch-lan-play-server
 description: '[老王杂谈说]：任天堂Switch 局域网联机 -服务器'
-url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/switch_lan_play_server
+url: https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/switch_lan_play_server
 arch:
   - amd64
-image: ghcr.nju.edu.cn/faserf/hassio-addons-switch-lan-play-server-{arch}
+image: ghcr.1ms.run/faserf/hassio-addons-switch-lan-play-server-{arch}
 panel_icon: mdi:local-area-network
 init: false
 options:

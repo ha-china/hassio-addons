@@ -78,7 +78,7 @@ RUN \
        "libmbedtls-dev:${DEBIAN_ARCH}" \
        "libmbedtls12:${DEBIAN_ARCH}" \
     && git clone --depth 1 -b "${CPCD_VERSION}" \
-       https://ghfast.top/github.com/SiliconLabs/cpc-daemon.git \
+       https://gh-proxy.org/github.com/SiliconLabs/cpc-daemon.git \
     && mkdir $CPCD_DIR/build && cd $CPCD_DIR/build \
     && cmake ../ \
        -DCMAKE_TOOLCHAIN_FILE=../debian.cmake \
@@ -110,7 +110,7 @@ ENV PATH="/usr/src/slc_cli/:$PATH"
 RUN \
     set -x \
     && git clone --depth 1 -b ${GECKO_SDK_VERSION} \
-        https://ghfast.top/github.com/SiliconLabs/simplicity_sdk.git gecko_sdk
+        https://gh-proxy.org/github.com/SiliconLabs/simplicity_sdk.git gecko_sdk
 
 # zigbeed links against libcpc.so
 COPY --from=cpcd-builder /usr/local/ /usr/${DEBIAN_CROSS_PREFIX}/

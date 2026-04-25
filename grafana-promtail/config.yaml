@@ -7,9 +7,9 @@ description: |-
 arch:
   - aarch64
   - amd64
-image: "ghcr.nju.edu.cn/bluemaex/ha-addons-promtail-{arch}"
+image: "ghcr.1ms.run/bluemaex/ha-addons-promtail-{arch}"
 startup: system
-url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/promtail
+url: https://gh-proxy.org/github.com/bluemaex/home-assistant-addons/tree/master/promtail
 init: false
 journald: true
 ingress: true

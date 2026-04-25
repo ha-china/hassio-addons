@@ -27,7 +27,7 @@ RUN apt-get update \
     # Compile and install libwebsocket
     #
     # DLWS_WITHOUT_TESTAPPS is just a workaround, see
-    # https://ghfast.top/github.com/warmcat/libwebsockets/issues/2790 for more
+    # https://gh-proxy.org/github.com/warmcat/libwebsockets/issues/2790 for more
     && git clone --depth 1 -b "v${LIBWEBSOCKET_VERSION}" \
        https://libwebsockets.org/repo/libwebsockets \
     \
@@ -40,7 +40,7 @@ RUN apt-get update \
     && cd ../.. \
     # Compile and install mosquitto
     && git clone --depth 1 -b "v${MOSQUITTO_VERSION}" \
-       https://ghfast.top/github.com/eclipse/mosquitto \
+       https://gh-proxy.org/github.com/eclipse/mosquitto \
     \
     && cd mosquitto \
     # Disable editline used by mosquitto_ctrl
@@ -52,7 +52,7 @@ RUN apt-get update \
     && cd .. \
     # Compile and install mosquitto-go-auth
     && git clone --depth 1 -b "${MOSQUITTO_AUTH_VERSION}" \
-       https://ghfast.top/github.com/iegomez/mosquitto-go-auth \
+       https://gh-proxy.org/github.com/iegomez/mosquitto-go-auth \
     \
     && cd mosquitto-go-auth \
     && sed -i 's/-I\/usr\/local\/include/-I\/usr\/include/' Makefile \

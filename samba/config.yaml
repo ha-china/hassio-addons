@@ -3,7 +3,7 @@ version: 12.6.1
 slug: samba
 name: Samba share
 description: '[老王杂谈说]：通过 SMB/CIFS 暴露 Home Assistant 文件夹'
-url: https://ghfast.top/github.com/home-assistant/addons/tree/master/samba
+url: https://gh-proxy.org/github.com/home-assistant/addons/tree/master/samba
 arch:
   - aarch64
   - amd64

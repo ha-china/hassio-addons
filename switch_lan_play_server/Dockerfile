@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.0.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} AS builder
 
@@ -25,7 +25,7 @@ WORKDIR /switch-lan-play
 # renovate: datasource=github-tags depName=spacemeowx2/switch-lan-play
 ARG SWITCH_LAN_PLAY_VERSION="v0.2.3"
 ENV SWITCH_LAN_PLAY_VERSION=${SWITCH_LAN_PLAY_VERSION}
-RUN git clone --branch "${SWITCH_LAN_PLAY_VERSION}" --single-branch --depth 1 https://ghfast.top/github.com/spacemeowx2/switch-lan-play.git .
+RUN git clone --branch "${SWITCH_LAN_PLAY_VERSION}" --single-branch --depth 1 https://gh-proxy.org/github.com/spacemeowx2/switch-lan-play.git .
 
 WORKDIR /switch-lan-play/server
 RUN npm install \
@@ -65,9 +65,9 @@ LABEL \
     org.opencontainers.image.title="Switch LAN Play Server" \
     org.opencontainers.image.description="Nintendo Switch Lan Play -Server" \
     org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
-    org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
+    org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/switch_lan_play_server" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/switch_lan_play_server" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/switch_lan_play_server/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/switch_lan_play_server" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/switch_lan_play_server" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/switch_lan_play_server/README.md" \
     org.opencontainers.image.created="${BUILD_DATE}"

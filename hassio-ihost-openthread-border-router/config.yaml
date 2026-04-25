@@ -4,7 +4,7 @@ slug: ihost-openthread_border_router
 name: ihost-OpenThread-Border-Router
 description: OpenThread Border Router add-on
 url: >-
-  https://ghfast.top/github.com/home-assistant/addons/tree/master/openthread_border_router
+  https://gh-proxy.org/github.com/home-assistant/addons/tree/master/openthread_border_router
 arch:
   - armv7
 homeassistant: 2023.9.0
@@ -21,7 +21,7 @@ privileged:
   - NET_ADMIN
 devices:
   - /dev/net/tun
-image: ghcr.nju.edu.cn/ihost-open-source-project/openthread-border-router
+image: ghcr.1ms.run/ihost-open-source-project/openthread-border-router
 init: false
 options:
   device: null

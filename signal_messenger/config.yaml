@@ -1,5 +1,5 @@
 name: Signal Messenger
-url: https://ghfast.top/github.com/haberda/signal-addon
+url: https://gh-proxy.org/github.com/haberda/signal-addon
 version: 0.98.0
 slug: signal_messenger
 arch:
@@ -24,4 +24,4 @@ schema:
   SIGNAL_CLI_CMD_TIMEOUT: int
 environment:
   SIGNAL_CLI_CONFIG_DIR: /config
-image: ghcr.nju.edu.cn/haberda/signal_messenger/{arch}
+image: ghcr.1ms.run/haberda/signal_messenger/{arch}

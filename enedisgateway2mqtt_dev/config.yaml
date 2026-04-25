@@ -64,7 +64,7 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
-image: ghcr.nju.edu.cn/alexbelgium/myelectricaldata_dev-{arch}
+image: ghcr.1ms.run/alexbelgium/myelectricaldata_dev-{arch}
 ingress: true
 map:
   - config:rw
@@ -93,5 +93,5 @@ services:
   - mqtt:want
 slug: enedisgateway2mqtt_dev
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "0.13.4"

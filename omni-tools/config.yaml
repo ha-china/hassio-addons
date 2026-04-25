@@ -2,7 +2,7 @@ arch:
   - aarch64
   - amd64
 description: '[老王杂谈说]：一个强大的基于网络的工具集合，用于日常任务。没有广告，没有跟踪，只是从你的浏览器中快速、可访问的实用工具。'
-image: ghcr.nju.edu.cn/alexbelgium/omni-tools-{arch}
+image: ghcr.1ms.run/alexbelgium/omni-tools-{arch}
 map:
   - addon_config:rw
 name: Omni Tools
@@ -17,6 +17,6 @@ schema:
     - name: match(^[A-Za-z0-9_]+$)
       value: str?
 slug: omni-tools
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: 0.6.1
 webui: "[PROTO:ssl]://[HOST]:[PORT:80]"

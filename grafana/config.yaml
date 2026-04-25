@@ -2,7 +2,7 @@ name: Grafana
 version: 12.1.0
 slug: grafana
 description: '[老王杂谈说]：一个用于美观分析和监控的开平台'
-url: https://ghfast.top/github.com/hassio-addons/addon-grafana
+url: https://gh-proxy.org/github.com/hassio-addons/addon-grafana
 startup: services
 ingress: true
 ingress_port: 1337
@@ -43,4 +43,4 @@ schema:
   env_vars:
     - name: match(^GF_([A-Z0-9_])+$)
       value: str
-image: ghcr.nju.edu.cn/hassio-addons/grafana/{arch}
+image: ghcr.1ms.run/hassio-addons/grafana/{arch}

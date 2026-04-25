@@ -3,7 +3,7 @@ version: "3.0"
 slug: rpc_shutdown
 name: RPC Shutdown
 description: '[老王杂谈说]：远程关闭 Windows 机器'
-url: https://ghfast.top/github.com/home-assistant/addons/tree/master/rpc_shutdown
+url: https://gh-proxy.org/github.com/home-assistant/addons/tree/master/rpc_shutdown
 arch:
   - aarch64
   - amd64

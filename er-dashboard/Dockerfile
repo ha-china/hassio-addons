@@ -1,12 +1,12 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.0.2
 
 # Stage 1: Get Frontend Assets
-# renovate: datasource=docker depName=ghcr.nju.edu.cn/eidolf/er-startseite/frontend
-FROM ghcr.nju.edu.cn/eidolf/er-startseite/frontend:v2026.2.1 AS frontend
+# renovate: datasource=docker depName=ghcr.1ms.run/eidolf/er-startseite/frontend
+FROM ghcr.1ms.run/eidolf/er-startseite/frontend:v2026.2.1 AS frontend
 
 # Stage 2: Get Backend Assets
-# renovate: datasource=docker depName=ghcr.nju.edu.cn/eidolf/er-startseite/backend
-FROM ghcr.nju.edu.cn/eidolf/er-startseite/backend:v2026.2.1 AS backend
+# renovate: datasource=docker depName=ghcr.1ms.run/eidolf/er-startseite/backend
+FROM ghcr.1ms.run/eidolf/er-startseite/backend:v2026.2.1 AS backend
 
 # Stage 3: Build Add-on
 # hadolint ignore=DL3006
@@ -109,9 +109,9 @@ LABEL \
     org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
     org.opencontainers.image.authors="FaserF <fabi.seitz@hotmail.de>" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/${BUILD_REPOSITORY}" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created="${BUILD_DATE}" \
     org.opencontainers.image.revision="${BUILD_REF}" \
     org.opencontainers.image.version="${BUILD_VERSION}"

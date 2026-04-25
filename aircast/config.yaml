@@ -2,7 +2,7 @@ name: AirCast
 version: 5.1.1
 slug: aircast
 description: '[老王杂谈说]：您的 Chromecast 设备的 AirPlay 功能'
-url: https://ghfast.top/github.com/hassio-addons/app-aircast
+url: https://gh-proxy.org/github.com/hassio-addons/app-aircast
 startup: services
 init: false
 arch:
@@ -23,4 +23,4 @@ schema:
   latency_rtp: int
   latency_http: int
   drift: bool
-image: ghcr.nju.edu.cn/hassio-addons/aircast
+image: ghcr.1ms.run/hassio-addons/aircast

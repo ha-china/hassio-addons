@@ -24,7 +24,7 @@ RUN \
     && ln -s /usr/include/libftdi1/ftdi.h /usr/include/ftdi.h \
     && mkdir -p /usr/src \
     && cd /usr/src \
-    && git clone https://ghfast.top/github.com/telldus/telldus \
+    && git clone https://gh-proxy.org/github.com/telldus/telldus \
     && cd telldus/telldus-core \
     && git reset --hard ${TELLDUS_COMMIT} \
     && sed -i \

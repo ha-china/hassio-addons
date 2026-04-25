@@ -1,10 +1,10 @@
 {
     "build_from": {
-      "aarch64": "ghcr.nju.edu.cn/home-assistant/aarch64-base:3.21",
-      "amd64": "ghcr.nju.edu.cn/home-assistant/amd64-base:3.21",
-      "armhf": "ghcr.nju.edu.cn/home-assistant/armhf-base:3.21",
-      "armv7": "ghcr.nju.edu.cn/home-assistant/armv7-base:3.31",
-      "i386": "ghcr.nju.edu.cn/home-assistant/i386-base:3.31"
+      "aarch64": "ghcr.1ms.run/home-assistant/aarch64-base:3.21",
+      "amd64": "ghcr.1ms.run/home-assistant/amd64-base:3.21",
+      "armhf": "ghcr.1ms.run/home-assistant/armhf-base:3.21",
+      "armv7": "ghcr.1ms.run/home-assistant/armv7-base:3.31",
+      "i386": "ghcr.1ms.run/home-assistant/i386-base:3.31"
     },
     "args": {
         "FRP_VERSION": "0.61.1"

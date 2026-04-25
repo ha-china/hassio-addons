@@ -67,7 +67,7 @@ devices:
 environment:
   PGID: "0"
   PUID: "0"
-image: ghcr.nju.edu.cn/alexbelgium/jackett_nas-{arch}
+image: ghcr.1ms.run/alexbelgium/jackett_nas-{arch}
 init: false
 map:
   - config:rw
@@ -102,6 +102,6 @@ schema:
   networkdisks: str?
 slug: jackett_nas
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/jackett
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/jackett
 version: "0.24.1736"
 webui: http://[HOST]:[PORT:9117]

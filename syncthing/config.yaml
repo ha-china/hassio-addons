@@ -2,7 +2,7 @@ name: Syncthing
 version: 1.19.15
 slug: syncthing
 description: '[老王杂谈说]：null'
-url: https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/syncthing
+url: https://gh-proxy.org/github.com/Poeschl-HomeAssistant-Addons/syncthing
 arch:
   - armhf
   - armv7
@@ -10,7 +10,7 @@ arch:
   - amd64
   - i386
 homeassistant: 0.115.0
-image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/syncthing-{arch}
+image: ghcr.1ms.run/poeschl-homeassistant-addons/syncthing-{arch}
 init: false
 schema:
   state_dir: str?

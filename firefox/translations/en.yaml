@@ -37,10 +37,10 @@ configuration:
     description: When set to 1, dark mode is enabled for the application.
   SECURE_CONNECTION:
     name: Secure Connection
-    description: When set to 1, an encrypted connection is used to access the application's GUI (either via a web browser or VNC client). This may not be compatible with HA Ingress (even in HTTPS). Note that few VNC clients support this method. SSVNC is one of them. See the Security section of https://ghfast.top/github.com/jlesage/docker-firefox for more details.
+    description: When set to 1, an encrypted connection is used to access the application's GUI (either via a web browser or VNC client). This may not be compatible with HA Ingress (even in HTTPS). Note that few VNC clients support this method. SSVNC is one of them. See the Security section of https://gh-proxy.org/github.com/jlesage/docker-firefox for more details.
   SECURE_CONNECTION_VNC_METHOD:
     name: Secure Connection VNC Method
-    description: Method used to perform the secure VNC connection. Possible values are SSL or TLS. See the Security section of https://ghfast.top/github.com/jlesage/docker-firefox for more details.
+    description: Method used to perform the secure VNC connection. Possible values are SSL or TLS. See the Security section of https://gh-proxy.org/github.com/jlesage/docker-firefox for more details.
   SECURE_CONNECTION_CERTS_CHECK_INTERVAL:
     name: Secure Connection Certificate Check Interval
     description: Interval, in seconds, at which the system verifies if web or VNC certificates have changed. When a change is detected, the affected services are automatically restarted. A value of 0 disables the check.

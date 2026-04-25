@@ -12,7 +12,7 @@ RUN apt-get update -y && \
 	rm /tmp/chrome.deb && \
 	google-chrome --version && \
 	mkdir /app && cd /app && \
-	wget "https://ghfast.top/github.com/klept0/MS-Rewards-Farmer/archive/refs/tags/${BUILD_VERSION}.tar.gz" && \
+	wget "https://gh-proxy.org/github.com/klept0/MS-Rewards-Farmer/archive/refs/tags/${BUILD_VERSION}.tar.gz" && \
 	tar --strip-components=1 -zxf "${BUILD_VERSION}.tar.gz" && \
 	rm -f "${BUILD_VERSION}.tar.gz" && \
 	sed -i 's/Path(__file__).parent.parent/Path.cwd()/g' src/utils.py && \
@@ -53,15 +53,15 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="jdeath (https://ghfast.top/github.com/jdeath)" \
+    maintainer="jdeath (https://gh-proxy.org/github.com/jdeath)" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="Home Assistant Add-ons" \
-    org.opencontainers.image.authors="jdeath (https://ghfast.top/github.com/jdeath)" \
+    org.opencontainers.image.authors="jdeath (https://gh-proxy.org/github.com/jdeath)" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/jdeath" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/${BUILD_REPOSITORY}" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/jdeath" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}

@@ -73,7 +73,7 @@ environment:
   calibre-web_CONFIG_DIRECTORY: /config
   shm_size: 1gb
 hassio_api: true
-image: ghcr.nju.edu.cn/alexbelgium/calibre_web-{arch}
+image: ghcr.1ms.run/alexbelgium/calibre_web-{arch}
 ingress: true
 init: false
 map:
@@ -115,6 +115,6 @@ schema:
   networkdisks: str?
 slug: calibre-web
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/calibre_web
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/calibre_web
 version: "0.6.26-2"
 video: true

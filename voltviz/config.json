@@ -7,8 +7,8 @@
     "aarch64",
     "amd64"
   ],
-  "image": "ghcr.nju.edu.cn/sanderdw/hassio-addons/ha-voltviz-{arch}",
-  "url": "https://ghfast.top/github.com/sanderdw/voltviz",
+  "image": "ghcr.1ms.run/sanderdw/hassio-addons/ha-voltviz-{arch}",
+  "url": "https://gh-proxy.org/github.com/sanderdw/voltviz",
   "startup": "application",
   "boot": "auto",
   "ingress": true,

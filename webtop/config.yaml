@@ -74,7 +74,7 @@ environment:
   TITLE: Ubuntu XFCE webtop
   shm_size: 1gb
 host_dbus: true
-image: ghcr.nju.edu.cn/alexbelgium/webtop-{arch}
+image: ghcr.1ms.run/alexbelgium/webtop-{arch}
 ingress: true
 init: false
 map:
@@ -137,6 +137,6 @@ schema:
 slug: webtop-kde
 tmpfs: true
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: 4.16-r0-ls95-5
 video: true

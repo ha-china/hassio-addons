@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:19.0.0
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:19.0.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} AS builder
 
@@ -20,12 +20,12 @@ ENV ADDON_UNSUPPORTED="false"
 
 RUN apk --no-cache add wget go tar
 # Version and checksum must be updated together
-# Find checksums at: https://ghfast.top/github.com/42wim/matterbridge/releases
+# Find checksums at: https://gh-proxy.org/github.com/42wim/matterbridge/releases
 ARG MATTERBRIDGE_VERSION="v1.26.0"
 ARG MATTERBRIDGE_SHA256="00e1bbfe3b32f2feccf9a7f13a6f12b1ce28a5eb04cc7b922b344e3493497425"
 
 WORKDIR /matterbridge
-RUN wget -qO /tmp/matterbridge.tar.gz https://ghfast.top/github.com/42wim/matterbridge/archive/refs/tags/${MATTERBRIDGE_VERSION}.tar.gz \
+RUN wget -qO /tmp/matterbridge.tar.gz https://gh-proxy.org/github.com/42wim/matterbridge/archive/refs/tags/${MATTERBRIDGE_VERSION}.tar.gz \
   && echo "${MATTERBRIDGE_SHA256}  /tmp/matterbridge.tar.gz" | sha256sum -c - \
   && tar xzf /tmp/matterbridge.tar.gz --strip-components=1 \
   && rm /tmp/matterbridge.tar.gz \
@@ -57,9 +57,9 @@ CMD [ "/run.sh" ]
 LABEL org.opencontainers.image.title="Matterbridge"
 LABEL org.opencontainers.image.description="A simple chat bridge between different messenger apps"
 LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons"
-LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
+LABEL org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/matterbridge"
-LABEL org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/matterbridge"
-LABEL org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/matterbridge/README.md"
+LABEL org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/matterbridge"
+LABEL org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/matterbridge"
+LABEL org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/matterbridge/README.md"
 LABEL org.opencontainers.image.created="${BUILD_DATE}"

@@ -3,7 +3,7 @@ version: 2.2.0
 slug: tellstick
 name: TellStick
 description: TellStick和TellStick Duo服务
-url: https://ghfast.top/github.com/home-assistant/addons/tree/master/tellstick
+url: https://gh-proxy.org/github.com/home-assistant/addons/tree/master/tellstick
 arch:
   - armhf
   - armv7

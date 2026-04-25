@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "slug": "labelstudio",
   "description": "[老王杂谈说]：来自labelstud.io的Label Studio",
-  "url": "https://ghfast.top/github.com/dcmartin/hassio-addons/tree/master/labelstudio/README.md",
+  "url": "https://gh-proxy.org/github.com/dcmartin/hassio-addons/tree/master/labelstudio/README.md",
   "webui": "http://[HOST]:[PORT:7998]",
   "startup": "application",
   "boot": "auto",

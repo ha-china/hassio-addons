@@ -7,7 +7,7 @@ description: '[老王杂谈说]：一个用于管理Swarm集群中所有资源�
 docker_api: true
 full_access: true
 hassio_api: true
-image: ghcr.nju.edu.cn/alexbelgium/portainer_agent-{arch}
+image: ghcr.1ms.run/alexbelgium/portainer_agent-{arch}
 init: false
 map:
   - config:rw
@@ -40,5 +40,5 @@ schema:
   PORTAINER_AGENT_ARGS: str?
 slug: portainer_agent
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: 2025.12-6

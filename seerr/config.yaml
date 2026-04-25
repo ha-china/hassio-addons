@@ -65,7 +65,7 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment: {}
-image: ghcr.nju.edu.cn/alexbelgium/seerr-{arch}
+image: ghcr.1ms.run/alexbelgium/seerr-{arch}
 ingress: true
 ingress_stream: true
 init: false
@@ -93,5 +93,5 @@ schema:
   TZ: str?
 slug: seerr
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/seerr
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/seerr
 version: "3.2.0"

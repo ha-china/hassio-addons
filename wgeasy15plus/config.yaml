@@ -7,8 +7,8 @@ description: >-
 arch:
   - amd64
   - aarch64
-url: "https://ghfast.top/github.com/jdeath/homeassistant-addons"
-image: ghcr.nju.edu.cn/wg-easy/wg-easy
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+image: ghcr.1ms.run/wg-easy/wg-easy
 ports:
   51820/udp: "51820"
   51821/tcp: "51821"

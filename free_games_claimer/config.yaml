@@ -67,7 +67,7 @@ devices:
   - /dev/nvme2
 environment:
   TINI_SUBREAPER: "false"
-image: ghcr.nju.edu.cn/alexbelgium/free_games_claimer-{arch}
+image: ghcr.1ms.run/alexbelgium/free_games_claimer-{arch}
 init: false
 map:
   - addon_config:rw
@@ -87,6 +87,6 @@ schema:
   CONFIG_LOCATION: str
 slug: free_games_claimer
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "1.8"
 webui: "[PROTO:ssl]://[HOST]:[PORT:6080]"

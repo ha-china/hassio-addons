@@ -2,7 +2,7 @@ name: InfluxDB2
 version: 1.0.1
 slug: influxdb2
 description: '[老王杂谈说]：用于指标、事件和实时分析的可扩展数据存储'
-url: https://ghfast.top/github.com/erik73/hassio-addons
+url: https://gh-proxy.org/github.com/erik73/hassio-addons
 panel_icon: mdi:chart-areaspline
 startup: services
 homeassistant: 0.92.0b2
@@ -39,4 +39,4 @@ schema:
   envvars:
     - name: match(^INFLUXD_([A-Z0-9_])+$)
       value: str
-image: ghcr.nju.edu.cn/erik73/influxdb2/{arch}
+image: ghcr.1ms.run/erik73/influxdb2/{arch}

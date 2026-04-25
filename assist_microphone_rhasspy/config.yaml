@@ -3,7 +3,7 @@ version: 2.2.3
 slug: assist_microphone_rhasspy
 name: Assist Microphone Rhasspy
 description: 流式麦克风音频到Assist
-url: https://ghfast.top/github.com/rhasspy/hassio-addons
+url: https://gh-proxy.org/github.com/rhasspy/hassio-addons
 hassio_api: true
 arch:
   - amd64

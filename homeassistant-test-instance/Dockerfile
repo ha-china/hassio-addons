@@ -1,7 +1,7 @@
 ARG HA_VERSION=2026.4.3
-ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/home-assistant:${HA_VERSION}
+ARG BUILD_FROM=ghcr.1ms.run/home-assistant/home-assistant:${HA_VERSION}
 # hadolint ignore=DL3006
-FROM ghcr.nju.edu.cn/hassio-addons/base:20.0.3 AS addon-base
+FROM ghcr.1ms.run/hassio-addons/base:20.0.3 AS addon-base
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
@@ -69,9 +69,9 @@ LABEL \
     org.opencontainers.image.title="Home Assistant Test Instance" \
     org.opencontainers.image.description="A standalone Home Assistant Core instance for testing purposes." \
     org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
-    org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
+    org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/homeassistant-test-instance" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/homeassistant-test-instance" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/homeassistant-test-instance/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/homeassistant-test-instance" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/homeassistant-test-instance" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/homeassistant-test-instance/README.md" \
     org.opencontainers.image.created="${BUILD_DATE}"

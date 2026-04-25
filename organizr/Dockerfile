@@ -27,7 +27,7 @@ ENV S6_CMD_WAIT_FOR_SERVICES=1 \
     S6_SERVICES_GRACETIME=0
 
 # Global LSIO modifications
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_lsio.sh" "/ha_lsio.sh"
+ADD "https://gh-proxy.org/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_lsio.sh" "/ha_lsio.sh"
 ARG CONFIGLOCATION="/data/organizr"
 RUN chmod 744 /ha_lsio.sh && if grep -qr "lsio" /etc; then /ha_lsio.sh "$CONFIGLOCATION"; fi && rm /ha_lsio.sh
 
@@ -47,14 +47,14 @@ RUN if [ ! -f /bin/sh ] && [ -f /usr/bin/sh ]; then ln -s /usr/bin/sh /bin/sh; f
 ARG MODULES="00-banner.sh 01-custom_script.sh"
 
 # Automatic modules download
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_automodules.sh" "/ha_automodules.sh"
+ADD "https://gh-proxy.org/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_automodules.sh" "/ha_automodules.sh"
 RUN chmod 744 /ha_automodules.sh && /ha_automodules.sh "$MODULES" && rm /ha_automodules.sh
 
 # Manual apps
 ENV PACKAGES="curl jq"
 
 # Automatic apps & bashio
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_autoapps.sh" "/ha_autoapps.sh"
+ADD "https://gh-proxy.org/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_autoapps.sh" "/ha_autoapps.sh"
 RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.sh
 
 ################
@@ -63,14 +63,14 @@ RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.
 
 # Add entrypoint
 ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" "/ha_entrypoint.sh"
+ADD "https://gh-proxy.org/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint.sh" "/ha_entrypoint.sh"
 
 # Entrypoint modifications
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint_modif.sh" "/ha_entrypoint_modif.sh"
+ADD "https://gh-proxy.org/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/ha_entrypoint_modif.sh" "/ha_entrypoint_modif.sh"
 RUN chmod 777 /ha_entrypoint.sh /ha_entrypoint_modif.sh && /ha_entrypoint_modif.sh && rm /ha_entrypoint_modif.sh
 
 # Standalone bashio command
-ADD "https://ghfast.top/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/.bashio-standalone.sh"
+ADD "https://gh-proxy.org/raw.githubusercontent.com/alexbelgium/hassio-addons/master/.templates/bashio-standalone.sh" "/.bashio-standalone.sh"
 RUN chmod 777 /.bashio-standalone.sh
 
 RUN sed -i "s|/usr/bin/env|/usr/bin/with-contenv|g" /etc/cont-init.d/*
@@ -96,15 +96,15 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="alexbelgium (https://ghfast.top/github.com/alexbelgium)" \
+    maintainer="alexbelgium (https://gh-proxy.org/github.com/alexbelgium)" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="Home Assistant Add-ons" \
-    org.opencontainers.image.authors="alexbelgium (https://ghfast.top/github.com/alexbelgium)" \
+    org.opencontainers.image.authors="alexbelgium (https://gh-proxy.org/github.com/alexbelgium)" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/alexbelgium" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/${BUILD_REPOSITORY}" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/alexbelgium" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}

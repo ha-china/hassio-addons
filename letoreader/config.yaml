@@ -7,7 +7,7 @@ description: 莱托阅读器是一款多功能的快速阅读工具，旨在提�
 arch:
   - amd64
   - aarch64
-url: "https://ghfast.top/github.com/jdeath/homeassistant-addons"
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
 ports:
   8080/tcp: 8080  
 ports_description:

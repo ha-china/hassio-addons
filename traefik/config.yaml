@@ -8,9 +8,9 @@ arch:
   - aarch64
   - amd64
   - armv7
-image: "ghcr.nju.edu.cn/bluemaex/ha-addons-traefik-{arch}"
+image: "ghcr.1ms.run/bluemaex/ha-addons-traefik-{arch}"
 startup: system
-url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/traefik
+url: https://gh-proxy.org/github.com/bluemaex/home-assistant-addons/tree/master/traefik
 ports:
   80/tcp: 83
   443/tcp: 443

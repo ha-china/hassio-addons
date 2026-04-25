@@ -2,7 +2,7 @@ name: Example
 version: 13.0.3
 slug: example
 description: '[老王杂谈说]：由 Home Assistant 社区应用提供的示例应用'
-url: https://ghfast.top/github.com/hassio-addons/app-example
+url: https://gh-proxy.org/github.com/hassio-addons/app-example
 init: false
 arch:
   - aarch64
@@ -13,4 +13,4 @@ options:
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)
   seconds_between_quotes: int(1,120)
-image: ghcr.nju.edu.cn/hassio-addons/example
+image: ghcr.1ms.run/hassio-addons/example

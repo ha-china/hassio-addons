@@ -3,7 +3,7 @@ version: 1.6.1
 slug: vosk
 name: vosk
 description: 使用怀俄明协议的vosk
-url: https://ghfast.top/github.com/rhasspy/hassio-addons/tree/master/vosk
+url: https://gh-proxy.org/github.com/rhasspy/hassio-addons/tree/master/vosk
 arch:
   - amd64
   - aarch64

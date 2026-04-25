@@ -29,7 +29,7 @@
   "slug": "homebox",
   "startup": "services",
   "upstream": "0.25.0",
-  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:7745]",
   "ingress": false,
   "ingress_port": 7745

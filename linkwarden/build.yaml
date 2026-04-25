@@ -1,4 +1,4 @@
 ---
 build_from:
-  aarch64: ghcr.nju.edu.cn/linkwarden/linkwarden:latest
-  amd64: ghcr.nju.edu.cn/linkwarden/linkwarden:latest
+  aarch64: ghcr.1ms.run/linkwarden/linkwarden:latest
+  amd64: ghcr.1ms.run/linkwarden/linkwarden:latest

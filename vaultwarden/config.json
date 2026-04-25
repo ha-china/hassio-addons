@@ -11,7 +11,7 @@
   "map": [
     "addon_config:rw"
   ],
-  "image": "ghcr.nju.edu.cn/dani-garcia/vaultwarden",
+  "image": "ghcr.1ms.run/dani-garcia/vaultwarden",
   "version": "1.35.7",
   "name": "Vaultwarden",
   "options": {},
@@ -25,7 +25,7 @@
   "slug": "vaultwarden",
   "startup": "services",
   "upstream": "1.35.7",
-  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:80]",
   "ingress": true,
   "ingress_port": 80

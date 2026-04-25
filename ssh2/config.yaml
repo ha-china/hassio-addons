@@ -2,7 +2,7 @@ name: Advanced SSH & Web Terminal
 version: 23.0.8
 slug: ssh2
 description: '[老王杂谈说]：null'
-url: https://ghfast.top/github.com/hassio-addons/app-ssh
+url: https://gh-proxy.org/github.com/hassio-addons/app-ssh
 startup: services
 ingress: true
 ingress_port: 0
@@ -83,4 +83,4 @@ schema:
     - str
   init_commands:
     - str
-image: ghcr.nju.edu.cn/hassio-addons/ssh
+image: ghcr.1ms.run/hassio-addons/ssh

@@ -3,7 +3,7 @@
   "version": "0.1.24",
   "slug": "sdr2mqtt",
   "description": "SDR/RTL传感器通过MQTT与Home Assistant自动发现连接。",
-  "url": "https://ghfast.top/github.com/thejeffreystone/hassio_addons",
+  "url": "https://gh-proxy.org/github.com/thejeffreystone/hassio_addons",
   "startup": "services",
   "arch": [
     "aarch64",

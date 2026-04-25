@@ -2,7 +2,7 @@ name: Network UPS Tools
 version: 0.18.0
 slug: nut
 description: '[老王杂谈说]：null'
-url: https://ghfast.top/github.com/hassio-addons/app-nut
+url: https://gh-proxy.org/github.com/hassio-addons/app-nut
 startup: system
 arch:
   - aarch64
@@ -60,4 +60,4 @@ schema:
   upsmon_deadtime: int?
   i_like_to_be_pwned: bool?
   leave_front_door_open: bool?
-image: ghcr.nju.edu.cn/hassio-addons/nut
+image: ghcr.1ms.run/hassio-addons/nut

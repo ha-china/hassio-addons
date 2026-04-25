@@ -21,7 +21,7 @@
   "slug": "IT-Tools",
   "startup": "services",
   "upstream": "2024.10.22-7ca5933",
-  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:80]",
   "panel_admin": false,
   "ingress": false,

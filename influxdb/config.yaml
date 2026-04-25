@@ -2,7 +2,7 @@ name: InfluxDB
 version: 5.0.2
 slug: influxdb
 description: 可扩展的数据存储库，用于指标、事件和实时分析。
-url: https://ghfast.top/github.com/hassio-addons/addon-influxdb
+url: https://gh-proxy.org/github.com/hassio-addons/addon-influxdb
 codenotary: codenotary@frenck.dev
 ingress: true
 ingress_port: 1337
@@ -46,4 +46,4 @@ schema:
   - name: match(^INFLUXDB_([A-Z0-9_])+$)
     value: str
   leave_front_door_open: bool?
-image: ghcr.nju.edu.cn/hassio-addons/influxdb/{arch}
+image: ghcr.1ms.run/hassio-addons/influxdb/{arch}

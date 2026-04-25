@@ -70,7 +70,7 @@ environment:
   WEBUI_PORT: "8080"
   PUID: "0"
   PGID: "0"
-image: ghcr.nju.edu.cn/alexbelgium/qbittorrent-{arch}
+image: ghcr.1ms.run/alexbelgium/qbittorrent-{arch}
 ingress: true
 init: false
 map:
@@ -142,5 +142,5 @@ schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
 slug: qbittorrent
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "5.1.4-23"

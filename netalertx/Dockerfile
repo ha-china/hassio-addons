@@ -45,7 +45,7 @@ RUN set -eux; \
 # 1) Final image #
 ##################
 ARG BUILD_FROM
-FROM ghcr.nju.edu.cn/jokob-sk/netalertx:latest
+FROM ghcr.1ms.run/jokob-sk/netalertx:latest
 
 # S6 settings (keep yours)
 ENV S6_CMD_WAIT_FOR_SERVICES=1 \
@@ -63,13 +63,13 @@ COPY --from=ha_tools /out/ /
 
 RUN BASHIO_VERSION="0.14.3" && \
     mkdir -p /tmp/bashio && \
-    curl -f -L -s -S "https://ghfast.top/github.com/hassio-addons/bashio/archive/v${BASHIO_VERSION}.tar.gz" | tar -xzf - --strip 1 -C /tmp/bashio && \
+    curl -f -L -s -S "https://gh-proxy.org/github.com/hassio-addons/bashio/archive/v${BASHIO_VERSION}.tar.gz" | tar -xzf - --strip 1 -C /tmp/bashio && \
     mv /tmp/bashio/lib /usr/lib/bashio && \
     ln -s /usr/lib/bashio/bashio /usr/bin/bashio && \
     rm -rf /tmp/bashio
 
 ARG TARGETARCH
-RUN curl -L -o /usr/local/bin/jq "https://ghfast.top/github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-$TARGETARCH" && \
+RUN curl -L -o /usr/local/bin/jq "https://gh-proxy.org/github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-$TARGETARCH" && \
     chmod +x /usr/local/bin/jq
 
 ###########
@@ -128,15 +128,15 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="alexbelgium (https://ghfast.top/github.com/alexbelgium)" \
+    maintainer="alexbelgium (https://gh-proxy.org/github.com/alexbelgium)" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="Home Assistant Add-ons" \
-    org.opencontainers.image.authors="alexbelgium (https://ghfast.top/github.com/alexbelgium)" \
+    org.opencontainers.image.authors="alexbelgium (https://gh-proxy.org/github.com/alexbelgium)" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/alexbelgium" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/${BUILD_REPOSITORY}" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/alexbelgium" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}

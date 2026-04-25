@@ -2,7 +2,7 @@ name: Hermes Agent
 version: "1.0.4"
 slug: hermes_agent
 description: "[老王杂谈说]：null"
-url: "https://ghfast.top/github.com/WolframRavenwolf/hermes-ha-addon"
+url: "https://gh-proxy.org/github.com/WolframRavenwolf/hermes-ha-addon"
 arch:
   - amd64
   - aarch64
@@ -24,7 +24,7 @@ ports_description:
   8080/tcp: "HTTP: /hermes/ (agent) · /dashboard/ (web UI) · /terminal/ (shell) · /v1/ (OpenAI API)"
   8443/tcp: "HTTPS: /hermes/ (agent) · /dashboard/ (web UI) · /terminal/ (shell) · /v1/ (OpenAI API) — TLS (self-signed cert)"
 options:
-  git_url: "https://ghfast.top/github.com/NousResearch/hermes-agent.git"
+  git_url: "https://gh-proxy.org/github.com/NousResearch/hermes-agent.git"
   git_ref: ""
   git_token: ""
   auto_update: false

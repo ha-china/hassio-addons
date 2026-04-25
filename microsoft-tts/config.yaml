@@ -24,4 +24,4 @@ schema:
   debug_logging: bool
   update_voices: bool
 tmpfs: true
-image: ghcr.nju.edu.cn/hugobloem/{arch}-wyoming-microsoft-tts
+image: ghcr.1ms.run/hugobloem/{arch}-wyoming-microsoft-tts

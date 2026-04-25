@@ -30,7 +30,7 @@ ENV LANG=C.UTF-8 \
     PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium
 
 # ── uv (Astral) ─────────────────────────────────────────────────────
-COPY --from=ghcr.nju.edu.cn/astral-sh/uv:latest /uv /usr/local/bin/uv
+COPY --from=ghcr.1ms.run/astral-sh/uv:latest /uv /usr/local/bin/uv
 ENV UV_LINK_MODE=copy
 
 # ── Node.js 22 ──────────────────────────────────────────────────────
@@ -58,7 +58,7 @@ ARG TTYD_VERSION=1.7.7
 RUN apt-get update && apt-get install -y --no-install-recommends \
         cmake libjson-c-dev libwebsockets-dev \
     && git clone --branch "$TTYD_VERSION" --depth 1 \
-        https://ghfast.top/github.com/tsl0922/ttyd.git /tmp/ttyd \
+        https://gh-proxy.org/github.com/tsl0922/ttyd.git /tmp/ttyd \
     && cd /tmp/ttyd && mkdir build && cd build \
     && cmake .. -DCMAKE_BUILD_TYPE=Release \
     && make -j"$(nproc)" && make install \

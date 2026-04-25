@@ -68,7 +68,7 @@
     "/dev/nvme1",
     "/dev/nvme2"
   ],
-  "image": "ghcr.nju.edu.cn/alexbelgium/papermerge-{arch}",
+  "image": "ghcr.1ms.run/alexbelgium/papermerge-{arch}",
   "init": false,
   "map": [
     "share:rw",
@@ -114,7 +114,7 @@
   },
   "slug": "papermerge",
   "udev": true,
-  "url": "https://ghfast.top/github.com/alexbelgium/hassio-addons",
+  "url": "https://gh-proxy.org/github.com/alexbelgium/hassio-addons",
   "version": "v2.0.1-ls60-bugfix",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8000]"
 }

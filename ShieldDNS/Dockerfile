@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.1.0
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.1.0
 ARG TARGETARCH
 # hadolint ignore=DL3006
 
@@ -23,7 +23,7 @@ RUN apk add --no-cache curl \
         *) \
             echo "Unsupported architecture: ${TARGETARCH}"; exit 1 ;; \
     esac \
-    && curl -L "https://ghfast.top/github.com/coredns/coredns/releases/download/v${COREDNS_VERSION}/coredns_${COREDNS_VERSION}_linux_${ARCH}.tgz" -o coredns.tgz \
+    && curl -L "https://gh-proxy.org/github.com/coredns/coredns/releases/download/v${COREDNS_VERSION}/coredns_${COREDNS_VERSION}_linux_${ARCH}.tgz" -o coredns.tgz \
     && tar -xzf coredns.tgz \
     && rm coredns.tgz
 
@@ -34,7 +34,7 @@ ARG TARGETARCH
 ARG SHIELDDNS_VERSION="1.7.1"
 WORKDIR /app
 RUN apk add --no-cache curl \
-    && curl -L "https://ghfast.top/github.com/FaserF/ShieldDNS/archive/refs/tags/v${SHIELDDNS_VERSION}.tar.gz" -o source.tar.gz \
+    && curl -L "https://gh-proxy.org/github.com/FaserF/ShieldDNS/archive/refs/tags/v${SHIELDDNS_VERSION}.tar.gz" -o source.tar.gz \
     && tar -xzf source.tar.gz --strip-components=1
 
 WORKDIR /app/admin
@@ -83,9 +83,9 @@ HEALTHCHECK --interval=5s --timeout=3s --retries=3 --start-period=10s \
 LABEL org.opencontainers.image.title="ShieldDNS"
 LABEL org.opencontainers.image.description="High-performance DoT proxy for AdGuard Home"
 LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
-LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
+LABEL org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/ShieldDNS"
-LABEL org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/ShieldDNS"
-LABEL org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/ShieldDNS/README.md"
+LABEL org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/ShieldDNS"
+LABEL org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/ShieldDNS"
+LABEL org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/ShieldDNS/README.md"
 LABEL org.opencontainers.image.created="${BUILD_DATE}"

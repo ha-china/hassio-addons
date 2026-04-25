@@ -3,7 +3,7 @@ version: 9.0.1
 slug: git_pull
 name: Git pull
 description: '[老王杂谈说]：简单的 git pull 来更新本地配置'
-url: https://ghfast.top/github.com/home-assistant/addons/tree/master/git_pull
+url: https://gh-proxy.org/github.com/home-assistant/addons/tree/master/git_pull
 arch:
   - aarch64
   - amd64

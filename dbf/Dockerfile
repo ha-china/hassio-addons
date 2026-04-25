@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.0.2
 FROM ${BUILD_FROM}
 
 # Build arguments
@@ -55,7 +55,7 @@ RUN \
         git \
         curl \
         git \
-    && git clone --depth 1 --branch "${DBF_VERSION}" https://ghfast.top/github.com/derf/db-fakedisplay.git /app \
+    && git clone --depth 1 --branch "${DBF_VERSION}" https://gh-proxy.org/github.com/derf/db-fakedisplay.git /app \
     && cd /app \
     && cpanm -n --no-man-pages --installdeps . \
     && rm -rf ~/.cpanm \
@@ -89,9 +89,9 @@ LABEL \
     org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
     org.opencontainers.image.authors="FaserF" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/dbf" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/dbf" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}

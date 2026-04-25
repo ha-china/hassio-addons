@@ -65,7 +65,7 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
-image: ghcr.nju.edu.cn/alexbelgium/resiliosync-{arch}
+image: ghcr.1ms.run/alexbelgium/resiliosync-{arch}
 ingress: true
 init: false
 map:
@@ -112,5 +112,5 @@ schema:
   networkdisks: str?
 slug: resiliosync
 udev: true
-url: https://ghfast.top/github.com/tyjtyj/hassio-addons
+url: https://gh-proxy.org/github.com/tyjtyj/hassio-addons
 version: "3.1.2.1076"

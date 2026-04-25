@@ -5,7 +5,7 @@ description: '[老王杂谈说]：null'
 environment:
   LC_ALL: en_US.UTF-8
   TIMEOUT: "60000"
-image: ghcr.nju.edu.cn/alexbelgium/changedetection.io-{arch}
+image: ghcr.1ms.run/alexbelgium/changedetection.io-{arch}
 ingress: true
 init: false
 map:
@@ -33,5 +33,5 @@ schema:
   TZ: str?
 slug: changedetection.io
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/changedetection.io
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/changedetection.io
 version: "0.54.10"

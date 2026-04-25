@@ -8,7 +8,7 @@ environment:
   OPENPROJECT_EDITION: bim
   OPENPROJECT_SECRET_KEY_BASE: addon_secret
   PGDATA: /data/pg
-image: ghcr.nju.edu.cn/alexbelgium/openproject-{arch}
+image: ghcr.1ms.run/alexbelgium/openproject-{arch}
 init: false
 map:
   - addon_config:rw
@@ -33,6 +33,6 @@ schema:
   OPENPROJECT_SECRET_KEY_BASE: str
 slug: openproject
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/openproject
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/openproject
 version: "17.3.1"
 webui: "[PROTO:ssl]://[HOST]:[PORT:8080]"

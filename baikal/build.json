@@ -1,7 +1,7 @@
 {
   "build_from": {
-    "aarch64": "ghcr.nju.edu.cn/mralucarddante/baikal-docker-hass:latest",
-    "amd64": "ghcr.nju.edu.cn/mralucarddante/baikal-docker-hass:latest",
-    "armv7": "ghcr.nju.edu.cn/mralucarddante/baikal-docker-hass:latest"
+    "aarch64": "ghcr.1ms.run/mralucarddante/baikal-docker-hass:latest",
+    "amd64": "ghcr.1ms.run/mralucarddante/baikal-docker-hass:latest",
+    "armv7": "ghcr.1ms.run/mralucarddante/baikal-docker-hass:latest"
   }
 }

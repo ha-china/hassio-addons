@@ -1,5 +1,5 @@
 {
   "build_from": {
-    "amd64": "ghcr.nju.edu.cn/imagegenius/immich:cuda"
+    "amd64": "ghcr.1ms.run/imagegenius/immich:cuda"
   }
 }

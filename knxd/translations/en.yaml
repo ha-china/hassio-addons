@@ -21,7 +21,7 @@ configuration:
       You can try leaving this blank in order for knxd to auto-detect your device.
   usb_filters:
     name: usb_filters
-    description: When using an USB interface, you can specify additional filters to use. See the filters[https://ghfast.top/github.com/knxd/knxd/blob/master/doc/inifile.rst#filters] section of the official knxd documentation.
+    description: When using an USB interface, you can specify additional filters to use. See the filters[https://gh-proxy.org/github.com/knxd/knxd/blob/master/doc/inifile.rst#filters] section of the official knxd documentation.
   custom_config:
     name: Complete custom config (deprecated)
     description: >

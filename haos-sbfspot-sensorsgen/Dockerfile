@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:18.1.1
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:18.1.1
 FROM $BUILD_FROM
 
 # Set shell
@@ -39,9 +39,9 @@ LABEL \
     org.opencontainers.image.vendor="Hasqt" \
     org.opencontainers.image.authors="Hasqt <https://community.home-assistant.io/u/hasqt>" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/habuild/hassio-addons/tree/main/haos-sbfspot-sensorsgen" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/${BUILD_REPOSITORY}" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/habuild/hassio-addons/tree/main/haos-sbfspot-sensorsgen" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}

@@ -2,7 +2,7 @@ name: MaryTTS
 version: 1.5.2
 slug: marytts
 description: 玛丽TTS语音引擎作为Hass.io插件。
-url: https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/MaryTTS
+url: https://gh-proxy.org/github.com/Poeschl-HomeAssistant-Addons/MaryTTS
 webui: http://[HOST]:[PORT:59125]
 arch:
 - armhf
@@ -10,7 +10,7 @@ arch:
 - aarch64
 - amd64
 - i386
-image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/marytts-{arch}
+image: ghcr.1ms.run/poeschl-homeassistant-addons/marytts-{arch}
 init: false
 ports:
   59125/tcp: 59125

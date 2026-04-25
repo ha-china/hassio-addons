@@ -2,7 +2,7 @@ name: ihost-Node-RED
 version: 20.2.3
 slug: ihost-nodered
 description: '[老王杂谈说]：基于流的物联网编程'
-url: https://ghfast.top/github.com/hassio-addons/addon-node-red
+url: https://gh-proxy.org/github.com/hassio-addons/addon-node-red
 codenotary: codenotary@frenck.dev
 ingress: true
 ingress_port: 0
@@ -66,4 +66,4 @@ schema:
   leave_front_door_open: bool?
   safe_mode: bool?
   max_old_space_size: int?
-image: ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-node-red-{arch}
+image: ghcr.1ms.run/ihost-open-source-project/hassio-ihost-node-red-{arch}

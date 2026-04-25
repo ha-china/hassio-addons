@@ -65,7 +65,7 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
-image: ghcr.nju.edu.cn/alexbelgium/baikal-{arch}
+image: ghcr.1ms.run/alexbelgium/baikal-{arch}
 map:
   - addon_config:rw
   - homeassistant_config:rw
@@ -84,6 +84,6 @@ schema:
       value: str?
 slug: baikal
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: 0.10.1-hafix4
 webui: "[PROTO:ssl]://[HOST]:[PORT:80]"

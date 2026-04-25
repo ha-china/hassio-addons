@@ -22,7 +22,7 @@
   "slug": "archivebox",
   "startup": "services",
   "upstream": "stable-2024-12-15",
-  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons/tree/main/archivebox",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons/tree/main/archivebox",
   "version": "stable-2024-12-15",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8000]",
   "panel_admin": false,

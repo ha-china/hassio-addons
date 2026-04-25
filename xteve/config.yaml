@@ -7,7 +7,7 @@ environment:
   XTEVE_CONF: /data/conf
   XTEVE_HOME: /data
 host_network: true
-image: ghcr.nju.edu.cn/alexbelgium/xteve-{arch}
+image: ghcr.1ms.run/alexbelgium/xteve-{arch}
 map:
   - config:rw
   - share:rw
@@ -25,6 +25,6 @@ schema:
       value: str?
 slug: xteve
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: 2.5.3-4
 webui: "[PROTO:ssl]://[HOST]:[PORT:34400]/web"

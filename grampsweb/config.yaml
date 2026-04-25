@@ -73,7 +73,7 @@ environment:
   GRAMPSWEB_THUMBNAIL_CACHE_CONFIG__CACHE_DIR: /config/thumbnail_cache
   GRAMPSWEB_REPORT_DIR: /config/cache/reports
   GRAMPSWEB_EXPORT_DIR: /config/cache/export
-image: ghcr.nju.edu.cn/alexbelgium/grampsweb-{arch}
+image: ghcr.1ms.run/alexbelgium/grampsweb-{arch}
 init: false
 options:
   env_vars: []
@@ -114,6 +114,6 @@ services:
   - mysql:want
 slug: grampsweb
 tmpfs: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/grampsweb
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/grampsweb
 version: "26.4.2"
 webui: "[PROTO:ssl]://[HOST]:[PORT:5001]"

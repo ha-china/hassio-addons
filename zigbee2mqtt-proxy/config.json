@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "slug": "zigbee2mqtt_proxy",
   "description": "为外部运行的Zigbee2MQTT提供代理",
-  "url": "https://ghfast.top/github.com/zigbee2mqtt/hassio-zigbee2mqtt/tree/master/zigbee2mqtt-proxy",
+  "url": "https://gh-proxy.org/github.com/zigbee2mqtt/hassio-zigbee2mqtt/tree/master/zigbee2mqtt-proxy",
   "arch": [
     "aarch64",
     "amd64",
@@ -34,5 +34,5 @@
     "server": "url",
     "auth_token": "str?"
   },
-  "image": "ghcr.nju.edu.cn/zigbee2mqtt/zigbee2mqtt-proxy-{arch}"
+  "image": "ghcr.1ms.run/zigbee2mqtt/zigbee2mqtt-proxy-{arch}"
 }

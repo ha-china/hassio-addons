@@ -46,7 +46,7 @@ RUN set -eux; \
 
 ARG BUILD_FROM
 ARG BUILD_VERSION
-FROM ghcr.nju.edu.cn/maintainerr/maintainerr:${BUILD_UPSTREAM}
+FROM ghcr.1ms.run/maintainerr/maintainerr:${BUILD_UPSTREAM}
 
 ##################
 # 2 Modify Image #
@@ -74,7 +74,7 @@ RUN chmod +x /entrypoint.sh \
 # Install bashio standalone
 RUN BASHIO_VERSION="0.14.3" && \
     mkdir -p /tmp/bashio && \
-    curl -f -L -s -S "https://ghfast.top/github.com/hassio-addons/bashio/archive/v${BASHIO_VERSION}.tar.gz" | tar -xzf - --strip 1 -C /tmp/bashio && \
+    curl -f -L -s -S "https://gh-proxy.org/github.com/hassio-addons/bashio/archive/v${BASHIO_VERSION}.tar.gz" | tar -xzf - --strip 1 -C /tmp/bashio && \
     mv /tmp/bashio/lib /usr/lib/bashio && \
     ln -s /usr/lib/bashio/bashio /usr/bin/bashio && \
     rm -rf /tmp/bashio
@@ -123,15 +123,15 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="alexbelgium (https://ghfast.top/github.com/alexbelgium)" \
+    maintainer="alexbelgium (https://gh-proxy.org/github.com/alexbelgium)" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="Home Assistant Add-ons" \
-    org.opencontainers.image.authors="alexbelgium (https://ghfast.top/github.com/alexbelgium)" \
+    org.opencontainers.image.authors="alexbelgium (https://gh-proxy.org/github.com/alexbelgium)" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/alexbelgium" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/${BUILD_REPOSITORY}" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/alexbelgium" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}

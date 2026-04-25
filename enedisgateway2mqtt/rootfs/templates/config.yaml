@@ -36,7 +36,7 @@ influxdb:
   # mais va augmenter la consommation mémoire & CPU et donc à activer uniquement sur un hardware robuste.
   method: synchronous # Mode disponible : synchronous / asynchronous / batching
   # batching_options permet uniquement de configurer la methode `batching`.
-  # Pour plus d'information : https://ghfast.top/github.com/influxdata/influxdb-client-python#batching
+  # Pour plus d'information : https://gh-proxy.org/github.com/influxdata/influxdb-client-python#batching
   batching_options:
     batch_size: 1000
     flush_interval: 1000

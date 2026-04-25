@@ -20,7 +20,7 @@ RUN \
         wheel \
     && pip3 install --no-cache-dir \
         "wyoming[zeroconf]==1.8.0" \
-        "wyoming-faster-whisper[sherpa] @ https://ghfast.top/github.com/rhasspy/wyoming-faster-whisper/archive/refs/tags/v${WYOMING_WHISPER_VERSION}.tar.gz" \
+        "wyoming-faster-whisper[sherpa] @ https://gh-proxy.org/github.com/rhasspy/wyoming-faster-whisper/archive/refs/tags/v${WYOMING_WHISPER_VERSION}.tar.gz" \
         'transformers==4.52.4' \
         'onnx-asr[cpu,hub]==0.7.0' \
     \

@@ -9,6 +9,6 @@ RUN apk add --no-cache gcc g++ make \
     pyyaml \
     pycrypto \
     && cd /usr/share \
-    && wget -c https://ghfast.top/github.com/liaan/broadlink_ac_mqtt/archive/refs/tags/1.2.1b.tar.gz -O - | tar -xz \
+    && wget -c https://gh-proxy.org/github.com/liaan/broadlink_ac_mqtt/archive/refs/tags/1.2.1b.tar.gz -O - | tar -xz \
     && chmod a+x /etc/services.d/broadlink-ac-mqtt/*
     

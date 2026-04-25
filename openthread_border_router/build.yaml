@@ -1,7 +1,7 @@
 ---
 build_from:
-  aarch64: ghcr.nju.edu.cn/home-assistant/aarch64-base-debian:trixie
-  amd64: ghcr.nju.edu.cn/home-assistant/amd64-base-debian:trixie
+  aarch64: ghcr.1ms.run/home-assistant/aarch64-base-debian:trixie
+  amd64: ghcr.1ms.run/home-assistant/amd64-base-debian:trixie
 args:
   OTBR_BETA_VERSION: 624a7d98e0dac5984c2982068f71fc81d2dbceb5
   OTBR_VERSION: b067e5ac5f8b3e92750df24922017eee2bc0fa04

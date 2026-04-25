@@ -1,9 +1,9 @@
 name: "Home Assistant Test Instance"
 version: "0.2.6"
 slug: "ha_test_instance"
-image: ghcr.nju.edu.cn/faserf/hassio-addons-homeassistant-test-instance-{arch}
+image: ghcr.1ms.run/faserf/hassio-addons-homeassistant-test-instance-{arch}
 description: "[老王杂谈说]：一个用于测试目的的独立 Home Assistant Core 实例"
-url: "https://ghfast.top/github.com/home-assistant/home-assistant"
+url: "https://gh-proxy.org/github.com/home-assistant/home-assistant"
 arch:
   - aarch64
   - amd64

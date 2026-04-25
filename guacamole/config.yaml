@@ -72,7 +72,7 @@ environment:
   PROXY_IP_HEADER: X-Forwarded-For
   PROXY_PROTOCOL_HEADER: X-Forwarded-Proto
   REMOTE_IP_VALVE_ENABLED: "true"
-image: ghcr.nju.edu.cn/alexbelgium/guacamole-{arch}
+image: ghcr.1ms.run/alexbelgium/guacamole-{arch}
 ingress: true
 init: false
 map:
@@ -101,6 +101,6 @@ schema:
   TZ: str?
 slug: guacamole
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "1.6.0-bullseye-3"
 video: true

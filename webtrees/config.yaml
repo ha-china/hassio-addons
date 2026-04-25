@@ -72,7 +72,7 @@ environment:
   PRETTY_URLS: "1"
   PUID: "1000"
   WEBTREES_HOME: /var2/www/webtrees
-image: ghcr.nju.edu.cn/alexbelgium/webtrees-{arch}
+image: ghcr.1ms.run/alexbelgium/webtrees-{arch}
 init: false
 map:
   - addon_config:rw
@@ -116,6 +116,6 @@ services:
   - mysql:want
 slug: webtrees
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "2.2.5"
 webui: "[PROTO:ssl]://[HOST]:[PORT:80]"

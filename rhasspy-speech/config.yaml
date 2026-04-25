@@ -3,7 +3,7 @@ version: 2.0.4
 slug: rhasspy-speech
 name: rhasspy-speech
 description: Rhasspy的语音转文本系统
-url: https://ghfast.top/github.com/rhasspy/hassio-addons/tree/master/rhasspy-speech
+url: https://gh-proxy.org/github.com/rhasspy/hassio-addons/tree/master/rhasspy-speech
 arch:
   - amd64
   - aarch64

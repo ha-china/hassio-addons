@@ -2,7 +2,7 @@ arch:
   - amd64
   - aarch64
 description: '[老王杂谈说]：null'
-image: ghcr.nju.edu.cn/alexbelgium/whatsapper-{arch}
+image: ghcr.1ms.run/alexbelgium/whatsapper-{arch}
 map:
   - addon_config:rw
   - share:rw
@@ -19,5 +19,5 @@ schema:
       value: str?
 slug: whatsapper
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/whatsapper
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/whatsapper
 version: 1.2.0

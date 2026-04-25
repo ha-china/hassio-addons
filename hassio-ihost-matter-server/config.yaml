@@ -4,7 +4,7 @@ slug: ihost-matter_server
 name: ihost-Matter Server
 description: '[老王杂谈说]：Home Assistant Matter支持的Matter WebSocket服务器。'
 url: >-
-  https://ghfast.top/github.com/home-assistant/addons/tree/master/matter_server
+  https://gh-proxy.org/github.com/home-assistant/addons/tree/master/matter_server
 arch:
   - armv7
 discovery:
@@ -15,7 +15,7 @@ homeassistant: 2024.6.0
 host_ipc: false
 host_network: true
 host_dbus: true
-image: ghcr.nju.edu.cn/ihost-open-source-project/armv7-addon-matter-server
+image: ghcr.1ms.run/ihost-open-source-project/armv7-addon-matter-server
 ingress: true
 ingress_port: 5580
 init: false

@@ -7,7 +7,7 @@ description: >-
 arch:
   - amd64
   - aarch64
-url: "https://ghfast.top/github.com/jdeath/homeassistant-addons"
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
 ports:
   3001/tcp: 3001
 ports_description:

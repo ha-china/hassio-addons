@@ -9,7 +9,7 @@ RUN apk add --no-cache --virtual build-dependencies git bluez-dev musl-dev make 
 RUN apk add --no-cache --update wget unzip py3-pip
 
 # Download and unzip the application
-RUN wget https://ghfast.top/github.com/zewelor/bt-mqtt-gateway/archive/refs/heads/master.zip
+RUN wget https://gh-proxy.org/github.com/zewelor/bt-mqtt-gateway/archive/refs/heads/master.zip
 RUN unzip -d /tmp/ master.zip && rm -r master.zip && cp -r /tmp/bt-mqtt-gateway-master/* /application
 
 # Ensure gateway.py is executable

@@ -67,7 +67,7 @@ devices:
 environment:
   PGID: "0"
   PUID: "0"
-image: ghcr.nju.edu.cn/alexbelgium/radarr_nas-{arch}
+image: ghcr.1ms.run/alexbelgium/radarr_nas-{arch}
 ingress: true
 ingress_entry: radarr
 init: false
@@ -107,5 +107,5 @@ schema:
   networkdisks: str?
 slug: radarr_nas
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/radarr
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/radarr
 version: "6.1.1.10360"

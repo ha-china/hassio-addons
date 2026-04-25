@@ -2,7 +2,7 @@ name: TasmoAdmin
 version: 0.33.0
 slug: sonweb
 description: '[老王杂谈说]：集中管理您所有的Sonoff-Tasmota设备'
-url: https://ghfast.top/github.com/hassio-addons/addon-tasmoadmin
+url: https://gh-proxy.org/github.com/hassio-addons/addon-tasmoadmin
 webui: '[PROTO:ssl]://[HOST]:[PORT:9541]'
 startup: system
 init: false
@@ -24,4 +24,4 @@ schema:
   ssl: bool
   certfile: str
   keyfile: str
-image: ghcr.nju.edu.cn/hassio-addons/tasmoadmin/{arch}
+image: ghcr.1ms.run/hassio-addons/tasmoadmin/{arch}

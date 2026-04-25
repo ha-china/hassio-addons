@@ -9,8 +9,8 @@ panel_icon: "mdi:cctv"
 panel_title: Frigate
 slug: frigate-hailo
 description: $translated_description
-url: "https://ghfast.top/github.com/blakeblackshear/frigate"
-image: ghcr.nju.edu.cn/blakeblackshear/frigate
+url: "https://gh-proxy.org/github.com/blakeblackshear/frigate"
+image: ghcr.1ms.run/blakeblackshear/frigate
 startup: application
 boot: auto
 init: false

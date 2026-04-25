@@ -30,7 +30,7 @@ RUN \
         tar -C ./tools -xzf - \
     && python3 -m venv .venv \
     && .venv/bin/pip3 install --no-cache-dir \
-        "speech-to-phrase @ https://ghfast.top/github.com/OHF-Voice/speech-to-phrase/archive/refs/tags/v${SPEECH_TO_PHRASE_VERSION}.tar.gz" \
+        "speech-to-phrase @ https://gh-proxy.org/github.com/OHF-Voice/speech-to-phrase/archive/refs/tags/v${SPEECH_TO_PHRASE_VERSION}.tar.gz" \
     && apt-get remove --yes build-essential \
     && apt-get autoclean \
     && apt-get purge \

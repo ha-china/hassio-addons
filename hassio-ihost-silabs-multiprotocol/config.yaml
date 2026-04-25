@@ -4,7 +4,7 @@ slug: hassio_ihost_silabs_multiprotocol
 name: Silicon Labs Multiprotocol
 description: Zigbee and OpenThread multiprotocol add-on
 url: >
-  https://ghfast.top/github.com/iHost-Open-Source-Project/hassio-ihost-addon/tree/master/hassio-ihost-silabs-multiprotocol
+  https://gh-proxy.org/github.com/iHost-Open-Source-Project/hassio-ihost-addon/tree/master/hassio-ihost-silabs-multiprotocol
 arch:
   - armv7
   - aarch64
@@ -21,7 +21,7 @@ host_uts: true
 privileged:
   - IPC_LOCK
   - NET_ADMIN
-image: ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-silabs-multiprotocol-{arch}
+image: ghcr.1ms.run/ihost-open-source-project/hassio-ihost-silabs-multiprotocol-{arch}
 init: false
 options:
   device: null

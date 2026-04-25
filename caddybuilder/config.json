@@ -21,7 +21,7 @@
   "slug": "caddybuilder",
   "startup": "services",
   "upstream": "v0.4.5",
-  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
   "panel_admin": false,
   "webui": "[PROTO:ssl]://[HOST]:[PORT:1432]",
   "ingress": false

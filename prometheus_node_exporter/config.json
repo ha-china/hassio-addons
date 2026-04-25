@@ -3,8 +3,8 @@
   "version": "3.0.0",
   "slug": "prometheus_node_exporter",
   "description": "[老王杂谈说]：null",
-  "url": "https://ghfast.top/github.com/loganmarchione/hassos-addons/tree/main/prometheus_node_exporter",
-  "image": "ghcr.nju.edu.cn/loganmarchione/hassos-addons/prometheusnodeexporter",
+  "url": "https://gh-proxy.org/github.com/loganmarchione/hassos-addons/tree/main/prometheus_node_exporter",
+  "image": "ghcr.1ms.run/loganmarchione/hassos-addons/prometheusnodeexporter",
   "arch": [
     "amd64",
     "aarch64"

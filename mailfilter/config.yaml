@@ -2,7 +2,7 @@ name: Mailfilter
 version: 5.1.0
 slug: mailfilter
 description: '[老王杂谈说]：用于 Home Assistant 的 Rspamd 邮件过滤器'
-url: https://ghfast.top/github.com/erik73/hassio-addons
+url: https://gh-proxy.org/github.com/erik73/hassio-addons
 arch:
   - aarch64
   - amd64
@@ -22,4 +22,4 @@ schema:
   enable_dkim_signing: bool
   enable_gtube_tests: bool?
   log_level: list(debug|silent|info|notice|warning|error)?
-image: ghcr.nju.edu.cn/erik73/mailfilter/{arch}
+image: ghcr.1ms.run/erik73/mailfilter/{arch}

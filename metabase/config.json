@@ -3,7 +3,7 @@
   "version": "1.2.0",
   "slug": "metabase",
   "description": "[老王杂谈说]：来了解这个对每个人来说都简单且开源的提问和学习数据的方式。",
-  "url": "https://ghfast.top/github.com/sanderdw/hassio-addons/blob/master/metabase/README.md",
+  "url": "https://gh-proxy.org/github.com/sanderdw/hassio-addons/blob/master/metabase/README.md",
   "startup": "application",
   "ports": {
     "3000/tcp": 7778
@@ -44,5 +44,5 @@
     "JAVA_TIMEZONE": "str",
     "JAVA_OPTS": "str"
   },
-  "image": "ghcr.nju.edu.cn/sanderdw/hassio-addons/ha-metabase-{arch}"
+  "image": "ghcr.1ms.run/sanderdw/hassio-addons/ha-metabase-{arch}"
 }

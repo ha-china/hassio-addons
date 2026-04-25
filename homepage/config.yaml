@@ -2,7 +2,7 @@ name: Homepage
 version: "1.12.3-0"
 slug: homepage
 description: "[老王杂谈说]：null"
-url: https://ghfast.top/github.com/bytenoodle/hassioaddon/tree/main/homepage
+url: https://gh-proxy.org/github.com/bytenoodle/hassioaddon/tree/main/homepage
 arch:
   - amd64
   - aarch64

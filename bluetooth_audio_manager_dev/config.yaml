@@ -2,8 +2,8 @@ name: "Bluetooth Audio Manager (Dev)"
 version: "sha-e732297"
 slug: bluetooth_audio_manager_dev
 description: "[老王杂谈说]：null"
-url: "https://ghfast.top/github.com/scyto/ha-bluetooth-audio-manager"
-image: "ghcr.nju.edu.cn/scyto/ha-bluetooth-audio-manager-dev"
+url: "https://gh-proxy.org/github.com/scyto/ha-bluetooth-audio-manager"
+image: "ghcr.1ms.run/scyto/ha-bluetooth-audio-manager-dev"
 arch:
   - aarch64
   - amd64

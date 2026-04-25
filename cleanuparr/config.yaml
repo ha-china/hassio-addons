@@ -64,7 +64,7 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
-image: ghcr.nju.edu.cn/alexbelgium/cleanuparr-{arch}
+image: ghcr.1ms.run/alexbelgium/cleanuparr-{arch}
 ingress: true
 ingress_stream: true
 init: false
@@ -89,6 +89,6 @@ schema:
   PUID: int
   TZ: str?
 slug: cleanuparr
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/cleanuparr
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/cleanuparr
 version: "2.9.8"
 webui: "[PROTO:ssl]://[HOST]:[PORT:11011]"

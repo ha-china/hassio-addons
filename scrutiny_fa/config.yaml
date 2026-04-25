@@ -7,7 +7,7 @@ environment:
   COLLECTOR_API_ENDPOINT: http://localhost:8080
   COLLECTOR_HOST_ID: home_assistant
 full_access: true
-image: ghcr.nju.edu.cn/alexbelgium/scrutiny-fa-{arch}
+image: ghcr.1ms.run/alexbelgium/scrutiny-fa-{arch}
 ingress: true
 init: false
 map:
@@ -44,5 +44,5 @@ schema:
   expose_collector: bool?
 slug: scrutiny_fa
 udev: true
-url: https://ghfast.top/github.com/Starosdev/scrutiny
+url: https://gh-proxy.org/github.com/Starosdev/scrutiny
 version: "v1.50.0"

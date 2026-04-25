@@ -1,1 +1,1 @@
-FROM ghcr.nju.edu.cn/openprinting/ps-printer-app:20240504-20-edge
+FROM ghcr.1ms.run/openprinting/ps-printer-app:20240504-20-edge

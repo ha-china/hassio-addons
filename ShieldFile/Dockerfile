@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.0.2
 # hadolint ignore=DL3006
 # renovate: datasource=docker depName=filebrowser/filebrowser
 FROM filebrowser/filebrowser:v2.63.2 AS filebrowser
@@ -47,9 +47,9 @@ HEALTHCHECK \
 LABEL org.opencontainers.image.title="ShieldFile"
 LABEL org.opencontainers.image.description="Secure, Web-based File Manager (SFTP over HTTPS)"
 LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
-LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
+LABEL org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/ShieldFile"
-LABEL org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/ShieldFile"
-LABEL org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/ShieldFile/README.md"
+LABEL org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/ShieldFile"
+LABEL org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/ShieldFile"
+LABEL org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/ShieldFile/README.md"
 LABEL org.opencontainers.image.created="${BUILD_DATE}"

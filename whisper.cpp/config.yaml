@@ -3,7 +3,7 @@ version: 1.1.0
 slug: whisper.cpp
 name: whisper.cpp
 description: 使用怀俄明协议的whisper.cpp。
-url: https://ghfast.top/github.com/rhasspy/hassio-addons/tree/master/whisper.cpp
+url: https://gh-proxy.org/github.com/rhasspy/hassio-addons/tree/master/whisper.cpp
 arch:
   - amd64
   - aarch64

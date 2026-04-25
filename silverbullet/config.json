@@ -33,7 +33,7 @@
   "slug": "silverbullet",
   "startup": "services",
   "upstream": "",
-  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:3000]",
   "ingress": false,
   "ingress_port": 3000

@@ -261,7 +261,7 @@
   "startup": "services",
   "timeout": 300,
   "tmpfs": true,
-  "url": "https://ghfast.top/github.com/dcmartin/addon-motion-video0/",
+  "url": "https://gh-proxy.org/github.com/dcmartin/addon-motion-video0/",
   "version": "0.11.2",
   "video": true,
   "webui": "http://[HOST]:[PORT:7999]/"

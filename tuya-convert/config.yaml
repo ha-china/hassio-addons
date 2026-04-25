@@ -2,7 +2,7 @@ name: tuya-convert BETA
 version: 0.1.8
 slug: tuya-convert
 description: '[老王杂谈说]：Tuya Convert - 使用开源软件刷写Tuya / Smart Life设备。处于测试阶段且不再维护！'
-url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/tuya-convert
+url: https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/tuya-convert
 arch:
   - aarch64
   - amd64

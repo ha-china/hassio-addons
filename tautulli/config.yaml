@@ -2,7 +2,7 @@ name: Tautulli
 version: 5.0.0
 slug: tautulli
 description: '[老王杂谈说]：用于Plex Media Server的监控和跟踪工具'
-url: https://ghfast.top/github.com/hassio-addons/addon-tautulli/tree/main/README.md
+url: https://gh-proxy.org/github.com/hassio-addons/addon-tautulli/tree/main/README.md
 webui: '[PROTO:ssl]://[HOST]:[PORT:8181]'
 arch:
   - aarch64
@@ -18,4 +18,4 @@ map:
   - backup:rw
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
-image: ghcr.nju.edu.cn/hassio-addons/tautulli/{arch}
+image: ghcr.1ms.run/hassio-addons/tautulli/{arch}

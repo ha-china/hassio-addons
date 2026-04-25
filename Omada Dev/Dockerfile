@@ -1,7 +1,7 @@
 ARG BUILD_ARCH=amd64
 # Define base images for different architectures
-FROM ghcr.nju.edu.cn/home-assistant/amd64-base-ubuntu:24.04 AS base-amd64
-FROM ghcr.nju.edu.cn/home-assistant/aarch64-base-ubuntu:24.04 AS base-arm64
+FROM ghcr.1ms.run/home-assistant/amd64-base-ubuntu:24.04 AS base-amd64
+FROM ghcr.1ms.run/home-assistant/aarch64-base-ubuntu:24.04 AS base-arm64
 
 # Select the correct base image based on TARGETARCH (injected by buildx)
 # TARGETARCH is 'amd64' or 'arm64'

@@ -2,7 +2,7 @@ name: "GlassHome Dashboard"
 version: "0.8.2"
 slug: glasshome
 description: "[老王杂谈说]：用于 Home Assistant 的现代、可定制仪表盘，支持拖放小部件。"
-url: "https://ghfast.top/github.com/glasshome/glasshome-addon"
+url: "https://gh-proxy.org/github.com/glasshome/glasshome-addon"
 arch:
   - amd64
   - aarch64
@@ -21,4 +21,4 @@ options:
   log_level: info
 schema:
   log_level: list(debug|info|warning|error)
-image: "ghcr.nju.edu.cn/glasshome/{arch}-glasshome"
+image: "ghcr.1ms.run/glasshome/{arch}-glasshome"

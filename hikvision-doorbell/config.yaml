@@ -1,9 +1,9 @@
 name: Hikvision Doorbell
 description: '[老王杂谈说]：将您的海康威视门铃连接到 Home Assistant（Beta 版本）'
 version: '3.1'
-image: ghcr.nju.edu.cn/pergolafabio/hikvision-doorbell
+image: ghcr.1ms.run/pergolafabio/hikvision-doorbell
 slug: hikvision_doorbell_beta
-url: https://ghfast.top/github.com/pergolafabio/Hikvision-Addons/tree/main/hikvision-doorbell
+url: https://gh-proxy.org/github.com/pergolafabio/Hikvision-Addons/tree/main/hikvision-doorbell
 arch:
   - amd64
   - i386

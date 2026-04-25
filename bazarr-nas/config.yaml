@@ -71,7 +71,7 @@ devices:
 environment:
   PGID: "0"
   PUID: "0"
-image: ghcr.nju.edu.cn/alexbelgium/bazarr-{arch}
+image: ghcr.1ms.run/alexbelgium/bazarr-{arch}
 ingress: true
 ingress_entry: bazarr
 init: false
@@ -111,6 +111,6 @@ schema:
   networkdisks: str?
 slug: bazarr_nas
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/bazarr
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/bazarr
 version: "1.5.6-4"
 webui: "[PROTO:ssl]://[HOST]:[PORT:6767]"

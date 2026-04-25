@@ -22,7 +22,7 @@ RUN \
     && pip3 install --no-cache-dir \
         --extra-index-url https://www.piwheels.org/simple \
         --extra-index-url https://download.pytorch.org/whl/cpu \
-        "wyoming-piper[zeroconf,zh] @ https://ghfast.top/github.com/rhasspy/wyoming-piper/archive/refs/tags/v${WYOMING_PIPER_VERSION}.tar.gz" \
+        "wyoming-piper[zeroconf,zh] @ https://gh-proxy.org/github.com/rhasspy/wyoming-piper/archive/refs/tags/v${WYOMING_PIPER_VERSION}.tar.gz" \
     \
     && rm -rf /var/lib/apt/lists/*
 

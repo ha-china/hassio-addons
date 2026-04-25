@@ -2,7 +2,7 @@ name: AppDaemon
 version: 0.18.4
 slug: appdaemon
 description: '[老王杂谈说]：null'
-url: https://ghfast.top/github.com/hassio-addons/app-appdaemon
+url: https://gh-proxy.org/github.com/hassio-addons/app-appdaemon
 webui: http://[HOST]:[PORT:5050]
 arch:
   - aarch64
@@ -32,4 +32,4 @@ schema:
     - str
   init_commands:
     - str
-image: ghcr.nju.edu.cn/hassio-addons/appdaemon
+image: ghcr.1ms.run/hassio-addons/appdaemon

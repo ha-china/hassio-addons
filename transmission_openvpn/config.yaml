@@ -69,7 +69,7 @@ environment:
   CREATE_TUN_DEVICE: "false"
   OPENVPN_OPTS: ""
   WEBPROXY_PORT: "8118"
-image: ghcr.nju.edu.cn/alexbelgium/transmission_openvpn-{arch}
+image: ghcr.1ms.run/alexbelgium/transmission_openvpn-{arch}
 ingress: true
 map:
   - config:rw
@@ -135,5 +135,5 @@ schema:
   networkdisks: str?
 slug: transmission_openvpn
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "v5.4.1"

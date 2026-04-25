@@ -66,7 +66,7 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
-image: ghcr.nju.edu.cn/alexbelgium/navidrome-{arch}
+image: ghcr.1ms.run/alexbelgium/navidrome-{arch}
 init: false
 map:
   - addon_config:rw
@@ -118,6 +118,6 @@ schema:
   welcome_message: str?
 slug: navidrome
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/navidrome
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/navidrome
 version: "0.61.2"
 webui: "[PROTO:ssl]://[HOST]:[PORT:4533]"

@@ -2,7 +2,7 @@
 build_arch=$1
 frp_version=$2
 
-frp_url="https://ghfast.top/github.com/fatedier/frp/releases/download/"
+frp_url="https://gh-proxy.org/github.com/fatedier/frp/releases/download/"
 app_path="/usr/src"
 
 function select_machine() {

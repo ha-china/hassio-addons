@@ -67,7 +67,7 @@ devices:
 environment:
   PGID: "0"
   PUID: "0"
-image: ghcr.nju.edu.cn/alexbelgium/prowlarr-{arch}
+image: ghcr.1ms.run/alexbelgium/prowlarr-{arch}
 ingress: true
 ingress_entry: prowlarr
 init: false
@@ -107,6 +107,6 @@ schema:
   smbv1: bool?
 slug: prowlarr
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "nightly-2.3.6.5351-ls231"
 webui: "[PROTO:ssl]://[HOST]:[PORT:9696]"

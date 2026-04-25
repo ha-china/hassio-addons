@@ -2,7 +2,7 @@ name: The Lounge
 version: 0.22.0
 slug: thelounge
 description: '[老王杂谈说]：一个自托管网页IRC客户端'
-url: https://ghfast.top/github.com/hassio-addons/addon-thelounge
+url: https://gh-proxy.org/github.com/hassio-addons/addon-thelounge
 arch:
   - aarch64
   - amd64
@@ -35,4 +35,4 @@ schema:
     - str
   users:
     - str
-image: ghcr.nju.edu.cn/hassio-addons/thelounge/{arch}
+image: ghcr.1ms.run/hassio-addons/thelounge/{arch}

@@ -1,5 +1,5 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base:9.3.0
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/debian-base:9.3.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -120,7 +120,7 @@ RUN curl -fsSL https://us-central1-apt.pkg.dev/doc/repo-signing-key.gpg | gpg --
     echo "deb [signed-by=/etc/apt/keyrings/antigravity-repo-key.gpg] https://us-central1-apt.pkg.dev/projects/antigravity-auto-updater-dev/ antigravity-debian main" > /etc/apt/sources.list.d/antigravity.list && \
     apt-get update && apt-get install -y --no-install-recommends antigravity && \
     ARCH_LG=$(dpkg --print-architecture | sed 's/amd64/x86_64/') && \
-    curl -Lo lazygit.tar.gz "https://ghfast.top/github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_${ARCH_LG}.tar.gz" && \
+    curl -Lo lazygit.tar.gz "https://gh-proxy.org/github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_${ARCH_LG}.tar.gz" && \
     tar xf lazygit.tar.gz lazygit && \
     install lazygit /usr/local/bin && \
     rm lazygit.tar.gz lazygit && \
@@ -153,10 +153,10 @@ HEALTHCHECK --interval=60s --timeout=10s --start-period=120s --retries=3 \
 LABEL org.opencontainers.image.title="Antigravity-Server"
 LABEL org.opencontainers.image.description="Stream the Antigravity AI IDE (Linux Desktop with XFCE4) via NoVNC in your browser."
 LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
-LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
+LABEL org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/antigravity-server"
-LABEL org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/antigravity-server"
-LABEL org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/antigravity-server/README.md"
+LABEL org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/antigravity-server"
+LABEL org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/antigravity-server"
+LABEL org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/antigravity-server/README.md"
 LABEL org.opencontainers.image.created="${BUILD_DATE}"
 LABEL org.opencontainers.image.version="${ANTIGRAVITY_VERSION}"

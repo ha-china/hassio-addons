@@ -2,7 +2,7 @@ name: OpenClaw Assistant
 version: "0.5.68"
 slug: openclaw_assistant
 description: '[老王杂谈说]：null'
-url: https://ghfast.top/github.com/techartdev/OpenClawHomeAssistant
+url: https://gh-proxy.org/github.com/techartdev/OpenClawHomeAssistant
 arch:
   - amd64
   - aarch64

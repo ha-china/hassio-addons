@@ -67,7 +67,7 @@ devices:
 environment:
   DATA_DIR: "/config"
   DEFAULT_PRODUCTION_DATA_DIR: "/config"
-image: ghcr.nju.edu.cn/alexbelgium/maintainerr-{arch}
+image: ghcr.1ms.run/alexbelgium/maintainerr-{arch}
 init: false
 panel_icon: mdi:movie-search
 map:
@@ -86,6 +86,6 @@ schema:
       value: str?
   TZ: str?
 slug: maintainerr
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/maintainerr
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/maintainerr
 version: "3.8.0"
 webui: "[PROTO:ssl]://[HOST]:[PORT:6246]"

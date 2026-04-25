@@ -57,7 +57,7 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
-image: ghcr.nju.edu.cn/alexbelgium/battybirdnet-pi-{arch}
+image: ghcr.1ms.run/alexbelgium/battybirdnet-pi-{arch}
 ingress: true
 ingress_stream: true
 init: false
@@ -114,7 +114,7 @@ services:
 slug: battybirdnet-pi
 tmpfs: true
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/battybirdnet-pi
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/battybirdnet-pi
 usb: true
 version: "2026.02.28"
 video: true

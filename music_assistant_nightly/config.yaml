@@ -26,7 +26,7 @@ backup_exclude:
   - collage_images/*
   - .cache/*
 stage: experimental
-image: ghcr.nju.edu.cn/music-assistant/server
+image: ghcr.1ms.run/music-assistant/server
 tmpfs: true
 options:
   log_level: info

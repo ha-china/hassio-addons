@@ -2,9 +2,9 @@ name: BLE Scale Sync
 version: "1.10.2"
 slug: ble-scale-sync
 description: '[老王杂谈说]：null'
-url: https://ghfast.top/github.com/KristianP26/ble-scale-sync
-documentation: https://ghfast.top/github.com/KristianP26/ble-scale-sync/blob/main/ble-scale-sync-addon/DOCS.md
-support: https://ghfast.top/github.com/KristianP26/ble-scale-sync/issues
+url: https://gh-proxy.org/github.com/KristianP26/ble-scale-sync
+documentation: https://gh-proxy.org/github.com/KristianP26/ble-scale-sync/blob/main/ble-scale-sync-addon/DOCS.md
+support: https://gh-proxy.org/github.com/KristianP26/ble-scale-sync/issues
 panel_icon: mdi:scale-bathroom
 arch:
   - amd64

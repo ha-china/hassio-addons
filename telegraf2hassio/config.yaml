@@ -9,7 +9,7 @@ arch:
 - aarch64
 - amd64
 - i386
-url: https://ghfast.top/github.com/joaofl/hassio-addons/tree/master/telegraf2hassio
+url: https://gh-proxy.org/github.com/joaofl/hassio-addons/tree/master/telegraf2hassio
 startup: application
 services:
 - mqtt:need

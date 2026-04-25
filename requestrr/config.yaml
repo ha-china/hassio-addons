@@ -69,7 +69,7 @@ devices:
 environment:
   PGID: '0'
   PUID: '0'
-image: ghcr.nju.edu.cn/alexbelgium/requestrr-{arch}
+image: ghcr.1ms.run/alexbelgium/requestrr-{arch}
 init: false
 map:
   - addon_config:rw
@@ -90,6 +90,6 @@ schema:
   TZ: str?
 slug: requestrr
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: 2.1.9
 webui: '[PROTO:ssl]://[HOST]:[PORT:4545]'

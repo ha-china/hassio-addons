@@ -2,7 +2,7 @@ name: Roundcube
 version: 2.0.4
 slug: roundcube
 description: '[老王杂谈说]：Roundcube 网页邮件客户端'
-url: https://ghfast.top/github.com/erik73/hassio-addons
+url: https://gh-proxy.org/github.com/erik73/hassio-addons
 arch:
   - aarch64
   - amd64
@@ -27,4 +27,4 @@ schema:
   certfile: str
   keyfile: str
   ssl: bool
-image: ghcr.nju.edu.cn/erik73/roundcube/{arch}
+image: ghcr.1ms.run/erik73/roundcube/{arch}

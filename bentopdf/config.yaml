@@ -1,9 +1,9 @@
 name: "BentoPDF"
 slug: bentopdf
-image: ghcr.nju.edu.cn/alexbelgium/bentopdf-{arch}
+image: ghcr.1ms.run/alexbelgium/bentopdf-{arch}
 description: "[老王杂谈说]：null"
 version: "2.8.4"
-url: "https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/bentopdf"
+url: "https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/bentopdf"
 arch:
   - amd64
   - aarch64

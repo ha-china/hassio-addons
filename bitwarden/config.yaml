@@ -2,7 +2,7 @@ name: Vaultwarden
 version: 0.26.7
 slug: bitwarden
 description: '[老王杂谈说]：null'
-url: https://ghfast.top/github.com/hassio-addons/app-vaultwarden
+url: https://gh-proxy.org/github.com/hassio-addons/app-vaultwarden
 webui: '[PROTO:ssl]://[HOST]:[PORT:7277]'
 init: false
 arch:
@@ -24,4 +24,4 @@ schema:
   certfile: str
   keyfile: str
   request_size_limit: int?
-image: ghcr.nju.edu.cn/hassio-addons/bitwarden
+image: ghcr.1ms.run/hassio-addons/bitwarden

@@ -3,7 +3,7 @@ version: 4.1.0
 slug: icantbelieveitsnotvaletudo
 description: 这是一个简单的伴侣服务，用于生成地图png文件。
   pngs.
-url: https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/ICantBelieveItsNotValetudo
+url: https://gh-proxy.org/github.com/Poeschl-HomeAssistant-Addons/ICantBelieveItsNotValetudo
 arch:
 - armv7
 - aarch64
@@ -69,4 +69,4 @@ options:
     mapDataTopic: valetudo/rockrobo/MapData/map-data
     minMillisecondsBetweenMapUpdates: 10000
     publishMapImage: true
-image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/icantbelieveitsnotvaletudo-{arch}
+image: ghcr.1ms.run/poeschl-homeassistant-addons/icantbelieveitsnotvaletudo-{arch}

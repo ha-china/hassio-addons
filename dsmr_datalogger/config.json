@@ -10,8 +10,8 @@
     "amd64",
     "i386"
   ],
-  "image": "ghcr.nju.edu.cn/sanderdw/hassio-addons/ha-dsmr-datalogger-{arch}",
-  "url": "https://ghfast.top/github.com/sanderdw/hassio-addons",
+  "image": "ghcr.1ms.run/sanderdw/hassio-addons/ha-dsmr-datalogger-{arch}",
+  "url": "https://gh-proxy.org/github.com/sanderdw/hassio-addons",
   "startup": "application",
   "boot": "auto",
   "init": false,

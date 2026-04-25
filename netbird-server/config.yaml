@@ -2,7 +2,7 @@ arch:
   - aarch64
   - amd64
 description: "[老王杂谈说]：\U0001F426 NetBird 自托管服务器栈（管理、信令、中继、仪表盘、Caddy）"
-image: ghcr.nju.edu.cn/alexbelgium/netbird-server-{arch}
+image: ghcr.1ms.run/alexbelgium/netbird-server-{arch}
 init: false
 map:
   - addon_config:rw
@@ -22,6 +22,6 @@ ports_description:
   3478/udp: NetBird Relay STUN
 schema:
   domain: str
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/netbird-server
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/netbird-server
 version: 0.64.5-7
 webui: "[PROTO:ssl]://[HOST]:[PORT:443]"

@@ -3,7 +3,7 @@ version: 1.6.3
 slug: vnc-viewer
 panel_icon: mdi:remote-desktop
 description: '[老王杂谈说]：集成在Home Assistant中的noVNC客户端'
-url: https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/vnc-viewer
+url: https://gh-proxy.org/github.com/Poeschl-HomeAssistant-Addons/vnc-viewer
 ingress: true
 ingress_port: 6080
 ingress_entry: vnc.html?autoconnect=true
@@ -22,4 +22,4 @@ schema:
   vnc_server_host: str
   vnc_server_port: int?
   vnc_server_password: str?
-image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/vnc-viewer-{arch}
+image: ghcr.1ms.run/poeschl-homeassistant-addons/vnc-viewer-{arch}

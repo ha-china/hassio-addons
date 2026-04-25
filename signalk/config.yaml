@@ -21,7 +21,7 @@ environment:
   PORT: "3000"
   SSLPORT: "3443"
   TCPSTREAMPORT: "8375"
-image: ghcr.nju.edu.cn/alexbelgium/signalk-{arch}
+image: ghcr.1ms.run/alexbelgium/signalk-{arch}
 map:
   - addon_config:rw
 name: Signalk Server
@@ -55,7 +55,7 @@ privileged:
 slug: signalk
 uart: true
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 usb: true
 version: "2.25.0"
 webui: http://[HOST]:[PORT:3000]

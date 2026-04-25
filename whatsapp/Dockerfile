@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.1.0
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.1.0
 # hadolint ignore=DL3006
 FROM $BUILD_FROM
 ARG BUILD_DATE="unknown"
@@ -80,11 +80,11 @@ LABEL \
     org.opencontainers.image.title="WhatsApp" \
     org.opencontainers.image.description="Home Assistant WhatsApp Backend (Baileys/Node.js)" \
     org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
-    org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
+    org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/whatsapp" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/whatsapp" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/whatsapp/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/whatsapp" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/whatsapp" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/whatsapp/README.md" \
     org.opencontainers.image.created="${BUILD_DATE}"
 
 # Healthcheck - reduced start-period since service starts quickly

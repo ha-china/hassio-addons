@@ -67,7 +67,7 @@ devices:
 environment:
   PGID: "0"
   PUID: "0"
-image: ghcr.nju.edu.cn/alexbelgium/sonarr_nas-{arch}
+image: ghcr.1ms.run/alexbelgium/sonarr_nas-{arch}
 ingress: true
 ingress_entry: sonarr
 init: false
@@ -107,5 +107,5 @@ schema:
   networkdisks: str?
 slug: sonarr_nas
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/sonarr
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/sonarr
 version: "4.0.17.2953"

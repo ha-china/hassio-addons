@@ -18,5 +18,5 @@
   "startup": "services",
   "upstream": "v1.3.1",
   "panel_admin": false,
-  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons"
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
 }

@@ -18,7 +18,7 @@ RUN \
         python3-pip \
         build-essential \
     && curl -L -s \
-        "https://ghfast.top/github.com/rhasspy/wyoming-whisper-cpp/archive/refs/tags/v${WYOMING_WHISPER_CPP_VERSION}.tar.gz" \
+        "https://gh-proxy.org/github.com/rhasspy/wyoming-whisper-cpp/archive/refs/tags/v${WYOMING_WHISPER_CPP_VERSION}.tar.gz" \
         | tar -zxvf - -C /tmp \
     && mv "/tmp/wyoming-whisper-cpp-${WYOMING_WHISPER_CPP_VERSION}" '/usr/share/wyoming-whisper-cpp' \
     && make -C "/usr/share/wyoming-whisper-cpp/whisper.cpp" main \

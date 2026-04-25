@@ -2,7 +2,7 @@ name: Advanced SSH & Web Terminal
 version: 21.0.4
 slug: ssh
 description: '[老王杂谈说]：为您的 Home Assistant 实例提供超级充电的 SSH 和 Web 终端访问'
-url: https://ghfast.top/github.com/hassio-addons/addon-ssh
+url: https://gh-proxy.org/github.com/hassio-addons/addon-ssh
 codenotary: codenotary@frenck.dev
 startup: services
 ingress: true
@@ -81,4 +81,4 @@ schema:
     - str
   init_commands:
     - str
-image: ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-ssh-{arch}
+image: ghcr.1ms.run/ihost-open-source-project/hassio-ihost-ssh-{arch}

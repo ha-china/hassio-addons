@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.0.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
@@ -33,7 +33,7 @@ RUN \
  apk add --no-cache --virtual \
     build-dependencies npm && \
   echo "**** install WebApp version ${NETBOOTXYZ_VERSION} ****" && \
-  curl -o /tmp/webapp.tar.gz -L https://ghfast.top/github.com/netbootxyz/webapp/archive/${NETBOOTXYZ_VERSION}.tar.gz && \
+  curl -o /tmp/webapp.tar.gz -L https://gh-proxy.org/github.com/netbootxyz/webapp/archive/${NETBOOTXYZ_VERSION}.tar.gz && \
   echo "${NETBOOTXYZ_SHA256} /tmp/webapp.tar.gz" | sha256sum -c - && \
   mkdir -p /app/ && tar xf /tmp/webapp.tar.gz -C \
     /app/ --strip-components=1 && \
@@ -62,9 +62,9 @@ LABEL \
   org.opencontainers.image.title="Netboot.xyz" \
   org.opencontainers.image.description="PXE-Server to deploy a OS inside your local network" \
   org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
-  org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
+  org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>" \
   org.opencontainers.image.licenses="MIT" \
-  org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/netboot-xyz" \
-  org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/netboot-xyz" \
-  org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/netboot-xyz/README.md" \
+  org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/netboot-xyz" \
+  org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/netboot-xyz" \
+  org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/netboot-xyz/README.md" \
   org.opencontainers.image.created="${BUILD_DATE}"

@@ -14,7 +14,7 @@
 # 1 Build Image #
 #################
 
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base/amd64:11.0.0
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base/amd64:11.0.0
 FROM ${BUILD_FROM}
 
 ##################
@@ -47,7 +47,7 @@ RUN \
     && if [[ "${BUILD_ARCH}" == *x86* ]]; then ARCH="amd64"; fi \
     \
     && curl -f -L -s \
-    "https://ghfast.top/github.com/portainer/portainer/releases/download/${BUILD_UPSTREAM}/portainer-${BUILD_UPSTREAM}-linux-${ARCH}.tar.gz" \
+    "https://gh-proxy.org/github.com/portainer/portainer/releases/download/${BUILD_UPSTREAM}/portainer-${BUILD_UPSTREAM}-linux-${ARCH}.tar.gz" \
     | tar zxvf - -C /opt/
 
 ##################
@@ -115,15 +115,15 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="alexbelgium (https://ghfast.top/github.com/alexbelgium)" \
+    maintainer="alexbelgium (https://gh-proxy.org/github.com/alexbelgium)" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="Home Assistant Add-ons" \
-    org.opencontainers.image.authors="alexbelgium (https://ghfast.top/github.com/alexbelgium)" \
+    org.opencontainers.image.authors="alexbelgium (https://gh-proxy.org/github.com/alexbelgium)" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/alexbelgium" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/${BUILD_REPOSITORY}" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/alexbelgium" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}

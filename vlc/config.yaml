@@ -3,7 +3,7 @@ version: 1.0.0
 slug: vlc
 name: VLC
 description: '[老王杂谈说]：使用 VLC 将您的设备变为媒体播放器'
-url: https://ghfast.top/github.com/home-assistant/addons/tree/master/vlc
+url: https://gh-proxy.org/github.com/home-assistant/addons/tree/master/vlc
 arch:
   - aarch64
   - amd64

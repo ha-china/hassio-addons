@@ -8,9 +8,9 @@ arch:
   - aarch64
   - amd64
   - armv7
-image: "ghcr.nju.edu.cn/bluemaex/ha-addons-unpoller-{arch}"
+image: "ghcr.1ms.run/bluemaex/ha-addons-unpoller-{arch}"
 startup: system
-url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/unpoller
+url: https://gh-proxy.org/github.com/bluemaex/home-assistant-addons/tree/master/unpoller
 init: false
 ports:
   9130/tcp: 9130

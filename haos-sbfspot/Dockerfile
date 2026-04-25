@@ -6,7 +6,7 @@ FROM $BUILD_FROM AS builder-base
 ARG TEMPIO_VERSION BUILD_ARCH
 RUN \
     curl -sSLf -o /usr/bin/tempio \
-    "https://ghfast.top/github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}"
+    "https://gh-proxy.org/github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}"
 
 # Copy root filesystem
 COPY rootfs /
@@ -29,7 +29,7 @@ RUN apk update && apk add --no-cache \
 # download and build SBFspot
 WORKDIR /tmp
 RUN \
-    git clone https://ghfast.top/github.com/sbfspot/SBFspot.git . \
+    git clone https://gh-proxy.org/github.com/sbfspot/SBFspot.git . \
     && sed -i s/mariadbclient/mariadb/ ./SBFspot/makefile \
     && make -C ./SBFspot mariadb \
     && sed -i s/mariadbclient/mariadb/ ./SBFspotUploadDaemon/makefile \
@@ -42,7 +42,7 @@ FROM $BUILD_FROM
 ARG TEMPIO_VERSION BUILD_ARCH
 RUN \
     curl -sSLf -o /usr/bin/tempio \
-    "https://ghfast.top/github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}"
+    "https://gh-proxy.org/github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}"
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -108,10 +108,10 @@ LABEL \
     org.label-schema.build-date=${BUILD_DATE} \
     org.label-schema.name="HAOS-SBFspot" \
     org.label-schema.schema-version="1.0" \
-    org.label-schema.url="https://ghfast.top/github.com/habuild/hassio-addons/tree/main/haos-sbfspot" \
-    org.label-schema.usage="https://ghfast.top/github.com/habuild/hassio-addons/tree/main/haos-sbfspot/README.md" \
+    org.label-schema.url="https://gh-proxy.org/github.com/habuild/hassio-addons/tree/main/haos-sbfspot" \
+    org.label-schema.usage="https://gh-proxy.org/github.com/habuild/hassio-addons/tree/main/haos-sbfspot/README.md" \
     org.label-schema.vcs-ref=${BUILD_REF} \
-    org.label-schema.vcs-url="https://ghfast.top/github.com/habuild/hassio-addons" \
+    org.label-schema.vcs-url="https://gh-proxy.org/github.com/habuild/hassio-addons" \
     org.label-schema.vendor="Hasqt"
 
 

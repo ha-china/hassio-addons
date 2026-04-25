@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/base-python:3.14-alpine3.23
+ARG BUILD_FROM=ghcr.1ms.run/home-assistant/base-python:3.14-alpine3.23
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
@@ -129,9 +129,9 @@ CMD [ "/run.sh" ]
 LABEL org.opencontainers.image.title="AegisBot"
 LABEL org.opencontainers.image.description="Production-ready Telegram Moderation Bot with AI-driven FAQ and Security Features"
 LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
-LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
+LABEL org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/AegisBot"
-LABEL org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/AegisBot"
-LABEL org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/AegisBot#readme"
+LABEL org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/AegisBot"
+LABEL org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/AegisBot"
+LABEL org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/AegisBot#readme"
 LABEL org.opencontainers.image.created="${BUILD_DATE}"

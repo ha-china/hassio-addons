@@ -66,7 +66,7 @@ devices:
   - /dev/nvme2
 environment:
   CONFIG_DIR: /config/addons_config/epicgamesfree
-image: ghcr.nju.edu.cn/alexbelgium/epicgamesfree-{arch}
+image: ghcr.1ms.run/alexbelgium/epicgamesfree-{arch}
 init: false
 map:
   - config:rw
@@ -85,6 +85,6 @@ schema:
   disable_cron: bool?
 slug: epicgamesfree
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "debian-2026-04-17"
 webui: "[PROTO:ssl]://[HOST]:[PORT:3000]"

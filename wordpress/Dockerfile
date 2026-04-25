@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.0.2
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -46,7 +46,7 @@ RUN \
     && mkdir -p /usr/src/wordpress \
     && tar zxvf /tmp/wordpress.tar.gz -C /usr/src/wordpress --strip-components=1 \
     && rm -f /tmp/wordpress.tar.gz \
-    && curl -L -o /usr/local/bin/wp "https://ghfast.top/github.com/wp-cli/wp-cli/releases/download/v2.12.0/wp-cli-2.12.0.phar" \
+    && curl -L -o /usr/local/bin/wp "https://gh-proxy.org/github.com/wp-cli/wp-cli/releases/download/v2.12.0/wp-cli-2.12.0.phar" \
     && echo "ce34ddd838f7351d6759068d09793f26755463b4a4610a5a5c0a97b68220d85c  /usr/local/bin/wp" | sha256sum -c - \
     && chmod +x /usr/local/bin/wp \
     # Create PHP symlinks
@@ -79,15 +79,15 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version="${BUILD_VERSION}" \
-    maintainer="FaserF <https://ghfast.top/github.com/FaserF>" \
+    maintainer="FaserF <https://gh-proxy.org/github.com/FaserF>" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="HASSIO-ADDONS" \
-    org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
+    org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/hassio-addons/addon-wordpress" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/${BUILD_REPOSITORY}" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/hassio-addons/addon-wordpress" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created="${BUILD_DATE}" \
     org.opencontainers.image.revision="${BUILD_REF}" \
     org.opencontainers.image.version="${BUILD_VERSION}"

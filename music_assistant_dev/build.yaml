@@ -1,5 +1,5 @@
 build_from:
-  amd64: ghcr.nju.edu.cn/music-assistant/base:latest
-  aarch64: ghcr.nju.edu.cn/music-assistant/base:latest
-  armhf: ghcr.nju.edu.cn/music-assistant/base:latest
-  armv7: ghcr.nju.edu.cn/music-assistant/base:latest
+  amd64: ghcr.1ms.run/music-assistant/base:latest
+  aarch64: ghcr.1ms.run/music-assistant/base:latest
+  armhf: ghcr.1ms.run/music-assistant/base:latest
+  armv7: ghcr.1ms.run/music-assistant/base:latest

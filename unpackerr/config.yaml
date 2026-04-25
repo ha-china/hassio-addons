@@ -67,7 +67,7 @@ devices:
 environment:
   VPN_ENABLED: "false"
   VPN_PROVIDER: "null"
-image: ghcr.nju.edu.cn/alexbelgium/unpackerr-{arch}
+image: ghcr.1ms.run/alexbelgium/unpackerr-{arch}
 init: false
 map:
   - media:rw
@@ -99,5 +99,5 @@ schema:
   networkdisks: str?
 slug: unpackerr
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "v0.15.2-2"

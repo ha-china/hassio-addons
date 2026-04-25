@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "slug": "pharos",
   "description": "[老王杂谈说]：TP-LINK CPE WiFi接入点的Pharos服务器",
-  "url": "https://ghfast.top/github.com/dcmartin/hassio-addons/tree/master/pharos/README.md",
+  "url": "https://gh-proxy.org/github.com/dcmartin/hassio-addons/tree/master/pharos/README.md",
   "webui": "http://[HOST]:[PORT:9321]",
   "startup": "application",
   "boot": "auto",

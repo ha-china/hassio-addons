@@ -3,14 +3,14 @@ version: 1.12.0
 slug: valetudo-mapper
 description: 这是一个简单的伴侣服务，用于为Valetudo RE生成地图png文件。
   map pngs.
-url: https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/valetudo-mapper
+url: https://gh-proxy.org/github.com/Poeschl-HomeAssistant-Addons/valetudo-mapper
 arch:
 - armhf
 - armv7
 - aarch64
 - amd64
 - i386
-image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/valetudo-mapper-{arch}
+image: ghcr.1ms.run/poeschl-homeassistant-addons/valetudo-mapper-{arch}
 init: false
 ports:
   3000/tcp: null

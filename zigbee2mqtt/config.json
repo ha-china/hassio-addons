@@ -8,7 +8,7 @@
   ],
   "uart": true,
   "udev": true,
-  "url": "https://ghfast.top/github.com/zigbee2mqtt/hassio-zigbee2mqtt/tree/master/zigbee2mqtt",
+  "url": "https://gh-proxy.org/github.com/zigbee2mqtt/hassio-zigbee2mqtt/tree/master/zigbee2mqtt",
   "startup": "application",
   "services": [
     "mqtt:need"
@@ -86,5 +86,5 @@
     "watchdog": "str?",
     "force_onboarding": "bool?"
   },
-  "image": "ghcr.nju.edu.cn/zigbee2mqtt/zigbee2mqtt-{arch}"
+  "image": "ghcr.1ms.run/zigbee2mqtt/zigbee2mqtt-{arch}"
 }

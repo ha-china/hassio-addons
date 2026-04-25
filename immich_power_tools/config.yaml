@@ -3,7 +3,7 @@ arch:
   - amd64
 description: '[老王杂谈说]：null'
 hassio_api: true
-image: ghcr.nju.edu.cn/alexbelgium/immich_power_tools-{arch}
+image: ghcr.1ms.run/alexbelgium/immich_power_tools-{arch}
 init: false
 map:
   - addon_config:rw
@@ -29,6 +29,6 @@ schema:
   IMMICH_API_KEY: str
   IMMICH_URL: str
 slug: immich_power_tools
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "0.21.2"
 webui: http://[HOST]:[PORT:3000]

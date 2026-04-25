@@ -58,7 +58,7 @@ devices:
   - /dev/nvme2
 hassio_api: true
 homeassistant_api: true
-image: ghcr.nju.edu.cn/alexbelgium/comixed-{arch}
+image: ghcr.1ms.run/alexbelgium/comixed-{arch}
 map:
   - addon_config:rw
   - media:rw
@@ -82,6 +82,6 @@ schema:
   networkdisks: str?
 slug: comixed
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "1.4"
 webui: "[PROTO:ssl]://[HOST]:[PORT:7171]"

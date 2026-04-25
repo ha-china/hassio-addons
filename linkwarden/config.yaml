@@ -13,7 +13,7 @@ environment:
   NEXT_PUBLIC_CREDENTIALS_ENABLED: "true"
   NEXT_PUBLIC_DISABLE_REGISTRATION: "false"
   STORAGE_FOLDER: /config/library
-image: ghcr.nju.edu.cn/alexbelgium/linkwarden-{arch}
+image: ghcr.1ms.run/alexbelgium/linkwarden-{arch}
 init: false
 map:
   - addon_config:rw
@@ -42,6 +42,6 @@ schema:
   OLLAMA_MODEL: str?
   STORAGE_FOLDER: str?
 slug: linkwarden
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/linkwarden
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/linkwarden
 version: "2.14.1"
 webui: "[PROTO:ssl]://[HOST]:[PORT:3000]"

@@ -2,7 +2,7 @@ name: yarr!
 version: 1.0.1
 slug: yarr
 description: '[老王杂谈说]：null'
-url: https://ghfast.top/github.com/einschmidt/app-yarr
+url: https://gh-proxy.org/github.com/einschmidt/app-yarr
 panel_icon: mdi:rss-box
 arch:
   - amd64
@@ -33,4 +33,4 @@ schema:
   certfile: str
   keyfile: str
   db_path: str?
-image: ghcr.nju.edu.cn/einschmidt/yarr/{arch}
+image: ghcr.1ms.run/einschmidt/yarr/{arch}

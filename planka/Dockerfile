@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM ghcr.nju.edu.cn/plankanban/planka:2.1.0 AS planka
+FROM ghcr.1ms.run/plankanban/planka:2.1.0 AS planka
 
 FROM ${BUILD_FROM}
 
@@ -48,11 +48,11 @@ LABEL \
     org.opencontainers.image.title="Planka" \
     org.opencontainers.image.description="The elegant open source project tracking tool" \
     org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
-    org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
+    org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/planka" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/planka" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/planka/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/planka" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/planka" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/planka/README.md" \
     org.opencontainers.image.created="${BUILD_DATE}"
 
 # Healthcheck

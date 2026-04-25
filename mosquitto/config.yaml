@@ -3,7 +3,7 @@ version: 7.1.0
 slug: mosquitto
 name: Mosquitto broker
 description: '[老王杂谈说]：null'
-url: https://ghfast.top/github.com/home-assistant/addons/tree/master/mosquitto
+url: https://gh-proxy.org/github.com/home-assistant/addons/tree/master/mosquitto
 arch:
   - aarch64
   - amd64

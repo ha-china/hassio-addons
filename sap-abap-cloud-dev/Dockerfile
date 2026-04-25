@@ -1,6 +1,6 @@
 # Multi-stage build: Use HA debian-base for S6/Bashio, pull SAP runtime from SAP image
-# renovate: datasource=docker depName=ghcr.nju.edu.cn/hassio-addons/debian-base
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base:9.3.0
+# renovate: datasource=docker depName=ghcr.1ms.run/hassio-addons/debian-base
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/debian-base:9.3.0
 # renovate: datasource=docker depName=sapse/abap-cloud-developer-trial
 ARG SAP_IMAGE=sapse/abap-cloud-developer-trial:2023
 # hadolint ignore=DL3006
@@ -92,11 +92,11 @@ LABEL \
     org.opencontainers.image.title="SAP ABAP Cloud Developer Trial" \
     org.opencontainers.image.description="SAP ABAP Platform Trial for local ABAP development - NO LICENSE PROVIDED" \
     org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
-    org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
+    org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/sap-abap-cloud-dev" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/sap-abap-cloud-dev" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/sap-abap-cloud-dev/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/sap-abap-cloud-dev" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/sap-abap-cloud-dev" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/sap-abap-cloud-dev/README.md" \
     org.opencontainers.image.created="${BUILD_DATE}"
 
 # Healthcheck - SAP takes a long time to start (5+ minutes)

@@ -3,11 +3,11 @@ name: Matterbridge
 version: 2.0.0
 slug: matterbridge
 description: '[老王杂谈说]：不同消息应用之间的简单聊天桥接'
-url: https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/matterbridge
+url: https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/matterbridge
 arch:
   - aarch64
   - amd64
-image: ghcr.nju.edu.cn/faserf/hassio-addons-matterbridge-{arch}
+image: ghcr.1ms.run/faserf/hassio-addons-matterbridge-{arch}
 map:
   - share:rw
 init: false

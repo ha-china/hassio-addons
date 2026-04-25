@@ -2,7 +2,7 @@ name: Lidarr
 version: 0.15.0
 slug: lidarr
 description: '[老王杂谈说]：看起来像Sonarr，但它是为音乐制作的'
-url: https://ghfast.top/github.com/hassio-addons/addon-lidarr/tree/main/README.md
+url: https://gh-proxy.org/github.com/hassio-addons/addon-lidarr/tree/main/README.md
 webui: http://[HOST]:[PORT:8686]
 init: false
 arch:
@@ -14,4 +14,4 @@ map:
   - media:rw
 ports:
   8686/tcp: 8686
-image: ghcr.nju.edu.cn/hassio-addons/lidarr/{arch}
+image: ghcr.1ms.run/hassio-addons/lidarr/{arch}

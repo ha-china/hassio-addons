@@ -10,7 +10,7 @@
     "armv7"
   ],
   "startup": "services",
-  "image": "ghcr.nju.edu.cn/thespad/py-kms",
+  "image": "ghcr.1ms.run/thespad/py-kms",
   "boot": "auto",
   "init": false,
   "ports": {

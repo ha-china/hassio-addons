@@ -3,7 +3,7 @@
   "slug": "rhasspy",
   "version": "2.5.11",
   "description": "离线语音助手",
-  "url": "https://ghfast.top/github.com/rhasspy/hassio-addons",
+  "url": "https://gh-proxy.org/github.com/rhasspy/hassio-addons",
   "arch": [
     "aarch64",
     "amd64",

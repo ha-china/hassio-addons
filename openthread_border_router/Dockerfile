@@ -23,7 +23,7 @@ RUN \
     && apt-get update \
     # The OTBR build script tries to run `sudo`
     && apt-get install -y --no-install-recommends sudo git \
-    && git clone --depth 1 -b main https://ghfast.top/github.com/openthread/ot-br-posix.git /usr/src/ot-br-posix \
+    && git clone --depth 1 -b main https://gh-proxy.org/github.com/openthread/ot-br-posix.git /usr/src/ot-br-posix \
     && cd /usr/src/ot-br-posix \
     && git fetch origin ${OTBR_BETA_VERSION} \
     && git checkout ${OTBR_BETA_VERSION} \
@@ -93,7 +93,7 @@ RUN \
     && apt-get update \
     # The OTBR build script tries to run `sudo`
     && apt-get install -y --no-install-recommends sudo git \
-    && git clone --depth 1 -b main https://ghfast.top/github.com/openthread/ot-br-posix.git /usr/src/ot-br-posix \
+    && git clone --depth 1 -b main https://gh-proxy.org/github.com/openthread/ot-br-posix.git /usr/src/ot-br-posix \
     && cd /usr/src/ot-br-posix \
     && git fetch origin ${OTBR_VERSION} \
     && git checkout ${OTBR_VERSION} \

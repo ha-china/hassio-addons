@@ -22,7 +22,7 @@ RUN \
     && pip3 install --no-cache-dir \
         --extra-index-url https://www.piwheels.org/simple \
         "wyoming[zeroconf]>=1.8,<2" \
-        "wyoming-openwakeword @ https://ghfast.top/github.com/rhasspy/wyoming-openwakeword/archive/refs/tags/v${WYOMING_OPENWAKEWORD_VERSION}.tar.gz" \
+        "wyoming-openwakeword @ https://gh-proxy.org/github.com/rhasspy/wyoming-openwakeword/archive/refs/tags/v${WYOMING_OPENWAKEWORD_VERSION}.tar.gz" \
     \
     && rm -rf /var/lib/apt/lists/*
 

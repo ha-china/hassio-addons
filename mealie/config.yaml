@@ -75,7 +75,7 @@ environment:
   WEB_CONCURRENCY: "2"
   WEB_GUNICORN: "true"
   WORKERS_PER_CORE: "0.5"
-image: ghcr.nju.edu.cn/alexbelgium/mealie-{arch}
+image: ghcr.1ms.run/alexbelgium/mealie-{arch}
 ingress: true
 map:
   - addon_config:rw
@@ -112,5 +112,5 @@ schema:
   ssl: bool
 slug: mealie
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "v3.16.0"

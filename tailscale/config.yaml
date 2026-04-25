@@ -2,7 +2,7 @@ name: Tailscale
 version: 0.28.1
 slug: tailscale
 description: '[老王杂谈说]：用于构建安全网络的零配置 VPN'
-url: https://ghfast.top/github.com/hassio-addons/app-tailscale
+url: https://gh-proxy.org/github.com/hassio-addons/app-tailscale
 ingress: true
 ingress_port: 0
 ingress_stream: true
@@ -91,4 +91,4 @@ schema:
     ssl: bool
   taildrop: bool
   userspace_networking: bool
-image: ghcr.nju.edu.cn/hassio-addons/tailscale
+image: ghcr.1ms.run/hassio-addons/tailscale

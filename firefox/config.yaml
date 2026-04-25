@@ -3,7 +3,7 @@ version: "1.10.1"
 slug: "firefox"
 panel_icon: "mdi:firefox"
 description: '[老王杂谈说]：用于 Firefox 的 Docker 容器'
-url: "https://ghfast.top/github.com/mincka/ha-addons/tree/main/firefox"
+url: "https://gh-proxy.org/github.com/mincka/ha-addons/tree/main/firefox"
 arch:
   - aarch64
   - amd64
@@ -27,7 +27,7 @@ devices:
   - /dev/snd
 # Map a working PulseAudio setup into the container
 audio: true
-image: "ghcr.nju.edu.cn/mincka/firefox-{arch}"
+image: "ghcr.1ms.run/mincka/firefox-{arch}"
 # To pass options as environment variables (thanks to legacy mode), they must be either "int" or "str" ("str?" will be ignored).
 legacy: true
 options:

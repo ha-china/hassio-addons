@@ -7,12 +7,12 @@ description: >-
 arch:
   - amd64
   - aarch64
-url: "https://ghfast.top/github.com/jdeath/homeassistant-addons"
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
 ports:
   18966/tcp: 18966
 ports_description:
   18966/tcp: "Web Interface"
-image: ghcr.nju.edu.cn/jason5ng32/myip
+image: ghcr.1ms.run/jason5ng32/myip
 boot: auto
 startup: services
 webui: "[PROTO:ssl]://[HOST]:[PORT:18966]"

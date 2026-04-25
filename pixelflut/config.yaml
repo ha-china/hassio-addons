@@ -3,7 +3,7 @@ version: 1.2.3
 slug: pixelflut
 panel_icon: mdi:waves
 description: '[老王杂谈说]：将一个Pixelflut画布带到你的智能家居中'
-url: https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/pixelflut
+url: https://gh-proxy.org/github.com/Poeschl-HomeAssistant-Addons/pixelflut
 ingress: true
 ingress_port: 6080
 ingress_entry: vnc.html?autoconnect=true
@@ -13,7 +13,7 @@ arch:
   - aarch64
   - amd64
   - i386
-image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/pixelflut-{arch}
+image: ghcr.1ms.run/poeschl-homeassistant-addons/pixelflut-{arch}
 init: false
 ports:
   1234/tcp: 1234

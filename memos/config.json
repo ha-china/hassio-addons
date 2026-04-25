@@ -25,7 +25,7 @@
   "slug": "memos",
   "startup": "services",
   "upstream": "0.27.1",
-  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:5230]",
   "ingress": false,
   "ingress_port": 5230

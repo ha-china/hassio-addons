@@ -3,7 +3,7 @@
   "version": "5e75061",
   "slug": "presence_monitor__edge",
   "description": "[老王杂谈说]：蓝牙信标、手机和其他蓝牙设备的被动蓝牙存在检测。",
-  "url": "https://ghfast.top/github.com/Limych/addon-presence-monitor",
+  "url": "https://gh-proxy.org/github.com/Limych/addon-presence-monitor",
   "image": "limych/hassio-presence-monitor-{arch}",
   "startup": "services",
   "arch": [

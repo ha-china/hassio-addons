@@ -1,7 +1,7 @@
 # Home Assistant Addon — thin wrapper over the main Sendspin Bluetooth Bridge image.
 # The base image already contains S6 overlay, Python source, dependencies,
 # and the S6 sendspin service definition.
-ARG BUILD_FROM=ghcr.nju.edu.cn/trudenboy/sendspin-bt-bridge:latest
+ARG BUILD_FROM=ghcr.1ms.run/trudenboy/sendspin-bt-bridge:latest
 FROM ${BUILD_FROM}
 
 # No additional layers needed — the base image includes everything:

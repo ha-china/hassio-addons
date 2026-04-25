@@ -2,7 +2,7 @@ name: Studio Code Server
 version: 6.0.1
 slug: vscode
 description: '[老王杂谈说]：在 Home Assistant 前端集成了功能齐全的 Visual Studio Code (VSCode) 体验。'
-url: https://ghfast.top/github.com/hassio-addons/addon-vscode
+url: https://gh-proxy.org/github.com/hassio-addons/addon-vscode
 ingress: true
 ingress_port: 1337
 ingress_stream: true
@@ -45,4 +45,4 @@ schema:
     - str
   init_commands:
     - str
-image: ghcr.nju.edu.cn/hassio-addons/vscode/{arch}
+image: ghcr.1ms.run/hassio-addons/vscode/{arch}

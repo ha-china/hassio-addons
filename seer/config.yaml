@@ -65,7 +65,7 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment: {}
-image: ghcr.nju.edu.cn/alexbelgium/seer-{arch}
+image: ghcr.1ms.run/alexbelgium/seer-{arch}
 init: false
 map:
   - addon_config:rw
@@ -88,6 +88,6 @@ schema:
   TZ: str?
 slug: seer
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/seer
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/seer
 version: v3.0.1
 webui: "[PROTO:ssl]://[HOST]:[PORT:5055]"

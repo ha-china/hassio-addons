@@ -2,7 +2,7 @@ name: rsync local
 version: 1.7.2
 slug: rsync-local
 description: '[老王杂谈说]：使用rsync将文件夹同步到外置USB驱动器。'
-url: https://ghfast.top/github.com/Poeschl-HomeAssistant-Addons/rsync-local
+url: https://gh-proxy.org/github.com/Poeschl-HomeAssistant-Addons/rsync-local
 arch:
   - armhf
   - armv7
@@ -12,7 +12,7 @@ arch:
 homeassistant: 0.115.0
 boot: manual
 init: false
-image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/rsync-local-{arch}
+image: ghcr.1ms.run/poeschl-homeassistant-addons/rsync-local-{arch}
 ports: {}
 ports_description: {}
 map:

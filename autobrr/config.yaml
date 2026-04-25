@@ -71,7 +71,7 @@ environment:
   WEBUI_PASSWORD: password
   WEBUI_PORT: "7474"
   WEBUI_USERNAME: admin
-image: ghcr.nju.edu.cn/alexbelgium/autobrr-{arch}
+image: ghcr.1ms.run/alexbelgium/autobrr-{arch}
 ingress: true
 init: false
 map:
@@ -107,5 +107,5 @@ schema:
   networkdisks: str?
 slug: autobrr
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/autobrr
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/autobrr
 version: "1.76.0"

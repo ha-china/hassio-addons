@@ -25,11 +25,11 @@
 
 | 原地址                | 国内加速地址                  |
 |---------------------|-------------------------|
-| ghcr.io             | ghcr.nju.edu.cn         |
+| ghcr.io             | ghcr.1ms.run         |
 | docker.io           | docker.1ms.run    |
 | lscr.io             | docker.1ms.run    |
 | docker.io           | docker.1ms.run          |
-| https://github.com  | https://ghfast.top      |
+| https://github.com  | https://gh-proxy.org      |
 
 
 ## ✨ 加载项介绍
@@ -82,11 +82,22 @@
 - [**Limych/hassio-addons:master**](https://github.com/Limych/hassio-addons)  
 - [**motion-ai/addons:master**](https://github.com/motion-ai/addons)  
 - [**dcmartin/hassio-addons:master**](https://github.com/dcmartin/hassio-addons)  
-- [**TimeMachine (saihgupr/HomeAssistantTimeMachine:main)**](https://github.com/saihgupr/HomeAssistantTimeMachine)  
+- [**TimeMachine (DiggingForDinos/HomeAssistantTimeMachine:main)**](https://github.com/DiggingForDinos/HomeAssistantTimeMachine)  
 - [**tommy-sense/homeassistant-addon:main**](https://github.com/tommy-sense/homeassistant-addon)  
 - [**jkunczik/home-assistant-omada:master**](https://github.com/jkunczik/home-assistant-omada)  
 - [**IhsenBouallegue/glasshome-addon:main**](https://github.com/IhsenBouallegue/glasshome-addon)  
 - [**bytenoodle/hassioaddon:main**](https://github.com/bytenoodle/hassioaddon)  
+- [**balloob/home-assistant-addons:main**](https://github.com/balloob/home-assistant-addons)  
+- [**arnonym/ha-plugins:main**](https://github.com/arnonym/ha-plugins)  
+- [**TECH7Fox/Asterisk-add-on:main**](https://github.com/TECH7Fox/Asterisk-add-on)  
+- [**yanfeng17/MediaPipe-Gesture-Recognition:master**](https://github.com/yanfeng17/MediaPipe-Gesture-Recognition)  
+- [**techartdev/OpenClawHomeAssistant:main**](https://github.com/techartdev/OpenClawHomeAssistant)  
+- [**scyto/ha-bluetooth-audio-manager:main**](https://github.com/scyto/ha-bluetooth-audio-manager)  
+- [**oyvhov/Tunet:main**](https://github.com/oyvhov/Tunet)  
+- [**RiDDiX/home-assistant-matter-hub:main**](https://github.com/RiDDiX/home-assistant-matter-hub)  
+- [**trudenboy/sendspin-bt-bridge:main**](https://github.com/trudenboy/sendspin-bt-bridge)  
+- [**KristianP26/ble-scale-sync:main**](https://github.com/KristianP26/ble-scale-sync)  
+- [**WolframRavenwolf/hermes-ha-addon:main**](https://github.com/WolframRavenwolf/hermes-ha-addon)  
 - [**hydroqc/hydroqc-hass-addons:main** (GitLab)](https://gitlab.com/hydroqc/hydroqc-hass-addons/)  
 
 

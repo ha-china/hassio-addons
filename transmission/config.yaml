@@ -70,7 +70,7 @@ devices:
   - /dev/md2
   - /dev/md3
 environment: {}
-image: ghcr.nju.edu.cn/alexbelgium/transmission_ls-{arch}
+image: ghcr.1ms.run/alexbelgium/transmission_ls-{arch}
 ingress: true
 init: false
 map:
@@ -123,5 +123,5 @@ schema:
   whitelist: str?
 slug: transmission_ls
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "4.1.1"

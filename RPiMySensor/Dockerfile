@@ -27,7 +27,7 @@ RUN \
         wiringpi \
     && \    
     #MySensors
-    git clone https://ghfast.top/github.com/mysensors/MySensors.git --depth 1 --branch development \ 
+    git clone https://gh-proxy.org/github.com/mysensors/MySensors.git --depth 1 --branch development \ 
     # SPI Dev test
     && \
     wget https://raw.githubusercontent.com/raspberrypi/linux/rpi-3.10.y/Documentation/spi/spidev_test.c \

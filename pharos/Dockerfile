@@ -49,7 +49,7 @@ LABEL \
     org.label-schema.name="cpu2msghub" \
     org.label-schema.schema-version="1.0" \
     org.label-schema.url="https://addons.community" \
-    org.label-schema.usage="https://ghfast.top/github.com/dcmartin/hassio-addons/pharos/tree/master/README.md" \
+    org.label-schema.usage="https://gh-proxy.org/github.com/dcmartin/hassio-addons/pharos/tree/master/README.md" \
     org.label-schema.vcs-ref=${BUILD_REF} \
-    org.label-schema.vcs-url="https://ghfast.top/github.com/dcmartin/hassio-addons/pharos" \
+    org.label-schema.vcs-url="https://gh-proxy.org/github.com/dcmartin/hassio-addons/pharos" \
     org.label-schema.vendor="DCMARTIN"

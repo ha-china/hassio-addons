@@ -1,7 +1,7 @@
-# https://ghfast.top/github.com/AlexxIT/builder/blob/master/builder.sh
+# https://gh-proxy.org/github.com/AlexxIT/builder/blob/master/builder.sh
 name: go2rtc
 description: '[老王杂谈说]：null'
-url: https://ghfast.top/github.com/AlexxIT/go2rtc
+url: https://gh-proxy.org/github.com/AlexxIT/go2rtc
 image: alexxit/go2rtc
 arch: [amd64, aarch64, i386, armv7]
 # https://developers.home-assistant.io/docs/add-ons/configuration

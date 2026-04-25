@@ -4,7 +4,7 @@ slug: google_assistant
 name: Google Assistant SDK
 description: 谷歌开发的虚拟个人助理。
 url: >-
-  https://ghfast.top/github.com/home-assistant/addons/tree/master/google_assistant
+  https://gh-proxy.org/github.com/home-assistant/addons/tree/master/google_assistant
 advanced: true
 arch:
   - armhf

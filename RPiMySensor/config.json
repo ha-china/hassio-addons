@@ -3,7 +3,7 @@
   "version": "0.0.25",
   "slug": "rpi-mysensor-gw",
   "description": "树莓派MySensors网关SPI扩展模块！",
-  "url": "https://ghfast.top/github.com/dianlight/hassio-addons/tree/master/RPiMySensor",
+  "url": "https://gh-proxy.org/github.com/dianlight/hassio-addons/tree/master/RPiMySensor",
   "arch": [
     "armhf",
     "armv7"

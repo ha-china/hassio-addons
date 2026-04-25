@@ -5,7 +5,7 @@
   "description": "[老王杂谈说]：SONOFF Dongle 刷机工具支持 iHost MG21 芯片及 SONOFF Dongle 系列的在线固件刷写（ZBDongle-P、ZBDongle-E、Dongle-M、Dongle-PMG24、Dongle-LMG21 和 Dongle-PZG23）",
   "uart": true,
   "udev": true,
-  "url": "https://ghfast.top/github.com/iHost-Open-Source-Project/hassio-ihost-addon/tree/master/hassio-ihost-sonoff-dongle-flasher",
+  "url": "https://gh-proxy.org/github.com/iHost-Open-Source-Project/hassio-ihost-addon/tree/master/hassio-ihost-sonoff-dongle-flasher",
   "startup": "application",
   "boot": "auto",
   "arch": [
@@ -51,5 +51,5 @@
   "schema": {
     "data_path": "str"
   },
-  "image": "ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-sonoff-dongle-flasher-{arch}"
+  "image": "ghcr.1ms.run/ihost-open-source-project/hassio-ihost-sonoff-dongle-flasher-{arch}"
 }

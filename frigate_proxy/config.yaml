@@ -4,7 +4,7 @@ panel_icon: "mdi:cctv"
 panel_title: Frigate
 slug: frigate-proxy
 description: 代理插件用于Frigate。
-url: "https://ghfast.top/github.com/blakeblackshear/frigate"
+url: "https://gh-proxy.org/github.com/blakeblackshear/frigate"
 startup: application
 boot: auto
 init: false

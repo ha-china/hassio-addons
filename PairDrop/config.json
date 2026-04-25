@@ -30,7 +30,7 @@
   "slug": "pairdrop",
   "startup": "services",
   "upstream": "latest",
-  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:3000]",
   "ingress": true,
   "ingress_port": 3000,

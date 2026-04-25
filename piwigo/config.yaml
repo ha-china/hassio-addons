@@ -66,7 +66,7 @@ devices:
   - /dev/nvme2
 environment:
   PWG_LOCAL_DIR: /config/addons_config/piwigo
-image: ghcr.nju.edu.cn/alexbelgium/piwigo-{arch}
+image: ghcr.1ms.run/alexbelgium/piwigo-{arch}
 init: false
 map:
   - config:rw
@@ -99,6 +99,6 @@ schema:
   networkdisks: str?
 slug: piwigo
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "16.3.0"
 webui: "[PROTO:ssl]://[HOST]:[PORT:80]"

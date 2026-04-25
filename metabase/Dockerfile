@@ -9,7 +9,7 @@ RUN apk add --no-cache jq
 
 RUN \
     mkdir -p /usr/src/bashio \
-    && curl -L -f -s "https://ghfast.top/github.com/hassio-addons/bashio/archive/refs/tags/v0.17.5.tar.gz" \
+    && curl -L -f -s "https://gh-proxy.org/github.com/hassio-addons/bashio/archive/refs/tags/v0.17.5.tar.gz" \
         | tar -xzf - --strip 1 -C /usr/src/bashio \
     && mv /usr/src/bashio/lib /usr/lib/bashio \
     && ln -s /usr/lib/bashio/bashio /usr/bin/bashio \
@@ -33,7 +33,7 @@ LABEL \
     org.opencontainers.image.vendor="Sanderdw's add-on repository" \
     org.opencontainers.image.authors="Sander de Wildt <sanderdw@gmail.com>" \
     org.opencontainers.image.licenses="GNU Affero General Public License (AGPL)" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/sanderdw/hassio-addons" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/sanderdw/hassio-addons" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/sanderdw/hassio-addons" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/sanderdw/hassio-addons" \
     org.opencontainers.image.documentation="https://raw.githubusercontent.com/sanderdw/hassio-addons/master/README.md" \
     org.opencontainers.image.version=${HA_RELEASE}

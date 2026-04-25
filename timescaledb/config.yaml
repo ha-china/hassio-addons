@@ -2,7 +2,7 @@ name: TimescaleDB
 version: 5.4.2
 slug: timescaledb
 description: '[老王杂谈说]：一个基于PostgreSQL构建的开源数据库，用于使用SQL的强大和便利性分析时间序列数据'
-url: https://ghfast.top/github.com/expaso/hassos-addon-timescaledb
+url: https://gh-proxy.org/github.com/expaso/hassos-addon-timescaledb
 codenotary: hans@expaso.nl
 arch:
   - armhf
@@ -66,4 +66,4 @@ schema:
       address: str?
       method: list(trust|reject|md5|password|scram-sha-256|gss|sspi|ident|peer|pam|ldap|radius|cert)?
       options: str?
-image: ghcr.nju.edu.cn/expaso/timescaledb/{arch}
+image: ghcr.1ms.run/expaso/timescaledb/{arch}

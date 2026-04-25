@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base:9.3.0
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/debian-base:9.3.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -42,7 +42,7 @@ RUN chmod +x /etc/s6-overlay/s6-rc.d/switchcraft/run
 ARG SWITCHCRAFT_VERSION="v2026.1.5b2"
 # shellcheck disable=SC2102
 # hadolint ignore=DL3013,SC2102
-RUN curl -L -o /tmp/switchcraft.tar.gz https://ghfast.top/github.com/FaserF/SwitchCraft/archive/refs/tags/${SWITCHCRAFT_VERSION}.tar.gz \
+RUN curl -L -o /tmp/switchcraft.tar.gz https://gh-proxy.org/github.com/FaserF/SwitchCraft/archive/refs/tags/${SWITCHCRAFT_VERSION}.tar.gz \
     && tar xf /tmp/switchcraft.tar.gz -C /app --strip-components=1 \
     && rm /tmp/switchcraft.tar.gz \
     # Install dependencies (mirroring upstream Dockerfile)
@@ -94,9 +94,9 @@ LABEL \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
-    org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
+    org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/switchcraft" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/switchcraft" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/switchcraft/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/switchcraft" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/switchcraft" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/switchcraft/README.md" \
     org.opencontainers.image.created="${BUILD_DATE}"

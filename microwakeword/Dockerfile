@@ -24,7 +24,7 @@ RUN \
     && .venv/bin/pip3 install --no-cache-dir \
         --extra-index-url https://www.piwheels.org/simple \
         'wyoming[zeroconf]>=1.8,<2' \
-        "wyoming-microwakeword @ https://ghfast.top/github.com/rhasspy/wyoming-microwakeword/archive/refs/tags/v${WYOMING_MICROWAKEWORD_VERSION}.tar.gz" \
+        "wyoming-microwakeword @ https://gh-proxy.org/github.com/rhasspy/wyoming-microwakeword/archive/refs/tags/v${WYOMING_MICROWAKEWORD_VERSION}.tar.gz" \
     \
     && rm -rf /var/lib/apt/lists/*
 

@@ -3,11 +3,11 @@ name: SwitchCraft
 version: 0.2.1
 slug: switchcraft
 description: '[老王杂谈说]：SwitchCraft 是您强大的跨平台工具，旨在成为 IT 专业人士的全面打包助手。'
-url: https://ghfast.top/github.com/FaserF/SwitchCraft
+url: https://gh-proxy.org/github.com/FaserF/SwitchCraft
 arch:
   - aarch64
   - amd64
-image: ghcr.nju.edu.cn/faserf/hassio-addons-switchcraft-{arch}
+image: ghcr.1ms.run/faserf/hassio-addons-switchcraft-{arch}
 ingress: true
 ingress_entry: "/"
 ingress_port: 8080

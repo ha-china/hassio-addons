@@ -3,7 +3,7 @@
   "version": "1.0.4",
   "slug": "ewelink_smart_home_for_homeassistant_slug",
   "description": "[老王杂谈说]：通过 MQTT 将 eWeLink 与 Home Assistant 集成",
-  "url": "https://ghfast.top/github.com/iHost-Open-Source-Project/hassio-ihost-addon",
+  "url": "https://gh-proxy.org/github.com/iHost-Open-Source-Project/hassio-ihost-addon",
   "startup": "application",
   "boot": "auto",
   "arch": [
@@ -43,6 +43,6 @@
       "password": "str?"
     }
   },
-  "image": "ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-ewelink-smart-home-{arch}",
+  "image": "ghcr.1ms.run/ihost-open-source-project/hassio-ihost-ewelink-smart-home-{arch}",
   "homeassistant": "2025.9.2"
 }

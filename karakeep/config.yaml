@@ -5,8 +5,8 @@ name: Karakeep
 slug: karakeep
 description: '[老王杂谈说]：一个可自托管的“收藏所有”应用程序（链接、笔记和图像），具有基于AI的自动标签和全文搜索功能'
 version: 0.30.0-4
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/karakeep
-image: ghcr.nju.edu.cn/alexbelgium/karakeep-{arch}
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/karakeep
+image: ghcr.1ms.run/alexbelgium/karakeep-{arch}
 init: false
 ports:
   3000/tcp: 3000

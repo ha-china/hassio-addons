@@ -1,6 +1,6 @@
 {
     "build_from": {
-        "aarch64": "ghcr.nju.edu.cn/gabe565/castsponsorskip:latest",
-        "amd64": "ghcr.nju.edu.cn/gabe565/castsponsorskip:latest"
+        "aarch64": "ghcr.1ms.run/gabe565/castsponsorskip:latest",
+        "amd64": "ghcr.1ms.run/gabe565/castsponsorskip:latest"
     }
 }

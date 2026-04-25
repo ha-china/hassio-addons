@@ -84,7 +84,7 @@ environment:
   serverPort: "8266"
   webUIPort: "8265"
 host_dbus: true
-image: ghcr.nju.edu.cn/alexbelgium/tdarr-{arch}
+image: ghcr.1ms.run/alexbelgium/tdarr-{arch}
 init: false
 map:
   - media:rw
@@ -121,7 +121,7 @@ schema:
   networkdisks: str?
 slug: tdarr
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "2.70.01"
 video: true
 webui: "[PROTO:ssl]://[HOST]:[PORT:8265]"

@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/base:3.22
+ARG BUILD_FROM=ghcr.1ms.run/home-assistant/base:3.22
 FROM ${BUILD_FROM}
 
 # Set shell
@@ -8,7 +8,7 @@ LABEL \
   org.opencontainers.image.authors="Logan Marchione <logan@loganmarchione.com>" \
   org.opencontainers.image.title="Prometheus Node Exporter" \
   org.opencontainers.image.description="The Prometheus Node Exporter for hardware and OS metrics exposed by *NIX kernels." \
-  org.opencontainers.image.source="https://ghfast.top/github.com/loganmarchione/hassos-addons/tree/main/prometheus_node_exporter"
+  org.opencontainers.image.source="https://gh-proxy.org/github.com/loganmarchione/hassos-addons/tree/main/prometheus_node_exporter"
 
 # Setup base system
 # renovate: datasource=github-releases depName=prometheus/node_exporter
@@ -28,7 +28,7 @@ RUN \
     esac \
     && mkdir -p /tmp/node_exporter \
     && curl -sSLf -o /tmp/node_exporter/node_exporter.tar.gz \
-       "https://ghfast.top/github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/node_exporter-${NODE_EXPORTER_VERSION}.linux-${NODE_EXPORTER_ARCH}.tar.gz" \
+       "https://gh-proxy.org/github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/node_exporter-${NODE_EXPORTER_VERSION}.linux-${NODE_EXPORTER_ARCH}.tar.gz" \
     && cd /tmp/node_exporter \
     && tar -xzvf node_exporter.tar.gz --strip-components=1 \
     && mv node_exporter /usr/local/bin/ \

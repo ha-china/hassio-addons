@@ -75,7 +75,7 @@ environment:
   SSL_KEY_NAME: privkey.pem
   TZ: Etc/UTC
 host_network: true
-image: ghcr.nju.edu.cn/alexbelgium/omada_v3-{arch}
+image: ghcr.1ms.run/alexbelgium/omada_v3-{arch}
 map:
   - config:rw
   - ssl:ro
@@ -108,6 +108,6 @@ schema:
       value: str?
 slug: omada_v3
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: ""
 webui: http://[HOST]:[PORT:8088]

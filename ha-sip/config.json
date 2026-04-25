@@ -2,7 +2,7 @@
   "name": "ha-sip",
   "version": "5.5",
   "slug": "ha-sip",
-  "url": "https://ghfast.top/github.com/arnonym/ha-plugins",
+  "url": "https://gh-proxy.org/github.com/arnonym/ha-plugins",
   "description": "[老王杂谈说]：Home Assistant SIP 网关",
   "arch": [
     "aarch64",

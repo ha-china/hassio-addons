@@ -11,7 +11,7 @@
     "PGDATA": "/config/database"
   },
   "hassio_api": true,
-  "image": "ghcr.nju.edu.cn/alexbelgium/postgres-{arch}",
+  "image": "ghcr.1ms.run/alexbelgium/postgres-{arch}",
   "init": false,
   "map": [
     "addon_config:rw",
@@ -37,6 +37,6 @@
   },
   "slug": "postgres",
   "udev": true,
-  "url": "https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/postgres",
+  "url": "https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/postgres",
   "version": "15.7-37"
 }

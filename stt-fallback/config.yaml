@@ -3,7 +3,7 @@ version: 1.0.0
 slug: stt-fallback
 name: stt-fallback
 description: $translated_description
-url: https://ghfast.top/github.com/rhasspy/hassio-addons/tree/master/stt-fallback
+url: https://gh-proxy.org/github.com/rhasspy/hassio-addons/tree/master/stt-fallback
 arch:
   - amd64
   - aarch64

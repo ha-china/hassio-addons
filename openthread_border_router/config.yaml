@@ -4,7 +4,7 @@ slug: openthread_border_router
 name: OpenThread Border Router
 description: '[老王杂谈说]：OpenThread 边界路由器附加组件'
 url: >-
-  https://ghfast.top/github.com/home-assistant/addons/tree/master/openthread_border_router
+  https://gh-proxy.org/github.com/home-assistant/addons/tree/master/openthread_border_router
 arch:
   - aarch64
   - amd64

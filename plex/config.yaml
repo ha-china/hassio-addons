@@ -2,7 +2,7 @@ name: Plex Media Server
 version: 4.1.0
 slug: plex
 description: '[老王杂谈说]：null'
-url: https://ghfast.top/github.com/hassio-addons/app-plex
+url: https://gh-proxy.org/github.com/hassio-addons/app-plex
 webui: http://[HOST]:[PORT:32400]/web
 startup: services
 init: false
@@ -51,4 +51,4 @@ options:
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   claim_code: str
-image: ghcr.nju.edu.cn/hassio-addons/plex
+image: ghcr.1ms.run/hassio-addons/plex

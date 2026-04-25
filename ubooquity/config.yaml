@@ -65,7 +65,7 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
-image: ghcr.nju.edu.cn/alexbelgium/ubooquity-{arch}
+image: ghcr.1ms.run/alexbelgium/ubooquity-{arch}
 init: false
 map:
   - media:rw
@@ -107,6 +107,6 @@ schema:
   theme: list(default|comixology2|plextheme-master)
 slug: ubooquity
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: 3.1.0
 webui: '[PROTO:ssl]://[HOST]:[PORT:2206]/ubooquity/admin'

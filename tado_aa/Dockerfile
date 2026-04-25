@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/base-python:3.14-alpine3.23
+ARG BUILD_FROM=ghcr.1ms.run/home-assistant/base-python:3.14-alpine3.23
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 ENV PIP_BREAK_SYSTEM_PACKAGES=1
@@ -55,9 +55,9 @@ LABEL \
     org.opencontainers.image.title="Tado Auto Assist" \
     org.opencontainers.image.description="Tado Auto-Assist for Geofencing and open Window detection" \
     org.opencontainers.image.vendor="FaserF's Home Assistant Apps" \
-    org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
+    org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/tado_aa" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/tado_aa" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/tado_aa/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/tado_aa" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/tado_aa" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/tado_aa/README.md" \
     org.opencontainers.image.created="${BUILD_DATE}"

@@ -69,7 +69,7 @@ environment:
   DIR_SOUNDS: /var/cache/zoneminder/sounds2
   DZM_CONFIG_DIR: /config/addons_config/zoneminder
   ZM_DIR_EVENTS: /var/cache/zoneminder/events2
-image: ghcr.nju.edu.cn/alexbelgium/zoneminder-{arch}
+image: ghcr.1ms.run/alexbelgium/zoneminder-{arch}
 map:
   - config:rw
   - media:rw
@@ -92,6 +92,6 @@ services:
   - mysql:want
 slug: zoneminder
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "1.38.1"
 webui: "[PROTO:ssl]://[HOST]:[PORT:80]/zm"

@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "slug": "minio",
   "description": "[老王杂谈说]：来自min.io的MINIO",
-  "url": "https://ghfast.top/github.com/dcmartin/open-horizon/tree/master/services/minio/README.md",
+  "url": "https://gh-proxy.org/github.com/dcmartin/open-horizon/tree/master/services/minio/README.md",
   "startup": "application",
   "boot": "auto",
   "arch": [

@@ -4,7 +4,7 @@ slug: silabs_flasher
 name: Silicon Labs Flasher
 description: '[老王杂谈说]：null'
 url: >
-  https://ghfast.top/github.com/home-assistant/addons/tree/master/silabs_flasher
+  https://gh-proxy.org/github.com/home-assistant/addons/tree/master/silabs_flasher
 
 arch:
   - aarch64

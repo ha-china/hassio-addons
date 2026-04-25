@@ -2,7 +2,7 @@ name: Grocy
 version: 0.25.1
 slug: grocy
 description: '[老王杂谈说]：null'
-url: https://ghfast.top/github.com/hassio-addons/app-grocy
+url: https://gh-proxy.org/github.com/hassio-addons/app-grocy
 ingress: true
 ingress_stream: true
 init: false
@@ -92,4 +92,4 @@ schema:
   certfile: str
   keyfile: str
   grocy_ingress_user: str
-image: ghcr.nju.edu.cn/hassio-addons/grocy
+image: ghcr.1ms.run/hassio-addons/grocy

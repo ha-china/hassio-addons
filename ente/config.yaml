@@ -68,7 +68,7 @@ environment:
   PGID: "0"
   PUID: "0"
   TZ: Europe/Paris
-image: ghcr.nju.edu.cn/alexbelgium/ente-{arch}
+image: ghcr.1ms.run/alexbelgium/ente-{arch}
 init: false
 map:
   - addon_config:rw
@@ -117,7 +117,7 @@ schema:
   networkdisks: str?
 slug: ente
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "4.4.20"
 video: true
 webui: http://[HOST]:[PORT:3000]

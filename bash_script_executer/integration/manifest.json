@@ -1,7 +1,7 @@
 {
   "domain": "bash_script_executer",
   "name": "Bash Script Executer",
-  "documentation": "https://ghfast.top/github.com/FaserF/hassio-addons/tree/master/bash_script_executer",
+  "documentation": "https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/bash_script_executer",
   "dependencies": [],
   "codeowners": ["@FaserF"],
   "version": "1.0.0",

@@ -80,7 +80,7 @@ environment:
   REVERSE_GEOCODING_DUMP_DIRECTORY: /data/.reverse-geocoding-dump/
   TRANSFORMERS_CACHE: /data/machine-learning
 hassio_api: true
-image: ghcr.nju.edu.cn/alexbelgium/immich-{arch}
+image: ghcr.1ms.run/alexbelgium/immich-{arch}
 init: false
 map:
   - addon_config:rw
@@ -139,7 +139,7 @@ services:
   - mysql:want
 slug: immich
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 usb: true
 version: "2.7.5"
 video: true

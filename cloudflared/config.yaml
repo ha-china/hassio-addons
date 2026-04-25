@@ -5,7 +5,7 @@ breaking_versions:
   - 6.0.0
 slug: cloudflared
 description: '[老王杂谈说]：使用 Cloudflare Tunnel 远程连接到 Home Assistant 而无需开放任何端口。'
-url: https://ghfast.top/github.com/homeassistant-apps/app-cloudflared
+url: https://gh-proxy.org/github.com/homeassistant-apps/app-cloudflared
 startup: services
 init: false
 hassio_api: true
@@ -34,4 +34,4 @@ schema:
   run_parameters:
     - match(^(--edge-bind-address|--edge-ip-version|--grace-period|--ha-connections|--logfile|--loglevel|--pidfile|--protocol|--region|--retries|--tag)=.*$)?
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
-image: ghcr.nju.edu.cn/homeassistant-apps/cloudflared/{arch}
+image: ghcr.1ms.run/homeassistant-apps/cloudflared/{arch}

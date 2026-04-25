@@ -6,7 +6,7 @@ description: 一个可以在自己的服务器上托管的虚拟游戏桌面。
 arch:
   - amd64
   - aarch64
-url: "https://ghfast.top/github.com/jdeath/homeassistant-addons"
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
 ports:
   80/tcp: 8765 
 ports_description:
@@ -15,7 +15,7 @@ map:
   - type: addon_config
     read_only: false
     path: /var/www/html/api/data
-image: ghcr.nju.edu.cn/ludus-leonis/freebeegee
+image: ghcr.1ms.run/ludus-leonis/freebeegee
 boot: manual
 startup: services
 webui: "[PROTO:ssl]://[HOST]:[PORT:80]"

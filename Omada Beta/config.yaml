@@ -11,7 +11,7 @@ arch:
   - aarch64
   - amd64
 init: false
-url: https://ghfast.top/github.com/jkunczik/home-assistant-omada
+url: https://gh-proxy.org/github.com/jkunczik/home-assistant-omada
 map:
   - ssl
 options:

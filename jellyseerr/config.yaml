@@ -67,7 +67,7 @@ devices:
   - /dev/nvme2
 environment: {}
 host_network: true
-image: ghcr.nju.edu.cn/alexbelgium/jellyseerr-{arch}
+image: ghcr.1ms.run/alexbelgium/jellyseerr-{arch}
 init: false
 map:
   - config:rw
@@ -85,6 +85,6 @@ schema:
   TZ: str?
 slug: jellyseerr
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/jellyseerr
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/jellyseerr
 version: v2.7.3
 webui: '[PROTO:ssl]://[HOST]:[PORT:5055]'

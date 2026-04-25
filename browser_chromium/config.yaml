@@ -22,7 +22,7 @@ environment:
   START_DOCKER: "false"
   TITLE: chromium browser
   shm_size: 1gb
-image: ghcr.nju.edu.cn/alexbelgium/chromium-{arch}
+image: ghcr.1ms.run/alexbelgium/chromium-{arch}
 ingress: true
 init: false
 map:
@@ -70,6 +70,6 @@ schema:
 slug: chromium
 tmpfs: true
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "version-91d1c203"
 video: true

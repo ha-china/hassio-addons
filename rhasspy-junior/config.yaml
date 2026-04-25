@@ -1,7 +1,7 @@
 name: "Rhasspy Junior"
 description: "简单的离线语音助手"
 version: "0.2.2"
-url: "https://ghfast.top/github.com/rhasspy/rhasspy-junior"
+url: "https://gh-proxy.org/github.com/rhasspy/rhasspy-junior"
 slug: "rhasspy_junior"
 init: false
 arch:

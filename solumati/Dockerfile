@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/base-python:3.14-alpine3.23
+ARG BUILD_FROM=ghcr.1ms.run/home-assistant/base-python:3.14-alpine3.23
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -43,7 +43,7 @@ ENV SOLUMATI_VERSION=${SOLUMATI_VERSION}
 ARG SOLUMATI_SHA256="1B9DE6C05599863A29B0D18F802CDDEC37E217AD1805D577C1FEE27299FC44C3"
 WORKDIR /tmp
 RUN mkdir src && \
-    curl -L "https://ghfast.top/github.com/FaserF/Solumati/archive/refs/tags/${SOLUMATI_VERSION}.tar.gz" -o solumati.tar.gz && \
+    curl -L "https://gh-proxy.org/github.com/FaserF/Solumati/archive/refs/tags/${SOLUMATI_VERSION}.tar.gz" -o solumati.tar.gz && \
     tar xzf solumati.tar.gz -C src --strip-components=1 && \
     rm solumati.tar.gz
 
@@ -99,11 +99,11 @@ HEALTHCHECK --interval=5m --timeout=3s --start-period=60s --retries=3 \
 LABEL org.opencontainers.image.title="Solumati"
 LABEL org.opencontainers.image.description="The Anti-Swipe Revolution - Self-hosted dating platform focused on meaningful matches."
 LABEL org.opencontainers.image.vendor="FaserF's Home Assistant Apps"
-LABEL org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>"
+LABEL org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/Solumati"
-LABEL org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/Solumati"
-LABEL org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/solumati/README.md"
+LABEL org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/Solumati"
+LABEL org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/Solumati"
+LABEL org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/solumati/README.md"
 LABEL org.opencontainers.image.created="${BUILD_DATE}"
 
 CMD [ "/run.sh" ]

@@ -7,9 +7,9 @@ description: |-
 arch:
   - aarch64
   - amd64
-image: "ghcr.nju.edu.cn/bluemaex/ha-addons-loki-{arch}"
+image: "ghcr.1ms.run/bluemaex/ha-addons-loki-{arch}"
 startup: system
-url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/loki
+url: https://gh-proxy.org/github.com/bluemaex/home-assistant-addons/tree/master/loki
 init: false
 ports:
   3100/tcp: 3100

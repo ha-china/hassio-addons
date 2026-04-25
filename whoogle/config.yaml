@@ -66,7 +66,7 @@ devices:
   - /dev/nvme2
 environment:
   EXPOSE_PORT: "5001"
-image: ghcr.nju.edu.cn/alexbelgium/whoogle-search-{arch}
+image: ghcr.1ms.run/alexbelgium/whoogle-search-{arch}
 ingress: true
 ingress_stream: true
 map:
@@ -120,5 +120,5 @@ schema:
   WHOOGLE_USER: str?
 slug: whoogle-search
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/whoogle
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/whoogle
 version: "1.2.4"

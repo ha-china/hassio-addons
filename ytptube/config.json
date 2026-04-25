@@ -38,7 +38,7 @@
   "slug": "ytptube",
   "startup": "services",
   "upstream": "2025-05-30",
-  "url": "https://ghfast.top/github.com/jdeath/homeassistant-addons",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8081]",
   "ingress": false,
   "ingress_port": 8081

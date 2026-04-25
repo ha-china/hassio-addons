@@ -1,6 +1,6 @@
 name: SSH Tunnel
 description: 创建到公共服务器的SSH隧道
-url: https://ghfast.top/github.com/AlexxIT/hassio-addons/tree/master/ssh_tunnel
+url: https://gh-proxy.org/github.com/AlexxIT/hassio-addons/tree/master/ssh_tunnel
 arch: [ amd64, aarch64, i386, armv7, armhf ]
 
 # https://developers.home-assistant.io/docs/add-ons/configuration

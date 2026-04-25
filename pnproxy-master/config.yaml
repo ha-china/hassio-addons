@@ -1,7 +1,7 @@
-# https://ghfast.top/github.com/AlexxIT/builder/blob/master/builder.sh
+# https://gh-proxy.org/github.com/AlexxIT/builder/blob/master/builder.sh
 name: pnproxy master
 description: 最新不稳定版本。
-url: https://ghfast.top/github.com/AlexxIT/pnproxy
+url: https://gh-proxy.org/github.com/AlexxIT/pnproxy
 image: alexxit/pnproxy
 arch: [ amd64, aarch64, i386, armv7 ]
 

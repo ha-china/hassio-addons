@@ -73,7 +73,7 @@ devices:
 environment:
   BIRDNET_GID: "0"
   BIRDNET_UID: "0"
-image: ghcr.nju.edu.cn/alexbelgium/birdnet-go-{arch}
+image: ghcr.1ms.run/alexbelgium/birdnet-go-{arch}
 ingress: true
 ingress_entry: "ui/dashboard"
 ingress_stream: true
@@ -116,6 +116,6 @@ services:
   - mqtt:want
 slug: birdnet-go
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons/tree/master/birdnet-go
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/birdnet-go
 usb: true
 version: "nightly-20260321-397"

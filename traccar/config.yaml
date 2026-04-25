@@ -2,7 +2,7 @@ name: Traccar
 version: 0.25.0
 slug: traccar
 description: 现代GPS追踪平台
-url: https://ghfast.top/github.com/hassio-addons/addon-traccar
+url: https://gh-proxy.org/github.com/hassio-addons/addon-traccar
 webui: '[PROTO:ssl]://[HOST]:[PORT:80]'
 codenotary: codenotary@frenck.dev
 panel_icon: mdi:car-connected
@@ -31,4 +31,4 @@ schema:
   ssl: bool
   certfile: str
   keyfile: str
-image: ghcr.nju.edu.cn/hassio-addons/traccar/{arch}
+image: ghcr.1ms.run/hassio-addons/traccar/{arch}

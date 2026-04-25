@@ -1,10 +1,10 @@
 {
   "name": "rtl_433 (next)",
-  "image": "ghcr.nju.edu.cn/pbkhrv/rtl_433-hass-addons-rtl_433-next-{arch}",
+  "image": "ghcr.1ms.run/pbkhrv/rtl_433-hass-addons-rtl_433-next-{arch}",
   "version": "next",
   "slug": "rtl433-next",
   "description": "通过SDR接收器使用rtl_433接收无线传感器数据。",
-  "url": "https://ghfast.top/github.com/pbkhrv/rtl_433-hass-addons/tree/main/rtl_433-next",
+  "url": "https://gh-proxy.org/github.com/pbkhrv/rtl_433-hass-addons/tree/main/rtl_433-next",
   "arch": [
     "armhf",
     "armv7",

@@ -2,7 +2,7 @@ name: Bambulab AMS Spoolman FilamentStatus
 version: "1.1.0-0"
 slug: bambulabspoolmanfs
 description: "[老王杂谈说]：这个项目将Bambulab AMS系统与Spoolman集成，以同步线材卷轴的使用。"
-url: https://ghfast.top/github.com/bytenoodle/hassioaddon
+url: https://gh-proxy.org/github.com/bytenoodle/hassioaddon
 arch:
   - amd64
   - aarch64

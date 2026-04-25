@@ -72,7 +72,7 @@ environment:
   ATTACHED_DEVICES_PERMS: '/dev/dri /dev/dvb /dev/vchiq /dev/vc-mem /dev/video1? -type c -o -type f'
 host_dbus: true
 host_network: true
-image: ghcr.nju.edu.cn/alexbelgium/jellyfin-{arch}
+image: ghcr.1ms.run/alexbelgium/jellyfin-{arch}
 ingress: true
 ingress_port: 0
 ingress_stream: true
@@ -121,6 +121,6 @@ schema:
   networkdisks: str?
 slug: jellyfin
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: "10.11.8"
 video: true

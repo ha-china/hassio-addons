@@ -11,7 +11,7 @@ environment:
   PUID: '503'
   TS3SERVER_LICENSE: accept
   TS_UPDATE: '1'
-image: ghcr.nju.edu.cn/alexbelgium/teamspeak-{arch}
+image: ghcr.1ms.run/alexbelgium/teamspeak-{arch}
 init: false
 map:
   - share:rw
@@ -28,5 +28,5 @@ ports_description:
   9987/udp: Voice
 slug: teamspeak
 udev: true
-url: https://ghfast.top/github.com/alexbelgium/hassio-addons
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 version: 3.13.6-8

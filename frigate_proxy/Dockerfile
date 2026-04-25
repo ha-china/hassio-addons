@@ -1,4 +1,4 @@
-FROM ghcr.nju.edu.cn/hassio-addons/debian-base:7.8.2
+FROM ghcr.1ms.run/hassio-addons/debian-base:7.8.2
 
 # Setup base
 # hadolint ignore=DL3003
@@ -31,8 +31,8 @@ LABEL \
     org.opencontainers.image.vendor="Frigate Add-ons" \
     org.opencontainers.image.authors="Blake Blackshear <blakeb@blakeshome.com>" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/${BUILD_REPOSITORY}" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/${BUILD_REPOSITORY}/blob/main/frigate_proxy/README.md" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/frigate_proxy/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}

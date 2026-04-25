@@ -2,7 +2,7 @@ name: ZeroTier One
 version: 0.25.2
 slug: zerotier
 description: '[老王杂谈说]：null'
-url: https://ghfast.top/github.com/hassio-addons/app-zerotier
+url: https://gh-proxy.org/github.com/hassio-addons/app-zerotier
 startup: services
 init: false
 arch:
@@ -28,4 +28,4 @@ schema:
     - str
   api_auth_token: str
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
-image: ghcr.nju.edu.cn/hassio-addons/zerotier
+image: ghcr.1ms.run/hassio-addons/zerotier

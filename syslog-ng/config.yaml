@@ -7,9 +7,9 @@ description: |-
 arch:
   - aarch64
   - amd64
-image: "ghcr.nju.edu.cn/bluemaex/ha-addons-syslog_ng-{arch}"
+image: "ghcr.1ms.run/bluemaex/ha-addons-syslog_ng-{arch}"
 startup: system
-url: https://ghfast.top/github.com/bluemaex/home-assistant-addons/tree/master/syslog-ng
+url: https://gh-proxy.org/github.com/bluemaex/home-assistant-addons/tree/master/syslog-ng
 init: false
 ports:
   5514/udp: 5514

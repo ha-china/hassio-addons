@@ -80,7 +80,7 @@ WORKDIR /usr/src/paperless
 # hadolint ignore=DL3013
 RUN \
     curl -J -L -o paperless.tar.xz \
-        "https://ghfast.top/github.com/paperless-ngx/paperless-ngx/releases/download/v${PAPERLESS_VERSION}/paperless-ngx-v${PAPERLESS_VERSION}.tar.xz" \
+        "https://gh-proxy.org/github.com/paperless-ngx/paperless-ngx/releases/download/v${PAPERLESS_VERSION}/paperless-ngx-v${PAPERLESS_VERSION}.tar.xz" \
     && 7z x paperless.tar.xz \
     && 7z x paperless.tar -o/usr/src/paperless \
     && rm paperless.tar.xz paperless.tar \
@@ -132,15 +132,15 @@ LABEL \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version="${BUILD_VERSION}" \
-    maintainer="FaserF <https://ghfast.top/github.com/FaserF>" \
+    maintainer="FaserF <https://gh-proxy.org/github.com/FaserF>" \
     org.opencontainers.image.title="${BUILD_NAME}" \
     org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
     org.opencontainers.image.vendor="FaserF's Home Assistant Add-ons" \
-    org.opencontainers.image.authors="FaserF <https://ghfast.top/github.com/FaserF>" \
+    org.opencontainers.image.authors="FaserF <https://gh-proxy.org/github.com/FaserF>" \
     org.opencontainers.image.licenses="MIT" \
-    org.opencontainers.image.url="https://ghfast.top/github.com/FaserF/hassio-addons" \
-    org.opencontainers.image.source="https://ghfast.top/github.com/FaserF/hassio-addons" \
-    org.opencontainers.image.documentation="https://ghfast.top/github.com/FaserF/hassio-addons/blob/master/paperless-ngx/README.md" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/FaserF/hassio-addons" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/FaserF/hassio-addons" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/FaserF/hassio-addons/blob/master/paperless-ngx/README.md" \
     org.opencontainers.image.created="${BUILD_DATE}" \
     org.opencontainers.image.revision="${BUILD_REF}" \
     org.opencontainers.image.version="${BUILD_VERSION}"
