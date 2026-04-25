@@ -1,11 +1,11 @@
-# La Météo Agricole 到 MQTT for Home Assistant
+# La Météo Agricole到MQTT for Home Assistant
 
-[![买我一杯咖啡](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/coffee.png)](https://www.buymeacoffee.com/smeagolworms4)
-[![买我一杯咖啡](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/paypal.png)](https://www.paypal.com/donate/?business=SURRPGEXF4YVU&no_recurring=0&item_name=Hello%2C+I%27m+SmeagolWorms4.+For+my+open+source+projects.%0AThanks+you+very+mutch+%21%21%21&currency_code=EUR)
+[![给我买杯咖啡](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/coffee.png)](https://www.buymeacoffee.com/smeagolworms4)
+[![给我买杯咖啡](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/paypal.png)](https://www.paypal.com/donate/?business=SURRPGEXF4YVU&no_recurring=0&item_name=Hello%2C+I%27m+SmeagolWorms4.+For+my+open+source+projects.%0AThanks+you+very+mutch+%21%21%21&currency_code=EUR)
 
-这是一个将 lameteoagricole.net 包装器实现为 MQTT for Home Assistant 的程序。它创建了一个 `weather.<location>` 实体（与 Météo France 卡兼容）以及农业传感器（DJC、警戒、UV、湿度、风速、日/月…）用于一个或多个法国地点。
+一个将lameteoagricole.net包装器实现为MQTT for Home Assistant的方案。为法国的一个或多个地点创建了一个`weather.<location>`实体（与Météo France卡片兼容）以及农业传感器（DJC、警戒、UV、湿度、风速、日/月…）。
 
-原始 Github: https://github.com/Smeagolworms4/meteoagricole2mqtt
+原始Github: https://github.com/Smeagolworms4/meteoagricole2mqtt
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

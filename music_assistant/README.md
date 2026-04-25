@@ -1,32 +1,32 @@
-# 音乐助手App
+# Music Assistant App
 
-Home Assistant的官方音乐助手App。
+The official Music Assistant App for Home Assistant.
 
-## 关于音乐助手
+## About Music Assistant
 
-音乐助手是一款免费、开源的音乐库管理器，可连接到您的流媒体服务和多种连接的扬声器。将您的Home Assistant实例变成您自己的个人音乐流媒体中心！
+Music Assistant is a free, open-source music library manager that connects to your streaming services and a wide range of connected speakers. Turn your Home Assistant instance into your own personal music streaming hub!
 
-## 功能
+## Features
 
-- 🎵 **多源音乐库**：连接Spotify、YouTube Music、Qobuz、Tidal等
-- 🔊 **通用播放器支持**：与Sonos、Chromecast、AirPlay、DLNA、Squeezebox等许多设备兼容
-- 🎶 **统一库**：所有来源的音乐都在一个地方
-- 🎯 **智能播放**：无缝播放、淡入淡出和音频归一化
-- 📱 **美丽界面**：通过Home Assistant访问的现代网络界面
-- 🏠 **Home Assistant集成**：完全集成到Home Assistant的媒体播放平台
+- 🎵 **Multi-source Music Library**: Connect Spotify, YouTube Music, Qobuz, Tidal, and more
+- 🔊 **Universal Player Support**: Works with Sonos, Chromecast, AirPlay, DLNA, Squeezebox, and many more
+- 🎶 **Unified Library**: All your music from different sources in one place
+- 🎯 **Smart Playback**: Gapless playback, crossfading, and audio normalization
+- 📱 **Beautiful Interface**: Modern web interface accessible through Home Assistant
+- 🏠 **Home Assistant Integration**: Full integration with Home Assistant's media player platform
 
-## 安装
+## Installation
 
-1. 在Home Assistant中导航到**设置** → **应用** → **应用商店**
-2. 搜索“音乐助手”
-3. 点击**安装**
-4. 等待安装完成
-5. 点击**启动**
-6. 打开**网络用户界面**以设置音乐助手
+1. Navigate to **Settings** → **Apps** → **App Store** in Home Assistant
+2. Search for "Music Assistant"
+3. Click **Install**
+4. Wait for the installation to complete
+5. Click **Start**
+6. Open the **Web UI** to set up Music Assistant
 
-## 配置
+## Configuration
 
-### 可用选项
+### Available Options
 
 ```yaml
 log_level: info
@@ -35,108 +35,110 @@ safe_mode: false
 
 #### log_level
 
-设置（全局）日志级别：
+Set the (global) logging level:
 
-- `error`：仅显示错误
-- `warning`：显示警告和错误
-- `info`：常规日志（推荐）
-- `debug`：详细的日志，用于故障排除
+- `error`: Only show errors
+- `warning`: Show warnings and errors
+- `info`: Normal logging (recommended)
+- `debug`: Detailed logging for troubleshooting
 
-**默认**：`info`
+**Default**: `info`
 
-**建议**：考虑仅在故障排除时使用`debug`级别。最好将全局设置保留为仅`info`。
+**Recommendation**: Consider using `debug` level only to troubleshoot any issues.
+Best to keep the global setting set to just `info`.
 
-提示：在音乐助手内，每个提供程序允许您覆盖日志级别。
+TIP: Within Music Assistant, each provider allows you to override the log level.
 
 #### safe_mode
 
-启用时，音乐助手将不加载任何提供程序启动。这对于故障排除启动问题或提供程序相关的问题很有用。
+When enabled, Music Assistant starts without loading any providers. This is useful for troubleshooting startup issues or provider-related problems.
 
-**默认**：`false`
+**Default**: `false`
 
-## 入门
+## Getting Started
 
-1. 启动应用后，点击**打开网络用户界面**
-2. 按照入门向导设置您的第一个音乐提供程序
-3. 连接您的扬声器/播放器
-4. 开始享受您的音乐！
+1. After starting the App, click **Open Web UI**
+2. Follow the onboarding wizard to set up your first music provider
+3. Connect your speakers/players
+4. Start enjoying your music!
 
-### 可选：Home Assistant集成
+### Optional: Home Assistant Integration
 
-为了高级自动化和控制，您可以可选地安装Home Assistant中的**音乐助手集成**。此集成允许您：
+For advanced automation and control, you can optionally install the **Music Assistant integration** in Home Assistant. This integration allows you to:
 
-- 🤖 从Home Assistant自动化和脚本中自动播放音乐
-- 🎛️ 使用Home Assistant服务控制播放
-- 📊 在仪表板中访问播放器状态和属性
-- 🎵 在Home Assistant场景和例程中使用音乐助手
+- 🤖 **Automate music playback** from Home Assistant automations and scripts
+- 🎛️ **Control playback** using Home Assistant services
+- 📊 **Access player states** and attributes in your dashboards
+- 🎵 **Use Music Assistant** in your Home Assistant scenes and routines
 
-**要安装集成：**
+**To install the integration:**
 
-安装应用后，Home Assistant应自动检测到Music Assistant服务器（或网络中的任何Music Assistant服务器）。在设备和服务页面上，您应该看到一个用于发现服务器的卡片，只需简单设置集成即可。
+The Music Assistant server should be auto detected by Home Assistant once you install the App (or any Music Assistant server in your network). On the Devices & services page, you should be greeted with a card for the discovered server to simply set up the integration.
 
-**注意**：应用提供Music Assistant服务器，而集成提供Home Assistant实体和自动化功能。如果您只想使用网络界面，则无需集成。
+**Note**: The App provides the Music Assistant server, while the integration provides the Home Assistant entities and automation capabilities. The App works perfectly fine without the integration if you only want to use the web interface.
 
-## 文档
+## Documentation
 
-有关详细文档，请访问：
+For detailed documentation, visit:
 
-- 📖 [官方文档](https://music-assistant.io)
-- 💬 [社区讨论](https://github.com/orgs/music-assistant/discussions)
-- 🐛 [支持与问题跟踪](https://github.com/music-assistant/support)
-- 💭 [Discord服务器](https://discord.gg/PZQ6RWbfeS)
+- 📖 [Official Documentation](https://music-assistant.io)
+- 💬 [Community Discussions](https://github.com/orgs/music-assistant/discussions)
+- 🐛 [Support & Issue Tracker](https://github.com/music-assistant/support)
+- 💭 [Discord Server](https://discord.gg/PZQ6RWbfeS)
 
-## 支持
+## Support
 
-如果您遇到任何问题：
+If you encounter any issues:
 
-1. 检查应用日志（在Home Assistant应用页面上可用）
-2. 访问[文档](https://music-assistant.io)
-3. 在[music-assistant/support](https://github.com/music-assistant/support)搜索现有问题
-4. 在[Discord](https://discord.gg/PZQ6RWbfeS)或[GitHub Discussions](https://github.com/orgs/music-assistant/discussions)上寻求帮助
+1. Check the App logs (available in the Home Assistant App page)
+2. Visit the [documentation](https://music-assistant.io)
+3. Search existing issues at [music-assistant/support](https://github.com/music-assistant/support)
+4. Ask for help on [Discord](https://discord.gg/PZQ6RWbfeS) or [GitHub Discussions](https://github.com/orgs/music-assistant/discussions)
 
-## 更新
+## Updates
 
-这是**稳定**频道。更新在经过彻底测试后发布，建议用于日常使用。
+This is the **stable** channel. Updates are released after thorough testing and are recommended for everyday use.
 
-### 更新频率
+### Update Frequency
 
-- 主要版本：每几个月（大约每季度一次）
-- 错误修复：需要时
-- 安全更新：立即
+- Major releases: Every few months (more or less once per quarter)
+- Bug fixes: As needed
+- Security updates: Immediately
 
-## 版本信息
+## Version Information
 
-此应用使用Music Assistant的稳定版本。对于最新功能，请考虑BETA或NIGHTLY版本（自行承担风险）。
+This App uses stable releases of Music Assistant. For the latest features, consider the BETA or NIGHTLY versions (use at your own risk).
 
-## 数据存储
+## Data Storage
 
-所有Music Assistant数据都存储在应用的数据库目录中：
+All Music Assistant data is stored within the App's data directory:
 
-- 音乐库数据库
-- 配置设置
+- Music library database
+- Configuration settings
 
-因此，备份Home Assistant中的Music Assistant应用也将包括您的Music Assistant数据。请确保在更新到新版本之前始终备份，以便您可以轻松回滚到上一个版本！
+Making a backup of the Music Assistant App within Home Assistant will therefore also include your Music Assistant data. Please ensure to always make a backup before updating to a new version so you can always easily revert to the previous version!
 
-## 性能提示
+## Performance Tips
 
-- 使用快速存储介质（推荐SSD）
-- 确保有足够的RAM（Home Assistant + 此应用至少4GB）
-- 保持您的Music Assistant实例更新
+- Use a fast storage medium (SSD recommended)
+- Ensure adequate RAM (minimum 4GB for Home Assistant + this App)
+- Keep your Music Assistant instance updated
 
-## 贡献
+## Contributing
 
-Music Assistant是开源的！欢迎贡献：
+Music Assistant is open source! Contributions are welcome:
 
-- 🐛 [报告错误](https://github.com/music-assistant/support)
-- 💡 [建议功能](https://github.com/orgs/music-assistant/discussions)
-- 🔧 提交拉取请求
-- 📝 改进文档
+- 🐛 [Report bugs](https://github.com/music-assistant/support)
+- 💡 [Suggest features](https://github.com/orgs/music-assistant/discussions)
+- 🔧 Submit pull requests
+- 📝 Improve documentation
 
-访问GitHub上的[Music Assistant组织](https://github.com/music-assistant)以贡献。
+Visit the [Music Assistant organization](https://github.com/music-assistant) on GitHub to contribute.
 
-## 许可证
+## License
 
-Music Assistant遵循Apache License 2.0许可证。
+Music Assistant is licensed under the Apache License 2.0.
+
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

@@ -1,6 +1,6 @@
 {
   "name": "LaMeteoAgricole 2 MQTT",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "slug": "meteoagricole2mqtt",
   "description": "[老王杂谈说]：null",
   "arch": [

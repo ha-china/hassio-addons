@@ -1,8 +1,8 @@
 ---
-version: 7.0.1
+version: 7.1.0
 slug: mosquitto
 name: Mosquitto broker
-description: '[老王杂谈说]：一个开源MQTT代理'
+description: '[老王杂谈说]：null'
 url: https://ghfast.top/github.com/home-assistant/addons/tree/master/mosquitto
 arch:
   - aarch64
@@ -16,6 +16,8 @@ map:
   - share
 options:
   logins: []
+  log_dest: []
+  log_type: []
   require_certificate: false
   certfile: fullchain.pem
   keyfile: privkey.pem
@@ -32,6 +34,10 @@ schema:
     - username: str
       password: password
       password_pre_hashed: "bool?"
+  log_dest:
+    - list(none|stdout|stderr|topic)?
+  log_type:
+    - list(none|debug|error|warning|notice|information|subscribe|unsubscribe|websockets|all)?
   require_certificate: bool
   certfile: str
   cafile: str?

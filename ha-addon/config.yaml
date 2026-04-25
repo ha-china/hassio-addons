@@ -1,8 +1,8 @@
 ---
 name: "Sendspin Bluetooth Bridge"
-version: "2.61.0"
+version: "2.61.1"
 slug: "sendspin_bt_bridge"
-description: "[老王杂谈说]：桥梁音乐助手向蓝牙音箱发送Sendspin协议"
+description: "[老王杂谈说]：null"
 url: "https://ghfast.top/github.com/trudenboy/sendspin-bt-bridge"
 image: "ghcr.nju.edu.cn/trudenboy/sendspin-bt-bridge"
 homeassistant: "2024.2.0"

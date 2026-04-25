@@ -1,32 +1,29 @@
 import os from 'os';
 import { uiAuthMiddleware } from '../middleware.js';
-import { sanitizeSessionId } from '../session.js';
+import { sanitizeSessionId, sessions } from '../session.js';
 import { API_TOKEN, PORT } from '../config.js';
 import { logger } from '../logger.js';
 
 export function registerUIRoutes(app) {
   // --- Dashboard ---
   app.get('/', uiAuthMiddleware, (req, res) => {
-    const sessionId = sanitizeSessionId(req.query.session_id || 'default');
+    let sessionId = req.query.session_id;
+    if (!sessionId) {
+      // Preference: 1. Connected session, 2. 'default' session, 3. First available session
+      const connectedSession = Array.from(sessions.values()).find((s) => s.isConnected);
+      if (connectedSession) {
+        sessionId = connectedSession.id;
+      } else if (sessions.has('default')) {
+        sessionId = 'default';
+      } else if (sessions.size > 0) {
+        sessionId = Array.from(sessions.keys())[0];
+      } else {
+        sessionId = 'default';
+      }
+    }
+    sessionId = sanitizeSessionId(sessionId);
     res.send(renderDashboard(sessionId));
   });
-
-  // Catch-all for other UI routes
-  app.get(
-    /^(?!\/(api|qr|status|events|logs|health|media|session\/start)).+/,
-    uiAuthMiddleware,
-    (req, res) => {
-      if (req.path.includes('/api/')) {
-        logger.warn(
-          { path: req.path, url: req.url, headers: req.headers },
-          'Catch-all hit for API path'
-        );
-        return res.status(404).json({ error: 'API route not found' });
-      }
-      const sessionId = sanitizeSessionId(req.query.session_id || 'default');
-      res.send(renderDashboard(sessionId));
-    }
-  );
 }
 
 function renderDashboard(sessionId) {
@@ -37,6 +34,7 @@ function renderDashboard(sessionId) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <title>WhatsApp Homeassistant App</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💬</text></svg>">
         <style>
             :root {
                 --primary: #00a884;
@@ -97,10 +95,10 @@ function renderDashboard(sessionId) {
             * { box-sizing: border-box; }
             body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; min-height: 100vh; font-size: 14px; }
 
-            .sidebar { width: 280px; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; transition: all 0.3s; }
-            .sidebar h1 { font-size: 1.8rem; line-height: 1.2; margin: 0; color: var(--primary); }
-            .sidebar-links { display: flex; flex-direction: column; gap: 10px; margin-top: 1rem; }
-            .sidebar-link { color: #8696a0; text-decoration: none; padding: 10px; border-radius: 8px; transition: all 0.2s; display: flex; align-items: center; gap: 10px; border: 1px solid transparent; font-size: 0.95rem; }
+            .sidebar { width: 280px; background: var(--sidebar-bg); color: var(--sidebar-text); padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; transition: all 0.3s; position: sticky; top: 0; height: 100vh; }
+            .sidebar h1 { font-size: 1.8rem; line-height: 1.2; margin: 0; color: var(--primary); flex-shrink: 0; }
+            .sidebar-links { display: flex; flex-direction: column; gap: 10px; margin-top: 1rem; flex-grow: 1; overflow-y: auto; }
+            .sidebar-link { color: #8696a0; text-decoration: none; padding: 10px; border-radius: 8px; transition: all 0.2s; display: flex; align-items: center; gap: 10px; border: 1px solid transparent; font-size: 0.95rem; flex-shrink: 0; }
             .sidebar-link:hover { background: #202c33; color: #fff; border-color: #313d45; }
 
             .main-content { flex: 1; padding: 2rem; overflow-y: auto; width: 100%; display: flex; flex-direction: column; gap: 2rem; }
@@ -220,7 +218,7 @@ function renderDashboard(sessionId) {
                 <a id="full-logs-link" href="#" target="_top" class="sidebar-link">📋 Full System Logs</a>
             </div>
 
-            <div style="margin-top: auto; padding-top: 1rem;">
+            <div style="margin-top: auto; padding-top: 1rem; flex-shrink: 0; border-top: 1px solid rgba(255,255,255,0.05);">
                 <div class="stat-label">System Info</div>
                 <div style="font-size: 0.8rem; color: #8696a0;">
                     Node: <span id="node-version">...</span><br>
@@ -367,7 +365,7 @@ function renderDashboard(sessionId) {
                         <button class="btn btn-primary" onclick="downloadDebugInfo()">
                             📥 Download Issue Debug Info
                         </button>
-                        <a href="https://github.com/FaserF/ha-whatsapp/issues/new" target="_blank" class="btn btn-secondary">
+                        <a href="https://github.com/FaserF/ha-whatsapp/issues/new?template=bug_report.yml" target="_blank" class="btn btn-secondary">
                             🔗 Open GitHub Issue
                         </a>
                     </div>
@@ -496,7 +494,7 @@ function renderDashboard(sessionId) {
             async function logoutSession() {
                 if (!confirm('WARNING: This will log you out and DELETE ALL authentication data for this session. You will need to scan the QR code again. Continue?')) return;
                 try {
-                    const response = await fetch(basePath + 'api/session', {
+                    const response = await fetch(basePath + 'session', {
                         method: 'DELETE',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ session_id: currentSession })
@@ -570,8 +568,16 @@ function renderDashboard(sessionId) {
                     const slug = data.addonSlug || 'unknown';
                     const fullLogsLink = document.getElementById('full-logs-link');
                     if (fullLogsLink) {
-                        // Point to the native HA Addon logs page
-                        fullLogsLink.href = '/config/app/' + slug + '/logs';
+                        const isIngress = window.location.pathname.includes('/api/hassio_ingress/');
+                        if (isIngress) {
+                            fullLogsLink.style.display = 'flex';
+                            // Point to the native HA Addon logs page (only works via Ingress)
+                            fullLogsLink.href = '/config/app/' + slug + '/logs';
+                            fullLogsLink.target = '_top';
+                        } else {
+                            // Hide if accessed directly via IP:PORT as the relative path would be wrong
+                            fullLogsLink.style.display = 'none';
+                        }
                     }
 
                     // Update Session Switcher

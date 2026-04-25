@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.0.91](https://github.com/SirUli/homeassistant-ollama-addon/compare/v2.0.90...v2.0.91) (2026-04-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ollama/ollama to v0.21.2 ([8ae6820](https://github.com/SirUli/homeassistant-ollama-addon/commit/8ae6820a49be54e598907f0c21208968ba7144e0))
+
+## [2.0.90](https://github.com/SirUli/homeassistant-ollama-addon/compare/v2.0.89...v2.0.90) (2026-04-25)
+
+
+### Bug Fixes
+
+* **deps:** update cycjimmy/semantic-release-action action to v6 ([ed6b325](https://github.com/SirUli/homeassistant-ollama-addon/commit/ed6b3259fe7eed3c8f3b329951eccfd2b6782273))
+
+## [2.0.89](https://github.com/SirUli/homeassistant-ollama-addon/compare/v2.0.88...v2.0.89) (2026-04-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ollama/ollama to v0.21.1 ([0e67687](https://github.com/SirUli/homeassistant-ollama-addon/commit/0e67687592f63ee1725a43b828d623d20e27efec))
+
 ## [2.0.88](https://github.com/SirUli/homeassistant-ollama-addon/compare/v2.0.87...v2.0.88) (2026-04-18)
 
 

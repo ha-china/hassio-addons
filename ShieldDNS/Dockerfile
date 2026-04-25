@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.1.0
 ARG TARGETARCH
 # hadolint ignore=DL3006
 
@@ -6,10 +6,10 @@ ARG TARGETARCH
 FROM --platform=$BUILDPLATFORM alpine:3.23 AS binary
 ARG TARGETARCH
 # renovate: datasource=github-releases depName=coredns/coredns
-ARG COREDNS_VERSION="1.14.2"
+ARG COREDNS_VERSION="1.14.3"
 
 # App metadata (injected by CI)
-ENV APP_VERSION="2.4.2"
+ENV APP_VERSION="2.4.4"
 ENV APP_NAME="ShieldDNS"
 ENV APP_SLUG="shielddns"
 ENV APP_UNSUPPORTED="false"
@@ -31,7 +31,7 @@ RUN apk add --no-cache curl \
 FROM --platform=$BUILDPLATFORM golang:1.26-alpine AS admin-build
 ARG TARGETARCH
 # renovate: datasource=github-releases depName=FaserF/ShieldDNS
-ARG SHIELDDNS_VERSION="1.6.0"
+ARG SHIELDDNS_VERSION="1.7.1"
 WORKDIR /app
 RUN apk add --no-cache curl \
     && curl -L "https://ghfast.top/github.com/FaserF/ShieldDNS/archive/refs/tags/v${SHIELDDNS_VERSION}.tar.gz" -o source.tar.gz \
@@ -45,28 +45,25 @@ RUN go mod download \
 FROM ${BUILD_FROM}
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
 
-# App metadata (Single set, consolidated)
-ENV APP_VERSION="2.4.0"
-ENV APP_NAME="ShieldDNS"
-ENV APP_SLUG="shielddns"
-ENV APP_UNSUPPORTED="false"
-
 # Setup directories
-RUN mkdir -p /var/www/admin /var/www/html /run/nginx /etc/services.d/shielddns /etc/shielddns
+RUN mkdir -p /etc/services.d/shielddns /data
 
-# Copy pre-compiled binaries and assets from build stages
+# Copy pre-compiled binaries from build stages
 COPY --from=binary /coredns /usr/bin/coredns
 COPY --from=admin-build /app/admin/shielddns-admin /usr/bin/shielddns-admin
-COPY --from=admin-build /app/admin/www /var/www/admin
 
 # Install dependencies
 # hadolint ignore=DL3018
-RUN apk add --no-cache -u \
+RUN \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/main" > /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/community" >> /etc/apk/repositories \
+    && apk add --no-cache musl musl-dev \
+    && apk upgrade --no-cache --available \
+    && apk add --no-cache \
     libssl3 \
     libcrypto3 \
     bind-tools \
     openssl \
-    nginx \
     netcat-openbsd \
     net-tools \
     dos2unix \
@@ -74,16 +71,12 @@ RUN apk add --no-cache -u \
     jq \
     ca-certificates
 
-# Copy Web Assets
-COPY www/index.html /var/www/html/index.html
-COPY www/logo.png /var/www/html/logo.png
-
 # Copy Addon run script to S6 services directory
 COPY run.sh /etc/services.d/shielddns/run
 RUN dos2unix /etc/services.d/shielddns/run && chmod +x /etc/services.d/shielddns/run
 
 # Healthcheck
-HEALTHCHECK --interval=30s --timeout=10s --retries=3 --start-period=60s \
+HEALTHCHECK --interval=5s --timeout=3s --retries=3 --start-period=10s \
     CMD curl -fS http://localhost:8080/api/health/live || exit 1
 
 # Labels

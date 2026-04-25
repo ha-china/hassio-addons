@@ -1,79 +1,80 @@
-# Home Assistant 插件：whoogle-search
+# Home assistant add-on: whoogle-search
 
-我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试都需要花费大量时间（以及一些金钱）。我经常使用我的 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了某些测试服务，如 VPN），这些服务我自己并不使用，以便进行故障排除和改进插件。
 
-如果这个插件为您节省了时间或使您的设置变得更容易，我将非常感谢您的支持！
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-[![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
-## 插件信息
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fwhoogle%2Fconfig.yaml)
-![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fwhoogle%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fwhoogle%2Fconfig.yaml)
+## Addon informations
 
-[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fwhoogle%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fwhoogle%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fwhoogle%2Fconfig.yaml)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢每一位为我仓库点星的人！要给仓库点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载演变](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/whoogle/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/whoogle/stats.png)
 
-## 关于
+## About
 
-[whoogle-search](https://github.com/benbusby/whoogle-search) 是一个自托管、无广告、尊重隐私的元搜索引擎。
-此插件基于 Docker 镜像 https://hub.docker.com/r/benbusby/whoogle-search/tags
+[whoogle-search](https://github.com/benbusby/whoogle-search) is a Self-hosted, ad-free, privacy-respecting metasearch engine.
+This addon is based on the docker image https://hub.docker.com/r/benbusby/whoogle-search/tags
 
-## 配置
+## Configuration
 
-使用插件的 `env_vars` 选项来传递额外的环境变量（大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-WebUI 可以在 <http://homeassistant:PORT> 或通过侧边栏使用入口访问。
-配置可以通过应用程序 WebUI 进行，但以下选项除外。
+Webui can be found at <http://homeassistant:PORT> or through the sidebar using Ingress.
+Configurations can be done through the app webUI, except for the following options.
 
-### 选项
+### Options
 
-| 选项 | 类型 | 默认 | 描述 |
+| Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `TZ` | str | `Europe/Amsterdam` | 时区 |
-| `WHOOGLE_CONFIG_LANGUAGE` | str | `lang_en` | 界面语言 |
-| `WHOOGLE_CONFIG_URL` | str | | 服务的基本 URL |
-| `WHOOGLE_CONFIG_THEME` | list | | 主题（system/light/dark）|
-| `WHOOGLE_CONFIG_COUNTRY` | str | | 搜索结果的国家代码 |
-| `WHOOGLE_CONFIG_SEARCH_LANGUAGE` | str | | 搜索语言 |
-| `WHOOGLE_CONFIG_BLOCK` | str | | 要阻止的网站列表（以逗号分隔）|
-| `WHOOGLE_CONFIG_SAFE` | list | | 安全搜索（0/1）|
-| `WHOOGLE_CONFIG_ALTS` | list | | 使用替代前端（0/1）|
-| `WHOOGLE_CONFIG_NEW_TAB` | list | | 在新标签页中打开结果（0/1）|
-| `WHOOGLE_CONFIG_VIEW_IMAGE` | list | | 启用查看图片选项（0/1）|
-| `WHOOGLE_CONFIG_GET_ONLY` | list | | 仅 GET 请求（0/1）|
-| `WHOOGLE_CONFIG_DISABLE` | list | | 禁止更改设置（0/1）|
-| `WHOOGLE_AUTOCOMPLETE` | list | | 启用自动完成（0/1）|
-| `WHOOGLE_MINIMAL` | list | | 最简模式（0/1）|
-| `WHOOGLE_CSP` | list | | 内容安全策略（0/1）|
-| `WHOOGLE_RESULTS_PER_PAGE` | int | | 每页结果数（5-100）|
-| `WHOOGLE_USER` | str | | 认证的用户名 |
-| `WHOOGLE_PASS` | password | | 认证的密码 |
-| `WHOOGLE_PROXY_TYPE` | str | | 代理类型 |
-| `WHOOGLE_PROXY_LOC` | str | | 代理位置 |
-| `WHOOGLE_PROXY_USER` | str | | 代理用户名 |
-| `WHOOGLE_PROXY_PASS` | str | | 代理密码 |
-| `WHOOGLE_ALT_TW` | str | | Twitter 的替代前端 |
-| `WHOOGLE_ALT_YT` | str | | YouTube 的替代前端 |
-| `WHOOGLE_ALT_IG` | str | | Instagram 的替代前端 |
-| `WHOOGLE_ALT_RD` | str | | Reddit 的替代前端 |
-| `WHOOGLE_ALT_MD` | str | | Medium 的替代前端 |
-| `WHOOGLE_ALT_TL` | str | | TikTok 的替代前端 |
-| `HTTPS_ONLY` | list | | 仅 HTTPS 模式（0/1）|
+| `TZ` | str | `Europe/Amsterdam` | Timezone |
+| `WHOOGLE_CONFIG_LANGUAGE` | str | `lang_en` | Interface language |
+| `WHOOGLE_CONFIG_URL` | str | | Base URL for the service |
+| `WHOOGLE_CONFIG_THEME` | list | | Theme (system/light/dark) |
+| `WHOOGLE_CONFIG_COUNTRY` | str | | Country code for search results |
+| `WHOOGLE_CONFIG_SEARCH_LANGUAGE` | str | | Search language |
+| `WHOOGLE_CONFIG_BLOCK` | str | | Comma-separated list of sites to block |
+| `WHOOGLE_CONFIG_SAFE` | list | | Safe search (0/1) |
+| `WHOOGLE_CONFIG_ALTS` | list | | Use alternative frontends (0/1) |
+| `WHOOGLE_CONFIG_NEW_TAB` | list | | Open results in new tab (0/1) |
+| `WHOOGLE_CONFIG_VIEW_IMAGE` | list | | Enable view image option (0/1) |
+| `WHOOGLE_CONFIG_GET_ONLY` | list | | GET requests only (0/1) |
+| `WHOOGLE_CONFIG_DISABLE` | list | | Disable changing settings (0/1) |
+| `WHOOGLE_AUTOCOMPLETE` | list | | Enable autocomplete (0/1) |
+| `WHOOGLE_MINIMAL` | list | | Minimal mode (0/1) |
+| `WHOOGLE_CSP` | list | | Content Security Policy (0/1) |
+| `WHOOGLE_RESULTS_PER_PAGE` | int | | Results per page (5-100) |
+| `WHOOGLE_USER` | str | | Username for authentication |
+| `WHOOGLE_PASS` | password | | Password for authentication |
+| `WHOOGLE_PROXY_TYPE` | str | | Proxy type |
+| `WHOOGLE_PROXY_LOC` | str | | Proxy location |
+| `WHOOGLE_PROXY_USER` | str | | Proxy username |
+| `WHOOGLE_PROXY_PASS` | str | | Proxy password |
+| `WHOOGLE_ALT_TW` | str | | Twitter alternative frontend |
+| `WHOOGLE_ALT_YT` | str | | YouTube alternative frontend |
+| `WHOOGLE_ALT_IG` | str | | Instagram alternative frontend |
+| `WHOOGLE_ALT_RD` | str | | Reddit alternative frontend |
+| `WHOOGLE_ALT_MD` | str | | Medium alternative frontend |
+| `WHOOGLE_ALT_TL` | str | | TikTok alternative frontend |
+| `HTTPS_ONLY` | list | | HTTPS only mode (0/1) |
 
-### 示例配置
+### Example Configuration
 
 ```yaml
 TZ: "Europe/London"
@@ -88,51 +89,29 @@ WHOOGLE_PASS: "secure-password"
 WHOOGLE_RESULTS_PER_PAGE: 20
 ```
 
-有关完整的环境变量文档，请参阅：https://github.com/benbusby/whoogle-search#environment-variables
+For complete environment variable documentation, see: https://github.com/benbusby/whoogle-search#environment-variables
 
-## 安装
+## Installation
 
-此插件的安装相当简单，与安装任何其他插件没有区别。
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
 
-1. 将我的插件存储库添加到您的 Home Assistant 实例中（在监督器插件存储库的右上角，或点击下面的按钮如果您已配置我的 HA）
-   [![打开您的 Home Assistant 实例并显示添加插件存储库对话框，其中包含特定存储库 URL 的预填充。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此插件。
-1. 点击 `保存` 按钮以存储您的配置。
-1. 将插件选项设置为您喜欢的设置
-1. 启动插件。
-1. 检查插件的日志，以查看一切是否顺利。
-1. 打开 WebUI 并调整软件选项
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Set the add-on options to your preferences
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open the webUI and adapt the software options
 
-## 支持
+## Support
 
-在 github 上创建一个 issue
+Create an issue on github
 
-## 示例
+## Illustration
 
-![示例](https://github.com/benbusby/whoogle-search/raw/main/docs/screenshot_desktop.jpg)
+![illustration](https://github.com/benbusby/whoogle-search/raw/main/docs/screenshot_desktop.jpg)
 
 [repository]: https://github.com/alexbelgium/hassio-addons
----
 
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 
-**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
-
----
-
-## 📱 关注我
-
-扫描下面二维码，关注我。有需要可以随时给我留言：
-
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
-
-## ☕ 赞助支持
-
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
-
-感谢您的支持与鼓励！

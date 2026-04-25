@@ -1,26 +1,26 @@
-# Home Assistant 插件：signalk
+# 家居助手插件：signalk
 
-我在业余时间维护这个和其他 Home Assistant 插件：跟踪上游变更、HA 变更以及在真实硬件上进行测试都需要花费大量的时间和金钱。我经常使用我超过 110 个插件中的 5-10 个，因此我安装了测试机器（并购买了某些测试服务，如 VPN），这些服务我自己并不使用，以便进行故障排除和改进插件。
+我在业余时间维护这个和其他的Home Assistant插件：跟进上游更改、Home Assistant更改以及在真实硬件上测试都需要花费大量时间（以及一些金钱）。我经常使用大约5-10个我的>110个插件，所以我安装了测试机器（并购买了某些我自身不使用的测试服务，如vpn），以进行故障排除和改进插件。
 
 如果这个插件为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
 
-[![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![买我一杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过PayPal捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
 
 ![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fsignalk%2Fconfig.yaml)
-![入站](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fsignalk%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fsignalk%2Fconfig.yaml)
 ![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fsignalk%2Fconfig.yaml)
 
-[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我仓库点星的人！要为它点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有为我仓库加星的人！要加星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -28,34 +28,34 @@ _感谢所有为我仓库点星的人！要为它点星，请点击下面的图�
 
 ## 关于
 
-[Signal K 服务器](https://github.com/SignalK/signalk-server) 是一个在船上的中央枢纽上运行的服务器应用程序。如果您使用或开发海洋电子设备，Signal K 服务器为您提供了一些东西。
+[Signal K服务器](https://github.com/SignalK/signalk-server) 是一个在船上的中央枢纽上运行的服务器应用程序。如果您使用或开发海洋电子设备，Signal K服务器为您提供了一些东西。
 
 ## 配置
 
 ### 选项
 
-- `env_vars`: 传递给 SignalK 的额外环境变量。
+- `env_vars`：传递给SignalK的额外环境变量。
 
 ## 安装
 
-此插件的安装非常简单，与安装任何其他插件没有区别。
+此插件的安装非常简单，与安装任何其他插件没有不同。
 
-1. 将我的插件存储库添加到您的 Home Assistant 实例中（在 supervisor 插件存储库的右上角，或点击下面的按钮如果您已经配置了我的 HA）
-   [![打开您的 Home Assistant 实例并显示带有特定存储库 URL 预填充的添加插件存储库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件存储库添加到您的Home Assistant实例中（在监督器插件存储库的右上角，或点击下面的按钮如果您已配置我的HA）
+   [![打开您的Home Assistant实例并显示具有特定存储库URL预先填充的添加插件存储库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 点击“保存”按钮以存储您的配置。
 1. 将插件选项设置为您的偏好。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切顺利。
-1. 打开 WebUI 并调整软件选项。
+1. 检查插件的日志以查看一切是否顺利。
+1. 打开WebUI并调整软件选项。
 
 ### 环境变量
 
-使用插件的 `env_vars` 选项传递额外的环境变量（名称为大写或小写）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+使用插件的`env_vars`选项来传递额外的环境变量（名称为大写或小写）。有关详细信息，请参阅https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
 ## 支持
 
-在 GitHub 上创建问题
+在GitHub上创建问题
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 ---

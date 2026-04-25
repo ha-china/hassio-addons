@@ -1,45 +1,51 @@
-# Sendspin 蓝牙桥
+# Sendspin Bluetooth Bridge
 
-![支持 aarch64 架构][aarch64-shield]
-![支持 amd64 架构][amd64-shield]
-![支持 armv7 架构][armv7-shield]
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+![Supports armv7 Architecture][armv7-shield]
 
-桥接音乐助手（Bridge Music Assistant）的 Sendspin 协议至蓝牙扬声器。
-将音乐助手中的音频流传输到与 Home Assistant 主机连接的任何蓝牙 A2DP 扬声器。
+Bridge Music Assistant's Sendspin protocol to Bluetooth speakers.
+Stream audio from Music Assistant to any Bluetooth A2DP speaker
+connected to your Home Assistant host.
 
-## 关于
+## About
 
-此插件允许您使用蓝牙扬声器作为音乐助手的音频输出播放器。它通过 Sendspin 协议连接到音乐助手，并通过 PulseAudio/PipeWire 将音频流路由到配对的蓝牙设备。
+This add-on allows you to use Bluetooth speakers as audio output
+players in Music Assistant. It connects to Music Assistant via the
+Sendspin protocol and routes audio streams to paired Bluetooth
+devices via PulseAudio/PipeWire.
 
-主要功能：
-- 多扬声器支持 — 每个扬声器在音乐助手中作为独立的播放器出现
-- 自动蓝牙重新连接
-- 通过 HA Ingress 提供的 Web UI 用于状态监控和配置
-- 自动发现音乐助手服务器（mDNS）
-- 通过音乐助手或直接 PulseAudio 进行音量控制
-- 在 **配置 → 音乐助手** 中进行音乐助手重新配置流程
-- 在 Web UI 中提供引导式入门、恢复操作、释放/回收控制以及基于诊断的错误报告预填充
+Key features:
+- Multi-speaker support — each speaker appears as a separate player in Music Assistant
+- Automatic Bluetooth reconnection
+- Web UI for status monitoring and configuration (via HA Ingress)
+- mDNS auto-discovery of Music Assistant server
+- Volume control through Music Assistant or direct PulseAudio
+- Music Assistant reconfigure flow in **Configuration → Music Assistant**
+- Guided onboarding, recovery actions, release/reclaim controls, and diagnostics-backed bug report prefills in the web UI
 
-## 文档
+## Documentation
 
-完整文档请参阅 [DOCS.md](DOCS.md) 或访问 [文档站点](https://trudenboy.github.io/sendspin-bt-bridge)。
+For full documentation, see [DOCS.md](DOCS.md) or visit the
+[documentation site](https://trudenboy.github.io/sendspin-bt-bridge).
 
-## 更新频道
+## Update channels
 
-- 此存储库中检查的插件清单是 **稳定版** Home Assistant 插件变体。
-- 安装的插件轨道由您从 Home Assistant 商店安装的插件变体决定。
-- 桥接 UI 仅指示当前轨道和更新指南；它不会切换已安装的插件轨道。
-- 当发布 RC 或 Beta 插件变体时，切换轨道意味着需要从 Home Assistant 商店安装相应的插件变体。
-- 稳定版 / RC 版 / Beta 版插件变体使用不同的默认 HA 入口端口和不同的默认播放器监听端口范围，因此它们可以在单个 HAOS 主机上并行运行。
-- 稳定版在主机启动后自动启动；RC 和 Beta 版默认为手动启动，以便预发布轨道保持可选。
-- HA Ingress 总是继续使用固定的轨道特定端口（`8080` 稳定版，`8081` RC，`8082` beta 版）。自定义 `WEB_PORT` 只会增加额外的直接监听器；它不会替换 Ingress。
-- 在插件模式下，认证始终由 Home Assistant / Ingress 强制执行；独立的密码切换在此处不适用。
-- 只有通过插件/Ingress 流才能使用静默 Home Assistant 令牌引导音乐助手，因此相关的 UI 辅助程序有意设置为插件范围。
-- **不要**同时在多个插件变体中配置相同的蓝牙扬声器。
+- The checked-in addon manifest in this repository is the **stable** Home Assistant addon variant.
+- The installed addon track is determined by the addon variant you install from the Home Assistant store.
+- The bridge UI only indicates the current track and update guidance; it does not switch the installed addon track.
+- When RC or Beta addon variants are published, switching tracks means installing the matching addon variant from the Home Assistant store.
+- Stable / RC / Beta addon variants use different default HA ingress ports and different default player listen-port ranges, so they can run side by side on one HAOS host.
+- Stable starts automatically after host boot; RC and Beta default to manual start so prerelease tracks stay opt-in.
+- HA Ingress always keeps using the fixed track-specific port (`8080` stable, `8081` RC, `8082` beta). A custom `WEB_PORT` only adds an extra direct listener; it does not replace Ingress.
+- In addon mode, auth is always enforced by Home Assistant / Ingress; the standalone password toggle does not apply here.
+- Silent Home Assistant token bootstrap for Music Assistant only works through the addon/Ingress flow, so related UI helpers are intentionally addon-scoped.
+- Do **not** configure the same Bluetooth speaker in more than one addon variant at the same time.
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
+
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

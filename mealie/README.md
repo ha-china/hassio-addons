@@ -1,65 +1,66 @@
-# Hass.io 插件：Mealie
+# Hass.io Add-ons: Mealie
 
-我在业余时间维护这个以及其他 Home Assistant 插件：跟踪上游变更、HA 变更以及在真实硬件上测试需要花费很多时间（还有一些金钱）。我经常使用我 >110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我不使用的测试服务，如 vpn），以排除故障并改进插件。
 
-如果这个插件为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-[![请给我买杯咖啡][捐赠徽章]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal-徽章]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
-## 插件信息
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmealie%2Fconfig.yaml)
-![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmealie%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmealie%2Fconfig.yaml)
+## Addon informations
 
-[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmealie%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmealie%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmealie%2Fconfig.yaml)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[捐赠徽章]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-徽章]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-**警告**：armv7 只支持到版本 0.4.3！它不会与后续版本一起更新
+Warning : armv7 only supported up to version 0.4.3! It won't be updated with later versions
 
-_感谢所有为我的仓库点赞的人！要点赞，请点击下面的图片，然后它将出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
-[![Stargazers 仓库列表 @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/mealie/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/mealie/stats.png)
 
-## 关于
+## About
 
-Mealie 是一个自托管的食谱管理和餐食计划器，拥有一个基于 Vue 的响应式前端应用程序，为全家人提供愉悦的用户体验。
-此 Mealie 1.0 插件基于 hendrix04 的 [docker 镜像](https://hub.docker.com/r/hendrix04/mealie-combined)。
-此插件基于 hay-kot 的 [docker 镜像](https://hub.docker.com/r/hkotel/mealie)。
+Mealie is a self hosted recipe manager and meal planner with a RestAPI backend and a reactive frontend application built in Vue for a pleasant user experience for the whole family.
+This addon for mealie 1.0 is based on the combined [docker image](https://hub.docker.com/r/hendrix04/mealie-combined) from hendrix04.
+This addon is based on the [docker image](https://hub.docker.com/r/hkotel/mealie) from hay-kot.
 
-## 配置
+## Configuration
 
-Webui 可以在 <http://homeassistant:PORT> 或通过侧边栏使用入口找到。
-可以通过应用程序 WebUI 进行配置，除了以下选项。
+Webui can be found at <http://homeassistant:PORT> or through the sidebar using Ingress.
+Configurations can be done through the app webUI, except for the following options.
 
-- 启动插件。稍等片刻，检查日志中是否有任何错误。
-- 默认凭证：
-  - 用户名：changeme@example.com
-  - 密码：MyPassword
+- Start the addon. Wait a while and check the log for any errors.
+- Default credentials:
+  - Username: changeme@example.com
+  - Password: MyPassword
 
-### 选项
+### Options
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|---------|------|
-| `PGID` | int | `1000` | 文件权限的组 ID |
-| `PUID` | int | `1000` | 文件权限的用户 ID |
-| `ssl` | bool | `false` | 启用 Web 界面的 HTTPS |
-| `certfile` | str | `fullchain.pem` | SSL 证书文件（必须在 /ssl 中）|
-| `keyfile` | str | `privkey.pem` | SSL 密钥文件（必须在 /ssl 中）|
-| `BASE_URL` | str | | 可选的外部基本 URL |
-| `DATA_DIR` | str | `/config` | 数据目录路径 |
-| `ALLOW_SIGNUP` | bool | `true` | 允许新用户注册 |
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `PGID` | int | `1000` | Group ID for file permissions |
+| `PUID` | int | `1000` | User ID for file permissions |
+| `ssl` | bool | `false` | Enable HTTPS for the web interface |
+| `certfile` | str | `fullchain.pem` | SSL certificate file (must be in /ssl) |
+| `keyfile` | str | `privkey.pem` | SSL key file (must be in /ssl) |
+| `BASE_URL` | str | | Optional external base URL |
+| `DATA_DIR` | str | `/config` | Data directory path |
+| `ALLOW_SIGNUP` | bool | `true` | Allow new user signup |
 
-要配置 Gunicorn 的 `--forwarded-allow-ips` 设置以信任反向代理，请手动将 `FORWARDED_ALLOW_IPS` 条目添加到您的插件配置中（以逗号分隔的 IP）。这是可选的，并且隐藏在默认选项选项卡中。例如：`FORWARDED_ALLOW_IPS: "192.168.1.1,10.0.0.1"`
+To configure Gunicorn's `--forwarded-allow-ips` setting for trusted reverse proxies, manually add a `FORWARDED_ALLOW_IPS` entry to your add-on configuration (comma-separated IPs). It is optional and hidden from the default options tab. For example: `FORWARDED_ALLOW_IPS: "192.168.1.1,10.0.0.1"`
 
-### 示例配置
+### Example Configuration
 
 ```yaml
 PGID: 1000
@@ -72,31 +73,31 @@ DATA_DIR: "/config"
 ALLOW_SIGNUP: false
 ```
 
-### 自定义脚本和环境变量
+### Custom Scripts and Environment Variables
 
-此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
+This addon supports custom scripts and environment variables through the `addon_config` mapping:
 
-- **自定义脚本**：请参阅[在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-您可以通过创建 `/homeassistant/addons_config/xxx-mealie/config.yaml` 来添加环境变量。
+You can add environment variables by creating `/homeassistant/addons_config/xxx-mealie/config.yaml`.
 
-完整的选项列表可以在此处找到：https://nightly.mealie.io/documentation/getting-started/installation/backend-config/
+The complete list of options can be found here: https://nightly.mealie.io/documentation/getting-started/installation/backend-config/
 
-## 与 HA 集成
+## Integration with HA
 
-### 详细信息（感谢 @michelangelonz）
+### Detailed infos (Thanks @michelangelonz)
 
-创建一个 RESTful 传感器
+Create a restful sensor
 
 ```yaml
 sensor:
   - platform: rest
     resource: "http://###.###.#.#:9090/api/groups/mealplans/today"
     method: GET
-    name: Mealie 当天的餐食
+    name: Mealie todays meal
     headers:
-      Authorization: Bearer <请输入 auth 信息>
+      Authorization: Bearer <put  auth here>
     value_template: "{{ value_json.value }}"
     json_attributes_path: $..recipe
     json_attributes:
@@ -109,47 +110,51 @@ sensor:
       - slug
 ```
 
-创建从属性创建模板传感器
+Create template sensors from attributes
 
 ```yaml
-- name: 当天的晚餐
+- name: TodaysDinner
   unique_id: sensor.TodaysDinner
   state: "{{ state_attr('sensor.mealie_todays_meal', 'name') }}"
-- name: 晚餐描述
+- name: TodaysDinnerDescription
   unique_id: sensor.DinnerDescription
   state: "{{ state_attr('sensor.mealie_todays_meal', 'description') }}"
-- name: 晚餐缩写
+- name: TodaysDinnerSlug
   unique_id: sensor.DinnerSlug
   state: "{{ state_attr('sensor.mealie_todays_meal', 'slug') }}"
-- name: 晚餐 ID
+- name: TodaysDinnerID
   unique_id: sensor.DinnerID
   state: "{{ state_attr('sensor.mealie_todays_meal', 'id') }}"
 ```
 
-添加一个用于图像的通用相机
+Add a generic camera for image
 http://###.###.#.#:9090/api/media/recipes/{{ state_attr('sensor.mealie_todays_meal', 'id') }}/images/min-original.webp
 
-### 全局信息
+### Global infos
 
-请参阅：https://hay-kot.github.io/mealie/documentation/community-guide/home-assistant/
+Read here : https://hay-kot.github.io/mealie/documentation/community-guide/home-assistant/
 
-## 安装
+## Installation
 
-此插件的安装相当简单，与安装任何其他 Hass.io 插件没有区别。
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
 
-1. 将我的插件存储库添加到您的 Home Assistant 实例中（在 supervisor 插件存储库的右上角，或点击下面的按钮如果您已经配置了我的 HA）
-   [![打开您的 Home Assistant 实例并显示具有特定存储库 URL 预填充的添加插件存储库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此插件。
-1. 点击“保存”按钮以存储您的配置。
-1. 启动插件。
-1. 检查插件的日志以查看是否一切顺利。
-1. 仔细配置插件以满足您的偏好，请参阅官方文档。
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Carefully configure the add-on to your preferences, see the official documentation for for that.
 
-## 支持
+## Support
 
-如果您在安装过程中遇到问题，请确保查看 github。
+If you have in issue with your installation, please be sure to checkout github.
 
-[仓库](https://github.com/alexbelgium/hassio-addons)
+[repository]: https://github.com/alexbelgium/hassio-addons
+
+
+
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

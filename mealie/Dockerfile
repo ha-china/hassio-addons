@@ -15,13 +15,13 @@
 #################
 
 # Stage 1: Build Frontend with SUB_PATH
-FROM node:20 AS frontend-builder
+FROM node:22 AS frontend-builder
 
 # Set the SUB_PATH environment variable
 ARG SUB_PATH="/mealie/"
 ENV SUB_PATH=$SUB_PATH
 
-ENV MEALIE_VERSION="v3.14.0"
+ENV MEALIE_VERSION="v3.16.0"
 
 # Clone the Mealie repository to get the frontend source code
 WORKDIR /frontend
