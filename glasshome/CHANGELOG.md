@@ -1,5 +1,62 @@
 # Changelog
 
+## 0.9.0
+
+### Widget Auto-Update
+
+- Automatic background updates for installed widgets — polls the hub and installs compatible new versions
+- Per-widget auto-update toggle to opt individual widgets in or out
+- Separate controls for official and community widgets in Settings
+- Update history with recent runs and failure surfacing
+- Dock badge showing available widget updates
+
+### Widget Rollback & Safe Mode
+
+- Config snapshots on every install, upgrade, and config change — automatic, zero setup
+- One-click rollback button on widgets that fail to mount, restoring the last known-good config
+- Safe Mode toggle in Settings that disables all widget loading for recovery from broken states
+- Uninstall now warns when active instances exist across dashboards and offers cascade removal
+
+### Widget Browser Improvements
+
+- New detail dialog when browsing widgets — full description, version info, compatibility, and install status
+- Per-registry error banners with retry instead of a single opaque failure
+- Better error messages with 8 distinct error types in human-readable language
+- "Update All" counter with accessibility support
+- Yanked widget detection — amber banner on dashboard widgets that have been pulled from the hub
+- Clear labels when a widget requires a newer SDK version
+- Reworked community consent dialog
+
+### Performance & Reliability
+
+- Debounced layout saves to prevent redundant writes during rapid edits
+- Stale module eviction on install/uninstall — no more phantom widgets lingering after changes
+- Config migration moved out of the render path — eliminates unnecessary re-renders
+- Lazy hub manifest loading in widget browser — only fetches details when you open them
+- Atomic install pipeline with per-widget locking — no more race conditions during concurrent installs
+- Generation counter on widget map to detect and discard stale state
+
+### Toast & Notification Overhaul
+
+- Fully responsive, theme-aware toast system with proper variants (success, error, warning, info)
+
+### Security
+
+- Hardened bundle downloads: size limits, timeout, content-type checks, SHA-256 verification
+- Auth required on all user-scoped routes and background uploads
+- SSRF and path traversal protections on all external requests
+- CSP headers and Trusted Types for defense-in-depth
+- Community widget updates gated behind explicit consent
+
+### Bug Fixes
+
+- Fixed SSE subscription auth — token now passed correctly
+- Fixed demo reset wiping all data instead of just demo content
+- Fixed stale widget map causing phantom widgets after rapid edits
+- Fixed stale dialog state in widget config dialogs
+- Fixed spurious dashboard save when navigating to settings
+- Fixed spinner flicker across widget cards during install
+
 ## 0.8.2
 
 ### Bug Fixes

@@ -1,34 +1,34 @@
-# Home Assistant 扩展：Memos
+# Home Assistant 插件：备忘录
 
-一个以隐私为先，轻量级的笔记记录服务。轻松捕捉和分享你的精彩想法。
+一个以隐私为先、轻量级的笔记服务。轻松捕捉和分享你的精彩想法。
 
-从以下链接运行 Docker 镜像：https://github.com/usememos/memos
+运行 Docker 镜像来自：https://github.com/usememos/memos
 
 
-_感谢所有为我仓库点星的人！要点星，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_感谢所有为我仓库点星的人！要点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 
 ## 安装
 
-安装此扩展非常简单，与安装任何其他 Hass.io 扩展没有区别。
+此插件的安装相当简单，与安装任何其他Hass.io插件没有太大区别。
 
-1. [将我的 Hass.io 扩展仓库添加到你的 Hass.io 实例][repository]。
-1. 安装此扩展。
-1. 点击 `保存` 按钮以存储你的配置。
-1. 启动扩展。
-1. 检查扩展日志以查看是否一切顺利。
-1. 通过 ingress 或 `<your-ip>:port` 打开 WebUI 应该可以工作。
-1. 设置将存储在 `/addons-config/2effc9b9_memos`
+1. [将我的Hass.io插件仓库添加到你的Hass.io实例][repository]。
+1. 安装此插件。
+1. 点击“保存”按钮以存储你的配置。
+1. 启动插件。
+1. 检查插件的日志以查看是否一切顺利。
+1. 打开WebUI应通过ingress或<你的IP>:端口号工作。
+1. 设置将存储在 /addons-config/2effc9b9_memos
 
 ## 配置
 
 ```
-port : 5230 # 你想要运行在的端口。
+port : 5230 #你想要运行的端口号。
 ```
 
-WebUI 可以在 `<your-ip>:port` 找到。
+WebUI可以在 `<你的IP>:端口号` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---

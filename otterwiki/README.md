@@ -1,48 +1,48 @@
-# Home Assistant 扩展：Otter Wiki
+# 家居助理插件：Otter Wiki
 
 # Otter Wiki
 
-Otter Wiki 是一种基于 Python 的协作内容管理系统，被称为 [wiki](https://zh.wikipedia.org/wiki/Wiki)。内容存储在 git 仓库中，记录了所有变更。[Markdown](https://daringfireball.net/projects/markdown) 被用作标记语言。Otter Wiki 使用 [Python](https://www.python.org/) 编写，采用了微框架 [Flask](http://flask.pocoo.org/)。[halfmoon](https://www.gethalfmoon.com) 被用作 CSS 框架，[CodeMirror](https://codemirror.net/) 作为编辑器。使用 [Font Awesome Free](https://fontawesome.com/license/free) 提供图标。
+Otter Wiki 是基于 Python 的协作内容管理系统，被称为 [wiki](https://zh.wikipedia.org/wiki/Wiki)。内容存储在 git 仓库中，记录所有更改。使用 [Markdown](https://daringfireball.net/projects/markdown) 作为标记语言。Otter Wiki 使用 [python](https://www.python.org/) 编写，采用微框架 [Flask](http://flask.pocoo.org/)。使用 [halfmoon](https://www.gethalfmoon.com) 作为 CSS 框架，[CodeMirror](https://codemirror.net/) 作为编辑器。[Font Awesome Free](https://fontawesome.com/license/free) 提供图标服务。
 
-## 显著特性
+## 亮点功能
 
-- 极简界面（支持暗黑模式）
-- 带有 markdown 突出显示和支持表格的编辑器
+- 极简界面（支持暗色模式）
+- 编辑器支持 Markdown 高亮显示和表格等扩展功能
 - 可定制的侧边栏：菜单和/或页面索引
-- 完整的变更日志和页面历史
+- 完整的更改日志和页面历史记录
 - 用户认证
 - 页面附件
-- 扩展 Markdown：表格、脚注、花哨块、警告和 mermaid 图表
-- （实验性）Git http 服务器：克隆、拉取和推送你的 wiki 内容
+- 扩展 Markdown：表格、脚注、花哨块、警告和 Mermaid 图表
+- （实验性）Git http 服务器：克隆、拉取和推送 Wiki 内容
 - 一个非常可爱的海狸作为标志（由 [Christy Presler](http://christypresler.com/) 绘制，CC BY 3.0）
 
-_感谢所有为我仓库点星的人！要为它点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有给我仓库点星的人！要给星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
-此扩展使用 [docker 镜像](https://github.com/redimp/otterwiki)。
+此插件使用 [docker 镜像](https://github.com/redimp/otterwiki)。
 
 ## 安装
 
-此扩展的安装非常简单，与安装任何其他 Hass.io 扩展没有区别。
+此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. 将我的 Hass.io 扩展仓库 [repository][repository] 添加到你的 Hass.io 实例中。
-1. 安装此扩展。
-1. 点击 `保存` 按钮以存储你的配置。
-1. 启动扩展。
-1. 检查扩展的日志以查看是否一切顺利。
-1. 打开 WebUI 应该可以通过 <your-ip>:port 访问。
-1. 设置将在 /addon_configs/2effc9b9_otterwiki 中。
+1. 将我的 Hass.io 插件仓库 [repository][repository] 添加到您的 Hass.io 实例。
+1. 安装此插件。
+2. 点击 `保存` 按钮以存储您的配置。
+3. 启动插件。
+4. 检查插件的日志，以查看是否一切顺利。
+5. 通过 <your-ip>:port 打开 WebUI 应该可以工作。
+6. 设置将在 /addon_configs/2effc9b9_otterwiki 中。
 
 ## 配置
 
 ```
-port : 8084 #你想要运行的端口。
+port : 8084 #您希望运行的端口。
 ```
 
-WebUI 可以在 `<your-ip>:port` 找到。
+WebUI 可以在 <your-ip>:port 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---
