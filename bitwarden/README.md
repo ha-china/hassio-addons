@@ -4,7 +4,7 @@
 
 [![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
 
-[![通过 GitHub Sponsors 赞助 Frenck][github-sponsors-shield]][github-sponsors]
+[![通过 GitHub Sponsors 支持Frenck][github-sponsors-shield]][github-sponsors]
 
 [![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
 
@@ -12,13 +12,13 @@
 
 ## 关于
 
-Bitwarden 是一个开源密码管理器，可以将敏感信息，如网站凭据，存储在加密的保险库中。
+Bitwarden 是一个开源密码管理器，可以存储敏感信息，如网站凭证，在加密的保险库中。
 
-Bitwarden 平台提供多种客户端应用程序，包括网页界面、桌面应用程序、浏览器插件和移动应用程序。
+Bitwarden 平台提供各种客户端应用程序，包括网页界面、桌面应用程序、浏览器扩展和移动应用。
 
-此应用基于轻量级且开源的 [Vaultwarden][vaultwarden] 实现，允许您自托管这款出色的密码管理器。
+此应用基于轻量级和开源的 [Vaultwarden][vaultwarden] 实现，允许您自托管这个出色的密码管理器。
 
-密码盗窃是一个严重的问题。您使用的网站和应用程序每天都在遭受攻击。安全漏洞发生，您的密码被窃取。当您在所有地方使用相同的密码时，黑客可以轻松访问您的电子邮件、银行和其他重要账户。使用密码管理器！
+密码盗窃是一个严重的问题。您使用的网站和应用每天都在遭受攻击。安全漏洞发生，您的密码被盗。当您在所有地方都使用相同的密码时，黑客可以轻易地访问您的电子邮件、银行和其他重要账户。使用密码管理器吧！
 
 ![Bitwarden 预览][screenshot]
 
@@ -32,8 +32,8 @@ Bitwarden 平台提供多种客户端应用程序，包括网页界面、桌面�
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.26.7-blue.svg
-[release]: https://github.com/hassio-addons/app-vaultwarden/tree/v0.26.7
+[release-shield]: https://img.shields.io/badge/version-v0.26.8-blue.svg
+[release]: https://github.com/hassio-addons/app-vaultwarden/tree/v0.26.8
 [screenshot]: https://github.com/hassio-addons/app-vaultwarden/raw/main/images/screenshot.png
 [vaultwarden]: https://github.com/dani-garcia/vaultwarden
 ---

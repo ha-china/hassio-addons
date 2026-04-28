@@ -7,6 +7,131 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.64.3] - 2026-04-27
+
+### Fixed — Group ID no longer overflows the device card
+
+When a Music Assistant syncgroup has no friendly name, the
+group badge fell back to rendering the raw group UUID (e.g.
+`b6b07ca7-79bf-4d75-a949-81c7dcff691b`).  The full UUID was
+wider than the player name and visibly obscured it on smaller
+cards.  The badge now shows only a short `#suffix` taken from
+the last hyphen segment of the UUID; the full id is still
+available in the badge tooltip.
+
+### Fixed — Release pipeline could not publish GitHub Releases
+
+Release builds for v2.64.1 and v2.64.2 produced the Docker
+images and synced the Home Assistant addon directories
+correctly, but the final "Create GitHub Release" step crashed
+with `Argument list too long` once the cumulative body grew
+past the runner's `execve()` argv limit.  The workflow now
+passes the release body to `actions/github-script` through an
+environment variable instead of inlining it into the script
+source, so the script payload stays small regardless of how
+large the notes get.  v2.64.1 and v2.64.2 GitHub Releases
+were backfilled manually after the fact.
+
+## [2.64.2] - 2026-04-27
+
+### Fixed — Now-playing progress bar resetting every ~15 s
+
+The progress bar on a device card was visibly jumping backward
+roughly every fifteen seconds during playback even though the
+audio itself never stuttered.  Two parallel sources of progress
+existed — Music Assistant's polled `elapsed_time` and the bridge
+daemon's native `track_progress_ms` — and the UI preferred the
+MA value.  MA's elapsed only refreshes on the monitor's 15 s
+poll cycle, which is exactly the interval at which the bar
+appeared to lurch.
+
+The native sendspin path already delivers the same data with
+one less hop.  Removed the MA progress branch from the UI so
+the bar is driven only by the bridge daemon's metadata events.
+Track / artist / album / artwork still come from MA when
+sendspin hasn't filled them in.
+
+## [2.64.1] - 2026-04-27
+
+### Changed — RSSI badge thresholds tuned for connected speakers
+
+The signal-strength chip on a device card now uses different
+buckets depending on whether the value comes from an inquiry
+scan (absolute dBm) or from a connected link (delta from the
+controller's Golden Receive Power Range).  Previously the same
+shared thresholds made a perfectly typical −23 Δ dB reading
+render as full-red "bad" 1-bar even when the speaker was
+streaming cleanly — misleading.
+
+New thresholds for connected-link Δ dB:
+
+- ≥ 0 — green, 4 bars (in golden range)
+- ≥ −10 — green, 3 bars (strong)
+- ≥ −20 — amber, 2 bars (fair)
+- ≥ −25 — amber, 1 bar (poor — margin shrinking but link still works)
+- < −25 — red, 1 bar (bad — likely audio issues)
+
+Inquiry-scan thresholds (absolute dBm) are unchanged.
+
+## [2.64.0] - 2026-04-27
+
+### Added — Bulk actions for all selected devices
+
+A new **Bulk actions ▾** dropdown in the device toolbar lets you act
+on every selected speaker at once:
+
+- **Reconnect all** — force a Bluetooth reconnect cycle.
+- **Power save all** — suspend audio streaming while keeping the
+  Bluetooth link alive (saves codec power on idle speakers).
+- **Standby all** — fully disconnect Bluetooth so the speaker can
+  power down its radio.
+- **Release all** — hand BT management back to the OS.
+
+### Added — Live signal strength (RSSI) badge enabled by default
+
+Every connected speaker now shows a coloured signal-strength chip in
+its device card, updated every 30 s.  Can be turned off under
+*Connection recovery* in Settings.
+
+### Changed — Scan modal asks before scanning
+
+Opening *Scan nearby* no longer starts a scan automatically.  The
+**Start Scan** button is highlighted so it's obvious what to press,
+letting you adjust adapter and audio-only filter first.
+
+### Changed — *Pair and Add* is now the default action for discovered devices
+
+In scan results, the primary action is *Pair and Add* — the safe
+default for most speakers.  A small ▾ button exposes *Add to fleet*
+for devices you've already paired elsewhere.
+
+### Changed — Show experimental features toggle has a visual warning
+
+The master switch that reveals in-development settings now has an
+amber border and a ⚠ icon so it reads as the cautionary control
+it is.
+
+### Fixed — Speaker buttons mis-route to the wrong device when multiple speakers share an adapter
+
+When two or more Bluetooth speakers are on the same adapter, every
+speaker's button presses now reach the correct player — including
+Next/Previous, which the previous workaround missed entirely.
+
+### Fixed — Physical volume knob on speaker didn't update the bridge slider
+
+Turning the volume knob now immediately moves the corresponding slider
+in the bridge UI.  Previously only the MA slider tracked it.
+
+### Fixed — "Reconnect all" silently did nothing on a healthy fleet
+
+The button now forces a reconnect cycle on selected speakers regardless
+of their current connection state, matching the per-device button.
+
+### Fixed — Transport commands routed to the wrong device after a bridge restart
+
+Play/Pause/Next from the UI now use a stable per-device identifier
+and can no longer land on the wrong speaker after a restart.
+
 ## [2.63.1] - 2026-04-26
 
 ### Fixed — LXC deployments on v2.50.x–v2.62.x can upgrade again
