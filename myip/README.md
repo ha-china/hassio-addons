@@ -1,28 +1,28 @@
-# Home Assistant 插件：MyIP
+# Home Assistant 扩展：MyIP
 
-MyIP 是一款高级 IP 工具，旨在提供关于您 IP 地址的广泛信息和诊断。它非常适合需要查看和分析 IP 详情、检查网站可达性、执行 DNS 泄露测试等用户。
+MyIP 是一款高级 IP 工具，旨在提供关于您 IP 地址的广泛信息和诊断。它非常适合需要查看和分析其 IP 详细信息、检查网站可达性、执行 DNS 泄露测试等用户。
 
-_感谢所有为我仓库点星的人！要点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有为我的仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
 
-![Stargazers 仓库名单 @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons))(https://github.com/jdeath/homeassistant-addons/stargazers)
+[![Stargazers 仓库列表 for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
-此插件使用 [docker 镜像](https://github.com/jason5ng32/MyIP)。
+此扩展使用 [docker 镜像](https://github.com/jason5ng32/MyIP)。
 
 ## 安装
 
-此插件的安装非常简单，与安装任何其他 Hass.io 插件没有太大区别。
+此扩展的安装相当简单，与安装任何其他 Hass.io 扩展没有区别。
 
-1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例。
-1. 安装此插件。
+1. 将我的 Hass.io 扩展仓库 [repository] 添加到您的 Hass.io 实例。
+1. 安装此扩展。
 1. 点击 `保存` 按钮以存储您的配置。
 1. 打开 WebUI 应该可以通过 <your-ip>:port 访问。
 
 ## 配置
 
 ```
-port : 18966 #您想要运行的端口。
+port : 18966 #您想要运行在的端口。
 ```
 
 WebUI 可以在 `<your-ip>:port` 找到。

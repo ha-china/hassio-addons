@@ -4,11 +4,11 @@
     "aarch64"
   ],
   "boot": "auto",
-  "description": "[老王杂谈说]：一套用于第五版龙与地下城玩家和地下城主的工具。",
+  "description": "[老王杂谈说]：一套为第五版龙与地下城玩家和地下城主提供的工具。",
   "environment": {},
   "map": [],
   "image": "ghcr.1ms.run/5etools-mirror-3/5etools-src",
-  "version": "2.27.0",
+  "version": "2.28.0",
   "name": "5etools",
   "options": {},
   "ports": {

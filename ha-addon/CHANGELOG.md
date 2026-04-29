@@ -7,6 +7,309 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.64.3] - 2026-04-27
+
+### Fixed — Group ID no longer overflows the device card
+
+When a Music Assistant syncgroup has no friendly name, the
+group badge fell back to rendering the raw group UUID (e.g.
+`b6b07ca7-79bf-4d75-a949-81c7dcff691b`).  The full UUID was
+wider than the player name and visibly obscured it on smaller
+cards.  The badge now shows only a short `#suffix` taken from
+the last hyphen segment of the UUID; the full id is still
+available in the badge tooltip.
+
+### Fixed — Release pipeline could not publish GitHub Releases
+
+Release builds for v2.64.1 and v2.64.2 produced the Docker
+images and synced the Home Assistant addon directories
+correctly, but the final "Create GitHub Release" step crashed
+with `Argument list too long` once the cumulative body grew
+past the runner's `execve()` argv limit.  The workflow now
+passes the release body to `actions/github-script` through an
+environment variable instead of inlining it into the script
+source, so the script payload stays small regardless of how
+large the notes get.  v2.64.1 and v2.64.2 GitHub Releases
+were backfilled manually after the fact.
+
+## [2.64.2] - 2026-04-27
+
+### Fixed — Now-playing progress bar resetting every ~15 s
+
+The progress bar on a device card was visibly jumping backward
+roughly every fifteen seconds during playback even though the
+audio itself never stuttered.  Two parallel sources of progress
+existed — Music Assistant's polled `elapsed_time` and the bridge
+daemon's native `track_progress_ms` — and the UI preferred the
+MA value.  MA's elapsed only refreshes on the monitor's 15 s
+poll cycle, which is exactly the interval at which the bar
+appeared to lurch.
+
+The native sendspin path already delivers the same data with
+one less hop.  Removed the MA progress branch from the UI so
+the bar is driven only by the bridge daemon's metadata events.
+Track / artist / album / artwork still come from MA when
+sendspin hasn't filled them in.
+
+## [2.64.1] - 2026-04-27
+
+### Changed — RSSI badge thresholds tuned for connected speakers
+
+The signal-strength chip on a device card now uses different
+buckets depending on whether the value comes from an inquiry
+scan (absolute dBm) or from a connected link (delta from the
+controller's Golden Receive Power Range).  Previously the same
+shared thresholds made a perfectly typical −23 Δ dB reading
+render as full-red "bad" 1-bar even when the speaker was
+streaming cleanly — misleading.
+
+New thresholds for connected-link Δ dB:
+
+- ≥ 0 — green, 4 bars (in golden range)
+- ≥ −10 — green, 3 bars (strong)
+- ≥ −20 — amber, 2 bars (fair)
+- ≥ −25 — amber, 1 bar (poor — margin shrinking but link still works)
+- < −25 — red, 1 bar (bad — likely audio issues)
+
+Inquiry-scan thresholds (absolute dBm) are unchanged.
+
+## [2.64.0] - 2026-04-27
+
+### Added — Bulk actions for all selected devices
+
+A new **Bulk actions ▾** dropdown in the device toolbar lets you act
+on every selected speaker at once:
+
+- **Reconnect all** — force a Bluetooth reconnect cycle.
+- **Power save all** — suspend audio streaming while keeping the
+  Bluetooth link alive (saves codec power on idle speakers).
+- **Standby all** — fully disconnect Bluetooth so the speaker can
+  power down its radio.
+- **Release all** — hand BT management back to the OS.
+
+### Added — Live signal strength (RSSI) badge enabled by default
+
+Every connected speaker now shows a coloured signal-strength chip in
+its device card, updated every 30 s.  Can be turned off under
+*Connection recovery* in Settings.
+
+### Changed — Scan modal asks before scanning
+
+Opening *Scan nearby* no longer starts a scan automatically.  The
+**Start Scan** button is highlighted so it's obvious what to press,
+letting you adjust adapter and audio-only filter first.
+
+### Changed — *Pair and Add* is now the default action for discovered devices
+
+In scan results, the primary action is *Pair and Add* — the safe
+default for most speakers.  A small ▾ button exposes *Add to fleet*
+for devices you've already paired elsewhere.
+
+### Changed — Show experimental features toggle has a visual warning
+
+The master switch that reveals in-development settings now has an
+amber border and a ⚠ icon so it reads as the cautionary control
+it is.
+
+### Fixed — Speaker buttons mis-route to the wrong device when multiple speakers share an adapter
+
+When two or more Bluetooth speakers are on the same adapter, every
+speaker's button presses now reach the correct player — including
+Next/Previous, which the previous workaround missed entirely.
+
+### Fixed — Physical volume knob on speaker didn't update the bridge slider
+
+Turning the volume knob now immediately moves the corresponding slider
+in the bridge UI.  Previously only the MA slider tracked it.
+
+### Fixed — "Reconnect all" silently did nothing on a healthy fleet
+
+The button now forces a reconnect cycle on selected speakers regardless
+of their current connection state, matching the per-device button.
+
+### Fixed — Transport commands routed to the wrong device after a bridge restart
+
+Play/Pause/Next from the UI now use a stable per-device identifier
+and can no longer land on the wrong speaker after a restart.
+
+## [2.63.1] - 2026-04-26
+
+### Fixed — LXC deployments on v2.50.x–v2.62.x can upgrade again
+
+The v2.50.x–v2.62.x ``lxc/upgrade.sh`` copies a fixed list of
+top-level directories from the downloaded GitHub release tarball,
+including ``demo/``, with no ``[[ -d ]]`` existence guard:
+
+```bash
+for dir in services routes demo templates static lxc scripts; do
+    rm -rf "${dest_root}/${dir}"
+    cp -a "${src_root}/${dir}" "${dest_root}/${dir}"   # ← exits 1 here
+done
+```
+
+The 2.63 series added ``demo/ export-ignore`` to ``.gitattributes``
+to trim the release tarball — but ``git archive`` honours that, so
+the directory disappears from
+``github.com/.../archive/refs/tags/<tag>.tar.gz`` for every release
+from 2.63.0 onward.  Result: every operator on v2.50.x–v2.62.x who
+hits "Apply update" gets ``cp: cannot stat '.../demo': No such file
+or directory`` and the upgrade aborts.  The deployed scripts have
+no self-update path either, so they're stuck **until a tarball that
+contains ``demo/`` ships**.
+
+Reverted ``demo/ export-ignore`` in this release so the v2.63.1
+tarball includes the directory and the legacy upgrade scripts can
+copy it.  Cost: +188 KB on the release archive.  The newer
+``upgrade.sh`` on ``main`` already drops ``demo`` from the loop
+*and* guards every copy with ``[[ -d ]]``, so this exclusion can be
+restored once every LXC in the wild has updated past that script
+(realistically after the next major release cycle).
+
+## [2.63.0] - 2026-04-26
+
+Stable release promoting rc.1 → rc.9 from main.  Headline themes
+(see the per-rc sections below for the full diff per fix):
+
+- **MPRIS hardware integration for connected speakers** (rc.1 +
+  rc.5 + rc.6).  The bridge now exports a per-device
+  ``org.mpris.MediaPlayer2.Player`` interface and registers it with
+  BlueZ via ``org.bluez.Media1.RegisterPlayer(path, properties)``,
+  which is what BlueZ actually uses to route AVRCP passthrough
+  commands.  Physical Play / Pause / Next / Previous / Volume on
+  the speaker now propagate to MA in ~50 ms via direct IPC instead
+  of needing the operator to drive playback exclusively from the HA
+  side.  rc.1-rc.5 had the wrong architecture (system-bus
+  well-known name + canonical ``/org/mpris/MediaPlayer2`` path);
+  rc.6 fixed it after VM 105 manual validation showed nothing was
+  wired through.
+- **Live RSSI badge for connected BR/EDR speakers** (rc.7 + rc.8 +
+  rc.9, opt-in via ``EXPERIMENTAL_RSSI_BADGE``).  Polls the kernel
+  mgmt socket (opcode 0x0031) every 30 s, gated by the shared
+  ``bt_operation_lock`` so a pair / scan / reconnect can never be
+  starved.  Required swapping ``gosu`` for ``setpriv`` in the
+  entrypoint so ``CAP_NET_ADMIN`` survives the UID drop — gosu was
+  silently clobbering capabilities, which is why every prior
+  attempt at connected-link RSSI returned ``MGMT_STATUS_PERMISSION_DENIED``
+  (rc.3 / rc.5 had wrong source; rc.7 had right source + wrong
+  encoding via btsocket; rc.8 finally hand-rolls the wire packet
+  and ships).  UI chip uses a monochrome 4-bar SVG matching the
+  battery icon idiom.
+- **HA addon settings persistence fixed** (rc.9, regression-class).
+  ``scripts/translate_ha_config.py`` rebuilds ``config.json`` from
+  ``options.json`` on every addon start; the preservation list
+  missed all 5 EXPERIMENTAL_* flags plus AUTH_ENABLED,
+  BRUTE_FORCE_PROTECTION, MA_WEBSOCKET_MONITOR, AUTO_UPDATE,
+  CHECK_UPDATES, SMOOTH_RESTART, ALLOW_HFP_PROFILE, TRUSTED_PROXIES.
+  Every restart silently rewrote those toggles to defaults — looked
+  to operators like the controls "didn't save".  All 13 fields now
+  preserved.
+- **Settings UI experimental block reorganised** (rc.9).  Moved
+  out of Connection recovery into a dedicated "Experimental
+  features" card with amber accent + ⚠ icon.  ALLOW_HFP_PROFILE
+  exposed as the fifth toggle in that card (was previously
+  hand-edit-only).
+- **BT info modal renders full ``bluetoothctl info``** (rc.9).
+  Backend always collected every line in ``info["raw"]``; modal
+  used to drop UUIDs, Modalias, LegacyPairing — the load-bearing
+  diagnostic for "does this speaker actually advertise A2DP Sink".
+  Now renders raw verbatim with bluetoothctl piped-stdin noise
+  filtered client-side.
+- **MA server version in diagnostics** (rc.9).  Bug-report env
+  block + post-handshake INFO banner line — issue #190 was slow
+  to triage because we couldn't tell which MA build the operator
+  ran.
+- **HA Supervisor SSE corruption fix under ingress** (rc.4).
+  Adds ``Cache-Control: no-cache, no-transform`` +
+  ``Content-Encoding: identity`` to the SSE response so the
+  ingress proxy stops deflate-compressing the event stream
+  (RFC 7234 §5.2.2.4).  Status updates in HA addon mode now
+  arrive without truncation again.
+- **Pre-existing bugs surfaced and fixed** during the rc cycle:
+  MA syncgroup multi-membership lookup (a player belonging to two
+  syncgroups got pinned to the first one iterated, breaking
+  on/off-target playback routing); ``_apply_connected_state``
+  centralised so the BT-monitor D-Bus path actually fires the
+  ``on_connected`` hook (rc.1 MPRIS regression); shared
+  ``bt_operation_lock`` promoted from per-module singletons.
+
+## [2.62.0] - 2026-04-25
+
+Stable release promoting rc.5 → rc.13 from main.  Headline themes
+(see the per-rc sections below for the full diff per fix):
+
+- **MA volume / mute sync simplified to a single source of truth**
+  (rc.7 + rc.8).  Sendspin's ``PulseVolumeController.start_monitoring``
+  now does real two-way PA→MA sync via
+  ``pulsectl_asyncio.subscribe_events('sink')``; the bridge's parallel
+  MA-proxy / parent-side push paths (``Route volume through MA`` /
+  ``Route mute through MA`` toggles, ``_set_volume_via_ma`` /
+  ``_set_mute_via_ma`` helpers, ``VOLUME_VIA_MA`` / ``MUTE_VIA_MA``
+  config keys) are gone.  Fixes the forum-reported "MA player stuck
+  muted; volume slider greyed out in HA" symptom.
+- **Sendspin artwork relay + legacy <5.5.0 fallback removed**
+  (rc.9).  The web UI consumes MA's ``image_url`` via the HMAC-signed
+  ``/api/ma/artwork`` proxy since v2.50, so the monkey-patched
+  binary-frame artwork interceptor in ``BridgeDaemon`` was dead
+  code.  ``requirements.txt`` pins ``sendspin==7.0.0``, so the
+  ``_has_upstream_volume_controller`` / ``_sync_bt_sink_volume``
+  fallback for sendspin <5.5.0 (``use_hardware_volume`` kwarg)
+  collapsed too.  Net -218 LoC across daemon + tests.
+- **Multi-adapter UI listing fixes** (rc.5, #193).  ``GET /api/bt/adapters``
+  now resolves the kernel ``hciN`` via ``/sys/class/bluetooth/<hci>/address``
+  (BlueZ registration order disagrees with kernel numbering after USB
+  hotplug) and reads the per-adapter alias via the explicit
+  ``bluetoothctl show <MAC>`` form (the previous ``select <MAC>; show``
+  recipe surfaced the **default** controller's alias for every adapter
+  in piped-stdin mode).
+- **HA addon ``Disable PA rescue-streams`` no longer silently resets**
+  (rc.6).  The option key was missing from all three
+  ``ha-addon*/config.yaml`` schemas; Supervisor stripped it on every
+  restart.  Added matching options + schema entries plus a parametrised
+  regression test covering all three addon variants.
+- **HA addon mute-on-spawn desync fixed** (rc.7).
+  ``_sync_unmute_to_ma(force=True)`` on post-spawn bypasses the
+  "already in sync" early-exit because the bridge's local mute flag
+  doesn't reflect MA's ``volume_muted=True`` reading from the
+  ~15 s startup PA-mute window.
+- **Online activation of new BT devices without bridge restart**
+  (delivered earlier in rc.1-rc.4 cycle, this stable confirms it).
+  ``ReconfigOrchestrator.START_CLIENT`` builds a new client via the
+  shared ``services/device_activation.DeviceActivationContext``
+  factory, registers it, and schedules ``client.run()`` on the main
+  asyncio loop — no Save & Restart prompt.
+- **Copilot review polish** (rc.10).  ``GET /api/bt/adapters`` dropped
+  to O(n) via the new ``services.bluetooth.build_hci_map()`` helper;
+  ``PulseVolumeController._handle_sink_event`` reuses the
+  subscribe-loop's ``PulseAsync`` instead of opening a fresh client
+  per event; ``stop_monitoring`` logs non-CancelledError exceptions
+  instead of swallowing them silently.
+- **Dependency hygiene pass** (rc.11) — five Dependabot PRs (#185,
+  #186, #187, #188, #189): cryptography ``>=3.4.0`` → ``>=46.0.7``
+  (CVE coverage), pytest ``>=8.0.0`` → ``>=9.0.3``, pytest-asyncio
+  ``>=0.23.0`` → ``>=1.3.0``, mypy ``>=1.20.1`` → ``>=1.20.2``,
+  ruff ``==0.15.10`` → ``==0.15.12``.  armv7 wheel availability for
+  cryptography 46 verified against the ``python:3.12-slim`` base.
+- **Update modal release-notes parser rewritten** (rc.12).  The
+  regex-strip-then-textContent path mangled GitHub release bodies —
+  RST-style ``\`\`code\`\`` spans showed literally, ``###`` section
+  headings collapsed to blank lines orphaning the bullets that
+  followed.  Replaced with ``_renderReleaseNotes(md, container)``
+  that builds proper DOM (``<code>``, ``<strong>``, ``<a>``,
+  ``<ul><li>`` with multi-line bullet continuation, skips the
+  auto-generated "🤖 Generated with Claude Code" footer).
+- **Docker image slim** (rc.13).  ~38 MB removed from the runtime
+  stage: pip leftover from base image (6.6 MB, builder strip didn't
+  cover it), unused ``/usr/lib/udev/hwdb*`` (22 MB, no udevd inside
+  container), unreachable ``/usr/lib/systemd`` (5.6 MB, s6-overlay
+  is PID 1), package documentation (4.4 MB).  Smoke-tested live
+  inside a running container.
+
+### Changed since 2.61.1
+- Test suite: 1494 → 1547 tests, +53 net new across the rc cycle
+  (28 deletions of obsolete tests covered by rc.8/rc.9 removals,
+  plus new coverage for build_hci_map, aread_sink_state, HA addon
+  schema sync, etc.).
+
 ## [2.61.0] - 2026-04-22
 
 Promotes the 2.61.0-rc line to stable. No code changes beyond the

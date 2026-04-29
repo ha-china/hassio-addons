@@ -1,9 +1,9 @@
 name: Otter Wiki
-version: "2.20.2"
+version: "2.20.3"
 upstream: 2.7.0
 slug: otterwiki
 description: >-
-  [老王杂谈说]：水獭维基是一种基于 Python 的用于协作内容管理的软件，被称为维基。内容存储在 git 仓库中，该仓库会跟踪所有的更改。Markdown 用作标记语言。水獭维基是用 Python 编写的，使用了微框架 Flask。halfmoon 用作 CSS 框架，CodeMirror 用作编辑器。Font Awesome Free 用于提供图标。
+  [老王杂谈说]：Otter Wiki是一种基于Python的协作内容管理软件，内容存储在跟踪所有更改的git仓库中，使用Markdown作为标记语言；它使用微框架Flask编写，CSS框架为halfmoon，编辑器为CodeMirror，图标由Font Awesome Free提供。
 arch:
   - amd64
   - aarch64
