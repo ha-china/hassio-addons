@@ -33,9 +33,9 @@ init: false
 startup: services
 name: ESPHome Device Builder (dev)
 panel_title: ESPHome Builder (dev)
-version: 2026.5.0-dev20260428
+version: 2026.5.0-dev20260429
 slug: esphome-dev
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：ESPHome 设备构建器的开发版本'
 image: ghcr.1ms.run/esphome/esphome-hassio
 stage: experimental
 options:

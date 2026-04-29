@@ -64,13 +64,13 @@ configuration:
     description: Render Home Assistant total statistical entities 'UNAVAILABLE' if not all node serials are yet known, set to 'true' or 'false'. Default is 'false'.
   ha_nodes_sensors_recorder:
     name: Node sensors statistic recorder
-    description: List of the node sensors entities which shall have Home Assistant statistic recorder enabled
+    description: List of the base names of the node sensors entities which shall have Home Assistant statistic recorder enabled. Available values are 'voltage_in', 'voltage_out', 'current_in', 'current_out', 'power', 'temperature', 'duty_cycle', 'rssi', 'energy'.
   ha_strings_sensors_recorder:
     name: String sensors statistic recorder
-    description: List of the string statistic sensors entities which shall have Home Assistant statistic recorder enabled
+    description: List of the base names of the string statistic sensors entities which shall have Home Assistant statistic recorder enabled. Available values are 'voltage_in', 'voltage_out', 'current_in', 'current_out', 'power', 'temperature', 'duty_cycle', 'rssi', 'energy'.
   ha_stats_sensors_recorder:
     name: Total statistics sensors statistic recorder
-    description: List of the total statistic sensors entities which shall have Home Assistant statistic recorder enabled
+    description: List of the base names of the total statistic sensors entities which shall have Home Assistant statistic recorder enabled. Available values are 'voltage_in', 'voltage_out', 'current_in', 'current_out', 'power', 'temperature', 'duty_cycle', 'rssi', 'energy'.
   ha_discovery_prefix:
     name: Home assistant MQTT discovery prefix
     description: MQTT prefix Home Assistant is subscribed for auto discovery of the new devices and entities. Please refer to HA MQTT documentation, default is 'homeassistant'. There is typically no need to change this setting.

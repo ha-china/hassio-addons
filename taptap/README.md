@@ -1,6 +1,6 @@
-# Home Assistant 插件：taptap - Tigo CCA 到 MQTT
+# Home Assistant 扩展：taptap - Tigo CCA 到 MQTT
 
-Tigo CCA Tap 到 MQTT 实现以从本地 Tigo 优化器获取数据到 Home Assistant。请参阅[文档](https://github.com/litinoveweedle/hassio-addons/blob/main/taptap/DOCS.md)了解所需的硬件安装和使用说明。
+Tigo CCA Tap 到 MQTT 实现将数据从 Tigo 优化器本地获取到 Home Assistant。查看 [文档](https://github.com/litinoveweedle/hassio-addons/blob/main/taptap/DOCS.md) 了解所需的硬件安装和使用方法。
 
 ![支持 aarch64 架构][aarch64-shield]
 ![支持 amd64 架构][amd64-shield]
