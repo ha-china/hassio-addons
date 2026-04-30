@@ -1,7 +1,7 @@
 name: OpenClaw Assistant
-version: "0.5.69"
+version: "0.5.70"
 slug: openclaw_assistant
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：作为 Home Assistant 插件运行 OpenClaw 助手（兼容 OpenClaw）'
 url: https://gh-proxy.org/github.com/techartdev/OpenClawHomeAssistant
 arch:
   - amd64

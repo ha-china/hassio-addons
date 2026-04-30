@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.9.1
+
+### Performance
+
+- Smarter entity subscriptions — only subscribes to entities your widgets actually use, not everything
+- Reduced unnecessary UI refreshes from Home Assistant heartbeat updates
+- Smoother drag and slide gestures on widgets
+
+### Bug Fixes
+
+- Fixed area names and floor changes not updating in the UI
+- Fixed a race condition that could briefly drop entity subscriptions during reconnection
+- Fixed incorrect timestamp tracking for entity state changes
+
 ## 0.9.0
 
 ### Widget Auto-Update

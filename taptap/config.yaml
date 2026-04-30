@@ -1,10 +1,10 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
 name: TapTap
-version: "0.3.3"
+version: 0.3.4
 slug: taptap
-description: '[老王杂谈说]：Tigo CCA 到 HomeAssistant MQTT 桥接'
+description: '[老王杂谈说]：Tigo CCA 至 HomeAssistant MQTT 桥'
 url: "https://gh-proxy.org/github.com/litinoveweedle/hassio-addons/tree/main/taptap"
-image: "ghcr.1ms.run/litinoveweedle/hassio-addon-taptap-{arch}"
+image: "ghcr.1ms.run/litinoveweedle/hassio-addon-taptap"
 homeassistant: 2025.3.1
 arch:
   - aarch64
@@ -37,10 +37,12 @@ options:
   ha_strings_availability_identified: false
   ha_stats_availability_online: false
   ha_stats_availability_identified: false
+  ha_nodes_sensors_recorder:
+    - energy
   ha_strings_sensors_recorder:
-    - energy_daily
+    - energy
   ha_stats_sensors_recorder:
-    - energy_daily
+    - energy
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   mqtt_server: str

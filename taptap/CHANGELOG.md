@@ -1,5 +1,12 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 
+## 0.3.4
+
+- BREAKING CHANGE - please adjust config ha_*_sensors_recorder values to the correct format (default value is 'energy')
+- update taptap-mqtt to v0.2.6
+  - fix energy integral calculation
+  - add validation for the *_SENSORS_RECORDER config values
+
 ## 0.3.3
 
 - update taptap-mqtt to v0.2.5 - hotfix to in Docker without SYS_RESOURCE capability
