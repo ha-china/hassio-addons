@@ -1,6 +1,6 @@
 ---
 name: "Sendspin Bluetooth Bridge"
-version: "2.65.0"
+version: "2.66.8"
 slug: "sendspin_bt_bridge"
 description: "[老王杂谈说]：null"
 url: "https://gh-proxy.org/github.com/trudenboy/sendspin-bt-bridge"
@@ -106,6 +106,7 @@ schema:
     - id: str
       mac: str?
       name: str?
+      device_class: str?
   ha_integration:
     enabled: bool?
     mode: "list(off|mqtt|rest)?"
