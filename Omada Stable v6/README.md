@@ -5,15 +5,15 @@
 
 ## 贡献
 
-此插件最初灵感来源于Matt Bentleys的
+此插件最初受到Matt Bentleys的
 [docker-omada-controller](https://github.com/mbentley/docker-omada-controller)
-以及jkunczik的[home-assistant-omada](https://github.com/jkunczik/home-assistant-omada)
-如果没有他们的出色工作，home-assistant-omada可能无法实现。
+和jkunczik [home-assistant-omada](https://github.com/jkunczik/home-assistant-omada)
+的启发，没有他们的出色工作，home-assistant-omada将无法实现。
 除了原始的docker omada controller之外，此插件将所有持久数据存储在/data目录中，
-以确保与Home Assistant兼容。
+以便与Home Assistant兼容。
 此插件的开发离不开其他人的努力。
-对于版本更新或新功能的拉取请求，我们始终表示欢迎。
-特别感谢DraTrav推动此插件的发展！
+对于版本更新或新功能的拉取请求始终欢迎。
+特别感谢DraTrav为此插件的发展做出的贡献！
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

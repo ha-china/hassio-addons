@@ -1,59 +1,63 @@
 # WhatsApp
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/whatsapp/logo.png" width="100" alt="Logo" />
+![WhatsApp Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/whatsapp/logo.png)
 
-[![Open your Home Assistant instance and show the app dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_whatsapp)
-[![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker Image](https://img.shields.io/badge/docker-1.5.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-whatsapp)
-![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_whatsapp)
+[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-1.5.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-whatsapp)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> Home Assistant WhatsApp App (Baileys/Node.js).
-
----
-
-## 📖 About
-
-### 🗝️ Native Control Commands
-
-Control your addon via WhatsApp!
-
-**Public Commands:**
-
-- `ha-app-status`: Check health and versions (HA Core/OS info included).
-- `ha-app-ping`: Basic connectivity check ("Pong!").
-- `ha-app-getid`: Returns the current Chat ID (useful for Group IDs).
-- `ha-app-sponsor`: Show support and donation links.
-
-**Admin Commands (Protected):**
-
-- `ha-app-help`: Show available commands and examples.
-- `ha-app-welcome`: Manually show the role-aware welcome message.
-- `ha-app-diagnose`: Run full message type diagnostic (Buttons, Lists, etc.).
-- `ha-app-logs`: See recent connection events.
-- `ha-app-restart`: Restart the WhatsApp connection.
-
-> [!TIP]
-> **First Contact:** The bot automatically sends a welcome message to new users on their first direct message, identifying their role (Admin/Standard).
-
-> [!TIP]
-> Send `ha-app-help` from an admin number for a full list of commands and usage examples.
+> Home Assistant WhatsApp 应用 (Baileys/Node.js).
 
 ---
 
-## ⚙️ Configuration
+## 📖 关于
 
-Configure the app via the **Configuration** tab in the Home Assistant App page.
+### 🗝️ 原生控制命令
 
-### Options
+通过 WhatsApp 控制您的插件！
+
+**公共命令：**
+
+- `ha-app-status`：检查健康状态和版本（包括 HA 核心和 OS 信息）。
+- `ha-app-ping`：基本连接检查（"Pong!"）。
+- `ha-app-getid`：返回当前的聊天 ID（用于群组 ID）。
+- `ha-app-sponsor`：显示支持和捐赠链接。
+
+**管理员命令（受保护）：**
+
+- `ha-app-help`：显示可用命令和示例。
+- `ha-app-welcome`：手动显示基于角色的欢迎信息。
+- `ha-app-diagnose`：运行完整消息类型诊断（按钮、列表等）。
+- `ha-app-logs`：查看最近的连接事件。
+- `ha-app-restart`：重启 WhatsApp 连接。
+
+> [!TIP]
+> **首次联系：**机器人会自动向新用户在他们的第一条直接消息中发送欢迎信息，并识别他们的角色（管理员/标准）。
+
+> [!TIP]
+> 从管理员号码发送 `ha-app-help` 以获取完整命令列表和使用示例。
+
+---
+
+## ⚙️ 配置
+
+通过 Home Assistant 应用页面中的 **配置** 选项卡配置应用。
+
+### 选项
 
 ```yaml
 admin_notifications_enabled: true
 admin_numbers: ''
+group_fetch_cooldown_on_error: 60000
+group_fetch_cooldown_on_rate_limit: 900000
+group_fetch_interval: 300000
 keep_alive_interval: 30000
 log_level: info
 mark_online: false
 mask_sensitive_data: false
 media_folder: ''
+message_send_interval: 1000
 reset_session: false
 send_message_timeout: 25000
 ui_auth_enabled: false
@@ -66,11 +70,10 @@ welcome_message_enabled: false
 
 ---
 
-## 👨‍💻 Credits & License
+## 👨‍💻 贡献者 & 许可证
 
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
-
+此项目是开源的，并受 MIT 许可证的约束。
+由 **FaserF** 维护。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

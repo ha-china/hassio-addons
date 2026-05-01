@@ -1,8 +1,8 @@
 name: "WhatsApp"
-version: "1.5.2"
+version: "1.5.3"
 slug: "whatsapp"
 image: ghcr.1ms.run/faserf/hassio-addons-whatsapp-{arch}
-description: "[老王杂谈说]：null"
+description: "[老王杂谈说]：Home Assistant WhatsApp 应用 (Baileys/Node.js)。"
 url: "https://gh-proxy.org/github.com/FaserF/ha-whatsapp"
 arch:
   - aarch64
@@ -29,6 +29,10 @@ options:
   admin_numbers: ""
   welcome_message_enabled: false
   admin_notifications_enabled: true
+  message_send_interval: 1000
+  group_fetch_interval: 300000
+  group_fetch_cooldown_on_error: 60000
+  group_fetch_cooldown_on_rate_limit: 900000
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)
   reset_session: bool
@@ -45,6 +49,10 @@ schema:
   admin_numbers: str?
   welcome_message_enabled: bool
   admin_notifications_enabled: bool
+  message_send_interval: int
+  group_fetch_interval: int
+  group_fetch_cooldown_on_error: int
+  group_fetch_cooldown_on_rate_limit: int
 ports:
   8066/tcp: 8066
 hassio_api: true

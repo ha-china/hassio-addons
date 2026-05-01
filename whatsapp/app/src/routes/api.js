@@ -29,6 +29,10 @@ import {
   SHOULD_RESET,
   PORT,
   ADDON_SLUG,
+  GROUP_FETCH_INTERVAL,
+  GROUP_FETCH_COOLDOWN_ON_ERROR,
+  GROUP_FETCH_COOLDOWN_ON_RATE_LIMIT,
+  MESSAGE_SEND_INTERVAL,
 } from '../config.js';
 import {
   WEBHOOK_ENABLED,
@@ -162,6 +166,21 @@ export function registerAPIRoutes(app) {
     });
   });
 
+  // --- Helper: Message Queue ---
+  async function enqueue(session, task) {
+    const result = await (session.sendQueue = session.sendQueue.then(async () => {
+      try {
+        const res = await task();
+        if (MESSAGE_SEND_INTERVAL > 0) await delay(MESSAGE_SEND_INTERVAL);
+        return res;
+      } catch (e) {
+        if (MESSAGE_SEND_INTERVAL > 0) await delay(MESSAGE_SEND_INTERVAL);
+        throw e;
+      }
+    }));
+    return result;
+  }
+
   // --- Messaging API ---
   app.post('/send_message', authMiddleware, async (req, res) => {
     const session = getReqSession(req);
@@ -173,19 +192,23 @@ export function registerAPIRoutes(app) {
       if (!session.sock) throw new Error('Socket not initialized');
       await session.sock.sendPresenceUpdate('composing', jid);
       await delay(250);
-      const sentMsg = await Promise.race([
-        session.sock.sendMessage(
-          jid,
-          { text: message },
-          { quoted, ephemeralExpiration: expiration }
-        ),
-        new Promise((_, reject) =>
-          setTimeout(() => {
-            session.sock.end(new Error(`Send message timeout (${SEND_MESSAGE_TIMEOUT}ms)`));
-            reject(new Error('Send message timeout'));
-          }, SEND_MESSAGE_TIMEOUT)
-        ),
-      ]);
+
+      const sentMsg = await enqueue(session, () =>
+        Promise.race([
+          session.sock.sendMessage(
+            jid,
+            { text: message },
+            { quoted, ephemeralExpiration: expiration }
+          ),
+          new Promise((_, reject) =>
+            setTimeout(() => {
+              session.sock.end(new Error(`Send message timeout (${SEND_MESSAGE_TIMEOUT}ms)`));
+              reject(new Error('Send message timeout'));
+            }, SEND_MESSAGE_TIMEOUT)
+          ),
+        ])
+      );
+
       session.stats.sent += 1;
       session.stats.last_sent_message = maskData(message);
       session.stats.last_sent_target = maskData(jid);
@@ -208,10 +231,12 @@ export function registerAPIRoutes(app) {
     const quoted = getQuotedMessage(session, quotedMessageId);
     try {
       const jid = getJid(number);
-      const sentMsg = await session.sock.sendMessage(
-        jid,
-        { image: { url: url }, caption: caption },
-        { quoted, ephemeralExpiration: expiration }
+      const sentMsg = await enqueue(session, () =>
+        session.sock.sendMessage(
+          jid,
+          { image: { url: url }, caption: caption },
+          { quoted, ephemeralExpiration: expiration }
+        )
       );
       session.stats.sent += 1;
       session.stats.last_sent_message = 'Image';
@@ -247,16 +272,18 @@ export function registerAPIRoutes(app) {
       if (!optionsValid) {
         normalizedSelectableCount = 0;
       }
-      const sentMsg = await session.sock.sendMessage(
-        jid,
-        {
-          poll: {
-            name: question,
-            values: options,
-            selectableCount: normalizedSelectableCount,
+      const sentMsg = await enqueue(session, () =>
+        session.sock.sendMessage(
+          jid,
+          {
+            poll: {
+              name: question,
+              values: options,
+              selectableCount: normalizedSelectableCount,
+            },
           },
-        },
-        { quoted, ephemeralExpiration: expiration }
+          { quoted, ephemeralExpiration: expiration }
+        )
       );
       session.messageStore.set(sentMsg.key.id, sentMsg);
       logger.info(
@@ -285,17 +312,19 @@ export function registerAPIRoutes(app) {
     const quoted = getQuotedMessage(session, quotedMessageId);
     try {
       const jid = getJid(number);
-      const sentMsg = await session.sock.sendMessage(
-        jid,
-        {
-          location: {
-            degreesLatitude: latitude,
-            degreesLongitude: longitude,
-            name: title,
-            address: description,
+      const sentMsg = await enqueue(session, () =>
+        session.sock.sendMessage(
+          jid,
+          {
+            location: {
+              degreesLatitude: latitude,
+              degreesLongitude: longitude,
+              name: title,
+              address: description,
+            },
           },
-        },
-        { quoted, ephemeralExpiration: expiration }
+          { quoted, ephemeralExpiration: expiration }
+        )
       );
       session.stats.sent += 1;
       session.stats.last_sent_message = `Location: ${title || 'Pinned'}`;
@@ -317,9 +346,11 @@ export function registerAPIRoutes(app) {
     if (!session.isConnected) return res.status(503).json({ detail: 'Not connected' });
     try {
       const jid = getJid(number);
-      const sentMsg = await session.sock.sendMessage(jid, {
-        react: { text: reaction, key: { remoteJid: jid, fromMe: false, id: messageId } },
-      });
+      const sentMsg = await enqueue(session, () =>
+        session.sock.sendMessage(jid, {
+          react: { text: reaction, key: { remoteJid: jid, fromMe: false, id: messageId } },
+        })
+      );
       res.json({ status: 'sent', id: sentMsg.key.id });
     } catch (e) {
       logger.error({ error: e.message, number }, 'Send reaction failed');
@@ -342,21 +373,23 @@ export function registerAPIRoutes(app) {
         }),
       }));
       const messageId = generateMessageID();
-      await session.sock.relayMessage(
-        jid,
-        {
-          viewOnceMessage: {
-            message: {
-              interactiveMessage: {
-                header: { title: '', hasMediaAttachment: false },
-                body: { text: message },
-                footer: { text: footer || '' },
-                nativeFlowMessage: { buttons: formattedButtons },
+      await enqueue(session, () =>
+        session.sock.relayMessage(
+          jid,
+          {
+            viewOnceMessage: {
+              message: {
+                interactiveMessage: {
+                  header: { title: '', hasMediaAttachment: false },
+                  body: { text: message },
+                  footer: { text: footer || '' },
+                  nativeFlowMessage: { buttons: formattedButtons },
+                },
               },
             },
           },
-        },
-        { messageId, quoted, ephemeralExpiration: expiration }
+          { messageId, quoted, ephemeralExpiration: expiration }
+        )
       );
       session.stats.sent += 1;
       session.stats.last_sent_message = `Buttons: ${message}`;
@@ -377,15 +410,17 @@ export function registerAPIRoutes(app) {
     const quoted = getQuotedMessage(session, quotedMessageId);
     try {
       const jid = getJid(number);
-      const sentMsg = await session.sock.sendMessage(
-        jid,
-        {
-          document: { url: url },
-          fileName: fileName,
-          caption: caption,
-          mimetype: 'application/octet-stream',
-        },
-        { quoted, ephemeralExpiration: expiration }
+      const sentMsg = await enqueue(session, () =>
+        session.sock.sendMessage(
+          jid,
+          {
+            document: { url: url },
+            fileName: fileName,
+            caption: caption,
+            mimetype: 'application/octet-stream',
+          },
+          { quoted, ephemeralExpiration: expiration }
+        )
       );
       session.stats.sent += 1;
       session.stats.last_sent_message = `Document: ${fileName || 'unnamed'}`;
@@ -404,10 +439,12 @@ export function registerAPIRoutes(app) {
     const quoted = getQuotedMessage(session, quotedMessageId);
     try {
       const jid = getJid(number);
-      const sentMsg = await session.sock.sendMessage(
-        jid,
-        { video: { url: url }, caption: caption },
-        { quoted, ephemeralExpiration: expiration }
+      const sentMsg = await enqueue(session, () =>
+        session.sock.sendMessage(
+          jid,
+          { video: { url: url }, caption: caption },
+          { quoted, ephemeralExpiration: expiration }
+        )
       );
       session.stats.sent += 1;
       session.stats.last_sent_time = Date.now();
@@ -426,10 +463,12 @@ export function registerAPIRoutes(app) {
     const quoted = getQuotedMessage(session, quotedMessageId);
     try {
       const jid = getJid(number);
-      await session.sock.sendMessage(
-        jid,
-        { audio: { url: url }, ptt: !!ptt, mimetype: 'audio/mp4' },
-        { quoted, ephemeralExpiration: expiration }
+      await enqueue(session, () =>
+        session.sock.sendMessage(
+          jid,
+          { audio: { url: url }, ptt: !!ptt, mimetype: 'audio/mp4' },
+          { quoted, ephemeralExpiration: expiration }
+        )
       );
       session.stats.sent += 1;
       trackSent(session, number, ptt ? 'Voice Note' : 'Audio');
@@ -451,7 +490,7 @@ export function registerAPIRoutes(app) {
         fromMe: fromMe !== undefined ? Boolean(fromMe) : true,
         id: message_id,
       };
-      await session.sock.sendMessage(jid, { delete: key });
+      await enqueue(session, () => session.sock.sendMessage(jid, { delete: key }));
       session.stats.sent += 1;
       trackSent(session, number, `Revoke: ${message_id}`);
       res.json({ status: 'sent' });
@@ -468,7 +507,7 @@ export function registerAPIRoutes(app) {
     try {
       const jid = getJid(number);
       const key = { remoteJid: jid, fromMe: true, id: message_id };
-      await session.sock.sendMessage(jid, { text: new_content, edit: key });
+      await enqueue(session, () => session.sock.sendMessage(jid, { text: new_content, edit: key }));
       session.stats.sent += 1;
       trackSent(session, number, `Edit: ${message_id}`);
       res.json({ status: 'sent' });
@@ -484,7 +523,7 @@ export function registerAPIRoutes(app) {
     if (!session.isConnected) return res.status(503).json({ detail: 'Not connected' });
     try {
       const jid = getJid(number);
-      await session.sock.sendPresenceUpdate(presence, jid);
+      await enqueue(session, () => session.sock.sendPresenceUpdate(presence, jid));
       res.json({ status: 'sent' });
     } catch (e) {
       logger.error({ error: e.message, number }, 'Set presence failed');
@@ -497,7 +536,19 @@ export function registerAPIRoutes(app) {
     if (!session.isConnected) return res.status(503).json({ detail: 'Not connected' });
     try {
       if (!session.sock) throw new Error('Socket not initialized');
-      const groups = await session.sock.groupFetchAllParticipating();
+
+      if (Date.now() < (session.groupFetchCooldownUntil || 0)) {
+        logger.debug({ sessionId: session.id }, 'Groups fetch requested during cooldown, skipping');
+        return res.status(429).json({
+          detail: 'Rate limit: Group fetch is currently in cooldown',
+          cooldown_remaining: Math.ceil((session.groupFetchCooldownUntil - Date.now()) / 1000),
+        });
+      }
+
+      const groups = await enqueue(session, () => session.sock.groupFetchAllParticipating());
+      session.lastGroupFetch = Date.now();
+      session.groupFetchCooldownUntil = 0;
+
       const result = Object.values(groups).map((g) => ({
         id: g.id,
         name: g.subject,
@@ -506,6 +557,11 @@ export function registerAPIRoutes(app) {
       res.json(result);
     } catch (e) {
       logger.error({ error: e.message }, 'Fetch groups failed');
+      if (e.message?.includes('rate-overlimit')) {
+        session.groupFetchCooldownUntil = Date.now() + GROUP_FETCH_COOLDOWN_ON_RATE_LIMIT;
+      } else {
+        session.groupFetchCooldownUntil = Date.now() + GROUP_FETCH_COOLDOWN_ON_ERROR;
+      }
       res.status(500).json({ detail: 'Internal Server Error: Failed to fetch groups' });
     }
   });
@@ -517,16 +573,27 @@ export function registerAPIRoutes(app) {
       if (!session.sock) throw new Error('Socket not initialized');
 
       let groups = {};
+      const now = Date.now();
       if (
-        !session.groupCache ||
-        session.groupCache.size === 0 ||
-        Date.now() - (session.lastGroupFetch || 0) > 300000
+        (!session.groupCache ||
+          session.groupCache.size === 0 ||
+          now - (session.lastGroupFetch || 0) > GROUP_FETCH_INTERVAL) &&
+        now > (session.groupFetchCooldownUntil || 0)
       ) {
         try {
-          groups = await session.sock.groupFetchAllParticipating();
-          session.lastGroupFetch = Date.now();
+          groups = await enqueue(session, () => session.sock.groupFetchAllParticipating());
+          session.lastGroupFetch = now;
+          session.groupFetchCooldownUntil = 0;
         } catch (e) {
           logger.warn({ error: e.message }, 'Failed to fetch groups, using cache');
+          // Update last fetch attempt even on error to avoid hammering
+          session.lastGroupFetch = now;
+          if (e.message?.includes('rate-overlimit')) {
+            session.groupFetchCooldownUntil = now + GROUP_FETCH_COOLDOWN_ON_RATE_LIMIT;
+            logger.info({ sessionId: session.id }, 'Rate limit detected, cooling down group fetch');
+          } else {
+            session.groupFetchCooldownUntil = now + GROUP_FETCH_COOLDOWN_ON_ERROR;
+          }
         }
       }
 
@@ -565,9 +632,11 @@ export function registerAPIRoutes(app) {
         if (msg && msg.key) {
           key = { ...msg.key, remoteJid: jid }; // ensure remoteJid matches request
         }
-        await session.sock.readMessages([key]);
+        await enqueue(session, () => session.sock.readMessages([key]));
       } else {
-        await session.sock.chatModify({ markRead: true, lastMessages: [] }, jid);
+        await enqueue(session, () =>
+          session.sock.chatModify({ markRead: true, lastMessages: [] }, jid)
+        );
       }
       res.json({ status: 'success' });
     } catch (e) {
@@ -594,31 +663,33 @@ export function registerAPIRoutes(app) {
         })),
       }));
       const messageId = generateMessageID();
-      await session.sock.relayMessage(
-        jid,
-        {
-          viewOnceMessage: {
-            message: {
-              interactiveMessage: {
-                header: { title: title || '', hasMediaAttachment: false },
-                body: { text: text || 'Menu' },
-                footer: { text: footer || '' },
-                nativeFlowMessage: {
-                  buttons: [
-                    {
-                      name: 'single_select',
-                      buttonParamsJson: JSON.stringify({
-                        title: button_text || 'Open Menu',
-                        sections: formattedSections,
-                      }),
-                    },
-                  ],
+      await enqueue(session, () =>
+        session.sock.relayMessage(
+          jid,
+          {
+            viewOnceMessage: {
+              message: {
+                interactiveMessage: {
+                  header: { title: title || '', hasMediaAttachment: false },
+                  body: { text: text || 'Menu' },
+                  footer: { text: footer || '' },
+                  nativeFlowMessage: {
+                    buttons: [
+                      {
+                        name: 'single_select',
+                        buttonParamsJson: JSON.stringify({
+                          title: button_text || 'Open Menu',
+                          sections: formattedSections,
+                        }),
+                      },
+                    ],
+                  },
                 },
               },
             },
           },
-        },
-        { messageId, quoted, ephemeralExpiration: expiration }
+          { messageId, quoted, ephemeralExpiration: expiration }
+        )
       );
       session.stats.sent += 1;
       trackSent(session, number, `List: ${title || text}`);
@@ -643,10 +714,12 @@ export function registerAPIRoutes(app) {
         `TEL;type=CELL;type=VOICE;waid=${contact_number}:${contact_number}\n` +
         'END:VCARD';
       const quoted = getQuotedMessage(session, quotedMessageId);
-      await session.sock.sendMessage(
-        jid,
-        { contacts: { displayName: contact_name, contacts: [{ vcard }] } },
-        { quoted, ephemeralExpiration: expiration }
+      await enqueue(session, () =>
+        session.sock.sendMessage(
+          jid,
+          { contacts: { displayName: contact_name, contacts: [{ vcard }] } },
+          { quoted, ephemeralExpiration: expiration }
+        )
       );
       session.stats.sent += 1;
       trackSent(session, number, `Contact: ${contact_name}`);

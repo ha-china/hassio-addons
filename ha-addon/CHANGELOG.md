@@ -7,6 +7,255 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.66.20] - 2026-05-01
+
+### Fixed
+- Scan results list now scrolls correctly when many Bluetooth devices are
+  found (third and final fix, follow-up to v2.66.17 and v2.66.19).
+  Previous attempts targeted `.bt-scan-results-box`, but a later CSS rule
+  (`overflow: visible !important`) intentionally resets overflow on that
+  element so the split-menu dropdown can escape clipping — that rule won
+  the cascade and `overflow-y: auto` never engaged.  Fixed by applying
+  `overflow-y: auto; max-height: min(380px, 44vh)` to the inner
+  `#scan-results-list` element directly, which is not subject to the
+  `overflow: visible` override.  The split-menu dropdown is repositioned
+  via `position: fixed` in JavaScript so it can still escape the scroll
+  container without requiring `overflow: visible` on any ancestor.
+
+## [2.66.19] - 2026-05-01
+
+### Fixed
+- Scan results list now scrolls correctly when many devices are found
+  (follow-up to v2.66.17).  The v2.66.17 fix added `min-height: 0` to
+  the modal body, but the body is a flex column (`.ui-stack`) whose
+  children use the default `flex-shrink: 1` — so the results box shrank
+  to fit rather than overflowing.  The scrollbar never engaged.  Fixed
+  by capping `.bt-scan-results-box` directly at `min(420px, 45vh)` with
+  `overflow-y: auto`, making the list the scroll target instead of the
+  body.
+
+## [2.66.18] - 2026-04-30
+
+### Fixed
+- HA MQTT publisher now logs `connecting to host:port` at startup and
+  applies a 10-second connection timeout (`aiomqtt` default is `None` —
+  no timeout — which caused the initial connection attempt to hang
+  silently for up to 2 minutes when the broker was unreachable, with no
+  log output and the UI permanently showing "not connected yet").
+
+## [2.66.17] - 2026-04-30
+
+### Fixed
+- Scan results list now scrolls when more devices are discovered than fit
+  in the visible modal area.  The modal body was missing `min-height: 0`
+  on its flex container, which prevented the browser from engaging
+  `overflow-y: auto` — content was clipped by the parent's
+  `overflow: hidden` with no scrollbar.
+
+## [2.66.16] - 2026-04-30
+
+### Fixed
+- Docker HEALTHCHECK now probes the actual bound port instead of always
+  falling back to `:8080`.  In HA addon mode the web server binds on the
+  dynamically assigned Supervisor ingress port (e.g. 65217); the old
+  `${WEB_PORT:-8080}` fallback never matched, so every health-check curl
+  request failed.  After 60 s start-period + 3 × 30 s retries Docker
+  marked the container `(unhealthy)`, and users with the Watchdog toggle
+  enabled experienced a restart loop every ~2 minutes.  The fix writes
+  the resolved port to `/tmp/sendspin-web-port` at startup; the
+  HEALTHCHECK reads it with a safe `:8080` fallback for non-addon
+  deployments where the file may not exist yet.
+
+## [2.66.15] - 2026-04-30
+
+### Fixed
+- The HA-coordinator event stream (`/api/status/events`) no longer
+  spams `AssertionError: Connection is a "hop-by-hop" header` in
+  the bridge log on every reconnect.  The route was setting an
+  explicit `Connection: keep-alive` response header, which WSGI
+  applications are forbidden from setting (PEP 3333 / RFC 2616
+  §13.5.1).  Waitress correctly enforced the rule and tore the
+  stream down — coordinators were reconnecting roughly once a
+  minute.  Header removed; canonical `/api/status/stream` was
+  already correct.
+- HACS pair form's CTA link on HAOS deployments where HA's zeroconf
+  hands back the bridge's mDNS hostname (e.g.
+  `sendspin-bridge-XXX.local`) instead of the resolved
+  `172.30.32.x` IP now correctly resolves to the absolute HA URL
+  (`https://ha.example.com/api/hassio_ingress/.../`).  Earlier,
+  the v2.66.14 CIDR check skipped the Supervisor lookup whenever
+  `host` failed to parse as an IP, so the form rendered the bare
+  `.local` URL — which most browsers can't open.
+
+## [2.66.14] - 2026-04-30
+
+### Added
+- HA panel highlights fields that the bridge needs filled in for the
+  selected integration mode.  When *Mode = MQTT*, the **Broker host**
+  label gets a red asterisk and the field is flagged as required;
+  attempting to save with it empty surfaces a clear toast ("MQTT
+  broker host is required.  Use 'auto' or enter a hostname / IP, or
+  switch the integration mode to Off") and scrolls focus to the
+  field.  Inline error styling matches the rest of the form, and
+  starts typing clears it immediately.  Saving MQTT mode with empty
+  username **and** password also pops a soft confirm
+  ("Most brokers require credentials.  Save anyway?") so the
+  anonymous-broker edge case still works without nagging operators
+  who already filled the fields.
+- HA Custom Component: the **MQTT broker host** field now accepts
+  full broker URIs.  Pasting `mqtt://host:1883`,
+  `mqtts://broker.example.com:8883`, `ssl://`, `tls://`, `ws://`,
+  `wss://`, `http://`, or `https://` works the same as a bare
+  hostname — the scheme is stripped, the URL port populates the
+  Port field, and TLS schemes (`mqtts`, `ssl`, `tls`, `https`,
+  `wss`) flip the TLS toggle automatically.  The broker host
+  blur handler flashes a transient hint summarising what changed
+  ("Cleaned up scheme · TLS enabled · port 8883").  Bare
+  hostnames, IPs, and `auto` pass through unchanged.
+
+### Fixed
+- HACS custom_component **auto-pair on HAOS** no longer falls back
+  to the manual-token form.  The bridge's pair endpoint
+  (`/api/auth/ha-pair`) previously trusted only a handful of
+  explicit IPs, but Supervisor presents addon-side requests with
+  source IPs anywhere in the hassio Docker `/23` network.  The
+  trust list now covers the whole network, so configuring the
+  custom_component on HAOS works with zero input — no need to
+  open the bridge UI and copy a token.
+- HACS config-flow **CTA link** is now a recognisable URL.  On
+  HAOS the link is prefixed with the operator's HA Frontend URL
+  (`https://ha.example.com/api/hassio_ingress/.../`), matching
+  the URL they already see in their browser address bar.  On
+  standalone bridges with mDNS, the link prefers the friendly
+  hostname (`<bridge_id>.local`) over the discovered IP.
+  Previously the link rendered as a raw ingress path or a
+  Supervisor-internal IP, both unrecognisable.
+
+## [2.66.13] - 2026-04-30
+
+### Added
+- Standalone-bridge **MQTT broker auto-suggest** from the configured
+  Music Assistant URL.  When the bridge runs outside HAOS (no
+  Supervisor), the *Auto-detect MQTT add-on* button now derives the
+  broker host from the MA URL (the common case where MA is an HA
+  add-on and Mosquitto sits on the same host) instead of returning
+  the misleading "Install and start the official Mosquitto add-on"
+  hint.  The runtime resolver does the same: `broker = "auto"` on a
+  standalone deployment falls back to the MA host before disabling
+  the publisher.  The operator only has to type the Mosquitto
+  username / password — host / port are pre-filled.
+
+### Changed
+- The HA panel's *MQTT broker* card adapts copy to the deployment
+  mode: HAOS keeps the "click Auto-detect to fill from the
+  Mosquitto add-on" hint, standalone shows "set Broker host to
+  your HA host's IP / hostname (`auto` requires HA add-on mode)"
+  and a `homeassistant.local` placeholder.  The Auto-detect
+  button label becomes *Suggest broker host* on standalone.
+
+## [2.66.12] - 2026-04-30
+
+### Fixed
+- The CSRF-token inline `<script>` block in `index.html` had a JS
+  comment that referenced `</script>` literally inside backticks.
+  HTML parsers close `<script>` on that sequence regardless of JS
+  comment context, so v2.66.11 leaked the orphaned tail of the
+  block — including the rendered CSRF token — into the page as
+  visible text.  Comment rephrased to avoid the literal sequence,
+  with a regression test that walks every inline `<script>` block
+  and rejects nested `</script` substrings.
+- `app.js` was shipped uncompressed despite the v2.66.11 gzip
+  middleware — Flask's `send_file` infers `text/javascript` for
+  `.js` (RFC 9239 / modern IANA preferred), but the middleware's
+  gzippable-prefix list only had `application/javascript`.  Both
+  forms are now covered, restoring the ~70 % cold-load reduction
+  for the largest single asset.
+
+## [2.66.11] - 2026-04-30
+
+### Added
+- gzip compression for text responses (HTML, JS, CSS, JSON, SVG).
+  Cold load through HA Ingress / Nabu Casa drops from ~960 KB
+  uncompressed (`app.js` 620 KB + `style.css` 330 KB + small JSON)
+  to ~200 KB on the wire — multi-second improvement on the path
+  that previously felt like "the addon never started".  Skips SSE
+  streams (the v2.63.0-rc.4 ingress no-transform handshake stays
+  intact) and bodies under 1 KB.
+- Focused HACS landing page (`info.md`) replaces the verbose
+  repository README that HACS used to render as the integration
+  description.
+- HACS config-flow dialog now embeds a clickable link to the
+  bridge's *Settings → Home Assistant → Bearer tokens for HA
+  custom_component* card on the discovery, manual, and reauth
+  steps.
+- HACS **manual** add-integration flow now auto-pairs on HAOS
+  when the operator leaves the token field blank — the same
+  Supervisor-mediated mint that the zeroconf path already used.
+  No more "I have to copy a token across two tabs" round-trip.
+
+### Fixed
+- HACS auto-pair on HAOS no longer gets rejected with 403.  The
+  ``/api/auth/ha-pair`` endpoint trusted only the Supervisor
+  container (`172.30.32.2`), but the call originates from
+  **HA Core** (`172.30.32.1` on the same `hassio` network).
+  Operators on HAOS were therefore always pushed through the
+  manual token form even though the bridge was already
+  configured.  HA Core's IP is now in the default trusted-proxy
+  set.
+- "Invalid CSRF token" when clicking **Generate token** under
+  *Settings → Home Assistant → Bearer tokens for HA
+  custom_component* in HA add-on mode.  The frontend reads
+  `window._csrfToken` but the template never set it, so JSON
+  POSTs sent an empty CSRF and the server rejected them.  The
+  template now exposes the per-session token via that global
+  (Docker / standalone deployments were unaffected because the
+  global auth gate is off there).
+- The **Bearer tokens for HA custom_component** card is now
+  always visible on the *Settings → Home Assistant* tab.
+  Previously it disappeared as soon as the bridge auto-paired
+  via MQTT on HAOS, forcing operators to click **Reconfigure**
+  to find the *Generate token* button.  Tokens are an
+  HACS-side concern independent of the bridge's own MA
+  integration mode, so collapsing them with the connection
+  card was wrong.
+
+## [2.66.10] - 2026-04-30
+
+### Added
+- "Previous run ended ungracefully" card at the top of the
+  Diagnostics tab — surfaces the breadcrumb-derived `exit_kind`,
+  last reached startup phase, last log message, and exit
+  code/signal from the prior run.  Hidden when the previous run
+  was graceful or there is no history yet.  Backed by a new
+  `last_run` field in `/api/diagnostics`.
+
+### Fixed
+- s6 finish now normalises s6-supervise's `256` sentinel exit code
+  ("killed by signal — see `$2`") into the conventional
+  `128 + signal` value used by every shell, so the breadcrumb's
+  `exit_code` matches what users see in `docker ps` /  `$?` /
+  journald (e.g. `137` for SIGKILL, `143` for SIGTERM).
+  Cosmetic — `exit_signal` was already authoritative.
+
+## [2.66.9] - 2026-04-30
+
+### Added
+- Boot/exit breadcrumb files persisted under
+  `<CONFIG_DIR>/breadcrumbs/`, surfaced as a new
+  **LAST RUN SUMMARY** section in the diagnostics bundle (and the
+  in-UI **Report** button output).  The bridge writes
+  `boot.json` incrementally during startup; the s6 finish script
+  writes `exit.json` with the actual exit code and signal.  On the
+  next boot the two are paired into a derived `exit_kind` —
+  `graceful`, `sigkill`, `crash_unhandled_exception`,
+  `terminated_during_startup`, `unknown_no_finish`,
+  `shutdown_interrupted`, `unknown_corrupt`, or `unknown_schema` —
+  and a single WARNING line lands in the ring buffer when the
+  previous run wasn't graceful.  Pure stdlib, atomic writes;
+  read-only filesystems degrade silently.  Pays off the first time
+  a user reports "the addon keeps restarting": the diagnostics they
+  attach already describes how the prior run died.
+
 ## [2.66.8] - 2026-04-30
 
 ### Changed
@@ -4467,7 +4716,19 @@ Stable rollup of the rc.1 → rc.5 series. Headline theme: **multi-adapter corre
 - mDNS auto-discovery for Music Assistant server (`SENDSPIN_SERVER=auto`)
 - Config persistence via `/config/config.json`
 
-[Unreleased]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.8...HEAD
+[Unreleased]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.20...HEAD
+[2.66.20]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.19...v2.66.20
+[2.66.19]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.18...v2.66.19
+[2.66.18]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.17...v2.66.18
+[2.66.17]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.16...v2.66.17
+[2.66.16]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.15...v2.66.16
+[2.66.15]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.14...v2.66.15
+[2.66.14]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.13...v2.66.14
+[2.66.13]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.12...v2.66.13
+[2.66.12]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.11...v2.66.12
+[2.66.11]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.10...v2.66.11
+[2.66.10]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.9...v2.66.10
+[2.66.9]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.8...v2.66.9
 [2.66.8]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.7...v2.66.8
 [2.66.7]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.6...v2.66.7
 [2.66.6]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.66.5...v2.66.6
