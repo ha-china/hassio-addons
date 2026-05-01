@@ -1,38 +1,62 @@
-# eWeLink Smart Home
+# eWeLink智能家居
 
-![Supports armv7 Architecture](https://img.shields.io/badge/armv7-yes-green.svg) ![Supports aarch64 Architecture](https://img.shields.io/badge/aarch64-yes-green.svg) ![Supports amd64 Architecture](https://img.shields.io/badge/amd64-yes-green.svg)
+![支持armv7架构](https://img.shields.io/badge/armv7-yes-green.svg) ![支持aarch64架构](https://img.shields.io/badge/aarch64-yes-green.svg) ![支持amd64架构](https://img.shields.io/badge/amd64-yes-green.svg)
 
-## About
+## 关于
 
-**eWeLink Smart Home** is designed to replace the legacy [eWeLink Smart Home](https://github.com/CoolKit-Technologies/ha-addon). It allows you to integrate devices under your eWeLink account into **Home Assistant** via **MQTT**, enabling device control and automation directly within Home Assistant. Simply log in with your eWeLink account to sync your devices into Home Assistant.
+**eWeLink智能家居** 设计用来替代传统的 [eWeLink智能家居](https://github.com/CoolKit-Technologies/ha-addon)。它允许您通过 **MQTT** 将您的eWeLink账户下的设备集成到 **Home Assistant** 中，从而实现直接在Home Assistant内进行设备控制和自动化。只需用您的eWeLink账户登录即可同步设备到Home Assistant。
 
-The legacy [eWeLink Smart Home](https://github.com/CoolKit-Technologies/ha-addon) add-on will **no longer be maintained or updated**. Some of its entity implementations rely on deprecated approaches, and the new project provides more robust and future-proof device support.
-If you are currently using the old add-on, don’t worry — the new add-on includes a **data migration feature**. After migration, your existing devices and automations in Home Assistant will continue to work as before. Please refer to **Step 5** for the migration process.
-
----
-
-## Key Differences Between the New and Legacy eWeLink Smart Home Add-ons
-
-1. The new add-on provides **more entities** for devices synced to Home Assistant, with implementations that better align with Home Assistant standards. It will continue to expand support for more devices and capabilities, including rapid support for new SONOFF products.
-2. The new add-on **does not provide a UI for device control**. All control and automation are performed directly within Home Assistant.
-3. The new add-on **no longer supports syncing Home Assistant devices back to the eWeLink cloud**, a feature that existed in the legacy add-on.
+传统的 [eWeLink智能家居](https://github.com/CoolKit-Technologies/ha-addon) 插件将 **不再维护或更新**。其中一些实体实现依赖于已过时的方法，而新项目提供了更健壮和面向未来的设备支持。
+如果您目前正在使用旧插件，请不要担心——新插件包括 **数据迁移功能**。迁移后，您的Home Assistant中的现有设备和自动化将继续按之前的方式工作。请参考 **步骤5** 了解迁移过程。
 
 ---
 
-## Prerequisites
+## 新版与旧版eWeLink智能家居插件的关键区别
 
-1. MQTT integration and the **MQTT Broker add-on** are installed and enabled in Home Assistant.
-2. You have registered an **eWeLink account** and added devices via the eWeLink mobile app.
-3. **If you are using the legacy eWeLink Smart Home add-on and wish to migrate its data**, please first upgrade it to **version 1.4.6**, then stop the legacy add-on. During migration, the system will automatically stop the legacy add-on if it is still running. Refer to **Step 5** for details.
+1. 新插件为同步到Home Assistant的设备提供了 **更多实体**，其实现在与Home Assistant标准更加一致。它将继续扩展对更多设备和功能的支持，包括对新SONOFF产品的快速支持。
+2. 新插件 **不提供设备控制UI**。所有控制和自动化都在Home Assistant内直接进行。
+3. 新插件 **不再支持将Home Assistant设备同步回eWeLink云**，这是旧插件中存在的功能。
 
-## Installation
-1. Go to the Add-on Store → Click the **More** button (⋮) in the upper-right corner → Select **Repositories**  
-2. Paste the following URL:  
+---
+
+## 先决条件
+
+1. Home Assistant已安装并启用了MQTT集成和 **MQTT代理插件**。
+2. 您已在eWeLink上注册了账户并通过eWeLink移动应用添加了设备。
+3. **如果您正在使用旧版eWeLink智能家居插件并希望迁移其数据**，请首先将其升级到 **版本1.4.6**，然后停止旧插件。在迁移过程中，系统将自动停止仍在运行的旧插件。有关详细信息，请参考 **步骤5**。
+
+## 安装
+1. 前往插件商店 → 点击右上角的 **更多** 按钮 (⋮) → 选择 **仓库**  
+2. 粘贴以下URL：  
    [https://github.com/iHost-Open-Source-Project/hassio-ihost-addon](https://github.com/iHost-Open-Source-Project/hassio-ihost-addon)  
-3. Or, simply click the button below to add it automatically:
+3. 或者，只需点击下面的按钮即可自动添加：
 
-[![Add Repository](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FiHost-Open-Source-Project%2Fhassio-ihost-addon)
+[![添加仓库](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FiHost-Open-Source-Project%2Fhassio-ihost-addon)
 
-## How to use
+## 使用方法
 
-See “Documentation” for details on how to use the eWeLink Smart Home add-on.
+请参阅“文档”以了解如何使用eWeLink智能家居插件。
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

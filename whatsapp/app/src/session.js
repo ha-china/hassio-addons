@@ -55,11 +55,14 @@ export function getSession(rawSessionId) {
       recentSent: [],
       recentReceived: [],
       recentFailures: [],
-      messageStore: new LRUCache({ max: 1000, ttl: 1000 * 60 * 60 * 24 }), // 1000 messages or 24h
+      messageStore: new LRUCache({ max: 5000, ttl: 1000 * 60 * 60 * 24 * 7 }), // 5000 messages or 7 days
       chatCache: new Map(),
       groupCache: new Map(),
       statusRateLimit: new Map(), // sender -> lastStatusTime
       unauthorizedWarned: new Set(), // sender IDs
+      lastGroupFetch: 0,
+      groupFetchCooldownUntil: 0,
+      sendQueue: Promise.resolve(),
       lastInterestTime: 0, // Track when someone last looked at this session
       stats: {
         sent: 0,
@@ -84,6 +87,13 @@ export function getSession(rawSessionId) {
       },
     });
     loadMessageStore(sessions.get(sessionId));
+    // Start periodic save for this session
+    sessions.get(sessionId)._saveInterval = setInterval(
+      () => {
+        saveMessageStore(sessions.get(sessionId));
+      },
+      5 * 60 * 1000
+    ); // Every 5 minutes
   }
   return sessions.get(sessionId);
 }
@@ -158,6 +168,9 @@ export async function deleteSession(sessionId) {
 
   if (session && session.haMonitorInterval) {
     clearInterval(session.haMonitorInterval);
+  }
+  if (session && session._saveInterval) {
+    clearInterval(session._saveInterval);
   }
 
   sessions.delete(sessionId);
