@@ -1,8 +1,7 @@
 arch:
   - aarch64
   - amd64
-codenotary: alexandrep.github@gmail.com
-description: '[老王杂谈说]：尽可能自动化所有我们能做的事情，使Usenet变得尽可能简单和精简'
+description: '[老王杂谈说]：null'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -66,8 +65,8 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment:
-  PGID: '0'
-  PUID: '0'
+  PGID: "0"
+  PUID: "0"
 image: ghcr.1ms.run/alexbelgium/sabnzbd-{arch}
 ingress_entry: sabnzbd
 init: false
@@ -78,6 +77,7 @@ map:
   - media:rw
 name: Sabnzbd
 options:
+  env_vars: []
   PGID: 0
   PUID: 0
 panel_admin: false
@@ -90,6 +90,9 @@ privileged:
   - SYS_ADMIN
   - DAC_READ_SEARCH
 schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
   PGID: int
   PUID: int
   TZ: str?
@@ -101,5 +104,5 @@ schema:
 slug: sabnzbd
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
-version: "4.5.5"
+version: "5.0.1"
 webui: http://[HOST]:[PORT:8080]

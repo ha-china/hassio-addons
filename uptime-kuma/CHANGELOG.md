@@ -2,12 +2,10 @@
 
 ## ⬆️ Dependency updates
 
-- ⬆️ Update louislam/uptime-kuma to v2.2.0 @[renovate[bot]](https://github.com/apps/renovate) ([#317](https://github.com/hassio-addons/app-uptime-kuma/pull/317))
-- ⬆️ Update alpine_3_23/npm to v11.11.0-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#322](https://github.com/hassio-addons/app-uptime-kuma/pull/322))
-- ⬆️ Update apprise to v1.9.8 @[renovate[bot]](https://github.com/apps/renovate) ([#320](https://github.com/hassio-addons/app-uptime-kuma/pull/320))
-- ⬆️ Update louislam/uptime-kuma to v2.2.1 @[renovate[bot]](https://github.com/apps/renovate) ([#321](https://github.com/hassio-addons/app-uptime-kuma/pull/321))
-- ⬆️ Update apprise to v1.9.9 @[renovate[bot]](https://github.com/apps/renovate) ([#324](https://github.com/hassio-addons/app-uptime-kuma/pull/324))
-- ⬆️ Update alpine_3_23/nodejs to v24.14.1-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#326](https://github.com/hassio-addons/app-uptime-kuma/pull/326))
-- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v20.0.2 @[renovate[bot]](https://github.com/apps/renovate) ([#327](https://github.com/hassio-addons/app-uptime-kuma/pull/327))
-- ⬆️ Update hassio-addons/workflows action to v2.0.6 @[renovate[bot]](https://github.com/apps/renovate) ([#315](https://github.com/hassio-addons/app-uptime-kuma/pull/315))
-- ⬆️ Update cloudflare/cloudflared to v2026.3.0 @[renovate[bot]](https://github.com/apps/renovate) ([#323](https://github.com/hassio-addons/app-uptime-kuma/pull/323))
+- ⬆️ Update alpine_3_23/setpriv to v2.41.4-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#328](https://github.com/hassio-addons/app-uptime-kuma/pull/328))
+- ⬆️ Update alpine_3_23/python3 to v3.12.13-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#330](https://github.com/hassio-addons/app-uptime-kuma/pull/330))
+- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v20.0.3 @[renovate[bot]](https://github.com/apps/renovate) ([#329](https://github.com/hassio-addons/app-uptime-kuma/pull/329))
+- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v20.0.4 @[renovate[bot]](https://github.com/apps/renovate) ([#331](https://github.com/hassio-addons/app-uptime-kuma/pull/331))
+- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v20.1.0 @[renovate[bot]](https://github.com/apps/renovate) ([#333](https://github.com/hassio-addons/app-uptime-kuma/pull/333))
+- ⬆️ Update apprise to v1.10.0 @[renovate[bot]](https://github.com/apps/renovate) ([#334](https://github.com/hassio-addons/app-uptime-kuma/pull/334))
+- ⬆️ Update louislam/uptime-kuma to v2.3.0 @[renovate[bot]](https://github.com/apps/renovate) ([#335](https://github.com/hassio-addons/app-uptime-kuma/pull/335))

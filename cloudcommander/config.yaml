@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：Cloud Commander，一款带有控制台和编辑器的 Web 文件管理器'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -104,4 +104,4 @@ schema:
 slug: cloudcommander
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/cloudcommander
-version: "19.13.1"
+version: "19.15.0"

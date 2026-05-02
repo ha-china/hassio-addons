@@ -1,24 +1,24 @@
-# Home Assistant 扩展：OpenThread 边界路由器扩展（网络）
+# Home Assistant 插件：OpenThread 边界路由器插件（网络）
 
-无需 USB 设备的 OpenThread 边界路由器扩展。仅适用于网络设备。
+无需 USB 设备的 OpenThread 边界路由器插件。仅适用于网络设备。
 
-[![Buy Me A Coffee](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/coffee.png)](https://www.buymeacoffee.com/smeagolworms4)
-[![Buy Me A Coffee](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/paypal.png)](https://www.paypal.com/donate/?business=SURRPGEXF4YVU&no_recurring=0&item_name=Hello%2C+I%27m+SmeagolWorms4.+For+my+open+source+projects.%0AThanks+you+very+mutch+%21%21%21&currency_code=EUR)
+[![给我买杯咖啡](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/coffee.png)](https://www.buymeacoffee.com/smeagolworms4)
+[![给我买杯咖啡](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/paypal.png)](https://www.paypal.com/donate/?business=SURRPGEXF4YVU&no_recurring=0&item_name=Hello%2C+I%27m+SmeagolWorms4.+For+my+open+source+projects.%0AThanks+you+very+mutch+%21%21%21&currency_code=EUR)
 
 原始 Fork Github : https://github.com/Smeagolworms4/core_openthread_border_router
 
 ## 原始说明。
 
-OpenThread 边界路由器扩展。此扩展使用上游的 OpenThread 边界路由器实现，并将其作为 Home Assistant 的扩展。
+OpenThread 边界路由器插件。此插件使用上游的 OpenThread 边界路由器实现，并将其作为 Home Assistant 的插件封装。
 
-**注意：** 此扩展需要支持 802.15.4 的无线电设备，并配备 OpenThread RCP 固件。如果您使用 [Home Assistant 黄金版](https://www.home-assistant.io/yellow/) 或 [Home Assistant Connect ZBT-1](https://www.home-assistant.io/connectzbt1/)（之前称为 SkyConnect），则正确的固件将自动安装。
+**注意：** 此插件需要支持 802.15.4 的无线电设备，并具有 OpenThread RCP 固件。如果您使用 [Home Assistant Yellow](https://www.home-assistant.io/yellow/) 或 [Home Assistant Connect ZBT-1](https://www.home-assistant.io/connectzbt1/)（之前称为 SkyConnect），则正确的固件将自动安装。
 
 ![支持 aarch64 架构][aarch64-shield]
 ![支持 amd64 架构][amd64-shield]
 
 ## 关于
 
-此扩展允许您创建或加入 Thread 网络，并将 Home Assistant 设置为 Thread 边界路由器。
+此插件允许您创建或加入 Thread 网络，并将 Home Assistant 设置为 Thread 边界路由器。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
