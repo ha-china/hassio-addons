@@ -1,62 +1,61 @@
-# Home assistant add-on: BirdNET-PiPy
+# Home assistant 插件：BirdNET-PiPy
 
-BirdNET-PiPy is a self-hosted system that uses the BirdNET deep-learning model to identify birds from their sounds, with a modern web dashboard for monitoring detections. This add-on packages the upstream project for Home Assistant with ingress support.
+BirdNET-PiPy 是一个自托管的系统，它使用 BirdNET 深度学习模型来识别鸟鸣声，并带有现代的网页仪表板以监控检测。此插件将上游项目打包为 Home Assistant 的插件，并支持入站功能。
 
-## About
+## 关于
 
-- Upstream project: https://github.com/Suncuss/BirdNET-PiPy
-- This add-on runs the BirdNET-PiPy backend services, Icecast audio stream, and Vue.js frontend in a single container.
+- 上游项目：https://github.com/Suncuss/BirdNET-PiPy
+- 此插件在一个容器中运行 BirdNET-PiPy 后端服务、Icecast 音频流和 Vue.js 前端。
 
-## Installation
+## 安装
 
-1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
-   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. Install this add-on.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的监督器插件商店中，或者如果您已配置我的 HA，则点击下面的按钮）。
+   ![打开您的 Home Assistant 实例并显示添加插件仓库对话框，其中已预先填写特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)(https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此插件。
+1. 启动插件。
+1. 检查插件的日志，以查看是否一切顺利。
 
-## Configuration
+## 配置
 
-Install, then start the add-on a first time. Open the Web UI from Home Assistant (Ingress) or directly at `http://<host>:8011` (or the port you configure).
-Configure location, audio source, and other settings in the BirdNET-PiPy UI after the container starts.
+安装后，首次启动插件。从 Home Assistant（入站）或直接在 `http://<host>:8011`（或您配置的端口）打开 Web UI。
+在容器启动后，在 BirdNET-PiPy UI 中配置位置、音频源和其他设置。
 
-Options can be configured through three ways:
+选项可以通过以下三种方式配置：
 
-- Add-on options
+- 插件选项
 
 ```yaml
-ICECAST_PASSWORD: "" # Optional: persistent password for the Icecast audio stream
-data_location: /config/data # Persistent data location (under /config, /share, or /data)
-env_vars: # Optional: extra environment variables
+ICECAST_PASSWORD: "" # 可选：Icecast 音频流的持久密码
+data_location: /config/data # 持久数据位置（位于 /config、/share 或 /data）
+env_vars: # 可选：额外的环境变量
   - name: STREAM_BITRATE
-    value: 320k # Icecast mp3 stream bitrate (default 320k)
+    value: 320k # Icecast mp3 流比特率（默认 320k）
 ```
 
 - Config.yaml
-Additional variables can be configured using the config.yaml file found in `/config/birdnet-pipy/config.yaml` using the Filebrowser add-on.
+使用位于 `/config/birdnet-pipy/config.yaml` 的 config.yaml 文件（通过文件浏览器插件配置）可以配置额外的变量。
 
 - Config_env.yaml
-Additional environment variables can be configured there.
+可以在那里配置额外的环境变量。
 
-### Mounting Drives
+### 挂载驱动器
 
-This add-on supports mounting both local drives and remote SMB shares:
+此插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：请参阅[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：请参阅[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-### Custom Scripts and Environment Variables
+### 自定义脚本和环境变量
 
-This add-on supports custom scripts and environment variables through the `addon_config` mapping:
+此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+- **自定义脚本**：请参阅[在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-## Notes
+## 注意事项
 
-- Audio input uses Home Assistant's PulseAudio server by default.
-- Ingress is enabled; direct access is available on the configured port.
-
+- 默认情况下，音频输入使用 Home Assistant 的 PulseAudio 服务器。
+- 入站功能已启用；直接访问可在配置的端口上获得。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

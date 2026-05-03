@@ -1,29 +1,29 @@
 # ESPHome 设备构建器（开发分支）
 
-![ESPHome 标志][logo][网站]
+![ESPHome 标志][logo]
 
-![GitHub 星标][github-stars-shield][仓库]
-![Discord][discord-shield][Discord]
+[![GitHub 星标][github-stars-shield]][repository]
+[![Discord][discord-shield]][discord]
 
 ## 关于
 
-此应用允许您编写配置，并将您的微控制器直接通过 Home Assistant 转换为智能家居设备，**无需任何编程经验**。您只需要编写 YAML 配置文件；其余的（空中更新、编译）都由 ESPHome 处理。
+此应用允许您编写配置，并通过 Home Assistant 将您的微控制器直接转换为智能家居设备，无需任何编程经验。您只需编写 YAML 配置文件；其余的（空中更新、编译）都由 ESPHome 处理。
 
 <p align="center">
 <img title="ESPHome 设备构建器截图" src="https://github.com/esphome/home-assistant-addon/raw/main/esphome-dev/images/screenshot.png" width="700px"></img>
 </p>
 
-[查看 ESPHome 文档][网站]
+[查看 ESPHome 文档][website]
 
 ## 示例
 
-使用 ESPHome，您可以从几行 YAML 直接跳转到自定义固件。例如，要包含一个 [DHT22][dht22] 温湿度传感器，您只需在配置文件中包含 8 行 YAML：
+使用 ESPHome，您可以从几行 YAML 直接转换为定制的固件。例如，要包含 [DHT22][dht22] 温湿传感器，您只需在配置文件中包含 8 行 YAML：
 
-![ESPHome DHT 配置示例](https://github.com/esphome/home-assistant-addon/raw/main/esphome-dev/images/dht-example.png width="500px")
+![ESPHome DHT 配置示例](https://github.com/esphome/home-assistant-addon/raw/main/esphome-dev/images/dht-example.png)
 
 然后只需点击上传，传感器就会神奇地出现在 Home Assistant 中：
 
-![ESPHome Home Assistant 发现](https://github.com/esphome/home-assistant-addon/raw/main/esphome-dev/images/temperature-humidity.png width="600px")
+![ESPHome Home Assistant 发现](https://github.com/esphome/home-assistant-addon/raw/main/esphome-dev/images/temperature-humidity.png)
 
 [discord]: https://discord.gg/KhAMKrd
 [repository]: https://github.com/esphome/esphome
@@ -32,7 +32,7 @@
 [dht22]: https://next.esphome.io/components/sensor/dht/
 [releases]: https://next.esphome.io/changelog/
 [logo]: https://github.com/esphome/home-assistant-addon/raw/main/esphome-dev/logo.png
-[网站]: https://next.esphome.io/
+[website]: https://next.esphome.io/
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
