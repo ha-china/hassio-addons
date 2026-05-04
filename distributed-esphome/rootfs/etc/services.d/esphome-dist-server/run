@@ -1,3 +1,0 @@
-#!/bin/sh
-echo "Starting ESPHome Fleet"
-exec python3 /app/main.py
