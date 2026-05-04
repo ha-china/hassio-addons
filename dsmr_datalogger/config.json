@@ -1,8 +1,8 @@
 {
   "name": "DSMR Datalogger",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "slug": "dsmr_datalogger",
-  "description": "数据记录仪仅支持DSMR（https://dsmr-reader.readthedocs.io）选项。",
+  "description": "[老王杂谈说]：DSMR 的数据记录器选项 (https://dsmr-reader.readthedocs.io)",
   "arch": [
     "armhf",
     "armv7",
@@ -26,7 +26,7 @@
     "DATALOGGER_SERIAL_PARITY": "N",
     "DATALOGGER_SLEEP": 0.5,
     "DATALOGGER_DEBUG_LOGGING": false,
-    "DATALOGGER_MIN_SLEEP_FOR_RECONNECT": 1.0,
+    "DATALOGGER_MIN_SLEEP_FOR_RECONNECT": 1,
     "DATALOGGER_TIMEOUT": 20
   },
   "schema": {

@@ -4,11 +4,11 @@
     "aarch64"
   ],
   "boot": "auto",
-  "description": "[老王杂谈说]：null",
+  "description": "[老王杂谈说]：用于专注与平静的环境音",
   "environment": {},
   "map": [],
   "image": "ghcr.1ms.run/remvze/moodist",
-  "version": "v2.5.2",
+  "version": "v2.6.0",
   "name": "moodist",
   "options": {},
   "ports": {
@@ -20,7 +20,7 @@
   "schema": {},
   "slug": "moodist",
   "startup": "services",
-  "upstream": "v2.5.2",
+  "upstream": "v2.6.0",
   "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8080]",
   "ingress": false,
