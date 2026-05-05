@@ -1,25 +1,25 @@
 ---
 name: Telegraf2Hassio
-version: 0.1.4
+version: 0.1.5
 slug: telegraf2hassio
-description: 将 Telegraf 指标转换为 Hass.io 自发现的传感器。
+description: '[老王杂谈说]：null'
 arch:
-- armhf
-- armv7
-- aarch64
-- amd64
-- i386
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
 url: https://gh-proxy.org/github.com/joaofl/hassio-addons/tree/master/telegraf2hassio
 startup: application
 services:
-- mqtt:need
+  - mqtt:need
 boot: auto
 host_network: true
 devices:
-- "/dev/mem"
+  - "/dev/mem"
 map:
-- config:rw
-- share:rw
+  - config:rw
+  - share:rw
 init: false
 options:
   mqtt_broker: localhost
@@ -37,4 +37,3 @@ schema:
   telegraf_topic: str
   calc_rate: str
   log_level: list(trace|debug|info|notice|warning|error|fatal)
-

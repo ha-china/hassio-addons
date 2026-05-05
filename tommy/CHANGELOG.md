@@ -1,5 +1,24 @@
 # TOMMY
 
+## 3.1.2
+
+### Minor Changes
+- Minor bug fixes
+
+## 3.1.1
+
+### Minor Changes
+- Fixed "Cannot find module 'next'" bug
+
+## 3.1.0
+
+### Major Changes
+- Switched to zoned pricing
+- Configuration Editor added
+
+### Minor Changes
+- mDNS improvements
+
 ## 3.0.2
 
 ### Minor Changes

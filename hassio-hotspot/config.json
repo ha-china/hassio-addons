@@ -1,8 +1,8 @@
 {
   "name": "Hassio Hotspot",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "slug": "hassio-hotspot",
-  "description": "物联网设备的接入点，具有可配置的网络接口和DHCP服务器。",
+  "description": "[老王杂谈说]：带有可配置网络接口和 DHCP 服务器的物联网设备接入点",
   "arch": [
     "armhf",
     "armv7",

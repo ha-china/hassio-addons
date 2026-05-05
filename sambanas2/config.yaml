@@ -1,8 +1,8 @@
 ---
 name: Samba NAS2
-version: 2026.5.0-rc5
+version: 2026.5.0-rc6
 slug: sambanas2
-description: '[老王杂谈说]：通过 SMB/CIFS 暴露 Home Assistant 磁盘'
+description: '[老王杂谈说]：null'
 url: https://gh-proxy.org/github.com/dianlight/hassio-addons/tree/master/sambanas2
 arch:
   - aarch64

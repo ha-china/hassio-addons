@@ -1,16 +1,29 @@
 # Changelog
 
+## 1.5.4 (2026-05-04)
+
+### 📦 Dependencies
+- ⬆️ Update dependency globals to v17.6.0 [skip-tests] (#785) [skip-tests] ([`30dbea68`](https://github.com/FaserF/hassio-addons/commit/30dbea68157c36dd4aa7393f15766a127e8e2764))
+
+### 🚀 Other
+- fixed changelog base image links ([`297c9266`](https://github.com/FaserF/hassio-addons/commit/297c9266aff47d48ab8b78c12469436a86f2eefd))
+- fixed changelog base image links ([`c464f4b3`](https://github.com/FaserF/hassio-addons/commit/c464f4b309a0e569cce87a2b2086bf181596eef5))
+- prepare for 1.5.4 release ([`043a1069`](https://github.com/FaserF/hassio-addons/commit/043a1069c2f594ce535b340f8ea7f0a670273b1c))
+- general stability improvements ([`cb4e9ce8`](https://github.com/FaserF/hassio-addons/commit/cb4e9ce86902ab78611f85fb6858b95a3bd4b03d))
+
+
 ## 1.5.3 (2026-04-30)
 
 ### 📦 Dependencies
+
 - update cooldown on temp rate limit from whatsapp ([`4c8e16a3`](https://github.com/FaserF/hassio-addons/commit/4c8e16a366ad258d2c190470f7c3d3212be954c7))
 - ⬆️ Update dependency playwright to v1.59.0 [skip-tests] (#778) [skip-tests] ([`b82653dc`](https://github.com/FaserF/hassio-addons/commit/b82653dcad29247838d708dd07d905f5a1ddbde5))
 - ⬆️ Update dependency express-rate-limit to v8.4.1 [skip-tests] (#775) [skip-tests] ([`3c84a2d6`](https://github.com/FaserF/hassio-addons/commit/3c84a2d67e63de8db1d9ff095bba938d917c5d4e))
 
 ### 🚀 Other
+
 - try to fix react to polls #678 ([`535833d2`](https://github.com/FaserF/hassio-addons/commit/535833d281c5013f948ef8b27543fd0dde77cd23))
 - handle many sent messages with send queue for rate limits ([`8f846433`](https://github.com/FaserF/hassio-addons/commit/8f84643335f1bbf091a315a4976ad5697c86fc13))
-
 
 ## 1.5.2 (2026-04-24)
 
@@ -23,7 +36,7 @@
 - ⬆️ Update dependency fastapi to v0.136.1 [skip-tests] (#773) [skip-tests] ([`7feb3041`](https://github.com/FaserF/hassio-addons/commit/7feb3041e4d66ae29305ee7e24cb7a0756013b30))
 - ⬆️ Update dependency uvicorn to v0.46.0 [skip-tests] (#770) [skip-tests] ([`97fcdefb`](https://github.com/FaserF/hassio-addons/commit/97fcdefbb3ba4f74a23f85cc91b18c04973d4f9d))
 - ⬆️ Update dependency express-rate-limit to v8.4.0 [skip-tests] (#769) [skip-tests] ([`8f864b21`](https://github.com/FaserF/hassio-addons/commit/8f864b21b2394988a22425f1d6eef8cb2cd6001c))
-- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v[20.1.0](https://github.com/hassio-addons/addon-base/releases/tag/20.1.0) [skip-tests] ([`709f7882`](https://github.com/FaserF/hassio-addons/commit/709f7882b67adc67ab6f64370f1d900e9a71b2e1))
+- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v[20.1.0](https://github.com/hassio-addons/app-base/releases/tag/v20.1.0) [skip-tests] ([`709f7882`](https://github.com/FaserF/hassio-addons/commit/709f7882b67adc67ab6f64370f1d900e9a71b2e1))
 - ⬆️ Update dependency protobufjs to v8 [skip-tests] (#767) [skip-tests] ([`ab6ee70a`](https://github.com/FaserF/hassio-addons/commit/ab6ee70aa7b92061d249f3ab8081fd746133ea96))
 
 ### 🚀 Other
