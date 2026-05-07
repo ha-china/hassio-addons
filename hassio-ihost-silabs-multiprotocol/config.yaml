@@ -1,10 +1,11 @@
 ---
-version: 1.0.0
+version: 1.0.2
 slug: hassio_ihost_silabs_multiprotocol
 name: Silicon Labs Multiprotocol
-description: Zigbee and OpenThread multiprotocol add-on
+description: '[老王杂谈说]：Zigbee 和 OpenThread 多协议插件'
 url: >
   https://gh-proxy.org/github.com/iHost-Open-Source-Project/hassio-ihost-addon/tree/master/hassio-ihost-silabs-multiprotocol
+
 arch:
   - armv7
   - aarch64

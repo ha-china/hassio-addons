@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.1.0
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
@@ -16,7 +16,7 @@ ARG PHP_VERSION="8.5"
 
 # hadolint ignore=DL4006,DL3018
 # renovate: datasource=repology depName=alpine_3_21/apache2 versioning=loose
-ARG APACHE2_VERSION="2.4.66-r0"
+ARG APACHE2_VERSION="2.4.67-r0"
 
 # App metadata (injected by CI)
 ENV APP_VERSION="3.3.1"
@@ -25,15 +25,15 @@ ENV APP_SLUG="apache2-minimal-mariadb"
 ENV APP_UNSUPPORTED="false"
 
 RUN mkdir /run/apache2 \
- && apk --no-cache -u add libcrypto3 libssl3 \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/main" > /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/community" >> /etc/apk/repositories \
+    && apk upgrade --no-cache --available \
+    && apk add --no-cache libcrypto3 libssl3 \
     apache2${APACHE2_VERSION:+=$APACHE2_VERSION} \
     curl \
     jq \
     && PHP_V=$(echo "${PHP_VERSION}" | cut -d. -f1-2 | tr -d '.') \
     && apk add --no-cache \
-    --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community \
-    --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main \
-    --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing \
     "php${PHP_V}-apache2" \
     libxml2-dev \
     apache2-utils \

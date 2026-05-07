@@ -1,10 +1,10 @@
-# Apache2 最小化配置
+# Apache2 最小化版
 
-![Apache2 最小化配置Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/apache2-minimal/logo.png) 
+![Apache2 最小化版标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/apache2-minimal/logo.png) 
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_apache2-minimal)
 [![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-3.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-apache2-minimal)
+[![Docker 镜像](https://img.shields.io/badge/docker-3.3.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-apache2-minimal)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > 没有PHP和最小额外模块的开源Web服务器。
@@ -13,31 +13,31 @@
 
 ## 📖 关于
 
-Apache HTTP服务器的一个轻量级、注重安全的版本。此插件提供了一个基础的Web服务器，优化用于静态内容和性能。它排除了PHP和额外模块，以最小化占用空间和攻击面，非常适合简单的HTML网站、文档或资产服务。
+Apache HTTP服务器的轻量级、安全版本。此插件提供了一个针对静态内容和性能优化的基础网络服务器。它不包括PHP和额外模块，以最小化占用空间和攻击面，非常适合简单的HTML网站、文档或服务资产。
 
-### Apache2 变种比较
+### Apache2 变体比较
 
-| 功能 | Apache2 (完整版) | Apache2 最小化配置 | Apache2 最小化配置 + MariaDB |
+| 特性 | Apache2（完整版） | Apache2 最小化版 | Apache2 最小化版 + MariaDB |
 | :--- | :--- | :--- | :--- |
 | **PHP 支持** | ✅ 是（完整版） | ❌ 否 | ✅ 是（基本版） |
 | **MariaDB 客户端** | ✅ 是 | ❌ 否 | ✅ 是 |
-| **占用空间** | 🖥️ 较大 | ⚡ 最小 | ⚖️ 中等 |
-| **适用场景** | WordPress、完整CMS | 静态网站 | 简单PHP应用 |
+| **占用空间** | 🖥️ 大 | ⚡ 最小 | ⚖️ 中等 |
+| **适用场景** | WordPress、全功能内容管理系统 | 静态网站 | 简单PHP应用 |
 
 ---
 
 ## 🏠 Home Assistant 集成
 
 此插件支持 Home Assistant 的 **Web服务器应用** 集成。
-集成将在插件启动时自动安装/更新。
+集成在插件启动时会自动安装/更新。
 
-有关更多信息和管理详情，请参阅[集成 README](../custom_components/webserver_app/README.md)。
+有关更多信息和管理细节，请参阅 [集成 README](../custom_components/webserver_app/README.md)。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 应用页面中的 **配置** 选项卡来配置此应用。
+通过 Home Assistant 应用页面中的 **配置** 选项卡配置此应用。
 
 ### 选项
 
@@ -55,9 +55,9 @@ website_name: web.local
 
 ---
 
-## 👨‍💻 贡献者与许可
+## 👨‍💻 致谢与许可证
 
-此项目是开源的，并采用 MIT 许可证。
+此项目是开源的，并遵循 MIT 许可证。
 由 **FaserF** 维护。
 ---
 

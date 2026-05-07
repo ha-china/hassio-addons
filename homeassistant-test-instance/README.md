@@ -1,21 +1,21 @@
 # Home Assistant 测试实例
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/homeassistant-test-instance/logo.png" width="100" alt="Logo" />
+![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/homeassistant-test-instance/logo.png) width="100" alt="Logo" />
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_homeassistant-test-instance)
 [![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-0.2.6-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-homeassistant-test-instance)
+[![Docker 镜像](https://img.shields.io/badge/docker-0.2.8-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-homeassistant-test-instance)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > 用于测试目的的独立 Home Assistant 核心实例。
 
 ---
 
-> [!注意]
-> **实验性/测试版状态**
+> [!警告]
+> **实验性 / 测试版状态**
 >
-> 此应用仍在开发中，或主要用于个人使用。
-> 它尚未经过广泛测试，但预计基本功能可以正常工作。
+> 此应用仍在开发中，或主要针对个人使用进行开发。
+> 它尚未经过广泛的测试，但预期基本功能正常。
 
 ---
 
@@ -37,7 +37,7 @@ log_level: info
 
 ---
 
-## 👨‍💻 信用 & 许可证
+## 👨‍💻 信用与许可
 
 此项目是开源的，并受 MIT 许可证的约束。
 由 **FaserF** 维护。

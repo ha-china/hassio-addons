@@ -11,7 +11,7 @@
 [SABnzbd] 是一个多平台二进制新闻组下载器。该程序在后台运行，简化了从 [Usenet] 下载、验证和提取文件的过程。
 
 [SABnzbd]: https://sabnzbd.org/
-[Usenet]: http://zh.wikipedia.org/wiki/Usenet
+[Usenet]: http://en.wikipedia.org/wiki/Usenet
 
 [discord-shield]: https://img.shields.io/discord/330944238910963714.svg
 [discord]: https://discord.gg/c5DvZ4e
@@ -19,8 +19,8 @@
 [forum]: https://community.home-assistant.io/t/?u=frenck
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.7.1-blue.svg
-[release]: https://github.com/hassio-addons/app-sabnzbd/tree/v0.7.1
+[release-shield]: https://img.shields.io/badge/version-v0.8.0-blue.svg
+[release]: https://github.com/hassio-addons/app-sabnzbd/tree/v0.8.0
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

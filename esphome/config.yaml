@@ -8,7 +8,7 @@ auth_api: true
 host_network: true
 ingress: true
 ingress_port: 0
-panel_icon: mdi:chip
+panel_icon: mdi:esphome
 uart: true
 ports:
   6052/tcp: null
@@ -26,13 +26,16 @@ schema:
   certfile: str?
   keyfile: str?
   leave_front_door_open: bool?
+  use_new_device_builder: bool?
 backup_exclude:
   - '*/*/'
 init: false
 startup: services
+options:
+  use_new_device_builder: false
 name: ESPHome Device Builder
 panel_title: ESPHome Builder
-version: 2026.4.4
+version: 2026.4.5
 slug: esphome
-description: '[老王杂谈说]：使用 ESPHome 构建您自己的智能家居设备，无需编程经验。'
+description: '[老王杂谈说]：null'
 image: ghcr.1ms.run/esphome/esphome-hassio

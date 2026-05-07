@@ -1,3 +1,47 @@
+# [2.9.0.dev2026050706] - 07.05.2026
+
+## 📦 Nightly Release
+
+_Changes since [2.9.0.dev2026050614](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026050614)_
+
+### 🐛 Bugfixes
+
+- Allow AirPlay2 devices to be selected for synchronised playback (by @bradkeifer in #3847)
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@bradkeifer
+
+
+# [2.9.0.dev2026050614] - 06.05.2026
+
+## 📦 Nightly Release
+
+_Changes since [2.9.0.dev2026050505](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026050505)_
+
+### 🐛 Bugfixes
+
+- Handle syncing for cases where session establishment is both early and late for adhering to required ntpstart value (by @bradkeifer in #3776)
+- Airplay: Add debounce to prevent-playback=1 commands (by @MarvinSchenkel in #3817)
+- Fix sync issues with Sendspin players (by @maximmaxim345 in #3840)
+- Fix Sendspin Cast bridge silently failing to set up (by @maximmaxim345 in #3841)
+- Fix output bit depth ignoring supported sample-rate/bit-depth pairs in player settings (by @OzGav in #3842)
+- Bump `aiosendspin` to 5.2.0 to fix slow desyncing at some player sample rates (by @maximmaxim345 in #3845)
+
+### 🧰 Maintenance and dependency bumps
+
+- Enhance warning for Spotify top tracks fetch failure (by @OzGav in #3837)
+- Bump soco from 0.30.14 to 0.31.0 (by @dependabot[bot] in #3838)
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@MarvinSchenkel, @OzGav, @bradkeifer, @maximmaxim345
+
+
 # [2.9.0.dev2026050505] - 05.05.2026
 
 ## 📦 Nightly Release
@@ -36,40 +80,5 @@ _Changes since [2.9.0.dev2026050406](https://github.com/music-assistant/server/r
 Special thanks to the following contributors who helped with this release:
 
 @MarvinSchenkel, @OzGav, @PeterPalenik, @chrisuthe, @dmoo500, @sprocket-9
-
-
-# [2.9.0.dev2026050406] - 04.05.2026
-
-## 📦 Nightly Release
-
-_Changes since [2.9.0.dev2026050205](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026050205)_
-
-### 🐛 Bugfixes
-
-- Fix Spotify playlists failing when track count is a multiple of 50 (by @gitviola in #3818)
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@gitviola
-
-
-# [2.9.0.dev2026050205] - 02.05.2026
-
-## 📦 Nightly Release
-
-_Changes since [2.9.0.dev2026050106](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026050106)_
-
-### 🧰 Maintenance and dependency bumps
-
-- Spotify: Update get_artist_albums limit, log error messages, guard methods (by @delatt in #3762)
-- Radio Paradise small cleanup (by @teancom in #3826)
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@delatt, @teancom
 
 

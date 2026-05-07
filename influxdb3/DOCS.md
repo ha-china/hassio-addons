@@ -163,7 +163,6 @@ data from an InfluxDB2 instance to InfluxDB3:
 ```json
 {
   "source_url": "http://<your_influxdb2_ip_address>:8086",
-  "source_token": "<your influxdb2 token>",
   "influxdb_version": 2,
   "source_database": "HomeAssistant",
   "dest_database": "HomeAssistant",
@@ -180,9 +179,9 @@ Save the file, for example call it data.json
 Call the API via curl:
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d @data.json \
-    http://<your_influxdb3_ip_address>:8181/api/v3/engine/import?action=start \
-    --header "Authorization: Bearer <your influxdb3_api_token>"
+curl -X POST http://<your_influxdb3_ip_address>:8181/api/v3/engine/import?action=start \
+    -H "Content-Type: application/json" -H "Source-Token: <your influxdb2 token>" \
+    -H "Authorization: Bearer <your influxdb3_api_token>" -d @data.json
 ```
 
 Important: Do not try to import an entire database. The importer/InfluxDB3 will
