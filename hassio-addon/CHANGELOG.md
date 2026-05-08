@@ -1,5 +1,37 @@
 # Changelog
 
+## 1.19.0
+
+### Added
+- Includes dashboard release `1.19.0`.
+- Adds smart Status Pills for lights that are on, open doors/windows, and open covers (#143).
+
+### Changed
+- Redesigns the Status Pills config modal with a cleaner layout and clearer smart-pill setup.
+- Refines the smart pill popup and entity scoping controls.
+
+<p>
+  <img src="https://raw.githubusercontent.com/oyvhov/Tunet/v1.19.0/public/release-assets/Pills.png" alt="Redesigned Status Pills and smart pill preview" width="430" />
+</p>
+
+**Full Changelog**: https://github.com/oyvhov/Tunet/compare/v1.18.1...v1.19.0
+
+## 1.18.1
+
+### Added
+- Includes dashboard release `1.18.1`.
+
+### Changed
+- Reduces idle dashboard background work for wall tablets and low-power displays.
+
+### Fixed
+- Fixes the add-on container healthcheck probe to use `127.0.0.1`.
+
+### Security
+- Clears the `ip-address` advisory through the `express-rate-limit` dependency update.
+
+**Full Changelog**: https://github.com/oyvhov/Tunet/compare/v1.18.0...v1.18.1
+
 ## 1.18.0
 
 ### Added
