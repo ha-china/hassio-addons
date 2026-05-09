@@ -1,79 +1,80 @@
-# 家居助手插件：Grampsweb
+# Home assistant add-on: Grampsweb
 
-我在业余时间维护这个和其他的家居助手插件：跟上上游变更、家居助手变更和在实际硬件上的测试需要花费很多时间（以及一些金钱）。我经常使用大约5-10个我的>110个插件，所以我安装了测试机器（并购买了一些我本人不使用的测试服务，如vpn），以便进行故障排除和改进插件。
 
-如果这个插件为您节省了时间或使您的设置更容易，我将非常感激您的支持！
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
 
-[![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![通过PayPal捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
 
-## 插件信息
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgrampsweb%2Fconfig.yaml)
-![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgrampsweb%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgrampsweb%2Fconfig.yaml)
+## Addon informations
 
-[![Codacy徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgrampsweb%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgrampsweb%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgrampsweb%2Fconfig.yaml)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有star我的仓库的人！要star它，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/grampsweb/stats.png)
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/grampsweb/stats.png)
 
-## 关于
-
----
-
-[Gramps Web](https://github.com/gramps-project/gramps-web) 是一个用于创建和分享家谱的网络应用程序。它是免费开源的家谱软件 Gramps 的网络前端。
-
-Gramps Web 提供以下功能：
-- 现代化的家谱研究网络界面
-- 多用户支持，具有用户管理功能
-- 支持丰富的媒体（照片、文档等）
-- 先进的搜索和筛选功能
-- 生成图表和报告
-- 支持导入/导出各种格式
-- 提供RESTful API以实现集成
-
-此插件基于官方 Gramps Web 项目：https://github.com/gramps-project/gramps-web
-
-## 配置
+## About
 
 ---
 
-Webui 可以在 <http://homeassistant:5000> 找到。
+[Gramps Web](https://github.com/gramps-project/gramps-web) is a web application for creating and sharing family trees. It's the web frontend for Gramps, the free and open-source genealogy software.
 
-### 选项
+Gramps Web offers:
+- Modern web interface for genealogy research
+- Multi-user support with user management
+- Rich media support (photos, documents, etc.)
+- Advanced search and filtering capabilities
+- Charts and reports generation
+- Import/export capabilities for various formats
+- RESTful API for integrations
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|---------|------|
-| `CELERY_NUM_WORKERS` | int | `2` | 后台任务使用的 Celery 工作进程数量 |
-| `GUNICORN_NUM_WORKERS` | int | `8` | 网络请求使用的 Gunicorn 工作进程数量 |
-| `GRAMPSWEB_SECRET_KEY` | str | - | 用于会话安全的密钥（未设置时自动生成） |
-| `GRAMPSWEB_BASE_URL` | str | - | 应用程序的基础 URL |
-| `ssl` | bool | `false` | 启用 SSL/TLS |
-| `certfile` | str | `fullchain.pem` | SSL 证书文件 |
-| `keyfile` | str | `privkey.pem` | SSL 私钥文件 |
+This addon is based on the official Gramps Web project: https://github.com/gramps-project/gramps-web
 
-### 邮件配置（可选）
+## Configuration
 
-| 选项 | 类型 | 描述 |
-|------|------|------|
-| `GRAMPSWEB_EMAIL_HOST` | str | SMTP 服务器主机名 |
-| `GRAMPSWEB_EMAIL_PORT` | int | SMTP 服务器端口 |
-| `GRAMPSWEB_EMAIL_USE_SSL` | bool | 使用 SSL 加密（用于端口 465） |
-| `GRAMPSWEB_EMAIL_USE_STARTTLS` | bool | 使用 STARTTLS 加密（用于端口 587） |
-| `GRAMPSWEB_EMAIL_HOST_USER` | str | SMTP 用户名 |
-| `GRAMPSWEB_EMAIL_HOST_PASSWORD` | str | SMTP 密码 |
-| `GRAMPSWEB_DEFAULT_FROM_EMAIL` | str | 默认发件人电子邮件地址 |
+---
 
-### 示例配置
+Webui can be found at <http://homeassistant:5000>.
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `CELERY_NUM_WORKERS` | int | `2` | Number of Celery workers for background tasks |
+| `GUNICORN_NUM_WORKERS` | int | `8` | Number of Gunicorn workers for web requests |
+| `GRAMPSWEB_SECRET_KEY` | str | - | Secret key for session security (auto-generated if not set) |
+| `GRAMPSWEB_BASE_URL` | str | - | Base URL for the application |
+| `ssl` | bool | `false` | Enable SSL/TLS |
+| `certfile` | str | `fullchain.pem` | SSL certificate file |
+| `keyfile` | str | `privkey.pem` | SSL private key file |
+
+### Email Configuration (Optional)
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `GRAMPSWEB_EMAIL_HOST` | str | SMTP server hostname |
+| `GRAMPSWEB_EMAIL_PORT` | int | SMTP server port |
+| `GRAMPSWEB_EMAIL_USE_SSL` | bool | Use SSL encryption (for port 465) |
+| `GRAMPSWEB_EMAIL_USE_STARTTLS` | bool | Use STARTTLS encryption (for port 587) |
+| `GRAMPSWEB_EMAIL_HOST_USER` | str | SMTP username |
+| `GRAMPSWEB_EMAIL_HOST_PASSWORD` | str | SMTP password |
+| `GRAMPSWEB_DEFAULT_FROM_EMAIL` | str | Default sender email address |
+
+### Example Configuration
 
 ```yaml
 CELERY_NUM_WORKERS: 2
@@ -91,88 +92,65 @@ GRAMPSWEB_EMAIL_HOST_PASSWORD: "your-app-password"
 GRAMPSWEB_DEFAULT_FROM_EMAIL: "gramps@example.com"
 ```
 
-### 自定义脚本和环境变量
+### Custom Scripts and Environment Variables
 
-此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
+This addon supports custom scripts and environment variables through the `addon_config` mapping:
 
-- **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详细信息。
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
 
-## 安装
-
----
-
-此插件的安装相对简单，与安装任何其他插件没有太大区别。
-
-1. 将我的插件仓库添加到您的家居助手实例中（在监督器插件商店的右上角，或点击下面的按钮如果您已配置我的 HA）
-   [![打开您的家居助手实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此插件。
-1. 点击“保存”按钮以存储您的配置。
-1. 将插件选项设置为您的偏好设置
-1. 启动插件。
-1. 检查插件的日志以查看一切是否顺利。
-1. 打开 WebUI 并设置您的第一个用户帐户
-
-## 首次设置
+## Installation
 
 ---
 
-启动插件后：
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
 
-1. 导航到 Web 界面
-2. 创建管理员用户帐户
-3. 设置您的家谱数据库
-4. 导入现有的 GEDCOM 文件或开始创建您的家谱
-5. 配置用户权限和共享设置
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Set the add-on options to your preferences
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open the webUI and set up your first user account
 
-## 数据存储
-
-插件在 `/config` 目录的几个位置存储数据：
-- **数据库**：`/config/config/` - 主要 Gramps 数据库文件
-- **媒体**：`/config/media/` - 照片、文档和其他媒体文件
-- **用户**：`/config/users/` - 用户帐户和认证数据
-- **缓存**：`/config/cache/` - 临时文件和报告
-- **搜索索引**：`/config/indexdir/` - 搜索索引数据
-
-## 备份建议
-
-为了数据安全，请定期备份：
-- 完整的 `/config` 目录（包含所有数据）
-- 从 Web 界面导出 GEDCOM 文件
-- 记录您的用户帐户和权限
-
-## 性能调优
-
-- **CELERY_NUM_WORKERS**：根据您的系统 CPU 核心数进行调整
-- **GUNICORN_NUM_WORKERS**：增加以支持更多并发用户
-- 考虑使用外部 MySQL/PostgreSQL 数据库以获得更好的性能
-
-## 支持
-
-在 GitHub 上创建问题
-
-[仓库](https://github.com/alexbelgium/hassio-addons)
----
-
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+## First Time Setup
 
 ---
 
-## 📱 关注我
+After starting the addon for the first time:
 
-扫描下面二维码，关注我。有需要可以随时给我留言：
+1. Navigate to the web interface
+2. Create an admin user account
+3. Set up your genealogy database
+4. Import existing GEDCOM files or start creating your family tree
+5. Configure user permissions and sharing settings
 
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+## Data Storage
 
-## ☕ 赞助支持
+The addon stores data in several locations within the `/config` directory:
+- **Database**: `/config/config/` - Main Gramps database files
+- **Media**: `/config/media/` - Photos, documents, and other media files
+- **Users**: `/config/users/` - User accounts and authentication data
+- **Cache**: `/config/cache/` - Temporary files and reports
+- **Search Index**: `/config/indexdir/` - Search indexing data
 
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+## Backup Recommendations
 
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
+For data safety, regularly backup:
+- The entire `/config` directory (contains all data)
+- Export GEDCOM files from the web interface
+- Document your user accounts and permissions
 
-感谢您的支持与鼓励！
+## Performance Tuning
+
+- **CELERY_NUM_WORKERS**: Adjust based on your system's CPU cores
+- **GUNICORN_NUM_WORKERS**: Increase for more concurrent users
+- Consider using an external MySQL/PostgreSQL database for better performance
+
+## Support
+
+Create an issue on github
+
+[repository]: https://github.com/alexbelgium/hassio-addons
+

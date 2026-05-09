@@ -1,14 +1,14 @@
-# Home Assistant 插件：Piwigo
+# Home Assistant 扩展：Piwigo
 
 
-我在业余时间维护这个以及其他 Home Assistant 插件：跟上上游更改、HA 更改以及在真实硬件上进行测试需要花费大量时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我本人不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
+我在业余时间维护这个以及其他 Home Assistant 扩展：跟踪上游变更、HA 变更以及在实际硬件上的测试需要花费大量的时间和一些金钱。我经常使用 5-10 个我 >110 个扩展，所以我安装了测试机器（并购买了些我不用自己测试的服务，如 vpn）来调试和改进这些扩展。
 
-如果这个插件为您节省了时间或使您的设置更加简单，我将非常感激您的支持！
+如果这个扩展为您节省了时间或使您的设置更简单，我将非常感激您的支持！
 
 [![请给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## 插件信息
+## 扩展信息
 
 ![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fpiwigo%2Fconfig.yaml)
 ![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fpiwigo%2Fconfig.yaml)
@@ -21,7 +21,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我的仓库点星的人！要点星，请点击下面的图片，然后它将出现在右上角。谢谢！_
+_感谢每一位给我仓库点星的人！要点星，请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -29,35 +29,35 @@ _感谢所有为我的仓库点星的人！要点星，请点击下面的图片�
 
 ## 关于
 
-Piwigo 是一款 Web 照片画廊软件。
-此插件基于 [docker 镜像](https://github.com/linuxserver/piwigo)。
+Piwigo 是一款网络照片画廊软件。
+此扩展基于 [docker 镜像](https://github.com/linuxserver/piwigo)。
 
 ## 安装
 
-此插件的安装相当简单，与安装任何其他 Hass.io 插件没有区别。
+此扩展的安装相当简单，与安装任何其他 Hass.io 扩展没有太大区别。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在监督器插件存储的右上角，或点击下面的按钮如果您已配置我的 HA）
-   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. 安装此插件。
+1. 将我的扩展仓库添加到您的 Home Assistant 实例中（在 supervisor 扩展存储的右上角，或点击下面的按钮如果您已经配置了我的 HA）
+   [![打开您的 Home Assistant 实例并显示一个带有特定仓库 URL 预填充的添加扩展仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此扩展。
 1. 点击“保存”按钮以存储您的配置。
-1. 启动插件。
-1. 检查插件的日志以查看一切是否顺利。
-1. 仔细配置插件以满足您的偏好，有关详细信息请参阅官方文档。
+1. 启动扩展。
+1. 检查扩展的日志以查看是否一切顺利。
+1. 仔细配置扩展以满足您的需求，请参阅官方文档。
 
 ## 配置
 
-使用插件的 `env_vars` 选项传递额外的环境变量（大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+使用扩展的 `env_vars` 选项来传递额外的环境变量（大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-Webui 可在 <http://homeassistant:81> 或通过侧边栏使用入口找到。
-配置可以通过应用 WebUI 完成，除了以下选项。
+Webui 可在 <http://homeassistant:81> 或通过 Ingress 侧边栏访问。
+配置可以通过应用 WebUI 进行，除了以下选项。
 
 ### 设置步骤
 
 1. 在 MySQL/MariaDB 服务器中为 Piwigo 创建用户和数据库
 2. 在数据库设置页面中，使用 IP 地址而不是主机名
-3. 编辑 `/config/piwigo/nginx/site-confs` 中的 nginx 配置以启用 SSL（端口 443）
-4. 自签名密钥位于 `/data/keys`（如有需要，请替换为自己的）
-5. 编辑 `/config/piwigo` 中的配置文件以设置电子邮件
+3. 编辑 `/config/piwigo/nginx/site-confs` 中的 nginx 配置以进行 SSL（端口 443）
+4. 自签名密钥位于 `/data/keys` 中（如有需要，请替换为您的密钥）
+5. 编辑 `/config/piwigo` 中的配置文件以进行电子邮件设置
 
 ### 选项
 
@@ -87,10 +87,10 @@ cifsdomain: "workgroup"
 
 ### 挂载驱动器
 
-此插件支持挂载本地驱动器和远程 SMB 共享：
+此扩展支持挂载本地驱动器和远程 SMB 共享：
 
-- **本地驱动器**：请参阅 [插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：请参阅 [插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：请参阅 [在扩展中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：请参阅 [在扩展中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 ---

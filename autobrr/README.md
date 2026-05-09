@@ -1,11 +1,11 @@
 # Home Assistant 插件：Autobrrf
 
-我在业余时间维护这个和其他 Home Assistant 插件：跟进上游变更、Home Assistant 变更以及在真实硬件上进行测试都需要花费大量时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我自己不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
+我在业余时间维护这个以及其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试都需要花费大量的时间（以及一些金钱）。我经常使用 5-10 个我超过 110 个插件中的几个，所以我安装了测试机器（并购买了某些我本人不使用的测试服务，如 VPN），以便进行故障排除和改进插件。
 
 如果这个插件为您节省了时间或使您的设置更加简单，我将非常感激您的支持！
 
-[![请给我买杯咖啡][捐赠徽章]](https://www.buymeacoffee.com/alexbelgium)
-[![通过 PayPal 捐赠][paypal-徽章]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
 
@@ -17,12 +17,12 @@
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-[捐赠徽章]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-徽章]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库点星的人！要星标它，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有为我仓库加星的人！要加星，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
-[![Stargazers 仓库列表 for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
 ![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/autobrr/stats.png)
 
@@ -30,28 +30,28 @@ _感谢所有给我的仓库点星的人！要星标它，请点击下面的图�
 
 ---
 
-[Autobrr](https://autobrr.com/) autobrr 是一款现代的种子下载自动化工具。我们受到了 trackarr、autodl-irssi 和 flexget 等工具的启发和想法，构建了一个可以做到一切的工具，甚至更多。
+[Autobrr](https://autobrr.com/) autobrr 是一款现代的种子下载自动化工具。受到 trackarr、autodl-irssi 和 flexget 等工具的启发和想法，我们构建了一个能够做到一切，甚至更多的工具。
 
-此插件基于 docker 镜像 https://github.com/autobrr/autobrr
+此插件基于 Docker 镜像 https://github.com/autobrr/autobrr
 
 ## 安装
 
 ---
 
-此插件的安装非常简单，与安装任何其他插件没有太大区别。
+此插件的安装非常简单，与安装任何其他插件没有区别。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在监督器插件商店的右上角，或点击下面的按钮如果您已配置我的 HA）
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在 supervisor 插件存储的右上角，或点击下面的按钮如果您已经配置了我的 HA）
    [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 点击“保存”按钮以存储您的配置。
-1. 将插件选项设置为您的偏好设置
+1. 将插件选项设置为您的偏好。
 1. 启动插件。
 1. 检查插件的日志以查看一切是否顺利。
 1. 打开 WebUI 并调整软件选项
 
 ## 配置
 
-WebUI 可在 <http://homeassistant:7474> 或通过入口访问。
+WebUI 可在 <http://homeassistant:7474> 或通过 Ingress 访问。
 默认凭证：`admin` / `password`（首次登录后更改）。
 
 ### 设置步骤
@@ -60,12 +60,12 @@ WebUI 可在 <http://homeassistant:7474> 或通过入口访问。
 2. 更改默认登录凭证
 3. 配置 RSS 指数器和下载客户端
 4. 设置自动化规则和过滤器
-5. 使用示例发布进行测试
+5. 使用示例发行版进行测试
 
 ### 选项
 
 | 选项 | 类型 | 默认 | 描述 |
-|--------|------|---------|-------------|
+|------|------|------|------|
 | `PGID` | int | `0` | 文件权限的组 ID |
 | `PUID` | int | `0` | 文件权限的用户 ID |
 | `TZ` | str | | 时区（例如，`Europe/London`） |
@@ -104,9 +104,9 @@ cifsdomain: "workgroup"
 
 ## 支持
 
-在 github 上创建问题
+在 GitHub 上创建问题
 
-[仓库](https://github.com/alexbelgium/hassio-addons)
+[repository]: https://github.com/alexbelgium/hassio-addons
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
