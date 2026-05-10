@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：一个功能完备、开源、最先进的视频监控软件系统'
+description: '[老王杂谈说]：一款功能齐全、开源、最先进的视频监控软件系统。'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -93,5 +93,5 @@ services:
 slug: zoneminder
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
-version: "1.38.1"
+version: "1.38.1-1"
 webui: "[PROTO:ssl]://[HOST]:[PORT:80]/zm"
