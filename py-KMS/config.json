@@ -1,6 +1,6 @@
 {
   "name": "py-kms",
-  "version": "646f4766-spad27",
+  "version": "db7409b5-spad44",
   "slug": "py-kms",
   "description": "这是py-kms，一个用来激活Windows和Office的服务器",
   "url": "https://mp.weixin.qq.com/s/7-P5JtLeNTPni9dB20TTWw",
@@ -10,7 +10,7 @@
     "armv7"
   ],
   "startup": "services",
-  "image": "ghcr.1ms.run/thespad/py-kms",
+  "image": "crpi-tuq1xajq0lk6s0kt.cn-shanghai.personal.cr.aliyuncs.com/hachina/py-kms",
   "boot": "auto",
   "init": false,
   "ports": {
