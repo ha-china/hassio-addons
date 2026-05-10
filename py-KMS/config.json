@@ -10,7 +10,7 @@
     "armv7"
   ],
   "startup": "services",
-  "image": "crpi-tuq1xajq0lk6s0kt.cn-shanghai.personal.cr.aliyuncs.com/hachina/py-kms",
+  "image": "crpi-tuq1xajq0lk6s0kt.cn-shanghai.personal.cr.aliyuncs.com/hachina/py-kms-{arch}",
   "boot": "auto",
   "init": false,
   "ports": {
