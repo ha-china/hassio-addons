@@ -1,8 +1,8 @@
 {
   "name": "Linux Router",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "slug": "linux-router",
-  "description": "物联网设备的接入点，具有可配置的网络接口、DHCP服务器等。",
+  "description": "[老王杂谈说]：为您的物联网设备提供的接入点，具有可配置网络接口、DHCP服务器等功能。",
   "arch": [
     "armhf",
     "armv7",

@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.69.0] - 2026-05-08
+
+### Changed
+- **Bumped the bundled Sendspin audio engine from 7.1.0 to 7.3.0.** Pulls in upstream PulseAudio / PipeWire integration improvements and better audio device discovery (7.2.0), plus two playback-stability fixes that show up regularly in this bridge's flows: mid-stream joins (after a Bluetooth reconnect or a hot config save that triggers a speaker restart) no longer audibly catch up, and changing the per-player sync delay from Music Assistant no longer produces a brief audio glitch from a wrong sync delta. No configuration changes required.
+
+### Fixed
+- **Speakers no longer crash on every connect after the 2.69.0-rc.3 release.** A signature drift between the bundled Sendspin 7.3.0 audio engine and the bridge's WebSocket-heartbeat override produced a `TypeError` the moment the daemon tried to start its server-initiated listener, so the speaker subprocess died, restarted in 30 s, died again, and never got past the connect step. The override now matches the new upstream signature and a regression test locks the contract so the next upstream bump fails fast in CI instead of in production.
+- **HA addon: "Release Bluetooth" toggle now survives an addon or Home Assistant restart.** Previously the released state was forgotten on restart, the bridge silently re-grabbed the BT device, and only released it again after the configured idle timeout — which interrupted whatever else was using the speaker (for example a TV soundbar over HDMI/ARC). The released flag now carries forward in the addon's options-to-config rebuild so reclaiming requires an explicit user action. ([#276](https://github.com/trudenboy/sendspin-bt-bridge/issues/276))
+- **Hot-apply settings now stay consistent with the speaker process.** When a settings save couldn't reach a speaker's audio process (process exiting, broken pipe), the bridge previously updated its own copy of the value anyway, so the UI showed a value the speaker had never received. The save path now writes the command to the speaker process first and only commits the bridge-side value after that write succeeds — failures are surfaced as an error in the save summary instead of a silent split-brain.
+- **Changing the log level in the main settings form now switches the bridge process logs immediately.** Previously only the speaker subprocesses picked up the new level, while the bridge itself stayed on the old level until the next restart. The dedicated log-level toggle on the dashboard already worked correctly; the main settings form is now consistent with it.
+- **Hot-apply settings that don't ack within the response window are no longer flagged as errors.** A busy audio loop (HAOS-VM, multi-speaker churn) could push the IPC ack past the 500 ms cap and the UI would show a red "Errors" banner even though the change later landed. The cap is raised to 1.5 s to absorb realistic latency and slow acks now appear in a neutral "Pending live" group with a wait icon.
+- **Saving a global setting no longer triggers a simultaneous reconnect storm on every speaker.** When a global field changed, all active speakers had their audio process restarted in parallel; on multi-speaker setups this overwhelmed BlueZ/PulseAudio and produced spurious disconnects. Restarts are now spaced 300 ms apart between starts so the cascade is absorbed smoothly without serializing total wall time.
+- **Saving the MQTT password concurrently from two browser sessions can no longer lose the new value.** The save path was reading the existing config twice — once before locking, once under the lock — and a parallel save slipping in between could be silently overwritten. The existing config is now read exactly once under the lock and shared by every consumer in the save flow.
+
 ## [2.68.0] - 2026-05-02
 
 ### Added
@@ -29,8 +43,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   players in the same MA sync group: increase the delay on the
   *other* (faster) players to match the slowest BT one.
   ([#237](https://github.com/trudenboy/sendspin-bt-bridge/issues/237))
-- Project support channels documented in README — Liberapay, NOWPayments, and direct crypto (Lightning, BTC, USDT). Boosty kept on Russian-language surfaces only.
-- Documentation site now has a dedicated **Sponsor the project** page (English + Russian) with the full crypto address table, scannable QR codes, FAQ, and non-monetary contribution options.
+- Project support channels documented in README — Liberapay, Ko-fi, NOWPayments, and direct crypto (Lightning, BTC, USDT). Boosty kept on Russian-language surfaces only.
+- Documentation site now has a dedicated **Sponsor the project** page (English + Russian) with the full crypto address table, scannable QR codes (including Ko-fi profile QR), FAQ, and non-monetary contribution options.
 - Web UI header now includes a discreet **Sponsor** link next to Report / Docs / GitHub, opening the documentation site's Sponsor page in a new tab.
 
 ### Changed
@@ -4991,7 +5005,8 @@ Stable rollup of the rc.1 → rc.5 series. Headline theme: **multi-adapter corre
 - mDNS auto-discovery for Music Assistant server (`SENDSPIN_SERVER=auto`)
 - Config persistence via `/config/config.json`
 
-[Unreleased]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.68.0...HEAD
+[Unreleased]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.69.0...HEAD
+[2.69.0]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.68.0...v2.69.0
 [2.68.0]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.67.2...v2.68.0
 [2.67.2]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.67.1...v2.67.2
 [2.67.1]: https://github.com/trudenboy/sendspin-bt-bridge/compare/v2.67.0...v2.67.1

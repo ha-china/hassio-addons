@@ -1,7 +1,7 @@
 name: Node-RED
-version: 21.0.7
+version: 21.0.9
 slug: nodered
-description: '[老王杂谈说]：用于物联网的基于流的编程'
+description: '[老王杂谈说]：null'
 url: https://gh-proxy.org/github.com/hassio-addons/app-node-red
 ingress: true
 ingress_port: 0

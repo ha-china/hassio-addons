@@ -41,15 +41,23 @@ export const ipFilterMiddleware = (req, res, next) => {
 
 export const authMiddleware = (req, res, next) => {
   const providedToken = req.header('X-Auth-Token');
+
+  if (!providedToken) {
+    logger.warn({ ip: req.ip, path: req.originalUrl }, '[AUTH] Missing X-Auth-Token in request');
+    return res.status(401).json({ error: 'Unauthorized', detail: 'Missing X-Auth-Token' });
+  }
+
   if (providedToken !== API_TOKEN) {
-    addLog(getSession('default'), `Unauthorized API access attempt from ${req.ip}`, 'error');
     logger.warn(
-      { ip: req.ip, path: req.originalUrl, tokenProvided: !!providedToken },
-      '[AUTH] Unauthorized access attempt'
+      {
+        ip: req.ip,
+        path: req.originalUrl,
+        match: false,
+        tokenPrefix: providedToken.substring(0, 4) + '...',
+      },
+      '[AUTH] Token mismatch. The provided token does not match the current API_TOKEN. Check addon logs for the current token.'
     );
-    return res
-      .status(401)
-      .json({ error: 'Unauthorized', detail: 'Invalid or missing X-Auth-Token' });
+    return res.status(401).json({ error: 'Unauthorized', detail: 'Invalid X-Auth-Token' });
   }
 
   // Valid token provided - update "Active Interest" for discovery logic
@@ -117,7 +125,7 @@ export const uiLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   skip: (req) => isPrivateIP(req.ip || req.connection.remoteAddress),
-  validate: { trustProxy: true },
+  validate: { trustProxy: false },
 });
 
 export const apiLimiter = rateLimit({
@@ -127,5 +135,5 @@ export const apiLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   skip: (req) => isPrivateIP(req.ip || req.connection.remoteAddress),
-  validate: { trustProxy: true },
+  validate: { trustProxy: false },
 });

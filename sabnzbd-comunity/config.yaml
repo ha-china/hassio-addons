@@ -1,7 +1,7 @@
 name: SABnzbd
-version: 0.7.1
+version: 0.8.0
 slug: sabnzbd-0
-description: '[老王杂谈说]：免费易用的二进制新闻阅读器'
+description: '[老王杂谈说]：免费且简单的二进制新闻阅读器'
 url: https://gh-proxy.org/github.com/hassio-addons/app-sabnzbd/tree/main/README.md
 ingress: true
 ingress_entry: sabnzbd/

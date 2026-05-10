@@ -1,69 +1,64 @@
-# [2.9.0.dev2026050205] - 02.05.2026
+# [2.9.0.dev2026050905] - 09.05.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.9.0.dev2026050106](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026050106)_
-
-### 🧰 Maintenance and dependency bumps
-
-- Spotify: Update get_artist_albums limit, log error messages, guard methods (by @delatt in #3762)
-- Radio Paradise small cleanup (by @teancom in #3826)
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@delatt, @teancom
-
-
-# [2.9.0.dev2026050106] - 01.05.2026
-
-## 📦 Nightly Release
-
-_Changes since [2.9.0.dev2026043006](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026043006)_
+_Changes since [2.9.0.dev2026050805](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026050805)_
 
 ### 🐛 Bugfixes
 
-- YTMusic: Add auto mixes to recommendations. (by @MarvinSchenkel in #3816)
+- Fix protocol recovery with missing cached parent (by @prydie in #3829)
 
 ### 🧰 Maintenance and dependency bumps
 
-- Revert "Remaintain jellyfin (#3528)" (by @staticdev in #3822)
+- Eliminate unused referencs to sync adjust.  (by @bradkeifer in #3852)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@MarvinSchenkel, @staticdev
+@bradkeifer, @prydie
 
 
-# [2.9.0.dev2026043006] - 30.04.2026
+# [2.9.0.dev2026050805] - 08.05.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.9.0.dev2026042906](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026042906)_
+_Changes since [2.9.0.dev2026050706](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026050706)_
+
+### 🚀 New Providers
+
+- Add NTS Radio (Music Provider) (by @mike-sheppard in #3722)
 
 ### 🚀 Features and enhancements
 
-- Set PlayerFeature.SELECT_SOURCE when the FINAL source list is multi-entry (by @rnewman in #3789)
-- Emby Music Provider: add on played event handler (by @hatharry in #3805)
-- Throttle torch to max 25% of CPU to prevent spikes during analysis (by @MarvinSchenkel in #3808)
+- Add manual IP addresses setting to the Sendspin provider (by @staticdev in #3846)
 
 ### 🐛 Bugfixes
 
-- Fix library sync deletion for non-streaming providers (by @OzGav in #3806)
-- bbc_sounds: use LiveStation.id for station identifier (by @MacTheFork in #3807)
-
-### 🧰 Maintenance and dependency bumps
-
-- Refine description for 'Hide in UI' config entry (by @OzGav in #3809)
-- ⬆️ Update music-assistant-models to 1.1.116 (by @music-assistant-machine in #3810)
-- ⬆️ Update music-assistant-frontend to 2.17.154 (by @music-assistant-machine in #3812)
+- Workaround for "Youtube Music playlist stalls on uploaded music" music-assistant/support#4469 (by @whitty in #3156)
+- Set NTS stations + mixtape images to square aspect (by @mike-sheppard in #3850)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@MacTheFork, @MarvinSchenkel, @OzGav, @hatharry, @rnewman
+@mike-sheppard, @staticdev, @whitty
+
+
+# [2.9.0.dev2026050706] - 07.05.2026
+
+## 📦 Nightly Release
+
+_Changes since [2.9.0.dev2026050614](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026050614)_
+
+### 🐛 Bugfixes
+
+- Allow AirPlay2 devices to be selected for synchronised playback (by @bradkeifer in #3847)
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@bradkeifer
 
 

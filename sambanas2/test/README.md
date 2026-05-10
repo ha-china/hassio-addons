@@ -1,12 +1,12 @@
 # Sambanas2 测试
 
-此目录包含 Sambanas2 Home Assistant 插件的测试脚本。
+此目录包含 Sambanas2 Home Assistant 插件测试脚本。
 
 ## 测试脚本
 
 ### 二进制升级测试
 
-两个测试脚本验证 `check-srat-update/run` 中的二进制自升级逻辑：
+两个测试脚本验证 `check-srat-update/run` 中的二进制自我升级逻辑：
 
 #### 1. 单元测试 (`test-binary-upgrade.sh`)
 
@@ -20,9 +20,9 @@
 - Semver 验证（带/不带 'v' 前缀，预发布标签）
 - 版本规范化
 - 使用 `sort -V` 进行版本比较
-- 升级决策流程
+- 升级决策工作流程
 
-**运行方法：**
+**运行方式：**
 ```bash
 ./test-binary-upgrade.sh
 ```
@@ -30,9 +30,9 @@
 **示例输出：**
 ```
 === 测试 semver 验证 ===
-✓ 有效 semver：1.2.3
-✓ 有效 semver with 'v'：v1.2.3
-✓ 有效 semver with prerelease：v2025.12.0-dev.8
+✓ 有效的 semver：1.2.3
+✓ 带有 'v' 前缀的有效的 semver：v1.2.3
+✓ 带有预发布标签的有效的 semver：v2025.12.0-dev.8
 
 === 测试摘要 ===
 通过：19
@@ -43,21 +43,21 @@
 
 #### 2. 集成测试 (`test-binary-upgrade-integration.sh`)
 
-包含实际 ELF 二进制文件和 `.note.metadata` 部分的端到端测试。
+包含实际 ELF 二进制文件，其中包含 `.note.metadata` 部分的端到端测试。
 
 **要求：**
 - `gcc`（用于编译测试二进制文件）
 - `objdump`（来自 binutils）
 
 **测试内容：**
-- 创建包含嵌入版本元数据的 ELF 二进制文件
-- 使用 `objdump` 从 `.note.metadata` 中提取版本
-- 完整升级流程：
+- 创建包含嵌入式版本元数据的 ELF 二进制文件
+- 使用 `objdump` 从 `.note.metadata` 提取版本
+- 完整的升级工作流程：
   - 新版本将被升级
   - 旧版本不会被升级
   - 从真实二进制文件中提取版本
 
-**运行方法：**
+**运行方式：**
 ```bash
 ./test-binary-upgrade-integration.sh
 ```
@@ -68,11 +68,11 @@
 ```
 === 创建带有版本的模拟二进制文件 ===
 ✓ 创建源二进制文件：srat-cli v2025.12.0
-✓ 创建升级二进制文件：srat-cli v2025.12.1（新版本）
+✓ 创建升级二进制文件：srat-cli v2025.12.1（较新）
 
-=== 模拟升级流程 ===
+=== 模拟升级工作流程 ===
   已将 srat-cli 从 2025.12.0 升级到 2025.12.1
-  跳过了 srat-server（1.4.0 不是 1.5.0 的新版本）
+  跳过了 srat-server（1.4.0 不比 1.5.0 新）
 ✓ 正确升级了 1 个二进制文件（srat-cli）
 ✓ 正确跳过了 1 个二进制文件（srat-server - 旧版本）
 
@@ -87,16 +87,16 @@
 
 **测试内容：**
 - ZFS 可用且具有显式的 `zpool` 版本输出
-- 当 `zpool` 版本不可用时，从内核检测中可用
+- 当 `zpool` 版本不可用时，从内核检测中可用 ZFS
 - 当文件系统条目缺失时，ZFS 不可用
 
-**运行方法：**
+**运行方式：**
 ```bash
 ./test-zfs-support-output.sh
 ```
 
 ### `buildLocal.sh`
-在本地构建用于测试的插件容器镜像。
+在本地构建插件容器镜像以进行测试。
 
 ### `runLocal.sh`
 使用测试配置运行本地构建的插件容器。
@@ -139,11 +139,11 @@ test:
       run: ./sambanas2/test/test-zfs-support-output.sh
 ```
 
-## 使用真实二进制文件手动测试
+## 使用真实二进制文件进行手动测试
 
 要手动测试升级逻辑：
 
-1. **准备带有嵌入版本的测试二进制文件：**
+1. **准备带有嵌入式版本的测试二进制文件：**
    ```bash
    # 您的 srat 二进制文件应该有 .note.metadata 部分
    objdump -s --section .note.metadata /usr/local/bin/srat-cli

@@ -1,7 +1,7 @@
 name: AppDaemon
-version: 0.18.4
+version: 0.18.5
 slug: appdaemon
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：使用 AppDaemon 4.x 为 Home Assistant 构建的 Python 应用和仪表盘'
 url: https://gh-proxy.org/github.com/hassio-addons/app-appdaemon
 webui: http://[HOST]:[PORT:5050]
 arch:

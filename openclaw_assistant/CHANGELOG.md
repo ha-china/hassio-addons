@@ -2,6 +2,11 @@
 
 All notable changes to the OpenClaw Assistant Home Assistant Add-on will be documented in this file.
 
+## [0.5.72] - 2026-05-04
+
+### Fixed
+- Repair startup when a persisted OpenClaw config still selects the unavailable `tools.web.search.provider=brave` provider. The add-on now clears that provider before launching the gateway so OpenClaw can start; users can reinstall/enable the Brave provider later if they want web search through Brave.
+
 ## [0.5.70] - 2026-04-30
 
 - Bump OpenClaw to 2026.4.27.

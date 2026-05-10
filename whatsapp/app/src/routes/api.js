@@ -10,6 +10,7 @@ import {
   signalInterest,
   getAuthDir,
   addLog,
+  enqueue,
 } from '../session.js';
 import { getJid } from '../utils/jid.js';
 import { maskData, generateMessageID } from '../utils/security.js';
@@ -85,6 +86,7 @@ export function registerAPIRoutes(app) {
       session.eventQueue = [];
       session.connectionLogs = [];
       session.messageStore.clear();
+      session.sendQueue = Promise.resolve();
       session.stats = {
         sent: 0,
         received: 0,
@@ -166,21 +168,6 @@ export function registerAPIRoutes(app) {
     });
   });
 
-  // --- Helper: Message Queue ---
-  async function enqueue(session, task) {
-    const result = await (session.sendQueue = session.sendQueue.then(async () => {
-      try {
-        const res = await task();
-        if (MESSAGE_SEND_INTERVAL > 0) await delay(MESSAGE_SEND_INTERVAL);
-        return res;
-      } catch (e) {
-        if (MESSAGE_SEND_INTERVAL > 0) await delay(MESSAGE_SEND_INTERVAL);
-        throw e;
-      }
-    }));
-    return result;
-  }
-
   // --- Messaging API ---
   app.post('/send_message', authMiddleware, async (req, res) => {
     const session = getReqSession(req);
@@ -190,11 +177,15 @@ export function registerAPIRoutes(app) {
     try {
       const jid = getJid(number);
       if (!session.sock) throw new Error('Socket not initialized');
-      await session.sock.sendPresenceUpdate('composing', jid);
-      await delay(250);
+      const sentMsg = await enqueue(session, async () => {
+        try {
+          await session.sock.sendPresenceUpdate('composing', jid).catch(() => {});
+          await delay(250);
+        } catch (e) {
+          logger.debug('Presence update failed, continuing with message');
+        }
 
-      const sentMsg = await enqueue(session, () =>
-        Promise.race([
+        return await Promise.race([
           session.sock.sendMessage(
             jid,
             { text: message },
@@ -206,8 +197,8 @@ export function registerAPIRoutes(app) {
               reject(new Error('Send message timeout'));
             }, SEND_MESSAGE_TIMEOUT)
           ),
-        ])
-      );
+        ]);
+      });
 
       session.stats.sent += 1;
       session.stats.last_sent_message = maskData(message);
@@ -235,7 +226,7 @@ export function registerAPIRoutes(app) {
         session.sock.sendMessage(
           jid,
           { image: { url: url }, caption: caption },
-          { quoted, ephemeralExpiration: expiration }
+          { quoted, ephemeralExpiration: expiration, mediaUploadTimeoutMs: SEND_MESSAGE_TIMEOUT }
         )
       );
       session.stats.sent += 1;
@@ -282,7 +273,7 @@ export function registerAPIRoutes(app) {
               selectableCount: normalizedSelectableCount,
             },
           },
-          { quoted, ephemeralExpiration: expiration }
+          { quoted, ephemeralExpiration: expiration, mediaUploadTimeoutMs: SEND_MESSAGE_TIMEOUT }
         )
       );
       session.messageStore.set(sentMsg.key.id, sentMsg);
@@ -323,7 +314,7 @@ export function registerAPIRoutes(app) {
               address: description,
             },
           },
-          { quoted, ephemeralExpiration: expiration }
+          { quoted, ephemeralExpiration: expiration, mediaUploadTimeoutMs: SEND_MESSAGE_TIMEOUT }
         )
       );
       session.stats.sent += 1;
@@ -419,7 +410,7 @@ export function registerAPIRoutes(app) {
             caption: caption,
             mimetype: 'application/octet-stream',
           },
-          { quoted, ephemeralExpiration: expiration }
+          { quoted, ephemeralExpiration: expiration, mediaUploadTimeoutMs: SEND_MESSAGE_TIMEOUT }
         )
       );
       session.stats.sent += 1;
@@ -443,7 +434,7 @@ export function registerAPIRoutes(app) {
         session.sock.sendMessage(
           jid,
           { video: { url: url }, caption: caption },
-          { quoted, ephemeralExpiration: expiration }
+          { quoted, ephemeralExpiration: expiration, mediaUploadTimeoutMs: SEND_MESSAGE_TIMEOUT }
         )
       );
       session.stats.sent += 1;
@@ -467,7 +458,7 @@ export function registerAPIRoutes(app) {
         session.sock.sendMessage(
           jid,
           { audio: { url: url }, ptt: !!ptt, mimetype: 'audio/mp4' },
-          { quoted, ephemeralExpiration: expiration }
+          { quoted, ephemeralExpiration: expiration, mediaUploadTimeoutMs: SEND_MESSAGE_TIMEOUT }
         )
       );
       session.stats.sent += 1;
@@ -575,24 +566,28 @@ export function registerAPIRoutes(app) {
       let groups = {};
       const now = Date.now();
       if (
-        (!session.groupCache ||
-          session.groupCache.size === 0 ||
-          now - (session.lastGroupFetch || 0) > GROUP_FETCH_INTERVAL) &&
+        (!session.lastGroupFetch || now - session.lastGroupFetch > GROUP_FETCH_INTERVAL) &&
         now > (session.groupFetchCooldownUntil || 0)
       ) {
+        // Set a temporary cooldown to prevent parallel requests from triggering multiple fetches
+        session.groupFetchCooldownUntil = now + 30000;
+
         try {
-          groups = await enqueue(session, () => session.sock.groupFetchAllParticipating());
+          const result = await enqueue(session, () => session.sock.groupFetchAllParticipating());
+          groups = result;
           session.lastGroupFetch = now;
           session.groupFetchCooldownUntil = 0;
         } catch (e) {
-          logger.warn({ error: e.message }, 'Failed to fetch groups, using cache');
-          // Update last fetch attempt even on error to avoid hammering
-          session.lastGroupFetch = now;
-          if (e.message?.includes('rate-overlimit')) {
+          const isRateLimit = e.message?.includes('rate-overlimit');
+          if (isRateLimit) {
             session.groupFetchCooldownUntil = now + GROUP_FETCH_COOLDOWN_ON_RATE_LIMIT;
-            logger.info({ sessionId: session.id }, 'Rate limit detected, cooling down group fetch');
+            logger.warn(
+              { sessionId: session.id },
+              'Rate limit hit during group fetch, cooling down for 15m'
+            );
           } else {
             session.groupFetchCooldownUntil = now + GROUP_FETCH_COOLDOWN_ON_ERROR;
+            logger.debug({ error: e.message }, 'Failed to fetch groups, using cache');
           }
         }
       }

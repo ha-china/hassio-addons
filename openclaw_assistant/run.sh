@@ -562,9 +562,20 @@ fi
 
 if [ -f "$OPENCLAW_CONFIG_PATH" ]; then
   if [ -f "$HELPER_PATH" ]; then
+    if python3 "$HELPER_PATH" repair-known-invalid-settings; then
+      :
+    else
+      rc=$?
+      echo "ERROR: Failed to repair known invalid OpenClaw config settings via oc_config_helper.py (exit code ${rc})."
+      echo "ERROR: Gateway configuration may be invalid; aborting startup."
+      exit "${rc}"
+    fi
+
     # In lan_https mode the gateway uses an internal port; nginx owns the external one.
     EFFECTIVE_GW_PORT="$GATEWAY_INTERNAL_PORT"
-    if ! python3 "$HELPER_PATH" apply-gateway-settings "$GATEWAY_MODE" "$GATEWAY_REMOTE_URL" "$GATEWAY_BIND_MODE" "$EFFECTIVE_GW_PORT" "$ENABLE_OPENAI_API" "$GATEWAY_AUTH_MODE" "$GATEWAY_TRUSTED_PROXIES"; then
+    if python3 "$HELPER_PATH" apply-gateway-settings "$GATEWAY_MODE" "$GATEWAY_REMOTE_URL" "$GATEWAY_BIND_MODE" "$EFFECTIVE_GW_PORT" "$ENABLE_OPENAI_API" "$GATEWAY_AUTH_MODE" "$GATEWAY_TRUSTED_PROXIES"; then
+      :
+    else
       rc=$?
       echo "ERROR: Failed to apply gateway settings via oc_config_helper.py (exit code ${rc})."
       echo "ERROR: Gateway configuration may be incorrect; aborting startup."

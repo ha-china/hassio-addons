@@ -1,8 +1,8 @@
 # Home Assistant 插件：Samba NAS 2 ![Logo](https://github.com/dianlight/hassio-addons/raw/devrelease/sambanas2/sambanas2/docs/full_logo.png)
 
-下一代插件，用于通过网络使用 Windows 文件共享来共享您的磁盘。
+下一代插件，让您通过 Windows 文件共享在网络上共享磁盘。
 
-![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield]
+![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield] 
 
 <!--[![Stargazers repo roster for @dianlight/hassio-addons](https://raw.githubusercontent.com/dianlight/hassio-addons/master/.github/stars2.svg)](https://github.com/dianlight/hassio-addons/stargazers)
 
@@ -19,9 +19,10 @@
 
 <a href="https://www.buymeacoffee.com/ypKZ2I0"><img src="https://img.buymeacoffee.com/button-api/?text=买我一杯咖啡&emoji=&slug=ypKZ2I0&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
 
+
 ## 关于
 
-此插件允许您在网络中跨不同操作系统启用文件共享。
+此插件允许您在网络中启用不同操作系统之间的文件共享。
 
 
 

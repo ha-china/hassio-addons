@@ -1,11 +1,11 @@
-# hassio-hotspot（以前称为 hassio-hostapd-extended）
-通过 USB WiFi 网卡（或板载 WiFi）为您的 IoT 设备在 Home Assistant 上启用一个接入点（带嵌入式 DHCP 服务器）。USB WiFi 特别有用，如果您希望 IoT 设备拥有不同的网络基础设施，而 RPI 的板载 WiFi 不可用或不稳定。
+# hassio-hotspot（之前称为hassio-hostapd-extended）
+使用USB WiFi网卡（或板载）为您的Home Assistant物联网设备启用接入点（带嵌入式DHCP服务器）。USB WiFi主要用于您希望为物联网设备使用不同的网络基础设施，而RPI板载WiFi不可用或不稳定。
 
-它允许使用外部 USB WiFi 网卡 **Ralink、Atheros 等** 创建一个接入点 **可选搭配 DHCP 服务器**，用于您的 IoT 设备。它起初是 hostapd 插件的一个分支，我重新命名了，因为它现在的功能超过了此：它为热点上的设备添加了可选择的互联网接入的 DHCP 服务器。它还为外部 USB 网卡增加了支持，以启用一个稳定的接入点，众所周知 RPI 上的板载 Broadcomm WiFi 操作不稳定，无法提供所需的可靠性。
+它允许使用外部USB WiFi网卡（Ralink、Atheros等）为您的物联网设备创建**可选的DHCP服务器**接入点。它开始了一个hostapd插件的分支，我将其重命名，因为现在它不仅限于这一点：它为热点上的设备添加了带可选互联网访问的DHCP服务器。它还增加了对外部USB网卡的支持，以启用稳定的接入点，众所周知，RPI板载Broadcomm WiFi运行不稳定，并且无法提供所需的可靠性。
 
 ## 安装
 
-要在您自己的 Hass.io 安装中使用此存储库，请按照 Home Assistant 网站上 [官方说明](https://www.home-assistant.io/hassio installing_third_party_addons/) 的以下 URL：
+要使用此存储库与您的Hass.io安装一起使用，请按照Home Assistant网站上的[官方说明](https://www.home-assistant.io/hassio installing_third_party_addons/)进行操作，以下是URL：
 
 ```txt
 https://github.com/joaofl/hassio-addons
@@ -13,7 +13,7 @@ https://github.com/joaofl/hassio-addons
 
 ### 配置
 
-可用的配置选项如下所示。确保根据您的需要进行编辑：
+可用的配置选项如下。请确保根据您的需求进行编辑：
 
 ```json
 {
@@ -22,11 +22,11 @@ https://github.com/joaofl/hassio-addons
     "channel": "0",
     "address": "192.168.2.1",
     "netmask": "255.255.255.0",
-    "broadcast": "192.168.2.254",
-    "interface": "",
-    "interface_internet": "eth0",
-    "allow_internet": false,
-    "dhcp_server": true,
+    "broadcast": "192.168.2.254"
+    "interface": ""
+    "interface_internet": "eth0"
+    "allow_internet": false
+    "dhcp_server": true
     "dhcp_start": "192.168.2.100",
     "dhcp_end": "192.168.2.200",
     "dhcp_dns": "1.1.1.1",
@@ -38,32 +38,56 @@ https://github.com/joaofl/hassio-addons
         {
             "mac": "00:11:22:33:44:55",
             "ip": "192.168.2.10",
-            "name": "客厅灯"
+            "name": "Living Room Light"
         }
     ]
 }
 ```
 
-当频道设置为 0 时，它会自动找到最佳频道。
+当频道设置为0时，它将自动找到最佳频道。
 
-当 `interface` 选项留空时，将在日志中打印检测到的 wlan 接口列表，插件将终止。请在配置中设置正确的 `interface` 值，然后重启插件。
+当`interface`选项留空时，将在日志中打印出检测到的wlan接口列表，并且插件将终止。然后在配置中设置正确的`interface`值，然后重新启动插件。
 
-### DHCP 配置
+### DHCP配置
 
-#### 租约时间
-`lease_time` 选项设置 DHCP 分配的 IP 地址保持有效的时间（以秒为单位）。默认值为 864000 秒（10 天）。
+#### 租赁时间
+`lease_time`选项设置DHCP分配的IP地址的有效时间（以秒为单位）。默认为864000秒（10天）。
 
-#### 静态租约
-配置静态租约时，确保 IP 地址在您的 DHCP 范围之外（由 `dhcp_start` 和 `dhcp_end` 定义），以避免 IP 冲突。
+#### 静态租赁
+配置静态租赁时，请确保IP地址不在您的DHCP范围内（由`dhcp_start`和`dhcp_end`定义），以避免IP冲突。
 
-例如：如果您的 DHCP 范围是 192.168.2.100 到 192.168.2.200，则您的静态 IP 应低于 .100 或高于 .200。
+示例：如果您的DHCP范围是192.168.2.100到192.168.2.200，您的静态IP应低于.100或高于.200。
 
-`static_leases` 选项允许您：
-- 为基于其 MAC 地址的设备保留特定 IP 地址
-- 可选为设备分配友好的名称以便识别
-- 确保设备始终获得相同的 IP 地址
+`static_leases`选项允许您：
+- 根据设备的MAC地址为设备保留特定的IP地址
+- 可选地为设备分配友好的名称以进行识别
+- 确保设备始终获得相同的IP地址
 
-每个静态租约条目需要：
-- `mac`：设备的 MAC 地址（格式：XX:XX:XX:XX:XX:XX）
-- `ip`：要分配的 IP 地址
+每个静态租赁条目需要：
+- `mac`：设备的MAC地址（格式：XX:XX:XX:XX:XX:XX）
+- `ip`：要分配的IP地址
 - `name`：（可选）用于识别设备的友好名称
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

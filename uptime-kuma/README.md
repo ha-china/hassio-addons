@@ -1,10 +1,10 @@
 # Home Assistant 社区应用：Uptime Kuma
 
-[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
+[![发布状态][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
 
 [![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
 
-[![通过 GitHub Sponsors 支持Frenck][github-sponsors-shield]][github-sponsors]
+[![通过 GitHub Sponsors 赞助 Frenck][github-sponsors-shield]][github-sponsors]
 
 [![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
 
@@ -12,9 +12,9 @@
 
 ## 关于
 
-Uptime Kuma 是一个开源的监控工具，最好将其与类似 "Uptime Robot" 的商业服务的自托管版本进行比较。
+Uptime Kuma 是一个开源的监控工具，最好与像 "Uptime Robot" 这样的商业服务的自托管版本进行比较。
 
-它允许您通过 HTTP/S、TCP、DNS 以及其他协议监控服务，并且可以发送关于服务中断的通知或触发 Home Assistant 自动化 webhook。
+它允许您通过 HTTP/S、TCP、DNS 以及其他协议监控服务，并且可以发送您关于服务中断的通知，或者触发 Home Assistant 的自动化 webhook。
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -26,8 +26,8 @@ Uptime Kuma 是一个开源的监控工具，最好将其与类似 "Uptime Robot
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v0.17.1-blue.svg
-[release]: https://github.com/hassio-addons/app-uptime-kuma/tree/v0.17.1
+[release-shield]: https://img.shields.io/badge/version-v0.17.2-blue.svg
+[release]: https://github.com/hassio-addons/app-uptime-kuma/tree/v0.17.2
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

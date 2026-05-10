@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.5](https://github.com/hugobloem/wyoming-microsoft-tts/compare/v1.4.4...v1.4.5) (2026-05-04)
+
+
+### 🏗️ Maintenance
+
+* **deps-dev:** bump pytest from 9.0.2 to 9.0.3 ([#167](https://github.com/hugobloem/wyoming-microsoft-tts/issues/167)) ([548d2d2](https://github.com/hugobloem/wyoming-microsoft-tts/commit/548d2d20787ba7d40d019d31e3ffa9988a16c26f))
+* **deps-dev:** bump ruff from 0.15.6 to 0.15.12 ([#175](https://github.com/hugobloem/wyoming-microsoft-tts/issues/175)) ([039744a](https://github.com/hugobloem/wyoming-microsoft-tts/commit/039744a366af41e313a9c5a2048d106b5cefec73))
+* **deps:** bump azure-cognitiveservices-speech from 1.48.2 to 1.49.1 ([#171](https://github.com/hugobloem/wyoming-microsoft-tts/issues/171)) ([20b5480](https://github.com/hugobloem/wyoming-microsoft-tts/commit/20b5480c4a8f483982ee506ffcb788c5aa90a288))
+* **deps:** bump googleapis/release-please-action from 4 to 5 ([#174](https://github.com/hugobloem/wyoming-microsoft-tts/issues/174)) ([9705c78](https://github.com/hugobloem/wyoming-microsoft-tts/commit/9705c7826fbf1e419997f99ea7e86046e75c485f))
+* **deps:** bump lxml from 6.0.2 to 6.1.0 ([#173](https://github.com/hugobloem/wyoming-microsoft-tts/issues/173)) ([c003cf1](https://github.com/hugobloem/wyoming-microsoft-tts/commit/c003cf1773ad117acef51db31dd1c897ad8a307a))
+* **deps:** bump regex from 2026.2.28 to 2026.4.4 ([#165](https://github.com/hugobloem/wyoming-microsoft-tts/issues/165)) ([66b0cab](https://github.com/hugobloem/wyoming-microsoft-tts/commit/66b0cab286a1043e1ea4df01bf4c7ac2601c41eb))
+
 ## [1.4.4](https://github.com/hugobloem/wyoming-microsoft-tts/compare/v1.4.3...v1.4.4) (2026-03-15)
 
 

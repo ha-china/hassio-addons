@@ -1,19 +1,19 @@
 # Apache2
 
-![Apache2 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/apache2/logo.png)
+![Apache2 Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/apache2/logo.png) 
 
-[![打开你的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_apache2)
-[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-3.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-apache2)
+[![打开您的 Home Assistant 实例并显示应用程序仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_apache2)
+[![Home Assistant 应用程序](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-3.3.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-apache2)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 开源 Web 服务器，包含 PHP 和 MariaDB。
+> 开源 Web 服务器，带有 PHP 和 MariaDB。
 
 ---
 
 ## 📖 关于
 
-Apache HTTP Server 是一个强大、灵活、健壮的开源 Web 服务器。此插件提供了一个预配置的 Apache2 环境，支持完整的 PHP 功能和 MariaDB 客户端集成，非常适合在 Home Assistant 中托管动态网站和基于 PHP 的应用程序（如 WordPress 或自定义仪表板）。
+Apache HTTP 服务器是一款强大、灵活、可靠的开源 Web 服务器。此插件提供了一个预配置的 Apache2 环境，具有完整的 PHP 支持和 MariaDB 客户端集成，非常适合在 Home Assistant 中托管动态网站和基于 PHP 的应用程序（如 WordPress 或自定义仪表板）。
 
 ### Apache2 变体比较
 
@@ -22,14 +22,14 @@ Apache HTTP Server 是一个强大、灵活、健壮的开源 Web 服务器。�
 | **PHP 支持** | ✅ 是（完整） | ❌ 否 | ✅ 是（基本） |
 | **MariaDB 客户端** | ✅ 是 | ❌ 否 | ✅ 是 |
 | **占用** | 🖥️ 较大 | ⚡ 最小 | ⚖️ 中等 |
-| **适用场景** | WordPress、完整 CMS | 静态站点 | 简单 PHP 应用 |
+| **最佳用途** | WordPress，完整 CMS | 静态网站 | 简单 PHP 应用 |
 
 ---
 
 ## 🏠 Home Assistant 集成
 
-此插件支持 Home Assistant 的 **Web 服务器应用** 集成。
-集成将在插件启动时自动安装/更新。
+此插件支持 Home Assistant 的 **Web 服务器应用程序** 集成。
+当插件启动时，集成会自动安装/更新。
 
 有关更多信息和管理细节，请参阅 [集成 README](../custom_components/webserver_app/README.md)。
 
@@ -37,7 +37,7 @@ Apache HTTP Server 是一个强大、灵活、健壮的开源 Web 服务器。�
 
 ## ⚙️ 配置
 
-通过 Home Assistant App 页面中的 **配置** 选项卡配置应用。
+通过 Home Assistant App 页面的 **配置** 选项卡配置应用程序。
 
 ### 选项
 
@@ -56,9 +56,9 @@ website_name: web.local
 
 ---
 
-## 👨‍💻 信用 & 许可证
+## 👨‍💻 贡献者 & 许可证
 
-此项目是开源的，并受 MIT 许可证的约束。
+此项目是开源的，并遵循 MIT 许可证。
 由 **FaserF** 维护。
 ---
 

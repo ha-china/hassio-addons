@@ -256,6 +256,43 @@ def set_control_ui_origins(origins_csv: str, additional_origins_csv: str = "", d
     return False
 
 
+def repair_known_invalid_settings():
+    """Repair known config values that prevent OpenClaw from starting."""
+    cfg = read_config()
+    if cfg is None:
+        return True
+
+    tools = cfg.get("tools")
+    if not isinstance(tools, dict):
+        return True
+
+    web = tools.get("web")
+    if not isinstance(web, dict):
+        return True
+
+    search = web.get("search")
+    if not isinstance(search, dict):
+        return True
+
+    provider = search.get("provider")
+    changes = []
+
+    if provider == "brave":
+        del search["provider"]
+        changes.append("removed unavailable tools.web.search.provider=brave")
+
+    if not changes:
+        print("INFO: No known invalid OpenClaw config settings found")
+        return True
+
+    if write_config(cfg):
+        print(f"INFO: Repaired OpenClaw config: {', '.join(changes)}")
+        return True
+
+    print("ERROR: Failed to write config")
+    return False
+
+
 def main():
     """CLI entry point for use by run.sh"""
     if len(sys.argv) < 2:
@@ -298,6 +335,13 @@ def main():
         if len(sys.argv) == 5:
             disable_device_auth = sys.argv[4].strip().lower() == "true"
         success = set_control_ui_origins(origins_csv, additional_origins_csv, disable_device_auth)
+        sys.exit(0 if success else 1)
+
+    elif cmd == "repair-known-invalid-settings":
+        if len(sys.argv) != 2:
+            print("Usage: oc_config_helper.py repair-known-invalid-settings")
+            sys.exit(1)
+        success = repair_known_invalid_settings()
         sys.exit(0 if success else 1)
 
     elif cmd == "set":

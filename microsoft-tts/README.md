@@ -1,7 +1,7 @@
-# 魔术师微软TTS
-Wyoming协议服务器，用于微软Azure语音合成。
+# 魔牛州微软TTS
+魔牛州协议服务器，用于微软Azure语音合成。
 
-此插件提供了Wyoming与微软Azure语音合成的集成，并可直接与[Home Assistant](https://www.home-assistant.io/)语音和[Rhasspy](https://github.com/rhasspy/rhasspy3)一起使用。
+此附加组件提供了魔牛州与微软Azure语音合成的集成，可以直接与[Home Assistant](https://www.home-assistant.io/)语音和[Rhasspy](https://github.com/rhasspy/rhasspy3)一起使用。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

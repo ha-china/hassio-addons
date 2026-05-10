@@ -1,32 +1,32 @@
 # ShieldDNS
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/ShieldDNS/logo.png" width="100" alt="Logo" />
+![ShieldDNS 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/ShieldDNS/logo.png) width="100" alt="Logo" />
 
-[![Open your Home Assistant instance and show the app dashboard.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_ShieldDNS)
-[![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker Image](https://img.shields.io/badge/docker-2.4.4-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-shielddns)
-![Project Maintenance](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_ShieldDNS)
+[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.4.6-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-shielddns)
+![项目维护者](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> High-performance DoT proxy for AdGuard Home
+> 高性能的 AdGuard Home DoT 代理
 
 ---
 
-## 📖 About
+## 📖 关于
 
-**ShieldDNS** is a high-performance, privacy-focused DNS solution supporting both **DNS-over-TLS (DoT)** and **DNS-over-HTTPS (DoH)**.
+**ShieldDNS** 是一个高性能、注重隐私的 DNS 解决方案，支持 **DNS-over-TLS (DoT)** 和 **DNS-over-HTTPS (DoH)**。
 
-It features a premium **Admin Dashboard** for real-time monitoring and a powerful **Filtering Engine** compatible with AdGuard, Pi-hole, and uBlock origin lists.
+它具有高级的 **管理仪表板** 用于实时监控和与 AdGuard、Pi-hole 和 uBlock origin 列表兼容的强大 **过滤引擎**。
 
-## 🚀 Key Features
+## 🚀 关键特性
 
-- 🔒 **Full Dual Support**: Natively supports both **DNS-over-TLS (DoT)** (port 853) and **DNS-over-HTTPS (DoH)** (port 443) with high-efficiency processing.
-- 📊 **Admin Dashboard**: Premium web UI for real-time statistics and configuration.
-- 🛡️ **DNS Filtering**: Integrated engine for blocklists with automatic updates and deduplication.
-- ⚡ **High Performance**: Built on CoreDNS and Go for maximum efficiency.
-- 🔐 **Secure Access**: Mandatory password protection (bcrypt) for the Admin UI.
-- 📱 **Multi-Platform**: Perfect for Android Private DNS, iOS Profiles, and Windows 11.
+- 🔒 **全面双支持**：原生支持 **DNS-over-TLS (DoT)**（端口 853）和 **DNS-over-HTTPS (DoH)**（端口 443），具有高效率的处理。
+- 📊 **管理仪表板**：高级网页 UI 用于实时统计和配置。
+- 🛡️ **DNS 过滤**：集成的引擎适用于带有自动更新和去重的阻止列表。
+- ⚡ **高性能**：基于 CoreDNS 和 Go，提供最大效率。
+- 🔐 **安全访问**：管理 UI 必须强制密码保护（bcrypt）。
+- 📱 **多平台**：非常适合 Android 私有 DNS、iOS 配置文件和 Windows 11。
 
-## 🛠️ Usage
+## 🛠️ 使用方法
 
 ### Docker Compose
 
@@ -37,7 +37,7 @@ services:
     ports:
       - '853:853/tcp' # DoT
       - '443:443/tcp' # DoH
-      - '8080:8080/tcp' # Admin Dashboard
+      - '8080:8080/tcp' # 管理仪表板
     environment:
       - UPSTREAM_DNS=1.1.1.1, 8.8.8.8
       - LOG_LEVEL=info # debug, info, error
@@ -45,56 +45,56 @@ services:
       - KEY_FILE=/certs/privkey.pem
     volumes:
       - ./certs:/certs
-      - ./data:/data # Persistent config and stats
+      - ./data:/data # 持久配置和统计
 ```
 
-## 🖥️ Admin Dashboard
+## 🖥️ 管理仪表板
 
-Access the dashboard at `http://YOUR_SERVER_IP:8080`.
+在 `http://YOUR_SERVER_IP:8080` 访问仪表板。
 
-- **Initial Setup**: On first access, you will be prompted to set a 12-character administrative password.
-- **Filtering**: Manage your blocklists (AdGuard, Pi-hole, etc.) directly from the UI.
-- **Stats**: View total queries, blocked requests, and blocking ratio in real-time.
+- **初始设置**：首次访问时，您将被提示设置一个 12 位的行政密码。
+- **过滤**：直接从 UI 管理您的阻止列表（AdGuard、Pi-hole 等）。
+- **统计**：实时查看总查询、阻止请求和阻止比率。
 
-## 📱 Client Configuration
+## 📱 客户端配置
 
-### DoT (DNS-over-TLS) - Port 853
+### DoT (DNS-over-TLS) - 端口 853
 
-- **Android**: Go to **Settings > Network > Private DNS** and enter `dns.example.com`.
-- **iOS/macOS**: Use the provided `.mobileconfig` template.
+- **Android**：进入 **设置 > 网络 > 私有 DNS** 并输入 `dns.example.com`。
+- **iOS/macOS**：使用提供的 `.mobileconfig` 模板。
 
-### DoH (DNS-over-HTTPS) - Port 443
+### DoH (DNS-over-HTTPS) - 端口 443
 
-- **Windows 11**: **Settings > Network > DNS settings > Edit**. Set DNS over HTTPS to "On (Manual)" and enter `https://dns.example.com/dns-query`.
-- **Browsers**: Enter `https://dns.example.com/dns-query` in your browser's "Secure DNS" settings.
+- **Windows 11**：进入 **设置 > 网络 > DNS 设置 > 编辑**。将 DNS over HTTPS 设置为“开（手动）”并输入 `https://dns.example.com/dns-query`。
+- **浏览器**：在浏览器的“安全 DNS”设置中输入 `https://dns.example.com/dns-query`。
 
-## 🛡️ Security Best Practices
+## 🛡️ 安全最佳实践
 
-Since you are exposing a DNS server to the public, you should secure it:
+由于您正在将 DNS 服务器公开到公网，您应该对其进行保护：
 
-1. **Use a WAF**: Place a Reverse Proxy or Cloudflare Tunnel in front of your DoH endpoint.
-2. **Firewall**: Whitelist your mobile IP ranges for port 853 if possible.
-3. **Password**: Use a strong, unique password for the Admin UI (min 12 chars).
+1. **使用 WAF**：在 DoH 端点前面放置反向代理或 Cloudflare Tunne。
+2. **防火墙**：如果可能，为端口 853 白名单您的移动 IP 范围。
+3. **密码**：为管理 UI 使用强大且唯一的密码（至少 12 个字符）。
 
-## 💡 Concepts & Protocols
+## 💡 概念和协议
 
-| Protocol | Port  | Description                | Support                                 |
-| :------- | :---- | :------------------------- | :-------------------------------------- |
-| **DoT**  | `853` | Dedicated secure DNS port. | **Native** (Android Private DNS).       |
-| **DoH**  | `443` | Standard HTTPS web port.   | **Native** (Windows 11, iOS, Browsers). |
+| 协议 | 端口 | 描述 | 支持 |
+| :--- | :--- | :--- | :--- |
+| **DoT** | `853` | 专用的安全 DNS 端口。 | **原生**（Android 私有 DNS）。 |
+| **DoH** | `443` | 标准的 HTTPS 网页端口。 | **原生**（Windows 11、iOS、浏览器）。 |
 
-## 🏠 Home Assistant Addon
+## 🏠 Home Assistant 插件
 
-ShieldDNS is available as an official Home Assistant Addon, featuring full **Ingress** support for the Admin Dashboard.
-[View Addon Repo](https://github.com/FaserF/hassio-addons/tree/master/ShieldDNS)
+ShieldDNS 作为官方 Home Assistant 插件提供，具有完整的 **入站** 支持用于管理仪表板。
+[查看插件仓库](https://github.com/FaserF/hassio-addons/tree/master/ShieldDNS)
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ 配置
 
-Configure the app via the **Configuration** tab in the Home Assistant App page.
+通过 Home Assistant 应用页面中的 **配置** 选项卡配置应用。
 
-### Options
+### 选项
 
 ```yaml
 certfile: fullchain.pem
@@ -111,11 +111,10 @@ upstream_dot: unfiltered.joindns4.eu dns.quad9.net one.one.one.one dns.google
 
 ---
 
-## 👨‍💻 Credits & License
+## 👨‍💻 致谢与许可
 
-This project is open-source and available under the MIT License.
-Maintained by **FaserF**.
-
+此项目是开源的，并受 MIT 许可证的约束。
+由 **FaserF** 维护。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
