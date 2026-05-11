@@ -16,11 +16,11 @@ pluggy==1.0.0
 pycodestyle==2.10.0
 pydantic==1.10.13
 pyflakes==3.0.1
-pytest==7.2.1
+pytest==9.0.3
 pytest-mock==3.10.0
-requests==2.32.4
+requests==2.33.0
 ruamel.yaml==0.17.21
 ruamel.yaml.clib==0.2.7
 tomli==2.0.1
 typing_extensions==4.5.0
-urllib3==2.6.3
+urllib3==2.7.0
