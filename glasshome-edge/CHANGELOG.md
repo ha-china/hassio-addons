@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.9.3
+
+### Bug Fixes
+
+- Fixed demo mode failing to start on fresh installs
+
+## 0.9.2
+
+### New Dashboard Header
+
+- Glass header on every dashboard with the dashboard name and icon, time-of-day greeting, current date and time
+- Live weather (temperature and condition) from your Home Assistant `weather.home` entity
+- Lights-on and open-door counts that automatically scope to the dashboard's area when one is set
+- Connection chips for Home Assistant and the GlassHome Hub so you can spot an offline side at a glance
+- Smooth crossfade when entering edit mode — header swaps to dashboard controls without a jarring jump
+- Responsive layout that scales down cleanly to phone-sized screens; edit-mode buttons collapse to icons on mobile
+
+### Unified Settings Shell
+
+- Settings pages now share the same glass header and status chips as the dashboard
+- Consistent navigation, spacing, and look across every settings screen
+
+### Bug Fixes
+
+- Uninstall failures now show plain-English messages (demo-mode block, server error, network failure) instead of leaking raw error text from the backend
+- Long-pressing a widget on mobile no longer accidentally selects text inside the tile or carries that highlight into the dialog you opened
+- Switching dashboards from the settings page now actually opens the dashboard you picked, and the choice survives a page reload
+- Switching between dashboards no longer briefly shows widgets from the previous dashboard — fixed a race that left stale instances on screen for a frame
+- First-install demo content rebuilt: three curated dashboards (Home, Bedroom, Energy) wired to the dock with correct layouts
+- Home dashboard weather widget pointed at a real demo entity so it shows data out of the box
+
+### Under the Hood
+
+- Updated to `@glasshome/ui` 0.2.1
+
 ## 0.9.1
 
 ### Performance

@@ -37,8 +37,8 @@ options:
   use_new_device_builder: false
 name: ESPHome Device Builder (dev)
 panel_title: ESPHome Builder (dev)
-version: 2026.5.0-dev20260510
+version: 2026.5.0-dev20260511
 slug: esphome-dev
-description: '[老王杂谈说]：ESPHome 设备构建器的开发版'
+description: '[老王杂谈说]：null'
 image: ghcr.1ms.run/esphome/esphome-hassio
 stage: experimental
