@@ -1,5 +1,5 @@
 {
-  "version": "2025.12.0",
+  "version": "2026.05.11",
   "name": "节点小宝",
   "url": "https://mp.weixin.qq.com/s/P0HvAso-Gkdl-awv22si9w?token=940637692&lang=zh_CN",
   "slug": "jdxb",
@@ -8,7 +8,7 @@
   "startup": "services",
   "ingress": true,
   "ingress_port": 9118,
-  "image": "ghcr.hasscn.top/desmond-dong/jdxb/jdxb-{arch}",
+  "image": "crpi-tuq1xajq0lk6s0kt.cn-shanghai.personal.cr.aliyuncs.com/hachina/jdxb-{arch}",
   "init": false,
   "hassio_role": "manager",
   "panel_icon": "mdi:server-network",
