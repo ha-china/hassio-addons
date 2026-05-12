@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.4
+
+### Under the Hood
+
+- Updated authentication library and validation framework — eliminates a class of startup crashes caused by dependency drift between local builds and CI
+- Bundled weather demo content now ships with the dashboard out of the box
+
 ## 0.9.3
 
 ### Bug Fixes
