@@ -1,10 +1,10 @@
 # Home Assistant 扩展：MyIP
 
-MyIP 是一款高级 IP 工具，旨在提供关于您 IP 地址的广泛信息和诊断。它非常适合需要查看和分析其 IP 详细信息、检查网站可达性、执行 DNS 泄露测试等用户。
+MyIP 是一款高级 IP 工具，旨在提供关于您 IP 地址的广泛信息和诊断。它非常适合需要查看和分析 IP 详细信息、检查网站可访问性、执行 DNS 泄露测试等用户。
 
-_感谢所有为我的仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
+_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
 
-[![Stargazers 仓库列表 for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
@@ -12,7 +12,7 @@ _感谢所有为我的仓库点赞的人！要点赞，请点击下面的图片�
 
 ## 安装
 
-此扩展的安装相当简单，与安装任何其他 Hass.io 扩展没有区别。
+此扩展的安装非常简单，与安装任何其他 Hass.io 扩展没有区别。
 
 1. 将我的 Hass.io 扩展仓库 [repository] 添加到您的 Hass.io 实例。
 1. 安装此扩展。
@@ -22,7 +22,7 @@ _感谢所有为我的仓库点赞的人！要点赞，请点击下面的图片�
 ## 配置
 
 ```
-port : 18966 #您想要运行在的端口。
+port : 18966 #您想要运行的端口号。
 ```
 
 WebUI 可以在 `<your-ip>:port` 找到。

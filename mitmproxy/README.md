@@ -1,28 +1,29 @@
-# Home Assistant 扩展：mitmproxy
+# Home Assistant 插件：mitmproxy
 
-mitmproxy 是您的瑞士军刀，用于调试、测试、隐私测量和渗透测试。它可以拦截、检查、修改和回放如 HTTP/1、HTTP/2、WebSocket 或任何其他 SSL/TLS-保护协议的网页流量。您可以对从 HTML 到 Protobuf 的各种消息类型进行美化和解码，即时拦截特定消息，在它们到达目的地之前修改它们，并在以后将它们回放到客户端或服务器。
+Mitmproxy 是你的瑞士军刀，用于调试、测试、隐私测量和渗透测试。它可以拦截、检查、修改和重放诸如 HTTP/1、HTTP/2、WebSockets 或任何其他 SSL/TLS-保护协议的网页流量。你可以美化并解码从 HTML 到 Protobuf 等多种消息类型，即时拦截特定消息，在它们到达目的地之前修改它们，并在稍后将其回放到客户端或服务器。
 
-使用 mitmproxy 的主要功能，通过 mitmweb 图形界面。您喜欢 Chrome 的开发者工具吗？mitmweb 为您提供了类似的其他应用或设备的体验，还增加了请求拦截和回放等额外功能。
+使用 mitmproxy 的主要功能，通过 mitmweb 图形界面进行操作。你喜欢 Chrome 的开发者工具吗？mitmweb 为任何其他应用程序或设备提供了类似的经验，同时还增加了请求拦截和重放等额外功能。
 
-_感谢所有为我仓库点星的人！要点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
-[![为 @jdeath/homeassistant-addons 仓库点星的用户列表](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
-此扩展基于 [docker 镜像](https://github.com/mitmproxy/mitmproxy)。
+此插件基于 [docker 镜像](https://github.com/mitmproxy/mitmproxy)。
 
 ## 安装
 
-1. 将我的 Hass.io 扩展仓库 [repository] 添加到您的 Hass.io 实例。
-1. 安装此扩展。
-2. 点击 `保存` 按钮以存储您的代理端口和 WebUI 端口配置。
-3. 启动扩展。
-4. 检查扩展日志以查看是否一切顺利。
-5. 您的证书将在 /addon_configs/2effc9b9_mitmproxy 生成。
-6. 如果您有来自另一个安装的证书，请将它们复制到这个目录。
+1. 将我的 Hass.io 插件仓库 [repository] 添加到你的 Hass.io 实例。
+1. 安装此插件。
+2. 点击 `保存` 按钮以存储你的代理端口和 WebUI 端口的配置。
+3. 启动插件。
+4. 检查插件的日志，以查看一切是否顺利。
+5. 你的证书将生成在 /addon_configs/2effc9b9_mitmproxy。
+6. 如果你从另一个安装中有了证书，请将它们复制到这个目录。
 7. 通过 <your-ip>:port 打开 WebUI。
 8. 密码是 `homeassistant`
+
 
 WebUI 可以在 `<your-ip>:port` 找到。
 
