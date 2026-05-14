@@ -2,6 +2,20 @@
 
 实时监控 Home Assistant 系统健康状态和 HA China 服务运行状态。
 
+## ☕ 赞助支持
+
+整个系统包括此应用（加载项）均以非盈利的目的无偿，持续提供使用
+
+服务器由[深圳酷宅科技有限公司](https://www.coolkit.cn/)提供赞助支持
+
+如果此系统您觉得好用，节约了你的时间，精力，也可以请我喝杯 ~~酒~~（啊不，咖啡）
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 
+
+
 ## 功能概览
 
 ### 🖥️ 系统健康度
