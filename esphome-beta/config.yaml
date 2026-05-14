@@ -33,11 +33,11 @@ init: false
 startup: services
 options:
   home_assistant_dashboard_integration: false
-  use_new_device_builder: false
+  use_new_device_builder: true
 name: ESPHome Device Builder (beta)
 panel_title: ESPHome Builder (beta)
-version: 2026.4.5
+version: 2026.5.0b1
 slug: esphome-beta
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：ESPHome 设备构建器 Beta 版'
 image: ghcr.1ms.run/esphome/esphome-hassio
 stage: experimental

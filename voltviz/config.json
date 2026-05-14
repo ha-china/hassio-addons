@@ -1,6 +1,6 @@
 {
   "name": "VoltViz",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "slug": "voltviz",
   "description": "[老王杂谈说]：null",
   "arch": [
@@ -15,6 +15,7 @@
   "ingress_stream": true,
   "panel_icon": "mdi:waveform",
   "webui": "http://[HOST]:[PORT:80]",
+  "hassio_api": true,
   "init": false,
   "ports": {
     "80/tcp": 8099

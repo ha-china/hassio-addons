@@ -1,150 +1,355 @@
-# Fleet for ESPHome
+# Sendspin Bluetooth Bridge
 
-> Previously known as **ESPHome Fleet** (1.5.0–1.7.0). <!-- br1-allow: rebrand-history hint, removed for 1.8 -->
+## About
 
-> **Not an official ESPHome project.** Fleet for ESPHome is an independent, community-built tool that depends on [ESPHome](https://esphome.io) but is not part of the ESPHome project and is not maintained by the ESPHome team. "ESPHome" is a trademark of its respective owners; this project uses the name only to describe what it works with.
+The Sendspin Bluetooth Bridge addon connects
+[Music Assistant](https://music-assistant.io/) to Bluetooth speakers via the
+Sendspin protocol. It streams audio over Bluetooth A2DP, turning any paired
+Bluetooth speaker into a fully controllable Music Assistant player—with volume
+control, play/pause, and multi-room grouping.
 
-> This file covers the **Home Assistant add-on** — available on HAOS and HA Supervised installs only. Running HA Container or HA Core? See [Standalone Docker installation](../README.md#as-a-standalone-docker-container) instead.
+Each speaker runs as an isolated subprocess with its own PulseAudio context,
+ensuring correct audio routing even with multiple speakers connected
+simultaneously.
 
-A modern Home Assistant UI for ESPHome — works just as well for three devices as for a hundred. Git-backed config history with one-click rollback, a real device table, a live compile queue with searchable history, an inline YAML editor with autocomplete, per-device ESPHome version pinning, scheduled OTA upgrades, and optional distributed compilation when a slow HA host becomes the bottleneck.
+## Installation
 
-## Getting Started
+1. In Home Assistant go to **Settings → Add-ons → Add-on Store**.
+2. Click the **⋮** menu (top-right) and select **Repositories**.
+3. Add the repository URL:
 
-Start the add-on, then open the web UI via the **Fleet for ESPHome** entry in the HA sidebar.
+   ```text
+   https://github.com/trudenboy/sendspin-bt-bridge
+   ```
 
-From 1.6.2, installing this add-on pulls a prebuilt image from GitHub Container Registry instead of building locally on your Home Assistant host. Installs now finish in a few seconds instead of a few minutes, and no longer fail when Docker Hub is rate-limiting or briefly unreachable.
+4. Close the dialog—**Sendspin Bluetooth Bridge** now appears in the store.
+5. Click it, then click **Install**.
 
-**ESPHome 2026.4 or newer is required.** The add-on uses ESPHome's built-in bundle format to ship only each device's own YAML + referenced secrets to the compiling worker — older ESPHome versions don't have that API. Pinning a device to an ESPHome version older than 2026.4 is refused; the UI will surface a clear "version too old" error rather than hang.
+## Requirements
 
-### First steps
+| Requirement | Details |
+|---|---|
+| **HA installation type** | Home Assistant OS or Home Assistant Supervised |
+| **Bluetooth adapter** | Built-in or USB dongle visible to the host |
+| **Bluetooth speaker(s)** | Paired to the host before starting the addon |
+| **Music Assistant** | Version 2.x with the Sendspin provider enabled (MA server ≥ 5.1.3) |
 
-1. Your existing ESPHome configs in `/config/esphome/` are picked up automatically — you should see them on the **Devices** tab.
-2. The add-on includes a **built-in local worker** that runs inside the HA host. It starts with one build slot — enough to compile any target sequentially. On a fast host you can raise it to 2–4+ via the `+`/`-` buttons next to `local-worker` on the **Workers** tab. Setting slots to 0 pauses the local worker entirely (useful if you've connected remote workers and want the HA host out of the build loop).
-3. To offload compilation to a faster machine, click **+ Connect Worker** in the Workers tab. Pick **Bash**, **PowerShell**, or **Docker Compose**, copy the generated snippet, and run it on whatever machine you want to compile on. The snippet includes your actual server URL and token, so there's nothing to edit. Workers poll the add-on over HTTP for jobs (bearer token auth) and push firmware directly to ESP devices; no inbound ports need to be open on the worker machine, but it does need network reach to the ESP devices it'll flash.
-4. **Restart Home Assistant** once after the first install. The add-on ships a custom HA integration (`esphome_fleet`) that it auto-installs to `/config/custom_components/` on startup — but Home Assistant only loads integrations at Core startup, so the integration stays dormant until you restart HA. Go to **Settings → System → Restart** and pick *Restart Home Assistant*.
-5. After the restart, Home Assistant will pop a "Fleet for ESPHome discovered" notification within a few seconds. Accept it to get all the devices, workers, and the add-on itself as real HA devices with entities.
+### Supported architectures
 
-> **Upgrading the add-on later?** If a Fleet release changes the integration (check the changelog — look for the `Integration` heading), you'll need to restart Home Assistant again after the add-on finishes updating. Restarting *the add-on* alone doesn't pick up integration changes, because HA Core only loads Python integrations at boot.
+| Architecture | Example hardware |
+|---|---|
+| `aarch64` | Raspberry Pi 4 / 5, Home Assistant Green, Home Assistant Yellow |
+| `amd64` | Intel/AMD x86-64 NUCs, Proxmox VMs |
+| `armv7` | Raspberry Pi 3 (limited RAM—may struggle with multiple speakers) |
 
-### Add-on configuration
+## Quick Start
 
-Everything is configured from the **Settings drawer** inside the web UI — click the gear icon in the top-right of the header. The Supervisor **Configuration** tab is intentionally empty; every option moved into the drawer so edits apply immediately without restarting the add-on. Settings are split into **Basic** (what you touch most — versioning, authentication, display) and **Advanced** (retention, cache, timeouts, polling) tabs. Each field carries inline help text describing what it does and the valid range, so there's no need to mirror the settings reference here.
+1. **Pair your Bluetooth speaker** using `bluetoothctl` in the Host terminal
+   (Settings → System → Hardware → ⋮ → Terminal) or via the HA Bluetooth
+   integration.
+2. **Open the addon Configuration tab** and add a device under
+   `bluetooth_devices` with the speaker's MAC address and a player name.
+3. **Set `sendspin_server`** to the IP of your Music Assistant instance, or
+   leave `auto` to discover it via mDNS (recommended).
+4. **Start the addon** and open the sidebar UI. The header onboarding checklist
+   points to the next safe setup step.
+5. **Open Configuration → Music Assistant** to connect or reconfigure MA. In
+   addon mode, "Sign in with Home Assistant" can create or reuse the token for
+   you.
+6. The speaker now appears as a player in Music Assistant—stream away!
 
-Settings persist across add-on updates. When upgrading from a pre-1.6 release, your existing Supervisor options (token, timeouts, thresholds, `require_ha_auth`) are one-shot imported on first boot so nothing you set before is lost.
+## Update channels in Home Assistant
 
-## What's on the Web UI
+Home Assistant packaging now uses the **installed add-on track** as the only real channel selector:
 
-**Devices.** Every ESPHome config in one place. Columns for online status, **tags**, current firmware version, HA entity link, IP address, WiFi vs Ethernet, last-compiled time, schedule, and ESPHome version. Optional columns for chip platform + PlatformIO board, BLE-proxy state, and a few more — opt in via the column picker. Click Upgrade on any row to compile + OTA that device. The row menu (⋮) exposes live logs, restart, ping, install-to-address, rendered config view, config history, rename, duplicate, pin, archive, delete, and copy-api-key (for devices with a native-API encryption key). Toggle **Show archived devices** in the column-picker dropdown to inline archived rows at 50 % opacity.
+| Concept | What it means | How it changes |
+|---|---|---|
+| **Installed add-on track** | The actual add-on variant installed from the HA store (`stable`, `RC`, or `Beta`). This determines the add-on slug, branding, default ingress port, default player listen-port base, startup policy, and update lane. | Install or switch the matching add-on variant in the HA store. |
+| **Bridge UI indication** | The bridge web UI shows which track is installed and explains how updates work for that track. | Read-only indication; switching tracks still happens in the HA store. |
 
-**Queue.** Every compile job — pending, running, succeeded, failed, or **blocked** (no eligible worker satisfies the active routing rules). Live build logs. Inline Rerun · Clear · Log on every row; everything else (cancel, download firmware, edit YAML, plus the device-section actions) lives behind the per-row hamburger. The worker-selection cell stacks **what the user asked for** (any worker / specific worker / tag expression) on top, **why this worker won** below.
+### Published add-on variants
 
-**Workers.** Every connected worker — local and remote — with platform info, **tags**, slot count, **disk quota usage** (e.g. `Quota: 2.1 / 10 GiB`), current job, and uptime. **Routing rules…** opens a builder for fleet-wide rules backed by device + worker tags. **Set disk quota…** in the per-row hamburger overrides the fleet-default disk quota for one worker. Workers self-pause when their disk crosses 95 % and un-pause below 90 %, surfacing a **disk full** badge in the Status column. The worker's Python source refreshes itself automatically when the add-on upgrades; its underlying Docker image only refreshes when you run `docker pull && docker restart`, and workers running an outdated image are flagged with an **Image stale** badge telling you when that's time.
+| Track | Repository directory | Add-on slug | Default ingress | Default player port base | Startup default |
+|---|---|---|---|---|---|
+| **Stable** | `ha-addon/` | `sendspin_bt_bridge` | `8080` | `8928` | `auto` |
+| **RC** | generated `ha-addon-rc/` | `sendspin_bt_bridge_rc` | `8081` | `9028` | `manual` |
+| **Beta** | generated `ha-addon-beta/` | `sendspin_bt_bridge_beta` | `8082` | `9128` | `manual` |
 
-**Schedules.** Every scheduled upgrade in one view. Recurring (daily/weekly/monthly or full cron) and one-time future schedules. Schedules live in the device YAML itself so they travel with your config and respect each device's pinned ESPHome version.
+Important:
 
-**Header** has a dark/light theme toggle, a "streamer mode" that blurs tokens and secrets (for screen-sharing demos), the currently-selected ESPHome version (changes for all new compiles unless overridden per-device via pinning), a shortcut to edit `secrets.yaml`, and a link to [ESPHome Web](https://web.esphome.io/) for browser-based initial flashing.
+- this checked-in `ha-addon/` directory is the **stable** source surface; prerelease variants are generated into `ha-addon-rc/` and `ha-addon-beta/`
+- stable / RC / Beta variants can run side by side on one HAOS host because they use different default HA ingress ports and different default player listen-port ranges
+- stable starts automatically after host boot; RC/Beta default to manual start so prerelease builds stay opt-in
+- do **not** configure the same Bluetooth speaker in more than one variant at the same time
+- do **not** let multiple variants manage the same Bluetooth adapter unless you intentionally isolate devices and ports
+- if you set a manual `base_listen_port` override, keep it unique across variants
 
-### Running different ESPHome versions across your fleet
+## Configuration
 
-The header dropdown sets the **global** ESPHome version — every new compile uses it unless a device is pinned. To pin a device, open the row menu (⋮) on the **Devices** tab and choose **Pin ESPHome version**. Pinned devices stick to their version regardless of what the global selector says; scheduled upgrades on a pinned device respect its pin.
+### General options
 
-Typical uses:
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `sendspin_server` | string | `auto` | Hostname or IP of the Music Assistant server. `auto` uses mDNS discovery (recommended). |
+| `sendspin_port` | port | `9000` | WebSocket port exposed by the MA Sendspin provider. Only change if you run multiple MA instances or use a custom port. |
+| `base_listen_port` | port | _(track default)_ | Optional starting port for auto-assigned Sendspin player listeners. Defaults are `8928` (stable), `9028` (RC), and `9128` (beta). |
+| `bridge_name` | string | _(empty)_ | Custom name for this bridge instance. When empty the system hostname is used automatically. |
+| `tz` | string | _(empty)_ | IANA timezone (e.g. `Europe/London`, `America/New_York`). Leave empty to inherit the Home Assistant system timezone. |
+| `pulse_latency_msec` | int | `600` | PulseAudio buffer latency in milliseconds. Higher values reduce audio dropouts on slower or virtualized systems at the cost of slightly higher latency. |
+| `startup_banner_grace_seconds` | int | `5` | How long the UI keeps the restart screen in its finalizing state after the backend reports ready. Set `0` to unlock immediately. |
+| `recovery_banner_grace_seconds` | int | `15` | How long top-level recovery banners stay hidden after the restart screen unlocks. Use this to give devices extra time to reconnect before attention banners appear. |
+| `prefer_sbc_codec` | bool | `false` | Force the SBC Bluetooth codec after each connection. SBC uses less CPU than AAC/LDAC—useful on low-power hardware with multiple speakers. Enable alongside PCM 44.1 kHz / 16-bit in MA for maximum CPU savings. |
+| `bt_check_interval` | int | `10` | Bluetooth reconnect check interval in seconds. Lower values detect disconnects faster. |
+| `bt_max_reconnect_fails` | int | `0` | Maximum consecutive reconnect attempts before giving up. `0` means unlimited (keep retrying forever). |
+| `log_level` | list | `info` | Logging verbosity: `info` or `debug`. Use `debug` when troubleshooting. |
+### Music Assistant API options
 
-- **Beta-test a release** on one low-stakes device (a garage sensor, an outdoor thermometer) while leaving the rest of the fleet on the stable version.
-- **Hold a picky device back** on a known-good version indefinitely when a newer ESPHome release breaks a component you depend on.
-- **Stage an upgrade** — flip the global version, compile one device, verify, then bulk-upgrade everything outdated.
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `ma_api_url` | string | _(empty)_ | Music Assistant REST API URL (e.g. `http://192.168.1.100:8095`). Auto-detected in addon mode. |
+| `ma_api_token` | string | _(empty)_ | MA API token. **In addon mode** — open **Configuration → Music Assistant** and use "Sign in with Home Assistant" to create or refresh it automatically (no manual setup needed). For Docker/LXC — create a token in MA → Settings → API Tokens and paste it here. |
+| `ma_auto_silent_auth` | bool | `true` | Addon/Ingress only. When enabled, the bridge first tries silent token creation or reuse via Home Assistant Ingress before falling back to the regular HA login popup. |
+| `volume_via_ma` | bool | `true` | Route volume commands through the MA API instead of controlling PulseAudio directly. Keeps MA and the speaker in sync. |
 
-Workers install whatever ESPHome version each job asks for, on demand, into a local per-version cache so subsequent jobs using that version start instantly. The cache is bounded by the per-worker disk quota (default 10 GiB, change in **Settings → Disk management**) and evicts the oldest things first when the budget fills up — see the **Workers tab** for live disk usage.
+The Music Assistant panel is reconfigurable: you can return to
+**Configuration → Music Assistant** at any time to reconnect the bridge, point
+it at a different MA instance, or refresh a stale token without rebuilding your
+Bluetooth device list.
 
-### Keeping workers up to date
+### Bluetooth devices
 
-The worker's Python source auto-updates from the server — every heartbeat negotiates the current client source revision and the worker rewrites its `.py` files in place when the server's copy is newer. Bug fixes and protocol-compatible additions to client code reach every worker (local and remote) without you touching the container. The **Docker image** is the part that doesn't auto-update: system packages (gcc, git, libffi), the Python interpreter itself, and hash-pinned dependencies only refresh when you pull a new image. The built-in local worker picks up a fresh image whenever the add-on upgrades; a remote worker you started with `docker run` stays on whatever image tag you pulled until you refresh it yourself.
-
-**When you need to refresh.** Only when the Workers tab flags the worker with an **Image stale** badge. Below that threshold a fresh image is the only fix; the add-on's automatic source-code updates won't bring the worker back into compatibility on their own.
-
-**How to tell.** Open the **Workers** tab. Stale workers carry an **Image stale** badge next to the hostname; hover to see the exact refresh command. The per-row version cell shows the client's baked-in image version.
-
-**Refresh command (Linux / Mac / Windows with Docker CLI):**
-
-```bash
-docker pull ghcr.io/weirded/esphome-dist-client:latest
-docker restart <your-worker-container-name>
+```yaml
+bluetooth_devices:
+  - mac: "AA:BB:CC:DD:EE:FF"
+    player_name: "Living Room Speaker"
 ```
 
-The `<your-worker-container-name>` is whatever you passed via `--name` when you first ran the container — `docker ps --format '{{.Names}}'` lists them. The restart reuses the old container's volumes and env vars, so the worker reconnects with the same token and hostname.
+Each entry in the `bluetooth_devices` list represents one Bluetooth speaker.
 
-**Docker Compose variant:**
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `mac` | **yes** | string | Bluetooth MAC address of the speaker (`AA:BB:CC:DD:EE:FF`). Find it with `bluetoothctl devices` after pairing. |
+| `player_name` | **yes** | string | Display name shown in Music Assistant. Must be unique across all devices. |
+| `adapter` | no | string | MAC address of the Bluetooth adapter to use for this device. Leave blank to use the system default adapter. |
+| `static_delay_ms` | no | int | Extra delay in milliseconds (0–5000) added on top of DAC-anchored sync. Default `0`. Use small positive values (e.g. 50) only if audio plays slightly too late. |
+| `listen_host` | no | string | Override the listen address for this device's Sendspin server. |
+| `listen_port` | no | port | Override the listen port for this device's Sendspin server. |
+| `enabled` | no | bool | Set to `false` to temporarily disable a device without removing it from the config. |
+| `preferred_format` | no | string | Audio format preference string passed to the Sendspin daemon. |
+| `keepalive_silence` | no | bool | Send silent audio frames to prevent the Bluetooth speaker from entering standby. |
+| `keepalive_interval` | no | int | Interval in seconds between keepalive silence frames. |
 
-```bash
-docker compose pull
-docker compose up -d
+### Bluetooth adapters
+
+```yaml
+bluetooth_adapters:
+  - id: "hci0"
+    name: "Built-in Adapter"
 ```
 
-(Run it in the directory that has your `docker-compose.yaml`. Compose detects that the image changed and rebuilds the container in-place.)
+Optional—leave empty for automatic detection. Only needed when you have
+multiple Bluetooth adapters and want to assign specific speakers to specific
+adapters.
 
-**Full re-install** (needed when upgrading across a `MIN_IMAGE_VERSION` bump, or when changing host platform, max-parallel-jobs, or token): remove the old container and re-run the snippet from **+ Connect Worker**. The built-in Connect Worker modal always emits a snippet that matches the currently-deployed server.
+| Field | Required | Type | Description |
+|---|---|---|---|
+| `id` | **yes** | string | Adapter identifier (`hci0`, `hci1`, etc.). |
+| `mac` | no | string | MAC address of the adapter (for display purposes). |
+| `name` | no | string | Friendly name shown in the web UI. |
 
-**Automating refreshes.** We deliberately don't ship an auto-update mechanism — every option adds a dependency (Watchtower, What's Up Docker, Compose + cron, Kubernetes controllers…) we'd then have to support. Pick whatever scheduler you already use on the host and have it run the refresh command on a cadence you're comfortable with. We don't endorse a specific tool.
+## Port strategy and addon tracks
 
-## Verifying what you're running
+### Addon tracks
 
-Every server and client image on GHCR is signed with [cosign](https://docs.sigstore.dev/) using GitHub's keyless OIDC flow (no long-lived keys anywhere). You can verify that the image you pulled is the one this repo built:
+The Home Assistant addon track is the variant you actually installed (`stable`, `RC`, or `Beta` when published).
+That installed variant determines the update lane. The bridge web UI only indicates the current track and the
+appropriate update instructions.
 
-```bash
-# Server image
-cosign verify \
-  --certificate-identity-regexp 'https://github.com/weirded/distributed-esphome/.github/workflows/publish-server\.yml@.*' \
-  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-  ghcr.io/weirded/esphome-dist-server:latest
+### Default ports by addon track
 
-# Worker image
-cosign verify \
-  --certificate-identity-regexp 'https://github.com/weirded/distributed-esphome/.github/workflows/publish-client\.yml@.*' \
-  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-  ghcr.io/weirded/esphome-dist-client:latest
+When multiple addon variants are installed on the same HAOS host, they use different default ports to reduce collisions:
+
+| Track | Default ingress / web port | Default base listen port |
+|---|---|---|
+| Stable | `8080` | `8928` |
+| RC | `8081` | `9028` |
+| Beta | `8082` | `9128` |
+
+### Manual port overrides
+
+- The Home Assistant Ingress web UI port is fixed by the installed addon track: `8080` (stable), `8081` (RC), `8082` (beta). You cannot remap the Ingress port from addon config.
+- Leave `base_listen_port` empty unless you need to shift the whole device-port range for this addon instance.
+- Use per-device `listen_port` only for targeted exceptions.
+
+> Do **not** configure the same Bluetooth speaker in more than one addon variant at the same time. Port separation avoids listener conflicts, but it cannot safely share a physical speaker across multiple active addon instances.
+
+## Multi-Speaker Setup
+
+Each Bluetooth speaker is configured as a separate entry in
+`bluetooth_devices` and appears as its own player in Music Assistant.
+
+```yaml
+bluetooth_devices:
+  - mac: "AA:BB:CC:DD:EE:FF"
+    player_name: "Kitchen"
+  - mac: "11:22:33:44:55:66"
+    player_name: "Bedroom"
+    adapter: "00:1A:7D:DA:71:13"
+    static_delay_ms: 50
 ```
 
-A successful verification prints the OIDC claims (workflow ref, run ID, commit SHA). Run this once before you trust an image in production, or wire it into your container-pull automation.
+**Tips for multi-speaker setups:**
 
-### Checking the software bill of materials
+- Assign distinct `player_name` values so they are easy to identify in MA.
+- If speakers are on different Bluetooth adapters, specify the `adapter` MAC
+  for each device to avoid contention.
+- Use `static_delay_ms` (0–5000) to fine-tune audio timing across speakers
+  when grouping them in Music Assistant multi-room mode. DAC-anchored sync
+  handles most latency automatically; only add a small positive value if needed.
+- On low-power hardware (RPi 3 / armv7), enable `prefer_sbc_codec` and limit
+  the number of simultaneous speakers to avoid CPU saturation.
 
-Every 1.5.0+ image also carries a CycloneDX SBOM as a cosign attestation — the full list of Python packages, OS libraries, and their pinned versions that went into the image. Handy for CVE audits.
+## Web Interface
 
-```bash
-# Server image — download + print the SBOM
-cosign verify-attestation \
-  --certificate-identity-regexp 'https://github.com/weirded/distributed-esphome/.github/workflows/publish-server\.yml@.*' \
-  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-  --type cyclonedx \
-  ghcr.io/weirded/esphome-dist-server:latest \
-  | jq -r '.payload | @base64d | fromjson | .predicate' \
-  > esphome-dist-server.sbom.json
+The addon includes a built-in web UI accessible from the Home Assistant
+sidebar via **Ingress** (click the addon name in the sidebar).
 
-# Worker image
-cosign verify-attestation \
-  --certificate-identity-regexp 'https://github.com/weirded/distributed-esphome/.github/workflows/publish-client\.yml@.*' \
-  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-  --type cyclonedx \
-  ghcr.io/weirded/esphome-dist-client:latest \
-  | jq -r '.payload | @base64d | fromjson | .predicate' \
-  > esphome-dist-client.sbom.json
-```
+The web interface provides:
 
-## Why this add-on requests these permissions
+- **Device status** — real-time connection state for each Bluetooth speaker.
+- **Audio sink info** — detected PulseAudio/PipeWire sink name per device.
+- **Volume control** — adjust speaker volume directly from the UI.
+- **Bluetooth scanning** — discover and pair new Bluetooth devices.
+- **Configuration** — edit settings without restarting (some changes require a
+  restart to take effect).
+- **Music Assistant integration** — connect to MA with one click via
+  "Sign in with Home Assistant" (Configuration → Music Assistant). The status
+  card now owns the **Reconfigure** action, so reconnecting to a new MA server
+  or refreshing the token uses the same surface as the original setup flow. The
+  bridge creates a long-lived MA API token automatically — no manual token
+  setup needed.
+- **Guided onboarding and recovery** — the UI surfaces onboarding checklists,
+  recovery actions, and diagnostics-based hints when adapters, sinks, speakers,
+  or MA auth are not ready yet.
+- **Diagnostics** — system info, adapter status, log viewer, bridge telemetry,
+  and a bug-report flow that downloads masked diagnostics and suggests an issue
+  description from the current runtime state.
 
-Home Assistant's add-on store shows each add-on's "stars" — a score based on how little Supervisor privilege it asks for. Fleet for ESPHome will never be a five-star add-on because managing a fleet of ESPHome devices genuinely requires a handful of elevated permissions. This section documents each one so the lower score is understood rather than mysterious.
+In addon mode, Home Assistant / Ingress authentication is always enforced. The
+standalone-only **Auto-get token on UI open** helper is intentionally hidden
+outside the addon/Ingress path because silent token bootstrap depends on a live
+Home Assistant browser session.
 
-- **`host_network: true`** — mDNS device discovery needs to see the LAN's `_esphomelib._tcp` broadcasts, which the default bridge network on a Supervisor add-on doesn't expose. Without host networking, Fleet wouldn't automatically discover ESPHome devices on your network; you'd have to hand-enter each IP. This is the single biggest "why not five stars" item, and it's load-bearing.
-- **`hassio_api: true`** — used to query the Supervisor for the currently-installed ESPHome add-on version (so Fleet's default compile version tracks whatever you have installed) and to post discovery entries so the HA integration auto-pairs. Read + narrow-scoped writes only.
-- **`homeassistant_api: true`** — reads entity states from HA Core to wire each managed ESPHome device to its matching HA device page (the Devices tab's "HA" column is the result). Read-only — Fleet never writes back into HA.
-- **`auth_api: true`** — used to validate Home Assistant long-lived access tokens on the direct-port API (`:8765`) so scripts and `curl` can authenticate with per-user credentials instead of the shared server token. The browser UI doesn't need this — it comes in through Ingress, which is already HA-authenticated.
-- **`privileged: [NET_RAW]`** — needed by the per-device **Ping** diagnostic on Home Assistant OS, where unprivileged ICMP is disabled by default. The ping helper tries the safer unprivileged path first and only falls back when the kernel refuses it. Scoped to ICMP — the endpoint accepts only the configured device's address, never an arbitrary host. This is the only non-default Linux capability the add-on holds.
-- **`map: [config:rw]`** — Fleet's whole premise is editing `/config/esphome/`. Read access finds the YAML targets; write access is needed by the inline editor, the automatic git history, rename/delete operations, and the archive/restore flow. Scoped to `/config` — Fleet has no way to reach other parts of your HA configuration.
+## Home Assistant integration (v2.65.0+)
 
-Everything else stays at Supervisor's defaults. The `options` / `schema` blocks are intentionally empty because every user-facing setting lives in the in-app Settings drawer (editable without an add-on restart); see the Add-on configuration section above.
+Two transports for direct HA control:
+
+- **MQTT discovery** — install the official Mosquitto add-on, then in
+  the bridge **Home Assistant** panel click *Auto-detect MQTT add-on*,
+  toggle **Enabled** with `mode: mqtt`. Speakers appear in HA under
+  *Settings → Devices → MQTT*, automatically merged into the same
+  device card Music Assistant already created.
+- **Custom integration via HACS** — add this repository as a HACS
+  custom repository (category *Integration*), install **Sendspin BT
+  Bridge**, restart HA. mDNS auto-discovers the bridge and on HAOS the
+  pairing is one-click via the Supervisor proxy.
+
+Neither transport duplicates Music Assistant's `media_player` surface
+— they only add what MA doesn't know about: BT signal strength,
+battery, sync health, idle behaviour, and BT-level commands like
+reconnect / wake / full reset.
+
+See the full [Home Assistant Integration documentation](https://trudenboy.github.io/sendspin-bt-bridge/home-assistant-integration/)
+for the entity catalog and example automations.
+
+## Onboarding, recovery, and support
+
+- The onboarding checklist walks through Bluetooth access, audio backend
+  readiness, first-sink verification, Music Assistant auth, and latency review.
+- Recovery guidance highlights safe next actions such as reconnect, re-pair, or
+  reclaim Bluetooth management after an auto-release threshold is hit.
+- **Release Bluetooth** temporarily hands the adapter back to the host/HA
+  without deleting the device entry. **Reclaim Bluetooth** resumes bridge
+  management, and the released state persists across restarts.
+- **Submit bug report** downloads masked diagnostics and opens GitHub with a
+  suggested description prefilled from diagnostics, recovery hints, and recent
+  issue logs.
+
+## Troubleshooting
+
+### Speaker not connecting
+
+1. Verify the speaker is paired at the host level:
+
+   ```bash
+   docker exec -it addon_local_sendspin_bt_bridge bluetoothctl
+   # then run: devices
+   ```
+
+2. Confirm the MAC address in your config matches exactly (case-insensitive,
+   colon-separated: `AA:BB:CC:DD:EE:FF`).
+3. Check that the Bluetooth adapter is available: `hciconfig` should list your
+   adapter as `UP RUNNING`.
+4. Try removing and re-pairing the speaker if it was previously paired to
+   another host.
+
+### No audio
+
+1. Check the addon Log tab for PulseAudio sink detection messages.
+2. Increase `pulse_latency_msec` to `400`–`600` if the sink is found but audio
+   is silent or choppy.
+3. Verify the speaker is in **A2DP mode** (not HFP/HSP hands-free mode).
+4. Restart the addon after the speaker is fully connected and showing in
+   `bluetoothctl info <MAC>` as `Connected: yes`.
+
+### High CPU usage
+
+1. Enable `prefer_sbc_codec: true` to use the lightest Bluetooth audio codec.
+2. In Music Assistant, set the Sendspin player output format to
+   **PCM 44.1 kHz / 16-bit** (instead of higher sample rates or 24-bit).
+3. Reduce the number of simultaneous speakers on armv7 / low-power hardware.
+
+### Speaker disconnects frequently
+
+1. Lower `bt_check_interval` (e.g. `5`) for faster reconnect detection.
+2. Move the speaker closer to the Bluetooth adapter or reduce interference
+   from Wi-Fi / USB 3.0 devices.
+3. Set a positive `keepalive_interval` on the device to prevent the speaker
+   from entering standby during silence. Values below 30 seconds are raised to
+   30 seconds.
+4. If using a USB Bluetooth dongle, try a different USB port (avoid USB 3.0
+   ports that share the 2.4 GHz band).
+
+### Addon fails to start
+
+1. Confirm your HA installation type is **OS** or **Supervised**—the addon
+   requires host-level D-Bus and Bluetooth access not available in Container
+   or Core installations.
+2. Check the Log tab for error messages about missing D-Bus or PulseAudio
+   sockets.
+3. If running **HA Supervised on Ubuntu 24.04+**, the host AppArmor may block
+   Bluetooth access. Update to v2.52.0+ — the addon's AppArmor profile now
+   includes `dbus` and `network raw` rules required by Ubuntu's strict defaults.
+
+## Known Issues & Limitations
+
+- **Privileged mode required.** The addon needs `SYS_ADMIN`, `NET_ADMIN`, and
+  `NET_RAW` capabilities for Bluetooth stack access.
+- **Host network mode.** Required for mDNS auto-discovery of Music Assistant
+  and for correct PulseAudio/PipeWire socket communication.
+- **Initial playback delay.** The first play command may have a brief delay
+  (~1–3 s) while the Bluetooth A2DP audio channel is established.
+- **armv7 memory constraints.** Raspberry Pi 3 has limited RAM; running more
+  than 2–3 speakers simultaneously may cause instability.
+- **Speaker must be paired before starting.** The addon manages connections but
+  does not handle initial Bluetooth pairing—pair speakers at the host level
+  first.
 
 ## Support
 
-If this add-on has saved you time or frustration, you can support continued development:
-
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-support-orange?logo=buy-me-a-coffee&logoColor=white&style=for-the-badge)](https://buymeacoffee.com/weirded)
+- **GitHub Issues:**
+  <https://github.com/trudenboy/sendspin-bt-bridge/issues>
+- **Documentation:**
+  <https://trudenboy.github.io/sendspin-bt-bridge>
+- **Discord:** Music Assistant server —
+  look for the Sendspin / Bluetooth channel

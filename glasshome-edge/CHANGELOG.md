@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.9.5-beta.1
+
+### New Features
+
+- Dock active item slides between items with a pill indicator
+- Mobile bottom-sheet rebuilt in-house — smoother drag-to-dismiss with velocity, proper keyboard avoidance, nested sheet support, popovers inside sheets no longer fight for stacking
+- Widget gestures now bind on the widget container itself, no wrapper needed
+
+### Improvements
+
+- Settings "Home Assistant" section uses the Home Assistant logo
+- Compact, consistently sized status chips on settings and dashboard
+- Empty dashboards scroll and center in the viewport
+
+### Bug Fixes
+
+- Widget picker config dialog no longer flickers when closing
+- Stale signal write during grid teardown silenced
+- CI now uses bun 1.3.11 to match local
+
+### Under the Hood
+
+- @glasshome/ui 0.2.1 → 0.2.2 (drops @corvu/drawer)
+- @glasshome/widget-sdk 0.3.4 → 0.3.5
+
 ## 0.9.4
 
 ### Under the Hood
