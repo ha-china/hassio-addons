@@ -1,31 +1,31 @@
 # GlassHome Dashboard
 
-现代、可定制的Home Assistant仪表板，拥有美观的玻璃质感设计。
+为 Home Assistant 提供的现代化、可定制的仪表板，具有美观的玻璃形态设计。
 
-## 声明：
-这是一个Beta版本。如果您有非常定制的设置，它可能无法正常工作。我在自己的设置上进行了彻底测试，因此不期望它会崩溃燃烧，但请谨慎操作，并备份您的Home Assistant！
+## 免责声明：
+这是一个测试版。如果您的设置非常定制化，它可能无法正常工作。我不期望它崩溃或烧毁，因为我已经在我的设置上进行了彻底测试，但请谨慎操作，并备份您的 Home Assistant！
 
 ## 安装
 
-1. 将此存储库添加到您的Home Assistant中：
+1. 将此存储库添加到您的 Home Assistant 中：
    - 设置 → 添加组件 → 添加组件商店
-   - 点击⋮（菜单）→ 存储库
+   - 点击 ⋮（菜单）→ 仓库
    - 添加：`https://github.com/glasshome/glasshome-addon`
 
-2. 从添加组件商店安装“GlassHome Dashboard”
+2. 从添加组件商店安装 "GlassHome Dashboard"
 
 3. 启动组件
 
 ## 功能
 
-- 🎨 美观的玻璃质感设计，支持深色模式
-- 🖱️ 拖放小部件自定义
-- 🏠 基于区域组织
+- 🎨 具有深色模式的美丽玻璃形态设计
+- 🖱️ 拖放小部件定制
+- 🏠 区域化组织
 - 📊 多种小部件类型：
-  - 可调节颜色的灯光
+  - 带颜色控制的灯光
   - 气候控制
-  - 配有图表的传感器
-  - 拥有实时流的摄像头
+  - 带图表的传感器
+  - 带实时流的摄像头
   - 天气
   - 场景
   - 电池监控
@@ -35,8 +35,8 @@
 ## 访问仪表板
 
 启动组件后，打开浏览器并访问：
-- `http://homeassistant.local:3123`（如果您使用的是.local域名）
-- `http://YOUR_HA_IP:3123`（将您的HA IP地址替换进去）
+- `http://homeassistant.local:3123`（如果您使用 .local 域名）
+- `http://YOUR_HA_IP:3123`（用您的 HA IP 地址替换）
 
 ## 配置
 
@@ -44,7 +44,7 @@
 
 ## 支持
 
-有关问题或功能请求，请访问[discord频道](https://discord.com/channels/1428131437265289248/1428167573094010930)
+有关问题或功能请求，请访问 [discord 通道](https://discord.com/channels/1428131437265289248/1428167573094010930)
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

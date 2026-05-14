@@ -1,73 +1,73 @@
-# Manyfold Home Assistant Add-on
+# Manyfold Home Assistant 插件
 
-This add-on wraps `ghcr.io/manyfold3d/manyfold-solo` for Home Assistant OS with persistent storage and configurable host-backed media paths.
+此插件将 `ghcr.io/manyfold3d/manyfold-solo` 用于 Home Assistant OS，并提供了持久存储和可配置的主机支持的媒体路径。
 
-Documentation: [manyfold.app/get-started](https://manyfold.app/get-started/)
+文档：[manyfold.app/get-started](https://manyfold.app/get-started/)
 
-## Features
+## 功能
 
-- Runs Manyfold on port `3214`.
-- Persists app data, database, cache, and settings under `/config` (`addon_config`).
-- Uses a configurable library path on Home Assistant host storage.
-- Refuses startup if configured paths resolve outside `/share`, `/media`, or `/config`.
-- No external PostgreSQL or Redis required.
-- Supports `amd64` and `aarch64`.
-- Includes a baseline AppArmor profile.
+- 在端口 `3214` 上运行 Manyfold。
+- 将应用数据、数据库、缓存和设置持久存储在 `/config` (`addon_config`) 下。
+- 使用 Home Assistant 主机存储上的可配置库路径。
+- 如果配置的路径解析到 `/share`、`/media` 或 `/config` 之外，则拒绝启动。
+- 不需要外部 PostgreSQL 或 Redis。
+- 支持 `amd64` 和 `aarch64`。
+- 包含基线 AppArmor 配置文件。
 
-## Default paths
+## 默认路径
 
-- Library path: `/share/manyfold/models`
-- Thumbnails path: `/config/thumbnails`
+- 库路径：`/share/manyfold/models`
+- 缩略图路径：`/config/thumbnails`
 
-## Installation
+## 安装
 
-1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
-   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-2. Refresh Add-on Store and install **Manyfold**.
-3. Configure options (defaults are safe for first run):
-   - `library_path`: `/share/manyfold/models`
-   - `secret_key_base`: leave blank to auto-generate
-   - `puid` / `pgid`: set to a non-root UID/GID (see "Fix root warning (PUID/PGID)" below)
-   - optionally tune worker/thread and upload limits in "Small server tuning" below
-4. Start the add-on.
-5. Open `http://<HA_IP>:3214`.
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在管理员的插件存储中右上角，或点击下面的按钮如果您已经配置了 HA）
+   ![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)(https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+2. 刷新插件存储并安装 **Manyfold**。
+3. 配置选项（默认值对于首次运行是安全的）：
+   - `library_path`：`/share/manyfold/models`
+   - `secret_key_base`：留空以自动生成
+   - `puid` / `pgid`：设置为非 root UID/GID（见下文“修复 root 警告 (PUID/PGID)”）
+   - 可选地根据下面的“小型服务器调整”调整工作进程/线程和上传限制
+4. 启动插件。
+5. 打开 `http://<HA_IP>:3214`。
 
-Before first start, ensure your library folder exists on the host:
+在第一次启动之前，确保您的库文件夹存在于主机上：
 
 ```bash
 mkdir -p /share/manyfold/models
 ```
 
-Local development alternative on the HA host:
+在 HA 主机上的本地开发替代方案：
 
-1. Copy `manyfold/` to `/addons/manyfold`.
-2. In Add-on Store menu (`...`), click `Check for updates`.
-3. Install and run **Manyfold** from local add-ons.
+1. 将 `manyfold/` 复制到 `/addons/manyfold`。
+2. 在插件存储菜单（`...`），点击“检查更新”。
+3. 从本地插件安装并运行 **Manyfold**。
 
-## Library/index workflow
+## 库/index 工作流程
 
-1. Drop STL/3MF/etc into `/share/manyfold/models` on the host.
-2. In Manyfold UI, configure a library that points to the same container path.
-3. Thumbnails and indexing artifacts persist in `/config/thumbnails`.
+1. 将 STL/3MF 等文件放入主机上的 `/share/manyfold/models`。
+2. 在 Manyfold UI 中配置一个指向相同容器路径的库。
+3. 缩略图和索引工件持久存储在 `/config/thumbnails`。
 
-## Options
+## 选项
 
-- `secret_key_base`: App secret used by Rails to sign/encrypt sessions and tokens. See [Secret Key Base](#secret-key-base) below.
-- `puid` / `pgid`: Ownership applied to writable mapped directories (`/config` paths).
-- `multiuser`: Toggle Manyfold multiuser mode.
-- `library_path`: Scanned/indexed path.
-- `thumbnails_path`: Persistent thumbnails/index artifacts (must be under `/config`).
-- `log_level`: `info`, `debug`, `warn`, `error`.
-- `web_concurrency`: Puma worker process count.
-- `rails_max_threads`: Max threads per Puma worker.
-- `default_worker_concurrency`: Sidekiq default queue concurrency.
-- `performance_worker_concurrency`: Sidekiq performance queue concurrency.
-- `max_file_upload_size`: Max uploaded archive size in bytes.
-- `max_file_extract_size`: Max extracted archive size in bytes.
+- `secret_key_base`：Rails 用于签名/加密会话和令牌的应用密钥。见下文“密钥基础”。
+- `puid` / `pgid`：应用于可写映射目录（`/config` 路径）的所有权。
+- `multiuser`：切换 Manyfold 多用户模式。
+- `library_path`：扫描/索引路径。
+- `thumbnails_path`：持久缩略图/索引工件（必须在 `/config` 之下）。
+- `log_level`：`info`、`debug`、`warn`、`error`。
+- `web_concurrency`：Puma 工作进程数量。
+- `rails_max_threads`：每个 Puma 工作进程的最大线程数。
+- `default_worker_concurrency`：Sidekiq 默认队列并发数。
+- `performance_worker_concurrency`：Sidekiq 性能队列并发数。
+- `max_file_upload_size`：最大上传归档大小（以字节为单位）。
+- `max_file_extract_size`：最大提取归档大小（以字节为单位）。
 
-## Small server tuning
+## 小型服务器调整
 
-For low-memory HAOS hosts, start with:
+对于内存较低的 HAOS 主机，从以下配置开始：
 
 ```yaml
 web_concurrency: 1
@@ -78,75 +78,75 @@ max_file_upload_size: 268435456
 max_file_extract_size: 536870912
 ```
 
-Then restart the add-on and increase gradually only if needed.
+然后重新启动插件，仅在需要时逐步增加。
 
-## Fix root warning (PUID/PGID)
+## 修复 root 警告（PUID/PGID）
 
-If Manyfold shows:
+如果 Manyfold 显示：
 
-`Manyfold is running as root, which is a security risk.`
+`Manyfold 以 root 用户运行，这是一个安全风险。`
 
-set `puid` and `pgid` in the add-on Configuration tab to a non-root UID/GID.
+在插件的配置标签页中将 `puid` 和 `pgid` 设置为非 root UID/GID。
 
-Example:
+示例：
 
 ```yaml
 puid: 1000
 pgid: 1000
 ```
 
-How to find the correct values in Home Assistant:
+如何在 Home Assistant 中找到正确的值：
 
-1. Open the **Terminal & SSH** add-on (or SSH into the HA host).
-2. If you know the target Linux user name, run:
+1. 打开 **终端 & SSH** 插件（或通过 SSH 连接到 HA 主机）。
+2. 如果您知道目标 Linux 用户名，运行：
 
 ```bash
 id <username>
 ```
 
-Use the `uid=` value for `puid` and `gid=` value for `pgid`.
+使用 `uid=` 值用于 `puid` 和 `gid=` 值用于 `pgid`。
 
-If you do not have a specific username, use the owner of the Manyfold folders:
+如果您没有特定的用户名，使用 Manyfold 文件夹的所有者：
 
 ```bash
 stat -c '%u %g' /share/manyfold/models
 ```
 
-Set `puid`/`pgid` to those numbers.
+将 `puid`/`pgid` 设置为这些数字。
 
-After changing values:
+更改值后：
 
-1. Save add-on Configuration.
-2. Restart the Manyfold add-on.
-3. Check logs for `puid:pgid=<uid>:<gid>` and confirm the warning is gone.
+1. 保存插件配置。
+2. 重新启动 Manyfold 插件。
+3. 检查日志以确认 `puid:pgid=<uid>:<gid>` 并确认警告已消失。
 
-## Validation behavior
+## 验证行为
 
-- Startup fails if `library_path` or `thumbnails_path` resolve outside mapped storage roots.
-- `thumbnails_path` must resolve under `/config` to guarantee persistence.
-- Startup fails if `library_path` is not readable.
+- 如果 `library_path` 或 `thumbnails_path` 解析到映射存储根之外，则启动失败。
+- `thumbnails_path` 必须解析到 `/config` 以保证持久性。
+- 如果 `library_path` 不可读，则启动失败。
 
-## Secret Key Base
+## 密钥基础
 
-`secret_key_base` is a required Rails secret used to sign and encrypt user sessions and tokens. Changing it will invalidate all active sessions and log everyone out.
+`secret_key_base` 是 Rails 所需的密钥，用于签名和加密用户会话和令牌。更改它将使所有活动会话失效并使所有人注销。
 
-**How it works:**
+**工作原理：**
 
-| Scenario | Behaviour |
-|----------|-----------|
-| **New install**, option left blank | A random secret is auto-generated and saved to `/config/secret_key_base` |
-| **Addon update**, option still blank | The previously saved `/config/secret_key_base` is reused — no data loss |
-| **Option manually set** | The value from the addon options is used and saved to `/config/secret_key_base` |
-| **Option was set, then cleared on update** | A new secret is generated — **sessions will be invalidated** |
+| 场景 | 行为 |
+|------|------|
+| **新安装**，选项留空 | 自动生成随机密钥并保存到 `/config/secret_key_base` |
+| **插件更新**，选项仍留空 | 重新使用之前保存的 `/config/secret_key_base` — 无数据丢失 |
+| **手动设置选项** | 使用插件选项中的值并保存到 `/config/secret_key_base` |
+| **选项已设置，然后在更新时清除** | 生成新的密钥 — **会话将失效** |
 
-**Recommendation:** Leave `secret_key_base` blank on first install and never change it afterwards. The auto-generated value persists across updates in `/config/secret_key_base`, which is included in Home Assistant backups.
+**建议：** 在首次安装时将 `secret_key_base` 留空，之后切勿更改。自动生成的值在 `/config/secret_key_base` 中持久存在，这包含在 Home Assistant 备份中。
 
-## Migrating from a previous installation
+## 从先前的安装迁移
 
-If you are reinstalling this addon or moving from another Manyfold addon (e.g. a different slug/repository), your data is stored in the previous addon's config directory on the HA host. To migrate without losing data:
+如果您正在重新安装此插件或从另一个 Manyfold 插件（例如不同的 slug/repository）迁移，则您的数据存储在 HA 主机上的先前插件配置目录中。要迁移而不丢失数据：
 
-1. SSH into your Home Assistant host.
-2. Copy the database and secret to the new addon config directory:
+1. 通过 SSH 连接到您的 Home Assistant 主机。
+2. 将数据库和密钥复制到新的插件配置目录：
 
 ```bash
 cp /addon_configs/<old_slug>/manyfold.sqlite3 /addon_configs/<new_slug>/manyfold.sqlite3
@@ -156,11 +156,35 @@ chown 1000:1000 /addon_configs/<new_slug>/
 chmod 600 /addon_configs/<new_slug>/secret_key_base
 ```
 
-Replace `<old_slug>` and `<new_slug>` with the actual directory names (e.g. `db21ed7f_manyfold` and `088d77ac_manyfold_solo`). List them with `ls /addon_configs/`.
+将 `<old_slug>` 和 `<new_slug>` 替换为实际的目录名称（例如 `db21ed7f_manyfold` 和 `088d77ac_manyfold_solo`）。使用 `ls /addon_configs/` 列出它们。
 
-3. Start the new addon — it will pick up the existing database and secret automatically.
+3. 启动新的插件 — 它将自动获取现有的数据库和密钥。
 
-## Notes
+## 注意事项
 
-- This baseline avoids Home Assistant ingress and keeps direct port access.
-- If `puid`/`pgid` change, restart the add-on to re-apply ownership to mapped directories.
+- 此基线避免了 Home Assistant 入口并保持了直接端口访问。
+- 如果 `puid`/`pgid` 发生变化，重新启动插件以重新应用映射目录的所有权。
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！
