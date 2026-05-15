@@ -1,16 +1,13 @@
 {
   "name": "rtl_433 MQTT Auto Discovery",
   "image": "ghcr.1ms.run/pbkhrv/rtl_433-hass-addons-rtl_433_mqtt_autodiscovery-{arch}",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "slug": "rtl433mqttautodiscovery",
-  "description": "通过MQTT自动发现rtl_433设备信息。",
+  "description": "[老王杂谈说]：null",
   "url": "https://gh-proxy.org/github.com/pbkhrv/rtl_433-hass-addons/tree/main/rtl_433_mqtt_autodiscovery",
   "arch": [
-    "armhf",
-    "armv7",
     "aarch64",
-    "amd64",
-    "i386"
+    "amd64"
   ],
   "startup": "application",
   "boot": "auto",

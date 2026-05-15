@@ -1,8 +1,8 @@
 ---
 name: "Sendspin Bluetooth Bridge"
-version: "2.70.1"
+version: "2.71.0"
 slug: "sendspin_bt_bridge"
-description: "[老王杂谈说]：音乐助手向蓝牙音箱发送 Sendspin 协议。"
+description: "[老王杂谈说]：null"
 url: "https://gh-proxy.org/github.com/trudenboy/sendspin-bt-bridge"
 image: "ghcr.1ms.run/trudenboy/sendspin-bt-bridge"
 homeassistant: "2024.2.0"

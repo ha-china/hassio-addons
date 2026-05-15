@@ -1,5 +1,5 @@
 name: "WhatsApp Home Assistant App"
-version: "1.5.4"
+version: "1.5.5"
 slug: "whatsapp"
 image: ghcr.1ms.run/faserf/hassio-addons-whatsapp-{arch}
 description: "[老王杂谈说]：null"

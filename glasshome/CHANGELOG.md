@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.9.5
+
+### New Features
+
+- Drag a widget into the top or bottom edge of the screen and the page autoscrolls. Long dashboards no longer require dropping a tile mid-move.
+- Active dashboard in the dock is highlighted by a sliding pill indicator that animates between items.
+- Mobile bottom-sheet rebuilt in-house: smoother drag-to-dismiss with velocity, proper keyboard avoidance, nested sheets, and popovers that no longer fight the stacking context.
+
+### Improvements
+
+- Mobile widget gestures redesigned. Tap toggles, long-press (500 ms with haptic bump on supported devices) opens the detail dialog. Fine control — sliders, color, presets — lives in the dialog. Page scroll over widgets is now snappy and predictable. Mouse and pen retain in-tile tap, hold, and slide.
+- Edit mode pickup on mobile requires a 300 ms long-press with haptic confirmation, so a quick swipe through the dashboard no longer accidentally grabs a tile. Page scroll passes through the gaps between widgets.
+- Resize handle hit target enlarged to 44×44 (visual grip unchanged), so even 1×1 tiles are resizable with a finger.
+- Settings "Home Assistant" section uses the Home Assistant logo. Status chips on the dashboard and settings are now compact and consistently sized.
+- Empty dashboards scroll and center properly in the viewport.
+
+### Bug Fixes
+
+- Widgets react to Home Assistant state changes in production again. Tapping a widget would toggle the entity in HA but the dashboard UI stayed frozen until refresh — a vendor-build module duplication caused entity subscriptions to never be sent.
+- Background layer tracks the large viewport on mobile (100lvh) so it no longer repaints when browser chrome collapses on scroll.
+- Web theme defaults to dark so the browser experience matches the native shell.
+- Widget picker config dialog no longer flickers on close.
+- Stale signal write during grid teardown silenced.
+
+### Under the Hood
+
+- @glasshome/ui 0.2.1 → 0.2.2 (drops @corvu/drawer)
+- @glasshome/widget-sdk 0.3.4 → 0.3.7 (gesture grammar split by pointer type, touch-action derived from config)
+- @glasshome/sync-layer 0.1.9 → 0.1.10 (duplicate-instance detection guards)
+- Hub bearer auth restored for the CLI publish flow (server-side fix after better-auth 1.6 bump)
+- CI bumped to bun 1.3.11 to match local
+
 ## 0.9.4
 
 ### Under the Hood
