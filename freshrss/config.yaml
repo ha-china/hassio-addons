@@ -1,7 +1,7 @@
 name: FreshRSS
-version: 1.0.4
+version: 1.0.5
 slug: freshrss
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：一个免费的、可自行托管的订阅聚合器'
 url: https://gh-proxy.org/github.com/einschmidt/app-freshrss
 panel_icon: mdi:rss-box
 arch:

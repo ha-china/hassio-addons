@@ -1,5 +1,21 @@
 # TOMMY
 
+## 3.1.6
+
+### Minor Changes
+- Minor UI improvements
+
+## 3.1.5
+
+### Minor Changes
+- Minor UI improvements
+
+## 3.1.4
+
+### Minor Changes
+- Updated logo
+- Added logo and icons to Home Assistant App repo
+
 ## 3.1.3
 
 ### Minor Changes
