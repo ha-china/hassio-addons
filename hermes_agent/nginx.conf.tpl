@@ -17,6 +17,10 @@ http {
     log_format minimal '$remote_addr - $request_uri $status';
     access_log /dev/stdout minimal;
 
+    # Dashboard tokens can exceed nginx's default 64-byte map bucket. This must
+    # be set before any map block is parsed.
+    map_hash_bucket_size 128;
+
     upstream ttyd_terminal {
         server 127.0.0.1:%%TTYD_TERMINAL_PORT%%;
     }
@@ -31,6 +35,17 @@ http {
 
     upstream hermes_dashboard {
         server 127.0.0.1:%%DASHBOARD_PORT%%;
+    }
+
+    map $http_x_forwarded_prefix $dashboard_proxy_prefix {
+        default "$http_x_forwarded_prefix/dashboard";
+        "" "/dashboard";
+    }
+
+    # HA Ingress sends X-Ingress-Path; custom reverse proxies may send X-Forwarded-Prefix.
+    map $http_x_ingress_path $dashboard_forwarded_prefix {
+        default "$http_x_ingress_path/dashboard";
+        "" $dashboard_proxy_prefix;
     }
 
     # ── Ingress (HA sidebar — landing page) ──────────────────────────
@@ -92,6 +107,7 @@ http {
             # Preserve the external host separately, but send the upstream host it expects.
             proxy_set_header Host 127.0.0.1;
             proxy_set_header X-Forwarded-Host $host;
+            proxy_set_header X-Forwarded-Prefix $dashboard_forwarded_prefix;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header Authorization "Bearer %%DASHBOARD_TOKEN%%";
             proxy_buffering off;
@@ -105,6 +121,7 @@ http {
             # Preserve the external host separately, but send the upstream host it expects.
             proxy_set_header Host 127.0.0.1;
             proxy_set_header X-Forwarded-Host $host;
+            proxy_set_header X-Forwarded-Prefix $dashboard_forwarded_prefix;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_buffering off;
             proxy_read_timeout 300s;
