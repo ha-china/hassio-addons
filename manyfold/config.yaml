@@ -1,7 +1,7 @@
 name: "Manyfold"
 slug: manyfold
-description: "[老王杂谈说]：Manyfold 3D模型管理器作为 Home Assistant 插件，使用上游镜像，并支持配置库和索引路径。"
-version: "0.139.3"
+description: "[老王杂谈说]：null"
+version: "0.140.1"
 url: "https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/manyfold"
 image: ghcr.1ms.run/alexbelgium/manyfold-{arch}
 arch:

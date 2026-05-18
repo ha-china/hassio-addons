@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.9.6
+
+### Improvements
+
+- Widget colors are more vibrant, especially at low opacity and in dark mode. Icons stay readable against their tinted backgrounds.
+- Climate widget mode colors (heat, cool, auto, off) render distinctly in both light and dark themes instead of washing out.
+
+### Bug Fixes
+
+- Widgets that need a newer dashboard than yours no longer get auto-installed and broken. Auto-update now skips incompatible versions and tells you why.
+- Climate widget no longer crashes when debug info is open.
+- Widget tiles render correctly on existing dashboards after updating.
+- Updating to a new dashboard release no longer leaves older bundled code lingering in your browser's cache. Updates take effect on first reload.
+
 ## 0.9.5
 
 ### New Features

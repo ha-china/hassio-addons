@@ -2,10 +2,15 @@
 """Apply Hermes dashboard compatibility patches for the Home Assistant add-on.
 
 The add-on runs against a user-selected Hermes checkout, so the dashboard source
-can be either modern and proxy-prefix aware, or older and root-path-only. This
-script keeps the startup path tolerant: modern sources are left alone, legacy
-sources get small idempotent patches, and upstream drift emits warnings instead
-of killing the add-on.
+can be either modern and proxy-prefix aware, or older and root-path-only. Keep
+startup tolerant: patch what we know how to patch, warn on upstream drift, and
+never make dashboard patch drift stop the whole add-on.
+
+Modern Hermes can derive its SPA base from X-Forwarded-Prefix, but Home
+Assistant Ingress prefixes include a long random token and can exceed upstream's
+current sanity limit. The add-on therefore also keeps an import.meta.url fallback
+and a relative Vite asset base so HA users are not broken by upstream path
+handling changes.
 """
 
 from __future__ import annotations
@@ -27,6 +32,13 @@ LEGACY_BASE_PATCHES = (
     LEGACY_BASE_PATCH,
     LEGACY_BASE_PATCH_WITHOUT_VITE_IGNORE,
 )
+MODERN_BASE_FALLBACK_MARKER = "HA-ADDON-IMPORT-META-FALLBACK-PATCHED"
+MODERN_BASE_FALLBACK_PATCH = (
+    'const HERMES_IMPORT_META_BASE_PATH = new URL(/* @vite-ignore */ "..", import.meta.url)'
+    '.pathname.replace(/\\/$/, ""); /* HA-ADDON-IMPORT-META-FALLBACK-PATCHED */\n'
+    'export const HERMES_BASE_PATH = readBasePath() || HERMES_IMPORT_META_BASE_PATH;'
+)
+VITE_BASE_MARKER = "HA-ADDON-BASE-INJECTED"
 
 
 def read(path: Path) -> str:
@@ -41,17 +53,35 @@ def write_if_changed(path: Path, old_text: str, new_text: str) -> bool:
 
 
 def patch_modern_dashboard(api: Path, api_text: str) -> bool:
-    """Undo obsolete legacy BASE patches on modern Hermes sources."""
-    matched_patch = next((patch for patch in LEGACY_BASE_PATCHES if patch in api_text), "")
-    if not matched_patch:
-        print("[run] Dashboard source is proxy-prefix aware; source patches skipped")
+    """Make modern Hermes dashboard paths robust behind HA Ingress."""
+    if not api.is_file():
         return False
 
-    repaired = api_text.replace(matched_patch, "const BASE = HERMES_BASE_PATH;")
-    if write_if_changed(api, api_text, repaired):
+    changed = False
+    patched = api_text
+    matched_patch = next((patch for patch in LEGACY_BASE_PATCHES if patch in patched), "")
+    if matched_patch:
+        patched = patched.replace(matched_patch, "const BASE = HERMES_BASE_PATH;")
+        changed = True
         print("[run] Removed obsolete dashboard BASE source patch")
+
+    if MODERN_BASE_FALLBACK_MARKER not in patched:
+        patched, count = re.subn(
+            r"^export const HERMES_BASE_PATH = readBasePath\(\);$",
+            MODERN_BASE_FALLBACK_PATCH,
+            patched,
+            count=1,
+            flags=re.MULTILINE,
+        )
+        if count:
+            changed = True
+            print("[run] Patched modern dashboard import.meta.url base fallback")
+        else:
+            print("[run] WARNING: api.ts HERMES_BASE_PATH pattern changed upstream - dashboard paths may need review")
+
+    if write_if_changed(api, api_text, patched):
         return True
-    return False
+    return changed
 
 
 def patch_legacy_api(api: Path, api_text: str) -> bool:
@@ -118,23 +148,39 @@ def patch_legacy_router(main_tsx: Path, main_text: str) -> bool:
     return False
 
 
-def patch_legacy_vite(vite: Path, vite_text: str) -> bool:
-    if not vite.is_file() or "HA-ADDON-BASE-INJECTED" in vite_text:
+def ensure_vite_relative_base(vite: Path, vite_text: str) -> bool:
+    """Force Vite to emit relative JS/CSS asset URLs for HA Ingress."""
+    if not vite.is_file():
+        return False
+    if VITE_BASE_MARKER in vite_text and re.search(r'^\s*base:\s*"\./",', vite_text, flags=re.MULTILINE):
         return False
 
-    cleaned = re.sub(r'^\s*base:\s*"\./",\s*\n', "", vite_text, flags=re.MULTILINE)
+    cleaned = re.sub(
+        r'^\s*/\* HA-ADDON-BASE-INJECTED \*/\s*\n\s*base:\s*["\'][^"\']*["\'],\s*\n',
+        "",
+        vite_text,
+        flags=re.MULTILINE,
+    )
+    cleaned = re.sub(
+        r'^\s*base:\s*["\'][^"\']*["\'],\s*\n',
+        "",
+        cleaned,
+        flags=re.MULTILINE,
+    )
     patched = cleaned.replace(
         "export default defineConfig({",
-        'export default defineConfig({\n  /* HA-ADDON-BASE-INJECTED */\n  base: "./",',
+        'export default defineConfig({\n  /* HA-ADDON-BASE-INJECTED */\n  base: "./",\n',
         1,
     )
 
     if patched == vite_text:
+        return False
+    if patched == cleaned:
         print("[run] WARNING: vite.config.ts defineConfig pattern changed upstream - dashboard assets may need review")
         return False
 
     if write_if_changed(vite, vite_text, patched):
-        print("[run] Patched legacy dashboard Vite base path")
+        print("[run] Patched dashboard Vite relative asset base")
         return True
     return False
 
@@ -161,7 +207,7 @@ def main() -> int:
         changed |= patch_legacy_api(api, api_text)
         changed |= patch_legacy_plugins(plugins, read(plugins))
         changed |= patch_legacy_router(main_tsx, read(main_tsx))
-        changed |= patch_legacy_vite(vite, read(vite))
+    changed |= ensure_vite_relative_base(vite, read(vite))
 
     status_file.write_text("changed" if changed else "")
     return 0

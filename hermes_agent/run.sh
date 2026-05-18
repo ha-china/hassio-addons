@@ -290,10 +290,10 @@ if [ -f "$SRC_DIR/web/package.json" ]; then
     fi
     rm -f "$PATCH_STATUS_FILE"
 
-    # Detect stale legacy build (absolute paths in output -> needs rebuild).
-    # Modern Hermes rewrites these from X-Forwarded-Prefix at request time.
-    if ! grep -q 'HERMES_BASE_PATH' "$SRC_DIR/web/src/lib/api.ts" 2>/dev/null && \
-       grep -q 'src="/assets/' "$SRC_DIR/hermes_cli/web_dist/index.html" 2>/dev/null; then
+    # Detect stale builds with absolute Vite asset paths. HA Ingress prefixes
+    # include a long random token, so the add-on must not depend on upstream
+    # X-Forwarded-Prefix handling to rewrite /assets/* at request time.
+    if grep -Eq '(src|href)="/assets/' "$SRC_DIR/hermes_cli/web_dist/index.html" 2>/dev/null; then
         DASHBOARD_REBUILD="true"
     fi
 
@@ -557,6 +557,10 @@ SHOW_DASHBOARD_PORTS="false"
 if [ "$ENABLE_DASHBOARD" = "true" ] && [ "$DASHBOARD_AVAILABLE" = "true" ]; then
     SHOW_DASHBOARD_PORTS="true"
 fi
+SHOW_API="false"
+if [ "$ENABLE_API" = "true" ]; then
+    SHOW_API="true"
+fi
 cp /var/www/landing.html.tpl /var/www/landing.html
 sed -i \
     -e "s|%%HERMES_VERSION%%|${HERMES_VERSION}|g" \
@@ -564,6 +568,7 @@ sed -i \
     -e "s|%%SHOW_TERMINAL%%|${SHOW_TERMINAL}|g" \
     -e "s|%%SHOW_DASHBOARD%%|${SHOW_DASHBOARD}|g" \
     -e "s|%%SHOW_DASHBOARD_PORTS%%|${SHOW_DASHBOARD_PORTS}|g" \
+    -e "s|%%SHOW_API%%|${SHOW_API}|g" \
     /var/www/landing.html
 
 echo "[run] Nginx configured (ingress: $INGRESS_PORT, HTTP: $HTTP_PORT, HTTPS: $HTTPS_PORT)"
