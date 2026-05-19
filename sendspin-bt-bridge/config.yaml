@@ -1,0 +1,120 @@
+---
+name: "Sendspin Bluetooth Bridge"
+version: "2.71.1"
+slug: "sendspin_bt_bridge"
+description: "[老王杂谈说]：null"
+url: "https://gh-proxy.org/github.com/trudenboy/sendspin-bt-bridge"
+image: "ghcr.1ms.run/trudenboy/sendspin-bt-bridge"
+homeassistant: "2024.2.0"
+arch:
+  - aarch64
+  - amd64
+  - armv7
+startup: application
+boot: auto
+host_network: true
+host_dbus: true
+hassio_api: true
+hassio_role: default
+homeassistant_api: true
+auth_api: true
+privileged:
+  - NET_ADMIN
+  - NET_RAW
+devices:
+  - /dev/bus/usb
+audio: true
+# Declare MQTT as an optional Supervisor service so the bridge can read
+# Mosquitto broker credentials via /services/mqtt for the
+# ha_integration.mqtt_broker = "auto" auto-detect path.  ``mqtt:want``
+# means "we'd like it if it's installed", not "we require it".
+services:
+  - mqtt:want
+apparmor: true
+init: false
+ingress: true
+ingress_port: 0
+panel_icon: mdi:bluetooth-audio
+panel_admin: false
+tmpfs: true
+backup_exclude:
+  - __pycache__/*
+  - "*.pyc"
+options:
+  sendspin_server: "auto"
+  sendspin_port: 8927
+  bridge_name: ""
+  ha_area_name_assist_enabled: true
+  tz: ""
+  pulse_latency_msec: 600
+  startup_banner_grace_seconds: 5
+  recovery_banner_grace_seconds: 15
+  prefer_sbc_codec: false
+  disable_pa_rescue_streams: false
+  bt_check_interval: 10
+  bt_max_reconnect_fails: 0
+  log_level: "info"
+  ma_api_url: ""
+  ma_api_token: ""
+  ma_auto_silent_auth: true
+  bluetooth_devices: []
+  bluetooth_adapters: []
+  ha_integration:
+    enabled: false
+    mode: "off"
+    mqtt_broker: "auto"
+    mqtt_port: 1883
+    mqtt_username: ""
+    mqtt_password: ""
+    mqtt_discovery_prefix: "homeassistant"
+    mqtt_tls: false
+    advertise_mdns: true
+    supervisor_pair: true
+schema:
+  sendspin_server: str
+  sendspin_port: port
+  base_listen_port: port?
+  bridge_name: str?
+  ha_area_name_assist_enabled: bool?
+  tz: str?
+  pulse_latency_msec: int?
+  startup_banner_grace_seconds: int?
+  recovery_banner_grace_seconds: int?
+  prefer_sbc_codec: bool?
+  disable_pa_rescue_streams: bool?
+  bt_check_interval: int?
+  bt_max_reconnect_fails: int?
+  log_level: "list(info|debug)?"
+  ma_api_url: str?
+  ma_api_token: str?
+  ma_auto_silent_auth: bool?
+  bluetooth_devices:
+    - mac: "match(([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2})"
+      player_name: str
+      adapter: str?
+      static_delay_ms: int?
+      listen_host: str?
+      listen_port: port?
+      enabled: bool?
+      preferred_format: str?
+      keepalive_silence: bool?
+      keepalive_interval: int?
+      idle_disconnect_minutes: int?
+      idle_mode: str?
+      power_save_delay_minutes: int?
+  bluetooth_adapters:
+    - id: str
+      mac: str?
+      name: str?
+      device_class: str?
+  ha_integration:
+    enabled: bool?
+    mode: "list(off|mqtt|rest)?"
+    mqtt_broker: str?
+    mqtt_port: port?
+    mqtt_username: str?
+    mqtt_password: password?
+    mqtt_discovery_prefix: str?
+    mqtt_tls: bool?
+    advertise_mdns: bool?
+    supervisor_pair: bool?
