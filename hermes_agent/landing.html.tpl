@@ -35,7 +35,7 @@
     <a class="btn small" id="btnAppInfo" href="/config/app/%%ADDON_SLUG%%/info" target="_top" onclick="document.querySelectorAll('iframe').forEach(function(f){f.remove()})" style="display:none">App Info</a>
   </div>
   <div class="status">
-    <span id="statusGateway">&#x23F3; Gateway</span>
+    <span id="statusApi" style="display:none">&#x23F8;&#xFE0F; API off</span>
     <span id="statusDashboard" style="display:none">&#x23F3; Dashboard</span>
     <span id="statusSecure">&#x1F512;</span>
   </div>
@@ -60,6 +60,7 @@
   var dashboardLoaded = false;
 
   var showDashboard = %%SHOW_DASHBOARD%%;
+  var showApi = %%SHOW_API%%;
   if (showDashboard) {
     btnDashboard.style.display = '';
   }
@@ -106,12 +107,18 @@
   var s = document.getElementById('statusSecure');
   s.textContent = window.isSecureContext ? '\u2705 Secure' : '\u26A0\uFE0F Not secure';
 
-  var g = document.getElementById('statusGateway');
-  fetch('./v1/health', {cache:'no-store'}).then(function(r) {
-    g.textContent = r.ok ? '\u2705 Gateway' : '\uD83D\uDCA4 Gateway';
-  }).catch(function() {
-    g.textContent = '\uD83D\uDCA4 Gateway';
-  });
+  var apiStatus = document.getElementById('statusApi');
+  if (showApi) {
+    apiStatus.style.display = '';
+    fetch('./v1/health', {cache:'no-store'}).then(function(r) {
+      apiStatus.textContent = r.ok ? '\u2705 API' : '\uD83D\uDCA4 API';
+    }).catch(function() {
+      apiStatus.textContent = '\uD83D\uDCA4 API';
+    });
+  } else {
+    apiStatus.style.display = '';
+    apiStatus.textContent = '\u23F8\uFE0F API off';
+  }
 
   if (showDashboard) {
     var d = document.getElementById('statusDashboard');

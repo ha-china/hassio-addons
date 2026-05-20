@@ -1,11 +1,11 @@
 # hass-4 烟雾测试
 
-针对作者的 hass-4 实例（`192.168.225.112`）进行的端到端烟雾测试，并针对真实 ESP 设备（`cyd-office-info`）执行完整的编译 + OTA 路径。
+针对作者 hass-4 实例（`192.168.225.112`）的全栈烟雾测试，并针对真实的 ESP 设备（`cyd-office-info`）执行完整的编译 + OTA 路径。
 
 这些测试故意与 `../e2e/` 中的模拟 Playwright 测试**分开**：
 
 - `../e2e/` 中的模拟测试在每次推送时在 CI 中运行，通过 `page.route()` 模拟 API 响应。它们运行速度快，可以独立验证 UI 行为。
-- 这些 hass-4 测试会触及真实的状态——它们会排队执行真实的编译作业，烧录真实的固件，并跟踪真实的设备日志。它们不在 CI 中运行。在成功部署后，它们会在 `push-to-hass-4.sh` 脚本结束处自动运行。
+- 这些 hass-4 测试会触及真实的状态——它们会排队执行真实的编译任务，烧录真实的固件，并实时跟踪真实设备的日志。它们不在 CI 中运行。在 `push-to-hass-4.sh` 部署成功后，它们会自动运行。
 
 ## 运行
 
@@ -18,7 +18,7 @@ npm run test:e2e:hass-4
 # 覆盖目标设备
 HASS4_TARGET=living-room.yaml npm run test:e2e:hass-4
 
-# 覆盖服务器 URL（例如，在另一个主机上本地运行）
+# 覆盖服务器 URL（例如，在本地不同主机上运行）
 HASS4_URL=http://192.168.1.42:8765 npm run test:e2e:hass-4
 
 # 头部模式（监视浏览器）
@@ -29,31 +29,31 @@ npx playwright test --config=e2e-hass-4/playwright.config.ts --headed
 
 | 环境变量            | 默认值                       | 描述                                       |
 |--------------------|-------------------------------|---------------------------------------------------|
-| `HASS4_URL`        | `http://192.168.225.112:8765` | 运行中插件的基 URL（NOT HA Ingress URL — 直接与插件通信） |
+| `HASS4_URL`        | `http://192.168.225.112:8765` | 运行中的插件的基本 URL（NOT HA Ingress URL — 直接与插件通信） |
 | `HASS4_TARGET`     | `cyd-office-info.yaml`        | 目标 ESPHome 配置的文件名             |
 | `COMPILE_BUDGET_MS`| `480000` (8 分钟)          | 编译 + OTA 完成的最大时间    |
-| `EXPECTED_VERSION` | `ha-addon/VERSION` 的内容   | 套件期望服务器上的插件版本。如果 `/ui/api/server-info` 返回不同的版本，则第一个测试会快速失败，防止意外测试过旧的部署。 |
+| `EXPECTED_VERSION` | `ha-addon/VERSION` 的内容  | 测试套件在服务器上期望的插件版本。如果 `/ui/api/server-info` 返回不同的版本，第一个测试会快速失败，防止意外测试过旧的部署。 |
 
 ## 版本安全检查
 
-在运行任何其他测试之前，套件会从工作树中读取 `ha-addon/VERSION` 并断言运行中的插件通过 `/ui/api/server-info` 报告相同的版本。这防止了在 `git pull` 后意外测试过时的部署。如果部署已过时，请先运行 `./push-to-hass-4.sh`。
+在运行任何其他测试之前，套件会从工作树中读取 `ha-addon/VERSION` 并断言运行中的插件通过 `/ui/api/server-info` 报告相同的版本。这可以防止在 `git pull` 后意外测试过旧的部署。如果部署已过时，请首先运行 `./push-to-hass-4.sh`。
 
-## 测试案例
+## 测试用例
 
-测试文件 `cyd-office-info.spec.ts` 运行四个顺序案例：
+测试文件 `cyd-office-info.spec.ts` 运行四个连续的测试用例：
 
-1. **设备标签加载** — 标题渲染，版本徽章与预期版本匹配，目标设备行可见。
+1. **设备选项卡加载** — 标题栏渲染，版本徽章与预期版本匹配，目标设备行可见。
 2. **计划升级** — 通过 `/ui/api/queue` 快照最新的作业 ID，点击行的升级按钮，轮询 API 直到出现新的作业 ID，然后确认队列行在 UI 中可见。
-3. **编译 + 日志跟踪** — 打开日志模式，验证行流进入 xterm 终端，然后轮询 `/ui/api/queue` 直到特定的作业 ID 达到终止状态。断言最终状态是 `成功` 且 `ota_result=成功`。
+3. **编译 + 日志跟踪** — 打开日志模态，验证行进入 xterm 终端，然后轮询 `/ui/api/queue` 以特定作业 ID 直到它达到终止状态。断言最终状态是 `success` 且 `ota_result=success`。
 4. **实时设备日志** — 打开行的汉堡菜单，点击实时日志，验证设备 API 将输出流到模态中。
 
-测试是**顺序运行**的（`workers: 1`，`fullyParallel: false`），因为它们在真实服务器上共享全局状态。
+测试以**串行**方式运行（`workers: 1`，`fullyParallel: false`），因为它们在真实服务器上共享全局状态。
 
 ## 为什么不使用 HA Ingress？
 
-该插件除了通过 HA Ingress 可用之外，还直接将端口 8765 暴露给主机网络。`/ui/api/*` 端点在直接访问时不需要身份验证（这已在 `dev-plans/SECURITY_AUDIT.md` 中的发现 F-03 中记录）。
+该插件除了通过 HA Ingress 可用之外，还直接将端口 8765 暴露给主机网络。`/ui/api/*` 端点在直接访问时不需要身份验证（这在 `dev-plans/SECURITY_AUDIT.md` 中的发现 F-03 中有记录）。
 
-对于这些烟雾测试，直接与插件端口通信是最简单的方法：没有 HA 登录流程，没有 Ingress 路径发现，没有令牌操作。如果您想测试 Ingress 路径本身，您需要设置 HA 长期访问令牌并通过 HA 前端进行导航。
+对于这些烟雾测试，直接与插件端口通信是最简单的方法：无需 HA 登录流程，无需 Ingress 路径发现，无需令牌操作。如果您想测试 Ingress 路径本身，您需要设置 HA 长期访问令牌并通过 HA 前端进行导航。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

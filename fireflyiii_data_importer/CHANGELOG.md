@@ -1,3 +1,9 @@
+## 2.3.2-4 (18-05-2026)
+- Minor bugs fixed
+## 2.3.2-3 (18-05-2026)
+- Minor bugs fixed
+## 2.3.2-2 (18-05-2026)
+- Minor bugs fixed
 
 ## 2.3.2 (2026-04-23)
 - Update to latest version from firefly-iii/data-importer (changelog : https://github.com/firefly-iii/data-importer/releases)

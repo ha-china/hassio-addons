@@ -1,34 +1,34 @@
 ## [Homeway.io](https://homeway.io/?source=addon_readme)
 
-**🎉 [介绍 Sage AI](https://homeway.io/sage-ai?source=addon_readme_sage_intro) 🎉** - **为 Home Assistant 和 Home Assistant 语音设备提供的免费 AI 助手。** 由 OpenAI 的 ChatGPT、Anthropic 的 Claud 或 Google 的 Gemini 驱动，Sage 可以实现逼真的语音和通信，与 Home Assistant 助手协同执行家庭操作、查找信息、查看天气等。Sage 提供个性化定制和超过 56 种语音。
+**🎉 [介绍 Sage AI](https://homeway.io/sage-ai?source=addon_readme_sage_intro) 🎉** - **为 Home Assistant 和 Home Assistant 语音设备提供免费的 AI 助手。** 由 OpenAI 的 ChatGPT、Anthropic 的 Claud 或 Google 的 Gemini 提供支持，Sage 使您能够与 Home Assistant 助手进行逼真的语音和沟通，执行家庭操作、查找信息、查看天气等。Sage 提供个性化定制和超过 56 种声音。
 
-Homeway 是一个 Home Assistant 社区项目，旨在为整个 Home Assistant 社区提供免费、私密和安全的云工具。
+Homeway 是一个 Home Assistant 社区项目，旨在为整个 Home Assistant 社区提供免费、私有和安全的云工具。
 
 ## 功能
 
 - 🚀 **免费。** 从任何地方远程访问您的 Home Assistant。
-- 🌿 **智能。** [Sage AI](https://homeway.io/sage-ai?source=addon_readme) 为 Home Assistant 和 Home Assistant 语音设备提供逼真的交互。
+- 🌿 **智能。** [Sage AI](https://homeway.io/sage-ai?source=addon_readme) 为与 Home Assistant 和 Home Assistant 语音设备的交互提供逼真的体验。
 - 🤖 **实用。** 使用 [Alexa](https://homeway.io/alexa?source=addon_readme) 和 [Google Assistant](https://homeway.io/googleassistant?source=addon_readme) 语音控制您的家庭。
 - 📱 **移动。** 免费远程访问官方 [Home Assistant Android 和 iOS 应用](https://homeway.io/app?source=addon_readme)
-- ⭐ **AI 就绪。** 免费远程 [MCP 服务器](https://blog.homeway.io/remote-mcp-server-for-home-assistant/?source=addon_readme) 允许 AI 机器人从任何地方访问和控制您的 Home Assistant。
-- 📺 **可流式传输。** 提供 [WebRTC 摄像头流式传输](https://blog.homeway.io/free-webrtc-video-streaming-for-home-assistant/?source=addon_readme)，带有 STUN 和 TURN 访问。
-- 🔒 **安全。** 先进的功能确保只有您能访问。
-- 🔭 **私密。** 我们永远不会存储、出售或分享您的数据。
+- ⭐ **AI 就绪。** 免费的远程 [MCP 服务器](https://blog.homeway.io/remote-mcp-server-for-home-assistant/?source=addon_readme) 使 AI 机器人能够从任何地方访问和控制您的 Home Assistant。
+- 📺 **可流式传输。** 提供 [WebRTC 摄像头流媒体传输](https://blog.homeway.io/free-webrtc-video-streaming-for-home-assistant/?source=addon_readme)，具有 STUN 和 TURN 访问权限。
+- 🔒 **安全。** 先进的功能确保只有您能够访问。
+- 🔭 **隐私。** 我们从不存储、出售或分享您的数据。
 - ⚡ **快速。** 全球服务器网络提供低延迟和高速。
-- 🛠️ **简单。** 无需维护或技术知识。您的 Home Assistant 保持在线和安全。
-- 🌍 **社区。** 由社区建设和为社区建设。加入我们的 [Discord 服务器](https://homeway.io/r/discord?source=addon_readme) 进行讨论和反馈。
+- 🛠️ **易于使用。** 无需维护或技术知识。您的 Home Assistant 保持在线和安全。
+- 🌍 **社区。** 由社区构建并为社区服务。加入我们的 [Discord 服务器](https://homeway.io/r/discord?source=addon_readme) 进行讨论和反馈。
 
 ## 现在尝试！
 
-- 点击上方的 "安装" 文字。
-- 安装完成后，点击上方的 "启动" 文字。
-- 点击上方的 "打开 Web UI" 文字。
+- 点击上面的 "安装" 文本。
+- 安装完成后，点击上面的 "启动" 文本。
+- 点击上面的 "打开 Web UI" 文本。
 - 点击按钮以链接您的 Homeway 账户。
 - 完成！
 
 如果您需要帮助，请阅读我们的 [完整设置指南](https://homeway.io/getstarted?source=addon_readme_full_guide)！
 
-### 反馈与错误
+### 反馈与问题
 
 我们的社区推动 Homeway 的发展。
 

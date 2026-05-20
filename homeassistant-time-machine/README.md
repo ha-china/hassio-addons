@@ -1,227 +1,135 @@
-# Home Assistant Time Machine Beta
+# Home Assistant 时间机器
 
-Home Assistant Time Machine is a web-based tool that acts as a "Time Machine" for your Home Assistant configuration. Browse YAML backups across automations, scripts, Lovelace dashboards, ESPHome files, and packages, then restore individual items back to your live setup with confidence.
+Home Assistant 时间机器是一个基于网页的工具，充当你的 Home Assistant 配置的“时间机器”。浏览自动化、脚本、Lovelace 仪表板、ESPHome 文件和软件包的 YAML 备份，然后有信心地将单个项目恢复到你的实时设置中。
 
-## What's New!
+## 新增功能！
 
-*   **Smart Backup:** New incremental backup mode that only saves files that have changed since the last snapshot. This significantly reduces storage usage while ensuring every snapshot appears complete and browsable in the UI.
-*   **Show Changes Only:** New toggle in settings to filter the snapshot list, showing only backups that contain changed or deleted items compared to your current live configuration. Works per-tab and filters both the snapshot list and items list.
-*   **Automation Service Call:** Trigger backups from Home Assistant automations or scripts using the `hassio.addon_stdin` service. Perfect for custom backup schedules or event-driven backups.
-*   **Diff Palettes:** Cycle through 8 new vibrant color palettes for the diff viewer by clicking the diff header bar.
+*   **备份锁定、删除和导出：** 添加了新的备份锁定功能，以防止意外删除快照。现在，你也可以使用新的右键单击上下文菜单手动删除或导出单个备份作为 .tar.gz 归档，直接从网页 UI 中操作。
+*   **HACS 集成：** 现在可以通过 HACS 作为伴侣集成！使用原生传感器跟踪备份状态，并使用 `time_machine.backup_now` 服务触发备份。
+*   **键盘导航：** 使用箭头键导航备份和项目！使用上/下键更改选择，使用左/右键切换面板。在项目上按 Enter 键查看其差异。
+*   **基于清单的备份和恢复：** 每个备份现在都包含详细的文件清单，确保恢复和变更检测完美了解文件所在位置，并将文件自动放回 YAML 结构中的确切位置。
+*   **Docker 环境变量：** 为 Docker 安装添加了对 `ESPHOME_CONFIG_PATH` 环境变量的支持，允许自定义 ESPHome 配置文件的位置。
+*   **分割配置支持：** 优化了使用 `!include`、`!include_dir_list` 和其他分割配置方法的复杂 Home Assistant 设置。
 
-![Screenshot 1](https://raw.githubusercontent.com/DiggingForDinos/HomeAssistantTimeMachineBeta/main/images/1.png)
-![Screenshot 2](https://raw.githubusercontent.com/DiggingForDinos/HomeAssistantTimeMachineBeta/main/images/2.png)
-![Screenshot 3](https://raw.githubusercontent.com/DiggingForDinos/HomeAssistantTimeMachineBeta/main/images/3.png)
-![Screenshot 4](https://raw.githubusercontent.com/DiggingForDinos/HomeAssistantTimeMachineBeta/main/images/4.png)
-![Screenshot 5](https://raw.githubusercontent.com/DiggingForDinos/HomeAssistantTimeMachineBeta/main/images/5.png)
-![Screenshot 5](https://raw.githubusercontent.com/DiggingForDinos/HomeAssistantTimeMachineBeta/main/images/6.png)
+![截图 1](https://raw.githubusercontent.com/saihgupr/HomeAssistantTimeMachine/main/images/1.png)
+![截图 2](https://raw.githubusercontent.com/saihgupr/HomeAssistantTimeMachine/main/images/2.png)
+![截图 3](https://raw.githubusercontent.com/saihgupr/HomeAssistantTimeMachine/main/images/3.png)
+![截图 4](https://raw.githubusercontent.com/saihgupr/HomeAssistantTimeMachine/main/images/4.png)
+![截图 5](https://raw.githubusercontent.com/saihgupr/HomeAssistantTimeMachine/main/images/5.png)
+![截图 6](https://raw.githubusercontent.com/saihgupr/HomeAssistantTimeMachine/main/images/6.png)
 
-## Features
+## 功能
 
-*   **Browse Backups:** Easily browse through your Home Assistant backup YAML files.
-*   **View Changes:** See a side-by-side diff of the changes between a backed-up item and the live version.
-*   **Restore Individual Items:** Restore individual automations or scripts without having to restore an entire backup.
-*   **Safety First:** Automatically creates a backup before restoring anything.
-*   **Reload Home Assistant:** Reload automations or scripts directly from the UI after a restore.
-*   **Scheduled Backups:** Configure automatic backups on a schedule.
-*   **Service Call Support:** Trigger backups from automations or scripts using the `hassio.addon_stdin` service.
-*   **Multi-language Support:** Available in English, Spanish, German, French, Dutch, and Italian.
-*   **Ingress Support:** Access through the Home Assistant UI without port forwarding.
-*   **Lovelace Backup:** Backup and restore your Lovelace dashboard configurations.
-*   **ESPHome & Packages Backup:** Optionally backup ESPHome and Packages files.
-*   **Backup Now Button:** Trigger an immediate backup with a single click.
-*   **Max Backups:** Set a limit on how many backups are kept.
-*   **Flexible Backup Locations:** Store backups in `/share`, `/backup`, `/config`, `/media`, or remote shares.
-*   **REST API:** Full API for programmatic backup management.
+*   **浏览备份：**轻松浏览你的 Home Assistant 备份 YAML 文件。
+*   **查看更改和差异调色板：**使用 8 种鲜艳的颜色调色板查看侧边差异。
+*   **恢复单个项目：**无需恢复整个备份即可恢复单个自动化或脚本。
+*   **智能备份：**增量备份模式只保存已更改的文件，显著减少存储使用量。
+*   **仅显示更改：**筛选备份，仅显示与实时配置相比包含更改或已删除项目的快照。
+*   **安全第一：**在恢复任何内容之前自动创建备份。
+*   **重新加载 Home Assistant：**在恢复后直接从 UI 中重新加载自动化或脚本。
+*   **计划备份：**按计划配置自动备份。
+*   **服务调用支持：**使用 `hassio.addon_stdin` 服务从 Home Assistant 自动化或脚本中触发备份。
+*   **多语言支持：**支持英语、西班牙语、德语、法语、荷兰语和意大利语。
+*   **入口支持：**无需端口转发即可通过 Home Assistant UI 访问。
+*   **Lovelace、ESPHome 和软件包：**全面支持备份和恢复仪表板、ESPHome 文件和软件包配置。
+*   **最大备份和灵活位置：**控制保留限制并将备份存储在 `/share`、`/backup`、`/media` 或远程共享中。
+*   **备份锁定和上下文菜单：**通过锁定你的最爱备份来防止意外删除。右键单击任何备份以即时锁定、解锁、导出或删除它。
+*   **REST API：**完整的 API 用于程序化备份管理。
 
-## Installation
+## 安装
 
-There are two ways to install Home Assistant Time Machine: as a Home Assistant add-on or as a standalone Docker container.
+有两种方式可以安装 Home Assistant 时间机器：作为 Home Assistant 插件或作为独立的 Docker 容器。
 
-### 1. Home Assistant add-on (Recommended for most users)
+### 1. Home Assistant 插件（推荐用于大多数用户）
 
-1.  **Add Repository:**
-    Click the button below to add the repository to your Home Assistant instance:
+1.  **添加存储库：**
+    点击下面的按钮将存储库添加到你的 Home Assistant 实例：
 
-    [![Open your Home Assistant instance and show the add-on store](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/DiggingForDinos/ha-addons)
+    ![打开你的 Home Assistant 实例并显示插件商店](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)(https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/saihgupr/ha-addons)
 
-    **Or manually add it:**
-    - Navigate to **Settings** → **Add-ons** → **Add-on Store**
-    - Click the three dots (⋮) in the top right corner and select **Repositories**
-    - Add the repository URL:
+    **或手动添加它：**
+    - 导航到**设置**→**插件**→**插件商店**
+    - 点击右上角的三个点（⋮）并选择**存储库**
+    - 添加存储库 URL：
       ```
-      https://github.com/DiggingForDinos/ha-addons
+      https://github.com/saihgupr/ha-addons
       ```
 
-2.  **Install the Add-on:**
-    The "Home Assistant Time Machine" add-on will now appear in the store. Click on it and then click "Install".
+2.  **安装插件：**
+    “Home Assistant 时间机器”插件现在将出现在商店中。点击它，然后点击“安装”。
 
-### 2. Standalone Docker Installation
+<details>
+<summary><h3>2. 独立 Docker 安装</h3></summary>
 
-For Docker users who aren't using the Home Assistant add-on, you have three deployment options:
+对于不使用 Home Assistant 插件的 Docker 用户，你有三种部署选项：
 
-**Option A: Docker Compose (recommended):**
+**选项 A：Docker Compose（推荐）：**
 
-1. Download the compose.yaml file:
+1. 下载 compose.yaml 文件：
    ```bash
-   curl -o compose.yaml https://raw.githubusercontent.com/DiggingForDinos/HomeAssistantTimeMachineBeta/main/compose.yaml
+   curl -o compose.yaml https://github.com/saihgupr/HomeAssistantTimeMachine/raw/branch/main/compose.yaml
    ```
 
-2. Edit the file to set your paths and credentials:
+2. 编辑文件以设置路径和凭据：
    ```bash
    nano compose.yaml
    ```
 
-3. Start the service:
+3. 启动服务：
    ```bash
    docker compose up -d
    ```
 
-**Option B: Docker Run (pre-built image):**
+**选项 B：Docker Run（预构建镜像）：**
 
 ```bash
 docker run -d \
   -p 54000:54000 \
   -e HOME_ASSISTANT_URL="http://your-ha-instance:8123" \
   -e LONG_LIVED_ACCESS_TOKEN="your-long-lived-access-token" \
+  -e ESPHOME_CONFIG_PATH="/path/to/esphome/config" \
+  -e THEME="dark" \
+  -e DEBUG_LOGS="false" \
   -v /path/to/your/ha/config:/config \
   -v /path/to/your/backups:/media \
   -v ha-time-machine-data:/data \
   --name ha-time-machine \
-  ghcr.io/diggingfordinos/homeassistanttimemachinebeta:latest
+  ghcr.io/saihgupr/homeassistanttimemachine:latest
 ```
 
-**Option C: Build locally:**
+**选项 C：本地构建：**
 
 ```bash
-git clone https://github.com/DiggingForDinos/HomeAssistantTimeMachineBeta.git
-cd HomeAssistantTimeMachineBeta/homeassistant-time-machine
+git clone https://github.com/saihgupr/HomeAssistantTimeMachine.git
+cd HomeAssistantTimeMachine/homeassistant-time-machine
 docker build -t ha-time-machine .
 
 docker run -d \
   -p 54000:54000 \
   -e HOME_ASSISTANT_URL="http://your-ha-instance:8123" \
   -e LONG_LIVED_ACCESS_TOKEN="your-long-lived-access-token" \
-  -v /path/to/your/ha/config:/config \
-  -v /path/to/your/backups:/media \
-  -v ha-time-machine-data:/data \
-  --name ha-time-machine \
-  ha-time-machine
-```
+  -e ESPHOME_CONFIG_PATH="/path/to/esphome/config"
+---
 
-Supplying the URL and token keeps credentials out of the UI. These environment variables are optional—if you set them, the settings fields are read-only; if you omit them, you can enter credentials in the web UI instead.
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 
-**Alternative:** omit the environment variables, start the container with the same volumes, then visit `http://localhost:54000` to enter credentials in the settings modal. They are stored in `/data/docker-ha-credentials.json`.
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
 
-#### Changing Options in Docker
+---
 
-After the container is running, you can toggle ESPHome support, adjust text style, and switch light/dark modes by POSTing to the app settings API. This persists the value in `/data/homeassistant-time-machine/docker-app-settings.json` so the UI reflects it on reload:
+## 📱 关注我
 
-```bash
-curl -X POST http://localhost:54000/api/app-settings \
-  -H 'Content-Type: application/json' \
-  -d '{
-        "theme": "light",
-        "esphomeEnabled": true,
-        "packagesEnabled": true,
-        "language": "de"
-      }'
-```
+扫描下面二维码，关注我。有需要可以随时给我留言：
 
-Adjust the payload if you need different paths, theme, or want to enable/disable features (`"esphomeEnabled": true|false`, `"packagesEnabled": true|false`, `"theme": light|dark`, `"language": en|es|de|fr|nl|it`).
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
 
-#### Accessing the Web Interface
+## ☕ 赞助支持
 
-After starting the container, access the web interface at `http://localhost:54000` (or your server's IP/port).
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
 
-**Note:** The HA URL and token fields in settings will be read-only if configured via environment variables, or editable if configured through the web UI.
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
 
-## Usage
-
-> **Tip:** If you expose port `54000/tcp` (for example, via the add-on's Configuration tab), you can open the UI directly at `http://your-host:54000` without relying on ingress.
-
-### Home Assistant add-on
-
-1.  **Configure the add-on:** In the add-on's configuration tab, set theme, language, esphome/packages toggle, and port.
-2.  **Start the add-on.**
-3.  **Open the Web UI:**
-    *   Use **Open Web UI** from the add-on panel to launch ingress (default recommended when the external port is disabled).
-    *   Or, if you've enabled port `54000/tcp` in the add-on configuration, browse to `http://homeassistant.local:54000` (or your configured host/port).
-4.  **In-app setup:**
-    *   In the web UI, go to the settings menu.
-    *   **Live Home Assistant Folder Path:** Set the path to your Home Assistant configuration directory (e.g., `/config`).
-    *   **Backup Folder Path:** Set the path to the directory where your backups are stored (e.g., `/media/timemachine`).
-
-### Docker Container
-
-1.  **Start the container** with the required volume mounts (see Docker installation above).
-2.  **Open the Web UI** at `http://localhost:54000` (or your server's IP/port).
-3.  **In-app setup:**
-    *   In the web UI, go to the settings menu.
-    *   **Live Home Assistant Folder Path:** Set to `/config` (this is the mounted volume).
-    *   **Backup Folder Path:** Set to `/media/timemachine` (this is the mounted volume).
-
-### Triggering Backups from Automations
-
-You can trigger a backup from Home Assistant automations or scripts using the `hassio.addon_stdin` service:
-
-```yaml
-service: hassio.addon_stdin
-data:
-  addon: homeassistant-time-machine-beta
-  input: backup
-```
-
-> **Note:** Replace `homeassistant-time-machine-beta` with your addon's slug if different.
-
-## Backup to Remote Share
-
-To configure backups to a remote share, first set up network storage within Home Assistant (Settings > System > Storage > 'Add network storage'). Name the share 'backups' and set its usage to 'Media'. Once configured, you can then specify the backup path in Home Assistant Time Machine settings as '/media/backups', which will direct backups to your remote share.
-
-## API Endpoints
-
-- **POST /api/backup-now**: Trigger an immediate backup. Requires `liveFolderPath` and `backupFolderPath`. Optional parameters (`smartBackupEnabled`, `maxBackupsEnabled`, `maxBackupsCount`, `timezone`) fall back to saved settings when not provided.
-- **POST /api/restore-automation** / **POST /api/restore-script**: Restore a single automation or script after creating a safety backup.
-- **POST /api/restore-lovelace-file** / **POST /api/restore-esphome-file** / **POST /api/restore-packages-file**: Restore Lovelace, ESPHome, or package files with automatic pre-restore backups.
-- **POST /api/get-backup-* ** & **/api/get-live-* ** families: Fetch specific items from backups or the live config (automations, scripts, Lovelace, ESPHome, packages).
-- **GET /api/schedule-backup** / **POST /api/schedule-backup**: Inspect or update scheduled backup jobs.
-- **POST /api/scan-backups**: Scan the backup directory tree and list discovered backups.
-- **POST /api/validate-path** / **POST /api/validate-backup-path**: Verify that provided directories exist and contain Home Assistant data/backups.
-- **POST /api/test-home-assistant-connection**: Confirm stored Home Assistant credentials work before saving.
-- **POST /api/reload-home-assistant**: Invoke a Home Assistant reload service (e.g., `automation.reload`).
-- **GET /api/health**: Simple status endpoint exposing version, ingress state, and timestamp.
-
-Example usage:
-```bash
-# Trigger backup
-curl -X POST http://localhost:54000/api/backup-now \
-  -H "Content-Type: application/json" \
-  -d '{"liveFolderPath": "/config", "backupFolderPath": "/media/timemachine"}'
-
-# Get scheduled jobs
-curl http://localhost:54000/api/schedule-backup
-
-# Scan backups
-curl -X POST http://localhost:54000/api/scan-backups \
-  -H "Content-Type: application/json" \
-  -d '{"backupRootPath": "/media/timemachine"}'
-```
-
-## Alternative Options
-
-For detailed history tracking powered by a local Git backend, check out [Home Assistant Version Control](https://github.com/DiggingForDinos/HomeAssistantVersionControl/). It provides complete version history for your setup by automatically tracking every change to your YAML files.
-
-## Press & Community
-
-Thank you to everyone who has written about or featured Home Assistant Time Machine!
-
-- [XDA Developers – "Home Assistant Time Machine tool is amazing"](https://www.xda-developers.com/home-assistant-time-machine-tool-is-amazing/)
-- [Glooob Domo – YouTube Video](https://www.youtube.com/watch?v=aWZ0ON8b8io)
-- [smarterkram | Olli – YouTube Video](https://www.youtube.com/watch?v=zyTExP_ebAE)
-
-## Support, Feedback & Contributing
-
-- File issues or feature requests at [GitHub Issues](https://github.com/DiggingForDinos/HomeAssistantTimeMachineBeta/issues).
-- Share feedback on usability so we can keep refining backup workflows.
-
-**If you find this add-on helpful, please ⭐ star the repository!**
+感谢您的支持与鼓励！

@@ -5,13 +5,13 @@
 ![项目维护][maintenance-shield]
 ![报告安装数量][installations-shield-stable]
 
-使用 Cloudflared 无需打开任何端口即可远程连接到您的 Home Assistant 实例。
+使用 Cloudflared，无需打开任何端口即可远程连接到您的 Home Assistant 实例。
 
 ## 关于
 
-Cloudflared 通过安全隧道将您的 Home Assistant 实例连接到 Cloudflare 的一个域名或子域名。通过这种方式，您可以在不打开路由器端口的情况下将 Home Assistant 公之于众。此外，您还可以利用 Cloudflare Teams，他们的零信任平台来进一步保护您的 Home Assistant 连接。
+Cloudflared 通过安全隧道将您的 Home Assistant 实例连接到 Cloudflare 的一个域名或子域名。通过这种方式，您可以在不打开路由器端口的情况下将 Home Assistant 暴露给互联网。此外，您还可以利用 Cloudflare Teams，他们的零信任平台来进一步保护您的 Home Assistant 连接。
 
-**要使用此应用（附加组件），您必须拥有一个使用 Cloudflare 进行 DNS 条目管理的域名（例如 example.com）。有关更多信息，请参阅我们的 [Wiki][wiki]**。
+**要使用此应用（附加组件），您必须拥有一个使用 Cloudflare 进行 DNS 条目记录的域名（例如 example.com）。您可以在我们的 [Wiki][wiki] 中找到更多相关信息**。
 
 ## 免责声明
 

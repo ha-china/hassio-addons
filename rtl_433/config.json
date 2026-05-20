@@ -1,16 +1,13 @@
 {
   "name": "rtl_433",
   "image": "ghcr.1ms.run/pbkhrv/rtl_433-hass-addons-rtl_433-{arch}",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "slug": "rtl433",
-  "description": "通过SDR棒和rtl_433接收无线传感器数据",
+  "description": "[老王杂谈说]：null",
   "url": "https://gh-proxy.org/github.com/pbkhrv/rtl_433-hass-addons/tree/main/rtl_433",
   "arch": [
-    "armhf",
-    "armv7",
     "aarch64",
-    "amd64",
-    "i386"
+    "amd64"
   ],
   "startup": "application",
   "boot": "auto",

@@ -276,54 +276,24 @@ fi
 # Build dashboard web frontend
 if [ -f "$SRC_DIR/web/package.json" ]; then
     # ── Patches for reverse-proxy compatibility (idempotent) ──
-    # The upstream dashboard assumes it's served at the URL root, using
-    # absolute paths (/api/*, /dashboard-plugins/*) that break behind a
-    # reverse proxy. We patch three files so ALL API and plugin requests
-    # are prefixed with the SPA's actual mount point — stable across HA
-    # Ingress, direct ports, custom reverse proxies, and React Router
-    # client-side navigation.
+    # Modern Hermes dashboard builds honor X-Forwarded-Prefix at runtime.
+    # Older builds need in-container source patches. Keep this tolerant:
+    # dashboard patch drift should never stop the add-on from starting.
     DASHBOARD_REBUILD="false"
+    PATCH_STATUS_FILE="$(mktemp)"
 
-    # 1. api.ts: compute BASE from import.meta.url (the JS chunk's runtime URL).
-    #    Stripping the trailing slash off `{SPA_ROOT}/assets/../` gives the
-    #    stable mount path. Also exported so usePlugins.ts can reuse it.
-    if ! grep -q 'HA-ADDON-BASE-PATCHED' "$SRC_DIR/web/src/lib/api.ts" 2>/dev/null; then
-        if grep -qE '^const BASE = ' "$SRC_DIR/web/src/lib/api.ts" 2>/dev/null; then
-            sed -i 's|^const BASE = .*|export const BASE = new URL("..", import.meta.url).pathname.replace(/\\/$/, ""); /* HA-ADDON-BASE-PATCHED */|' "$SRC_DIR/web/src/lib/api.ts"
-            DASHBOARD_REBUILD="true"
-        fi
+    if ! python /usr/local/bin/hermes-dashboard-patches "$SRC_DIR" "$PATCH_STATUS_FILE"; then
+        echo "[run] WARNING: dashboard compatibility patch failed - continuing startup"
     fi
-
-    # 2. usePlugins.ts: prefix hardcoded /dashboard-plugins/* URLs with BASE so
-    #    plugin JS/CSS loads via the same reverse-proxy route as /api/. Depends
-    #    on patch 1 having exported BASE — skip if api.ts wasn't patched.
-    #    Sanity-check surfaces a warning if upstream changes the URL syntax
-    #    (e.g. switches from template literals to string concatenation).
-    if grep -q 'HA-ADDON-BASE-PATCHED' "$SRC_DIR/web/src/lib/api.ts" 2>/dev/null && \
-       [ -f "$SRC_DIR/web/src/plugins/usePlugins.ts" ] && \
-       ! grep -q 'HA-ADDON-PLUGINS-PATCHED' "$SRC_DIR/web/src/plugins/usePlugins.ts" 2>/dev/null; then
-        sed -i \
-            -e 's|import { api } from "@/lib/api";|import { api, BASE } from "@/lib/api"; /* HA-ADDON-PLUGINS-PATCHED */|' \
-            -e 's|`/dashboard-plugins/|`${BASE}/dashboard-plugins/|g' \
-            "$SRC_DIR/web/src/plugins/usePlugins.ts"
-        if ! grep -q '${BASE}/dashboard-plugins/' "$SRC_DIR/web/src/plugins/usePlugins.ts" 2>/dev/null; then
-            echo "[run] WARNING: usePlugins.ts URL pattern changed upstream — dashboard plugins may 404"
-        fi
+    if [ -s "$PATCH_STATUS_FILE" ]; then
         DASHBOARD_REBUILD="true"
     fi
+    rm -f "$PATCH_STATUS_FILE"
 
-    # 3. vite.config.ts: inject base:"./" into defineConfig (HTML asset paths).
-    #    Ensures npm run build (called by `hermes update` / `hermes web`) also
-    #    produces relative script/link hrefs, not just our explicit vite build.
-    if ! grep -q 'HA-ADDON-BASE-INJECTED' "$SRC_DIR/web/vite.config.ts" 2>/dev/null; then
-        # Clean up bare base: "./" lines from pre-marker versions (e.g. 1.0.3-dev)
-        sed -i '/^\s*base:\s*"\.\/",\s*$/d' "$SRC_DIR/web/vite.config.ts" 2>/dev/null || true
-        sed -i 's|export default defineConfig({|export default defineConfig({\n  /* HA-ADDON-BASE-INJECTED */\n  base: "./",|' "$SRC_DIR/web/vite.config.ts"
-        DASHBOARD_REBUILD="true"
-    fi
-
-    # 4. Detect stale build (absolute paths in output → needs rebuild)
-    if grep -q 'src="/assets/' "$SRC_DIR/hermes_cli/web_dist/index.html" 2>/dev/null; then
+    # Detect stale builds with absolute Vite asset paths. HA Ingress prefixes
+    # include a long random token, so the add-on must not depend on upstream
+    # X-Forwarded-Prefix handling to rewrite /assets/* at request time.
+    if grep -Eq '(src|href)="/assets/' "$SRC_DIR/hermes_cli/web_dist/index.html" 2>/dev/null; then
         DASHBOARD_REBUILD="true"
     fi
 
@@ -587,6 +557,10 @@ SHOW_DASHBOARD_PORTS="false"
 if [ "$ENABLE_DASHBOARD" = "true" ] && [ "$DASHBOARD_AVAILABLE" = "true" ]; then
     SHOW_DASHBOARD_PORTS="true"
 fi
+SHOW_API="false"
+if [ "$ENABLE_API" = "true" ]; then
+    SHOW_API="true"
+fi
 cp /var/www/landing.html.tpl /var/www/landing.html
 sed -i \
     -e "s|%%HERMES_VERSION%%|${HERMES_VERSION}|g" \
@@ -594,6 +568,7 @@ sed -i \
     -e "s|%%SHOW_TERMINAL%%|${SHOW_TERMINAL}|g" \
     -e "s|%%SHOW_DASHBOARD%%|${SHOW_DASHBOARD}|g" \
     -e "s|%%SHOW_DASHBOARD_PORTS%%|${SHOW_DASHBOARD_PORTS}|g" \
+    -e "s|%%SHOW_API%%|${SHOW_API}|g" \
     /var/www/landing.html
 
 echo "[run] Nginx configured (ingress: $INGRESS_PORT, HTTP: $HTTP_PORT, HTTPS: $HTTPS_PORT)"

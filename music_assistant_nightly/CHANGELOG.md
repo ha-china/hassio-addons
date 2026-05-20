@@ -1,82 +1,84 @@
-# [2.9.0.dev2026051306] - 13.05.2026
+# [2.9.0.dev2026051906] - 19.05.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.9.0.dev2026051213](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026051213)_
-
-### 🚀 Features and enhancements
-
-- Allow Plugin Providers and Metadata providers to implement music related ProviderFeatures (by @MarvinSchenkel in #3811)
-- Support German radio station metadata (by @OzGav in #3881)
-
-### 🎨 Frontend Changes
-
-- Enable asynchronous download in lokalise workflow (by @OzGav in [#1766](https://github.com/music-assistant/frontend/pull/1766))
-
-### 🧰 Maintenance and dependency bumps
-
-- ⬆️ Update music-assistant-frontend to 2.17.156 (by @music-assistant-machine in #3884)
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@MarvinSchenkel, @OzGav
-
-
-# [2.9.0.dev2026051213] - 12.05.2026
-
-## 📦 Nightly Release
-
-_Changes since [2.9.0.dev2026051207](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026051207)_
+_Changes since [2.9.0.dev2026051905](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026051905)_
 
 ### 🐛 Bugfixes
 
-- Disable zone handling for a disabled player in MusicCast (by @fmunkes in #3872)
-- Fix media progress retrieval for open sessions in Audiobookshelf (by @fmunkes in #3879)
-- Fix silence after warmup buffer period (by @MarvinSchenkel in #3880)
-
-### 🎨 Frontend Changes
-
-- Add trending_stations translation key for TuneIn recommendations (by @dmoo500 in [#1765](https://github.com/music-assistant/frontend/pull/1765))
+- Preserve propagated artist / album genres across refreshes (by @OzGav in #3883)
+- Apple Music: fix rotating IDs for recommendation folders and personal stations (by @dmoo500 in #3895)
+- Fix Apple Music library_add errors (by @dmoo500 in #3907)
 
 ### 🧰 Maintenance and dependency bumps
 
-- Bump python-fullykiosk from 0.0.14 to 0.0.15 (by @dependabot[bot] in #3876)
-- Bump mypy from 1.19.1 to 2.1.0 (by @dependabot[bot] in #3877)
-- ⬆️ Update music-assistant-frontend to 2.17.155 (by @music-assistant-machine in #3878)
+- Bump snapcast from 2.3.7 to 2.3.8 (by @dependabot[bot] in #3909)
+- Bump syrupy from 5.1.0 to 5.2.0 (by @dependabot[bot] in #3910)
+- Bump codespell from 2.4.1 to 2.4.2 (by @dependabot[bot] in #3911)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@MarvinSchenkel, @dmoo500, @fmunkes
+@OzGav, @dmoo500
 
 
-# [2.9.0.dev2026051207] - 12.05.2026
+# [2.9.0.dev2026051905] - 19.05.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.9.0.dev2026051106](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026051106)_
+_Changes since [2.9.0.dev2026051706](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026051706)_
+
+### 🚀 New Providers
+
+- Add Last.fm Recommendations metadata provider (by @OzGav in #3020)
 
 ### 🚀 Features and enhancements
 
-- Add player filter to scrobble providers (by @Tommatheussen in #3823)
-- Detect Sendspin Cast Receiver failures and show them in the frontend (by @maximmaxim345 in #3853)
-- TuneIn: store image URLs as HTTPS instead of HTTP (by @dmoo500 in #3868)
+- Improve UX of Sync groups (by @MarvinSchenkel in #3897)
+- Subsonic: Provide close implementation that cleans up (by @khers in #3906)
 
-### 🐛 Bugfixes
+### 🎨 Frontend Changes
 
-- Fix imageproxy URL encoding for paths containing only spaces (by @OzGav in #3863)
-- Tolerate non-UTF-8 metadata in DLNA SOAP/NOTIFY responses (by @OzGav in #3864)
-- Fix event loop blocks when building the crossfade buffer (by @MarvinSchenkel in #3867)
-- Emby Music Provider: scrobble tracks only (by @hatharry in #3871)
-- Fix AA Background Processing to not Monopolize CPU (by @chrisuthe in #3873)
+- A11Y - Improve spoken search clear button label (by @bartbunting in [#1777](https://github.com/music-assistant/frontend/pull/1777))
+- Toggle homescreen edit mode label in user menu (by @dmoo500 in [#1768](https://github.com/music-assistant/frontend/pull/1768))
+- Remove border-radius from sidebar header logo (by @remon1496 in [#1758](https://github.com/music-assistant/frontend/pull/1758))
+- Add translation keys for Recommendations plugin provider (by @dmoo500 in [#1774](https://github.com/music-assistant/frontend/pull/1774))
+- Add Bulgarian translation (by @OzGav in [#1771](https://github.com/music-assistant/frontend/pull/1771))
+
+### 🧰 Maintenance and dependency bumps
+
+<details>
+<summary>4 changes</summary>
+
+- Bump plexapi from 4.17.2 to 4.18.1 (by @dependabot[bot] in #3598)
+- Add DTZ005 mypy rule (by @OzGav in #3770)
+- Add WeChat QR login for QQ Music (by @xiasi0 in #3898)
+- ⬆️ Update music-assistant-frontend to 2.17.158 (by @music-assistant-machine in #3912)
+
+</details>
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@MarvinSchenkel, @OzGav, @Tommatheussen, @chrisuthe, @dmoo500, @hatharry, @maximmaxim345
+@MarvinSchenkel, @OzGav, @bartbunting, @dmoo500, @khers, @remon1496, @xiasi0
+
+
+# [2.9.0.dev2026051706] - 17.05.2026
+
+## 📦 Nightly Release
+
+_Changes since [2.9.0.dev2026051606](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026051606)_
+
+### 🚀 Features and enhancements
+
+- Fix double sendspin bridges for devices with both Airplay and Cast (by @MarvinSchenkel in #3854)
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@MarvinSchenkel
 
 

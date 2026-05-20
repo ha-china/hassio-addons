@@ -1,16 +1,16 @@
-# rtl_433 MQTT 自动发现 Home Assistant 插件
+# rtl_433 MQTT Auto Discovery Home Assistant Add-on
 
-## 关于
+## About
 
-此插件是 [rtl_433_mqtt_hass.py](https://github.com/merbanan/rtl_433/blob/a20cd1a62caa52dad97e4a99f8373b2fba3986d9/examples/rtl_433_mqtt_hass.py) 脚本的一个简单封装，属于优秀的 [rtl_433](https://github.com/merbanan/rtl_433) 项目的一部分。它帮助 Home Assistant 发现并解释通过 rtl_433 发布到 MQTT 的传感器数据。
+This add-on is a simple wrapper around the [rtl_433_mqtt_hass.py](https://github.com/merbanan/rtl_433/blob/a20cd1a62caa52dad97e4a99f8373b2fba3986d9/examples/rtl_433_mqtt_hass.py) script that's part of the excellent [rtl_433](https://github.com/merbanan/rtl_433) project. It helps Home Assistant discover and interpret sensor data that's published to MQTT by rtl_433.
 
-rtl_433 是一个软件包，通过 [支持的 SDR 加密狗之一](https://triq.org/rtl_433/HARDWARE.html) 接收无线传感器数据，解码并以多种格式输出，包括 JSON 和 MQTT。rtl_433 理解的无线传感器主要在 433.92 MHz、868 MHz、315 MHz、345 MHz 和 915 MHz ISM 频段上发送数据。
+rtl_433 is a software package that receives wireless sensor data via [one of the supported SDR dongles](https://triq.org/rtl_433/HARDWARE.html), decodes and outputs it in a variety of formats including JSON and MQTT. The wireless sensors that rtl_433 understands transmit data mostly on 433.92 MHz, 868 MHz, 315 MHz, 345 MHz, and 915 MHz ISM bands.
 
-## 此脚本支持哪些传感器/设备？
+## What sensors/devices does this script support?
 
-该脚本查找 rtl_433 输出中的特定数据位，以确定数据来自哪种传感器，并帮助 Home Assistant 适当地处理这些数据。
+The script looks for specific bits of data in rtl_433's output to figure out what kind of sensor the data is coming from and to help Home Assistant handle it appropriately.
 
-更具体地说，该脚本查找 rtl_433 事件数据中的以下关键字：
+More specifically, this script looks for the following keys in rtl_433's event data:
 ```
 alarm
 battery_ok
@@ -47,84 +47,84 @@ wind_speed_km_h
 wind_speed_m_s
 ```
 
-在上述关键字均未出现的情况下，该脚本将忽略事件发生的设备，并不会通知 Home Assistant。
+In cases where none of the keys above appear, the script ignores the device that the event came from and doesn't notify Home Assistant about it.
 
-### 我如何检查我的传感器是否受支持？
+### How do I check whether my sensor is supported?
 
-一种查找方法是在一台不同于运行 Home Assistant 操作系统的计算机上，使用连接的 SDR 加密狗运行 rtl_433，带上 `-F json` 命令行参数，检查 rtl_433 输出的事件内容。如果您看不到上述提到的关键字，则说明该脚本将无法向 Home Assistant 发送该特定传感器的自动发现信息。
+One way to find out is to run rtl_433 with an SDR dongle attached on a computer other than your Home Assistant OS install, with `-F json` command line argument and check the contents of events output by rtl_433. If you don't see any of the keys mentioned above, then this script won't be able to send auto discovery information to HA for that particular sensor.
 
-### 如果我的传感器不受支持，我该怎么办？
+### What do I do if my sensor is not supported?
 
-您可以使用其中一种 MQTT HA 集成手动配置 `binary_sensor` 或 `sensor` 或设备触发器等。有关详细信息，请参见 [文档](https://www.home-assistant.io/integrations/#search/mqtt)，并在 [HA 论坛](https://community.home-assistant.io/search?q=mqtt%20sensor) 中进行搜索。
+You can use one of the MQTT HA integrations to configure `binary_sensor` or `sensor` or device trigger etc manually. See [documentation](https://www.home-assistant.io/integrations/#search/mqtt) for details and search the [HA forum](https://community.home-assistant.io/search?q=mqtt%20sensor).
 
-## 工作原理
+## How it works
 
-此插件的唯一功能是在 Home Assistant OS 管理器中或直接在 Docker 中运行 rtl_433_mqtt_hass.py。引用脚本的描述：
+All the add-on does is run rtl_433_mqtt_hass.py inside the Home Assistant OS supervisor or Docker directly. Quoting the script's description:
 
-> 发布 Home Assistant MQTT 自动发现主题，以供 rtl_433 设备使用。
+> Publish Home Assistant MQTT auto discovery topics for rtl_433 devices.
 
-> rtl_433_mqtt_hass.py 连接到 MQTT，并订阅由 rtl_433 发布到 MQTT 的 rtl_433 事件流。该脚本发布额外的 MQTT 主题，Home Assistant 可以使用这些主题自动发现并最小化配置新设备。
+> rtl_433_mqtt_hass.py connects to MQTT and subscribes to the rtl_433 event stream that is published to MQTT by rtl_433. The script publishes additional MQTT topics that can be used by Home Assistant to automatically discover and minimally configure new devices.
 
-> 该脚本发布的配置主题告诉 Home Assistant 应订阅哪些 MQTT 主题，以便接收 MQTT 作为设备主题发布的数据。
+> The configuration topics published by this script tell Home Assistant what MQTT topics to subscribe to in order to receive the data published as device topics by MQTT.
 
-有关更多信息，请参见 [原始脚本](https://github.com/merbanan/rtl_433/blob/a20cd1a62caa52dad97e4a99f8373b2fba3986d9/examples/rtl_433_mqtt_hass.py) 和 [Home Assistant MQTT 发现文档](https://www.home-assistant.io/docs/mqtt/discovery/)。
+For more information, see [the original script](https://github.com/merbanan/rtl_433/blob/a20cd1a62caa52dad97e4a99f8373b2fba3986d9/examples/rtl_433_mqtt_hass.py) and [Home Assistant MQTT discovery documentation](https://www.home-assistant.io/docs/mqtt/discovery/).
 
-## 先决条件
+## Prerequisites
 
-该插件在您已经运行 rtl_433 并将“事件”和“设备”数据发布到 MQTT 的情况下才会发挥作用。如果您希望在运行 Home Assistant OS 的同一台机器上设置这一点，最简单的方法可能是使用 [rtl_433 Home Assistant 插件](https://github.com/pbkhrv/rtl_433-hass-addons/tree/main/rtl_433)。
+This add-on doesn't do anything useful unless you already have rtl_433 running and publishing "events" and "device" data to MQTT. If you would like to set that up on the same machine that's running the Home Assistant OS, the simplest way might be to use the [rtl_433 Home Assistant Add-on](https://github.com/pbkhrv/rtl_433-hass-addons/tree/main/rtl_433).
 
-## Home Assistant 插件
+## Home Assistant Add-on
 
-### 安装
+### Installation
 
-要安装此 Home Assistant 插件，您首先需要添加 rtl_433 插件仓库：
+To install this Home Assistant add-on you need to add the rtl_433 add-on repository first:
 
- 1. 在管理面板的“插件商店”选项卡中导航。
+ 1. Navigate to the "Add-on store" tab in the Supervisor panel
 
- 2. 单击右上角的菜单按钮，选择“仓库”。
+ 2. Click the menu button in the top right corner and select "Repositories"
 
- 3. 在“添加仓库”字段中输入 https://github.com/pbkhrv/rtl_433-hass-addons。
+ 3. Enter https://github.com/pbkhrv/rtl_433-hass-addons in the "Add repository" field.
 
- 4. 向下滚动，选择 “rtl_433 MQTT 自动发现” 插件并安装它。
+ 4. Scroll down, select the "rtl_433 MQTT Auto Discovery" add-on and install it.
 
- 5. 仅在尝试添加新设备时建议运行该插件。保持“开机时启动”关闭，在插件配置中启用 `mqtt_retain`，启动插件以注册新设备，然后在完成后将其关闭。否则，`rtl_433` 可能会捕捉到许多处于边缘范围内的设备，或者像胎压监测传感器 (TPMS) 这样的瞬态设备，向 Home Assistant 添加许多不必要的设备。
+ 5. It is only recommended to run the addon when trying to add a new device. Keep "Start on boot" off, enable `mqtt_retain` in the addon configuration, start the addon to register new devices, and then shut it down when done. Otherwise, `rtl_433` is likely to pick up many devices at the edge of it's range, or transient devices like tire pressure monitoring sensors (TPMS) adding many undesired devices to Home Assistant.
 
-### 配置
+### Configuration
 
-默认情况下，该插件假定已安装官方 Mosquitto 插件。在这种情况下，MQTT 连接信息将自动确定。否则，要使用外部代理，请提供以下配置选项：
+By default, this addon assumes the official Mosquitto addon is installed. In that case, the MQTT connection information is determined automatically. Otherwise, to use an external broker, provide the following configuration options:
 
 * `mqtt_host`
 * `mqtt_port`
 * `mqtt_user`
 * `mqtt_password`
 
-以下选项适用于所有代理配置：
+The following options apply to all broker configurations:
 
-* `mqtt_retain`: 如果设置为 true，MQTT 代理将在重启之间保留配置主题。默认为 `false`。
-* `rtl_topic`: rtl_433 发布其输出的 MQTT 主题。默认为 "rtl_433"。
-* `device_topic_suffix`: 设备主题后缀，这对于保持设备主题稳定（如果更换电池时设备 ID 发生变化）非常有帮助。要使用此项，请在 rtl_433 配置中设置设备行，如 `devices=rtl_433/localhost/devices[/type][/model][/subtype]/C[channel:0],events=rtl_433/localhost/events`，然后将此值设置为匹配设备部分（例如 `devices[/type][/model][/subtype]/C[channel:0]`）。请记住，这是一个后缀 - 部分 `rtl_433/localhost` 将从 MQTT 事件主题中获取。
-* `discovery_prefix`: MQTT 主题前缀，Home Assistant [查看发现信息](https://www.home-assistant.io/docs/mqtt/discovery/#discovery_prefix)。默认为 "homeassistant"。
-* `discovery_interval`: 发布发现信息的频率，以秒为单位。默认为 600。
-* `force_update`: 在发现配置中使用 `force_update` 标志。请参见 [此处](https://www.home-assistant.io/integrations/sensor.mqtt/#force_update) 的详细信息。
+* `mqtt_retain`: MQTT broker will retain configuration topics between restarts if this is set to true. Default is `false`.
+* `rtl_topic`: MQTT topic where rtl_433 is publishing its output. Default is "rtl_433".
+* `device_topic_suffix`: The device topic suffix, which can be helpful for keeping device topics stable if they change device ID when swapping batteries. To use this, set a devices line like `devices=rtl_433/localhost/devices[/type][/model][/subtype]/C[channel:0],events=rtl_433/localhost/events` in your rtl\_433 configuration, and then set this value to match the devices part (such as `devices[/type][/model][/subtype]/C[channel:0]`). Please keep in mind that this is a suffix - the part `rtl_433/localhost` will be taken from the MQTT event topic.
+* `discovery_prefix`: MQTT topic prefix where Home Assistant is [looking for discovery information](https://www.home-assistant.io/docs/mqtt/discovery/#discovery_prefix). Default is "homeassistant".
+* `discovery_interval`: how often to publish discovery information, in seconds. Default is 600.
+* `force_update`: Use `force_update` flag in discovery configuration. See details [here](https://www.home-assistant.io/integrations/sensor.mqtt/#force_update).
 
-## Docker 中的独立自动发现
+## Stand-alone Autodiscovery in Docker
 
-按照以下步骤在专用容器中仅运行自动发现脚本。对于此设置，我们建议使用 [hertzg/rtl_433_docker](https://github.com/hertzg/rtl_433_docker) 映像来运行 `rtl_433` 本身。
+Follow these steps to run just the autodiscovery script in a dedicated container. For this setup, we recommend using the [hertzg/rtl_433_docker](https://github.com/hertzg/rtl_433_docker) images to run `rtl_433` itself.
 
 ```
 docker run -e MQTT_HOST=mqtt.example.com -e MQTT_USERNAME=username -e MQTT_PASSWORD=password ghcr.io/pbkhrv/rtl_433-hass-addons-rtl_433_mqtt_autodiscovery-amd64
 ```
 
-根据您的架构替换 `amd64`。对于 Raspberry Pi，这取决于您的 Pi 版本和操作系统，分别为 `armhf`、`armv7` 或 `aarch64`。如果不确定，在命令行运行 `arch` 可以帮助识别架构。
+Replace `amd64` with your appropriate architecture. For Raspberry Pi, this is `armhf`, `armv7`, or `aarch64` depending on your Pi version and operating system. If unsure, running `arch` at the command line can help identify the architecture.
 
-使用 docker-compose：
+Using docker-compose:
 
 ```
 version: '3'
 services:
   rtl_433_autodiscovery:
     container_name: rtl_433_autodiscovery
-    image: ghcr.io/pbkhrv/rtl_433-hass-addons-rtl_433_mqtt_autodiscovery-amd64 # 在 Raspberry Pi 上，将 `amd64` 替换为适当的架构。
+    image: ghcr.io/pbkhrv/rtl_433-hass-addons-rtl_433_mqtt_autodiscovery-amd64 # On Raspberry Pi replace `amd64` with the appropriate architecture.
     environment:
       - MQTT_HOST=mqtt.example.com
       - MQTT_USERNAME=username
@@ -135,3 +135,4 @@ services:
       # - DISCOVERY_INTERVAL=600
       # - LOG_LEVEL=debug
       # - OTHER_ARGS=--retain
+```
