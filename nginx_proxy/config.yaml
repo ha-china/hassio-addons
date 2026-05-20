@@ -1,9 +1,9 @@
 ---
-version: 4.1.0
+version: 4.2.0
 hassio_api: true
 slug: nginx_proxy
 name: NGINX Home Assistant SSL proxy
-description: '[老王杂谈说]：一个 SSL/TLS 代理'
+description: '[老王杂谈说]：SSL/TLS 代理'
 url: https://gh-proxy.org/github.com/home-assistant/addons/tree/master/nginx_proxy
 arch:
   - aarch64

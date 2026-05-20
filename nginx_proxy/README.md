@@ -1,20 +1,23 @@
-# Home Assistant App: NGINX Home Assistant SSL proxy
+# Home Assistant App: NGINX Home Assistant SSL代理
 
-设置一个使用 NGINX 的 SSL 代理，并将从端口 80 的流量重定向到 443。
+使用NGINX设置SSL代理，并将流量从端口80重定向到443。
 
-![支持 aarch64 架构][aarch64-shield] ![支持 amd64 架构][amd64-shield]
+![支持aarch64架构][aarch64-shield] ![支持amd64架构][amd64-shield]
 
 ## 关于
 
-使用 NGINX Web 服务器设置一个 SSL 代理。它通常用于转发 SSL 互联网流量，同时允许来自/至 Home Assistant 实例的未加密流量。
+使用NGINX网络服务器设置SSL代理。通常用于转发SSL互联网流量，同时允许Home Assistant实例与本地流量进行未加密通信。
 
-在开始此应用之前，请确保您已经生成了一个证书。[Duck DNS](https://github.com/home-assistant/hassio-addons/tree/master/duckdns) 应用可以生成一个 Let's Encrypt 证书，该证书可用于此应用。
+在开始此应用之前，请确保您已生成证书。[Duck DNS](https://github.com/home-assistant/hassio-addons/tree/master/duckdns)应用可以生成一个Let's Encrypt证书，该证书可用于此应用。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

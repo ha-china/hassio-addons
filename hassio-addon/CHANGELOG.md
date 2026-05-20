@@ -1,12 +1,20 @@
 # Changelog
 
+## 1.20.0
+
+### Changed
+
+- Includes dashboard release `1.20.0` with full live map zooming/panning, customizable room select integration, modern minimalist history layout, responsive snug heights, and translation files.
+
 ## 1.19.0
 
 ### Added
+
 - Includes dashboard release `1.19.0`.
 - Adds smart Status Pills for lights that are on, open doors/windows, and open covers (#143).
 
 ### Changed
+
 - Redesigns the Status Pills config modal with a cleaner layout and clearer smart-pill setup.
 - Refines the smart pill popup and entity scoping controls.
 
@@ -19,15 +27,19 @@
 ## 1.18.1
 
 ### Added
+
 - Includes dashboard release `1.18.1`.
 
 ### Changed
+
 - Reduces idle dashboard background work for wall tablets and low-power displays.
 
 ### Fixed
+
 - Fixes the add-on container healthcheck probe to use `127.0.0.1`.
 
 ### Security
+
 - Clears the `ip-address` advisory through the `express-rate-limit` dependency update.
 
 **Full Changelog**: https://github.com/oyvhov/Tunet/compare/v1.18.0...v1.18.1
@@ -35,13 +47,16 @@
 ## 1.18.0
 
 ### Added
+
 - Includes dashboard release `1.18.0`.
 - Adds a Home Assistant Lock card with lock, unlock, and open/unlatch controls for `lock.*` entities (#148).
 
 ### Changed
+
 - Registers Lock cards across dashboard add/edit/render flows.
 
 ### Fixed
+
 - Handles Home Assistant `open`/`opening` lock states and code-protected lock actions.
 - Retries settings-sync revision conflicts when the local device has unsynced changes.
 
@@ -50,14 +65,17 @@
 ## 1.17.0
 
 ### Added
+
 - Includes dashboard release `1.17.0`.
 - Adds Cards-only dashboard mode for tablet/kiosk setups, hiding the header, status pills, page navigation, Settings, Add, and Edit controls while keeping dashboard cards visible (#149).
 - To enable it, open Settings, go to Header, expand Visibility, and turn on **Show only cards**. To leave cards-only mode, press `Esc` on a keyboard or long-press an empty area of the dashboard.
 
 ### Changed
+
 - Splits specialized dashboard pages into lazy-loaded chunks so the main app bundle stays under the CI size gate.
 
 ### Fixed
+
 - Keeps critical recovery UI available in cards-only mode, including connection/auth warning surfaces, so users are not locked out of setup or troubleshooting.
 
 **Full Changelog**: https://github.com/oyvhov/Tunet/compare/v1.16.2...v1.17.0
@@ -65,6 +83,7 @@
 ## 1.16.2
 
 ### Added
+
 - Includes dashboard release `1.16.2`.
 - Small release preview for the refreshed Status Pills feature.
 - Adds new animation presets for Status Pills.
@@ -74,10 +93,12 @@
 </p>
 
 ### Changed
+
 - Refines Status Pills with animation presets, expanded color choices, clearer icon-only naming, and more predictable manual heading behavior.
 - Reduces unnecessary profile/settings bootstrap work when profile prefetch is intentionally disabled.
 
 ### Fixed
+
 - Keeps Status Pills heading and subtitle visibility settings stable across reopen and reload, and commits pending condition values when saving.
 - Prevents newly added visible sensor and alarm pills from disappearing after save by requiring an entity selection before the pill can be saved.
 - Improves Home Assistant backend auth logging and Docker fallback URL handling for easier connection troubleshooting.
@@ -87,152 +108,187 @@
 ## 1.16.1
 
 ### Added
+
 - Includes dashboard release `1.16.1`.
 
 ### Changed
+
 - Improves localization verification by extending i18n parity checks to cover French.
 
 ### Fixed
+
 - Restores full French UI activation by wiring `fr` into runtime translation mapping and language selectors.
 
 ## 1.16.0
 
 ### Added
+
 - Includes dashboard release `1.16.0`.
 - Adds support for mower cards and mower popup controls for `lawn_mower.*` entities.
 
 ### Changed
+
 - Improves Media/Sonos page presentation with empty-state messaging, stronger action labels, and more resilient grouping behavior.
 
 ### Fixed
+
 - Improves backend Home Assistant URL fallback handling for Docker-hosted setups, reducing profile/settings backend unavailable errors.
 
 ## 1.15.4
 
 ### Changed
+
 - Includes dashboard release `1.15.4`.
 - Adds sensor-card support for Home Assistant `select.*` and `input_select.*` entities (#135).
 
 ### Fixed
+
 - Keeps styled sensor select dropdowns and related popup activity inside clean card bounds without noisy retry spam.
 
 ## 1.15.3
 
 ### Changed
+
 - Includes dashboard release `1.15.3`.
 
 ### Fixed
+
 - Restores missing Weather card condition icons by switching to a stable Meteocons CDN path (#134).
 
 ## 1.15.2
 
 ### Changed
+
 - Edit button moved into the settings dropdown on mobile.
 - Sensor card mobile layout improved: name no longer truncates on large cards.
 - Haptic feedback suppressed during scroll gestures.
 
 ### Added
+
 - Toggle to show/hide page pill labels on mobile (Header settings).
 
 ## 1.15.1
 
 ### Fixed
+
 - Fixed add-on installation and update failures caused by a build dependency conflict (#128).
 
 ## 1.15.0
 
 ### Added
+
 - Battery page, Lights page, and Room Explorer page for dedicated device management.
 - Lava Lamp and Silk animated backgrounds.
 - Toast notifications and PWA support.
 
 ### Changed
+
 - Includes dashboard release `1.15.0`.
 - Restyled page navigation, Add Page dropdown, and modal type tabs.
 
 ### Security
+
 - Hashed auth tokens, added CSP headers, and hardened server routes.
 
 ## 1.14.9
 
 ### Changed
+
 - Includes dashboard release `1.14.9`.
 
 ### Fixed
+
 - Keeps the Status Pills editor open while creating a new pill so the add-on UI no longer drops the editor pane mid-edit.
 
 ## 1.14.8
 
 ### Changed
+
 - Includes dashboard release `1.14.8`.
 
 ### Fixed
+
 - Keeps mobile sensor card titles, controls, and range visuals inside compact card bounds on narrow screens.
 
 ## 1.14.7
 
 ### Changed
+
 ### Fixed
+
 - Includes dashboard release `1.14.7`.
 - Preserves working OAuth API calls when proactive refresh fails temporarily and keeps backend validation responses aligned with real auth failures versus reachability errors.
 
 ## 1.14.6
 
 ### Changed
+
 - Includes dashboard release `1.14.6`.
 
 ### Fixed
+
 - Keeps long update names inside the Updates panel layout instead of overflowing the action area.
 
 ### Security
+
 - Restricts Supervisor ingress header trust to explicit add-on mode while preserving Home Assistant sidebar ingress access.
 
 ## 1.14.5
 
 ### Fixed
+
 - Report clear error and prevent redirect loops when using an HTTP Home Assistant URL from an HTTPS dashboard (#108).
 
 ## 1.14.4
 
 ### Fixed
+
 - Prevent spurious logouts when the backend fails to connect to the Home Assistant URL (#106).
 
 ## 1.14.3
 
 ### Changed
+
 - Includes dashboard release `1.14.3`.
 - Improves mobile-friendly layouts for core card types (Alarm, Android TV, Car, Climate, Cover, Cost, Fan, Light, Media, Nordpool, Room, and Vacuum).
 
 ## 1.14.2
 
 ### Changed
+
 - Includes dashboard release `1.14.2`.
 - Refreshes Home Assistant OAuth access tokens proactively for protected API calls and restores API auth from stored browser sessions during startup.
 
 ### Fixed
+
 - Reduces repeated invalid-auth websocket validation attempts against Home Assistant when Docker or add-on requests reuse a stale token.
 
 ## 1.14.1
 
 ### Changed
+
 - Includes dashboard release `1.14.1`.
 - Restores persistent OAuth browser sessions so login survives closing and reopening the browser.
 
 ### Fixed
+
 - Preserves same-browser OAuth reuse across tabs while keeping refreshed session tokens synchronized.
 
 ## 1.14.0
 
 ### Changed
+
 - Includes dashboard release `1.14.0`.
 - Restores Docker and add-on compatibility for protected backend calls with internal and fallback Home Assistant URL handling.
 - Improves multi-device settings sync with revision-checked conflict handling and immediate reconciliation.
 
 ### Fixed
+
 - Reduces lazy-loaded chunk failures by removing asset throttling.
 - Fixes Status Pills editor behavior when reselecting the same pill.
 
 ### Security
+
 - Hardens Profiles and Settings authorization by validating Home Assistant identity on the backend.
 - Limits OAuth token persistence to the browser session.
 

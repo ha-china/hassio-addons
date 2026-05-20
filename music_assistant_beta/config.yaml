@@ -1,7 +1,7 @@
 name: Music Assistant (BETA)
-version: 2.9.0b11
+version: 2.9.0b13
 slug: music_assistant_beta
-description: '[老王杂谈说]：音乐助手服务器的 Beta 版本。'
+description: '[老王杂谈说]：音乐助手服务器 Beta 版本'
 url: https://music-assistant.io
 arch:
   - amd64
@@ -13,6 +13,7 @@ auth_api: true
 host_network: true
 ingress: true
 ingress_port: 8094
+audio: true
 panel_icon: mdi:music-assistant
 panel_title: Music Assistant
 panel_admin: false

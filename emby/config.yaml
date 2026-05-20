@@ -5,7 +5,7 @@ backup_exclude:
   - "*/cache/"
   - "*/transcoding-temp/"
   - "*/logs/*"
-description: '[老王杂谈说]：一个免费的软件媒体系统，让你掌控管理和流式传输你的媒体'
+description: '[老王杂谈说]：一个免费软件媒体系统，让您掌控管理和流式传输您的媒体'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -119,5 +119,5 @@ schema:
 slug: emby
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/emby
-version: "4.9.3.0"
+version: "4.9.5.0"
 video: true

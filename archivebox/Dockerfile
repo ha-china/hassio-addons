@@ -1,7 +1,5 @@
 ARG BUILD_FROM
-FROM docker.1ms.run/archivebox/archivebox
-
-VOLUME [ "/share" ]
+FROM archivebox/archivebox
 	
 COPY run.sh /
 RUN chmod a+x /run.sh

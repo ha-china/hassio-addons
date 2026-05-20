@@ -7,7 +7,7 @@
     "i386"
   ],
   "boot": "auto",
-  "description": "ArchiveBox 是一个强大的、自托管的互联网存档解决方案，用于收集、保存和查看您想要离线保留的网站。",
+  "description": "[老王杂谈说]：null",
   "environment": {},
   "map": [
     "addon_config:rw"
@@ -21,9 +21,9 @@
   },
   "slug": "archivebox",
   "startup": "services",
-  "upstream": "stable-2024-12-15",
+  "upstream": "stable-2026-05-18",
   "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons/tree/main/archivebox",
-  "version": "stable-2024-12-15",
+  "version": "stable-2026-05-18",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8000]",
   "panel_admin": false,
   "ingress": false,
