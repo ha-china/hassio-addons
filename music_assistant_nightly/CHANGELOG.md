@@ -1,3 +1,57 @@
+# [2.9.0.dev2026052106] - 21.05.2026
+
+## 📦 Nightly Release
+
+_Changes since [2.9.0.dev2026052010](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026052010)_
+
+### 🎨 Frontend Changes
+
+- Fix auto-refresh toggle on server logs page (by @OzGav in [#1784](https://github.com/music-assistant/frontend/pull/1784))
+- Use server-derived color palette via `MediaItemPalette` (by @maximmaxim345 in [#1782](https://github.com/music-assistant/frontend/pull/1782))
+
+### 🧰 Maintenance and dependency bumps
+
+- ⬆️ Update music-assistant-models to 1.1.120 (by @music-assistant-machine in #3937)
+- ⬆️ Update music-assistant-frontend to 2.17.161 (by @music-assistant-machine in #3940)
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@OzGav, @maximmaxim345
+
+
+# [2.9.0.dev2026052010] - 20.05.2026
+
+## 📦 Nightly Release
+
+_Changes since [2.9.0.dev2026052006](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026052006)_
+
+### 🐛 Bugfixes
+
+- Sonos S1: Implement select_source for line-in support (by @MarvinSchenkel in #3925)
+- Streams: Handle empty supported_sample_rates in get_output_format (by @MarvinSchenkel in #3926)
+- Fix HEOS showing incorrect Now Playing (by @Tommatheussen in #3928)
+- Close coroutines when submitted in rapid succession (by @MarvinSchenkel in #3929)
+- Fix issues with M4B audiobooks (by @OzGav in #3930)
+
+### 🎨 Frontend Changes
+
+- Fix Audio Pipeline volume normalisation line (by @OzGav in [#1752](https://github.com/music-assistant/frontend/pull/1752))
+- Fix genre casing (by @OzGav in [#1744](https://github.com/music-assistant/frontend/pull/1744))
+
+### 🧰 Maintenance and dependency bumps
+
+- Improve lastfm recommendations (by @OzGav in #3922)
+- ⬆️ Update music-assistant-frontend to 2.17.160 (by @music-assistant-machine in #3927)
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@MarvinSchenkel, @OzGav, @Tommatheussen
+
+
 # [2.9.0.dev2026052006] - 20.05.2026
 
 ## 📦 Nightly Release
@@ -41,72 +95,5 @@ _Changes since [2.9.0.dev2026051906](https://github.com/music-assistant/server/r
 Special thanks to the following contributors who helped with this release:
 
 @MarvinSchenkel, @OzGav, @dmoo500, @loopj, @maximmaxim345
-
-
-# [2.9.0.dev2026051906] - 19.05.2026
-
-## 📦 Nightly Release
-
-_Changes since [2.9.0.dev2026051905](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026051905)_
-
-### 🐛 Bugfixes
-
-- Preserve propagated artist / album genres across refreshes (by @OzGav in #3883)
-- Apple Music: fix rotating IDs for recommendation folders and personal stations (by @dmoo500 in #3895)
-- Fix Apple Music library_add errors (by @dmoo500 in #3907)
-
-### 🧰 Maintenance and dependency bumps
-
-- Bump snapcast from 2.3.7 to 2.3.8 (by @dependabot[bot] in #3909)
-- Bump syrupy from 5.1.0 to 5.2.0 (by @dependabot[bot] in #3910)
-- Bump codespell from 2.4.1 to 2.4.2 (by @dependabot[bot] in #3911)
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@OzGav, @dmoo500
-
-
-# [2.9.0.dev2026051905] - 19.05.2026
-
-## 📦 Nightly Release
-
-_Changes since [2.9.0.dev2026051706](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026051706)_
-
-### 🚀 New Providers
-
-- Add Last.fm Recommendations metadata provider (by @OzGav in #3020)
-
-### 🚀 Features and enhancements
-
-- Improve UX of Sync groups (by @MarvinSchenkel in #3897)
-- Subsonic: Provide close implementation that cleans up (by @khers in #3906)
-
-### 🎨 Frontend Changes
-
-- A11Y - Improve spoken search clear button label (by @bartbunting in [#1777](https://github.com/music-assistant/frontend/pull/1777))
-- Toggle homescreen edit mode label in user menu (by @dmoo500 in [#1768](https://github.com/music-assistant/frontend/pull/1768))
-- Remove border-radius from sidebar header logo (by @remon1496 in [#1758](https://github.com/music-assistant/frontend/pull/1758))
-- Add translation keys for Recommendations plugin provider (by @dmoo500 in [#1774](https://github.com/music-assistant/frontend/pull/1774))
-- Add Bulgarian translation (by @OzGav in [#1771](https://github.com/music-assistant/frontend/pull/1771))
-
-### 🧰 Maintenance and dependency bumps
-
-<details>
-<summary>4 changes</summary>
-
-- Bump plexapi from 4.17.2 to 4.18.1 (by @dependabot[bot] in #3598)
-- Add DTZ005 mypy rule (by @OzGav in #3770)
-- Add WeChat QR login for QQ Music (by @xiasi0 in #3898)
-- ⬆️ Update music-assistant-frontend to 2.17.158 (by @music-assistant-machine in #3912)
-
-</details>
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@MarvinSchenkel, @OzGav, @bartbunting, @dmoo500, @khers, @remon1496, @xiasi0
 
 

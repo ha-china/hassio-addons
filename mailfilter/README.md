@@ -1,21 +1,21 @@
-# Home Assistant App: 邮件过滤器
+# Home Assistant App: Mailfilter
 
-[![发布状态][发布盾牌]][发布] ![项目阶段][项目阶段盾牌] ![维护状态][维护盾牌]
+[![发布][发布盾牌]][发布] ![项目阶段][项目阶段盾牌] ![维护状态][维护盾牌]
 
-Rspamd 邮件过滤器，可选 ClamAV 抗病毒功能...
-请注意！ClamAV 会消耗大量内存！
-不建议在内存小于 6GB 的设备上使用。
+Rspamd 邮件过滤器，可选的 clamav 抗病毒功能...
+请注意！clamav 会消耗大量内存！
+不建议在内存低于 6GB 的设备上使用。
 
 ## 关于
 
-重要：此应用要求已安装邮件服务器应用！
+重要：此应用要求已安装 Mailserver 应用！
 
 此应用为您的邮件服务器提供邮件过滤器。
 
 [维护盾牌]: https://img.shields.io/maintenance/yes/2026.svg
-[项目阶段盾牌]: https://img.shields.io/badge/project%20stage-实验性-黄色.svg
-[发布盾牌]: https://img.shields.io/badge/version-v5.1.0-蓝色.svg
-[发布]: https://github.com/erik73/app-mailfilter/tree/v5.1.0
+[项目阶段盾牌]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
+[发布盾牌]: https://img.shields.io/badge/version-v5.1.1-blue.svg
+[发布]: https://github.com/erik73/app-mailfilter/tree/v5.1.1
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

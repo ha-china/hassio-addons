@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.20.2
+
+### Changed
+- Add release notes.
+
+## 1.20.1
+
+### Changed
+- Includes dashboard release `1.20.1`.
+- Broadens vacuum map entity auto-detection to cover both camera and image domains with friendly-name token matching.
+- Persists vacuum map zoom and pan per vacuum so the map view restores when reopening the modal.
+
+### Fixed
+- Fixes vacuum map detection for setups where the entity friendly name (but not the entity ID) references the vacuum.
+- Adds Norwegian `kart` keyword to fallback map entity discovery.
+- Fixes ModernDropdown portal click-outside handling.
+
 ## 1.20.0
 
 ### Changed
