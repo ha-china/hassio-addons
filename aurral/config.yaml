@@ -1,12 +1,13 @@
 name: Aurral
-version: "1.76.17"
+version: "1.76.17-2"
 slug: aurral
 description: >-
-  [老王杂谈说]：null
+  [老王杂谈说]：为 Lidarr 提供自托管音乐发现、需求管理、流程和播放列表导入，并包含基于媒体库的推荐。
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/blob/master/aurral/README.md
 arch:
   - aarch64
   - amd64
+image: ghcr.1ms.run/alexbelgium/aurral-{arch}
 init: false
 ports:
   3001/tcp: 3001
@@ -17,11 +18,9 @@ map:
   - addon_config:rw
   - share:rw
   - media:rw
-env_vars:
-  - name: WEEKLY_FLOW_FOLDER
-    description: "Path for Navidrome smart playlist files (weekly flow)"
-    required: false
 options:
   download_folder: /share/aurral/downloads
+  weekly_flow_folder: weekly-flow
 schema:
   download_folder: str
+  weekly_flow_folder: str

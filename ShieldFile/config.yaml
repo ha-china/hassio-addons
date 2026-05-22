@@ -1,7 +1,7 @@
 name: "ShieldFile"
-version: "2.3.2"
+version: "2.3.3"
 slug: "shieldfile"
-description: "[老王杂谈说]：安全的基于Web的文件管理器（SFTP over HTTPS）"
+description: "[老王杂谈说]：null"
 url: "https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/ShieldFile"
 arch:
   - aarch64

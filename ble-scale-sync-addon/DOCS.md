@@ -86,7 +86,7 @@ Add-on v1.8.1 bumps `garminconnect` to 0.3.x, which uses a new native auth engin
 
 ## Advanced: Custom Config
 
-For advanced setups (multi-user, additional exporters like InfluxDB/Webhook/Ntfy/Strava/File, or alternative BLE transports), enable **Use custom config.yaml** and place your configuration at:
+For advanced setups (multi-user, additional exporters like InfluxDB/Webhook/Ntfy/Telegram/Intervals.icu/Strava/File, or alternative BLE transports), enable **Use custom config.yaml** and place your configuration at:
 
 ```
 /share/ble-scale-sync/config.yaml

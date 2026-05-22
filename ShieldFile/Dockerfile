@@ -1,7 +1,7 @@
-ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.1.1
 # hadolint ignore=DL3006
 # renovate: datasource=docker depName=filebrowser/filebrowser
-FROM filebrowser/filebrowser:v2.63.2 AS filebrowser
+FROM filebrowser/filebrowser:v2.63.5 AS filebrowser
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
@@ -18,12 +18,17 @@ ENV FILEBROWSER_VERSION="v2.53.1"
 # hadolint ignore=DL3018,DL4006
 
 # App metadata (injected by CI)
-ENV APP_VERSION="2.3.1"
+ENV APP_VERSION="2.3.2"
 ENV APP_NAME="ShieldFile"
 ENV APP_SLUG="shieldfile"
 ENV APP_UNSUPPORTED="false"
 
-RUN apk add --no-cache -u libssl3 libcrypto3 curl bash dos2unix openssl nginx \
+RUN \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/main" > /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/community" >> /etc/apk/repositories \
+    && apk add --no-cache musl musl-dev \
+    && apk upgrade --no-cache --available \
+    && apk add --no-cache libssl3 libcrypto3 curl bash dos2unix openssl nginx \
     && mkdir -p /data/database
 
 COPY --from=filebrowser /bin/filebrowser /usr/local/bin/filebrowser
