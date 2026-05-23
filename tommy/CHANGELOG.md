@@ -1,5 +1,11 @@
 # TOMMY
 
+## 4.0.0
+
+### Major Changes
+- New dashboard UI
+- **Breaking change:** Matter integration is now disabled by default. It can be enabled in the dashboard.
+
 ## 3.1.6
 
 ### Minor Changes

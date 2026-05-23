@@ -69,5 +69,5 @@ slug: brave
 tmpfs: true
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
-version: "1.90.122-ls99"
+version: "1.90.124-ls101"
 video: true

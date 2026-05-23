@@ -1,7 +1,7 @@
 name: Music Assistant
-version: 2.8.7
+version: 2.8.8
 slug: music_assistant
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：音乐助手服务器是一个免费开源的媒体库管理器，它可以连接您的流媒体服务以及多种连接的音箱。'
 url: https://music-assistant.io
 arch:
   - amd64
@@ -13,6 +13,7 @@ auth_api: true
 host_network: true
 ingress: true
 ingress_port: 8094
+audio: true
 panel_icon: mdi:music-assistant
 panel_title: Music Assistant
 panel_admin: false

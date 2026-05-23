@@ -1,13 +1,13 @@
 # Home Assistant App: freshrss
 
-一个免费的自托管RSS和Atom订阅源聚合器。
+一个免费的自托管 RSS 和 Atom 订阅聚合器。
 
 ## 关于
 
-FreshRSS是一个自托管RSS和Atom订阅源聚合器。
-它轻量级、易于使用、功能强大且可自定义。
+FreshRSS 是一个自托管的 RSS 和 Atom 订阅聚合器。
+它轻量级、易于使用、功能强大且可定制。
 
-![freshrss预览][preview]
+![freshrss 预览][preview]
 
 [preview]: https://github.com/einschmidt/app-freshrss/raw/main/images/freshrss.webp
 ---

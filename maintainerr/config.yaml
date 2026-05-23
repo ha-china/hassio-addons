@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：用于 Plex、Jellyfin 和 Emby 的基于规则的媒体清理工具。创建合集，并可选择删除未观看内容。'
+description: '[老王杂谈说]：null'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -87,5 +87,5 @@ schema:
   TZ: str?
 slug: maintainerr
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/maintainerr
-version: "3.11.2"
+version: "3.12.0"
 webui: "[PROTO:ssl]://[HOST]:[PORT:6246]"

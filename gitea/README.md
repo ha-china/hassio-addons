@@ -1,10 +1,10 @@
-## 🚀 开发请求 : [✨ [请求] 访问 Gitea app.ini (于 2025-06-10 打开)](https://github.com/alexbelgium/hassio-addons/issues/1907) 由 [@UplandJacob](https://github.com/UplandJacob)
+## 🛠 开发请求 : [✨ [请求] 访问 Gitea app.ini (于 2025-06-10 打开)](https://github.com/alexbelgium/hassio-addons/issues/1907) 由 [@UplandJacob](https://github.com/UplandJacob)
 # Home Assistant 插件: Gitea
 
 
-我在业余时间维护这个以及其他 Home Assistant 插件：跟进上游更改、Home Assistant 更改以及在真实硬件上测试需要花费大量的时间（以及一些金钱）。我经常使用我 >110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我自身不使用的测试服务，如 vpn），以便进行故障排除和改进插件。
+我在业余时间维护这个和其他 Home Assistant 插件：跟进上游更改、HA 更改以及在实际硬件上的测试需要花费大量时间（以及一些金钱）。我经常使用 5-10 个我 >110 个插件，所以我安装了测试机器（并购买了一些我自己不使用的测试服务，如 vpn）来调试和改进插件。
 
-如果这个插件为您节省了时间或使您的设置更加简便，我将非常感谢您的支持！
+如果这个插件为您节省了时间或使您的设置更加简单，我将非常感激您的支持！
 
 [![请我喝杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -12,7 +12,7 @@
 ## 插件信息
 
 ![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgitea%2Fconfig.yaml)
-![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgitea%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgitea%2Fconfig.yaml)
 ![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fgitea%2Fconfig.yaml)
 
 [![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
@@ -22,34 +22,34 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有给我的仓库加星的人！要加星，请点击下面的图片，然后它将出现在右上角。谢谢！_
+_感谢所有为我的仓库点星的人！要点星，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
-[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![Stargazers 仓库清单 for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
 ![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/gitea/stats.png)
 
 ## 关于
 
-[Gitea](https://about.gitea.com/) 是一个轻松的自托管一站式软件开发服务，它包括 Git 托管、代码审查、团队协作、包注册和 CI/CD。它与 GitHub、Bitbucket 和 GitLab 类似。
+[Gitea](https://about.gitea.com/) 是一个简单的自托管一站式软件开发服务，它包括 Git 托管、代码审查、团队协作、包注册和 CI/CD。它与 GitHub、Bitbucket 和 GitLab 类似。
 
-增加了各种调整和配置选项。
+添加了各种调整和配置选项。
 此插件基于 [docker 镜像](https://hub.docker.com/r/gitea/gitea)。
 
 ## 配置
 
-Web 界面可以在 <http://homeassistant:PORT> 或通过侧边栏使用 Ingress 访问。
-可以通过应用 Web 界面进行配置，除了以下选项之外。
+Webui 可以在 <http://homeassistant:PORT> 或通过侧边栏使用入口找到。
+配置可以通过应用 webUI 完成，除了以下选项。
 
 ### 选项
 
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|---------|------|
+| 选项 | 类型 | 默认 | 描述 |
+|--------|------|---------|-------------|
 | `ssl` | bool | `false` | 启用 Web 界面的 HTTPS |
-| `certfile` | str | `fullchain.pem` | SSL 证书文件（必须位于 /ssl） |
-| `keyfile` | str | `privkey.pem` | SSL 密钥文件（必须位于 /ssl） |
-| `APP_NAME` | str | | Gitea 应用程序名称 |
-| `DOMAIN` | str | | 要访问的域（默认：homeassistant.local） |
-| `ROOT_URL` | str | | 自定义根 URL（用于特定的路由需求） |
+| `certfile` | str | `fullchain.pem` | SSL 证书文件（必须位于 /ssl）|
+| `keyfile` | str | `privkey.pem` | SSL 密钥文件（必须位于 /ssl）|
+| `APP_NAME` | str | | Gitea 应用程序的名称 |
+| `DOMAIN` | str | | 要访问的域名（默认：homeassistant.local）|
+| `ROOT_URL` | str | | 自定义根 URL（用于特定的路由需求）|
 
 ### 示例配置
 
@@ -64,25 +64,25 @@ ROOT_URL: "http://homeassistant.local:3000"
 
 ### 自定义脚本和环境变量
 
-此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
+此插件支持通过 `addon_config` 映射自定义脚本和环境变量：
 
 - **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（名称为大写或小写）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
 ## 安装
 
 此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在监督器的插件存储中右上角，或点击下面的按钮如果您已配置我的 HA）
-   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的 supervisor 插件存储中，或点击下面的按钮如果您已配置我的 HA）
+   [![打开您的 Home Assistant 实例并显示具有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 点击“保存”按钮以存储您的配置。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切顺利。
-1. 前往 Web 界面，您将在那里初始化应用程序
-1. 重启插件，以应用任何应该应用的操作
+1. 检查插件的日志以查看一切是否顺利。
+1. 前往 webui，您将初始化应用程序
+1. 重启插件，以应用应应用的任何选项
 
-[仓库链接]: https://github.com/alexbelgium/hassio-addons
+[repository]: https://github.com/alexbelgium/hassio-addons
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
