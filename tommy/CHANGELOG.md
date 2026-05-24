@@ -1,5 +1,10 @@
 # TOMMY
 
+## 4.0.1
+
+### Minor Changes
+- Fixed a bug where the QR code for the Matter integration wasn't shown when trial mode was paused.
+
 ## 4.0.0
 
 ### Major Changes

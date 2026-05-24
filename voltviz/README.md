@@ -1,35 +1,35 @@
 # Home Assistant App: VoltViz
 
-一个动态的、实时的音乐可视化工具，将声音转化为令人惊叹的视觉体验。与系统音频、麦克风以及[音乐助手](https://music-assistant.io/)（通过[Sendspin](https://www.sendspin-audio.com/))同步支持，并观看您的音乐变得生动起来。
+一个动态的实时音乐可视化器，将声音转化为惊人的视觉体验。与系统音频、麦克风以及[音乐助手](https://music-assistant.io/)（通过[Sendspin](https://www.sendspin-audio.com/)）同步支持，并观看您的音乐栩栩如生。
 
 ![VoltViz](https://raw.githubusercontent.com/sanderdw/voltviz/main/images/home-assistant/music-assistant.png)
 
-## 特性
+## 功能
 
-- 30多种令人惊叹的视觉效果样式（粒子效果、3D、复古、节日等）
+- 30+ 种惊人的可视化风格（粒子效果、3D、复古、节日等）
 - 通过麦克风、系统音频或Sendspin流实时音频输入
 - 使用Three.js和WebGL进行GPU加速渲染
-- 通过Sendspin集成了音乐助手
-- 支持通过URL参数的视觉化和设置深度链接
+- 通过Sendspin集成音乐助手
+- 支持通过URL参数进行可视化器和设置深链接
 
 ## 安装
 
-1. 将仓库添加到Home Assistant：`https://github.com/sanderdw/hassio-addons`
+1. 将存储库添加到Home Assistant：`https://github.com/sanderdw/hassio-addons`
 2. 安装**VoltViz**应用
 3. 启动应用
 4. 点击**打开Web UI**通过Ingress访问VoltViz
 5. 连接到Sendspin（用于音乐助手）
 6. 播放音乐
-7. 选择VoltViz播放器（在连接后音乐助手中自动显示）
+7. 选择VoltViz播放器（在连接到音乐助手后自动显示）
 
 YouTube视频：[https://youtu.be/ONP__FHpd-M](https://youtu.be/ONP__FHpd-M)
 <video src="https://uto-mix.sanwil.net/install-voltviz.mp4" type="video/mp4" />
 
 ## 配置
 
-| 选项         | 描述                   |
-|--------------|------------------------|
-| `SENDSPIN_URL` | (可选) 您Sendspin服务器的内部URL，用于服务器端代理。示例：`http://d5369777-music-assistant:8927` |
+| 选项 | 描述 |
+|------|------|
+| `SENDSPIN_URL` | （可选）用于服务器端代理的Sendspin服务器内部URL。例如：`http://d5369777-music-assistant:8927` |
 
 ## Ingress
 
@@ -41,36 +41,36 @@ VoltViz通过[Sendspin](https://www.sendspin-audio.com/)支持[音乐助手](htt
 
 ### 服务器端代理（推荐）
 
-默认情况下，VoltViz直接从浏览器连接到Sendspin。这仅在内部网络且没有HTTPS（由于混合内容限制）的情况下工作。为了解决这个问题，应用可以通过服务器端代理Sendspin：
+默认情况下，VoltViz从浏览器直接连接到Sendspin。这仅在内部网络上且没有HTTPS（由于混合内容限制）的情况下有效。为了解决这个问题，应用可以通过服务器端代理Sendspin：
 
-1. 在应用**配置**标签中，将`SENDSPIN_URL`设置为您的音乐助手的内部地址：
+1. 在应用的**配置**标签中，将`SENDSPIN_URL`设置为音乐助手的内部地址：
    ```
    http://d5369777-music-assistant:8927
    ```
-2. 重新启动应用
+2. 重启应用
 3. 打开VoltViz并点击Sendspin按钮
-4. 输入`./sendspin-proxy/`作为服务器URL并点击连接
+4. 将服务器URL输入为`./sendspin-proxy/`并点击连接
 
-这会将所有Sendspin流量（包括WebSocket）通过HA Ingress路由，因此它可以通过HTTPS工作，而不需要直接访问音乐助手服务器。
+这将使所有Sendspin流量（包括WebSocket）通过HA Ingress路由，因此即使在没有直接网络访问音乐助手服务器的情况下，也可以通过HTTPS工作。
 
-您也可以通过将`?sendspin=./sendspin-proxy/`附加到VoltViz URL来将其保存为书签——连接对话框将自动打开，并预填入URL。
+您也可以通过将`?sendspin=./sendspin-proxy/`附加到VoltViz URL来将其添加到书签——连接对话框将自动打开并预填充URL。
 
 ### 直接连接
 
 或者，点击Sendspin按钮并直接输入服务器URL（例如`http://192.168.1.100:8927`）。这需要浏览器从服务器获取HTTP访问。
 
-## 深度链接支持
+## 深链接支持
 
-您可以使用URL参数直接链接到特定的可视化效果，并使用自定义设置：
+您可以使用URL参数直接链接到特定的可视化器并使用自定义设置：
 
-| 参数       | 描述                                 | 默认值 |
-|------------|--------------------------------------|--------|
-| viz        | 视觉化效果名称（例如tunnel，sphere）   | sphere |
-| sensitivity | 音频反应乘数（0.1–3.0）               | 1.0    |
-| speed      | 动画速度乘数（0.1–3.0）               | 1.0    |
-| hueShift   | 颜色偏移度（0–360）                   | 0      |
-| scale      | 元素缩放乘数（0.5–3.0）               | 1.0    |
-| sendspin   | Sendspin服务器URL                     |        |
+| 参数   | 描述                         | 默认值 |
+|--------|------------------------------|--------|
+| viz    | 可视化器名称（例如tunnel，sphere） | sphere |
+| sensitivity | 音频反应乘数（0.1–3.0）       | 1.0    |
+| speed  | 动画速度乘数（0.1–3.0）       | 1.0    |
+| hueShift | 颜色偏移度（0–360）           | 0      |
+| scale  | 元素缩放乘数（0.5–3.0）        | 1.0    |
+| sendspin | Sendspin服务器URL             |        |
 
 ## 更多信息
 

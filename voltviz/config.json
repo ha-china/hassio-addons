@@ -1,8 +1,8 @@
 {
   "name": "VoltViz",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "slug": "voltviz",
-  "description": "[老王杂谈说]：null",
+  "description": "[老王杂谈说]：一款将声音转化为惊艳视觉体验的动态实时音乐可视化器",
   "arch": [
     "aarch64",
     "amd64"
