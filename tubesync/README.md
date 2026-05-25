@@ -1,30 +1,31 @@
-# 家庭助理插件：TubeSync
+# Home Assistant 插件：Tubesync
 
-这只是一个测试。不确定是否有效。
+这只是一个测试。不确定是否正常工作。
 
-TubeSync 是一个 YouTube 的 PVR（个人视频录制器）。或者说，就像 Sonarr 但针对 YouTube（内置下载客户端）。它旨在同步 YouTube 中的频道和播放列表到本地目录，并在下载媒体后更新您的媒体服务器。
+TubeSync 是一个 YouTube 的个人视频录制器（PVR）。或者说，就像 Sonarr 但针对 YouTube（带有内置的下载客户端）。它旨在将 YouTube 的频道和播放列表同步到本地目录，并在媒体下载后更新您的媒体服务器。
 
-[GitHub 项目链接](https://github.com/meeb/tubesync)
+https://github.com/meeb/tubesync
 
-_感谢所有为我的仓库点星的人！要点星，请点击下面的图片，然后它将出现在右上角。谢谢！_
+_感谢所有星标了我的仓库的人！要星标，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
-![点星图标](https://reporoster.com/stars/jdeath/homeassistant-addons)
+![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)
 
-[![@jdeath/homeassistant-addons 的 Star 仓库名单](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 
 ## 安装
 
 安装此插件相当简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. 将我的 Hass.io 插件仓库[仓库地址](https://github.com/jdeath/homeassistant-addons)添加到您的 Hass.io 实例。
+1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例。
 1. 安装此插件。
 1. 创建目录 /config/addon_config/tubesync 以存储您的配置。
 1. 启动插件。
-1. 检查插件的日志，以查看是否一切顺利。
+1. 检查插件的日志以查看一切是否顺利。
 1. 在 homeassistant:4848 打开 WebUI
 
-[仓库地址](https://github.com/jdeath/homeassistant-addons)
+
+[repository]: https://github.com/jdeath/homeassistant-addons
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

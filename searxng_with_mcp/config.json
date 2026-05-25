@@ -1,8 +1,8 @@
 {
   "name": "SearXNG w/ MCP",
-  "version": "2026.5.21-d8f74af3d",
+  "version": "2026.5.23-323ce7600",
   "slug": "searxng_with_mcp",
-  "description": "[老王杂谈说]：null",
+  "description": "[老王杂谈说]：SearXNG 是一个元搜索引擎。添加了用于 llama.cpp、Claude 代码等的 OvertliDS/mcp-searxng-enhanced 端点。",
   "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
   "environment": {
     "ODS_CONFIG_PATH": "/etc/searxng/ods_config.json",

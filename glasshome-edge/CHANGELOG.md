@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.9.7-beta.4
+
+### Bug Fixes
+
+- Adding an external link to the dock now works. The button silently failed on installs served over plain HTTP on the LAN.
+- The Home Assistant server URL field shows your saved URL after you leave settings and come back. The stale "Save" button that could overwrite your reverse-proxy URL with the default is gone.
+- Light-mode widget picker icons are legible. They used to render as muddy brown on cream.
+- The widget picker search box clears itself between adds, so you no longer see a stale query when reopening the dialog.
+- Analog clock hour marks are visible in light mode. They used to render in white-on-cream and disappear.
+- Widgets with multiple entities (lights, switches, sensors, etc.) show a comma-separated list of friendly names as the default title instead of only the first entity's name.
+
+## 0.9.7-beta.3
+
+### Bug Fixes
+
+- Editing a placed widget now shows the full entity list again. The "No entities found" message that appeared when reopening a widget's settings is gone.
+- Searching for an entity by its friendly name works in every widget picker. Typing "Solar Power" finds your sensor whether you remember the entity_id or not.
+- Newly-created Home Assistant areas appear in the area widget picker live, without restarting the dashboard.
+
+## 0.9.7-beta.2
+
+### Improvements
+
+- First update after this release pulls a single multi-architecture image instead of two separate ones, so future updates download faster.
+
+## 0.9.7-beta.1
+
+### Bug Fixes
+
+- Drag and resize work immediately after adding the first widget to a fresh dashboard. No more refresh-or-add-second-widget workaround.
+- Batteries widget now shows your batteries. Some setups previously saw an empty widget even when Home Assistant had battery entities.
+- Dashboard reconnects to Home Assistant automatically after the iPad app comes back from the background. You no longer have to open Settings to bring widgets back to life.
+- After upgrading to a new dashboard release, your widgets update and load on first paint with a brief "Updating widgets…" splash. No more opaque "Failed to load widget" toasts. If the hub is unreachable, the splash gives up after 10s and any incompatible tile shows a one-click "Update" button.
+- Background widget auto-updates actually run now. They had been silently skipped on every paired install.
+
 ## 0.9.6
 
 ### Improvements
