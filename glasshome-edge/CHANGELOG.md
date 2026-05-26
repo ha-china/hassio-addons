@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.7-beta.5
+
+### Improvements
+
+- Widgets you drop on the dashboard now appear at a readable size by default. Climate, light, clock, cover, batteries land at 2x2 instead of the 1x1 minimum; weather and media-player at 3x2; area and camera at 3x3. You can still resize each tile as before.
+- Analogue clock now shows the date underneath the dial when you turn on "Show Date" in widget settings. The toggle is visible in both digital and analogue clock modes.
+- Widget Browser icons (Settings → Browse Widgets) are legible. They used to render as muddy brown.
+
 ## 0.9.7-beta.4
 
 ### Bug Fixes
