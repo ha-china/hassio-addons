@@ -1,8 +1,8 @@
 {
   "name": "DSMR Reader",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "slug": "dsmr_reader",
-  "description": "[老王杂谈说]：用于读取智能电表 DSMR P1 端口 (https://dsmr-reader.readthedocs.io)",
+  "description": "[老王杂谈说]：用于读取智能电表 DSMR P1 接口 (https://dsmr-reader.readthedocs.io)",
   "arch": [
     "armv7",
     "aarch64",
@@ -14,6 +14,7 @@
   "boot": "auto",
   "uart": true,
   "ingress": true,
+  "watchdog": "http://[HOST]:[PORT:80]/healthcheck",
   "panel_icon": "mdi:leaf-circle-outline",
   "hassio_api": true,
   "init": false,
@@ -77,7 +78,7 @@
     "DSMRREADER_REMOTE_DATALOGGER_SERIAL_BYTESIZE": "str",
     "DSMRREADER_REMOTE_DATALOGGER_NETWORK_HOST": "str",
     "DSMRREADER_REMOTE_DATALOGGER_NETWORK_PORT": "str",
-    "DSMRREADER_LOGLEVEL": "list(ERROR|WARNING|DEBUG)",
+    "DSMRREADER_LOGLEVEL": "list(INFO|ERROR|WARNING|DEBUG)",
     "DJANGO_TIME_ZONE": "str",
     "DJANGO_SECRET_KEY": "str",
     "DJANGO_FORCE_SCRIPT_NAME": "str?",
