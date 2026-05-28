@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     xz-utils \
     file \
     python3 \
+    cmake \
     nginx \
     gnupg \
     build-essential \
@@ -113,8 +114,10 @@ RUN if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then \
 USER root
 
 # Install OpenClaw globally
+# Bundle node-llama-cpp in the image so the default local memory/embeddings
+# provider works in HAOS without requiring manual npm installs in /usr/lib.
 RUN npm config set fund false && npm config set audit false \
-    && npm install -g openclaw@2026.5.22
+    && npm install -g openclaw@2026.5.22 node-llama-cpp@3.18.1
 
 # Shell aliases and color options for interactive use
 RUN tee -a /etc/bash.bashrc <<'EOF'
@@ -138,10 +141,11 @@ COPY run.sh /run.sh
 COPY oc_config_helper.py /oc_config_helper.py
 COPY render_nginx.py /render_nginx.py
 COPY oc-cleanup.sh /usr/local/bin/oc-cleanup
+COPY oc-gateway /usr/local/bin/oc-gateway
 COPY openclaw-proxy-shim.cjs /usr/local/lib/openclaw-proxy-shim.cjs
 COPY nginx.conf.tpl /etc/nginx/nginx.conf.tpl
 COPY landing.html.tpl /etc/nginx/landing.html.tpl
-RUN chmod +x /run.sh /oc_config_helper.py /render_nginx.py /usr/local/bin/oc-cleanup \
+RUN chmod +x /run.sh /oc_config_helper.py /render_nginx.py /usr/local/bin/oc-cleanup /usr/local/bin/oc-gateway \
     && mkdir -p /run/nginx
 
 CMD [ "/run.sh" ]

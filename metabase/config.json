@@ -1,8 +1,8 @@
 {
   "name": "Metabase",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "slug": "metabase",
-  "description": "[老王杂谈说]：来认识一下这个简单开源的方式，让每个人都能提问并从数据中学习。",
+  "description": "[老王杂谈说]：体验这种简单开源的方式，让每个人都能向数据提问并从中学习。",
   "url": "https://gh-proxy.org/github.com/sanderdw/hassio-addons/blob/main/metabase/README.md",
   "startup": "application",
   "ports": {

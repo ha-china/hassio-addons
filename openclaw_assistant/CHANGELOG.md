@@ -2,14 +2,51 @@
 
 All notable changes to the OpenClaw Assistant Home Assistant Add-on will be documented in this file.
 
+## [0.5.74] - 2026-05-27
+
+### Fixed
+- Bundle `node-llama-cpp` inside the add-on image so the default local memory/embeddings provider works in HAOS without manual package installs.
+- Add `cmake` to the image so `node-llama-cpp` can fall back to a source build when a prebuilt binary is unavailable for the target architecture.
+
+## [0.5.73] - 2026-05-26
+
+### Added
+- New add-on-native `oc-gateway` helper for container-supervised runtime management:
+  - `oc-gateway status` shows gateway state in the HA add-on model (`run.sh` supervisor, not systemd)
+  - `oc-gateway restart` requests gateway self-restart via `SIGUSR1` without full add-on restart
+
+### Changed
+- Troubleshooting and setup docs now use `oc-gateway status` / `oc-gateway restart` in add-on contexts to avoid confusing systemd-related CLI output.
+
 ## [0.5.72] - 2026-05-04
 
 ### Fixed
 - Repair startup when a persisted OpenClaw config still selects the unavailable `tools.web.search.provider=brave` provider. The add-on now clears that provider before launching the gateway so OpenClaw can start; users can reinstall/enable the Brave provider later if they want web search through Brave.
 
+## [0.5.71] - 2026-05-03
+
+### Changed
+- Bump OpenClaw through the 2026.4.29 and 2026.5.2 upstream releases.
+
 ## [0.5.70] - 2026-04-30
 
+### Changed
 - Bump OpenClaw to 2026.4.27.
+
+## [0.5.69] - 2026-04-27
+
+### Changed
+- Bump OpenClaw through the 2026.4.23 and 2026.4.24 upstream releases.
+
+## [0.5.68] - 2026-04-25
+
+### Changed
+- Bump OpenClaw through the 2026.4.14, 2026.4.15, 2026.4.21, and 2026.4.22 upstream releases.
+
+## [0.5.67] - 2026-04-25
+
+### Changed
+- Bump OpenClaw through the 2026.4.5, 2026.4.8, 2026.4.9, 2026.4.10, 2026.4.11, and 2026.4.12 upstream releases.
 
 ## [0.5.66] - 2026-04-04
 
@@ -30,6 +67,11 @@ All notable changes to the OpenClaw Assistant Home Assistant Add-on will be docu
 
 ### Fixed
 - **Gateway restart loop** (issue #95): `openclaw gateway run` is a thin wrapper that spawns `openclaw-gateway` as a long-running daemon then exits immediately. On self-restart (SIGUSR1 / `openclaw gateway restart`), the old daemon forks a new one and exits — the new PID is not a child of run.sh. The supervisor now uses a 3-tier daemon detection function (`find_gateway_daemon_pid`): (1) port ownership via `ss -tlnp`, (2) process title via `pgrep -f "openclaw-gateway"`, (3) `/proc/*/cmdline` scan for "openclaw" (catches the daemon immediately after fork, even before process.title or port bind — critical on Pi/eMMC where initialization takes 20-30 s). Detection retries up to 10 times with a final port-occupancy guard before any supervisor-initiated restart. Non-child PIDs are monitored with `kill -0` polling instead of `wait`. The loopback relay (tailnet mode) is stopped/restarted around gateway restarts to prevent port conflicts.
+
+## [0.5.61] - 2026-03-10
+
+### Fixed
+- **Gateway restart loop** (issue #95): stop the tailnet loopback relay before supervisor-initiated gateway restarts and start it again after the new daemon is launched, preventing the relay from holding the local port and trapping the add-on in an `already listening` restart loop.
 
 ## [0.5.60] - 2026-03-10
 
