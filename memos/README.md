@@ -1,34 +1,34 @@
-# Home Assistant 插件：备忘录
+# Home assistant 插件：便签
 
-一个以隐私为先、轻量级的笔记服务。轻松捕捉和分享你的精彩想法。
+一个以隐私为首要，轻量级的笔记记录服务。轻松捕捉和分享你的精彩想法。
 
-运行 Docker 镜像来自：https://github.com/usememos/memos
+运行 Docker 镜像来源：https://github.com/usememos/memos
 
 
-_感谢所有为我仓库点星的人！要点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢每一位给我仓库点赞的人！要给仓库点赞，请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
-[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![@jdeath/homeassistant-addons 的星标仓库名单](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 
 ## 安装
 
-此插件的安装相当简单，与安装任何其他Hass.io插件没有太大区别。
+安装此插件非常简单，与安装任何其他 Hass.io 插件没有太大区别。
 
-1. [将我的Hass.io插件仓库添加到你的Hass.io实例][repository]。
+1. 将我的 Hass.io 插件仓库 [repository] 添加到你的 Hass.io 实例。
 1. 安装此插件。
-1. 点击“保存”按钮以存储你的配置。
+1. 点击 `保存` 按钮以存储你的配置。
 1. 启动插件。
-1. 检查插件的日志以查看是否一切顺利。
-1. 打开WebUI应通过ingress或<你的IP>:端口号工作。
+1. 检查插件的日志以查看一切是否顺利。
+1. 打开 WebUI 应该可以通过 ingress 或 <your-ip>:port 访问。
 1. 设置将存储在 /addons-config/2effc9b9_memos
 
 ## 配置
 
 ```
-port : 5230 #你想要运行的端口号。
+port : 5230 #你想要运行在的端口。
 ```
 
-WebUI可以在 `<你的IP>:端口号` 找到。
+WebUI 可以在 `<your-ip>:port` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---

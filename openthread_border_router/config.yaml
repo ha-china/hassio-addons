@@ -1,5 +1,6 @@
 ---
-version: 2.16.8
+version: 3.0.0
+breaking_versions: [3.0.0]
 slug: openthread_border_router
 name: OpenThread Border Router
 description: '[老王杂谈说]：null'

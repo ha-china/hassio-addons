@@ -1,5 +1,14 @@
 # TOMMY
 
+## 5.0.0
+
+### Major Changes
+- Performance improvements
+- **Breaking change:** Offline licenses are no longer supported. Existing offline license holders are moved to Trial Mode and prompted to switch to online license activation. If you can't switch and previously purchased a Pro Edition license, email info@tommysense.com or reach out on Discord for a refund.
+
+### Minor Changes
+- Removed dependency on Home Assistant Supervisor
+
 ## 4.0.1
 
 ### Minor Changes

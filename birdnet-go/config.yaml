@@ -2,7 +2,7 @@ arch:
   - aarch64
   - amd64
 audio: true
-description: '[老王杂谈说]：实时 BirdNET 和 Battybirdnet 声景分析器'
+description: '[老王杂谈说]：null'
 devices:
   - /dev/dri
   - /dev/snd
@@ -89,6 +89,8 @@ options:
   LOG_MAX_SIZE_MB: 50
   LOG_MAX_AGE_DAYS: 7
   homeassistant_microphone: false
+  mqtt_auto_config: false
+  mariadb_auto_config: false
 panel_admin: false
 panel_icon: mdi:bird
 ports:
@@ -114,6 +116,8 @@ schema:
   cifsusername: str?
   homeassistant_microphone: bool?
   localdisks: str?
+  mariadb_auto_config: bool?
+  mqtt_auto_config: bool?
   networkdisks: str?
 services:
   - mysql:want
@@ -122,4 +126,4 @@ slug: birdnet-go
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/birdnet-go
 usb: true
-version: "nightly-20260525-2"
+version: "nightly-20260525-3"

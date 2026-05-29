@@ -39,8 +39,14 @@ RUN find . -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -e
 # Silence "chmod: Read-only file system" noise from upstream entrypoint:
 # Home Assistant mounts /dev/snd read-only, so the chmod is a no-op and the
 # stderr output is just noise. The "|| true" already absorbs the exit code.
+# Warn (without failing the build) if the upstream pattern drifts so we notice
+# in CI logs and can update the patch.
 RUN if [ -f /usr/bin/entrypoint.sh ]; then \
-        sed -i 's#chmod -R a+rw /dev/snd || true#chmod -R a+rw /dev/snd 2>/dev/null || true#' /usr/bin/entrypoint.sh; \
+        if grep -q 'chmod -R a+rw /dev/snd || true' /usr/bin/entrypoint.sh; then \
+            sed -i 's#chmod -R a+rw /dev/snd || true#chmod -R a+rw /dev/snd 2>/dev/null || true#' /usr/bin/entrypoint.sh; \
+        else \
+            echo "WARN: upstream entrypoint.sh /dev/snd chmod pattern not found; nightly drift?" >&2; \
+        fi; \
     fi
 
 # Uses /bin for compatibility purposes
@@ -131,12 +137,3 @@ RUN \
         awk '/http \{/{print; print "map $http_user_agent $dontlog {\n  default 0;\n  \"~*HealthCheck\" 1;\n}\naccess_log /var/log/nginx/access.log combined if=$dontlog;"; next}1' /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.new && \
         mv /etc/nginx/nginx.conf.new /etc/nginx/nginx.conf; \
     fi
-
-ENV HEALTH_PORT="80" \
-    HEALTH_URL=""
-HEALTHCHECK \
-    --interval=5s \
-    --retries=5 \
-    --start-period=30s \
-    --timeout=25s \
-    CMD curl -A "HealthCheck: Docker/1.0" -s -f "http://127.0.0.1:${HEALTH_PORT}${HEALTH_URL}" &>/dev/null || exit 1

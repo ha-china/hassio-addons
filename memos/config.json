@@ -4,7 +4,7 @@
     "aarch64"
   ],
   "boot": "auto",
-  "description": "[老王杂谈说]：一款隐私优先、轻量级的笔记服务。轻松捕捉并分享你的精彩想法。",
+  "description": "[老王杂谈说]：null",
   "environment": {
     "MEMOS_DATA": "/config/"
   },
@@ -12,7 +12,7 @@
     "addon_config:rw"
   ],
   "image": "neosmemo/memos",
-  "version": "0.28.0",
+  "version": "0.29.0",
   "name": "memos",
   "options": {},
   "ports": {
@@ -24,7 +24,7 @@
   "schema": {},
   "slug": "memos",
   "startup": "services",
-  "upstream": "0.28.0",
+  "upstream": "0.29.0",
   "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:5230]",
   "ingress": false,
