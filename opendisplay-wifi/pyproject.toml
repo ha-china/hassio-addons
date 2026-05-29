@@ -3,6 +3,6 @@ name = "ha-opendisplay-wifi"
 version = "0.1.0"
 requires-python = ">=3.14"
 dependencies = [
-    "aiohttp>=3.11",
+    "aiohttp>=3.13.4",
     "py-opendisplay @ git+https://github.com/balloob/py-opendisplay.git@wifi-server",
 ]
