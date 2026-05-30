@@ -2,6 +2,15 @@
 
 All notable changes to the OpenClaw Assistant Home Assistant Add-on will be documented in this file.
 
+## [0.5.75] - 2026-05-28
+
+### Changed
+- **Backup-friendly persistence defaults**: new add-on options `persist_node_global` and `persist_brew_tools`, both defaulting to `false` so large optional toolchains are no longer persisted into Home Assistant backups unless users explicitly opt in.
+- `run.sh` now keeps npm global installs and Homebrew ephemeral by default, while preserving the old rebuild-survival behavior when the new toggles are enabled.
+
+### Added
+- Migration notes and documentation for older installs that already have legacy `/config/.node_global/` or `/config/.linuxbrew/` directories contributing to backup size.
+
 ## [0.5.74] - 2026-05-27
 
 ### Fixed

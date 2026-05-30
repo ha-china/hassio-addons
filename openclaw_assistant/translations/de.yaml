@@ -42,6 +42,14 @@ configuration:
   clean_session_locks_on_exit:
     name: Sitzungssperren beim Beenden bereinigen
     description: Sitzungssperrdateien beim ordnungsgemäßen Stoppen des Add-ons bereinigen
+
+  persist_node_global:
+    name: npm-Globale Skills dauerhaft speichern
+    description: Wenn EIN, werden benutzerinstallierte npm-Skills und globale Pakete unter /config/.node_global gespeichert und über Add-on-Neubuilds hinweg behalten. Standard ist AUS, um Home-Assistant-Backups klein zu halten.
+
+  persist_brew_tools:
+    name: Homebrew-Tools dauerhaft speichern
+    description: Wenn EIN, werden Homebrew und per brew installierte CLI-Tools unter /config/.linuxbrew gespeichert und über Add-on-Neubuilds hinweg behalten. Standard ist AUS, um Home-Assistant-Backups klein zu halten.
   
   gateway_mode:
     name: Gateway-Modus

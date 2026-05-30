@@ -4,38 +4,38 @@
 ![支持 amd64 架构][amd64-shield]
 ![支持 armv7 架构][armv7-shield]
 
-桥接器音乐助手将 Sendspin 协议传输到蓝牙音箱。
-从音乐助手流式传输音频到任何连接到您 Home Assistant 主机的蓝牙 A2DP 音箱。
+Bridge Music Assistant 的 Sendspin 协议到蓝牙扬声器。
+从音乐助手流式传输音频到连接到您的 Home Assistant 主机的任何蓝牙 A2DP 扬声器。
 
 ## 关于
 
-此插件允许您使用蓝牙音箱作为音乐助手的音频输出播放器。它通过 Sendspin 协议连接到音乐助手，并通过 PulseAudio/PipeWire 将音频流路由到已配对的蓝牙设备。
+此附加组件允许您在音乐助手中使用蓝牙扬声器作为音频输出播放器。它通过 Sendspin 协议连接到音乐助手，并通过 PulseAudio/PipeWire 将音频流路由到配对的蓝牙设备。
 
 主要功能：
-- 多音箱支持 - 每个音箱在音乐助手中作为独立的播放器出现
-- 自动蓝牙重新连接
-- 通过 HA Ingress 提供的 Web UI 用于状态监控和配置
+- 多扬声器支持 — 每个扬声器在音乐助手里都作为一个独立的播放器出现
+- 自动蓝牙重连
+- Web UI 用于状态监控和配置（通过 HA Ingress）
 - mDNS 自动发现音乐助手服务器
 - 通过音乐助手或直接 PulseAudio 控制音量
-- 在 **配置 → 音乐助手** 中的音乐助手重新配置流程
-- Web UI 中的引导设置、恢复操作、释放/回收控制以及基于诊断的 bug 报告预填充
+- 在 **配置 → 音乐助手** 中进行音乐助手重新配置流程
+- 在 Web UI 中提供引导式入门、恢复操作、发布/回收控制以及基于诊断的故障报告预填充
 
 ## 文档
 
-完整的文档请参阅 [DOCS.md](DOCS.md) 或访问 [文档网站](https://trudenboy.github.io/sendspin-bt-bridge)。
+有关完整文档，请参阅 [DOCS.md](DOCS.md) 或访问 [文档网站](https://trudenboy.github.io/sendspin-bt-bridge)。
 
-## 更新频道
+## 更新渠道
 
-- 此存储库中检入的插件清单是 **稳定** 的 Home Assistant 插件版本。
-- 安装的插件轨迹取决于您从 Home Assistant 商店安装的插件版本。
-- 桥接器 UI 仅指示当前轨迹和更新指导；它不会切换已安装的插件轨迹。
-- 当发布 RC 或 Beta 插件版本时，切换轨迹意味着从 Home Assistant 商店安装匹配的插件版本。
-- 稳定 / RC / Beta 插件版本使用不同的默认 HA Ingress 端口和不同的默认播放器侦听端口范围，因此它们可以在一个 HAOS 主机上并行运行。
-- 稳定版本在主机启动后自动启动；RC 和 Beta 版本默认为手动启动，以便预发布轨迹保持为可选。
-- HA Ingress 总是继续使用固定的轨迹特定端口（稳定版 `8080`，RC 版本 `8081`，beta 版本 `8082`）。自定义 `WEB_PORT` 只会增加额外的直接监听器；它不会替换 Ingress。
-- 在插件模式下，身份验证始终由 Home Assistant / Ingress 执行；独立的密码切换在这里不适用。
-- 只有通过插件/Ingress 流，音乐助手的静默 Home Assistant 令牌引导才能正常工作，因此相关的 UI 辅助工具有意限定为插件范围。
-- **不要** 同时在一个插件版本中配置同一个蓝牙音箱。
+- 此存储库中签入的附加组件清单是 **稳定** 的 Home Assistant 附加组件版本。
+- 安装的附加组件轨道由您从 Home Assistant 商店安装的附加组件版本确定。
+- 桥接器 UI 仅指示当前轨道和更新指导；它不会切换已安装的附加组件轨道。
+- 当发布 RC 或 Beta 附加组件版本时，切换轨道意味着从 Home Assistant 商店安装匹配的附加组件版本。
+- 稳定 / RC / Beta 附加组件版本使用不同的默认 HA Ingress 端口和不同的默认播放器监听端口范围，因此它们可以在单个 HAOS 主机上并行运行。
+- 稳定版本在主机启动后自动启动；RC 和 Beta 默认为手动启动，因此预发布轨道保持为可选。
+- HA Ingress 总是继续使用固定的轨道特定端口（`8080` 稳定，`8081` RC，`8082` beta）。自定义 `WEB_PORT` 仅添加一个额外的直接监听器；它不会替换 Ingress。
+- 在附加组件模式下，身份验证始终由 Home Assistant / Ingress 强制执行；独立密码切换在此处不适用。
+- 仅通过附加组件/Ingress 流才能为音乐助手执行静默 Home Assistant 令牌引导，因此相关的 UI 辅助程序故意限定在附加组件范围内。
+- **不要**同时在多个附加组件版本中配置相同的蓝牙扬声器。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg

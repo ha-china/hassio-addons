@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：代理服务器以绕过Cloudflare保护'
+description: '[老王杂谈说]：绕过 Cloudflare 防护的代理服务器'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -79,5 +79,5 @@ schema:
 slug: flaresolverr
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
-version: "3.4.6"
+version: "3.5.0"
 webui: "[PROTO:ssl]://[HOST]:[PORT:8191]"

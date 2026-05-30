@@ -42,6 +42,14 @@ configuration:
   clean_session_locks_on_exit:
     name: Limpar Bloqueios de Sessão ao Sair
     description: Limpar arquivos de bloqueio de sessão quando o add-on parar normalmente
+
+  persist_node_global:
+    name: Persistir skills globais do npm
+    description: Quando ativado, armazena skills npm instaladas pelo usuário e pacotes globais em /config/.node_global para sobreviverem a reconstruções do add-on. O padrão é desativado para manter menores os backups do Home Assistant.
+
+  persist_brew_tools:
+    name: Persistir ferramentas do Homebrew
+    description: Quando ativado, armazena o Homebrew e ferramentas CLI instaladas via brew em /config/.linuxbrew para sobreviverem a reconstruções do add-on. O padrão é desativado para manter menores os backups do Home Assistant.
   
   gateway_mode:
     name: Modo do Gateway

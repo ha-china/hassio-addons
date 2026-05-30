@@ -2,7 +2,7 @@ arch:
   - aarch64
   - amd64
 boot: manual
-description: '[老王杂谈说]：通过将版本标签与上游发布进行对齐来自动更新附加组件'
+description: '[老王杂谈说]：通过将版本标签与上游发布对齐，自动更新插件。'
 environment:
   GIT_DISCOVERY_ACROSS_FILESYSTEM: "1"
 image: ghcr.1ms.run/alexbelgium/addons_updater-{arch}
@@ -30,4 +30,4 @@ schema:
 slug: updater
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/addons_updater
-version: "3.19.16"
+version: "2026.05"

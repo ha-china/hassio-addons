@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：将来自应用程序（Sonarr, Sickrage, CouchPotato, Mylar 等）的查询转换为 tracker 网站特定的 HTTP 查询，解析 HTML 响应，然后将结果发送回请求的应用程序。'
+description: '[老王杂谈说]：将来自应用程序（Sonarr, Sickrage, CouchPotato, Mylar 等）的查询转换为特定于 Tracker 的 HTTP 查询，解析 HTML 响应，然后将结果发送回请求的软件'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -103,5 +103,5 @@ schema:
 slug: jackett_nas
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/jackett
-version: "0.24.1909"
+version: "0.24.1970"
 webui: http://[HOST]:[PORT:9117]

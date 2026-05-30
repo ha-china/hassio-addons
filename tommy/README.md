@@ -2,7 +2,7 @@
 
 这是为 TOMMY 定制的 Home Assistant 插件，TOMMY 是一个 Wi-Fi 感应系统，可以将 ESP32 设备转变为能够检测墙壁和障碍物后运动的运动和存在传感器。
 
-该插件将 TOMMY 直接集成到您的 Home Assistant 实例中，让您可以为现有的自动化创建运动区域。所有处理都在您的网络上本地进行。
+该插件将 TOMMY 直接集成到您的 Home Assistant 实例中，允许您创建用于现有自动化的运动区域。所有处理都在您的网络上本地进行。
 
 **开始使用：** [安装指南](https://www.tommysense.com/docs/installation/homeassistant)  
 **了解更多：** [完整文档](https://www.tommysense.com/docs)

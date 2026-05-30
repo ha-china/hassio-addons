@@ -42,6 +42,14 @@ configuration:
   clean_session_locks_on_exit:
     name: Wyczyść blokady sesji przy wyjściu
     description: Usuń pliki blokad sesji gdy dodatek zatrzymuje się poprawnie
+
+  persist_node_global:
+    name: Zachowuj globalne umiejętności npm
+    description: Po włączeniu zapisuje umiejętności npm instalowane przez użytkownika i pakiety globalne w /config/.node_global, aby przetrwały przebudowę dodatku. Domyślnie wyłączone, aby kopie zapasowe Home Assistant były mniejsze.
+
+  persist_brew_tools:
+    name: Zachowuj narzędzia Homebrew
+    description: Po włączeniu zapisuje Homebrew i narzędzia CLI instalowane przez brew w /config/.linuxbrew, aby przetrwały przebudowę dodatku. Domyślnie wyłączone, aby kopie zapasowe Home Assistant były mniejsze.
   
   gateway_remote_url:
     name: URL zdalnego Gateway

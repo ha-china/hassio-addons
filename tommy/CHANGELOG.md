@@ -1,5 +1,10 @@
 # TOMMY
 
+## 5.0.1
+
+### Minor Changes
+- Improved error message when mesh networks are detected
+
 ## 5.0.0
 
 ### Major Changes

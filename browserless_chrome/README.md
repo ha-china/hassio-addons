@@ -1,10 +1,10 @@
-# 家居助手插件：无头Chrome浏览器
+# 家居助理插件：无头Chrome浏览器
 
-我在业余时间维护这个和其他的家居助手插件：跟进上游变化、家居助手变化以及在实际硬件上进行测试需要花费大量时间（还有一些金钱）。我经常使用我超过110个插件中的5-10个，所以我安装了测试机器（并购买了一些我自身不使用的测试服务，如VPN）来调试和改进插件。
+我在业余时间维护这个以及其他Home Assistant插件：跟进上游更改、Home Assistant更改以及在真实硬件上测试都需要花费大量的时间（以及一些金钱）。我经常使用大约5-10个我的>110个插件，所以我安装了测试机器（并购买了如VPN之类的测试服务），这些服务我自己并不使用，用于故障排除和改进插件。
 
 如果这个插件为您节省了时间或使您的设置更简单，我将非常感激您的支持！
 
-[![请给我买杯咖啡][捐赠徽章]](https://www.buymeacoffee.com/alexbelgium)
+[![给我买杯咖啡][捐赠徽章]](https://www.buymeacoffee.com/alexbelgium)
 [![通过PayPal捐赠][paypal徽章]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
@@ -20,28 +20,28 @@
 [捐赠徽章]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal徽章]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我仓库加星的人！要加星，请点击下面的图片，然后它就会出现在右上角。谢谢！_
+_感谢所有给我的仓库点星的人！要点星，请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
-[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+[![@alexbelgium/hassio-addons的星标仓库](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/browserless_chrome/stats.png)
+![下载演变](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/browserless_chrome/stats.png)
 
 ## 关于
 
 ---
 
 [无头Chrome](https://github.com/browserless/chrome) 是一个网络服务，允许远程客户端连接、驱动和执行无头工作。
-此插件基于 Docker 镜像 https://hub.docker.com/r/browserless/chrome/
+此插件基于以下docker镜像：https://hub.docker.com/r/browserless/chrome/
 
 ## 配置
 ---
 
-Web界面可以在 <http://homeassistant:PORT> 找到。
-配置可以通过应用程序Web界面进行，除了以下选项外：
+Webui 可以在 <http://homeassistant:PORT> 找到。
+可以通过应用程序WebUI进行配置，除了以下选项
 
 | 选项 | 描述 | 默认值 |
-|------|------|--------|
-| `TIMEOUT` | 请求超时（毫秒） | `60000` |
+|--------|-------------|---------|
+| `TIMEOUT` | 请求超时时间（毫秒） | `60000` |
 
 ```yaml
 TIMEOUT: 60000
@@ -49,29 +49,32 @@ TIMEOUT: 60000
 
 ### 自定义脚本和环境变量
 
-此插件支持通过 `addon_config` 映射自定义脚本和环境变量：
+此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
 - **自定义脚本**：请参阅[在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
+- **env_vars选项**：使用插件的 `env_vars` 选项来传递额外的环境变量（名称为大写或小写）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
 ## 安装
 
 ---
 
-此插件的安装非常简单，与安装任何其他插件没有区别。
+此插件的安装非常简单，与安装任何其他插件没有太大区别。
 
-1. 将我的插件仓库添加到您的家居助手实例中（在管理员界面右上角的插件存储中，或点击下面的按钮如果您已配置我的HA）
-   [![打开您的家居助手实例并显示带有特定仓库URL预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的Home Assistant实例中（在supervisor插件存储的右上角，或点击下面的按钮如果您已配置我的HA）
+   [![打开您的Home Assistant实例并显示带有特定仓库URL预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 点击“保存”按钮以存储您的配置。
-1. 将插件选项设置为您的偏好。
+1. 将插件选项设置为您的偏好设置
 1. 启动插件。
 1. 检查插件的日志以查看是否一切顺利。
-1. 打开Web界面并调整软件选项
+1. 打开WebUI并调整软件选项
 
 ## 支持
 
-在GitHub上创建问题
+在github上创建问题
+
+
+
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

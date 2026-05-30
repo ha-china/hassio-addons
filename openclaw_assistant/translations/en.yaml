@@ -42,6 +42,14 @@ configuration:
   clean_session_locks_on_exit:
     name: Clean Session Locks on Exit
     description: Cleanup session lock files when add-on stops gracefully
+
+  persist_node_global:
+    name: Persist npm Global Skills
+    description: When ON, store user-installed npm skills and global packages under /config/.node_global so they survive add-on rebuilds. Default OFF to keep Home Assistant backups smaller.
+
+  persist_brew_tools:
+    name: Persist Homebrew Tools
+    description: When ON, store Homebrew and brew-installed CLI tools under /config/.linuxbrew so they survive add-on rebuilds. Default OFF to keep Home Assistant backups smaller.
   
   gateway_mode:
     name: Gateway Mode

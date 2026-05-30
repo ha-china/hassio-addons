@@ -44,6 +44,8 @@ ROUTER_KEY=$(jq -r '.router_ssh_key_path // "/data/keys/router_ssh"' "$OPTIONS_F
 # Optional: allow disabling lock cleanup if you ever need to debug
 CLEAN_LOCKS_ON_START=$(jq -r '.clean_session_locks_on_start // true' "$OPTIONS_FILE")
 CLEAN_LOCKS_ON_EXIT=$(jq -r '.clean_session_locks_on_exit // true' "$OPTIONS_FILE")
+PERSIST_NODE_GLOBAL=$(jq -r '.persist_node_global // false' "$OPTIONS_FILE")
+PERSIST_BREW_TOOLS=$(jq -r '.persist_brew_tools // false' "$OPTIONS_FILE")
 
 # Gateway configuration
 GATEWAY_MODE=$(jq -r '.gateway_mode // "local"' "$OPTIONS_FILE")
@@ -149,6 +151,15 @@ export XDG_CONFIG_HOME=/config
 
 mkdir -p /config/.openclaw /config/.openclaw/identity /config/clawd /config/keys /config/secrets
 
+warn_legacy_persistent_dir() {
+  local path="$1"
+  local label="$2"
+  if [ -e "$path" ]; then
+    echo "WARN: Found legacy persistent ${label} at ${path}, but persistence is disabled."
+    echo "WARN: It will still inflate Home Assistant backups until you remove or archive it manually."
+  fi
+}
+
 # ------------------------------------------------------------------------------
 # Sync built-in OpenClaw skills from image to persistent storage
 # On each startup, copy new/updated built-in skills so they survive rebuilds.
@@ -180,21 +191,33 @@ else
 fi
 
 # ------------------------------------------------------------------------------
-# Persist user-installed node skills across Docker image rebuilds
-# Redirect npm/pnpm global installs to /config/.node_global (persistent storage)
-# so that skills installed via the dashboard survive container rebuilds.
+# Optional persistence for user-installed node skills across Docker image rebuilds.
+# When enabled, redirect npm/pnpm global installs to /config/.node_global so
+# dashboard-installed skills survive image updates. Disabled by default to keep
+# Home Assistant backups smaller.
 # NOTE: This MUST come after the skills sync above (which needs the original npm root -g).
 # ------------------------------------------------------------------------------
 PERSISTENT_NODE_GLOBAL="/config/.node_global"
-mkdir -p "$PERSISTENT_NODE_GLOBAL"
-npm config set prefix "$PERSISTENT_NODE_GLOBAL" 2>/dev/null || true
-export PATH="${PERSISTENT_NODE_GLOBAL}/bin:${PATH}"
-export NODE_PATH="${PERSISTENT_NODE_GLOBAL}/lib/node_modules:${NODE_PATH:-}"
+if [ "$PERSIST_NODE_GLOBAL" = "true" ] || [ "$PERSIST_NODE_GLOBAL" = "1" ]; then
+  mkdir -p "$PERSISTENT_NODE_GLOBAL"
+  npm config set prefix "$PERSISTENT_NODE_GLOBAL" 2>/dev/null || true
+  export PATH="${PERSISTENT_NODE_GLOBAL}/bin:${PATH}"
+  export NODE_PATH="${PERSISTENT_NODE_GLOBAL}/lib/node_modules:${NODE_PATH:-}"
 
-# Also configure pnpm global dir to persistent storage
-export PNPM_HOME="${PERSISTENT_NODE_GLOBAL}/pnpm"
-mkdir -p "$PNPM_HOME"
-export PATH="${PNPM_HOME}:${PATH}"
+  # Also configure pnpm global dir to persistent storage
+  export PNPM_HOME="${PERSISTENT_NODE_GLOBAL}/pnpm"
+  mkdir -p "$PNPM_HOME"
+  export PATH="${PNPM_HOME}:${PATH}"
+  echo "INFO: persist_node_global=true; user-installed npm skills will survive add-on rebuilds."
+else
+  npm config delete prefix 2>/dev/null || true
+  export npm_config_prefix="/usr/local"
+  export PNPM_HOME="/tmp/.pnpm-home"
+  mkdir -p "$PNPM_HOME"
+  export PATH="${PNPM_HOME}:${PATH}"
+  warn_legacy_persistent_dir "$PERSISTENT_NODE_GLOBAL" "node global tool/skill data"
+  echo "INFO: persist_node_global=false; npm/pnpm global installs are ephemeral and excluded from HA backups."
+fi
 
 # Protect critical runtime variables from accidental override via gateway_env_vars.
 is_reserved_gateway_env_var() {
@@ -331,42 +354,48 @@ elif [ "$GW_ENV_VARS_TYPE" != "null" ]; then
 fi
 
 # ------------------------------------------------------------------------------
-# Persist Linuxbrew/Homebrew across Docker image rebuilds
-# Homebrew installs to /home/linuxbrew/.linuxbrew/ which is ephemeral.
-# We sync it to /config/.linuxbrew and symlink back so brew-installed CLI
-# tools (gog, gh, bw, etc.) survive add-on updates.
+# Optional persistence for Linuxbrew/Homebrew across Docker image rebuilds.
+# When enabled, sync /home/linuxbrew/.linuxbrew to /config/.linuxbrew so
+# brew-installed CLI tools survive image updates. Disabled by default to keep
+# Home Assistant backups smaller.
 # ------------------------------------------------------------------------------
 IMAGE_BREW_DIR="/home/linuxbrew/.linuxbrew"
 PERSISTENT_BREW_DIR="/config/.linuxbrew"
 
-if [ -d "$IMAGE_BREW_DIR" ] && [ ! -L "$IMAGE_BREW_DIR" ]; then
-  # Image has a real Homebrew install — sync to persistent storage
-  if [ -d "$PERSISTENT_BREW_DIR" ]; then
-    # Persistent copy exists: sync new/updated files from image (upgrades),
-    # but preserve user-installed packages already in persistent storage.
-    if command -v rsync >/dev/null 2>&1; then
-      rsync -a --update "$IMAGE_BREW_DIR/" "$PERSISTENT_BREW_DIR/" 2>/dev/null || true
+if [ "$PERSIST_BREW_TOOLS" = "true" ] || [ "$PERSIST_BREW_TOOLS" = "1" ]; then
+  if [ -d "$IMAGE_BREW_DIR" ] && [ ! -L "$IMAGE_BREW_DIR" ]; then
+    # Image has a real Homebrew install — sync to persistent storage
+    if [ -d "$PERSISTENT_BREW_DIR" ]; then
+      # Persistent copy exists: sync new/updated files from image (upgrades),
+      # but preserve user-installed packages already in persistent storage.
+      if command -v rsync >/dev/null 2>&1; then
+        rsync -a --update "$IMAGE_BREW_DIR/" "$PERSISTENT_BREW_DIR/" 2>/dev/null || true
+      else
+        cp -ru "$IMAGE_BREW_DIR/"* "$PERSISTENT_BREW_DIR/" 2>/dev/null || true
+      fi
+      echo "INFO: Synced Homebrew updates to persistent storage"
     else
-      cp -ru "$IMAGE_BREW_DIR/"* "$PERSISTENT_BREW_DIR/" 2>/dev/null || true
+      # First time: copy entire Homebrew install to persistent storage
+      cp -a "$IMAGE_BREW_DIR" "$PERSISTENT_BREW_DIR" 2>/dev/null || true
+      echo "INFO: Copied Homebrew to persistent storage at $PERSISTENT_BREW_DIR"
     fi
-    echo "INFO: Synced Homebrew updates to persistent storage"
+    # Replace image dir with symlink to persistent copy
+    rm -rf "$IMAGE_BREW_DIR"
+    ln -sf "$PERSISTENT_BREW_DIR" "$IMAGE_BREW_DIR"
+  elif [ -L "$IMAGE_BREW_DIR" ]; then
+    echo "INFO: Homebrew already linked to persistent storage"
+  elif [ -d "$PERSISTENT_BREW_DIR" ]; then
+    # Image doesn't have Homebrew (failed install?) but persistent copy exists
+    mkdir -p "$(dirname "$IMAGE_BREW_DIR")"
+    ln -sf "$PERSISTENT_BREW_DIR" "$IMAGE_BREW_DIR"
+    echo "INFO: Restored Homebrew symlink from persistent storage"
   else
-    # First time: copy entire Homebrew install to persistent storage
-    cp -a "$IMAGE_BREW_DIR" "$PERSISTENT_BREW_DIR" 2>/dev/null || true
-    echo "INFO: Copied Homebrew to persistent storage at $PERSISTENT_BREW_DIR"
+    echo "INFO: Homebrew not available (install may have failed during image build)"
   fi
-  # Replace image dir with symlink to persistent copy
-  rm -rf "$IMAGE_BREW_DIR"
-  ln -sf "$PERSISTENT_BREW_DIR" "$IMAGE_BREW_DIR"
-elif [ -L "$IMAGE_BREW_DIR" ]; then
-  echo "INFO: Homebrew already linked to persistent storage"
-elif [ -d "$PERSISTENT_BREW_DIR" ]; then
-  # Image doesn't have Homebrew (failed install?) but persistent copy exists
-  mkdir -p "$(dirname "$IMAGE_BREW_DIR")"
-  ln -sf "$PERSISTENT_BREW_DIR" "$IMAGE_BREW_DIR"
-  echo "INFO: Restored Homebrew symlink from persistent storage"
+  echo "INFO: persist_brew_tools=true; brew-installed tools will survive add-on rebuilds."
 else
-  echo "INFO: Homebrew not available (install may have failed during image build)"
+  warn_legacy_persistent_dir "$PERSISTENT_BREW_DIR" "Homebrew data"
+  echo "INFO: persist_brew_tools=false; Homebrew installs stay ephemeral and excluded from HA backups."
 fi
 
 # Back-compat: some docs/scripts assume /data; point it at /config.

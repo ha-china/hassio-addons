@@ -42,6 +42,14 @@ configuration:
   clean_session_locks_on_exit:
     name: Limpiar bloqueos de sesión al salir
     description: Limpiar archivos de bloqueo de sesión cuando el complemento se detiene correctamente
+
+  persist_node_global:
+    name: Conservar habilidades globales de npm
+    description: Cuando está activado, guarda las habilidades npm instaladas por el usuario y los paquetes globales en /config/.node_global para que sobrevivan a reconstrucciones del complemento. Por defecto está desactivado para mantener pequeñas las copias de seguridad de Home Assistant.
+
+  persist_brew_tools:
+    name: Conservar herramientas de Homebrew
+    description: Cuando está activado, guarda Homebrew y las herramientas CLI instaladas con brew en /config/.linuxbrew para que sobrevivan a reconstrucciones del complemento. Por defecto está desactivado para mantener pequeñas las copias de seguridad de Home Assistant.
   
   gateway_mode:
     name: Modo del Gateway
