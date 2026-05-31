@@ -1,5 +1,11 @@
 # TOMMY
 
+## 5.0.2
+
+### Minor Changes
+- Improved error message when a stale fingerprint is detected
+
+
 ## 5.0.1
 
 ### Minor Changes

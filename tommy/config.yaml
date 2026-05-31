@@ -1,7 +1,7 @@
 name: TOMMY
-version: "5.0.1"
+version: "5.0.2"
 slug: tommysense-homeassistant-addon
-description: '[老王杂谈说]：用于存在和运动检测的自托管 Wi-Fi 感知。运行在 ESP32 上。'
+description: '[老王杂谈说]：null'
 url: "https://gh-proxy.org/github.com/tommy-sense/homeassistant-addon"
 arch:
   - aarch64
