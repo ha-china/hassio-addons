@@ -8,7 +8,7 @@
   ],
   "boot": "auto",
   "init": false,
-  "description": "[老王杂谈说]：一个用于下载所有您iCloud照片的命令行工具。应该将其做成集成，但这工作得很好！",
+  "description": "[老王杂谈说]：null",
   "environment": {},
   "map": [
     "media:rw",
@@ -23,9 +23,9 @@
   },
   "slug": "iclouddownloader",
   "startup": "services",
-  "upstream": "1.32.2",
+  "upstream": "1.32.3",
   "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons/tree/main/iclouddownloader",
-  "version": "1.32.2",
+  "version": "1.32.3",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8080]",
   "ingress": false,
   "ingress_port": 8080

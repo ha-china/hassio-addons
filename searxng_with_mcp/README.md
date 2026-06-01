@@ -1,15 +1,14 @@
-# Home Assistant 插件：searxng w/ mcp
-
+# Home Assistant 插件：searxng 与 mcp
 
 ## 关于
 
-[SearXNG](https://docs.searxng.org/index.html) 是一个免费的互联网元搜索引擎，可聚合来自多达 247 个搜索服务的搜索结果。用户既不被追踪也不被建立档案。此外，SearXNG 还可以通过 Tor 用于在线匿名搜索。
+[SearXNG](https://docs.searxng.org/index.html) 是一个免费的互联网元搜索引擎，可聚合多达 247 个搜索服务的搜索结果。用户既不会被追踪也不会被建立档案。此外，SearXNG 还可以通过 Tor 使用，以实现在线匿名。
 
-本 Home Assistant 插件由 https://github.com/DDanii/HA-Add-ons-by-DDanii/tree/master/searxng 转换而来。
+Home Assistant 插件改编自 https://github.com/DDanii/HA-Add-ons-by-DDanii/tree/master/searxng
 
-此插件包括一个轻量级的 MCP 服务器，它为 llama.cpp（以及任何其他 MCP 兼容客户端）提供通过私有的 [SearXNG](https://github.com/searxng/searxng) 实例进行网络搜索。
+这包括一个轻量级的 MCP 服务器，它为 llama.cpp（以及任何其他 MCP 兼容客户端）提供了一个私有的 [SearXNG](https://github.com/searxng/searxng) 实例来进行网络搜索。
 
-MCP 服务器由 https://github.com/jdeath/mcp-searxng-enhanced 转换而来，以提供快速 MCP IP 端点（使用了 AI 进行编辑）。对于包含 MCP 代码的 `https://github.com/jdeath/mcp-searxng-enhanced`
+MCP 服务器改编自 https://github.com/jdeath/mcp-searxng-enhanced，以提供一个 FastMCP IP 端点（使用人工智能进行了编辑）。有关 MCP 代码，请参阅 `https://github.com/jdeath/mcp-searxng-enhanced`。
 
 如果您只想使用 SearXNG，请使用 @DDanii 插件。
 
@@ -28,7 +27,6 @@ formats:
 
 您通常不需要编辑 `addon_configs/2effc9b9_searxng_with_mcp/ods_config.json` 文件中的 MCP 服务器设置，但您可以选择这样做。服务器/端口/主机不应被修改。
 
-
 重启插件
 
 将您的 llama.cpp MCP 服务器指向：http://IP:MCPPORT/mcp 
@@ -45,11 +43,11 @@ formats:
 "set_base_url_for_ingress": true
 ```
 
-如果启用 set_base_url_for_ingress，则设置 SEARXNG_BASE_URL 环境变量，这是 ingress 使用所必需的，并覆盖 settings.yml 中的 base_url 变量
+如果启用 set_base_url_for_ingress，它将设置 SEARXNG_BASE_URL 环境变量，这对于 ingress 使用是必需的，并且它将覆盖 settings.yml 中的 base_url 变量。
 
 ## 自定义
 
-在插件配置文件夹（addon_configs/2effc9b9_searxng_with_mcp）中的第一次运行后，将会有一个 custom.sh 文件，在其中您可以添加您自己的命令。
+在插件配置文件夹（addon_configs/2effc9b9_searxng_with_mcp）的第一次运行后，其中将会有一个 custom.sh 文件，您可以在其中添加自己的命令。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

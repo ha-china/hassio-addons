@@ -51,5 +51,19 @@ configuration:
   hermes_home:
     name: Hermes Home Directory
     description: >-
-      Directory name for Hermes Agent data (relative to /config).
-      Default ".hermes". Change to e.g. "amy" for /config/amy/.
+      Single-profile mode: directory name for Hermes Agent data (relative to /config).
+      Default ".hermes". Change to e.g. "amy" for /config/amy/. Ignored when
+      the "profiles" list below is non-empty.
+  profiles:
+    name: Profiles (multi-profile mode)
+    description: >-
+      List of profile directories (relative to /config) to run concurrently.
+      The first entry is the primary and keeps the root routes (/hermes/,
+      /dashboard/, /v1/, /terminal/). Each additional profile is served under
+      /profile/<name>/...
+  profile_env_vars:
+    name: Per-profile .env Overrides
+    description: >-
+      Per-profile overrides layered on top of the shared "env_vars" above.
+      "profile" must match a directory in the "profiles" list exactly.
+      Repeat the entry for each variable on the same profile.

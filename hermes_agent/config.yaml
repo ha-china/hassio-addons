@@ -1,7 +1,7 @@
 name: Hermes Agent
-version: "1.0.8"
+version: "1.1.0"
 slug: hermes_agent
-description: "[老王杂谈说]：由 Nous Research 构建的自改进 AI 智能体。Wolfram Ravenwolf 制作的 Home Assistant 附加组件。"
+description: "[老王杂谈说]：null"
 url: "https://gh-proxy.org/github.com/WolframRavenwolf/hermes-ha-addon"
 arch:
   - amd64
@@ -31,6 +31,8 @@ options:
   hass_url: "http://homeassistant.local:8123"
   homeassistant_token: ""
   hermes_home: ".hermes"
+  profiles: []
+  profile_env_vars: []
   enable_dashboard: false
   enable_terminal: false
   enable_api: false
@@ -46,6 +48,12 @@ schema:
   hass_url: "url?"
   homeassistant_token: "password?"
   hermes_home: "str?"
+  profiles:
+    - "str"
+  profile_env_vars:
+    - profile: "str"
+      name: "match(^[A-Z_][A-Z0-9_]{0,254}$)"
+      value: "str"
   enable_dashboard: "bool"
   enable_terminal: "bool"
   enable_api: "bool"

@@ -1,4 +1,5 @@
 #!/command/with-contenv bash
+# shellcheck shell=bash
 # ─────────────────────────────────────────────────────────────────────
 # Hermes Agent HA Add-on Entrypoint
 # ─────────────────────────────────────────────────────────────────────
@@ -20,6 +21,7 @@ GIT_TOKEN=$(opt git_token)
 AUTO_UPDATE=$(opt_bool auto_update)
 HASS_URL=$(opt hass_url)
 HASS_TOKEN=$(opt homeassistant_token)
+# shellcheck disable=SC2034  # consumed by resolve_profiles in profile-init.sh
 HERMES_HOME_DIR=$(opt hermes_home)
 ENABLE_DASHBOARD=$(opt_bool enable_dashboard)
 ENABLE_TERMINAL=$(opt_bool enable_terminal)
@@ -43,23 +45,46 @@ else
     echo "precedence ::ffff:0:0/96  100" >> /etc/gai.conf
 fi
 
-# Core paths (HOME=/config set in Dockerfile ENV)
-export HERMES_HOME="$HOME/${HERMES_HOME_DIR:-.hermes}"
 # HA's s6 supervises this wrapper; keep upstream Hermes in foreground mode.
 export HERMES_GATEWAY_NO_SUPERVISE=1
-echo "[run] HERMES_HOME: $HERMES_HOME"
 
-# ── Section 3: Persistent storage setup ──────────────────────────────
-SRC_DIR="$HERMES_HOME/hermes-agent"
-VENV_DIR="$SRC_DIR/venv"
+# ── Section 3: Profile resolution ────────────────────────────────────
+# Source the profile-init library. Resolves the `profiles` list (or legacy
+# `hermes_home`) into PROFILE_* arrays and per-profile port arrays.
+PROFILE_INIT_LIB=""
+for _candidate in \
+    "/usr/local/lib/hermes-profile-init.sh" \
+    "$(dirname "${BASH_SOURCE[0]}")/profile-init.sh"; do
+    if [ -f "$_candidate" ]; then
+        PROFILE_INIT_LIB="$_candidate"
+        break
+    fi
+done
+if [ -z "$PROFILE_INIT_LIB" ]; then
+    echo "[run] FATAL: profile-init.sh not found"
+    exit 1
+fi
+# shellcheck source=profile-init.sh
+source "$PROFILE_INIT_LIB"
+
+resolve_profiles || exit 1
+
+PRIMARY_HOME="${PROFILE_HOMES[0]}"
+PRIMARY_VENV_DIR="${PROFILE_VENV_DIRS[0]}"
+export HERMES_HOME="$PRIMARY_HOME"
+
+echo "[run] Profiles (${#PROFILE_DIRS[@]}):"
+for i in "${!PROFILE_DIRS[@]}"; do
+    prefix_label="${PROFILE_PATH_PREFIX[$i]:-/}"
+    echo "[run]   [$i] ${PROFILE_NAMES[$i]} → ${PROFILE_HOMES[$i]} (route: $prefix_label)"
+done
+
+# ── Section 3b: System paths ─────────────────────────────────────────
 BREW_DIR="$HOME/.linuxbrew"
 NODE_DIR="$HOME/.npm-global"
 GO_DIR="$HOME/.go"
 CERTS_DIR="$HOME/.certs"
 INGRESS_PORT=49169
-TTYD_HERMES_PORT=49269
-TTYD_TERMINAL_PORT=49369
-DASHBOARD_PORT=49469
 HTTP_PORT=8080
 HTTPS_PORT=8443
 
@@ -81,11 +106,9 @@ nginx
 echo "[run] Loading page active (ingress: $INGRESS_PORT)"
 
 # Create persistent directories (only system infra — Hermes creates its own)
-for d in "$HERMES_HOME" \
-         "$NODE_DIR/lib" \
-         "$GO_DIR/bin" \
-         "$CERTS_DIR"; do
-    mkdir -p "$d"
+mkdir -p "$NODE_DIR/lib" "$GO_DIR/bin" "$CERTS_DIR"
+for i in "${!PROFILE_DIRS[@]}"; do
+    mkdir -p "${PROFILE_HOMES[$i]}"
 done
 
 # Go
@@ -110,6 +133,9 @@ if [ -d "$BREW_DIR/bin" ]; then
     export HOMEBREW_REPOSITORY="$BREW_DIR/Homebrew"
     export PATH="$BREW_DIR/sbin:$BREW_DIR/bin:$PATH"
 fi
+
+# Snapshot PATH before adding any per-profile venv — used when building per-shell PATH.
+BASE_PATH="$PATH"
 
 # ── Section 4: Shell environment ─────────────────────────────────────
 # ~/.bashrc: persistent, create-if-missing (user-editable)
@@ -192,140 +218,156 @@ PROFILE
     echo "[run] Created default .profile"
 fi
 
-# ── Section 5: Hermes installation ───────────────────────────────────
-MARKER_FILE="$HOME/.hermes_install"
-
+# ── Section 5: Hermes installation (per profile) ─────────────────────
 compute_marker() {
-    local ref="${GIT_REF:-$(cd "$SRC_DIR" 2>/dev/null && git rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown)}"
-    local hash="$(cd "$SRC_DIR" 2>/dev/null && git rev-parse HEAD 2>/dev/null || echo none)"
-    local subs="$(find "$SRC_DIR" -mindepth 2 -maxdepth 2 -name pyproject.toml -print 2>/dev/null | while IFS= read -r pyproject; do basename "$(dirname "$pyproject")"; done | sort | paste -sd,)"
+    local src_dir="$1"
+    local ref="${GIT_REF:-$(cd "$src_dir" 2>/dev/null && git rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown)}"
+    local hash
+    hash="$(cd "$src_dir" 2>/dev/null && git rev-parse HEAD 2>/dev/null || echo none)"
+    local subs
+    subs="$(find "$src_dir" -mindepth 2 -maxdepth 2 -name pyproject.toml -print 2>/dev/null | while IFS= read -r pyproject; do basename "$(dirname "$pyproject")"; done | sort | paste -sd,)"
     echo "${GIT_URL}|${ref}|${hash}|${subs}"
 }
 
 install_needed() {
+    local src_dir="$1" venv_dir="$2" marker_file="$3"
     local current
-    current=$(compute_marker)
-    if [ ! -f "$MARKER_FILE" ]; then return 0; fi
-    if [ "$(cat "$MARKER_FILE")" != "$current" ]; then return 0; fi
-    if [ ! -f "$VENV_DIR/bin/activate" ]; then return 0; fi
-    if [ ! -f "$VENV_DIR/bin/hermes" ]; then return 0; fi
+    current=$(compute_marker "$src_dir")
+    if [ ! -f "$marker_file" ]; then return 0; fi
+    if [ "$(cat "$marker_file")" != "$current" ]; then return 0; fi
+    if [ ! -f "$venv_dir/bin/activate" ]; then return 0; fi
+    if [ ! -f "$venv_dir/bin/hermes" ]; then return 0; fi
     return 1
 }
 
-activate_venv() {
-    if [ ! -f "$VENV_DIR/bin/activate" ]; then
-        echo "[run] Creating venv..."
-        uv venv "$VENV_DIR" --python 3.11
-    fi
-    # shellcheck disable=SC1091
-    source "$VENV_DIR/bin/activate"
-}
+install_profile() {
+    local i="$1"
+    local src_dir="${PROFILE_SRC_DIRS[$i]}"
+    local venv_dir="${PROFILE_VENV_DIRS[$i]}"
+    local marker_file="${PROFILE_MARKER[$i]}"
+    local name="${PROFILE_NAMES[$i]}"
 
-# Clone if missing
-if [ ! -d "$SRC_DIR/.git" ]; then
-    echo "[run] Cloning Hermes Agent..."
-    CLONE_URL="$GIT_URL"
-    if [ -n "$GIT_TOKEN" ]; then
-        CLONE_URL=$(echo "$GIT_URL" | sed "s|https://|https://${GIT_TOKEN}@|")
-    fi
-    CLONE_ARGS=()
-    if [ -n "$GIT_REF" ]; then
-        CLONE_ARGS+=(--branch "$GIT_REF")
-    fi
-    git clone "${CLONE_ARGS[@]}" "$CLONE_URL" "$SRC_DIR"
-    cd "$SRC_DIR"
-    git submodule update --init --recursive 2>/dev/null || true
-    echo "[run] Clone complete: $(git log --oneline -1)"
-fi
-
-# Auto-update (stash local changes, pull, restore)
-if [ "$AUTO_UPDATE" = "true" ] && [ -d "$SRC_DIR/.git" ]; then
-    echo "[run] Pulling latest changes..."
-    cd "$SRC_DIR"
-    git stash --quiet 2>/dev/null || true
-    git pull --ff-only 2>/dev/null || echo "[run] Warning: git pull failed (branch may have diverged)"
-    git stash pop --quiet 2>/dev/null || true
-    git submodule update --init --recursive 2>/dev/null || true
-fi
-
-# Editable install
-activate_venv
-if install_needed; then
-    echo "[run] Installing Hermes (editable)..."
-    cd "$SRC_DIR"
-    uv pip install -e ".[all,dev]" 2>&1 | tail -5
-    # Submodules
-    if [ -f "$SRC_DIR/mini-swe-agent/pyproject.toml" ]; then
-        uv pip install -e "$SRC_DIR/mini-swe-agent" 2>&1 | tail -3
-    fi
-    if [ -f "$SRC_DIR/tinker-atropos/pyproject.toml" ]; then
-        uv pip install -e "$SRC_DIR/tinker-atropos" 2>&1 | tail -3
-    fi
-    compute_marker > "$MARKER_FILE"
-    echo "[run] Install complete"
-else
-    echo "[run] Install up to date (marker match)"
-fi
-
-# Link image-installed npm packages into project node_modules (where Hermes expects them)
-if [ ! -e "$SRC_DIR/node_modules/agent-browser" ]; then
-    mkdir -p "$SRC_DIR/node_modules"
-    ln -snf /usr/lib/node_modules/agent-browser "$SRC_DIR/node_modules/agent-browser"
-    cd "$SRC_DIR" && npm audit fix --silent 2>/dev/null || true
-    echo "[run] Linked agent-browser into project"
-fi
-
-# Build dashboard web frontend
-if [ -f "$SRC_DIR/web/package.json" ]; then
-    # ── Patches for reverse-proxy compatibility (idempotent) ──
-    # Modern Hermes dashboard builds honor X-Forwarded-Prefix at runtime.
-    # Older builds need in-container source patches. Keep this tolerant:
-    # dashboard patch drift should never stop the add-on from starting.
-    DASHBOARD_REBUILD="false"
-    PATCH_STATUS_FILE="$(mktemp)"
-
-    if ! python /usr/local/bin/hermes-dashboard-patches "$SRC_DIR" "$PATCH_STATUS_FILE"; then
-        echo "[run] WARNING: dashboard compatibility patch failed - continuing startup"
-    fi
-    if [ -s "$PATCH_STATUS_FILE" ]; then
-        DASHBOARD_REBUILD="true"
-    fi
-    rm -f "$PATCH_STATUS_FILE"
-
-    # Detect stale builds with absolute Vite asset paths. HA Ingress prefixes
-    # include a long random token, so the add-on must not depend on upstream
-    # X-Forwarded-Prefix handling to rewrite /assets/* at request time.
-    if grep -Eq '(src|href)="/assets/' "$SRC_DIR/hermes_cli/web_dist/index.html" 2>/dev/null; then
-        DASHBOARD_REBUILD="true"
+    # Clone if missing
+    if [ ! -d "$src_dir/.git" ]; then
+        echo "[run] [$name] Cloning Hermes Agent..."
+        local clone_url="$GIT_URL"
+        if [ -n "$GIT_TOKEN" ]; then
+            clone_url=$(echo "$GIT_URL" | sed "s|https://|https://${GIT_TOKEN}@|")
+        fi
+        local clone_args=()
+        if [ -n "$GIT_REF" ]; then
+            clone_args+=(--branch "$GIT_REF")
+        fi
+        git clone "${clone_args[@]}" "$clone_url" "$src_dir"
+        (cd "$src_dir" && git submodule update --init --recursive 2>/dev/null || true)
+        echo "[run] [$name] Clone complete: $(cd "$src_dir" && git log --oneline -1)"
     fi
 
-    if [ "$DASHBOARD_REBUILD" = "true" ] || [ ! -d "$SRC_DIR/hermes_cli/web_dist/assets" ]; then
-        echo "[run] Building dashboard frontend..."
-        if (cd "$SRC_DIR/web" && npm install --silent 2>&1 | tail -3 && npx vite build --outDir ../hermes_cli/web_dist --emptyOutDir 2>&1 | tail -3); then
-            echo "[run] Dashboard frontend built"
-        else
-            echo "[run] Warning: dashboard frontend build failed (dashboard will not be available)"
+    # Auto-update (stash local changes, pull, restore)
+    if [ "$AUTO_UPDATE" = "true" ] && [ -d "$src_dir/.git" ]; then
+        echo "[run] [$name] Pulling latest changes..."
+        (
+            cd "$src_dir"
+            git stash --quiet 2>/dev/null || true
+            git pull --ff-only 2>/dev/null || echo "[run] [$name] Warning: git pull failed (branch may have diverged)"
+            git stash pop --quiet 2>/dev/null || true
+            git submodule update --init --recursive 2>/dev/null || true
+        )
+    fi
+
+    # Editable install
+    if [ ! -f "$venv_dir/bin/activate" ]; then
+        echo "[run] [$name] Creating venv..."
+        uv venv "$venv_dir" --python 3.11
+    fi
+    if install_needed "$src_dir" "$venv_dir" "$marker_file"; then
+        echo "[run] [$name] Installing Hermes (editable)..."
+        (
+            cd "$src_dir"
+            # shellcheck disable=SC1091
+            source "$venv_dir/bin/activate"
+            uv pip install -e ".[all,dev]" 2>&1 | tail -5
+            if [ -f "$src_dir/mini-swe-agent/pyproject.toml" ]; then
+                uv pip install -e "$src_dir/mini-swe-agent" 2>&1 | tail -3
+            fi
+            if [ -f "$src_dir/tinker-atropos/pyproject.toml" ]; then
+                uv pip install -e "$src_dir/tinker-atropos" 2>&1 | tail -3
+            fi
+        )
+        compute_marker "$src_dir" > "$marker_file"
+        echo "[run] [$name] Install complete"
+    else
+        echo "[run] [$name] Install up to date (marker match)"
+    fi
+
+    # Link image-installed npm packages into project node_modules
+    if [ ! -e "$src_dir/node_modules/agent-browser" ]; then
+        mkdir -p "$src_dir/node_modules"
+        ln -snf /usr/lib/node_modules/agent-browser "$src_dir/node_modules/agent-browser"
+        (cd "$src_dir" && npm audit fix --silent 2>/dev/null || true)
+        echo "[run] [$name] Linked agent-browser into project"
+    fi
+
+    # Build dashboard web frontend
+    if [ -f "$src_dir/web/package.json" ]; then
+        local rebuild="false"
+        local status_file
+        status_file="$(mktemp)"
+
+        if ! python /usr/local/bin/hermes-dashboard-patches "$src_dir" "$status_file"; then
+            echo "[run] [$name] WARNING: dashboard compatibility patch failed - continuing startup"
+        fi
+        if [ -s "$status_file" ]; then
+            rebuild="true"
+        fi
+        rm -f "$status_file"
+
+        if grep -Eq '(src|href)="/assets/' "$src_dir/hermes_cli/web_dist/index.html" 2>/dev/null; then
+            rebuild="true"
+        fi
+
+        if [ "$rebuild" = "true" ] || [ ! -d "$src_dir/hermes_cli/web_dist/assets" ]; then
+            echo "[run] [$name] Building dashboard frontend..."
+            if (cd "$src_dir/web" && npm install --silent 2>&1 | tail -3 && npx vite build --outDir ../hermes_cli/web_dist --emptyOutDir 2>&1 | tail -3); then
+                echo "[run] [$name] Dashboard frontend built"
+            else
+                echo "[run] [$name] Warning: dashboard frontend build failed (dashboard will not be available)"
+            fi
         fi
     fi
-fi
+}
 
-# Verify
-HERMES_VERSION=$(hermes --version 2>/dev/null | head -1 || echo "unknown")
+for i in "${!PROFILE_DIRS[@]}"; do
+    install_profile "$i"
+done
+
+# Activate the primary profile's venv for any tooling (e.g. dashboard module probe).
+# shellcheck disable=SC1091
+source "$PRIMARY_VENV_DIR/bin/activate"
+
+# Verify version (from primary)
+HERMES_VERSION="$("$PRIMARY_VENV_DIR/bin/hermes" --version 2>/dev/null | head -1 || echo "unknown")"
 export HERMES_VERSION
 echo "[run] Hermes version: $HERMES_VERSION"
 
-# ── Section 6: Initial config scaffolding (mirrors official installer) ─
-if [ ! -f "$HERMES_HOME/.env" ] && [ -f "$SRC_DIR/.env.example" ]; then
-    cp -p "$SRC_DIR/.env.example" "$HERMES_HOME/.env"
-    chmod 600 "$HERMES_HOME/.env"
-    echo "[run] Created .env from source example (chmod 600)"
-fi
-if [ ! -f "$HERMES_HOME/config.yaml" ] && [ -f "$SRC_DIR/cli-config.yaml.example" ]; then
-    cp -p "$SRC_DIR/cli-config.yaml.example" "$HERMES_HOME/config.yaml"
-    echo "[run] Created config.yaml from source example"
-fi
-if [ ! -f "$HERMES_HOME/SOUL.md" ]; then
-    cat > "$HERMES_HOME/SOUL.md" << 'SOUL_EOF'
+# ── Section 6: Initial config scaffolding (per profile) ──────────────
+scaffold_profile_files() {
+    local i="$1"
+    local home="${PROFILE_HOMES[$i]}"
+    local src_dir="${PROFILE_SRC_DIRS[$i]}"
+    local name="${PROFILE_NAMES[$i]}"
+
+    if [ ! -f "$home/.env" ] && [ -f "$src_dir/.env.example" ]; then
+        cp -p "$src_dir/.env.example" "$home/.env"
+        chmod 600 "$home/.env"
+        echo "[run] [$name] Created .env from source example (chmod 600)"
+    fi
+    if [ ! -f "$home/config.yaml" ] && [ -f "$src_dir/cli-config.yaml.example" ]; then
+        cp -p "$src_dir/cli-config.yaml.example" "$home/config.yaml"
+        echo "[run] [$name] Created config.yaml from source example"
+    fi
+    if [ ! -f "$home/SOUL.md" ]; then
+        cat > "$home/SOUL.md" << 'SOUL_EOF'
 # Hermes Agent Persona
 
 <!--
@@ -342,10 +384,15 @@ This file is loaded fresh each message -- no restart needed.
 Delete the contents (or this file) to use the default personality.
 -->
 SOUL_EOF
-    echo "[run] Created SOUL.md template"
-fi
+        echo "[run] [$name] Created SOUL.md template"
+    fi
+}
 
-# tmux config (persistent, user-editable)
+for i in "${!PROFILE_DIRS[@]}"; do
+    scaffold_profile_files "$i"
+done
+
+# tmux config (persistent, user-editable, single-instance)
 if [ ! -f /config/.tmux.conf ]; then
     cat > /config/.tmux.conf << 'TMUX'
 set -g default-terminal "tmux-256color"
@@ -356,44 +403,16 @@ TMUX
 fi
 
 # ── Section 7: Environment variable passthrough ──────────────────────
-# Source .env first (base config from hermes setup)
-if [ -f "$HERMES_HOME/.env" ]; then
-    set -a
-    # shellcheck disable=SC1091
-    source "$HERMES_HOME/.env"
-    set +a
-fi
+# apply_env_vars_for_profile + upsert_env_var live in profile-init.sh
+for i in "${!PROFILE_DIRS[@]}"; do
+    apply_env_vars_for_profile "$i"
+done
 
-# Write HA addon config env_vars to .env (non-empty values only)
-# Hermes reads .env via dotenv (override=True), so this is the canonical path
-RESERVED_VARS="HERMES_HOME|HASS_TOKEN|HASS_URL|GITHUB_TOKEN"
-
-if [ -f "$HERMES_HOME/.env" ]; then
-    ENV_COUNT=$(jq '.env_vars | length' "$OPTIONS_FILE" 2>/dev/null || echo 0)
-    for i in $(seq 0 $((ENV_COUNT - 1))); do
-        VAR_NAME=$(jq -r ".env_vars[$i].name" "$OPTIONS_FILE")
-        VAR_VALUE=$(jq -r ".env_vars[$i].value" "$OPTIONS_FILE")
-        if echo "$VAR_NAME" | grep -qE "^($RESERVED_VARS)$"; then
-            echo "[run] Warning: Skipping '$VAR_NAME' (use the dedicated config option instead)"
-            continue
-        fi
-        if [ -n "$VAR_VALUE" ]; then
-            if grep -q "^${VAR_NAME}=" "$HERMES_HOME/.env"; then
-                sed -i "s|^${VAR_NAME}=.*|${VAR_NAME}=${VAR_VALUE}|" "$HERMES_HOME/.env"
-            else
-                echo "${VAR_NAME}=${VAR_VALUE}" >> "$HERMES_HOME/.env"
-            fi
-            echo "[run] .env: ${VAR_NAME} set from addon config"
-        fi
-    done
-fi
-
-# HA integration: pass through if set
+# HA integration: pass through if set (shared across profiles)
 if [ -n "$HASS_TOKEN" ]; then
     export HASS_TOKEN
     echo "[run] HASS_TOKEN injected"
 fi
-# Git token also serves as GITHUB_TOKEN (for gh CLI + Hermes skills)
 if [ -n "$GIT_TOKEN" ]; then
     export GITHUB_TOKEN="$GIT_TOKEN"
     echo "[run] GITHUB_TOKEN injected"
@@ -403,46 +422,20 @@ if [ -n "$HASS_URL" ]; then
     echo "[run] HASS_URL: $HASS_URL"
 fi
 
-# OpenAI-compatible API server on the Gateway (port 8642, host 127.0.0.1 = Hermes defaults)
-if [ "$ENABLE_API" = "true" ]; then
-    export API_SERVER_ENABLED=true
-    echo "[run] API server enabled"
-else
-    export API_SERVER_ENABLED=false
-    echo "[run] API server disabled"
-fi
-# Write API_SERVER_ENABLED to .env (Hermes dotenv override=True)
-# PORT and HOST are fixed (nginx upstream hardcoded to 127.0.0.1:8642)
-if [ -f "$HERMES_HOME/.env" ]; then
-    if grep -q "^API_SERVER_ENABLED=" "$HERMES_HOME/.env"; then
-        sed -i "s|^API_SERVER_ENABLED=.*|API_SERVER_ENABLED=${API_SERVER_ENABLED}|" "$HERMES_HOME/.env"
-    else
-        echo "API_SERVER_ENABLED=${API_SERVER_ENABLED}" >> "$HERMES_HOME/.env"
-    fi
-fi
+# nginx htpasswd (shared)
 if [ -n "$ACCESS_PASSWORD" ]; then
-    export API_SERVER_KEY="$ACCESS_PASSWORD"
-    # Write to .env so Hermes' dotenv loader picks it up (override=True)
-    if [ -f "$HERMES_HOME/.env" ]; then
-        if grep -q "^API_SERVER_KEY=" "$HERMES_HOME/.env"; then
-            sed -i "s|^API_SERVER_KEY=.*|API_SERVER_KEY=${ACCESS_PASSWORD}|" "$HERMES_HOME/.env"
-        else
-            echo "API_SERVER_KEY=${ACCESS_PASSWORD}" >> "$HERMES_HOME/.env"
-        fi
-    fi
     echo "hermes:$(openssl passwd -apr1 "$ACCESS_PASSWORD")" > /etc/nginx/.htpasswd
     echo "[run] Access password set (API key + nginx basic auth)"
 else
     rm -f /etc/nginx/.htpasswd
-    # Clear API_SERVER_KEY in .env if password was removed
-    if [ -f "$HERMES_HOME/.env" ] && grep -q "^API_SERVER_KEY=" "$HERMES_HOME/.env"; then
-        sed -i "s|^API_SERVER_KEY=.*|API_SERVER_KEY=|" "$HERMES_HOME/.env"
-    fi
 fi
 
-# ~/.hermes_profile: regenerated every start with all env vars (for SSH/docker-exec sessions)
+# ~/.hermes_profile: regenerated every start (shared, defaults to primary).
+# HERMES_HOME is set only if unset, so ttyd subprocesses that pre-set it
+# (per-profile sessions) keep their own profile.
 cat > /config/.hermes_profile << ENVSH
-export HERMES_HOME="$HERMES_HOME"
+: "\${HERMES_HOME:=$PRIMARY_HOME}"
+export HERMES_HOME
 export HERMES_GATEWAY_NO_SUPERVISE=1
 export HERMES_VERSION="$HERMES_VERSION"
 $([ -n "$GIT_TOKEN" ] && echo "export GITHUB_TOKEN=\"$GIT_TOKEN\"")
@@ -454,21 +447,18 @@ export HOMEBREW_CELLAR="$BREW_DIR/Cellar"
 export HOMEBREW_PREFIX="$BREW_DIR"
 export HOMEBREW_REPOSITORY="$BREW_DIR/Homebrew"
 export NPM_CONFIG_PREFIX="$NODE_DIR"
-export PATH="$VENV_DIR/bin:$BREW_DIR/sbin:$BREW_DIR/bin:$GO_DIR/bin:/usr/local/go/bin:$NODE_DIR/bin:\$PATH"
+export PATH="\${HERMES_HOME}/hermes-agent/venv/bin:$BREW_DIR/sbin:$BREW_DIR/bin:$GO_DIR/bin:/usr/local/go/bin:$NODE_DIR/bin:\$PATH"
 ENVSH
 
-# ── Section 8: TLS certificates ──────────────────────────────────────
+# ── Section 8: TLS certificates (shared) ─────────────────────────────
 if [ ! -f "$CERTS_DIR/server.crt" ]; then
     echo "[run] Generating self-signed TLS certificates..."
-    # CA
     openssl req -x509 -new -nodes -newkey ec -pkeyopt ec_paramgen_curve:prime256v1 \
         -keyout "$CERTS_DIR/ca.key" -out "$CERTS_DIR/ca.crt" \
         -days 3650 -subj "/CN=Hermes Agent CA" 2>/dev/null
-    # Server cert signed by CA
     openssl req -new -nodes -newkey ec -pkeyopt ec_paramgen_curve:prime256v1 \
         -keyout "$CERTS_DIR/server.key" -out /tmp/server.csr \
         -subj "/CN=hermes-agent" 2>/dev/null
-    # SAN: localhost + common LAN hostnames
     LAN_IP=$(hostname -I 2>/dev/null | awk '{print $1}' || echo "127.0.0.1")
     openssl x509 -req -in /tmp/server.csr \
         -CA "$CERTS_DIR/ca.crt" -CAkey "$CERTS_DIR/ca.key" \
@@ -483,9 +473,8 @@ else
 fi
 
 # ── Section 9: Render nginx config ───────────────────────────────────
-# Check dashboard availability (used for nginx stripping + landing page)
 DASHBOARD_AVAILABLE="false"
-if python -c "from hermes_cli.web_server import start_server" 2>/dev/null; then
+if "$PRIMARY_VENV_DIR/bin/python" -c "from hermes_cli.web_server import start_server" 2>/dev/null; then
     DASHBOARD_AVAILABLE="true"
 fi
 
@@ -497,74 +486,100 @@ else
     AUTH_BASIC_OFF=''
 fi
 
-# Render ports config if any direct-port service enabled
-if [ "$ENABLE_DASHBOARD" = "true" ] || [ "$ENABLE_TERMINAL" = "true" ] || [ "$ENABLE_API" = "true" ]; then
-    cp /etc/nginx/nginx-ports.conf.tpl /etc/nginx/ports.conf
+# Per-profile dashboard tokens — populated after dashboards start.
+# Use a placeholder until then so generated nginx config is still valid.
+# (Consumed by emit_token_maps / emit_profile_locations in nginx-render.sh.)
+# shellcheck disable=SC2034
+DASHBOARD_TOKENS=()
+for i in "${!PROFILE_DIRS[@]}"; do
+    DASHBOARD_TOKENS[$i]="PENDING_TOKEN_$i"
+done
+
+# Nginx rendering helpers (sourced from a separate library for testability)
+# Resolve adjacent file when run.sh is executed locally; container puts the lib in /usr/local/lib.
+NGINX_RENDER_LIB=""
+for _candidate in \
+    "/usr/local/lib/hermes-nginx-render.sh" \
+    "$(dirname "${BASH_SOURCE[0]}")/nginx-render.sh"; do
+    if [ -f "$_candidate" ]; then
+        NGINX_RENDER_LIB="$_candidate"
+        break
+    fi
+done
+if [ -z "$NGINX_RENDER_LIB" ]; then
+    echo "[run] FATAL: nginx-render.sh not found"
+    exit 1
+fi
+# shellcheck source=nginx-render.sh
+source "$NGINX_RENDER_LIB"
+
+render_nginx_config() {
+    # Render ports config if any direct-port service enabled
+    local include_ports
+    if [ "$ENABLE_DASHBOARD" = "true" ] || [ "$ENABLE_TERMINAL" = "true" ] || [ "$ENABLE_API" = "true" ]; then
+        cp /etc/nginx/nginx-ports.conf.tpl /etc/nginx/ports.conf
+        emit_token_maps | substitute_marker /etc/nginx/ports.conf '%%DASHBOARD_TOKEN_MAPS%%'
+        emit_profile_locations http | substitute_marker /etc/nginx/ports.conf '%%HTTP_PROFILE_LOCATIONS%%'
+        emit_profile_locations https | substitute_marker /etc/nginx/ports.conf '%%HTTPS_PROFILE_LOCATIONS%%'
+        sed -i \
+            -e "s|%%HTTP_PORT%%|${HTTP_PORT}|g" \
+            -e "s|%%HTTPS_PORT%%|${HTTPS_PORT}|g" \
+            -e "s|%%CERTS_DIR%%|${CERTS_DIR}|g" \
+            -e "s|%%AUTH_BASIC_ON%%|${AUTH_BASIC_ON}|g" \
+            -e "s|%%AUTH_BASIC_OFF%%|${AUTH_BASIC_OFF}|g" \
+            /etc/nginx/ports.conf
+        include_ports="include /etc/nginx/ports.conf;"
+        echo "[run] Direct ports: enabled (HTTP: $HTTP_PORT, HTTPS: $HTTPS_PORT)"
+    else
+        include_ports="# direct ports disabled"
+        echo "[run] Direct ports: disabled (Ingress only)"
+    fi
+
+    cp /etc/nginx/nginx.conf.tpl /etc/nginx/nginx.conf
+    emit_upstreams | substitute_marker /etc/nginx/nginx.conf '%%UPSTREAMS%%'
+    emit_dashboard_maps | substitute_marker /etc/nginx/nginx.conf '%%DASHBOARD_MAPS%%'
+    emit_profile_locations ingress | substitute_marker /etc/nginx/nginx.conf '%%INGRESS_PROFILE_LOCATIONS%%'
     sed -i \
-        -e "s|%%HTTP_PORT%%|${HTTP_PORT}|g" \
-        -e "s|%%HTTPS_PORT%%|${HTTPS_PORT}|g" \
-        -e "s|%%TTYD_TERMINAL_PORT%%|${TTYD_TERMINAL_PORT}|g" \
-        -e "s|%%TTYD_HERMES_PORT%%|${TTYD_HERMES_PORT}|g" \
-        -e "s|%%DASHBOARD_PORT%%|${DASHBOARD_PORT}|g" \
+        -e "s|%%INGRESS_PORT%%|${INGRESS_PORT}|g" \
         -e "s|%%CERTS_DIR%%|${CERTS_DIR}|g" \
-        -e "s|%%AUTH_BASIC_ON%%|${AUTH_BASIC_ON}|g" \
-        -e "s|%%AUTH_BASIC_OFF%%|${AUTH_BASIC_OFF}|g" \
-        /etc/nginx/ports.conf
-    # Conditionally remove terminal/API locations
-    if [ "$ENABLE_TERMINAL" != "true" ]; then
-        sed -i '/# TERMINAL_START/,/# TERMINAL_END/d' /etc/nginx/ports.conf
-        echo "[run] Web terminal: disabled on direct ports"
-    else
-        echo "[run] Web terminal: enabled on direct ports"
-    fi
-    if [ "$ENABLE_API" != "true" ]; then
-        sed -i '/# API_START/,/# API_END/d' /etc/nginx/ports.conf
-    fi
-    if [ "$ENABLE_DASHBOARD" != "true" ] || [ "$DASHBOARD_AVAILABLE" != "true" ]; then
-        sed -i '/# DASHBOARD_START/,/# DASHBOARD_END/d' /etc/nginx/ports.conf
-        echo "[run] Web dashboard: disabled on direct ports"
-    else
-        echo "[run] Web dashboard: enabled on direct ports"
-    fi
-    INCLUDE_PORTS="include /etc/nginx/ports.conf;"
-    echo "[run] Direct ports: enabled (HTTP: $HTTP_PORT, HTTPS: $HTTPS_PORT)"
-else
-    INCLUDE_PORTS="# direct ports disabled"
-    echo "[run] Direct ports: disabled (Ingress only)"
-fi
+        -e "s|%%HERMES_VERSION%%|${HERMES_VERSION}|g" \
+        -e "s|%%INCLUDE_PORTS%%|${include_ports}|g" \
+        /etc/nginx/nginx.conf
+}
 
-cp /etc/nginx/nginx.conf.tpl /etc/nginx/nginx.conf
-sed -i \
-    -e "s|%%INGRESS_PORT%%|${INGRESS_PORT}|g" \
-    -e "s|%%TTYD_TERMINAL_PORT%%|${TTYD_TERMINAL_PORT}|g" \
-    -e "s|%%TTYD_HERMES_PORT%%|${TTYD_HERMES_PORT}|g" \
-    -e "s|%%DASHBOARD_PORT%%|${DASHBOARD_PORT}|g" \
-    -e "s|%%CERTS_DIR%%|${CERTS_DIR}|g" \
-    -e "s|%%HERMES_VERSION%%|${HERMES_VERSION}|g" \
-    -e "s|%%INCLUDE_PORTS%%|${INCLUDE_PORTS}|g" \
-    /etc/nginx/nginx.conf
-
-# Strip dashboard from ingress if module not available
-if [ "$DASHBOARD_AVAILABLE" != "true" ]; then
-    sed -i '/# DASHBOARD_START/,/# DASHBOARD_END/d' /etc/nginx/nginx.conf
-fi
+render_nginx_config
 
 # Render landing page
 ADDON_SLUG=$(hostname | tr '-' '_')
 SHOW_TERMINAL="false"
-if [ "$ENABLE_TERMINAL" = "true" ]; then
-    SHOW_TERMINAL="true"
-fi
+[ "$ENABLE_TERMINAL" = "true" ] && SHOW_TERMINAL="true"
 SHOW_DASHBOARD="$DASHBOARD_AVAILABLE"
 SHOW_DASHBOARD_PORTS="false"
 if [ "$ENABLE_DASHBOARD" = "true" ] && [ "$DASHBOARD_AVAILABLE" = "true" ]; then
     SHOW_DASHBOARD_PORTS="true"
 fi
 SHOW_API="false"
-if [ "$ENABLE_API" = "true" ]; then
-    SHOW_API="true"
-fi
+[ "$ENABLE_API" = "true" ] && SHOW_API="true"
+
+# Build profiles JSON for the landing page renderer
+build_profiles_json() {
+    local i pref
+    printf '['
+    for i in "${!PROFILE_DIRS[@]}"; do
+        [ "$i" -gt 0 ] && printf ','
+        pref="${PROFILE_PATH_PREFIX[$i]}"
+        printf '{"name":%s,"prefix":%s,"primary":%s}' \
+            "$(jq -Rn --arg n "${PROFILE_NAMES[$i]}" '$n')" \
+            "$(jq -Rn --arg p "$pref" '$p')" \
+            "$([ "$i" -eq 0 ] && echo true || echo false)"
+    done
+    printf ']'
+}
+PROFILES_JSON="$(build_profiles_json)"
+
 cp /var/www/landing.html.tpl /var/www/landing.html
+# PROFILES_JSON contains JSON; use a different delimiter so braces don't collide
+PROFILES_JSON_ESC=$(printf '%s' "$PROFILES_JSON" | sed 's|[\\/&]|\\&|g')
 sed -i \
     -e "s|%%HERMES_VERSION%%|${HERMES_VERSION}|g" \
     -e "s|%%ADDON_SLUG%%|${ADDON_SLUG}|g" \
@@ -572,31 +587,53 @@ sed -i \
     -e "s|%%SHOW_DASHBOARD%%|${SHOW_DASHBOARD}|g" \
     -e "s|%%SHOW_DASHBOARD_PORTS%%|${SHOW_DASHBOARD_PORTS}|g" \
     -e "s|%%SHOW_API%%|${SHOW_API}|g" \
+    -e "s|%%PROFILES_JSON%%|${PROFILES_JSON_ESC}|g" \
     /var/www/landing.html
 
 echo "[run] Nginx configured (ingress: $INGRESS_PORT, HTTP: $HTTP_PORT, HTTPS: $HTTPS_PORT)"
 
-# ── Section 10: Start services ───────────────────────────────────────
-GATEWAY_PID=""
-TTYD_TERMINAL_PID=""
-TTYD_HERMES_PID=""
-DASHBOARD_PID=""
-DASHBOARD_TOKEN=""
+# ── Section 10: Start services (per profile) ─────────────────────────
+GATEWAY_PIDS=()
+TTYD_HERMES_PIDS=()
+TTYD_TERMINAL_PIDS=()
+DASHBOARD_PIDS=()
 
-start_gateway() {
-    echo "[run] Starting Hermes gateway..."
-    mkdir -p "$HERMES_HOME/logs"
-    cd "$HERMES_HOME"
-    hermes gateway run 2>&1 | tee -a "$HERMES_HOME/logs/gateway.log" &
-    TEE_PID=$!
-    sleep 0.5  # let gateway fork
-    GATEWAY_PID=$(pgrep -f "hermes gateway run" | sort -n | tail -1 || echo "$TEE_PID")
-    echo "[run] Gateway started (PID: $GATEWAY_PID, tee: $TEE_PID)"
+start_gateway_for_profile() {
+    local i="$1"
+    local home="${PROFILE_HOMES[$i]}"
+    local venv="${PROFILE_VENV_DIRS[$i]}"
+    local name="${PROFILE_NAMES[$i]}"
+    local port="${API_PORTS[$i]}"
+
+    echo "[run] [$name] Starting gateway (API port: $port)..."
+    mkdir -p "$home/logs"
+    (
+        cd "$home"
+        export HERMES_HOME="$home"
+        export PATH="$venv/bin:$BASE_PATH"
+        "$venv/bin/hermes" gateway run 2>&1 | tee -a "$home/logs/gateway.log"
+    ) &
+    local tee_pid=$!
+    sleep 0.5
+    # Find the matching gateway PID (cwd points to this profile's home)
+    local pid=""
+    for candidate in $(pgrep -f "hermes gateway run" 2>/dev/null | sort -n); do
+        local cwd
+        cwd=$(readlink "/proc/$candidate/cwd" 2>/dev/null || echo "")
+        if [ "$cwd" = "$home" ]; then
+            pid="$candidate"
+            break
+        fi
+    done
+    [ -z "$pid" ] && pid="$tee_pid"
+    GATEWAY_PIDS[$i]="$pid"
+    echo "[run] [$name] Gateway PID: $pid (tee: $tee_pid)"
 }
 
-start_ttyd() {
-    echo "[run] Starting ttyd (hermes: ${TTYD_HERMES_PORT}, terminal: ${TTYD_TERMINAL_PORT})..."
-    # Hermes startup wrapper (avoids .profile autostart recursion)
+# Install the dedicated hermes startup wrapper (shared, sources .bashrc).
+# Each ttyd subprocess sets HERMES_HOME via env before exec, so .bashrc sources
+# the right .env for that session.
+install_start_hermes_wrapper() {
     cat > /usr/local/bin/start-hermes << 'WRAPPER'
 #!/bin/bash
 source ~/.bashrc
@@ -609,50 +646,72 @@ echo "Run 'hermes' to restart, or 'exit' to close."
 exec bash
 WRAPPER
     chmod +x /usr/local/bin/start-hermes
-    # Hermes: dedicated wrapper (sources .bashrc, starts hermes, fallback shell on error)
-    ttyd \
-        --port "${TTYD_HERMES_PORT}" \
-        --interface 127.0.0.1 \
-        --base-path /hermes/ \
-        --writable -d 3 \
-        tmux -u new -A -s hermes /usr/local/bin/start-hermes &
-    TTYD_HERMES_PID=$!
-    # Terminal: non-login shell (plain shell)
-    ttyd \
-        --port "${TTYD_TERMINAL_PORT}" \
-        --interface 127.0.0.1 \
-        --base-path /terminal/ \
-        --writable -d 3 \
-        tmux -u new -A -s terminal /usr/bin/bash &
-    TTYD_TERMINAL_PID=$!
-    echo "[run] ttyd started (hermes PID: $TTYD_HERMES_PID, terminal PID: $TTYD_TERMINAL_PID)"
 }
 
-start_dashboard() {
+start_ttyd_for_profile() {
+    local i="$1"
+    local home="${PROFILE_HOMES[$i]}"
+    local name="${PROFILE_NAMES[$i]}"
+    local prefix="${PROFILE_PATH_PREFIX[$i]}"
+    local hermes_port="${TTYD_HERMES_PORTS[$i]}"
+    local term_port="${TTYD_TERMINAL_PORTS[$i]}"
+
+    echo "[run] [$name] Starting ttyd (hermes: $hermes_port, terminal: $term_port)..."
+    env HERMES_HOME="$home" \
+        ttyd \
+            --port "$hermes_port" \
+            --interface 127.0.0.1 \
+            --base-path "${prefix}/hermes/" \
+            --writable -d 3 \
+            tmux -u new -A -s "hermes-${name}" /usr/local/bin/start-hermes &
+    TTYD_HERMES_PIDS[$i]=$!
+
+    env HERMES_HOME="$home" \
+        ttyd \
+            --port "$term_port" \
+            --interface 127.0.0.1 \
+            --base-path "${prefix}/terminal/" \
+            --writable -d 3 \
+            tmux -u new -A -s "terminal-${name}" /usr/bin/bash &
+    TTYD_TERMINAL_PIDS[$i]=$!
+    echo "[run] [$name] ttyd PIDs: hermes=${TTYD_HERMES_PIDS[$i]} terminal=${TTYD_TERMINAL_PIDS[$i]}"
+}
+
+start_dashboard_for_profile() {
+    local i="$1"
+    local home="${PROFILE_HOMES[$i]}"
+    local venv="${PROFILE_VENV_DIRS[$i]}"
+    local name="${PROFILE_NAMES[$i]}"
+    local port="${DASHBOARD_PORTS[$i]}"
+
     if [ "$DASHBOARD_AVAILABLE" != "true" ]; then
-        echo "[run] Dashboard: not available (web_server module not found)"
+        echo "[run] [$name] Dashboard: not available (web_server module not found)"
         return
     fi
-    echo "[run] Starting dashboard (port: $DASHBOARD_PORT)..."
-    cd "$HERMES_HOME"
-    python -c "from hermes_cli.web_server import start_server; start_server(host='127.0.0.1', port=$DASHBOARD_PORT, open_browser=False)" &
-    DASHBOARD_PID=$!
-    echo "[run] Dashboard started (PID: $DASHBOARD_PID)"
+    echo "[run] [$name] Starting dashboard (port: $port)..."
+    (
+        cd "$home"
+        export HERMES_HOME="$home"
+        exec "$venv/bin/python" -c "from hermes_cli.web_server import start_server; start_server(host='127.0.0.1', port=${port}, open_browser=False)"
+    ) &
+    DASHBOARD_PIDS[$i]=$!
+    echo "[run] [$name] Dashboard PID: ${DASHBOARD_PIDS[$i]}"
 }
 
-# Read the dashboard's ephemeral session token and inject it into nginx config.
+# Read the dashboard's ephemeral session token from a running dashboard.
 # The dashboard generates a random token on each start and embeds it in index.html.
-# nginx auth_basic and HA Ingress both consume/strip the Authorization header,
-# so the browser's Bearer token never reaches the dashboard backend.
-# We read the token from the dashboard's HTML and inject it via proxy_set_header.
-inject_dashboard_token() {
+inject_dashboard_token_for_profile() {
+    local i="$1"
+    local name="${PROFILE_NAMES[$i]}"
+    local port="${DASHBOARD_PORTS[$i]}"
+
     if [ "$DASHBOARD_AVAILABLE" != "true" ]; then
         return
     fi
-    echo "[run] Waiting for dashboard token..."
+    echo "[run] [$name] Waiting for dashboard token..."
     local token=""
-    for i in $(seq 1 15); do
-        token=$(curl -s "http://127.0.0.1:${DASHBOARD_PORT}/" 2>/dev/null \
+    for _ in $(seq 1 15); do
+        token=$(curl -s "http://127.0.0.1:${port}/" 2>/dev/null \
             | grep -oP '__HERMES_SESSION_TOKEN__="\K[^"]+' || true)
         if [ -n "$token" ]; then
             break
@@ -660,12 +719,12 @@ inject_dashboard_token() {
         sleep 2
     done
     if [ -z "$token" ]; then
-        echo "[run] Warning: could not read dashboard token (dashboard API auth may not work)"
-        # Use a placeholder so nginx config is still valid
+        echo "[run] [$name] Warning: could not read dashboard token (dashboard API auth may not work)"
         token="UNAVAILABLE"
     fi
-    DASHBOARD_TOKEN="$token"
-    echo "[run] Dashboard token obtained (${#token} chars)"
+    # shellcheck disable=SC2034  # consumed by emit_token_maps / emit_profile_locations in nginx-render.sh
+    DASHBOARD_TOKENS[$i]="$token"
+    echo "[run] [$name] Dashboard token obtained (${#token} chars)"
 }
 
 reload_nginx() {
@@ -677,21 +736,24 @@ reload_nginx() {
 # Register signal handler BEFORE starting services
 trap shutdown SIGTERM SIGINT
 
-start_gateway
-start_ttyd
-start_dashboard
-inject_dashboard_token
+install_start_hermes_wrapper
 
-# Inject the dashboard token into the already-rendered nginx configs
-if [ -n "$DASHBOARD_TOKEN" ]; then
-    sed -i "s|%%DASHBOARD_TOKEN%%|${DASHBOARD_TOKEN}|g" /etc/nginx/nginx.conf
-    [ -f /etc/nginx/ports.conf ] && sed -i "s|%%DASHBOARD_TOKEN%%|${DASHBOARD_TOKEN}|g" /etc/nginx/ports.conf
-fi
+for i in "${!PROFILE_DIRS[@]}"; do
+    start_gateway_for_profile "$i"
+    start_ttyd_for_profile "$i"
+    start_dashboard_for_profile "$i"
+done
+
+for i in "${!PROFILE_DIRS[@]}"; do
+    inject_dashboard_token_for_profile "$i"
+done
+
+# Re-render nginx now that we have real dashboard tokens
+render_nginx_config
 
 reload_nginx
 
 echo "[run] All services started"
-# Derive base URL from HASS_URL (scheme + host, our port)
 BASE_URL="${HASS_URL:-http://localhost}"
 BASE_SCHEME="${BASE_URL%%://*}"
 BASE_HOST="${BASE_URL#*://}"
@@ -704,56 +766,67 @@ else
 fi
 echo "─────────────────────────────────────────────"
 echo " ${HERMES_VERSION}"
-echo " Gateway PID: ${GATEWAY_PID}"
-echo " Hermes:      ${BASE_URL}/hermes/"
-[ "$DASHBOARD_AVAILABLE" = "true" ] && echo " Dashboard:   ${BASE_URL}/dashboard/"
-echo " Terminal:    ${BASE_URL}/terminal/"
-echo " API:         ${BASE_URL}/v1/"
+for i in "${!PROFILE_DIRS[@]}"; do
+    prefix="${PROFILE_PATH_PREFIX[$i]}"
+    label="${PROFILE_NAMES[$i]}"
+    echo " Profile ${label} (PID ${GATEWAY_PIDS[$i]}):"
+    echo "   Hermes:    ${BASE_URL}${prefix}/hermes/"
+    [ "$DASHBOARD_AVAILABLE" = "true" ] && echo "   Dashboard: ${BASE_URL}${prefix}/dashboard/"
+    echo "   Terminal:  ${BASE_URL}${prefix}/terminal/"
+    echo "   API:       ${BASE_URL}${prefix}/v1/"
+done
 echo "─────────────────────────────────────────────"
 
 # ── Section 11: Signal handling ──────────────────────────────────────
 shutdown() {
     echo ""
     echo "[run] Shutting down..."
-    # Reverse order: nginx -> ttyd -> gateway
     nginx -s quit 2>/dev/null || true
     echo "[run] nginx stopped"
-    for pid in "$TTYD_TERMINAL_PID" "$TTYD_HERMES_PID" "$DASHBOARD_PID"; do
+    for i in "${!PROFILE_DIRS[@]}"; do
+        for pid in "${TTYD_TERMINAL_PIDS[$i]:-}" "${TTYD_HERMES_PIDS[$i]:-}" "${DASHBOARD_PIDS[$i]:-}"; do
+            if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
+                kill "$pid" 2>/dev/null || true
+            fi
+        done
+    done
+    echo "[run] ttyd + dashboards stopped"
+    for i in "${!PROFILE_DIRS[@]}"; do
+        local pid="${GATEWAY_PIDS[$i]:-}"
         if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
-            kill "$pid" 2>/dev/null
+            kill -TERM "$pid" 2>/dev/null || true
+            local waited=0
+            while kill -0 "$pid" 2>/dev/null && [ $waited -lt 10 ]; do
+                sleep 1
+                waited=$((waited + 1))
+            done
+            if kill -0 "$pid" 2>/dev/null; then
+                echo "[run] [${PROFILE_NAMES[$i]}] Gateway didn't stop gracefully, force killing..."
+                kill -9 "$pid" 2>/dev/null || true
+            fi
+            echo "[run] [${PROFILE_NAMES[$i]}] Gateway stopped"
         fi
     done
-    echo "[run] ttyd + dashboard stopped"
-    if [ -n "$GATEWAY_PID" ] && kill -0 "$GATEWAY_PID" 2>/dev/null; then
-        kill -TERM "$GATEWAY_PID" 2>/dev/null
-        local waited=0
-        while kill -0 "$GATEWAY_PID" 2>/dev/null && [ $waited -lt 10 ]; do
-            sleep 1
-            waited=$((waited + 1))
-        done
-        if kill -0 "$GATEWAY_PID" 2>/dev/null; then
-            echo "[run] Gateway didn't stop gracefully, force killing..."
-            kill -9 "$GATEWAY_PID" 2>/dev/null || true
-        fi
-        echo "[run] Gateway stopped"
-    fi
     echo "[run] Shutdown complete"
     exit 0
 }
 
 # ── Section 12: Supervisor loop ──────────────────────────────────────
 while true; do
-    if ! kill -0 "$GATEWAY_PID" 2>/dev/null; then
-        set +e; wait "$GATEWAY_PID" 2>/dev/null; EXIT_CODE=$?; set -e
-        if [ $EXIT_CODE -eq 0 ]; then
-            echo "[run] Gateway exited normally (code 0) — restarting in 3s..."
-            echo "[run] (Use the shutdown handler to stop the container.)"
-        else
-            echo "[run] Gateway exited unexpectedly (code: $EXIT_CODE), restarting in 3s..."
+    for i in "${!PROFILE_DIRS[@]}"; do
+        pid="${GATEWAY_PIDS[$i]:-}"
+        if [ -z "$pid" ] || ! kill -0 "$pid" 2>/dev/null; then
+            set +e; wait "$pid" 2>/dev/null; EXIT_CODE=$?; set -e
+            if [ "$EXIT_CODE" -eq 0 ]; then
+                echo "[run] [${PROFILE_NAMES[$i]}] Gateway exited normally (code 0) — restarting in 3s..."
+                echo "[run] (Use the shutdown handler to stop the container.)"
+            else
+                echo "[run] [${PROFILE_NAMES[$i]}] Gateway exited unexpectedly (code: $EXIT_CODE), restarting in 3s..."
+            fi
+            sleep 3
+            start_gateway_for_profile "$i"
         fi
-        sleep 3
-        start_gateway
-    fi
+    done
     sleep 5
 done
 

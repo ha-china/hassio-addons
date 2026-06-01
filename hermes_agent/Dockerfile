@@ -77,6 +77,8 @@ RUN su - linuxbrew -c \
 
 # ── Addon files ──────────────────────────────────────────────────────
 COPY run.sh /
+COPY nginx-render.sh /usr/local/lib/hermes-nginx-render.sh
+COPY profile-init.sh /usr/local/lib/hermes-profile-init.sh
 COPY nginx.conf.tpl /etc/nginx/nginx.conf.tpl
 COPY nginx-ports.conf.tpl /etc/nginx/nginx-ports.conf.tpl
 COPY landing.html.tpl /var/www/landing.html.tpl

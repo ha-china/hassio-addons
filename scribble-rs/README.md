@@ -1,38 +1,38 @@
-# Home assistant add-on: Scribble-rs
+# Home Assistant 插件：Scribble-rs
 
-Scribble.rs is an alternative to the web-based drawing game skribbl.io. My main problems with skribbl.io were the ads and the fact that a disconnect would cause you to lose your points. On top of that, the automatic word choice was quite annoying and caused some frustration.
+Scribble.rs 是一个基于网页的绘画游戏 skribbl.io 的替代品。我对 skribbl.io 的主要问题在于广告以及断开连接会导致你丢失积分。除此之外，自动选择的单词相当烦人，并引起了一些挫败感。
 
-
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有为我仓库点星的人！要点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## About
+## 关于
 
-This addon is based on https://github.com/scribble-rs/scribble.rs.
+此插件基于 https://github.com/scribble-rs/scribble.rs。
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Hass.io add-on.
+此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Open WebUI should work via ingress or <your-ip>:port.
+1. 将我的 Hass.io 插件仓库 [repository][repository] 添加到你的 Hass.io 实例中。
+1. 安装此插件。
+1. 启动插件。
+1. 检查插件的日志，以查看是否一切顺利。
+1. 通过 ingress 或 <your-ip>:port 打开 WebUI 应该可以工作。
 
-## Configuration
+## 配置
 
 ```
-port : 8080 #port you want to run on.
+port : 8080 # 你想要运行的端口。
 ```
 
-Webui can be found at `<your-ip>:port`.
-
+WebUI 可以在 `<your-ip>:port` 找到。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我
