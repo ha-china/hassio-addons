@@ -58,6 +58,10 @@ profile tommysense-homeassistant-addon flags=(attach_disconnected,mediate_delete
     # Caddy config
     /tmp/Caddyfile r,
     /tmp/** r,
+
+    # Loading page served while the server starts up
+    /var/www/ r,
+    /var/www/** r,
     
     # Caddy data and cache directories
     /root/.config/ rwk,

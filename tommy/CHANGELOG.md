@@ -1,5 +1,29 @@
 # TOMMY
 
+## 5.0.6
+
+### Minor Changes
+- Fixed an issue where the Home Assistant loading screen was cached, causing it to keep showing even after the dashboard was ready
+
+## 5.0.5
+
+### Minor Changes
+- Removed the automatic page reload during the loading state
+- Added a background color to the logo in Home Assistant for compatibility with light themes
+
+## 5.0.4
+
+### Minor Changes
+- Updated AppArmor for the Home Assistant App
+
+## 5.0.3
+
+### Minor Changes
+- Fixed an issue causing the Home Assistant App dashboard to show an error until the server was fully started
+- Fixed an issue where a power loss could cause the license to be invalid until the next heartbeat
+- Fixed an error causing the license heartbeat to deadlock and require a restart
+- Added a specific dashboard message for when a restart is required
+
 ## 5.0.2
 
 ### Minor Changes

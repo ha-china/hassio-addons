@@ -1,7 +1,7 @@
 name: "GlassHome Dashboard (Edge)"
-version: "0.9.7-beta.5"
+version: "0.10.0-beta.2"
 slug: glasshome-edge
-description: "[老王杂谈说]：null"
+description: "[老王杂谈说]：GlassHome 的早期版本用于测试。日常使用请选用稳定版。"
 url: "https://gh-proxy.org/github.com/glasshome/glasshome-addon"
 stage: experimental
 arch:

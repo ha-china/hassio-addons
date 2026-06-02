@@ -2,7 +2,7 @@ apparmor: "true"
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：用于 smartd S.M.A.R.T 监控的 Scrutiny webUI'
+description: '[老王杂谈说]：Scrutiny WebUI，用于 smartd S.M.A.R.T 监控'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -113,4 +113,4 @@ schema:
 slug: scrutiny
 udev: true
 url: https://gh-proxy.org/github.com/Starosdev/scrutiny
-version: "v1.62.1"
+version: "v1.62.2"

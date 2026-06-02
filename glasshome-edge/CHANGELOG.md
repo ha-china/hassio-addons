@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.10.0-beta.2
+
+### Bug Fixes
+
+- Upgrading from an earlier version no longer fails to start. Your existing dashboards and placed widgets carry over into the new accounts setup instead of being lost.
+
+## 0.10.0-beta.1
+
+### New Features
+
+- Sign in with a GlassHome account. Open settings, start the sign-in, and approve it by entering the short code at glasshome.app/link. Your dashboard then knows who you are across devices, no password typed on the TV or tablet.
+- GlassHome Pro. Community widgets and custom theming are now part of Pro. Free dashboards keep the full built-in widget set; an upgrade prompt appears when you reach for a Pro-only feature.
+- Try a demo home. From the welcome screen you can explore a fully populated dashboard with sample rooms and devices before connecting your own Home Assistant.
+- Pair a second screen with Quick-Connect. A kiosk or extra tablet shows a short code you confirm once, instead of copying tokens by hand.
+
+### Improvements
+
+- Redesigned welcome and setup. A calmer, conversational onboarding walks you through connecting your home one step at a time, with a smoother brand intro.
+- Reworked Settings. Your account and your home now live in clearly separated cards, every section shares the same rounded, layered look, and corners follow the radius you pick in the theme editor.
+- New "Reduce Motion" toggle in settings. Turn it on to dial back animations across the dashboard.
+- Settings sections and widgets ease in with a gentle staggered entrance instead of appearing all at once.
+- Faster installs and updates. The add-on download is about a third smaller, so upgrades land quicker.
+
 ## 0.9.7-beta.5
 
 ### Improvements
