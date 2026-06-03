@@ -1,13 +1,21 @@
 ## What’s changed
 
-## 🧰 Maintenance
+- ⬆️ Update SteVe OCPP to v3.13.0 @[renovate[bot]](https://github.com/apps/renovate) ([#344](https://github.com/erik73/app-steve/pull/344))
 
-- Run release drafter as last step of CI @erik73 ([#331](https://github.com/erik73/app-steve/pull/331))
-- Change to production stage @erik73 ([#333](https://github.com/erik73/app-steve/pull/333))
+## 🐛 Bug fixes
+
+- Fix run scripts for mariadb @erik73 ([#345](https://github.com/erik73/app-steve/pull/345))
 
 ## ⬆️ Dependency updates
 
-- ⬆️ Update erik73/workflows action to v1.0.11 @[renovate[bot]](https://github.com/apps/renovate) ([#328](https://github.com/erik73/app-steve/pull/328))
-- ⬆️ Update alpine_3_23/nginx to v1.28.3-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#330](https://github.com/erik73/app-steve/pull/330))
-- ⬆️ Update erik73/workflows action to v1.1.0 @[renovate[bot]](https://github.com/apps/renovate) ([#329](https://github.com/erik73/app-steve/pull/329))
-- ⬆️ Update SteVe OCPP to v3.12.0 @[renovate[bot]](https://github.com/apps/renovate) ([#332](https://github.com/erik73/app-steve/pull/332))
+- ⬆️ Update App base image to v6.0.7 @[renovate[bot]](https://github.com/apps/renovate) ([#334](https://github.com/erik73/app-steve/pull/334))
+- ⬆️ Update alpine_3_23/mariadb-client to v11.4.10-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#335](https://github.com/erik73/app-steve/pull/335))
+- ⬆️ Update App base image to v6.0.8 @[renovate[bot]](https://github.com/apps/renovate) ([#336](https://github.com/erik73/app-steve/pull/336))
+- ⬆️ Update erik73/workflows action to v1.1.1 @[renovate[bot]](https://github.com/apps/renovate) ([#337](https://github.com/erik73/app-steve/pull/337))
+- ⬆️ Update App base image to v6.0.9 @[renovate[bot]](https://github.com/apps/renovate) ([#338](https://github.com/erik73/app-steve/pull/338))
+- ⬆️ Update erik73/workflows action to v2 @[renovate[bot]](https://github.com/apps/renovate) ([#339](https://github.com/erik73/app-steve/pull/339))
+- ⬆️ Update alpine_3_23/nginx to v1.28.3-r1 @[renovate[bot]](https://github.com/apps/renovate) ([#340](https://github.com/erik73/app-steve/pull/340))
+- ⬆️ Update alpine_3_23/openjdk25-jre-headless to v25.0.3_p9-r1 @[renovate[bot]](https://github.com/apps/renovate) ([#341](https://github.com/erik73/app-steve/pull/341))
+- ⬆️ Update alpine_3_23/nginx to v1.28.3-r2 @[renovate[bot]](https://github.com/apps/renovate) ([#342](https://github.com/erik73/app-steve/pull/342))
+- ⬆️ Update alpine_3_23/mariadb-client to v11.4.12-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#343](https://github.com/erik73/app-steve/pull/343))
+- ⬆️ Update SteVe OCPP to v3.13.0 @[renovate[bot]](https://github.com/apps/renovate) ([#344](https://github.com/erik73/app-steve/pull/344))

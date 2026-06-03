@@ -1,22 +1,22 @@
 # Home Assistant Ollama 插件
 
-请注意，此插件支持使用 CPU 加速或实验性的 Nvidia GPU 支持（如果对您有效，请报告！）。对于 ROCm，支持仍在等待中。
+请注意，此插件需要在 CPU 加速或实验性的 Nvidia GPU 支持下运行（如果对您有效，请报告一下！）。对于 ROCm，支持仍在等待中。
 
 ## 模型目录
 
-所有下载的模型默认存储在 `/share/ollama`。由于历史原因，您也可以将其配置为 `/config/ollama`。请确保您有足够的可用空间。您可以选择 `/data/ollama` 以保持您的备份小，因为此路径不包括在插件备份中。
+所有下载的模型默认存储在 `/share/ollama`。由于历史原因，您也可以将其配置为 `/config/ollama`。请确保您有足够的空间。您可以选择 `/data/ollama` 以保持备份较小，因为此路径不包括在插件备份中。
 
 ## Ollama 集成
 
-要下载任何模型，请使用 Ollama 的 API 或与 Home Assistant 集成 [Ollama](https://www.home-assistant.io/integrations/ollama/) 进行集成：
+要下载任何模型，可以使用 Ollama 的 API 或与 Home Assistant 集成 [Ollama](https://www.home-assistant.io/integrations/ollama/) 集成：
 
-[![添加 Ollama 集成](https://my.home-assistant.io/badges/brand.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=ollama)
+![添加 Ollama 集成](https://my.home-assistant.io/badges/brand.svg)(https://my.home-assistant.io/redirect/config_flow_start/?domain=ollama)
 
-使用以下数据：
+请使用以下数据：
 
 - URL: `http://76e18fb5-ollama:11434`
 
-如果您想更改模型，请删除集成（而不是插件！）并重新启动配置集成的过程。
+如果您想更改模型，请删除集成（而不是插件！），然后重新启动配置集成的过程。
 
 ## 关于 UI 链接的说明
 

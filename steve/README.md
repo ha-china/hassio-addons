@@ -1,17 +1,17 @@
 # Home Assistant App: SteVe
 
-[![发布][发布盾牌]][发布] ![项目阶段][项目阶段盾牌] ![维护状态][维护盾牌]
+[![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
 
-SteVe OCPP服务器。
+SteVe OCPP 服务器。
 
 ## 关于
 
-Steve是一个用于与充电点通信的OCPP服务器
+Steve 是一个用于与充电桩通信的 OCPP 服务器。
 
-[维护盾牌]: https://img.shields.io/maintenance/yes/2026.svg
-[项目阶段盾牌]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[发布盾牌]: https://img.shields.io/badge/version-v5.0.0-blue.svg
-[发布]: https://github.com/erik73/app-steve/tree/v5.0.0
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
+[release-shield]: https://img.shields.io/badge/version-v5.0.1-blue.svg
+[release]: https://github.com/erik73/app-steve/tree/v5.0.1
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

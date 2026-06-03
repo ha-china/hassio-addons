@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.10.0-beta.4
+
+### Bug Fixes
+
+- Your dashboard shows up again after upgrading. Some upgraded installs opened to a blank screen and widgets you added vanished on save; your existing dashboard and widgets now appear, and edits stick.
+
+## 0.10.0-beta.3
+
+### Bug Fixes
+
+- Home Assistant reconnects after upgrading. If an upgrade left your dashboard signed in but showing no devices, sign in to Home Assistant again and the connection is restored automatically, or set the address under Settings (which now saves correctly).
+
 ## 0.10.0-beta.2
 
 ### Bug Fixes

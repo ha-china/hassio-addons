@@ -7,7 +7,7 @@
     "i386"
   ],
   "boot": "auto",
-  "description": "[老王杂谈说]：TubeSync 是一个用于 YouTube 的个人视频录像机",
+  "description": "[老王杂谈说]：TubeSync 是一款专为 YouTube 设计的 PVR（个人视频录像机）。",
   "environment": {},
   "map": [
     "config:rw"
@@ -25,7 +25,7 @@
   "startup": "services",
   "upstream": "1.0",
   "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons/tree/main/tubesync",
-  "version": "v0.18.0",
+  "version": "v0.18.1",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:4848]",
   "init": false,
   "ingress": false

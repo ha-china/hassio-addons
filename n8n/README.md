@@ -1,10 +1,10 @@
-# Home assistant 插件：n8n
+# 家居助理插件：n8n
 
-n8n 是一个可扩展的工作流自动化工具。采用公平的代码分发模式，n8n 将始终拥有可见的源代码，可进行自托管，并允许您添加自己的自定义函数、逻辑和应用。n8n 的基于节点的方案使其非常灵活，使您能够将任何事物连接到任何事物。
+n8n 是一款可扩展的工作流程自动化工具。采用公平的代码分发模式，n8n 总是会有可见的源代码，支持自托管，并允许您添加自己的自定义函数、逻辑和应用。n8n 的基于节点的架构使其非常灵活，让您能够将任何事物连接到任何事物。
 
-功能未测试，但插件运行正常
+功能未经测试，但插件可以运行
 
-_感谢所有给我仓库点星的人！要给星，请点击下面的图片，然后它将显示在右上角。谢谢！_
+_感谢 everyone 为我的仓库 star！要 star，请点击下面的图片，然后它就会出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
@@ -14,32 +14,33 @@ _感谢所有给我仓库点星的人！要给星，请点击下面的图片，�
 
 ## 安装
 
-1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例。
+1. [将我的 Hass.io 插件仓库][repository] 添加到您的 Hass.io 实例。
 1. 点击 `保存` 按钮以存储您的配置。
 1. 启动插件。
-1. 插件会失败，这是正常的。
+1. 插件将失败，这是正常的。
 1. 使用 ssh 登录您的 homeassistant 并运行 `chmod 2777 /addon_configs/2effc9b9_n8n`
-1. 启动插件。
-1. 检查插件的日志以查看一切是否顺利。
-1. 打开 WebUI 应该可以通过 <your-ip>:port 访问。
+1. 重新启动插件。
+1. 检查插件的日志以查看是否一切顺利。
+1. 打开 WebUI 应该可以通过 <你的IP>:端口号 访问。
 1. 设置管理员账户。
 1. 设置将位于 /addon_configs/2effc9b9_n8n
 
 ## 配置
 
-您可以将插件设置为使用环境文件。请注意使用 '/home/node' 作为基础路径，它将映射到 /addon_configs/2effc9b9_n8n 
+您可以设置插件使用环境文件，如果选择的话。注意使用 '/home/node' 作为基本路径，它将映射到 /addon_configs/2effc9b9_n8n
 
-您需要自己创建此文件，并使其成为您想要设置的环境的列表，例如：
+您需要自己创建该文件，并将其作为您想要设置的环境列表，如下所示：
+
 ```
 DB_SQLITE_POOL_SIZE=10
 N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 ```
 
 ```
-port : 5678 #您希望运行的端口号。
+port : 5678 #你想要运行在的端口号。
 ```
 
-WebUI 可以在 `<your-ip>:port` 找到。
+WebUI 可以在 `<你的IP>:端口号` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---

@@ -47,7 +47,7 @@ There is no GUI provided with InfluxDB3. To manage the app, you need to
 install InfluxDB 3 Explorer. It is available as an app here in this repo.
 
 You will need your token to connect, and point the Explorer app to
-<your_influxdb2_ip_address>:8181
+<your_influxdb3_ip_address>:8181
 
 ## HomeAssistant Configuration
 
@@ -134,6 +134,10 @@ SSL support is not enabled at the moment.
 Please see the changelog
 
 ## InfluxDB -> InfluxDB3 Migration
+
+It is now possible to migrate data using the InfluxDB3 Explorer gui.
+That is the easiest way, but if you want to use the command line instead
+use the following method:
 
 ### Install plugin to migate data from InfluxDB1.x or Influxdb2.x
 
