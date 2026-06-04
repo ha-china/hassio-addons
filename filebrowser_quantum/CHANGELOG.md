@@ -1,3 +1,7 @@
+## 1.3.3-8 (2026-06-03)
+- Add `default_user_scope` option: sets the FileBrowser source path and default user scope (must be an existing absolute directory path, defaults to `/`)
+
+- Allow config persistence
 
 ## 1.3.3 (2026-05-19)
 - Update to latest version from gtsteffaniak/filebrowser (changelog : https://github.com/gtsteffaniak/filebrowser/releases)

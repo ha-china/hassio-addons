@@ -1,169 +1,171 @@
-# 使用 Puppeteer 截取 Home Assistant 屏幕截图
+# Screenshot Home Assistant using Puppeteer
 
-轻松创建 Home Assistant 仪表板的屏幕截图。允许您将它们放在电子墨水屏幕或其他可以显示图像的屏幕上。
+Easily create screenshots of your Home Assistant dashboards. Allowing you to put them on e-ink screens or any other screen that can display images.
 
-[![打开您的 Home Assistant 实例并显示一个插件的仪表板。](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=0f1cc410_puppet&repository_url=https%3A%2F%2Fgithub.com%2Fballoob%2Fhome-assistant-addons)
+[![Open your Home Assistant instance and show the dashboard of an add-on.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=0f1cc410_puppet&repository_url=https%3A%2F%2Fgithub.com%2Fballoob%2Fhome-assistant-addons)
 
-![UI 屏幕截图](example/ui.png)
+![UI Screenshot](example/ui.png)
 
-![UI 屏幕截图](example/device.jpg)
+![UI Screenshot](example/device.jpg)
 
-您需要创建一个长期有效的访问令牌并将其作为插件选项添加。
+You will need to create a long lived access token and add it as an add-on option.
 
-启用看门狗选项，在浏览器启动失败时重启插件（有时会发生这种情况，仍在调查中）。
+Enable the watch dog option to restart the add-on when the browser fails to launch (happens sometimes, still investigating).
 
-_这是一个原型，完全没有安全性。任何人都可以访问服务器并对任何 Home Assistant 页面进行屏幕截图。_
+_This is a prototype, there is NO security. Anyone can access the server and make screenshots of any Home Assistant page._
 
-[![显示 Home Assistant 仪表板屏幕截图的 ESPHome 设备](https://raw.githubusercontent.com/balloob/home-assistant-addons/main/puppet/example/screenshot.jpg)](./example/)
+[![ESPHome device showing a screenshot of a Home Assistant dashboard](https://raw.githubusercontent.com/balloob/home-assistant-addons/main/puppet/example/screenshot.jpg)](./example/)
 
-## 配置
+## Configuration
 
-- access_token: 用于向 Home Assistant 进行身份验证的长期有效访问令牌。
+- access_token: Long-lived access token used to authenticate against Home Assistant.
 
-## 高级配置
+## Advanced configuration
 
-- home_assistant_url: 当插件浏览器捕获屏幕截图时，应打开的您的 Home Assistant 实例的基本 URL。默认值为 `http://homeassistant:8123`，这是插件可以访问 Home Assistant 的内部 URL。如果您的实例在 Home Assistant 中配置了 SSL 证书，并且需要通过不同的主机名或端口访问（例如，http://my-ha.local:8123 或 https://example.duckdns.org），您可以覆盖它。
-- keep_browser_open: 如果为 true，则在请求之间保持 Chromium 浏览器处于活动状态。
+- home_assistant_url: Base URL of your Home Assistant instance that the add-on browser should open when taking screenshots. Defaults to `http://homeassistant:8123` which is the internal URL at which the add-on can reach Home Assistant. You can override it if your instance has configured SSL certificates inside Home Assistant and requires to be reached via a different hostname or port (e.g., http://my-ha.local:8123 or https://example.duckdns.org).
+- keep_browser_open: If true, keeps the Chromium browser alive between requests.
 
 ## Web UI
 
-现在插件包括一个基于 Web 的用户界面，帮助您轻松配置和预览屏幕截图。您可以通过以下方式访问它：
+The add-on now includes a web-based user interface to help you easily configure and preview screenshots. You can access it by:
 
-1. 从 Home Assistant Supervisor 界面打开插件的 Web UI
-2. 或者直接导航到 `http://homeassistant.local:10000/`
+1. Opening the add-on's Web UI from the Home Assistant Supervisor interface
+2. Or navigating directly to `http://homeassistant.local:10000/`
 
-Web UI 提供：
-- 交互式表单来配置屏幕截图参数（路径、视口大小、格式、主题等）
-- 屏幕截图的实时预览
-- 自动生成的 URL，您可以复制并在自动化或外部应用程序中使用
+The Web UI provides:
+- Interactive form to configure screenshot parameters (path, viewport size, format, theme, etc.)
+- Live preview of screenshots
+- Automatically generated URL that you can copy and use in your automations or external applications
 
-这在测试不同设置并在自动化中使用 URL 之前找到完美配置特别有用。
+This is particularly useful for testing different settings and finding the perfect configuration before using the URLs in your automations.
 
-## 使用方法
+## Usage
 
-启动插件将在端口 10000 上启动一个新服务器。您请求的任何路径都将返回该页面的屏幕截图。您需要指定您想要的视口大小。
+Starting the add-on will launch a new server on port 10000. Any path you request will return a screenshot of that page. You will need to specify the viewport size you want.
 
-例如，要获取默认仪表板的 1000px x 1000px 屏幕截图，请获取：
-
-```
-http://homeassistant.local:10000/lovelace/0?viewport=1000x1000
-```
-
-### 电子墨水屏幕
-
-为了减少电子墨水屏幕的调色板，您可以添加 `colors` 参数。值是一个用逗号分隔的十六进制颜色列表，用于使用。例如，对于双色的电子墨水屏幕（黑色和白色）：
+For example, to get a 1000px x 1000px screenshot of your default dashboard, fetch:
 
 ```
-http://homeassistant.local:10000/lovelace/0?viewport=1000x1000&colors=000000,FFFFFF
+http://homeassistant.local:10000/home?viewport=1000x1000
 ```
 
-您还可以通过添加 `invert` 参数来反转颜色：
+### e-ink displays
+
+To reduce the color palette for e-ink displays, you can add the `colors` parameter. The value is a comma-separated list of hex colors to use. For example, for a 2-color e-ink display (black and white):
 
 ```
-http://homeassistant.local:10000/lovelace/0?viewport=1000x1000&colors=000000,FFFFFF&invert
+http://homeassistant.local:10000/home?viewport=1000x1000&colors=000000,FFFFFF
 ```
 
-建议使用电子墨水主题（如 [Graphite](https://github.com/TilmanGriesel/graphite?tab=readme-ov-file#e-ink-themes)）来优化可读性。
-
-### 设置主题
-
-您可以通过添加 `theme` 查询参数来设置屏幕截图的 Home Assistant 界面主题。值应该是 Home Assistant 支持的主题名称（例如，`Graphite E-ink Light`）。
+You can also invert the colors by adding the `invert` parameter:
 
 ```
-http://homeassistant.local:10000/lovelace/0?viewport=1000x1000&theme=Graphite%20E-ink%20Light
+http://homeassistant.local:10000/home?viewport=1000x1000&colors=000000,FFFFFF&invert
 ```
 
-### 完成加载检测
+It's recommended to use an e-ink theme like [Graphite](https://github.com/TilmanGriesel/graphite?tab=readme-ov-file#e-ink-themes) to optimize readability.
 
-默认情况下，在冷启动时，服务器将在加载被认为完成后的 2.5 秒内等待，以给那些没有被加载旋转器跟踪的项目加载（例如，图标、图片）。当浏览器处于活动状态时，它等待 750 毫秒。您可以通过添加 `wait` 查询参数来控制等待时间。例如，要等待 10 秒：
+### Set Theme
 
-```
-http://homeassistant.local:10000/lovelace/0?viewport=1000x1000&wait=10000
-```
-
-您可以使用 `zoom` 查询参数来控制页面的缩放级别。默认缩放级别为 1。例如，要放大 1.3 倍：
+You can set the theme of the Home Assistant interface for the screenshot by adding the `theme` query parameter. The value should be a theme name that Home Assistant supports (e.g., `Graphite E-ink Light`).
 
 ```
-http://homeassistant.local:10000/lovelace/0?viewport=1000x1000&zoom=1.3
+http://homeassistant.local:10000/home?viewport=1000x1000&theme=Graphite%20E-ink%20Light
 ```
 
-### 输出格式
+**Note:** Theme changes apply to all sessions of the user whose token is used. To avoid having your normal browsing sessions affected by screenshot themes (e.g., e-ink themes), create a separate user account specifically for Puppet and use that user's long-lived access token in the addon configuration.
 
-默认情况下，输出格式为 PNG。您可以通过添加 `format=jpeg`、`format=webp`、`format=bmp` 查询参数来请求 JPEG、WebP 或 BMP 图像：
+### Finish loading detection
 
-```
-http://homeassistant.local:10000/lovelace/0?viewport=1000x1000&format=jpeg
-```
+By default, on a cold start the server will wait for 2.5 extra seconds after the loading is considered done, to give things that are not tracked by loading spinners to load (ie icons, pictures). When the browser is active, it waits 750ms. You can control this wait time by adding a `wait` query parameter. For example, to wait 10 seconds:
 
 ```
-http://homeassistant.local:10000/lovelace/0?viewport=1000x1000&format=webp
+http://homeassistant.local:10000/home?viewport=1000x1000&wait=10000
+```
+
+You can control the zoom level of the page using the `zoom` query parameter. The default zoom level is 1. For example, to zoom in 1.3x:
+
+```
+http://homeassistant.local:10000/home?viewport=1000x1000&zoom=1.3
+```
+
+### Full page
+
+By default the screenshot is clipped to the viewport height. Set the height to `auto` in the `viewport` parameter to capture the entire scrollable page instead, so a dashboard that extends below the fold is captured in one shot. The width still applies; the height grows to fit the content, capped at 4000px so a very long page can't produce a runaway image.
+
+```
+http://homeassistant.local:10000/home?viewport=1000xauto
+```
+
+### Output formats
+
+By default, the output format is PNG. You can request a JPEG, WebP or BMP image by adding the `format=jpeg`, `format=webp`, `format=bmp` query parameter:
+
+```
+http://homeassistant.local:10000/home?viewport=1000x1000&format=jpeg
 ```
 
 ```
-http://homeassistant.local:10000/lovelace/0?viewport=1000x1000&format=bmp
+http://homeassistant.local:10000/home?viewport=1000x1000&format=webp
 ```
 
-### 旋转屏幕截图
-
-您可以通过添加 `rotate` 查询参数来旋转屏幕截图。有效值为 90、180 和 270。
-
 ```
-http://homeassistant.local:10000/lovelace/0?viewport=1000x1000&rotate=90
+http://homeassistant.local:10000/home?viewport=1000x1000&format=bmp
 ```
 
-### 设置语言
+### Rotate screenshot
 
-您可以通过添加 `lang` 查询参数来设置屏幕截图的 Home Assistant 界面语言。值应该是 Home Assistant 支持的语言代码（例如，`en`、`nl`、`de`、`ko`、`ja`、`zh-Hans`、`zh-Hant`）。
-
-```
-http://homeassistant.local:10000/lovelace/0?viewport=1000x1000&lang=nl
-```
-
-### 设置暗黑模式
-
-您可以通过添加 `dark` 查询参数来启用屏幕截图的暗黑模式。此参数不需要值。
+You can rotate the screenshot by adding the `rotate` query parameter. Valid values are 90, 180, and 270.
 
 ```
-http://homeassistant.local:10000/lovelace/0?viewport=1000x1000&dark
+http://homeassistant.local:10000/home?viewport=1000x1000&rotate=90
 ```
 
-### 预加载请求
+### Set Language
 
-为了提高后续请求的性能，您可以使用 `next` 参数提前安排浏览器导航到所需页面。提供您预期下一个屏幕截图请求发生时的秒数。插件将尝试在指定路径的 10 秒 *之前* 此时间戳之前导航浏览器。
+You can set the language of the Home Assistant interface for the screenshot by adding the `lang` query parameter. The value should be a language code that Home Assistant supports (e.g., `en`, `nl`, `de`, `ko`, `ja`, `zh-Hans`, `zh-Hant`).
 
 ```
-# 示例如何让浏览器提前预热，以便在 300 秒后准备好拍摄屏幕截图。
-http://homeassistant.local:10000/lovelace/0?next=300
+http://homeassistant.local:10000/home?viewport=1000x1000&lang=nl
 ```
 
-提供 `next` 参数不会影响当前请求。它将仅用于下一个请求。
+### Set Dark Mode
+
+You can enable dark mode for the screenshot by adding the `dark` query parameter. This parameter doesn't require a value.
+
+```
+http://homeassistant.local:10000/home?viewport=1000x1000&dark
+```
+
+### Preloading requests
+
+To improve performance for subsequent requests, you can schedule the browser to navigate to the desired page ahead of time using the `next` parameter. Provide the number of seconds when you expect the *next* screenshot request to occur. The add-on will attempt to navigate the browser to the specified path 10 seconds *before* this timestamp.
+
+```
+# Example how the browser will warm up so it's ready to take a screenshot
+# in 300 seconds.
+http://homeassistant.local:10000/home?next=300
+```
+
+Providing a `next` parameter will not affect the current request. It will only be used for the next request.
+
+## Using images inside Home Assistant
+
+You can use a template image entity to pull Puppet output into Home Assistant to make it possible to send it in notifications or use for other purposes.
+
+```
+template:
+  - image:
+      name: My dashboard
+      url: "http://homeassistant.local:10000/home?viewport=1000x1000"
+```
 
 ## Proxmox
 
-如果您在 Proxmox 下以虚拟机方式运行 Home Assistant OS，请确保您的虚拟机的主机类型设置为 `host`。
+If you're running Home Assistant OS in a virtual machine under Proxmox, make sure the host type of your virtual machine is set to `host`.
 
-## 速度（或缺乏速度）
+## Speed (or lack thereof)
 
-此插件很慢。在 Home Assistant Green 上，冷启动时大约需要 10 秒。浏览器最多保持 30 秒的活动状态。
+This add-on is slow. On a Home Assistant Green, on cold-start, it takes ~10s. The browser is kept alive for up to 30 seconds.
 
-如果请求同一页面，屏幕截图将尽可能快地返回（在 HA Green 上为 0.6 秒）。如果请求不同页面，它需要大约 1.5 秒，因为它需要导航。
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-
-
-## 📱 关注我
-
-扫描下面二维码，关注我。有需要可以随时给我留言：
-
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
-
-## ☕ 赞助支持
-
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
-
-感谢您的支持与鼓励！
+If the same page is requested, a screenshot is returned as fast as possible (0.6s on HA Green). If a different page is requested, it takes ~1.5s because it needs to navigate.

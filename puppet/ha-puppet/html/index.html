@@ -96,13 +96,13 @@
               <input
                 type="text"
                 id="path"
-                value="/lovelace"
+                value="/home"
                 class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:border-transparent"
                 style="
                   border-color: var(--ha-blue-light);
                   --tw-ring-color: var(--ha-blue);
                 "
-                placeholder="/lovelace"
+                placeholder="/home"
               />
             </div>
 
@@ -142,6 +142,20 @@
                   --tw-ring-color: var(--ha-blue);
                 "
               />
+              <div class="flex items-center mt-2">
+                <input
+                  type="checkbox"
+                  id="auto_height"
+                  class="h-4 w-4 border-gray-300 rounded"
+                  style="
+                    color: var(--ha-blue);
+                    --tw-ring-color: var(--ha-blue);
+                  "
+                />
+                <label for="auto_height" class="ml-2 block text-sm text-gray-700"
+                  >Auto height (capture full page, max 4000px)</label
+                >
+              </div>
             </div>
 
             <!-- Next -->
@@ -181,6 +195,11 @@
               >
                 <option value="">Default</option>
               </select>
+              <p class="text-xs text-gray-500 mt-1">
+                <strong>Note:</strong> Theme changes apply to all sessions of
+                the user whose token is used. Consider using a
+                separate user for Puppet.
+              </p>
               <p class="text-xs text-gray-500 mt-1">
                 Find more themes at the
                 <a
@@ -288,6 +307,28 @@
                     <option value="webp">WebP</option>
                     <option value="bmp">BMP</option>
                   </select>
+                </div>
+
+                <!-- BMP Mode -->
+                <div id="bmpModeContainer" style="display:none;">
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >BMP Mode</label
+                  >
+                  <select
+                    id="bmp_mode"
+                    class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:border-transparent"
+                    style="
+                      border-color: var(--ha-blue-light);
+                      --tw-ring-color: var(--ha-blue);
+                    "
+                  >
+                    <option value="color">Color (24-bit)</option>
+                    <option value="grayscale">Grayscale (8-bit)</option>
+                    <option value="binary">Binary (1-bit)</option>
+                  </select>
+                  <p class="text-xs text-gray-500 mt-1">
+                    Choose BMP output mode. Only applies when format is BMP.
+                  </p>
                 </div>
 
                 <!-- Wait Time -->
@@ -576,7 +617,7 @@
         <input
           type="text"
           id="importUrlInput"
-          placeholder="e.g., http://192.168.1.30:10000/lovelace/0?viewport=1000x600&theme=midnight"
+          placeholder="e.g., http://192.168.1.30:10000/home?viewport=1000x600&theme=midnight"
           class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:border-transparent font-mono text-sm mb-2"
           style="
             border-color: var(--ha-blue-light);
@@ -613,6 +654,27 @@
     </div>
 
     <script>
+      // Effective viewport height for the URL: the literal "auto" when the
+      // auto-height box is checked, otherwise the numeric height field.
+      function getViewportHeight() {
+        return document.getElementById("auto_height").checked
+          ? "auto"
+          : document.getElementById("height").value;
+      }
+
+      // Apply a viewport height string (a number or "auto") to the form,
+      // toggling the auto-height checkbox and disabling the number field to
+      // match. A numeric value is preserved so unchecking auto restores it.
+      function setViewportHeight(height) {
+        const isAuto = String(height).toLowerCase() === "auto";
+        const heightEl = document.getElementById("height");
+        document.getElementById("auto_height").checked = isAuto;
+        heightEl.disabled = isAuto;
+        if (!isAuto && height !== undefined && height !== "") {
+          heightEl.value = height;
+        }
+      }
+
       // Save settings to localStorage
       function saveSettings() {
         const settings = {
@@ -620,6 +682,7 @@
           path: document.getElementById("path").value,
           width: document.getElementById("width").value,
           height: document.getElementById("height").value,
+          auto_height: document.getElementById("auto_height").checked,
           format: document.getElementById("format").value,
           theme: document.getElementById("theme").value,
           dark: document.getElementById("dark").checked,
@@ -632,6 +695,7 @@
           rotate: document.getElementById("rotate").value,
           invert: document.getElementById("invert").checked,
           next: document.getElementById("next").value,
+          bmp_mode: document.getElementById("bmp_mode")?.value,
         };
         localStorage.setItem("puppetSettings", JSON.stringify(settings));
       }
@@ -652,6 +716,10 @@
             document.getElementById("width").value = settings.width;
           if (settings.height !== undefined)
             document.getElementById("height").value = settings.height;
+          if (settings.auto_height !== undefined) {
+            document.getElementById("auto_height").checked = settings.auto_height;
+            document.getElementById("height").disabled = settings.auto_height;
+          }
           if (settings.format !== undefined)
             document.getElementById("format").value = settings.format;
           if (settings.theme !== undefined)
@@ -676,6 +744,8 @@
             document.getElementById("invert").checked = settings.invert;
           if (settings.next !== undefined)
             document.getElementById("next").value = settings.next;
+          if (settings.bmp_mode !== undefined && document.getElementById("bmp_mode"))
+            document.getElementById("bmp_mode").value = settings.bmp_mode;
         } catch (e) {
           console.error("Error loading settings:", e);
         }
@@ -695,12 +765,12 @@
           document.getElementById("path").value = urlParams.get("path");
         }
 
-        // Parse viewport (widthxheight)
+        // Parse viewport (widthxheight, or widthxauto)
         const viewport = urlParams.get("viewport");
         if (viewport) {
           const [width, height] = viewport.split("x");
           if (width) document.getElementById("width").value = width;
-          if (height) document.getElementById("height").value = height;
+          if (height) setViewportHeight(height);
         }
 
         // Load other parameters
@@ -740,6 +810,9 @@
         if (urlParams.has("next")) {
           document.getElementById("next").value = urlParams.get("next");
         }
+        if (urlParams.has("bmp_mode") && document.getElementById("bmp_mode")) {
+          document.getElementById("bmp_mode").value = urlParams.get("bmp_mode");
+        }
       }
 
       // Update browser URL to match current form settings
@@ -747,7 +820,7 @@
         const device = document.getElementById("device").value;
         const path = document.getElementById("path").value || "/";
         const width = document.getElementById("width").value;
-        const height = document.getElementById("height").value;
+        const height = getViewportHeight();
         const format = document.getElementById("format").value;
         const theme = document.getElementById("theme").value;
         const dark = document.getElementById("dark").checked;
@@ -760,6 +833,7 @@
         const rotate = document.getElementById("rotate").value;
         const invert = document.getElementById("invert").checked;
         const next = document.getElementById("next").value;
+        const bmp_mode = document.getElementById("bmp_mode")?.value || "color";
 
         // Build query parameters - include path as a query param
         const params = new URLSearchParams();
@@ -804,6 +878,11 @@
         }
         if (next) {
           params.append("next", next);
+        }
+
+        // Include bmp_mode only for BMP format (omit if default)
+        if (format === "bmp" && bmp_mode && bmp_mode !== "color") {
+          params.append("bmp_mode", bmp_mode);
         }
 
         // Keep UI at root path, all settings in query string
@@ -891,12 +970,12 @@
             document.getElementById("path").value = pathname;
           }
 
-          // Parse viewport (widthxheight)
+          // Parse viewport (widthxheight, or widthxauto)
           const viewport = urlParams.get("viewport");
           if (viewport) {
             const [width, height] = viewport.split("x");
             if (width) document.getElementById("width").value = width;
-            if (height) document.getElementById("height").value = height;
+            if (height) setViewportHeight(height);
           }
 
           // Load other parameters
@@ -953,6 +1032,11 @@
             document.getElementById("next").value = urlParams.get("next");
           }
 
+          if (urlParams.has("bmp_mode")) {
+            const el = document.getElementById("bmp_mode");
+            if (el) el.value = urlParams.get("bmp_mode");
+          }
+
           // Update the UI
           updateUrl();
           updateBrowserUrl();
@@ -987,7 +1071,7 @@
         const device = document.getElementById("device").value;
         const path = document.getElementById("path").value || "/";
         const width = document.getElementById("width").value;
-        const height = document.getElementById("height").value;
+        const height = getViewportHeight();
         const format = document.getElementById("format").value;
         const theme = document.getElementById("theme").value;
         const dark = document.getElementById("dark").checked;
@@ -1000,6 +1084,7 @@
         const rotate = document.getElementById("rotate").value;
         const invert = document.getElementById("invert").checked;
         const next = document.getElementById("next").value;
+        const bmp_mode = document.getElementById("bmp_mode")?.value || "color";
 
         // Build query parameters
         const params = new URLSearchParams();
@@ -1080,6 +1165,10 @@
           params.append("next", next);
         }
 
+        if (format === "bmp" && bmp_mode && bmp_mode !== "color") {
+          params.append("bmp_mode", bmp_mode);
+        }
+
         // Construct full URL with port 10000
         let baseUrl;
         if (window.hass?.network?.internal) {
@@ -1104,6 +1193,14 @@
       function updateUrl() {
         const url = buildUrl();
         document.getElementById("generatedUrl").value = url;
+        // Show or hide BMP mode control based on format
+        const fmt = document.getElementById("format").value;
+        const bmpContainer = document.getElementById("bmpModeContainer");
+        if (fmt === "bmp") {
+          bmpContainer.style.display = "block";
+        } else {
+          bmpContainer.style.display = "none";
+        }
       }
 
       // Copy URL to clipboard
@@ -1290,7 +1387,7 @@
           document.getElementById("width").value = device.width;
         }
         if (device.height !== undefined) {
-          document.getElementById("height").value = device.height;
+          setViewportHeight(device.height);
         }
         if (device.colors !== undefined) {
           document.getElementById("colors").value = device.colors;
@@ -1382,6 +1479,12 @@
       // Note: loadPreview() is called by the generic select change listener below
       document.getElementById("device").addEventListener("change", () => {
         onDeviceChange();
+      });
+
+      // Disable the height field while auto height is on (URL/preview refresh is
+      // handled by the generic input listeners above).
+      document.getElementById("auto_height").addEventListener("change", (e) => {
+        document.getElementById("height").disabled = e.target.checked;
       });
 
       // Load settings and initialize on page load

@@ -1,28 +1,28 @@
-# 音乐助手应用
+# 音乐助手应用程序
 
-Home Assistant 的官方音乐助手应用。
+Home Assistant官方的音乐助手应用程序。
 
 ## 关于音乐助手
 
-音乐助手是一款免费、开源的音乐库管理器，可连接您的流媒体服务和广泛的连接式扬声器。将您的 Home Assistant 实例变成您自己的个人音乐流媒体中心！
+音乐助手是一个免费的、开源的音乐库管理器，它可以连接到您的流媒体服务和各种连接的扬声器。将您的Home Assistant实例转变为您自己的个人音乐流媒体中心！
 
-## 功能
+## 特性
 
-- 🎵 **多源音乐库**：连接 Spotify、YouTube Music、Qobuz、Tidal 以及更多
-- 🔊 **通用播放器支持**：与 Sonos、Chromecast、AirPlay、DLNA、Squeezebox 等许多设备兼容
-- 🎶 **统一音乐库**：将来自不同源的所有音乐集中在一个地方
+- 🎵 **多源音乐库**：连接Spotify、YouTube Music、Qobuz、Tidal以及更多
+- 🔊 **通用播放器支持**：与Sonos、Chromecast、AirPlay、DLNA、Squeezebox等许多播放器兼容
+- 🎶 **统一音乐库**：所有来自不同源的音乐都在一个地方
 - 🎯 **智能播放**：无缝播放、淡入淡出和音频归一化
-- 📱 **美观界面**：现代化的网页界面，可通过 Home Assistant 访问
-- 🏠 **Home Assistant 集成**：与 Home Assistant 的媒体播放平台完全集成
+- 📱 **精美界面**：通过Home Assistant访问的现代网络界面
+- 🏠 **Home Assistant集成**：完全集成到Home Assistant的媒体播放平台
 
 ## 安装
 
-1. 在 Home Assistant 中导航到 **设置** → **应用** → **应用商店**
+1. 在Home Assistant中，导航到**设置**→**应用程序**→**应用商店**
 2. 搜索“音乐助手”
-3. 点击 **安装**
+3. 点击**安装**
 4. 等待安装完成
-5. 点击 **启动**
-6. 打开 **网页界面** 以设置音乐助手
+5. 点击**启动**
+6. 打开**网络用户界面**来设置音乐助手
 
 ## 配置
 
@@ -40,41 +40,41 @@ safe_mode: false
 - `error`：仅显示错误
 - `warning`：显示警告和错误
 - `info`：常规日志（推荐）
-- `debug`：详细的日志，用于故障排除
+- `debug`：详细的调试日志，用于故障排除
 
 **默认**：`info`
 
-**建议**：考虑仅在使用 `debug` 级别进行故障排除时使用。
+**建议**：仅在故障排除时使用`debug`级别，并将全局设置保持在`info`。
 
-提示：在音乐助手内，每个提供程序允许您覆盖日志级别。
+提示：在音乐助手内，每个提供程序允许你覆盖日志级别。
 
 #### safe_mode
 
-启用时，音乐助手将在不加载任何提供程序的情况下启动。这对于故障排除启动问题或提供程序相关的问题很有用。
+当启用时，音乐助手将在不加载任何提供程序的情况下启动。这在故障排除启动问题或提供程序相关问题时非常有用。
 
 **默认**：`false`
 
-## 入门
+## 入门指南
 
-1. 启动应用后，点击 **打开网页界面**
-2. 按照入门向导设置您的第一个音乐提供程序
+1. 启动应用程序后，点击**打开网络用户界面**
+2. 按照引导向导设置您的第一个音乐提供程序
 3. 连接您的扬声器/播放器
 4. 开始享受您的音乐！
 
-### 可选：Home Assistant 集成
+### 可选：Home Assistant集成
 
-为了高级自动化和控制，您可以可选地安装 Home Assistant 中的 **音乐助手集成**。此集成允许您：
+为了进行高级自动化和控制，您可以选择在Home Assistant中安装**音乐助手集成**。此集成允许您：
 
-- 🤖 从 Home Assistant 自动化和脚本中自动播放音乐
-- 🎛️ 使用 Home Assistant 服务控制播放
-- 📊 在您的仪表板中访问播放器状态和属性
-- 🎵 在您的 Home Assistant 场景和常规中使用音乐助手
+- 🤖 从Home Assistant自动化和脚本中自动化音乐播放
+- 🎛️ 使用Home Assistant服务控制播放
+- 📊 在仪表板中访问播放器状态和属性
+- 🎵 在Home Assistant场景和常规中使用音乐助手
 
 **要安装集成**：
 
-安装应用后，Home Assistant 应自动检测 Music Assistant 服务器（或网络中的任何 Music Assistant 服务器）。在设备和服务页面，您应该看到一个用于发现服务器的卡片，只需设置集成即可。
+在安装应用程序后，Music Assistant服务器应该会自动被Home Assistant检测到（或者您网络中的任何Music Assistant服务器）。在设备和服务页面上，您应该看到一个用于设置集成的卡，只需简单设置即可。
 
-**注意**：应用提供 Music Assistant 服务器，而集成提供 Home Assistant 实体和自动化功能。如果您只想使用网页界面，则无需集成。
+**注意**：应用程序提供了Music Assistant服务器，而集成提供了Home Assistant实体和自动化功能。如果只想使用网络界面，应用程序不安装集成也可以正常工作。
 
 ## 文档
 
@@ -82,61 +82,61 @@ safe_mode: false
 
 - 📖 [官方文档](https://music-assistant.io)
 - 💬 [社区讨论](https://github.com/orgs/music-assistant/discussions)
-- 🐛 [支持 & 问题追踪器](https://github.com/music-assistant/support)
-- 💭 [Discord 服务器](https://discord.gg/PZQ6RWbfeS)
+- 🐛 [支持与问题追踪器](https://github.com/music-assistant/support)
+- 💭 [Discord服务器](https://discord.gg/PZQ6RWbfeS)
 
-## 支持
+## 支持服务
 
 如果您遇到任何问题：
 
-1. 检查应用日志（可在 Home Assistant 应用页面查看）
-2. 访问 [文档](https://music-assistant.io)
-3. 在 [music-assistant/support](https://github.com/music-assistant/support) 搜索现有问题
-4. 在 [Discord](https://discord.gg/PZQ6RWbfeS) 或 [GitHub Discussions](https://github.com/orgs/music-assistant/discussions) 上寻求帮助
+1. 检查应用程序日志（在Home Assistant应用程序页面中可用）
+2. 访问[文档](https://music-assistant.io)
+3. 在[music-assistant/support](https://github.com/music-assistant/support)搜索现有问题
+4. 在[Discord](https://discord.gg/PZQ6RWbfeS)或[GitHub Discussions](https://github.com/orgs/music-assistant/discussions)上寻求帮助
 
 ## 更新
 
-这是 **稳定** 频道。更新在彻底测试后发布，并推荐用于日常使用。
+这是**稳定**渠道。更新在彻底测试后发布，并推荐用于日常使用。
 
 ### 更新频率
 
-- 主要版本：每几个月一次（大约每季度一次）
-- 错误修复：按需
+- 主要版本：每隔几个月（大约每季度一次）
+- 错误修复：根据需要
 - 安全更新：立即
 
 ## 版本信息
 
-此应用使用 Music Assistant 的稳定版本。对于最新功能，请考虑 BETA 或 NIGHTLY 版本（使用风险自担）。
+此应用程序使用Music Assistant的稳定版本。对于最新功能，请考虑BETA或NIGHTLY版本（自行承担风险）。
 
 ## 数据存储
 
-所有音乐助手数据都存储在应用的 数据目录 内：
+所有音乐助手数据都存储在应用程序的数据目录中：
 
 - 音乐库数据库
 - 配置设置
 
-因此，备份 Home Assistant 中的音乐助手应用也将包括您的音乐助手数据。请在更新到新版本之前始终进行备份，以便您可以轻松地回滚到上一个版本！
+因此，备份Home Assistant中的音乐助手应用程序将包括您的音乐助手数据。请在更新到新版本之前始终进行备份，以便您可以轻松地恢复到上一个版本！
 
 ## 性能提示
 
-- 使用快速的存储介质（推荐使用 SSD）
-- 确保有足够的 RAM（Home Assistant + 此应用至少需要 4GB）
+- 使用快速的存储介质（推荐SSD）
+- 确保有足够的RAM（Home Assistant和此应用程序至少4GB）
 - 保持您的音乐助手实例更新
 
 ## 贡献
 
-音乐助手是开源的！欢迎贡献：
+音乐助手是开源的！欢迎贡献力量：
 
 - 🐛 [报告错误](https://github.com/music-assistant/support)
 - 💡 [建议功能](https://github.com/orgs/music-assistant/discussions)
 - 🔧 提交拉取请求
 - 📝 改进文档
 
-访问 [Music Assistant 组织](https://github.com/music-assistant) 在 GitHub 上的页面以贡献。
+请访问[Music Assistant组织](https://github.com/music-assistant)在GitHub上以进行贡献。
 
 ## 许可证
 
-音乐助手根据 Apache License 2.0 许可。
+音乐助手遵循Apache License 2.0许可。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

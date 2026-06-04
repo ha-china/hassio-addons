@@ -1,5 +1,14 @@
 # TOMMY
 
+## 5.1.0
+
+### Major Changes
+- Added a WebSerial tool at webserial.tommysense.com for flashing and sensor debugging from browsers without WebSerial access. The dashboard now shows the pairing code alongside the link when WebSerial is unavailable.
+
+### Minor Changes
+- Added a connection screen to the flashing flow prompting to connect the device and enter Firmware Download Mode before flashing
+- Simplified the provisioning flow
+
 ## 5.0.6
 
 ### Minor Changes

@@ -7,6 +7,10 @@ import { loadDevicesConfig, getDeviceConfig } from "./devices.js";
 
 // Maximum number of next requests to keep in memory
 const MAX_NEXT_REQUESTS = 100;
+// Initial viewport height (px) used to render a "WIDTHxauto" request before the
+// full page height is measured. Kept modest so short pages don't gain trailing
+// whitespace; taller content still renders and is captured via the clip.
+const AUTO_RENDER_HEIGHT = 800;
 const BROWSER_TIMEOUT = 30_000; // Timeout for browser inactivity in milliseconds
 
 class RequestHandler {
@@ -111,11 +115,20 @@ class RequestHandler {
         extraWait = undefined;
       }
 
-      // Get viewport - use device config as default if device is specified
+      // Get viewport - use device config as default if device is specified.
+      // The height may be the literal "auto" (e.g. "1000xauto") to capture the
+      // whole scrollable page; the captured height is then derived from the
+      // rendered content and capped (see MAX_AUTO_HEIGHT in screenshot.js).
+      let autoHeight = false;
       let viewportParams;
       const viewportQuery = requestUrl.searchParams.get("viewport");
       if (viewportQuery) {
-        viewportParams = viewportQuery.split("x").map((n) => parseInt(n));
+        const [widthStr, heightStr] = viewportQuery.split("x");
+        autoHeight = (heightStr || "").toLowerCase() === "auto";
+        viewportParams = [
+          parseInt(widthStr),
+          autoHeight ? AUTO_RENDER_HEIGHT : parseInt(heightStr),
+        ];
       } else if (deviceConfig) {
         viewportParams = [deviceConfig.width, deviceConfig.height];
       } else {
@@ -195,6 +208,12 @@ class RequestHandler {
         format = "png";
       }
 
+      // BMP mode: 'color' (24-bit), 'grayscale' (8-bit), 'binary' (1-bit)
+      let bmpMode = requestUrl.searchParams.get("bmp_mode") || "color";
+      if (!["color", "grayscale", "binary"].includes(bmpMode)) {
+        bmpMode = "color";
+      }
+
       let rotate = parseInt(requestUrl.searchParams.get("rotate"));
       if (isNaN(rotate) || ![90, 180, 270].includes(rotate)) {
         rotate = undefined;
@@ -230,8 +249,10 @@ class RequestHandler {
         paletteColors,
         dithering,
         invert,
+        autoHeight,
         zoom,
         format,
+        bmpMode,
         rotate,
         lang,
         theme,
@@ -253,7 +274,7 @@ class RequestHandler {
       } catch (err) {
         if (err instanceof CannotOpenPageError) {
           console.error(requestId, `Cannot open page: ${err.message}`);
-          response.statusCode = 404;
+          response.statusCode = err.status;
           response.end(`Cannot open page: ${err.message}`);
           return;
         }
@@ -333,11 +354,7 @@ class RequestHandler {
     this.busy = true;
     console.log(requestId, "Preparing next request");
     try {
-      const navigateResult = await this.browser.navigatePage({
-        ...requestParams,
-        // No unnecessary wait time, as we're just warming up
-        extraWait: 0,
-      });
+      const navigateResult = await this.browser.navigatePage(requestParams);
       console.debug(requestId, `Navigated in ${navigateResult.time} ms`);
     } catch (err) {
       console.error(requestId, "Error preparing next request", err);

@@ -6,6 +6,10 @@ import { CannotOpenPageError } from "./error.js";
 
 const HEADER_HEIGHT = 56;
 
+// Cap (px) for an auto-height ("WIDTHxauto") screenshot so a very long
+// dashboard can't produce a runaway image. Content taller than this is clipped.
+const MAX_AUTO_HEIGHT = 4000;
+
 // Dithering algorithms
 function applyDithering(data, width, height, palette, channels = 4, algorithm = "atkinson", paletteColors = null) {
   // Convert hex colors to RGB
@@ -27,19 +31,22 @@ function applyDithering(data, width, height, palette, channels = 4, algorithm = 
   // Function to find the closest color in the quantization palette
   // Returns the index (which maps to both quantization and output palette)
   function findClosestColorIndex(r, g, b) {
-    let minDistance = Infinity;
+    let minDistanceSq = Infinity;
     let closestIndex = 0;
 
     for (let i = 0; i < rgbQuantizationPalette.length; i++) {
       const color = rgbQuantizationPalette[i];
-      const distance = Math.sqrt(
-        Math.pow(r - color[0], 2) +
-        Math.pow(g - color[1], 2) +
-        Math.pow(b - color[2], 2)
-      );
 
-      if (distance < minDistance) {
-        minDistance = distance;
+      const dr = r - color[0];
+      const dg = g - color[1];
+      const db = b - color[2];
+
+      // Do comparisons using squared distances to avoid extra computational overhead
+      // of Math.sqrt and Math.pow
+      const distanceSq = dr * dr + dg * dg + db * db;
+
+      if (distanceSq < minDistanceSq) {
+        minDistanceSq = distanceSq;
         closestIndex = i;
       }
     }
@@ -73,37 +80,114 @@ function applyDithering(data, width, height, palette, channels = 4, algorithm = 
 }
 
 function applyErrorDiffusionDithering(data, width, height, channels, algorithm, findClosestColor) {
-  // Create a copy of the data to work with
-  const result = new Uint8Array(data);
+  // Create a copy of the data in float to avoid quantization/truncation noise on each diffusion step
+  const work = new Float32Array(data.length);
+  for (let i = 0; i < data.length; i++) work[i] = data[i];
+
+  const result = new Uint8Array(data.length);
+
+  const clamp255 = (v) => (v < 0 ? 0 : v > 255 ? 255 : v);
+  const idxOf = (x, y) => (y * width + x) * channels;
+
+  // Distribute helper operates on float buffer
+  const distribute = (x, y, dx, dy, factor, er, eg, eb) => {
+    const nx = x + dx, ny = y + dy;
+    if (nx < 0 || nx >= width || ny < 0 || ny >= height) return;
+    const ni = idxOf(nx, ny);
+    work[ni]     = clamp255(work[ni]     + er * factor);
+    work[ni + 1] = clamp255(work[ni + 1] + eg * factor);
+    work[ni + 2] = clamp255(work[ni + 2] + eb * factor);
+    // leave alpha alone
+  };
+
+  // Diffusion kernels (weights sum to 1 for FS; Atkinson intentionally < 1)
+  // For serpentine scan we mirror dx.
+  const kernels = {
+    "floyd-steinberg": [
+      [ 1, 0, 7/16],
+      [-1, 1, 3/16],
+      [ 0, 1, 5/16],
+      [ 1, 1, 1/16],
+    ],
+    "atkinson": [
+      [ 1, 0, 1/8],
+      [ 2, 0, 1/8],
+      [-1, 1, 1/8],
+      [ 0, 1, 1/8],
+      [ 1, 1, 1/8],
+      [ 0, 2, 1/8],
+    ],
+    "jarvis-judice-ninke": [
+      [ 1, 0, 7/48], [ 2, 0, 5/48],
+      [-2, 1, 3/48], [-1, 1, 5/48], [0, 1, 7/48], [1, 1, 5/48], [2, 1, 3/48],
+      [-2, 2, 1/48], [-1, 2, 3/48], [0, 2, 5/48], [1, 2, 3/48], [2, 2, 1/48],
+    ],
+    "stucki": [
+      [ 1, 0, 8/42], [ 2, 0, 4/42],
+      [-2, 1, 2/42], [-1, 1, 4/42], [0, 1, 8/42], [1, 1, 4/42], [2, 1, 2/42],
+      [-2, 2, 1/42], [-1, 2, 2/42], [0, 2, 4/42], [1, 2, 2/42], [2, 2, 1/42],
+    ],
+    "burkes": [
+      [ 1, 0, 8/32], [ 2, 0, 4/32],
+      [-2, 1, 2/32], [-1, 1, 4/32], [0, 1, 8/32], [1, 1, 4/32], [2, 1, 2/32],
+    ],
+    "sierra": [
+      [ 1, 0, 5/32], [ 2, 0, 3/32],
+      [-2, 1, 2/32], [-1, 1, 4/32], [0, 1, 5/32], [1, 1, 4/32], [2, 1, 2/32],
+      [-1, 2, 2/32], [0, 2, 3/32], [1, 2, 2/32],
+    ],
+    "sierra-lite": [
+      [ 1, 0, 2/4],
+      [-1, 1, 1/4],
+      [ 0, 1, 1/4],
+    ],
+  };
+
+  // select which error-diffusion kernel to use for dithering and ensure a default of floyd-steinberg
+  const kernel = kernels[algorithm] || kernels["floyd-steinberg"];
+
+  // For Atkinson dithering reduce error intensity for softer dithering
+  const errorGain = (algorithm === "atkinson") ? 0.75 : 1.0;
+  const minTotalError = 8;
 
   for (let y = 0; y < height; y++) {
-    for (let x = 0; x < width; x++) {
-      const idx = (y * width + x) * channels;
 
-      const oldR = result[idx];
-      const oldG = result[idx + 1];
-      const oldB = result[idx + 2];
+    // Do a serpentine scan to reduce directional artifacts
+    const serpentine = (y & 1) === 1; // alternate direction each row
+    const xStart = serpentine ? width - 1 : 0;
+    const xEnd = serpentine ? -1 : width;
+    const xStep = serpentine ? -1 : 1;
+
+    for (let x = xStart; x !== xEnd; x += xStep) {
+      const i = idxOf(x, y);
+
+      // If you ever have transparency, skip fully transparent pixels
+      if (channels === 4 && work[i + 3] <= 0) {
+        result[i] = result[i + 1] = result[i + 2] = 0;
+        result[i + 3] = 0;
+        continue;
+      }
+
+      const oldR = work[i], oldG = work[i + 1], oldB = work[i + 2];
 
       const [newR, newG, newB] = findClosestColor(oldR, oldG, oldB);
 
-      result[idx] = newR;
-      result[idx + 1] = newG;
-      result[idx + 2] = newB;
-      // Keep alpha channel unchanged if it exists
-      if (channels === 4) {
-        // Alpha channel remains the same
-      }
+      // Write quantized result
+      result[i]     = newR;
+      result[i + 1] = newG;
+      result[i + 2] = newB;
+      if (channels === 4) result[i + 3] = Math.round(clamp255(work[i + 3]));
 
-      const errorR = oldR - newR;
-      const errorG = oldG - newG;
-      const errorB = oldB - newB;
+      let errorR = (oldR - newR) * errorGain;
+      let errorG = (oldG - newG) * errorGain;
+      let errorB = (oldB - newB) * errorGain;
 
       // Only distribute error if there's significant quantization error
       // This prevents artifacts in solid color areas (like white backgrounds and borders)
       const totalError = Math.abs(errorR) + Math.abs(errorG) + Math.abs(errorB);
 
       // Skip error diffusion for near-perfect matches
-      if (totalError < 8) {
+      if (totalError < minTotalError) {
         continue;
       }
 
@@ -119,92 +203,9 @@ function applyErrorDiffusionDithering(data, width, height, channels, algorithm, 
       }
 
       // Distribute error to neighboring pixels
-      const distribute = (dx, dy, factor, dampening = 1.0) => {
-        const newX = x + dx;
-        const newY = y + dy;
-
-        if (newX >= 0 && newX < width && newY >= 0 && newY < height) {
-          const newIdx = (newY * width + newX) * channels;
-          const dampedErrorR = errorR * dampening;
-          const dampedErrorG = errorG * dampening;
-          const dampedErrorB = errorB * dampening;
-          result[newIdx] = Math.max(0, Math.min(255, result[newIdx] + dampedErrorR * factor));
-          result[newIdx + 1] = Math.max(0, Math.min(255, result[newIdx + 1] + dampedErrorG * factor));
-          result[newIdx + 2] = Math.max(0, Math.min(255, result[newIdx + 2] + dampedErrorB * factor));
-          // Don't modify alpha channel
-        }
-      };
-
-      // Apply different error distribution patterns based on algorithm
-      if (algorithm === "floyd-steinberg") {
-        // Floyd-Steinberg error distribution (classic, sharper)
-        distribute(1, 0, 7/16);  // Right
-        distribute(-1, 1, 3/16); // Bottom-left
-        distribute(0, 1, 5/16);  // Bottom
-        distribute(1, 1, 1/16);  // Bottom-right
-      } else if (algorithm === "atkinson") {
-        // Atkinson dithering error distribution (softer)
-        const errorDampening = 0.75; // Reduce error intensity for softer dithering
-        distribute(1, 0, 1/8, errorDampening);   // Right
-        distribute(2, 0, 1/8, errorDampening);   // Right + 1
-        distribute(-1, 1, 1/8, errorDampening);  // Bottom-left
-        distribute(0, 1, 1/8, errorDampening);   // Bottom
-        distribute(1, 1, 1/8, errorDampening);   // Bottom-right
-        distribute(0, 2, 1/8, errorDampening);   // Bottom + 1
-      } else if (algorithm === "jarvis-judice-ninke") {
-        // Jarvis-Judice-Ninke (JJN) - high quality, more diffusion
-        distribute(1, 0, 7/48);   // Right
-        distribute(2, 0, 5/48);   // Right + 1
-        distribute(-2, 1, 3/48);  // Bottom-left-left
-        distribute(-1, 1, 5/48);  // Bottom-left
-        distribute(0, 1, 7/48);   // Bottom
-        distribute(1, 1, 5/48);   // Bottom-right
-        distribute(2, 1, 3/48);   // Bottom-right-right
-        distribute(-2, 2, 1/48);  // Bottom2-left-left
-        distribute(-1, 2, 3/48);  // Bottom2-left
-        distribute(0, 2, 5/48);   // Bottom2
-        distribute(1, 2, 3/48);   // Bottom2-right
-        distribute(2, 2, 1/48);   // Bottom2-right-right
-      } else if (algorithm === "stucki") {
-        // Stucki - similar to JJN but slightly different weights
-        distribute(1, 0, 8/42);   // Right
-        distribute(2, 0, 4/42);   // Right + 1
-        distribute(-2, 1, 2/42);  // Bottom-left-left
-        distribute(-1, 1, 4/42);  // Bottom-left
-        distribute(0, 1, 8/42);   // Bottom
-        distribute(1, 1, 4/42);   // Bottom-right
-        distribute(2, 1, 2/42);   // Bottom-right-right
-        distribute(-2, 2, 1/42);  // Bottom2-left-left
-        distribute(-1, 2, 2/42);  // Bottom2-left
-        distribute(0, 2, 4/42);   // Bottom2
-        distribute(1, 2, 2/42);   // Bottom2-right
-        distribute(2, 2, 1/42);   // Bottom2-right-right
-      } else if (algorithm === "burkes") {
-        // Burkes - faster, two-row dithering
-        distribute(1, 0, 8/32);   // Right
-        distribute(2, 0, 4/32);   // Right + 1
-        distribute(-2, 1, 2/32);  // Bottom-left-left
-        distribute(-1, 1, 4/32);  // Bottom-left
-        distribute(0, 1, 8/32);   // Bottom
-        distribute(1, 1, 4/32);   // Bottom-right
-        distribute(2, 1, 2/32);   // Bottom-right-right
-      } else if (algorithm === "sierra") {
-        // Sierra - three-row dithering
-        distribute(1, 0, 5/32);   // Right
-        distribute(2, 0, 3/32);   // Right + 1
-        distribute(-2, 1, 2/32);  // Bottom-left-left
-        distribute(-1, 1, 4/32);  // Bottom-left
-        distribute(0, 1, 5/32);   // Bottom
-        distribute(1, 1, 4/32);   // Bottom-right
-        distribute(2, 1, 2/32);   // Bottom-right-right
-        distribute(-1, 2, 2/32);  // Bottom2-left
-        distribute(0, 2, 3/32);   // Bottom2
-        distribute(1, 2, 2/32);   // Bottom2-right
-      } else if (algorithm === "sierra-lite") {
-        // Sierra Lite - simplified two-row version
-        distribute(1, 0, 2/4);    // Right
-        distribute(-1, 1, 1/4);   // Bottom-left
-        distribute(0, 1, 1/4);    // Bottom
+      for (const [dx0, dy, w] of kernel) {
+        const dx = serpentine ? -dx0 : dx0; // mirror horizontally when scanning right-to-left
+        distribute(x, y, dx, dy, w, errorR, errorG, errorB);
       }
     }
   }
@@ -270,7 +271,7 @@ export class Browser {
 
     // The last path we requested a screenshot for
     // We store this instead of using page.url() because panels can redirect
-    // users, ie / -> /lovelace/0.
+    // users, ie / -> /home.
     this.lastRequestedPath = undefined;
     this.lastRequestedLang = undefined;
     this.lastRequestedTheme = undefined;
@@ -516,6 +517,15 @@ export class Browser {
         console.log("Timeout waiting for HA to finish loading");
       }
 
+      // If the access token is missing/invalid/expired, Home Assistant
+      // redirects to the login screen (/auth/authorize) instead of the
+      // dashboard. Returning a 200 login-page screenshot is a confusing silent
+      // failure, so detect the redirect from the page URL and fail with a clear
+      // error instead.
+      if (new URL(page.url()).pathname.startsWith("/auth/authorize")) {
+        throw new CannotOpenPageError(500, pagePath);
+      }
+
       // Update language
       // Should really be done via localStorage.selectedLanguage
       // but that doesn't seem to work
@@ -565,7 +575,7 @@ export class Browser {
     }
   }
 
-  async screenshotPage({ viewport, colors, paletteColors, dithering, invert, zoom, format, rotate }) {
+  async screenshotPage({ viewport, colors, paletteColors, dithering, invert, zoom, format, rotate, autoHeight = false, bmpMode = "color" }) {
     let start = new Date();
     if (this.busy) {
       throw new Error("Browser is busy");
@@ -577,13 +587,30 @@ export class Browser {
     try {
       const page = await this.getPage();
 
+      // Default: clip to the viewport (minus the cropped header). With
+      // autoHeight (a "WIDTHxauto" viewport), clip to the document's full scroll
+      // height instead so a dashboard that extends below the fold is captured in
+      // one shot — still cropping the header, and capped at MAX_AUTO_HEIGHT so a
+      // very long page can't run away. (Puppeteer renders beyond the viewport
+      // for the taller clip.)
+      let clipHeight = viewport.height - headerHeight;
+      if (autoHeight) {
+        const scrollHeight = await page.evaluate(
+          () => document.documentElement.scrollHeight,
+        );
+        clipHeight = Math.min(
+          Math.max(scrollHeight - headerHeight, 1),
+          MAX_AUTO_HEIGHT,
+        );
+      }
+
       let image = await page.screenshot({
         type: "png",
         clip: {
           x: 0,
           y: headerHeight,
           width: viewport.width,
-          height: viewport.height - headerHeight,
+          height: clipHeight,
         },
       });
 
@@ -629,13 +656,32 @@ export class Browser {
         sharpInstance = sharpInstance.webp();
         image = await sharpInstance.toBuffer();
       } else if (format === "bmp") {
-        // Ensure we have 3-channel RGB data for BMP (remove alpha if present)
-        sharpInstance = sharpInstance.toColorspace('srgb').removeAlpha().raw();
-        const { data, info } = await sharpInstance.toBuffer({
-          resolveWithObject: true,
-        });
-        const bmpEncoder = new BMPEncoder(info.width, info.height, 24);
-        image = bmpEncoder.encode(data);
+        // Support multiple BMP modes: color (24-bit), grayscale (8-bit), binary (1-bit)
+        if (bmpMode === "grayscale") {
+          // Generate 8-bit grayscale
+          sharpInstance = sharpInstance.greyscale().removeAlpha().raw();
+          const { data, info } = await sharpInstance.toBuffer({
+            resolveWithObject: true,
+          });
+          const bmpEncoder = new BMPEncoder(info.width, info.height, 8);
+          image = bmpEncoder.encode(data);
+        } else if (bmpMode === "binary") {
+          // Generate 1-bit black/white using threshold
+          sharpInstance = sharpInstance.greyscale().threshold().raw();
+          const { data, info } = await sharpInstance.toBuffer({
+            resolveWithObject: true,
+          });
+          const bmpEncoder = new BMPEncoder(info.width, info.height, 1);
+          image = bmpEncoder.encode(data);
+        } else {
+          // Default: 24-bit color BMP
+          sharpInstance = sharpInstance.toColorspace('srgb').removeAlpha().raw();
+          const { data, info } = await sharpInstance.toBuffer({
+            resolveWithObject: true,
+          });
+          const bmpEncoder = new BMPEncoder(info.width, info.height, 24);
+          image = bmpEncoder.encode(data);
+        }
       } else {
         sharpInstance = sharpInstance.png();
         image = await sharpInstance.toBuffer();

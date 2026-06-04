@@ -1,24 +1,24 @@
-# Home Assistant 插件：OpenThread 边界路由器插件（网络）
+# Home Assistant 扩展：OpenThread 边界路由器扩展（网络）
 
-无需USB设备即可使用。仅适用于网络设备。
+无需USB设备即可使用的OpenThread边界路由器扩展。仅适用于网络设备。
 
-[![买我一杯咖啡](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/coffee.png)](https://www.buymeacoffee.com/smeagolworms4)
-[![买我一杯咖啡](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/paypal.png)](https://www.paypal.com/donate/?business=SURRPGEXF4YVU&no_recurring=0&item_name=Hello%2C+I%27m+SmeagolWorms4.+For+my+open+source+projects.%0AThanks+you+very+mutch+%21%21%21&currency_code=EUR)
+[![给我买杯咖啡](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/coffee.png)](https://www.buymeacoffee.com/smeagolworms4)
+[![给我买杯咖啡](https://raw.githubusercontent.com/Smeagolworms4/donate-assets/master/paypal.png)](https://www.paypal.com/donate/?business=SURRPGEXF4YVU&no_recurring=0&item_name=Hello%2C+I%27m+SmeagolWorms4.+For+my+open+source+projects.%0AThanks+you+very+mutch+%21%21%21&currency_code=EUR)
 
-原始分支 GitHub: https://github.com/Smeagolworms4/core_openthread_border_router
+原始Fork Github: https://github.com/Smeagolworms4/core_openthread_border_router
 
-## 原始说明。
+## 原始readme。
 
-OpenThread 边界路由器插件。该插件使用上游 OpenThread 边界路由器实现，并将其包装为 Home Assistant 的插件。
+OpenThread边界路由器扩展。该扩展使用上游OpenThread边界路由器实现，并将其作为Home Assistant的扩展。
 
-**注意：**此插件需要一个支持 802.15.4 且具有 OpenThread RCP 固件的无线电。如果您使用 [Home Assistant 黄色版](https://www.home-assistant.io/yellow/) 或 [Home Assistant Connect ZBT-1](https://www.home-assistant.io/connectzbt1/)（之前称为 SkyConnect），则正确的固件将自动安装。
+**注意：** 此扩展需要支持802.15.4的无线电设备并具有OpenThread RCP固件。如果您使用的是[Home Assistant Yellow](https://www.home-assistant.io/yellow/)或[Home Assistant Connect ZBT-1](https://www.home-assistant.io/connectzbt1/)（之前称为SkyConnect），则正确的固件将自动安装。
 
-![支持 aarch64 架构][aarch64-shield]
-![支持 amd64 架构][amd64-shield]
+![支持aarch64架构][aarch64-shield]
+![支持amd64架构][amd64-shield]
 
 ## 关于
 
-此插件允许您创建或加入 Thread 网络，并使 Home Assistant 成为 Thread 边界路由器。
+此扩展允许您创建或加入Thread网络，并将Home Assistant变成一个Thread边界路由器。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
