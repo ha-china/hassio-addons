@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.1.1
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
@@ -11,17 +11,22 @@ ENV APP_NAME="pterodactyl Wings Gameserver"
 ENV APP_SLUG="pterodactyl_wings"
 ENV APP_UNSUPPORTED="false"
 
-RUN apk add --no-cache -u libssl3 libcrypto3 ca-certificates curl tini tzdata && \
+RUN \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/main" > /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/community" >> /etc/apk/repositories \
+    && apk add --no-cache musl musl-dev \
+    && apk upgrade --no-cache --available \
+    && apk add --no-cache libssl3 libcrypto3 ca-certificates curl tini tzdata && \
     mkdir -p /etc/pterodactyl /var/log/pterodactyl /tmp/pterodactyl
 
 # Download wings binary with multi-arch support
 # Pin to specific version for reproducible builds
-ARG WINGS_VERSION=v1.12.1
+ARG WINGS_VERSION=v1.12.3
 ENV WINGS_VERSION=${WINGS_VERSION}
 ARG TARGETARCH
-# SHA256 checksums for version v1.12.1 (from official release)
-ARG WINGS_SHA256_AMD64=1c572d4dd49b56749aca439d6d57034aed983bdda8cf222ebdb24d239c199dc9
-ARG WINGS_SHA256_ARM64=d4cb31482be751a5242f1107feab6c6c4b1fff9626945c574f481f0c37625d80
+# SHA256 checksums for version v1.12.3 (from official release)
+ARG WINGS_SHA256_AMD64=c0e98c755e5ea52657f851afef26061e75a5ea7ea67e4bb63e58d6fccde59f24
+ARG WINGS_SHA256_ARM64=08e18ecb8d0dc3e72c79b38d97bb846518699865df73ecd45b719061da491d6c
 # hadolint ignore=DL4006,SC3040,SC2039
 RUN set -o pipefail && \
     if [ "${TARGETARCH}" = "arm64" ]; then ARCH="arm64"; CHECKSUM="${WINGS_SHA256_ARM64}"; else ARCH="amd64"; CHECKSUM="${WINGS_SHA256_AMD64}"; fi && \

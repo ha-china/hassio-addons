@@ -1,10 +1,10 @@
 # pterodactyl Wings 游戏服务器
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/pterodactyl-wings/logo.png" width="100" alt="Logo" />
+![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/pterodactyl-wings/logo.png)
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_pterodactyl-wings)
 [![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-2.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-pterodactyl_wings)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.3.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-pterodactyl_wings)
 ![项目维护者](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > 开源游戏服务器
@@ -19,7 +19,7 @@
 
 ## ⚙️ 配置
 
-通过 Home Assistant App 页面中的 **配置** 选项卡来配置该应用。
+通过 Home Assistant App 页面中的 **配置** 选项卡来配置此应用。
 
 ### 选项
 
@@ -30,9 +30,9 @@ log_level: info
 
 ---
 
-## 👨‍💻 信用 & 许可证
+## 👨‍💻 致谢与许可
 
-本项目为开源项目，采用 MIT 许可证。
+本项目为开源项目，遵循 MIT 许可协议。
 由 **FaserF** 维护。
 ---
 

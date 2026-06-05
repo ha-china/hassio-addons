@@ -1,8 +1,21 @@
 # Changelog
 
+## 1.5.7 (2026-06-04)
+
+### 🐛 Bug Fixes
+- await decryptPollVote for correct poll vote decryption #678 ([`29323fe5`](https://github.com/FaserF/hassio-addons/commit/29323fe587de65fc8a16ad9431b98edbdf16de7b))
+
+### 📦 Dependencies
+- ⬆️ Update dependency uvicorn to v0.49.0 [skip-tests] ([`d7351179`](https://github.com/FaserF/hassio-addons/commit/d735117997d0bba66e96582a0b9ee93ddd2c44f4))
+
+### 🚀 Other
+- Improved session stability #824 ([`6c9cc8a8`](https://github.com/FaserF/hassio-addons/commit/6c9cc8a8b372e91120fd1c083f29c0b0a623a54e))
+
+
 ## 1.5.6 (2026-06-02)
 
 ### 📦 Dependencies
+
 - improved poll_update encryption FaserF/ha-whatsapp#46 ([`08413421`](https://github.com/FaserF/hassio-addons/commit/084134217a3d93d39b04e770394a89e05ef686b0))
 - ⬆️ Update dependency eslint to v10.4.1 [skip-tests] (#823) [skip-tests] ([`5e07d445`](https://github.com/FaserF/hassio-addons/commit/5e07d445a6723d1de09ecae26e4b995f2f45d0af))
 - ⬆️ Update dependency uvicorn to v0.48.0 [skip-tests] (#822) [skip-tests] ([`7a74ac15`](https://github.com/FaserF/hassio-addons/commit/7a74ac15b8e408e442283aeb07a2f1296e681646))
@@ -17,10 +30,10 @@
 - ⬆️ Update dependency eslint to v10.4.0 [skip-tests] (#806) [skip-tests] ([`af45d99a`](https://github.com/FaserF/hassio-addons/commit/af45d99a0792647f5ded7212c4e444e99eb197cd))
 
 ### 🚀 Other
+
 - improved poll reaction #678 ([`052d00ed`](https://github.com/FaserF/hassio-addons/commit/052d00ed9fcfb847568a6fccfb73d7bdc3ed1159))
 - fix rate-overlimit after reconnect FaserF/ha-whatsapp#47 ([`e8717485`](https://github.com/FaserF/hassio-addons/commit/e87174850c95c11732c61c31826aab1e6c328ce0))
 - fix send_poll service saved to store FaserF/ha-whatsapp#45 ([`591ff60f`](https://github.com/FaserF/hassio-addons/commit/591ff60fa77a58871fc0e8427babb64d3b0f7624))
-
 
 ## 1.5.5 (2026-05-15)
 

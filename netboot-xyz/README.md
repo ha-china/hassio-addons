@@ -2,12 +2,12 @@
 
 ![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/netboot-xyz/logo.png)
 
-[![打开你的Home Assistant实例并显示应用程序仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_netboot-xyz)
-[![Home Assistant应用程序](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker镜像](https://img.shields.io/badge/docker-2.3.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-netboot-xyz)
-![项目维护者](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![打开您的Home Assistant实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_netboot-xyz)
+[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.3.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-netboot-xyz)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> PXE-Server用于在你的本地网络中部署操作系统
+> 本地网络内部署操作系统的PXE-Server
 
 ---
 
@@ -15,31 +15,32 @@
 
 ## 示例配置
 
-示例`menu.ipxe`配置文件可以在[示例目录](examples/menu.ipxe)中找到。
-此文件展示了如何配置Windows 11、Linux Mint和SystemRescue的自定义引导项。
+示例 `menu.ipxe` 配置文件可以在 [示例目录](examples/menu.ipxe) 中找到。
+此文件演示了如何为Windows 11、Linux Mint和SystemRescue配置自定义引导条目。
 
-> PXE-Server用于在你的本地网络中部署操作系统
+> 本地网络内部署操作系统的PXE-Server
 
 ---
 
 ## ⚙️ 配置
 
-通过Home Assistant应用程序页面中的**配置**选项卡配置应用程序。
+通过Home Assistant App页面中的**配置**选项卡配置此应用。
 
 ### 选项
 
 ```yaml
 dhcp_range: 192.168.1.200
 log_level: info
+menu_version: latest
 path: /media/netboot/image
 path_config: /media/netboot/config
 ```
 
 ---
 
-## 👨‍💻 致谢与许可
+## 👨‍💻 贡献者与许可证
 
-本项目是开源的，并受MIT许可的约束。
+此项目是开源的，并受MIT许可证的约束。
 由**FaserF**维护。
 ---
 

@@ -64,28 +64,46 @@ website_name: null
 
 **Available PHP Modules**:
 
-- apcu
+- bcmath
+- bz2
+- calendar
 - ctype
 - curl
 - dom
 - exif
 - fileinfo
+- ftp
 - gd
+- gettext
 - iconv
-- imap
 - intl
+- ldap
 - mbstring
 - mysqli
+- mysqlnd
+- pcntl
 - pdo
 - pdo_mysql
 - pdo_sqlite
+- pecl-apcu
+- pecl-imagick
+- pecl-imap
+- pecl-redis
 - phar
+- posix
 - session
+- shmop
 - simplexml
 - soap
 - sockets
+- sodium
+- sqlite3
+- sysvmsg
+- sysvsem
+- sysvshm
 - tokenizer
 - xml
+- xmlreader
 - xmlwriter
 - zip
 <!-- PHP_INFO_END -->

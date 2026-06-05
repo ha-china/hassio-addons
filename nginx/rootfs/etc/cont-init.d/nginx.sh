@@ -148,7 +148,7 @@ if [ "$ssl" = "true" ] && [ "$default_conf" = "default" ]; then
 	cat >/etc/nginx/sites-enabled/default.conf <<EOF
 server {
     listen 80;
-    server_name ${website_name};
+    server_name ${website_name} _;
 
     # Redirect all HTTP to HTTPS
     return 301 https://\$host\$request_uri;
@@ -159,7 +159,7 @@ EOF
 	cat >/etc/nginx/sites-enabled/default-ssl.conf <<EOF
 server {
     listen 443 ssl http2;
-    server_name ${website_name};
+    server_name ${website_name} _;
 
     root ${webrootdocker};
     index index.html index.htm index.php;
@@ -196,7 +196,7 @@ else
 	cat >/etc/nginx/sites-enabled/default.conf <<EOF
 server {
     listen 80;
-    server_name ${website_name};
+    server_name ${website_name} _;
 
     root ${webrootdocker};
     index index.html index.htm index.php;
@@ -317,6 +317,8 @@ if [ ! -f /etc/php85/php-fpm.d/www.conf ]; then
 	# Create minimal www.conf if it doesn't exist
 	cat >/etc/php85/php-fpm.d/www.conf <<'PHPFPM_EOF'
 [www]
+user = www-data
+group = www-data
 listen = 127.0.0.1:9000
 PHPFPM_EOF
 else
@@ -327,6 +329,17 @@ else
 	else
 		# Append listen directive if not present
 		echo "listen = 127.0.0.1:9000" >>/etc/php85/php-fpm.d/www.conf
+	fi
+	# Ensure user/group are set to www-data in existing config
+	if grep -q "^user\s*=" /etc/php85/php-fpm.d/www.conf; then
+		sed -i 's/^user\s*=.*/user = www-data/' /etc/php85/php-fpm.d/www.conf
+	else
+		sed -i '/^\[www\]/a user = www-data' /etc/php85/php-fpm.d/www.conf
+	fi
+	if grep -q "^group\s*=" /etc/php85/php-fpm.d/www.conf; then
+		sed -i 's/^group\s*=.*/group = www-data/' /etc/php85/php-fpm.d/www.conf
+	else
+		sed -i '/^user = www-data/a group = www-data' /etc/php85/php-fpm.d/www.conf
 	fi
 fi
 

@@ -4,16 +4,16 @@
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_ShieldFile)
 [![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-2.3.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-shieldfile)
-![项目维护者](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.3.4-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-shieldfile)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 安全的基于 Web 的文件管理器（通过 HTTPS 的 SFTP）
+> 安全的基于 Web 的文件管理器（通过 HTTPS 使用 SFTP）
 
 ---
 
 ## 📖 关于
 
-安全的基于 Web 的文件管理器（通过 HTTPS 的 SFTP）
+安全的基于 Web 的文件管理器（通过 HTTPS 使用 SFTP）
 
 ---
 
@@ -38,7 +38,7 @@ users:
 
 ## 👨‍💻 贡献者与许可证
 
-此项目是开源的，并遵循 MIT 许可证。
+此项目是开源的，并受 MIT 许可证的约束。
 由 **FaserF** 维护。
 ---
 

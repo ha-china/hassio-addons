@@ -1,15 +1,32 @@
 #!/usr/bin/env bashio
 # shellcheck shell=bash
-set -euo pipefail
 
-MINIO_USER="$(bashio::config 'MINIO_ROOT_USER')"
-MINIO_PASS="$(bashio::config 'MINIO_ROOT_PASSWORD')"
+# Internal MinIO credentials (not user-configurable; MinIO is 127.0.0.1 only)
+MINIO_CRED_FILE="/config/minio-creds"
+if [ -f "$MINIO_CRED_FILE" ]; then
+    # Reuse persisted credentials across restarts
+    MINIO_USER="$(sed -n '1p' "$MINIO_CRED_FILE")"
+    MINIO_PASS="$(sed -n '2p' "$MINIO_CRED_FILE")"
+    # Regenerate if file is corrupted
+    if [ -z "$MINIO_USER" ] || [ -z "$MINIO_PASS" ]; then
+        MINIO_USER="minio_$(head -c 4 /dev/urandom | od -An -tx1 | tr -d ' \n')"
+        MINIO_PASS="$(head -c 24 /dev/urandom | base64 | tr -d '\n')"
+        printf '%s\n%s\n' "$MINIO_USER" "$MINIO_PASS" > "$MINIO_CRED_FILE"
+        chmod 600 "$MINIO_CRED_FILE"
+    fi
+else
+    # Generate random credentials on first run
+    MINIO_USER="minio_$(head -c 4 /dev/urandom | od -An -tx1 | tr -d ' \n')"
+    MINIO_PASS="$(head -c 24 /dev/urandom | base64 | tr -d '\n')"
+    printf '%s\n%s\n' "$MINIO_USER" "$MINIO_PASS" > "$MINIO_CRED_FILE"
+    chmod 600 "$MINIO_CRED_FILE"
+fi
 S3_BUCKET="b2-eu-cen"
 
 export ENTE_S3_ARE_LOCAL_BUCKETS=true
 export ENTE_S3_B2_EU_CEN_KEY="$MINIO_USER"
 export ENTE_S3_B2_EU_CEN_SECRET="$MINIO_PASS"
-export ENTE_S3_B2_EU_CEN_ENDPOINT="http://192.168.178.23:$(bashio::addon.port "3200")"
+export ENTE_S3_B2_EU_CEN_ENDPOINT="http://127.0.0.1:3200"
 export ENTE_S3_B2_EU_CEN_REGION=eu-central-2
 export ENTE_S3_B2_EU_CEN_BUCKET="$S3_BUCKET"
 
@@ -33,6 +50,8 @@ DB_PASS="$(bashio::config 'DB_PASSWORD' || echo ente)"
 # External DB opts (may be blank)
 DB_HOST_EXT="$(bashio::config 'DB_HOSTNAME' || echo '')"
 DB_PORT_EXT="$(bashio::config 'DB_PORT' || echo '')"
+# Default external Postgres port when unset
+[ -z "$DB_PORT_EXT" ] && DB_PORT_EXT=5432
 
 USE_EXTERNAL_DB=false
 if bashio::config.true 'USE_EXTERNAL_DB'; then
@@ -40,11 +59,6 @@ if bashio::config.true 'USE_EXTERNAL_DB'; then
     bashio::log.warning "USE_EXTERNAL_DB enabled: will connect to external Postgres."
 else
     bashio::log.info "Using internal Postgres."
-fi
-
-DISABLE_WEB_UI=false
-if bashio::config.true 'DISABLE_WEB_UI'; then
-    DISABLE_WEB_UI=true
 fi
 
 # Active DB connection target (may be overridden below)
@@ -95,8 +109,8 @@ jwt:
   secret: $(_rand_b64url 32)
 
 db:
-  host:     ${DB_HOST_INTERNAL}
-  port:     ${DB_PORT_INTERNAL}
+  host:     ${DB_HOST}
+  port:     ${DB_PORT}
   name:     ${DB_NAME}
   user:     ${DB_USER}
   password: ${DB_PASS}
@@ -186,9 +200,11 @@ bootstrap_internal_db() {
 # MinIO
 ############################################
 start_minio() {
-    bashio::log.info "Starting MinIO (:3200)..."
+    bashio::log.info "Starting MinIO (127.0.0.1:3200)..."
     mkdir -p /config/minio-data
-    "$MINIO_BIN" server /config/minio-data --address ":3200" &
+    export MINIO_ROOT_USER="$MINIO_USER"
+    export MINIO_ROOT_PASSWORD="$MINIO_PASS"
+    "$MINIO_BIN" server /config/minio-data --address "127.0.0.1:3200" --console-address "127.0.0.1:9001" &
     MINIO_PID=$!
 }
 
@@ -206,13 +222,10 @@ wait_minio_ready_and_bucket() {
 # Web (static nginx bundle)
 ############################################
 start_web() {
-    if $DISABLE_WEB_UI; then
-        bashio::log.info "Web UI disabled."
-        return 0
-    fi
-
-    ENTE_API_ORIGIN=http://localhost:8080
-    ENTE_ALBUMS_ORIGIN=http://localhost:3002
+    ENTE_API_ORIGIN="$(bashio::config 'ENTE_ENDPOINT_URL')"
+    # Derive albums origin from the same host as the API endpoint, mapped to port 8302
+    ENTE_ALBUMS_HOST="$(echo "$ENTE_API_ORIGIN" | sed -E 's#(https?://[^:/]+).*#\1#')"
+    ENTE_ALBUMS_ORIGIN="${ENTE_ALBUMS_HOST}:8302"
     export ENTE_API_ORIGIN ENTE_ALBUMS_ORIGIN
 
     # Running ente-web-prepare
@@ -222,11 +235,13 @@ start_web() {
 
     mkdir -p /run/nginx /var/log/nginx
 
-    # Set nginx
-    mv /etc/nginx/http.d/web.bak /etc/nginx/http.d/web.conf
+    # Set nginx (idempotent: only move if .bak still exists)
+    if [ -f /etc/nginx/http.d/web.bak ]; then
+        mv /etc/nginx/http.d/web.bak /etc/nginx/http.d/web.conf
+    fi
 
-    bashio::log.info "Starting Ente web (nginx, ports 3000‑3004)..."
-    exec nginx -g 'daemon off;' &
+    bashio::log.info "Starting Ente web (nginx, ports 3000‑3009)..."
+    nginx -g 'daemon off;' &
     WEB_PID=$!
 }
 

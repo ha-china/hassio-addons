@@ -1,7 +1,10 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：null'
+backup_exclude:
+  - "**/minio-data/**"
+  - "**/postgres/**"
+description: '[老王杂谈说]：自托管、端到端加密的照片与视频存储 (Ente 服务器 + MinIO)'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -76,20 +79,32 @@ name: Ente
 options:
   env_vars: []
   DB_PASSWORD: ente
-  DISABLE_WEB_UI: true
   ENTE_ENDPOINT_URL: http://homeassistant.local:8280
-  MINIO_DATA_LOCATION: /config/minio-data
-  MINIO_ROOT_PASSWORD: minioadmin
-  MINIO_ROOT_USER: minioadmin
   TZ: Europe/Paris
   USE_EXTERNAL_DB: false
 ports:
   3000/tcp: 8300
-  3200/tcp: 8320
+  3001/tcp: 8301
+  3002/tcp: 8302
+  3003/tcp: 8303
+  3004/tcp: 8304
+  3005/tcp: 8305
+  3006/tcp: 8306
+  3007/tcp: 8307
+  3008/tcp: 8308
+  3009/tcp: 8309
   8080/tcp: 8280
 ports_description:
   3000/tcp: Ente web UI
-  3200/tcp: MinIO S3 endpoint
+  3001/tcp: Ente Accounts
+  3002/tcp: Ente Albums
+  3003/tcp: Ente Auth
+  3004/tcp: Ente Cast
+  3005/tcp: Ente Share
+  3006/tcp: Ente Embed
+  3007/tcp: Ente Paste
+  3008/tcp: Ente Locker
+  3009/tcp: Ente Memories
   8080/tcp: Ente API (museum)
 privileged:
   - SYS_ADMIN
@@ -103,11 +118,7 @@ schema:
   DB_PASSWORD: str
   DB_PORT: int?
   DB_USERNAME: str?
-  DISABLE_WEB_UI: bool?
   ENTE_ENDPOINT_URL: str
-  MINIO_DATA_LOCATION: str
-  MINIO_ROOT_PASSWORD: str
-  MINIO_ROOT_USER: str
   TZ: str?
   USE_EXTERNAL_DB: bool?
   cifsdomain: str?
@@ -118,6 +129,6 @@ schema:
 slug: ente
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
-version: "4.4.22-2"
+version: "4.4.22-7"
 video: true
 webui: http://[HOST]:[PORT:3000]
