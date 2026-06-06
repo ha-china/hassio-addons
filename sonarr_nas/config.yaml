@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：可监控多个 RSS 订阅源以获取你喜爱的节目的新剧集，并会自动抓取、分类和重命名这些文件。'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -108,4 +108,4 @@ schema:
 slug: sonarr_nas
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/sonarr
-version: "4.0.17.2967"
+version: "4.0.17.2969"

@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.10.0-beta.5
+
+### New Features
+
+- See who's in your home. Settings → Your Home now lists every member with their name, email, and role.
+
+### Improvements
+
+- Changing the dashboard background now shows the Pro lock up front. Free dashboards see lock badges on background options and an upgrade prompt, instead of clicks that silently did nothing.
+
+### Bug Fixes
+
+- Custom themes created on 0.9.x are back. If your saved themes disappeared from the theme editor after upgrading, they reappear and can be edited again.
+- Homes sharing one server are now fully separated: community widgets and custom themes belong to your home only and no longer show up for other households on the same install.
+- Background widget updates run for every home on a shared server, not just the first one.
+
 ## 0.10.0-beta.4
 
 ### Bug Fixes
