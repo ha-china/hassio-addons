@@ -1,5 +1,23 @@
 # TOMMY
 
+## 5.3.0
+
+### Major Changes
+- Added a settings menu in the dashboard.
+- Option to disable discovery methods
+
+## 5.2.1
+
+### Minor Changes
+- Fixed a bug causing the webserial tool to wait for heartbeats
+
+## 5.2.0
+
+### Minor Changes
+- Improved TOMMY flasher and provisioner process
+- ESPHome component now requires an explicit `discovery` field (`mdns` or `manual`).
+- Fixed an issue causing devices to fail connecting to the server using mDNS
+
 ## 5.1.0
 
 ### Major Changes

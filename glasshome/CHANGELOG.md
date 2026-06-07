@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.10.0
+
+Highlights since 0.9.6:
+
+### New Features
+
+- Sign in with a GlassHome account. Start the sign-in from settings and approve it by entering a short code at glasshome.app/link. Your dashboard knows you across devices, no password typed on the TV or tablet.
+- GlassHome Pro. Community widgets and custom theming are now part of Pro. Free dashboards keep the full built-in widget set; a clear upgrade prompt appears when you reach for a Pro-only feature.
+- Editing your dashboard is clearer: the page dims behind the widgets, each widget gets crisp corner buttons for move, remove, and resize, and holding a widget opens its settings directly.
+- Try a demo home. From the welcome screen you can explore a fully populated dashboard, Pro features included, before connecting your own Home Assistant.
+- Pair a second screen with Quick-Connect. A kiosk or extra tablet shows a short code you confirm once, instead of copying tokens by hand.
+- Theme cards in the theme picker now show each theme's actual background and color palette, plus a new sharp Monochrome look with a diamond grid background and a scattered-trees pattern for Forest Zen.
+- Icons now load without an internet connection. Entity, area, and dock icons come straight from your own server instead of an external icon service.
+
+### Improvements
+
+- Redesigned welcome and setup. A calmer, conversational onboarding walks you through connecting your home one step at a time.
+- Reworked Settings. Your account and your home live in clearly separated cards, Settings → Your Home lists every member with their role, and a new "Reduce Motion" toggle dials back animations.
+- Widgets you drop on the dashboard appear at a readable size by default instead of the 1x1 minimum.
+- Searching for an entity by its friendly name works in every widget picker.
+- Faster installs and updates. The add-on download is about a third smaller.
+
+### Bug Fixes
+
+- Upgrading from 0.9.x preserves your dashboards, placed widgets, and custom themes.
+- Homes sharing one server are fully separated: community widgets, custom themes, and background updates belong to your home only.
+- Dashboard reconnects to Home Assistant automatically after the app comes back from the background.
+- Drag and resize work immediately after adding the first widget to a fresh dashboard.
+- Batteries widget shows your batteries on setups where it used to come up empty.
+
 ## 0.9.6
 
 ### Improvements
