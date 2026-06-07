@@ -1,5 +1,5 @@
 # 使用固定的基础镜像
-FROM docker.1ms.run/library/ubuntu:24.10
+FROM docker.1panel.live/library/ubuntu:24.10
 
 # 定义平台相关变量
 ARG BUILD_ARCH

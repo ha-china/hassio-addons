@@ -23,7 +23,7 @@ privileged:
   - NET_ADMIN
 devices:
   - /dev/net/tun
-image: docker.1ms.run/homeassistant/{arch}-addon-otbr
+image: docker.1panel.live/homeassistant/{arch}-addon-otbr
 init: false
 options:
   device: null

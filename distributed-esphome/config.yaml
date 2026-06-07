@@ -15,7 +15,7 @@ init: true
 # this, Supervisor runs ``docker buildx build`` against the
 # ``docker:<HOST_DOCKER_VER>-cli`` builder image, which fails if
 # Docker Hub is rate-limiting the host or briefly unreachable —
-# the exact symptom in #82 (``Image docker.1ms.run/library/docker:...-cli
+# the exact symptom in #82 (``Image docker.1panel.live/library/docker:...-cli
 # does not exist``). ``{arch}`` is substituted by Supervisor at
 # install time (``amd64-addon-esphome-dist-server`` on x86-64,
 # ``aarch64-addon-esphome-dist-server`` on ARM); the version segment

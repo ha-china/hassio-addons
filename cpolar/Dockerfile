@@ -1,4 +1,4 @@
-FROM docker.1ms.run/probezy/cpolar:3.3.18
+FROM docker.1panel.live/probezy/cpolar:3.3.18
 
 RUN apt-get update && apt-get install -y \
     jq \

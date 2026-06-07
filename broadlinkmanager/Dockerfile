@@ -1,4 +1,4 @@
-FROM docker.1ms.run/techblog/fastapi:latest
+FROM docker.1panel.live/techblog/fastapi:latest
 
 LABEL maintainer="tomer.klein@gmail.com"
 

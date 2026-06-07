@@ -8,7 +8,7 @@ arch:
   - amd64
 boot: manual
 description: '[老王杂谈说]：扫描 HDMI CEC 设备'
-image: docker.1ms.run/homeassistant/{arch}-addon-cec_scan
+image: docker.1panel.live/homeassistant/{arch}-addon-cec_scan
 options: {}
 schema: {}
 startup: once

@@ -17,7 +17,7 @@ discovery:
   - deconz
 gpio: true
 homeassistant: 0.91.2
-image: docker.1ms.run/homeassistant/{arch}-addon-deconz
+image: docker.1panel.live/homeassistant/{arch}-addon-deconz
 ingress: true
 ingress_entry: ingress.html
 init: false

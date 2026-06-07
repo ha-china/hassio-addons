@@ -15,7 +15,7 @@
     "armv7",
     "i386"
   ],
-  "image": "docker.1ms.run/mkerix/room-assistant-{arch}",
+  "image": "docker.1panel.live/mkerix/room-assistant-{arch}",
   "boot": "auto",
   "services": [
     "mqtt:want"

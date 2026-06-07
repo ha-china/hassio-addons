@@ -1,7 +1,7 @@
 # ARG BUILD_FROM
 # FROM $BUILD_FROM
 
-FROM docker.1ms.run/node:18-slim
+FROM docker.1panel.live/node:18-slim
 ENV CK_API_ENV=prod
 RUN apt-get update && apt-get install -y python3 build-essential
 RUN mkdir -p /workspace/node_modules

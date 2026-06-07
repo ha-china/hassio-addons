@@ -8,7 +8,7 @@ url: https://gh-proxy.org/github.com/home-assistant/addons/tree/master/nginx_pro
 arch:
   - aarch64
   - amd64
-image: docker.1ms.run/homeassistant/{arch}-addon-nginx_proxy
+image: docker.1panel.live/homeassistant/{arch}-addon-nginx_proxy
 init: false
 map:
   - ssl

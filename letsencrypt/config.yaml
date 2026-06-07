@@ -9,7 +9,7 @@ arch:
   - aarch64
   - amd64
 boot: manual
-image: docker.1ms.run/homeassistant/{arch}-addon-letsencrypt
+image: docker.1panel.live/homeassistant/{arch}-addon-letsencrypt
 init: false
 map:
   - ssl:rw

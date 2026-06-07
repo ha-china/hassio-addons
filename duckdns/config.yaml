@@ -10,7 +10,7 @@ arch:
   - amd64
 hassio_api: true
 init: false
-image: docker.1ms.run/homeassistant/{arch}-addon-duckdns
+image: docker.1panel.live/homeassistant/{arch}-addon-duckdns
 map:
   - ssl:rw
 options:

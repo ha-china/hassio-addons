@@ -11,7 +11,7 @@ discovery:
   - zwave_js
 hassio_api: true
 homeassistant: 2025.12.0
-image: docker.1ms.run/homeassistant/{arch}-addon-zwave_js
+image: docker.1panel.live/homeassistant/{arch}-addon-zwave_js
 init: false
 ingress: true
 ingress_port: 8091

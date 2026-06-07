@@ -39,4 +39,4 @@ schema:
   debug_logging: bool
 audio: true
 homeassistant: 2023.12.1
-image: docker.1ms.run/homeassistant/{arch}-addon-assist_microphone
+image: docker.1panel.live/homeassistant/{arch}-addon-assist_microphone

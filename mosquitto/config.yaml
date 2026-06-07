@@ -10,7 +10,7 @@ arch:
 auth_api: true
 discovery:
   - mqtt
-image: docker.1ms.run/homeassistant/{arch}-addon-mosquitto
+image: docker.1panel.live/homeassistant/{arch}-addon-mosquitto
 map:
   - ssl
   - share

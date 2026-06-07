@@ -1,5 +1,5 @@
 ARG BUILD_VERSION
-FROM docker.1ms.run/linuxserver/emulatorjs
+FROM docker.1panel.live/linuxserver/emulatorjs
 
 VOLUME [ "/share" ]
 

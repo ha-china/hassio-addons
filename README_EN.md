@@ -23,9 +23,9 @@ All Addon acceleration correspondence is as follows:
 | Original URL        | China Accelerated URL     |
 |---------------------|-------------------------|
 | ghcr.io             | ghcr.nju.edu.cn         |
-| docker.io           | docker.1ms.run    |
-| lscr.io             | docker.1ms.run    |
-| docker.io           | docker.1ms.run          |
+| docker.io           | docker.1panel.live    |
+| lscr.io             | docker.1panel.live    |
+| docker.io           | docker.1panel.live          |
 | https://github.com  | https://gh-proxy.org      |
 
 Excellent third-party libraries:

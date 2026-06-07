@@ -9,7 +9,7 @@ arch:
   - amd64
 hassio_api: true
 host_network: true
-image: docker.1ms.run/homeassistant/{arch}-addon-samba
+image: docker.1panel.live/homeassistant/{arch}-addon-samba
 init: false
 map:
   - addons:rw

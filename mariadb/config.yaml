@@ -10,7 +10,7 @@ arch:
   - amd64
 backup_post: unlock-tables-for-backup
 backup_pre: lock-tables-for-backup
-image: docker.1ms.run/homeassistant/{arch}-addon-mariadb
+image: docker.1panel.live/homeassistant/{arch}-addon-mariadb
 init: false
 options:
   databases:

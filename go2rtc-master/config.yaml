@@ -2,7 +2,7 @@
 name: go2rtc master
 description: 最新不稳定版本
 url: https://gh-proxy.org/github.com/AlexxIT/go2rtc
-image: docker.1ms.run/alexxit/go2rtc
+image: docker.1panel.live/alexxit/go2rtc
 arch: [ amd64, aarch64, i386, armv7 ]
 
 # https://developers.home-assistant.io/docs/add-ons/configuration

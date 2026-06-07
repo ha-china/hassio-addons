@@ -1,4 +1,4 @@
-FROM docker.1ms.run/rhasspy/rhasspy:2.5.11
+FROM docker.1panel.live/rhasspy/rhasspy:2.5.11
 LABEL maintainer="Michael Hansen <mike@rhasspy.org>"
 
 ENV LANG C.UTF-8

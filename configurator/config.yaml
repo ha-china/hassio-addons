@@ -9,7 +9,7 @@ arch:
   - amd64
 homeassistant: 0.91.1
 homeassistant_api: true
-image: docker.1ms.run/homeassistant/{arch}-addon-configurator
+image: docker.1panel.live/homeassistant/{arch}-addon-configurator
 ingress: true
 init: false
 map:

@@ -8,7 +8,7 @@ arch:
   - aarch64
   - amd64
 host_network: true
-image: docker.1ms.run/homeassistant/{arch}-addon-rpc_shutdown
+image: docker.1panel.live/homeassistant/{arch}-addon-rpc_shutdown
 options:
   computers:
     - address: 192.168.0.1

@@ -35,4 +35,4 @@ ports:
   8099/tcp: null
 
 # docker hub
-image: docker.1ms.run/matt8707/addon-ha-fusion-{arch}
+image: docker.1panel.live/matt8707/addon-ha-fusion-{arch}
