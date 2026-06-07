@@ -13,7 +13,7 @@ environment:
   NEXT_PUBLIC_CREDENTIALS_ENABLED: "true"
   NEXT_PUBLIC_DISABLE_REGISTRATION: "false"
   STORAGE_FOLDER: /config/library
-image: ghcr.1ms.run/alexbelgium/linkwarden-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/linkwarden-{arch}
 init: false
 map:
   - addon_config:rw

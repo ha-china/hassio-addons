@@ -7,7 +7,7 @@ url: https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/antigravit
 arch:
   - amd64
   - aarch64
-image: ghcr.1ms.run/faserf/hassio-addons-antigravity-server-{arch}
+image: ghcr.nju.edu.cn/faserf/hassio-addons-antigravity-server-{arch}
 init: false
 ingress: true
 ingress_port: 6080

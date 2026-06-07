@@ -85,5 +85,5 @@
     "watchdog": "str?",
     "force_onboarding": "bool?"
   },
-  "image": "ghcr.1ms.run/ihost-open-source-project/hassio-ihost-zigbee2mqtt-{arch}"
+  "image": "ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-zigbee2mqtt-{arch}"
 }

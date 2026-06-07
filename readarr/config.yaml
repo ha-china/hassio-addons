@@ -16,4 +16,4 @@ map:
   - media:rw
 ports:
   8787/tcp: 8787
-image: ghcr.1ms.run/hassio-addons/readarr/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/readarr/{arch}

@@ -40,7 +40,7 @@
   },
   "hassio_role": "manager",
   "hassio_api": true,
-  "image": "ghcr.1ms.run/ihost-open-source-project/hassio-ihost-addon-{arch}",
+  "image": "ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-addon-{arch}",
   "devices": [
     "/dev/ttyS3"
   ],

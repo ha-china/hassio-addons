@@ -81,4 +81,4 @@ schema:
     - str
   init_commands:
     - str
-image: ghcr.1ms.run/ihost-open-source-project/hassio-ihost-ssh-{arch}
+image: ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-ssh-{arch}

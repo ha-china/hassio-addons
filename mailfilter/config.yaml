@@ -22,4 +22,4 @@ schema:
   enable_dkim_signing: bool
   enable_gtube_tests: bool?
   log_level: list(debug|silent|info|notice|warning|error)?
-image: ghcr.1ms.run/erik73/mailfilter/{arch}
+image: ghcr.nju.edu.cn/erik73/mailfilter/{arch}

@@ -21,7 +21,7 @@ environment:
   PORT: "3000"
   SSLPORT: "3443"
   TCPSTREAMPORT: "8375"
-image: ghcr.1ms.run/alexbelgium/signalk-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/signalk-{arch}
 map:
   - addon_config:rw
 name: Signalk Server

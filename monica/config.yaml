@@ -71,7 +71,7 @@ environment:
   SCOUT_QUEUE: "false"
   MEILISEARCH_URL: "http://127.0.0.1:7700"
   MEILISEARCH_KEY: "null"
-image: ghcr.1ms.run/alexbelgium/monica-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/monica-{arch}
 init: false
 options:
   env_vars: []

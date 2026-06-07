@@ -27,4 +27,4 @@ schema:
   certfile: str
   keyfile: str
   ssl: bool
-image: ghcr.1ms.run/erik73/roundcube/{arch}
+image: ghcr.nju.edu.cn/erik73/roundcube/{arch}

@@ -3,7 +3,7 @@ version: "2.0.0"
 slug: bluetooth_audio_manager
 description: "[老王杂谈说]：通过持久配对、自动重连和 AppArmor 安全机制管理蓝牙音频设备连接（A2DP）。"
 url: "https://gh-proxy.org/github.com/scyto/ha-bluetooth-audio-manager"
-image: "ghcr.1ms.run/scyto/ha-bluetooth-audio-manager"
+image: "ghcr.nju.edu.cn/scyto/ha-bluetooth-audio-manager"
 arch:
   - aarch64
   - amd64

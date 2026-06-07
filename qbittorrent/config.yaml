@@ -70,7 +70,7 @@ environment:
   WEBUI_PORT: "8080"
   PUID: "0"
   PGID: "0"
-image: ghcr.1ms.run/alexbelgium/qbittorrent-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/qbittorrent-{arch}
 ingress: true
 init: false
 map:

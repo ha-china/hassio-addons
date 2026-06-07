@@ -24,4 +24,4 @@ schema:
     - str
   init_commands:
     - str
-image: ghcr.1ms.run/hassio-addons/jupyterlab/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/jupyterlab/{arch}

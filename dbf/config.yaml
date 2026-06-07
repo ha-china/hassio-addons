@@ -29,4 +29,4 @@ schema:
   imprint_name: str?
   imprint_address: str?
   privacy_policy_url: str?
-image: ghcr.1ms.run/faserf/hassio-addons-dbf-{arch}
+image: ghcr.nju.edu.cn/faserf/hassio-addons-dbf-{arch}

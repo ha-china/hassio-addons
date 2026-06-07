@@ -70,7 +70,7 @@ environment:
   MEDIA_ROOT: ""
   POSTGRES_DB: /config/addons_config/tandoor_recipes/recipes.db
   TRUSTED_PROXIES: "**"
-image: ghcr.1ms.run/alexbelgium/tandoor_recipes-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/tandoor_recipes-{arch}
 map:
   - config:rw
   - share:rw

@@ -1,5 +1,5 @@
 # https://gh-proxy.org/github.com/hassio-addons/addon-debian-base/releases
-FROM ghcr.1ms.run/hassio-addons/debian-base:9.2.0 AS base
+FROM ghcr.nju.edu.cn/hassio-addons/debian-base:9.2.0 AS base
 
 SHELL [ "/bin/bash", "-euxo", "pipefail", "-c" ]
 

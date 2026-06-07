@@ -23,4 +23,4 @@ map:
     path: /app/data
 breaking_versions:
   - v1.3.0
-image: ghcr.1ms.run/einschmidt/pocket-id
+image: ghcr.nju.edu.cn/einschmidt/pocket-id

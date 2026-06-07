@@ -10,7 +10,7 @@ panel_title: Frigate
 slug: frigate-fa
 description: '[老王杂谈说]：具有IP摄像头实时本地目标检测功能的NVR'
 url: "https://gh-proxy.org/github.com/blakeblackshear/frigate"
-image: ghcr.1ms.run/blakeblackshear/frigate
+image: ghcr.nju.edu.cn/blakeblackshear/frigate
 startup: application
 boot: auto
 init: false

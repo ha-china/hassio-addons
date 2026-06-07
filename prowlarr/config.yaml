@@ -67,7 +67,7 @@ devices:
 environment:
   PGID: "0"
   PUID: "0"
-image: ghcr.1ms.run/alexbelgium/prowlarr-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/prowlarr-{arch}
 ingress: true
 ingress_entry: prowlarr
 init: false

@@ -24,7 +24,7 @@ RUN apk add --no-cache curl tar \
 
 # ── Stage 2: Production image ────────────────────────────────────────
 ARG BUILD_FROM
-FROM ${BUILD_FROM:-ghcr.1ms.run/hassio-addons/base:16.3.2}
+FROM ${BUILD_FROM:-ghcr.nju.edu.cn/hassio-addons/base:16.3.2}
 
 RUN apk add --no-cache nodejs npm
 

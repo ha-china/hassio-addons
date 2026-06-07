@@ -14,7 +14,7 @@
 # 1 Build Image #
 #################
 
-ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/debian-base:9.1.0
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base:9.1.0
 ###############################################################################
 # Get prebuild containers from Vaultwarden
 ###############################################################################

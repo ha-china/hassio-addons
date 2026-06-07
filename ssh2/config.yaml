@@ -83,4 +83,4 @@ schema:
     - str
   init_commands:
     - str
-image: ghcr.1ms.run/hassio-addons/ssh
+image: ghcr.nju.edu.cn/hassio-addons/ssh

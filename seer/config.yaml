@@ -65,7 +65,7 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment: {}
-image: ghcr.1ms.run/alexbelgium/seer-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/seer-{arch}
 init: false
 map:
   - addon_config:rw

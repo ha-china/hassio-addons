@@ -16,4 +16,4 @@ hassio_api: true
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   upload_limit: int?
-image: ghcr.1ms.run/hassio-addons/phpmyadmin/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/phpmyadmin/{arch}

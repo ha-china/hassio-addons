@@ -1,7 +1,7 @@
 ARG BUILD_ARCH
 
 #FROM quay.io/redlib/redlib:latest
-FROM ghcr.1ms.run/cycneuramus/containers:redlib
+FROM ghcr.nju.edu.cn/cycneuramus/containers:redlib
 
 ARG BUILD_ARCH
 

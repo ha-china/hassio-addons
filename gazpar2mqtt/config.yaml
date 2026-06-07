@@ -64,7 +64,7 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
-image: ghcr.1ms.run/alexbelgium/gazpar2mqtt-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/gazpar2mqtt-{arch}
 map:
   - config:rw
   - share:rw

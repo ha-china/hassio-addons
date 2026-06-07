@@ -8,7 +8,7 @@
     "aarch64",
     "amd64"
   ],
-  "image": "ghcr.1ms.run/sanderdw/hassio-addons/ha-dsmr-reader-{arch}",
+  "image": "ghcr.nju.edu.cn/sanderdw/hassio-addons/ha-dsmr-reader-{arch}",
   "url": "https://gh-proxy.org/github.com/sanderdw/hassio-addons",
   "startup": "application",
   "boot": "auto",

@@ -46,7 +46,7 @@ RUN set -eux; \
 
 ARG BUILD_FROM
 ARG BUILD_VERSION
-FROM ghcr.1ms.run/maintainerr/maintainerr:${BUILD_UPSTREAM}
+FROM ghcr.nju.edu.cn/maintainerr/maintainerr:${BUILD_UPSTREAM}
 
 ##################
 # 2 Modify Image #

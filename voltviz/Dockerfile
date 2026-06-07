@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.1ms.run/sanderdw/voltviz:latest
+ARG BUILD_FROM=ghcr.nju.edu.cn/sanderdw/voltviz:latest
 FROM $BUILD_FROM
 ARG BUILD_ARCH
 ARG HA_RELEASE

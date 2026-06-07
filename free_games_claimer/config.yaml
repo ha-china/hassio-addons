@@ -67,7 +67,7 @@ devices:
   - /dev/nvme2
 environment:
   TINI_SUBREAPER: "false"
-image: ghcr.1ms.run/alexbelgium/free_games_claimer-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/free_games_claimer-{arch}
 init: false
 map:
   - addon_config:rw

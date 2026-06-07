@@ -35,4 +35,4 @@ schema:
     - str
   users:
     - str
-image: ghcr.1ms.run/hassio-addons/thelounge/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/thelounge/{arch}

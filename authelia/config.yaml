@@ -19,4 +19,4 @@ options:
 schema:
   domain: str
   log_level: list(debug|info|warn|error)
-image: ghcr.1ms.run/einschmidt/authelia
+image: ghcr.nju.edu.cn/einschmidt/authelia

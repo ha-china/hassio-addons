@@ -67,7 +67,7 @@ devices:
 environment:
   VPN_ENABLED: "false"
   VPN_PROVIDER: "null"
-image: ghcr.1ms.run/alexbelgium/unpackerr-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/unpackerr-{arch}
 init: false
 map:
   - media:rw

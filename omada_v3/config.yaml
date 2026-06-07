@@ -75,7 +75,7 @@ environment:
   SSL_KEY_NAME: privkey.pem
   TZ: Etc/UTC
 host_network: true
-image: ghcr.1ms.run/alexbelgium/omada_v3-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/omada_v3-{arch}
 map:
   - config:rw
   - ssl:ro

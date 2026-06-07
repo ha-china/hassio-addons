@@ -43,6 +43,6 @@
       "password": "str?"
     }
   },
-  "image": "ghcr.1ms.run/ihost-open-source-project/hassio-ihost-ewelink-smart-home-{arch}",
+  "image": "ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-ewelink-smart-home-{arch}",
   "homeassistant": "2025.9.2"
 }

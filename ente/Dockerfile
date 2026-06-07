@@ -55,7 +55,7 @@ RUN npm run build:memories
 FROM ghcr.1ms.run/ente-io/server:latest
 
 ##################
-# 2) Tune image  #
+# 2) ghcr.nju.edu.cn#
 ##################
 ENV S6_CMD_WAIT_FOR_SERVICES=1 \
     S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \

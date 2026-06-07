@@ -2,7 +2,7 @@ arch:
   - aarch64
   - amd64
 description: "[老王杂谈说]：\U0001F426 NetBird 自托管服务器栈（管理、信令、中继、仪表盘、Caddy）"
-image: ghcr.1ms.run/alexbelgium/netbird-server-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/netbird-server-{arch}
 init: false
 map:
   - addon_config:rw

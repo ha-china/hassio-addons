@@ -4,7 +4,7 @@ arch:
 description: '[老王杂谈说]：跳过所有本地 Google Cast 设备上的 YouTube 广告和赞助'
 environment: {}
 host_network: true
-image: ghcr.1ms.run/alexbelgium/sponsorblockcast-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/sponsorblockcast-{arch}
 init: false
 map:
   - addon_config:rw

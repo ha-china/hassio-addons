@@ -51,5 +51,5 @@
   "schema": {
     "data_path": "str"
   },
-  "image": "ghcr.1ms.run/ihost-open-source-project/hassio-ihost-sonoff-dongle-flasher-{arch}"
+  "image": "ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-sonoff-dongle-flasher-{arch}"
 }

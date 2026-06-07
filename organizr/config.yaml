@@ -64,7 +64,7 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
-image: ghcr.1ms.run/alexbelgium/organizr-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/organizr-{arch}
 map:
   - addon_config:rw
   - ssl

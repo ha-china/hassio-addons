@@ -73,7 +73,7 @@ environment:
   GRAMPSWEB_THUMBNAIL_CACHE_CONFIG__CACHE_DIR: /config/thumbnail_cache
   GRAMPSWEB_REPORT_DIR: /config/cache/reports
   GRAMPSWEB_EXPORT_DIR: /config/cache/export
-image: ghcr.1ms.run/alexbelgium/grampsweb-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/grampsweb-{arch}
 init: false
 options:
   env_vars: []

@@ -41,4 +41,4 @@ schema:
   envvars:
     - name: match(^INFLUXDB3_([A-Z0-9_])+$)
       value: str
-image: ghcr.1ms.run/erik73/influxdb3/{arch}
+image: ghcr.nju.edu.cn/erik73/influxdb3/{arch}

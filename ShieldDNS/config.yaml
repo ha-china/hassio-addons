@@ -47,4 +47,4 @@ schema:
 #   # Removing this section avoids the "Network" configuration tab in HA, which is misleading here.
 #   # 853/tcp: 853
 #   # 443/tcp: 3443
-image: ghcr.1ms.run/faserf/hassio-addons-shielddns-{arch}
+image: ghcr.nju.edu.cn/faserf/hassio-addons-shielddns-{arch}

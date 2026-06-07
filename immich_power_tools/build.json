@@ -1,6 +1,6 @@
 {
   "build_from": {
-    "aarch64": "ghcr.1ms.run/varun-raj/immich-power-tools:latest",
-    "amd64": "ghcr.1ms.run/varun-raj/immich-power-tools:latest"
+    "aarch64": "ghcr.nju.edu.cn/varun-raj/immich-power-tools:latest",
+    "amd64": "ghcr.nju.edu.cn/varun-raj/immich-power-tools:latest"
   }
 }

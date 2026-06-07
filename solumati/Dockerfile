@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.1ms.run/home-assistant/base-python:3.14-alpine3.23
+ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/base-python:3.14-alpine3.23
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 

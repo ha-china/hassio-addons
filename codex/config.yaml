@@ -61,7 +61,7 @@ environment:
   PUID: "0"
 hassio_api: true
 homeassistant_api: true
-image: ghcr.1ms.run/alexbelgium/codex-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/codex-{arch}
 ingress: true
 ingress_stream: true
 map:

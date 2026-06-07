@@ -71,7 +71,7 @@ environment:
   START_DOCKER: "false"
   TITLE: Ubuntu KDE webtop
   shm_size: 1gb
-image: ghcr.1ms.run/alexbelgium/webtop_kde-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/webtop_kde-{arch}
 ingress: true
 init: false
 map:

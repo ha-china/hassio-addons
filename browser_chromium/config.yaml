@@ -22,7 +22,7 @@ environment:
   START_DOCKER: "false"
   TITLE: chromium browser
   shm_size: 1gb
-image: ghcr.1ms.run/alexbelgium/chromium-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/chromium-{arch}
 ingress: true
 init: false
 map:

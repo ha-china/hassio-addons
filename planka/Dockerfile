@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM ghcr.1ms.run/plankanban/planka:2.1.0 AS planka
+FROM ghcr.nju.edu.cn/plankanban/planka:2.1.0 AS planka
 
 FROM ${BUILD_FROM}
 

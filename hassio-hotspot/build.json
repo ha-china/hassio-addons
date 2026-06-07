@@ -1,9 +1,9 @@
 {
   "build_from": {
-    "aarch64": "ghcr.1ms.run/home-assistant/aarch64-base:latest",
-    "amd64": "ghcr.1ms.run/home-assistant/amd64-base:latest",
-    "armhf": "ghcr.1ms.run/home-assistant/armhf-base:latest",
-    "armv7": "ghcr.1ms.run/home-assistant/armv7-base:latest",
-    "i386": "ghcr.1ms.run/home-assistant/i386-base:latest"
+    "aarch64": "ghcr.nju.edu.cn/home-assistant/aarch64-base:latest",
+    "amd64": "ghcr.nju.edu.cn/home-assistant/amd64-base:latest",
+    "armhf": "ghcr.nju.edu.cn/home-assistant/armhf-base:latest",
+    "armv7": "ghcr.nju.edu.cn/home-assistant/armv7-base:latest",
+    "i386": "ghcr.nju.edu.cn/home-assistant/i386-base:latest"
   }
 }

@@ -69,7 +69,7 @@ environment:
   DIR_SOUNDS: /var/cache/zoneminder/sounds2
   DZM_CONFIG_DIR: /config/addons_config/zoneminder
   ZM_DIR_EVENTS: /var/cache/zoneminder/events2
-image: ghcr.1ms.run/alexbelgium/zoneminder-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/zoneminder-{arch}
 map:
   - config:rw
   - media:rw

@@ -1,6 +1,6 @@
 {
   "name": "rtl_433 MQTT Auto Discovery",
-  "image": "ghcr.1ms.run/pbkhrv/rtl_433-hass-addons-rtl_433_mqtt_autodiscovery-{arch}",
+  "image": "ghcr.nju.edu.cn/pbkhrv/rtl_433-hass-addons-rtl_433_mqtt_autodiscovery-{arch}",
   "version": "0.10.0",
   "slug": "rtl433mqttautodiscovery",
   "description": "[老王杂谈说]：null",

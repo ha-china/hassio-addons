@@ -16,4 +16,4 @@ map:
   - media:rw
 ports:
   8080/tcp: null
-image: ghcr.1ms.run/hassio-addons/sabnzbd
+image: ghcr.nju.edu.cn/hassio-addons/sabnzbd

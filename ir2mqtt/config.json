@@ -4,7 +4,7 @@
   "slug": "ir2mqtt",
   "description": "[老王杂谈说]：带有学习和 MQTT 自动发现功能的红外桥 Web UI",
   "url": "https://gh-proxy.org/github.com/steelcuts/ir2mqtt",
-  "image": "ghcr.1ms.run/steelcuts/ir2mqtt-ha-app",
+  "image": "ghcr.nju.edu.cn/steelcuts/ir2mqtt-ha-app",
   "arch": [
     "aarch64",
     "amd64",

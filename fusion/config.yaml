@@ -17,4 +17,4 @@ options:
 schema:
   password: password?
   log_level: list(debug|info|warn|error)
-image: ghcr.1ms.run/einschmidt/fusion
+image: ghcr.nju.edu.cn/einschmidt/fusion

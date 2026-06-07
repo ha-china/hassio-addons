@@ -58,7 +58,7 @@ devices:
   - /dev/nvme2
 hassio_api: true
 homeassistant_api: true
-image: ghcr.1ms.run/alexbelgium/comixed-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/comixed-{arch}
 map:
   - addon_config:rw
   - media:rw

@@ -71,7 +71,7 @@ environment:
   WEBUI_PASSWORD: password
   WEBUI_PORT: "7474"
   WEBUI_USERNAME: admin
-image: ghcr.1ms.run/alexbelgium/autobrr-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/autobrr-{arch}
 ingress: true
 init: false
 map:

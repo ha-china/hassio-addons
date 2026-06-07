@@ -19,7 +19,7 @@ ARG BUILD_UPSTREAM="2.9.13"
 
 ARG BUILD_FROM
 ARG BUILD_VERSION
-FROM ghcr.1ms.run/cleanuparr/cleanuparr:${BUILD_UPSTREAM}
+FROM ghcr.nju.edu.cn/cleanuparr/cleanuparr:${BUILD_UPSTREAM}
 
 ##################
 # 2 Modify Image #

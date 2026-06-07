@@ -1,4 +1,4 @@
-FROM ghcr.1ms.run/hassio-addons/base-python:stable
+FROM ghcr.nju.edu.cn/hassio-addons/base-python:stable
 
 EXPOSE 8080
 RUN pip install icloudpd

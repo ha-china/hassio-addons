@@ -4,7 +4,7 @@ version: 2026.03.01
 slug: haos-sbfspot-sensorsgen
 description: '[老王杂谈说]：为 SBFspot 多逆变器配置创建额外传感器'
 url: "https://gh-proxy.org/github.com/habuild/hassio/tree/main/haos-sbfspot-sensorsgen"
-image: "ghcr.1ms.run/habuild/{arch}-addon-haos-sbfspot-sensorsgen"
+image: "ghcr.nju.edu.cn/habuild/{arch}-addon-haos-sbfspot-sensorsgen"
 arch:
   - armv7
   - aarch64

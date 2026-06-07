@@ -1,6 +1,6 @@
-ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/debian-base:9.3.0
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base:9.3.0
 ARG KOMODO_VERSION=2.1.2
-FROM ghcr.1ms.run/moghtech/komodo-core:${KOMODO_VERSION} AS komodo
+FROM ghcr.nju.edu.cn/moghtech/komodo-core:${KOMODO_VERSION} AS komodo
 FROM ${BUILD_FROM}
 
 # Set shell

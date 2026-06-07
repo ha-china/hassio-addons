@@ -39,4 +39,4 @@ schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   memory_max: int?
   memory_init: int?
-image: ghcr.1ms.run/hassio-addons/unifi
+image: ghcr.nju.edu.cn/hassio-addons/unifi

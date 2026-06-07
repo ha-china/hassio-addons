@@ -2,7 +2,7 @@ arch:
   - aarch64
   - amd64
 description: '[老王杂谈说]：开源密码管理方案'
-image: ghcr.1ms.run/alexbelgium/vaultwarden-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/vaultwarden-{arch}
 init: false
 map:
   - ssl

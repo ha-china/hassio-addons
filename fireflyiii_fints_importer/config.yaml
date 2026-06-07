@@ -67,7 +67,7 @@ devices:
   - /dev/nvme2
 environment:
   TRUSTED_PROXIES: '**'
-image: ghcr.1ms.run/alexbelgium/fireflyiii_fints_importer-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/fireflyiii_fints_importer-{arch}
 map:
   - config:rw
   - share:rw

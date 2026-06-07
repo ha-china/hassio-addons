@@ -24,7 +24,7 @@ init: true
 # build when GHCR is unreachable and ``push-to-hass-4.sh`` can
 # continue rsync-deploying dev builds (see IM.5 for the sed filter
 # that strips this line on the dev loop).
-image: ghcr.1ms.run/weirded/{arch}-addon-esphome-dist-server
+image: ghcr.nju.edu.cn/weirded/{arch}-addon-esphome-dist-server
 # Bug #5 (1.6.1): `stage: experimental` removed. The add-on has
 # shipped stable releases through 1.6 with full test coverage,
 # cosign + SBOM supply-chain hardening, an AppArmor profile, and

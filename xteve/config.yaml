@@ -7,7 +7,7 @@ environment:
   XTEVE_CONF: /data/conf
   XTEVE_HOME: /data
 host_network: true
-image: ghcr.1ms.run/alexbelgium/xteve-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/xteve-{arch}
 map:
   - config:rw
   - share:rw

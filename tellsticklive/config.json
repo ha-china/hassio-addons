@@ -77,5 +77,5 @@
       }
     ]
   },
-  "image": "ghcr.1ms.run/erik73/tellsticklive/{arch}"
+  "image": "ghcr.nju.edu.cn/erik73/tellsticklive/{arch}"
 }

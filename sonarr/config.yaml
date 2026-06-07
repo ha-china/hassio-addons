@@ -14,4 +14,4 @@ map:
   - media:rw
 ports:
   8989/tcp: 8989
-image: ghcr.1ms.run/hassio-addons/sonarr
+image: ghcr.nju.edu.cn/hassio-addons/sonarr

@@ -74,7 +74,7 @@ environment:
   TITLE: Ubuntu XFCE webtop
   shm_size: 1gb
 host_dbus: true
-image: ghcr.1ms.run/alexbelgium/webtop-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/webtop-{arch}
 ingress: true
 init: false
 map:

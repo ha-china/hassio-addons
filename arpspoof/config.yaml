@@ -67,7 +67,7 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 host_network: true
-image: ghcr.1ms.run/alexbelgium/arpspoof-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/arpspoof-{arch}
 map: []
 name: Arpspoof
 options:

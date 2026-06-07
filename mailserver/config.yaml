@@ -50,4 +50,4 @@ schema:
   message_size_limit: int
   mail_max_userip_connections: int?
   mynetworks: str?
-image: ghcr.1ms.run/erik73/mailserver/{arch}
+image: ghcr.nju.edu.cn/erik73/mailserver/{arch}

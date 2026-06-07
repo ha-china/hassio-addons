@@ -14,4 +14,4 @@ map:
   - media:rw
 ports:
   6767/tcp: 6767
-image: ghcr.1ms.run/hassio-addons/bazarr/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/bazarr/{arch}

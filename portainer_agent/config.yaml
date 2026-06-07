@@ -7,7 +7,7 @@ description: '[老王杂谈说]：一个用于管理Swarm集群中所有资源�
 docker_api: true
 full_access: true
 hassio_api: true
-image: ghcr.1ms.run/alexbelgium/portainer_agent-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/portainer_agent-{arch}
 init: false
 map:
   - config:rw

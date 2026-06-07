@@ -71,7 +71,7 @@ devices:
 environment:
   PGID: "0"
   PUID: "0"
-image: ghcr.1ms.run/alexbelgium/bazarr-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/bazarr-{arch}
 ingress: true
 ingress_entry: bazarr
 init: false

@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:19.0.0
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:19.0.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} AS builder
 

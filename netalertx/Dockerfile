@@ -45,7 +45,7 @@ RUN set -eux; \
 # 1) Final image #
 ##################
 ARG BUILD_FROM
-FROM ghcr.1ms.run/jokob-sk/netalertx:latest
+FROM ghcr.nju.edu.cn/jokob-sk/netalertx:latest
 
 # S6 settings (keep yours)
 ENV S6_CMD_WAIT_FOR_SERVICES=1 \

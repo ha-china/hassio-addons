@@ -1,6 +1,6 @@
 {
   "build_from": {
-    "aarch64": "ghcr.1ms.run/browserless/chromium:latest",
-    "amd64": "ghcr.1ms.run/browserless/chromium:latest"
+    "aarch64": "ghcr.nju.edu.cn/browserless/chromium:latest",
+    "amd64": "ghcr.nju.edu.cn/browserless/chromium:latest"
   }
 }

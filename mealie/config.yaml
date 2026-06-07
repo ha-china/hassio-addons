@@ -75,7 +75,7 @@ environment:
   WEB_CONCURRENCY: "2"
   WEB_GUNICORN: "true"
   WORKERS_PER_CORE: "0.5"
-image: ghcr.1ms.run/alexbelgium/mealie-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/mealie-{arch}
 ingress: true
 map:
   - addon_config:rw

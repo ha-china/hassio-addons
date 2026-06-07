@@ -1,8 +1,8 @@
-ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
 # Use official image pinned to digest to ensure integrity (CodeRabbit: reproducible builds)
 # Note: This uses Wiki.js V3 Beta/Alpha - Renovate tracks ARG WIKIJS_VERSION
 ARG WIKIJS_VERSION=3.0.0-alpha.413
-FROM ghcr.1ms.run/requarks/wiki:${WIKIJS_VERSION} AS wiki_release
+FROM ghcr.nju.edu.cn/requarks/wiki:${WIKIJS_VERSION} AS wiki_release
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}

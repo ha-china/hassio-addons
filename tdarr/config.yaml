@@ -84,7 +84,7 @@ environment:
   serverPort: "8266"
   webUIPort: "8265"
 host_dbus: true
-image: ghcr.1ms.run/alexbelgium/tdarr-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/tdarr-{arch}
 init: false
 map:
   - media:rw

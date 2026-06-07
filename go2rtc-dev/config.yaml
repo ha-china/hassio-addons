@@ -2,7 +2,7 @@
 name: go2rtc (dev)
 description: '[老王杂谈说]：面向高级测试员的开发版。实验性功能，用于测试潜在更新。'
 url: https://gh-proxy.org/github.com/AlexxIT/go2rtc/tree/dev
-image: ghcr.1ms.run/alexxit/go2rtc
+image: ghcr.nju.edu.cn/alexxit/go2rtc
 arch: [amd64, aarch64, i386, armv7]
 # https://developers.home-assistant.io/docs/add-ons/configuration
 version: dev

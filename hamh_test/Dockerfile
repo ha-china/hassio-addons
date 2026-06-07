@@ -1,4 +1,4 @@
-FROM ghcr.1ms.run/hassio-addons/base-nodejs:0.2.5
+FROM ghcr.nju.edu.cn/hassio-addons/base-nodejs:0.2.5
 
 ENV SUPERVISOR_TOKEN ""
 VOLUME /config

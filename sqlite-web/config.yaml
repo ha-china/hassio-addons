@@ -15,4 +15,4 @@ map:
   - share:rw
 schema:
   database: str?
-image: ghcr.1ms.run/hassio-addons/sqlite-web
+image: ghcr.nju.edu.cn/hassio-addons/sqlite-web

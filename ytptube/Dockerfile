@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM ghcr.1ms.run/arabcoders/ytptube
+FROM ghcr.nju.edu.cn/arabcoders/ytptube
 
 USER root
 RUN apt-get update && apt-get install -y --no-install-recommends jq nginx gettext-base

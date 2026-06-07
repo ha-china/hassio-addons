@@ -65,7 +65,7 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment: {}
-image: ghcr.1ms.run/alexbelgium/seerr-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/seerr-{arch}
 ingress: true
 ingress_stream: true
 init: false

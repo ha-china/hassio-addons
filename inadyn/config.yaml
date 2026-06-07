@@ -67,7 +67,7 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 host_network: true
-image: ghcr.1ms.run/alexbelgium/inadyn-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/inadyn-{arch}
 map:
   - ssl
 name: Inadyn

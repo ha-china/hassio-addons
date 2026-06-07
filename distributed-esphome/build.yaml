@@ -6,7 +6,7 @@
 # Bug #8: Supervisor emits a "build.yaml is deprecated, move params into the
 # Dockerfile directly" WARNING on every addon-validation pass. We tried
 # removing this file in dev.12 — that made Supervisor fall back to its own
-# default base (ghcr.1ms.run/home-assistant/<arch>-base, which is Alpine/musl),
+# default base (ghcr.nju.edu.cn/home-assistant/<arch>-base, which is Alpine/musl),
 # and the build immediately failed because our Dockerfile uses `apt-get`
 # (Debian/glibc) for gcc/libffi/libssl/git, which PlatformIO needs at
 # runtime for its toolchains. Alpine-compatible fixes would mean either
@@ -20,7 +20,7 @@
 # Confirmed on current Supervisor (2026-04 hass-4) by adding
 # ``@sha256:…`` to both ``build_from`` entries and pushing — Supervisor
 # SILENTLY rejected the build.yaml (didn't surface an "invalid
-# schema" error), fell back to its default ``ghcr.1ms.run/home-assistant/
+# schema" error), fell back to its default ``ghcr.nju.edu.cn/home-assistant/
 # <arch>-base`` (Alpine/musl), and the build then failed on the
 # Dockerfile's ``apt-get install`` step (Alpine has no apt). Because
 # the rejection is silent, the symptom is "Alpine fallback" rather

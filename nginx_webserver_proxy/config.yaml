@@ -31,4 +31,4 @@ schema:
   static_site_root: str
   static_site_prefix: str
   log_level: list(info|debug|warn|error)
-image: "ghcr.1ms.run/alexbelgium/nginx_webserver_proxy-{arch}"
+image: "ghcr.nju.edu.cn/alexbelgium/nginx_webserver_proxy-{arch}"

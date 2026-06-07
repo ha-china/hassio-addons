@@ -2,7 +2,7 @@
 name: Komodo
 version: 0.1.2
 slug: komodo
-image: ghcr.1ms.run/faserf/hassio-addons-komodo-{arch}
+image: ghcr.nju.edu.cn/faserf/hassio-addons-komodo-{arch}
 description: '[老王杂谈说]：在多台服务器上构建和部署软件的工具'
 url: https://gh-proxy.org/github.com/moghtech/komodo
 arch:

@@ -24,4 +24,4 @@ schema:
   ssl: bool
   certfile: str
   keyfile: str
-image: ghcr.1ms.run/hassio-addons/tasmoadmin/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/tasmoadmin/{arch}

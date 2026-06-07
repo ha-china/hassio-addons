@@ -31,4 +31,4 @@ ports:
 ingress: true
 ingress_port: 8280
 panel_icon: mdi:rss
-image: ghcr.1ms.run/faserf/hassio-addons-tt-rss-{arch}
+image: ghcr.nju.edu.cn/faserf/hassio-addons-tt-rss-{arch}

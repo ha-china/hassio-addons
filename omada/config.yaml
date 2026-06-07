@@ -70,7 +70,7 @@ environment:
   SSL_CERT_NAME: fullchain.pem
   SSL_KEY_NAME: privkey.pem
   TZ: Etc/UTC
-image: ghcr.1ms.run/alexbelgium/omada-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/omada-{arch}
 map:
   - addon_config:rw
   - ssl:ro

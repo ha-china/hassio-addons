@@ -65,7 +65,7 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
-image: ghcr.1ms.run/alexbelgium/cloudcommander-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/cloudcommander-{arch}
 ingress: true
 ingress_stream: true
 map:

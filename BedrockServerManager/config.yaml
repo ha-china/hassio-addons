@@ -8,7 +8,7 @@ arch:
   - amd64
   - aarch64
 url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
-image: "ghcr.1ms.run/dmedina559/bedrock-server-manager"
+image: "ghcr.nju.edu.cn/dmedina559/bedrock-server-manager"
 ports:
   11325/tcp: 11325
   19132/udp: 19132

@@ -71,7 +71,7 @@ devices:
 environment:
   data_location: /config/database
 host_network: true
-image: ghcr.1ms.run/alexbelgium/emby_stable-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/emby_stable-{arch}
 ingress: true
 ingress_port: 0
 ingress_stream: true

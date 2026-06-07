@@ -38,4 +38,4 @@ panel_title: ESPHome Builder
 version: 2026.5.3
 slug: esphome
 description: '[老王杂谈说]：使用 ESPHome 构建你的智能家居设备，无需编程经验'
-image: ghcr.1ms.run/esphome/esphome-hassio
+image: ghcr.nju.edu.cn/esphome/esphome-hassio

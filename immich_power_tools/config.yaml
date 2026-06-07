@@ -3,7 +3,7 @@ arch:
   - amd64
 description: '[老王杂谈说]：null'
 hassio_api: true
-image: ghcr.1ms.run/alexbelgium/immich_power_tools-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/immich_power_tools-{arch}
 init: false
 map:
   - addon_config:rw

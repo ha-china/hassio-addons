@@ -14,4 +14,4 @@ map:
   - media:rw
 ports:
   7878/tcp: 7878
-image: ghcr.1ms.run/hassio-addons/radarr
+image: ghcr.nju.edu.cn/hassio-addons/radarr

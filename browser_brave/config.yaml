@@ -22,7 +22,7 @@ environment:
   START_DOCKER: "false"
   TITLE: Brave browser
   shm_size: 1gb
-image: ghcr.1ms.run/alexbelgium/brave-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/brave-{arch}
 ingress: true
 init: false
 map:

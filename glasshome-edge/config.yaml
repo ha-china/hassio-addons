@@ -24,4 +24,4 @@ options:
   log_level: info
 schema:
   log_level: list(debug|info|warning|error)
-image: "ghcr.1ms.run/glasshome/dash"
+image: "ghcr.nju.edu.cn/glasshome/dash"

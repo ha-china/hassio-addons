@@ -51,4 +51,4 @@ options:
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
   claim_code: str
-image: ghcr.1ms.run/hassio-addons/plex
+image: ghcr.nju.edu.cn/hassio-addons/plex

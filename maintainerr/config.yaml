@@ -67,7 +67,7 @@ devices:
 environment:
   DATA_DIR: "/config"
   DEFAULT_PRODUCTION_DATA_DIR: "/config"
-image: ghcr.1ms.run/alexbelgium/maintainerr-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/maintainerr-{arch}
 init: false
 panel_icon: mdi:movie-search
 map:

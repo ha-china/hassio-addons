@@ -4,7 +4,7 @@ arch:
 description: "[老王杂谈说]：集中式网络可见性和持续资产发现。"
 hassio_api: true
 host_network: true
-image: ghcr.1ms.run/alexbelgium/netalertx-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/netalertx-{arch}
 ingress: true
 ingress_entry: devices.php
 ingress_port: 20211

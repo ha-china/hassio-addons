@@ -1,6 +1,6 @@
-ARG BUILD_FROM=ghcr.1ms.run/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
 ARG WIKIJS_VERSION=2.5.312
-FROM ghcr.1ms.run/requarks/wiki:${WIKIJS_VERSION} AS wiki_release
+FROM ghcr.nju.edu.cn/requarks/wiki:${WIKIJS_VERSION} AS wiki_release
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}

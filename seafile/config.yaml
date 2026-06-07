@@ -68,7 +68,7 @@ environment:
   NOSWAG: "1"
   PGID: "1000"
   PUID: "1000"
-image: ghcr.1ms.run/alexbelgium/seafile-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/seafile-{arch}
 map:
   - config:rw
   - share:rw

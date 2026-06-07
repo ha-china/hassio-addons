@@ -30,7 +30,7 @@ ENV LANG=C.UTF-8 \
     PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium
 
 # ── uv (Astral) ─────────────────────────────────────────────────────
-COPY --from=ghcr.1ms.run/astral-sh/uv:latest /uv /usr/local/bin/uv
+COPY --from=ghcr.nju.edu.cn/astral-sh/uv:latest /uv /usr/local/bin/uv
 ENV UV_LINK_MODE=copy
 
 # ── Node.js 22 ──────────────────────────────────────────────────────

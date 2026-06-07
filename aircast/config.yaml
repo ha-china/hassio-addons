@@ -23,4 +23,4 @@ schema:
   latency_rtp: int
   latency_http: int
   drift: bool
-image: ghcr.1ms.run/hassio-addons/aircast
+image: ghcr.nju.edu.cn/hassio-addons/aircast

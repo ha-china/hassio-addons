@@ -16,4 +16,4 @@ options:
   log_level: info
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)
-image: ghcr.1ms.run/erik73/influxdb3-explorer/{arch}
+image: ghcr.nju.edu.cn/erik73/influxdb3-explorer/{arch}

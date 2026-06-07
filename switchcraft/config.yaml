@@ -7,7 +7,7 @@ url: https://gh-proxy.org/github.com/FaserF/SwitchCraft
 arch:
   - aarch64
   - amd64
-image: ghcr.1ms.run/faserf/hassio-addons-switchcraft-{arch}
+image: ghcr.nju.edu.cn/faserf/hassio-addons-switchcraft-{arch}
 ingress: true
 ingress_entry: "/"
 ingress_port: 8080

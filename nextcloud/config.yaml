@@ -82,7 +82,7 @@ environment:
   SKIP_DATA_DIRECTORY_PERMISSION_CHECK: "yes"
   TRUSTED_PROXIES: "**"
 hassio_api: true
-image: ghcr.1ms.run/alexbelgium/nextcloud_ocr-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/nextcloud_ocr-{arch}
 ingress_port: 0
 init: false
 map:

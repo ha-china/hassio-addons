@@ -8,7 +8,7 @@ arch:
   - amd64
   - aarch64
 url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
-ports:
+ports:ghcr.nju.edu.cn
   51820/udp: "51820"
   51821/tcp: "51821"
 ports_description:

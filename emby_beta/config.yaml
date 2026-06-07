@@ -71,7 +71,7 @@ devices:
 environment:
   data_location: /share/emby
 host_network: true
-image: ghcr.1ms.run/alexbelgium/emby-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/emby-{arch}
 ingress: true
 ingress_port: 0
 ingress_stream: true

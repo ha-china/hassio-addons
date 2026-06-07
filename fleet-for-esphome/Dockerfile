@@ -1,7 +1,7 @@
 # Bug #8: keep this default aligned with ``ha-addon/build.yaml``.
 # Supervisor flags ``build.yaml`` as deprecated, but we still need it —
 # without it Supervisor falls back to its own arch-default base
-# (``ghcr.1ms.run/home-assistant/<arch>-base``, Alpine/musl), which breaks
+# (``ghcr.nju.edu.cn/home-assistant/<arch>-base``, Alpine/musl), which breaks
 # the ``apt-get install`` step below and every sdist dep that ESPHome
 # pulls in at runtime. The per-arch ``build_from`` map in build.yaml
 # is identical for aarch64 and amd64
@@ -53,7 +53,7 @@ LABEL \
     io.hass.version="${BUILD_VERSION}"
 
 # PR #80 review: loud failure when Supervisor's ``build_from`` regex
-# silently falls back to ``ghcr.1ms.run/home-assistant/<arch>-base`` (Alpine/
+# silently falls back to ``ghcr.nju.edu.cn/home-assistant/<arch>-base`` (Alpine/
 # musl). The existing ``apt-get install`` already fails in that case —
 # but only because apt happens to be absent on Alpine. If the Dockerfile
 # ever grows a distro-portable shim ("apt-get || apk add …"), the

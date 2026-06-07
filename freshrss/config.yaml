@@ -27,4 +27,4 @@ schema:
   certfile: str
   keyfile: str
   base_url: str
-image: ghcr.1ms.run/einschmidt/freshrss
+image: ghcr.nju.edu.cn/einschmidt/freshrss

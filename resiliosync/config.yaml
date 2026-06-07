@@ -65,7 +65,7 @@ devices:
   - /dev/nvme0
   - /dev/nvme1
   - /dev/nvme2
-image: ghcr.1ms.run/alexbelgium/resiliosync-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/resiliosync-{arch}
 ingress: true
 init: false
 map:

@@ -26,6 +26,6 @@
   "version": "v0.103.0",
   "ingress": true,
   "ingress_port": 8080,
-  "image": "ghcr.1ms.run/triliumnext/trilium",
+  "image": "ghcr.nju.edu.cn/triliumnext/trilium",
   "webui": "[PROTO:ssl]://[HOST]:[PORT:8080]"
 }

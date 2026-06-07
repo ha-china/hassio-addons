@@ -6,7 +6,7 @@ description: '[老王杂谈说]：simao-silva/noip-renewer for homeassistant 插
 url: "https://gh-proxy.org/github.com/habuild/hassio-addons/tree/main/noip-renewer"
 stage: experimental
 init: false
-image: "ghcr.1ms.run/habuild/{arch}-addon-noip-renewer"
+image: "ghcr.nju.edu.cn/habuild/{arch}-addon-noip-renewer"
 hassio_api: true
 homeassistant_api: true
 arch:

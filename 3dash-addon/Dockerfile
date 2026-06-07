@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.1ms.run/home-assistant/amd64-base:3.20
+ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/amd64-base:3.20
 
 # Stage 1: Build the SPA
 FROM node:20-alpine AS builder

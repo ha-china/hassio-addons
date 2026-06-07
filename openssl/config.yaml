@@ -7,7 +7,7 @@ url: https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/openssl
 arch:
   - aarch64
   - amd64
-image: ghcr.1ms.run/faserf/hassio-addons-openssl-{arch}
+image: ghcr.nju.edu.cn/faserf/hassio-addons-openssl-{arch}
 map:
   - ssl:rw
 init: false

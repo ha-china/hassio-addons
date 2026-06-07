@@ -36,4 +36,4 @@ schema:
   envvars:
     - name: str
       value: str
-image: ghcr.1ms.run/hassio-addons/bookstack/{arch}
+image: ghcr.nju.edu.cn/hassio-addons/bookstack/{arch}

@@ -17,7 +17,7 @@
   "panel_icon": "mdi:chart-line",
   "stage": "experimental",
   "docker_api": true,
-  "image": "ghcr.1ms.run/poeschl-homeassistant-addons/container-stats-{arch}",
+  "image": "ghcr.nju.edu.cn/poeschl-homeassistant-addons/container-stats-{arch}",
   "ports": {
     "8080/tcp": null
   },

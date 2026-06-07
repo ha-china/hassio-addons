@@ -67,7 +67,7 @@ devices:
 environment:
   FG_PLUGINS: ""
   FG_WEBUI_PASSWD: homeassistant123
-image: ghcr.1ms.run/alexbelgium/flexget-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/flexget-{arch}
 init: false
 map:
   - share:rw

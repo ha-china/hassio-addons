@@ -1,5 +1,5 @@
 ARG BUILD_FROM
-FROM ghcr.1ms.run/jdeath/checkroyalcaribbeanprice
+FROM ghcr.nju.edu.cn/jdeath/checkroyalcaribbeanprice
 
 ENV PYTHONUNBUFFERED=1
 WORKDIR /app

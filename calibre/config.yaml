@@ -72,7 +72,7 @@ environment:
   PUID: "0"
   START_DOCKER: "false"
   shm_size: 1gb
-image: ghcr.1ms.run/alexbelgium/calibre-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/calibre-{arch}
 ingress: true
 init: false
 map:

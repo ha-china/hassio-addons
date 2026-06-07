@@ -10,7 +10,7 @@ map:
   - addon_config:rw
 environment:
   PORT: "3000"
-image: ghcr.1ms.run/alexbelgium/social_to_mealie-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/social_to_mealie-{arch}
 init: false
 ports:
   3000/tcp: 3000

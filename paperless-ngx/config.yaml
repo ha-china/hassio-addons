@@ -41,4 +41,4 @@ schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)
   reset_database: bool?
   reset_database_confirm: bool?
-image: ghcr.1ms.run/faserf/hassio-addons-paperless-ngx-{arch}
+image: ghcr.nju.edu.cn/faserf/hassio-addons-paperless-ngx-{arch}

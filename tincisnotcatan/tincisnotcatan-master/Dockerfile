@@ -1,4 +1,4 @@
-FROM ghcr.1ms.run/hassio-addons/base
+FROM ghcr.nju.edu.cn/hassio-addons/base
 
 RUN mkdir /data
 WORKDIR /data

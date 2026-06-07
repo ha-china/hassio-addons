@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.1ms.run/home-assistant/base:3.22
+ARG BUILD_FROM=ghcr.nju.edu.cn/home-assistant/base:3.22
 FROM ${BUILD_FROM}
 
 # Set shell

@@ -7,7 +7,7 @@ url: https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/nginx
 arch:
   - aarch64
   - amd64
-image: ghcr.1ms.run/faserf/hassio-addons-nginx-{arch}
+image: ghcr.nju.edu.cn/faserf/hassio-addons-nginx-{arch}
 # webui: http://[HOST]:[PORT:80]
 map:
   - ssl:rw

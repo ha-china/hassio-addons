@@ -2,7 +2,7 @@
 name: Wiki.JS
 version: 3.4.2
 slug: wiki.js
-image: ghcr.1ms.run/faserf/hassio-addons-wiki.js-{arch}
+image: ghcr.nju.edu.cn/faserf/hassio-addons-wiki.js-{arch}
 description: '[老王杂谈说]：最强大且可扩展的开源 Wiki 软件'
 url: https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/wiki.js
 arch:

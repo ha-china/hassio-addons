@@ -33,4 +33,4 @@ schema:
   certfile: str
   keyfile: str
   db_path: str?
-image: ghcr.1ms.run/einschmidt/yarr
+image: ghcr.nju.edu.cn/einschmidt/yarr

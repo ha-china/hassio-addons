@@ -91,4 +91,4 @@ schema:
     ssl: bool
   taildrop: bool
   userspace_networking: bool
-image: ghcr.1ms.run/hassio-addons/tailscale
+image: ghcr.nju.edu.cn/hassio-addons/tailscale

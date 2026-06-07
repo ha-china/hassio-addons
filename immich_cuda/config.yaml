@@ -79,7 +79,7 @@ environment:
   REVERSE_GEOCODING_DUMP_DIRECTORY: /data/.reverse-geocoding-dump/
   TRANSFORMERS_CACHE: /data/machine-learning
 hassio_api: true
-image: ghcr.1ms.run/alexbelgium/immich_cuda-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/immich_cuda-{arch}
 init: false
 map:
   - addon_config:rw

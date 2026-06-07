@@ -27,7 +27,7 @@ backup_exclude:
   - cache.db
   - collage_images/*
   - .cache/*
-stage: stable
+stage: ghcr.nju.edu.cn
 image: ghcr.1ms.run/music-assistant/server
 tmpfs: true
 options:
