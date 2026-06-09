@@ -72,7 +72,7 @@ environment:
   FB_BASEURL: /filebrowser_quantum
   FILEBROWSER_CONFIG: "/config/config.yaml"
   FILEBROWSER_DATABASE: "/config/database.db"
-  PGID:ghcr.nju.edu.cn
+  PGID:
   PUID: "0"
 image: ghcr.1ms.run/alexbelgium/filebrowser_quantum-{arch}
 ingress: true

@@ -68,7 +68,7 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment:
-  PGID:ghcr.nju.edu.cn
+  PGID:
   PUID: "0"
   TZ: Europe/Paris
 image: ghcr.1ms.run/alexbelgium/ente-{arch}
