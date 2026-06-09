@@ -1,5 +1,5 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
-ARG WIKIJS_VERSION=2.5.312
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.1.1
+ARG WIKIJS_VERSION=2.5.314
 FROM ghcr.nju.edu.cn/requarks/wiki:${WIKIJS_VERSION} AS wiki_release
 
 # hadolint ignore=DL3006
@@ -17,7 +17,12 @@ ENV APP_NAME="Wiki.JS"
 ENV APP_SLUG="wiki.js"
 ENV APP_UNSUPPORTED="false"
 
-RUN apk add --no-cache -u libssl3 libcrypto3 nodejs npm yarn wget dos2unix mariadb-client git openssh-client pandoc libc6-compat
+RUN \
+    echo "https://dl-cdn.alpinelinux.org/alpine/v3.23/main" > /etc/apk/repositories \
+    && echo "https://dl-cdn.alpinelinux.org/alpine/v3.23/community" >> /etc/apk/repositories \
+    && apk add --no-cache musl musl-dev \
+    && apk upgrade --no-cache --available \
+    && apk add --no-cache libssl3 libcrypto3 nodejs npm yarn wget dos2unix mariadb-client git openssh-client pandoc libc6-compat
 
 WORKDIR /wiki
 COPY --from=wiki_release /wiki .
@@ -26,6 +31,9 @@ COPY --from=wiki_release /wiki .
 RUN WIKIJS_VERSION=$(node -p "require('./package.json').version" 2>/dev/null || echo "unknown") && \
     echo "WIKIJS_VERSION=${WIKIJS_VERSION}" >> /etc/environment && \
     rm -f /wiki/config.sample.yml
+
+# Copy rootfs
+COPY rootfs /
 
 COPY run.sh /
 RUN chmod a+x /run.sh \

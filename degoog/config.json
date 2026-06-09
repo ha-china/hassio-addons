@@ -1,0 +1,34 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：null",
+  "environment": {
+    "DEGOOG_DATA_DIR": "/config/",
+    "PUID": "0",
+    "PGID": "0"
+  },
+  "map": [
+    "addon_config:rw"
+  ],
+  "version": "0.20.0",
+  "name": "degoog",
+  "options": {},
+  "ports": {
+    "4445/tcp": "4445"
+  },
+  "ports_description": {
+    "4445/tcp": "Web interface (direct, without ingress)"
+  },
+  "schema": {},
+  "slug": "degoog",
+  "startup": "services",
+  "upstream": "latest",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:4445]",
+  "panel_admin": false,
+  "ingress": true,
+  "ingress_port": 4444
+}

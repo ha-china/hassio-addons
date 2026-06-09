@@ -1,5 +1,10 @@
 # TOMMY
 
+## 5.4.0
+
+### Major Changes
+- Added an option to switch between the in-built and external antenna when using the Seeed Studio XIAO ESP32C6
+
 ## 5.3.0
 
 ### Major Changes

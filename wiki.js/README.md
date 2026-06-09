@@ -1,6 +1,6 @@
 # Wiki.JS
 
-![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/wiki.js/logo.png)
+![Wiki.JS 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/wiki.js/logo.png) width="100" alt="Logo" />
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_wiki.js)
 [![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
@@ -17,13 +17,13 @@
 
 首次启动时，您将看到一个管理员设置向导。向导将引导您完成 Wiki 连接的初始配置以及管理员账户的创建。
 
-在此过程中，请创建您自己的 **管理员账户**（邮箱 / 密码）。
+在此过程中，请创建您的 **管理员账户**（电子邮件 / 密码）。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant App 页面中的 **配置** 选项卡配置此应用。
+通过 Home Assistant 应用页面中的 **配置** 选项卡配置此应用。
 
 ### 选项
 
@@ -38,9 +38,9 @@ ssl: true
 
 ---
 
-## 👨‍💻 致谢与许可证
+## 👨‍💻 致谢与许可
 
-此项目是开源的，并遵循 MIT 许可证。
+此项目是开源的，并遵循 MIT 许可协议。
 由 **FaserF** 维护。
 ---
 
