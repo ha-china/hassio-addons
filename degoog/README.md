@@ -1,10 +1,10 @@
 # Home Assistant 插件：degoog
 
-一个搜索聚合器，可以查询多个搜索引擎并在一个地方显示结果。您可以添加自定义搜索引擎、Bang-命令插件、槽位插件（在结果上方/下方或侧边栏中触发的查询面板）以及传输（如 curl、FlareSolverr 或您自己的自定义 HTTP 获取策略）。梦想是最终拥有一个用户制作的插件/引擎市场。
+一个搜索聚合器，可以查询多个搜索引擎并在一个地方显示结果。您可以添加自定义搜索引擎、Bang-命令插件、槽位插件（在结果上方/下方或侧边栏中触发的查询面板）以及传输（如curl、FlareSolverr或您自己的自定义HTTP获取策略）。梦想是最终拥有一个用户制作的插件/引擎市场。
 
-_感谢所有为我点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
 
-[![点赞 @jdeath/homeassistant-addons 仓库的用户名单](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
@@ -15,19 +15,19 @@ _感谢所有为我点赞的人！要点赞，请点击下面的图片，然后�
 此插件的安装非常简单，与安装任何其他Hass.io插件没有区别。
 
 1. 将我的Hass.io插件仓库[repository]添加到您的Hass.io实例中。
-1. 点击`保存`按钮以存储您的配置。
+1. 点击“保存”按钮以存储您的配置。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切顺利。
-1. 打开WebUI——可通过Home Assistant入口（侧面板）或`<your-ip>:4444`访问。
+1. 打开WebUI——可通过Home Assistant入口（侧面板）或`<your-ip>:4445`访问。
 
 ## 配置
-在 \addon_configs\2effc9b9_degoog\ 中的数据文件。
+在 \addon_configs\2effc9b9_degoog\ 中的数据文件
 
 ```
-port : 8080 #您希望运行的端口。
+port : 4445 #您想要运行的端口。不能是4444
 ```
 
-WebUI可以在 `<your-ip>:port` 找到。
+WebUI可以在`<your-ip>:port`找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---

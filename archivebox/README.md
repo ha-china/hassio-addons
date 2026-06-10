@@ -1,14 +1,14 @@
 # Home Assistant 插件：ArchiveBox
 
-**ArchiveBox 是一个强大、自托管的互联网存档解决方案，用于收集、保存和查看您希望离线保留的网站。**
+**ArchiveBox 是一个强大、自托管的互联网存档解决方案，用于收集、保存和查看您希望离线保存的网站。**
 
-**您可以逐个输入 URL，或者安排定期导入**来自浏览器书签或历史记录、RSS 源、Pocket/Pinboard 等书签服务以及其他更多内容。请参阅 <a href="#input-formats">输入格式</a> 获取完整列表。
+**您可以逐个添加 URL，或者定期从浏览器书签或历史记录、RSS 源、Pocket/Pinboard 等书签服务导入。有关完整列表，请参阅 <a href="#input-formats">输入格式</a>。**
 
-**它以多种格式保存您输入的 URL 的快照：** HTML、PDF、PNG 屏幕截图、WARC 等，开箱即用，自动提取和保存各种内容（文章文本、音频/视频、Git 仓库等）。请参阅 <a href="#output-formats">输出格式</a> 获取完整列表。
+**它以多种格式保存您提供的 URL 的快照：HTML、PDF、PNG 屏幕截图、WARC 等，开箱即用，自动提取和保存大量内容（文章文本、音频/视频、Git 仓库等）。有关完整列表，请参阅 <a href="#output-formats">输出格式</a>。**
 
-目标是安心入睡，知道您关心的互联网部分将在下线后自动以耐用且易于访问的格式 [保留数十年](#background--motivation)。
+目标是安心入睡，知道您关心的互联网部分将在它下线后自动以耐用、易于访问的格式 [保存数十年](#background--motivation)。
 
-_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
+_感谢每一位为我的仓库点星！要为它点星，请点击下面的图片，然后它将出现在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
@@ -21,21 +21,19 @@ _感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，�
 
 此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. [将我的 Hass.io 插件仓库][repository] 添加到您的 Hass.io 实例。
+1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例。
 1. 安装此插件。
 
-
 ## 配置
-1. 使用 ssh 登录 homeassistant
+1. 通过 ssh 登录 homeassistant
 1. 输入 "docker ps" 以找到 archivebox 容器的 ID
 1. 输入 "docker exec -it CONTAINERID /bin/bash"
 1. 输入 "su archivebox"
 1. 输入 "cd /config/"
 1. 输入 "archivebox manage createsuperuser" 并输入信息
-1. 输入 "archivebox config --set SAVE_ARCHIVE_DOT_ORG=False" 以设置在此处发现的任何额外配置：https://github.com/ArchiveBox/ArchiveBox/wiki/Configuration
-1. 访问 http://localhomeassistantip:8000/ 以使用 WebUI。Ingress 目前不工作
-1. 使用书签let 或浏览器扩展将链接（或所有活动）发送到 archivebox
-
+1. 输入 "archivebox config --set SAVE_ARCHIVE_DOT_ORG=False" 以设置任何在此处找到的额外配置：https://github.com/ArchiveBox/ArchiveBox/wiki/Configuration
+1. 访问 http://localhomeassistantip:8000/ 以使用 WebUI。Ingress 不可用
+1. 使用 bookmarklet 或浏览器扩展将链接（或所有活动）发送到 archivebox
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---

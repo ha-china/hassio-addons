@@ -1,66 +1,64 @@
-# Home assistant add-on: ytptube
+# Home Assistant 插件：ytptube
 
-Web GUI for yt-dlp with playlist & channel support (https://github.com/arabcoders/ytptube).
+yt-dlp 的 Web 界面，支持播放列表和频道（https://github.com/arabcoders/ytptube）。
 
-
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢每一位为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
-## About
+## 关于
 
-This addon is based on the [docker image](https://github.com/arabcoders/ytptube).
+此插件基于 [docker 镜像](https://github.com/arabcoders/ytptube)。
 
-# YTPTube Features.
+# YTPTube 功能。
 
-* Multi-downloads support.
-* Random beautiful background. `can be disabled or source changed`.
-* Can handle live streams.
-* Scheduler to queue channels or playlists to be downloaded automatically at a specified time.
-* Send notification to targets based on selected events. 
-* Support per link `cli options` & `cookies`.
-* Queue multiple URLs separated by comma.
-* Presets system to re-use frequently used yt-dlp options.
-* Simple file browser. `Disabled by default`.
-* A built in video player **with support for sidecar external subtitles**.
-* New `POST /api/history` endpoint that allow one or multiple links to be sent at the same time.
-* New `GET /api/history/add?url=http://..` endpoint that allow to add single item via GET request.
-* Modern frontend UI.
-* SQLite as database backend.
-* Basic authentication support.
-* Support for curl_cffi, see [yt-dlp documentation](https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#impersonation)
-* Support basic mode for WebUI for non-technical users, which hides most of the normal features from view.
-* Bundled tools in container: curl-cffi, ffmpeg, ffprobe, aria2, rtmpdump, mkvtoolsnix, mp4box.
-* Automatic upcoming live stream re-queue.
-* Apply `yt-dlp` options per custom defined conditions.
-* Custom browser extensions, bookmarklets and iOS shortcuts to send links to YTPTube instance.
+* 支持多下载。
+* 随机美丽的背景。`可以禁用或更改源`。
+* 可以处理直播流。
+* 调度器可以自动在指定时间下载频道或播放列表。
+* 根据所选事件向目标发送通知。
+* 支持“每个链接”的 `cli 选项` 和 `cookies`。
+* 使用逗号分隔的多个 URL 排队。
+* 预设系统可重复使用常用的 yt-dlp 选项。
+* 简单的文件浏览器。`默认禁用`。
+* 内置视频播放器 **支持侧载外部字幕**。
+* 新增 `POST /api/history` 端点，允许同时发送一个或多个链接。
+* 新增 `GET /api/history/add?url=http://..` 端点，允许通过 GET 请求添加单个项目。
+* 现代前端 UI。
+* SQLite 作为数据库后端。
+* 基本身份验证支持。
+* 支持 curl_cffi，请参阅 [yt-dlp 文档](https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#impersonation)。
+* 支持基本模式 WebUI，面向非技术用户，隐藏了大部分正常功能。
+* 容器中捆绑工具：curl-cffi、ffmpeg、ffprobe、aria2、rtmpdump、mkvtoolsnix、mp4box。
+* 自动重新排队即将到来的直播流。
+* 根据自定义条件应用 `yt-dlp` 选项。
+* 自定义浏览器扩展、书签和 iOS 快捷方式，以将链接发送到 YTPTube 实例。
 
-## Installation
+## 安装
 
-The installation of this add-on has a few extra steps.
+安装此插件有一些额外的步骤。
 
-1. [Add my Hass.io add-ons repository][repository] to your Hass.io instance.
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Download directory defaults to /share/ytptube, can be changed to anything in share
-1. Start the add-on. It will fail
-1. ssh into home assistant and type `chown hassio /addon_configs/2effc9b9_ytptube`
-1. Start the add-on. It will fail
-1. ssh again into home assistant and type `chown hassio /share/ytptube` or the download directory if you changed it
-1. Start the add-on
-1. Check the logs of the add-on to see if everything went well.
-1. Open WebUI via <your-ip>:port. Ingress does not work
-1. Click "Rebuild" will pull in the latest yt-dlp, even if YTPTube does not have an update.
-## Configuration
+1. [将我的 Hass.io 插件仓库][repository] 添加到您的 Hass.io 实例。
+1. 安装此插件。
+1. 点击 `保存` 按钮以存储您的配置。
+1. 下载目录默认为 /share/ytptube，可以在 share 中更改。
+1. 启动插件。它将失败
+1. 通过 ssh 登录 home assistant 并输入 `chown hassio /addon_configs/2effc9b9_ytptube`
+1. 再次通过 ssh 登录 home assistant 并输入 `chown hassio /share/ytptube` 或您更改的下载目录
+1. 启动插件
+1. 检查插件的日志以查看是否一切顺利。
+1. 通过 <your-ip>:port 打开 WebUI。入口不起作用
+1. 点击 "重建" 将拉取最新的 yt-dlp，即使 YTPTube 没有更新。
+
+## 配置
 
 ```
-port : 8081 #port you want to run on.
+port : 8081 #您想要运行的端口。
 ```
 
-Webui can be found at `<your-ip>:port`.
+Webui 可以在 `<your-ip>:port` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
-
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

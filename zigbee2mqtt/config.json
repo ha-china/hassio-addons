@@ -1,8 +1,8 @@
 {
   "name": "Zigbee2MQTT",
-  "version": "2.11.0-1",
+  "version": "2.12.0-1",
   "slug": "zigbee2mqtt",
-  "description": "[老王杂谈说]：无需厂商的网桥或网关即可使用您的 ZigBee 设备。",
+  "description": "[老王杂谈说]：无需厂商的桥接器或网关，即可使用您的 ZigBee 设备",
   "breaking_versions": [
     "2.0.0-1"
   ],

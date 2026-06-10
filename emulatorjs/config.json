@@ -4,7 +4,7 @@
     "armv7"
   ],
   "boot": "auto",
-  "description": "复古游戏机网络版",
+  "description": "[老王杂谈说]：RetroArch Web版",
   "environment": {
     "TZ": "America/New_York"
   },
@@ -28,7 +28,7 @@
   "startup": "services",
   "upstream": "1.0",
   "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
-  "version": "1.9.2-ls173",
+  "version": "1.9.2-ls134",
   "panel_admin": false,
   "ingress": true,
   "ingress_port": 80,

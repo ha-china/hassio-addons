@@ -1,7 +1,7 @@
 ARG BUILD_VERSION
 FROM docker.1panel.live/linuxserver/emulatorjs
 
-VOLUME [ "/share" ]
+#VOLUME [ "/share" ]
 
 USER root
 
@@ -38,4 +38,5 @@ LABEL \
     org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
     org.opencontainers.image.created=${BUILD_DATE} \
     org.opencontainers.image.revision=${BUILD_REF} \
+
     org.opencontainers.image.version=${BUILD_VERSION}
