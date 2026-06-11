@@ -14,6 +14,7 @@ from post_action import PostActionHangup
 
 if TYPE_CHECKING:
     import call
+    import menu
 
 
 class CommandCallService(TypedDict):
@@ -27,7 +28,7 @@ class CommandCallService(TypedDict):
 class CommandDial(TypedDict):
     command: Literal['dial']
     number: str
-    menu: Optional[call.MenuFromStdin]
+    menu: Optional[menu.MenuFromStdin]
     ring_timeout: Optional[str]
     sip_account: Optional[str]
     webhook_to_call_after_call_was_established: Optional[str]
@@ -37,12 +38,13 @@ class CommandDial(TypedDict):
 class CommandHangup(TypedDict):
     command: Literal['hangup']
     number: str
+    sip_code: int
 
 
 class CommandAnswer(TypedDict):
     command: Literal['answer']
     number: str
-    menu: Optional[call.MenuFromStdin]
+    menu: Optional[menu.MenuFromStdin]
     webhook_to_call: Optional[webhook.WebhookToCall]
 
 

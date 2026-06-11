@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.0-beta.1
+
+### Improvements
+
+- The temperature in your dashboard header now matches the unit you set in Home Assistant. Switch between °C and °F in Home Assistant and the header follows.
+
+### Security
+
+- Your Home Assistant access token is no longer handed to the browser. Nothing changes in how you use the dashboard; your connection is just better protected.
+
 ## 0.10.0
 
 Stable release. Everything from the 0.10.0 betas:

@@ -4,19 +4,19 @@
 
 [![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
 
-[![通过 GitHub Sponsors 支持Frenck][github-sponsors-shield]][github-sponsors]
+[![通过 GitHub Sponsors 赞助 Frenck][github-sponsors-shield]][github-sponsors]
 
 [![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
 
-基于流程的物联网编程。
+基于流的物联网编程。
 
 ## 关于
 
-[Node-RED][nodered] 是一个编程工具，用于以新颖有趣的方式连接硬件设备、API 和在线服务。
+[Node-RED][nodered] 是一种编程工具，可以将硬件设备、API 和在线服务以新的和有趣的方式连接起来。
 
-它提供了一个基于浏览器的编辑器，使得使用调色板中的广泛节点轻松构建流程变得容易，只需一键即可将其部署到其运行时。
+它提供了一个基于浏览器的编辑器，可以轻松地将流程连接起来，使用调色板中的各种节点，只需一键即可部署到其运行时。
 
-![Node-RED 在 Home Assistant 前端][screenshot]
+![Node-RED 在 Home Assistant 前端中的截图][screenshot]
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -29,8 +29,8 @@
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v21.0.10-blue.svg
-[release]: https://github.com/hassio-addons/app-node-red/tree/v21.0.10
+[release-shield]: https://img.shields.io/badge/version-v22.0.0-blue.svg
+[release]: https://github.com/hassio-addons/app-node-red/tree/v22.0.0
 [screenshot]: https://github.com/hassio-addons/app-node-red/raw/main/images/screenshot.png
 ---
 

@@ -1,7 +1,7 @@
 name: Music Assistant (BETA)
-version: 2.9.0rc4
+version: 2.9.0rc7
 slug: music_assistant_beta
-description: '[老王杂谈说]：音乐助手服务器的 Beta 版本。'
+description: '[老王杂谈说]：null'
 url: https://music-assistant.io
 arch:
   - amd64

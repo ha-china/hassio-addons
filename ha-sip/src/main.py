@@ -2,8 +2,10 @@
 import asyncio
 import faulthandler
 import os
+import socket
 import sys
 from typing import Optional, Any
+from urllib.parse import urlparse
 
 import yaml
 
@@ -53,6 +55,20 @@ def get_name_server(raw_name_server: str):
     if name_server_without_empty:
         log(None, f'Setting name server: {name_server}')
     return name_server_without_empty
+
+
+def log_hostname_resolution(label: str, url: str) -> None:
+    if not url:
+        return
+    hostname = urlparse(url).hostname
+    if not hostname:
+        log(None, f'Error: could not extract hostname from {label}: {url}')
+        return
+    try:
+        ip = socket.gethostbyname(hostname)
+        log(None, f'{label} hostname {hostname} resolves to {ip}')
+    except socket.gaierror as e:
+        log(None, f'Error: could not resolve {label} hostname {hostname}: {e}')
 
 
 def get_cache_dir(raw_cache_dir: str) -> Optional[str]:
@@ -127,6 +143,8 @@ def main():
         'voice': config.TTS_VOICE,
         'debug_print': config.TTS_DEBUG_PRINT,
     }
+    log_hostname_resolution('HA_BASE_URL', config.HA_BASE_URL)
+    log_hostname_resolution('HA_WEBSOCKET_URL', config.HA_WEBSOCKET_URL)
     ha_config = ha.HaConfig(config.HA_BASE_URL, config.HA_WEBSOCKET_URL, config.HA_TOKEN, tts_config_from_env, config.HA_WEBHOOK_ID, cache_dir)
     if ha_config.tts_config['debug_print']:
         asyncio.run(ha.print_tts_providers(ha_config))
@@ -163,8 +181,7 @@ def main():
             )
             is_first_enabled_account = False
 
-    mqtt_mode = config.COMMAND_SOURCE.lower().strip() == 'mqtt'
-    mqtt_client = mqtt.create_client_and_connect(command_handler) if mqtt_mode else None
+    mqtt_client = mqtt.create_client_and_connect(global_options, command_handler) if global_options.enable_mqtt else None
     def trigger_webhook(event: Any, webhook_id: Optional[str] = None):
         ha.trigger_webhook(ha_config, event, webhook_id)
     def send_mqtt_event(event: Any, webhook_id: Optional[str] = None):
