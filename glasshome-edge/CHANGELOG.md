@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0-beta.2
+
+### Security
+
+- Community widgets now ask permission before touching your home. When you install a widget that uses your devices, you see exactly what it wants ("Control your lights") and approve it. The widget can only do what you approved, and if it ever tries to do more, the attempt is blocked and you get a notification.
+- Widgets can no longer send your home's data anywhere except your Home Assistant and GlassHome, and they never see your Home Assistant login. Each widget runs in its own isolated space and can't interfere with the rest of your dashboard.
+- A new help page explains, in plain language, what widgets can and cannot do: glasshome.app/docs/widget-security.
+
 ## 1.0.0-beta.1
 
 ### Improvements

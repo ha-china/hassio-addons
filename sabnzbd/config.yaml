@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：通过尽可能自动化一切，让 Usenet 尽可能简单流畅。'
+description: '[老王杂谈说]：null'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -104,5 +104,5 @@ schema:
 slug: sabnzbd
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
-version: "5.0.3"
+version: "5.0.4"
 webui: http://[HOST]:[PORT:8080]

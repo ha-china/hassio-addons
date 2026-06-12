@@ -1,0 +1,29 @@
+name: Spoolman-Ingress
+version: "0.23.1-1-ingress"
+slug: spoolman_ingress
+description: "[老王杂谈说]：null"
+arch:
+  - amd64
+  - aarch64
+  - armv7
+startup: services
+init: false
+map:
+  - addon_config:rw
+  - data:rw
+environment:
+  SPOOLMAN_HOST: "0.0.0.0"
+  SPOOLMAN_DIR_DATA: "/config"
+  SPOOLMAN_DIR_BACKUPS: "/config/backups"
+  SPOOLMAN_DIR_LOGS: "/config/logs"
+  SPOOLMAN_DIR_CACHE: "/config/cache"
+options:
+  SPOOLMAN_DEBUG_MODE: false
+schema:
+  SPOOLMAN_DEBUG_MODE: bool
+homeassistant_api: false
+hassio_api: true
+ingress: true
+ingress_port: 7912
+panel_icon: mdi:printer-3d-nozzle
+panel_title: Spoolman

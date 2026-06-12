@@ -8,11 +8,11 @@
 
 [![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
 
-网络级别的广告和追踪器阻止 DNS 服务器。
+网络级别的广告和跟踪器阻止 DNS 服务器。
 
 ## 关于
 
-AdGuard Home 是一个网络级别的广告和追踪器阻止 DNS 服务器，具备家长控制（成人内容阻止）功能。其目的是让您控制整个网络和所有设备，并且不需要使用客户端程序。
+AdGuard Home 是一个网络级别的广告和跟踪器阻止 DNS 服务器，具备家长控制（成人内容阻止）功能。它的目的是让您控制整个网络和所有设备，并且不需要使用客户端程序。
 
 AdGuard Home 提供了一个美观、易于使用且功能丰富的网页界面，可以轻松管理过滤过程及其设置。
 
@@ -28,9 +28,9 @@ AdGuard Home 提供了一个美观、易于使用且功能丰富的网页界面�
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v6.1.3-blue.svg
-[release]: https://github.com/hassio-addons/app-adguard-home/tree/v6.1.3
-[screenshot]: https://github.com/hassio-addons/app-adguard-home/raw/v6.1.3/images/screenshot.png
+[release-shield]: https://img.shields.io/badge/version-v6.2.0-blue.svg
+[release]: https://github.com/hassio-addons/app-adguard-home/tree/v6.2.0
+[screenshot]: https://github.com/hassio-addons/app-adguard-home/raw/v6.2.0/images/screenshot.png
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

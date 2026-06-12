@@ -1,8 +1,8 @@
-# Home Assistant 插件：ytptube
+# Home assistant 插件：ytptube
 
 yt-dlp 的 Web 界面，支持播放列表和频道（https://github.com/arabcoders/ytptube）。
 
-_感谢每一位为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
@@ -17,37 +17,37 @@ _感谢每一位为我仓库点赞的人！要点赞，请点击下面的图片�
 * 可以处理直播流。
 * 调度器可以自动在指定时间下载频道或播放列表。
 * 根据所选事件向目标发送通知。
-* 支持“每个链接”的 `cli 选项` 和 `cookies`。
-* 使用逗号分隔的多个 URL 排队。
-* 预设系统可重复使用常用的 yt-dlp 选项。
+* 支持每个链接的 `cli 选项` 和 `cookies`。
+* 使用逗号分隔的多个 URL。
+* 预设系统可以重复使用常用的 yt-dlp 选项。
 * 简单的文件浏览器。`默认禁用`。
 * 内置视频播放器 **支持侧载外部字幕**。
-* 新增 `POST /api/history` 端点，允许同时发送一个或多个链接。
-* 新增 `GET /api/history/add?url=http://..` 端点，允许通过 GET 请求添加单个项目。
+* 新的 `POST /api/history` 端点，允许同时发送一个或多个链接。
+* 新的 `GET /api/history/add?url=http://..` 端点，允许通过 GET 请求添加单个项目。
 * 现代前端 UI。
 * SQLite 作为数据库后端。
 * 基本身份验证支持。
-* 支持 curl_cffi，请参阅 [yt-dlp 文档](https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#impersonation)。
-* 支持基本模式 WebUI，面向非技术用户，隐藏了大部分正常功能。
+* 支持 curl_cffi，见 [yt-dlp 文档](https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#impersonation)。
+* 支持基本模式 WebUI，为非技术用户隐藏大多数正常功能。
 * 容器中捆绑工具：curl-cffi、ffmpeg、ffprobe、aria2、rtmpdump、mkvtoolsnix、mp4box。
 * 自动重新排队即将到来的直播流。
 * 根据自定义条件应用 `yt-dlp` 选项。
-* 自定义浏览器扩展、书签和 iOS 快捷方式，以将链接发送到 YTPTube 实例。
+* 自定义浏览器扩展、书签和 iOS 快捷方式，可以将链接发送到 YTPTube 实例。
 
 ## 安装
 
-安装此插件有一些额外的步骤。
+此插件的安装有几个额外步骤。
 
 1. [将我的 Hass.io 插件仓库][repository] 添加到您的 Hass.io 实例。
 1. 安装此插件。
 1. 点击 `保存` 按钮以存储您的配置。
 1. 下载目录默认为 /share/ytptube，可以在 share 中更改。
 1. 启动插件。它将失败
-1. 通过 ssh 登录 home assistant 并输入 `chown hassio /addon_configs/2effc9b9_ytptube`
-1. 再次通过 ssh 登录 home assistant 并输入 `chown hassio /share/ytptube` 或您更改的下载目录
+1. 通过 ssh 进入 home assistant 并输入 `chown hassio /addon_configs/2effc9b9_ytptube`
+1. 再次通过 ssh 进入 home assistant 并输入 `chown hassio /share/ytptube` 或您更改的下载目录
 1. 启动插件
-1. 检查插件的日志以查看是否一切顺利。
-1. 通过 <your-ip>:port 打开 WebUI。入口不起作用
+1. 检查插件的日志以查看一切是否顺利。
+1. 通过 <your-ip>:port 打开 WebUI。入口不工作
 1. 点击 "重建" 将拉取最新的 yt-dlp，即使 YTPTube 没有更新。
 
 ## 配置
@@ -56,7 +56,7 @@ _感谢每一位为我仓库点赞的人！要点赞，请点击下面的图片�
 port : 8081 #您想要运行的端口。
 ```
 
-Webui 可以在 `<your-ip>:port` 找到。
+WebUI 可以在 `<your-ip>:port` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---

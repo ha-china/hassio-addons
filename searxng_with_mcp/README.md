@@ -1,15 +1,14 @@
-# Home Assistant 插件：searxng w/ mcp
-
+# Home Assistant 扩展插件：searxng w/ mcp
 
 ## 关于
 
-[SearXNG](https://docs.searxng.org/index.html) 是一个免费的互联网元搜索引擎，可以聚合多达 247 个搜索服务的搜索结果。用户既不会被追踪也不会被建立档案。此外，SearXNG 还可以通过 Tor 进行在线匿名搜索。
+[SearXNG](https://docs.searxng.org/index.html) 是一个免费的互联网元搜索引擎，可聚合来自多达 247 个搜索服务的搜索结果。用户既不被追踪也不被建立档案。此外，SearXNG 还可以通过 Tor 用于在线匿名搜索。
 
-本 Home Assistant 插件来自 https://github.com/DDanii/HA-Add-ons-by-DDanii/tree/master/searxng
+本 Home Assistant 扩展插件来自 https://github.com/DDanii/HA-Add-ons-by-DDanii/tree/master/searxng
 
-它包括一个轻量级的 MCP 服务器，为 llama.cpp（以及任何其他 MCP 兼容客户端）提供了一个通过私有 [SearXNG](https://github.com/searxng/searxng) 实例进行网络搜索的途径。
+它包括一个轻量级的 MCP 服务器，为 llama.cpp（以及任何其他 MCP 兼容客户端）提供了一个通过私有 [SearXNG](https://github.com/searxng/searxng) 实例进行网络搜索的功能。
 
-MCP 服务器来自 https://github.com/jdeath/mcp-searxng-enhanced，用于提供快速 MCP IP 端点（使用人工智能进行了编辑）。有关 MCP 代码，请访问 `https://github.com/jdeath/mcp-searxng-enhanced`。
+MCP 服务器来自 https://github.com/jdeath/mcp-searxng-enhanced，提供了快速 MCP IP 端点（使用人工智能进行了编辑）。对于在 `https://github.com/jdeath/mcp-searxng-enhanced` 上的 MCP 代码。
 
 如果您只想使用 SearXNG，请使用 @DDanii 插件。
 
@@ -32,7 +31,7 @@ formats:
 重启插件
 
 将您的 llama.cpp MCP 服务器指向：http://IP:MCPPORT/mcp 
-将 MCP 服务器添加到 claude 代码中：`claude mcp add --transport http searxng http://IP:MCPPORT/mcp`
+将 MCP 服务器添加到 claude 代码：`claude mcp add --transport http searxng http://IP:MCPPORT/mcp`
 
 如果您安装了 @Danni Valkey 插件，您可以通过设置 settings.yml 中的 Valkey url 来连接它：
 ```
@@ -45,11 +44,11 @@ formats:
 "set_base_url_for_ingress": true
 ```
 
-如果启用 set_base_url_for_ingress，它将设置 SEARXNG_BASE_URL 环境变量，这对于入口使用是必需的，并且会覆盖 settings.yml 中的 base_url 变量
+如果启用 set_base_url_for_ingress，它将设置 SEARXNG_BASE_URL 环境变量，这对于入口使用是必需的，并覆盖了 settings.yml 中的 base_url 变量。
 
 ## 自定义
 
-在插件配置文件夹（addon_configs/2effc9b9_searxng_with_mcp）中的第一次运行后，将会有一个 custom.sh 文件，您可以在其中添加自己的命令。
+在插件配置文件夹（addon_configs/2effc9b9_searxng_with_mcp）第一次运行后，将会有一个 custom.sh 文件，您可以在其中添加自己的命令。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

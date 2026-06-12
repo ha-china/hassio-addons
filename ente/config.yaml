@@ -4,7 +4,7 @@ arch:
 backup_exclude:
   - "**/minio-data/**"
   - "**/postgres/**"
-description: '[老王杂谈说]：自托管、端到端加密的照片和视频存储（Ente server + MinIO）'
+description: '[老王杂谈说]：null'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -68,10 +68,10 @@ devices:
   - /dev/nvme1
   - /dev/nvme2
 environment:
-  PGID:
+  PGID: "0"
   PUID: "0"
   TZ: Europe/Paris
-image: ghcr.1ms.run/alexbelgium/ente-{arch}
+image: ghcr.nju.edu.cn/alexbelgium/ente-{arch}
 init: false
 map:
   - addon_config:rw
@@ -129,6 +129,6 @@ schema:
 slug: ente
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
-version: "1.7.24"
+version: "4.4.23"
 video: true
 webui: http://[HOST]:[PORT:3000]

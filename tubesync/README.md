@@ -1,25 +1,27 @@
-# Home Assistant 扩展：TubeSync
+# Home assistant 插件：TubeSync
 
-这只是个测试。不确定是否有效。
+这只是一个测试。不确定是否有效。
 
-TubeSync 是一个 YouTube 的个人视频录制器（PVR）。或者说，就像 Sonarr 但针对 YouTube（内置下载客户端）。它旨在同步频道和播放列表从 YouTube 到本地目录，并在媒体下载后更新您的媒体服务器。
+TubeSync 是一个 YouTube 的个人视频录像机（PVR）。或者，就像 Sonarr 但用于 YouTube（内置下载客户端）。它旨在同步频道和播放列表从 YouTube 到本地目录，并在媒体下载后更新您的媒体服务器。
 
-https://github.com/meeb/tubesync
+[GitHub 项目链接](https://github.com/meeb/tubesync)
 
-_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有为我的仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
+
+![点赞我的 Home Assistant 插件仓库](https://reporoster.com/stars/jdeath/homeassistant-addons)
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 
 ## 安装
 
-安装此扩展相当简单，与安装任何其他 Hass.io 扩展没有太大区别。
+此插件的安装非常简单，与安装任何其他 Hass.io 插件没有不同。
 
-1. [将我的 Hass.io 扩展仓库][repository] 添加到您的 Hass.io 实例中。
-1. 安装此扩展。
+1. [将我的 Hass.io 插件仓库添加到您的 Hass.io 实例][repository]。
+1. 安装此插件。
 1. 创建目录 /config/addon_config/tubesync 以存储您的配置。
-1. 启动扩展。
-1. 检查扩展的日志以查看是否一切顺利。
+1. 启动插件。
+1. 检查插件的日志，以查看是否一切顺利。
 1. 在 homeassistant:4848 打开 WebUI
 
 
