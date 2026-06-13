@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.0-beta.3
+
+### Fixes
+
+- Signing in with your GlassHome account now takes you to your home and your dashboards. Before, it could land you on an empty page or quietly create a second "Home".
+- Connecting your GlassHome account from Settings now works for accounts that got stuck on earlier versions, and the duplicate profile the old bug created is cleaned up automatically when you reconnect.
+- When a sign-in or account connection fails, you now see a clear message explaining what to do instead of a silent dead end or a confusing "invalid code".
+- Home Assistant admins are now admins in GlassHome too, so you can manage your home's members. Your role updates the next time you sign in.
+- Every home always has a dashboard. If yours was missing one, it comes back on your next sign-in.
+- Widgets no longer freeze when switching between dashboards.
+
 ## 1.0.0-beta.2
 
 ### Security

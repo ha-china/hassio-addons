@@ -1,8 +1,8 @@
 {
   "name": "HA Second Core",
-  "version": "2026.6.2",
+  "version": "2026.6.3",
   "slug": "second_core",
-  "description": "[老王杂谈说]：默认在 8124 端口运行第二个 Home Assistant 核心实例。",
+  "description": "[老王杂谈说]：默认在端口 8124 上运行第二个 Home Assistant Core 实例。",
   "arch": [
     "amd64",
     "aarch64"
