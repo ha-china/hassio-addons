@@ -1,16 +1,20 @@
-# ![logo](https://github.com/habuild/hassio/blob/main/noip-renewer/logo.png?raw=true)
+# ![logo](https://github.com/habuild/hassio-addons/blob/main/noip-renewer/logo.png?raw=true)
 
 simao-silva/noip-renewer 的副本
 
-使用方法
-docker run --rm --env NO_IP_USERNAME=<EMAIL> --env NO_IP_PASSWORD=<PASSWORD> --env NO_IP_TOTP_KEY=<NOIP TOTP KEY> simaofsilva/noip-renewer:<TAG>
+用法
+docker run --rm --env NO_IP_USERNAME=<用户名> --env NO_IP_PASSWORD=<密码> --env NO_IP_TOTP_KEY=<NOIP TOTP 密钥> simaofsilva/noip-renewer:<标签>
 
 ---
 
-![icon](https://github.com/habuild/hassio/blob/main/noip-renewer/icon.png?raw=true)
+![icon](https://github.com/habuild/hassio-addons/blob/main/noip-renewer/icon.png?raw=true)
+---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
 
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
 
+---
 
 ## 📱 关注我
 

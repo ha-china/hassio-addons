@@ -1,12 +1,12 @@
 ---
-name: noip-renewer --test
-version: 2025.10.7
+name: noip-renewer
+version: dev
 slug: noip-renewer
-description: '[老王杂谈说]：simao-silva/noip-renewer for homeassistant 插件'
+description: '[老王杂谈说]：simao-silva/noip-renewer（Home Assistant 附加组件）'
 url: "https://gh-proxy.org/github.com/habuild/hassio-addons/tree/main/noip-renewer"
 stage: experimental
 init: false
-image: "ghcr.nju.edu.cn/habuild/{arch}-addon-noip-renewer"
+image: "ghcr.nju.edu.cn/habuild/addon-noip-renewer"
 hassio_api: true
 homeassistant_api: true
 arch:
