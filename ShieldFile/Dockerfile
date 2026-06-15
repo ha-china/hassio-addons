@@ -1,7 +1,7 @@
 ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.1.1
 # hadolint ignore=DL3006
 # renovate: datasource=docker depName=filebrowser/filebrowser
-FROM filebrowser/filebrowser:v2.63.11 AS filebrowser
+FROM filebrowser/filebrowser:v2.63.15 AS filebrowser
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
@@ -18,7 +18,7 @@ ENV FILEBROWSER_VERSION="v2.53.1"
 # hadolint ignore=DL3018,DL4006
 
 # App metadata (injected by CI)
-ENV APP_VERSION="2.3.3"
+ENV APP_VERSION="2.3.4"
 ENV APP_NAME="ShieldFile"
 ENV APP_SLUG="shieldfile"
 ENV APP_UNSUPPORTED="false"

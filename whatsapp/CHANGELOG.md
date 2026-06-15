@@ -1,16 +1,32 @@
 # Changelog
 
+## 1.5.9 (2026-06-15)
+
+### 📦 Dependencies
+- ⬆️ Update dependency fastapi to v0.137.1 [skip-tests] (#841) ([`637a8837`](https://github.com/FaserF/hassio-addons/commit/637a88370bcc9f4db38961b3befb2502d3fdda35))
+
+
+## 1.5.8 (2026-06-15)
+
+### 📦 Dependencies
+- ⬆️ Update dependency fastapi to v0.137.0 [skip-tests] (#839) [skip-tests] ([`62b9d2a8`](https://github.com/FaserF/hassio-addons/commit/62b9d2a8b805e0b03b70997644869f8c8e8025bb))
+- ⬆️ Update eslint monorepo to v10.5.0 [skip-tests] ([`1dbd9a76`](https://github.com/FaserF/hassio-addons/commit/1dbd9a7623c43fe9d6b8b986d01b733d0dbd7b9a))
+- ⬆️ Update dependency bonjour-service to v1.4.1 [skip-tests] (#833) [skip-tests] ([`3368976d`](https://github.com/FaserF/hassio-addons/commit/3368976ddfe127e5df94c236616afd1907d029fc))
+
+
 ## 1.5.7 (2026-06-04)
 
 ### 🐛 Bug Fixes
+
 - await decryptPollVote for correct poll vote decryption #678 ([`29323fe5`](https://github.com/FaserF/hassio-addons/commit/29323fe587de65fc8a16ad9431b98edbdf16de7b))
 
 ### 📦 Dependencies
+
 - ⬆️ Update dependency uvicorn to v0.49.0 [skip-tests] ([`d7351179`](https://github.com/FaserF/hassio-addons/commit/d735117997d0bba66e96582a0b9ee93ddd2c44f4))
 
 ### 🚀 Other
-- Improved session stability #824 ([`6c9cc8a8`](https://github.com/FaserF/hassio-addons/commit/6c9cc8a8b372e91120fd1c083f29c0b0a623a54e))
 
+- Improved session stability #824 ([`6c9cc8a8`](https://github.com/FaserF/hassio-addons/commit/6c9cc8a8b372e91120fd1c083f29c0b0a623a54e))
 
 ## 1.5.6 (2026-06-02)
 
