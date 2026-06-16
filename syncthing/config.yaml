@@ -1,14 +1,11 @@
 name: Syncthing
-version: 1.19.15
+version: 2.0.0
 slug: syncthing
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：Syncthing 是一个持续文件同步程序，采用去中心化的方式。'
 url: https://gh-proxy.org/github.com/Poeschl-HomeAssistant-Addons/syncthing
 arch:
-  - armhf
-  - armv7
   - aarch64
   - amd64
-  - i386
 homeassistant: 0.115.0
 image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/syncthing-{arch}
 init: false

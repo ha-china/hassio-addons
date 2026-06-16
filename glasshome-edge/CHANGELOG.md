@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.0-beta.4
+
+### Improvements
+
+- Set a light's color with a new color wheel and brightness slider — pick any hue and shade at a glance instead of fiddling with sliders.
+- The energy widget has a cleaner, redesigned look that makes it easier to see how power flows through your home.
+- If a sign-in attempt doesn't go through, you can simply try again — failed attempts no longer leave you stuck.
+
+### Under the hood
+
+- Security and stability hardening.
+
 ## 1.0.0-beta.3
 
 ### Fixes
