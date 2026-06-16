@@ -1,0 +1,30 @@
+{
+  "name": "智能家居部署向导",
+  "version": "2026.06.14",
+  "slug": "installer",
+  "description": "【老王杂谈说】：从零到一，向导式完成全套智能家居部署 - 楼层区域/集成安装/设备管理/蓝图更新/语音设置",
+  "url": "https://www.hasscn.top",
+  "arch": ["aarch64", "amd64"],
+  "init": false,
+  "startup": "services",
+  "boot": "auto",
+  "ingress": false,
+  "map": ["config:rw", "share:rw"],
+  "hassio_api": true,
+  "homeassistant_api": true,
+  "hassio_role": "manager",
+  "image": "crpi-tuq1xajq0lk6s0kt.cn-shanghai.personal.cr.aliyuncs.com/hachina/installer-{arch}",
+  "full_access": false,
+  "apparmor": true,
+  "webui": "http://[HOST]:[PORT:7733]",
+  "ports": {
+    "7733/tcp": 7733
+  },
+  "ports_description": {
+    "7733/tcp": "部署向导Web界面"
+  },
+  "options": {},
+  "schema": {},
+  "homeassistant": "2023.1.0",
+  "timeout": 30
+}
