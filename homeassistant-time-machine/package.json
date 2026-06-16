@@ -12,7 +12,7 @@
     "dev": "node app.js"
   },
   "dependencies": {
-    "ejs": "^3.1.9",
+    "ejs": "^6.0.1",
     "express": "^4.22.2",
     "js-yaml": "^4.2.0",
     "node-cron": "^4.2.1",
