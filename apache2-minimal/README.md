@@ -4,16 +4,16 @@
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_apache2-minimal)
 [![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-3.3.3-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-apache2-minimal)
+[![Docker 镜像](https://img.shields.io/badge/docker-3.4.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-apache2-minimal)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 开源 Web 服务器，不包含 PHP 和最小化额外模块。
+> 开源 Web 服务器，无 PHP 和最小化额外模块。
 
 ---
 
 ## 📖 关于
 
-Apache HTTP 服务器的轻量级、安全版本。此插件提供了一个针对静态内容和性能优化的基础网络服务器。它排除了 PHP 和额外模块，以最小化占用空间和攻击面，非常适合简单的 HTML 网站、文档或托管资源。
+Apache HTTP 服务器的轻量级、安全版本。此插件提供了一个针对静态内容和性能优化的基础 Web 服务器。它排除了 PHP 和额外模块，以最小化占用空间和攻击面，非常适合简单的 HTML 网站、文档或托管资源。
 
 ### Apache2 变体比较
 
@@ -31,7 +31,7 @@ Apache HTTP 服务器的轻量级、安全版本。此插件提供了一个针�
 此插件支持 Home Assistant 的 **Webserver App** 集成。
 集成在插件启动时会自动安装/更新。
 
-有关更多信息以及配置细节，请参阅 [集成 README](../custom_components/webserver_app/README.md)。
+有关更多信息和管理细节，请参阅 [集成 README](../custom_components/webserver_app/README.md)。
 
 ---
 
@@ -55,7 +55,7 @@ website_name: web.local
 
 ---
 
-## 👨‍💻 致谢与许可
+## 👨‍💻 贡献者 & 许可证
 
 此项目是开源的，并受 MIT 许可证的约束。
 由 **FaserF** 维护。

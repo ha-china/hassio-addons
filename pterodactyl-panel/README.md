@@ -4,7 +4,7 @@
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_pterodactyl-panel)
 [![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-1.2.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-pterodactyl_panel)
+[![Docker 镜像](https://img.shields.io/badge/docker-1.3.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-pterodactyl_panel)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > 开源游戏服务器管理面板
@@ -18,25 +18,25 @@
 1. 在 Home Assistant 应用商店中搜索 "pterodactyl Panel Gameserver - BETA" 应用并安装。
 2. （可选）在配置选项卡中设置一个 **密码**。如果留空，将生成一个随机密码并在日志中显示。
 3. 启动应用。
-4. 初始登录凭据请参阅 [文档](DOCS.md#%F0%9F%9A%80-first-login)。
+4. 对于初始登录凭证，请参阅[文档](DOCS.md#%F0%9F%9A%80-first-login)。
 
 > [!TIP]
 > **登录信息：**
 >
 > - **邮箱地址:** `admin@example.com`
-> - **密码:** 在 `password` 字段中设置的值（或如果留空，请检查日志）
+> - **密码:** 您在 `password` 字段中设置的值（或如果留空，请检查日志）
 >
 > > 开源游戏服务器 - 目前尚未完全工作
 >
 > [!CAUTION]
 > **实验性/测试版状态**
 > 此应用仍在开发中，或主要用于个人使用。
-> 它尚未经过广泛测试，但预期基本功能正常。
+> 它尚未经过广泛测试，但预期基本功能应该可以工作。
 
 如果您在此应用中遇到任何问题，请通过以下链接报告。
-问题表单将预先填写应用信息，以帮助我们更快地解决问题。
+问题表单将预填充应用信息，以帮助我们更快地解决问题。
 
-如果您有新功能或改进的想法，请使用以下链接提交功能请求。表单将预先填写应用信息。
+如果您有新功能或改进的想法，请使用以下链接提交功能请求。表单将预填充应用信息。
 
 ---
 
@@ -57,9 +57,9 @@ ssl: false
 
 ---
 
-## 👨‍💻 信用 & 许可证
+## 👨‍💻 致谢与许可
 
-此项目是开源的，并受 MIT 许可证的约束。
+此项目是开源的，并可在 MIT 许可证下使用。
 由 **FaserF** 维护。
 ---
 

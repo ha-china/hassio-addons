@@ -1,8 +1,8 @@
 ---
 name: Switch LAN Play Server
-version: 2.3.1
+version: 2.4.0
 slug: switch-lan-play-server
-description: '[老王杂谈说]：任天堂Switch 局域网联机 -服务器'
+description: '[老王杂谈说]：任天堂 Switch Lan Play -服务器'
 url: https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/switch_lan_play_server
 arch:
   - amd64

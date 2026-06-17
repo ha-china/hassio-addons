@@ -1,7 +1,7 @@
 # Multi-stage build: Use HA debian-base for S6/Bashio, pull SAP runtime from SAP image
 # renovate: datasource=docker depName=ghcr.nju.edu.cn/hassio-addons/debian-base
 ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base:9.3.0
-# renovate: datasource=docker depName=sapse/abap-cloud-developer-trial
+# renovate: datasource=docker depName=docker.1panel.live/sapse/abap-cloud-developer-trial
 ARG SAP_IMAGE=sapse/abap-cloud-developer-trial:2023
 # hadolint ignore=DL3006
 FROM ${SAP_IMAGE} AS sap-source
@@ -21,7 +21,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # critical here as the SAP runtime is already pinned via the base image.
 
 # App metadata (injected by CI)
-ENV APP_VERSION="0.2.1"
+ENV APP_VERSION="0.3.0"
 ENV APP_NAME="SAP ABAP Cloud Developer Trial"
 ENV APP_SLUG="sap-abap-cloud-dev"
 ENV APP_UNSUPPORTED="false"

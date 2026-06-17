@@ -4,22 +4,22 @@
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_bash_script_executer)
 [![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-2.4.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-bashscriptexecuter)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.5.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-bashscriptexecuter)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 在此 Home Assistant 应用环境内执行您自己的 bash 脚本。
+> 在此 Home Assistant 应用环境内部执行您自己的 bash 脚本。
 
 ---
 
 ## 📖 关于
 
-在此 Homeassistant 应用环境内执行您自己的 bash 脚本。
+在此 Home Assistant 应用环境内部执行您自己的 bash 脚本。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 应用页面中的 **配置** 选项卡配置此应用。
+通过 Home Assistant 应用页面中的 **配置** 选项卡来配置此应用。
 
 ### 选项
 
@@ -35,9 +35,9 @@ script_path3: 'false'
 
 ---
 
-## 👨‍💻 贡献者 & 许可证
+## 👨‍💻 致谢与许可证
 
-此项目是开源的，并遵循 MIT 许可证。
+此项目为开源项目，采用 MIT 许可证。
 由 **FaserF** 维护。
 ---
 

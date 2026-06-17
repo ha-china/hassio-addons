@@ -1,18 +1,31 @@
 # Changelog
 
+## 1.6.0 (2026-06-16)
+
+### 🐛 Bug Fixes
+
+- correctly preserve @lid domains in JID normalization #678 ([`8611a874`](https://github.com/FaserF/hassio-addons/commit/8611a8744d304ddc018c5e96fe7eaaf762e4d43f))
+- resolve JID mismatch in poll vote decryption #46 ([`79f7bf39`](https://github.com/FaserF/hassio-addons/commit/79f7bf3909f0c945dba473c0f799279abbdc9c37))
+- pass seconds parameter to video and audio messages ([`eb64a83e`](https://github.com/FaserF/hassio-addons/commit/eb64a83ef32e38398d5afb310b62456060fb5daa))
+
+### 📦 Dependencies
+
+- updated dependencys for security fixes reported by dependabot ([`c5cd6570`](https://github.com/FaserF/hassio-addons/commit/c5cd6570c7f7217d19f091a4352bdfd39d7c03d9))
+- ⬆️ Update Add-on base images to v21 [skip-tests] ([`2efc4ca0`](https://github.com/FaserF/hassio-addons/commit/2efc4ca058bca977cf5667d3778a6232d45b3ab2))
+
 ## 1.5.9 (2026-06-15)
 
 ### 📦 Dependencies
-- ⬆️ Update dependency fastapi to v0.137.1 [skip-tests] (#841) ([`637a8837`](https://github.com/FaserF/hassio-addons/commit/637a88370bcc9f4db38961b3befb2502d3fdda35))
 
+- ⬆️ Update dependency fastapi to v0.137.1 [skip-tests] (#841) ([`637a8837`](https://github.com/FaserF/hassio-addons/commit/637a88370bcc9f4db38961b3befb2502d3fdda35))
 
 ## 1.5.8 (2026-06-15)
 
 ### 📦 Dependencies
+
 - ⬆️ Update dependency fastapi to v0.137.0 [skip-tests] (#839) [skip-tests] ([`62b9d2a8`](https://github.com/FaserF/hassio-addons/commit/62b9d2a8b805e0b03b70997644869f8c8e8025bb))
 - ⬆️ Update eslint monorepo to v10.5.0 [skip-tests] ([`1dbd9a76`](https://github.com/FaserF/hassio-addons/commit/1dbd9a7623c43fe9d6b8b986d01b733d0dbd7b9a))
 - ⬆️ Update dependency bonjour-service to v1.4.1 [skip-tests] (#833) [skip-tests] ([`3368976d`](https://github.com/FaserF/hassio-addons/commit/3368976ddfe127e5df94c236616afd1907d029fc))
-
 
 ## 1.5.7 (2026-06-04)
 

@@ -1,6 +1,6 @@
 ---
 name: Antigravity-Server
-version: "1.2.2"
+version: "1.3.0"
 slug: antigravity-server
 description: '[老王杂谈说]：在您的浏览器中通过 NoVNC 流式传输 Antigravity AI IDE（带有 XFCE4 的 Linux 桌面）。'
 url: https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/antigravity-server

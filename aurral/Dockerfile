@@ -1,6 +1,6 @@
 # ==============================================================
 # Home Assistant Add-on: Aurral
-# Wraps the upstream ghcr.1ms.run/lklynet/aurral image.
+# Wraps the upstream ghcr.nju.edu.cn/lklynet/aurral image.
 # ==============================================================
 ARG BUILD_FROM
 FROM ${BUILD_FROM}

@@ -1,9 +1,9 @@
 ---
 name: Imapsync
-version: 0.3.1
+version: 0.4.0
 slug: imapsync
 image: ghcr.nju.edu.cn/faserf/hassio-addons-imapsync-{arch}
-description: '[老王杂谈说]：轻松可靠地同步 IMAP 账户。'
+description: '[老王杂谈说]：轻松且可靠地同步 IMAP 账户。'
 url: https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/imapsync
 arch:
   - aarch64

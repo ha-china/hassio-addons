@@ -1,7 +1,7 @@
 name: "DBF (DB-Infoscreen)"
-version: "1.0.0"
+version: "1.1.0"
 slug: "dbf"
-description: "[老王杂谈说]：铁路出发显示屏（前身为 db-fakescreen）作为 Home Assistant 应用程序。"
+description: "[老王杂谈说]：作为 Home Assistant 应用的火车站出发显示屏（曾名 db-fakescreen）"
 url: "https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/dbf"
 arch:
   - aarch64

@@ -1,31 +1,31 @@
 # Antigravity-Server
 
-![Antigravity-Server 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/antigravity-server/logo.png) width="100" alt="Logo" />
+![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/antigravity-server/logo.png)
 
-[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_antigravity-server)
-[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-1.2.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-antigravity-server)
-![项目维护者](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![打开您的Home Assistant实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_antigravity-server)
+[![Home Assistant应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker镜像](https://img.shields.io/badge/docker-1.3.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-antigravity-server)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 通过 NoVNC 在浏览器中流式传输 Antigravity AI IDE（Linux 桌面带有 XFCE4）。
+> 通过NoVNC在浏览器中流式传输Antigravity AI IDE（Linux桌面版，带XFCE4）。
 
 ---
 
 ## 📖 关于
 
-通过 NoVNC 在浏览器中流式传输 Antigravity AI IDE（Linux 桌面带有 XFCE4）。
+通过NoVNC在浏览器中流式传输Antigravity AI IDE（Linux桌面版，带XFCE4）。
 
 ### 高级功能
 
-- **动态工具集**：动态启用针对 Android、C++/Dev、Windows (MinGW) 或 Linters 的专用工具。
-- **持久性**：您的设置和工具在 `/data` 目录中持久保存。
-- **入境支持**：通过 Home Assistant 入境安全访问桌面。
+- **动态工具集**：实时启用Android、C++/Dev、Windows（MinGW）或Linter的专业工具。
+- **持久性**：您的设置和工具在`/data`目录中持久保存。
+- **入口支持**：通过Home Assistant入口安全访问桌面。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 应用页面中的 **配置** 选项卡配置此应用。
+通过Home Assistant App页面中的**配置**选项卡配置此应用。
 
 ### 选项
 
@@ -42,10 +42,10 @@ vnc_password: ''
 
 ---
 
-## 👨‍💻 信用与许可证
+## 👨‍💻 致谢与许可
 
-此项目是开源的，并受 MIT 许可证的约束。
-由 **FaserF** 维护。
+此项目为开源项目，并采用MIT许可协议。
+由**FaserF**维护。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

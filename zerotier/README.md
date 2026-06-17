@@ -8,13 +8,13 @@
 
 [![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
 
-使用一个在所有地方都按相同方式工作的虚拟网络层，极大地简化您的网络。
+使用一个在任何地方都工作相同的虚拟网络层，彻底简化您的网络。
 
 ## 关于
 
-ZeroTier 通过单一系统提供 VPN、SDN 和 SD-WAN 的功能。管理您连接的所有资源，无论是在本地网络还是广域网络中，就像整个世界是一个单一的数据中心一样。
+ZeroTier 通过一个系统提供 VPN、SDN 和 SD-WAN 的功能。管理您在本地和广域网中连接的所有资源，就像整个世界都是一个数据中心一样。
 
-人们使用 ZeroTier 来无缝地连接笔记本电脑、台式机、手机、嵌入式设备、云资源和应用程序，无论他们去哪里，都可以按照他们想要的方式连接。它将整个世界变成一个单一的数据中心，现在您可以通过此应用添加您的 Home Assistant 实例。
+人们使用 ZeroTier 无缝地连接笔记本电脑、台式机、手机、嵌入式设备、云资源和应用程序，无论他们去哪里都可以。它将整个世界变成一个单一的数据中心，您现在可以使用此应用程序添加您的 Home Assistant 实例。
 
 [discord-shield]: https://img.shields.io/discord/478094546522079232.svg
 [discord]: https://discord.me/hassioaddons
@@ -26,8 +26,8 @@ ZeroTier 通过单一系统提供 VPN、SDN 和 SD-WAN 的功能。管理您连�
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
-[release-shield]: https://img.shields.io/badge/version-v0.25.2-blue.svg
-[release]: https://github.com/hassio-addons/app-zerotier/tree/v0.25.2
+[release-shield]: https://img.shields.io/badge/version-v0.26.0-blue.svg
+[release]: https://github.com/hassio-addons/app-zerotier/tree/v0.26.0
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

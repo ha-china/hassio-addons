@@ -1,5 +1,5 @@
 ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base:9.3.0
-ARG KOMODO_VERSION=2.1.2
+ARG KOMODO_VERSION=2.2.0
 FROM ghcr.nju.edu.cn/moghtech/komodo-core:${KOMODO_VERSION} AS komodo
 FROM ${BUILD_FROM}
 
@@ -10,7 +10,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3008
 
 # App metadata (injected by CI)
-ENV APP_VERSION="0.1.1"
+ENV APP_VERSION="0.2.0"
 ENV APP_NAME="Komodo"
 ENV APP_SLUG="komodo"
 ENV APP_UNSUPPORTED="false"

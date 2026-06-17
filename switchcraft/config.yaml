@@ -1,8 +1,8 @@
 ---
 name: SwitchCraft
-version: 0.2.1
+version: 0.3.0
 slug: switchcraft
-description: '[老王杂谈说]：SwitchCraft 是您强大的跨平台工具，旨在成为 IT 专业人士的全面打包助手。'
+description: '[老王杂谈说]：SwitchCraft 是一款强大的跨平台工具，旨在为 IT 专业人士提供全面的打包辅助功能。'
 url: https://gh-proxy.org/github.com/FaserF/SwitchCraft
 arch:
   - aarch64

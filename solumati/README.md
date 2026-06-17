@@ -1,25 +1,25 @@
 # Solumati
 
-![Solumati 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/solumati/logo.png) 
+![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/solumati/logo.png)
 
-[![打开你的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_solumati)
+[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_solumati)
 [![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-2.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-solumati)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.4.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-solumati)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 反滑动革命 - 专注于有意义配对的自托管交友平台。
+> 反划时代的革命 - 集中于有意义配对的托管交友平台。
 
 ---
 
 ## 📖 关于
 
-反滑动革命 - 专注于有意义配对的自托管交友平台。
+反划时代的革命 - 集中于有意义配对的托管交友平台。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant App 页面中的 **配置** 选项卡配置此应用。
+通过 Home Assistant App 页面的 **配置** 选项卡配置该应用。
 
 ### 选项
 
@@ -35,9 +35,9 @@ test_mode: false
 
 ---
 
-## 👨‍💻 信用 & 许可证
+## 👨‍💻 贡献者 & 许可证
 
-此项目为开源项目，采用 MIT 许可证。
+本项目是开源的，并受 MIT 许可证保护。
 由 **FaserF** 维护。
 ---
 

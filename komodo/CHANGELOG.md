@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.0 (2026-06-16)
+
+### 📦 Dependencies
+
+- ⬆️ Update ghcr.io/moghtech/komodo-core Docker tag to v2.2.0 [skip-tests] (#798) [skip-tests] ([`929bdf0f`](https://github.com/FaserF/hassio-addons/commit/929bdf0f771e1039ea4bd29aa6ff08e45e4711a7))
+- ⬆️ Update dependency moghtech/komodo to v2.2.0 [skip-tests] (#797) [skip-tests] ([`1d88e3dc`](https://github.com/FaserF/hassio-addons/commit/1d88e3dc1ce116fcdf46c818f3e7a29ff14035d1))
+
+### 🚀 Other
+
+- fixed homeassistant app base image links ([`99f50367`](https://github.com/FaserF/hassio-addons/commit/99f503679e9b461f86de82e91555442c700f843d))
+
 ## 0.1.2 (2026-04-09)
 
 ### 🚀 Other
@@ -22,7 +33,7 @@
 - ⬆️ Update ghcr.io/moghtech/komodo-core Docker tag to v2 [skip-tests] ([`2e011d6c`](https://github.com/FaserF/hassio-addons/commit/2e011d6c6980654a5c28fd095025f8a34184d1a5))
 - ⬆️ Update dependency moghtech/komodo to v2 [skip-tests] ([`f980db3d`](https://github.com/FaserF/hassio-addons/commit/f980db3d0c6c595a5b847d3ed18e5ba569bff169))
 - update home-assistant.io/addons/ to /apps/ and remove ignore ([`35318ec8`](https://github.com/FaserF/hassio-addons/commit/35318ec8f6d1c5be470aace8f13a1ac617fd9b85))
-- ⬆️ Update ghcr.io/hassio-addons/debian-base Docker tag to v[9.2.0](https://github.com/hassio-addons/addon-debian-base/releases/tag/v9.2.0) [skip-tests] ([`1dbf04d8`](https://github.com/FaserF/hassio-addons/commit/1dbf04d8803f0000a3afcce47d044f594c10ec70))
+- ⬆️ Update ghcr.io/hassio-addons/debian-base Docker tag to v[9.2.0](https://github.com/hassio-addons/app-debian-base/releases/tag/v9.2.0) [skip-tests] ([`1dbf04d8`](https://github.com/FaserF/hassio-addons/commit/1dbf04d8803f0000a3afcce47d044f594c10ec70))
 - Update README information with support info ([`c70fff01`](https://github.com/FaserF/hassio-addons/commit/c70fff01378d531e3dffc35dc2bf94b49237f541))
 
 ### 🚀 Other

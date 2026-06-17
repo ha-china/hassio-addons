@@ -1,10 +1,10 @@
 # Switch LAN Play 服务器
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/switch_lan_play_server/logo.png" width="100" alt="Logo" />
+![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/switch_lan_play_server/logo.png) width="100" alt="Logo" />
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_switch_lan_play_server)
 [![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-2.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-switch-lan-play-server)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.4.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-switch-lan-play-server)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > 任天堂 Switch LAN Play - 服务器
@@ -29,9 +29,9 @@ log_level: info
 
 ---
 
-## 👨‍💻 信用与许可证
+## 👨‍💻 贡献者 & 许可证
 
-此项目是开源的，并受 MIT 许可证的约束。
+此项目是开源的，并遵循 MIT 许可证。
 由 **FaserF** 维护。
 ---
 

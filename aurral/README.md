@@ -1,18 +1,18 @@
 # Aurral
 
-[Aurral](https://github.com/lklynet/aurral) 是一款自托管的音乐发现、请求管理、流管理和播放列表导入应用程序，适用于 Lidarr，并具有图书馆感知推荐功能。
+[Aurral](https://github.com/lklynet/aurral) 是一款为 Lidarr 提供的自托管音乐发现、请求管理、流管理和播放列表导入应用程序，具备基于图书馆推荐的智能推荐功能。
 此插件基于以下 docker 镜像：<https://github.com/lklynet/aurral>
 
 ## 配置
 
 | 选项 | 默认值 | 描述 |
 |---|---|---|
-| `download_folder` | `/share/aurral/downloads` | Aurral 写入流下载的路径。必须在 `/share` 之下。 |
-| `weekly_flow_folder` | `weekly-flow` | 添加到 `download_folder` 的子文件夹名称，用于每周流文件。完整路径将是 `download_folder/weekly_flow_folder`。 |
+| `download_folder` | `/share/aurral/downloads` | Aurral 写入流下载的路径。必须位于 `/share` 之下。 |
+| `weekly_flow_folder` | `weekly-flow` | 添加到 `download_folder` 的子文件夹名称，用于每周流文件。完整路径为 `download_folder/weekly_flow_folder`。 |
 
 ## 安装
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的监督者插件商店中，或者如果您已配置了 HA，请点击下面的按钮）
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的监督器插件商店中，或者如果您已配置了 HA，请点击下面的按钮）
 
    ![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)(https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 
@@ -22,7 +22,7 @@
 5. 可选地设置 `weekly_flow_folder` 以自定义每周流子文件夹的名称。
 6. 启动插件。
 7. 检查插件的日志以查看是否一切顺利。
-8. 打开 WebUI 并完成入门流程。
+8. 打开 WebUI 并完成入门设置。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

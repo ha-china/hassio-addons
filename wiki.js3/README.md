@@ -1,10 +1,10 @@
 # Wiki.JS (版本 3 - Alpha)
 
-<img src="https://raw.githubusercontent.com/FaserF/hassio-addons/master/wiki.js3/logo.png" width="100" alt="Logo" />
+![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/wiki.js3/logo.png)
 
-[![打开您的 Home Assistant 实例并显示应用程序仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_wiki.js3)
+[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_wiki.js3)
 [![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-0.6.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-wiki.js3)
+[![Docker 镜像](https://img.shields.io/badge/docker-0.7.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-wiki)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > 最强大且可扩展的开源 Wiki 软件（版本 3 - Alpha）
@@ -14,8 +14,8 @@
 > [!注意]
 > **实验性 / 测试版状态**
 >
-> 此应用程序仍在开发中，或主要针对个人使用开发。
-> 它尚未经过充分测试，但预计基本功能可以正常工作。
+> 此应用仍在开发中，或主要针对个人使用进行开发。
+> 它尚未经过广泛测试，但预计基本功能将正常工作。
 
 ---
 
@@ -23,13 +23,13 @@
 
 ## 🏁 首次启动
 
-首次启动时，您将看到一个管理设置向导。向导将引导您完成 Wiki 连接的初始配置和管理员账户的创建。
+在首次启动时，您将看到一个管理设置向导。向导将引导您完成 Wiki 连接的初始配置以及管理员账户的创建。
 
-请在此过程中创建自己的 **管理员账户**（邮箱 / 密码）。
+在此过程中，请创建您自己的 **管理员账户**（电子邮件 / 密码）。
 
 ### 默认数据库凭证
 
-应用程序预先配置了本地 PostgreSQL 数据库。`wiki` 数据库用户的默认密码为：
+应用预配置了本地的 PostgreSQL 数据库。`wiki` 数据库用户的默认密码为：
 
 - **密码**：`wikijs`（这是数据库密码，不是您的管理员登录密码）
 
@@ -37,7 +37,7 @@
 
 ## ⚙️ 配置
 
-通过 Home Assistant 应用页面中的 **配置** 选项卡配置应用程序。
+通过 Home Assistant App 页面中的 **配置** 选项卡配置应用。
 
 ### 选项
 
@@ -55,7 +55,7 @@ ssl: true
 
 ## 👨‍💻 致谢与许可
 
-此项目是开源的，并采用 MIT 许可证。
+此项目是开源的，并受 MIT 许可证的约束。
 由 **FaserF** 维护。
 ---
 

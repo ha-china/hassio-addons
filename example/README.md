@@ -2,8 +2,6 @@
 
 [![发布][release-shield]][release] ![项目阶段][project-stage-shield] ![项目维护][maintenance-shield]
 
-[![Discord][discord-shield]][discord] [![社区论坛][forum-shield]][forum]
-
 [![通过 GitHub Sponsors 赞助 Frenck][github-sponsors-shield]][github-sponsors]
 
 [![在 Patreon 上支持 Frenck][patreon-shield]][patreon]
@@ -14,30 +12,26 @@ Home Assistant 社区应用的一个示例。
 
 这是一个 Home Assistant 的示例应用。启动后，它每 5 秒显示一条随机引用。
 
-它展示了多个功能和结构，例如：
+它展示了几个特性和结构，如：
 
 - 完整的 GitHub 仓库。
-- 通用 Dockerfile 结构和设置。
+- 通用的 Dockerfile 结构和设置。
 - 使用 `config.yaml` 和 `build.yaml` 文件。
-- 通用 shell 脚本结构 (`run.sh`)。
-- 使用 CodeClimate 进行质量保证。
-- 使用 GitLab 进行持续集成和部署。
-- 使用 Home Assistant 社区应用的构建环境。
-- 在基础镜像中少量使用 Bash 函数库。
+- 使用 S6 overlay 与服务交互的一般结构。
+- Bashio 的基本使用。
+- 使用 GitHub Actions 进行持续集成和部署。
+- 部署到 GitHub 容器注册库。
+- 在我们的基础镜像中少量使用 Bash 函数库。
 - 使用 Docker 标签模式。
 
-[discord-shield]: https://img.shields.io/discord/478094546522079232.svg
-[discord]: https://discord.me/hassioaddons
-[forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
-[forum]: https://community.home-assistant.io?u=frenck
 [github-sponsors-shield]: https://frenck.dev/wp-content/uploads/2019/12/github_sponsor.png
 [github-sponsors]: https://github.com/sponsors/frenck
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
 [patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
 [patreon]: https://www.patreon.com/frenck
 [project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
-[release-shield]: https://img.shields.io/badge/version-v13.0.3-blue.svg
-[release]: https://github.com/hassio-addons/app-example/tree/v13.0.3
+[release-shield]: https://img.shields.io/badge/version-v14.0.0-blue.svg
+[release]: https://github.com/hassio-addons/app-example/tree/v14.0.0
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

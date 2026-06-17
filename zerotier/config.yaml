@@ -1,7 +1,7 @@
 name: ZeroTier One
-version: 0.25.2
+version: 0.26.0
 slug: zerotier
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：使用一个随处一致的虚拟网络层，彻底简化您的网络。'
 url: https://gh-proxy.org/github.com/hassio-addons/app-zerotier
 startup: services
 init: false

@@ -1,25 +1,25 @@
-# Tado Auto Assist
+# Tado 自动助手
 
-![Tado Auto Assist 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/tado_aa/logo.png) width="100" alt="Logo" />
+![Tado 自动助手Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/tado_aa/logo.png) width="100" alt="Logo" />
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_tado_aa)
 [![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-2.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-tado_aa)
-![项目维护者](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.4.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-tado_aa)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> Tado Auto-Assist 用于地理围栏和开窗检测
+> 基于地理围栏和开窗检测的 Tado 自动助手
 
 ---
 
 ## 📖 关于
 
-Tado Auto-Assist 用于地理围栏和开窗检测
+Tado 自动助手用于地理围栏和开窗检测
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant App 页面的 **配置** 选项卡配置此应用。
+通过 Home Assistant 应用页面中的 **配置** 选项卡配置此应用。
 
 ### 选项
 
@@ -33,9 +33,9 @@ username: ''
 
 ---
 
-## 👨‍💻 致谢与许可
+## 👨‍💻 贡献者与许可
 
-本项目是开源的，并遵循 MIT 许可协议。
+本项目是开源的，并受 MIT 许可协议保护。
 由 **FaserF** 维护。
 ---
 

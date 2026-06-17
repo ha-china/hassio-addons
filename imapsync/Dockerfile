@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:21.0.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 ARG BUILD_DATE="1970-01-01T00:00:00Z"
@@ -11,12 +11,17 @@ SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 ARG IMAPSYNC_VERSION=2.229
 
 # App metadata (injected by CI)
-ENV APP_VERSION="0.3.1"
+ENV APP_VERSION="0.4.0"
 ENV APP_NAME="Imapsync"
 ENV APP_SLUG="imapsync"
 ENV APP_UNSUPPORTED="false"
 
-RUN apk --no-cache -u add \
+RUN \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/main" > /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/community" >> /etc/apk/repositories \
+    && apk add --no-cache musl musl-dev \
+    && apk upgrade --no-cache --available \
+    && apk add --no-cache \
     expect \
     perl \
     perl-cgi \

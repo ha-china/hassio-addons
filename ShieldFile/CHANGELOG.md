@@ -1,12 +1,18 @@
 # Changelog
 
+## 2.4.0 (2026-06-16)
+
+### 📦 Dependencies
+
+- ⬆️ Update Add-on base images to v21 [skip-tests] ([`2efc4ca0`](https://github.com/FaserF/hassio-addons/commit/2efc4ca058bca977cf5667d3778a6232d45b3ab2))
+
 ## 2.3.5 (2026-06-15)
 
 ### 📦 Dependencies
+
 - ⬆️ Update filebrowser/filebrowser Docker tag to v2.63.15 [skip-tests] ([`d8b1dac7`](https://github.com/FaserF/hassio-addons/commit/d8b1dac7934f89b4e8e94142585606489e49179a))
 - ⬆️ Update filebrowser/filebrowser Docker tag to v2.63.14 [skip-tests] (#830) [skip-tests] ([`f6818553`](https://github.com/FaserF/hassio-addons/commit/f6818553c83a9d28a9e4e35040f4b1c9b5db360d))
 - ⬆️ Update filebrowser/filebrowser Docker tag to v2.63.13 [skip-tests] (#828) [skip-tests] ([`382e1d93`](https://github.com/FaserF/hassio-addons/commit/382e1d9359bdaedd3631f6d8ed0bfd2976a9e15c))
-
 
 ## 2.3.4 (2026-06-04)
 

@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:21.0.0
 
 # Stage 1: Get Frontend Assets
 # renovate: datasource=docker depName=ghcr.nju.edu.cn/eidolf/er-startseite/frontend
@@ -21,16 +21,22 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3008,DL3013,DL3018,DL3042
 
 # App metadata (injected by CI)
-ENV APP_VERSION="1.3.2"
+ENV APP_VERSION="1.4.0"
 ENV APP_NAME="ER-Startseite (Dashboard)"
 ENV APP_SLUG="er-dashboard"
 ENV APP_UNSUPPORTED="false"
 
 RUN \
- apk add --no-cache -u libssl3 libcrypto3 \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/main" > /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/community" >> /etc/apk/repositories \
+    && apk add --no-cache musl musl-dev \
+    && apk upgrade --no-cache --available \
+    && apk add --no-cache libssl3 libcrypto3 \
         curl \
         nginx \
         openssl \
+        postgresql17 \
+        postgresql17-contrib \
         postgresql \
         postgresql-contrib \
         postgresql-jit \

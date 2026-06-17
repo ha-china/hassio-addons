@@ -1,11 +1,11 @@
 # OpenSSL
 
-![OpenSSL Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/openssl/logo.png)
+![OpenSSL 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/openssl/logo.png)
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_openssl)
 [![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-2.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-openssl)
-![项目维护者](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.4.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-openssl)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > 生成自签名证书
 
@@ -19,7 +19,7 @@
 
 ## ⚙️ 配置
 
-通过 Home Assistant App 页面的 **配置** 选项卡配置此应用。
+通过 Home Assistant App 页面的 **配置** 选项卡配置应用。
 
 ### 选项
 
@@ -30,9 +30,9 @@ website_name: null
 
 ---
 
-## 👨‍💻 致谢与许可证
+## 👨‍💻 贡献者与许可
 
-此项目是开源的，并遵循 MIT 许可证。
+此项目是开源的，受 MIT 许可协议保护。
 由 **FaserF** 维护。
 ---
 

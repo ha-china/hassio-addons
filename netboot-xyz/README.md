@@ -3,8 +3,8 @@
 ![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/netboot-xyz/logo.png)
 
 [![打开您的Home Assistant实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_netboot-xyz)
-[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-2.3.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-netboot-xyz)
+[![Home Assistant应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker镜像](https://img.shields.io/badge/docker-2.4.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-netboot-xyz)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > 本地网络内部署操作系统的PXE-Server
@@ -38,9 +38,9 @@ path_config: /media/netboot/config
 
 ---
 
-## 👨‍💻 贡献者与许可证
+## 👨‍💻 致谢与许可
 
-此项目是开源的，并受MIT许可证的约束。
+此项目是开源的，并受MIT许可协议保护。
 由**FaserF**维护。
 ---
 

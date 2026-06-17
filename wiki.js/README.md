@@ -4,7 +4,7 @@
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_wiki.js)
 [![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-3.4.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-wiki.js)
+[![Docker 镜像](https://img.shields.io/badge/docker-3.5.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-wiki)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > 最强大且可扩展的开源 Wiki 软件
@@ -15,15 +15,15 @@
 
 ## 🏁 首次启动
 
-首次启动时，您将看到一个管理员设置向导。向导将引导您完成 Wiki 连接的初始配置以及管理员账户的创建。
+在首次启动时，您将看到一个管理设置向导。向导将引导您完成 Wiki 连接的初始配置以及管理员账户的创建。
 
-在此过程中，请创建您的 **管理员账户**（电子邮件 / 密码）。
+请在此过程中创建您的 **管理员账户**（邮箱 / 密码）。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 应用页面中的 **配置** 选项卡配置此应用。
+通过 Home Assistant App 页面中的 **配置** 选项卡配置此应用。
 
 ### 选项
 

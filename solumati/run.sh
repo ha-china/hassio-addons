@@ -170,6 +170,19 @@ set -e
 
 # Get App Version
 
+# Check if Solumati build was skipped because the repo is private
+if [ -f /solumati_skipped ]; then
+	bashio::log.warning "=================================================="
+	bashio::log.warning "   ⚠️  SOLUMATI BUILD SKIPPED  ⚠️"
+	bashio::log.warning "=================================================="
+	bashio::log.warning "This addon is a placeholder because the repository"
+	bashio::log.warning "is private and was built without GITHUB_TOKEN."
+	bashio::log.warning "Please rebuild with a valid GITHUB_TOKEN."
+	bashio::log.warning "=================================================="
+	bashio::log.info "Exiting peacefully..."
+	exit 0
+fi
+
 # --- CONFIGURATION ---
 DATA_DIR="/data/postgresql"
 IMAGES_DIR="/data/images"
@@ -467,6 +480,9 @@ BACKEND_PID=$!
 # --- NGINX START ---
 bashio::log.info "Starting Nginx (Frontend)..."
 mkdir -p /run/nginx
+# Ensure Nginx temporary directories exist for Alpine 3.23
+mkdir -p /var/lib/nginx/tmp/client_body /var/lib/nginx/tmp/proxy /var/lib/nginx/tmp/fastcgi /var/lib/nginx/tmp/uwsgi /var/lib/nginx/tmp/scgi
+chown -R nginx:nginx /var/lib/nginx
 nginx -g "daemon off;" &
 NGINX_PID=$!
 

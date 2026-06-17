@@ -3,11 +3,11 @@
 ![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/tt-rss/logo.png)
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_tt-rss)
-[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-1.2.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-tt-rss)
+[![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-1.3.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-tt-rss)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 基于网页的新闻源（RSS/Atom）阅读器和聚合器
+> 一个基于网页的新闻源（RSS/Atom）阅读器和聚合器
 
 ---
 
@@ -17,14 +17,14 @@
 
 1. 在 Home Assistant 应用商店中搜索 "Tiny Tiny RSS"。
 2. 安装应用。
-3. 配置数据库连接设置（见下文配置）。
+3. 配置数据库连接设置（见配置部分）。
 4. 启动应用。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 应用页面中的 **配置** 选项卡配置应用。
+通过 Home Assistant 应用页面中的 **配置** 选项卡来配置应用。
 
 ### 选项
 
@@ -38,7 +38,7 @@ ssl: false
 
 ---
 
-## 👨‍💻 致谢与许可证
+## 👨‍💻 信用与许可
 
 此项目是开源的，并受 MIT 许可证的约束。
 由 **FaserF** 维护。

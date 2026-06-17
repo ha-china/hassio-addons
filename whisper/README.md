@@ -1,22 +1,24 @@
 # Home Assistant App: Whisper
 
-![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
+![支持aarch64架构][aarch64-shield] ![支持amd64架构][amd64-shield]
 
-Home Assistant app (formerly known as add-on) that uses multiple speech-to-text backends:
+Home Assistant应用（之前称为附加组件），使用多个语音识别后端：
 
 - [faster-whisper](https://github.com/guillaumekln/faster-whisper/)
 - [HuggingFace transformers](https://huggingface.co/docs/transformers/index)
-- [sherpa-onnx](https://k2-fsa.github.io/sherpa/onnx/index.html) ([parakeet](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3) only)
-- [onnx-asr](https://github.com/istupakov/onnx-asr) ([GigaAM](https://github.com/salute-developers/GigaAM) only)
+- [sherpa-onnx](https://k2-fsa.github.io/sherpa/onnx/index.html) ([parakeet](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3) 仅支持)
+- [onnx-asr](https://github.com/istupakov/onnx-asr) ([GigaAM](https://github.com/salute-developers/GigaAM) 仅支持)
 
-Part of the [Year of Voice](https://www.home-assistant.io/blog/2022/12/20/year-of-voice/).
+是 [Voice Year](https://www.home-assistant.io/blog/2022/12/20/year-of-voice/) 的一部分。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
-
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

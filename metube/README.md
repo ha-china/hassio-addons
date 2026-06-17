@@ -1,8 +1,8 @@
 # Home Assistant 插件：MeTube
 
-基于 yt-dlp 分支（使用 yt-dlp 分支）的 YouTube-dl 网页 GUI，支持播放列表。允许您从 YouTube 和其他数十个网站（https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md）下载视频。
+基于 yt-dlp 分支（使用 yt-dlp）的 YouTube-dl 网页 GUI，支持播放列表。允许您从 YouTube 和其他数十个网站（https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md）下载视频。
 
-_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有给我仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
@@ -16,16 +16,16 @@ _感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，�
 
 1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例中。
 1. 安装此插件。
-2. 点击 `保存` 按钮以存储您的配置。
-3. 下载目录默认为 /share/metube，可以在 share 中更改。
-4. 启动插件。
-5. 检查插件的日志以查看是否一切顺利。
-6. 通过 ingress 或 <your-ip>:port 打开 WebUI 应该可以工作。
+1. 点击 `保存` 按钮以存储您的配置。
+1. 下载目录默认为 /share/metube，可以更改为 share 中的任何位置。
+1. 启动插件。
+1. 检查插件的日志以查看是否一切顺利。
+1. 通过 ingress 或 <your-ip>:port 打开 WebUI 应该可以工作。
 
 ## 配置
 
 ```
-port : 8081 # 您想要运行的端口。
+port : 8081 # 想要运行在的端口。
 ```
 
 WebUI 可以在 `<your-ip>:port` 找到。

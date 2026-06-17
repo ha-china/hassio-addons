@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:20.0.2
+ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/base:21.0.0
 # Build stage
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM} AS builder
@@ -7,12 +7,18 @@ FROM ${BUILD_FROM} AS builder
 # hadolint ignore=DL3018
 
 # App metadata (injected by CI)
-ENV APP_VERSION="2.3.1"
+ENV APP_VERSION="2.4.0"
 ENV APP_NAME="Switch LAN Play Client"
 ENV APP_SLUG="switch-lan-play"
 ENV APP_UNSUPPORTED="false"
 
-RUN apk add --no-cache -u libssl3 libcrypto3 \
+RUN \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/main" > /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/community" >> /etc/apk/repositories \
+    && apk add --no-cache musl musl-dev \
+    && apk upgrade --no-cache --available \
+    && apk add --no-cache \
+    libssl3 libcrypto3 \
     libpcap-dev \
     libuv-dev \
     git \
@@ -43,7 +49,13 @@ ENV SWITCH_LAN_PLAY_VERSION="v0.2.3"
 
 # Install runtime dependencies (procps for pgrep)
 # hadolint ignore=DL3018
-RUN apk add --no-cache -u libssl3 libcrypto3 \
+RUN \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/main" > /etc/apk/repositories \
+    && echo "http://dl-cdn.alpinelinux.org/alpine/v3.23/community" >> /etc/apk/repositories \
+    && apk add --no-cache musl musl-dev \
+    && apk upgrade --no-cache --available \
+    && apk add --no-cache \
+    libssl3 libcrypto3 \
     libpcap \
     libuv \
     procps \

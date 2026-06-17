@@ -1,10 +1,10 @@
 # Planka
 
-![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/planka/logo.png)
+![Planka 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/planka/logo.png) 
 
-[![打开你的Home Assistant实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_planka)
-[![Home Assistant应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker镜像](https://img.shields.io/badge/docker-1.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-planka)
+[![打开你的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_planka)
+[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-1.4.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-planka)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > 优雅的开源项目管理工具
@@ -15,7 +15,7 @@
 
 ## 安装
 
-1. 在Home Assistant应用商店中搜索“Planka”。
+1. 在 Home Assistant 应用商店中搜索 "Planka"。
 2. 安装应用。
 3. 启动应用。
 
@@ -23,7 +23,7 @@
 
 ## ⚙️ 配置
 
-通过Home Assistant应用页面中的**配置**标签来配置应用。
+通过 Home Assistant 应用页面中的 **配置** 选项卡配置应用。
 
 ### 选项
 
@@ -40,10 +40,10 @@ ssl: false
 
 ---
 
-## 👨‍💻 贡献者 & 许可证
+## 👨‍💻 致谢与许可
 
-本项目是开源的，并遵循MIT许可证。
-由**FaserF**维护。
+此项目为开源项目，遵循 MIT 许可协议。
+由 **FaserF** 维护。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

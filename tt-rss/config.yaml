@@ -1,7 +1,7 @@
 name: Tiny Tiny RSS
-version: 1.2.1
+version: 1.3.0
 slug: tt-rss
-description: '[老王杂谈说]：基于网络的新闻源（RSS/Atom）阅读器和聚合器'
+description: '[老王杂谈说]：一个基于网页的新闻源 (RSS/Atom) 阅读器和聚合器'
 url: https://tt-rss.org
 arch:
   - aarch64

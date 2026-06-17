@@ -1,11 +1,11 @@
 # Switch LAN Play 客户端
 
-![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/switch_lan_play/logo.png)
+![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/switch_lan_play/logo.png) width="100" alt="Logo" />
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_switch_lan_play)
 [![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-2.3.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-switch-lan-play)
-![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Docker 镜像](https://img.shields.io/badge/docker-2.4.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-switch-lan-play)
+![项目维护者](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > 任天堂 Switch LAN Play - 客户端
 
@@ -19,7 +19,7 @@
 
 ## ⚙️ 配置
 
-通过 Home Assistant App 页面的 **配置** 选项卡来配置此应用。
+通过 Home Assistant 应用页面中的 **配置** 选项卡配置此应用。
 
 ### 选项
 
@@ -30,9 +30,9 @@ server: switch.lan-play.com:11451
 
 ---
 
-## 👨‍💻 贡献者 & 许可证
+## 👨‍💻 致谢与许可证
 
-此项目是开源的，并采用 MIT 许可证。
+此项目为开源项目，并遵循 MIT 许可证。
 由 **FaserF** 维护。
 ---
 

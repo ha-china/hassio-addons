@@ -1,13 +1,13 @@
-# ER-Startseite (仪表盘)
+# ER-Startseite (仪表板)
 
-![ER-Startseite 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/er-dashboard/logo.png) 
+![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/er-dashboard/logo.png)
 
-[![打开您的 Home Assistant 实例并显示应用仪表盘](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_er-dashboard)
-[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-1.3.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-er-dashboard)
+[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_er-dashboard)
+[![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-1.4.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-er-dashboard)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 一个现代、高度可定制的霓虹美学仪表盘。
+> 一个现代、高度可定制的霓虹美学仪表板。
 
 ---
 
@@ -37,9 +37,9 @@ ssl: false
 
 ---
 
-## 👨‍💻 致谢与许可
+## 👨‍💻 致谢与许可证
 
-此项目是开源的，并采用 MIT 许可证。
+此项目是开源的，并可在 MIT 许可证下使用。
 由 **FaserF** 维护。
 ---
 

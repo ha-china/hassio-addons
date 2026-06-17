@@ -1,10 +1,10 @@
 name: BLE Scale Sync
 # x-release-please-start-version
-version: 1.17.0
+version: 1.18.0
 # x-release-please-end
 slug: ble-scale-sync
 description: >-
-  [老王杂谈说]：读取 BLE 智能秤并将其导出到 Garmin Connect、MQTT (HA 自动发现)、InfluxDB 等。
+  [老王杂谈说]：读取蓝牙智能秤数据并导出到 Garmin Connect、MQTT (HA 自动发现)、InfluxDB 等。
 url: https://gh-proxy.org/github.com/KristianP26/ble-scale-sync
 documentation: >-
   https://gh-proxy.org/github.com/KristianP26/ble-scale-sync/blob/main/ble-scale-sync-addon/DOCS.md
