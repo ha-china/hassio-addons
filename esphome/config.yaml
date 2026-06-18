@@ -26,16 +26,13 @@ schema:
   certfile: str?
   keyfile: str?
   leave_front_door_open: bool?
-  use_new_device_builder: bool?
 backup_exclude:
   - '*/*/'
 init: false
 startup: services
-options:
-  use_new_device_builder: false
 name: ESPHome Device Builder
 panel_title: ESPHome Builder
-version: 2026.5.3
+version: 2026.6.0
 slug: esphome
-description: '[老王杂谈说]：使用 ESPHome 构建你的智能家居设备，无需编程经验'
+description: '[老王杂谈说]：使用 ESPHome 制作你自己的智能家居设备，无需编程经验。'
 image: ghcr.nju.edu.cn/esphome/esphome-hassio

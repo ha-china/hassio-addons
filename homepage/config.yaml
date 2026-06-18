@@ -1,7 +1,7 @@
 name: Homepage
-version: "1.13.1-0"
+version: "1.13.2-0"
 slug: homepage
-description: "[老王杂谈说]：这是一个现代的、完全静态、快速、安全且完全代理、高度可定制的应用程序仪表盘，集成了超过 100 种服务并支持多种语言翻译，可通过 YAML 文件或 Docker 标签发现轻松配置。"
+description: "[老王杂谈说]：一个现代化的、完全静态、快速、安全且完全代理的、高度可定制的应用仪表板，集成了超过 100 种服务，并支持多种语言翻译。"
 url: https://gh-proxy.org/github.com/bytenoodle/hassioaddon/tree/main/homepage
 arch:
   - amd64
