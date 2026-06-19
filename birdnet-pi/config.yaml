@@ -3,7 +3,7 @@ arch:
   - amd64
 audio: true
 backup: cold
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：实时声学鸟类分类系统'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -116,5 +116,5 @@ tmpfs: true
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/birdnet-pi
 usb: true
-version: 2026.02.25
+version: 2026.06.01
 video: true
