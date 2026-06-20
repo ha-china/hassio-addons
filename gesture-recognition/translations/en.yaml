@@ -4,7 +4,7 @@ configuration:
   # ============================================================================
   rtsp_url:
     name: RTSP URL
-    description: Camera RTSP stream URL (format: rtsp://username:password@ip:554/stream1)
+    description: "Camera RTSP stream URL (format: rtsp://username:password@ip:554/stream1)"
   rtsp_reconnect_delay:
     name: RTSP Reconnect Delay
     description: Delay in seconds before retrying failed RTSP connection (recommended: 5)
