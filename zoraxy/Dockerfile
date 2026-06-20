@@ -14,39 +14,9 @@
 # 1 Build Image #
 #################
 
-ARG BUILD_FROM=ghcr.nju.edu.cn/hassio-addons/debian-base:9.1.0
-###############################################################################
-# Get prebuild containers from Vaultwarden
-###############################################################################
-FROM "vaultwarden/server:latest" AS vaultwarden
-
-###############################################################################
-# Build the actual add-on.
-###############################################################################
-# hadolint ignore=DL3006
+ARG BUILD_FROM
+ARG BUILD_VERSION
 FROM ${BUILD_FROM}
-
-# Set shell
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-# Get the Bitwarden from official images
-COPY --from=vaultwarden /vaultwarden /opt/vaultwarden
-COPY --from=vaultwarden /web-vault /opt/web-vault
-
-RUN \
-    apt-get update \
-    \
-    && apt-get install -y --no-install-recommends \
-        libmariadb-dev-compat \
-        libpq5 \
-        nginx \
-        sqlite3 \
-    && apt-get clean \
-    && rm -f -r \
-        /etc/nginx \
-    \
-    && mkdir -p /var/log/nginx \
-    && touch /var/log/nginx/error.log
 
 ##################
 # 2 Modify Image #
@@ -57,6 +27,8 @@ ENV S6_CMD_WAIT_FOR_SERVICES=1 \
     S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
     S6_SERVICES_GRACETIME=0
 
+USER root
+
 ##################
 # 3 Install apps #
 ##################
@@ -65,26 +37,36 @@ ENV S6_CMD_WAIT_FOR_SERVICES=1 \
 COPY rootfs/ /
 RUN find . -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -exec chmod +x {} \;
 
-RUN chmod +x /etc/s6-overlay/s6-rc.d/*/run
-
 # Uses /bin for compatibility purposes
 # hadolint ignore=DL4005
 RUN if [ ! -f /bin/sh ] && [ -f /usr/bin/sh ]; then ln -s /usr/bin/sh /bin/sh; fi && \
     if [ ! -f /bin/bash ] && [ -f /usr/bin/bash ]; then ln -s /usr/bin/bash /bin/bash; fi
 
+# Persist Zoraxy data in /config (addon_config) instead of the ephemeral
+# upstream working directory, so the configuration survives add-on updates.
+RUN sed -i 's#/opt/zoraxy/config#/config#g' /opt/zoraxy/entrypoint.py
+
 # Modules
-ARG MODULES="00-banner.sh 01-custom_script.sh"
+ARG MODULES="00-banner.sh"
 
 # Automatic modules download
 COPY ha_automodules.sh /ha_automodules.sh
 RUN chmod 744 /ha_automodules.sh && /ha_automodules.sh "$MODULES" && rm /ha_automodules.sh
 
 # Manual apps
-ENV PACKAGES=""
+ENV PACKAGES="jq"
 
 # Automatic apps & bashio
 COPY ha_autoapps.sh /ha_autoapps.sh
 RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.sh
+
+# Install bashio
+RUN BASHIO_VERSION="0.14.3" && \
+    mkdir -p /tmp/bashio && \
+    curl -f -L -s -S "https://gh-proxy.org/github.com/hassio-addons/bashio/archive/v${BASHIO_VERSION}.tar.gz" | tar -xzf - --strip 1 -C /tmp/bashio && \
+    mv /tmp/bashio/lib /usr/lib/bashio && \
+    ln -s /usr/lib/bashio/bashio /usr/bin/bashio && \
+    rm -rf /tmp/bashio
 
 ################
 # 4 Entrypoint #
@@ -95,15 +77,13 @@ ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
 COPY ha_entrypoint.sh /ha_entrypoint.sh
 RUN chmod 777 /ha_entrypoint.sh
 
-# Install bashio
+# Install bashio standalone fallback
 COPY bashio-standalone.sh /usr/local/lib/bashio-standalone.sh
 RUN chmod 0755 /usr/local/lib/bashio-standalone.sh
 
-#
-#WORKDIR /
-#ENTRYPOINT [ "/usr/bin/env" ]
-#CMD [ "/ha_entrypoint.sh" ]
-#SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+WORKDIR /
+ENTRYPOINT [ "/usr/bin/env" ]
+CMD [ "/ha_entrypoint.sh" ]
 
 ############
 # 5 Labels #
@@ -140,27 +120,11 @@ LABEL \
 # 6 Healthcheck #
 #################
 
-# Avoid spamming logs
-# hadolint ignore=SC2016
-RUN \
-    # Handle Apache configuration
-    if [ -d /etc/apache2/sites-available ]; then \
-        for file in /etc/apache2/sites-*/*.conf; do \
-            sed -i '/<VirtualHost/a \ \n    # Match requests with the custom User-Agent "HealthCheck" \n    SetEnvIf User-Agent "HealthCheck" dontlog \n    # Exclude matching requests from access logs \n    CustomLog ${APACHE_LOG_DIR}/access.log combined env=!dontlog' "$file"; \
-        done; \
-    fi && \
-    \
-    # Handle Nginx configuration
-    if [ -f /etc/nginx/nginx.conf ]; then \
-        awk '/http \{/{print; print "map $http_user_agent $dontlog {\n  default 0;\n  \"~*HealthCheck\" 1;\n}\naccess_log /var/log/nginx/access.log combined if=$dontlog;"; next}1' /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.new && \
-        mv /etc/nginx/nginx.conf.new /etc/nginx/nginx.conf; \
-    fi
-
-ENV HEALTH_PORT="80" \
+ENV HEALTH_PORT="8000" \
     HEALTH_URL=""
 HEALTHCHECK \
     --interval=5s \
     --retries=5 \
     --start-period=30s \
     --timeout=25s \
-    CMD curl -A "HealthCheck: Docker/1.0" -s -f "http://127.0.0.1:${HEALTH_PORT}${HEALTH_URL}" &>/dev/null || exit 1
+    CMD curl -A "HealthCheck: Docker/1.0" -s -f "http://127.0.0.1:${HEALTH_PORT}${HEALTH_URL}" &>/dev/null || curl -k --fail "https://127.0.0.1:${HEALTH_PORT}${HEALTH_URL}" &>/dev/null || exit 1

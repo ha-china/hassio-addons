@@ -2,7 +2,32 @@
 # shellcheck shell=bash
 set -e
 
-for file in /data/gitea/conf/app.ini /etc/templates/app.ini; do
+############################
+# EXPOSE APP.INI IN CONFIG #
+############################
+
+# Ensure the gitea conf directory exists
+mkdir -p /data/gitea/conf
+
+# If a real file (not a symlink) exists, move it to /config.
+# This covers both the initial migration from older installs and the post-wizard
+# case where Gitea's atomic SaveTo replaces the symlink with the completed config.
+# Always overwrite /config/app.ini so the installed settings are never discarded.
+if [ -f "/data/gitea/conf/app.ini" ] && [ ! -L "/data/gitea/conf/app.ini" ]; then
+    bashio::log.info "Moving app.ini to addon_config folder for direct access"
+    cp /data/gitea/conf/app.ini /config/app.ini
+    rm /data/gitea/conf/app.ini
+fi
+
+# Symlink /data/gitea/conf/app.ini -> /config/app.ini so the file is visible in the
+# addon_config folder (accessible via the HA file editor). When Gitea's first-run
+# wizard writes the config it lands in /config/app.ini via this symlink.
+if [ ! -L "/data/gitea/conf/app.ini" ]; then
+    ln -s /config/app.ini /data/gitea/conf/app.ini
+    bashio::log.info "app.ini is now accessible in your addon_config folder"
+fi
+
+for file in /config/app.ini /etc/templates/app.ini; do
 
     if [ ! -f "$file" ]; then
         continue

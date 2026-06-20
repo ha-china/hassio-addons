@@ -2,7 +2,7 @@ apparmor: "true"
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：Scrutiny WebUI 用于 smartd S.M.A.R.T 监控（完全访问）'
+description: '[老王杂谈说]：Scrutiny WebUI 用于 smartd S.M.A.R.T 监控 (完全访问权限)'
 environment:
   COLLECTOR_API_ENDPOINT: http://localhost:8080
   COLLECTOR_HOST_ID: home_assistant
@@ -45,4 +45,4 @@ schema:
 slug: scrutiny_fa_original
 udev: true
 url: https://gh-proxy.org/github.com/analogj/scrutiny
-version: "v1.63.0"
+version: "v0.9.2"

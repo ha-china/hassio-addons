@@ -1,3 +1,11 @@
+## 1.26.2-3 (19-06-2026)
+- Minor bugs fixed
+
+## 1.26.2-2 (2026-06-19)
+- Expose app.ini in the addon_config folder so users can edit it directly via the HA file editor
+
+## 1.26.2-1 (2026-06-19)
+- Fix SSH authentication failing with `chroot("/var/empty"): Operation not permitted [preauth]` by allowing `capability sys_chroot` in the AppArmor profile, which sshd needs for privilege-separation (#2653)
 
 ## 1.26.2 (2026-05-22)
 - Update to latest version from go-gitea/gitea (changelog : https://github.com/go-gitea/gitea/releases)

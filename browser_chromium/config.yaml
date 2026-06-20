@@ -2,7 +2,7 @@ arch:
   - aarch64
   - amd64
 audio: true
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：Chromium 浏览器'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -71,5 +71,5 @@ slug: chromium
 tmpfs: true
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
-version: "version-cca5154d"
+version: "version-b9b82d3e"
 video: true

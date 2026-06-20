@@ -3,7 +3,7 @@ arch:
   - aarch64
 backup_exclude:
   - "**/cache/**"
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：用于 Home Assistant 的 Navidrome'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -119,5 +119,5 @@ schema:
 slug: navidrome
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/navidrome
-version: "0.62.0"
+version: "0.62.0-2"
 webui: "[PROTO:ssl]://[HOST]:[PORT:4533]"
