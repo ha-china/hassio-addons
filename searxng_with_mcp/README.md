@@ -1,22 +1,22 @@
-# Home Assistant 扩展程序：searxng w/ mcp
+# Home Assistant 扩展插件：searxng 与 mcp
 
 ## 关于
 
-[SearXNG](https://docs.searxng.org/index.html) 是一个免费的互联网元搜索引擎，可聚合多达 247 个搜索服务的成果。用户既不被跟踪也不被画像。此外，SearXNG 还可以通过 Tor 用于在线匿名搜索。
+[SearXNG](https://docs.searxng.org/index.html) 是一个免费的互联网元搜索引擎，可聚合来自多达 247 个搜索服务的搜索结果。用户既不被追踪也不被分析。此外，SearXNG 可以通过 Tor 在线匿名使用。
 
-本 Home Assistant 扩展程序由 https://github.com/DDanii/HA-Add-ons-by-DDanii/tree/master/searxng 修改而来。
+本 Home Assistant 扩展插件来自 https://github.com/DDanii/HA-Add-ons-by-DDanii/tree/master/searxng
 
-它包括一个轻量级的 MCP 服务器，可以为 llama.cpp（以及任何其他 MCP 兼容客户端）提供通过私有 [SearXNG](https://github.com/searxng/searxng) 实例的网页搜索。
+该插件包括一个轻量级的 MCP 服务器，为 llama.cpp（以及任何其他 MCP 兼容客户端）提供通过私有的 [SearXNG](https://github.com/searxng/searxng) 实例进行网页搜索的功能。
 
-MCP 服务器修改自 https://github.com/jdeath/mcp-searxng-enhanced，以提供快速 MCP IP 端点（使用了 AI 进行编辑）。对于在 `https://github.com/jdeath/mcp-searxng-enhanced` 上的 MCP 代码。
+MCP 服务器来自 https://github.com/jdeath/mcp-searxng-enhanced，以提供快速 MCP IP 端点（使用 AI 进行编辑）。对于在 `https://github.com/jdeath/mcp-searxng-enhanced` 上的 MCP 代码。
 
-如果您只想使用 SearXNG，请使用 @DDanii 扩展程序。
+如果您只想使用 SearXNG，请使用 @DDanii 插件。
 
 ## 配置
 
-配置您的 SearXNG 端口和您的 MCP 端口。
+配置您的 SearXNG 端口和您的 MCP 端口
 
-SearXNG 必须在 `addon_configs/2effc9b9_searxng_with_mcp/settings.yml` 文件中进行配置。
+SearXNG 必须在 `addon_configs/2effc9b9_searxng_with_mcp/settings.yml` 文件中进行配置
 
 要使用 MCP 服务器，您必须在 settings.yml 中的格式部分添加 `- json`：
 ```
@@ -25,30 +25,29 @@ formats:
     - json
 ```
 
-您通常不需要编辑 `addon_configs/2effc9b9_searxng_with_mcp/ods_config.json` 文件中的 MCP 服务器设置，但您可以编辑。服务器/端口/主机不应被修改。
+您通常不需要编辑 `addon_configs/2effc9b9_searxng_with_mcp/ods_config.json` 文件中的 MCP 服务器设置，但您可以选择编辑。服务器/端口/主机不应被更改。
 
-
-重启扩展程序
+重新启动插件
 
 将您的 llama.cpp MCP 服务器指向：http://IP:MCPPORT/mcp
 在 claude 代码中添加 MCP 服务器：`claude mcp add --transport http searxng http://IP:MCPPORT/mcp`
 
-如果您安装了 @Danni Valkey 扩展程序，您可以通过设置 settings.yml 中的 Valkey url 来连接到它：
+如果您安装了 @Danni Valkey 插件，您可以通过设置 settings.yml 中的 Valkey url 来连接它：
 ```
   url: valkey://57fef649-valkey:6379/0
 ```
 
-为了方便，有一个扩展程序配置选项：
+为了方便，有一个插件配置选项：
 
 ```yaml
 "set_base_url_for_ingress": true
 ```
 
-如果启用 set_base_url_for_ingress，它将设置 SEARXNG_BASE_URL 环境变量，这对于 ingress 使用是必需的，并会覆盖 settings.yml 中的 base_url 变量。
+如果启用 set_base_url_for_ingress，它将设置 SEARXNG_BASE_URL 环境变量，这是 ingress 使用所必需的，并覆盖 settings.yml 中的 base_url 变量。
 
 ## 自定义
 
-在扩展程序配置文件夹（addon_configs/2effc9b9_searxng_with_mcp）第一次运行后，其中将会有一个 custom.sh 文件，您可以在其中添加自己的命令。
+在插件配置文件夹（addon_configs/2effc9b9_searxng_with_mcp）的第一次运行后，将会在文件夹中创建一个 custom.sh 文件，您可以在其中添加自己的命令。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
