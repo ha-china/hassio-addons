@@ -2,32 +2,24 @@
 
 ![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/homeassistant-test-instance/logo.png)
 
-[![打开您的 Home Assistant 实例并显示应用程序仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_homeassistant-test-instance)
-[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-0.2.8-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-homeassistant-test-instance)
+[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_homeassistant-test-instance)
+[![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-1.0.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-homeassistant-test-instance)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 用于测试目的的独立 Home Assistant 核心实例。
-
----
-
-> [!警告]
-> **实验性/测试版状态**
->
-> 此应用程序仍在开发中，或主要针对个人使用进行开发。
-> 它尚未经过充分测试，但预期可以基本工作。
+> 用于测试目的的独立 Home Assistant Core 实例。
 
 ---
 
 ## 📖 关于
 
-一个用于测试目的的独立 Home Assistant 核心实例。
+一个用于测试目的的独立 Home Assistant Core 实例。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 应用程序页面中的 **配置** 选项卡配置应用程序。
+通过 Home Assistant App 页面中的 **配置** 选项卡配置此应用。
 
 ### 选项
 

@@ -5,7 +5,7 @@
 
 ## 关于
 
-Home Assistant Core 的 Matter WebSocket 服务器。Matter（之前被称为基于 IP 的连接家居或 CHIP）是一个基于 IPv6 的智能家居标准。此应用（之前称为附加组件）提供了一个 Matter 控制器，允许您对 Matter 设备进行配置和控制。相应的 Home Assistant Core 集成通过 WebSocket 与此服务器进行通信。
+Home Assistant Core 的 Matter WebSocket 服务器。Matter（之前被称为基于 IP 的连接家居或 CHIP）是一个基于 IPv6 的智能家居标准。此应用（之前称为附加组件）提供了一个 Matter 控制器，允许您配置和控制 Matter 设备。相应的 Home Assistant Core 集成通过 WebSocket 与此服务器进行通信。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
