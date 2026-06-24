@@ -1,6 +1,6 @@
-# 鸟类助手插件：BirdNET-PiPy
+# Home Assistant 插件：BirdNET-PiPy
 
-BirdNET-PiPy 是一个自托管的系统，它使用 BirdNET 深度学习模型来识别鸟类的声音，并带有现代化的网页仪表板来监控检测。此插件将上游项目打包为 Home Assistant，并支持入口。
+BirdNET-PiPy 是一个自托管的系统，它使用 BirdNET 深度学习模型来识别鸟鸣声，并带有现代的网页仪表板以监控检测。此插件将上游项目打包为 Home Assistant 的插件，并支持入站。
 
 ## 关于
 
@@ -9,18 +9,18 @@ BirdNET-PiPy 是一个自托管的系统，它使用 BirdNET 深度学习模型�
 
 ## 安装
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的监督器插件商店中，或者如果您已配置我的 HA，则点击下面的按钮）。
-   ![打开您的 Home Assistant 实例并显示添加插件仓库对话框，其中预填充了特定的仓库 URL](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)(https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的监督器插件存储中，或者如果您已经配置了 HA，则点击下面的按钮）。
+   ![打开您的 Home Assistant 实例并显示添加插件仓库对话框，其中已预先填写特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)(https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切顺利。
 
 ## 配置
 
-安装后，首次启动插件。从 Home Assistant（入口）或直接在 `http://<host>:8011`（或您配置的端口）打开 Web UI。
-容器启动后，在 BirdNET-PiPy UI 中配置位置、音频源和其他设置。
+安装后，首次启动插件。从 Home Assistant（入站）或直接在 `http://<host>:8011`（或您配置的端口）打开 Web UI。
+在容器启动后，在 BirdNET-PiPy UI 中配置位置、音频源和其他设置。
 
-选项可以通过以下三种方式配置：
+可以通过三种方式配置选项：
 
 - 插件选项
 
@@ -32,30 +32,30 @@ env_vars: # 可选：额外的环境变量
     value: 320k # Icecast mp3 流比特率（默认 320k）
 ```
 
-- Config.yaml
-使用 Filebrowser 插件在 `/config/birdnet-pipy/config.yaml` 文件中配置额外的变量。
+- config.yaml
+使用 `/config/birdnet-pipy/config.yaml` 中的 config.yaml 文件（通过文件浏览器插件访问）可以配置额外的变量。
 
 - Config_env.yaml
-可以在那里配置额外的环境变量。
+可以在其中配置额外的环境变量。
 
 ### 挂载驱动器
 
 此插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **本地驱动器**：请参阅[插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：请参阅[插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：见 [插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：见 [插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### 自定义脚本和环境变量
 
 此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **自定义脚本**：请参阅[插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+- **自定义脚本**：见 [插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 获取详细信息。
 
 ## 注意事项
 
 - 默认情况下，音频输入使用 Home Assistant 的 PulseAudio 服务器。
-- 入口已启用；可以直接在配置的端口上访问。
+- 已启用入站；在配置的端口上可以直接访问。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

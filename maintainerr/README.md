@@ -1,12 +1,12 @@
-# Home Assistant 扩展：Maintainerr
+# Home Assistant 插件：Maintainerr
 
-_"看起来和Overseerr类似，但做的是相反的事情。"_
+_"看起来和 Overseerr 一样，却做了相反的事情。"_
 
-Maintainerr 是一个基于规则的媒体管理工具，适用于您的 Plex、Jellyfin 或 Emby 生态系统。它根据可配置的规则（观看状态、年龄、评分等）创建智能集合，并且可以选择删除未观看的内容，以保持您的媒体库整洁。
+Maintainerr 是一个基于规则的媒体管理工具，适用于您的 Plex、Jellyfin 或 Emby 生态系统。它根据可配置的规则（观看状态、年龄、评分等）创建智能收藏夹，并可选择删除未观看的内容，以保持您的媒体库整洁。
 
 ## 关于
 
-Maintainerr 与以下系统集成：
+Maintainerr 集成以下服务：
 
 - **Plex / Jellyfin / Emby** — 媒体服务器
 - **Sonarr / Radarr** — 删除媒体文件
@@ -16,8 +16,8 @@ Maintainerr 与以下系统集成：
 ## 安装
 
 1. 将仓库添加到 Home Assistant。
-2. 安装 **Maintainerr** 扩展。
-3. 启动扩展。
+2. 安装 **Maintainerr** 插件。
+3. 启动插件。
 4. 在端口 `6246` 上打开 Web UI。
 
 ## 配置
@@ -29,19 +29,19 @@ Maintainerr 与以下系统集成：
 
 ### 可用的额外环境变量
 
-| 变量 | 默认值 | 描述 |
-|------|--------|------|
+| 变量 | 默认 | 描述 |
+|------|------|------|
 | `UI_PORT` | `6246` | 更改监听端口 |
 | `BASE_PATH` | _(空)_ | 在 URL 子路径下提供服务 |
 
 ## 数据
 
-持久数据（数据库、配置）存储在 HA 扩展配置目录中，并在扩展更新和重新安装后持续存在。
+持久数据（数据库、配置）存储在 Home Assistant 插件配置目录中，并能在插件更新和重新安装后持续存在。
 
 ## 支持
 
 - [Maintainerr 上游项目](https://github.com/maintainerr/maintainerr)
-- [扩展仓库问题](https://github.com/alexbelgium/hassio-addons/issues)
+- [插件仓库问题](https://github.com/alexbelgium/hassio-addons/issues)
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

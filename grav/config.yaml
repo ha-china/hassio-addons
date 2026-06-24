@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：快速、简单、灵活，基于文件的 Web 平台'
+description: '[老王杂谈说]：null'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -89,5 +89,5 @@ schema:
 slug: grav
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
-version: "1.7.53"
+version: "2.0.0"
 webui: "[PROTO:ssl]://[HOST]:[PORT:80]"
