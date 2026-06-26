@@ -1,9 +1,9 @@
 ---
-version: 9.0.2
+version: 9.0.3
 breaking_versions: [9.0.0]
 slug: matter_server
 name: Matter Server
-description: '[老王杂谈说]：用于 Home Assistant Matter 支持的 Matter WebSocket 服务器。'
+description: '[老王杂谈说]：用于 Home Assistant Matter 支持的 Matter WebSocket 服务器'
 url: >-
   https://gh-proxy.org/github.com/home-assistant/addons/tree/master/matter_server
 arch:

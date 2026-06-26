@@ -1,7 +1,7 @@
 name: Music Assistant
-version: 2.9.3
+version: 2.9.4
 slug: music_assistant
-description: '[老王杂谈说]：Music Assistant 服务器是一个免费的开源媒体库管理器，连接你的流媒体服务和各种连接的音箱。'
+description: '[老王杂谈说]：Music Assistant 服务器是一款免费、开源的媒体库管理器，可与您的流媒体服务以及各种连接的音箱进行连接。'
 url: https://music-assistant.io
 arch:
   - amd64

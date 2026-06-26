@@ -1,13 +1,13 @@
 # 非官方Home Assistant插件：UnPoller
 
-UnPoller（<https://github.com/unpoller/unpoller>）作为Home Assistant插件打包。
+UnPoller（<https://github.com/unpoller/unpoller>）捆绑为Home Assistant插件。
 
 ## 安装
 
-按照以下步骤将插件安装到您的系统中：
+按照以下步骤将插件安装到您的系统：
 
-1. 在Home Assistant前端导航至 **Supervisor -> 插件商店**
-1. 通过URL添加此新仓库 (`https://github.com/bluemaex/home-assistant-addons`)
+1. 在Home Assistant前端导航到 **Supervisor -> 插件商店**
+1. 通过URL添加此新仓库（`https://github.com/bluemaex/home-assistant-addons`）
 1. 查找“UnPoller”插件并点击它。
 1. 点击“安装”按钮
 1. 阅读插件内的文档
@@ -22,7 +22,7 @@ UnPoller（<https://github.com/unpoller/unpoller>）作为Home Assistant插件�
 
 有关如何配置此插件的详细信息，请参阅插件页面内的[文档](DOCS.md)
 
-此项目与UnPoller无关，仅是一个社区努力的项目。UnPoller本身遵循[MIT许可证](https://github.com/unpoller/unpoller/blob/master/LICENSE)。
+此项目与UnPoller无关，仅是社区的努力。UnPoller本身是在[MIT许可证](https://github.com/unpoller/unpoller/blob/master/LICENSE)下分发的。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
