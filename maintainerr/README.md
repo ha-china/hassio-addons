@@ -1,13 +1,12 @@
 # Home Assistant 插件：Maintainerr
 
-_"看起来和 Overseerr 一样，却做了相反的事情。"_
+_"看起来和味道像 Overseerr，做的是相反的事情。"_
 
-Maintainerr 是一个基于规则的媒体管理工具，适用于您的 Plex、Jellyfin 或 Emby 生态系统。它根据可配置的规则（观看状态、年龄、评分等）创建智能收藏夹，并可选择删除未观看的内容，以保持您的媒体库整洁。
+Maintainerr 是一款基于规则的媒体管理工具，适用于您的 Plex、Jellyfin 或 Emby 生态系统。它根据可配置的规则（观看状态、年龄、评分等）创建智能集合，并且可以选择删除未观看的内容，以保持您的媒体库整洁。
 
 ## 关于
 
-Maintainerr 集成以下服务：
-
+Maintainerr 集成以下功能：
 - **Plex / Jellyfin / Emby** — 媒体服务器
 - **Sonarr / Radarr** — 删除媒体文件
 - **Overseerr / Jellyseerr** — 重置请求
@@ -15,7 +14,7 @@ Maintainerr 集成以下服务：
 
 ## 安装
 
-1. 将仓库添加到 Home Assistant。
+1. 将存储库添加到 Home Assistant。
 2. 安装 **Maintainerr** 插件。
 3. 启动插件。
 4. 在端口 `6246` 上打开 Web UI。
@@ -36,12 +35,12 @@ Maintainerr 集成以下服务：
 
 ## 数据
 
-持久数据（数据库、配置）存储在 Home Assistant 插件配置目录中，并能在插件更新和重新安装后持续存在。
+持久数据（数据库、配置）存储在 HA 插件配置目录中，并可在插件更新和重新安装后继续使用。
 
 ## 支持
 
 - [Maintainerr 上游项目](https://github.com/maintainerr/maintainerr)
-- [插件仓库问题](https://github.com/alexbelgium/hassio-addons/issues)
+- [插件存储库问题](https://github.com/alexbelgium/hassio-addons/issues)
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

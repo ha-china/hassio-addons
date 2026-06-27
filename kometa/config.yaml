@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：Python 脚本用于更新电影、剧集和合集的元数据信息，并自动构建合集'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -94,4 +94,4 @@ schema:
 slug: kometa
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/kometa
-version: "2.4.3"
+version: "2.4.4"

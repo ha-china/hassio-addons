@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.0-beta.5
+
+### Improvements
+
+- Browsing and adding widgets got a cleaner, more consistent look. The widget browser ("Get more widgets") and the add-widget picker now share the same card layout, with a tidy search-and-filter bar and a side-by-side view for the widget you're inspecting.
+- Pro now covers your whole home. When one member has Pro, every member, kiosk, and family phone gets Pro features too. If your home goes offline, Pro keeps working for two weeks before it steps down.
+- After you sign out, the setup screen remembers and pre-fills your last Home Assistant address, so reconnecting is one less thing to type.
+
+### Fixes
+
+- The Reduce Blur and Reduce Motion accessibility settings now apply inside widgets too, not just the rest of the app.
+- In dark mode, widgets now follow your custom theme's colors and corner roundness instead of falling back to the defaults.
+
 ## 1.0.0-beta.4
 
 ### Improvements
