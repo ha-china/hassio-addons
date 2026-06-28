@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.0-beta.6
+
+### Improvements
+
+- Remote access now lives in one place. Settings has a single "Remote access" card covering both the managed GlassHome tunnel and your own addresses (a home reverse proxy, a VPN, or your own tunnel). A reverse proxy on your home network is free; a public address needs GlassHome Pro.
+- The sign-in screen was redesigned. The ways to sign in are now clear, colour-coded cards, with the best one for your situation highlighted: Home Assistant at home, your GlassHome account when you're away. It also shows your home's name so you know where you're signing in.
+- No more dead ends when you're away from home. If Home Assistant can't be reached, that option is clearly marked unavailable with what to do instead, rather than dropping you on a browser error page.
+- The mobile app now works away from home, not just on your home network. It reaches Home Assistant securely through your dashboard server, the same way the web app does.
+
+### Fixes
+
+- A widget that fails to auto-update now quietly retries once before showing an error.
+
 ## 1.0.0-beta.5
 
 ### Improvements

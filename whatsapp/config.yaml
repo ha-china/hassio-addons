@@ -1,8 +1,8 @@
 name: "WhatsApp Home Assistant App"
-version: "1.6.2"
+version: "1.6.3"
 slug: "whatsapp"
 image: ghcr.nju.edu.cn/faserf/hassio-addons-whatsapp-{arch}
-description: "[老王杂谈说]：Home Assistant WhatsApp 应用 (Baileys/Node.js)."
+description: "[老王杂谈说]：Home Assistant WhatsApp 应用 (Baileys/Node.js)。"
 url: "https://gh-proxy.org/github.com/FaserF/ha-whatsapp"
 arch:
   - aarch64
@@ -33,6 +33,7 @@ options:
   group_fetch_interval: 300000
   group_fetch_cooldown_on_error: 60000
   group_fetch_cooldown_on_rate_limit: 900000
+  reject_unauthorized: true
 schema:
   log_level: list(trace|debug|info|notice|warning|error|fatal)
   reset_session: bool
@@ -53,6 +54,7 @@ schema:
   group_fetch_interval: int
   group_fetch_cooldown_on_error: int
   group_fetch_cooldown_on_rate_limit: int
+  reject_unauthorized: bool
 ports:
   8066/tcp: 8066
 hassio_api: true
