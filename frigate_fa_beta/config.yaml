@@ -1,5 +1,5 @@
 name: Frigate (Full Access) Beta
-version: 0.17.1
+version: 0.17.2
 breaking_versions:
   - 0.17.0
   - 0.16.0
@@ -8,7 +8,7 @@ breaking_versions:
 panel_icon: "mdi:cctv"
 panel_title: Frigate
 slug: frigate-fa-beta
-description: '[老王杂谈说]：具有实时本地物体检测功能的NVR，用于IP摄像机'
+description: '[老王杂谈说]：null'
 url: "https://gh-proxy.org/github.com/blakeblackshear/frigate"
 image: ghcr.nju.edu.cn/blakeblackshear/frigate
 startup: application

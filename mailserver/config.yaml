@@ -1,7 +1,7 @@
 name: Mailserver
-version: 6.1.3
+version: 6.1.4
 slug: mailserver
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：专为 Home Assistant 设计的 Postfix 和 Dovecot 邮件服务器，配有 Postfix Admin 管理界面。'
 url: https://gh-proxy.org/github.com/erik73/hassio-addons
 arch:
   - aarch64

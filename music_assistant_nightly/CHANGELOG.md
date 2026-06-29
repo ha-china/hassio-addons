@@ -1,101 +1,79 @@
-# [2.10.0.dev2026062807] - 28.06.2026
+# [2.10.0.dev2026062908] - 29.06.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.10.0.dev2026062706](https://github.com/music-assistant/server/releases/tag/2.10.0.dev2026062706)_
-
-### 🚀 New Providers
-
-- Add Bose SoundTouch player provider (by @Odn0 in #3891)
+_Changes since [2.10.0.dev2026062815](https://github.com/music-assistant/server/releases/tag/2.10.0.dev2026062815)_
 
 ### 🚀 Features and enhancements
 
-- Add birthday/memoriam recommendations via MusicBrainz (by @dmoo500 in #3833)
-- mcp: add set_repeat tool to queue controls (by @steamEngineer in #4377)
-- mcp: add explicit pause/resume playback tools (by @steamEngineer in #4390)
-- mcp: add players ungroup tool  (by @steamEngineer in #4391)
-- Unload idle audio-analysis models to reclaim memory (by @marcelveldt in #4452)
+- Add playlist metadata infrastructure to MetadataProvider (by @dmoo500 in #4460)
+- Add support for podcast chapters in Audiobookshelf (by @fmunkes in #4478)
+- Bounded managed pool for radio mode (by @marcelveldt in #4479)
 
 ### 🐛 Bugfixes
 
-- Avoid syncing native parent volume to AirPlay protocols (by @jyundt in #3980)
-- Fix Local Audio pulse audio syncing, silence, and volume on intial playback (by @iVolt1 in #4453)
-
-### 🎨 Frontend Changes
-
-- Include icon aliases in IconPicker search results (by @dmoo500 in [#1972](https://github.com/music-assistant/frontend/pull/1972))
-- Add missing aria labels (by @stvncode in [#1973](https://github.com/music-assistant/frontend/pull/1973))
-- Upgrade eslint + add oxlint (by @stvncode in [#1958](https://github.com/music-assistant/frontend/pull/1958))
-
-### Other Changes
-
-- Lokalise translations update (by @github-actions[bot] in #4454)
+- Improve Hue entertainment start reliability for slow DTLS handshakes (by @steamEngineer in #4467)
+- Fix the podcast's title not being used in Audiobookshelf's episode parser (by @fmunkes in #4477)
+- iBroadcast mapping issue with album id's and possible other id's (by @robsonke in #4482)
 
 ### 🧰 Maintenance and dependency bumps
 
-- ⬆️ Update music-assistant-frontend to 2.17.203 (by @music-assistant-machine in #4468)
+- Auto-sync provider manifests on Dependabot PRs (by @marcelveldt in #4471)
+- Clarify supported installation methods in README (by @marcelveldt in #4480)
+- Bump wiim from 0.1.4 to 0.1.5 (by @dependabot[bot] in #4481)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@Odn0, @dmoo500, @iVolt1, @jyundt, @marcelveldt, @steamEngineer, @stvncode
+@dmoo500, @fmunkes, @marcelveldt, @robsonke, @steamEngineer
 
 
-# [2.10.0.dev2026062706] - 27.06.2026
+# [2.10.0.dev2026062815] - 28.06.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.10.0.dev2026062622](https://github.com/music-assistant/server/releases/tag/2.10.0.dev2026062622)_
+_Changes since [2.10.0.dev2026062814](https://github.com/music-assistant/server/releases/tag/2.10.0.dev2026062814)_
 
 ### 🚀 Features and enhancements
 
-- Improve stream URL handling with failover support (by @benklop in #2996)
-- Adapt artist / audiobook controller for authors and narrators (by @fmunkes in #3570)
-- Enhance play_media start_item parameter to allow latest podcast episode to be played and podcast/playlist to play from here (by @OzGav in #3832)
-- Rewrite Deezer provider with GraphQL client (by @jdaberkow in #3900)
-- Adjust Sonic Similarity base scoring and pools to allow for better matching and more meaningful presets (by @chrisuthe in #4429)
-- Improve Search results from Sonic Similarity Plugin (by @chrisuthe in #4430)
-- Add native player sleep timers (by @teancom in #4432)
-
-### 🐛 Bugfixes
-
-- Apple Music: Intelligent fallback for deprecated catalog tracks (by @dmoo500 in #4109)
-- Smart Playlist: Enrich library tracks with database genres for filtering (by @dmoo500 in #4175)
-- Cap concurrent realtime audio analysis sessions (by @marcelveldt in #4451)
-
-### 🎨 Frontend Changes
-
-- Lokalise: Translations update (by @marcelveldt in [#1971](https://github.com/music-assistant/frontend/pull/1971))
-- add bitrate information to the QualityDetailsBtn.vue screen (by @Bonusbartus in [#1754](https://github.com/music-assistant/frontend/pull/1754))
-- Add sleep timer support (by @marcelveldt in [#1970](https://github.com/music-assistant/frontend/pull/1970))
+- Enhance and fix podcast metadata (episode descriptions, chapters, parent-podcast name) in gPodder, iTunes Podcast and Podcast RSS Feed (by @chrisuthe in #4444)
+- Genre content-type awareness: create/edit safety + targeted restore (by @jozefKruszynski in #4474)
+- Smart shuffle for player queues (by @marcelveldt in #4475)
 
 ### 🧰 Maintenance and dependency bumps
 
-- Refactor MusicBrainz provider into multi-file package (by @dmoo500 in #3905)
-- ⬆️ Update music-assistant-frontend to 2.17.202 (by @music-assistant-machine in #4455)
+- Replace obfuscated app_vars with build-time secret injection (by @marcelveldt in #4473)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@Bonusbartus, @OzGav, @benklop, @chrisuthe, @dmoo500, @fmunkes, @jdaberkow, @marcelveldt, @teancom
+@chrisuthe, @jozefKruszynski, @marcelveldt
 
 
-# [2.10.0.dev2026062622] - 26.06.2026
+# [2.10.0.dev2026062814] - 28.06.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.10.0.dev2026062606](https://github.com/music-assistant/server/releases/tag/2.10.0.dev2026062606)_
+_Changes since [2.10.0.dev2026062807](https://github.com/music-assistant/server/releases/tag/2.10.0.dev2026062807)_
 
 ### 🐛 Bugfixes
 
-- Give playback priority over realtime audio analysis (by @marcelveldt in #4449)
+- Audiobookshelf: tolerate out-of-range podcast episode dates (by @OzGav in #4458)
+- Fix min/max volume scaling lost on protocol/external volume redirect (by @Hopperpop in #4461)
+- Unsync a player when its power is turned off externally (by @marcelveldt in #4463)
+- Fix discover page not loading due to MusicBrainz recommendation scan (by @marcelveldt in #4470)
+- Prevent providers picking the same port when starting concurrently (by @marcelveldt in #4472)
+
+### 🧰 Maintenance and dependency bumps
+
+- ⬆️ Update music-assistant-models to 1.1.145 (by @music-assistant-machine in #4476)
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@marcelveldt
+@Hopperpop, @OzGav, @marcelveldt
 
 

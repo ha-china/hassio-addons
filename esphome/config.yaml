@@ -13,18 +13,12 @@ uart: true
 ports:
   6052/tcp: null
 map:
-  - ssl:ro
   - config:rw
 discovery:
   - esphome
 schema:
-  status_use_ping: bool?
-  streamer_mode: bool?
   home_assistant_dashboard_integration: bool?
   default_compile_process_limit: int(1,)?
-  ssl: bool?
-  certfile: str?
-  keyfile: str?
   leave_front_door_open: bool?
 backup_exclude:
   - '*/*/'
@@ -32,7 +26,7 @@ init: false
 startup: services
 name: ESPHome Device Builder
 panel_title: ESPHome Builder
-version: 2026.6.2
+version: 2026.6.3
 slug: esphome
-description: '[老王杂谈说]：使用 ESPHome 构建智能家居设备，无需编程经验'
+description: '[老王杂谈说]：null'
 image: ghcr.nju.edu.cn/esphome/esphome-hassio

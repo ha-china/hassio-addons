@@ -1,36 +1,36 @@
 # NGINX
 
-![NGINX 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/nginx/logo.png) width="100" alt="Logo" />
+![NGINX Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/nginx/logo.png) width="100" alt="Logo" />
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_nginx)
 [![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-0.4.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-nginx)
+[![Docker 镜像](https://img.shields.io/badge/docker-0.4.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-nginx)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 开源 Web 服务器，支持 PHP 和 MariaDB。
+> 开源 Web 服务器，带有 PHP 和 MariaDB。
 
 ---
 
-> [!注意]
+> [!警告]
 > **实验性/测试版状态**
 >
-> 此应用仍在开发中，或主要针对个人使用进行开发。
-> 它尚未经过广泛测试，但预计基本功能将正常工作。
+> 此应用仍在开发中，或主要用于个人使用。
+> 它尚未经过充分测试，但预期在基本功能上应该可以正常工作。
 
 ---
 
 ## 📖 关于
 
-NGINX 是一个高性能的 HTTP 服务器和反向代理，以其稳定性、丰富的功能集和低资源消耗而闻名。此插件提供了 NGINX 与 PHP-FPM 和 MariaDB 客户端的支持，为复杂 Web 应用程序的托管和高并发环境提供了一个现代且极快的替代方案。
+NGINX 是一个高性能的 HTTP 服务器和反向代理，以其稳定性、丰富的功能集和低资源消耗而闻名。此插件为 NGINX 提供了 PHP-FPM 和 MariaDB 客户端支持，提供了一个现代且极为快速的替代 Apache 的选择，用于服务复杂的 Web 应用程序和处理高并发环境。
 
 ---
 
 ## 🏠 Home Assistant 集成
 
-此插件支持 Home Assistant 的 **Web 服务器应用** 集成。
-集成将在插件启动时自动安装/更新。
+此插件支持 Home Assistant 的 **Web服务器应用** 集成。
+当插件启动时，集成会自动安装/更新。
 
-有关更多信息和管理细节，请参阅 [集成 README](../custom_components/webserver_app/README.md)。
+有关更多信息以及配置细节，请参阅 [集成 README](https://github.com/FaserF/ha-webserver)。
 
 ---
 
@@ -55,9 +55,9 @@ website_name: web.local
 
 ---
 
-## 👨‍💻 贡献者与许可证
+## 👨‍💻 贡献者与许可协议
 
-此项目是开源的，并受 MIT 许可证的约束。
+此项目是开源的，并遵循 MIT 许可协议。
 由 **FaserF** 维护。
 ---
 

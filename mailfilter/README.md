@@ -8,14 +8,14 @@ Rspamd 邮件过滤器，可选 ClamAV 抗病毒功能...
 
 ## 关于
 
-重要：此应用需要安装邮件服务器应用！
+重要：此应用要求已安装邮件服务器应用！
 
 此应用为您的邮件服务器提供邮件过滤器。
 
 [维护盾牌]: https://img.shields.io/maintenance/yes/2026.svg
-[项目阶段盾牌]: https://img.shields.io/badge/project%20stage-实验性-黄色.svg
-[发布盾牌]: https://img.shields.io/badge/version-v6.0.0-蓝色.svg
-[发布]: https://github.com/erik73/app-mailfilter/tree/v6.0.0
+[项目阶段盾牌]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
+[发布盾牌]: https://img.shields.io/badge/version-v6.0.1-blue.svg
+[发布]: https://github.com/erik73/app-mailfilter/tree/v6.0.1
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
