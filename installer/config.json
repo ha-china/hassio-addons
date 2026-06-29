@@ -8,7 +8,10 @@
   "init": false,
   "startup": "services",
   "boot": "auto",
-  "ingress": false,
+  "ingress": true,
+  "ingress_port": 7733,
+  "panel_title": "部署向导",
+  "panel_icon": "mdi:home-lightning-bolt",
   "map": ["config:rw", "share:rw"],
   "hassio_api": true,
   "homeassistant_api": true,
@@ -16,13 +19,6 @@
   "image": "crpi-tuq1xajq0lk6s0kt.cn-shanghai.personal.cr.aliyuncs.com/hachina/installer-{arch}",
   "full_access": false,
   "apparmor": true,
-  "webui": "http://[HOST]:[PORT:7733]",
-  "ports": {
-    "7733/tcp": 7733
-  },
-  "ports_description": {
-    "7733/tcp": "部署向导Web界面"
-  },
   "options": {},
   "schema": {},
   "homeassistant": "2023.1.0",
