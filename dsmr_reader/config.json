@@ -1,6 +1,6 @@
 {
   "name": "DSMR Reader",
-  "version": "2.1.0",
+  "version": "2.1.2",
   "slug": "dsmr_reader",
   "description": "[老王杂谈说]：用于读取智能电表 DSMR P1 接口 (https://dsmr-reader.readthedocs.io)",
   "arch": [

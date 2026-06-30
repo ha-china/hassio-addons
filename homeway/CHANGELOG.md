@@ -1,7 +1,7 @@
 <!-- https://developers.home-assistant.io/docs/add-ons/presentation#keeping-a-changelog -->
 <!-- This is used in the homeway UI to show updates, so keep it up to date. -->
 
-## 3.0.8
+## 3.1.0
 
 - 🧠 [Connect Your AI With The New Remote MCP Server for Home Assistant](https://blog.homeway.io/remote-mcp-server-for-home-assistant/?source=addon_changelog)
     - Works with all major AI agents and assistants, including Claude, Gemini, ChatGPT, Copilot, Cursor, and more!
@@ -18,6 +18,8 @@
     - Free STUN and TURN server usage for all users.
     - No setup required, it will work right now!
     - [Check out our launch blog post to learn more!](https://blog.homeway.io/free-webrtc-video-streaming-for-home-assistant/?source=addon_changelog)
+- 🚀 Big Perf and Memory Improvements
+    - We made numerous performance and RAM optimizations in our sister project [OctoEverywhere](https://octoeverywhere.com), which we have now ported to Homeway!
 - 🐛 Various bug fixes and improvements
 
 
