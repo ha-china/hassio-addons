@@ -1,9 +1,9 @@
 name: MyIP
-version: "v6.5.0"
+version: "v6.6.0"
 upstream: latest
 slug: myip
 description: >-
-  [老王杂谈说]：最棒的 IP 工具箱。轻松查看你的 IP、IP 地理位置查询、检测 DNS 泄露、检查 WebRTC 连接、速度测试、Ping 测试、MTR 测试、检测网站可用性、Whois 查询及其他更多功能！
+  [老王杂谈说]：最佳 IP 工具箱。轻松查看您的 IP、IP 地理位置查询、检测 DNS 泄露、检查 WebRTC 连接、速度测试、Ping 测试、MTR 测试、检查网站可用性、Whois 查询以及更多！
 arch:
   - amd64
   - aarch64

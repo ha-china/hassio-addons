@@ -2,14 +2,14 @@
 
 ![支持aarch64架构][aarch64-shield] ![支持amd64架构][amd64-shield]
 
-Home Assistant应用（之前称为附加组件），使用多个语音识别后端：
+Home Assistant应用（之前称为附加组件），使用多个语音转文本后端：
 
 - [faster-whisper](https://github.com/guillaumekln/faster-whisper/)
 - [HuggingFace transformers](https://huggingface.co/docs/transformers/index)
-- [sherpa-onnx](https://k2-fsa.github.io/sherpa/onnx/index.html) ([parakeet](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3) 仅支持)
-- [onnx-asr](https://github.com/istupakov/onnx-asr) ([GigaAM](https://github.com/salute-developers/GigaAM) 仅支持)
+- [sherpa-onnx](https://k2-fsa.github.io/sherpa/onnx/index.html) ([仅parakeet](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3))
+- [onnx-asr](https://github.com/istupakov/onnx-asr) ([仅GigaAM](https://github.com/salute-developers/GigaAM))
 
-是 [Voice Year](https://www.home-assistant.io/blog/2022/12/20/year-of-voice/) 的一部分。
+是[声音年](https://www.home-assistant.io/blog/2022/12/20/year-of-voice/)的一部分。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg

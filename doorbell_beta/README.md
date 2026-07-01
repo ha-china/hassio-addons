@@ -1,6 +1,6 @@
-# Home Assistant App: 大华门铃（__测试版__）
+# Home Assistant App: 大华门铃（__Beta__）
 
-__注意__：此应用仅用于测试，如果您仍在使用它，请切换到“稳定版”
+__注意__：此应用程序仅用于测试，如果您仍在使用它，请切换到“稳定”版本
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

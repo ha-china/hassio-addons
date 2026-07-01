@@ -10,7 +10,7 @@ InfluxDB3是一个针对高写入量优化的时序数据库。
 它提供了一个HTTP API以供客户端交互，并且通常与Grafana结合使用以可视化数据。
 
 InfluxDB3的管理必须通过InfluxDB 3 Explorer来执行。
-它可以作为一个docker容器下载，并安装在你的电脑上的Docker Desktop等地方。
+它可以作为一个Docker容器下载，并在例如Docker Desktop等计算机上安装。
 
 # Inluxdata 家庭许可证
 

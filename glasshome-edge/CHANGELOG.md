@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.0.0-beta.8
+
+### Fixes
+
+- Album art and camera images now load when you're away from home, not just on your home network. Media-player widgets show cover art and camera widgets show their picture over remote access, the same as at home.
+
+## 1.0.0-beta.7
+
+### Improvements
+
+- The dashboard's frosted-glass blur is now faster and lighter, especially when you have many widgets on screen. A new Blur setting lets you choose how it looks: Performant Blur (the new default, the same frosted look at a fraction of the cost), Dynamic Blur (real-time and most accurate, but heaviest on the device), or No Blur (solid surfaces, the lightest option).
+- The lights and lock summary in the dashboard header are now two buttons. Tap the lights chip to turn off every light in view, or the lock chip to lock every door, right from the dashboard.
+
+### Fixes
+
+- The icon next to a page's title is now properly centered.
+
 ## 1.0.0-beta.6
 
 ### Improvements
