@@ -64,15 +64,16 @@ export function registerAPIRoutes(app) {
     const session = getReqSession(req);
     addLog(session, 'Received Logout/Reset request', 'warning');
     try {
-      if (session.sock) {
+      const sock = session.sock;
+      if (sock) {
+        session.sock = undefined;
         await Promise.race([
-          session.sock.logout(),
+          sock.logout(),
           new Promise((_, reject) => setTimeout(() => reject(new Error('Logout timeout')), 5000)),
         ]).catch((e) =>
           logger.warn({ error: e.message, sessionId: session.id }, 'Logout failed or timed out')
         );
-        session.sock.end(undefined);
-        session.sock = undefined;
+        sock.end(undefined);
       }
       const authDir = getAuthDir(session.id);
       try {
@@ -82,6 +83,7 @@ export function registerAPIRoutes(app) {
       }
       fs.mkdirSync(authDir, { recursive: true });
       session.isConnected = false;
+      session.isConnecting = false;
       session.currentQR = null;
       session.eventQueue = [];
       session.connectionLogs = [];
@@ -119,6 +121,17 @@ export function registerAPIRoutes(app) {
     if (session.isConnected) return res.json({ status: 'connected', qr: null });
     if (session.currentQR) return res.json({ status: 'scanning', qr: session.currentQR });
     return res.json({ status: 'waiting', detail: 'QR generation in progress' });
+  });
+
+  // Passkey ceremony status — polled by the integration config flow during
+  // the "approve on phone" waiting step (experimental Option 2).
+  app.get('/passkey/status', authMiddleware, (req, res) => {
+    const session = getReqSession(req);
+    res.json({
+      passkeyDetected: session.passkeyDetected || false,
+      passkeyWaiting: session.passkeyWaiting || false,
+      isConnected: session.isConnected || false,
+    });
   });
 
   app.post('/session/pair', authMiddleware, async (req, res) => {
@@ -165,6 +178,8 @@ export function registerAPIRoutes(app) {
       connected: session.isConnected,
       disconnect_reason: session.isConnected ? null : session.disconnectReason,
       uptime: Math.floor((Date.now() - session.stats.start_time) / 1000),
+      chat_count: session.chatCache ? session.chatCache.size : 0,
+      group_count: session.groupCache ? session.groupCache.size : 0,
     });
   });
 
@@ -707,6 +722,7 @@ export function registerAPIRoutes(app) {
 
       res.json({
         total_chats: session.chatCache ? session.chatCache.size : groupList.length,
+        initial_chats_received: session.initialChatsReceived || false,
         groups: groupList,
       });
     } catch (e) {
@@ -877,7 +893,103 @@ export function registerAPIRoutes(app) {
       webhookEnabled: WEBHOOK_ENABLED,
       webhookUrl: WEBHOOK_URL,
       deviceInfo: session.deviceInfo || {},
+      passkeyDetected: session.passkeyDetected || false,
+      passkeyWaiting: session.passkeyWaiting || false,
     });
+  });
+
+  function getMessageText(msg) {
+    if (!msg || !msg.message) return '';
+    let m = msg.message;
+    if (m.ephemeralMessage) m = m.ephemeralMessage.message;
+    if (m.viewOnceMessage) m = m.viewOnceMessage.message;
+    if (m.viewOnceMessageV2) m = m.viewOnceMessageV2.message;
+    if (m.documentWithCaptionMessage) m = m.documentWithCaptionMessage.message;
+    if (!m) return '';
+
+    return (
+      m.conversation ||
+      m.extendedTextMessage?.text ||
+      m.imageMessage?.caption ||
+      m.videoMessage?.caption ||
+      m.buttonsResponseMessage?.selectedDisplayText ||
+      m.templateButtonReplyMessage?.selectedId ||
+      (m.imageMessage ? '🖼️ Image' : '') ||
+      (m.videoMessage ? '📹 Video' : '') ||
+      (m.audioMessage ? '🎵 Audio' : '') ||
+      (m.documentMessage ? '📄 Document' : '') ||
+      (m.pollCreationMessage ? `📊 Poll: ${m.pollCreationMessage.name}` : '') ||
+      ''
+    );
+  }
+
+  app.get('/api/chats', uiAuthMiddleware, (req, res) => {
+    const sessionId = sanitizeSessionId(req.query.session_id || 'default');
+    const session = getSession(sessionId);
+    if (!session.messageStore) return res.json([]);
+
+    const messages = Array.from(session.messageStore.values());
+    const JidMap = {};
+
+    messages.forEach((msg) => {
+      if (!msg.key || !msg.key.remoteJid) return;
+      const jid = msg.key.remoteJid;
+      if (!jid.endsWith('@s.whatsapp.net') && !jid.endsWith('@g.us')) return;
+
+      const msgTime = (msg.messageTimestamp?.low || msg.messageTimestamp || 0) * 1000;
+      const previewText = getMessageText(msg);
+
+      if (!JidMap[jid] || msgTime > JidMap[jid].timestamp) {
+        let name = jid.split('@')[0];
+        if (jid.endsWith('@g.us') && session.groupCache && session.groupCache.has(jid)) {
+          name = session.groupCache.get(jid);
+        } else if (msg.pushName) {
+          name = msg.pushName;
+        }
+
+        JidMap[jid] = {
+          jid,
+          name,
+          preview: previewText,
+          timestamp: msgTime,
+          fromMe: msg.key.fromMe || false,
+        };
+      } else if (msg.pushName && JidMap[jid] && JidMap[jid].name === jid.split('@')[0]) {
+        JidMap[jid].name = msg.pushName;
+      }
+    });
+
+    const chats = Object.values(JidMap)
+      .filter((c) => c.preview && c.preview.trim().length > 0)
+      .sort((a, b) => b.timestamp - a.timestamp);
+    res.json(chats);
+  });
+
+  app.get('/api/messages', uiAuthMiddleware, (req, res) => {
+    const sessionId = sanitizeSessionId(req.query.session_id || 'default');
+    const session = getSession(sessionId);
+    const targetJid = req.query.jid;
+
+    if (!targetJid) return res.status(400).json({ detail: 'Missing jid parameter' });
+    if (!session.messageStore) return res.json([]);
+
+    const messages = Array.from(session.messageStore.values())
+      .filter((msg) => msg.key && msg.key.remoteJid === targetJid)
+      .map((msg) => {
+        const timestamp = (msg.messageTimestamp?.low || msg.messageTimestamp || 0) * 1000;
+        const text = getMessageText(msg);
+        return {
+          id: msg.key.id,
+          fromMe: msg.key.fromMe || false,
+          senderName: msg.key.fromMe ? 'You' : msg.pushName || targetJid.split('@')[0],
+          text,
+          timestamp,
+        };
+      })
+      .filter((m) => m.text && m.text.trim().length > 0)
+      .sort((a, b) => a.timestamp - b.timestamp);
+
+    res.json(messages);
   });
 
   app.post('/api/session/restart', uiAuthMiddleware, (req, res) => {
