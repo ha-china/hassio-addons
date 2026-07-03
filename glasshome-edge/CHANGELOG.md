@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.0.0-beta.9
+
+### Improvements
+
+- Adding a phone or tablet is now as easy as scanning a QR code. Open the new device dialog, scan the code with the new device, and confirm with one tap, no sign-in or typing needed. Devices without a camera can enter a 6-digit code instead, with an on-screen numpad for touch screens. While a device is connecting you now see clear progress indicators instead of a frozen screen.
+- The sign-in screen now fills in your Home Assistant address for you, taken from your home's settings, so there's one less thing to type. You can still change it if you need to. The welcome screen also fits better on short screens instead of pushing content off the bottom.
+- The Area widget was redesigned. It now shows your room's controls as a clean column of tiles, making each light, switch, and sensor easier to see and tap.
+- Installing a community widget now shows one clear permission dialog instead of two back-to-back popups. It lists exactly what the widget wants access to, with a "How widgets are kept safe" explainer if you want the details.
+- Widgets can now use icons from any icon set, not just a small built-in selection. Icons are cached on your box after first use, so they keep working offline. Icons also no longer flicker or shift while you scroll.
+- Widgets now download as smaller, faster bundles and update automatically after you upgrade.
+- The dropdown menus in Settings now have a consistent size and no longer waste space on mobile.
+
+### Fixes
+
+- Performant Blur (the default frosted-glass mode) now works on iPhone, iPad, and Mac. Before, glass surfaces on those devices showed no blur at all.
+- Changing your background now updates the frosted glass instantly, instead of showing the old background's frost until you reloaded.
+- The frosted-glass look is now identical in every blur mode, with the same strength and tint everywhere. Kiosks and tablets also get their frost instantly after a reload instead of re-computing it.
+- Widgets no longer appear slightly too small right after the dashboard's opening animation.
+
 ## 1.0.0-beta.8
 
 ### Fixes
