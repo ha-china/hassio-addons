@@ -1,7 +1,7 @@
 name: "Manyfold"
 slug: manyfold
 description: "[老王杂谈说]：null"
-version: "0.145.1-2"
+version: "0.146.0"
 url: "https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/manyfold"
 image: ghcr.nju.edu.cn/alexbelgium/manyfold-{arch}
 arch:

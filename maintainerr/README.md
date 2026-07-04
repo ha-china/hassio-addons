@@ -1,12 +1,12 @@
 # Home Assistant 插件：Maintainerr
 
-_"看起来和味道像 Overseerr，做的是相反的事情。"_
+_"看起来和Overseerr很像，但做的是相反的事情。"_
 
-Maintainerr 是一款基于规则的媒体管理工具，适用于您的 Plex、Jellyfin 或 Emby 生态系统。它根据可配置的规则（观看状态、年龄、评分等）创建智能集合，并且可以选择删除未观看的内容，以保持您的媒体库整洁。
+Maintainerr 是一个基于规则的媒体管理工具，适用于您的 Plex、Jellyfin 或 Emby 生态系统。它根据可配置的规则（观看状态、年龄、评分等）创建智能集合，并且可以选择删除未观看的内容，以保持您的媒体库整洁。
 
 ## 关于
 
-Maintainerr 集成以下功能：
+Maintainerr 集成以下服务：
 - **Plex / Jellyfin / Emby** — 媒体服务器
 - **Sonarr / Radarr** — 删除媒体文件
 - **Overseerr / Jellyseerr** — 重置请求
@@ -35,7 +35,7 @@ Maintainerr 集成以下功能：
 
 ## 数据
 
-持久数据（数据库、配置）存储在 HA 插件配置目录中，并可在插件更新和重新安装后继续使用。
+持久数据（数据库、配置）存储在 HA 插件配置目录中，并会在插件更新和重新安装后保留。
 
 ## 支持
 

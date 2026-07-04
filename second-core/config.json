@@ -1,8 +1,8 @@
 {
   "name": "HA Second Core",
-  "version": "2026.7.0",
+  "version": "2026.7.1",
   "slug": "second_core",
-  "description": "[老王杂谈说]：null",
+  "description": "[老王杂谈说]：默认在端口 8124 上运行第二个 Home Assistant 核心版。",
   "arch": [
     "amd64",
     "aarch64"
