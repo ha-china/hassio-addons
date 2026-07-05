@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.0.0-beta.10
+
+### Improvements
+
+- Settings now shows you and your home together in a single household card, instead of two separate "You" and "Your Home" cards.
+- The Devices screen groups your connected devices by person and clears out stale sessions, so the list stays tidy.
+- The Remote Access settings got a visual refresh: the managed tunnel and your own addresses are now clearly separated with icons and dividers.
+
+### Fixes
+
+- Widgets now size correctly across more tile shapes. State cards size to the tile's height as well as its width, so they no longer look cramped or oversized.
+- Fixed "ghost" widget tiles that could linger in empty slots, and gave every widget slot the same consistent look.
+- Updated the Home Assistant logo to its current mark.
+
 ## 1.0.0-beta.9
 
 ### Improvements

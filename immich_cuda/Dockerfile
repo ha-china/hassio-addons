@@ -37,18 +37,18 @@ RUN chmod 744 /ha_lsio.sh && if grep -qr "lsio" /etc; then /ha_lsio.sh "$CONFIGL
 # Install REDIS
 ENV DOCKER_MODS="imagegenius/mods:universal-redis"
 
-#    && chmod 777 -R /docker-mods \
-#        && /./docker-mods/* || ls / \
-#    && if [ !-f /defaults/redis.conf ]; then echo "Not installed" && exit 1; fi
-#ENV DOCKER_MODS=""
-
 ##################
 # 3 Install apps #
 ##################
 
 # Add rootfs
 COPY rootfs/ /
-RUN find . -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -exec chmod +x {} \;
+
+# FIX BUG 1: scope find to HA-owned directories only, never the whole filesystem.
+# Running `find .` from WORKDIR=/ hits node_modules inside /app/immich and fails chmod (exit 1).
+RUN find /etc /usr/local/bin /usr/local/lib /usr/local/share \
+    -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) \
+    -exec chmod +x {} \; 2>/dev/null || true
 
 # Uses /bin for compatibility purposes
 # hadolint ignore=DL4005
@@ -63,7 +63,7 @@ COPY ha_automodules.sh /ha_automodules.sh
 RUN chmod 744 /ha_automodules.sh && /ha_automodules.sh "$MODULES" && rm /ha_automodules.sh
 
 # Manual apps
-ENV PACKAGES="sudo sed yamllint pip jq"
+ENV PACKAGES="sudo yamllint pip sed jq"
 
 # Automatic apps & bashio
 COPY ha_autoapps.sh /ha_autoapps.sh
@@ -82,19 +82,21 @@ RUN chmod 777 /ha_entrypoint.sh
 COPY bashio-standalone.sh /usr/local/lib/bashio-standalone.sh
 RUN chmod 0755 /usr/local/lib/bashio-standalone.sh
 
-RUN apt-get update && apt-get install -y --no-install-recommends sed \
-    && sed -i "s|postgresql-16|postgresql-15|g" /etc/s6-overlay/s6-rc.d/init-test-run/run
+# FIX BUG 2: /etc/s6-overlay/s6-rc.d/init-test-run/run no longer exists in the
+# imagegenius base image (service was removed). Guard with file existence check.
+# The base image already ships postgresql-client-14 through 18, so the redundant
+# install is removed. Only the conditional sed is kept for backward compatibility
+# in case a future base image re-introduces the file.
+RUN if [ -f /etc/s6-overlay/s6-rc.d/init-test-run/run ]; then \
+        sed -i "s|postgresql-16|postgresql-15|g" /etc/s6-overlay/s6-rc.d/init-test-run/run; \
+    fi
 
-# Install dependencies
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    lsb-release \
-    wget \
-    gnupg && \
-    echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
-    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends postgresql-client-15
+# postgresql-client (for the psql CLI used in 99-run.sh) is already installed by the
+# imagegenius base image, so no separate install is needed here. A previous PGDG-repo
+# install using `apt-key add` was removed: the base image moved to a release where the
+# apt-key binary no longer exists, breaking the build. Fail the build early, rather than
+# surfacing a cryptic runtime failure in 99-run.sh, if a future base image drops it.
+RUN command -v psql || { echo "psql not found in base image; postgresql-client must be provided by the upstream base image" >&2; exit 1; }
 
 #ENTRYPOINT [ "/usr/bin/env" ]
 #CMD [ "/ha_entrypoint.sh" ]

@@ -34,9 +34,19 @@ _Thanks to everyone having starred my repo! To star it click on the image below,
 Web based files browser.
 This addon is based on the [docker image](https://github.com/imagegenius/docker-immich) from imagegenius.
 
+## Immich v3
+
+This add-on tracks **Immich v3** (built on the `ghcr.io/imagegenius/immich:3` image line).
+
+- **Database**: Immich v3 requires PostgreSQL (14–17) with the **VectorChord (`vchord`)** extension; upstream `pgvecto.rs` support has been removed. The `Postgres 15` and `Postgres 17` add-ons in this repository already provide a VectorChord-capable database and are the recommended choice (you can also use the official `ghcr.io/immich-app/postgres:*-vectorchord*` image).
+- **Upgrading from Immich v2**: keep your existing VectorChord-capable database so Immich can migrate its data automatically. If your database still holds data in the old `pgvecto.rs` extension, leave that extension in place until Immich has finished migrating to VectorChord.
+- **CPU**: on `amd64`, Immich v3 requires an x86-64-v2 (or newer) CPU.
+
+See the official [v3 migration guide](https://immich.app/blog/v3-migration) for details.
+
 ## Configuration
 
-Webui can be found at `<your-ip>:8080`. PostgreSQL/MySQL can be either internal or external.
+Webui can be found at `<your-ip>:8080`. PostgreSQL can be either internal or external.
 
 ### Options
 
@@ -86,6 +96,20 @@ This addon supports mounting both local drives and remote SMB shares:
 
 - **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
 - **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+
+#### Using a Local Disk for Immich Storage
+
+To save Immich data to a mounted local disk:
+
+1. Set the `localdisks` option to your drive name (e.g., `sda1`). The drive will be mounted at `/mnt/sda1`.
+2. Set the `data_location` option to a path on the mounted drive, for example `/mnt/sda1/immich`.
+
+Example configuration:
+
+```yaml
+localdisks: "sda1"
+data_location: "/mnt/sda1/immich"
+```
 
 ### Custom Scripts and Environment Variables
 
