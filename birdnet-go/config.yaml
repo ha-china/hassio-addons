@@ -2,6 +2,8 @@ arch:
   - aarch64
   - amd64
 audio: true
+backup_exclude:
+  - logs/**
 description: '[老王杂谈说]：实时 BirdNET 和 Battybirdnet 声景分析器'
 devices:
   - /dev/dri
@@ -126,4 +128,4 @@ slug: birdnet-go
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/birdnet-go
 usb: true
-version: "nightly-20260615"
+version: "nightly-20260615-3"
