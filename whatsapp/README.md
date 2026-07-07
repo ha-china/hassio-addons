@@ -1,13 +1,13 @@
-# WhatsApp Home Assistant 应用
+# WhatsApp Home Assistant App
 
 ![Logo](https://raw.githubusercontent.com/FaserF/hassio-addons/master/whatsapp/logo.png)
 
-[![打开你的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_whatsapp)
+[![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_whatsapp)
 [![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-1.6.3-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-whatsapp)
-![项目维护者](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Docker 镜像](https://img.shields.io/badge/docker-1.7.0-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-whatsapp)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> Home Assistant WhatsApp 应用（Baileys/Node.js）。
+> Home Assistant WhatsApp App (Baileys/Node.js).
 
 ---
 
@@ -15,44 +15,68 @@
 
 ### 🗝️ 原生控制命令
 
-通过 WhatsApp 控制你的附加组件！
+通过 WhatsApp 控制您的插件！
 
 **公共命令：**
 
 - `ha-app-status`：检查健康和版本（包括 HA 核心和 OS 信息）。
 - `ha-app-ping`：基本连接检查（"Pong!"）。
-- `ha-app-getid`：返回当前聊天 ID（用于群组 ID）。
+- `ha-app-getid`：返回当前的聊天 ID（用于群组 ID）。
 - `ha-app-sponsor`：显示支持和捐赠链接。
 
 **管理员命令（受保护）：**
 
 - `ha-app-help`：显示可用命令和示例。
-- `ha-app-welcome`：手动显示角色感知的欢迎消息。
+- `ha-app-welcome`：手动显示基于角色的欢迎信息。
 - `ha-app-diagnose`：运行完整的消息类型诊断（按钮、列表等）。
 - `ha-app-logs`：查看最近的连接事件。
 - `ha-app-restart`：重启 WhatsApp 连接。
 
 > [!TIP]
-> **首次联系：**机器人自动向新用户在他们的首次直接消息中发送欢迎消息，并识别他们的角色（管理员/标准）。
+> **首次联系：**机器人会自动向新用户在他们的第一条直接消息中发送欢迎信息，并识别他们的角色（管理员/标准）。
 
 > [!TIP]
-> 从管理员号码发送 `ha-app-help` 获取命令和用法示例的完整列表。
+> 从管理员号码发送 `ha-app-help` 以获取命令和用法示例的完整列表。
 
 ## ⚠️ 反封禁和安全指南
 
-由于此附加组件使用非官方的 WhatsApp API 库（Baileys），WhatsApp 的自动化反垃圾邮件系统可能会标记并暂时/永久暂停显示类似垃圾邮件行为的账户。遵循以下规则以保持账户安全：
+由于此插件使用非官方 WhatsApp API 库（Baileys），WhatsApp 的自动反垃圾邮件系统可能会标记并暂时/永久暂停显示类似垃圾邮件行为的账户。遵循以下规则以保持您的账户安全：
 
-- **预热新号码**：不要使用全新的 SIM 卡或新注册的号码用于机器人。使用一个具有与真实用户手动建立的聊天历史的现有号码。
-- **保存联系人**：确保接收消息的账户已经将机器人的电话号码保存在他们的联系人列表中。向未保存的联系人发送消息会显著增加被标记的风险。
-- **避免批量发信**：不要向大量收件人或群组同时发送消息。
-- **使用延迟**：在通过 Home Assistant 自动化发送连续消息时，总是在消息之间插入延迟操作（例如 5-10 秒）。
-- **模拟输入**：附加组件自动在每个消息发送前模拟 1-2.5 秒的输入状态（`composing...`），以模仿人类行为。
+- **预热新号码**：不要使用全新的 SIM 卡或新注册的号码用于机器人。使用一个与真实用户已有手动建立的聊天历史的号码。
+- **保存联系人**：确保接收消息的账户已将机器人的电话号码保存到他们的联系人列表中。向未保存的联系人发送消息会显著增加被标记的风险。
+- **避免群发消息**：不要向大量收件人或群组同时发送消息。
+- **使用延迟**：在通过 Home Assistant 自动化发送连续消息时，始终在消息之间插入延迟操作（例如 5-10 秒）。
+- **模拟输入**：该插件会自动在每条消息发送前模拟 1-2.5 秒的输入状态（`composing...`），以模拟人类行为。
+
+## 🐳 独立 Docker 支持（仅限 Docker）
+
+如果您在容器中运行 Home Assistant（没有 Supervisor/HAOS），您可以运行 WhatsApp 网关作为独立的 Docker 容器。
+
+### Docker Compose 示例
+
+```yaml
+services:
+  whatsapp-gateway:
+    image: ghcr.io/faserf/hassio-addons/whatsapp-gw:latest
+    container_name: whatsapp-gateway
+    restart: unless-stopped
+    ports:
+      - '8066:8066'
+    volumes:
+      - ./data:/data
+      - ./media:/media
+    environment:
+      - PORT=8066
+      - DATA_DIR=/data
+      - MEDIA_FOLDER=/media
+      - LOG_LEVEL=info
+```
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 应用页面中的 **配置** 选项卡配置应用。
+通过 Home Assistant App 页面的 **配置** 选项卡配置应用。
 
 ### 选项
 
@@ -81,9 +105,9 @@ welcome_message_enabled: false
 
 ---
 
-## 👨‍💻 贡献者与许可证
+## 👨‍💻 致谢与许可证
 
-此项目是开源的，可在 MIT 许可证下获得。
+此项目是开源的，并可在 MIT 许可证下使用。
 由 **FaserF** 维护。
 ---
 

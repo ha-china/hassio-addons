@@ -200,6 +200,176 @@ function renderDashboard(sessionId) {
                 padding: 20px 24px;
                 border-top: 1px solid var(--border-color);
             }
+            .chat-back-btn {
+                display: none;
+            }
+
+            /* Responsive Design */
+            @media (max-width: 768px) {
+                .app-layout {
+                    flex-direction: column;
+                }
+
+                .sidebar {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    min-width: 0 !important;
+                    height: auto !important;
+                    border-right: none;
+                    border-bottom: 1px solid var(--border-color);
+                    padding: 0 !important;
+                }
+
+                .sidebar-header {
+                    padding: 10px 16px !important;
+                }
+
+                .nav-menu {
+                    flex-direction: row !important;
+                    padding: 0 8px 8px 8px !important;
+                    gap: 4px !important;
+                    width: 100% !important;
+                }
+
+                .nav-item {
+                    flex: 1;
+                    justify-content: center;
+                    padding: 8px 4px !important;
+                    font-size: 0.85rem !important;
+                    gap: 6px !important;
+                }
+
+                .nav-item span {
+                    display: none;
+                }
+
+                .nav-divider {
+                    display: none !important;
+                }
+
+                .nav-menu a.nav-item {
+                    display: none !important;
+                }
+
+                .main-content {
+                    height: calc(100vh - 105px) !important;
+                }
+
+                /* Chats Tab Layout on Mobile */
+                .chat-container {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .chat-sidebar {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    min-width: 0 !important;
+                    border-right: none !important;
+                }
+
+                .chat-thread {
+                    width: 100% !important;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    background: var(--bg-chat);
+                    z-index: 10;
+                    display: none;
+                }
+
+                /* Toggle between Sidebar and Chat Thread based on chat-open class on body */
+                body.chat-open .chat-sidebar {
+                    display: none !important;
+                }
+
+                body.chat-open .chat-thread {
+                    display: flex !important;
+                }
+
+                .chat-back-btn {
+                    display: flex !important;
+                    align-items: center;
+                    justify-content: center;
+                    background: none;
+                    border: none;
+                    color: var(--text-primary);
+                    font-size: 1.2rem;
+                    margin-right: 12px;
+                    cursor: pointer;
+                    padding: 4px 8px;
+                }
+            }
+
+            /* Modernized Styles & Animations */
+            .tab-panel {
+                animation: panelFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            @keyframes panelFadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(6px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .sidebar-header, .top-header {
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                background: rgba(255, 255, 255, 0.85) !important;
+            }
+            html[data-theme="dark"] .sidebar-header, 
+            html[data-theme="dark"] .top-header {
+                background: rgba(17, 27, 33, 0.85) !important;
+            }
+
+            .btn {
+                transition: all var(--transition-speed) cubic-bezier(0.16, 1, 0.3, 1) !important;
+            }
+            .btn:active {
+                transform: scale(0.96);
+            }
+
+            .form-group input, .form-group textarea, .form-group select {
+                transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+            }
+            .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+                border-color: var(--primary) !important;
+                box-shadow: 0 0 0 3px rgba(0, 168, 132, 0.15);
+            }
+
+            .nav-item {
+                transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease !important;
+            }
+            @media (min-width: 769px) {
+                .nav-item:hover {
+                    transform: translateX(4px);
+                }
+            }
+            @media (max-width: 768px) {
+                .nav-item:active {
+                    transform: scale(0.95);
+                }
+            }
+
+            .chat-message, .message-wrapper {
+                animation: messageSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            @keyframes messageSlideIn {
+                from {
+                    opacity: 0;
+                    transform: scale(0.96) translateY(4px);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1) translateY(0);
+                }
+            }
 
             .sys-info-title {
                 font-size: 11px;
@@ -326,14 +496,24 @@ function renderDashboard(sessionId) {
             }
 
             .banner-warning {
-                background-color: rgba(255, 188, 0, 0.1);
-                border: 1px solid rgba(255, 188, 0, 0.3);
+                background-color: rgba(255, 188, 0, 0.08);
+                border: 1px solid rgba(138, 109, 28, 0.25);
+                color: #7a5f15;
+            }
+
+            html[data-theme="dark"] .banner-warning {
+                background-color: rgba(255, 188, 0, 0.08);
+                border: 1px solid rgba(255, 188, 0, 0.2);
                 color: #ffe699;
             }
 
             .banner-warning-icon {
-                color: var(--warning);
+                color: #8f6a00;
                 font-size: 20px;
+            }
+
+            html[data-theme="dark"] .banner-warning-icon {
+                color: var(--warning);
             }
 
             .banner-info {
@@ -953,6 +1133,27 @@ function renderDashboard(sessionId) {
                 align-items: baseline;
                 margin-bottom: 4px;
             }
+            .sys-info-val {
+                font-weight: 600;
+                color: var(--text-main);
+                transition: color 0.2s ease;
+            }
+
+            .sys-info-link {
+                text-decoration: none;
+                color: inherit;
+                display: block;
+                transition: color 0.2s ease, padding-left 0.2s ease;
+            }
+
+            .sys-info-link:hover {
+                color: var(--primary);
+                padding-left: 2px;
+            }
+
+            .sys-info-link:hover .sys-info-val {
+                color: var(--primary);
+            }
             .chat-name {
                 font-weight: 600;
                 color: var(--text-main);
@@ -1102,13 +1303,6 @@ function renderDashboard(sessionId) {
                 padding: 0;
                 border-radius: 8px;
             }
-
-            @media (max-width: 768px) {
-                body { flex-direction: column; }
-                .sidebar { width: 100%; height: auto; border-bottom: 1px solid var(--border-color); }
-                .main-content { height: auto; overflow: visible; }
-                .content-body { padding: 16px; }
-            }
         </style>
     </head>
     <body>
@@ -1120,7 +1314,7 @@ function renderDashboard(sessionId) {
                     <i class="fab fa-whatsapp logo-icon"></i>
                     <div class="logo-text">
                         <span class="logo-title">WhatsApp Gateway</span>
-                        <span class="logo-subtitle">Home Assistant</span>
+                        <span class="logo-subtitle" id="logo-subtitle">Home Assistant</span>
                     </div>
                 </div>
             </div>
@@ -1146,7 +1340,7 @@ function renderDashboard(sessionId) {
                     <i class="fas fa-puzzle-piece nav-icon"></i>
                     <span>Integration Repo</span>
                 </a>
-                <a href="https://github.com/FaserF/hassio-addons" target="_blank" class="nav-item">
+                <a id="ha-repo-link" href="https://github.com/FaserF/hassio-addons" target="_blank" class="nav-item">
                     <i class="fas fa-cubes nav-icon"></i>
                     <span>HA App Repo</span>
                 </a>
@@ -1163,10 +1357,11 @@ function renderDashboard(sessionId) {
             <div class="sidebar-footer">
                 <div class="sys-info-title">System Properties</div>
                 <div class="sys-info-text">
-                    Node: <span id="node-version" class="sys-info-val">...</span><br>
-                    Addon: <span id="addon-version-sidebar" class="sys-info-val">...</span><br>
-                    Integration: <span id="int-version-sidebar" class="sys-info-val">...</span><br>
-                    Baileys: <span id="baileys-version" class="sys-info-val">...</span>
+                    <a href="https://github.com/FaserF/hassio-addons/tree/main/whatsapp" target="_blank" class="sys-info-link">Addon: <span id="addon-version-sidebar" class="sys-info-val">...</span></a>
+                    <a href="https://github.com/FaserF/ha-whatsapp" target="_blank" class="sys-info-link">Integration: <span id="int-version-sidebar" class="sys-info-val">...</span></a>
+                    <a href="https://github.com/WhiskeySockets/Baileys" target="_blank" class="sys-info-link">Baileys: <span id="baileys-version" class="sys-info-val">...</span></a>
+                    <a href="https://github.com/nodejs/node" target="_blank" class="sys-info-link">Node: <span id="node-version" class="sys-info-val">...</span></a>
+                    <a href="https://github.com/fastapi/fastapi" target="_blank" class="sys-info-link">Fastapi: <span id="fastapi-version" class="sys-info-val">...</span></a>
                 </div>
             </div>
         </aside>
@@ -1423,15 +1618,16 @@ function renderDashboard(sessionId) {
                                 <p>Select a contact or group from the left sidebar to start chatting.</p>
                             </div>
 
-                            <!-- Active chat state -->
+                            <!-- Active Chat State -->
                             <div class="chat-thread-active" id="chat-thread-active" style="display: none;">
                                 <div class="chat-thread-header">
-                                    <div class="chat-header-avatar">
-                                        <i class="fas fa-user-circle"></i>
-                                    </div>
-                                    <div class="chat-header-info">
-                                        <h4 id="active-chat-name">Contact JID</h4>
-                                        <p id="active-chat-jid">JID details</p>
+                                    <div class="chat-thread-info">
+                                        <button class="chat-back-btn" onclick="goBackToChatList(event)"><i class="fas fa-arrow-left"></i></button>
+                                        <div class="chat-thread-avatar" id="active-chat-avatar"></div>
+                                        <div>
+                                            <h4 id="active-chat-name">Contact JID</h4>
+                                            <p id="active-chat-jid">JID details</p>
+                                        </div>
                                     </div>
                                 </div>
                                 
@@ -1501,24 +1697,27 @@ function renderDashboard(sessionId) {
                 }
             });
 
-            function switchTab(tabId) {
-                navItems.forEach(nav => nav.classList.remove('active'));
-                tabPanels.forEach(panel => panel.classList.remove('active'));
-
-                const activeNav = document.querySelector(\`.nav-item[data-tab="\${tabId}"]\`);
-                const activePanel = document.getElementById(\`tab-\${tabId}\`);
-                
-                if (activeNav && activePanel) {
-                    activeNav.classList.add('active');
-                    activePanel.classList.add('active');
-                    pageTitle.innerText = tabId.charAt(0).toUpperCase() + tabId.slice(1);
-                    
-                    isChatTabActive = (tabId === 'chats');
-                    if (isChatTabActive) {
-                        loadChats();
-                    }
-                }
+        function switchTab(tabId) {
+            navItems.forEach(nav => nav.classList.remove('active'));
+            tabPanels.forEach(panel => panel.classList.remove('active'));
+            
+            const activeNav = document.querySelector(\`.nav-item[data-tab="\${tabId}"]\`);
+            const activePanel = document.getElementById(\`tab-\${tabId}\`);
+            
+            if (activeNav && activePanel) {
+                activeNav.classList.add('active');
+                activePanel.classList.add('active');
+                pageTitle.innerText = tabId.charAt(0).toUpperCase() + tabId.slice(1);
             }
+
+            // Custom trigger for chats tab
+            isChatTabActive = (tabId === 'chats');
+            if (isChatTabActive) {
+                loadChats();
+            } else {
+                document.body.classList.remove('chat-open');
+            }
+        }
 
             // Host Utilities
             const getBasePath = () => {
@@ -1761,11 +1960,21 @@ function renderDashboard(sessionId) {
                 renderChatList(allChats);
             }
 
-            function selectChat(jid, name) {
-                activeChatJid = jid;
-                
-                document.getElementById('chat-thread-empty').style.display = 'none';
-                document.getElementById('chat-thread-active').style.display = 'flex';
+            function goBackToChatList(event) {
+            if (event) event.preventDefault();
+            activeChatJid = null;
+            document.getElementById('chat-thread-active').style.display = 'none';
+            document.getElementById('chat-thread-empty').style.display = 'flex';
+            document.body.classList.remove('chat-open');
+            loadChats();
+        }
+
+        function selectChat(jid, name) {
+            activeChatJid = jid;
+            document.body.classList.add('chat-open');
+            
+            document.getElementById('chat-thread-empty').style.display = 'none';
+            document.getElementById('chat-thread-active').style.display = 'flex';
                 
                 document.getElementById('active-chat-name').textContent = name;
                 document.getElementById('active-chat-jid').textContent = jid;
@@ -1884,11 +2093,18 @@ function renderDashboard(sessionId) {
                     const data = await response.json();
                     isConnected = data.isConnected;
 
+                    // Update footer session info
+                    const footerSessionId = document.getElementById('footer-session-id');
+                    const footerSessionStatus = document.getElementById('footer-session-status');
+                    if (footerSessionId) footerSessionId.textContent = data.sessionId || currentSession;
+                    if (footerSessionStatus) footerSessionStatus.textContent = data.isConnected ? 'Connected' : 'Disconnected';
+
                     // Version elements
                     document.getElementById('node-version').textContent = data.nodeVersion || 'N/A';
                     document.getElementById('addon-version-sidebar').textContent = data.addonVersion || 'N/A';
                     document.getElementById('int-version-sidebar').textContent = data.integrationVersion || 'N/A';
                     document.getElementById('baileys-version').textContent = data.baileysVersion || 'N/A';
+                    document.getElementById('fastapi-version').textContent = data.fastapiVersion || 'N/A';
 
                     // Dev/Beta releases banner
                     const addonVer = data.addonVersion || '';
@@ -1900,12 +2116,24 @@ function renderDashboard(sessionId) {
                                   intVer.toLowerCase().includes('pre');
                     document.getElementById('dev-banner').style.display = isDev ? 'flex' : 'none';
 
+                    // Standalone mode adjustments
+                    if (data.isStandalone) {
+                        document.title = 'WhatsApp Gateway';
+                        const subtitle = document.getElementById('logo-subtitle');
+                        if (subtitle) subtitle.textContent = 'Standalone';
+                        const haRepoLink = document.getElementById('ha-repo-link');
+                        if (haRepoLink) {
+                            const span = haRepoLink.querySelector('span');
+                            if (span) span.textContent = 'Project Repository';
+                        }
+                    }
+
                     // Ingress config logs link
                     const slug = data.addonSlug || 'unknown';
                     const fullLogsLink = document.getElementById('full-logs-link');
                     if (fullLogsLink) {
                         const isIngress = window.location.pathname.includes('/api/hassio_ingress/');
-                        if (isIngress) {
+                        if (isIngress && !data.isStandalone) {
                             fullLogsLink.style.display = 'flex';
                             fullLogsLink.href = '/config/app/' + slug + '/logs';
                         } else {
