@@ -8,10 +8,10 @@ PUID=$(bashio::config "PUID")
 PGID=$(bashio::config "PGID")
 
 # Check data location
-LOCATION=""
+LOCATION="$(bashio::config 'data_location')"
 
 if [[ "$LOCATION" = "null" || -z "$LOCATION" ]]; then
-    LOCATION="/config/data"
+    LOCATION="/data/data"
 else
     LOCATIONOK=""
     for location in "/share" "/config" "/data" "/mnt"; do
@@ -21,7 +21,7 @@ else
     done
 
     if [ -z "$LOCATIONOK" ]; then
-        LOCATION="/config/data"
+        LOCATION="/data/data"
         bashio::log.fatal "Your data_location value can only be set in /share, /config, /data or /mnt. It will be reset to the default location : $LOCATION"
     fi
 fi
@@ -49,7 +49,7 @@ done
 
 for folders in /defaults /etc/cont-init.d /etc/services.d /etc/s6-overlay/s6-rc.d; do
     if [ -d "$folders" ]; then
-        find "$folders" -type f -exec sed -i "s|/config/data|$LOCATION|g" {} + &> /dev/null || true
+        find "$folders" -type f -exec sed -i "s|/data/data|$LOCATION|g" {} + &> /dev/null || true
     fi
 done
 
@@ -70,6 +70,11 @@ mkdir -p "$LOCATION" /tmp/cache "$XDG_RUNTIME_DIR"
 chmod 755 /tmp/cache
 chmod 700 "$XDG_RUNTIME_DIR"
 
+# Pre-create the Selkies joystick log so the base image's "chmod 777 /tmp/selkies*"
+# calls (in init-selkies-config and svc-de) never fail on an empty glob.
+touch /tmp/selkies_js.log
+chmod 777 /tmp/selkies_js.log
+
 if [ -e "$LOCATION/.cache" ] && [ ! -L "$LOCATION/.cache" ]; then
     rm -rf "$LOCATION/.cache"
 fi
@@ -78,3 +83,25 @@ ln -sfn /tmp/cache "$LOCATION/.cache"
 bashio::log.info "Setting ownership to $PUID:$PGID"
 chown -R "$PUID":"$PGID" "$LOCATION" /tmp/cache "$XDG_RUNTIME_DIR"
 chmod -R 700 "$LOCATION"
+
+# The base init-selkies-config script overrides XDG_RUNTIME_DIR to $HOME/.XDG, which lands
+# on persistent storage and conflicts with the tmpfs runtime dir set above. Re-assert the
+# tmpfs value at the end of that oneshot so the app and desktop agree on one valid dir.
+SELKIES_CONFIG_RUN="/etc/s6-overlay/s6-rc.d/init-selkies-config/run"
+if [ -f "$SELKIES_CONFIG_RUN" ]; then
+    sed -i '/^# XDG_RUNTIME_DIR override reconciled$/,+1d' "$SELKIES_CONFIG_RUN"
+    printf '\n# XDG_RUNTIME_DIR override reconciled\nprintf "%%s" "%s" > /run/s6/container_environment/XDG_RUNTIME_DIR\n' "$XDG_RUNTIME_DIR" >> "$SELKIES_CONFIG_RUN"
+fi
+
+# The Selkies desktop init oneshots do best-effort device/permission setup (mknod
+# /dev/input/*, chmod /tmp/selkies*, /dev/dri perms) that is only partially permitted in the
+# HA add-on sandbox. A non-zero exit from a oneshot fails add-on bringup and crash-loops the
+# container, so make these two tolerant and always report success. Longruns (svc-*) are left
+# untouched so s6 keeps supervising them with their real exit codes.
+for oneshot in init-video init-selkies-config; do
+    run="/etc/s6-overlay/s6-rc.d/$oneshot/run"
+    if [ -f "$run" ] && ! grep -q '^set +e$' "$run"; then
+        sed -i "1a set +e" "$run"
+        printf '\nexit 0\n' >> "$run"
+    fi
+done

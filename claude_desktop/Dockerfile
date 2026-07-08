@@ -31,12 +31,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Allow UID and GID setting
 # hadolint ignore=SC2015,DL4006,SC2013,SC2086
 RUN \
-    usermod --home /config/data abc && \
+    usermod --home /data/data abc && \
     if [[ -d /etc/services.d ]] && ls /etc/services.d/*/run 1> /dev/null 2>&1; then sed -i "1a set +e" /etc/services.d/*/run; fi
 
 # Global LSIO modifications
 COPY ha_lsio.sh /ha_lsio.sh
-ARG CONFIGLOCATION="/config/data"
+ARG CONFIGLOCATION="/data/data"
 RUN chmod 744 /ha_lsio.sh && if grep -qr "lsio" /etc; then /ha_lsio.sh "$CONFIGLOCATION"; fi && rm /ha_lsio.sh
 
 ##################
@@ -56,7 +56,12 @@ RUN if [ ! -f /bin/sh ] && [ -f /usr/bin/sh ]; then ln -s /usr/bin/sh /bin/sh; f
 RUN curl -fsSLo /usr/share/keyrings/claude-desktop-archive-keyring.asc https://downloads.claude.ai/claude-desktop/key.asc && \
     echo "deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/claude-desktop-archive-keyring.asc] https://downloads.claude.ai/claude-desktop/apt/stable stable main" > /etc/apt/sources.list.d/claude-desktop.list && \
     apt-get update && \
-    apt-get install -y --no-install-recommends claude-desktop python3-pip && \
+    apt-get install -y --no-install-recommends \
+        claude-desktop \
+        python3-pip \
+        libsecret-1-0 \
+        dbus-x11 \
+        git gh && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
