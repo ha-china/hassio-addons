@@ -11,7 +11,7 @@ audio: true
 hassio_api: true
 hassio_role: manager
 host_dbus: true
-image: docker.1panel.live/homeassistant/{arch}-addon-ssh
+image: homeassistant/{arch}-addon-ssh
 ingress: true
 init: false
 map:
