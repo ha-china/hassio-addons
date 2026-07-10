@@ -9,18 +9,18 @@
 
 ## 关于
 
-Mozilla Firefox 是由 Mozilla Foundation 及其子公司 Mozilla Corporation 开发的一款免费开源网络浏览器。
+Mozilla Firefox 是由 Mozilla Foundation 及其子公司 Mozilla Corporation 开发的一款免费开源网页浏览器。
 
 此插件基于 [docker 镜像](https://github.com/jlesage/docker-firefox) 由 [Jocelyn Le Sage](https://github.com/jlesage) 提供。
 
-非常感谢他为创建和维护这些优秀的容器而付出的努力。
+非常感谢他为创建和维护这些优秀的容器所做的贡献。
 他是真正的英雄，需要得到 [支持](https://github.com/sponsors/jlesage)。
 
 ## 与原始容器的区别
 
-以下是一些区别，这些区别要么是使此容器作为插件工作所必需的，要么是基于我的个人偏好的调整：
+有一些区别是必需的，以便此容器作为插件工作，或者只是基于我的偏好进行的调整：
 
-- Edge 版本：此容器不是基于 Alpine **Stable**，而是基于 Alpine **Edge**。主要原因是希望利用可用的最新 Firefox 版本。在启动过程中，容器日志中可能显示较旧的 Firefox 版本，可以忽略。它会在每次容器启动时尝试更新 Firefox。
+- Edge 版本：此容器不是基于 Alpine **Stable**，而是 Alpine **Edge**。主要原因是利用可用的最新 Firefox 版本。在启动过程中，容器可能在日志中显示较旧的 Firefox 版本，这可以忽略。它会在每次容器启动时尝试更新 Firefox。
 - 为了使其与 Home Assistant 持久性兼容，我需要重新映射文件夹，为此，启动脚本以 `root` 用户身份运行。我将在未来尽量避免这样做。
 
 ## 使用方法
@@ -34,11 +34,11 @@ Mozilla Firefox 是由 Mozilla Foundation 及其子公司 Mozilla Corporation �
 ## 上传
 
 如果您需要通过 Firefox 插件上传文件，您可以使用 [文件编辑器插件](https://github.com/home-assistant/addons/blob/master/configurator/) 将文件上传到您的 `/share/firefox` 文件夹。
-文件将在插件的 `downloads` 文件夹中可用。当您选择上传文件时，您可以浏览到该位置。
+文件将在插件的 `downloads` 文件夹中可用。当您选择上传文件时，可以浏览到该位置。
 
 ## 导入书签
 
-您可以通过将 `bookmarks.html` 文件拖放到您的 `/share/firefox` 文件夹中，然后在 Firefox 中导入 `bookmarks.html` 文件来导入书签。
+您可以通过将 `bookmarks.html` 文件拖放到您的 `/share/firefox` 文件夹中，并在 Firefox 中导入 `bookmarks.html` 文件来导入书签。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg

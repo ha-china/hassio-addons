@@ -1,6 +1,6 @@
 # Home Assistant 插件：Firefox
 
-在 Home Assistant 内部运行 Firefox 浏览器，以便从您的家中访问本地或外部网站。
+在 Home Assistant 内运行 Firefox 浏览器，以便从您的家中访问本地或外部网站。
 
 ![支持 aarch64 架构][aarch64-shield]
 ![支持 amd64 架构][amd64-shield]
@@ -9,27 +9,27 @@
 
 ## 关于
 
-Mozilla Firefox 是由 Mozilla 基金会和其子公司 Mozilla Corporation 开发的一款免费开源网络浏览器。
+Mozilla Firefox 是由 Mozilla Foundation 及其子公司 Mozilla Corporation 开发的一款免费开源网络浏览器。
 
 此插件基于 [docker 镜像](https://github.com/jlesage/docker-firefox) 由 [Jocelyn Le Sage](https://github.com/jlesage) 提供。
 
-非常感谢他为创建和维护这些优秀的容器而付出的努力。他是真正的英雄，需要得到 [支持](https://github.com/sponsors/jlesage)。
+非常感谢他创建了并维护了这些优秀的容器。他是真正的英雄，需要得到 [支持](https://github.com/sponsors/jlesage)。
 
 ## 与原始容器的区别
 
-为了使其与 Home Assistant 持久性兼容，我需要重新映射文件夹，因此启动脚本以 `root` 用户身份运行。我将在未来尽量避免这样做。
+为了使其与 Home Assistant 持久性兼容，我需要重新映射文件夹，为此，启动脚本以 `root` 用户运行。我将在未来尽量避免这样做。
 
 ## 使用方法
 
-只需安装，启动容器，然后点击“打开 Web UI”。您可以使用“在侧边栏中显示”以方便访问。您在 Firefox 中所做的所有操作都将持久化。即使您停止插件或重启 Home Assistant 主机操作系统。
+只需安装，启动容器，然后点击“打开 Web UI”。您可以使用“在侧边栏显示”以便于访问。您在 Firefox 中所做的所有操作都会被持久化。即使您停止了插件或重启了 Home Assistant 主机操作系统。
 
 ## 下载
 
-在 Firefox 中下载的文件将自动存储到您的 `/share/firefox` 文件夹中。
+在 Firefox 中下载的文件将自动存储到您的 `/share/firefox` 文件夹。
 
 ## 上传
 
-如果您需要通过 Firefox 插件上传文件，可以使用 [文件编辑器插件](https://github.com/home-assistant/addons/blob/master/configurator/) 将文件上传到您的 `/share/firefox` 文件夹。文件将在插件的 `downloads` 文件夹中可用。当您选择要上传的文件时，可以浏览到该位置。
+如果您需要通过 Firefox 插件上传文件，可以使用 [文件编辑器插件](https://github.com/home-assistant/addons/blob/master/configurator/) 将文件上传到您的 `/share/firefox` 文件夹。文件将在插件的 `downloads` 文件夹中可用。当您选择上传文件时，可以浏览到该位置。
 
 ## 导入书签
 

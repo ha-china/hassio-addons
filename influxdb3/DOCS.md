@@ -137,7 +137,7 @@ Please see the changelog
 
 It is now possible to migrate data using the InfluxDB3 Explorer gui.
 That is the easiest way, but if you want to use the command line instead
-use the following method:
+use the following method (it provides more granular control):
 
 ### Install plugin to migate data from InfluxDB1.x or Influxdb2.x
 

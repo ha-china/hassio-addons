@@ -1,5 +1,5 @@
 name: InfluxDB3
-version: 0.3.6
+version: 0.3.8
 slug: influxdb3
 description: '[老王杂谈说]：用于指标、事件和实时分析的可扩展数据存储'
 url: https://gh-proxy.org/github.com/erik73/hassio-addons

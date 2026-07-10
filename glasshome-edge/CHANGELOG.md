@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.0-beta.11
+
+### Improvements
+
+- Badges and buttons across Settings got a visual refresh for a cleaner, more consistent look: frosted status chips, polished gradient Pro and Early Bird badges, and pill-shaped buttons.
+- Entity and area pickers now only load live data while they're open, so opening Settings feels lighter and snappier.
+
+### Fixes
+
+- Fixed Home Assistant sign-in failing when GlassHome runs behind a reverse proxy that terminates HTTPS.
+- Home Assistant error messages now show the real text instead of "[object Object]".
+
 ## 1.0.0-beta.10
 
 ### Improvements

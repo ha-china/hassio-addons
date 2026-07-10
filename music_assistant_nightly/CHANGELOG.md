@@ -1,3 +1,124 @@
+# [2.10.0.dev2026071006] - 10.07.2026
+
+## 📦 Nightly Release
+
+_Changes since [2.10.0.dev2026070906](https://github.com/music-assistant/server/releases/tag/2.10.0.dev2026070906)_
+
+### 🚀 New Providers
+
+- Add Rainy Mood provider (by @jlpouffier in #3844)
+- Add Music Quiz plugin: multiplayer guess-the-song game (by @TimoPtr in #4572)
+- Add Ambient Sounds provider with locally generated noise loops (by @marcelveldt in #4676)
+
+### 🚀 Features and enhancements
+
+- Faster and more robust global search with per-provider timeouts and caching (by @marcelveldt in #4671)
+- Add audio overlay support to queue playback (by @marcelveldt in #4674)
+- Faster library browsing: slim summary mode for list endpoints (by @marcelveldt in #4679)
+- Library list endpoints return slim summary items by default (by @marcelveldt in #4693)
+- Expose party join URL and playback mode to guests (by @marcelveldt in #4694)
+- Persist auth token activity at most once per hour (by @marcelveldt in #4695)
+- Reduce memory usage of large play queues (by @marcelveldt in #4697)
+
+### 🐛 Bugfixes
+
+- Don't crash DLNA player update on malformed device metadata XML (by @MarvinSchenkel in #4682)
+- Fix Spotify authentication failing after recent token changes (by @marcelveldt in #4688)
+- Fix guest listen-in race conditions in the party and quiz plugins (by @marcelveldt in #4700)
+
+### 🎨 Frontend Changes
+
+- Add issue chooser redirecting to the support repo (by @marcelveldt in [#2040](https://github.com/music-assistant/frontend/pull/2040))
+- Add diagnostics report download to settings (by @marcelveldt in [#2038](https://github.com/music-assistant/frontend/pull/2038))
+- Add Music Quiz game interface (by @TimoPtr in [#2010](https://github.com/music-assistant/frontend/pull/2010))
+- Add listen-in (shared audio) for party guests (by @marcelveldt in [#2041](https://github.com/music-assistant/frontend/pull/2041))
+
+### 🧰 Maintenance and dependency bumps
+
+<details>
+<summary>9 changes</summary>
+
+- Add diagnostics sections for core controllers and common providers (by @marcelveldt in #4675)
+- ⬆️ Update music-assistant-models to 1.1.158 (by @music-assistant-machine in #4678)
+- ⬆️ Update music-assistant-models to 1.1.159 (by @music-assistant-machine in #4680)
+- Add full-text search index for search (by @marcelveldt in #4681)
+- Stabilize CodSpeed benchmark runs (by @marcelveldt in #4689)
+- Remove non-deterministic macro benchmarks from CodSpeed (by @marcelveldt in #4691)
+- Add issue chooser redirecting to the support repo (by @marcelveldt in #4696)
+- ⬆️ Update music-assistant-frontend to 2.17.214 (by @music-assistant-machine in #4701)
+- ⬆️ Update music-assistant-frontend to 2.17.215 (by @music-assistant-machine in #4704)
+
+</details>
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@MarvinSchenkel, @TimoPtr, @jlpouffier, @marcelveldt
+
+
+# [2.10.0.dev2026070906] - 09.07.2026
+
+## 📦 Nightly Release
+
+_Changes since [2.10.0.dev2026070805](https://github.com/music-assistant/server/releases/tag/2.10.0.dev2026070805)_
+
+### 🚀 New Providers
+
+- Add Profiler provider for on-demand performance diagnostics (by @marcelveldt in #4653)
+
+### 🚀 Features and enhancements
+
+- Add diagnostics feature (by @marcelveldt in #4652)
+- Add fixed genres to Phish.in tracks (by @OzGav in #4659)
+- Add join code expiry lookup to auth controller (by @marcelveldt in #4663)
+- Add virtual player support to the Sendspin provider (by @marcelveldt in #4666)
+- Add support for sound effect media items (by @marcelveldt in #4669)
+- Add convenience API for providers to send custom events to clients (by @marcelveldt in #4670)
+
+### 🐛 Bugfixes
+
+- Improve global search reliability and database query parameter logic (by @SyedaAnshrahGillani in #4207)
+- Fix XSS and cross-host request issues in MSX Bridge web player (by @MarvinSchenkel in #4562)
+- Advertise both IP families via mDNS and respect a specific bind IP when publishing (by @OzGav in #4646)
+- Prevent admin token leak to untrusted return_url during first-run setup (by @MarvinSchenkel in #4649)
+- Fix several bugs in the Jellyfin provider (by @OzGav in #4654)
+- Fix Plex artist albums not loading on servers without filter metadata (by @OzGav in #4657)
+- Don't auto-sync all Phish.in playlists to the library (by @OzGav in #4660)
+- Block long-lived token creation for guest accounts (by @MarvinSchenkel in #4661)
+- Harden MSX bridge against host-header XSS and cross-origin fetches (by @MarvinSchenkel in #4662)
+
+### 🎨 Frontend Changes
+
+- Show track BPM and musical key on the track details page (by @MarvinSchenkel in [#2034](https://github.com/music-assistant/frontend/pull/2034))
+
+### Other Changes
+
+- Add CodSpeed performance benchmarks and CI integration (by @codspeed-hq[bot] in #4656)
+
+### 🧰 Maintenance and dependency bumps
+
+<details>
+<summary>8 changes</summary>
+
+- Add performance benchmark suite (by @marcelveldt in #4651)
+- Update aiodns to 4.0.4 and remove pycares pin (by @MarvinSchenkel in #4658)
+- Improve Sendspin proxy error handling and quieter websocket command logging (by @marcelveldt in #4664)
+- ⬆️ Update music-assistant-models to 1.1.155 (by @music-assistant-machine in #4665)
+- ⬆️ Update music-assistant-models to 1.1.156 (by @music-assistant-machine in #4668)
+- Add shared playback session and guest access helpers for plugins (by @marcelveldt in #4672)
+- ⬆️ Update music-assistant-models to 1.1.157 (by @music-assistant-machine in #4673)
+- ⬆️ Update music-assistant-frontend to 2.17.213 (by @music-assistant-machine in #4677)
+
+</details>
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@MarvinSchenkel, @OzGav, @SyedaAnshrahGillani, @codspeed-hq[bot], @marcelveldt
+
+
 # [2.10.0.dev2026070805] - 08.07.2026
 
 ## 📦 Nightly Release
@@ -54,114 +175,5 @@ _Changes since [2.10.0.dev2026070706](https://github.com/music-assistant/server/
 Special thanks to the following contributors who helped with this release:
 
 @GiuliaPassoni, @MarvinSchenkel, @OzGav, @SyntaxSawdust, @jozefKruszynski, @marcelveldt, @stvncode, @trudenboy
-
-
-# [2.10.0.dev2026070706] - 07.07.2026
-
-## 📦 Nightly Release
-
-_Changes since [2.10.0.dev2026070607](https://github.com/music-assistant/server/releases/tag/2.10.0.dev2026070607)_
-
-### 🚀 Features and enhancements
-
-- fastmcp_server: update provider to v0.13.3 (queue, library-URI, and playback tools + localizable config) (by @trudenboy in #4486)
-- Use radio playlists in the MCP play_media tool (by @marcelveldt in #4501)
-- Smart fades analyzer v2: frequency band envelopes, time signature and anti-aliased energy binning (by @MarvinSchenkel in #4580)
-- Smart crossfade: content-aware 3-band EQ from frequency band analysis (by @MarvinSchenkel in #4591)
-- Add taxonomy genre icons, update genre icon image resolver (by @jozefKruszynski in #4611)
-
-### 🐛 Bugfixes
-
-- Harden JWT token expiration and fix guest token revocation (by @MarvinSchenkel in #4556)
-- Fix smart playlist artwork not displaying in recommendations (by @dmoo500 in #4571)
-- Sample smart playlist seeds evenly in discover mode (by @MarvinSchenkel in #4621)
-- Fix media position exceeding duration on squeezelite players (by @MarvinSchenkel in #4623)
-- Shuffle smart playlist seed tracks before sampling (by @MarvinSchenkel in #4625)
-
-### 🎨 Frontend Changes
-
-- Exclude parent directory ("..") item from selection in browse mode (by @MarvinSchenkel in [#2029](https://github.com/music-assistant/frontend/pull/2029))
-
-### 🧰 Maintenance and dependency bumps
-
-<details>
-<summary>7 changes</summary>
-
-- Scope based authorization for API commands and centralized user impersonation (by @marcelveldt in #4613)
-- Cache negative results in @use_cache and avoid the SWR double read (by @marcelveldt in #4616)
-- Slim cache indexes, upsert in place, and clean up stale SWR rows (by @marcelveldt in #4617)
-- Run dependency security checks without an untrusted privileged checkout (by @MarvinSchenkel in #4618)
-- Bump API schema version for scope based authorization (by @marcelveldt in #4622)
-- ⬆️ Update music-assistant-frontend to 2.17.211 (by @music-assistant-machine in #4635)
-- Auto-approve automated frontend/models bump PRs in dependency security gate (by @MarvinSchenkel in #4638)
-
-</details>
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@MarvinSchenkel, @dmoo500, @jozefKruszynski, @marcelveldt, @trudenboy
-
-
-# [2.10.0.dev2026070607] - 06.07.2026
-
-## 📦 Nightly Release
-
-_Changes since [2.10.0.dev2026070506](https://github.com/music-assistant/server/releases/tag/2.10.0.dev2026070506)_
-
-### 🚀 Features and enhancements
-
-- BBC Sounds: refactor for auntie-sounds 2.0 (by @kieranhogg in #4450)
-- Add support for authors and narrators to audiobookshelf (by @fmunkes in #4526)
-- Smart fades analyzer v2: frequency band envelopes, time signature and anti-aliased energy binning (by @MarvinSchenkel in #4580)
-- Remove per-track config rebuild overhead (by @marcelveldt in #4585)
-- Resolve publish IP at startup instead of baking it into config entry defaults (by @marcelveldt in #4588)
-- Add genre detection to playlist_metadata provider (by @dmoo500 in #4593)
-- Implement SQL-based explicit filter for smart playlists (by @dmoo500 in #4594)
-- Add explicit parameter to TracksController.library_items (by @dmoo500 in #4597)
-- Populate derived_from on output protocols (by @marcelveldt in #4609)
-
-### 🐛 Bugfixes
-
-- Prevent SSRF via attacker-controlled WebRTC HTTP proxy path (by @MarvinSchenkel in #4554)
-- Rate-limit join code exchange and lengthen join codes (by @MarvinSchenkel in #4558)
-- Fix builtin Snapserver failing to load on busy MA startup (by @OzGav in #4586)
-- Sanitize all control characters in icy-name stream header (by @OzGav in #4595)
-- Improve error presentation for folder playback resolution (by @OzGav in #4598)
-- Prevent duplicate versions of the same song in dynamic playlist queues (by @marcelveldt in #4603)
-
-### 🎨 Frontend Changes
-
-- Show the base protocol for bridged outputs and explain their locked toggle (by @marcelveldt in [#2017](https://github.com/music-assistant/frontend/pull/2017))
-
-### Other Changes
-
-- Make Sendspin bridges first-class derived transports (by @marcelveldt in #4596)
-- Add typed get_config_value helper to the config-owning base models (by @marcelveldt in #4606)
-- Local Audio: promote attribution stubs to regular visible players (by @marcelveldt in #4607)
-
-### 🧰 Maintenance and dependency bumps
-
-<details>
-<summary>9 changes</summary>
-
-- Bump aiohttp-asyncmdnsresolver from 0.1.1 to 0.2.0 (by @dependabot[bot] in #4599)
-- Bump pre-commit from 4.5.1 to 4.6.0 (by @dependabot[bot] in #4600)
-- Bump huggingface-hub from 1.12.0 to 1.22.0 (by @dependabot[bot] in #4601)
-- Fix test-ordering flake caused by a leaked models global cache (by @marcelveldt in #4602)
-- Fix mypy no-any-return error in Plex lyrics fetch (by @marcelveldt in #4604)
-- ⬆️ Update music-assistant-models to 1.1.152 (by @music-assistant-machine in #4605)
-- Isolate the unit-test `mass` fixture from host audio and default providers (by @marcelveldt in #4608)
-- Add test coverage for local audio bridge-manager edge cases (by @marcelveldt in #4610)
-- ⬆️ Update music-assistant-frontend to 2.17.210 (by @music-assistant-machine in #4612)
-
-</details>
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@MarvinSchenkel, @OzGav, @dmoo500, @fmunkes, @kieranhogg, @marcelveldt
 
 

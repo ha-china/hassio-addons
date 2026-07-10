@@ -1,6 +1,6 @@
 name: "Puppet"
-description: "[老王杂谈说]：null"
-version: "2.5.0"
+description: "[老王杂谈说]：把仪表盘变成漂亮的图片"
+version: "2.5.1"
 slug: "puppet"
 homeassistant_api: true
 init: false

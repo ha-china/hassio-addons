@@ -3,7 +3,7 @@ arch:
 audio: true
 backup_exclude:
   - logs/**
-description: '[老王杂谈说]：实时 BirdNET 声景分析器，编译自 alexbelgium/birdnet-go 分支并合并了所有开放的 PR，启用了 OpenVINO 以实现 Intel CPU/iGPU 加速（仅限 amd64 的测试构建）'
+description: '[老王杂谈说]：实时 BirdNET 声景分析器，编译自 alexbelgium/birdnet-go 分支（合并了所有开放 PR），启用了 OpenVINO 以实现 Intel CPU/iGPU 加速（仅 amd64 测试构建）'
 devices:
   - /dev/dri
   - /dev/snd
@@ -83,7 +83,7 @@ map:
   - addon_config:rw
   - media:rw
   - share:rw
-name: Birdnet-go (custom version)
+name: Birdnet-go (customized and built from source)
 options:
   env_vars: []
   BIRDSONGS_FOLDER: /config/clips
@@ -127,5 +127,5 @@ slug: birdnet-go-dev
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 usb: true
-version: "source-20260706"
+version: "source-20260709"
 video: true

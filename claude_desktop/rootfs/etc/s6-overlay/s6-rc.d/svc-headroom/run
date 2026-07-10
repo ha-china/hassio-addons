@@ -6,10 +6,11 @@
 # client are unaffected. Without this backend the MCP tools cannot store/retrieve compressed
 # content and no savings are ever recorded.
 declare port=8787
+declare host=127.0.0.1
 
 if bashio::config.true 'install_headroom' && command -v headroom >/dev/null 2>&1; then
-    bashio::log.info "svc-headroom: starting headroom proxy on 127.0.0.1:${port} (MCP backend only; no client routing)"
-    exec headroom proxy --host 127.0.0.1 --port "${port}" --code-aware
+    bashio::log.info "svc-headroom: starting headroom proxy on ${host}:${port}; dashboard available at /dashboard when the port is mapped (MCP backend only; no client routing)"
+    exec headroom proxy --host "${host}" --port "${port}" --code-aware
 fi
 
 bashio::log.info "svc-headroom: install_headroom disabled or headroom not found; idling"

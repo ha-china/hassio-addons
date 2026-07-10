@@ -16,7 +16,7 @@
 
 ARG BUILD_FROM
 ARG BUILD_VERSION
-ARG BUILD_UPSTREAM="5.2.2"
+ARG BUILD_UPSTREAM="5.2.3"
 FROM ${BUILD_FROM}
 
 ##################
@@ -52,7 +52,7 @@ RUN \
     && echo 'WebUI\LocalHostAuth=false' >> /defaults/qBittorrent.conf \
     \
     # Add vuetorrent
-    && curl -f -s -S -O -J -L "$(curl -f -s -L https://api.github.com/repos/WDaan/VueTorrent/releases | grep -o "http.*vuetorrent.zip" | head -1)" >/dev/null \
+    && curl -f -s -S -O -J -L https://gh-proxy.org/github.com/VueTorrent/VueTorrent/releases/latest/download/vuetorrent.zip >/dev/null \
     && unzip -o vuetorrent.zip -d / >/dev/null \
     && rm vuetorrent.zip >/dev/null
 
