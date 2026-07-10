@@ -9,6 +9,7 @@
   "startup": "services",
   "boot": "auto",
   "ingress": true,
+  "ingress_stream": true,
   "ingress_port": 7733,
   "panel_title": "部署向导",
   "panel_icon": "mdi:home-lightning-bolt",
