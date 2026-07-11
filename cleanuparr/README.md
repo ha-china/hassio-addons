@@ -1,10 +1,10 @@
 # Home Assistant 插件：Cleanuparr
 
-自动从您的 \*arr 应用程序（Sonarr、Radarr、Lidarr、Readarr、Whisparr）和下载客户端（qBittorrent、Deluge、Transmission、NZBGet、SABnzbd）中移除卡住、停滞和不需要的下载。
+自动从您的 \*arr 应用程序（Sonarr、Radarr、Lidarr、Readarr、Whisparr）和下载客户端（qBittorrent、Deluge、Transmission、NZBGet、SABnzbd）中移除停滞、卡住和不需要的下载。
 
 ## 关于
 
-Cleanuparr 监控您的下载队列，并应用可配置的规则：
+Cleanuparr 监控您的下载队列，并应用可配置的规则来：
 - 移除停滞或卡住的下载
 - 清理不需要的文件
 - 通过 Apprise（Discord、Telegram、Slack、电子邮件等60多种方式）通知
@@ -31,7 +31,7 @@ Cleanuparr 监控您的下载队列，并应用可配置的规则：
 
 ## 数据
 
-持久性配置存储在 HA 插件配置目录中，且在插件更新和重新安装后仍然存在。
+持久配置存储在 HA 插件配置目录中，并在插件更新和重新安装后仍然存在。
 
 ## 支持
 

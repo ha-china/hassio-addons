@@ -11,7 +11,7 @@ ARG BUILD_DATE="1970-01-01T00:00:00Z"
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
 # App metadata (injected by CI)
-ENV APP_VERSION="3.4.1"
+ENV APP_VERSION="3.4.2"
 ENV APP_NAME="Apache2"
 ENV APP_SLUG="apache2"
 ENV APP_UNSUPPORTED="false"
@@ -22,7 +22,7 @@ WORKDIR /tmp
 ARG PHP_VERSION="8.5"
 
 # renovate: datasource=repology depName=alpine_3_21/apache2 versioning=loose
-ARG APACHE2_VERSION="2.4.67-r0"
+ARG APACHE2_VERSION="2.4.68-r0"
 
 # Excluded due to low usage but high increase of image size: libxml2-dev, php85-dev, php85-pecl-xdebug, mosquitto-dev
 # hadolint ignore=DL3018,DL3047,DL4006,DL3003

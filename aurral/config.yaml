@@ -1,8 +1,8 @@
 name: Aurral
-version: "1.76.51"
+version: "1.76.52"
 slug: aurral
 description: >-
-  [老王杂谈说]：针对具有库感知推荐的 Lidarr 的自托管音乐发现、请求管理、流程和播放列表导入。
+  [老王杂谈说]：用于 Lidarr 的自托管音乐发现、请求管理、工作流和播放列表导入，并附带库感知推荐。
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/blob/master/aurral/README.md
 arch:
   - aarch64

@@ -16,10 +16,10 @@ ARG PHP_VERSION="8.5"
 
 # hadolint ignore=DL4006,DL3018
 # renovate: datasource=repology depName=alpine_3_21/apache2 versioning=loose
-ARG APACHE2_VERSION="2.4.67-r0"
+ARG APACHE2_VERSION="2.4.68-r0"
 
 # App metadata (injected by CI)
-ENV APP_VERSION="3.4.1"
+ENV APP_VERSION="3.4.2"
 ENV APP_NAME="Apache2 Minimal with MariaDB Client"
 ENV APP_SLUG="apache2-minimal-mariadb"
 ENV APP_UNSUPPORTED="false"

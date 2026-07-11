@@ -3,41 +3,41 @@
 ![Apache2 标志](https://raw.githubusercontent.com/FaserF/hassio-addons/master/apache2/logo.png) 
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_apache2)
-[![Home Assistant 应用](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-3.4.1-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-apache2)
-![项目维护者](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
+[![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
+[![Docker 镜像](https://img.shields.io/badge/docker-3.4.3-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-apache2)
+![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
-> 开源 Web 服务器，支持 PHP 和 MariaDB。
+> 基于 PHP 和 MariaDB 的开源 Web 服务器。
 
 ---
 
 ## 📖 关于
 
-Apache HTTP Server 是一个强大、灵活且稳健的开源 Web 服务器。此插件提供预配置的 Apache2 环境，包含完整的 PHP 支持和 MariaDB 客户端集成，非常适合在 Home Assistant 中托管动态网站和基于 PHP 的应用程序（如 WordPress 或自定义仪表板）。
+Apache HTTP 服务器是一个强大、灵活且健壮的开源 Web 服务器。此插件提供了一个预配置的 Apache2 环境，具有完整的 PHP 支持和 MariaDB 客户端集成，非常适合在 Home Assistant 中托管动态网站和基于 PHP 的应用程序（如 WordPress 或自定义仪表板）。
 
 ### Apache2 变体比较
 
-| 特性 | Apache2（完整版） | Apache2 最小版 | Apache2 最小版 + MariaDB |
+| 特性 | Apache2（完整） | Apache2 最小化 | Apache2 最小化 + MariaDB |
 | :--- | :--- | :--- | :--- |
-| **PHP 支持** | ✅ 是（完整版） | ❌ 否 | ✅ 是（基本版） |
+| **PHP 支持** | ✅ 是（完整） | ❌ 否 | ✅ 是（基本） |
 | **MariaDB 客户端** | ✅ 是 | ❌ 否 | ✅ 是 |
 | **占用空间** | 🖥️ 较大 | ⚡ 最小 | ⚖️ 中等 |
-| **适用场景** | WordPress、完整 CMS | 静态网站 | 简单 PHP 应用 |
+| **适用场景** | WordPress、全功能内容管理系统 | 静态网站 | 简单 PHP 应用 |
 
 ---
 
 ## 🏠 Home Assistant 集成
 
-此插件支持 Home Assistant 的 **Web 服务器应用** 集成。
+此插件支持 Home Assistant 的 **Web服务器应用** 集成。
 当插件启动时，集成会自动安装/更新。
 
-有关更多信息及配置细节，请参阅 [集成 README](https://github.com/FaserF/ha-webserver)。
+有关更多信息和管理细节，请参阅 [集成 README](https://github.com/FaserF/ha-webserver)。
 
 ---
 
 ## ⚙️ 配置
 
-通过 Home Assistant 应用页面中的 **配置** 选项卡配置应用。
+通过 Home Assistant App 页面的 **配置** 选项卡配置应用。
 
 ### 选项
 
@@ -56,9 +56,9 @@ website_name: web.local
 
 ---
 
-## 👨‍💻 致谢与许可
+## 👨‍💻 贡献者 & 许可证
 
-此项目是开源的，并受 MIT 许可证保护。
+此项目是开源的，并受 MIT 许可证的约束。
 由 **FaserF** 维护。
 ---
 

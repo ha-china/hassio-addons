@@ -1,6 +1,6 @@
 # Home Assistant 插件：BirdNET-PiPy
 
-BirdNET-PiPy 是一个自托管的系统，它使用 BirdNET 深度学习模型来识别鸟鸣声，并带有现代化的网页仪表板用于监控检测。此插件将上游项目打包到 Home Assistant 中，并支持入站功能。
+BirdNET-PiPy 是一个自托管的系统，它使用 BirdNET 深度学习模型来识别鸟鸣声，并带有现代的网页仪表板以监控检测。此插件将上游项目打包到 Home Assistant 中，并支持入站功能。
 
 ## 关于
 
@@ -10,7 +10,7 @@ BirdNET-PiPy 是一个自托管的系统，它使用 BirdNET 深度学习模型�
 ## 安装
 
 1. 将我的插件仓库添加到您的 Home Assistant 实例中（在右上角的监督器插件商店中，或者如果您已配置我的 HA，则点击下面的按钮）。
-   ![打开您的 Home Assistant 实例并显示添加插件仓库对话框，其中已预先填写特定的仓库 URL。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)(https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+   ![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)(https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此插件。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切顺利。
@@ -33,29 +33,29 @@ env_vars: # 可选：额外的环境变量
 ```
 
 - Config.yaml
-使用位于 `/config/birdnet-pipy/config.yaml` 的 config.yaml 文件（通过文件浏览器插件配置）可以配置额外的变量。
+使用 Filebrowser 插件在 `/config/birdnet-pipy/config.yaml` 文件中配置额外的变量。
 
 - Config_env.yaml
-可以在其中配置额外的环境变量。
+在此处配置额外的环境变量。
 
 ### 挂载驱动器
 
 此插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **本地驱动器**：请参阅[在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **远程共享**：请参阅[在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：见 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：见 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
 ### 自定义脚本和环境变量
 
 此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **自定义脚本**：请参阅[在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+- **自定义脚本**：见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 了解详情。
 
 ## 注意事项
 
 - 默认情况下，音频输入使用 Home Assistant 的 PulseAudio 服务器。
-- 已启用入站；直接访问可在配置的端口上获得。
+- 启用了入站功能；可以直接在配置的端口上访问。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

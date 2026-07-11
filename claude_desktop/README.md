@@ -1,97 +1,191 @@
-# Home Assistant 扩展：Claude Desktop
+# Home assistant add-on: Claude Desktop
 
-![支持 aarch64 架构][aarch64-shield]
-![支持 amd64 架构][amd64-shield]
-![项目维护][maintenance-shield]
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+![Project Maintenance][maintenance-shield]
 
-在 LinuxServer.io Selkies 容器中运行 Claude Desktop Linux 应用，并通过 Home Assistant 入口进行流式传输。
+Run Claude Desktop and an optional persistent Claude Code web terminal in one
+LinuxServer.io Selkies add-on.
 
-## 安装
+## Installation
 
-1. 将此仓库添加到 Home Assistant 扩展存储库。
-2. 安装 **Claude Desktop**。
-3. 启动扩展并从侧边栏打开 Web UI。
-4. 使用桌面应用程序中的 Claude 账户登录。
+1. Add this repository to the Home Assistant add-on store.
+2. Install **Claude Desktop**.
+3. Start the add-on and open the web UI from the sidebar.
+4. Sign in with your Claude account from the Desktop app.
 
-Claude Desktop 登录需要支持桌面应用程序的 claude.ai 计划。桌面应用程序不接受 API 密钥。Anthropic 的 Linux 测试版不包括计算机使用或语音输入。
+Claude Desktop sign-in requires a claude.ai plan that supports the Desktop app.
+API keys are not accepted by the Desktop application. Anthropic's Linux beta
+currently does not include Computer Use or dictation.
 
-## 功能
+## Architecture
 
-- 单应用程序 Selkies 模式下的 Claude Desktop。
-- 支持 Home Assistant 入口。
-- 在 `/data/data` 下保持 `$HOME` 的持久性，跨重启保留 Claude Desktop 和 Claude Code 登录状态。
-- 可选的从 Anthropic 的 apt 仓库更新 Claude Desktop。
-- 可选的额外 apt 和 pip 软件包安装。
-- 内置 `git` 和 GitHub CLI (`gh`)，可选启动凭据配置。
-- 通过存储库标准的 `claude_desktop.sh` 脚本支持自定义脚本。
-- 可选捆绑的 Claude Code 优化工具：headroom、rtk 和 caveman。
-- 当启用 `install_headroom` 时，Headroom 仪表板在映射端口 `8787` 上暴露。
-- 低功耗默认值：GPU 设备映射，`AUTO_GPU=1`，`SELKIES_FRAMERATE=30`，`/tmp` tmpfs，以及 `$HOME/.cache` 重定向到 `/tmp/cache`。
+Claude Desktop and Claude Code run as separate clients inside the same add-on.
+They share the configured persistent home directory, Git credentials,
+repositories, Claude Code configuration, Headroom storage, and RTK
+configuration, but they do not share or hand off a conversation.
 
-## 选项
+- **Claude Desktop** uses Headroom through its MCP tools.
+- **Claude Code** uses Headroom's supported `headroom wrap claude` integration.
+- **RTK** filters Claude Code Bash output through its `PreToolUse` hook.
+- **tmux** keeps the terminal session running when the browser disconnects.
 
-| 选项 | 默认值 | 描述 |
+## Features
+
+- Claude Desktop in single-app Selkies mode.
+- Home Assistant ingress support for Claude Desktop.
+- Official Claude Code stable package installed in the same image.
+- Optional authenticated `ttyd` web terminal on port `7681`.
+- Persistent `tmux` session shared by reconnecting terminal clients.
+- Persistent `$HOME` at the configured `data_location` (default `/data/data`),
+  preserving Desktop and Claude Code state across restarts.
+- Optional runtime Claude Desktop updates from Anthropic's apt repository.
+- Optional extra apt and pip package installation.
+- Baked-in `git`, GitHub CLI (`gh`), `ripgrep`, and terminal tooling.
+- Custom script support through the repository standard `claude_desktop.sh`.
+- Optional bundled Claude Code optimization tools: Headroom, RTK, and Caveman.
+- Headroom dashboard exposed on mapped port `8787` when enabled.
+- Low-power defaults for GPU mapping, Selkies frame rate, and volatile caches.
+
+## Claude Code terminal setup
+
+The terminal service is enabled in the add-on configuration but remains
+unavailable until authentication is configured. Port `7681` is not mapped by
+default.
+
+1. Set a unique `terminal_password`. The existing `PASSWORD` option is accepted
+   only as a compatibility fallback.
+2. Optionally set `terminal_username` and `terminal_workspace`.
+3. Map container port `7681` to a host port in the add-on **Network** section.
+4. Restart the add-on.
+5. Reach `http://<home-assistant-host>:7681` only through an encrypted VPN or an
+   HTTPS reverse proxy, then sign in with the configured terminal credentials.
+
+The terminal opens in a persistent tmux session. Closing the browser detaches
+from tmux rather than terminating commands that are already running.
+
+Start the optimized Claude Code path with:
+
+```shell
+claude-headroom
+```
+
+This reuses the supervised Headroom proxy on `127.0.0.1:8787` and launches
+Claude Code with the required routing. Headroom is told not to install RTK
+because the add-on already maintains the RTK hook in
+`~/.claude/settings.json`.
+
+To bypass Headroom for troubleshooting, run:
+
+```shell
+claude-direct
+```
+
+Running `claude` directly is equivalent to the direct path. The first Claude
+Code launch may require its own account authentication; Desktop and Claude Code
+store separate client credentials even though both use the configured
+persistent home directory.
+
+### Multiple concurrent clients
+
+Every browser connection attaches to the same tmux session. Concurrent clients
+therefore see the same terminal, keystrokes, and resize events. This is useful
+for reconnecting to one long-running session, but it is not an isolated
+multi-user terminal.
+
+### Terminal user and permissions
+
+The service drops privileges to the LinuxServer `abc` account before starting
+ttyd. The effective numeric UID and GID follow the configured `PUID` and `PGID`.
+Using `PUID: 0` can provide root-equivalent access inside the add-on; use a
+non-zero UID/GID where your storage permissions allow it.
+
+The configured workspace must resolve to the persistent home directory or a
+subdirectory of `/share`, `/media`, `/mnt`, `/data`, or `/config`. Existing
+directories are never re-owned by the terminal service and must already be
+readable, writable, and searchable by `abc`.
+
+### Terminal security
+
+The direct ttyd endpoint uses HTTP Basic Authentication without TLS.
+Credentials and terminal traffic are unencrypted on the network. ttyd also
+receives its Basic Authentication credential as a process argument, so it is
+visible to processes with sufficient access inside the container.
+
+Do not expose port `7681` directly to the public internet. Use a VPN such as
+WireGuard or Tailscale, or place the endpoint behind an HTTPS reverse proxy.
+Use a unique `terminal_password` rather than reusing the Selkies `PASSWORD`.
+
+## Options
+
+| Option | Default | Description |
 | ------ | ------- | ----------- |
-| `PUID` / `PGID` | `0` / `0` | 用于持久数据所有权的用户和组。 |
-| `TZ` | | 可选时区，例如 `America/New_York`。 |
-| `KEYBOARD` | | 可选 Selkies 键盘布局。 |
-| `PASSWORD` | | 可选的 Selkies 端口直接密码。在暴露端口 `3000` 或 `3001` 之前设置此密码。 |
-| `DRINODE` | | 可选的 Selkies GPU 设备覆盖。 |
-| `DNS_server` | `8.8.8.8` | 标准 DNS 模块使用的 DNS 服务器。 |
-| `auto_update` | `true` | 在扩展启动时检查 Anthropic 的 apt 仓库并升级 `claude-desktop`。 |
-| `install_headroom` | `true` | 在 Claude Desktop 中注册内置的 `headroom` MCP 服务器，启动 Headroom 代理后端，并在端口 `8787` 上暴露 Headroom 仪表板（当该端口开放时），在 `/dashboard` 上。这暴露了应用内部的 `headroom_compress`/`headroom_retrieve`/`headroom_stats` 上下文压缩工具。（Claude Desktop 覆盖 `ANTHROPIC_BASE_URL`，因此透明代理压缩不可用 — MCP 是支持的路径；参见 [headroom #869](https://github.com/headroomlabs-ai/headroom/issues/869)。禁用将删除 MCP 条目并停止后端/仪表板服务。） |
-| `install_rtk` | `true` | 在持久 Claude Code 设置中配置 rtk Claude Code `PreToolUse` 钩子。 |
-| `install_caveman` | `true` | 将 caveman Claude Code 插件安装到持久 Claude Code 主目录中。 |
-| `install_github_cli` | `true` | 启用首次启动检查和 `git` 和 `gh` 命令的设置。 |
-| `github_token` | | 可选的 GitHub 个人访问令牌，用于 `gh` 身份验证和配置 GitHub 的 Git 凭据。 |
-| `github_username` | | 可选的全局 Git 作者名称。 |
-| `github_email` | | 可选的全局 Git 作者电子邮件。 |
-| `ha_smart_context` | `true` | 启用 Home Assistant 智能上下文对 Claude 工具的支持。 |
-| `enable_ha_mcp` | `true` | 启用 Home Assistant MCP 对 Claude 工具的支持。 |
-| `dangerously_skip_permissions` | `false` | 暴露 Claude Code 的危险权限跳过模式选项。仅在您理解风险的情况下启用。 |
-| `additional_apps` | | 启动时安装的逗号分隔的 Debian apt 软件包，例如 `htop,git`。 |
-| `additional_pip` | | 启动时安装的逗号分隔的 pip 软件包。安装使用 `--break-system-packages`。 |
-| `data_location` | `/data/data` | 持久主目录位置。保持此持久性，以便 Claude 登录在重启后继续有效。 |
-| `networkdisks`, `cifsusername`, `cifspassword`, `cifsdomain` | | 标准的 SMB 挂载选项。 |
-| `localdisks` | | 标准的本地磁盘挂载选项。 |
-| `env_vars` | `[]` | 导出到容器中的额外环境变量。这可以覆盖 `SELKIES_*` 默认值。 |
+| `PUID` / `PGID` | `0` / `0` | Numeric user and group applied by the LinuxServer initialization. |
+| `TZ` | | Optional timezone, for example `Europe/Brussels`. |
+| `KEYBOARD` | | Optional Selkies keyboard layout. |
+| `PASSWORD` | | Optional password for direct Selkies ports and compatibility fallback for terminal authentication. |
+| `DRINODE` | | Optional GPU device override for Selkies. |
+| `DNS_server` | `8.8.8.8` | DNS server used by the standard DNS module. |
+| `auto_update` | `true` | Upgrade `claude-desktop` from Anthropic's apt repository at startup. |
+| `enable_terminal` | `true` | Enable the supervised Claude Code web-terminal service. |
+| `terminal_username` | `claude` | Username used by ttyd Basic Authentication. |
+| `terminal_password` | | Dedicated terminal password. The service idles when this and `PASSWORD` are empty. |
+| `terminal_workspace` | | Initial directory; defaults to `<data_location>/workspace`. |
+| `install_headroom` | `true` | Enable Headroom MCP for Desktop and the supervised local proxy reused by `claude-headroom`. |
+| `install_rtk` | `true` | Configure RTK's Claude Code `PreToolUse` hook. |
+| `install_caveman` | `true` | Install the Caveman Claude Code plugin in the persistent Claude home. |
+| `install_github_cli` | `true` | Enable setup checks for the baked-in `git` and `gh` commands. |
+| `github_token` | | Optional GitHub token used to authenticate `gh` and Git operations. |
+| `github_username` | | Optional global Git author name. |
+| `github_email` | | Optional global Git author email. |
+| `ha_smart_context` | `true` | Enable Home Assistant smart context support for Claude tooling. |
+| `enable_ha_mcp` | `true` | Enable Home Assistant MCP support for Claude tooling. |
+| `dangerously_skip_permissions` | `false` | Reserved compatibility option; it is not applied by the terminal launcher. |
+| `additional_apps` | | Comma-separated Debian apt packages to install at startup. |
+| `additional_pip` | | Comma-separated pip packages installed with `--break-system-packages`. |
+| `data_location` | `/data/data` | Persistent home directory for both Claude clients and tooling. |
+| `env_vars` | `[]` | Additional environment variables exported inside the container. |
 
-## 自定义脚本
+## Headroom behavior
 
-扩展包括存储库标准的自定义脚本执行器。在首次启动时，它从共享模板中在扩展配置目录中初始化 `claude_desktop.sh` 文件。该脚本中的命令在启动时运行，允许本地自定义而无需重新构建镜像。
+When `install_headroom` is enabled, the add-on registers `headroom mcp serve` in
+Claude Desktop and starts a supervised local Headroom backend. Desktop can use
+`headroom_compress`, `headroom_retrieve`, and `headroom_stats` through MCP.
 
-## 数据和缓存位置
+Claude Desktop overrides `ANTHROPIC_BASE_URL`, so it is deliberately launched
+without proxy injection. The web terminal instead provides `claude-headroom`,
+which reuses the supervised proxy through Headroom's `--no-proxy` mode. RTK
+setup remains owned by the add-on through Headroom's `--no-rtk` mode.
 
-持久状态存储在配置的 `data_location`。Claude Desktop 在 `~/.config/Claude` 以下存储登录数据，Claude Code/工具配置存储在 `~/.claude` 以下。易失性缓存数据通过 `$XDG_CACHE_HOME` 和 `$HOME/.cache` 重定向到 `/tmp/cache`。
+The Headroom dashboard remains available at:
 
-## Headroom 仪表板
+```text
+http://<home-assistant-host>:8787/dashboard
+```
 
-当启用 `install_headroom` 时，扩展启动本地 Headroom 代理后端并默认映射端口 `8787`。通过 `http://<home-assistant-host>:8787/dashboard` 打开以查看 Headroom 实时节省仪表板。如果您禁用 `8787/tcp` 端口映射，后端仅绑定到本地主机以用于 MCP，并且仪表板不会对外暴露。
+when the `8787/tcp` port is mapped. Treat this endpoint as sensitive and do not
+expose it directly to the public internet.
+
+## Custom scripts
+
+The add-on includes the repository standard custom-script executor. On first
+start, it seeds `claude_desktop.sh` in the add-on config directory. Commands in
+that script run during startup, allowing local customization without rebuilding
+the image.
+
+## Data and cache locations
+
+Persistent state is stored in the configured `data_location` (default
+`/data/data`):
+
+- Claude Desktop sign-in: `~/.config/Claude`
+- Claude Code settings, hooks, sessions, and plugins: `~/.claude`
+- Default terminal workspace: `~/workspace`
+- Headroom and RTK user state: their standard paths below the shared home
+
+Volatile cache data is redirected to `/tmp/cache` through `$XDG_CACHE_HOME` and
+`$HOME/.cache`.
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
----
-
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
-
----
-
-## 📱 关注我
-
-扫描下面二维码，关注我。有需要可以随时给我留言：
-
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
-
-## ☕ 赞助支持
-
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
-
-感谢您的支持与鼓励！

@@ -9,19 +9,24 @@
 
 ## 关于
 
-Mozilla Firefox 是由 Mozilla Foundation 及其子公司 Mozilla Corporation 开发的一款免费开源网络浏览器。
+Mozilla Firefox 是由 Mozilla 基金会和其子公司 Mozilla Corporation 开发的一款免费开源网络浏览器。
 
-此插件基于 [docker 镜像](https://github.com/jlesage/docker-firefox) 由 [Jocelyn Le Sage](https://github.com/jlesage) 提供。
+此插件基于 [Jocelyn Le Sage](https://github.com/jlesage) 的 [docker 镜像](https://github.com/jlesage/docker-firefox)。
 
-非常感谢他创建了并维护了这些优秀的容器。他是真正的英雄，需要得到 [支持](https://github.com/sponsors/jlesage)。
+非常感谢他为创建和维护这些优秀的容器而做出的贡献。
+他是真正的英雄，需要得到 [支持](https://github.com/sponsors/jlesage)。
 
 ## 与原始容器的区别
 
-为了使其与 Home Assistant 持久性兼容，我需要重新映射文件夹，为此，启动脚本以 `root` 用户运行。我将在未来尽量避免这样做。
+为了与 Home Assistant 持久性兼容，Firefox 配置文件被重新映射到插件的 `/data` 卷，并下载到 `/share/firefox` 文件夹。此重映射发生在容器初始化期间，因此 Firefox 本身以非特权用户身份运行。
 
 ## 使用方法
 
-只需安装，启动容器，然后点击“打开 Web UI”。您可以使用“在侧边栏显示”以便于访问。您在 Firefox 中所做的所有操作都会被持久化。即使您停止了插件或重启了 Home Assistant 主机操作系统。
+只需安装，启动容器，然后点击“打开 Web UI”。您可以使用“在侧边栏显示”以便于访问。您在 Firefox 中所做的所有操作都将持久化，即使您停止插件或重启 Home Assistant 主机操作系统。
+
+## 文件浏览器和终端
+
+基础镜像包含一个集成的网络文件管理器和网络终端。这两个功能默认都是禁用的，可以从插件的配置选项卡（`WEB_FILE_MANAGER` 和 `WEB_TERMINAL`）中启用。
 
 ## 下载
 
@@ -29,11 +34,12 @@ Mozilla Firefox 是由 Mozilla Foundation 及其子公司 Mozilla Corporation �
 
 ## 上传
 
-如果您需要通过 Firefox 插件上传文件，可以使用 [文件编辑器插件](https://github.com/home-assistant/addons/blob/master/configurator/) 将文件上传到您的 `/share/firefox` 文件夹。文件将在插件的 `downloads` 文件夹中可用。当您选择上传文件时，可以浏览到该位置。
+如果您需要通过 Firefox 插件上传文件，可以使用 [文件编辑器插件](https://github.com/home-assistant/addons/blob/master/configurator/) 将文件上传到您的 `/share/firefox` 文件夹。
+文件将在插件的 `downloads` 文件夹中可用。当您选择上传文件时，可以浏览到该位置。
 
 ## 导入书签
 
-您可以通过将 `bookmarks.html` 文件拖放到您的 `/share/firefox` 文件夹中，然后在 Firefox 中导入 `bookmarks.html` 文件来导入书签。
+您可以通过将 `bookmarks.html` 文件拖放到您的 `/share/firefox` 文件夹中，并在 Firefox 中导入 `bookmarks.html` 文件来导入书签。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
