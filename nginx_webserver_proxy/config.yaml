@@ -1,7 +1,7 @@
 name: "Nginx Proxy Manager + Static Web Server"
 slug: nginx_webserver_proxy
-description: "[老王杂谈说]：Nginx Proxy Manager 搭载内置的可配置静态文件服务器，可通过 81 端口的 NPM 界面管理反向代理，同时通过 80 端口从 HA 存储提供文件服务。"
-version: "2.14.1"
+description: "[老王杂谈说]：Nginx Proxy Manager 内置可配置的静态文件服务器。通过 81 端口的 NPM UI 管理反向代理，同时通过 80 端口从 HA 存储提供文件服务。"
+version: "2.14.1-1"
 url: "https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/nginx_webserver_proxy"
 arch:
   - amd64
