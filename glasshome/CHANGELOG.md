@@ -1,5 +1,50 @@
 # Changelog
 
+## 1.0.0
+
+GlassHome v1. Everything since 0.10.0:
+
+### New Features
+
+- A short, personal welcome note the first time you open GlassHome.
+- Add a phone or tablet by scanning a QR code, with no tokens to copy. Devices without a camera can enter a 6-digit code on an on-screen numpad instead, and you see clear progress while it connects.
+- Settings now tells you when a newer version of GlassHome is available, showing the version you're on and the one to update to.
+- Widgets can use icons from any icon set, not just a small built-in selection. Icons are cached on your box after first use, so they keep working offline, and they no longer flicker or shift while you scroll.
+- Turn off every light or lock every door straight from the dashboard header: the lights and lock chips are now buttons.
+
+### Improvements
+
+- The dashboard's frosted-glass blur is faster and lighter, especially with many widgets on screen. A new Blur setting lets you choose: Performant (the new default, the same look at a fraction of the cost), Dynamic (real-time and most accurate, heaviest on the device), or None (solid surfaces, the lightest option).
+- Remote access lives in one place: a single card for the managed GlassHome tunnel and your own addresses (a home reverse proxy, a VPN, or your own tunnel). A reverse proxy at home is free; a public address needs Pro.
+- The mobile app now works away from home, reaching Home Assistant securely through your dashboard server. Album art and camera images load over remote access too, not just on your home network.
+- No more dead ends when you're away: if Home Assistant can't be reached, that option is clearly marked unavailable with what to do instead, rather than a browser error page.
+- A redesigned sign-in screen with clear, colour-coded options, the best one for your situation highlighted, your home's name shown, and your Home Assistant address filled in for you.
+- Browsing and adding widgets share one cleaner card layout, with a tidy search-and-filter bar and a side-by-side view of the widget you're inspecting.
+- The Area widget was redesigned as a clean column of tiles, making each light, switch, and sensor easier to see and tap.
+- Installing a community widget shows one clear permission dialog instead of two, listing exactly what it wants access to, with a "How widgets are kept safe" explainer.
+- Pro now covers your whole home: when one member has Pro, every member, kiosk, and family phone gets Pro too, and it keeps working for two weeks if your home goes offline.
+- Settings shows you and your home together in a single household card, and the Devices screen groups connected devices by person and clears out stale sessions.
+- Widgets download as smaller, faster bundles and update automatically after you upgrade.
+- Badges and buttons across Settings got a visual refresh: frosted status chips, polished gradient Pro and Early Bird badges, and pill-shaped buttons. Dropdown menus have a consistent size and no longer waste space on mobile.
+- The dashboard header temperature matches the unit you set in Home Assistant, switching between °C and °F with it.
+
+### Security
+
+- Community widgets ask permission before touching your home and can only do what you approve; if a widget ever tries to do more, the attempt is blocked and you get a notification. Each widget runs in its own isolated space, can't interfere with the rest of your dashboard, and can never send your home's data anywhere except your Home Assistant and GlassHome. Widgets never see your Home Assistant login, and your Home Assistant token is no longer handed to the browser. A help page explains, in plain language, what widgets can and cannot do: glasshome.app/docs/widget-security.
+
+### Fixes
+
+- Signing in with your GlassHome account reliably lands you on your home and your dashboards, instead of an empty page or a duplicate "Home". Connecting your account from Settings fixes accounts stuck on earlier versions and cleans up the duplicate profile automatically. Failed sign-ins now show a clear message instead of a silent dead end.
+- Home Assistant admins are admins in GlassHome too, so you can manage your home's members; your role updates on your next sign-in. Every home always has a dashboard, restored on next sign-in if yours was missing.
+- Sign-in works behind a reverse proxy that terminates HTTPS, and Home Assistant error messages show the real text instead of "[object Object]".
+- Notification banners show the correct colours in light mode and under custom themes.
+- Performant Blur (the default) now works on iPhone, iPad, and Mac. Changing your background updates the frosted glass instantly, and the frosted look is identical in every blur mode.
+- Widgets size correctly across more tile shapes, no longer look too small right after the opening animation, and "ghost" tiles no longer linger in empty slots.
+- Reduce Blur and Reduce Motion now apply inside widgets too, and in dark mode widgets follow your custom theme's colours and corner roundness.
+- A widget that fails to auto-update quietly retries once before showing an error, and widgets no longer freeze when switching between dashboards.
+- The interactive demo loads with every widget fully styled, and each visitor gets their own private demo that tidies itself up afterward.
+- The Home Assistant logo was updated to its current mark, and the icon next to a page's title is properly centred.
+
 ## 0.10.0
 
 Highlights since 0.9.6:

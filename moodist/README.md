@@ -1,10 +1,10 @@
 # Home Assistant 插件：Moodist
 
-专注和宁静的环境声音。
+用于专注和放松的环境声音。
 
-_感谢所有给我的仓库点星的人！要给它点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
-[![@jdeath/homeassistant-addons 的星标仓库列表](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
@@ -12,19 +12,19 @@ _感谢所有给我的仓库点星的人！要给它点星，请点击下面的�
 
 ## 安装
 
-此插件的安装非常简单，与安装任何其他Hass.io插件没有太大区别。
+安装此插件非常简单，与安装任何其他Hass.io插件没有区别。
 
-1. 将我的Hass.io插件仓库 [repository][repository] 添加到您的Hass.io实例中。
+1. 将我的Hass.io插件仓库[repository]添加到您的Hass.io实例中。
 1. 安装此插件。
-1. 点击 `保存` 按钮以存储您的配置。
+1. 点击“保存”按钮以存储您的配置。
 1. 启动插件。
-1. 检查插件的日志，查看是否一切顺利。
-1. 通过ingress或 <your-ip>:port 打开WebUI应该可以工作。
+1. 检查插件的日志，以查看一切是否顺利。
+1. 通过ingress或<your-ip>:port打开WebUI应该可以工作。
 
 ## 配置
 
 ```
-port : 8081 #你想要运行的端口。
+port : 8081 #您想要运行的端口。
 ```
 
 WebUI可以在 `<your-ip>:port` 找到。

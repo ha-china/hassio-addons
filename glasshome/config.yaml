@@ -1,14 +1,15 @@
 name: "GlassHome Dashboard"
-version: "0.10.0"
+version: "1.0.0"
 slug: glasshome
-description: "[老王杂谈说]：用于 Home Assistant 的现代化、可定制仪表板，支持拖放小部件"
-url: "https://gh-proxy.org/github.com/glasshome/glasshome-addon"
+description: "[老王杂谈说]：用于 Home Assistant 的现代、可自定义仪表板，支持拖拽组件"
+url: "https://gh-proxy.org/github.com/glasshome/homeassistant-addon"
 arch:
   - amd64
   - aarch64
 init: false
 ingress: false
 panel_icon: mdi:view-dashboard
+webui: "http://[HOST]:[PORT:3123]/"
 startup: application
 boot: auto
 ports:

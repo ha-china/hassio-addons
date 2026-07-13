@@ -2,7 +2,7 @@
 
 GlassHome（https://glasshome.app）的早期构建版本，Home Assistant 的本地优先仪表板。新功能在这里进行测试，然后再发布到稳定版插件中。
 
-![GlassHome 仪表板，Midnight Glass 主题](https://glasshome.app/assets/screenshots/home-midnight-glass-dark-desktop.webp)
+![GlassHome仪表板，Midnight Glass主题](https://glasshome.app/assets/screenshots/home-midnight-glass-dark-desktop.webp)
 
 ## 你应该安装它吗？
 
@@ -10,8 +10,8 @@ GlassHome（https://glasshome.app）的早期构建版本，Home Assistant 的�
 
 - 在端口 **3124** 上运行，因此它可以与稳定版插件 **并行运行**。你可以同时安装两者。
 - 需要 **高级模式**：在 Home Assistant 用户配置文件中启用它，才能在商店中看到此插件。
-- 经常更新。检查变更日志标签，以查看每个构建的更改。
-- Edge 版本经过测试，但属于预发布。在执行主要版本跳跃之前，请备份 Home Assistant。
+- 更新频繁。查看变更日志标签，了解每个构建的更改。
+- Edge 构建已测试，但为预发布版本。在重大版本跳跃之前，请备份 Home Assistant。
 
 ## 开始使用
 
@@ -19,9 +19,9 @@ GlassHome（https://glasshome.app）的早期构建版本，Home Assistant 的�
 2. 打开 `http://homeassistant.local:3124`（或 `http://YOUR_HA_IP:3124`）。
 3. 新手？请遵循 [5分钟快速入门](https://glasshome.app/docs/quickstart)。
 
-## 发现有什么问题？
+## 发现了什么问题？
 
-这正是 Edge 的用途。在 [Discord 错误报告论坛](https://discord.gg/FJYdeDmrzv) 中报告它，并提供你的 Edge 版本，这样它就可以在发布稳定版之前得到修复。
+这正是 Edge 的作用所在。在 [Discord bug-reports 论坛](https://discord.gg/FJYdeDmrzv) 中报告它，并带上你的 Edge 版本，它将在达到稳定版之前得到修复。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

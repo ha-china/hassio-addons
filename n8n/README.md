@@ -6,7 +6,7 @@ n8n 是一个可扩展的工作流自动化工具。采用公平的代码分发�
 
 _感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
 
-[![Stargazers 仓库列表 @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
@@ -19,7 +19,7 @@ _感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，�
 1. 启动扩展组件。
 1. 扩展组件将失败，这是正常的
 1. 通过 ssh 连接到您的 homeassistant 并运行 `chmod 2777 /addon_configs/2effc9b9_n8n`
-1. 启动扩展组件
+1. 重新启动扩展组件
 1. 检查扩展组件的日志以查看是否一切顺利。
 1. 通过 <your-ip>:port 打开 WebUI 应该可以工作。
 1. 设置管理员账户
@@ -27,7 +27,7 @@ _感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，�
 
 ## 配置
 
-您可以选择将扩展组件设置为使用环境文件。注意使用 '/home/node' 作为基本路径，它将映射到 /addon_configs/2effc9b9_n8n 
+您可以将扩展组件设置为使用环境文件。注意使用 '/home/node' 作为基本路径，它将映射到 /addon_configs/2effc9b9_n8n 
 
 您需要自己创建此文件，并使其成为您想要设置的环境的列表，例如：
 ```
@@ -36,7 +36,7 @@ N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 ```
 
 ```
-port : 5678 #您想要运行在的端口。
+port : 5678 #您想要运行的端口号。
 ```
 
 WebUI 可以在 <your-ip>:port 找到。

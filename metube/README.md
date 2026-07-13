@@ -1,25 +1,25 @@
-# Home Assistant 扩展：MeTube
+# Home Assistant 插件：MeTube
 
-基于 yt-dlp 分支（使用 yt-dlp）的网页界面，支持播放列表。允许您从 YouTube 和其他数十个网站下载视频（https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md）。
+基于 yt-dlp 分支（使用 yt-dlp 分支）的 YouTube-dl 网页 GUI，支持播放列表。允许您从 YouTube 和其他数十个网站（https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md）下载视频。
 
-_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它将显示在右上角。谢谢！_
+_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
-![Stargazers 仓库列表 @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
-此扩展基于 [docker 镜像](https://github.com/alexta69/metube)。
+此插件基于 [docker 镜像](https://github.com/alexta69/metube)。
 
 ## 安装
 
-此扩展的安装非常简单，与安装任何其他 Hass.io 扩展没有区别。
+此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. 将我的 Hass.io 扩展仓库 [repository] 添加到您的 Hass.io 实例。
-1. 安装此扩展。
+1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例中。
+1. 安装此插件。
 2. 点击 `保存` 按钮以存储您的配置。
 3. 下载目录默认为 /share/metube，可以在 share 中更改。
-4. 启动扩展。
-5. 检查扩展的日志以查看一切是否顺利。
+4. 启动插件。
+5. 检查插件的日志以查看是否一切顺利。
 6. 通过 ingress 或 <your-ip>:port 打开 WebUI 应该可以工作。
 
 ## 配置
