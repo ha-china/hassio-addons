@@ -113,6 +113,12 @@ See the [full list](https://blescalesync.dev/guide/supported-scales).
 
 ## Troubleshooting
 
+### Add-on exits immediately with `DBusError: ... AccessDenied`
+
+The full error mentions `An AppArmor policy prevents this sender from sending this message`, names `member="Hello"`, and appears before any scanning starts.
+
+The Supervisor's default AppArmor profile does not allow the D-Bus calls this add-on makes to reach BlueZ. Newer add-on versions run unconfined instead, so updating to the latest version fixes it. If you still see this after updating, uninstall and reinstall the add-on so the Supervisor picks up the new manifest.
+
 ### Bluetooth adapter reset
 
 The add-on power-cycles the Bluetooth adapter on startup to ensure a clean state. This is enabled by default (**Reset Bluetooth adapter on startup**). If you have other HA Bluetooth integrations that lose connectivity when this add-on restarts, disable the option.

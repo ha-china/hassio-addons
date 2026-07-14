@@ -2,7 +2,7 @@ arch:
   - aarch64
   - amd64
 audio: true
-description: '[老王杂谈说]：Claude Desktop 和一个持久的 Claude Code 网页终端'
+description: "[老王杂谈说]：Claude 桌面应用和持久的 Claude Code 网页终端"
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -57,8 +57,8 @@ options:
 panel_admin: false
 panel_icon: mdi:robot-happy
 ports:
-  3001/tcp: "ubunturesolute-version-6dc44b0e"
-  7681/tcp: "ubunturesolute-version-6dc44b0e"
+  3001/tcp: null
+  7681/tcp: 7681
   8787/tcp: 8787
 ports_description:
   3001/tcp: Claude Desktop web interface
@@ -100,5 +100,5 @@ slug: claude_desktop
 tmpfs: true
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
-version: "ubunturesolute-version-6dc44b0e"
+version: "1.16"
 video: true

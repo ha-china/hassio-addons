@@ -1,10 +1,10 @@
 name: BLE Scale Sync
 # x-release-please-start-version
-version: 1.19.0
+version: 1.20.0
 # x-release-please-end
 slug: ble-scale-sync
 description: >-
-  [老王杂谈说]：读取 BLE 智能秤并导出到 Garmin Connect、MQTT (HA 自动发现)、InfluxDB 等等
+  [老王杂谈说]：读取 BLE 智能秤并导出到 Garmin Connect、MQTT (HA 自动发现)、InfluxDB 等。
 url: https://gh-proxy.org/github.com/KristianP26/ble-scale-sync
 documentation: >-
   https://gh-proxy.org/github.com/KristianP26/ble-scale-sync/blob/main/ble-scale-sync-addon/DOCS.md
@@ -21,6 +21,15 @@ host_dbus: true
 privileged:
   - NET_ADMIN
   - NET_RAW
+# The Supervisor's default AppArmor profile denies the D-Bus method calls this
+# add-on needs, so it dies on the very first `Hello` handshake to
+# org.freedesktop.DBus before any BLE scan starts. Running unconfined is what
+# the standalone Docker image already does. Confinement buys little here: the
+# add-on already runs as root with host_network, host_dbus, NET_ADMIN and
+# NET_RAW. A custom apparmor.txt would be the tidier fix, but a profile that
+# fails to parse breaks add-on install AND update for every user, and it cannot
+# be tested in CI. See issue #271.
+apparmor: false
 hassio_api: true
 map:
   - share:rw

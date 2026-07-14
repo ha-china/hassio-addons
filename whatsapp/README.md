@@ -4,7 +4,7 @@
 
 [![打开您的 Home Assistant 实例并显示应用仪表板](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=605cee21_whatsapp)
 [![Home Assistant App](https://img.shields.io/badge/home%20assistant-app-blue.svg)](https://www.home-assistant.io/apps/)
-[![Docker 镜像](https://img.shields.io/badge/docker-1.7.2-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-whatsapp)
+[![Docker Image](https://img.shields.io/badge/docker-1.7.3-blue.svg?logo=docker&style=flat-square)](https://github.com/FaserF/hassio-addons/pkgs/container/hassio-addons-whatsapp)
 ![项目维护](https://img.shields.io/badge/maintainer-FaserF-blue?style=flat-square)
 
 > Home Assistant WhatsApp App (Baileys/Node.js).
@@ -28,7 +28,7 @@
 
 - `ha-app-help`：显示可用命令和示例。
 - `ha-app-welcome`：手动显示基于角色的欢迎信息。
-- `ha-app-diagnose`：运行完整的消息类型诊断（按钮、列表等）。
+- `ha-app-diagnose`：运行完整消息类型诊断（按钮、列表等）。
 - `ha-app-logs`：查看最近的连接事件。
 - `ha-app-restart`：重启 WhatsApp 连接。
 
@@ -36,21 +36,21 @@
 > **首次联系：**机器人会自动向新用户在他们的第一条直接消息中发送欢迎信息，并识别他们的角色（管理员/标准）。
 
 > [!TIP]
-> 从管理员号码发送 `ha-app-help` 获取命令的完整列表和使用示例。
+> 从管理员号码发送 `ha-app-help` 获取完整命令列表和用法示例。
 
 ## ⚠️ 防止封号和安全指南
 
-由于此插件使用非官方 WhatsApp API 库（Baileys），WhatsApp 的自动反垃圾邮件系统可能会标记并暂时/永久封禁显示类似垃圾邮件行为的账户。遵循以下规则以保护您的账户安全：
+由于此插件使用非官方 WhatsApp API 库（Baileys），WhatsApp 的自动反垃圾邮件系统可能会标记并暂时/永久封禁显示类似垃圾邮件行为的账户。请遵守以下规则以保持您的账户安全：
 
-- **预热新号码**：不要使用全新的 SIM 卡或新注册的号码用于机器人。使用一个与真实用户有手动建立的聊天历史的号码。
-- **保存联系人**：确保接收消息的账户已将机器人的电话号码保存到他们的联系人列表中。向未保存的联系人发送消息会显著增加被标记的风险。
+- **预热新号码**：不要使用全新的 SIM 卡或新注册的号码用于机器人。使用一个与真实用户已建立手动聊天历史的号码。
+- **保存联系人**：确保接收消息的账户已将机器人的电话号码保存在他们的联系人列表中。向未保存的联系人发送消息会显著增加被标记的风险。
 - **避免群发**：不要向大量收件人或群组同时发送消息。
-- **使用延迟**：在通过 Home Assistant 自动化发送连续消息时，总是在消息之间插入延迟操作（例如 5-10 秒）。
+- **使用延迟**：当通过 Home Assistant 自动化发送连续消息时，始终在消息之间插入延迟操作（例如 5-10 秒）。
 - **模拟输入**：该插件会自动在每条消息发送前模拟 1-2.5 秒的输入状态（`composing...`），以模拟人类行为。
 
-## 🐳 独立 Docker 支持（仅限 Docker）
+## 🐳 独立 Docker 支持（仅 Docker）
 
-如果您在容器中运行 Home Assistant（没有 Supervisor/HAOS），您可以独立运行 WhatsApp 网关作为 Docker 容器。
+如果您在容器中运行 Home Assistant（没有 Supervisor/HAOS），您可以作为一个独立的 Docker 容器运行 WhatsApp 网关。
 
 ### Docker Compose 示例
 
@@ -76,7 +76,7 @@ services:
 
 ## ⚙️ 配置
 
-通过 Home Assistant App 页面中的 **配置** 选项卡配置应用。
+通过 Home Assistant App 页面的 **配置** 选项卡配置应用。
 
 ### 选项
 
@@ -107,7 +107,7 @@ welcome_message_enabled: false
 
 ## 👨‍💻 致谢与许可
 
-此项目是开源的，并采用 MIT 许可证。
+本项目为开源项目，遵循 MIT 许可证。
 由 **FaserF** 维护。
 ---
 

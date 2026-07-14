@@ -3,7 +3,7 @@ arch:
 audio: true
 backup_exclude:
   - logs/**
-description: '[老王杂谈说]：实时 BirdNET 声景分析器，编译自 alexbelgium/birdnet-go 分支（合并了所有开放 PR），启用了 OpenVINO 以实现 Intel CPU/iGPU 加速（仅 amd64 测试构建）'
+description: '[老王杂谈说]：null'
 devices:
   - /dev/dri
   - /dev/snd
@@ -127,5 +127,5 @@ slug: birdnet-go-dev
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
 usb: true
-version: "source-20260709"
+version: "source-20260714"
 video: true
