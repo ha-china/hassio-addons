@@ -1,5 +1,33 @@
 # Changelog
 
+## [2.2.1](https://github.com/SirUli/homeassistant-ollama-addon/compare/v2.2.0...v2.2.1) (2026-07-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ollama/ollama to v0.32.0 ([867876e](https://github.com/SirUli/homeassistant-ollama-addon/commit/867876e238ed96ab6bb12c785a5e5d62aa036a16))
+
+# [2.2.0](https://github.com/SirUli/homeassistant-ollama-addon/compare/v2.1.0...v2.2.0) (2026-07-06)
+
+
+### Features
+
+* Authentication via API Keys and move home ([00f2ecb](https://github.com/SirUli/homeassistant-ollama-addon/commit/00f2ecb629d82c13848bc7405aa344d9205d75dd))
+
+# [2.1.0](https://github.com/SirUli/homeassistant-ollama-addon/compare/v2.0.112...v2.1.0) (2026-07-06)
+
+
+### Features
+
+* persist Ollama Cloud credentials across addon restarts ([0d11836](https://github.com/SirUli/homeassistant-ollama-addon/commit/0d118363af1d7922923f6b76c80a2c8e5036382b)), closes [#197](https://github.com/SirUli/homeassistant-ollama-addon/issues/197) [#219](https://github.com/SirUli/homeassistant-ollama-addon/issues/219)
+
+## [2.0.112](https://github.com/SirUli/homeassistant-ollama-addon/compare/v2.0.111...v2.0.112) (2026-07-06)
+
+
+### Bug Fixes
+
+* Add /dev/kfd to list of devices for rocm ([088ac33](https://github.com/SirUli/homeassistant-ollama-addon/commit/088ac33ae18e2736e51ca207bbeae73efa0f86e6))
+
 ## [2.0.111](https://github.com/SirUli/homeassistant-ollama-addon/compare/v2.0.110...v2.0.111) (2026-06-30)
 
 

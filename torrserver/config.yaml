@@ -1,11 +1,10 @@
 ---
 name: TorrServer
 slug: torrserver
-description: '[老王杂谈说]：TorrServer 用于 Home Assistant'
+description: '[老王杂谈说]：用于 Home Assistant 的 TorrServer'
 image: ghcr.nju.edu.cn/aatrubilin/hassio-torrserver/{arch}
-version: 2.0.0-MatriX.142
+version: 2.0.1-MatriX.142.1
 url: https://gh-proxy.org/github.com/aatrubilin/hassio-torrserver
-codenotary: aatrubilin@gmail.com
 init: false
 auth_api: true
 arch:

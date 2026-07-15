@@ -1,25 +1,25 @@
-# 主页助手插件：皇家价格检查
+# Home Assistant 插件：皇家邮轮价格检查
 
 ## 描述
-如果皇家加勒比邮轮的附加选项降价，则发出通知。可以重新定价邮轮、仅限饮料套餐、互联网、游览等。
+当皇家加勒比邮轮的附加服务价格下降时，会进行通知。可以重新定价邮轮、仅饮料套餐、网络、短途旅行等。
 
-_感谢所有为我仓库点星的人！要星标它，请点击下面的图片，然后它将显示在右上角。谢谢！_
+_感谢所有为我仓库点星的人！要为它点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 
 ## 安装
 
-此插件的安装相当简单，与安装任何其他Hass.io插件没有区别。
+此插件的安装非常简单，与安装任何其他Hass.io插件没有区别。
 
-1. [将我的Hass.io插件仓库][repository]添加到您的Hass.io实例中。
+1. 将我的Hass.io插件仓库[仓库](https://github.com/jdeath/homeassistant-addons)添加到您的Hass.io实例中。
 1. 安装此插件。
-2. 点击“保存”按钮以存储您的配置。
-3. 启动插件。它将失败，这是正常的
-4. 前往 /addon-configs/2effc9b9_royalpricecheck
-5. 编辑 `/addon-configs/2effc9b9_royalpricecheck/config.yaml`（见下文）
-6. 再次运行插件并检查日志
-7. 确认工作正常后，使用自动化运行此插件一次每天
+1. 点击“保存”按钮以存储您的配置。
+1. 启动插件。它会失败，这是正常的
+1. 前往 /addon-configs/2effc9b9_royalpricecheck
+1. 编辑 `/addon-configs/2effc9b9_royalpricecheck/config.yaml`（见下文）
+1. 再次运行插件并检查日志
+1. 确认工作正常后，使用自动化任务每天运行一次
 
 ## config.yaml
 请参阅 `https://github.com/jdeath/CheckRoyalCaribbeanPrice`
@@ -44,7 +44,7 @@ mode: single
 
 # 发送通知。
 1. 编辑 `/addon-configs/2effc9b9_royalpricecheck/config.yaml`
-2. 配置通知行
+1. 配置通知行
 
 对于Home Assistant通知，它应该看起来像这样：
 ```
@@ -53,21 +53,21 @@ apprise:
   urls:
     - 'hassio://192.168.X.XX/eyXXXXXXXXXXXXXXXX.eyXXXXXXXXXXXXXXXXXxx'
 ```
-其中 `eyXXX.eyXXX` 字符串是Home Assistant长生命期令牌。长生命期访问令牌可以使用用户Home Assistant个人资料页底部的“长生命期访问令牌”部分创建。
+其中 `eyXXX.eyXXX` 字符串是Home Assistant的长效令牌。长效访问令牌可以通过用户Home Assistant个人资料页面的“长效访问令牌”部分创建。
 
-更多信息请参阅：`https://github.com/caronc/apprise/wiki/Notify_homeassistant`
+更多详情请参阅 `https://github.com/caronc/apprise/wiki/Notify_homeassistant`
 
-更多信息请参阅：`https://github.com/caronc/apprise` 您可以包含多个URL行来发送电子邮件等。
+更多详情请参阅 `https://github.com/caronc/apprise` 您可以包含多个URL行以发送电子邮件等。
 
 # 添加到侧边栏
-由于没有WebUI，因此无法在侧边栏中显示。但是，您可以将以下代码添加到Home Assistant的 `configuration.yaml` 中，以通过侧边栏条目显示日志。
+由于没有WebUI，因此无法在侧边栏中显示。但是，您可以将以下代码添加到您的Home Assistant `configuration.yaml` 中，以通过侧边栏条目显示日志。
 
 ```
 panel_custom:
   - name: panel_rewards
     sidebar_title: 奖励
     sidebar_icon: mdi:medal
-    url_path: 'hassio/addon/2effc9b9_royalpricecheck/logs'
+    url_path: 'config/app/2effc9b9_royalpricecheck/logs'
     module_url: /api/hassio/app/entrypoint.js
     embed_iframe: true
     require_admin: true
@@ -76,7 +76,7 @@ panel_custom:
 # 问题
 
 
-[repository]: https://github.com/jdeath/homeassistant-addons
+[仓库]: https://github.com/jdeath/homeassistant-addons
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**

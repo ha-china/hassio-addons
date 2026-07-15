@@ -1,7 +1,7 @@
 name: "Ollama"
-description: "[老王杂谈说]：上手使用大型语言模型"
+description: "[老王杂谈说]：开始使用大语言模型。"
 # renovate: datasource=github-tags depName=ollama/ollama
-version: "0.31.1"
+version: "0.32.0"
 slug: "ollama"
 arch:
   - aarch64
@@ -29,8 +29,10 @@ options:
   OLLAMA_MAX_LOADED_MODELS: 1
   OLLAMA_NUM_PARALLEL: 1
   OLLAMA_ORIGINS: ""
+  HOME: /data
   gpus: all
 schema:
+  OLLAMA_API_KEY: str?
   OLLAMA_CONTEXT_LENGTH: int?
   OLLAMA_FLASH_ATTENTION: int
   OLLAMA_MODELS: list(/config/ollama|/share/ollama|/data/ollama)
@@ -51,6 +53,7 @@ schema:
   OLLAMA_CONTEXT_LENGTH: int?
   OLLAMA_ORIGINS: str
   HTTPS_PROXY: str?
+  HOME: str
   gpus: str
 backup_exclude:
   - "ollama/**"
@@ -61,6 +64,7 @@ devices:
   - /dev/apex_2
   - /dev/apex_3
   - /dev/dri/card0
+  - /dev/kfd
   - /dev/vchiq
   - /dev/video10
   - /dev/video0

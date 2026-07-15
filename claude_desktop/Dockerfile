@@ -11,6 +11,7 @@ ARG BUILD_FROM
 ARG BUILD_VERSION
 ARG RTK_VERSION="v0.43.0"
 ARG RTK_COMMIT="5a7880d404db8364d602f2ecdc41dd790f64013f"
+ARG TOKENSAVE_VERSION="7.2.0"
 
 # The upstream aarch64 release is cross-built on ubuntu-latest and requires
 # GLIBC 2.39. Build the pinned source on Bookworm instead so it is compatible
@@ -24,6 +25,13 @@ RUN git clone --depth 1 --branch "${RTK_VERSION}" https://gh-proxy.org/github.co
     cargo build --release --locked && \
     install -D -m 0755 target/release/rtk /out/rtk && \
     /out/rtk --version
+
+# tokensave ships no Bookworm-compatible prebuilt binary either; build the pinned
+# crates.io release from source so GLIBC matches the add-on runtime.
+FROM rust:1.91-bookworm AS tokensave-builder
+ARG TOKENSAVE_VERSION
+RUN cargo install tokensave --version "${TOKENSAVE_VERSION}" --locked --root /out && \
+    /out/bin/tokensave --version
 
 FROM ${BUILD_FROM}
 
@@ -61,17 +69,19 @@ RUN curl -fsSL --retry 3 --retry-delay 2 \
 # 3 Install apps #
 ##################
 
-# Add rootfs
+# Add rootfs. Only the directories this add-on ships scripts in are traversed, so the chmod
+# cannot alter executables elsewhere in the image.
 COPY rootfs/ /
-RUN find . -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -exec chmod +x {} \; && \
-    chmod +x /usr/local/bin/claude-direct /usr/local/bin/claude-headroom /usr/local/bin/claude-terminal-shell
+RUN find /etc/cont-init.d /etc/s6-overlay /defaults /usr/local/bin -type f \
+        \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -exec chmod +x {} \;
 
 # Uses /bin for compatibility purposes
 # hadolint ignore=DL4005
 RUN if [ ! -f /bin/sh ] && [ -f /usr/bin/sh ]; then ln -s /usr/bin/sh /bin/sh; fi && \
     if [ ! -f /bin/bash ] && [ -f /usr/bin/bash ]; then ln -s /usr/bin/bash /bin/bash; fi
 
-# Install Claude Desktop, Claude Code, browser-terminal tooling, and Python tooling
+# Install Claude Desktop, Claude Code, and Python tooling. gnome-keyring provides the
+# Secret Service backend Electron safeStorage needs to persist sign-in and dispatch grants.
 RUN install -d -m 0755 /etc/apt/keyrings && \
     curl -fsSLo /usr/share/keyrings/claude-desktop-archive-keyring.asc https://downloads.claude.ai/claude-desktop/key.asc && \
     curl -fsSLo /etc/apt/keyrings/claude-code.asc https://downloads.claude.ai/keys/claude-code.asc && \
@@ -86,34 +96,22 @@ RUN install -d -m 0755 /etc/apt/keyrings && \
         dbus-x11 \
         git \
         gh \
-        ripgrep \
-        tmux && \
+        ripgrep && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# ttyd is not packaged in Debian bookworm. Install the pinned upstream static binary.
-ARG TTYD_VERSION="1.7.7"
-RUN set -eux; \
-    case "$(dpkg --print-architecture)" in \
-        amd64) ttyd_arch="x86_64" ;; \
-        arm64) ttyd_arch="aarch64" ;; \
-        *) echo "Unsupported architecture for ttyd: $(dpkg --print-architecture)" >&2; exit 1 ;; \
-    esac; \
-    curl -fsSL --retry 3 --retry-delay 2 \
-        -o /usr/local/bin/ttyd \
-        "https://gh-proxy.org/github.com/tsl0922/ttyd/releases/download/${TTYD_VERSION}/ttyd.${ttyd_arch}"; \
-    chmod 0755 /usr/local/bin/ttyd; \
-    /usr/local/bin/ttyd --version
-
-# Copy the pinned Bookworm-built RTK binary and execute it in the final image.
-# This makes an ABI mismatch fail the image build instead of surfacing at runtime.
+# Copy the pinned Bookworm-built RTK and tokensave binaries and execute them in the final
+# image. This makes an ABI mismatch fail the image build instead of surfacing at runtime.
 COPY --from=rtk-builder /out/rtk /usr/local/bin/rtk
-RUN /usr/local/bin/rtk --version
+COPY --from=tokensave-builder /out/bin/tokensave /usr/local/bin/tokensave
+RUN /usr/local/bin/rtk --version && /usr/local/bin/tokensave --version
 
-# Install only the Headroom proxy, code-compression, and MCP features used by this add-on.
+# Install only the Headroom proxy, code-compression, and MCP features used by this add-on,
+# plus mcp-proxy (stdio->SSE bridge for the Home Assistant MCP server) and uv (fast
+# installer used for the additional_pip option).
 RUN apt-get update && \
     apt-get install -y --no-install-recommends nodejs && \
-    pip3 install --break-system-packages "headroom-ai[proxy,code,mcp]" && \
+    pip3 install --break-system-packages "headroom-ai[proxy,code,mcp]" mcp-proxy uv && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /root/.cache
 

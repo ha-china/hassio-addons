@@ -10,17 +10,17 @@
 
 这是一个 [Home Assistant 的 TorrServer](https://github.com/aatrubilin/hassio-torrserver)。
 
-🌟 请考虑通过给它一个 star 来支持 [这个项目](https://github.com/aatrubilin/hassio-torrserver)。
+🌟 请考虑通过给它加星来支持 [这个项目](https://github.com/aatrubilin/hassio-torrserver)。
 
 [<img src="https://raw.githubusercontent.com/aatrubilin/hassio-torrserver/master/assets/screenshot.png"/>](https://raw.githubusercontent.com/aatrubilin/hassio-torrserver/dev/assets/screenshot.png)
 
-有问题或疑问？您可以在 GitHub 上 [打开一个 issue](https://github.com/aatrubilin/hassio-torrserver/issues)。
+有问题或疑问？您可以在 GitHub [这里](https://github.com/aatrubilin/hassio-torrserver/issues) 提交问题。
 
-> _请注意，此应用程序仅在 **HA OS** 上进行了测试_
+> _请注意，此应用仅在 **HA OS** 上进行了测试_
 
 ----
 
-此 hassio 应用程序由 [@aatrubilin](https://github.com/aatrubilin) 基于 [YouROK/TorrServer](https://github.com/YouROK/TorrServer) 提供。
+hassio 应用由 [@aatrubilin](https://github.com/aatrubilin) 基于 [YouROK/TorrServer](https://github.com/YouROK/TorrServer) 提供。
 ---
 
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
