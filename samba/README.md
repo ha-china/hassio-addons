@@ -6,8 +6,8 @@
 
 ## 关于
 
-此应用（之前称为附加组件）允许您在网络中跨不同操作系统启用文件共享。
-它让您可以使用Windows和macOS设备访问您的配置文件。
+此应用（以前称为附加组件）允许您在网络中启用不同操作系统之间的文件共享。
+它让您可以使用Windows和macOS设备访问配置文件。
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg

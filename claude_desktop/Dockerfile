@@ -34,6 +34,7 @@ RUN cargo install tokensave --version "${TOKENSAVE_VERSION}" --locked --root /ou
     /out/bin/tokensave --version
 
 FROM ${BUILD_FROM}
+ARG BUILD_ARCH
 
 ##################
 # 2 Modify Image #
@@ -73,15 +74,17 @@ RUN curl -fsSL --retry 3 --retry-delay 2 \
 # cannot alter executables elsewhere in the image.
 COPY rootfs/ /
 RUN find /etc/cont-init.d /etc/s6-overlay /defaults /usr/local/bin -type f \
-        \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -exec chmod +x {} \;
+        \( -name "*.sh" -o -name "run" -o -name "finish" -o -name "ha-cli" \) -print -exec chmod +x {} \; && \
+    chmod +x /usr/local/bin/claude
 
 # Uses /bin for compatibility purposes
 # hadolint ignore=DL4005
 RUN if [ ! -f /bin/sh ] && [ -f /usr/bin/sh ]; then ln -s /usr/bin/sh /bin/sh; fi && \
     if [ ! -f /bin/bash ] && [ -f /usr/bin/bash ]; then ln -s /usr/bin/bash /bin/bash; fi
 
-# Install Claude Desktop, Claude Code, and Python tooling. gnome-keyring provides the
-# Secret Service backend Electron safeStorage needs to persist sign-in and dispatch grants.
+# Install Claude Desktop, Claude Code, Python tooling, and lightweight local validators.
+# gnome-keyring provides the Secret Service backend Electron safeStorage needs to persist
+# sign-in and dispatch grants.
 RUN install -d -m 0755 /etc/apt/keyrings && \
     curl -fsSLo /usr/share/keyrings/claude-desktop-archive-keyring.asc https://downloads.claude.ai/claude-desktop/key.asc && \
     curl -fsSLo /etc/apt/keyrings/claude-code.asc https://downloads.claude.ai/keys/claude-code.asc && \
@@ -96,9 +99,36 @@ RUN install -d -m 0755 /etc/apt/keyrings && \
         dbus-x11 \
         git \
         gh \
-        ripgrep && \
+        ripgrep \
+        jq \
+        shellcheck \
+        yamllint && \
+    test -x /usr/bin/claude && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Install the current upstream hadolint and actionlint releases for both supported
+ARG HADOLINT_VERSION=v2.14.0
+ARG ACTIONLINT_VERSION=v1.7.12
+
+RUN set -eux; \
+    case "${BUILD_ARCH}" in \
+        amd64) hadolint_arch="x86_64"; actionlint_arch="amd64" ;; \
+        aarch64) hadolint_arch="arm64"; actionlint_arch="arm64" ;; \
+        *) echo "Unsupported validation-tools architecture: ${BUILD_ARCH}" >&2; exit 1 ;; \
+    esac; \
+    curl -fsSL --retry 3 --retry-delay 2 \
+        -o /usr/local/bin/hadolint \
+        "https://gh-proxy.org/github.com/hadolint/hadolint/releases/download/${HADOLINT_VERSION}/hadolint-linux-${hadolint_arch}"; \
+    chmod 0755 /usr/local/bin/hadolint; \
+    curl -fsSL --retry 3 --retry-delay 2 \
+        -o /tmp/actionlint.tar.gz \
+        "https://gh-proxy.org/github.com/rhysd/actionlint/releases/download/${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION#v}_linux_${actionlint_arch}.tar.gz"; \
+    tar -xzf /tmp/actionlint.tar.gz -C /tmp actionlint; \
+    install -m 0755 /tmp/actionlint /usr/local/bin/actionlint; \
+    rm -f /tmp/actionlint /tmp/actionlint.tar.gz; \
+    hadolint --version; \
+    actionlint -version
 
 # Copy the pinned Bookworm-built RTK and tokensave binaries and execute them in the final
 # image. This makes an ABI mismatch fail the image build instead of surfacing at runtime.
@@ -107,11 +137,14 @@ COPY --from=tokensave-builder /out/bin/tokensave /usr/local/bin/tokensave
 RUN /usr/local/bin/rtk --version && /usr/local/bin/tokensave --version
 
 # Install only the Headroom proxy, code-compression, and MCP features used by this add-on,
-# plus mcp-proxy (stdio->SSE bridge for the Home Assistant MCP server) and uv (fast
-# installer used for the additional_pip option).
+# plus mcp-proxy (stdio->HTTP bridge for the Home Assistant MCP server) and uv (fast
+# installer used for the additional_pip option). The `proxy` extra already ships the ONNX
+# runtime + transformers needed by the Kompress compressor — the `ml` extra (full PyTorch,
+# ~5 GB with CUDA wheels) is deliberately NOT installed; svc-headroom pre-warms the ONNX
+# model into the persistent HF cache instead.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends nodejs && \
-    pip3 install --break-system-packages "headroom-ai[proxy,code,mcp]" mcp-proxy uv && \
+    pip3 install --break-system-packages "headroom-ai[proxy,code,mcp]" mcp-proxy uv websockets && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /root/.cache
 
@@ -159,7 +192,6 @@ CMD [ "/ha_entrypoint.sh" ]
 # 5 Labels #
 ############
 
-ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_DESCRIPTION
 ARG BUILD_NAME

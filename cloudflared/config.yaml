@@ -1,10 +1,10 @@
 name: Cloudflared
-version: 7.0.9
+version: 7.0.10
 breaking_versions:
   - 5.3.7
   - 6.0.0
 slug: cloudflared
-description: '[老王杂谈说]：使用 Cloudflare Tunnel 远程连接 Home Assistant，无需开放任何端口'
+description: '[老王杂谈说]：使用 Cloudflare Tunnel 远程连接 Home Assistant，无需开放任何端口。'
 url: https://gh-proxy.org/github.com/homeassistant-apps/app-cloudflared
 startup: services
 init: false

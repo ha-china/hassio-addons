@@ -1,24 +1,31 @@
 # Changelog
 
-## 9.0.4
+## 9.1.0
 
 - **⚠️ When upgrading from 8.x, please also consider the release notes for 9.0.0.**
+- Update [Matter Server from 1.1.7 to 1.2.6](https://github.com/matter-js/matterjs-server/blob/main/CHANGELOG.md)
+  - Supports Matter 1.6.0
+  - Synchronize Time to devices that support this
+  - Experimental Support for Battery Saving mode of ICD devices
+  - Many Optimizations and Fixes
+- Add `time_sync` option (`auto`/`on`/`off`, default `auto`) to push the current time to Matter devices via the Matter Server's `--enable-time-sync` flag. `auto` enables time sync only when the host clock is NTP synchronized; `on` always enables it (with a warning if NTP is not synchronized); `off` disables it.
+- Add `default_fabric_label` option to pin the fabric label via the Matter Server's `--default-fabric-label` flag. When set, changing the label via the WebSocket API is blocked.
+
+## 9.0.4
+
 - Update [Matter Server from 1.1.2 to 1.1.7](https://github.com/matter-js/matterjs-server/blob/main/CHANGELOG.md#117-2026-07-01) to address reported issues and optimize RAM and CPU usage (a lot)
 
 ## 9.0.3
 
-- **⚠️ When upgrading from 8.x, please also consider the release notes for 9.0.0.**
 - Update [Matter Server from 1.1.1 to 1.1.2](https://github.com/matter-js/matterjs-server/blob/main/CHANGELOG.md#112-2026-06-25) to address reported issues
 
 ## 9.0.2
 
-- **⚠️ When upgrading from 8.x, please also consider the release notes for 9.0.0.**
 - Update Matter Server to 1.1.1 with increased Health check timings
 - Speed up Beta version installation
 
 ## 9.0.1
 
-- **⚠️ Please also consider the release notes for 9.0.0 when upgrading from 8.x.**
 - Fixes Heath check with default port settings
 
 ## 9.0.0

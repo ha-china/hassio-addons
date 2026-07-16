@@ -1,3 +1,50 @@
+## 1.28 (16-07-2026)
+- Minor bugs fixed
+## 1.27 (15-07-2026)
+
+- Route Claude Desktop cowork/local-agent-mode sessions through the Headroom proxy. Desktop spawns its bundled Claude Code binary at an absolute path (bypassing the add-on's PATH wrapper) with `ANTHROPIC_BASE_URL` pinned to the production endpoint, so those sessions never produced proxy savings. The add-on now manages `env.ANTHROPIC_BASE_URL` in `~/.claude/settings.json` — settings `env` entries replace inherited environment values at CLI startup — gated on `headroom_wrap_claude_code` and never overwriting a user-customized endpoint.
+- Fix Headroom's Kompress compression engine never activating, which made even proxied traffic record zero token savings (e.g. 175 requests, 0 saved). The proxy's startup preload is deliberately cache-only, but the HuggingFace model cache defaulted to `~/.cache` — tmpfs in this add-on, wiped every restart — so the ONNX model (plus the separately fetched `answerdotai/ModernBERT-base` tokenizer) was never cached and the engine idled in "deferred" mode forever, misleadingly logged as `Kompress: not installed`. `svc-headroom` now points `HF_HOME` at persistent storage (`~/.headroom/hf`, ~270 MB); the proxy's own request path already downloads a missing model in the background on first use and passes requests through uncompressed until it lands, so no blocking startup pre-warm is needed — the port binds immediately either way, and Kompress activates within the first couple of requests on the first boot, then loads instantly on every boot after. The already-installed `proxy` extra's ONNX runtime is sufficient — the multi-gigabyte PyTorch `ml` extra is deliberately not installed.
+
+## 1.26 (15-07-2026)
+
+- Fix startup permission failures that prevented Claude Desktop from starting: storage was chowned to a hardcoded `1000:1000`, but the shared `abc` desktop user was never mapped to that UID. During init `abc` was still the image default (`911`), so TokenSave (`.claude.json.new`), RTK (`RTK.md`), nginx, PulseAudio, the Mesa shader cache, and Claude Desktop itself all hit `Permission denied`; the base image's `init-adduser` then remapped `abc` to root mid-startup (PUID/PGID were read from add-on options where they did not exist, falling back to `0`), which also made Claude Code reject `permission_mode: bypass`.
+- Add `PUID`/`PGID` add-on options (default `1000:1000`) and remap `abc` to that identity at the very start of folder setup, before any ownership is applied and before any service resolves the user. The base image's `init-adduser` is pinned to the same effective identity so it can no longer remap `abc` mid-startup.
+- In `permission_mode: bypass`, a configured `PUID: 0` automatically falls back to UID `1000` (Claude Code refuses bypass permissions as root), retaining the configured group.
+- Fix `bashio::config.array: command not found` in the TokenSave repository setup, tools configuration, and `claude-tools-doctor.sh`: the function only exists in the repo's standalone bashio, not in the real bashio shipped in the image. Use `bashio::config`, which prints list entries one per line.
+- Return managed Claude configuration files to the effective `abc` identity instead of the raw configured `PUID`/`PGID` (which previously fell back to `0` and left the files root-owned).
+- Pre-create `/tmp/.X11-unix` with the standard sticky mode so Xorg, which runs as the non-root `abc` user on a tmpfs `/tmp`, no longer fails to create its socket directory (`_XSERVTransmkdir: euid != 0`).
+
+## 1.25 (15-07-2026)
+- Minor bugs fixed
+## 1.24 (15-07-2026)
+
+- Fix the `/usr/local/bin/claude` wrapper never routing terminal Claude Code sessions through the Headroom proxy: it hardcoded `HEADROOM_BIN="/usr/local/bin/headroom"` while the binary is installed at `/usr/bin/headroom`, so the executable check always failed and the wrapper fell back to launching Claude Code directly. Resolve the binary with `command -v headroom` instead.
+- Harden startup TokenSave indexing so an interrupted `init`/`sync` or a hard add-on stop can no longer leave a corrupt semantic graph that fails every subsequent boot. Each configured repository is now prepared under a startup-scoped `flock` (serialised against overlapping restarts and mid-boot git sync hooks); an existing index is refreshed with a retried incremental `sync` (transient `SQLITE_BUSY` no longer looks like corruption); and only a genuinely unreadable index — or a half-written one flagged by an `init` sentinel — is quarantined to `.tokensave/corrupt-<timestamp>/` and rebuilt from scratch, so the graph self-heals instead of propagating corruption.
+
+## 1.23 (15-07-2026)
+
+- Add a `ha-cli` helper that lets Claude configure Home Assistant (automations, scripts, scenes, helpers, dashboards, area/label/floor/entity registries, and service calls) through the Home Assistant Core API instead of a filesystem mount. It authenticates automatically with the add-on's `SUPERVISOR_TOKEN` via the Supervisor Core-API proxy (no token setup), and deliberately cannot reach `configuration.yaml`/`secrets.yaml` or other add-ons' credentials. Toggle with the new `enable_ha_api_helper` option (default on), which also controls a managed guidance block appended to `~/.claude/CLAUDE.md`.
+
+## 1.21 (15-07-2026)
+
+- Fix Claude Code bypass permissions being rejected when the add-on uses its default root `PUID`.
+- In `permission_mode: bypass`, remap the shared `abc` Desktop runtime to an unused non-root UID before storage ownership and Selkies startup, while retaining its configured primary group for mounted-path access.
+- Make folder setup and final Claude configuration ownership follow the effective `abc` identity instead of the configured root UID.
+- Drop root console invocations of the add-on's `/usr/local/bin/claude` wrapper to the non-root `abc` runtime before passing `--dangerously-skip-permissions`.
+- Extend `claude-tools-doctor.sh` with configured/effective UID and GID checks for bypass mode.
+
+## 1.20 (15-07-2026)
+
+- Complete the TokenSave Claude Code integration at startup: install its MCP server, permissions, PreToolUse/UserPromptSubmit/Stop hooks, global guidance, and Git synchronization hooks instead of registering only `tokensave serve`.
+- Add `tokensave_project_paths` for explicit per-repository initialization and incremental synchronization; no repositories are scanned or indexed unless listed.
+- Route PATH-based Claude Code launches through the already-supervised Headroom proxy by default with a recursion-safe `/usr/local/bin/claude` wrapper; fall back to the official binary when the proxy is unavailable.
+- Pass the local proxy URL explicitly to the Headroom MCP server, while retaining MCP-only integration for the Desktop Electron application.
+- Keep the unauthenticated Headroom dashboard container-local by default; add `expose_headroom_dashboard` and leave port `8787/tcp` unmapped until explicitly enabled.
+- Fix the hourly gains report so Headroom no longer suppresses RTK output, add TokenSave gains, and gate each tool on its actual add-on option.
+- Add `claude-tools-doctor.sh` to inspect binaries, redacted MCP registrations, hooks, proxy health, routing, project indexes, and gains.
+- Install local validation tools (`jq`, `shellcheck`, `yamllint`, current `hadolint`, and current `actionlint`) to reduce avoidable CI round-trips.
+- Disable the unpinned third-party Caveman startup installer by default; it remains opt-in.
+
 ## 1.19 (14-07-2026)
 - Minor bugs fixed
 ## 1.18 (14-07-2026)
@@ -17,7 +64,7 @@
 - Minor bugs fixed
 ## 1.15 (13-07-2026)
 - Minor bugs fixed
- 
+  
 ## ubunturesolute-version-6dc44b0e (2026-07-13)
 - Update to latest version from linuxserver/docker-baseimage-selkies (changelog : https://github.com/linuxserver/docker-baseimage-selkies/releases)
 ## 1.14 (10-07-2026)

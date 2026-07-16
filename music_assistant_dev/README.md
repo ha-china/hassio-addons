@@ -1,250 +1,231 @@
-# 音乐助手开发应用
+# Music Assistant DEV App
 
-这是一个专为音乐助手设计的特殊开发应用，允许开发者快速在Home Assistant中测试音乐助手的特定分支、拉取请求，甚至是音乐助手的分支。
+This is a special development App for Music Assistant that allows developers to quickly test specific branches, pull requests, or even forks of Music Assistant directly in Home Assistant.
 
-## 目的
+## Purpose
 
-本应用旨在用于：
+This App is designed for:
 
-- 在合并前测试拉取请求
-- 开发和调试新功能
-- 测试音乐助手的分支
-- 运行用于测试的自定义分支
+- Testing pull requests before merging
+- Developing and debugging new features
+- Testing forks of Music Assistant
+- Running custom branches for testing
 
-## 工作原理
+## How It Works
 
-与使用预构建发布的常规音乐助手应用不同，此开发应用：
+Unlike the regular Music Assistant App which uses pre-built releases, this Dev App:
 
-1. 从指定的Git源（分支、PR或分支）构建和安装服务器
-2. 从指定的Git源（分支、PR或分支）构建和安装前端
-3. 使用您的自定义代码启动音乐助手
+1. Builds and installs the server from a specified Git source (branch, PR, or fork)
+2. Builds and installs the frontend from a specified Git source (branch, PR, or fork)
+3. Starts Music Assistant with your custom code
 
-构建过程：
+The build process:
 
-1. 从指定的Git引用安装服务器包
-2. 根据其构建过程（npm构建）构建前端
-3. 将前端作为Python包安装（覆盖默认前端）
-4. 启动音乐助手
+1. Installs the server package from the specified Git reference
+2. Builds the frontend according to its build procedure (npm build)
+3. Installs the frontend as a Python package (overwriting the default frontend)
+4. Starts Music Assistant
 
-## 配置
+## Configuration
 
-### 基本配置
+### Basic Configuration
 
 ```yaml
 log_level: info
 safe_mode: false
 ```
 
-### 服务器仓库配置
+### Server Repository Configuration
 
-使用`server_repo`选项指定要安装的音乐助手服务器版本：
+Use the `server_repo` option to specify which version of the Music Assistant server to install:
 
-**格式**：`owner/repo@reference`或仅`reference`
+**Format**: `owner/repo@reference` or just `reference`
 
-- **分支**：`dev`、`main`或任何分支名称
-- **拉取请求**：`pr-123`（将检出PR #123）
-- **分支**：`username/server@branch-name`
-- **提交**：完整的提交SHA
-- **空/空白**：使用GitHub上的最新夜间发布版（快速模式 - 无需构建）
+- **Branch**: `dev`, `main`, or any branch name
+- **Pull Request**: `pr-123` (will checkout PR #123)
+- **Fork**: `username/server@branch-name`
+- **Commit**: Full commit SHA
+- **Empty/blank**: Use latest nightly release from GitHub (fast mode - no build required)
 
-**示例**：
+**Examples**:
 
 ```yaml
-# 使用最新的夜间发布版（快速 - 无需构建）
+# Use latest nightly release (FAST - no build required)
 server_repo: ""
 
-# 使用dev分支
+# Use the dev branch
 server_repo: dev
 
-# 使用特定分支
+# Use a specific branch
 server_repo: feature/new-player
 
-# 测试拉取请求
+# Test a pull request
 server_repo: pr-456
 
-# 测试分支
+# Test a fork
 server_repo: someuser/server@experimental-feature
 
-# 使用特定提交
+# Use a specific commit
 server_repo: abc123def456...
 ```
 
-**默认**：`""`（空 - 使用GitHub上的最新夜间发布版）
+**Default**: `""` (empty - uses latest nightly release from GitHub)
 
-> **注意**：当`server_repo`留空或空白时，应用将安装GitHub发布版中的最新夜间发布轮（快速模式 - 无需构建）。这是最快的选项，因为不需要服务器构建。
+> **Note**: When `server_repo` is left empty or blank, the App will install the latest nightly release wheel from GitHub releases. This is the fastest option as no server build is required.
 
-### 前端仓库配置
+### Frontend Repository Configuration
 
-使用`frontend_repo`选项指定要安装的音乐助手前端版本：
+Use the `frontend_repo` option to specify which version of the Music Assistant frontend to install:
 
-**格式**：与服务器仓库相同 - `owner/repo@reference`或仅`reference`
+**Format**: Same as server_repo - `owner/repo@reference` or just `reference`
 
-- **分支**：`main`、`dev`或任何分支名称
-- **拉取请求**：`pr-789`（将检出PR #789）
-- **分支**：`username/frontend@branch-name`
-- **提交**：完整的提交SHA
-- **空/空白**：跳过前端构建（使用捆绑的前端）
+- **Branch**: `main`, `dev`, or any branch name
+- **Pull Request**: `pr-789` (will checkout PR #789)
+- **Fork**: `username/frontend@branch-name`
+- **Commit**: Full commit SHA
+- **Empty/blank**: Skip frontend build (use bundled frontend)
 
-**示例**：
+**Examples**:
 
 ```yaml
-# 跳过前端构建（快速 - 使用捆绑的前端）
+# Skip frontend build (FAST - use bundled frontend)
 frontend_repo: ""
 
-# 使用main分支
+# Use the main branch
 frontend_repo: main
 
-# 使用特定分支
+# Use a specific branch
 frontend_repo: feature/new-ui
 
-# 测试拉取请求
+# Test a pull request
 frontend_repo: pr-789
 
-# 测试分支
+# Test a fork
 frontend_repo: someuser/frontend@redesign
 
-# 使用特定提交
+# Use a specific commit
 frontend_repo: abc123def456...
 ```
 
-**默认**：`""`（空 - 使用捆绑的前端，无构建）
+**Default**: `""` (empty - uses bundled frontend, no build)
 
-> **注意**：当`frontend_repo`留空或空白时，前端构建将**完全跳过**。这显著减少了启动时间，当您只需要测试后端功能时非常理想。将使用与服务器安装捆绑的前端。
+> **Note**: When `frontend_repo` is left empty or blank, the frontend build will be **skipped entirely**. This significantly reduces startup time and is ideal when you only need to test backend features. The frontend bundled with the server installation will be used instead.
 
-## 完整配置示例
+## Full Configuration Examples
 
-### 快速模式（仅后端测试）
+### Fast Mode (Backend Testing Only)
 ```yaml
 log_level: info
 safe_mode: false
 server_repo: ""
 frontend_repo: ""
 ```
-使用GitHub上的最新夜间发布版，无需构建。启动时间最快。
+Uses latest nightly release from GitHub, no builds required. Fastest startup time.
 
-### 后端开发模式
+### Backend Development Mode
 ```yaml
 log_level: debug
 safe_mode: false
 server_repo: dev
 frontend_repo: ""
 ```
-从`dev`分支构建服务器，跳过前端构建。快速测试后端更改的理想选择。
+Builds server from the `dev` branch, skips frontend build. Good for testing backend changes quickly.
 
-### 完整开发模式
+### Full Development Mode
 ```yaml
 log_level: debug
 safe_mode: false
 server_repo: pr-456
 frontend_repo: pr-789
 ```
-从源构建服务器（PR #456）和前端（PR #789）。全面测试的完整控制。
+Builds both server (PR #456) and frontend (PR #789) from source. Full control for comprehensive testing.
 
-## 重要说明
+## Important Notes
 
-### 构建时间
+### Build Time
 
-构建时间根据您的配置而变化：
-- **两者都为空**（`server_repo: ""`和`frontend_repo: ""`）：最快 - 无需构建，使用最新夜间发布版
-- **仅指定`server_repo`**：中等 - 仅构建服务器，跳过前端（理想的后端测试）
-- **两者都指定**：最慢 - 从源构建服务器和前端（完整开发模式）
+Build time varies depending on your configuration:
+- **Both empty** (`server_repo: ""` and `frontend_repo: ""`): Fastest - no builds, uses latest nightly release
+- **Only `server_repo` specified**: Medium - builds server only, skips frontend (ideal for backend testing)
+- **Both specified**: Slowest - builds both server and frontend from source (full development mode)
 
-**提示**：当仅测试后端功能时，请留空`frontend_repo`以显著减少启动时间！
+**Tip**: Leave `frontend_repo` empty when only testing backend features to significantly reduce startup time!
 
-### 安全模式
+### Safe Mode
 
-- 如果您需要在不加载提供者的情况下启动音乐助手，请设置`safe_mode: true`
-- 用于调试任何启动问题
+- Set `safe_mode: true` if you need to start Music Assistant without loading providers
+- Useful for debugging any startup issues
 
-### 拉取请求语法
+### Pull Request Syntax
 
-指定拉取请求时，使用`pr-NUMBER`（例如，`pr-123`、`pr-456`）。应用将自动获取和检出PR。
+When specifying a pull request, use `pr-NUMBER` (e.g., `pr-123`, `pr-456`). The App will automatically fetch and checkout the PR for you.
 
-## 故障排除
+## Troubleshooting
 
-### 应用无法启动
+### App won't start
 
-1. 检查应用日志以查找构建错误
-2. 验证分支/PR/分支是否存在且可访问
-3. 尝试使用已知良好的分支，如`dev`或`main`
-4. 启用`safe_mode: true`以跳过提供者加载
+1. Check the App logs for build errors
+2. Verify the branch/PR/fork exists and is accessible
+3. Try using a known-good branch like `dev` or `main`
+4. Enable `safe_mode: true` to bypass provider loading
 
-### 构建失败
+### Build failures
 
-- 确保指定的Git引用存在
-- 检查分支中是否存在依赖冲突
-- 前端构建需要Node.js - 构建失败可能表明不兼容的前端代码
+- Ensure the specified Git reference exists
+- Check if there are dependency conflicts in the branch
+- Frontend build requires Node.js - build failures may indicate incompatible frontend code
 
-### 性能问题
+### Performance issues
 
-- 从源构建使用更多资源
-- 仅用于开发测试，不要作为日常驱动程序使用
+- Building from source uses more resources
+- Only use this App for development testing, not as a daily driver
 
-## 开发者工作流程
+## Developer Workflow
 
-### 测试PR
+### Testing a PR
 
-1. 查找PR编号（例如，#456）
-2. 配置：`server_repo: pr-456`
-3. 重新启动应用
-4. 测试更改
+1. Find the PR number (e.g., #456)
+2. Configure: `server_repo: pr-456`
+3. Restart the App
+4. Test the changes
 
-### 开发功能
+### Developing Features
 
-1. 将您的分支推送到您的分支
-2. 配置：`server_repo: yourusername/server@your-branch`
-3. 重新启动应用
-4. 测试和迭代
+1. Push your branch to your fork
+2. Configure: `server_repo: yourusername/server@your-branch`
+3. Restart the App
+4. Test and iterate
 
-### 测试服务器和前端更改
+### Testing Both Server and Frontend Changes
 
 ```yaml
 server_repo: pr-456
 frontend_repo: pr-789
 ```
 
-这允许您测试两个存储库之间的协调更改。
+This allows you to test coordinated changes across both repositories.
 
-## 支持
+## Support
 
-这是一个开发者工具，不支持普通用户。如果您遇到问题：
+This is a developer tool and is not supported for regular users. If you encounter issues:
 
-- 检查应用日志
-- 验证您的Git引用是否正确
-- 首先使用默认分支进行测试
-- 在音乐助手开发者Discord频道中提问
+- Check the App logs
+- Verify your Git references are correct
+- Test with the default branches first
+- Ask in the Music Assistant developer Discord channel
 
-## 与常规应用的区别
+## Differences from Regular App
 
-| 功能      | 常规应用       | 开发应用（夜间模式）    | 开发应用（源模式）    |
+| Feature      | Regular App       | DEV App (Nightly mode)    | DEV App (Source mode)    |
 | ------------ | ----------------- | ------------------------- | ------------------------ |
-| 安装      | 预构建发布版 | 最新夜间轮 | 从源构建 |
-| 启动时间 | 快速              | 快速                      | 较慢（构建时间）      |
-| 稳定性    | 稳定发布版   | 夜间构建            | 开发代码         |
-| 前端      | 捆绑           | 捆绑                   | 从源构建        |
-| 更新      | 自动         | 手动（重启）          | 手动（更改配置）   |
-| 用例      | 生产        | 快速后端测试     | 全部开发/测试 |
----
+| Installation | Pre-built release | Latest nightly wheel      | Built from source        |
+| Startup time | Fast              | Fast                      | Slower (build time)      |
+| Stability    | Stable releases   | Nightly builds            | Development code         |
+| Frontend     | Bundled           | Bundled                   | Built from source        |
+| Updates      | Automatic         | Manual (restart)          | Manual (change config)   |
+| Use case     | Production        | Quick backend testing     | Full development/testing |
 
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
-
-**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
-
----
-
-## 📱 关注我
-
-扫描下面二维码，关注我。有需要可以随时给我留言：
-
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
-
-## ☕ 赞助支持
-
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
-
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
-
-感谢您的支持与鼓励！
+**Configuration Modes:**
+- **Fast mode**: Both repos empty - Uses latest nightly release, no builds
+- **Backend dev mode**: Only `server_repo` specified - Builds server, uses bundled frontend
+- **Full dev mode**: Both repos specified - Builds everything from source
