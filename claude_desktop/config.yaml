@@ -2,7 +2,7 @@ arch:
   - aarch64
   - amd64
 audio: true
-description: "[老王杂谈说]：Claude Desktop，具备 Headroom、RTK 和 TokenSave 优化"
+description: "[老王杂谈说]：带有余量、RTK 和 TokenSave 优化的 Claude Desktop"
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -39,7 +39,6 @@ options:
   data_location: /data/data
   additional_apps: ""
   additional_pip: ""
-  auto_update: true
   github_email: ""
   enable_ha_mcp: false
   ha_mcp_url: http://homeassistant:8123/api/mcp
@@ -49,6 +48,7 @@ options:
   github_username: ""
   enable_tools_health_report: true
   expose_headroom_dashboard: false
+  headroom_auto_compress: true
   headroom_wrap_claude_code: true
   install_caveman: false
   install_github_cli: true
@@ -96,6 +96,7 @@ schema:
   github_username: str?
   enable_tools_health_report: bool
   expose_headroom_dashboard: bool
+  headroom_auto_compress: bool?
   headroom_wrap_claude_code: bool
   install_caveman: bool
   install_github_cli: bool
@@ -109,5 +110,5 @@ slug: claude_desktop
 tmpfs: true
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
-version: "1.28"
+version: "1.32"
 video: true

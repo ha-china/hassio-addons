@@ -1,119 +1,164 @@
-## ⚠️ 多台机器上 VNC 无法工作。请使用 config.env 来执行脚本
+# Home Assistant add-on: Free Games Claimer
 
-# Home assistant 插件：免费游戏领取器
+I maintain this and other Home Assistant add-ons in my free time. Keeping up
+with upstream changes, Home Assistant changes, and testing on real hardware
+takes a significant amount of time.
 
-![捐赠](https://www.buymeacoffee.com/alexbelgium)
-![捐赠](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffree_games_claimer%2Fconfig.yaml)
-![入口](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffree_games_claimer%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffree_games_claimer%2Fconfig.yaml)
+## Add-on information
 
-![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
-![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
-![构建器](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=构建器)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffree_games_claimer%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffree_games_claimer%2Fconfig.yaml)
 
-[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20(no%20paypal)-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
-[paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20with%20Paypal-0070BA?logo=paypal&style=flat&logoColor=white
+[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
-_感谢所有星标我的仓库的人！要星标它，请点击下面的图片，它将在右上角。谢谢！_
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-![@alexbelgium/hassio-addons 的星标者仓库列表](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+## About
 
-![下载量趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/free_games_claimer/stats.png)
+This add-on is based on
+[Free Games Claimer Remaster](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster).
+It can claim free games from:
 
-## 关于
-
-[免费游戏领取器](https://github.com/vogler/free-games-claimer) : 定期领取免费游戏
-
-- 埃及游戏商店
-- 亚马逊_prime游戏
+- Epic Games Store
+- Amazon Prime Gaming
 - GOG
-- Live 游戏金 - 计划中
+- Steam
+- GamerPower-supported stores, when explicitly enabled
 
-此插件基于 https://github.com/vogler/free-games-claimer 的 docker 镜像
+For compatibility with previous add-on releases, the default store selection
+remains Epic Games, Prime Gaming, and GOG.
 
-## 配置
+## Web interface
 
-Webui 可以在 <http://homeassistant:6080> 找到（NoVNC 接口 - 目前在某些机器上有问题）。
+The noVNC interface remains available on port `6080`:
 
-### 选项
-
-| 选项 | 类型 | 默认值 | 描述 |
-|------|------|--------|------|
-| `CMD_ARGUMENTS` | 字符串 | `node epic-games ; node prime-gaming ; node gog` | 用于领取游戏的命令 |
-| `CONFIG_LOCATION` | 字符串 | `/config/config.env` | 配置文件的位置 |
-
-### 示例配置
-
-```yaml
-CMD_ARGUMENTS: "node epic-games ; node prime-gaming ; node gog"
-CONFIG_LOCATION: "/config/config.env"
+```text
+http://homeassistant:6080
 ```
 
-### 环境配置
+It can be used for initial sign-in, CAPTCHA handling, or other manual browser
+interaction. Set `VNC_PASSWORD` in `config.env` to protect the VNC session.
 
-所有主要配置都是通过位于 `/config/addons_config/free_games_claimer/config.env` 的 `config.env` 文件完成的。
+## Add-on options
 
-如果此文件不存在，它将在首次启动时使用默认设置创建。
+| Option | Default | Description |
+|--------|---------|-------------|
+| `CONFIG_LOCATION` | `/config/config.env` | Persistent environment configuration file |
+| `RUN_ONCE` | `true` | Run all selected claimers once, then stop the add-on as previous releases did |
+| `STORES` | empty | Optional comma-separated override, such as `epic,prime,gog,steam` |
+| `CMD_ARGUMENTS` | `node epic-games ; node prime-gaming ; node gog` | Deprecated compatibility option; recognized legacy command names are converted to `STORES` |
+| `env_vars` | `[]` | Additional environment variables passed to the add-on |
 
-### 必要的环境变量
+### Run modes
 
-将这些添加到您的 `config.env` 文件中：
+With `RUN_ONCE: true`, the add-on performs one claiming pass and stops. This is
+the default and preserves the behavior of the former vogler-based add-on.
+
+With `RUN_ONCE: false`, the remaster remains running and uses its internal
+scheduler. Set `SCHEDULER_HOURS` in `config.env` to control the interval.
+
+## Environment configuration
+
+The add-on keeps its configuration in `CONFIG_LOCATION`, which defaults to
+`/config/config.env`. From Home Assistant this is stored in the add-on's
+private `addon_configs` directory and can be edited with a compatible file
+browser add-on.
+
+A template is created on first start. Common examples are:
 
 ```env
-# 埃及游戏商店
+# Preserve the former default selection
+STORES=epic,prime,gog
+
+# Epic Games
 EG_EMAIL=your-email@example.com
 EG_PASSWORD=your-password
+EG_OTPKEY=
 
-# 亚马逊_prime游戏
+# Amazon Prime Gaming
 PG_EMAIL=your-amazon-email@example.com
-PG_PASSWORD=your-amazon-password
+PG_PASSWORD=your-password
+PG_OTPKEY=
 
-# GOG (可选)
+# GOG
 GOG_EMAIL=your-gog-email@example.com
-GOG_PASSWORD=your-gog-password
+GOG_PASSWORD=your-password
 
-# 通知 (可选)
-EMAIL_SMTP_HOST=smtp.gmail.com
-EMAIL_SMTP_PORT=587
-EMAIL_USER=notifications@example.com
-EMAIL_PASS=your-app-password
-EMAIL_TO=recipient@example.com
+# Optional Steam support
+STEAM_USERNAME=your-steam-username
+STEAM_PASSWORD=your-password
+
+# Optional notifications
+NOTIFY=tgram://bot-token/chat-id
+# DISCORD_WEBHOOK=https://discord.com/api/webhooks/...
 ```
 
-### 其他选项
+Existing variables such as `EG_EMAIL`, `EG_PASSWORD`, `PG_EMAIL`,
+`PG_PASSWORD`, `PG_OTPKEY`, `GOG_EMAIL`, `GOG_PASSWORD`, `SHOW`, `WIDTH`,
+`HEIGHT`, `TIMEOUT`, `LOGIN_TIMEOUT`, `DRYRUN`, and `NOTIFY` remain compatible.
+See the
+[upstream configuration reference](https://github.com/P-Adamiec/Free-Games-Claimer-Remaster#configuration)
+for all available settings.
 
-有关完整的配置选项和高级设置，请参阅：https://github.com/vogler/free-games-claimer#configuration--options
+## Upgrade from version 1.8
 
-### 重要提示
+Version 2.0 changes the application engine from
+`vogler/free-games-claimer` (Node.js, Playwright, and Firefox) to
+`P-Adamiec/Free-Games-Claimer-Remaster` (Python, nodriver, and Chromium).
+The add-on performs the following migration automatically on first start:
 
-- **VNC 问题**：NoVNC 网络接口目前在某些机器上无法可靠工作
-- **推荐**：使用 `config.env` 文件而不是网络界面进行配置
-- **安全**：安全地存储凭证，并在可用时考虑使用特定于应用密码
+1. The existing `config.env` remains at the same configured location.
+2. Legacy `epic-games.json`, `prime-gaming.json`, and `gog.json` claim history
+   is imported into the remaster SQLite database at `/data/fgc.db`.
+3. Existing database rows are detected and are not duplicated if migration is
+   retried.
+4. A pre-migration database backup is created when an existing `fgc.db` is
+   present.
+5. All old files remain under `/data/data` for rollback or manual recovery.
 
-### 自定义脚本和环境变量
+Browser sessions cannot be converted because the old add-on used a shared
+Firefox profile while the remaster uses separate Chromium profiles per store.
+Credentials remain available through `config.env`, but accounts that require
+interactive authentication may need a one-time login through noVNC after the
+upgrade. The old Firefox profile is retained and is never deleted.
 
-此插件支持通过 `addon_config` 映射的自定义脚本和环境变量：
+The external noVNC port remains `6080`, although the standalone remaster image
+normally uses port `7080`.
 
-- **自定义脚本**：参见 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **环境变量**：参见 [向您的插件添加环境变量](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+## Upstream update policy
 
-## 安装
+The image is built from an explicit upstream commit in the Dockerfile. This
+keeps amd64 and aarch64 images reproducible and prevents an upstream branch or
+container tag from changing without an add-on review and version bump.
 
-此插件的安装非常简单，与安装任何其他插件没有区别。
+The repository updater is intentionally paused for this add-on because the
+add-on uses its own `2.x` version series while the replacement upstream uses a
+`1.x` version series. An automatic replacement would risk a Home Assistant
+version regression and would not safely update the pinned commit. A maintainer
+upstream update must therefore update `UPSTREAM_REF`, `upstream_version`, the
+add-on version, and `CHANGELOG.md` together.
 
-1. 将我的插件仓库添加到您的 home assistant 实例（在 supervisor 插件商店的右上角，或如果您已配置我的 HA，请点击下面的按钮）
-   ![打开您的 Home Assistant 实例并显示带有预填特定仓库 URL 的添加插件仓库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-2. 安装此插件。
-3. 点击 `保存` 按钮以保存您的配置。
-4. 设置插件的选项以符合您的偏好。
-5. 启动插件。
-6. 检查插件的日志以查看是否一切正常。
-7. 打开 WebUI 并调整软件选项
+## Installation
 
-## 支持
+1. Add this add-on repository to the Home Assistant add-on store.
+2. Install **Free Games Claimer**.
+3. Configure the add-on options as needed.
+4. Start the add-on and review its log.
+5. Open noVNC if an account needs manual authentication.
 
-在 github 上创建问题
+[![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 
-[repository]: https://github.com/alexbelgium/hassio-addons
+## Custom scripts and environment variables
+
+- [Running custom scripts in add-ons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- [Passing environment variables to an add-on](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2)
+
+## Support
+
+Open an issue in the
+[add-on repository](https://github.com/alexbelgium/hassio-addons/issues).

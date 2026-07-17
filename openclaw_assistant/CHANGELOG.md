@@ -2,6 +2,32 @@
 
 All notable changes to the OpenClaw Assistant Home Assistant Add-on will be documented in this file.
 
+## [0.5.82] - 2026-07-15
+
+### Fixed
+- Repair add-on startup automatically when the bundled OpenClaw CLI is older than the persisted `/config/.openclaw/openclaw.json` format version. On mismatch, the add-on now restores the newer runtime before launching the gateway instead of silently coming up broken after a Home Assistant OS update or add-on rebuild.
+- Regenerate malformed `lan_https` CA/server certificates with proper X.509 extensions (`basicConstraints`, `keyUsage`, `extendedKeyUsage`) so Python/OpenSSL strict verification accepts the built-in HTTPS proxy certificates.
+
+## [0.5.81] - 2026-07-14
+
+### Changed
+- Bump OpenClaw to `2026.7.1`.
+
+## [0.5.80] - 2026-06-26
+
+### Changed
+- Bump OpenClaw to `2026.6.10`.
+
+## [0.5.78] - 2026-06-16
+
+### Changed
+- Bump OpenClaw through the `2026.5.28` and `2026.6.6` upstream releases.
+
+## [0.5.76] - 2026-05-29
+
+### Changed
+- Bump OpenClaw to `2026.5.27`.
+
 ## [0.5.75] - 2026-05-28
 
 ### Changed

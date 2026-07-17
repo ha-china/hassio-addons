@@ -1,17 +1,17 @@
 # Home Assistant 插件：Collabora
 
-我在业余时间维护这个以及其他 Home Assistant 插件：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试都需要花费大量时间（以及一些金钱）。我经常使用大约 5-10 个我的 >110 个插件，所以我安装了测试机器（并购买了一些我自己不使用的测试服务，如 VPN），以便进行故障排除和改进插件。
+我在业余时间维护这个以及其他 Home Assistant 插件：跟进上游更改、Home Assistant 更改以及在实际硬件上的测试都需要花费大量的时间（以及一些金钱）。我经常使用我超过 110 个插件中的 5-10 个，所以我安装了测试机器（并购买了一些我自己不使用的测试服务，如 VPN），以便进行故障排除和改进插件。
 
-如果这个插件为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
+如果这个插件为您节省了时间或使您的设置更简单，我将非常感激您的支持！
 
 [![买我一杯咖啡][捐赠徽章]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-徽章]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
 ## 插件信息
 
-![版本](https://img.shields.io/badge/dynamic/yaml?label=版本&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcollabora%2Fconfig.yaml)
-![入口](https://img.shields.io/badge/dynamic/yaml?label=入口&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcollabora%2Fconfig.yaml)
-![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=架构&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcollabora%2Fconfig.yaml)
+![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcollabora%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcollabora%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fcollabora%2Fconfig.yaml)
 
 [![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
@@ -20,11 +20,11 @@
 [捐赠徽章]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-徽章]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_感谢所有为我的仓库点星的人！要星标它，请点击下面的图片，然后它将显示在右上角。谢谢！_
+_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![下载演变](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/collabora/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/collabora/stats.png)
 
 ## 关于
 
@@ -34,7 +34,7 @@ Collabora Online 是一个基于 LibreOffice 技术的协作办公套件。
 
 ---
 
-1. 将我的插件仓库添加到您的 Home Assistant 实例中，或点击下面的我的链接。
+1. 将我的插件仓库添加到您的 Home Assistant 实例中，或点击下面的 My 链接。
 1. 安装插件。
 1. 启动插件。
 1. 检查插件日志以验证成功启动。
@@ -51,15 +51,15 @@ Webui 可以在 `https://homeassistant:9980/browser/dist/admin/admin.html` 找�
 
 | 选项 | 类型 | 默认 | 描述 |
 |--------|------|---------|-------------|
-| `aliasgroup1` | str | | 使用两个 \ 转义点（例如 `nextcloud_domain\\.com`）的 Nextcloud 外部域名 |
-| `domain1` | str | | 使用两个 \ 转义点（例如 `code_domain\\.com`）的 Collabora 外部域名 |
+| `aliasgroup1` | str | | Nextcloud 外部域名，使用两个 \ 转义点（例如 `nextcloud_domain\\.com`） |
+| `domain1` | str | | Collabora 外部域名，使用两个 \ 转义点（例如 `code_domain\\.com`） |
 | `extra_params` | str | | 传递给 Collabora 启动脚本的额外参数 |
-| `ssl` | bool | `false` | 启用 SSL 使用 /ssl 中的证书 |
-| `certfile` | str | `fullchain.pem` | 位于 /ssl 中的证书文件名 |
-| `keyfile` | str | `privkey.pem` | 位于 /ssl 中的私钥文件名 |
+| `ssl` | bool | `false` | 启用 SSL，使用 /ssl 中的证书 |
+| `certfile` | str | `fullchain.pem` | 证书文件名，位于 /ssl |
+| `keyfile` | str | `privkey.pem` | 私钥文件名，位于 /ssl |
 | `username` | str | | Collabora 管理控制台的用户名 |
 | `password` | str | | Collabora 管理控制台的密码 |
-| `dictionaries` | str | | 安装字典语言的空格分隔列表 |
+| `dictionaries` | str | | 要安装的字典语言列表，用空格分隔 |
 
 ### 示例配置
 
@@ -84,16 +84,14 @@ password: changeme
 
 ### 自定义脚本和环境变量
 
-此插件支持通过 `addon_config` 映射自定义脚本和环境变量：
+此插件支持通过 `addon_config` 映射使用自定义脚本和环境变量：
 
 - **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
 - **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
 ## 支持
 
-在 GitHub 上创建一个问题
-
-
+在 GitHub 上创建一个 issue
 
 
 ---

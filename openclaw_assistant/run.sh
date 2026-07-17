@@ -542,6 +542,69 @@ if ! command -v openclaw >/dev/null 2>&1; then
   exit 1
 fi
 
+get_openclaw_version() {
+  local raw
+  raw="$(openclaw --version 2>/dev/null | head -n 1 || true)"
+  printf '%s\n' "$raw" | grep -oE '[0-9]{4}\.[0-9]+\.[0-9]+' | head -n 1 || true
+}
+
+version_is_less_than() {
+  local left="$1"
+  local right="$2"
+  [ -n "$left" ] && [ -n "$right" ] && [ "$left" != "$right" ] && \
+    [ "$(printf '%s\n%s\n' "$left" "$right" | sort -V | head -n 1)" = "$left" ]
+}
+
+repair_runtime_version_mismatch() {
+  local config_path="/config/.openclaw/openclaw.json"
+  local runtime_version persisted_version refreshed_version
+
+  if [ ! -f "$config_path" ]; then
+    return 0
+  fi
+
+  runtime_version="$(get_openclaw_version)"
+  persisted_version="$(python3 - "$config_path" <<'PY'
+import json
+import sys
+from pathlib import Path
+
+path = Path(sys.argv[1])
+try:
+    data = json.loads(path.read_text(encoding="utf-8"))
+except Exception:
+    print("", end="")
+    raise SystemExit(0)
+
+value = data.get("meta", {}).get("lastTouchedVersion", "")
+print(value if isinstance(value, str) else "", end="")
+PY
+)"
+
+  if [ -z "$runtime_version" ] || [ -z "$persisted_version" ]; then
+    return 0
+  fi
+
+  if ! version_is_less_than "$runtime_version" "$persisted_version"; then
+    return 0
+  fi
+
+  echo "WARN: Persisted OpenClaw config was last written by newer version $persisted_version, but bundled runtime is $runtime_version."
+  echo "WARN: Attempting one-time runtime repair so the gateway can start after add-on rebuilds or Home Assistant OS updates."
+
+  if npm install -g "openclaw@${persisted_version}" >/tmp/openclaw-runtime-repair.log 2>&1; then
+    refreshed_version="$(get_openclaw_version)"
+    echo "INFO: OpenClaw runtime repair succeeded (${runtime_version} -> ${refreshed_version:-$persisted_version})."
+    return 0
+  fi
+
+  echo "ERROR: Automatic runtime repair failed; startup will continue with bundled OpenClaw $runtime_version."
+  echo "ERROR: Review /tmp/openclaw-runtime-repair.log and rerun 'openclaw update' or 'npm install -g openclaw@${persisted_version}' once connectivity is available."
+  return 0
+}
+
+repair_runtime_version_mismatch
+
 # Bootstrap minimal OpenClaw config ONLY if missing.
 # We do not overwrite or patch existing configs; onboarding owns everything else.
 OPENCLAW_CONFIG_PATH="/config/.openclaw/openclaw.json"
@@ -635,6 +698,71 @@ if [ "$ENABLE_HTTPS_PROXY" = "true" ]; then
   CERT_DIR="/config/certs"
   mkdir -p "$CERT_DIR"
 
+  cert_ext_contains() {
+    local cert_path="$1"
+    local extension_name="$2"
+    local expected="$3"
+    openssl x509 -in "$cert_path" -noout -ext "$extension_name" 2>/dev/null | grep -Fq "$expected"
+  }
+
+  local_ca_cert_is_valid() {
+    local cert_path="$1"
+    [ -f "$cert_path" ] && \
+      cert_ext_contains "$cert_path" basicConstraints "CA:TRUE" && \
+      cert_ext_contains "$cert_path" keyUsage "Certificate Sign, CRL Sign"
+  }
+
+  gateway_server_cert_is_valid() {
+    local cert_path="$1"
+    [ -f "$cert_path" ] && \
+      cert_ext_contains "$cert_path" extendedKeyUsage "TLS Web Server Authentication" && \
+      cert_ext_contains "$cert_path" subjectAltName "DNS:localhost"
+  }
+
+  generate_local_ca_cert() {
+    cat > "$CERT_DIR/_ca.ext" <<'CAEOF'
+[v3_ca]
+basicConstraints=critical,CA:TRUE
+keyUsage=critical,keyCertSign,cRLSign
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid:always,issuer
+CAEOF
+
+    openssl genrsa -out "$CERT_DIR/ca.key" 2048 2>/dev/null
+    openssl req -new -key "$CERT_DIR/ca.key" -out "$CERT_DIR/ca.csr" \
+      -subj "/CN=OpenClaw Local CA" 2>/dev/null
+    openssl x509 -req -in "$CERT_DIR/ca.csr" -signkey "$CERT_DIR/ca.key" \
+      -out "$CERT_DIR/ca.crt" -days 3650 \
+      -extfile "$CERT_DIR/_ca.ext" -extensions v3_ca 2>/dev/null
+
+    rm -f "$CERT_DIR/ca.csr" "$CERT_DIR/_ca.ext"
+    chmod 600 "$CERT_DIR/ca.key"
+  }
+
+  generate_gateway_server_cert() {
+    openssl genrsa -out "$CERT_DIR/gateway.key" 2048 2>/dev/null
+    openssl req -new -key "$CERT_DIR/gateway.key" -out "$CERT_DIR/gateway.csr" \
+      -subj "/CN=OpenClaw Gateway" 2>/dev/null
+
+    cat > "$CERT_DIR/_server.ext" <<SERVER_EOF
+[v3_server]
+basicConstraints=critical,CA:FALSE
+keyUsage=critical,digitalSignature,keyEncipherment
+extendedKeyUsage=serverAuth
+subjectAltName=IP:${LAN_IP:-127.0.0.1},IP:127.0.0.1,DNS:localhost,DNS:homeassistant,DNS:homeassistant.local${EXTRA_SANS:+,${EXTRA_SANS}}
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid,issuer
+SERVER_EOF
+
+    openssl x509 -req -in "$CERT_DIR/gateway.csr" \
+      -CA "$CERT_DIR/ca.crt" -CAkey "$CERT_DIR/ca.key" -CAcreateserial \
+      -out "$CERT_DIR/gateway.crt" -days 3650 \
+      -extfile "$CERT_DIR/_server.ext" -extensions v3_server 2>/dev/null
+
+    rm -f "$CERT_DIR/gateway.csr" "$CERT_DIR/_server.ext" "$CERT_DIR/ca.srl"
+    chmod 600 "$CERT_DIR/gateway.key"
+  }
+
   # Detect primary LAN IP
   LAN_IP=$(hostname -I 2>/dev/null | awk '{print $1}')
   STORED_IP=$(cat "$CERT_DIR/.cert_ip" 2>/dev/null || echo "")
@@ -642,12 +770,17 @@ if [ "$ENABLE_HTTPS_PROXY" = "true" ]; then
   # --- Local CA (generated once, persists across restarts) ---
   if [ ! -f "$CERT_DIR/ca.key" ] || [ ! -f "$CERT_DIR/ca.crt" ]; then
     echo "INFO: Generating local CA certificate (one-time)..."
-    openssl genrsa -out "$CERT_DIR/ca.key" 2048 2>/dev/null
-    openssl req -new -x509 -key "$CERT_DIR/ca.key" -out "$CERT_DIR/ca.crt" \
-      -days 3650 -nodes -subj "/CN=OpenClaw Local CA" 2>/dev/null
-    chmod 600 "$CERT_DIR/ca.key"
+    generate_local_ca_cert
     STORED_IP=""  # force server cert regeneration
     echo "INFO: Local CA created at $CERT_DIR/ca.crt"
+  elif ! local_ca_cert_is_valid "$CERT_DIR/ca.crt"; then
+    echo "WARN: Existing local CA certificate is missing required X.509 CA extensions."
+    echo "WARN: Regenerating CA/server certificates for OpenSSL and Python strict verification compatibility."
+    echo "WARN: Devices that trusted the old CA need the new /cert/ca.crt installed again."
+    rm -f "$CERT_DIR/ca.key" "$CERT_DIR/ca.crt" "$CERT_DIR/gateway.key" "$CERT_DIR/gateway.crt"
+    generate_local_ca_cert
+    STORED_IP=""
+    echo "INFO: Local CA rotated at $CERT_DIR/ca.crt"
   fi
 
   # --- Extra SANs from gateway_additional_allowed_origins + gateway_public_url ---
@@ -681,24 +814,9 @@ PY
   STORED_EXTRA_SANS=$(cat "$CERT_DIR/.cert_extra_sans" 2>/dev/null || echo "")
 
   # --- Server cert (regenerated when LAN IP or SANs change) ---
-  if [ ! -f "$CERT_DIR/gateway.crt" ] || [ ! -f "$CERT_DIR/gateway.key" ] || [ "$LAN_IP" != "$STORED_IP" ] || [ "$EXTRA_SANS" != "$STORED_EXTRA_SANS" ]; then
+  if [ ! -f "$CERT_DIR/gateway.crt" ] || [ ! -f "$CERT_DIR/gateway.key" ] || [ "$LAN_IP" != "$STORED_IP" ] || [ "$EXTRA_SANS" != "$STORED_EXTRA_SANS" ] || ! gateway_server_cert_is_valid "$CERT_DIR/gateway.crt"; then
     echo "INFO: Generating server TLS certificate for IP: ${LAN_IP:-unknown}..."
-    openssl genrsa -out "$CERT_DIR/gateway.key" 2048 2>/dev/null
-    openssl req -new -key "$CERT_DIR/gateway.key" -out "$CERT_DIR/gateway.csr" \
-      -subj "/CN=OpenClaw Gateway" 2>/dev/null
-
-    # SAN extension — include LAN IP, loopback, common mDNS names + user extras
-    cat > "$CERT_DIR/_san.ext" <<SANEOF
-subjectAltName=IP:${LAN_IP:-127.0.0.1},IP:127.0.0.1,DNS:localhost,DNS:homeassistant,DNS:homeassistant.local${EXTRA_SANS:+,${EXTRA_SANS}}
-SANEOF
-
-    openssl x509 -req -in "$CERT_DIR/gateway.csr" \
-      -CA "$CERT_DIR/ca.crt" -CAkey "$CERT_DIR/ca.key" -CAcreateserial \
-      -out "$CERT_DIR/gateway.crt" -days 3650 \
-      -extfile "$CERT_DIR/_san.ext" 2>/dev/null
-
-    rm -f "$CERT_DIR/gateway.csr" "$CERT_DIR/_san.ext" "$CERT_DIR/ca.srl"
-    chmod 600 "$CERT_DIR/gateway.key"
+    generate_gateway_server_cert
     printf '%s' "$LAN_IP" > "$CERT_DIR/.cert_ip"
     printf '%s' "$EXTRA_SANS" > "$CERT_DIR/.cert_extra_sans"
     echo "INFO: Server TLS certificate generated (SAN: IP:${LAN_IP:-127.0.0.1}${EXTRA_SANS:+,${EXTRA_SANS}})"

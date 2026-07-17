@@ -1,32 +1,12 @@
-# ARG BUILD_FROM
-# FROM $BUILD_FROM
-
-# # Install Chromium
-# RUN apk add --no-cache \
-#   chromium \
-#   nss \
-#   freetype \
-#   harfbuzz \
-#   ca-certificates \
-#   ttf-freefont
-
-# # Ensure Node.js and npm are installed (for Alpine-based images)
-# RUN apk add --no-cache nodejs npm || echo "Node.js already installed"
-
-
-FROM debian:bullseye-slim
+FROM node:22-bookworm-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
 
 RUN apt-get update && apt-get install -y \
     chromium \
-    curl \
     fonts-noto-cjk \
     fonts-noto-color-emoji \
-    && curl -fsSL https://deb.nodesource.com/setup_23.x -o nodesource_setup.sh \
-    && bash nodesource_setup.sh \
-    && apt-get install -y nodejs \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -40,14 +20,10 @@ COPY ha-puppet/package*.json ./
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 
 # Ensure a clean state before installing
-RUN npm ci --unsafe-perm
+RUN npm ci --omit=dev
 
 # Copy the rest of the project files
 COPY ha-puppet/ .
 
-# Set Puppeteer to use Alpine Chromium
-# ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
-
 # Run the application
 CMD ["node", "http.js"]
-

@@ -1,100 +1,123 @@
-# Home assistant add-on: FileBrowser Quantum
+# Home Assistant 插件：FileBrowser Quantum
 
 
-I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 hours a week for this. If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+我在业余时间维护这个和其他 Home Assistant 插件：跟进上游更改、Home Assistant 更改以及在真实硬件上进行测试需要花费大量时间（以及一些金钱）。我每周大约花费5-10小时来做这件事。如果这个插件为您节省了时间或使您的设置变得更简单，我将非常感激您的支持！
 
-[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
-[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+[![请给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
 
-## Addon informations
+## 插件信息
 
-![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffilebrowser_quantum%2Fconfig.yaml)
-![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffilebrowser_quantum%2Fconfig.yaml)
-![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffilebrowser_quantum%2Fconfig.yaml)
+![版本](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffilebrowser_quantum%2Fconfig.yaml)
+![入口](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffilebrowser_quantum%2Fconfig.yaml)
+![架构](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffilebrowser_quantum%2Fconfig.yaml)
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![Codacy 徽章](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
 [![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
 [![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
 
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
 
-_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+_感谢所有为我仓库加星的人！要加星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
-![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/filebrowser_quantum/stats.png)
+![下载趋势](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/filebrowser_quantum/stats.png)
 
-## About
+## 关于
 
-FileBrowser Quantum is a modern, responsive, multi-source file manager with realtime indexing, advanced sharing, and expanded authentication options (password, proxy, OIDC, or no-auth). It is a maintained fork of the original FileBrowser project.
+FileBrowser Quantum 是一个现代、响应式、多源文件管理器，具有实时索引、高级共享和扩展的认证选项（密码、代理、OIDC 或无认证）。它是原始 FileBrowser 项目的维护分支。
 
-This addon is based on the [docker image](https://hub.docker.com/r/gtstef/filebrowser) from the FileBrowser Quantum project.
+此插件基于 [docker 镜像](https://hub.docker.com/r/gtstef/filebrowser)。
 
-## Installation
+## 安装
 
-The installation of this add-on is pretty straightforward and not different in
-comparison to installing any other Home Assistant add-on.
+此插件的安装非常简单，与安装任何其他 Home Assistant 插件没有区别。
 
-1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
-   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
-1. Install this add-on.
-1. Click the `Save` button to store your configuration.
-1. Start the add-on.
-1. Check the logs of the add-on to see if everything went well.
-1. Access the web UI through the sidebar or at `<your-ip>:8071`.
+1. 将我的插件仓库添加到您的 Home Assistant 实例中（在监督器插件存储的右上角，或点击下面的按钮如果您已配置我的 HA）
+   [![打开您的 Home Assistant 实例并显示带有特定仓库 URL 预填充的添加插件仓库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此插件。
+1. 点击“保存”按钮以存储您的配置。
+1. 启动插件。
+1. 检查插件的日志以查看一切是否顺利。
+1. 通过侧边栏或 `<your-ip>:8071` 访问 Web UI。
 
-## Configuration
+## 配置
 
-The web UI can be found at `<your-ip>:8071` or through the Home Assistant sidebar when using Ingress.
+Web UI 可在 `<your-ip>:8071` 或通过使用入口的 Home Assistant 侧边栏访问。
 
-**Default credentials:**
-- Username: `admin`
-- Password: `admin`
+**默认凭证：**
+- 用户名：`admin`
+- 密码：`admin`
 
-**Important:** Change the default credentials immediately after first login for security.
+**重要提示：** 首次登录后，请立即通过点击“设置”>“用户管理”更改默认凭证以保障安全。
 
-### Options
+### 选项
 
-| Option | Type | Default | Description |
+| 选项 | 类型 | 默认 | 描述 |
 |--------|------|---------|-------------|
-| `auth_method` | list | `password` | Authentication method (`password`, `noauth`, `proxy`, `oidc`) |
-| `default_user_scope` | str | `/` | The root filesystem path used as the FileBrowser source and as the default scope for all users. Must be an existing absolute directory path (e.g. `/share`, `/media`). |
-| `localdisks` | str | _(optional)_ | Local drives to mount (e.g., `sda1,sdb1,MYNAS`) |
-| `networkdisks` | str | _(optional)_ | SMB shares to mount (e.g., `//SERVER/SHARE`) |
-| `cifsusername` | str | _(optional)_ | SMB username for network shares |
-| `cifspassword` | str | _(optional)_ | SMB password for network shares |
-| `cifsdomain` | str | _(optional)_ | SMB domain for network shares |
+| `auth_method` | 列表 | `password` | 认证方法（`password`、`noauth`、`proxy`、`oidc`） |
+| `default_user_scope` | 字符串 | `/` | 作为 FileBrowser 源和所有用户的默认作用域使用的根文件系统路径。必须是现有绝对目录路径（例如 `/share`、`/media`）。 |
+| `localdisks` | 字符串 | _(可选)_ | 要挂载的本地驱动器（例如，`sda1,sdb1,MYNAS`） |
+| `networkdisks` | 字符串 | _(可选)_ | 要挂载的 SMB 共享（例如，`//SERVER/SHARE`） |
+| `cifsusername` | 字符串 | _(可选)_ | 网络共享的 SMB 用户名 |
+| `cifspassword` | 字符串 | _(可选)_ | 网络共享的 SMB 密码 |
+| `cifsdomain` | 字符串 | _(可选)_ | 网络共享的 SMB 域 |
 
-## Setup
+## 设置
 
-1. Start the add-on and wait for it to initialize.
-1. Access the web interface through the Home Assistant sidebar or at `<your-ip>:8071`.
-1. Log in using the default credentials:
-   - Username: `admin`
-   - Password: `admin`
-1. **Important:** Immediately change the default password by clicking on "Settings" > "User Management".
-1. Configure additional sources and authentication settings through the add-on options or the web interface.
+1. 启动插件并等待其初始化。
+1. 通过 Home Assistant 侧边栏或 `<your-ip>:8071` 访问 Web 界面。
+1. 使用默认凭证登录：
+   - 用户名：`admin`
+   - 密码：`admin`
+1. **重要提示：** 立即通过点击“设置”>“用户管理”更改默认密码。
+1. 通过插件选项或 Web 界面配置额外的源和认证设置。
 
-### Mounting Drives
+### 挂载驱动器
 
-This addon supports mounting both local drives and remote SMB shares:
+此插件支持挂载本地驱动器和远程 SMB 共享：
 
-- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
-- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+- **本地驱动器**：请参阅 [在插件中挂载本地驱动器](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **远程共享**：请参阅 [在插件中挂载远程共享](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
 
-### Custom Scripts and Environment Variables
+### 自定义脚本和环境变量
 
-This addon supports custom scripts and environment variables through the `addon_config` mapping:
+此插件通过 `addon_config` 映射支持自定义脚本和环境变量：
 
-- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
-- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-add-ons
+- **自定义脚本**：请参阅 [在插件中运行自定义脚本](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars 选项**：使用插件的 `env_vars` 选项传递额外的环境变量（使用大写或小写名称）。请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-add-ons
 
-## Support
+## 支持
 
-Create an issue on GitHub, or ask on the [Home Assistant Community thread](https://community.home-assistant.io/t/home-assistant-addon-filebrowser/282108/3).
+在 GitHub 上创建问题，或在 [Home Assistant 社区线程](https://community.home-assistant.io/t/home-assistant-addon-filebrowser/282108/3) 上提问。
 
 [repository]: https://github.com/alexbelgium/hassio-addons
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！
