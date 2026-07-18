@@ -2,6 +2,12 @@
 
 All notable changes to the OpenClaw Assistant Home Assistant Add-on will be documented in this file.
 
+## [0.5.84] - 2026-07-17
+
+### Changed
+- Bundle `mcporter@0.12.3` in the add-on image so `auto_configure_mcp` can register Home Assistant out of the box on fresh installs without a manual global install workaround.
+- Replace the misleading startup hint that told users to run `openclaw onboard` when `mcporter` was missing. The message now correctly points to a broken image state instead.
+
 ## [0.5.82] - 2026-07-15
 
 ### Fixed

@@ -4,7 +4,7 @@ FROM ${BUILD_FROM}
 # Base image is Debian Bookworm (glibc). This avoids musl-related native module issues
 # that occur on Alpine (e.g. clipboard, node-llama-cpp).
 
-# Install base packages (without nodejs/npm - we'll get Node 22 from NodeSource)
+# Install base packages (without nodejs/npm - we'll get Node 24 from NodeSource)
 # build-essential provides gcc/cc needed by Homebrew for OpenClaw's brew-managed dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     bash \
@@ -34,19 +34,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Node.js 22 LTS from NodeSource (Debian Bookworm ships Node 18, but OpenClaw requires 20+)
-# Use explicit keyring + apt source instead of setup_22.x pipe script for deterministic builds.
+# Install Node.js 24 LTS from NodeSource.
+# OpenClaw supports Node >=24.15.0, and this keeps the image compatible with the
+# current mcporter releases without relying on an older pinned CLI line.
+# Use explicit keyring + apt source instead of setup_24.x pipe script for deterministic builds.
 RUN mkdir -p /etc/apt/keyrings \
     && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
     | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
     && chmod 644 /etc/apt/keyrings/nodesource.gpg \
-    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_22.x nodistro main" \
+    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_24.x nodistro main" \
     > /etc/apt/sources.list.d/nodesource.list \
     && apt-get update \
     && apt-get install -y --no-install-recommends nodejs \
     && NODE_VERSION="$(node -v)" \
     && echo "$NODE_VERSION" \
-    && echo "$NODE_VERSION" | grep -E '^v22\.' \
+    && echo "$NODE_VERSION" | grep -E '^v24\.' \
     && rm -f /etc/apt/sources.list.d/nodesource.list /etc/apt/keyrings/nodesource.gpg \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -113,11 +115,13 @@ RUN if [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then \
     fi
 USER root
 
-# Install OpenClaw globally
-# Bundle node-llama-cpp in the image so the default local memory/embeddings
-# provider works in HAOS without requiring manual npm installs in /usr/lib.
+# Install OpenClaw globally.
+# Bundle node-llama-cpp so the default local memory/embeddings provider works
+# in HAOS without requiring manual npm installs in /usr/lib.
+# Bundle mcporter so Home Assistant MCP auto-configuration works out of the box.
+# The image now ships Node 24, so use the current mcporter line.
 RUN npm config set fund false && npm config set audit false \
-    && npm install -g openclaw@2026.7.1 node-llama-cpp@3.18.1
+    && npm install -g openclaw@2026.7.1 node-llama-cpp@3.18.1 mcporter@0.12.3
 
 # Shell aliases and color options for interactive use
 RUN tee -a /etc/bash.bashrc <<'EOF'

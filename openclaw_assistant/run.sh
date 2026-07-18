@@ -920,7 +920,7 @@ if [ "$AUTO_CONFIGURE_MCP" = "true" ] && [ -n "$HA_TOKEN" ]; then
       fi
     fi
   else
-    echo "INFO: mcporter not available; skipping MCP auto-configuration (run 'openclaw onboard' first)"
+    echo "WARN: mcporter is missing from the add-on image; skipping MCP auto-configuration"
   fi
 elif [ "$AUTO_CONFIGURE_MCP" = "true" ] && [ -z "$HA_TOKEN" ]; then
   echo "INFO: MCP auto-configure enabled but homeassistant_token not set — skipping"

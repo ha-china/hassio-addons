@@ -1,7 +1,7 @@
 arch:
   - aarch64
   - amd64
-description: '[老王杂谈说]：提供完整管理 Sonarr、Radarr、Lidarr 和 Readarr 索引器，且无需单独设置每个应用的种子追踪器和 Usenet 索引器。'
+description: '[老王杂谈说]：提供种子追踪器和 Usenet 索引器，无需单独配置即可完全管理 Sonarr、Radarr、Lidarr 和 Readarr 索引器。'
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -108,4 +108,4 @@ schema:
 slug: prowlarr
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
-version: "develop-2.5.1.5464-ls268"
+version: "nightly-2.5.1.5478-ls7"

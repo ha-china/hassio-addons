@@ -1,123 +1,297 @@
-# Home Assistant 扩展：Claude Desktop
+# Home assistant add-on: Claude Desktop
 
-![支持 aarch64 架构][aarch64-shield]
-![支持 amd64 架构][amd64-shield]
-![项目维护][maintenance-shield]
+![Supports aarch64 Architecture][aarch64-shield]
+![Supports amd64 Architecture][amd64-shield]
+![Project Maintenance][maintenance-shield]
 
-在 LinuxServer.io Selkies 扩展中运行 Claude Desktop，并默认启用 Headroom 上下文压缩、RTK Bash 输出加速和 TokenSave 语义代码智能。
+Run Claude Desktop in a LinuxServer.io Selkies add-on, with Headroom context
+compression, RTK Bash-output acceleration, and TokenSave semantic code
+intelligence wired in by default.
 
-## 安装
+## Installation
 
-1. 将此仓库添加到 Home Assistant 扩展商店。
-2. 安装 **Claude Desktop**。
-3. 启动扩展并从侧边栏打开 Web UI。
-4. 使用桌面应用程序通过 Claude 账户登录。
+1. Add this repository to the Home Assistant add-on store.
+2. Install **Claude Desktop**.
+3. Start the add-on and open the web UI from the sidebar.
+4. Sign in with your Claude account from the Desktop app.
 
-Claude Desktop 登录需要支持桌面应用程序的 claude.ai 计划。桌面应用程序不接受 API 密钥。Anthropic 的 Linux 测试版目前不包括计算机使用或语音输入。
+Claude Desktop sign-in requires a claude.ai plan that supports the Desktop app.
+API keys are not accepted by the Desktop application. Anthropic's Linux beta
+currently does not include Computer Use or dictation.
 
-## 架构
+## Architecture
 
-一切都是围绕 Claude Desktop 应用程序构建的。Claude Code 安装在同一镜像中，但不是作为独立服务公开：Claude Desktop 的协同和调度会话内部运行它，并且它们使用共享的 Claude Code 配置 (`~/.claude`)、钩子、MCP 服务器、权限和 PATH 工具。
+Everything is built around the Claude Desktop app. Claude Code is installed in
+the same image but is not exposed as a standalone service: Claude Desktop's
+cowork and dispatch sessions run it internally, and they pick up the shared
+Claude Code configuration (`~/.claude`), hooks, MCP servers, permissions, and
+PATH tools.
 
-- **Claude Desktop** 通过其 MCP 工具使用 Headroom。
-- **Desktop 中的 Claude Code 会话** 通过共享的 Claude Code 配置获得相同的 MCP 服务器、权限模式和 RTK/TokenSave 钩子。
-- 当 `headroom_wrap_claude_code` 启用时，基于 PATH 的 Claude Code 启动将通过受监督的 Headroom 代理路由。如果桌面版本直接调用 `/usr/bin/claude`，会话仍然有效，并且仍然具有共享的权限模式和 Headroom MCP 工具，但无法注入透明代理压缩。
-- 共享的 `abc` 桌面账户在配置的 `PUID`/`PGID`（默认 `1000:1000`）下运行。当 `PUID` 为 `0` 时，选择 `permission_mode: bypass`，扩展在 Selkies 和 Claude Desktop 启动之前自动回退到 UID `1000`，因为 Claude Code 在有效的 root UID 下拒绝绕过模式。
-- **gnome-keyring** 为 Electron 提供了 Secret Service 后端，以便在重启之间持久化登录和调度权限授权。
+- **Claude Desktop** uses Headroom through its MCP tools.
+- **Claude Code sessions inside Desktop** get the same MCP servers, permission
+  mode, and RTK/TokenSave hooks through the shared Claude Code configuration.
+- PATH-based Claude Code launches are routed through the supervised Headroom
+  proxy when `headroom_wrap_claude_code` is enabled. If a Desktop release calls
+  `/usr/bin/claude` directly, the session remains functional and still has the
+  shared permission mode and Headroom MCP tools, but transparent proxy
+  compression cannot be injected.
+- The shared `abc` desktop account runs under the configured `PUID`/`PGID`
+  (default `1000:1000`). When `permission_mode: bypass` is selected while
+  `PUID` is `0`, the add-on automatically falls back to UID `1000` before
+  Selkies and Claude Desktop start, because Claude Code refuses bypass mode
+  under an effective root UID.
+- **gnome-keyring** provides the Secret Service backend Electron needs to
+  persist sign-in and dispatch permission grants across restarts.
 
-## 优化层
+## Optimization layers
 
-三个捆绑的优化工具是互补的：
+The three bundled optimization tools are complementary:
 
-- **RTK** 重新编写受支持的 Bash 命令，以便 Claude 接收紧凑的输出。
-- **TokenSave** 为显式选定的代码仓库构建本地语义图，并将 Claude 引导远离重复的 Explore/Grep/Read 扩散。
-- **Headroom** 透明地压缩代理的 Claude Code 流量，并还向 Claude Desktop 公开按需压缩/检索/统计 MCP 工具。
+- **RTK** rewrites supported Bash commands so Claude receives compact output.
+- **TokenSave** builds a local semantic graph for explicitly selected code
+  repositories and steers Claude away from repeated Explore/Grep/Read fan-out.
+- **Headroom** transparently compresses proxied Claude Code traffic and also
+  exposes on-demand compress/retrieve/statistics MCP tools to Claude Desktop.
 
-TokenSave 的完整 Claude 集成在启动时安装：MCP 服务器、权限、PreToolUse/UserPromptSubmit/Stop 钩子、全局提示规则和 Git 同步钩子。只有当仓库在 `tokensave_project_paths` 中列出时，才会对其进行索引；不会执行自动文件系统扫描。
+TokenSave's complete Claude integration is installed at startup: MCP server,
+permissions, PreToolUse/UserPromptSubmit/Stop hooks, global prompt rules, and
+Git synchronization hooks. A repository is indexed only when it is listed in
+`tokensave_project_paths`; no automatic filesystem scan is performed.
 
-## 功能
+## Features
 
-- 单应用程序 Selkies 模式下的 Claude Desktop，带有 Home Assistant 入口。
-- 由官方 Claude Code 稳定版本提供动力，支持 Desktop 协同/调度会话。
-- 在配置的 `data_location`（默认 `/data/data`）下持久 `$HOME`，在重启之间保留 Desktop 和 Claude Code 状态。
-- 通过捆绑的、自动解锁的 gnome-keyring 持久登录。
-- 可配置的 Claude Code 权限：严格的提示、自动安全操作批准或为受信任安装显式全绕过。
-- 绕过模式的自动非 root 运行时强制执行，包括 root 控制台包装启动。
-- 在每次启动时从 Anthropic 的 apt 仓库中尽力更新 Claude Desktop（离线时静默跳过）。
-- 可选的 apt 和 pip 软件包安装（pip 安装使用 `uv`）。
-- 预安装的 `git`、GitHub CLI (`gh`)、`ripgrep`、`jq`、`shellcheck`、`yamllint`、`hadolint` 和 `actionlint`。
-- 通过存储库标准 `claude_desktop.sh` 支持自定义脚本。
-- 捆绑的优化工具：Headroom、RTK 和 TokenSave；Caveman 仍然可以作为可选插件使用。
-- 可选的 Home Assistant MCP 桥接，以便 Claude 可以查询和控制 Home Assistant。
-- Headroom、RTK 和 TokenSave 的独立每小时节省报告。
-- `claude-tools-doctor.sh` 诊断，用于二进制文件、路由、钩子、MCP 注册、项目索引、代理健康、权限、运行时身份和收益。
-- GPU 映射、Selkies 帧率和易失性缓存的低功耗默认值。
+- Claude Desktop in single-app Selkies mode with Home Assistant ingress.
+- Official Claude Code stable package powering Desktop cowork/dispatch
+  sessions.
+- Persistent `$HOME` at the configured `data_location` (default `/data/data`),
+  preserving Desktop and Claude Code state across restarts.
+- Persistent sign-in through a bundled, auto-unlocked gnome-keyring.
+- Configurable Claude Code permissions: strict prompts, automatic safe-action
+  approval, or explicit full bypass for trusted installations.
+- Automatic non-root runtime enforcement for bypass mode, including root-console
+  wrapper launches.
+- Best-effort Claude Desktop update from Anthropic's apt repository at every
+  startup (skipped silently when offline).
+- Optional extra apt and pip package installation (pip installs use `uv`).
+- Baked-in `git`, GitHub CLI (`gh`), `ripgrep`, `jq`, `shellcheck`, `yamllint`,
+  `hadolint`, and `actionlint`.
+- Custom script support through the repository standard `claude_desktop.sh`.
+- Bundled optimization tools: Headroom, RTK, and TokenSave; Caveman remains
+  available as an opt-in plugin.
+- Optional Home Assistant MCP bridge so Claude can query and control Home
+  Assistant.
+- Independent hourly savings reports for Headroom, RTK, and TokenSave.
+- `claude-tools-doctor.sh` diagnostics for binaries, routing, hooks, MCP
+  registrations, project indexes, proxy health, permissions, runtime identity,
+  and gains.
+- Low-power defaults for GPU mapping, Selkies frame rate, and volatile caches.
 
-## 选项
+## Options
 
-| 选项 | 默认值 | 描述 |
+| Option | Default | Description |
 | ------ | ------- | ----------- |
-| `PUID` / `PGID` | `1000` / `1000` | 共享 `abc` 桌面账户的数据位置和运行 Claude Desktop 的用户和组 ID。在绕过模式下，当 `PUID` 为 `0` 时，自动在 Selkies 和 Claude Desktop 启动之前将根 `PUID` 替换为 UID `1000`，同时保留配置的组。 |
-| `TZ` | | 可选时区，例如 `Europe/Brussels`。 |
-| `KEYBOARD` | | 可选的 Selkies 键盘布局。 |
-| `PASSWORD` | | 可选的 Selkies 端口密码。 |
-| `DRINODE` | | 可选的 Selkies GPU 设备覆盖。 |
-| `DNS_server` | `8.8.8.8` | 标准 DNS 模块使用的 DNS 服务器。 |
-| `permission_mode` | `auto` | Claude Code 权限策略：`strict`、`auto` 或 `bypass`。 |
-| `install_headroom` | `true` | 注册 Headroom MCP 并运行受监督的本地代理。 |
-| `headroom_wrap_claude_code` | `true` | 通过已运行的 Headroom 代理路由基于 PATH 的 Claude Code 启动。 |
-| `headroom_auto_compress` | `true` | 在每个 Claude Code 会话中通过管理的 `PostToolUse` 钩子自动压缩大型工具输出。 |
-| `expose_headroom_dashboard` | `false` | 绑定 Headroom 到所有接口。必须在扩展的 **网络** 部分手动映射端口 `8787/tcp`。 |
-| `install_rtk` | `true` | 配置 RTK 的 Claude Code `PreToolUse` Bash 钩子。 |
-| `install_tokensave` | `true` | 安装 TokenSave 的完整全局 Claude 集成。 |
-| `tokensave_project_paths` | `[]` | 在启动时初始化或同步的显式绝对 Git 仓库路径。 |
-| `install_caveman` | `false` | 在启动时安装第三方 Caveman Claude Code 插件。 |
-| `enable_tools_health_report` | `true` | 每小时将 Headroom、RTK 和 TokenSave 的收益写入扩展日志。 |
-| `install_github_cli` | `true` | 启用内置 `git` 和 `gh` 命令的设置检查。 |
-| `github_token` | | 用于认证 `gh` 和 Git 操作的可选 GitHub 令牌。 |
-| `github_username` | | 可选的全局 Git 作者名称。 |
-| `github_email` | | 可选的全局 Git 作者电子邮件。 |
-| `enable_ha_mcp` | `false` | 在 Claude 中注册 Home Assistant 的 MCP 服务器（需要 `ha_mcp_token`）。 |
-| `ha_mcp_url` | `http://homeassistant:8123/api/mcp` | Home Assistant MCP 服务器集成可流的 HTTP 端点。 |
-| `ha_mcp_token` | | 由 MCP 桥接使用的 Home Assistant 长期访问令牌。 |
-| `enable_ha_api_helper` | `true` | 提供 `ha-cli` 核心API助手并添加指导，以便 Claude 可以配置 Home Assistant，而无需 `/config` 挂载。 |
-| `additional_apps` | | 启动时安装的逗号分隔的 Debian apt 软件包。 |
-| `additional_pip` | | 启动时安装的逗号分隔的 pip 软件包（通过 `uv`）。 |
-| `data_location` | `/data/data` | Claude 和工具的持久家目录。 |
-| `env_vars` | `[]` | 在容器内部导出的附加环境变量。 |
+| `PUID` / `PGID` | `1000` / `1000` | Numeric user and group of the shared `abc` desktop account that owns the data location and runs Claude Desktop. In bypass mode, a root `PUID` is automatically replaced at runtime by UID `1000` while the configured group is retained. |
+| `TZ` | | Optional timezone, for example `Europe/Brussels`. |
+| `KEYBOARD` | | Optional Selkies keyboard layout. |
+| `PASSWORD` | | Optional password for direct Selkies ports. |
+| `DRINODE` | | Optional GPU device override for Selkies. |
+| `DNS_server` | `8.8.8.8` | DNS server used by the standard DNS module. |
+| `permission_mode` | `auto` | Claude Code permission policy: `strict`, `auto`, or `bypass`. |
+| `install_headroom` | `true` | Register Headroom MCP and run the supervised local proxy. |
+| `headroom_wrap_claude_code` | `true` | Route PATH-based Claude Code launches through the already-running Headroom proxy. |
+| `headroom_auto_compress` | `true` | Auto-compress large tool outputs in every Claude Code session via a managed `PostToolUse` hook. |
+| `expose_headroom_dashboard` | `false` | Bind Headroom to all interfaces. Port `8787/tcp` must also be mapped manually. |
+| `install_rtk` | `true` | Configure RTK's Claude Code `PreToolUse` Bash hook. |
+| `install_tokensave` | `true` | Install TokenSave's complete global Claude integration. |
+| `tokensave_project_paths` | `[]` | Explicit absolute Git repository paths to initialize or sync at startup. |
+| `install_caveman` | `false` | Install the third-party Caveman Claude Code plugin at startup. |
+| `enable_tools_health_report` | `true` | Write independent Headroom, RTK, and TokenSave gains to the add-on log hourly. |
+| `install_github_cli` | `true` | Enable setup checks for the baked-in `git` and `gh` commands. |
+| `github_token` | | Optional GitHub token used to authenticate `gh` and Git operations. |
+| `github_username` | | Optional global Git author name. |
+| `github_email` | | Optional global Git author email. |
+| `enable_ha_mcp` | `false` | Register Home Assistant's MCP server in Claude (requires `ha_mcp_token`). |
+| `ha_mcp_url` | `http://homeassistant:8123/api/mcp` | Streamable HTTP endpoint of Home Assistant's MCP Server integration. |
+| `ha_mcp_token` | | Home Assistant long-lived access token used by the MCP bridge. |
+| `enable_ha_api_helper` | `true` | Ship the `ha-cli` Core-API helper and add guidance so Claude can configure Home Assistant without a `/config` mount. |
+| `additional_apps` | | Comma-separated Debian apt packages to install at startup. |
+| `additional_pip` | | Comma-separated pip packages installed at startup (via `uv`). |
+| `data_location` | `/data/data` | Persistent home directory for Claude and tooling. |
+| `env_vars` | `[]` | Additional environment variables exported inside the container. |
 
-### 权限模式
+### Permission modes
 
 ```yaml
 permission_mode: auto
 ```
 
-- `strict` 保持 Claude Code 的正常交互式权限提示。
-- `auto` 请求 Claude Code 的自动权限分类器批准安全操作，同时保留对危险操作的提示。这是默认值。
-- `bypass` 通过在共享设置中使用 `bypassPermissions` 和为包装启动的会话使用 `--dangerously-skip-permissions` 禁用 Claude Code 权限检查。
+- `strict` keeps Claude Code's normal interactive permission prompts.
+- `auto` asks Claude Code's automatic permission classifier to approve safe
+  operations while retaining prompts for risky actions. This is the default.
+- `bypass` disables Claude Code permission checks by using
+  `bypassPermissions` in the shared settings and
+  `--dangerously-skip-permissions` for wrapper-launched sessions.
 
-Claude Code 不允许在其实效 UID 为 `0` 时使用绕过模式。如果扩展配置为 `PUID: 0`，则选择 `bypass` 以 UID `1000` 运行共享 `abc` 运行时账户，在存储所有权
----
+Claude Code does not permit bypass mode when its effective UID is `0`. If the
+add-on is configured with `PUID: 0`, selecting `bypass` runs the shared `abc`
+runtime account as UID `1000` instead, before storage ownership and Desktop
+startup. Its configured primary GID is retained, so group-based access to
+mounted Home Assistant paths remains available. Strict and auto modes keep the
+configured identity unchanged.
 
-**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+A root shell invoking `/usr/local/bin/claude` in bypass mode is also dropped to
+the remapped `abc` account. Directly invoking `/usr/bin/claude` as root still
+bypasses the add-on wrapper and will be rejected by Claude Code.
 
-**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+`bypass` gives Claude broad authority over all mounted writable data and every
+command or credential available inside the add-on. Enable it only in a trusted
+installation with trusted repositories and mounts. Mounted paths must remain
+accessible to the effective non-root UID or its retained group.
 
----
+### TokenSave project example
 
-## 📱 关注我
+Only repositories listed here are indexed. Paths must be absolute, mounted in
+the add-on, and resolve to a Git working tree:
 
-扫描下面二维码，关注我。有需要可以随时给我留言：
+```yaml
+tokensave_project_paths:
+  - /share/projects/hassio-addons
+  - /share/projects/birdnet-go
+```
 
-<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+At startup, an uninitialized repository receives `tokensave init`; an existing
+index receives an incremental `tokensave sync`. Removing a path from the option
+stops automatic synchronization but does not delete its `.tokensave` database.
+Configured repositories are added to Git's `safe.directory` list for the shared
+runtime user before TokenSave performs repository discovery.
 
-## ☕ 赞助支持
+## Headroom behavior
 
-如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+When `install_headroom` is enabled, the add-on registers `headroom mcp serve`
+with the explicit local proxy URL in Claude Desktop and Claude Code, then starts
+a supervised Headroom backend on `127.0.0.1:8787`.
 
-<div style="display: flex; justify-content: space-between;">
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
-  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
-</div> 💖
+Claude Desktop overrides `ANTHROPIC_BASE_URL`, so Desktop chat deliberately uses
+the MCP integration. The `/usr/local/bin/claude` wrapper routes PATH-based Claude
+Code sessions through `headroom wrap claude --no-proxy`, reusing the supervised
+backend without starting a second proxy.
 
-感谢您的支持与鼓励！
+With `headroom_auto_compress` enabled (the default), a managed Claude Code
+`PostToolUse` hook additionally compresses large `Bash`/`Grep`/`Glob`/`WebFetch`
+outputs (over ~4000 characters) in **every** session type — terminal, Desktop
+cowork, dispatch, and cron — without the model having to remember to call the
+MCP tools. The original output is kept in Headroom's local store for one hour
+and can always be recovered with `mcp__headroom__headroom_retrieve` using the
+hash printed in the compression marker. Error text (`stderr`) is never
+compressed, and plain prose passes through unchanged; the savings come from
+structured output such as JSON dumps, search results, and logs.
+
+The dashboard is disabled externally by default. To expose it:
+
+1. Set `expose_headroom_dashboard: true`.
+2. Map `8787/tcp` in the add-on **Network** section.
+3. Open `http://<home-assistant-host>:8787/dashboard`.
+
+The dashboard is unauthenticated. Do not publish this port to the public
+internet.
+
+## Diagnostics
+
+Run the following inside the add-on through a custom script or container console:
+
+```bash
+claude-tools-doctor.sh
+```
+
+The report checks the tool binaries, configuration switches, configured and
+effective runtime identities, redacted MCP registrations, Claude hooks,
+permission mode, Headroom health, TokenSave indexes, routing, and recorded
+savings. It never prints MCP environment values because the Home Assistant MCP
+entry can contain a long-lived token.
+
+The hourly report can also be invoked manually:
+
+```bash
+claude-gains-report.sh
+```
+
+## Home Assistant MCP bridge
+
+To let Claude query and control Home Assistant:
+
+1. In Home Assistant, add the **Model Context Protocol Server** integration
+   (Settings → Devices & services → Add integration).
+2. Create a long-lived access token (your profile → Security).
+3. Set `enable_ha_mcp: true` and paste the token into `ha_mcp_token` in the
+   add-on configuration, then restart the add-on.
+
+The add-on bridges Claude to the integration's stateless Streamable HTTP
+endpoint (`/api/mcp`) with `mcp-proxy`. Override `ha_mcp_url` only if your Home
+Assistant instance is not reachable as `homeassistant:8123` from add-ons.
+
+## Configuring Home Assistant (API helper)
+
+When `enable_ha_api_helper` is on (the default), the add-on ships a `ha-cli`
+command and tells Claude — via a managed block in `~/.claude/CLAUDE.md` — that
+it can configure Home Assistant through the Home Assistant **Core API** rather
+than a filesystem mount. This is deliberately more contained than mapping
+`/config`: the API cannot read `configuration.yaml`, `secrets.yaml`, or any
+other add-on's stored credentials.
+
+`ha-cli` authenticates automatically with the add-on's `SUPERVISOR_TOKEN`
+through the Supervisor Core-API proxy (the add-on already sets
+`homeassistant_api: true`), so there is nothing to configure. It can create and
+edit automations, scripts, and scenes; call any service; read entity states;
+and, over WebSocket, manage helpers, dashboards, and the area/label/floor/entity
+registries. Run `ha-cli --help` inside the add-on for the full command
+reference.
+
+```bash
+ha-cli config                                   # connectivity check
+ha-cli get config/automation/config/<id>        # read one automation
+ha-cli post config/automation/config/<id> @new.json   # create/update it
+ha-cli call automation.reload                   # apply YAML-mode changes
+ha-cli ws '{"type":"config/area_registry/list"}'
+```
+
+Security notes:
+
+- The Supervisor proxy token grants **admin-equivalent** Core API access (it can
+  call any service and edit any UI-managed configuration), but it cannot reach
+  the raw YAML files or other add-ons' data. For a tighter scope, set
+  `HA_BASE_URL`/`HA_TOKEN` (or the `ha_mcp_token` option) to a limited Home
+  Assistant user's long-lived token — `ha-cli` prefers those when present.
+- The guidance instructs Claude to read each object and show you the intended
+  change before writing, but Claude Code's own tool-permission prompts remain
+  the real gate: each `ha-cli` call still needs your approval unless
+  `permission_mode` is set to `bypass`.
+- Set `enable_ha_api_helper: false` to remove both the guidance block and the
+  helper's registration if you do not want Claude configuring Home Assistant.
+
+## Custom scripts
+
+The add-on includes the repository standard custom-script executor. On first
+start, it seeds `claude_desktop.sh` in the add-on config directory. Commands in
+that script run during startup, allowing local customization without rebuilding
+the image.
+
+## Data and cache locations
+
+Persistent state is stored in the configured `data_location` (default
+`/data/data`):
+
+- Claude Desktop sign-in: `~/.config/Claude` (token encrypted via
+  gnome-keyring; keyring DB in `~/.local/share/keyrings`)
+- Claude Code settings, hooks, sessions, plugins, and permission mode:
+  `~/.claude`
+- Headroom, RTK, and TokenSave user state: their standard paths below the
+  shared home
+- TokenSave repository indexes: `.tokensave/` inside each explicitly configured
+  project
+
+Volatile cache data is redirected to `/tmp/cache` through `$XDG_CACHE_HOME` and
+`$HOME/.cache`.
+
+[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
+[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg

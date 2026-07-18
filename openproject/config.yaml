@@ -1,7 +1,7 @@
 arch:
   - amd64
   - aarch64
-description: '[老王杂谈说]：用于 Home Assistant 的 OpenProject'
+description: '[老王杂谈说]：OpenProject 用于 Home Assistant'
 environment:
   APP_DATA_PATH: /data/assets
   OPENPROJECT_ATTACHMENTS__STORAGE__PATH: /data/assets/files
@@ -34,5 +34,5 @@ schema:
 slug: openproject
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/openproject
-version: "17.5.1"
+version: "17.6.0"
 webui: "[PROTO:ssl]://[HOST]:[PORT:8080]"

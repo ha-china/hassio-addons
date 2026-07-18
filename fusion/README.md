@@ -1,15 +1,16 @@
 # Home Assistant App: Fusion
 
-Home Assistant app for [Fusion](https://github.com/0x2E/fusion).
+[Fusion](https://github.com/0x2E/fusion) 的 Home Assistant 应用。
 
-## About
+## 关于
 
-A lightweight RSS feed aggregator and reader.
-
-
+一个轻量级的 RSS 订阅源聚合器和阅读器。
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

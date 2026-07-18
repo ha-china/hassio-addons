@@ -4,8 +4,7 @@
 
 ## 关于
 
-Yarr 是一个用 Go 编写后端，前端采用 Vue.js 的 RSS 聚合服务器。
-存储由 SQLite 支持。
+Yarr 是一个使用 Go 编写后端，前端采用 Vue.js 的 RSS 聚合服务器。存储由 SQLite 支持。
 
 ![yarr 预览][promo]
 

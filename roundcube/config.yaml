@@ -1,7 +1,7 @@
 name: Roundcube
-version: 3.0.2
+version: 3.0.3
 slug: roundcube
-description: '[老王杂谈说]：null'
+description: '[老王杂谈说]：Roundcube 网页邮件客户端'
 url: https://gh-proxy.org/github.com/erik73/hassio-addons
 arch:
   - aarch64

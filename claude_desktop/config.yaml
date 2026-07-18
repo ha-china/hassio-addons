@@ -2,7 +2,7 @@ arch:
   - aarch64
   - amd64
 audio: true
-description: "[老王杂谈说]：带有余量、RTK 和 TokenSave 优化的 Claude Desktop"
+description: "[老王杂谈说]：带有余量、RTK 和 TokenSave 优化的 Claude 桌面版"
 devices:
   - /dev/dri
   - /dev/dri/card0
@@ -110,5 +110,5 @@ slug: claude_desktop
 tmpfs: true
 udev: true
 url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
-version: "1.32"
+version: "kali-version-9ad48e7a"
 video: true

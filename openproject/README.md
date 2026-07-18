@@ -1,9 +1,8 @@
 # Home Assistant 扩展：Openproject
 
+我在业余时间维护这个和其他 Home Assistant 扩展：跟踪上游更改、Home Assistant 更改以及在真实硬件上进行测试都需要花费大量的时间和金钱。我经常使用我超过 110 个扩展中的 5-10 个，所以我安装了测试机器（并购买了一些我自己不使用的测试服务，如 VPN），以便进行故障排除和改进扩展。
 
-我在业余时间维护这个以及其他 Home Assistant 扩展：跟踪上游变更、HA 变更以及在实际硬件上的测试都需要花费很多时间（还有一些费用）。我经常使用 5-10 个我的 >110 个扩展，因此我会安装测试机器（并购买一些我自身不使用的测试服务，例如 VPN）来排查问题和改进扩展。
-
-如果这个扩展能为您节省时间或使您的设置变得更简单，我将非常感激您的支持！
+如果这个扩展为您节省了时间或使您的设置更简单，我将非常感激您的支持！
 
 [![给我买杯咖啡][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
 [![通过 PayPal 捐赠][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
@@ -21,7 +20,7 @@
 [donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 [paypal-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee%20Paypal-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
 
-_感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+_感谢所有给我的仓库点星的人！要给仓库点星，请点击下面的图片，然后它就会显示在右上角。谢谢！_
 
 [![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
 
@@ -35,23 +34,23 @@ _感谢所有为我仓库点赞的人！要点赞，请点击下面的图片，�
 
 使用扩展的 `env_vars` 选项来传递额外的环境变量（大写或小写名称）。有关详细信息，请参阅 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
 
-填写默认扩展选项以启动扩展。特别是要确保使用您的 homeassistant ip 和扩展暴露的端口配置主机名
+填写默认扩展选项以启动扩展。特别是要确保配置主机名为您的 homeassistant ip + 扩展暴露端口
 对于其他选项，请使用 config.yaml 系统配置：https://github.com/alexbelgium/hassio-addons/wiki/Addons-feature:-add-env-variables
 
-WebUI 可以在 `<您的IP>:端口` 找到。
+Webui 可在 `<您的 IP>:端口` 找到。
 
 ## 安装
 
-此扩展的安装非常简单，与安装任何其他 Hass.io 扩展没有太大区别。
+此扩展的安装相当简单，与安装任何其他 Hass.io 扩展没有太大区别。
 
-1. 将我的扩展存储库添加到您的 home assistant 实例中（在右上角的监督器扩展存储库中，或点击下面的按钮如果您已配置我的 HA）
-   [![打开您的 Home Assistant 实例并显示带有特定存储库 URL 预填充的添加扩展存储库对话框](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 将我的扩展存储库添加到您的 home assistant 实例中（在监督器的扩展存储库顶部右侧，或点击下面的按钮如果您已配置我的 HA）
+   [![打开您的 Home Assistant 实例并显示带有特定存储库 URL 预填充的添加扩展存储库对话框。](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
 1. 安装此扩展。
 1. 点击“保存”按钮以存储您的配置。
 1. 启动扩展。
-1. 检查扩展的日志以查看是否一切顺利。
-1. 前往 WebUI，在那里您将初始化应用程序
-1. 重新启动扩展，以应用任何应应用的选择
+1. 检查扩展的日志以查看一切是否顺利。
+1. 前往 webui，您将在那里初始化应用
+1. 重启扩展，以应用任何应应用的选项
 
 默认管理密码（登录：admin，密码：admin）。
 
