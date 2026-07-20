@@ -1,50 +1,53 @@
-# Home assistant插件：Fusion RSS
+# Home Assistant 插件：Fusion RSS
 
-一个轻量级的RSS订阅聚合器和阅读器。
+一个轻量级的 RSS 流聚合和阅读器。
 
 主要功能包括：
 
-- 自动分组、书签、搜索、检测订阅
-- 导入/导出OPML文件
-- 支持RSS、Atom、JSON类型的订阅
-- 响应式，支持亮色/暗色模式，PWA
+- 分组、书签、搜索、自动嗅探源
+- 导入/导出 OPML 文件
+- 支持 RSS、Atom、JSON 类型源
+- 响应式设计、浅色/深色模式、PWA
 - 轻量级，易于自托管
-  - 使用Golang和SQLite构建，单个二进制文件即可部署
-  - 预构建的Docker镜像
-  - 使用约80MB的内存
-  
-感谢所有给我仓库星标的人！要星标它，请点击下面的图片，它将出现在右上角。谢谢！
+  - 使用 Golang 和 SQLite 构建，单二进制文件部署
+  - 预构建 Docker 镜像
+  - 约 80MB 的内存使用
 
-[![@jdeath/homeassistant-addons的Starazers仓库列表](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+_感谢所有为我的仓库点赞的人！要点赞，请点击下面的图片，然后它就会显示在右上角。谢谢！_
+
+[![Stargazers 仓库列表 @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
 
 ## 关于
 
-此插件基于[docker镜像](https://github.com/0x2E/fusion)。
+此插件基于 [docker 镜像](https://github.com/0x2E/fusion)。
 
 ## 安装
 
-此插件的安装非常直接，与其他任何Hass.io插件的安装方式相同。
+此插件的安装非常简单，与安装任何其他 Hass.io 插件没有区别。
 
-1. 将我的Hass.io插件仓库[repository]添加到您的Hass.io实例。
+1. 将我的 Hass.io 插件仓库 [repository] 添加到您的 Hass.io 实例。
 1. 安装此插件。
-1. 点击`保存`按钮以保存您的配置。
+1. 点击 `保存` 按钮以存储您的配置。
 1. 启动插件。
 1. 检查插件的日志以查看是否一切顺利。
-1. 应该可以通过ingress或<your-ip>:port访问WebUI。
-1. 您的数据存储在 /addon_configs/2effc9b9_fusionrss
+1. 通过 ingress 或 <your-ip>:port 打开 WebUI 应该可以工作。
+1. 您的数据存储在 /addon_configs/2effc9b9_fusionrss。
 
 ## 配置
 
 ```
-port : 8080 #您想要运行的端口。
+port : 8080 # 您想运行的端口号。
 ```
 
-Webui可以在 `<your-ip>:port` 找到。
+WebUI 可以在 `<your-ip>:port` 找到。
 
 [repository]: https://github.com/jdeath/homeassistant-addons
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

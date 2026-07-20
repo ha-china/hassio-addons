@@ -1,18 +1,19 @@
 # Home Assistant Omada Add-On v6
 
-此插件将Omada Controller v6直接集成到运行在ARM、x64或x86处理器的Home Assistant中。
+此插件将Omada Controller v6直接引入运行在ARM、x64或x86处理器的Home Assistant中。
 由于新的Mongo DB版本与该指令集不兼容，版本6不再适用于Raspberry Pi 4。
 
 ## 贡献
 
 此插件最初受到Matt Bentleys的
 [docker-omada-controller](https://github.com/mbentley/docker-omada-controller)
-和jkunczik [home-assistant-omada](https://github.com/jkunczik/home-assistant-omada)
-的启发，没有他们的出色工作，home-assistant-omada将无法实现。
+和jkunczik的
+[home-assistant-omada](https://github.com/jkunczik/home-assistant-omada)
+的启发，没有他们的出色工作，home-assistant-omada将不会成为可能。
 除了原始的docker omada controller之外，此插件将所有持久数据存储在/data目录中，
 以便与Home Assistant兼容。
 此插件的开发离不开其他人的努力。
-对于版本更新或新功能的拉取请求始终欢迎。
+欢迎提交版本更新或新功能的拉取请求。
 特别感谢DraTrav为此插件的发展做出的贡献！
 ---
 

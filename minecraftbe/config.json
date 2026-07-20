@@ -4,7 +4,7 @@
     "aarch64"
   ],
   "boot": "auto",
-  "description": "[老王杂谈说]：Minecraft 专用服务器",
+  "description": "[老王杂谈说]：null",
   "environment": {
     "EULA": "TRUE"
   },
@@ -22,8 +22,8 @@
   "schema": {},
   "slug": "minecraftbe",
   "startup": "services",
-  "upstream": "2026.7.3",
+  "upstream": "2026.7.4",
   "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
-  "version": "2026.7.3",
+  "version": "2026.7.4",
   "ingress": false
 }
