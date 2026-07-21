@@ -1,8 +1,8 @@
 name: "Fleet for ESPHome"
-version: "1.7.1"
+version: "1.7.2"
 slug: "esphome_dist_server"
-description: "[老王杂谈说]：ESPHome 的一款现代 Home Assistant 界面 — 基于 Git 的配置历史支持回滚、实时编译队列、各设备版本锁定、定时 OTA 以及可选的分布式编译。无论拥有 3 个还是 300 个设备皆可适用。"
-url: "https://gh-proxy.org/github.com/weirded/distributed-esphome"
+description: "[老王杂谈说]：一个专为 ESPHome 设计的现代 Home Assistant UI —— 具备基于 Git 的配置历史和回滚、实时编译队列、设备级版本锁定、定时 OTA 更新及可选的分布式编译，无论您拥有 3 台还是 300 台设备皆可使用。"
+url: "https://gh-proxy.org/github.com/weirded/fleet-for-esphome"
 # #10: dropped armhf, armv7, i386 — Supervisor flags them as deprecated, and
 # ESPHome compilation is a 64-bit-only game in practice. No real users on
 # 32-bit ARM or x86; the toolchains for new ESP32 variants don't ship for them.

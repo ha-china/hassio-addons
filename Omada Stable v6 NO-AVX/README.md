@@ -1,35 +1,37 @@
-# Home Assistant Omada Add-On v6 (No-AVX)
+# Home Assistant Omada Add-On v6 (无AVX)
 
-This add-on brings the Omada Controller v6 directly into Home Assistant.
+此插件将Omada Controller v6直接引入Home Assistant。
 
-**This is a special variant compiled with a MongoDB binary that does NOT require AVX instructions.**
-This allows running Omada Controller v6 on older CPUs (like older Celerons, Pentiums, or some Xeons) that are otherwise incompatible with the standard MongoDB 5.0+ required by Omada v6.
+**这是一个特殊变体，使用无需AVX指令的MongoDB二进制文件编译而成。**
+这允许在旧CPU（如较老的Celeron、Pentium或某些Xeon）上运行Omada Controller v6，这些CPU在其他情况下与Omada v6所需的MongoDB 5.0+标准不兼容。
 
-## Compatibility
+## 兼容性
 
-- **Supported:** x86_64 (amd64) CPUs without AVX support.
-- **Also Supported:** Standard x86_64 CPUs.
-- **ARM64:** This add-on supports ARM64 devices that meet MongoDB 5.0+ requirements (ARMv8.2-A or newer).
-  - **Works on:** Raspberry Pi 5, newer Rockchip boards.
-  - **Does NOT work on:** Raspberry Pi 4, Raspberry Pi 3. These devices lack the required ARMv8.2 instructions for MongoDB 5.0+. Use the v5 add-on instead.
+- **支持：** 无AVX支持的x86_64 (amd64) CPU。
+- **也支持：** 标准x86_64 CPU。
+- **ARM64：** 此插件支持符合MongoDB 5.0+要求的ARM64设备（ARMv8.2-A或更新）。
+  - **适用于：** Raspberry Pi 5，较新的Rockchip板。
+  - **不适用于：** Raspberry Pi 4，Raspberry Pi 3。这些设备缺少MongoDB 5.0+所需的ARMv8.2指令。请使用v5插件。
+  
+## 贡献
 
-## Contribution
-
-This add-on was originally inspired by Matt Bentley’s
+此插件最初灵感来源于Matt Bentley的
 [docker-omada-controller](https://github.com/mbentley/docker-omada-controller)
-and jkunczik [home-assistant-omada](https://github.com/jkunczik/home-assistant-omada).
-It incorporates the No-AVX MongoDB build from [fenio/omada-controller-no-avx](https://github.com/fenio/omada-controller-no-avx).
+以及jkunczik的 [home-assistant-omada](https://github.com/jkunczik/home-assistant-omada)。
+它集成了来自[fenio/omada-controller-no-avx](https://github.com/fenio/omada-controller-no-avx)的No-AVX MongoDB构建。
 
-Other than in the original docker omada controller,
-this add-on stores all persistent data in the /data directory,
-so that it is compatible with Home Assistant.
-This Add-On would not be possible without the effort of other people.
-Pull requests for version updates or new features are always more than welcome.
-Special thanks goes to DraTrav for pushing this Add-On forward!
-
+除了原始的docker omada controller，
+此插件将所有持久数据存储在/data目录中，
+以便与Home Assistant兼容。
+如果没有其他人的努力，此插件将无法实现。
+对于版本更新或新功能的拉取请求始终欢迎。
+特别感谢DraTrav推动此插件的发展！
 ---
+
 **⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
 **⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
 ---
 
 ## 📱 关注我

@@ -1,9 +1,9 @@
 ---
 name: Omada Controller Stable v6 (HA OS)
 image: jeruntu/home-assistant-omada-stable-v6-haos
-version: 6.2.10.17
+version: 6.2.14.11
 slug: omada_controller_stable_v6_haos
-description: '[老王杂谈说]：运行在 Home Assistant OS 上的 Raspberry Pi 5 的 TP-Link Omada Controller 软件'
+description: '[老王杂谈说]：null'
 webui: https://[HOST]:[PORT:8043]
 startup: application
 stop_timeout: 60

@@ -1,4 +1,4 @@
-# Omada Controller 稳定版 v6 (HA OS)
+# Omada Controller 稳定版 v6 (高可用操作系统)
 
 此版本适用于**运行 Home Assistant OS 的 Raspberry Pi 5 用户**。
 
@@ -13,7 +13,7 @@
 
 ## 为什么需要单独的版本？
 
-MongoDB 8.0（标准稳定版 v6 图像所使用）要求内存分配器（tcmalloc）的 `mmap` 区域必须是 1 GB 对齐的。HA OS 在容器中运行附加组件，并且有安全限制，这阻止了这些分配的成功，导致 MongoDB 在启动时崩溃，并显示以下错误：
+MongoDB 8.0（标准稳定版 v6 图像所使用）要求内存分配器（tcmalloc）的 `mmap` 区域必须对 1 GB 进行对齐。HA OS 在容器中运行附加组件，并受到安全限制，这阻止了这些分配的成功，导致 MongoDB 在启动时崩溃，并显示以下错误：
 
 ```
 MmapAligned() failed - unable to allocate with tag
