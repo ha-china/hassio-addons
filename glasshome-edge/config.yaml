@@ -1,0 +1,28 @@
+name: "GlassHome Dashboard (Edge)"
+version: "1.3.0"
+slug: glasshome-edge
+description: "[老王杂谈说]：早期 GlassHome 构建版本用于测试，日常使用请采用稳定版。"
+url: "https://gh-proxy.org/github.com/glasshome/homeassistant-addon"
+stage: experimental
+arch:
+  - amd64
+  - aarch64
+init: false
+ingress: false
+panel_icon: mdi:view-dashboard
+webui: "http://[HOST]:[PORT:3124]/"
+startup: application
+boot: auto
+ports:
+  3124/tcp: 3124
+ports_description:
+  3124/tcp: "Web interface (Edge)"
+environment:
+  PORT: "3124"
+map:
+  - data:rw
+options:
+  log_level: info
+schema:
+  log_level: list(debug|info|warning|error)
+image: "ghcr.nju.edu.cn/glasshome/dash"

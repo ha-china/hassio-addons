@@ -1,0 +1,39 @@
+name: Bookstack
+version: 5.0.0
+slug: bookstack
+description: '[老王杂谈说]：简单免费的 WIKI 软件'
+url: https://gh-proxy.org/github.com/hassio-addons/app-bookstack
+webui: '[PROTO:ssl]://[HOST]:[PORT:80]'
+init: false
+arch:
+  - aarch64
+  - amd64
+services:
+  - mysql:want
+map:
+  - ssl
+ports:
+  80/tcp: 2665
+ports_description:
+  80/tcp: Web interface
+options:
+  envvars: []
+  ssl: false
+  certfile: fullchain.pem
+  keyfile: privkey.pem
+schema:
+  remote_mysql_host: str?
+  remote_mysql_database: str?
+  remote_mysql_username: str?
+  remote_mysql_password: password?
+  remote_mysql_port: int?
+  show_appkey: bool?
+  appkey: str?
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  certfile: str
+  keyfile: str
+  ssl: bool
+  envvars:
+    - name: str
+      value: str
+image: ghcr.nju.edu.cn/hassio-addons/bookstack/{arch}

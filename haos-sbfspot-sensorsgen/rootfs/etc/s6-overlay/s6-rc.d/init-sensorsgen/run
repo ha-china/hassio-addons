@@ -1,0 +1,12 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Community Add-on: HAOS-SBF-MQTT-SensorsGen
+# Generates Discovery MQTT messages for SBFspot sensors
+# ==============================================================================
+
+declare -a options
+
+CONFIG_PATH=/data/options.json 
+
+bashio::log.green "Starting SensorsGen..."

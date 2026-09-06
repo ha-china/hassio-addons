@@ -1,0 +1,36 @@
+name: yarr!
+version: 1.0.6
+slug: yarr
+description: '[老王杂谈说]：又一个 RSS 阅读器'
+url: https://gh-proxy.org/github.com/einschmidt/app-yarr
+panel_icon: mdi:rss-box
+arch:
+  - amd64
+  - aarch64
+ports:
+  80/tcp: 7070
+ports_description:
+  80/tcp: Web interface
+init: false
+ingress: true
+ingress_stream: true
+map:
+  - share:rw
+  - ssl
+options:
+  login:
+    username: ''
+    password: ''
+  ssl: true
+  certfile: fullchain.pem
+  keyfile: privkey.pem
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  login:
+    username: str
+    password: password
+  ssl: bool
+  certfile: str
+  keyfile: str
+  db_path: str?
+image: ghcr.nju.edu.cn/einschmidt/yarr

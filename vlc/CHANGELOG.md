@@ -1,0 +1,44 @@
+# Changelog
+
+## 1.1.0
+
+- Run VLC with user privileges
+- Fix default media directory
+- Update to Alpine 3.24
+
+## 1.0.0
+
+- Remove unsupported architectures (armv7, i386)
+- Update to Alpine 3.23
+
+## 0.3.1
+
+- Restart VLC on Audio plug-in restart
+- Update to Alpine 3.22
+
+## 0.3.0
+
+- Prevent race condition reading secrets on startup
+- Update to Alpine 3.19
+
+## 0.2.0
+
+- Update to Alpine 3.17
+- Mark add-on as stable
+- Use new s6-overlay
+
+## 0.1.3
+
+- Correct port on discovery
+
+## 0.1.2
+
+- Revert restart nginx service on error
+
+## 0.1.1
+
+- Restart nginx service on error
+
+## 0.1.0
+
+- Initial release

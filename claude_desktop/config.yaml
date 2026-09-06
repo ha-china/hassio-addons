@@ -1,0 +1,140 @@
+arch:
+  - aarch64
+  - amd64
+audio: true
+description: "[老王杂谈说]：带有头部空间、RTK 和 TokenSave 优化的 Claude Desktop"
+devices:
+  - /dev/dri
+  - /dev/dri/card0
+  - /dev/dri/card1
+  - /dev/dri/renderD128
+  - /dev/fuse
+  - /dev/kvm
+  - /dev/vhost-vsock
+environment:
+  AUTO_GPU: "1"
+  FM_HOME: /data/data
+  HOME: /data/data
+  PGID: "1000"
+  PUID: "1000"
+  SELKIES_AUDIO_ENABLED: "false"
+  SELKIES_ENABLE_SHARING: "false"
+  SELKIES_FRAMERATE: "15"
+  SELKIES_GAMEPAD_ENABLED: "false"
+  SELKIES_MICROPHONE_ENABLED: "false"
+  SELKIES_SECOND_SCREEN: "false"
+  SELKIES_USE_BROWSER_CURSORS: "true"
+  START_DOCKER: "false"
+  TITLE: Claude Desktop
+image: ghcr.nju.edu.cn/alexbelgium/claude_desktop-{arch}
+ingress: true
+init: false
+hassio_api: true
+hassio_role: manager
+homeassistant_api: true
+auth_api: true
+map:
+  - addon_config:rw
+  - share:rw
+  - media:rw
+  - ssl
+name: Claude Desktop
+options:
+  env_vars: []
+  DNS_server: 8.8.8.8
+  PGID: 1000
+  PUID: 1000
+  data_location: /data/data
+  additional_apps: ""
+  additional_pip: ""
+  github_email: ""
+  enable_ha_mcp: false
+  ha_mcp_url: http://homeassistant:8123/api/mcp
+  ha_mcp_token: ""
+  enable_ha_api_helper: true
+  github_token: ""
+  github_username: ""
+  enable_tools_health_report: true
+  expose_headroom_dashboard: false
+  headroom_auto_compress: true
+  headroom_wrap_claude_code: true
+  install_caveman: false
+  install_codex_cli: false
+  codex_sandbox_mode: workspace-write
+  install_github_cli: true
+  install_headroom: true
+  install_rtk: true
+  install_tokensave: true
+  mcp_servers_desktop:
+    - headroom
+    - tokensave
+    - homeassistant
+    - codex
+  mcp_servers_code:
+    - headroom
+    - tokensave
+    - homeassistant
+    - codex
+  permission_mode: auto
+  tokensave_project_paths: []
+panel_admin: false
+panel_icon: mdi:robot-happy
+ports:
+  3001/tcp: null
+  8787/tcp: null
+ports_description:
+  3001/tcp: Claude Desktop web interface
+  8787/tcp: Optional Headroom dashboard and proxy
+privileged:
+  - SYS_ADMIN
+  - DAC_READ_SEARCH
+schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
+  DNS_server: str?
+  data_location: str?
+  DRINODE: list(/dev/dri/card0|/dev/dri/card1|/dev/dri/card2|/dev/dri/renderD128|/dev/dri/renderD129|)?
+  KEYBOARD: list(da-dk-qwerty|de-de-qwertz|en-gb-qwerty|en-us-qwerty|es-es-qwerty|fr-ch-qwertz|fr-fr-azerty|it-it-qwerty|ja-jp-qwerty|pt-br-qwerty|sv-se-qwerty|tr-tr-qwerty)?
+  MAX_RES: match(^[1-9][0-9]{2,3}x[1-9][0-9]{2,3}$)?
+  PASSWORD: str?
+  PGID: int
+  PUID: int
+  TZ: match([A-Z][a-z]*./[A-Z][a-z]*.)?
+  additional_apps: str?
+  additional_pip: str?
+  cifsdomain: str?
+  cifspassword: str?
+  cifsusername: str?
+  localdisks: str?
+  networkdisks: str?
+  github_email: str?
+  enable_ha_mcp: bool?
+  ha_mcp_url: str?
+  ha_mcp_token: password?
+  enable_ha_api_helper: bool?
+  github_token: password?
+  github_username: str?
+  enable_tools_health_report: bool
+  expose_headroom_dashboard: bool
+  headroom_auto_compress: bool?
+  headroom_wrap_claude_code: bool
+  install_caveman: bool
+  install_codex_cli: bool
+  codex_sandbox_mode: list(read-only|workspace-write|danger-full-access)
+  install_github_cli: bool
+  install_headroom: bool
+  install_rtk: bool
+  install_tokensave: bool
+  mcp_servers_desktop:
+    - list(headroom|tokensave|homeassistant|codex)
+  mcp_servers_code:
+    - list(headroom|tokensave|homeassistant|codex)
+  permission_mode: list(strict|auto|bypass)
+  tokensave_project_paths:
+    - str
+slug: claude_desktop
+udev: true
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
+version: "07308545.6"
+video: true

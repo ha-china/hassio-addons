@@ -1,0 +1,41 @@
+name: Music Assistant
+version: 2.10.2
+slug: music_assistant
+description: '[老王杂谈说]：Music Assistant 服务器是一个免费的开源媒体库管理器，可连接您的流媒体服务和华为音箱。'
+url: https://music-assistant.io
+arch:
+  - amd64
+  - aarch64
+homeassistant_api: true
+discovery:
+  - music_assistant
+auth_api: true
+host_network: true
+ingress: true
+ingress_port: 8094
+audio: true
+panel_icon: mdi:music-assistant
+panel_title: Music Assistant
+panel_admin: false
+uart: false
+apparmor: true
+map:
+  - media:rw
+  - ssl:ro
+init: false
+backup_exclude:
+  - cache.db
+  - collage_images/*
+  - .cache/*
+stage: stable
+image: ghcr.nju.edu.cn/music-assistant/server
+tmpfs: true
+options:
+  log_level: info
+  safe_mode: false
+schema:
+  log_level: list(debug|info|warning|error)
+  safe_mode: bool
+privileged:
+  - SYS_ADMIN
+  - DAC_READ_SEARCH

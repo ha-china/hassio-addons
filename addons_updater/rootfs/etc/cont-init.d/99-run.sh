@@ -1,0 +1,457 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+set -e
+
+##########
+# UPDATE #
+##########
+
+bashio::log.info "Starting $(lastversion --version)"
+
+if bashio::config.true "dry_run"; then
+    bashio::log.warning "Dry run mode : on"
+fi
+
+bashio::log.info "Checking status of referenced repositories..."
+VERBOSE=$(bashio::config 'verbose')
+if bashio::config.true "date_iso8601"; then
+    DATE_FORMAT="+%Y-%m-%d"
+else
+    DATE_FORMAT="+%d-%m-%Y"
+fi
+
+# Version published in the addon configuration, which is the one Home
+# Assistant compares; the upstream tag lives in updater.json instead
+function config_version() {
+    local folder="$1"
+    if [ -f "$folder/config.json" ]; then
+        jq -r '.version // empty' "$folder/config.json"
+    elif [ -f "$folder/config.yaml" ]; then
+        sed -n 's/^version:[[:space:]]*//p' "$folder/config.yaml" \
+            | head -n 1 \
+            | sed -e 's/[[:space:]]*#.*$//' -e 's/^"//' -e 's/"$//' \
+            | sed -e "s/^'//" -e "s/'$//"
+    fi
+}
+
+# Escape a version so that sed treats it as plain text on both sides
+function sed_pattern() {
+    printf '%s' "$1" | sed -e 's/[]\/$*.^[]/\\&/g'
+}
+
+function sed_replacement() {
+    printf '%s' "$1" | sed -e 's/[\/&]/\\&/g'
+}
+
+#Defining github value
+LOGINFO="... github authentification" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+
+GITUSER=$(bashio::config 'gituser')
+GITMAIL=$(bashio::config 'gitmail')
+git config --system http.sslVerify false
+git config --system credential.helper 'cache --timeout 7200'
+git config --system user.name "${GITUSER}"
+if [[ "$GITMAIL" != "null" ]]; then git config --system user.email "${GITMAIL}"; fi
+
+if bashio::config.has_value 'gitapi'; then
+    LOGINFO="... setting github API" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+    GITHUB_API_TOKEN=$(bashio::config 'gitapi')
+    export GITHUB_API_TOKEN
+fi
+
+#Create or update local version
+REPOSITORY=$(bashio::config 'repository')
+BASENAME=$(basename "https://github.com/$REPOSITORY")
+
+if [ ! -d "/data/$BASENAME" ]; then
+    LOGINFO="... cloning ${REPOSITORY}" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+    cd /data/ || exit
+    git clone "https://github.com/${REPOSITORY}"
+else
+    LOGINFO="... updating ${REPOSITORY}" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+    cd "/data/$BASENAME" || exit
+    DEFAULT_BRANCH=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
+    git pull --rebase origin > /dev/null || git reset --hard "origin/${DEFAULT_BRANCH}" > /dev/null
+    git pull --rebase origin > /dev/null || (rm -r "/data/$BASENAME" && git clone "https://github.com/${REPOSITORY}")
+fi
+
+LOGINFO="... parse addons" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+
+# Go through all folders, add to filters if not existing
+
+cd /data/"$BASENAME" || exit
+for f in */; do
+
+    if [ -f /data/"$BASENAME"/"$f"/updater.json ]; then
+        SLUG=${f//\//}
+
+        # Rebase
+        LOGINFO="... updating ${REPOSITORY}" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+        cd "/data/$BASENAME" || exit
+        git pull --rebase &> /dev/null || git reset --hard &> /dev/null
+        git pull --rebase &> /dev/null
+
+        #Define the folder addon
+        LOGINFO="... $SLUG : checking slug exists in repo" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+        cd /data/"${BASENAME}"/"${SLUG}" || {
+            bashio::log.error "$SLUG addon not found in this repository. Exiting."
+            continue
+        }
+
+        # Get variables
+        UPSTREAM=$(jq -r .upstream_repo updater.json)
+        BETA=$(jq -r .github_beta updater.json)
+        FULLTAG=$(jq -r .github_fulltag updater.json)
+        HAVINGASSET=$(jq -r .github_havingasset updater.json)
+        SOURCE=$(jq -r .source updater.json)
+        FILTER_TEXT=$(jq -r .github_tagfilter updater.json)
+        EXCLUDE_TEXT=$(jq -r .github_exclude updater.json)
+        EXCLUDE_TEXT="${EXCLUDE_TEXT:-zzzzzzzzzzzzzzzz}"
+        PAUSED=$(jq -r .paused updater.json)
+        DATE="$(date "$DATE_FORMAT")"
+        BYDATE=$(jq -r .dockerhub_by_date updater.json)
+
+        # Number of elements to check in dockerhub
+        if grep -q "dockerhub_list_size" updater.json; then
+            LISTSIZE=$(jq -r .dockerhub_list_size updater.json)
+        else
+            LISTSIZE=100
+        fi
+
+        #Skip if paused
+        if [[ "$PAUSED" = true ]]; then
+            bashio::log.magenta "... $SLUG addon updates are paused, skipping"
+            continue
+        fi
+
+        #Find current version
+        LOGINFO="... $SLUG : get current version" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+        CURRENT=$(jq .upstream_version updater.json) \
+            || {
+                bashio::log.error "$SLUG addon upstream tag not found in updater.json. Exiting."
+                continue
+            }
+
+        if [[ "$SOURCE" = dockerhub ]]; then
+            # Use dockerhub as upstream
+            # shellcheck disable=SC2116
+            LOGINFO="... Source is dockerhub" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+
+            #Prepare tag flag
+            if [ "${FILTER_TEXT}" = "null" ] || [ "${FILTER_TEXT}" = "" ]; then
+                FILTER_TEXT=""
+            else
+                LOGINFO="... $SLUG : filter_text is on" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+                FILTER_TEXT="&name=$FILTER_TEXT"
+            fi
+
+            #Prepare tag flag
+            if [ "${EXCLUDE_TEXT}" = "null" ] || [ "${EXCLUDE_TEXT}" = "" ]; then
+                EXCLUDE_TEXT="zzzzzzzzzzzzzzzzzz"
+            fi
+
+            DOCKERHUB_REPO="${UPSTREAM%%/*}"
+            DOCKERHUB_IMAGE=$(echo "$UPSTREAM" | cut -d "/" -f2)
+            LASTVERSION=$(
+                curl -f -L -s --fail "https://hub.docker.com/v2/repositories/${DOCKERHUB_REPO}/${DOCKERHUB_IMAGE}/tags?page_size=$LISTSIZE$FILTER_TEXT" \
+                    | jq '.results | .[] | .name' -r \
+                    | sed -e '/.*latest.*/d' \
+                    | sed -e '/.*dev.*/d' \
+                    | sed -e '/.*nightly.*/d' \
+                    | sed -e '/.*beta.*/d' \
+                    | sed -e "/.*$EXCLUDE_TEXT.*/d" \
+                    | sort -V \
+                    | tail -n 1
+            )
+
+            [ "${BETA}" = true ] \
+                && LASTVERSION=$(
+                    curl -f -L -s --fail "https://hub.docker.com/v2/repositories/${DOCKERHUB_REPO}/${DOCKERHUB_IMAGE}/tags?page_size=$LISTSIZE$FILTER_TEXT" \
+                        | jq '.results | .[] | .name' -r \
+                        | sed -e '/.*latest.*/d' \
+                        | sed -e '/.*dev.*/!d' \
+                        | sed -e "/.*$EXCLUDE_TEXT.*/d" \
+                        | sort -V \
+                        | tail -n 1
+                )
+
+            [ "${BYDATE}" = true ] \
+                && LASTVERSION=$(
+                    curl -f -L -s --fail "https://hub.docker.com/v2/repositories/${DOCKERHUB_REPO}/${DOCKERHUB_IMAGE}/tags?page_size=${LISTSIZE}&ordering=last_updated$FILTER_TEXT" \
+                        | jq '.results | .[] | .name' -r \
+                        | sed -e '/.*latest.*/d' \
+                        | sed -e '/.*dev.*/d' \
+                        | sed -e '/.*nightly.*/d' \
+                        | sed -e "/.*$EXCLUDE_TEXT.*/d" \
+                        | sort -V \
+                        | tail -n 1
+                ) \
+                && DATE=$(
+                    curl -f -L -s --fail "https://hub.docker.com/v2/repositories/${DOCKERHUB_REPO}/${DOCKERHUB_IMAGE}/tags/?page_size=${LISTSIZE}&ordering=last_updated$FILTER_TEXT" \
+                        | jq '.results[] | select(.name==$LASTVERSION) | .last_updated' -r --arg LASTVERSION "$LASTVERSION"
+                ) \
+                && DATE="${DATE%T*}" \
+                && DATE="$(date -d "$DATE" "$DATE_FORMAT")" \
+                && LASTVERSION="$LASTVERSION-$DATE"
+            LOGINFO="... $SLUG : bydate is true, version is $LASTVERSION" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+
+        else
+
+            # Use source as upstream
+            ARGUMENTS="--at $SOURCE"
+            LASTVERSION_REPO="$UPSTREAM"
+
+            if [ "${SOURCE}" = "codeberg" ]; then
+                # Codeberg is a hosted Gitea instance; pass the repository as a full URL for lastversion
+                CODEBERG_BASE_URL="https://codeberg.org"
+                ARGUMENTS="--at gitea"
+                LASTVERSION_REPO="${CODEBERG_BASE_URL}/${UPSTREAM}"
+                LOGINFO="... $SLUG : source is codeberg (gitea, using ${CODEBERG_BASE_URL})" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+            else
+                LOGINFO="... $SLUG : source is $SOURCE" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+            fi
+
+            #Prepare tag flag
+            if [ "${FULLTAG}" = true ]; then
+                LOGINFO="... $SLUG : github_fulltag is on" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+                ARGUMENTS="$ARGUMENTS --format tag"
+            else
+                LOGINFO="... $SLUG : github_fulltag is off" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+            fi
+
+            #Prepare tag flag
+            if [ "${HAVINGASSET}" = true ]; then
+                LOGINFO="... $SLUG : asset_only tag is on" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+                ARGUMENTS="$ARGUMENTS --having-asset"
+            else
+                LOGINFO="... $SLUG : asset_only is off" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+            fi
+
+            #Prepare tag flag
+            if [ "${FILTER_TEXT}" = "null" ] || [ "${FILTER_TEXT}" = "" ]; then
+                FILTER_TEXT=""
+            else
+                LOGINFO="... $SLUG : filter_text is on" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+                ARGUMENTS="$ARGUMENTS --only $FILTER_TEXT"
+            fi
+
+            #Prepare tag flag
+            if [ "${EXCLUDE_TEXT}" = "null" ] || [ "${EXCLUDE_TEXT}" = "" ]; then
+                EXCLUDE_TEXT=""
+            else
+                LOGINFO="... $SLUG : github_exclude is on" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+                ARGUMENTS="$ARGUMENTS --exclude $EXCLUDE_TEXT"
+            fi
+
+            #If beta flag, select beta version
+            if [ "${BETA}" = true ]; then
+                LOGINFO="... $SLUG : beta is on" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+                ARGUMENTS="$ARGUMENTS --pre"
+            else
+                LOGINFO="... $SLUG : beta is off" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+            fi
+
+            # If failure, checks if there is packages that could be used
+            function test_packages() {
+                if [ "$VERBOSE" = true ]; then
+                    # shellcheck disable=SC2086
+                    bashio::log.info "source : $SOURCE and LASTVERSION : $(lastversion "$UPSTREAM" $ARGUMENTS 2>&1 || true)"
+                fi
+                # shellcheck disable=SC2086
+                if [[ "$SOURCE" == *"github"* ]] && [[ "$(lastversion "$UPSTREAM" $ARGUMENTS 2>&1 || true)" == *"No release"* ]]; then
+                    # Is there a package
+                    bashio::log.warning "No version found, looking if packages available"
+                    last_packages="$(curl -s -L https://github.com/"$UPSTREAM"/packages | sed -n "s/.*\/container\/package\/\([^\"]*\).*/\1/p")" || true
+                    last_package="$(echo "$last_packages" | head -n 1)" || true
+                    if [[ "$(echo -n "$last_packages" | grep -c '^')" -gt 0 ]]; then
+                        bashio::log.warning "A total of $(echo -n "$last_packages" | grep -c '^') packages were found, using $last_package"
+                        LASTVERSION=""
+                        LASTVERSION="$(curl -s -L https://github.com/"$UPSTREAM"/pkgs/container/"$last_package" | sed -n "s/.*?tag=\([^\"]*\)\">.*/\1/p" \
+                            | sed -e '/.*latest.*/d' \
+                            | sed -e '/.*dev.*/d' \
+                            | sed -e '/.*nightly.*/d' \
+                            | sed -e '/.*beta.*/d' \
+                            | sort -V \
+                            | tail -n 1)" || true
+                        if [[ "$LASTVERSION" == "" ]]; then
+                            # Continue to next
+                            bashio::log.warning "No packages found"
+                            set_continue=true
+                        else
+                            bashio::log.info "Found tag $LASTVERSION"
+                            echo "$LASTVERSION"
+                        fi
+                    else
+                        # Continue to next
+                        bashio::log.warning "No packages found"
+                        set_continue=true
+                    fi
+                else
+                    # Continue to next
+                    set_continue=true
+                fi
+            }
+
+            # shellcheck disable=SC2086
+            LASTVERSION="$(lastversion "$LASTVERSION_REPO" $ARGUMENTS || test_packages)"
+
+            # Codeberg fallback: lastversion may not support custom Gitea hosts in older builds
+            if [[ -z "$LASTVERSION" && "${SOURCE}" = "codeberg" ]]; then
+                LOGINFO="... $SLUG : attempting Codeberg API fallback" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+                RELEASES_URL="https://codeberg.org/api/v1/repos/${UPSTREAM}/releases"
+                JQ_FILTER='.[] | select(.draft == false)'
+                if [ "$BETA" != true ]; then
+                    JQ_FILTER='.[] | select(.draft == false and .prerelease == false)'
+                fi
+                CODEBERG_TAGS=$(curl -fsSL "$RELEASES_URL" | jq -r "$JQ_FILTER | .tag_name" || true)
+
+                if [ -n "$CODEBERG_TAGS" ]; then
+                    if [ -n "$FILTER_TEXT" ]; then
+                        CODEBERG_TAGS=$(echo "$CODEBERG_TAGS" | grep "$FILTER_TEXT" || true)
+                    fi
+
+                    if [ -n "$EXCLUDE_TEXT" ]; then
+                        CODEBERG_TAGS=$(echo "$CODEBERG_TAGS" | sed "/${EXCLUDE_TEXT}/d")
+                    fi
+
+                    CODEBERG_TAGS=$(echo "$CODEBERG_TAGS" | sed '/^$/d' | sort -V)
+                    LASTVERSION=$(echo "$CODEBERG_TAGS" | tail -n 1)
+                fi
+
+                if [ -n "$LASTVERSION" ] && [ "$FULLTAG" != true ]; then
+                    LASTVERSION="${LASTVERSION#v}"
+                fi
+
+                if [ -z "$LASTVERSION" ]; then
+                    bashio::log.warning "... $SLUG : unable to determine Codeberg release"
+                    set_continue=true
+                fi
+            fi
+
+            # Continue if issue
+            if [[ "${set_continue:-false}" == true ]]; then
+                continue
+            fi
+
+        fi
+
+        # Add brackets
+        LASTVERSION='"'${LASTVERSION}'"'
+
+        # Skip if current or last version is empty (would corrupt files by replacing all "" occurrences)
+        if [ "${CURRENT}" = '""' ] || [ "${LASTVERSION}" = '""' ]; then
+            bashio::log.warning "... $SLUG : skipping update due to empty version string (current=${CURRENT}, latest=${LASTVERSION})"
+            continue
+        fi
+
+        # Update if needed
+        if [ "${CURRENT}" != "${LASTVERSION}" ]; then
+            LOGINFO="... $SLUG : update from ${CURRENT} to ${LASTVERSION}" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+
+            ADDONFOLDER="/data/${BASENAME}/${SLUG}"
+
+            # Version currently published, before any file is touched
+            CONFIGVERSION="$(config_version "$ADDONFOLDER" || true)"
+            if [ -z "$CONFIGVERSION" ]; then
+                bashio::log.error "... $SLUG : no version found in the addon config, skipping"
+                continue
+            fi
+
+            # Home Assistant hides an update when it can compare both
+            # versions and the new one is not strictly newer, and cannot
+            # order tags such as "version-bf9e0b4f" at all. The addon
+            # version is therefore derived from the upstream tag, which
+            # stays untouched in updater.json so that the same upstream
+            # release is never published twice
+            if ! ADDONVERSION="$(python3 /usr/bin/ha_version.py --current "$CONFIGVERSION" --upstream "${LASTVERSION//\"/}")"; then
+                bashio::log.error "... $SLUG : no Home Assistant compliant version derived from ${LASTVERSION}, skipping"
+                continue
+            fi
+
+            if [ "$ADDONVERSION" != "${LASTVERSION//\"/}" ]; then
+                bashio::log.blue "... $SLUG : Home Assistant would not offer ${LASTVERSION//\"/} as an update of $CONFIGVERSION, addon version set to $ADDONVERSION"
+            fi
+
+            #Change all instances of version, the addon config excluded as
+            #its version can now differ from the upstream tag
+            LOGINFO="... $SLUG : updating files" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+            CURRENTPATTERN="$(sed_pattern "$CURRENT")"
+            LASTVERSIONTEXT="$(sed_replacement "$LASTVERSION")"
+            for files in "Dockerfile" "build.json" "build.yaml"; do
+                if [ -f "$ADDONFOLDER/$files" ]; then
+                    sed -i "s/${CURRENTPATTERN}/${LASTVERSIONTEXT}/g" "$ADDONFOLDER/$files"
+                fi
+            done
+
+            # Remove " and modify version
+            LASTVERSION=${LASTVERSION//\"/}
+            CURRENT=${CURRENT//\"/}
+            if [ -f "$ADDONFOLDER/config.json" ]; then
+                # Piping jq into sponge would empty the file if jq fails
+                if CONFIGJSON="$(jq --arg variable "$ADDONVERSION" '.version = $variable' "$ADDONFOLDER/config.json")"; then
+                    printf '%s\n' "$CONFIGJSON" > "$ADDONFOLDER/config.json" # Replace version tag
+                fi
+            elif [ -f "$ADDONFOLDER/config.yaml" ]; then
+                sed -i "/^version:/c\version: \"$ADDONVERSION\"" "$ADDONFOLDER/config.yaml"
+            fi
+
+            # Leave the addon untouched rather than committing a version
+            # Home Assistant would not offer
+            if [ "$(config_version "$ADDONFOLDER")" != "$ADDONVERSION" ]; then
+                bashio::log.error "... $SLUG : version $ADDONVERSION could not be written in the addon config, reverting"
+                git checkout -- "$ADDONFOLDER"
+                continue
+            fi
+
+            # Replace upstream tag and date, keeping the file intact if jq
+            # fails as a truncated updater.json would lose the addon source
+            if ! UPDATERJSON="$(jq --arg version "$LASTVERSION" --arg date "$DATE" '.upstream_version = $version | .last_update = $date' "$ADDONFOLDER/updater.json")"; then
+                bashio::log.error "... $SLUG : updater.json could not be updated, reverting"
+                git checkout -- "$ADDONFOLDER"
+                continue
+            fi
+            printf '%s\n' "$UPDATERJSON" > "$ADDONFOLDER/updater.json"
+
+            #Update changelog
+            touch "$ADDONFOLDER/CHANGELOG.md"
+            if [ "$ADDONVERSION" != "$LASTVERSION" ]; then
+                sed -i "1i - Upstream tag : $LASTVERSION" "$ADDONFOLDER/CHANGELOG.md"
+            fi
+            if [[ "$SOURCE" == *"github"* ]]; then
+                sed -i "1i - Update to latest version from $UPSTREAM (changelog : https://github.com/${UPSTREAM%/}/releases)" "$ADDONFOLDER/CHANGELOG.md"
+            else
+                sed -i "1i - Update to latest version from $UPSTREAM" "$ADDONFOLDER/CHANGELOG.md"
+            fi
+            sed -i "1i ## ${ADDONVERSION} (${DATE})" "$ADDONFOLDER/CHANGELOG.md"
+            sed -i "1i\ " "$ADDONFOLDER/CHANGELOG.md"
+            LOGINFO="... $SLUG : files updated" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+
+            #Git commit and push
+            git add -A # add all modified files
+
+            git commit -m "Updater bot : $SLUG updated to ${ADDONVERSION} (upstream ${LASTVERSION})" > /dev/null
+
+            LOGINFO="... $SLUG : push to github" && if [ "$VERBOSE" = true ]; then bashio::log.info "$LOGINFO"; fi
+
+            git remote set-url origin "https://${GITUSER}:${GITHUB_API_TOKEN}@github.com/${REPOSITORY}" &> /dev/null
+
+            # Push
+            if ! bashio::config.true "dry_run"; then
+                git push &> /dev/null
+            fi
+
+            #Log
+            bashio::log.yellow "... $SLUG updated to ${ADDONVERSION} (upstream ${CURRENT} to ${LASTVERSION})"
+
+        else
+            bashio::log.green "... $SLUG is up-to-date ${CURRENT}"
+        fi
+    fi
+done || true # Continue even if issue
+
+# Clean dry run
+if bashio::config.true "dry_run"; then
+    rm -r /data/*
+fi
+
+bashio::log.info "Addons update completed"

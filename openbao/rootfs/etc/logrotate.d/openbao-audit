@@ -1,0 +1,16 @@
+# Rotation for the OpenBao audit sink.
+
+/data/openbao/logs/*.log {
+    daily
+    maxsize 16M
+    rotate 5
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0600 openbao openbao
+    sharedscripts
+    postrotate
+        killall -HUP bao > /dev/null 2>&1 || true
+    endscript
+}

@@ -1,0 +1,6 @@
+{
+  "build_from": {
+    "aarch64": "wger/server:latest",
+    "amd64": "wger/server:latest"
+  }
+}

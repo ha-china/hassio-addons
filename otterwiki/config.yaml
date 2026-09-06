@@ -1,0 +1,24 @@
+name: Otter Wiki
+version: "2.24.0"
+upstream: 2.7.0
+slug: otterwiki
+description: >-
+  [老王杂谈说]：一个奥特尔维基是基于 Python 的协作内容管理系统，称为维基。其内容存储在 git 仓库中，以跟踪所有更改。Markdown 用作标记语言。奥特尔维基使用 Python 编写，并采用了 Flask 微框架、halfmoon 作为 CSS 框架以及 CodeMirror 作为编辑器。Font Awesome Free 提供图标的服务。
+arch:
+  - amd64
+  - aarch64
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+ports:
+  80/tcp: 8084
+ports_description:
+  80/tcp: "Web Interface"
+map:
+  - type: addon_config
+    read_only: false
+    path: /app-data
+image: redimp/otterwiki
+boot: auto
+startup: services
+webui: "[PROTO:ssl]://[HOST]:[PORT:80]"
+ingress: false
+ingress_port: 80

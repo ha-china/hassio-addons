@@ -1,0 +1,79 @@
+## 2026.08 (2026-08-01)
+
+- Addon versions written in config.yaml now always comply with Home Assistant versioning: an upstream tag Home Assistant cannot order (`version-bf9e0b4f`, `ubuntu-2026-06-01`, ...) or would sort as older (`1.2.3-2`, `1.2.3+4`) no longer lands in config.yaml. The addon number is incremented instead, while the raw upstream tag stays in updater.json so the same release is never published twice
+- Pre-release markers become a version section, `5.0.0b5` is published as `5.0.0.5`
+- A tag Home Assistant cannot order keeps every number it carries, `v26.2-ls256` is published as `v26.2.256`
+- Upstream tags are escaped before being replaced in Dockerfile/build files
+
+## 2026.06 (05-06-2026)
+- Minor bugs fixed
+## 2026.05 (30-05-2026)
+- Update lastversion to 3.6.12
+
+## 3.19.16 (2026-01-10)
+- Add config option to choose ISO8601 (YYYY-MM-DD) or DD-MM-YYYY dates for last_update/changelog entries
+
+## 3.19.15 (2025-12-08)
+- The Home Assistant project has deprecated support for the armv7, armhf and i386 architectures. Support wil be fully dropped in the upcoming Home Assistant 2025.12 release
+- Improve Codeberg handling with a Gitea API fallback when lastversion lacks custom host support
+
+## 3.19.12 (2025-11-18)
+
+- Added support for configuring extra environment variables through the `env_vars` option.
+
+## 3.19.11
+
+- Avoid blank config.json when using config.yaml
+
+## 3.19.9
+
+- Automatically add a link to the release tab when using a github repo to facilitate access to upstream changelog
+
+## 3.19
+
+- New HA config logic implemented. Files are now located in the addon config file, that can be accessed from the addon_configs folder from my filebrowser or cloudcommander addons. Migration of data, custom configs, and custom scripts should be automatic. Please be sure to update all your links however ! For more information, see here : https://developers.home-assistant.io/blog/2023/11/06/public-addon-config/
+- Feat : if there is no releases in a github repo, check if there is a valid package and get the highest tag https://github.com/alexbelgium/hassio-addons/issues/1168
+- Feat : github_exclude applies to dockerhub
+
+## 3.18
+
+- github_exclude: exclude a text in the release name
+- Correct github_tagfilter usage in dockerhub
+
+## 3.17
+
+- Clean cache
+
+## 3.16
+
+- Removed git password option as it is no longer usable
+
+## 3.15
+
+- Apply github_tagfilter to dockerhub
+
+## 3.10
+
+- Add dry run mode (test but does not commit)
+
+## 3.9.9
+
+- Add mode
+- WARNING : update to supervisor 2022.11 before installing
+- Fix : dockerhub_list_size corrected
+- New dockerhub_list_size tag for dockerhub
+- Look for last 100 elements instead of 10
+- New dockerhub_by_date tag for dockerhub
+- Nightly tag only for beta
+- Use latest lastversion & base images
+- Feat: "pause: true" pauses the updates for a specific addon
+
+## 3.*
+
+- Breaking change : new logic. Please read Readme.
+- Supports sources from : dockerhub/github,gitlab,bitbucket,pip,hg,sf,website-feed,local,helm_chart,wiki,system,wp
+
+## 2.*
+
+- Add codenotary sign
+- Initial build

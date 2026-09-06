@@ -1,0 +1,8 @@
+{
+  "last_update": "2026-08-15",
+  "repository": "alexbelgium/hassio-addons",
+  "slug": "librespeed",
+  "source": "github",
+  "upstream_repo": "linuxserver/docker-librespeed",
+  "upstream_version": "6.2.1"
+}

@@ -1,0 +1,10 @@
+{
+	# debug
+	log {
+		format console
+		output file /var/log/caddy/caddy.log
+	}
+	auto_https disable_redirects
+}
+
+import sites-enabled/*.caddy

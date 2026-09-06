@@ -1,0 +1,39 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64",
+    "armhf",
+    "armv7",
+    "i386"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：GeoIP Update 程序对 GeoIP2 和 GeoIP Legacy 二进制数据库进行自动更新。",
+  "environment": {},
+  "map": [
+    "share:rw",
+    "all_addon_configs:rw"
+  ],
+  "name": "Maxmind GEO IP Update",
+  "options": {
+    "GEOIPUPDATE_DB_DIR": "/addon_configs/c80c7555_caddy-2",
+    "GEOIPUPDATE_ACCOUNT_ID": "1234567",
+    "GEOIPUPDATE_LICENSE_KEY": "abcdefghi",
+    "GEOIPUPDATE_EDITION_IDS": "GeoLite2-ASN GeoLite2-City GeoLite2-Country",
+    "GEOIPUPDATE_FREQUENCY": "24"
+  },
+  "ports": {},
+  "ports_description": {},
+  "schema": {
+    "GEOIPUPDATE_DB_DIR": "str",
+    "GEOIPUPDATE_ACCOUNT_ID": "str",
+    "GEOIPUPDATE_LICENSE_KEY": "str",
+    "GEOIPUPDATE_EDITION_IDS": "str",
+    "GEOIPUPDATE_FREQUENCY": "str"
+  },
+  "slug": "geoipupdate",
+  "startup": "services",
+  "upstream": "v8.0.0",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons/geoipupdate",
+  "version": "v8.0.0",
+  "ingress": false
+}

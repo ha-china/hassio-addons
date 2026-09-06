@@ -1,0 +1,59 @@
+name: Asterisk
+version: 6.2.0
+breaking_versions:
+  - 6.0.0
+  - 5.1.0
+  - 5.0.0
+slug: asterisk
+description: '[老王杂谈说]：用于门铃、电话等SIP设备的PBX服务器'
+url: https://gh-proxy.org/github.com/TECH7Fox/asterisk-hass-addons
+image: ghcr.nju.edu.cn/tech7fox/asterisk-hass-addon
+arch:
+  - aarch64
+  - amd64
+homeassistant_api: true
+map:
+  - addon_config:rw
+  - media:rw
+  - ssl
+  # To allow the add-on migrate from home assistant config to add-on config
+  - homeassistant_config:rw
+options:
+  ami_password: null
+  auto_add: true
+  auto_add_secret: ""
+  video_support: false
+  register_ingress_entry: true
+  generate_ssl_cert: true
+  certfile: fullchain.pem
+  keyfile: privkey.pem
+  additional_sounds: []
+  mailbox: false
+  mailbox_port: 12345
+  mailbox_password: ""
+  mailbox_extension: "100"
+  mailbox_google_api_key: ""
+  log_level: info
+schema:
+  ami_password: password
+  auto_add: bool
+  auto_add_secret: password
+  video_support: bool
+  additional_sounds:
+    - str
+  register_ingress_entry: bool
+  generate_ssl_cert: bool
+  certfile: str
+  keyfile: str
+  mailbox: bool
+  mailbox_port: port
+  mailbox_password: password
+  mailbox_extension: str
+  mailbox_google_api_key: password
+  log_level: list(all|trace|debug|info|notice|warning|error|fatal|off)
+host_network: true
+init: false
+uart: true # chan-dongle requirement
+stdin: true
+ingress: true
+ingress_port: 8088

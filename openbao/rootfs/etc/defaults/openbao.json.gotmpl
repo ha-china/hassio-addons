@@ -1,0 +1,67 @@
+{{- $options := (ds "options") -}}
+{{- $auditStdout := index $options "audit_stdout" -}}
+{{- $auditFile := index $options "audit_file" -}}
+{{- $trustedProxies := index $options "trusted_proxies" -}}
+{
+  "ui": true,
+  "api_addr": "http{{ if not $options.tls_disable }}s{{ end }}://0.0.0.0:8200",
+  "cluster_addr": "http{{ if not $options.tls_disable }}s{{ end }}://127.0.0.1:8201",
+  "listener": [
+    {
+      "tcp": {
+        "address": "0.0.0.0:8200",
+        "tls_disable": {{ $options.tls_disable }},
+        {{ if not $options.tls_disable -}}
+        "tls_cert_file": "/ssl/openbao/fullchain.pem",
+        "tls_key_file": "/ssl/openbao/privkey.pem",
+        {{ end -}}
+        {{ if $trustedProxies -}}
+        "x_forwarded_for_authorized_addrs": "{{ $trustedProxies }}",
+        "x_forwarded_for_reject_not_authorized": false,
+        "x_forwarded_for_reject_not_present": false,
+        {{ end -}}
+        "telemetry": {
+          "unauthenticated_metrics_access": false
+        }
+      }
+    }
+  ],
+  "storage": {
+    "raft": {
+      "path": "/data/openbao/data",
+      "node_id": "homeassistant"
+    }
+  },
+{{- if or $auditStdout $auditFile }}
+  "audit": [
+{{- if $auditStdout }}
+    {
+      "file": {
+        "to-stdout": {
+          "description": "audit -> addon log -> journald",
+          "options": { "file_path": "stdout" }
+        }
+      }
+    }{{ if $auditFile }},{{ end }}
+{{- end }}
+{{- if $auditFile }}
+    {
+      "file": {
+        "to-file": {
+          "description": "audit -> /data/openbao/logs, rotated by logrotate",
+          "options": {
+            "file_path": "/data/openbao/logs/audit.log",
+            "mode": "0600"
+          }
+        }
+      }
+    }
+{{- end }}
+  ],
+{{- end }}
+  "telemetry": {
+    "prometheus_retention_time": "24h",
+    "disable_hostname": true
+  },
+  "log_level": "{{ strings.ToUpper $options.log_level }}"
+}

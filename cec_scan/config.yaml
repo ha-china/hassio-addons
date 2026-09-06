@@ -1,0 +1,16 @@
+---
+version: "4.0"
+slug: cec_scan
+name: CEC Scanner
+url: https://gh-proxy.org/github.com/home-assistant/addons/tree/master/cec_scan
+arch:
+  - aarch64
+  - amd64
+boot: manual
+description: '[老王杂谈说]：扫描 HDMI CEC 设备'
+image: docker.1panel.live/homeassistant/{arch}-addon-cec_scan
+options: {}
+schema: {}
+startup: once
+video: true
+init: false

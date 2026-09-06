@@ -1,0 +1,59 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+
+COMPONENT=$(bashio::config 'component' 'hacs')
+CHANNEL=$(bashio::config 'channel' 'current')
+
+bashio::log.info "------------------------------------"
+bashio::log.info "开始下载..."
+bashio::log.info "安装渠道: ${CHANNEL}"
+bashio::log.info "------------------------------------"
+
+if ! bashio::fs.directory_exists "/homeassistant/custom_components"; then
+    bashio::log.info "Looks like HACS is your first custom integration, nice!"
+    mkdir /homeassistant/custom_components
+fi
+
+if ! bashio::var.equals "${CHANNEL}" "hacs"; then
+    wget -O ./get-hacs https://get.hacs.vip
+    chmod +x ./get-hacs
+    DOMAIN="${COMPONENT}" bash ./get-hacs
+
+elif bashio::var.equals "${CHANNEL}" "current"; then
+    wget -O ./get-hacs https://get.hacs.vip
+    chmod +x ./get-hacs
+    bash ./get-hacs
+
+elif bashio::var.equals "${CHANNEL}" "development"; then
+    bashio::log.info "下载HACS集成源码..."
+    if bashio::fs.directory_exists "/tmp/hacs"; then
+        bashio::log.info "Cleaning up the previous download..."
+        rm -rf /tmp/hacs
+    fi
+
+    git clone --depth 1 --branch china https://github.com/hacs-china/integration.git /tmp/hacs
+
+    cd /tmp/hacs || bashio::exit.nok "Could not find the integration source"
+
+    bashio::log.info "安装前端..."
+    bash ./scripts/install/frontend
+
+    bashio::log.info "Injecting a version..."
+    current_tag=$(curl -sSL https://data-v2.hacs.xyz/integration/data.json | jq -r '.["172733314"].last_version')
+    current_commit="$(git rev-parse --short HEAD)"
+    updated_version="$(echo ${current_tag} | awk -F. -v OFS=. '{$NF += 1 ; print}')-dev-${current_commit}"
+    python3 ./scripts/update/manifest.py --version "${updated_version}"
+    bashio::log.info "Version set to: ${updated_version}"
+
+    bashio::log.info "Copying the integration source..."
+    cd /
+    rm -rf /homeassistant/custom_components/hacs
+    mv /tmp/hacs/custom_components/hacs /homeassistant/custom_components/hacs
+    rm -rf /tmp/hacs
+
+    bashio::log.info "安装完成..."
+    bashio::log.info "请重启 Home Assistant 并添加 HACS 集成"
+
+else
+    bashio::exit.nok "Invalid channel!"
+fi

@@ -1,0 +1,37 @@
+#!/command/with-contenv bashio
+# vim: ft=bash
+# shellcheck shell=bash
+# ==============================================================================
+# Start Piper service
+# ==============================================================================
+flags=()
+if bashio::config.true 'update_voices'; then
+    flags+=('--update-voices')
+fi
+
+if bashio::config.true 'debug_logging'; then
+    flags+=('--debug')
+fi
+
+# Delete old options
+options=$(bashio::addon.options)
+for old_key in 'max_piper_procs' 'streaming'; do
+    if bashio::jq.exists "${options}" ".${old_key}"; then
+        bashio::log.info "Removing ${old_key}"
+        bashio::addon.option "${old_key}"
+    fi
+done
+
+# shellcheck disable=SC2068
+exec python3 -m wyoming_piper \
+    --uri 'tcp://0.0.0.0:10200' \
+    --zeroconf \
+    --length-scale "$(bashio::config 'length_scale')" \
+    --noise-scale "$(bashio::config 'noise_scale')" \
+    --noise-w "$(bashio::config 'noise_w')" \
+    --sentence-silence "$(bashio::config 'sentence_silence')" \
+    --speaker "$(bashio::config 'speaker')" \
+    --voice "$(bashio::config 'voice')" \
+    --data-dir /data \
+    --data-dir /share/piper \
+    --download-dir /data ${flags[@]}

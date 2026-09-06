@@ -1,0 +1,80 @@
+name: Hermes Agent
+version: "1.3.2"
+slug: hermes_agent
+description: "[老王杂谈说]：Nous Research 构建的自改进人工智能代理。由 Wolfram Ravenwolf 制作的 Home Assistant 插件。"
+url: "https://gh-proxy.org/github.com/WolframRavenwolf/hermes-ha-addon"
+arch:
+  - amd64
+  - aarch64
+init: false
+startup: application
+boot: auto
+ingress: true
+ingress_port: 49169
+ingress_stream: true
+panel_icon: mdi:robot
+panel_title: Hermes Agent
+backup_exclude:
+  - .hermes/hermes-agent/venv
+  - .hermes/hermes-agent/node_modules
+  - .hermes/hermes-agent/web/node_modules
+  - lsp/bin
+  - lsp/node_modules
+  - lsp/python-packages
+  - lsp/pses
+  - .cache
+  - .npm
+map:
+  - addon_config:rw
+  - media:rw
+  - share:rw
+ports:
+  8080/tcp: null
+  8443/tcp: 8443
+  9119/tcp: null
+ports_description:
+  8080/tcp: "HTTP: /hermes/ (agent) · /dashboard/ (web UI) · /terminal/ (shell) · /v1/ (OpenAI API)"
+  8443/tcp: "HTTPS: /hermes/ (agent) · /dashboard/ (web UI) · /terminal/ (shell) · /v1/ (OpenAI API) — TLS (self-signed cert)"
+  9119/tcp: "Hermes Desktop remote backend — opt-in; trusted LAN/VPN/Tailscale only"
+options:
+  git_url: "https://gh-proxy.org/github.com/NousResearch/hermes-agent.git"
+  git_ref: ""
+  git_token: ""
+  auto_update: false
+  hass_url: "http://homeassistant.local:8123"
+  homeassistant_token: ""
+  hermes_home: ".hermes"
+  profiles: []
+  profiles_base: ".hermes/profiles"
+  profile_env_vars: []
+  enable_dashboard: false
+  enable_terminal: false
+  enable_api: false
+  enable_desktop_backend: false
+  access_password: ""
+  env_vars:
+    - name: "OPENROUTER_API_KEY"
+      value: ""
+schema:
+  git_url: "url?"
+  git_ref: "str?"
+  git_token: "password?"
+  auto_update: "bool"
+  hass_url: "url?"
+  homeassistant_token: "password?"
+  hermes_home: "str?"
+  profiles:
+    - "str"
+  profiles_base: "str?"
+  profile_env_vars:
+    - profile: "str"
+      name: "match(^[A-Z_][A-Z0-9_]{0,254}$)"
+      value: "str"
+  enable_dashboard: "bool"
+  enable_terminal: "bool"
+  enable_api: "bool"
+  enable_desktop_backend: "bool"
+  access_password: "password?"
+  env_vars:
+    - name: "match(^[A-Z_][A-Z0-9_]{0,254}$)"
+      value: "str"

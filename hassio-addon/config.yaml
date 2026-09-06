@@ -1,0 +1,28 @@
+name: 'Tunet'
+description: '[老王杂谈说]：一个现代、响应式的 Home Assistant 仪表板'
+version: "1.21.1"
+slug: 'tunet'
+url: 'https://gh-proxy.org/github.com/oyvhov/Tunet'
+init: false
+startup: application
+arch:
+  - aarch64
+  - amd64
+homeassistant_api: true
+auth_api: true
+ingress: true
+ingress_port: 3002
+panel_icon: 'mdi:view-dashboard-variant'
+panel_title: 'Tunet'
+ports:
+  3002/tcp: null
+ports_description:
+  3002/tcp: 'Tunet Web Interface (not needed when using Ingress)'
+options:
+  data_encryption_mode: 'off'
+  data_encryption_key: ''
+  data_encryption_salt: ''
+schema:
+  data_encryption_mode: 'list(off|dual|enc_only)?'
+  data_encryption_key: 'password?'
+  data_encryption_salt: 'password?'

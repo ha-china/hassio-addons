@@ -1,0 +1,30 @@
+---
+name: Omada Controller Stable v6 (HA OS)
+image: jeruntu/home-assistant-omada-stable-v6-haos
+version: 6.3.0.45
+slug: omada_controller_stable_v6_haos
+description: '[老王杂谈说]：为 Home Assistant OS 下的 Raspberry Pi 5 翻译 TP-Link Omada 控制器软件'
+webui: https://[HOST]:[PORT:8043]
+startup: application
+stop_timeout: 60
+arch:
+  - aarch64
+init: false
+url: https://gh-proxy.org/github.com/jkunczik/home-assistant-omada
+map:
+  - ssl
+options:
+  enable_hass_ssl: false
+  certfile: /ssl/fullchain.pem
+  keyfile: /ssl/privkey.pem
+  upgrade_https_port: 8043
+  show_mongodb_logs: false
+  show_server_logs: true
+schema:
+  enable_hass_ssl: bool
+  certfile: str
+  keyfile: str
+  upgrade_https_port: int
+  show_mongodb_logs: bool
+  show_server_logs: bool
+host_network: true

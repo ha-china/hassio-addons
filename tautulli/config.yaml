@@ -1,0 +1,21 @@
+name: Tautulli
+version: 6.1.1
+slug: tautulli
+description: '[老王杂谈说]：Plex 媒体服务器的监控和跟踪工具'
+url: https://gh-proxy.org/github.com/hassio-addons/app-tautulli/tree/main/README.md
+webui: http://[HOST]:[PORT:8181]
+arch:
+  - aarch64
+  - amd64
+init: false
+hassio_api: true
+ports:
+  8181/tcp: 8181
+ports_description:
+  8181/tcp: Tautulli web interface
+map:
+  - share:rw
+  - backup:rw
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+image: ghcr.nju.edu.cn/hassio-addons/tautulli/{arch}

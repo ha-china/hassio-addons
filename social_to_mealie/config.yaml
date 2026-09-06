@@ -1,0 +1,43 @@
+name: Social to Mealie
+version: "1.7.2"
+slug: social_to_mealie
+description: '[老王杂谈说]：直接从社交媒体导入食谱到 Mealie'
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons
+arch:
+  - aarch64
+  - amd64
+map:
+  - addon_config:rw
+environment:
+  PORT: "3000"
+image: ghcr.nju.edu.cn/alexbelgium/social_to_mealie-{arch}
+init: false
+ports:
+  3000/tcp: 3000
+ports_description:
+  3000/tcp: Web interface
+options:
+  OPENAI_URL: https://api.openai.com/v1
+  OPENAI_API_KEY: ""
+  TRANSCRIPTION_MODEL: whisper-1
+  TEXT_MODEL: gpt-4o-mini
+  MEALIE_URL: ""
+  MEALIE_API_KEY: ""
+  MEALIE_GROUP_NAME: home
+  YTDLP_VERSION: latest
+  env_vars: []
+schema:
+  OPENAI_URL: str
+  OPENAI_API_KEY: str
+  TRANSCRIPTION_MODEL: str
+  TEXT_MODEL: str
+  MEALIE_URL: str
+  MEALIE_API_KEY: str
+  MEALIE_GROUP_NAME: str?
+  EXTRA_PROMPT: str?
+  YTDLP_VERSION: str?
+  COOKIES: str?
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
+webui: "[PROTO:ssl]://[HOST]:[PORT:3000]"

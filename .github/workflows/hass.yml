@@ -1,0 +1,38 @@
+name: Sync hass-panel Addons
+
+on:
+  #schedule:
+  #  - cron: '0 17 * * *'  
+  workflow_dispatch:  # 允许手动触发
+  repository_dispatch:
+    types: [external_trigger]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10  # 添加超时限制
+
+    steps:
+      - uses: actions/checkout@v4
+
+
+
+      - name: sync hass-panel
+        run: |
+            mkdir -p hass-panel hass-panel-beta
+            wget -q -O hass-panel.zip https://github.com/mrtian2016/hass-panel/archive/refs/heads/main.zip
+            unzip -q -o hass-panel.zip -d hass-panel-temp && rm hass-panel.zip
+            ls -l
+            mv -f hass-panel-temp/hass-panel-main/hass-panel/* hass-panel/
+            mv -f hass-panel-temp/hass-panel-main/hass-panel-beta/* hass-panel-beta/
+            rm -rf hass-panel-temp
+
+
+          
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Sync addons automatically at $(date +'%Y-%m-%d %H:%M:%S')"
+          git push

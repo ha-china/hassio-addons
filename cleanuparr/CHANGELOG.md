@@ -1,0 +1,50 @@
+ 
+## 2.10.5 (2026-08-13)
+- Update to latest version from Cleanuparr/Cleanuparr (changelog : https://github.com/Cleanuparr/Cleanuparr/releases)
+ 
+## 2.10.3 (2026-08-08)
+- Update to latest version from Cleanuparr/Cleanuparr (changelog : https://github.com/Cleanuparr/Cleanuparr/releases)
+ 
+## 2.10.2 (2026-08-01)
+- Update to latest version from Cleanuparr/Cleanuparr (changelog : https://github.com/Cleanuparr/Cleanuparr/releases)
+ 
+## 2.9.16 (2026-07-11)
+- Update to latest version from Cleanuparr/Cleanuparr (changelog : https://github.com/Cleanuparr/Cleanuparr/releases)
+ 
+## 2.9.14 (2026-06-20)
+- Update to latest version from Cleanuparr/Cleanuparr (changelog : https://github.com/Cleanuparr/Cleanuparr/releases)
+
+## 2.9.13 (2026-05-16)
+- Update to latest version from Cleanuparr/Cleanuparr (changelog : https://github.com/Cleanuparr/Cleanuparr/releases)
+
+## 2.9.11 (2026-05-09)
+- Update to latest version from Cleanuparr/Cleanuparr (changelog : https://github.com/Cleanuparr/Cleanuparr/releases)
+
+## 2.9.10 (2026-05-02)
+- Update to latest version from Cleanuparr/Cleanuparr (changelog : https://github.com/Cleanuparr/Cleanuparr/releases)
+
+## 2.9.8 (2026-04-18)
+- Update to latest version from Cleanuparr/Cleanuparr (changelog : https://github.com/Cleanuparr/Cleanuparr/releases)
+
+## 2.9.5 (2026-04-11)
+- Update to latest version from Cleanuparr/Cleanuparr (changelog : https://github.com/Cleanuparr/Cleanuparr/releases)
+
+## 2.9.4 (2026-04-06)
+- Update to latest version from Cleanuparr/Cleanuparr (changelog : https://github.com/Cleanuparr/Cleanuparr/releases)
+
+## 2.9.3 (2026-04-04)
+- Update to latest version from Cleanuparr/Cleanuparr (changelog : https://github.com/Cleanuparr/Cleanuparr/releases)
+
+## 2.9.1 (2026-03-28)
+- Update to latest version from Cleanuparr/Cleanuparr (changelog : https://github.com/Cleanuparr/Cleanuparr/releases)
+
+## 2.8.1 (2026-03-14)
+- Update to latest version from Cleanuparr/Cleanuparr (changelog : https://github.com/Cleanuparr/Cleanuparr/releases)
+# Changelog
+
+## 2.7.7
+
+- Initial release of Cleanuparr addon
+- Based on upstream image `ghcr.io/cleanuparr/cleanuparr:2.7.7`
+- Persistent config stored in HA addon config directory
+- Supports amd64 and aarch64 architectures

@@ -1,0 +1,85 @@
+---
+configuration:
+  beam_size:
+    name: Beam size
+    description: >-
+      Number of candidates to consider simultaneously during transcription (0 =
+      auto).  Increasing the beam size will increase accuracy at the cost of
+      performance.
+  language:
+    name: Language
+    description: >-
+      Language to pre-load model for during start-up.
+  model:
+    name: Model
+    description: |
+      Whisper model that will be used for transcription.
+
+      The default `auto` selects `tiny-int8` for ARM devices like the Raspberry
+      Pi 4 and `base-int8` otherwise. Compressed models (`int8`) are slightly
+      less accurate than their counterparts, but smaller and faster.
+  custom_model:
+    name: Custom model
+    description: |
+      Path to a converted model directory, or a CTranslate2-converted Whisper
+      model ID from the HuggingFace Hub like
+      "Systran/faster-distil-whisper-small.en".
+
+      If custom_model_type is set to 'transformers', a HuggingFace transformers
+      Whisper model ID from HuggingFace like 'openai/whisper-tiny.en' may be
+      used.
+  custom_model_type:
+    name: Custom model type
+    description: |
+      Speech-to-text backend to use for `custom_model` if `stt_library` is set
+      to auto.
+  initial_prompt:
+    name: Initial prompt
+    description: >-
+      Description of audio that can help Whisper transcribe unusual words
+      better.
+  stt_library:
+    name: Speech-to-text library
+    description: >-
+      Speech-to-text backend library to use.
+
+      The default `auto` will select the best backend/model based on
+      language/hardware.
+
+      Overridden by `custom_model_type` when `custom_model` is set.
+  whisper_task:
+    name: Whisper task
+    description: >-
+      Task to perform with the model.
+
+      The default `transcribe` transcribes audio in the spoken language, while
+      `translate` translates the spoken audio into English.
+  sherpa_streaming:
+    name: Sherpa streaming
+    description: >-
+      Use streaming model with sherpa backend.
+
+      This overrides the default English model with a faster but less accurate
+      streaming model.
+  vad_clip:
+    name: VAD clip
+    description: >-
+      Use voice activity detection (VAD) to clip silence from audio before
+      transcription.
+
+      This is a latency win for silence-heavy audio, especially with batch
+      backends like sherpa and funasr. Streaming backends are unaffected.
+  local_files_only:
+    name: Local files only
+    description: >-
+      Only use models that have already been downloaded, and never check online
+      for updates.
+
+      Leave this off until your models have downloaded, then turn it on to keep
+      the add-on offline and skip the update check on every request.
+  debug_logging:
+    name: Debug logging
+    description: >-
+      Print DEBUG level messages to the app's log.
+network:
+  10300/tcp: Whisper Wyoming Protocol

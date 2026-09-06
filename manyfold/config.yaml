@@ -1,0 +1,51 @@
+name: "Manyfold"
+slug: manyfold
+description: "[老王杂谈说]：Manyfold 3D 模型管理器作为 Home Assistant 附加组件，使用上游镜像并配置图书管理类/索引路径。"
+version: "0.148.0"
+url: "https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/manyfold"
+image: ghcr.nju.edu.cn/alexbelgium/manyfold-{arch}
+arch:
+  - amd64
+  - aarch64
+startup: services
+init: false
+hassio_api: true
+homeassistant_api: true
+ports:
+  3214/tcp: 3214
+ports_description:
+  3214/tcp: "Manyfold Web UI"
+webui: "http://[HOST]:[PORT:3214]"
+map:
+  - addon_config:rw
+  - share:rw
+  - media:rw
+options:
+  secret_key_base: ""
+  puid: 1000
+  pgid: 1000
+  multiuser: true
+  library_path: "/share/manyfold/models"
+  thumbnails_path: "/config/thumbnails"
+  log_level: "info"
+  web_concurrency: 4
+  rails_max_threads: 16
+  default_worker_concurrency: 4
+  performance_worker_concurrency: 1
+  max_file_upload_size: 1073741824
+  max_file_extract_size: 1073741824
+schema:
+  secret_key_base: str
+  puid: int
+  pgid: int
+  public_hostname: str?
+  multiuser: bool
+  library_path: str
+  thumbnails_path: str
+  log_level: list(info|debug|warn|error)
+  web_concurrency: int
+  rails_max_threads: int
+  default_worker_concurrency: int
+  performance_worker_concurrency: int
+  max_file_upload_size: int
+  max_file_extract_size: int

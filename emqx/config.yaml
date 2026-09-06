@@ -1,0 +1,26 @@
+name: EMQX
+version: 0.9.0
+slug: emqx
+description: '[老王杂谈说]：物联网最可扩展的 MQTT 代理。Mosquitto app 的替代方案。'
+url: https://gh-proxy.org/github.com/hassio-addons/app-emqx
+startup: services
+ingress: true
+ingress_port: 18083
+ingress_stream: true
+init: false
+panel_icon: mdi:pipe
+panel_title: EMQX
+arch:
+  - aarch64
+  - amd64
+map:
+  - ssl
+  - addon_config:rw
+options:
+  env_vars: []
+host_network: true
+schema:
+  env_vars:
+    - name: match(^EMQX_([A-Z0-9_])+$)
+      value: str
+image: ghcr.nju.edu.cn/hassio-addons/emqx/{arch}

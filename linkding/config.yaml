@@ -1,0 +1,24 @@
+name: "linkding"
+version: "1.46.2"
+upstream: "1.45.0"
+slug: linkding
+description: >-
+  [老王杂谈说]：Linkding 是你可以自建托管的书签管理器，它专为极简、快速及易于使用 Docker 搭建而设计。
+arch:
+  - amd64
+  - aarch64
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+ports:
+  9090/tcp: 9090
+ports_description:
+  9090/tcp: "Web Interface"
+map:
+  - type: addon_config
+    read_only: false
+    path: /etc/linkding/data
+image: sissbruecker/linkding
+boot: auto
+startup: services
+webui: "[PROTO:ssl]://[HOST]:[PORT:9090]"
+ingress: false
+ingress_port: 9090

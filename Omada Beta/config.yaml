@@ -1,0 +1,31 @@
+---
+name: Omada Controller Beta
+image: jeruntu/home-assistant-omada-beta
+version: beta-6.3.0.43
+slug: omada_controller_beta
+description: '[老王杂谈说]：TP-Link Omada 控制器软件'
+webui: https://[HOST]:[PORT:8043]
+startup: application
+stop_timeout: 60
+arch:
+  - aarch64
+  - amd64
+init: false
+url: https://gh-proxy.org/github.com/jkunczik/home-assistant-omada
+map:
+  - ssl
+options:
+  enable_hass_ssl: false
+  certfile: /ssl/fullchain.pem
+  keyfile: /ssl/privkey.pem
+  upgrade_https_port: 8043
+  show_mongodb_logs: false
+  show_server_logs: true
+schema:
+  enable_hass_ssl: bool
+  certfile: str
+  keyfile: str
+  upgrade_https_port: int
+  show_mongodb_logs: bool
+  show_server_logs: bool
+host_network: true

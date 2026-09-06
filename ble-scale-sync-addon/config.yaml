@@ -1,0 +1,105 @@
+name: BLE Scale Sync
+# x-release-please-start-version
+version: 1.27.0
+# x-release-please-end
+slug: ble-scale-sync
+description: >-
+  [老王杂谈说]：读取 BLE 智能体重秤并导出至 Garmin Connect、MQTT（HA 自动发现）、InfluxDB 以及其他平台。
+url: https://gh-proxy.org/github.com/KristianP26/ble-scale-sync
+documentation: >-
+  https://gh-proxy.org/github.com/KristianP26/ble-scale-sync/blob/main/ble-scale-sync-addon/DOCS.md
+support: https://gh-proxy.org/github.com/KristianP26/ble-scale-sync/issues
+panel_icon: mdi:scale-bathroom
+arch:
+  - amd64
+  - aarch64
+  - armv7
+startup: services
+boot: auto
+host_network: true
+host_dbus: true
+privileged:
+  - NET_ADMIN
+  - NET_RAW
+# The Supervisor's default AppArmor profile denies the D-Bus method calls this
+# add-on needs, so it dies on the very first `Hello` handshake to
+# org.freedesktop.DBus before any BLE scan starts. Running unconfined is what
+# the standalone Docker image already does. Confinement buys little here: the
+# add-on already runs as root with host_network, host_dbus, NET_ADMIN and
+# NET_RAW. A custom apparmor.txt would be the tidier fix, but a profile that
+# fails to parse breaks add-on install AND update for every user, and it cannot
+# be tested in CI. See issue #271.
+apparmor: false
+hassio_api: true
+map:
+  - share:rw
+options:
+  scale_mac: ''
+  ble_adapter: ''
+  force_scale_adapter: ''
+  qn_protocol_byte: ''
+  qn_report_byte: ''
+  qn_weight_ack: ''
+  qn_a4_prelude: ''
+  auto_clear_stale_bond: false
+  proxy_liveness_timeout_min: 30
+  weight_unit: kg
+  height_unit: cm
+  user_name: Default
+  user_height: 170
+  user_birth_date: '1990-01-01'
+  user_gender: male
+  user_is_athlete: false
+  user_weight_min: 40
+  user_weight_max: 150
+  mqtt_enabled: true
+  mqtt_auto: true
+  mqtt_broker_url: ''
+  mqtt_username: ''
+  mqtt_password: ''
+  mqtt_topic: scale/body-composition
+  mqtt_ha_discovery: true
+  mqtt_ha_device_name: BLE Scale
+  garmin_enabled: false
+  garmin_email: ''
+  garmin_password: ''
+  garmin_weight_only: false
+  scan_cooldown: 30
+  reset_bluetooth: true
+  debug: false
+  custom_config: false
+schema:
+  scale_mac: str?
+  ble_adapter: str?
+  force_scale_adapter: str?
+  qn_protocol_byte: str?
+  qn_report_byte: str?
+  qn_weight_ack: str?
+  qn_a4_prelude: str?
+  auto_clear_stale_bond: bool?
+  proxy_liveness_timeout_min: int(0,1440)?
+  weight_unit: list(kg|lbs)
+  height_unit: list(cm|in)
+  user_name: str
+  user_height: int(50,250)
+  user_birth_date: str
+  user_gender: list(male|female)
+  user_is_athlete: bool
+  user_weight_min: int(10,300)
+  user_weight_max: int(10,500)
+  mqtt_enabled: bool
+  mqtt_auto: bool
+  mqtt_broker_url: str?
+  mqtt_username: str?
+  mqtt_password: password?
+  mqtt_topic: str
+  mqtt_ha_discovery: bool
+  mqtt_ha_device_name: str
+  garmin_enabled: bool
+  garmin_email: str?
+  garmin_password: password?
+  garmin_weight_only: bool?
+  scan_cooldown: int(5,3600)
+  reset_bluetooth: bool
+  debug: bool
+  custom_config: bool

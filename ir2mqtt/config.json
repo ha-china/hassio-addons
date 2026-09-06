@@ -1,0 +1,34 @@
+{
+  "name": "IR2MQTT",
+  "version": "1.0.0-beta.4",
+  "slug": "ir2mqtt",
+  "description": "[老王杂谈说]：带有学习和 MQTT 自动发现功能的红外桥 Web UI",
+  "url": "https://gh-proxy.org/github.com/steelcuts/ir2mqtt",
+  "image": "ghcr.nju.edu.cn/steelcuts/ir2mqtt-ha-app",
+  "arch": [
+    "aarch64",
+    "amd64",
+    "armv7"
+  ],
+  "startup": "application",
+  "boot": "auto",
+  "init": false,
+  "ingress": true,
+  "ingress_port": 8099,
+  "panel_icon": "mdi:remote",
+  "panel_title": "IR2MQTT",
+  "uart": true,
+  "udev": true,
+  "options": {
+    "mqtt_broker": "core-mosquitto",
+    "mqtt_port": 1883,
+    "mqtt_user": "",
+    "mqtt_pass": ""
+  },
+  "schema": {
+    "mqtt_broker": "str",
+    "mqtt_port": "int",
+    "mqtt_user": "str",
+    "mqtt_pass": "password"
+  }
+}

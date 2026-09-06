@@ -1,0 +1,35 @@
+name: n8n
+version: "2.37.9"
+upstream: 1.62.4
+slug: n8n
+description: >-
+  [老王杂谈说]：n8n 是一款可扩展的工作流自动化工具。其公平代码分发模式确保源代码始终可见，可供自托管，并允许您添加自定义函数、逻辑和应用程序。n8n 基于节点的方法使其具有高度灵活性，使您能够将任何事物与任何事物连接起来。
+arch:
+  - amd64
+  - aarch64
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+ports:
+  5678/tcp: 5678
+ports_description:
+  5678/tcp: "Web Interface"
+map:
+  - type: addon_config
+    read_only: false
+    path: /home/node/
+environment:
+  PUID: "1"
+  PGID: "1"
+  N8N_SECURE_COOKIE: "false"
+  TINI_SUBREAPER: "true"
+  N8N_USER_FOLDER: "/home/node/"
+boot: auto
+startup: services
+webui: "[PROTO:ssl]://[HOST]:[PORT:5678]"
+ingress: false
+ingress_port: 5678
+options:
+  USE_ENV_FILE: false
+  N8N_ENV_FILES: "/home/node/config.env"
+schema:
+  USE_ENV_FILE: "bool"
+  N8N_ENV_FILES: "str"

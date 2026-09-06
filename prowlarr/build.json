@@ -1,0 +1,6 @@
+{
+  "build_from": {
+    "aarch64": "docker.1panel.live/linuxserver/prowlarr:arm64v8-nightly",
+    "amd64": "docker.1panel.live/linuxserver/prowlarr:amd64-nightly"
+  }
+}

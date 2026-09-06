@@ -1,0 +1,324 @@
+# Changelog
+
+All notable changes to the Hermes Agent Home Assistant add-on are documented here.
+
+The format follows the spirit of [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Versions match the add-on `version` in `config.yaml`.
+
+## [Unreleased]
+
+## [1.3.2] - 2026-08-27
+
+### Changed
+
+- Reduce backup size by excluding only regenerated shared venv, project/dashboard dependencies, profile LSP runtimes, and `.cache`/`.npm` caches. The first start or first LSP use after a restore can be slower and network-dependent; canonical state, user-managed tools, and browser profiles/login state remain backed up.
+
+### Fixed
+
+- Reduce Linux gateway-supervisor process-tree snapshots from 20 per second to one every two seconds while preserving 50 ms exit and signal responsiveness, immediate cleanup scans, and the existing non-Linux containment behavior.
+- Publish add-on launcher processes with the recognized `hermes-gateway` command identity so Hermes Dashboard liveness correctly reports s6-supervised gateways as running.
+- Preserve Linux virtualenv discovery while publishing that identity by starting a venv-local `hermes-gateway` interpreter symlink directly; this prevents startup from losing installed packages such as `hermes_cli`.
+- Keep the per-slot supervisor out of Hermes Gateway process discovery by running it through ordinary venv Python and deriving the recognizable `hermes-gateway` alias only for the final child; status and update flows no longer treat the supervisor as an extra manual gateway.
+- Keep older pinned Hermes revisions startable when they predate `--external-supervisor`: the add-on launcher feature-detects the installed Gateway parser and removes only the unsupported Python argument, while modern revisions retain the external supervisor handback marker.
+
+### Verified
+
+- `PYTHONDONTWRITEBYTECODE=1 python -B -m unittest discover -s tests -q` with Python 3.11.15 - 122 tests OK, 2 skipped.
+- Shell syntax for every shipped `hermes_agent/*.sh` file, Python AST parsing, YAML parsing, and `git diff --check` passed.
+- A real Home Assistant Supervisor backup/restore smoke proved that only rebuildable runtime data was excluded, canonical state and configuration survived restore, and the excluded runtime was reconstructed successfully.
+- A real HAOS process-lifecycle smoke against live `/proc` command lines proved that only the gateway child matched Hermes discovery, exactly one update target existed, only the child carried `--external-supervisor`, update handback replaced the child through the fixed slot, and no detached restart watcher was launched.
+
+## [1.3.1] - 2026-07-31
+
+### Fixed
+
+- Fail startup before nginx or Hermes services start when `enable_api` has no usable `access_password`.
+- Read `access_password` losslessly from Supervisor JSON so trailing line breaks reach validation instead of being stripped by shell command substitution, and reject NUL before assigning it to a shell variable.
+- Keep all four add-on-owned `API_SERVER_*` variables authoritative across shared and per-profile environment overrides, including stale canonical and `export` aliases from earlier `.env` files.
+- Reassert add-on-owned API settings after Hermes loads profile, external-secret, and managed environment sources.
+- Enforce enabled and disabled API settings on the final Hermes `GatewayConfig`, so stale profile or managed YAML cannot retain or replace the API listener.
+- Keep Hermes' supported live provider-credential reloads while reasserting only add-on-owned slot identity, multiplex, foreground-supervision, and API values after each load.
+- Pin every add-on-managed gateway process to its assigned profile independently of native supervised-child support, so a sticky interactive `active_profile` in an older persisted Hermes checkout cannot redirect the primary gateway or duplicate a worker.
+- Protect each slot's assigned `HERMES_HOME` across profile, external-secret, and managed environment loads.
+- Disable Hermes profile multiplexing in profile environment files, before the named-profile startup preflight, and in the final gateway config so only the add-on's explicit gateway slot owns each profile.
+- Protect `HERMES_GATEWAY_NO_SUPERVISE=1` and `HERMES_S6_SUPERVISED_CHILD=1` against late profile, external-secret, and managed environment overrides so Hermes cannot redirect the tracked foreground child back into upstream s6 supervision.
+- Run each gateway under a separately tracked per-slot subreaper/process-group supervisor and duplicate output through a separately tracked, fail-fast Python logger connected by a private FIFO. Clean-reexec the long-lived supervisor with only non-secret locale/path state while handing the complete original gateway environment through an anonymous unlinked file descriptor to the gateway child. Pass the original `run.sh` PID to both children, arm Linux parent-death handling before long-lived work, block TERM/INT across the supervisor reexec, and publish slot readiness only after the post-reexec parent check and handlers are active. Sanitize the logger environment before its blocking FIFO open, exit immediately on a durable log-file open or write failure, defer shutdown until readiness or startup cleanup, and treat logger or sink failure as a profile failure. Restart and shutdown now TERM/KILL same-group and session-detached descendants, reap adopted orphans, bound logger drain time, reap both direct children, and remove FIFO/readiness state before propagating any unsafe exit. A clean supervisor logs the gateway's actual status and returns success only after its owned descendant set is empty; an unsafe or unproven supervisor exit is container-fatal and never starts an overlapping slot replacement.
+- Document that add-on-managed gateway slots are controlled through Home Assistant Supervisor rather than Hermes' native `gateway stop` or `gateway restart` service-manager commands.
+- Reject malformed or unknown `profile_env_vars.profile` targets instead of silently retaining stale per-profile values.
+- Correct API health guidance: `/v1/health` is public Hermes liveness, while `/v1/models` verifies Bearer authentication.
+
+### Security
+
+- Require enabled API credentials to contain at least 16 printable ASCII characters after trimming; reject Hermes' known placeholders, single-quote and backslash characters, dotenv interpolation syntax, controls, and non-ASCII input.
+- Serialize enabled credentials as single-quoted literals that round-trip identically through Bash and python-dotenv; keep `API_SERVER_KEY` empty when the API is disabled.
+- Keep rejected values out of startup errors, reject line breaks before dotenv serialization, and reject malformed or multiline `env_vars` and `profile_env_vars` records.
+
+### Verified
+
+- `PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 -B -m unittest discover -s tests -q` - 108 tests OK, 2 skipped.
+- Shell syntax for every shipped `hermes_agent/*.sh` file, YAML parsing, and `git diff --check` passed.
+- Differential comparison with Hermes' authoritative `has_usable_secret(..., min_length=16)` predicate matched all 30 credential cases in the supported single-line matrix; 2 CR/LF serialization-hardening cases were separately rejected.
+- Complex safe credentials round-tripped byte-for-byte through both Bash and Hermes' production python-dotenv parser.
+
+## [1.3.0] - 2026-07-19
+
+### Added
+
+- Add an opt-in Hermes Desktop remote backend on container port 9119 using the official `hermes serve` contract and the existing access password.
+- Keep the Desktop port unmapped and the feature disabled by default; Home Assistant's Network settings choose the external host port.
+
+### Security
+
+- Require `access_password` whenever the Desktop backend is enabled.
+- Warn that authenticated Desktop access provides full agent control, carries the accepted opt-in risk, and belongs only on a trusted LAN/VPN/Tailscale path rather than the public internet.
+
+### Verified
+
+- `PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3 -B -m unittest discover -s tests -v` - 66 tests OK, 1 skipped.
+- Shell syntax, Python AST, YAML parsing, public-repository hygiene, and `git diff --check` passed.
+- An isolated Home Assistant test repository built and installed the add-on without changing the stopped production installation.
+- The live remote backend enforced authentication, exposed the `default` and `worker` profiles, minted single-use WebSocket tickets, and rejected ticket reuse.
+- The codesign-verified Hermes Desktop app connected through its real cookie-authenticated remote path and reached the expected provider onboarding for the credential-free test profile.
+- Independent code reviews completed with no blocking findings.
+
+## [1.2.1] - 2026-06-18
+
+### Fixed
+
+- Keep Dashboard Chat WebSockets open behind Home Assistant Ingress by enabling `ingress_stream` and rewriting proxied dashboard API `Origin` headers to the dashboard backend host.
+- Fix direct-port Dashboard Chat WebSocket authentication when browsers send Basic auth plus the SPA `?token=` query parameter.
+
+### Verified
+
+- `git diff --check` - OK.
+- `bash -n hermes_agent/nginx-render.sh hermes_agent/run.sh` - OK.
+- `python3 -m py_compile hermes_agent/dashboard-patches.py` - OK.
+- `uv run --with pytest python -m pytest -q tests/test_dashboard_ingress_patches.py` - 21 passed.
+- `uv run --with pytest python -m pytest -q` - 53 passed, 1 skipped.
+- Live Home Assistant local DEV add-on lifecycle smoke - `/dashboard/api/pty` streamed binary TUI frames, `/dashboard/api/ws` emitted `gateway.ready`, and `/dashboard/api/events` stayed open through both HA Ingress and direct HTTPS access.
+
+## [1.2.0] - 2026-06-15
+
+### Added
+
+- Add `profiles_base` so bare multi-profile names can default to upstream-style `.hermes/profiles/<name>` storage.
+
+### Changed
+
+- Use one shared Hermes Agent clone and virtualenv for all profiles instead of installing Hermes separately for every profile.
+- Preserve existing flat profile directories such as `/config/amy` during upgrades when the new `profiles_base` target does not exist yet.
+
+### Fixed
+
+- Fix the shared-install dashboard patch helper call so startup uses the shared `SRC_DIR` instead of removed per-profile variables.
+- Correct Home Assistant option text and storage documentation for the shared install and `profiles_base` behavior.
+- Fix the README OpenAI-compatible API authentication example formatting.
+
+### Verified
+
+- `git diff --check` - OK.
+- `PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -q` - 53 tests OK, 1 skipped.
+- `PYTHONDONTWRITEBYTECODE=1 /amy/hermes-agent/.venv/bin/python -m pytest -q` - 52 passed, 1 skipped.
+- `bash -n hermes_agent/run.sh hermes_agent/profile-init.sh hermes_agent/nginx-render.sh` - OK.
+- YAML parse checks for `repository.yaml`, `hermes_agent/build.yaml`, `hermes_agent/config.yaml`, and `hermes_agent/translations/en.yaml` - OK.
+- Live Home Assistant local DEV add-on smoke - two profiles started, `nginx -t` passed, one shared Hermes clone/venv was reused, restart reused the shared install marker, primary and secondary Dashboard/Terminal/API routes returned HTTP 200, HA Ingress Dashboard WebSockets returned `HTTP/1.1 101 Switching Protocols` for `/api/pty`, `/api/ws`, and `/api/events` on both root and `/profile/amy`, and legacy flat profile preservation passed.
+
+## [1.1.2] - 2026-06-15
+
+### Added
+
+- Add this Home Assistant add-on changelog so users can see what changed before updating.
+
+### Changed
+
+- Clarify persistent storage documentation: container `/config` maps to the add-on's private `addon_config` storage, not the normal Home Assistant Core `/config` folder.
+- Document where to find the same storage from HAOS/Samba via the `addon_configs` share.
+- Correct the install-marker name shown in the storage tree for multi-profile aware versions.
+
+### Fixed
+
+- Fix the dashboard Chat tab behind Home Assistant Ingress by preserving WebSocket upgrades through the nginx `/dashboard/api/` proxy.
+- Forward `Upgrade` and mapped `Connection` headers for dashboard API routes while keeping normal REST calls on the same path sane.
+- Add regression coverage for primary and multi-profile dashboard API routes across Ingress, direct HTTP, and direct HTTPS render modes.
+
+### Verified
+
+- `git diff --check` - OK.
+- `python3 -m pytest -q tests/test_dashboard_ingress_patches.py` - 18 passed.
+- `python3 -m pytest -q` - 43 passed, 1 skipped.
+- `bash -n hermes_agent/nginx-render.sh hermes_agent/run.sh` - OK.
+- `python3 -m py_compile hermes_agent/dashboard-patches.py` - OK.
+- Live Home Assistant local DEV add-on smoke - add-on started, `nginx -t` passed, dashboard returned HTTP 200 through Ingress, and `/dashboard/api/pty`, `/dashboard/api/ws`, and `/dashboard/api/events` returned `HTTP/1.1 101 Switching Protocols`.
+
+## [1.1.1] - 2026-06-04
+
+### Fixed
+
+- Fix dashboard startup regression by executing the installed dashboard patch helper directly instead of relying on a non-guaranteed `python` alias.
+- Use the helper's `#!/usr/bin/env python3` shebang, matching the Python executable installed in the add-on image.
+- Add a regression assertion so startup does not reintroduce the bare `python` dependency.
+
+### Verified
+
+- `python3 -m unittest discover -s tests` - 43 tests OK, 1 skipped.
+- `python3 -m py_compile hermes_agent/dashboard-patches.py tests/test_dashboard_ingress_patches.py tests/test_multi_profile.py` - OK.
+- `bash -n hermes_agent/run.sh hermes_agent/profile-init.sh hermes_agent/nginx-render.sh` - OK.
+
+## [1.1.0] - 2026-06-01
+
+### Added
+
+- Add multi-profile mode via `profiles`; the first profile keeps the existing root URLs and additional profiles are exposed under `/profile/<name>/...`.
+- Add Home Assistant-compatible `profile_env_vars` for per-profile `.env` overrides.
+- Render nginx routing per profile for dashboard, terminal, and API access.
+- Add profile initialization support and per-profile tmux/session naming.
+- Add regression tests for multi-profile behavior.
+
+### Changed
+
+- Keep Hermes Gateway in the foreground under Home Assistant s6 so Supervisor tracks the add-on lifecycle correctly.
+- Update README and translations for multi-profile support.
+
+### Notes
+
+- Includes the v1.0.8 gateway foreground fix that was tagged but not published as a GitHub Release.
+- Thanks to @imcvampire for the multi-profile work.
+
+### Verified
+
+- `python3 -m unittest discover -s tests -q` - 43 tests OK, 1 skipped.
+- `git diff --check` - OK.
+- `python3 -m py_compile hermes_agent/dashboard-patches.py tests/test_dashboard_ingress_patches.py tests/test_multi_profile.py` - OK.
+- `bash -n hermes_agent/run.sh hermes_agent/nginx-render.sh hermes_agent/profile-init.sh` - OK.
+
+## [1.0.8] - 2026-05-28
+
+### Fixed
+
+- Keep Hermes Gateway in the foreground under Home Assistant s6 supervision.
+- Ensure Supervisor can correctly track the add-on lifecycle instead of losing sight of a backgrounded gateway process.
+- Add a regression test for the foreground gateway behavior.
+
+### Notes
+
+- Tagged as v1.0.8 and later included in the v1.1.0 GitHub Release notes.
+
+## [1.0.7] - 2026-05-17
+
+### Fixed
+
+- Fix dashboard asset loading behind Home Assistant Ingress for modern Hermes dashboard builds.
+- Add an add-on-controlled `import.meta.url` fallback for dashboard base-path detection so API, plugin, router, and asset paths keep working when Home Assistant Ingress uses a long random prefix.
+- Force Vite to emit relative dashboard asset URLs with `base: "./"` for modern and legacy dashboard sources.
+- Rebuild stale dashboard bundles when `index.html` still contains absolute `/assets/...` references.
+- Keep legacy dashboard compatibility patches and partial-patch repair behavior.
+- Avoid polling `/v1/health` when the API server is disabled, preventing misleading nginx `connect() failed` log noise.
+
+### Changed
+
+- Update the landing page so `/v1/health` is shown as optional API server health, not Gateway health.
+
+### Notes
+
+- Thanks to @imcvampire for the logs and browser Network screenshot that exposed the remaining asset-path failure.
+
+### Verified
+
+- `python3 -m pytest -q` - 13 passed.
+- `git diff --check` - OK.
+- `python3 -m py_compile hermes_agent/dashboard-patches.py` - OK.
+- `bash -n hermes_agent/run.sh` - OK.
+- Independent code review passed with no blocking findings.
+
+## [1.0.6] - 2026-05-16
+
+### Fixed
+
+- Fix Home Assistant add-on startup failure introduced in v1.0.5 when direct HTTP/HTTPS ports are enabled.
+- Move `map_hash_bucket_size 128;` into the main nginx template before the first `map` block.
+- Remove the late duplicate directive from the direct-ports include.
+- Add a regression test that locks the directive ordering.
+
+### Verified
+
+- Verified on a real Home Assistant add-on installation with a fresh `/config` runtime.
+- Upgrade/start path reached `nginx reloaded` and `All services started`.
+- Ingress landing page, dashboard, dashboard deep links, dashboard assets, dashboard API, and `/v1/health` returned 200.
+
+### Notes
+
+- Thanks to @imcvampire for reporting the post-v1.0.5 dashboard startup problem.
+
+## [1.0.5] - 2026-05-16
+
+### Fixed
+
+- Fix Home Assistant add-on startup failures caused by fragile dashboard source patching after upstream Hermes dashboard changes.
+- Move dashboard source rewriting into a tested helper script instead of multi-expression `sed` calls.
+- Skip source patches for modern Hermes dashboards that already support proxy prefixes via `X-Forwarded-Prefix`.
+- Repair partially patched v1.0.4 dashboard sources from failed previous starts.
+- Keep legacy fallback patches for older root-path-only Hermes dashboard sources.
+- Forward the dashboard prefix from Home Assistant Ingress or custom reverse proxies to Hermes.
+- Add regression tests for modern upstream, legacy fallback, and the `sed` delimiter failure class.
+
+### Notes
+
+- Thanks to @imcvampire for pinpointing the `sed` delimiter crash in PR #4.
+
+## [1.0.4] - 2026-04-24
+
+### Fixed
+
+- Pass a loopback `Host` header to the upstream dashboard when proxying through nginx.
+- Improve dashboard reverse-proxy compatibility after the v1.0.3 dashboard hardening work.
+
+### Notes
+
+- Tagged as v1.0.4 but not published as a separate GitHub Release.
+
+## [1.0.3] - 2026-04-20
+
+### Fixed
+
+- Make the dashboard work fully behind Home Assistant Ingress, direct `/dashboard/` mounts, and custom reverse proxies.
+- Replace the previous `BASE = "."` workaround with runtime base-path computation from `import.meta.url`.
+- Patch `api.ts`, `usePlugins.ts`, and `vite.config.ts` idempotently in-container so API calls, plugin assets, router paths, and built HTML assets stay correctly prefixed.
+- Fix the landing-page Gateway indicator by switching the probe to the public `/v1/health` endpoint instead of authenticated `/v1/models`.
+- Protect direct-port `/dashboard/api/*` routes with the dashboard session token while keeping `/dashboard/api/status` public for health/status use.
+
+### Added
+
+- Add a README Security Model section covering Home Assistant Ingress, direct-port dashboard auth, and `/v1/*` API Bearer auth.
+
+## [1.0.2] - 2026-04-20
+
+### Fixed
+
+- Restore dashboard compatibility with Hermes Agent v0.10.0 after upstream added a global auth middleware requiring an ephemeral Bearer token on `/api/` endpoints.
+- Read the dashboard token from the HTML on startup and inject it server-side through nginx so Basic Auth and Home Assistant Ingress do not strip or consume it.
+
+## [1.0.1] - 2026-04-20
+
+### Added
+
+- Add Web Dashboard support as a new tab alongside Hermes and Terminal through the Home Assistant sidebar.
+- Add direct HTTP/HTTPS dashboard exposure through the `enable_dashboard` toggle.
+- Expose dashboard pages for status, sessions, analytics, logs, cron, skills, config, and API keys.
+
+### Fixed
+
+- Fix Supervisor loop behavior by tracking the gateway PID correctly and always restarting the gateway, preventing container death on manual gateway restart.
+
+## [1.0.0] - 2026-03-27
+
+### Added
+
+- Initial stable Home Assistant add-on packaging for Hermes Agent.
+- Persistent AI agent with SQLite FTS5 long-term memory, self-improving skills, and multi-platform messaging.
+- OpenAI-compatible API under `/v1/` for frontends such as Open WebUI and SillyTavern.
+- Persistent web terminals backed by tmux through the Home Assistant sidebar.
+- HTTP and HTTPS direct LAN access with auto-generated TLS certificates and optional Basic Auth.
+- Full persistence for source code, venv, Homebrew, npm, Go, and agent data across add-on updates.
+- Editable install so the agent can read and modify its own source code.
+- Plugin architecture for custom tools, commands, and hooks.
+- Container toolchain with Go 1.26, Node.js 22, Python 3.11, Chromium, GitHub CLI, Homebrew, uv, and common development tools.
+- Support for `amd64` and `aarch64`.

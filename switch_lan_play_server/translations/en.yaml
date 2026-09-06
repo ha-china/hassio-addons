@@ -1,0 +1,10 @@
+configuration:
+  username:
+    name: "Username"
+    description: "Username for the server."
+  password:
+    name: "Password"
+    description: "Password for the server."
+  log_level:
+    name: "Log Level"
+    description: "Controls the verbosity of the app logs."

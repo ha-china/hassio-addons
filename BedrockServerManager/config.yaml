@@ -1,0 +1,26 @@
+name: Bedrock Server Manager
+version: "3.10.5-1"
+upstream: "3.10.5"
+slug: bedrockservermanager
+description: >-
+  [老王杂谈说]：基岩版服务器管理器是一款专为轻松安装、管理和维护 Minecraft 基岩版专用服务器而设计的全面 Python 服务器。
+arch:
+  - amd64
+  - aarch64
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+ports:
+  11325/tcp: 11325
+  19132/udp: 19132
+ports_description:
+  11325/tcp: "Web Interface (direct, without ingress)"
+  19132/udp: "Minecraft API"
+webui: "[PROTO:ssl]://[HOST]:[PORT:11325]"
+map:
+  - type: addon_config
+    read_only: false
+    path: /root/
+boot: auto
+startup: services
+panel_admin: false
+ingress: true
+ingress_port: 8099

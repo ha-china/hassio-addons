@@ -1,0 +1,54 @@
+ 
+## 0.23.0 (2026-09-05)
+- Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)
+ 
+## 0.22.0 (2026-07-04)
+- Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)
+
+## 0.21.4 (2026-05-22)
+- Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)
+
+## 0.21.3 (2026-05-02)
+- Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)
+
+## 0.21.2 (2026-04-23)
+- Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)
+
+## 0.21.1 (2026-04-11)
+- Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)
+
+## 0.20.1 (2026-03-28)
+- Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)
+
+## 0.20.0 (2026-03-07)
+- Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)
+
+## 0.19.1 (2026-02-07)
+- Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)
+- Added support for configuring extra environment variables via the `env_vars` add-on option alongside config.yaml. See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+
+## "0.19.0" (2025-11-01)
+- Minor bugs fixed
+
+## 0.19.0 (2025-11-01)
+- Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)
+
+## 0.18.0 (2025-08-30)
+- Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)
+
+## 0.17.0 (2025-08-01)
+- Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)
+
+## 0.16.0 (2025-05-24)
+- Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)
+
+## 0.15.0 (2025-03-29)
+- Update to latest version from varun-raj/immich-power-tools (changelog : https://github.com/varun-raj/immich-power-tools/releases)
+## 0.14.0-5 (2025-03-03)
+- Minor bugs fixed
+## 0.14.0-4 (2025-02-19)
+- Minor bugs fixed
+## 0.14.0-3 (2025-02-17)
+- Minor bugs fixed
+## 0.14.0 (2025-02-17)
+- First build

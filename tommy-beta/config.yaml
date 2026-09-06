@@ -1,0 +1,35 @@
+name: TOMMY (beta)
+version: "6.1.2"
+slug: tommysense-homeassistant-addon-beta
+description: '[老王杂谈说]：使用 Wi-Fi 感应进行存在检测。运行于 ESP32。'
+url: "https://gh-proxy.org/github.com/tommy-sense/homeassistant-addon"
+arch:
+  - aarch64
+  - amd64
+image: tommysense/virtual-bridge
+startup: application
+boot: auto
+stage: experimental
+host_network: true
+apparmor: true
+ingress: true
+ingress_port: 0
+panel_icon: mdi:wifi-arrow-left-right
+init: false
+map:
+  - type: data
+    read_only: False
+options:
+  ports:
+    dashboard: 8089
+    file_server_http: 8090
+    file_server_https: 8091
+    mqtt: 1886
+    udp_relay: 8547
+schema:
+  ports:
+    dashboard: port
+    file_server_http: port
+    file_server_https: port
+    mqtt: port
+    udp_relay: port

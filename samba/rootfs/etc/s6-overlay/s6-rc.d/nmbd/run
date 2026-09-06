@@ -1,0 +1,10 @@
+#!/command/with-contenv bashio
+# vim: ft=bash
+# shellcheck shell=bash
+# ==============================================================================
+# Start nmbd service
+# ==============================================================================
+exec nmbd \
+  --foreground \
+  --debug-stdout \
+  --no-process-group

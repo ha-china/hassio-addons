@@ -1,0 +1,36 @@
+{
+  "name": "智能家居部署向导",
+  "version": "2026.08.18",
+  "slug": "installer",
+  "description": "【老王杂谈说】：集成商（落地商）标准化落地简化神器",
+  "url": "https://www.hasscn.top",
+  "arch": ["aarch64", "amd64"],
+  "init": false,
+  "startup": "services",
+  "boot": "auto",
+  "ingress": true,
+  "ingress_stream": true,
+  "ingress_port": 7733,
+  "panel_title": "部署向导",
+  "panel_icon": "mdi:home-lightning-bolt",
+  "map": ["homeassistant_config:rw", "share:rw"],
+  "hassio_api": true,
+  "homeassistant_api": true,
+  "hassio_role": "manager",
+  "image": "crpi-tuq1xajq0lk6s0kt.cn-shanghai.personal.cr.aliyuncs.com/hachina/installer-{arch}",
+  "full_access": false,
+  "apparmor": true,
+  "options": {
+    "env_vars": []
+  },
+  "schema": {
+    "env_vars": [
+      {
+        "name": "match(^[A-Za-z0-9_]+$)",
+        "value": "str?"
+      }
+    ]
+  },
+  "homeassistant": "2026.05.0",
+  "timeout": 30
+}

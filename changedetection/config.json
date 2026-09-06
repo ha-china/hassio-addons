@@ -1,0 +1,34 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64",
+    "armhf",
+    "armv7",
+    "i386"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：主动管理您的数据生活，通过 Discord、电子邮件、Slack、Telegram 及 70 多种其他渠道跟踪网站内容更改并接收通知。",
+  "environment": {
+    "PLAYWRIGHT_DRIVER_URL": "ws://db21ed7f-browserless-chrome:3000/?stealth=1&--disable-web-security=true",
+    "FETCH_WORKERS": "1"
+  },
+  "map": [
+    "share:rw"
+  ],
+  "name": "changedetection",
+  "ports": {
+    "5000/tcp": "5000"
+  },
+  "ports_description": {
+    "5000/tcp": "WebUI"
+  },
+  "slug": "changedetection",
+  "startup": "services",
+  "upstream": "0.55.8",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons/tree/main/changedetection",
+  "version": "0.60.2",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:5000]",
+  "panel_admin": false,
+  "ingress": true,
+  "ingress_port": 5000
+}

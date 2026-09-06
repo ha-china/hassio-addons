@@ -1,0 +1,6 @@
+{
+  "build_from": {
+    "amd64": "ghcr.nju.edu.cn/baldarn/whatsapper:latest",
+    "aarch64": "ghcr.nju.edu.cn/baldarn/whatsapper:latest"
+  }
+}

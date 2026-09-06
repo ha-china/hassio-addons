@@ -1,0 +1,31 @@
+set -e
+declare -a options
+
+CONFIG_PATH=/data/options.json
+
+MQTT_Host="$(bashio::config 'MQTT_Host' 'core-mosquitto')"
+MQTT_User="$(bashio::config 'MQTT_User')"
+MQTT_Pass="$(bashio::config 'MQTT_Pass')"
+MQTT_Topic="$(bashio::config 'MQTT_Topic')"
+MQTT_Data="$(bashio::config 'MQTT_Data')"
+
+PLANTNAME="$(bashio::config 'Plantname')"
+InvSerial="$(bashio::config 'InvSerial')"
+
+PLANTNAME2="$(bashio::config 'Plantname2')"
+InvSerial2="$(bashio::config 'InvSerial2')"
+
+PLANTNAME3="$(bashio::config 'Plantname3')"
+InvSerial3="$(bashio::config 'InvSerial3')"
+
+current_timestamp=$(date +'%Y-%m-%dT%H:%M:%S%z')
+timestamp=$(date +'%Y-%m-%dT%H:%M:%S%z')
+
+sleep 5
+
+if bashio::config.true 'Send_Message2'; then
+              bashio::log.blue "Sending User Message go 2..."
+              bashio::log.blue /usr/bin/mosquitto_pub -h "$MQTT_Host" -u "$MQTT_User" -P "$MQTT_Pass" -t homeassistant/sbfspot_"$PLANTNAME"/sbfspot_"$InvSerial" -m "$MESSAGE2" -d
+              
+              /usr/bin/mosquitto_pub -h "$MQTT_Host" -u "$MQTT_User" -P "$MQTT_Pass" -t homeassistant/sbfspot_"$PLANTNAME"/sbfspot_"$InvSerial" -m "$MESSAGE2" -d
+fi

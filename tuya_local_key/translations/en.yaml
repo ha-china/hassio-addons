@@ -1,0 +1,13 @@
+configuration:
+  QR_SCHEME:
+    name: QR scheme
+    description: >-
+      Scheme used for the login QR code. Use "smartlife" for the Smart Life app or "tuyaSmart" for the Tuya Smart app. Switch schemes if scanning or confirmation does not work for your account.
+  AUTH_USERNAME:
+    name: Basic Auth username
+    description: >-
+      Optional username for HTTP Basic Auth. A login is required only when both username and password are set. (Not used in Home Assistant ingress acess)
+  AUTH_PASSWORD:
+    name: Basic Auth password
+    description: >-
+      Optional password for HTTP Basic Auth. A login is required only when both username and password are set. (Not used in Home Assistant ingress acess)

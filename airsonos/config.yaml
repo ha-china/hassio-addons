@@ -1,0 +1,28 @@
+name: AirSonos
+version: 5.2.0
+slug: airsonos
+description: '[老王杂谈说]：适用于 Sonos（以及 UPnP）设备的 AirPlay 功能。'
+url: https://gh-proxy.org/github.com/hassio-addons/app-airsonos
+startup: services
+init: false
+arch:
+  - aarch64
+  - amd64
+hassio_api: true
+host_network: true
+map:
+  - addon_config:rw
+  - homeassistant_config:rw
+options:
+  port: 49152
+  latency_rtp: 1000
+  latency_http: 2000
+  drift: false
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  address: str?
+  port: port
+  latency_rtp: int
+  latency_http: int
+  drift: bool
+image: ghcr.nju.edu.cn/hassio-addons/airsonos

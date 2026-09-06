@@ -1,0 +1,53 @@
+---
+# yamllint disable rule:line-length
+
+# General details
+name: "Homeway"
+description: "[老王杂谈说]：为您的 Home Assistant 提供免费的网络安全远程访问、由 ChatGPT 驱动的 AI 支持、Google 和 Alexa 支持等功能！"
+slug: "homeway"
+url: "https://homeway.io"
+# The icon used if the user adds our web ui to the side bar.
+panel_icon: mdi:home-sound-out
+# Indicates we will have Web Ui the user can use.
+ingress: true
+# Required to access the home assistant web server.
+host_network: true
+# Required since we our own docker init system.
+init: false
+# Support architectures, all of them.
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+# Map the config folder, we so can add the assistant config snips if needed.
+map:
+  - homeassistant_config:rw
+# We don't use the default port because it conflicts with software like giv_tcp. So we use our own random port.
+ingress_port: 45120
+# We need to expose the port for the Wyoming protocol for Sage.
+ports:
+  "11027/tcp": null
+ports_description:
+  "11027/tcp": "Homeway's Sage Assist Wyoming Protocol"
+# Add some config options for user to control the addon.
+# These options are defined in the schema section below, and the translations for them are in the en.yaml file, which gives them pretty names.
+# Note if the `log_level` name changes, the options.py class needs to be updated!
+options:
+  log_level: "info"
+schema:
+  log_level: list(debug|info|warning|error)?
+# Allows the addon to make home assistant authed API calls to the core.
+homeassistant_api: true
+auth_api: true
+# Enable the supervisor to manage our addon, logs, backups.
+hassio_role: "manager"
+hassio_api: true
+# Defines that instead of HA building the docker image from source, it will be downloaded from our github package repo.
+# For local dev this must be commented out, but it should never be committed that way.
+image: ghcr.nju.edu.cn/homewayio/homeway/{arch}
+# Note when this version number changes, we must make a release to start a docker container build immediately, since HA will start looking for the new version.
+# Basically: Make the final commit -> test and check lint actions (if a docker change, push to docker-test to ensure it builds) -> bump the version number -> create GitHub release.
+# UPDATE THE CHANGE LOG!
+version: 3.1.1

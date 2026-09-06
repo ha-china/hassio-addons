@@ -1,0 +1,37 @@
+arch:
+  - aarch64
+  - amd64
+description: '[老王杂谈说]：网页监控，通知与变化检测'
+environment:
+  LC_ALL: en_US.UTF-8
+  TIMEOUT: "60000"
+image: ghcr.nju.edu.cn/alexbelgium/changedetection.io-{arch}
+ingress: true
+init: false
+map:
+  - config:rw
+name: Changedetection.io
+panel_icon: mdi:vector-difference
+options:
+  env_vars: []
+  PGID: 0
+  PUID: 0
+  TIMEOUT: "60000"
+ports:
+  5000/tcp: 5000
+ports_description:
+  5000/tcp: Webui (not required for Ingress)
+schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
+  BASE_URL: str?
+  PGID: int
+  PLAYWRIGHT_DRIVER_URL: str?
+  PUID: int
+  TIMEOUT: int
+  TZ: str?
+slug: changedetection.io
+udev: true
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/changedetection.io
+version: "0.60.3"

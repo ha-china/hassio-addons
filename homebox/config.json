@@ -1,0 +1,47 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：为家庭用户构建的库存与组织系统",
+  "environment": {
+    "HBOX_STORAGE_DATA": "/config",
+    "HBOX_STORAGE_SQLITE_URL": "/config/homebox.db?_fk=1",
+    "HBOX_OPTIONS_TRUST_PROXY": "true"
+  },
+  "map": [
+    "addon_config:rw"
+  ],
+  "version": "0.26.2-4",
+  "name": "Homebox",
+  "options": {
+    "HBOX_OPTIONS_ALLOW_REGISTRATION": "true",
+    "HBOX_AUTH_API_KEY_PEPPER": "kEotDMciZBFEueJm7l9yyzh16DuX291CL+CNqH00pjTWAA5iqk1LFODsFY4CCjgF",
+    "HBOX_OIDC_ENABLED": "false",
+    "HBOX_OIDC_ISSUER_URL": "",
+    "HBOX_OIDC_CLIENT_ID": "",
+    "HBOX_OIDC_CLIENT_SECRET": ""
+  },
+  "ports": {
+    "7745/tcp": "7745"
+  },
+  "ports_description": {
+    "7745/tcp": "Web interface"
+  },
+  "schema": {
+    "HBOX_OPTIONS_ALLOW_REGISTRATION": "list(true|false)",
+    "HBOX_AUTH_API_KEY_PEPPER": "str",
+    "HBOX_OIDC_ENABLED": "list(true|false)",
+    "HBOX_OIDC_ISSUER_URL": "str",
+    "HBOX_OIDC_CLIENT_ID": "str",
+    "HBOX_OIDC_CLIENT_SECRET": "str"
+  },
+  "slug": "homebox",
+  "startup": "services",
+  "upstream": "0.26.2",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:7745]",
+  "ingress": true,
+  "ingress_port": 8099
+}

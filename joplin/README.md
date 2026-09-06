@@ -1,0 +1,141 @@
+## &#9888; Open Request : [✨ [REQUEST] [Joplin] Add Ingress (opened 2025-06-15)](https://github.com/alexbelgium/hassio-addons/issues/1913) by [@aluavin](https://github.com/aluavin)
+# Home assistant add-on: Joplin
+
+
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## Addon informations
+
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoplin%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoplin%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fjoplin%2Fconfig.yaml)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/joplin/stats.png)
+
+## About
+
+[Joplin Server](https://github.com/laurent22/joplin) is a free, open source note taking and to-do synchronization application, which can handle a large number of notes organized into notebooks. With this server you can sync all your notes across all your devices. Joplin supports end-to-end encryption, markdown editing, web clipper extensions, and synchronization with various cloud services.
+
+This addon is based on the [docker image](https://hub.docker.com/r/etechonomy/joplin-server) from etechonomy.
+
+Thanks to @poudenes for helping with the development!
+
+## Configuration
+
+Webui can be found at `<your-ip>:22300`.
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `APP_BASE_URL` | str | `http://your_domain:port` | Base public URL where the service will be running |
+| `data_location` | str | `/config/addons_config/joplin` | Path where Joplin data is stored |
+| `DB_CLIENT` | str | | Database client type. Only `pg` (PostgreSQL) is supported. MariaDB/MySQL is NOT supported. |
+| `POSTGRES_HOST` | str | | PostgreSQL server hostname |
+| `POSTGRES_PORT` | int | | PostgreSQL server port |
+| `POSTGRES_DATABASE` | str | | PostgreSQL database name |
+| `POSTGRES_USER` | str | | PostgreSQL username |
+| `POSTGRES_PASSWORD` | str | | PostgreSQL password |
+| `MAILER_ENABLED` | int | | Enable email service (1=true, 0=false) |
+| `MAILER_HOST` | str | | SMTP server hostname |
+| `MAILER_PORT` | int | | SMTP server port |
+| `MAILER_SECURITY` | str | | SMTP security (none, tls, starttls) |
+| `MAILER_AUTH_USER` | str | | SMTP authentication username |
+| `MAILER_AUTH_PASSWORD` | str | | SMTP authentication password |
+| `MAILER_NOREPLY_NAME` | str | | Email sender name |
+| `MAILER_NOREPLY_EMAIL` | str | | Email sender address |
+
+### Example Configuration
+
+```yaml
+APP_BASE_URL: "http://192.168.1.100:22300"
+data_location: "/config/addons_config/joplin"
+DB_CLIENT: "pg"
+POSTGRES_HOST: "your-postgres-host"
+POSTGRES_PORT: 5432
+POSTGRES_DATABASE: "joplin"
+POSTGRES_USER: "joplin"
+POSTGRES_PASSWORD: "secure_password"
+MAILER_ENABLED: 1
+MAILER_HOST: "smtp.gmail.com"
+MAILER_PORT: 587
+MAILER_SECURITY: "starttls"
+MAILER_AUTH_USER: "your-email@gmail.com"
+MAILER_AUTH_PASSWORD: "your-app-password"
+MAILER_NOREPLY_NAME: "Joplin Server"
+MAILER_NOREPLY_EMAIL: "noreply@yourdomain.com"
+```
+
+### Database Setup
+
+Joplin Server uses SQLite by default, but for production use, PostgreSQL is recommended.
+
+> **Important:** Joplin Server only supports **PostgreSQL** as an external database. MariaDB/MySQL is **not** supported. You must install a PostgreSQL addon (not the MariaDB addon) and set `DB_CLIENT` to `pg`.
+
+1. Install and configure a PostgreSQL addon
+2. Create a database and user for Joplin in PostgreSQL
+3. Configure the PostgreSQL options in the Joplin addon (use port `5432`, not `3306`)
+4. Restart the addon
+
+Make sure the provided database and user exist as the server will not create them automatically.
+
+### Email Configuration
+
+To enable email functionality for user registration and notifications:
+
+1. Configure your SMTP server details
+2. Set `MAILER_ENABLED` to `1`
+3. Provide authentication credentials
+4. Test the configuration by registering a new user
+
+### Custom Scripts and Environment Variables
+
+This addon supports custom scripts and environment variables through the `addon_config` mapping:
+
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+
+## Installation
+
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
+
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Navigate to the web interface to complete the initial setup.
+
+## Setup Steps
+
+1. **Initial Setup**: After starting the addon, navigate to the web interface
+2. **Create Admin Account**: Create your first admin user account
+3. **Configure Synchronization**: Set up your Joplin clients to sync with the server
+4. **Optional Database**: Consider switching to PostgreSQL for better performance
+5. **Email Service**: Configure email service for user management features
+
+## Support
+
+Create an issue on [GitHub](https://github.com/alexbelgium/hassio-addons/issues).
+
+[repository]: https://github.com/alexbelgium/hassio-addons
+
+

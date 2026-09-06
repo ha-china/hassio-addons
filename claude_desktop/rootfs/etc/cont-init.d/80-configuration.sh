@@ -1,0 +1,58 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+set -e
+
+# Shared by every Selkies-based add-on in this repo (claude_desktop, webtop, webtop_kde) via a
+# symlink; keep it add-on agnostic. Every option read here is guarded, so an add-on that does
+# not declare a given option simply skips that block.
+#
+# All three images are Debian/Ubuntu-based, so apt is the only system package manager used.
+if bashio::config.has_value 'additional_apps'; then
+    bashio::log.info "Installing additional apps :"
+    apt-get update -o Acquire::http::Timeout=10 -o Acquire::https::Timeout=10 &> /dev/null || bashio::log.warning "Unable to update apt package lists"
+    for packagestoinstall in $(bashio::config 'additional_apps' | tr ',' ' '); do
+        bashio::log.green "... $packagestoinstall"
+        apt-get install -yqq --no-install-recommends "$packagestoinstall" &> /dev/null || bashio::log.fatal "Error : $packagestoinstall not found"
+    done
+fi
+
+if bashio::config.has_value 'additional_pip'; then
+    if command -v uv &> /dev/null; then
+        pip_install=(uv pip install --system --break-system-packages)
+    else
+        pip_install=(pip install --break-system-packages)
+    fi
+    for p in $(bashio::config 'additional_pip' | tr ',' ' '); do
+        bashio::log.green "... pip: $p"
+        "${pip_install[@]}" "$p" || bashio::log.fatal "Error: pip package $p failed"
+    done
+fi
+
+if bashio::config.has_value 'TZ'; then
+    TIMEZONE=$(bashio::config 'TZ')
+    if [ -f "/usr/share/zoneinfo/$TIMEZONE" ]; then
+        bashio::log.info "Setting timezone to $TIMEZONE"
+        ln -snf "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime
+        echo "$TIMEZONE" > /etc/timezone
+    else
+        bashio::log.fatal "Error : $TIMEZONE not found. Here is a list of valid timezones : https://manpages.ubuntu.com/manpages/focal/man3/DateTime::TimeZone::Catalog.3pm.html"
+    fi
+fi
+
+if bashio::config.has_value 'KEYBOARD'; then
+    KEYBOARD=$(bashio::config 'KEYBOARD')
+    bashio::log.info "Setting keyboard to $KEYBOARD"
+    if [ -d /var/run/s6/container_environment ]; then printf "%s" "$KEYBOARD" > /var/run/s6/container_environment/KEYBOARD; fi
+    grep -qxF "KEYBOARD=\"$KEYBOARD\"" ~/.bashrc 2> /dev/null || printf "%s\n" "KEYBOARD=\"$KEYBOARD\"" >> ~/.bashrc
+fi
+
+if bashio::config.has_value 'PASSWORD'; then
+    bashio::log.info "Setting password to the value defined in options"
+    PASSWORD=$(bashio::config 'PASSWORD')
+    passwd -d abc
+    echo -e "$PASSWORD\n$PASSWORD" | passwd abc
+elif [[ -n "$(bashio::addon.port "3000")" ]] || [[ -n "$(bashio::addon.port "3001")" ]]; then
+    bashio::log.warning "SEVERE RISK IDENTIFIED"
+    bashio::log.warning "You are opening an external port but your password is not defined"
+    bashio::log.warning "You risk being hacked ! Please disable the external ports, or use a password"
+fi

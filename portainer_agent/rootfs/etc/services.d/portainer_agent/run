@@ -1,0 +1,18 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+set -euo pipefail
+
+bashio::require.unprotected
+bashio::log.info "Starting app"
+
+cd /app || exit 1
+
+container_name="${HOSTNAME//-/_}"
+export HOSTNAME="${container_name}"
+
+args=()
+if bashio::config.has_value 'PORTAINER_AGENT_ARGS'; then
+  read -r -a args <<<"$(bashio::config 'PORTAINER_AGENT_ARGS')"
+fi
+
+./agent "${args[@]}"

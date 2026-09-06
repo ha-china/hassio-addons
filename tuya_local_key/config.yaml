@@ -1,0 +1,34 @@
+name: Tuya Local Key
+version: "2.1"
+slug: tuya_local_key
+description: '[老王杂谈说]：使用二维码登录检索 Smart Life / Tuya 设备的本地密钥。'
+url: https://gh-proxy.org/github.com/vineetchoudhary/tuya-local-key
+arch:
+  - aarch64
+  - amd64
+image: ghcr.nju.edu.cn/vineetchoudhary/tuya-local-key
+init: false
+startup: application
+boot: manual
+ingress: true
+ingress_port: 8000
+ingress_entry: /
+panel_icon: mdi:key-wireless
+panel_title: Tuya Local Key
+panel_admin: true
+ports:
+  8000/tcp: null
+ports_description:
+  8000/tcp: Direct web UI port, optional when not using ingress.
+environment:
+  SESSION_FILE: /data/session.json
+  QR_SCHEME: smartlife
+  PORT: "8000"
+options:
+  QR_SCHEME: smartlife
+  DEVICE_CACHE: "on"
+schema:
+  QR_SCHEME: "list(smartlife|tuyaSmart)"
+  DEVICE_CACHE: "list(on|off)"
+  AUTH_USERNAME: "str?"
+  AUTH_PASSWORD: "password?"

@@ -1,0 +1,6 @@
+GRDF_USERNAME: username #your GRDF login (ex : myemail@email.com)
+GRDF_PASSWORD: password #your GRDF password
+MQTT_HOST: 127.0.0.1 #hostname or ip address of the MQTT broker.
+# OPTIONAL VARIABLES : see https://gh-proxy.org/github.com/ssenart/gazpar2mqtt
+
+description: '[老王杂谈说]：'

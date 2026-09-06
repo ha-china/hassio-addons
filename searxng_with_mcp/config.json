@@ -1,0 +1,43 @@
+{
+  "name": "SearXNG w/ MCP",
+  "version": "2026.9.3-a1144dda3",
+  "slug": "searxng_with_mcp",
+  "description": "[老王杂谈说]：SearXNG 是一个元搜索引擎。为 llama.cpp、Claude code 等添加了 OvertliDS/mcp-searxng-enhanced 端点。",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
+  "environment": {
+    "ODS_CONFIG_PATH": "/etc/searxng/ods_config.json",
+    "SEARXNG_ENGINE_API_BASE_URL": "http://0.0.0.0:8080/search",
+    "MCP_HTTP_HOST": "0.0.0.0",
+    "MCP_HTTP_PORT": "8081"
+  },
+  "map": [
+    {
+      "type": "addon_config",
+      "read_only": false,
+      "path": "/etc/searxng"
+    }
+  ],
+  "hassio_api": true,
+  "init": false,
+  "options": {
+    "set_base_url_for_ingress": true
+  },
+  "schema": {
+    "set_base_url_for_ingress": "bool"
+  },
+  "ports": {
+    "8080/tcp": 8080,
+    "8081/tcp": 8081
+  },
+  "ports_description": {
+    "8080/tcp": "Web interface http",
+    "8081/tcp": "MCP Server interface http"
+  },
+  "ingress": true,
+  "ingress_port": 8080,
+  "panel_icon": "mdi:magnify",
+  "arch": [
+    "aarch64",
+    "amd64"
+  ]
+}

@@ -1,0 +1,19 @@
+name: SABnzbd
+version: 0.8.2
+slug: sabnzbd-0
+description: '[老王杂谈说]：自由轻松的二进制新闻阅读器'
+url: https://gh-proxy.org/github.com/hassio-addons/app-sabnzbd/tree/main/README.md
+ingress: true
+ingress_entry: sabnzbd/
+panel_icon: mdi:arrow-down-bold
+init: false
+arch:
+  - aarch64
+  - amd64
+map:
+  - addon_config:rw
+  - share:rw
+  - media:rw
+ports:
+  8080/tcp: null
+image: ghcr.nju.edu.cn/hassio-addons/sabnzbd
