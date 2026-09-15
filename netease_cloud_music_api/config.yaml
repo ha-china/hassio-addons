@@ -1,0 +1,15 @@
+name: NetEase Cloud Music API
+version: "0.1.1"
+slug: netease_cloud_music_api
+description: '[老王杂谈说]：网易云音乐 API 为音乐助手服务。'
+url: https://gh-proxy.org/github.com/NeteaseCloudMusicApiEnhanced/api-enhanced
+startup: services
+boot: auto
+init: false
+arch:
+  - aarch64
+  - amd64
+ports:
+  3000/tcp: 3000
+ports_description:
+  3000/tcp: NetEase API HTTP

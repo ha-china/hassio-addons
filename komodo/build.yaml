@@ -1,0 +1,5 @@
+---
+build_from:
+  amd64: ghcr.nju.edu.cn/hassio-addons/debian-base:9.4.0
+args:
+  KOMODO_VERSION: 2.3.2

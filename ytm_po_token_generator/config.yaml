@@ -1,0 +1,11 @@
+name: YT Music PO Token Generator
+version: 2.0.0
+slug: ytm_po_token_generator
+description: '[老王杂谈说]：一个用于 BgUtils POT 提供者以生成 YouTube Music PO 写期的 HA App 封装器。'
+url: https://gh-proxy.org/github.com/Brainicism/bgutil-ytdlp-pot-provider
+image: brainicism/bgutil-ytdlp-pot-provider
+arch:
+  - amd64
+  - aarch64
+ports:
+  "4416/tcp": 4416

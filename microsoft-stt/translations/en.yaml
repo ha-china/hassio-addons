@@ -1,0 +1,34 @@
+---
+configuration:
+  subscription_key:
+    name: Subscription key
+    description: >-
+      You Microsoft Azure Speech Service subscription key.
+  service_region:
+    name: Service Region
+    description: >-
+      The region you set up you Speech Service instance in (e.g. uksouth).
+  language:
+    name: Language
+    description: >-
+      The language to use for speech recognition. This should be a BCP-47
+      language tag, such as en-US or fr-FR. You can also pass multiple languages by separating them with a semi-colon. You can find a list of supported
+      languages in the Microsoft documentation, here: https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=stt.
+  update_languages:
+    name: Update languages
+    description: >-
+      Download the list of new languages automatically every time the add-on
+      starts.  You must also reload the Wyoming integration for Microsoft in Home
+      Assistant to see new languages.
+  profanity:
+    name: Profanity
+    description: >-
+      The level of profanity filtering to apply to the speech recognition. Off
+      means no filtering, Masked means the profanity is replaced with asterisks,
+      and Removed means the profanity is removed from the text.
+  debug_logging:
+    name: Debug logging
+    description: >-
+      Print DEBUG level messages to the add-on's log.
+network:
+  10300/tcp: Microsoft Wyoming Protocol

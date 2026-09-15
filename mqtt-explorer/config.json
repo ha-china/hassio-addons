@@ -1,0 +1,32 @@
+{
+  "name": "MQTT Explorer",
+  "version": "browser-1.0.3",
+  "slug": "mqtt_explorer",
+  "description": "[老王杂谈说]：MQTT Explorer 是一款全面的 MQTT 客户端，为您提供对 MQTT 主题的结构化概览，使您与代理上的设备/服务进行操作变得非常简单。",
+  "arch": [
+    "armhf",
+    "armv7",
+    "amd64",
+    "aarch64"
+  ],
+  "startup": "application",
+  "boot": "auto",
+  "ingress": true,
+  "ingress_port": 4000,
+  "panel_admin": true,
+  "panel_icon": "mdi:access-point-network",
+  "image": "smeagolworms4/mqtt-explorer",
+  "map": [
+    "addons"
+  ],
+  "environment": {
+    "CONFIG_PATH": "/data",
+    "INITIAL_CONFIG": "{\"ConnectionManager_connections\":{\"f69723c3-4fcd-4bd9-a63d-c81864946931\":{\"configVersion\":1,\"certValidation\":true,\"clientId\":\"mqtt-explorer-52dfac40\",\"id\":\"f69723c3-4fcd-4bd9-a63d-c81864946931\",\"name\":\"homeassistant\",\"encryption\":false,\"subscriptions\":[{\"topic\":\"#\",\"qos\":0},{\"topic\":\"$SYS/#\",\"qos\":0}],\"type\":\"mqtt\",\"host\":\"core-mosquitto.local.hass.io\",\"port\":1883,\"protocol\":\"mqtt\"}}}"
+  },
+  "ports": {
+    "4000": null
+  },
+  "ports_description": {
+    "4000": "Exposed HTTP port"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "last_update": "2026-09-12",
+  "repository": "alexbelgium/hassio-addons",
+  "slug": "immich",
+  "source": "container",
+  "upstream_digest": "sha256:4a9b1b59a12eb80f30814bd6b4df9b4536285af49ffdcde193a37aec902d5034",
+  "upstream_repo": "ghcr.nju.edu.cn/imagegenius/immich:3-cuda",
+  "upstream_version": "3.2.0"
+}

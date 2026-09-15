@@ -1,0 +1,21 @@
+{
+  "name": "Lucky",
+  "version": "2.27.2",
+  "slug": "lucky",
+  "description": "A Lucky add-on for Home Assistant",
+  "image": "crpi-tuq1xajq0lk6s0kt.cn-shanghai.personal.cr.aliyuncs.com/hachina/lucky-{arch}",
+  "arch": ["aarch64", "amd64"],
+  "startup": "services",
+  "boot": "auto",
+  "host_network": true,
+  "ingress": true,
+  "ingress_port": 16601,
+  "panel_icon": "mdi:server-network",
+  "map": [
+    "config:rw"
+  ],
+  "ports": {
+    "16601/tcp": 16601
+  },
+  "webui": "http://[HOST]:[PORT:16601]"
+}

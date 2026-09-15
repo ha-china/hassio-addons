@@ -1,0 +1,21 @@
+name: Nginx Proxy Manager
+version: 4.0.2
+slug: nginxproxymanager
+description: '[老王杂谈说]：通过简单、强大的界面管理 Nginx 代理主机'
+url: https://gh-proxy.org/github.com/hassio-addons/app-nginx-proxy-manager
+webui: http://[HOST]:[PORT:81]
+startup: services
+init: false
+arch:
+  - aarch64
+  - amd64
+hassio_api: true
+ports:
+  80/tcp: 80
+  81/tcp: 81
+  443/tcp: 443
+map:
+  - addon_config:rw
+backup_exclude:
+  - '*/logs'
+image: ghcr.nju.edu.cn/hassio-addons/nginxproxymanager/{arch}

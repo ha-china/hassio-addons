@@ -1,0 +1,69 @@
+# Home Assistant 插件：n8n
+
+n8n 是一款可扩展的工作流自动化工具。采用公平的代码分发模式，n8n 始终拥有可见的源代码，可自行托管，并允许您添加自定义函数、逻辑和应用。n8n 基于节点的方式使其具有高度灵活性，让您可以将任何事物连接到任何事物。
+
+功能未经测试，但插件可以运行
+
+_感谢大家对我要好的 repo 的关注！如果您想要关注它，请点击下方的图片，它将显示在最上方。谢谢！_
+
+[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+
+## 关于
+
+该插件使用 [docker 镜像](https://github.com/n8n-io/n8n)。
+
+## 安装
+
+1. [向我添加 Hass.io 插件仓库][repository] 到您的 Hass.io 实例中。
+1. 点击 `Save` 按钮以保存您的配置。
+1. 启动插件。
+1. 插件将失败，这没关系
+1. ssh 到您的 homeassistant 并运行 `chmod 2777 /addon_configs/2effc9b9_n8n`
+1. 启动插件
+1. 检查插件的日志以查看一切是否顺利进行。
+1. WebUI 应通过 <your-ip>:port 访问。
+1. 设置管理员账户
+1. 设置将在 /addon_configs/2effc9b9_n8n 中
+
+## 配置
+
+如果您选择，可以设置插件使用环境变量文件。注意使用 '/home/node' 作为基路径，它将映射到 /addon_configs/2effc9b9_n8n。
+
+您需要自己创建此文件，并将其列为您希望设置的环境变量，例如：
+```
+DB_SQLITE_POOL_SIZE=10
+N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
+```
+
+```
+port : 5678 # 您想要运行的端口号。
+```
+
+WebUI 可通过 `<your-ip>:port` 访问。
+
+[repository]: https://github.com/jdeath/homeassistant-addons
+
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

@@ -1,0 +1,27 @@
+name: JupyterLab
+version: 0.18.1
+slug: jupyterlablite
+description: '[老王杂谈说]：创建包含现场代码、方程、可视化图表和解释性文本的文档。'
+url: https://gh-proxy.org/github.com/hassio-addons/app-jupyterlab
+ingress: true
+panel_icon: mdi:flask-outline
+arch:
+  - aarch64
+  - amd64
+homeassistant_api: true
+init: false
+map:
+  - config:rw
+  - share:rw
+options:
+  github_access_token: ''
+  system_packages: []
+  init_commands: []
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  github_access_token: password
+  system_packages:
+    - str
+  init_commands:
+    - str
+image: ghcr.nju.edu.cn/hassio-addons/jupyterlab/{arch}

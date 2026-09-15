@@ -1,0 +1,27 @@
+name: "Obsidian Sync Server"
+slug: obsidian_syncserver_solo
+image: ghcr.nju.edu.cn/alexbelgium/obsidian_syncserver_solo-{arch}
+description: "[老王杂谈说]：自托管的基于 CouchDB 的 Obsidian LiveSync 后端。采用纯 HTTP——请将您自己的反向代理置于前端以启用 TLS。"
+version: "3.5.2.1"
+url: "https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/obsidian_syncserver_solo"
+arch:
+  - amd64
+  - aarch64
+startup: services
+init: false
+ports:
+  5984/tcp: 5984
+ports_description:
+  5984/tcp: "CouchDB HTTP — add a reverse proxy for mobile Obsidian"
+map:
+  - addon_config:rw
+options:
+  username: admin
+  password: ""
+  database: obsidian
+  log_level: info
+schema:
+  username: str
+  password: password?
+  database: match(^[a-z][a-z0-9_$()+/-]*$)
+  log_level: list(debug|info|warn|error)

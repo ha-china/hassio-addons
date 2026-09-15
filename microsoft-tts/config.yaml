@@ -1,0 +1,27 @@
+name: Microsoft TTS
+description: '[老王杂谈说]：使用 Microsoft Azure 进行文本转语音'
+version: 1.4.5
+slug: wyoming_microsoft_tts
+init: false
+arch:
+  - aarch64
+  - amd64
+discovery:
+  - wyoming
+ports:
+  10200/tcp: null
+options:
+  debug_logging: false
+  update_voices: true
+schema:
+  subscription_key: str
+  service_region: str
+  rate: str?
+  pitch: str?
+  volume: str?
+  style: str?
+  style_degree: str?
+  debug_logging: bool
+  update_voices: bool
+tmpfs: true
+image: ghcr.nju.edu.cn/hugobloem/{arch}-wyoming-microsoft-tts

@@ -1,0 +1,28 @@
+name: Z-Wave JS UI
+version: 7.6.0
+slug: zwavejs2mqtt
+description: '[老王杂谈说]：可完全配置的 Z-Wave JS 网关和控制面板'
+url: https://gh-proxy.org/github.com/hassio-addons/app-zwave-js-ui
+ingress: true
+ingress_stream: true
+panel_title: Z-Wave JS
+panel_icon: mdi:z-wave
+startup: system
+init: false
+timeout: 30
+arch:
+  - aarch64
+  - amd64
+discovery:
+  - zwave_js
+services:
+  - mqtt:want
+uart: true
+udev: true
+map:
+  - share:rw
+ports:
+  3000/tcp: null
+ports_description:
+  3000/tcp: Z-Wave JS communication
+image: ghcr.nju.edu.cn/hassio-addons/zwave-js-ui

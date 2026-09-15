@@ -1,0 +1,68 @@
+# Home Assistant 附加组件：Maintainerr
+
+_"外观和气味像 Overseerr，却恰好相反。"_
+
+Maintainerr 是一个基于规则运行媒体管理工具，用于你的 Plex、Jellyfin 或 Emby 生态系统。它可以根据可配置规则创建智能收藏夹（观看状态、年龄、评分等），并可选择性地删除未观看内容以保持库的整洁。
+
+## 关于
+
+Maintainerr 集成以下内容：
+- **Plex / Jellyfin / Emby** — 媒体服务器
+- **Sonarr / Radarr** — 移除媒体文件
+- **Overseerr / Jellyseerr** — 重置请求
+- **Tautulli** — 用于高级观看统计
+
+## 安装
+
+1. 将存储库添加到 Home Assistant。
+2. 安装 **Maintainerr** 附加组件。
+3. 启动附加组件。
+4. 打开端口 `6246` 上的 Web 界面。
+
+## 配置
+
+| 选项 | 描述 |
+|--------|-------------|
+| `TZ` | 时区（例如 `Europe/Paris`）。默认为 `Europe/London`。 |
+| `env_vars` | 传递给容器的额外环境变量。 |
+
+### 可用额外环境变量
+
+| 变量 | 默认值 | 描述 |
+|----------|---------|------|
+| `UI_PORT` | `6246` | 更改监听端口 |
+| `BASE_PATH` | _(空)_ | 在 URL 子路径下提供服务 |
+
+## 数据
+
+持久化数据（数据库、配置）存储在家辅助组件配置目录中，并能在附加组件更新和重新安装后保留。
+
+## 支持
+
+- [Maintainerr 上游项目](https://github.com/maintainerr/maintainerr)
+- [附加组件存储库问题](https://github.com/alexbelgium/hassio-addons/issues)
+
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

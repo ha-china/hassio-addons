@@ -1,0 +1,7 @@
+configuration:
+  config_file:
+    name: "Konfigurationsdatei"
+    description: "Pfad zur Konfigurationsdatei."
+  log_level:
+    name: "Log-Ebene"
+    description: "Steuert die Detailgenauigkeit der Protokolle."

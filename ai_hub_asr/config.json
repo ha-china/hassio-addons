@@ -1,0 +1,26 @@
+{
+  "version": "v1.1.8",
+  "slug": "ai_hub_asr",
+  "name": "AI HUB ASR",
+  "description": "[老王杂谈说]：多语言离线语音转文本，基于SenseVoice，支持中英日韩粤及情感检测，兼容Wyoming协议",
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "init": false,
+  "host_network": true,
+  "homeassistant_api": true,
+  "image": "crpi-tuq1xajq0lk6s0kt.cn-shanghai.personal.cr.aliyuncs.com/hachina/ai_hub_asr-{arch}",
+  "ports": {
+    "10300/tcp": 10300
+  },
+  "map": [
+    "config:rw"
+  ],
+  "backup_exclude": [
+    "/data"
+  ],
+  "discovery": [
+    "wyoming"
+  ]
+}

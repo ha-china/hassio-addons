@@ -1,0 +1,31 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64",
+    "armhf",
+    "armv7",
+    "i386"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：ArchiveBox 是一个功能强大的自用托管互联网存档解决方案，用于收集、保存和离线查看您希望保留的网站。",
+  "environment": {},
+  "map": [
+    "addon_config:rw"
+  ],
+  "name": "archivebox",
+  "ports": {
+    "8000/tcp": "8000"
+  },
+  "ports_description": {
+    "8000/tcp": "WebUI"
+  },
+  "slug": "archivebox",
+  "startup": "services",
+  "upstream": "v0.9.35rc131-2026-07-20",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons/tree/main/archivebox",
+  "version": "2026.09.03",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:8000]",
+  "panel_admin": false,
+  "ingress": false,
+  "ingress_port": 8000
+}
