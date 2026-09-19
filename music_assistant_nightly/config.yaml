@@ -1,0 +1,42 @@
+name: Music Assistant (NIGHTLY)
+version: 2.11.0.dev2026091803
+slug: music_assistant_nightly
+description: NIGHTLY version of Music Assistant.
+  Install this version if you want to keep up with the latest bleeding edge development of Music Assistant!
+  Use it at your own risk, it might not be recommended for daily/production use because it can be unstable.
+url: https://music-assistant.io
+arch:
+  - amd64
+  - aarch64
+homeassistant_api: true
+discovery:
+  - music_assistant
+auth_api: true
+host_network: true
+ingress: true
+ingress_port: 8094
+audio: true
+panel_icon: mdi:music-assistant
+panel_title: Music Assistant
+panel_admin: false
+uart: false
+map:
+  - media:rw
+  - ssl:ro
+init: false
+backup_exclude:
+  - cache.db
+  - collage_images/*
+  - .cache/*
+stage: experimental
+image: ghcr.nju.edu.cn/music-assistant/server
+tmpfs: true
+options:
+  log_level: info
+  safe_mode: false
+schema:
+  log_level: list(debug|info|warning|error)
+  safe_mode: bool
+privileged:
+  - SYS_ADMIN
+  - DAC_READ_SEARCH

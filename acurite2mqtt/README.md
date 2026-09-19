@@ -1,0 +1,1 @@
+# Home Assistant 插件：Acurite

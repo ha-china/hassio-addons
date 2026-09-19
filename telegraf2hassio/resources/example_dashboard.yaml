@@ -1,0 +1,170 @@
+kiosk_mode:
+  hide_header: true
+views:
+  - title: Server
+    path: server
+    icon: mdi:server
+    badges: []
+    cards:
+      - type: entity
+        entity: sensor.myserver_system_uptime_format
+        name: myserver Uptime
+        state_color: false
+      - type: grid
+        cards:
+          - type: gauge
+            entity: sensor.myserver_mem_used_percent
+            min: 0
+            max: 100
+            name: RAM
+            severity:
+              green: 0
+              yellow: 70
+              red: 90
+            unit: '%'
+          - type: gauge
+            entity: sensor.myserver_disk_nvme0n1p2_used_percent
+            min: 0
+            max: 100
+            name: /
+            severity:
+              green: 0
+              yellow: 70
+              red: 90
+            unit: '%'
+          - type: gauge
+            entity: sensor.myserver_disk_sda1_used_percent
+            min: 0
+            max: 100
+            unit: '%'
+            name: /mnt/data
+            severity:
+              green: 0
+              yellow: 70
+              red: 90
+          - type: gauge
+            entity: sensor.myserver_disk_sdb1_used_percent
+            min: 0
+            max: 100
+            unit: '%'
+            name: /mnt/shared
+            severity:
+              green: 0
+              yellow: 70
+              red: 90
+          - type: gauge
+            entity: sensor.myserver_disk_sdc1_used_percent
+            min: 0
+            max: 100
+            unit: '%'
+            name: Musicas
+            severity:
+              green: 0
+              yellow: 70
+              red: 90
+          - type: gauge
+            entity: sensor.myserver_disk_sdd1_used_percent
+            min: 0
+            max: 100
+            unit: '%'
+            name: Filmes
+            severity:
+              green: 0
+              yellow: 70
+              red: 90
+      - square: false
+        columns: 2
+        type: grid
+        cards:
+          - type: custom:mini-graph-card
+            decimals: 2
+            entities:
+              - entity: sensor.myserver_system_load1
+                name: System Load
+            font_size: 90
+            height: 120
+            hour24: true
+            hours_to_show: 72
+            line_color: lightblue
+            line_width: 4
+            points_per_hour: 2
+            show:
+              extrema: true
+              average: true
+              fill: false
+              labels: false
+              points: false
+            color_thresholds:
+              - value: 0
+                color: '#2acaea'
+              - value: 12
+                color: '#ff0000'
+          - type: custom:mini-graph-card
+            decimals: 0
+            unit: °C
+            entities:
+              - entity: sensor.myserver_sensors_package_id_0_temp_input
+                name: System Temperature
+            font_size: 90
+            height: 120
+            hour24: true
+            hours_to_show: 72
+            line_color: lightblue
+            line_width: 4
+            points_per_hour: 2
+            show:
+              extrema: true
+              average: true
+              fill: false
+              labels: false
+              points: false
+            color_thresholds:
+              - value: 0
+                color: '#2acaea'
+              - value: 70
+                color: '#ff0000'
+          - type: custom:mini-graph-card
+            decimals: 0
+            unit: B/s
+            entities:
+              - entity: sensor.myserver_net_enp2s0_bytes_sent_dt
+                name: Network Output
+            font_size: 90
+            height: 120
+            hours_to_show: 1
+            line_color: lightblue
+            line_width: 4
+            points_per_hour: 140
+            show:
+              extrema: true
+              average: true
+              fill: false
+              labels: false
+              points: false
+          - type: custom:mini-graph-card
+            decimals: 0
+            unit: B/s
+            entities:
+              - entity: sensor.myserver_net_enp2s0_bytes_recv_dt
+                name: Network Input
+            font_size: 90
+            height: 120
+            hours_to_show: 1
+            line_color: lightblue
+            line_width: 4
+            points_per_hour: 140
+            show:
+              extrema: true
+              average: true
+              fill: false
+              labels: false
+              points: false
+      - type: entities
+        entities:
+          - entity: binary_sensor.myserver
+          - entity: sensor.myserver_processes_running
+          - entity: sensor.myserver_processes_idle
+          - entity: sensor.myserver_processes_sleeping
+          - entity: sensor.myserver_processes_total
+        state_color: true
+        title: Processes

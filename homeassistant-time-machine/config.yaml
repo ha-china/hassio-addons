@@ -1,0 +1,35 @@
+name: Home Assistant Time Machine
+version: 2.3.1
+slug: homeassistant-time-machine
+description: '[老王杂谈说]：null'
+url: https://gh-proxy.org/github.com/saihgupr/HomeAssistantTimeMachine
+changelog: https://gh-proxy.org/github.com/saihgupr/HomeAssistantTimeMachine/blob/develop/homeassistant-time-machine/CHANGELOG.md
+arch:
+  - amd64
+  - aarch64
+startup: application
+boot: auto
+init: false
+webui: http://[HOST]:[PORT:54000]
+hassio_api: true
+auth_api: true
+homeassistant_api: true
+hassio_role: default
+ingress: true
+ingress_port: 54000
+stdin: true
+panel_icon: mdi:history
+panel_title: Time Machine
+map: ['config:rw', 'backup:rw', 'media:rw', 'share:rw', 'ssl:rw', 'addons:rw']
+ports:
+  54000/tcp: null
+options:
+  theme: dark
+  esphome: false
+  packages: false
+  language: 'en'
+schema:
+  theme: list(dark|light)
+  esphome: bool?
+  packages: bool?
+  language: 'list(en|es|de|fr|nl|it)'

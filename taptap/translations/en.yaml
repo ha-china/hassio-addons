@@ -1,0 +1,79 @@
+configuration:
+  log_level:
+    name: log level
+    description: The amount of logging the add-on should do. [trace|debug|info|notice|warning|error|fatal]
+  mqtt_server:
+    name: MQTT server IP
+    description: IP address or FQDN of the MQTT broker. If you are running Mosquitto addon it will be IP address of your HomeAssistant.
+  mqtt_port:
+    name: MQTT port
+    description: MQTT broker TCP port, default is '1883'.
+  mqtt_qos:
+    name: MQTT QoS
+    description: MQTT QoS configuration - refer to Home Assistant MQTT documentation, default 1.
+  mqtt_timeout:
+    name: MQTT timeout
+    description: MQTT connection timeout - refer to Home Assistant MQTT documentation, default 5.
+  mqtt_user:
+    name: MQTT username
+    description: MQTT username to connect to server.
+  mqtt_pass:
+    name: MQTT password
+    description: MQTT password to connect to server.
+  taptap_serial:
+    name: Modbus to serial device file
+    description: If you use Modbus to USB/Serial convertor connected to Home assistant server this will be it device file (probably /dev/ttyUSB0 or /dev/ttyACM0). If you use Modbus to Ethernet convertor this must not be filled!
+  taptap_address:
+    name: Modbus to Ethernet convertor IP
+    description: If you use Modbus to Ethernet convertor connected to Home assistant server this will be its IP address. If you use Modbus to Serial/USB convertor this must not be filled!
+  taptap_port:
+    name: Modbus to Ethernet convertor port
+    description: If you use Modbus to Ethernet convertor connected to Home assistant server this will be its TCP port, default is '502'.
+  taptap_modules:
+    name: Tigo modules strings name, modules names and serial numbers
+    description: Tigo modules string name, module names and serial number in the [STRING]:NAME:[SERIAL] format. Please see Documentation for detailed explanation.
+  taptap_topic_name:
+    name: MQTT topic and device name
+    description: Name to be used as device name in the Home Assistant, default is 'tigo'. This will be also used as MQTT topic (together with topic prefix) to post messages on MQTT to Home Assistant.
+  taptap_topic_prefix:
+    name: MQTT topic prefix for taptap
+    description: MQTT topic prefix used on the MQTT to post messages so Home Assistant can read those, default is 'taptap'. There is typically there is no need to change this setting.
+  taptap_update:
+    name: MQTT update time
+    description: How often Home Assistant entities are updated in seconds, default is '10'.
+  taptap_timeout:
+    name: Availability timeout
+    description: If no message is received within last X seconds from the node and 'Entities unavailable if node is offline' is set to true then corresponding entities are set to 'Unavailable' state. If your entities have flapping 'Unavailable' status during the day increase this number. Default is '180' seconds.
+  ha_nodes_availability_online:
+    name: Node entities unavailable if node is offline
+    description: To render Home Assistant node entities 'UNAVAILABLE' if no message received within TIMEOUT, set to 'true' or 'false'. Default is 'true'.
+  ha_nodes_availability_identified:
+    name: Node entities unavailable if node serial is not yet known
+    description: Render Home Assistant node entities 'UNAVAILABLE' if node serial is not yet known, set to 'true' or 'false'. Default is 'false'.
+  ha_strings_availability_online:
+    name: String statistical entities unavailable if all string nodes are offline
+    description: Render Home Assistant string statistical entities 'UNAVAILABLE' if there are not any nodes online, set to 'true' or 'false'.
+  ha_strings_availability_identified:
+    name: String statistical entities unavailable if not all string node serials are yet known
+    description: Render Home Assistant string statistical entities 'UNAVAILABLE' if not all node serials are yet known, set to 'true' or 'false'. Default is 'false'.
+  ha_stats_availability_online:
+    name: Total statistical entities unavailable if all nodes are offline
+    description: Render Home Assistant total statistical entities 'UNAVAILABLE' if there are not any node online, set to 'true' or 'false'.
+  ha_stats_availability_identified:
+    name: Total statistical entities unavailable if not all node serials are yet known
+    description: Render Home Assistant total statistical entities 'UNAVAILABLE' if not all node serials are yet known, set to 'true' or 'false'. Default is 'false'.
+  ha_nodes_sensors_recorder:
+    name: Node sensors statistic recorder
+    description: List of the base names of the node sensors entities which shall have Home Assistant statistic recorder enabled. Available values are 'voltage_in', 'voltage_out', 'current_in', 'current_out', 'power', 'temperature', 'duty_cycle', 'rssi', 'energy'.
+  ha_strings_sensors_recorder:
+    name: String sensors statistic recorder
+    description: List of the base names of the string statistic sensors entities which shall have Home Assistant statistic recorder enabled. Available values are 'voltage_in', 'voltage_out', 'current_in', 'current_out', 'power', 'temperature', 'duty_cycle', 'rssi', 'energy'.
+  ha_stats_sensors_recorder:
+    name: Total statistics sensors statistic recorder
+    description: List of the base names of the total statistic sensors entities which shall have Home Assistant statistic recorder enabled. Available values are 'voltage_in', 'voltage_out', 'current_in', 'current_out', 'power', 'temperature', 'duty_cycle', 'rssi', 'energy'.
+  ha_discovery_prefix:
+    name: Home assistant MQTT discovery prefix
+    description: MQTT prefix Home Assistant is subscribed for auto discovery of the new devices and entities. Please refer to HA MQTT documentation, default is 'homeassistant'. There is typically no need to change this setting.
+  ha_birth_topic:
+    name: Home assistant MQTT LWT and birth topic
+    description: MQTT prefix Home Assistant announces when gets online. Please refer to HA MQTT documentation, default is 'homeassistant/status'. There is typically no need to change this setting.

@@ -1,0 +1,159 @@
+#!/command/with-contenv bashio
+
+#---------------------------------------------------------------------------------------------------------------------------
+# HELPER FUNCTIONS
+#---------------------------------------------------------------------------------------------------------------------------
+
+# Sets a config value as both an s6 container environment variable and a shell export.
+# Usage: _set_env 'CONFIG_KEY'
+function _set_env {
+  local key="$1"
+  local value
+  value="$(bashio::config "${key}")"
+  printf '%s' "${value}" > /run/s6/container_environment/"${key}"
+  export "${key}=${value}"
+}
+
+# Sets an optional config value (only if it has a value in the add-on config).
+# Usage: _set_env_optional 'CONFIG_KEY'
+function _set_env_optional {
+  local key="$1"
+  if bashio::config.has_value "${key}"; then
+    _set_env "${key}"
+  fi
+}
+
+#---------------------------------------------------------------------------------------------------------------------------
+# CHECK FOR UPDATES
+#---------------------------------------------------------------------------------------------------------------------------
+
+function _check_update {
+  local addon_version
+  addon_version="$(bashio::addon.version)"
+  bashio::log.blue "Home Assistant DSMR Reader App - Release: ${addon_version}"
+
+  local check_update
+  check_update=$(curl -s "https://api-check.duckdns.org/dsmr-reader-addon/${addon_version}?webserv=$(bashio::config 'WEBSERVER')&arch=$(bashio::info.arch)") || true
+  if [[ "${check_update}" == *"response_string"* ]]; then
+    bashio::log.blue "$(echo "${check_update}" | jq --raw-output .response_string)"
+  else
+    bashio::log.red "Home Assistant DSMR Reader App - Update check failed"
+  fi
+}
+
+#---------------------------------------------------------------------------------------------------------------------------
+# CONFIGURE ENVIRONMENT VARIABLES
+#---------------------------------------------------------------------------------------------------------------------------
+
+function _set_env_vars {
+  if [[ -n "${DJANGO_DATABASE_HOST}" && "${DJANGO_DATABASE_HOST}" != 'dsmrdb' ]]; then
+    return
+  fi
+
+  bashio::log.blue "Home Assistant DSMR Reader App - Configuring addon settings"
+  mkdir -p /run/s6/container_environment
+
+  # Core settings
+  _set_env 'DSMRREADER_ADMIN_USER'
+  _set_env 'DSMRREADER_ADMIN_PASSWORD'
+  _set_env 'DJANGO_DATABASE_NAME'
+  _set_env 'DJANGO_DATABASE_USER'
+  _set_env 'DJANGO_DATABASE_PASSWORD'
+  _set_env 'DJANGO_DATABASE_HOST'
+  _set_env 'DJANGO_DATABASE_PORT'
+  _set_env 'CONTAINER_RUN_MODE'
+
+  # Remote datalogger API settings (only in remote_datalogger mode)
+  if [[ "$(bashio::config 'CONTAINER_RUN_MODE')" == 'remote_datalogger' ]]; then
+    _set_env 'DSMRREADER_REMOTE_DATALOGGER_API_HOSTS'
+    _set_env 'DSMRREADER_REMOTE_DATALOGGER_API_KEYS'
+  fi
+
+  # Remote datalogger connection settings
+  _set_env 'DSMRREADER_REMOTE_DATALOGGER_SERIAL_PORT'
+  _set_env 'DSMRREADER_REMOTE_DATALOGGER_INPUT_METHOD'
+  _set_env 'DSMRREADER_REMOTE_DATALOGGER_SERIAL_BAUDRATE'
+  _set_env 'DSMRREADER_REMOTE_DATALOGGER_SERIAL_BYTESIZE'
+  _set_env 'DSMRREADER_REMOTE_DATALOGGER_NETWORK_HOST'
+  _set_env 'DSMRREADER_REMOTE_DATALOGGER_NETWORK_PORT'
+
+  # Django settings
+  _set_env 'DSMRREADER_LOGLEVEL'
+  _set_env 'DJANGO_TIME_ZONE'
+  _set_env 'DJANGO_SECRET_KEY'
+  _set_env 'DJANGO_X_FRAME_OPTIONS'
+
+  # Optional Django settings
+  _set_env_optional 'DJANGO_CSRF_TRUSTED_ORIGINS'
+}
+
+#---------------------------------------------------------------------------------------------------------------------------
+# CONFIGURE WEBSERVER
+#---------------------------------------------------------------------------------------------------------------------------
+
+function _require_port {
+  if [[ "$(bashio::addon.port '80/tcp')" == "" ]]; then
+    bashio::log.red "Home Assistant DSMR Reader App - No port configured, configure a UI port in the Network options"
+    exit 1
+  fi
+}
+
+function _configure_webserver {
+  local ip_address
+  ip_address="$(bashio::network.ipv4_address)"
+  ip_address="${ip_address%%/*}"
+
+  local webserver
+  webserver="$(bashio::config 'WEBSERVER')"
+
+  case "${webserver}" in
+    Ingress)
+      bashio::log.blue "Home Assistant DSMR Reader App - Ingress enabled"
+      local ingress_entry
+      ingress_entry="$(bashio::addon.ingress_entry)"
+
+      # Patch ingress server to contain the correct paths
+      sed -i "s#%%entry%%#${ingress_entry}#g" /etc/nginx/conf.d/ingress.conf
+
+      printf '%s' "${ingress_entry}/static/" > /run/s6/container_environment/DJANGO_STATIC_URL
+      printf '%s' "${ingress_entry}/" > /run/s6/container_environment/DJANGO_FORCE_SCRIPT_NAME
+      printf '%s' 'True' > /run/s6/container_environment/DJANGO_USE_X_FORWARDED_HOST
+
+      # Patch resolver to match DNS
+      local dns_host
+      dns_host="$(bashio::dns.host)"
+      sed -i "s/%%dns_host%%/${dns_host}/g" /etc/nginx/conf.d/resolver.conf
+      ;;
+
+    Custom)
+      _require_port
+
+      if bashio::config.has_value 'DJANGO_STATIC_URL'; then
+        printf '%s' "$(bashio::config 'DJANGO_STATIC_URL')" > /run/s6/container_environment/DJANGO_STATIC_URL
+      fi
+      if bashio::config.has_value 'DJANGO_FORCE_SCRIPT_NAME'; then
+        printf '%s' "$(bashio::config 'DJANGO_FORCE_SCRIPT_NAME')" > /run/s6/container_environment/DJANGO_FORCE_SCRIPT_NAME
+      fi
+      printf '%s' 'True' > /run/s6/container_environment/DJANGO_USE_X_FORWARDED_HOST
+
+      rm -f /etc/nginx/conf.d/resolver.conf
+      bashio::log.green "Home Assistant DSMR Reader App - Custom reverse proxy enabled (Note: Ingress will not work), DSMR Reader is accessible at:"
+      bashio::log.green "Home Assistant DSMR Reader App - http://${ip_address}:$(bashio::addon.port '80/tcp')/"
+      ;;
+
+    Standard)
+      _require_port
+      rm -f /etc/nginx/conf.d/resolver.conf
+      bashio::log.green "Home Assistant DSMR Reader App - Ingress disabled, when started, DSMR Reader is accessible at:"
+      bashio::log.green "Home Assistant DSMR Reader App - http://${ip_address}:$(bashio::addon.port '80/tcp')/"
+      ;;
+  esac
+}
+
+#---------------------------------------------------------------------------------------------------------------------------
+# MAIN
+#---------------------------------------------------------------------------------------------------------------------------
+
+_check_update
+_set_env_vars
+_configure_webserver

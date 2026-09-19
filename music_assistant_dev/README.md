@@ -1,0 +1,260 @@
+# Music Assistant DEV App
+
+This is a special development App for Music Assistant that allows developers to quickly test specific branches, pull requests, or even forks of Music Assistant directly in Home Assistant.
+
+## Purpose
+
+This App is designed for:
+
+- Testing pull requests before merging
+- Developing and debugging new features
+- Testing forks of Music Assistant
+- Running custom branches for testing
+
+## How It Works
+
+Unlike the regular Music Assistant App which uses pre-built releases, this Dev App:
+
+1. Builds and installs the server from a specified Git source (branch, PR, or fork)
+2. Builds and installs the frontend from a specified Git source (branch, PR, or fork)
+3. Starts Music Assistant with your custom code
+
+The build process:
+
+1. Installs the server package from the specified Git reference
+2. Builds the frontend with the package manager detected from its lockfile (pnpm, yarn, or npm)
+3. Installs the frontend as a Python package (overwriting the default frontend)
+4. Starts Music Assistant
+
+The App image is built on top of the nightly server image, so the dependency set, the bundled
+app variables and the cliairplay binary are already in place. Installing a branch only has to
+apply what actually differs from that nightly.
+
+## Configuration
+
+### Basic Configuration
+
+```yaml
+log_level: info
+safe_mode: false
+```
+
+### Server Repository Configuration
+
+Use the `server_repo` option to specify which version of the Music Assistant server to install:
+
+**Format**: `owner/repo@reference` or just `reference`
+
+- **Branch**: `dev`, `main`, or any branch name, including one with a slash like `feature/new-player`
+- **Pull Request**: `pr-123` (will checkout PR #123)
+- **Fork**: `username/server@branch-name`, or `username/server` to use that fork's default branch
+- **Commit**: Full commit SHA
+- **Empty/blank**: Use the nightly build baked into the App image (fast mode - no install required)
+
+**Examples**:
+
+```yaml
+# Use the nightly build from the App image (FAST - no install required)
+server_repo: ""
+
+# Use the dev branch
+server_repo: dev
+
+# Use a specific branch
+server_repo: feature/new-player
+
+# Test a pull request
+server_repo: pr-456
+
+# Test a fork
+server_repo: someuser/server@experimental-feature
+
+# Use a specific commit
+server_repo: abc123def456...
+```
+
+**Default**: `""` (empty - uses the nightly build baked into the App image)
+
+> **Note**: When `server_repo` is left empty or blank, the App runs the nightly build that is already installed in its image, so nothing is downloaded at startup. Rebuild the App to move to a newer nightly.
+
+### Frontend Repository Configuration
+
+Use the `frontend_repo` option to specify which version of the Music Assistant frontend to install:
+
+**Format**: Same as server_repo - `owner/repo@reference` or just `reference`
+
+- **Branch**: `main`, `dev`, or any branch name, including one with a slash like `feature/new-ui`
+- **Pull Request**: `pr-789` (will checkout PR #789)
+- **Fork**: `username/frontend@branch-name`, or `username/frontend` to use that fork's default branch
+- **Commit**: Full commit SHA
+- **Empty/blank**: Skip frontend build (use bundled frontend)
+
+**Examples**:
+
+```yaml
+# Skip frontend build (FAST - use bundled frontend)
+frontend_repo: ""
+
+# Use the main branch
+frontend_repo: main
+
+# Use a specific branch
+frontend_repo: feature/new-ui
+
+# Test a pull request
+frontend_repo: pr-789
+
+# Test a fork
+frontend_repo: someuser/frontend@redesign
+
+# Use a specific commit
+frontend_repo: abc123def456...
+```
+
+**Default**: `""` (empty - uses bundled frontend, no build)
+
+> **Note**: When `frontend_repo` is left empty or blank, the frontend build will be **skipped entirely**. This significantly reduces startup time and is ideal when you only need to test backend features. The frontend bundled with the server installation will be used instead.
+
+## Full Configuration Examples
+
+### Fast Mode (Backend Testing Only)
+```yaml
+log_level: info
+safe_mode: false
+server_repo: ""
+frontend_repo: ""
+```
+Runs the nightly build from the App image, no installs required. Fastest startup time.
+
+### Backend Development Mode
+```yaml
+log_level: debug
+safe_mode: false
+server_repo: dev
+frontend_repo: ""
+```
+Builds server from the `dev` branch, skips frontend build. Good for testing backend changes quickly.
+
+### Full Development Mode
+```yaml
+log_level: debug
+safe_mode: false
+server_repo: pr-456
+frontend_repo: pr-789
+```
+Builds both server (PR #456) and frontend (PR #789) from source. Full control for comprehensive testing.
+
+## Important Notes
+
+### Build Time
+
+Build time varies depending on your configuration:
+- **Both empty** (`server_repo: ""` and `frontend_repo: ""`): Fastest - no installs, runs the nightly build from the image
+- **Only `server_repo` specified**: Medium - builds server only, skips frontend (ideal for backend testing)
+- **Both specified**: Slowest - builds both server and frontend from source (full development mode)
+
+**Tip**: Leave `frontend_repo` empty when only testing backend features to significantly reduce startup time!
+
+### Safe Mode
+
+- Set `safe_mode: true` if you need to start Music Assistant without loading providers
+- Useful for debugging any startup issues
+
+### Pull Request Syntax
+
+When specifying a pull request, use `pr-NUMBER` (e.g., `pr-123`, `pr-456`). The App will automatically fetch and checkout the PR for you.
+
+## Troubleshooting
+
+### App won't start
+
+1. Check the App logs for build errors
+2. Verify the branch/PR/fork exists and is accessible
+3. Try using a known-good branch like `dev` or `main`
+4. Enable `safe_mode: true` to bypass provider loading
+
+### Build failures
+
+- Ensure the specified Git reference exists - the log names the repository and reference it could not reach
+- Check if there are dependency conflicts in the branch
+- Frontend build requires Node.js - build failures may indicate incompatible frontend code
+
+### Performance issues
+
+- Building from source uses more resources
+- Only use this App for development testing, not as a daily driver
+
+## Developer Workflow
+
+### Testing a PR
+
+1. Find the PR number (e.g., #456)
+2. Configure: `server_repo: pr-456`
+3. Restart the App
+4. Test the changes
+
+### Developing Features
+
+1. Push your branch to your fork
+2. Configure: `server_repo: yourusername/server@your-branch`
+3. Restart the App
+4. Test and iterate
+
+### Testing Both Server and Frontend Changes
+
+```yaml
+server_repo: pr-456
+frontend_repo: pr-789
+```
+
+This allows you to test coordinated changes across both repositories.
+
+## Support
+
+This is a developer tool and is not supported for regular users. If you encounter issues:
+
+- Check the App logs
+- Verify your Git references are correct
+- Test with the default branches first
+- Ask in the Music Assistant developer Discord channel
+
+## Differences from Regular App
+
+| Feature      | Regular App       | DEV App (Nightly mode)    | DEV App (Source mode)    |
+| ------------ | ----------------- | ------------------------- | ------------------------ |
+| Installation | Pre-built release | Nightly build in the image | Built from source        |
+| Startup time | Fast              | Fast                      | Slower (build time)      |
+| Stability    | Stable releases   | Nightly builds            | Development code         |
+| Frontend     | Bundled           | Bundled                   | Built from source        |
+| Updates      | Automatic         | Manual (restart)          | Manual (change config)   |
+| Use case     | Production        | Quick backend testing     | Full development/testing |
+
+**Configuration Modes:**
+- **Fast mode**: Both repos empty - Runs the nightly build from the image, no installs
+- **Backend dev mode**: Only `server_repo` specified - Builds server, uses bundled frontend
+- **Full dev mode**: Both repos specified - Builds everything from source
+
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

@@ -1,0 +1,55 @@
+{
+  "name": "SONOFF Dongle Flasher",
+  "version": "1.3.4",
+  "slug": "sonoff_dongle_flasher_for_ihost",
+  "description": "[老王杂谈说]：SONOFF Dongle Flasher 支持 iHost MG21 芯片及 SONOFF Dongle 系列的在线固件刷写（ZBDongle-P、ZBDongle-E、Dongle-M、Dongle-PMG24、Dongle-LMG21、Dongle-PZG23 和 Dongle-MZG23）",
+  "uart": true,
+  "udev": true,
+  "url": "https://gh-proxy.org/github.com/iHost-Open-Source-Project/hassio-ihost-addon/tree/master/hassio-ihost-sonoff-dongle-flasher",
+  "startup": "application",
+  "boot": "auto",
+  "arch": [
+    "armv7",
+    "aarch64",
+    "amd64"
+  ],
+  "init": false,
+  "panel_icon": "mdi:memory-arrow-down",
+  "panel_title": "SONOFF Dongle Flasher",
+  "ingress": true,
+  "ingress_port": 8324,
+  "ingress_stream": true,
+  "host_network": true,
+  "homeassistant_api": true,
+  "hassio_role": "admin",
+  "hassio_api": true,
+  "kernel_modules": true,
+  "full_access": true,
+  "apparmor": false,
+  "gpio": true,
+  "privileged": [
+    "SYS_ADMIN",
+    "SYS_MODULE",
+    "SYS_RAWIO",
+    "SYS_RESOURCE"
+  ],
+  "map": [
+    {
+      "type": "addon_config",
+      "read_only": false,
+      "path": "/Sonoff-Dongle-Flasher-For-IHost"
+    },
+    {
+      "type": "homeassistant_config",
+      "read_only": false,
+      "path": "/config"
+    }
+  ],
+  "options": {
+    "data_path": "/config/Sonoff-Dongle-Flasher-For-IHost"
+  },
+  "schema": {
+    "data_path": "str"
+  },
+  "image": "ghcr.nju.edu.cn/ihost-open-source-project/hassio-ihost-sonoff-dongle-flasher-{arch}"
+}

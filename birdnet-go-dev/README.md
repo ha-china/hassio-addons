@@ -1,0 +1,234 @@
+# Home assistant add-on: Birdnet-Go (from source)
+
+> **⚠️ Test build.** This is a special variant of the [standard birdnet-go add-on](https://github.com/alexbelgium/hassio-addons/tree/master/birdnet-go). Instead of pulling the prebuilt `ghcr.io/tphakala/birdnet-go` image, it **compiles BirdNET-Go from the [`alexbelgium/birdnet-go`](https://github.com/alexbelgium/birdnet-go) fork**. At build time it syncs the fork's `main` with the `tphakala/birdnet-go` upstream and **merges every open non-draft ("in review") pull request on the fly** (see [`merge-prs.sh`](./merge-prs.sh)), so the binary reflects upstream main plus all work currently under review. Everything below is identical to the standard add-on, except the fork-only settings listed under [Fork-only settings](#fork-only-settings).
+
+
+
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## Addon informations
+
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbirdnet-go%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbirdnet-go%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fbirdnet-go%2Fconfig.yaml)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://reporoster.com/stars/alexbelgium/hassio-addons)](https://github.com/alexbelgium/hassio-addons/stargazers)
+
+
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/birdnet-go/stats.png)
+
+## About
+
+[BirdNET-Go](https://github.com/tphakala/birdnet-go/tree/main) is an AI solution for continuous avian monitoring and identification developed by @tphakala
+
+This addon is based on their docker image.
+
+## Configuration
+
+Install, then start the addon a first time. Webui can be found at <http://homeassistant:8080>.
+You'll need a microphone : either use one connected to HA or the audio stream of a rstp camera.
+
+The audio clips folder can be stored on an external or SMB drive by mounting it from the addon options, then specifying the path instead of "clips/". For example, "/mnt/NAS/Birdnet/"
+
+Options can be configured through three ways :
+
+- Addon options
+
+```yaml
+BIRDSONGS_FOLDER: /config/clips # where audio clips are stored (can be on a mounted drive)
+LOG_MAX_SIZE_MB: 50 # max log file size before rotation
+LOG_MAX_AGE_DAYS: 7 # max log retention in days
+homeassistant_microphone: false # when true, force audio source to "default" (HA microphone)
+env_vars: [] # extra environment variables to pass to the container
+TZ: Etc/UTC # timezone, see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
+mqtt_auto_config: false # set true to auto-wire the Home Assistant MQTT addon into config.yaml
+mariadb_auto_config: false # set true to auto-wire the Home Assistant MariaDB addon into config.yaml (also disables SQLite)
+```
+
+- Config.yaml
+Additional variables can be configured using the config.yaml file found in /config/db21ed7f_birdnet-go/config.yaml using the Filebrowser addon
+
+- Config_env.yaml
+Additional environment variables can be configured there
+
+### Fork-only settings
+
+These are currently fork-only settings from the [`alexbelgium/birdnet-go`](https://github.com/alexbelgium/birdnet-go) fork and are **not** in the standard add-on. [`merge-prs.sh`](./merge-prs.sh) syncs the fork's `main` with upstream before applying open PRs, so once a PR merges upstream the setting stays in this build — it just arrives via that sync instead of the PR-merge step, and stops being fork-only. Only a PR that is **closed without merging** drops its setting from later builds.
+
+#### First daily detection consensus
+
+Requires a second model to confirm the **first** detection of each bird species each day. Until one is accepted, every attempt for that species is held to the same two-model bar; only once a detection clears it does every later detection that day behave exactly as it does today, on a single model.
+
+The first detection of a species in a day is the weakest evidence the pipeline produces, and it is the one that creates a "new species today" entry. Asking two models to agree on just that one detection removes most spurious new-species entries without slowing anything else down.
+
+**Off by default.** Turn it on in the web UI under *Settings → Filters → First Daily Detection Consensus*, or in `config.yaml`:
+
+```yaml
+realtime:
+  firstdailyconsensus:
+    enabled: true
+```
+
+The setting is re-read on each detection cycle, so it takes effect without restarting the add-on.
+
+It deliberately does **nothing** in these cases, all of which keep today's single-model behaviour:
+
+- you run only one bird model (the default) — a second opinion does not exist, so the rule can never trigger
+- the species is not a bird — bats and the non-bird sound classes Perch reports (insects, amphibians, mammals, `power_tool`, and so on)
+- the species is not known to *every* active bird model analyzing that audio source — a species only one of them can name could never reach two confirmations. With several sources running different model combinations, this is decided per source, not add-on-wide
+- a dynamic threshold has actually lowered the bar for that species, meaning you asked for a more permissive gate
+- the taxonomy or the database cannot be consulted — it fails open and accepts the detection
+
+In practice it only bites when a single audio source has two or more bird models (for example BirdNET plus Perch) analyzing it, on species all of them can identify. The trade is fewer false new-species entries, at the cost of occasionally delaying a genuine first sighting until a second model agrees.
+
+Requires [alexbelgium/birdnet-go#63](https://github.com/alexbelgium/birdnet-go/pull/63).
+
+### MQTT and MariaDB auto-configuration (opt-in)
+
+If the Home Assistant **MQTT** addon is installed and running and you set `mqtt_auto_config: true` in the addon options, the addon writes the HA Mosquitto credentials directly into BirdNET-Go's `config.yaml` on every startup: `realtime.mqtt.enabled`, `broker`, `username`, and `password` are populated, and the topic defaults to `birdnet`. In addition, it enables BirdNET-Go's **native Home Assistant MQTT auto-discovery** (`realtime.mqtt.homeassistant.enabled`), so the detection sensors show up in Home Assistant automatically — **no manual MQTT sensor YAML required** (the hand-written sensors in [HAINTEGRATION.md](./HAINTEGRATION.md) remain available if you prefer to build your own). Messages are also retained (`realtime.mqtt.retain: true`) so sensor states survive Home Assistant restarts. When the option is `false` (the default), the addon still logs the broker details and reminds you about the option whenever Mosquitto is detected — nothing is written.
+
+If the Home Assistant **MariaDB** addon is installed and running and you set `mariadb_auto_config: true`, the addon writes the HA credentials into `output.mysql.*` and sets `output.sqlite.enabled` to `false` (database name `birdnet`, created on first connect). When the option is `false` (the default), the addon only logs the credentials so you can configure them manually.
+
+The addon also seeds `output.sqlite.path` and `logging.file_output.*` defaults only when those keys are missing from `config.yaml`, so values you change through the BirdNET-Go UI now survive container restarts.
+
+### Mounting Drives
+
+This addon supports mounting both local drives and remote SMB shares:
+
+- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+
+### Custom Scripts and Environment Variables
+
+This addon supports custom scripts and environment variables through the `app_config` mapping:
+
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+
+## Installation
+
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
+
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Set the add-on options to your preferences
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open the webUI and adapt the software options
+
+## Integration with HA
+
+Home Assistant Integration instructions are found here, [Birdnet-Go Addon: Home Assistant Integration](./HAINTEGRATION.md)
+
+## Setting up a RTSP Source using VLC
+
+VLC opens a TCP port but the stream is udp. Because of this will need to configure Birdnet-Go to use udp. Adjust the config.yaml file to udp or use the birdnet-go command line option:
+
+`--rtsptransport udp --rtsp rtsp://192.168.1.21:8080/stream.sdp`
+
+### Linux instructions
+
+Run vlc without an interface using one of these commands:
+
+```bash
+# This should work for most devices
+/usr/bin/vlc -I dummy -vvv alsa://hw:0,0 --no-sout-all --sout-keep --sout '#transcode{acodec=mpga}:rtp{sdp=rtsp://:8080/stream.sdp}'
+
+# Try this if the first command does not work
+/usr/bin/vlc -I dummy -vvv alsa://hw:4,0 --no-sout-all --sout-keep --sout '#rtp{sdp=rtsp://:8080/stream.sdp}'
+```
+
+Run `arecord -l` to get microphone hardware info
+
+```text
+**** List of CAPTURE Hardware Devices ****
+card 0: PCH [HDA Intel PCH], device 0: ALC3220 Analog [ALC3220 Analog]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 2: S7 [SteelSeries Arctis 7], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 3: Nano [Yeti Nano], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 4: Device [USB PnP Sound Device], device 0: USB Audio [USB Audio]
+  Subdevices: 0/1
+  Subdevice #0: subdevice #0
+```
+
+hw:4,0 = **card 4**: Device [USB PnP Sound Device], **device 0**: USB Audio [USB Audio]
+
+Systemd service file example. Adjust the user:group accordingly. If you want to run as root, you will likely need to run vlc-wrapper instead of vlc.
+
+```text
+[Unit]
+Description=VLC Birdnet RTSP Server
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+StandardOutput=journal
+ExecStart=/usr/bin/vlc -I dummy -vvv alsa://hw:0,0 --sout '#transcode{acodec=mpga}:rtp{sdp=rtsp://:8080/stream.sdp}'
+User=someone
+Group=somegroup
+
+[Install]
+WantedBy=multi-user.target
+```
+
+## Common issues
+
+Not yet available
+
+## Support
+
+Create an issue on github
+
+---
+
+![illustration](https://raw.githubusercontent.com/tphakala/birdnet-go/main/doc/BirdNET-Go-dashboard.webp)
+
+
+
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

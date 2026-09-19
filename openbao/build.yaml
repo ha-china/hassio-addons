@@ -1,0 +1,15 @@
+---
+build_from:
+  aarch64: "ghcr.nju.edu.cn/home-assistant/aarch64-base:3.24"
+  amd64: "ghcr.nju.edu.cn/home-assistant/amd64-base:3.24"
+labels:
+  maintainer: "bluemaex <homeassistant@blmx.de>"
+  org.opencontainers.image.authors: "bluemaex <homeassistant@blmx.de>"
+  org.opencontainers.image.licenses: "MIT License"
+  org.opencontainers.image.title: "Home Assistant Unofficial Add-on: openbao"
+  org.opencontainers.image.url: https://gh-proxy.org/github.com/bluemaex/home-assistant-addons
+  org.opencontainers.image.source: https://gh-proxy.org/github.com/bluemaex/home-assistant-addons/openbao
+  org.opencontainers.image.documentation: https://gh-proxy.org/github.com/bluemaex/home-assistant-addons/openbao/README.md
+  org.opencontainers.image.created: "2026-08-23T18:08:17Z"
+  org.opencontainers.image.revision: e8c8b5057c0445eab1eb75c1c54571d07b42546f
+  org.opencontainers.image.version: 0.1.4

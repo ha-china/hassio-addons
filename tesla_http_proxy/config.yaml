@@ -1,0 +1,40 @@
+name: "Tesla HTTP Proxy"
+version: "2.3.0"
+slug: "tesla_http_proxy"
+description: "[老王杂谈说]：转发 Tesla Fleet API 的请求"
+url: "https://gh-proxy.org/github.com/llamafilm/tesla-http-proxy-addon/tree/main/tesla_http_proxy"
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+hassio_role: homeassistant
+init: false
+map:
+  - share:rw
+startup: services
+options:
+  client_id: ""
+  client_secret: ""
+  domain: ""
+  debug: false
+  regenerate_auth: true
+  region: "North America, Asia-Pacific"
+schema:
+  client_id: str?
+  client_secret: password?
+  domain: match(^[a-z0-9-.]{1,253}$)
+  debug: bool
+  regenerate_auth: bool
+  region: list(North America, Asia-Pacific|Europe, Middle East, Africa|China)
+ingress: true
+panel_icon: mdi:forward
+backup_exclude:
+  - /data/gnugpg
+  - /data/password-store
+hassio_api: true
+stage: experimental
+ports:
+  443/tcp: 4430
+image: "ghcr.1ms.run/llamafilm/tesla_http_proxy_{arch}"

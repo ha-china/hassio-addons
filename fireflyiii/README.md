@@ -1,0 +1,125 @@
+# Home Assistant 附加组件：fireflyiii
+
+我利用闲暇时间维护此及其他 Home Assistant 附加组件：跟进上游变更、Home Assistant 变更以及在真实硬件上进行测试需要大量时间和（一些）金钱。我使用的附加组件约有 5-10 个，因此我经常安装测试机器（并购买一些我不亲自使用的测试服务，例如 VPN），以便于调试和改进附加组件。
+
+如果这个附加组件为您节省了时间或使您的配置更简便，我将非常感谢您的支持！
+
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## 附加组件信息
+
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffireflyiii%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffireflyiii%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Ffireflyiii%2Fconfig.yaml)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+
+_感谢大家星标我的仓库！要星标它，请点击下方的图片，它将显示在右上角。谢谢！_
+
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/fireflyiii/stats.png)
+
+## 关于
+
+["Firefly III"](https://www.firefly-iii.org) 是一个用于个人财务管理的（自托管）应用程序。它可以帮助您跟踪支出和收入，这样您就可以花得更少，存得更多。
+该附加组件基于 Docker 镜像 https://hub.docker.com/r/fireflyiii/core
+
+## 配置
+
+使用附加组件的 `env_vars` 选项来传递额外的环境变量（名称可以是大写或小写）。详见 https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2。
+
+WebUI 可以通过 <http://homeassistant:PORT> 访问，或通过侧边栏使用 Ingress 访问。
+配置可以通过应用程序 WebUI 完成，除了以下选项外。
+
+**⚠️ 重要**：首次启动前请更改您的 `APP_KEY`！您无法随后更改它而不重置数据库。
+
+### 选项
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `APP_KEY` | str | `CHANGEME_32_CHARS_EuC5dfn3LAPzeO` | **关键**: 32 字符加密密钥 - 首次运行前更改！ |
+| `CONFIG_LOCATION` | str | `/config/addons_config/fireflyiii/config.yaml` | 额外配置文件的位置 |
+| `DB_CONNECTION` | list | `sqlite_internal` | 数据库类型 (sqlite_internal/mariadb_addon/mysql/pgsql) |
+| `DB_HOST` | str | | 数据库主机 (用于外部数据库) |
+| `DB_PORT` | str | | 数据库端口 (用于外部数据库) |
+| `DB_DATABASE` | str | | 数据库名称 (对于 mariadb_addon 默认为 `firefly`) |
+| `DB_USERNAME` | str | | 数据库用户名 (覆盖 MariaDB 附加组件服务发现，如果已设置) |
+| `DB_PASSWORD` | str | | 数据库密码 (覆盖 MariaDB 附加组件服务发现，如果已设置) |
+| `Updates` | list | | 自动更新时间表 (每小时/每天/每周) |
+| `silent` | bool | `true` | 静默模式 - 设为 false 以获取调试信息 |
+
+### 示例配置
+
+```yaml
+APP_KEY: "SomeRandomStringOf32CharsExactly"
+CONFIG_LOCATION: "/config/addons_config/fireflyiii/config.yaml"
+DB_CONNECTION: "mariadb_addon"
+DB_HOST: "core-mariadb"
+DB_PORT: "3306"
+DB_DATABASE: "firefly"
+DB_USERNAME: "firefly"
+DB_PASSWORD: "secure_password"
+Updates: "weekly"
+silent: false
+```
+
+### 高级配置
+
+可以使用 config.yaml 文件配置额外的环境变量。参见：
+- [添加环境变量指南](https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon)
+- [完整的 Firefly III 环境变量](https://raw.githubusercontent.com/firefly-iii/firefly-iii/main/.env.example)
+
+## 安装
+
+此附加组件的安装非常直接，与其他任何附加组件的安装没有区别。
+
+1. 将我的附加组件仓库添加到您的 Home Assistant 实例（在 supervisor 附加组件商店右上角，或者如果您已配置我的 HA，请单击下方按钮）
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. 安装此附加组件。
+1. 点击 `Save` 按钮以保存您的配置。
+1. 将附加组件选项设置为您的偏好设置。
+1. 启动附加组件。
+1. 查看附加组件的日志，以确认一切是否正常。
+1. 打开 WebUI 并调整软件选项
+
+## 支持
+
+在 GitHub 上创建问题。
+
+## 插图
+
+![illustration](https://raw.githubusercontent.com/firefly-iii/firefly-iii/develop/.github/assets/img/imac-complete.png)
+
+[repository]: https://github.com/alexbelgium/hassio-addons
+
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

@@ -1,0 +1,43 @@
+{
+  "name": "voice-assistant",
+  "version": "2026.07.31",
+  "slug": "voice-assistant",
+  "description": "[老王杂谈说]：一款Linux下的语音助手",
+  "url": "https://www.hasscn.top",
+  "init": false,
+  "arch": ["aarch64", "amd64"],
+  "panel_icon": "mdi:account-voice",
+  "boot": "auto",
+  "image": "crpi-tuq1xajq0lk6s0kt.cn-shanghai.personal.cr.aliyuncs.com/hachina/voice-assistant-{arch}",
+  "host_network": true,
+  "audio": true,
+  "map": [
+    "share:ro",
+    "media:ro"
+  ],
+  "devices": [
+    "/dev/snd:/dev/snd"
+  ],
+  "options": {
+    "name": ""
+  },
+  "schema": {
+    "name": "str?",
+    "audio-input-device": "str?",
+    "audio-output-device": "str?",
+    "mic-volume": "int(0,100)?",
+    "audio-input-channels": "list(1|2)?",
+    "continue-conversation-delay": "float(0,10)?",
+    "timer-max-ring-seconds": "int?",
+    "mic-auto-gain": "bool?",
+    "mic-noise-suppression": "bool?",
+    "enable-thinking-sound": "bool?",
+    "enable-output-only": "bool?",
+    "wake-model": "str?",
+    "stop-model": "str?",
+    "network-interface": "str?",
+    "host": "str?",
+    "port": "port?",
+    "debug": "bool?"
+  }
+}
