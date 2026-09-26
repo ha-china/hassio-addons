@@ -1,0 +1,42 @@
+---
+configuration:
+  device:
+    name: Device
+    description: The device address of your ConBee/RaspBee.
+  dbg_info:
+    name: Debug Info
+  dbg_aps:
+    name: Debug APS
+  dbg_zcl:
+    name: Debug ZCL
+  dbg_zdp:
+    name: Debug ZDP
+  dbg_ddf:
+    name: Debug DDF
+  dbg_dev:
+    name: Debug DEV
+  dbg_ota:
+    name: Debug OTA
+  dbg_error:
+    name: Debug Error
+  dbg_http:
+    name: Debug HTTP
+  ota_update:
+    name: Zigbee OTA updates
+    description: >-
+      Automatically downloads available Zigbee firmware updates when
+      enabled.
+    fields:
+      bosch:
+        name: Bosch
+      ikea:
+        name: IKEA
+      ledvance:
+        name: OSRAM/LEDVANCE
+network:
+  40850/tcp: >-
+    deCONZ API backend (Access for Phoscon and REST API outside the app)
+  5900/tcp: >-
+    deCONZ via VNC (Accessing the GUI with external VNC software. Not secured!)
+  8081/tcp: >-
+    deCONZ WebSocket (Connection to other applications e.g. Node-RED)

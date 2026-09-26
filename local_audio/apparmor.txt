@@ -1,0 +1,260 @@
+#include <tunables/global>
+
+# The name below is a placeholder: the Supervisor rewrites it to the installed
+# slug at load time, and the slug carries an install-dependent prefix (`local_`
+# for a local app, the repository hash for a store one). Nothing inside this
+# file may therefore reference the profile by name -- which is why the child
+# receive rules are peerless.
+profile local_audio flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+
+  # A fixed-function player: no mount, umount or remount, no dac_read_search
+  # and no sys_admin. The supervision tree, bashio and the option-reading
+  # scripts all run as root and switch to no other user, so CAP_KILL is the
+  # only capability this outer profile declares; the two bundled daemons
+  # declare theirs below.
+  #
+  # s6-supervise signals each longrun down, and both daemons have dropped to
+  # their own uids by then, so every stop is a CAP_KILL check -- the SIGTERM,
+  # and equally the SIGKILL each service's `timeout-kill` fires behind it. Deny
+  # it and neither arrives, which leaves those files bounding nothing.
+  #
+  # It grants less than its name suggests. The container has its own pid
+  # namespace, so there is nothing outside it to signal, and the signal rules
+  # below still decide which signals may reach which of these processes.
+  capability kill,
+
+  file,
+
+  # s6 supervises the three services and passes on a container stop. The stop
+  # signal arrives from the unconfined container runtime, which the base
+  # abstraction already permits receiving from.
+  #
+  # Every child profile below repeats this set as its `signal (receive)`. They
+  # have to match: a signal this profile may send but a child may not receive is
+  # denied at delivery, and s6 brings a longrun down with SIGTERM *and* SIGCONT,
+  # so a receive set missing `cont` takes a denial on every ordinary stop.
+  signal (send) set=(kill,term,int,hup,cont,usr1,usr2),
+
+  # s6-overlay v3: the init, the execline and s6 tools it puts on PATH, and the
+  # supervision state it builds under /run.
+  /init ix,
+  /bin/** ix,
+  /usr/bin/** ix,
+  /usr/sbin/** ix,
+  /command/** ix,
+  /package/** ix,
+  /etc/s6-overlay/** r,
+  /run/{s6,s6-rc*,service}/** rwix,
+  /run/s6-linux-init-container-results/** rw,
+
+  # bashio reads the options from the Supervisor API; the shared shell library
+  # and jq turn the answer into the values the run script writes out.
+  /usr/lib/bashio/** ix,
+  /usr/lib/sendspin-cli/** r,
+  # The oneshot execs this one; common.sh above is only ever sourced.
+  /usr/lib/sendspin-cli/decide-daemons ix,
+
+  # bashio's option fetch is an HTTP call to the Supervisor, and hostname
+  # resolution for it needs the datagram pair.
+  network inet stream,
+  network inet6 stream,
+  network inet dgram,
+  network inet6 dgram,
+  network unix stream,
+  network unix dgram,
+
+  # /run/sendspin-cli holds the rendered config, the control socket and the
+  # recorded daemon decision; /data is the add-on's persistent volume; s6
+  # writes and locks the rest of /run.
+  /run/sendspin-cli/** rw,
+  /data/** rw,
+  /run/** rwk,
+  /tmp/** rw,
+
+  # Nothing here reads the shadow files or edits the account databases, and the
+  # `file` rule above would otherwise allow both.
+  deny /etc/shadow rw,
+  deny /etc/gshadow rw,
+  deny /etc/{passwd,group} w,
+
+  # The bundled daemons and the player are confined further than this profile.
+  /usr/bin/dbus-daemon cx,
+  /usr/sbin/avahi-daemon cx,
+  /usr/bin/sendspin-cli cx,
+
+  # The system bus that avahi-daemon is reached over. Dropping to the
+  # `messagebus` user is the only reason it needs a capability at all.
+  profile /usr/bin/dbus-daemon flags=(attach_disconnected,mediate_deleted) {
+    #include <abstractions/base>
+
+    capability setgid,
+    capability setuid,
+
+    signal (receive) set=(kill,term,int,hup,cont,usr1,usr2),
+
+    /usr/bin/dbus-daemon mr,
+    /usr/share/dbus-1/** r,
+    /etc/dbus-1/** r,
+    /var/lib/dbus/machine-id r,
+    # Resolving the `messagebus` user it drops to; without these the daemon
+    # exits at its user lookup and restarts forever, silently.
+    /etc/nsswitch.conf r,
+    /etc/passwd r,
+    /etc/group r,
+    # k because the daemons lock their pid files, and locking is its own
+    # AppArmor permission -- rw alone denies fcntl(F_SETLKW) even for root.
+    /run/dbus/ rw,
+    /run/dbus/** rwk,
+
+    network unix stream,
+    network unix dgram,
+  }
+
+  # Answers mDNS for this player. It drops to the `avahi` user and chroots, and
+  # both were measured against the Debian build this image installs: dropping
+  # either CAP_SYS_CHROOT or CAP_CHOWN from the container stops it starting.
+  profile /usr/sbin/avahi-daemon flags=(attach_disconnected,mediate_deleted) {
+    #include <abstractions/base>
+    #include <abstractions/nameservice>
+
+    capability setgid,
+    capability setuid,
+    capability sys_chroot,
+    capability chown,
+
+    signal (receive) set=(kill,term,int,hup,cont,usr1,usr2),
+    # The health check's `avahi-daemon --check` is a kill(pid, 0) between two
+    # processes carrying this same profile.
+    signal set=(exists) peer=@{profile_name},
+
+    /usr/sbin/avahi-daemon mr,
+    /etc/avahi/** r,
+    /run/avahi-daemon/ rw,
+    /run/avahi-daemon/** rwk,
+    /run/dbus/system_bus_socket rw,
+    @{PROC}/sys/net/ipv{4,6}/** r,
+
+    # 5353 on both families, plus the netlink socket it watches interface and
+    # address changes on. `dgram` is the type avahi actually opens that one
+    # with -- socket(PF_NETLINK, SOCK_DGRAM, NETLINK_ROUTE) -- and a kernel
+    # that mediates netlink by type denies the bind under any other, which
+    # fails the daemon's interface enumeration and leaves it restarting for as
+    # long as the app runs.
+    network inet dgram,
+    network inet6 dgram,
+    network netlink dgram,
+    network unix stream,
+    network unix dgram,
+  }
+
+  # The player itself: the one component reachable from the network, and the
+  # one that needs no capability at all. It runs as root and /dev/snd nodes
+  # are root-owned, so owner permissions cover them and there is nothing for
+  # CAP_DAC_OVERRIDE to do. Omitting every `capability` rule denies the lot.
+  profile /usr/bin/sendspin-cli flags=(attach_disconnected,mediate_deleted) {
+    #include <abstractions/base>
+    #include <abstractions/nameservice>
+
+    signal (receive) set=(kill,term,int,hup,cont,usr1,usr2),
+
+    /usr/bin/sendspin-cli mr,
+
+    # A wss:// server value needs the trust store.
+    /etc/ssl/** r,
+    /usr/share/ca-certificates/** r,
+
+    # The PulseAudio client writes its cookie under the (root) home.
+    owner /root/.config/ w,
+    owner /root/.config/pulse/ w,
+    owner /root/.config/pulse/** rw,
+
+    # Its own rendered config, control socket and persistent state. k for the
+    # control socket's lock file.
+    /run/sendspin-cli/** rwk,
+    /data/state/** rw,
+
+    # ALSA: the library's configuration and the plugin that bridges to
+    # PulseAudio. The device-node rules below are inert while the app maps no
+    # /dev/snd; they stay so that the profile is not what breaks direct
+    # hardware output if it ever does.
+    /usr/lib/**/alsa-lib/*.so mr,
+    /usr/share/alsa/** r,
+    /etc/alsa/** r,
+    /etc/asound.conf r,
+    /dev/snd/ r,
+    /dev/snd/** rw,
+    @{PROC}/asound/** r,
+    /sys/class/sound/** r,
+    /sys/devices/**/sound/** r,
+
+    # Home Assistant's PulseAudio, which `audio: true` maps in and which the
+    # player's `default` ALSA device plays through.
+    /etc/pulse/** r,
+    /run/audio/** rw,
+    /dev/shm/** rw,
+
+    # Reached over the system bus, through the avahi-compat shim.
+    /run/dbus/system_bus_socket rw,
+    /run/avahi-daemon/socket rw,
+
+    # The websocket server on 8928 and the connections it makes out; UDP for
+    # resolving a `server` value.
+    network inet stream,
+    network inet6 stream,
+    network inet dgram,
+    network inet6 dgram,
+    network unix stream,
+    network unix dgram,
+
+    # ==========================================================================
+    # The stream hooks
+    #
+    # hook-start and hook-stop are a command, and the player runs one by
+    # execve()ing /bin/sh. This profile granted no exec of anything at all until
+    # these rules, and it is worth being plain about what they cost: somebody who
+    # takes this player over through the network can now start a shell, and
+    # through it any program in the image. What they cannot do is reach anything
+    # the player itself could not already reach -- every one of those programs
+    # runs under this same profile, holding no capability, able to open only the
+    # files listed above. The boundary that matters is this file's, and these
+    # rules do not move it.
+    #
+    # The rule below has to reach /usr/bin/dash, which is where /bin/sh resolves
+    # to in this usrmerged image -- AppArmor mediates the resolved path, so a
+    # rule written against /bin/sh parses, loads, and then denies at runtime.
+    #
+    # ix, and not the bounded `cx -> <a hook profile>` that would be better,
+    # because AppArmor cannot express it here. A child profile is reachable only
+    # by a name, and the only name form that needs none is `cx`, which resolves
+    # within the profile it is written in -- this one, which is already a child.
+    # AppArmor supports one level of child profile and no more: the second level
+    # loads (`... ///usr/bin/sendspin-cli//hook` appears in
+    # /sys/kernel/security/apparmor/profiles) and the transition is then refused
+    # at exec with `info="profile transition not found"`. Every form that would
+    # name a profile outside this one needs an absolute name, and this file may
+    # not use one: the Supervisor rewrites the top-level name to the installed
+    # slug before loading, which is what the note at the top of this file is
+    # about. Ux is the remaining alternative and is worse than ix in the only
+    # way that counts -- it would put the shell outside this profile entirely,
+    # capabilities, denials and all -- so the shell inherits instead.
+    # ==========================================================================
+
+    # One rule for both halves of running a hook: /usr/bin/dash, which is the
+    # shell the player execs, and the programs a hook runs with it -- curl at an
+    # amplifier's relay, jq over what it answers. A hook that could run only
+    # dash's builtins would not be a feature, and naming dash separately would be
+    # a rule this one already covers.
+    #
+    # /usr/sbin is deliberately not here beside it. Everything in it is system
+    # administration -- useradd, chroot, the filesystem and swap tools -- so it
+    # is a set no hook has a use for and the one set worth not handing to
+    # somebody who has reached this far. That holds only while /usr/sbin is a
+    # directory of its own, which it is on the Debian this image is built on and
+    # will not be once Debian's sbin-merge lands: after that every path in it
+    # resolves under /usr/bin and this rule swallows the lot. The confined check
+    # in scripts/smoke_test.sh asserts a hook cannot run out of /usr/sbin, so
+    # that day is a red test rather than a quiet widening.
+    /usr/bin/** ix,
+  }
+}

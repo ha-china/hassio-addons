@@ -1,0 +1,16 @@
+#!/usr/bin/with-contenv bashio
+
+CONFIG_PATH=$(bashio::config 'dynamic_configuration_path')
+ENV_VARS=$(gomplate -d options=/data/options.json -i '{{ range (ds "options").env_vars }}{{ . }} {{ end }}')
+
+CONFIG_ARGS=""
+if [ -f "${CONFIG_PATH}" ]; then
+    CONFIG_ARGS="--config ${CONFIG_PATH}"
+fi
+
+if [ -z "$ENV_VARS" ]; then
+    ENV_VARS="HOMEASSISTANT_ADDON=1"
+fi
+
+bashio::log.info "Starting Unpoller..."
+env ${ENV_VARS} /usr/local/bin/unpoller ${CONFIG_ARGS}

@@ -1,0 +1,4 @@
+---
+# renovate: datasource=docker depName=ghcr.nju.edu.cn/hassio-addons/debian-base
+build_from:
+  amd64: "ghcr.nju.edu.cn/hassio-addons/debian-base:9.3.0"

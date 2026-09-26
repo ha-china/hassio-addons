@@ -1,0 +1,32 @@
+{
+  "name": "py-kms",
+  "version": "2026.05.10",
+  "slug": "py-kms",
+  "description": "这是py-kms，一个用来激活Windows和Office的服务器",
+  "url": "https://mp.weixin.qq.com/s/7-P5JtLeNTPni9dB20TTWw",
+  "arch": [
+    "aarch64",
+    "amd64",
+    "armv7"
+  ],
+  "startup": "services",
+  "image": "crpi-tuq1xajq0lk6s0kt.cn-shanghai.personal.cr.aliyuncs.com/hachina/py-kms-{arch}",
+  "boot": "auto",
+  "init": false,
+  "ports": {
+    "1688/tcp": 1688
+  },
+  "ports_description": {
+    "1688/tcp": "KMS Server port"
+  },
+  "environment": {
+    "PUID": "1000",
+    "PGID": "1000",
+    "TZ": "Asia/Shanghai"
+  },
+  "map": [
+    "config:rw"
+  ],
+  "restart": "unless-stopped",
+  "log_level": "info"
+}

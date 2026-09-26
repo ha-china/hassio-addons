@@ -1,0 +1,87 @@
+# Home Assistant 插件：ytptube
+
+yt-dlp 的 Web 图形界面，支持播放列表和频道（https://github.com/arabcoders/ytptube）。
+
+**感谢所有为我仓库点星的用户！请点击下方图片进行点星，它将出现在右上角。谢谢！**
+
+[![Stargazers repo roster for @jdeath/homeassistant-addons](https://reporoster.com/stars/jdeath/homeassistant-addons)](https://github.com/jdeath/homeassistant-addons/stargazers)
+
+## 关于本插件
+
+本插件基于 [docker 镜像](https://github.com/arabcoders/ytptube)。
+
+# YTPTube 功能特性。
+
+*   支持多下载。
+*   随机背景。`可以禁用或更改源`。
+*   支持实时流。
+*   可配置定时任务队列，在指定时间自动下载频道或播放列表。
+*   根据选中事件向目标发送通知。
+*   支持为每个链接指定 `cli 选项` & `cookies`。
+*   支持多个 URL，用逗号分隔。
+*   预设系统，可重用常用的 yt-dlp 选项。
+*   简易文件浏览器。`默认已禁用`。
+*   内置视频播放器，**支持侧边附属字幕**。
+*   新增 `POST /api/history` 端点，允许同时发送一个或多个链接。
+*   新增 `GET /api/history/add?url=http://..` 端点，允许通过 GET 请求添加单个项目。
+*   现代化前端界面。
+*   数据库后端使用 SQLite。
+*   支持基础认证。
+*   支持 curl_cffi，参见 [yt-dlp 文档](https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#impersonation)。
+*   为技术非专业用户支持 WebUI 基础模式，这会隐藏大多数正常功能视图。
+*   容器内捆绑工具：curl-cffi, ffmpeg, ffprobe, aria2, rtmpdump, mkvtoolsnix, mp4box。
+*   自动重新加入即将发生的实时流。
+*   根据自定义条件应用 `yt-dlp` 选项。
+*   自定义浏览器扩展、书签代码和 iOS 快捷指令，用于将链接发送到 YTPTube 实例。
+
+## 安装
+
+本插件的安装有几个额外步骤。
+
+1.  [将我发布的 Hass.io 插件仓库][repository] 添加到您的 Hass.io 实例。
+2.  安装此插件。
+3.  点击 `保存` 按钮以存储配置。
+4.  下载目录默认为 /share/ytptube，可以更改为 share 下的任一路径。
+5.  启动插件。它将失败。
+6.  ssh 进入 Home Assistant 并输入 `chown hassio /addon_configs/2effc9b9_ytptube`。
+7.  再次启动插件。它将失败。
+8.  再次 ssh 进入 Home Assistant 并输入 `chown hassio /share/ytptube` 或您更改的下载目录。
+9.  启动插件。
+10. 检查插件日志以查看一切是否正常。
+11. 通过 <your-ip>:port 打开 WebUI。Ingress 不起作用。
+12. 点击 "Rebuild"（重建），即使 YTPTube 没有更新，也会拉取最新的 yt-dlp。
+
+## 配置
+
+```
+port : 8081 # 您想要运行此插件的端口。
+```
+
+WebUI 位于 `<your-ip>:port`。
+
+[repository]: https://github.com/jdeath/homeassistant-addons
+
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

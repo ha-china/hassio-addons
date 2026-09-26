@@ -1,0 +1,36 @@
+{
+  "version": "26.08.06",
+  "name": "WebTunnel",
+  "url": "https://mp.weixin.qq.com/s/nWA72IHHPTtsmoG_45rCsQ",
+  "slug": "webtunnel",
+  "description": "[老王杂谈说]：安全好用的内网穿透软件",
+  "arch": ["amd64", "aarch64"],
+  "startup": "services",
+  "image": "crpi-tuq1xajq0lk6s0kt.cn-shanghai.personal.cr.aliyuncs.com/hachina/webtunnel-{arch}",
+  "init": false,
+  "hassio_role": "manager",
+  "panel_icon": "mdi:server-network",
+  "ports": {
+    "9600/tcp": 9600
+  },
+  "devices": [
+    "/dev/net/tun"
+  ],
+  "boot": "auto",
+  "restart": "always",
+  "host_network": true,
+  "webui": "http://[HOST]:[PORT:9600]/?s=gjhAXN",
+  "options": {
+    "login_type": "password",
+    "user": "",
+    "passwd": "",
+    "uid": ""
+  },
+  "schema": {
+    "login_type": "list(password|uid)",
+    "user": "str",
+    "passwd": "password",
+    "uid": "str"
+  }
+}
+

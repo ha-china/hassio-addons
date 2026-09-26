@@ -1,0 +1,6 @@
+{
+  "build_from": {
+    "aarch64": "gitea/gitea:latest",
+    "amd64": "gitea/gitea:latest"
+  }
+}

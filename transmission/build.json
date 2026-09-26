@@ -1,0 +1,6 @@
+{
+    "build_from": {
+        "aarch64": "docker.1panel.live/linuxserver/transmission:arm64v8-latest",
+        "amd64": "docker.1panel.live/linuxserver/transmission:amd64-latest"
+    }
+}

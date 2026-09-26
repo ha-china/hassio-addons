@@ -1,0 +1,314 @@
+ 
+## 20260827 (2026-08-29)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+- Upstream tag : 20260823
+## 20260826 (26-08-2026)
+- Minor bugs fixed
+## 20260716.1 (26-08-2026)
+- Minor bugs fixed
+ 
+## 20260716.1 (2026-08-26)
+- Rebuild after syncing the alexbelgium/birdnet-go fork with upstream tphakala/birdnet-go and resolving conflicts on all open pull requests
+
+## 20260716 (2026-07-16)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+ 
+## 20260712 (2026-07-13)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+## nightly-20260615-4 (09-07-2026)
+- Minor bugs fixed
+## nightly-20260615-3 (05-07-2026)
+- Harden the `output.sqlite.path` rewrite added for the persistence fix: reject paths containing `..` traversal segments (shared `validate_safe_path` check), and create the destination's parent directory under `/config` when the relative path includes a subdirectory (e.g. `db/birdnet.db`), since SQLite does not create missing parent directories itself.
+
+## nightly-20260615-2 (05-07-2026)
+- Minor bugs fixed
+ - Fix detections/database not persisting across restarts on a fresh install: upstream's default `config.yaml` ships `output.sqlite.path: birdnet.db` (relative) explicitly, so the missing-only (`//=`) seeding introduced previously never rewrote it to an absolute path. A relative path resolves against the app's ephemeral working directory, so the database was silently recreated empty on every restart. Any relative `output.sqlite.path` is now rewritten to live under the persistent `/config` on startup; values already set to an absolute path are left untouched. (https://github.com/tphakala/birdnet-go/discussions/3774)
+ - MQTT auto-config now also enables BirdNET-Go's native Home Assistant MQTT auto-discovery: detection sensors appear in Home Assistant automatically with no manual YAML (existing UI/config.yaml edits are preserved)
+- MQTT auto-config seeds `realtime.mqtt.retain: true` (only when unset) so sensor states survive Home Assistant restarts
+- Added supervisor watchdog (tcp://[HOST]:[PORT:8080]) so the add-on is automatically restarted if BirdNET-Go stops responding
+- Added backup_exclude for rotated logs, making Home Assistant backups smaller (SQLite journals are kept so hot backups stay consistent)
+
+## nightly-20260615 (2026-06-17)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+## nightly-20260601-2 (03-06-2026)
+- Minor bugs fixed
+## nightly-20260601 (2026-06-01)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+## nightly-20260524 (2026-05-30)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+## nightly-20260429-405 (2026-05-30)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+## nightly-20260525-3 (28-05-2026)
+- New `mqtt_auto_config` addon option (default `false`). When `true` and the Home Assistant MQTT addon is active, `realtime.mqtt.{enabled,broker,username,password}` are written directly to `config.yaml` on every restart. When `false` but Mosquitto is detected, the addon still logs the broker details and reminds you about the option — nothing is written.
+- New `mariadb_auto_config` addon option (default `false`). When `true` and the Home Assistant MariaDB addon is active, `output.mysql.*` is filled in and `output.sqlite.enabled` is set to `false`. When `false` but MariaDB is detected, the addon logs the credentials and reminds you about the option.
+- **Breaking**: `output.sqlite.path` and `logging.file_output.*` are now seeded only when missing from `config.yaml` (previously overwritten every restart). Values changed through the BirdNET-Go UI or by hand-editing `config.yaml` now survive container restarts. If you relied on `LOG_MAX_SIZE_MB` / `LOG_MAX_AGE_DAYS` addon options to override an existing setting in `config.yaml`, remove the existing key from `config.yaml` or edit it directly — the option will only be applied on first run.
+- **Breaking (UI only)**: The nginx ingress reverse-proxy no longer rewrites HTML `href`/`src`/`action` attributes; upstream BirdNET-Go handles those itself via `X-Ingress-Path`. JavaScript string-literal rewrites are unchanged. Please file an issue if you see broken images, links, or forms in the ingress UI after upgrade.
+- Fix database-migration restore: the timestamped backup created during a `BIRDSONGS_FOLDER` change was being written to the script's working directory and looked up under a fresh timestamp on restore, so a SQL failure left the user unable to recover. Backup path is now absolute and reused for restore.
+- Harden the `BIRDSONGS_FOLDER` SQL/YAML path substitution: paths containing characters outside `[A-Za-z0-9._/-]` are now rejected up front instead of being interpolated raw into the SQL UPDATE statement.
+- Tolerate a missing internet connection on first boot: if the default `config.yaml` cannot be downloaded from GitHub, the init script now seeds an empty YAML document so the addon-defaults block populates a usable config (rather than aborting the script on the next `yq` call under `set -e`).
+- Warn (without failing the build) if the upstream `entrypoint.sh` patch target drifts in a new nightly.
+- Remove a dead nginx upstream definition that pointed at an unused port.
+
+## nightly-20260525-2 (26-05-2026)
+- Suppress noisy startup logs: silence `chmod /dev/snd` errors on the read-only HA mount, and hide unavailable ALSA plugins (JACK, OSS, dsnoop) from device enumeration so libjack and pcm_oss/dsnoop probes no longer print at launch. ALSA overrides are written to `/root/.asoundrc` (since `/etc/asound.conf` is read-only in this environment).
+- Allow advanced users to override the ALSA config by dropping a custom `asound.conf` into the addon config folder.
+- Add LOG_MAX_SIZE_MB and LOG_MAX_AGE_DAYS addon options to manage log storage size
+- Automatically trim log files exceeding configured age on startup
+
+## nightly-20260525 (26-05-2026)
+- Minor bugs fixed
+
+## nightly-20260511-414-2 (22-05-2026)
+- Minor bugs fixed
+
+## nightly-20260511-414 (2026-05-16)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## nightly-20260429-405 (2026-05-02)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## nightly-20260321-397 (2026-03-26)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## nightly-20260315 (2026-03-21)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## nightly-20260311 (2026-03-14)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+## nightly-20260118-2 (17-02-2026)
+- Minor bugs fixed
+
+## nightly-20260118 (2026-01-21)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## nightly-20260113 (2026-01-14)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## nightly-20260111 (2026-01-12)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## nightly-20260110 (2026-01-10)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+## nightly-20251223-2 (2025-12-27)
+- Minor bugs fixed
+## nightly-20251224 (2025-12-24)
+- Minor bugs fixed
+
+## nightly-20251223 (2025-12-23)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## nightly-20251214 (2025-12-20)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+- Added support for configuring extra environment variables via the `env_vars` add-on option alongside config.yaml. See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+
+- Preserve the microphone selected in the BirdNET-Go UI unless the `homeassistant_microphone` option explicitly forces the default device.
+
+## "nightly-20251028" (2025-11-01)
+- Minor bugs fixed
+
+## nightly-20251028 (2025-11-01)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+## "nightly-20251012" (2025-10-18)
+- Minor bugs fixed
+
+## nightly-20251012 (2025-10-18)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## nightly-20251008 (2025-10-11)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+## nightly-20250904_6 (2025-09-17)
+- New option "homeassistant_microphone". If set to true, will use homeassistant's microphone by setting the audio_card to "default". Please use the addon options to select the device to which "default" is allocated
+
+## nightly-20250904 (2025-09-06)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## nightly-20250826 (2025-08-30)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## nightly-20250813 (2025-08-16)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## nightly-20250805 (2025-08-09)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+## nightly-20250731-4 (2025-08-04)
+- Minor bugs fixed
+## nightly-20250731-3 (2025-08-04)
+- Minor bugs fixed
+## nightly-20250731-2 (2025-08-02)
+- Minor bugs fixed
+
+## nightly-20250731 (2025-08-01)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+## nightly-20250730 (2025-07-30)
+- Minor bugs fixed
+## nightly-20250725-2 (2025-07-28)
+- Fix /asset path
+- Added 9090 telemetry port
+
+## nightly-20250725 (2025-07-25)
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## nightly-20250710 (2025-07-12)
+
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## 20250710 (2025-07-12)
+
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## 20250704 (2025-07-07)
+
+- Minor bugs fixed
+
+## 20250508 (2025-07-05)
+
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## 20250419 (2025-05-17)
+
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## 20250427-7 (2025-05-15)
+
+- Breaking change: COMMAND addon option removed. Please instead use the config.yaml to define the RTSP feeds
+- Use entrypoint
+
+## 20250427-2 (2025-04-27)
+
+- Minor bugs fixed
+
+## 20250427 (2025-04-27)
+
+- Minor bugs fixed
+
+## 20250316 (2025-04-26)
+
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## 0.6.4-3 (2025-04-07)
+
+- Minor bugs fixed
+
+## 0.6.4-2 (2025-03-30)
+
+- Minor bugs fixed
+
+## 0.6.4 (2025-03-17)
+
+- Minor bugs fixed
+
+## 0.6.3 (2025-03-15)
+
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## 0.6.2-2 (2025-02-21)
+
+- Minor bugs fixed
+
+## 0.6.2 (2025-02-21)
+
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## 20250126-2 (2025-02-21)
+
+- Minor bugs fixed
+
+## 20250126 (2025-02-15)
+
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## 0.6.0-nightly-20250124 (2025-01-25)
+
+- Minor bugs fixed
+
+## 0.6.0-4 (2025-01-21)
+
+- Fix sounds play
+- Correct sqlite for //
+
+## 0.6.0 (2025-01-18)
+
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## 20250103-10 (2025-01-17)
+
+- BREAKING CHANGE : improve implementation of addon options such as Birdsongs folder. Please check the log at first start if anything is different than you expected
+- WARNING : your files will move to the new Birdsongs folder in case of change
+- WARNING : your db will be modified in case of Birdsongs folder change to still allow access to files. A backup will always be created
+- Fix ingress issues
+
+## 20250103 (2025-01-11)
+
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## 25-4 (2024-12-29)
+
+- Fixed https://github.com/alexbelgium/hassio-addons/issues/1687
+
+## 25-3 (2024-12-28)
+
+- avx2 support added by @tphakala
+
+## 25-2 (2024-12-21)
+
+- Minor bugs fixed
+
+## 25 (2024-12-21)
+
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## 0.5.5-11 (2024-10-22)
+
+- Minor bugs fixed
+
+## 0.5.5-10 (2024-09-30)
+
+- Minor bugs fixed
+
+## 0.5.5-9 (2024-07-06)
+
+- Correct indentation issue
+
+## 0.5.5-8 (2024-07-03)
+
+- New option : set the audio clip directory from addon options
+
+## 0.5.5-2 (2024-06-25)
+
+- Minor bugs fixed
+
+## 0.5.5 (2024-06-22)
+
+- Update to latest version from tphakala/birdnet-go (changelog : https://github.com/tphakala/birdnet-go/releases)
+
+## 0.5.5 (2024-06-20)
+
+- Minor bugs fixed
+
+## 0.5.3-3 (2024-06-07)
+
+- Minor bugs fixed
+
+## 0.5.3-2 (2024-06-07)
+
+- Minor bugs fixed
+
+## 0.5.3 (2024-05-26)
+
+- Minor bugs fixed
+
+## 0.5.2 (2024-05-04)
+
+- Minor bugs fixed
+
+## 0.5.1-4 (2024-04-23)
+
+- Feat : provide mariadb information in the startup log to allow its usage
+
+## 0.5.1-3 (2024-04-23)
+
+- Feat : Allow mounting of SMB and local drives to store the audio clips on an external drive
+
+## 0.5.1 (2024-04-22)
+
+- Initial build

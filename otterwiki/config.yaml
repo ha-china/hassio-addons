@@ -1,0 +1,24 @@
+name: Otter Wiki
+version: "2.24.1"
+upstream: 2.7.0
+slug: otterwiki
+description: >-
+  [老王杂谈说]：Otter Wiki 是一款基于 Python 的协作内容管理软件（即维基）。内容存储在 git 仓库中，用于跟踪所有更改。Markdown 用作标记语言。Otter Wiki 使用 Python 编写，基于微框架 Flask。halfmoon 作为 CSS 框架，CodeMirror 作为编辑器。Font Awesome Free 提供图标服务。
+arch:
+  - amd64
+  - aarch64
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+ports:
+  80/tcp: 8084
+ports_description:
+  80/tcp: "Web Interface"
+map:
+  - type: addon_config
+    read_only: false
+    path: /app-data
+image: redimp/otterwiki
+boot: auto
+startup: services
+webui: "[PROTO:ssl]://[HOST]:[PORT:80]"
+ingress: false
+ingress_port: 80
