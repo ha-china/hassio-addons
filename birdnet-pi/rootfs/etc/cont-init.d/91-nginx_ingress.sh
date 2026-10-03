@@ -1,0 +1,94 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+set -e
+
+##################
+# ALLOW RESTARTS #
+##################
+
+if [[ "${BASH_SOURCE[0]}" == /etc/cont-init.d/* ]]; then
+    mkdir -p /etc/scripts-init
+    sed -i "s|/etc/cont-init.d|/etc/scripts-init|g" /ha_entrypoint.sh
+    sed -i "/ rm/d" /ha_entrypoint.sh
+    cp "${BASH_SOURCE[0]}" /etc/scripts-init/
+fi
+
+#################
+# NGINX SETTING #
+#################
+
+# Variables
+ingress_port=$(bashio::addon.ingress_port)
+ingress_interface=$(bashio::addon.ip_address)
+ingress_entry=$(bashio::addon.ingress_entry)
+
+# Quits if ingress is not active
+if [[ "$ingress_entry" != "/api"* ]]; then
+    bashio::log.info "Ingress entry is not set, exiting configuration."
+    sed -i "1a sleep infinity" /custom-services.d/02-nginx.sh
+    # This script re-runs from /etc/scripts-init on an add-on restart, so drop
+    # any marker left by an earlier run: it is what 02-caddy.sh reads to decide
+    # whether the ingress site belongs in the Caddyfile.
+    rm -f /ingress_url
+    exit 0
+fi
+
+bashio::log.info "Adapting for ingress"
+echo "... setting up nginx"
+
+# Check if the NGINX configuration file exists
+nginx_conf="/etc/nginx/servers/ingress.conf"
+if [ -f "$nginx_conf" ]; then
+    sed -i "s/%%port%%/${ingress_port}/g" "$nginx_conf"
+    sed -i "s/%%interface%%/${ingress_interface}/g" "$nginx_conf"
+    sed -i "s|%%ingress_entry%%|${ingress_entry}|g" "$nginx_conf"
+else
+    bashio::log.error "NGINX configuration file not found: $nginx_conf"
+    exit 1
+fi
+
+# Disable log
+sed -i "/View Log/d" "$HOME/BirdNET-Pi/homepage/views.php"
+
+echo "... ensuring restricted area access"
+echo "${ingress_entry}" > /ingress_url
+
+# Modify PHP file safely
+php_file="$HOME/BirdNET-Pi/scripts/common.php"
+if [ -f "$php_file" ]; then
+    sed -i "/function is_authenticated/a if (strpos(\$_SERVER['HTTP_REFERER'], '/api/hassio_ingress') !== false && strpos(\$_SERVER['HTTP_REFERER'], trim(file_get_contents('/ingress_url'))) !== false) { \$ret = true; return \$ret; }" "$php_file"
+else
+    bashio::log.warning "PHP file not found: $php_file"
+fi
+
+echo "... adapting Caddyfile for ingress"
+chmod +x /helpers/caddy_ingress.sh
+
+# Correct script execution
+/helpers/caddy_ingress.sh
+
+# Correct API images
+sed -i "s|localhost|localhost:8082|g" "$HOME/BirdNET-Pi/scripts/utils/notifications.py"
+
+# Update the Caddyfile if update script exists
+caddy_update_script="$HOME/BirdNET-Pi/scripts/update_caddyfile.sh"
+if [ ! -f "$caddy_update_script" ]; then
+    bashio::log.error "Caddy update script not found: $caddy_update_script"
+    exit 1
+fi
+
+# update_caddyfile.sh rewrites /etc/caddy/Caddyfile from scratch, which drops
+# the ingress site added just above. 02-caddy.sh runs it right before starting
+# caddy, so the hook below has to re-add the site from inside that script, just
+# before it formats and reloads the config.
+# The anchor must not require "sudo": the Dockerfile strips it from every
+# BirdNET-Pi script at build time, so the shipped line is "caddy fmt --overwrite".
+if ! grep -qF "/helpers/caddy_ingress.sh" "$caddy_update_script"; then
+    sed -i -E "/^[[:space:]]*(sudo[[:space:]]+)?caddy[[:space:]]+fmt[[:space:]]+--overwrite/i /helpers/caddy_ingress.sh" "$caddy_update_script"
+fi
+
+# sed is silent when the anchor is missing; make sure the hook is really there
+if ! grep -qF "/helpers/caddy_ingress.sh" "$caddy_update_script"; then
+    bashio::log.warning "Could not anchor the ingress site in $caddy_update_script, appending it instead"
+    printf '\n/helpers/caddy_ingress.sh\n' >> "$caddy_update_script"
+fi

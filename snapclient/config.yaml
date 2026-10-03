@@ -1,0 +1,23 @@
+name: "Snapclient"
+version: "0.9.1"
+slug: snapclient
+description: "Snapclient for Snapcast"
+arch: 
+  - aarch64
+  - amd64
+  - armv7
+  - i386
+
+# Sound
+audio: true
+devices:
+  - /dev/snd
+
+init: false
+
+schema:
+  host: str
+  port: port?
+options:
+  host: ""
+  port: 1704

@@ -1,0 +1,20 @@
+---
+configuration:
+  log_level:
+    name: Livello Log
+    description: >-
+      Controlla il livello di dettaglio dei log dati dall'app.
+  name:
+    name: Nome
+    description: >-
+      Il nome del tuo dispositivo mostrato sui
+      client ufficiali di Spotify.
+  bitrate:
+    name: Bitrate
+    description: >-
+      Il bitrate che Spotify dovrebbe usare. Piú é alto, migliore é la qualitá sonora,
+      tuttavia, l'app consumerá piú banda.
+  initial_volume:
+    name: Volume Iniziale
+    description: >-
+      Volume iniziale in % da 0 a 100.

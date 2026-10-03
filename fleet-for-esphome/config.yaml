@@ -1,0 +1,118 @@
+name: "Fleet for ESPHome"
+version: "1.7.3"
+slug: "esphome_dist_server"
+description: "[老王杂谈说]：一个为 ESPHome 设计的现代 Home Assistant 界面——支持基于 Git 的配置历史记录与回滚、实时编译队列、逐设备版本固定、定时 OTA 以及可选的分布式编译，无论是 3 台还是 300 台设备都能使用。"
+url: "https://gh-proxy.org/github.com/weirded/fleet-for-esphome"
+# #10: dropped armhf, armv7, i386 — Supervisor flags them as deprecated, and
+# ESPHome compilation is a 64-bit-only game in practice. No real users on
+# 32-bit ARM or x86; the toolchains for new ESP32 variants don't ship for them.
+arch: [aarch64, amd64]
+startup: application
+boot: auto
+init: true
+# Bug #82 / IM.2 (1.6.2): install from a prebuilt image on GHCR
+# instead of having Supervisor build on each install host. Without
+# this, Supervisor runs ``docker buildx build`` against the
+# ``docker:<HOST_DOCKER_VER>-cli`` builder image, which fails if
+# Docker Hub is rate-limiting the host or briefly unreachable —
+# the exact symptom in #82 (``Image docker.1panel.live/library/docker:...-cli
+# does not exist``). ``{arch}`` is substituted by Supervisor at
+# install time (``amd64-addon-esphome-dist-server`` on x86-64,
+# ``aarch64-addon-esphome-dist-server`` on ARM); the version segment
+# is appended automatically from ``version:`` above. ``build.yaml``
+# stays in the repo so Supervisor can still fall back to a local
+# build when GHCR is unreachable and ``push-to-hass-4.sh`` can
+# continue rsync-deploying dev builds (see IM.5 for the sed filter
+# that strips this line on the dev loop).
+image: ghcr.nju.edu.cn/weirded/{arch}-addon-esphome-dist-server
+# Bug #5 (1.6.1): `stage: experimental` removed. The add-on has
+# shipped stable releases through 1.6 with full test coverage,
+# cosign + SBOM supply-chain hardening, an AppArmor profile, and
+# a real threat model (dev-plans/SECURITY_AUDIT.md). No `stage:`
+# key defaults to stable in Supervisor.
+# PR #80 review (1.6.1): bumped from 2024.1.0 → 2024.11.0 to match
+# the assumptions baked into `custom_integration/esphome_fleet/config_flow.py`.
+# async_step_reconfigure is only dispatched by HA 2024.11+, and the
+# flow uses async_update_reload_and_abort (also 2024.11+). Bumping
+# makes the declared minimum match reality — the pre-2024.11 fallback
+# path was dead code in that window anyway.
+homeassistant: "2024.11.0"
+codeowners:
+  - "@weirded"
+# Ingress: Web UI embedded in HA sidebar, authenticated by HA
+ingress: true
+ingress_port: 8765
+# `mdi:chip` matches the ESPHome Device Builder add-on's sidebar icon
+# so Fleet and Builder sit next to each other with the same visual
+# vocabulary (#issue — bug 3 in 1.6).
+panel_icon: mdi:chip
+panel_title: "Fleet for ESPHome"
+# Direct port: build workers (Docker) connect here with Bearer token auth
+ports:
+  8765/tcp: 8765
+ports_description:
+  8765/tcp: "Build worker API & Web UI"
+# mDNS device discovery requires host networking
+host_network: true
+# #206: NET_RAW lets the per-device Ping diagnostic open raw ICMP
+# sockets when the host's ``net.ipv4.ping_group_range`` is empty
+# (HAOS default ``1 0``). The ping helper tries unprivileged datagram
+# ICMP first and falls back to the raw-socket path; without the
+# capability the modal failed immediately on every HAOS install.
+privileged:
+  - NET_RAW
+# Supervisor API access — needed to detect ESPHome add-on version
+hassio_api: true
+# HA Core REST API access — needed to read entity states (device connectivity)
+homeassistant_api: true
+# AU.1: Supervisor /auth endpoint — lets the add-on validate HA user
+# credentials (Authorization: Bearer <HA long-lived access token>) on
+# direct-port requests so mutations can be attributed to the HA user,
+# and direct-port access can be locked down via the `require_ha_auth`
+# add-on option (AU.3).
+auth_api: true
+# SS.1 (1.6.1): AppArmor profile `apparmor.txt` ships alongside this
+# file. Supervisor loads the profile automatically when this key is
+# true and re-loads it on each upgrade. If a legitimate operation
+# starts failing after an upgrade and the add-on log shows
+# `apparmor="DENIED"` lines, widen `apparmor.txt` rather than
+# disabling this flag — losing the profile drops one Supervisor
+# security star and the deny-by-default protection.
+apparmor: true
+# #26: declare that we POST to Supervisor's /discovery with service
+# "esphome_fleet". Without this, Supervisor rejects the POST with 403
+# "Apps must list services they provide via discovery in their config!"
+# The service name matches the integration DOMAIN that `async_step_hassio`
+# on the integration side dispatches against.
+discovery:
+  - esphome_fleet
+# GitHub #45: exclude the local worker's ESPHome version cache + build
+# artifacts from HA backups. These are large (~50-200MB per target) and
+# fully reproducible — they'll be rebuilt on first compile after restore.
+# Bug #199: also exclude /data/firmware/ — compiled .bin archives kept
+# for the History tab's Download button. ~100% of the partial-addon
+# backup payload today (237 MB on hass-4 for ~480 retained jobs); they
+# regenerate from YAML on Compile / Rerun, so a restore never blocks
+# on them. Pairs with #198's 2-day on-disk retention.
+backup_exclude:
+  - esphome-versions
+  - firmware
+map:
+  # HI.9: need write access to /config/custom_components/esphome_fleet/
+  # for the HA-integration auto-installer (HI.8) at startup. The new
+  # `homeassistant_config` key mounts at /homeassistant (NOT /config),
+  # which would break every existing `/config/esphome/...` path in the
+  # server + scanner. Stick with the old `config:rw` shorthand — it's
+  # deprecated but still works, and deprecation-warning is a smaller
+  # tax than a full path migration. Revisit when HA removes `config`.
+  - config:rw
+# SP.8 (1.6): every user-facing option moved into the in-app Settings
+# drawer (`/data/settings.json`). Supervisor's Configuration tab is
+# intentionally empty — users edit token, timeouts, thresholds and the
+# `require_ha_auth` flag via the gear icon in the web UI. Values set in
+# `options.json` on pre-1.6 installs are one-shot imported into the
+# Settings store on first boot after upgrade (see settings.py).
+#
+# Leaving `options:` and `schema:` absent is deliberate. Supervisor
+# renders an empty config panel with the standard info text, which is
+# the signal we want: "there's nothing to configure here anymore."

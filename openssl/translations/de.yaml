@@ -1,0 +1,7 @@
+configuration:
+  website_name:
+    name: "Webseiten-Name (CN)"
+    description: "Der Common Name (CN), für den das Zertifikat ausgestellt werden soll."
+  log_level:
+    name: "Log Level"
+    description: "Steuert die Detailgenauigkeit der Protokolle."

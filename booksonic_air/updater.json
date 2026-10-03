@@ -1,0 +1,8 @@
+{
+  "last_update": "26-08-2023",
+  "repository": "alexbelgium/hassio-addons",
+  "slug": "booksonic_air",
+  "source": "github",
+  "upstream_repo": "linuxserver/docker-booksonic-air",
+  "upstream_version": "2201.1.0"
+}

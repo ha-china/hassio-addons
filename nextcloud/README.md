@@ -1,0 +1,208 @@
+## &#9888; Open Issue : [🐛 [NextCloud] Mounted localdisk does not have write permissions (opened 2025-09-23)](https://github.com/alexbelgium/hassio-addons/issues/2123) by [@Patabugen](https://github.com/Patabugen)
+# Home assistant add-on: Nextcloud
+
+
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## Addon informations
+
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnextcloud%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnextcloud%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fnextcloud%2Fconfig.yaml)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+
+![Uses elasticsearch][elasticsearch-shield]
+
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/nextcloud/stats.png)
+
+## About
+
+Various tweaks and configuration options addition.
+Inital fork from version : https://github.com/haberda/hassio_addons
+This addon is based on the [docker image](https://github.com/linuxserver/docker-nextcloud) from linuxserver.io.
+
+## Configuration
+
+Webui can be found at `<your-ip>:port`.
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `PGID` | int | `1000` | Group ID for file permissions |
+| `PUID` | int | `1000` | User ID for file permissions |
+| `TZ` | str | | Timezone (e.g., `Europe/London`) |
+| `additional_apps` | str | | Additional APK packages to install (comma-separated) |
+| `trusted_domains` | str | | Trusted domains for Nextcloud access |
+| `use_own_certs` | bool | `false` | Use custom SSL certificates |
+| `certfile` | str | `fullchain.pem` | SSL certificate file (in `/ssl/`) |
+| `keyfile` | str | `privkey.pem` | SSL private key file (in `/ssl/`) |
+| `OCR` | bool | `false` | Enable Tesseract OCR capability |
+| `OCRLANG` | str | | OCR languages (e.g., `fra,eng`) |
+| `Full_Text_Search` | bool | `false` | Enable full-text search with Elasticsearch |
+| `elasticsearch_server` | str | | Elasticsearch server address (ip:port) |
+| `enable_thumbnails` | bool | `true` | Enable thumbnail generation |
+| `default_phone_region` | str | | Default phone region (ISO 3166-1 alpha-2) |
+| `disable_updates` | bool | `false` | Prevent automatic app updates |
+| `env_memory_limit` | str | `512M` | PHP memory limit |
+| `env_post_max_size` | str | `512M` | Maximum POST size |
+| `env_upload_max_filesize` | str | `512M` | Maximum upload file size |
+| `localdisks` | str | | Local drives to mount (e.g., `sda1,sdb1,MYNAS`). Add a folder after the drive to mount only that folder, e.g. `MYNAS/public` mounts only that folder, at `/mnt/MYNAS/public`. Folder mounts need an add-on version released after 2026-09-19. |
+| `networkdisks` | str | | SMB shares to mount (e.g., `//SERVER/SHARE`) |
+| `cifsusername` | str | | SMB username for network shares |
+| `cifspassword` | str | | SMB password for network shares |
+| `cifsdomain` | str | | SMB domain for network shares |
+| `skip_permissions_check` | bool | `false` | Skip file permissions checking |
+
+### Example Configuration
+
+```yaml
+PGID: 1000
+PUID: 1000
+TZ: "Europe/London"
+additional_apps: "vim,curl"
+trusted_domains: "nextcloud.example.com,192.168.1.100"
+use_own_certs: true
+certfile: "fullchain.pem"
+keyfile: "privkey.pem"
+OCR: true
+OCRLANG: "eng,fra,deu"
+enable_thumbnails: true
+env_memory_limit: "1024M"
+localdisks: "sda1,sdb1"
+networkdisks: "//192.168.1.100/nextcloud"
+cifsusername: "nextcloud_user"
+cifspassword: "password123"
+```
+
+### Mounting Drives
+
+This addon supports mounting both local drives and remote SMB shares:
+
+- **Local drives**: See [Mounting Local Drives in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-Local-Drives-in-Addons)
+- **Remote shares**: See [Mounting Remote Shares in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Mounting-remote-shares-in-Addons)
+
+### Custom Scripts and Environment Variables
+
+This addon supports custom scripts and environment variables through the `app_config` mapping:
+
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+
+### Custom Script Example
+
+Create `/config/addons_autoscripts/nextcloud-ocr.sh` for custom initialization:
+
+```bash
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+
+# Custom script executed at addon start
+# Runs only after initialization is done
+
+mkdir -p /scripts
+if [ ! -f /app/www/public/occ ]; then
+    cp /config/addons_autoscripts/"$(basename "${BASH_SOURCE}")" /scripts/ && exit 0
+fi
+
+echo "Scanning files"
+sudo -u abc php /app/www/public/occ files:scan --all
+echo "File scan completed!"
+```
+
+### Change the temp folder to avoid bloating emmc on HA systems (thanks @senna1992)
+
+See ; https://github.com/alexbelgium/hassio-addons/discussions/1370
+
+### Use mariadb as the main database (Thanks @amaciuc)
+
+If you notice the following warning at your first `webui` running:
+
+```bash
+Performance warning
+You chose SQLite as database.
+SQLite should only be used for minimal and development instances. For production we recommend a different database backend.
+If you use clients for file syncing, the use of SQLite is highly discouraged.
+```
+
+and you want to overcome this, follow the below steps:
+
+- 1. Install `mariadb` add-on, configure it with some random infos and start it. It is important to start it successfully in order to be seen by `nextcloud` in the network.
+- 2. Install `nextcloud` add-on (or restart it if you have already installed), watch the logs until you will notice the following `warning`:
+
+  ```bash
+  WARNING: MariaDB addon was found! It can't be configured automatically due to the way Nextcloud works, but you can configure it manually when running the web UI for the first time using those values :
+  Database user : service
+  Database password : Eangohyuchae6aif7saich2nies8xaivaejaNgaev6gi3yohy8ha2aexaetei6oh
+  Database name : nextcloud
+  Host-name : core-mariadb:3306
+  ```
+
+- 3. Go back at `mariadb` add-on, configure it with above credentials and restart it. Make sure the add-on is creating the `nextcloud` database.
+- 4. Go in the webui and fill all required info. Here you can view an example:
+
+![image](https://user-images.githubusercontent.com/19391765/207888717-50b43002-a5e2-4782-b5c9-1f582309df2b.png)
+
+## Installation
+
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
+
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Go to the webui, where you will create your username, password, and database (if using mariadb, infos are in the log)
+1. Restart the addon, to apply any option that should be applied
+
+## HA integration
+
+See this component : https://www.home-assistant.io/integrations/nextcloud/
+
+[repository]: https://github.com/alexbelgium/hassio-addons
+[elasticsearch-shield]: https://img.shields.io/badge/Elasticsearch-optional-blue.svg?logo=elasticsearch
+continu
+
+
+
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

@@ -1,0 +1,25 @@
+{
+  "name": "home-assistant-time-machine",
+  "version": "2.3.1",
+  "repository": {
+    "type": "git",
+    "url": "https://gh-proxy.org/github.com/saihgupr/HomeAssistantTimeMachine.git"
+  },
+  "description": "Browse and restore Home Assistant configuration backups",
+  "private": true,
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.22.2",
+    "js-yaml": "^4.2.0",
+    "node-cron": "^4.2.1",
+    "node-fetch": "^2.6.12",
+    "yaml": "^2.9.0"
+  },
+  "overrides": {
+    "brace-expansion": "2.0.2"
+  }
+}

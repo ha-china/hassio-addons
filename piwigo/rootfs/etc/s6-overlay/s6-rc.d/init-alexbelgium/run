@@ -1,0 +1,47 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+set -e
+
+##################
+# SYMLINK CONFIG #
+##################
+
+#Create folders
+
+if [ ! -d /share/piwigo ]; then
+    echo "Creating /share/piwigo"
+    mkdir -p /share/piwigo
+    chown -R "$PUID:$PGID" /share/piwigo
+else
+    chown -R "$PUID:$PGID" /share/piwigo
+fi
+
+mkdir -p /config/www/local
+if [ ! -d /share/piwigo/config ] && [ -d /config/www/local/config ]; then
+    echo "moving config folder"
+    mv /config/www/local/config /share/piwigo
+    ln -s /share/piwigo/config /config/www/local
+    echo "links done"
+else
+    if [ -d /config/www/local/config ]; then rm -r /config/www/local/config; fi
+    ln -s /share/piwigo/config /config/www/local
+    echo "Using existing config"
+fi
+
+mkdir -p /config/keys
+if [ ! -d /share/piwigo/keys ]; then
+    echo "moving keys folder"
+    mv /config/keys /share/piwigo
+    ln -s /share/piwigo/keys /config
+    echo "links done"
+else
+    rm -r /config/keys
+    ln -s /share/piwigo/keys /config
+    echo "Using existing keys folder"
+fi
+
+##################
+# CORRECT CONFIG #
+##################
+# shellcheck disable=SC2015
+sed -i 's|E_ALL|""|g' /share/piwigo/config/config.inc.php && echo "config corrected for php error" || true

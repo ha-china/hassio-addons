@@ -1,0 +1,173 @@
+# Home assistant add-on: Monica
+
+
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## Addon informations
+
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmonica%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmonica%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmonica%2Fconfig.yaml)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/monica/stats.png)
+
+## About
+
+[Monica](https://www.monicahq.com/) is a Personal Relationship Manager (PRM) that helps you organize your social life and keep track of your relationships with friends, family, and colleagues. It's like a CRM, but for your personal life.
+
+Key features:
+- Track conversations, activities, and important dates
+- Store contact information and relationship details
+- Set reminders for birthdays, anniversaries, and follow-ups
+- Document gifts given and received
+- Track debts and favors
+- Organize notes and memories about people
+- Journal functionality
+- Gift ideas tracking
+- Multiple database options (SQLite, MariaDB, MySQL)
+- Built-in Meilisearch full-text search engine
+
+This addon is based on the official [Monica](https://github.com/monicahq/monica) application.
+
+## Configuration
+
+Webui can be found at `<your-ip>:8181`.
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `database` | list | `sqlite` | Database type (sqlite/MariaDB_addon/Mysql_external) |
+| `APP_KEY` | str | | Application encryption key (auto-generated if empty) |
+| `DB_DATABASE` | str | | Database name (for external MySQL/MariaDB) |
+| `DB_HOST` | str | | Database hostname (for external MySQL/MariaDB) |
+| `DB_USERNAME` | str | | Database username (for external MySQL/MariaDB) |
+| `DB_PASSWORD` | str | | Database password (for external MySQL/MariaDB) |
+| `DB_PORT` | int | | Database port (for external MySQL/MariaDB) |
+| `MAIL_MAILER` | str | `log` | Mail driver (smtp/log/sendmail) |
+| `MAIL_HOST` | str | | SMTP server hostname |
+| `MAIL_PORT` | str | | SMTP server port |
+| `MAIL_USERNAME` | str | | SMTP username |
+| `MAIL_PASSWORD` | str | | SMTP password |
+| `MAIL_ENCRYPTION` | str | | SMTP encryption (tls/ssl) |
+| `MAIL_FROM_ADDRESS` | str | | From email address |
+| `MAIL_FROM_NAME` | str | | From email name |
+
+### Example Configuration
+
+```yaml
+database: "sqlite"
+APP_KEY: ""  # Will be auto-generated
+MAIL_MAILER: "smtp"
+MAIL_HOST: "smtp.gmail.com"
+MAIL_PORT: "587"
+MAIL_USERNAME: "your-email@gmail.com"
+MAIL_PASSWORD: "your-app-password"
+MAIL_ENCRYPTION: "tls"
+MAIL_FROM_ADDRESS: "your-email@gmail.com"
+MAIL_FROM_NAME: "Monica"
+```
+
+### Database Configuration
+
+**SQLite (Default):**
+- No additional configuration required
+- Data stored in addon directory
+- Suitable for single-user setups
+
+**MariaDB Addon:**
+- Set `database` to `MariaDB_addon`
+- Requires MariaDB addon to be installed and running
+- Addon will auto-configure database connection
+
+**External MySQL/MariaDB:**
+- Set `database` to `Mysql_external`
+- Configure all `DB_*` options with your database details
+
+### Email Configuration
+
+Configure SMTP settings to enable:
+- Password reset emails
+- Invitation emails
+- Notification emails
+- Reminder emails
+
+### Custom Scripts and Environment Variables
+
+This addon supports custom scripts and environment variables through the `app_config` mapping:
+
+- **Meilisearch full-text search**: The addon ships with an embedded [Meilisearch](https://www.meilisearch.com/) service that Monica uses by default. The search API listens on `http://127.0.0.1:7700` inside the container. Override `MEILISEARCH_URL` via `env_vars` if you prefer an external Meilisearch instance—the init script will detect that and skip starting the bundled daemon. You can further tweak Meilisearch by defining extra environment variables through the `env_vars` option if needed. To secure (or disable) Meilisearch authentication without custom env vars, set the `meilisearch_key` add-on option; the init script will pass it to both Monica and the bundled Meilisearch instance. If you prefer to manage the key yourself, you can also provide `MEILI_MASTER_KEY` through `env_vars`, which the add-on now uses as a fallback when no `meilisearch_key` is configured. When neither is set (or they are too short), the add-on now generates a persistent 32-byte key in `/data/meilisearch_master_key` so Meilisearch always starts with a valid master key.
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+
+## Installation
+
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
+
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Configure database and email settings as needed.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Open the webUI to set up your Monica account.
+
+## First Setup
+
+After installation and startup:
+
+1. Open the webUI at `<your-ip>:8181`
+2. Create your first user account
+3. Complete the setup wizard
+4. Start adding your contacts and relationships
+
+## Support
+
+Create an issue on github, or ask on the [home assistant community forum](https://community.home-assistant.io/)
+
+For more information about Monica, visit: https://www.monicahq.com/
+
+[repository]: https://github.com/alexbelgium/hassio-addons
+
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://gitee.com/desmond_GT/hassio-addons/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

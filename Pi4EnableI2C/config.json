@@ -1,0 +1,25 @@
+{
+  "name": "HassOS I2C Configurator",
+  "version": "0.14",
+  "slug": "hassosi2cconfiguratoraddon",
+  "description": "这启用了i2c。您可以在运行一次后卸载它。检查日志以获取信息。",
+  "arch": [
+    "armhf",
+    "armv7",
+    "aarch64"
+  ],
+  "startup": "once",
+  "auth_api": true,
+  "init": false,
+  "ingress": true,
+  "app_armor": false,
+  "privileged": [
+    "SYS_ADMIN"
+  ],
+  "stage": "experimental",
+  "full_access": true,
+  "url": "https://community.home-assistant.io/t/add-on-hassos-i2c-configurator/264167",
+  "boot": "manual",
+  "options": {},
+  "schema": {}
+}

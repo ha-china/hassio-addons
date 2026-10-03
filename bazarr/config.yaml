@@ -1,0 +1,17 @@
+name: Bazarr
+version: 0.7.0
+slug: bazarr
+description: '[老王杂谈说]：下载并管理 Sonarr 和 Radarr 的字幕'
+url: https://gh-proxy.org/github.com/hassio-addons/app-bazarr/tree/main/README.md
+webui: http://[HOST]:[PORT:6767]
+init: false
+arch:
+  - aarch64
+  - amd64
+map:
+  - addon_config:rw
+  - share:rw
+  - media:rw
+ports:
+  6767/tcp: 6767
+image: ghcr.nju.edu.cn/hassio-addons/bazarr/{arch}

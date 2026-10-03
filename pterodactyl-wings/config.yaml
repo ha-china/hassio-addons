@@ -1,0 +1,28 @@
+---
+name: pterodactyl Wings Gameserver
+version: 2.4.6
+slug: pterodactyl_wings
+description: '[老王杂谈说]：开源游戏主机'
+url: https://gh-proxy.org/github.com/FaserF/hassio-addons/tree/master/pterodactyl-wings
+arch:
+  - aarch64
+  - amd64
+image: ghcr.nju.edu.cn/faserf/hassio-addons-pterodactyl_wings-{arch}
+# webui: "[PROTO:ssl]://[HOST]:[PORT:8080]"
+host_network: true
+startup: services
+map:
+  - share:rw
+ingress: true
+ingress_port: 8080
+init: false
+full_access: true
+privileged:
+  - NET_ADMIN
+panel_icon: mdi:controller
+options:
+  config_file: /share/pterodactyl/config.yml
+  log_level: "info"
+schema:
+  config_file: str
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?

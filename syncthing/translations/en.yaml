@@ -1,0 +1,8 @@
+configuration:
+  state_dir:
+    name: State directory
+    description: Absolute path to the directory to store Syncthing's internal state. Defaults to `/data` if unset.
+network:
+  8384/tcp: Web frontend (not needed with Ingress)
+  22000/tcp: Sync protocol
+  21027/udp: Discovery broadcast

@@ -1,0 +1,10 @@
+---
+configuration:
+  host:
+    name: Snapserver Host
+    description: >-
+      Hostname of the snapcast server.
+  port:
+    name: Snapserver Port
+    description: >-
+      Port of the snapcast server.

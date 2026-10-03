@@ -1,0 +1,157 @@
+#============================#
+# ALEXBELGIUM'S DOCKERFILE  #
+#============================#
+# Home Assistant Add-on – ENTE (server + web UI)
+
+########################################################
+# 0) Build the ente-web static front-end (multi-stage) #
+########################################################
+FROM node:24 AS web-builder
+
+# Build-time selector; set `--build-arg ENTE_WEB_TAG=vX.Y.Z` if you want a specific release
+ARG ENTE_WEB_TAG=main
+
+ENV RUSTUP_HOME=/usr/local/rustup \
+    CARGO_HOME=/usr/local/cargo \
+    PATH=/usr/local/cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Tools needed to build (git, rust for ente-wasm)
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends \
+      git \
+      curl \
+      ca-certificates \
+      build-essential \
+    ; \
+    rm -rf /var/lib/apt/lists/*; \
+    \
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable --target wasm32-unknown-unknown
+
+# Pull the web source
+WORKDIR /src
+RUN git clone --depth 1 --branch "${ENTE_WEB_TAG}" https://gh-proxy.org/github.com/ente/ente.git .
+
+# Build web workspace (lives in ./web)
+WORKDIR /src/web
+ENV NEXT_PUBLIC_ENTE_ENDPOINT=ENTE_API_ORIGIN_PLACEHOLDER
+ENV NEXT_PUBLIC_ENTE_ALBUMS_ENDPOINT=ENTE_ALBUMS_ORIGIN_PLACEHOLDER
+
+RUN npm ci
+RUN npm run build:photos
+RUN npm run build:albums
+RUN npm run build:accounts
+RUN npm run build:auth
+RUN npm run build:cast
+RUN npm run build:share
+RUN npm run build:embed
+RUN npm run build:paste
+RUN npm run build:locker
+RUN npm run build:memories
+
+#################
+# 1) Base image #
+#################
+FROM ghcr.nju.edu.cn/ente/server:latest
+
+##################
+# 2) Tune image  #
+##################
+ENV S6_CMD_WAIT_FOR_SERVICES=1 \
+    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
+    S6_SERVICES_GRACETIME=0
+
+USER root
+
+# --- LSIO helper ---
+COPY ha_lsio.sh /ha_lsio.sh
+ARG CONFIGLOCATION="/config"
+RUN set -eux; \
+    chmod 744 /ha_lsio.sh; \
+    if grep -qr "lsio" /etc; then /ha_lsio.sh "$CONFIGLOCATION"; fi; \
+    rm /ha_lsio.sh
+
+# --- MinIO, psql client etc.
+RUN set -eux; \
+    BUILD_ARCH="$(uname -m)"; \
+    echo "${BUILD_ARCH}"; \
+    ARCH="amd64"; \
+    if echo "${BUILD_ARCH}" | grep -Eq 'aarch64|armv8|arm64'; then ARCH="arm64"; fi; \
+    apk add --no-cache bash curl ca-certificates wget jq tini postgresql15-client; \
+    curl -fsSL "https://dl.min.io/server/minio/release/linux-${ARCH}/minio" -o /usr/local/bin/minio; \
+    curl -fsSL "https://dl.min.io/client/mc/release/linux-${ARCH}/mc" -o /usr/local/bin/mc; \
+    chmod +x /usr/local/bin/minio /usr/local/bin/mc
+
+RUN apk add --no-cache \
+    lsb-release curl gnupg wget tini jq sudo \
+    postgresql postgresql-client
+
+# ---------- ente-web bundle ----------
+RUN apk add --no-cache nginx
+
+# Static files built in the previous stage
+COPY --from=web-builder /src/web/apps/photos/out    /www/photos
+COPY --from=web-builder /src/web/apps/albums/out    /www/albums
+COPY --from=web-builder /src/web/apps/accounts/out  /www/accounts
+COPY --from=web-builder /src/web/apps/auth/out      /www/auth
+COPY --from=web-builder /src/web/apps/cast/out      /www/cast
+COPY --from=web-builder /src/web/apps/share/out     /www/share
+COPY --from=web-builder /src/web/apps/embed/out     /www/embed
+COPY --from=web-builder /src/web/apps/paste/out     /www/paste
+COPY --from=web-builder /src/web/apps/locker/out    /www/locker
+COPY --from=web-builder /src/web/apps/memories/out  /www/memories
+
+############################
+# 3) Install add-on helpers #
+############################
+COPY rootfs/ /
+RUN find . -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -exec chmod +x {} \;
+
+ARG MODULES="00-banner.sh 01-custom_script.sh 00-global_var.sh 00-local_mounts.sh 00-smb_mounts.sh"
+COPY ha_automodules.sh /ha_automodules.sh
+RUN set -eux; \
+    chmod 744 /ha_automodules.sh; \
+    /ha_automodules.sh "$MODULES"; \
+    rm /ha_automodules.sh
+
+ENV PACKAGES="sudo jq yamllint nginx"
+COPY ha_autoapps.sh /ha_autoapps.sh
+RUN set -eux; \
+    chmod 744 /ha_autoapps.sh; \
+    /ha_autoapps.sh "$PACKAGES"; \
+    rm /ha_autoapps.sh
+
+###############
+# 4) Entrypoint
+###############
+ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
+COPY ha_entrypoint.sh /ha_entrypoint.sh
+RUN chmod +x /ha_entrypoint.sh
+
+ENTRYPOINT ["/usr/bin/env"]
+CMD ["/ha_entrypoint.sh"]
+
+############
+# 5) Labels
+############
+ARG BUILD_VERSION BUILD_ARCH BUILD_DATE BUILD_NAME BUILD_DESCRIPTION BUILD_REF BUILD_REPOSITORY
+LABEL \
+  io.hass.name="${BUILD_NAME}" \
+  io.hass.description="${BUILD_DESCRIPTION}" \
+  io.hass.arch="${BUILD_ARCH}" \
+  io.hass.type="addon" \
+  io.hass.version=${BUILD_VERSION} \
+  maintainer="alexbelgium (https://gh-proxy.org/github.com/alexbelgium)" \
+  org.opencontainers.image.title="${BUILD_NAME}" \
+  org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
+  org.opencontainers.image.url="https://gh-proxy.org/github.com/alexbelgium" \
+  org.opencontainers.image.source="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}" \
+  org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+  org.opencontainers.image.created=${BUILD_DATE} \
+  org.opencontainers.image.revision=${BUILD_REF} \
+  org.opencontainers.image.version=${BUILD_VERSION}
+
+#################
+# 6) Finish line
+#################
+EXPOSE 3000 3001 3002 3003 3004 3005 3006 3007 3008 3009

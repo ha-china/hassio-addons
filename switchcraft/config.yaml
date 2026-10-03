@@ -1,0 +1,31 @@
+---
+name: SwitchCraft
+version: 0.3.0
+slug: switchcraft
+description: '[老王杂谈说]：SwitchCraft 是一款强大的跨平台工具，旨在为 IT 专业人士提供全面的打包辅助功能。'
+url: https://gh-proxy.org/github.com/FaserF/SwitchCraft
+arch:
+  - aarch64
+  - amd64
+image: ghcr.nju.edu.cn/faserf/hassio-addons-switchcraft-{arch}
+ingress: true
+ingress_entry: "/"
+ingress_port: 8080
+ports:
+  8080/tcp: 8081
+init: false
+map:
+  - homeassistant_config:rw
+options:
+  log_level: "info"
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
+  flet_secret: str?
+  base_url: str?
+  entra_client_id: str?
+  entra_client_secret: str?
+  entra_tenant_id: str?
+  github_client_id: str?
+  github_client_secret: str?
+panel_icon: mdi:package-variant-closed
+stage: experimental

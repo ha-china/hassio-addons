@@ -1,0 +1,16 @@
+name: Example
+version: 14.0.1
+slug: example
+description: '[老王杂谈说]：Home Assistant 社区应用程序示例应用'
+url: https://gh-proxy.org/github.com/hassio-addons/app-example
+init: false
+arch:
+  - aarch64
+  - amd64
+options:
+  log_level: info
+  seconds_between_quotes: 5
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
+  seconds_between_quotes: int(1,120)
+image: ghcr.nju.edu.cn/hassio-addons/example

@@ -1,0 +1,6 @@
+{
+    "build_from": {
+        "aarch64": "ghcr.nju.edu.cn/signalk/signalk-server:latest",
+        "amd64": "ghcr.nju.edu.cn/signalk/signalk-server:latest"
+    }
+}
