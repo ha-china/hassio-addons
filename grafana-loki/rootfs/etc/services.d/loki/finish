@@ -1,0 +1,9 @@
+#!/usr/bin/env bashio
+# ==============================================================================
+# Take down the S6 supervision tree when cmd fails
+# s6-overlay docs: https://github.com/just-containers/s6-overlay
+# ==============================================================================
+
+declare APP_EXIT_CODE=${1}
+bashio::log.warning "Loki exited - Halt add-on with exit code ${APP_EXIT_CODE}"
+exec /run/s6/basedir/bin/halt

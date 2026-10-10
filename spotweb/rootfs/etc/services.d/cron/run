@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv sh
+
+chmod -R +x /etc/periodic
+
+# log errors in addon logs in foreground
+/usr/sbin/crond -f -L /proc/1/fd/1 -S -l 0

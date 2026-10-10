@@ -1,0 +1,33 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "manual",
+  "description": "[老王杂谈说]：Open Dungeon Master 是在您自己的机器上运行 multiplayer（及单人）奇幻角色扮演游戏 5e 战役的人工智能 Dungeon Master。叙述者将为您已有的任何 AI：本地模型（llama.cpp、Ollama、LM Studio、vLLM）、API 密钥（OpenAI、OpenRouter 或任何兼容 OpenAI 的端点），或您已付费的 CLI 代理（Claude Code、Codex、opencode、Grok Build），该代理将以其订阅进行叙述，无需提供 API 密钥。",
+  "environment": {
+    "AD_SERVER__PORT": "4141"
+  },
+  "map": [
+    {
+      "type": "addon_config",
+      "read_only": false,
+      "path": "/app/data"
+    }
+  ],
+  "version": "0.25.0",
+  "name": "opendm",
+  "ports": {
+    "3005/tcp": "3005"
+  },
+  "ports_description": {
+    "3005/tcp": "WebUI"
+  },
+  "slug": "opendm",
+  "startup": "services",
+  "upstream": "0.1.0",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:3005]",
+  "ingress": false,
+  "ingress_port": 3005,
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+}

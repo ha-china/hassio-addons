@@ -1,0 +1,65 @@
+#!/usr/bin/env sh
+# Persist Claude Desktop sign-in across restarts.
+# Claude Desktop (Electron) stores its auth token via safeStorage. On Linux the libsecret
+# backend needs a running Secret Service (gnome-keyring), but gnome-keyring is intentionally
+# not installed in this image: on first boot it prompts for a keyring password, which blocks
+# Claude Desktop from ever launching. Without the daemon, forcing --password-store=gnome-libsecret
+# leaves safeStorage.isEncryptionAvailable()=false, so the session can never be stored — that
+# surfaced as recurring "sign in again" prompts and (because the stale session also fails the
+# elevated-access OAuth check) the Claude app's dispatch tab showing this desktop as offline.
+#
+# --password-store=basic uses Electron's built-in fixed-key store instead: no daemon and no
+# prompt. Secrets land under $HOME/.config/Claude, and HOME=/data/data is persistent add-on
+# storage, so the saved sign-in survives restarts.
+#
+# This flag is only half of it. Electron refuses the basic backend unless the application opts
+# in via safeStorage.setUsePlainTextEncryption(true), and Claude Desktop never calls it — with
+# the flag alone, isEncryptionAvailable() stays false and the sign-in is still lost on every
+# restart. /etc/cont-init.d/86-claude_safestorage.sh injects that opt-in into app.asar before
+# this runs; do not drop one without the other.
+# Headroom is intentionally not injected into the Desktop process: Claude Desktop
+# force-overrides ANTHROPIC_BASE_URL (headroom #869), so Desktop uses the registered Headroom
+# MCP tools instead.
+
+# GPU acceleration: deliberately no flags. Do not add ANGLE/EGL flags here.
+#
+# Chromium already renders on the GPU on this base image, because LSIO's Xvfb is started with
+# `-vfbdevice /dev/dri/renderD128` — so GLX here is backed by the real render node, not the
+# indirect/software path. Left alone, Chromium picks Mesa's GLX (libGLX_mesa), initialises the
+# GPU process, and composites on the GPU.
+#
+# Passing `--use-gl=angle --use-angle=gl-egl` actively *broke* that. It forces Mesa's EGL X11
+# platform, which offers no window-capable EGLConfig under this Xvfb, so the GPU process logged
+#   ui/gl/gl_surface_egl.cc:262  No suitable EGL configs found.
+# gave up on GL entirely, and Chromium relaunched it with `--use-gl=disabled` while stamping
+# `--disable-gpu-compositing` on every renderer — i.e. the flags caused the CPU rendering they
+# were meant to remove. Measured three times, including at the production 15360x8640 screen:
+# with the flags the GPU process loads libEGL_mesa and holds 1 fd on the render node; with no
+# flags it loads libGLX_mesa and holds 8, and no renderer carries --disable-gpu-compositing.
+#
+# A standalone ANGLE probe is not evidence for any of this: Claude Desktop's bundled ANGLE
+# happily creates a hardware context here via its default (GLX) path, which is why the probe
+# that used to gate these flags passed while the flags themselves disabled the GPU.
+#
+# `--use-angle=gl` also works, but it only reproduces what Chromium already chooses by itself,
+# so it is not passed either.
+
+# Shared memory.
+#
+# --disable-dev-shm-usage exists because Docker's default /dev/shm is 64 MB, which is not
+# enough for Chromium's renderers and produced a crash loop here (see the 1.3 changelog entry).
+# Home Assistant ignores the add-on's shm_size, so the size cannot be set from this repo and
+# genuinely varies between installs — it is 7.7 GB on some hosts and the 64 MB default on
+# others. Hardcoding either answer is wrong, so ask the kernel: keep the workaround when
+# /dev/shm is small, and drop it when there is plenty, where it would otherwise push Chromium's
+# shared memory into ordinary files for no benefit. If the size cannot be determined, keep the
+# flag — the crash it prevents is worse than the overhead it costs.
+SHM_FLAGS="--disable-dev-shm-usage"
+SHM_KB="$(df -k /dev/shm 2> /dev/null | awk 'NR==2 {print $2}')"
+if [ -n "$SHM_KB" ] && [ "$SHM_KB" -ge 262144 ]; then
+    SHM_FLAGS=""
+fi
+
+# SHM_FLAGS must stay unquoted so it expands to a separate argument, or to nothing at all.
+# shellcheck disable=SC2086
+exec claude-desktop --no-sandbox --password-store=basic $SHM_FLAGS

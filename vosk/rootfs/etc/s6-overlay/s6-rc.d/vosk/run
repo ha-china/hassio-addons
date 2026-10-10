@@ -1,0 +1,37 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Start vosk service
+# ==============================================================================
+flags=()
+
+if bashio::config.true 'debug_logging'; then
+    flags+=('--debug')
+fi
+
+if bashio::config.true 'limit_sentences'; then
+    flags+=('--limit-sentences')
+fi
+
+if bashio::config.true 'allow_unknown'; then
+    flags+=('--allow-unknown')
+fi
+
+if [ -d '/share/vosk/models' ]; then
+  # Each directory is a language name with a model inside
+  while read -r lang_dir; do
+      # Override the model for this language
+      lang="$(basename "${lang_dir}")"
+      flags+=('--model-for-language' "${lang}" "$(realpath "${lang_dir}")")
+  done < <(find '/share/vosk/models' -mindepth 1 -maxdepth 1 -type d)
+fi
+
+exec python3 -m wyoming_vosk \
+    --uri 'tcp://0.0.0.0:10300' \
+    --data-dir /data \
+    --download-dir /data \
+    --data-dir /share/vosk/models \
+    --sentences-dir /share/vosk/sentences \
+    --correct-sentences "$(bashio::config 'correct_sentences')" \
+    --language "$(bashio::config 'preload_language')" \
+    --preload-language "$(bashio::config 'preload_language')" ${flags[@]}

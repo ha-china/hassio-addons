@@ -1,0 +1,38 @@
+FROM python:3.13-slim
+
+# Match ha-addon/Dockerfile's apt layer. `git` is load-bearing for the
+# server's git_versioning module (on-disk history of config edits);
+# without it the feature silently errors out at startup ("git binary
+# not found on PATH; auto-versioning disabled") and every save is
+# dropped from history. Exposed by HT.14 — bug #104.
+# `iputils-ping` keeps the server-spawned local worker's OTA network-
+# diagnostics probe functional, same as the add-on image (bug #6).
+# #240 (ESPHome 2026.7): the new native ESP-IDF toolchain (replacing
+# PlatformIO for ESP32) downloads openocd-esp32 and *verifies it by
+# executing it* during framework install; openocd links libusb-1.0.so.0,
+# so without `libusb-1.0-0` the verify exits 127 and the whole ESP-IDF
+# install fails -> every ESP32 compile dies.
+RUN apt-get update && apt-get install -y gcc libffi-dev libssl-dev git iputils-ping libusb-1.0-0 && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY server/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY server/ .
+COPY VERSION /app/VERSION
+
+# Bundle client code so the server can serve it to remote clients for
+# auto-update AND so main.py can spawn it as the embedded local-worker
+# inside this same container. The embedded worker imports client deps
+# (psutil via client/sysinfo.py); without this install step it crashes
+# at import with ModuleNotFoundError and dies as a zombie — visible to
+# users as "local-worker missing" in the Workers tab, silent in logs
+# because main.py redirects the child's stderr. Bug #193.
+COPY client/ /app/client/
+RUN pip install --no-cache-dir -r /app/client/requirements.txt
+
+VOLUME /data
+VOLUME /config/esphome
+
+EXPOSE 8765
+
+CMD ["python3", "main.py"]

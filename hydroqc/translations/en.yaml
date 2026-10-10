@@ -1,0 +1,64 @@
+configuration:
+  hq_name:
+    name: Contract Name
+    description: "The name given to the contract (home, chalet, etc) in Home-Assistant and MQTT (default: maison)"
+  hq_username:
+    name: Email address
+    description: The mail address associated with your HydroQuebec account
+  hq_password:
+    name: Password
+    description: Your HydroQuebec password
+  hq_customer:
+    name: Customer number
+    description: Customer number from your invoice (10 digits, you may need to add a leading 0)
+  hq_account:
+    name: Account Number
+    description: Account Number from your invoice (12 digits)
+  hq_contract:
+    name: Contract Number
+    description: Contract number from your invoice (10 digits, you may need to add a leading 0)
+  hq_rate:
+    name: Rate of the contract
+    description: "The rate code of your contract (ex: D,DT,DPC)"
+  hq_rate_option:
+    name: Rate option of the contract
+    description: "Rate option code of your contract (ex: CPC, NONE). Must be set to NONE if no option is available."
+  sync_hourly_consumption:
+    name: Sync Hourly Consumption
+    description: Enable the hourly consumption feature (to configure HASS Energy Dashboard)
+  preheat_duration_minutes:
+    name: Pre-heat duration
+    description: Define how much time (minutes) in advance the preheating should start before a peak event
+  mqtt_discovery_data_topic:
+    name: MQTT Discovery Data Topic
+    description: The MQTT discovery topic for Home Assistant, change at your own risks
+  mqtt_data_root_topic:
+    name: MQTT Data Root Topic
+    description: The root MQTT topic where the hydroqc generated values will be published
+  mqtt_username:
+    name: MQTT Username
+    description: MQTT username
+  mqtt_password:
+    name: MQTT Password
+    description: MQTT Password
+  mqtt_server:
+    name: MQTT Server
+    description: Address of the MQTT server
+  mqtt_port:
+    name: MQTT Port
+    description: Port of the MQTT server
+  ha_url:
+    name: Home Assistant URL
+    description: The websocket url to HASS Core.
+  ha_token:
+    name: Home Assistant Token
+    description: The supervisor token to access the HASS websocket core api.
+  timezone:
+    name: Timezone
+    description: Your timezone, the default is "America/Toronto"
+  log_level:
+    name: Log Level
+    description: Log level of the daemon and HTTP output.
+  hydroqc_config_file:
+    name: Config File
+    description: Configuration file to use, change at your own risks

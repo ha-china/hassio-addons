@@ -1,0 +1,6 @@
+{
+    "build_from": {
+        "aarch64": "docker.1panel.live/linuxserver/sonarr:arm64v8-develop",
+        "amd64": "docker.1panel.live/linuxserver/sonarr:amd64-develop"
+    }
+}

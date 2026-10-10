@@ -1,0 +1,84 @@
+# Changelog
+
+## 3.1
+- **Scan network** now finds Tuya Zigbee and Bluetooth gateways that Tuya lists without a local key ([#7](https://github.com/vineetchoudhary/tuya-local-key/issues/7)). Tuya puts such a gateway's key on its sub-devices instead and doesn't say which sub-devices belong to which gateway, so the scan recognises gateways by their category and tries the keys on your sub-devices at each address that answers.
+- A gateway found this way shows its local key, marked with an asterisk because Tuya lists it on a sub-device, along with its IP and protocol version.
+- When several gateways have no key, the scan can't tell which one is at which address, so they show **check needed**. The scan summary lists each address with the sub-devices whose key answered there, and a gateway's details panel has a one-click **Check** for each address. When a Check leaves one gateway, that one is checked too, so two gateways take one click. Later scans remember them, even when their IPs change. The CLI keeps no state, so it lists those addresses instead, to match against your router's client list.
+- Sub-devices now get their gateway's IP and version even before the gateways are told apart. The table no longer shows a protocol version for them, since it's their gateway's. Their details panel shows it as **Gateway IP** and **Gateway protocol**, which tuya-local needs to set up a sub-device.
+- The scan now asks each gateway it finds which of its sub-devices are online. A sub-device its gateway reports offline shows **offline** instead of a green **via gateway**, and no longer counts as online in the device count. In 3.0, every sub-device of a gateway that answered looked online.
+- **Full Changelog**: https://github.com/vineetchoudhary/tuya-local-key/compare/v3.0...v3.1
+
+## 3.0
+- Added **Scan network**, which finds each device's local IP and protocol version (3.1, 3.3, 3.4, 3.5, and the device22 variant that tuya-local calls 3.22/3.42). Tuya's device-sharing API doesn't return a protocol version, so the app connects to each device on TCP port 6668 with its local key and tries each version in turn. It never uses broadcasts, so devices on another VLAN are found too, as long as the firewall lets the app reach port 6668 there.
+- Added a Protocol column. The Status column now shows what the scan found (reachable, busy, key mismatch, unreachable, not found, or via gateway), tagged `LAN`, and falls back to the cloud's online flag for devices that haven't been scanned.
+- The details panel has a Local network section with the local IP, protocol version and status, and a Check button to try a single device at an IP address.
+- Scans are compared against the previous one. A changed protocol version or IP, or a device that stopped accepting its local key, is listed in the change summary, since each one breaks a local integration.
+- Scan results are stored encrypted beside the device list, and are cleared along with it when you log out or log in again.
+- Added a `LAN_SUBNET` setting to prefill the scan box.
+- Export CSV, Scan network, Refresh and Log out moved into the header. On a narrow screen, the ones that don't fit move into a ⋮ menu.
+- Log out now asks for confirmation first, since it also deletes the saved device list and scan results.
+- The CLI takes `--scan 192.168.2.0/24` (your IoT VLAN or subnet) to add the same fields to its text, `--json` and `--csv` output.
+- **Full Changelog**: https://github.com/vineetchoudhary/tuya-local-key/compare/v2.1...v3.0
+
+## 2.1
+- The device list is now stored on disk, so a restart or an app update shows your devices immediately instead of re-fetching them from Tuya.
+- The stored list is encrypted. It contains every local key in your account, so it is written with a key kept beside it and readable only by the app. Logging out deletes both, which also makes any copy of the file that survives elsewhere permanently unreadable.
+- Every refresh is now compared against the previous list. Devices added, removed, and renamed are summarised above the table, and so are local keys that changed. Changed rows are badged, and the filter matches the badge text.
+- When Tuya cannot be reached, or your login has expired, the saved device list is now shown as a labelled snapshot instead of an error or the login screen. Local keys do not expire with the login, so those keys are still good. Logging out still clears everything.
+- Added a `DEVICE_CACHE` setting. Set it to `off` to keep the device list in memory only, as in 2.0.
+- The device list is now cached for 3 days instead of 24 hours. Click Refresh at any time to pull the current list from Tuya.
+- **Full Changelog**: https://github.com/vineetchoudhary/tuya-local-key/compare/v2.0...v2.1
+
+## 2.0
+- Added a device details panel. Select a device row to see every field the device-sharing SDK returns: identity, connectivity, account ids, timestamps, every data point with its local dp id and current value, and the raw JSON record.
+- Timestamps in the web UI now use your browser's timezone. The details panel also shows the UTC reading and the raw epoch. CSV export stay in UTC.
+- Moved UUID, category, IP address, and last-paired time out of the device table into the details panel.
+- Update `tuya-device-sharing-sdk`.
+- **Full Changelog**: https://github.com/vineetchoudhary/tuya-local-key/compare/v1.7...v2.0
+
+## 1.7
+- `AUTH_USERNAME` and `AUTH_PASSWORD` only apply to the direct port access. These are ignored under Home Assistant ingress.
+- **Full Changelog**: https://github.com/vineetchoudhary/tuya-local-key/compare/v1.6...v1.7
+
+## 1.6
+- Added optional username/password authentication. Set both `AUTH_USERNAME` and `AUTH_PASSWORD` to enable login.
+- Cached the device list in the web UI for 24 hours. Use the Refresh button to fetch the latest list from Tuya.
+- Added Home Assistant configuration for selecting the QR code scheme.
+- Various other improvements and bug fixes.
+- **Full Changelog**: https://github.com/vineetchoudhary/tuya-local-key/compare/v1.5...v1.6
+
+## 1.5
+- Fixed broken app icon for Home Assistant ingress urls
+- **Full Changelog**: https://github.com/vineetchoudhary/tuya-local-key/compare/v1.4...v1.5
+
+## 1.4
+- Publishing GHCR images without Buildx provenance/SBOM attestation manifests.
+- Local keys are now hidden by default in the web UI. Use the eye toggle in the Local Key header to reveal or hide all keys, while copy-to-clipboard continues to copy the real key value.
+- **Full Changelog**: https://github.com/vineetchoudhary/tuya-local-key/compare/v1.3...v1.4
+
+## 1.3
+- Fix HomeAssistant volume mount issue
+- **Full Changelog**: https://github.com/vineetchoudhary/tuya-local-key/compare/v1.2...v1.3
+
+## 1.2
+
+- Fixed Home Assistant installation.
+- Added the Home Assistant app icon.
+- **Full Changelog**: https://github.com/vineetchoudhary/tuya-local-key/compare/v1.1...v1.2
+
+## 1.1
+
+- Added Home Assistant app support.
+- Improved web UI local-key copy behavior.
+- Hardened QR login polling and session cleanup.
+- **Full Changelog**: https://github.com/vineetchoudhary/tuya-local-key/compare/v1.0...v1.1
+
+## 1.0
+
+- Retrieve device localKey values using QR-code login from the Smart Life app.
+- No Tuya IoT developer account, Access ID, or Access Secret required.
+- Web UI for login, device listing, filtering, copying local keys, refreshing devices, logging out, and exporting CSV.
+- CLI with the same QR-code login flow for terminal use.
+- Session caching so repeat scans are not required until the login expires.
+- Docker and Docker Compose support.
+- Multi-architecture Docker images for linux/amd64 and linux/arm64.

@@ -1,0 +1,901 @@
+import time
+import json
+import base64
+import logging
+import concurrent.futures
+from typing import Any, Dict, List, Optional, Tuple
+from urllib.parse import parse_qsl
+
+from .interfaces import IConfigManager, IHomeAssistantFileSystem, IAccountLinkStatusUpdateHandler, IHomeContext, IHomeAssistantWebSocket
+from .streammsgbuilder import StreamMsgBuilder
+from .httpresult import HttpResult
+from .httprequest import PathTypes, HttpRequest
+from .sentry import Sentry
+from .buffer import Buffer
+
+from .Proto.HaApiTarget import HaApiTarget
+from .Proto.HttpInitialContext import HttpInitialContext
+from .WebStream.uploadbody import UploadBody, UploadBodyOrNone
+
+
+# A helper class that's the result of all ran commands.
+class CommandResponse():
+
+    @staticmethod
+    def Success(resultDict:Optional[Dict[str,Any]]=None):
+        if resultDict is None:
+            resultDict = {}
+        return CommandResponse(200, resultDict, None)
+
+
+    @staticmethod
+    def Error(statusCode:int, errorStr_CanBeNull:Optional[str]=None):
+        return CommandResponse(statusCode, None, errorStr_CanBeNull)
+
+
+    def __init__(self, statusCode:int, resultDict:Optional[Dict[str,Any]], errorStr_CanBeNull:Optional[str]):
+        self.StatusCode = statusCode
+        self.ResultDict = resultDict
+        self.ErrorStr = errorStr_CanBeNull
+
+
+#
+# Platform Command Handler Interface
+#
+# This interface provides the platform specific code for command handlers
+# Each platform MUST implement this interface and MUST implement the function signatures in the same way.
+#
+# This class is responsible for handling Commands.
+#
+class CommandHandler:
+
+    # The prefix all commands must use to be handled as a command.
+    # This must be lowercase, to match the lower() we call on the incoming path.
+    # This must end with a /, so it's the correct length when we remove the prefix.
+    c_CommandHandlerPathPrefix = "/homeway-command-api/"
+
+    #
+    # Common Errors
+    #
+    # These are also defined in the service and need to stay in sync.
+    #
+    # These are all command system errors.
+    c_CommandError_UnknownFailure = 750
+    c_CommandError_ArgParseFailure = 751
+    c_CommandError_ExecutionFailure = 752
+    c_CommandError_ResponseSerializeFailure = 753
+    c_CommandError_UnknownCommand = 754
+    c_CommandError_PluginTypeNotSupported = 755
+    # Used when we know we can't connect to the printer because we dont have valid auth
+    c_CommandError_LostAuth = 789
+
+    _Instance:"CommandHandler" = None #pyright: ignore[reportAssignmentType]
+
+
+    @staticmethod
+    def Init(logger:logging.Logger):
+        CommandHandler._Instance = CommandHandler(logger)
+
+
+    @staticmethod
+    def Get() -> "CommandHandler":
+        return CommandHandler._Instance
+
+
+    def __init__(self, logger:logging.Logger):
+        self.Logger = logger
+        self.ConfigManager:Optional[IConfigManager] = None
+        self.HomeAssistantFileSystem:Optional[IHomeAssistantFileSystem] = None
+        self.HomeContext:Optional[IHomeContext] = None
+        self.AccountLinkStatusUpdateHandler:Optional[IAccountLinkStatusUpdateHandler] = None
+        self.HaWebSocketCon:Optional[IHomeAssistantWebSocket] = None
+
+
+    # Registers the config manager, which is need
+    def RegisterConfigManager(self, configManager:IConfigManager):
+        self.ConfigManager = configManager
+
+
+    # Registers the Home Assistant file system, which is needed for file commands.
+    def RegisterHomeAssistantFileSystem(self, fileSystem:IHomeAssistantFileSystem):
+        self.HomeAssistantFileSystem = fileSystem
+
+
+    # Registers the home context manager, which is needed for some commands.
+    def RegisterHomeContext(self, homeContext:IHomeContext):
+        self.HomeContext = homeContext
+
+
+    # Registers the Home Assistant WebSocket connection, which is needed for some commands.
+    def RegisterHomeAssistantWebsocketCon(self, haWebSocketCon:IHomeAssistantWebSocket):
+        self.HaWebSocketCon = haWebSocketCon
+
+
+    # Get's callbacks when the printer link status changes.
+    def RegisterAccountLinkStatusUpdateHandler(self, accountLinkStatusUpdateHandler:IAccountLinkStatusUpdateHandler):
+        self.AccountLinkStatusUpdateHandler = accountLinkStatusUpdateHandler
+
+
+    #
+    # Command Handlers
+    #
+
+
+    # Some special commands require the raw body to be parsed in a specific way, so this helper will check if the command is one of those.
+    # For any command that doesn't allow the body to be parsed for args, the GET params will be parsed and used for the args dict.
+    def ShouldParseUploadBodyAsJson(self, commandPathLower:str) -> bool:
+        # None of these exist for HW right now.
+        return True
+
+
+    # The goal here is to keep as much of the common logic as common as possible.
+    def ProcessCommand(self, commandPath:str, jsonObj_CanBeNone:Optional[Dict[str, Any]]) -> CommandResponse:
+        if jsonObj_CanBeNone is not None and not isinstance(jsonObj_CanBeNone, dict):
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "Command arguments must be a JSON object.")
+
+        commandName = self._GetCommandName(commandPath)
+        if commandName == "ping":
+            return CommandResponse.Success({"Message":"Pong"})
+
+        # Handle the batch API call command. Used by Sage to be more efficient.
+        if commandName == "batch-web-requests":
+            if jsonObj_CanBeNone is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "No arguments provided.")
+            if self.ConfigManager is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ExecutionFailure, "No config manager.")
+            return self.HandleBatchApiRequestsCommand(jsonObj_CanBeNone)
+
+        # Can be used to make any Home Assistant WebSocket API call.
+        if commandName == "ha-websocket-api-call":
+            if jsonObj_CanBeNone is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "No arguments provided.")
+            if self.HaWebSocketCon is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ExecutionFailure, "No Home Assistant WebSocket connection.")
+            return CommandResponse.Success(self._InvokeHaWebsocketApiCall(jsonObj_CanBeNone))
+
+        # Can be used to make multiple Home Assistant WebSocket API calls in a single command.
+        if commandName == "batch-ha-websocket-api-call":
+            if jsonObj_CanBeNone is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "No arguments provided.")
+            if self.HaWebSocketCon is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ExecutionFailure, "No Home Assistant WebSocket connection.")
+            return self.HandleBatchHaWebsocketApiCallCommand(jsonObj_CanBeNone)
+
+        # Returns the Home Assistant version string, if known.
+        if commandName == "get-ha-version":
+            if self.HaWebSocketCon is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ExecutionFailure, "No Home Assistant WebSocket connection.")
+            haVersion = self.HaWebSocketCon.GetHomeAssistantVersionString()
+            successful = haVersion is not None
+            return CommandResponse.Success({"Success": successful, "HaVersion": haVersion})
+
+        # restart-if-needed - Deprecated 1.0.5 (3/16/2024) for `get-config-status`
+        # Returns this addon's status with the config. This works for both container and standalone addons.
+        if commandName == "get-config-status":
+            needsRestartForAssistantConfigs = False
+            canEditConfig = False
+            if self.ConfigManager is not None:
+                # Check all of the other status before NeedsRestart, since that will restart HA if needed.
+                canEditConfig = self.ConfigManager.CanEditConfig()
+                needsRestartForAssistantConfigs = self.ConfigManager.NeedsRestart()
+            return CommandResponse.Success(
+                {
+                    "CanEditConfig" : canEditConfig,
+                    "NeedsRestartForAssistantConfigs": needsRestartForAssistantConfigs,
+                })
+
+        # Lists files and folders in the Home Assistant config directory.
+        if commandName == "file-list":
+            return self.HandleListFilesCommand(jsonObj_CanBeNone)
+
+        # Reads a text file in the Home Assistant config directory.
+        if commandName == "file-read-text":
+            if jsonObj_CanBeNone is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "No arguments provided.")
+            return self.HandleReadTextFileCommand(jsonObj_CanBeNone)
+
+        # Reads raw bytes from a file in the Home Assistant config directory.
+        if commandName == "file-read-data":
+            if jsonObj_CanBeNone is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "No arguments provided.")
+            return self.HandleReadDataFileCommand(jsonObj_CanBeNone)
+
+        # Adds or overwrites a file in the Home Assistant config directory.
+        if commandName == "file-write":
+            if jsonObj_CanBeNone is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "No arguments provided.")
+            return self.HandleWriteFileCommand(jsonObj_CanBeNone)
+
+        # Moves or copies a file in the Home Assistant config directory.
+        if commandName == "file-move":
+            if jsonObj_CanBeNone is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "No arguments provided.")
+            return self.HandleMoveFileCommand(jsonObj_CanBeNone)
+
+        # Applies a unified diff patch to a file in the Home Assistant config directory.
+        if commandName == "file-patch":
+            if jsonObj_CanBeNone is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "No arguments provided.")
+            return self.HandlePatchFileCommand(jsonObj_CanBeNone)
+
+        # Removes a file in the Home Assistant config directory.
+        if commandName == "file-delete":
+            if jsonObj_CanBeNone is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "No arguments provided.")
+            return self.HandleDeleteFileCommand(jsonObj_CanBeNone)
+
+        # Used to tell the addon that there's an account linked to this addon. Mostly used to update the webserver page.
+        if commandName == "update-account-link-status":
+            if jsonObj_CanBeNone is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "No arguments provided.")
+            if self.AccountLinkStatusUpdateHandler is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ExecutionFailure, "No account link update handler.")
+            self.AccountLinkStatusUpdateHandler.OnAccountLinkStatusUpdate(jsonObj_CanBeNone["IsLinked"])
+            return CommandResponse.Success()
+
+        # Used for Assistant device control & MCP to get the full device and entity tree and optionally states in a single call.
+        # This must return the full entity tree, with no filtering unless the domain filter is sent.
+        if commandName == "get-full-device-and-entity-tree":
+            # Ensure we have a home context.
+            if self.HomeContext is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ExecutionFailure, "No home context.")
+
+            # Read the optional force refresh arg.
+            forceRefresh = False
+            if jsonObj_CanBeNone is not None:
+                forceRefresh = bool(jsonObj_CanBeNone.get("ForceRefresh", False))
+            # Read the optional flag to also include states.
+            includeStates = False
+            if jsonObj_CanBeNone is not None:
+                includeStates = bool(jsonObj_CanBeNone.get("IncludeStates", False))
+            # Read the optional flag to also include labels.
+            includeLabels = False
+            if jsonObj_CanBeNone is not None:
+                includeLabels = bool(jsonObj_CanBeNone.get("IncludeLabels", False))
+            # Read the optional domain filter flag, which is one high level filter that cuts down on size a lot.
+            domainsFilter:Optional[List[str]]=None
+            if jsonObj_CanBeNone is not None:
+                domainsFilterRaw = jsonObj_CanBeNone.get("FilterDomains", None)
+                if domainsFilterRaw is not None:
+                    if isinstance(domainsFilterRaw, list) and all(isinstance(d, str) for d in domainsFilterRaw):
+                        if len(domainsFilterRaw) > 0:
+                            domainsFilter = domainsFilterRaw
+                    else:
+                        return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "'FilterDomains' must be a list of strings.")
+
+            allEntities, allStates, labels = self.HomeContext.GetFullDeviceAndEntityTree(forceRefresh, includeStates, includeLabels, domainsFilter)
+            successful = allEntities is not None
+            return CommandResponse.Success({"Success": successful, "Floors": allEntities, "States": allStates, "Labels": labels})
+
+        # Used by Sage and MCP to get the current home context and live state in a single round trip.
+        if commandName == "get-live-context":
+            if self.HomeContext is None:
+                return CommandResponse.Error(CommandHandler.c_CommandError_ExecutionFailure, "No home context.")
+            homeContext = self.HomeContext.GetSageHomeContext()
+            states, liveContext = self.HomeContext.GetStatesAndLiveContext()
+            successful = homeContext is not None and states is not None and liveContext is not None
+            return CommandResponse.Success({
+                "Success": successful,
+                "HomeContext": self._SerializeCompressionResult(homeContext),
+                "States": self._SerializeCompressionResult(states),
+                "LiveContext": self._SerializeCompressionResult(liveContext),
+            })
+
+        # Unknown command
+        return CommandResponse.Error(CommandHandler.c_CommandError_UnknownCommand, "The command path didn't match any known commands.")
+
+
+    #
+    # Common Handler Core Logic
+    #
+
+    # Returns True or False depending if this request is a Homeway command or not.
+    # If it is, HandleCommand should be used to get the response.
+    def IsCommandRequest(self, httpInitialContext:HttpInitialContext) -> bool:
+        # Get the path to check if it's a command or not.
+        if httpInitialContext.PathType() != PathTypes.Relative:
+            return False
+        path = StreamMsgBuilder.BytesToString(httpInitialContext.Path())
+        if path is None:
+            raise Exception("IsCommandHttpRequest Http request has no path field in IsCommandRequest.")
+        pathLower = path.lower()
+        # If the path starts with our special prefix, it's for us!
+        return pathLower.startswith(CommandHandler.c_CommandHandlerPathPrefix)
+
+
+    # Handles a command and returns an HttpResult
+    #
+    # Note! It's very important that the HttpResult has all of the properties the generic system expects! For example,
+    # it must have the FullBodyBuffer (similar to the snapshot helper) and a valid response object JUST LIKE the requests lib would return.
+    #
+    def HandleCommand(self, httpInitialContext:HttpInitialContext, postBody:UploadBody) -> HttpResult:
+        # Parse the command path and the optional json args.
+        commandPath:str = ""
+        commandPathLower:str = ""
+        jsonObj:Optional[Dict[str, Any]] = None
+        responseObj:Optional[CommandResponse] = None
+        try:
+            # Get the command path and json args, the json object can be null if there are no args.
+            commandPath, commandPathLower = self._GetCommandPath(httpInitialContext)
+            # There are some very special commands where the body is data, so for those we don't try to
+            # parse the json args. But remember those take args via GET parameters.
+            postBodyForJsonArgs:Optional[UploadBody] = None
+            if self.ShouldParseUploadBodyAsJson(commandPathLower):
+                postBodyForJsonArgs = postBody
+            # We always call this, if there's no upload body it will parse the args from get params.
+            jsonObj = self._GetJsonArgs(commandPath, postBodyForJsonArgs)
+        except Exception as e:
+            Sentry.OnException("CommandHandler error while parsing command args.", e)
+            responseObj = CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, str(e))
+
+        # If the args parse was successful, try to handle the command.
+        if responseObj is None:
+            try:
+                responseObj = self.ProcessCommand(commandPathLower, jsonObj)
+            except Exception as e:
+                Sentry.OnException("CommandHandler error while handling command.", e)
+                responseObj = CommandResponse.Error(CommandHandler.c_CommandError_ExecutionFailure, str(e))
+
+        if responseObj is None:
+            responseObj = CommandResponse.Error(CommandHandler.c_CommandError_ExecutionFailure, str("No response object returned."))
+
+        # Build the result
+        resultBytes:Optional[bytes] = None
+        try:
+            # Build the common response.
+            jsonResponse:Dict[str, Any] = {
+                "Status" : responseObj.StatusCode
+            }
+            if responseObj.ErrorStr is not None:
+                jsonResponse["Error"] = responseObj.ErrorStr
+            if responseObj.ResultDict is not None:
+                jsonResponse["Result"] = responseObj.ResultDict
+
+            # Serialize to bytes
+            resultBytes = json.dumps(jsonResponse).encode(encoding="utf-8")
+
+        except Exception as e:
+            Sentry.OnException("CommandHandler failed to serialize response.", e)
+            # Use a known good json object for this error.
+            resultBytes = json.dumps(
+                {
+                    "Status": CommandHandler.c_CommandError_ResponseSerializeFailure,
+                    "Error":"Serialize Response Failed"
+                }).encode(encoding="utf-8")
+
+        # Build the full result
+        # Make sure to set the content type, so the response can be compressed.
+        headers = {
+            "Content-Type": "text/json"
+        }
+        url = StreamMsgBuilder.BytesToString(httpInitialContext.Path())
+        if url is None:
+            url = "Unknown"
+        return HttpResult(200, headers, url, False, fullBodyBuffer=Buffer(resultBytes))
+
+
+    def HandleBatchApiRequestsCommand(self, jsonArgs:Dict[str, Any]) -> CommandResponse:
+
+        # Get the command list
+        requestList:Optional[List[Dict[str, Any]]] = jsonArgs.get("Requests", None)
+        if requestList is None:
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "No 'Requests' list provided.")
+        if not isinstance(requestList, list):
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "'Requests' is not a list.")
+
+        # Try to invoke each API call, and make sure to send the results in the same order.
+        # Even if a command fails, we want to still run all of the commands.
+        def _InvokeApi(request:Dict[str, Any]) -> Dict[str, Any]:
+            start = time.time()
+            result:Dict[str, Any] = {}
+            try:
+                # The ID is used to match requests and responses.
+                requestId:Optional[int] = request.get("Id", None)
+                if requestId is None:
+                    raise Exception("No 'Id' provided in request.")
+                result["Id"] = int(requestId)
+                # Should be a relative URL string.
+                relativeUrl:Optional[str] = request.get("Url", None)
+                if relativeUrl is None:
+                    raise Exception("No 'Url' provided in request.")
+                # Should be a string with the http method.
+                method:Optional[str] = request.get("Method", None)
+                if method is None:
+                    raise Exception("No 'Method' provided in request.")
+                # Optional - Should be a dictionary with the headers.
+                headers:Optional[Dict[str, str]] = request.get("Headers", None)
+                # Optional - This should be a base64 encoded byte array of anything.
+                data:Optional[bytes] = request.get("Data", None)
+                dataBuffer:Optional[Buffer] = None
+                if data is not None:
+                    dataBuffer = Buffer(base64.b64decode(data))
+
+                # Make the request, be sure to use the API core target to get auth added.
+                response = HttpRequest.MakeHttpCall(self.Logger, relativeUrl, PathTypes.Relative, method, headers, dataBuffer, allowRedirects=False, apiTarget=HaApiTarget.Core)
+                if response is None:
+                    raise Exception("HttpRequest.MakeHttpCall returned None.")
+
+                # Always try to read the body, if there is any.
+                # We don't care if this fails, we just want to try to get the body.
+                resultBodyStr = None
+                try:
+                    response.ReadAllContentFromStreamResponse(self.Logger)
+                    fullBodyBuffer = response.FullBodyBuffer
+                    if fullBodyBuffer is None:
+                        raise Exception("No FullBodyBuffer in response.")
+                    resultBodyStr = base64.b64encode(fullBodyBuffer.GetBytesLike()).decode(encoding="utf-8")
+                except Exception:
+                    pass
+
+                # Package the result
+                result["StatusCode"] = int(response.StatusCode)
+                result["Body"] = resultBodyStr
+            except Exception as e:
+                self.Logger.error(f"HandleBatchApiCallCommand Exception from command: {e}")
+                result["Error"] = "Exception in making request."
+            result["DurationMs"] = int((time.time()-start) * 1000)
+            return result
+
+
+        # Run all of the commands in parallel.
+        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as pool:
+            # Debug helper
+            if self.Logger.isEnabledFor(logging.DEBUG):
+                for request in requestList:
+                    if not isinstance(request, dict):
+                        self.Logger.debug(f"HandleBatchApiCallCommand invalid request: {request}")
+                        continue
+                    data = request.get("Data", None)
+                    if data is not None:
+                        try:
+                            data = base64.b64decode(data)
+                        except Exception:
+                            data = "[invalid base64]"
+                    self.Logger.debug(f"HandleBatchApiCallCommand Request: {json.dumps(request)} - Data: {data}")
+
+            # Submit all tasks
+            futureList = {pool.submit(_InvokeApi, request): request for request in requestList}
+
+            # Wait for all tasks to complete and process results
+            # Wait for them in order, since we need to send the results back in order.
+            results:List[Dict[str, Any]] = []
+            for future in futureList:
+                try:
+                    # Use a long timeout, just to make sure we don't get stuck forever.
+                    # The http call will always use a timeout as well.
+                    results.append(future.result(60*2))
+                except Exception as e:
+                    self.Logger.error(f"HandleBatchApiCallCommand Exception from future: {e}")
+                    results.append({"Error":"Failed to execute"})
+
+        return CommandResponse.Success({"Responses":results})
+
+
+    def HandleListFilesCommand(self, jsonArgs_CanBeNone:Optional[Dict[str, Any]]) -> CommandResponse:
+        if self.HomeAssistantFileSystem is None:
+            return self._FileSystemNotSupportedResponse()
+
+        rawPath = self._GetCommandArg(jsonArgs_CanBeNone, "Path")
+        if rawPath is None:
+            rawPath = ""
+        if not isinstance(rawPath, str):
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "'Path' must be a string.")
+
+        rawRecursive = self._GetCommandArg(jsonArgs_CanBeNone, "Recursive")
+        recursive, recursiveError = self._ParseOptionalBool(rawRecursive, "Recursive", True)
+        if recursiveError is not None:
+            return recursiveError
+        try:
+            return CommandResponse.Success(self.HomeAssistantFileSystem.ListFiles(rawPath, recursive))
+        except Exception as e:
+            return self._FileSystemExceptionToCommandResponse(e)
+
+
+    def HandleReadDataFileCommand(self, jsonArgs:Dict[str, Any]) -> CommandResponse:
+        if self.HomeAssistantFileSystem is None:
+            return self._FileSystemNotSupportedResponse()
+
+        rawPath = self._GetCommandArg(jsonArgs, "Path")
+        if not isinstance(rawPath, str):
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "'Path' must be a string.")
+
+        rawStartByte = self._GetCommandArg(jsonArgs, "StartByte")
+        startByte, startByteError = self._ParseOptionalNonNegativeInt(rawStartByte, "StartByte")
+        if startByteError is not None:
+            return startByteError
+
+        rawMaxBytes = self._GetCommandArg(jsonArgs, "MaxBytes")
+        maxBytes, maxBytesError = self._ParseOptionalNonNegativeInt(rawMaxBytes, "MaxBytes")
+        if maxBytesError is not None:
+            return maxBytesError
+
+        rawTailBytes = self._GetCommandArg(jsonArgs, "TailBytes")
+        tailBytes, tailBytesError = self._ParseOptionalNonNegativeInt(rawTailBytes, "TailBytes")
+        if tailBytesError is not None:
+            return tailBytesError
+
+        if startByte is not None and tailBytes is not None:
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "Only one of 'StartByte' or 'TailBytes' can be set.")
+
+        try:
+            return CommandResponse.Success(self.HomeAssistantFileSystem.ReadDataFile(rawPath, startByte, maxBytes, tailBytes))
+        except Exception as e:
+            return self._FileSystemExceptionToCommandResponse(e)
+
+
+    def HandleReadTextFileCommand(self, jsonArgs:Dict[str, Any]) -> CommandResponse:
+        if self.HomeAssistantFileSystem is None:
+            return self._FileSystemNotSupportedResponse()
+
+        rawPath = self._GetCommandArg(jsonArgs, "Path")
+        if not isinstance(rawPath, str):
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "'Path' must be a string.")
+
+        rawTextEncoding = self._GetCommandArg(jsonArgs, "TextEncoding")
+        textEncoding, textEncodingError = self._ParseOptionalString(rawTextEncoding, "TextEncoding")
+        if textEncodingError is not None:
+            return textEncodingError
+
+        rawStartLine = self._GetCommandArg(jsonArgs, "StartLine")
+        startLine, startLineError = self._ParseOptionalNonNegativeInt(rawStartLine, "StartLine")
+        if startLineError is not None:
+            return startLineError
+
+        rawMaxLines = self._GetCommandArg(jsonArgs, "MaxLines")
+        maxLines, maxLinesError = self._ParseOptionalNonNegativeInt(rawMaxLines, "MaxLines")
+        if maxLinesError is not None:
+            return maxLinesError
+
+        rawTailLines = self._GetCommandArg(jsonArgs, "TailLines")
+        tailLines, tailLinesError = self._ParseOptionalNonNegativeInt(rawTailLines, "TailLines")
+        if tailLinesError is not None:
+            return tailLinesError
+
+        if startLine is not None and tailLines is not None:
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "Only one of 'StartLine' or 'TailLines' can be set.")
+
+        try:
+            return CommandResponse.Success(self.HomeAssistantFileSystem.ReadTextFile(rawPath, textEncoding, startLine, maxLines, tailLines))
+        except Exception as e:
+            return self._FileSystemExceptionToCommandResponse(e)
+
+
+    def HandleWriteFileCommand(self, jsonArgs:Dict[str, Any]) -> CommandResponse:
+        if self.HomeAssistantFileSystem is None:
+            return self._FileSystemNotSupportedResponse()
+
+        rawPath = self._GetCommandArg(jsonArgs, "Path")
+        if not isinstance(rawPath, str):
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "'Path' must be a string.")
+
+        rawText = self._GetCommandArg(jsonArgs, "Text")
+        text, textError = self._ParseOptionalString(rawText, "Text")
+        if textError is not None:
+            return textError
+
+        rawBase64Data = self._GetCommandArg(jsonArgs, "Base64Data")
+        base64Data, base64DataError = self._ParseOptionalString(rawBase64Data, "Base64Data")
+        if base64DataError is not None:
+            return base64DataError
+        if text is not None and base64Data is not None:
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "Only one of 'Text' or 'Base64Data' can be provided.")
+
+        rawTextEncoding = self._GetCommandArg(jsonArgs, "TextEncoding")
+        textEncoding, textEncodingError = self._ParseOptionalString(rawTextEncoding, "TextEncoding")
+        if textEncodingError is not None:
+            return textEncodingError
+
+        rawCreateParents = self._GetCommandArg(jsonArgs, "CreateParents")
+        createParents, createParentsError = self._ParseOptionalBool(rawCreateParents, "CreateParents", True)
+        if createParentsError is not None:
+            return createParentsError
+
+        rawOverride = self._GetCommandArg(jsonArgs, "Override")
+        override, overrideError = self._ParseOptionalBool(rawOverride, "Override", True)
+        if overrideError is not None:
+            return overrideError
+
+        rawExpectedSha256 = self._GetCommandArg(jsonArgs, "ExpectedSha256")
+        expectedSha256, expectedSha256Error = self._ParseOptionalString(rawExpectedSha256, "ExpectedSha256")
+        if expectedSha256Error is not None:
+            return expectedSha256Error
+
+        try:
+            return CommandResponse.Success(self.HomeAssistantFileSystem.WriteFile(rawPath, text, base64Data, textEncoding, createParents, override, expectedSha256))
+        except Exception as e:
+            return self._FileSystemExceptionToCommandResponse(e)
+
+
+    def HandleMoveFileCommand(self, jsonArgs:Dict[str, Any]) -> CommandResponse:
+        if self.HomeAssistantFileSystem is None:
+            return self._FileSystemNotSupportedResponse()
+
+        rawPath = self._GetCommandArg(jsonArgs, "Path")
+        if not isinstance(rawPath, str):
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "'Path' must be a string.")
+
+        rawNewPath = self._GetCommandArg(jsonArgs, "NewPath")
+        if not isinstance(rawNewPath, str):
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "'NewPath' must be a string.")
+
+        rawCopy = self._GetCommandArg(jsonArgs, "Copy")
+        copy, copyError = self._ParseOptionalBool(rawCopy, "Copy", False)
+        if copyError is not None:
+            return copyError
+
+        rawOverride = self._GetCommandArg(jsonArgs, "Override")
+        override, overrideError = self._ParseOptionalBool(rawOverride, "Override", False)
+        if overrideError is not None:
+            return overrideError
+
+        rawExpectedSha256 = self._GetCommandArg(jsonArgs, "ExpectedSha256")
+        expectedSha256, expectedSha256Error = self._ParseOptionalString(rawExpectedSha256, "ExpectedSha256")
+        if expectedSha256Error is not None:
+            return expectedSha256Error
+
+        try:
+            return CommandResponse.Success(self.HomeAssistantFileSystem.MoveFile(rawPath, rawNewPath, copy, override, expectedSha256))
+        except Exception as e:
+            return self._FileSystemExceptionToCommandResponse(e)
+
+
+    def HandlePatchFileCommand(self, jsonArgs:Dict[str, Any]) -> CommandResponse:
+        if self.HomeAssistantFileSystem is None:
+            return self._FileSystemNotSupportedResponse()
+
+        rawPath = self._GetCommandArg(jsonArgs, "Path")
+        if not isinstance(rawPath, str):
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "'Path' must be a string.")
+
+        rawUnifiedDiffPatch = self._GetCommandArg(jsonArgs, "UnifiedDiffPatch")
+        if not isinstance(rawUnifiedDiffPatch, str):
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "'UnifiedDiffPatch' must be a string.")
+
+        rawExpectedSha256 = self._GetCommandArg(jsonArgs, "ExpectedSha256")
+        expectedSha256, expectedSha256Error = self._ParseOptionalString(rawExpectedSha256, "ExpectedSha256")
+        if expectedSha256Error is not None:
+            return expectedSha256Error
+
+        try:
+            return CommandResponse.Success(self.HomeAssistantFileSystem.PatchFile(rawPath, rawUnifiedDiffPatch, expectedSha256))
+        except Exception as e:
+            return self._FileSystemExceptionToCommandResponse(e)
+
+
+    def HandleDeleteFileCommand(self, jsonArgs:Dict[str, Any]) -> CommandResponse:
+        if self.HomeAssistantFileSystem is None:
+            return self._FileSystemNotSupportedResponse()
+
+        rawPath = self._GetCommandArg(jsonArgs, "Path")
+        if not isinstance(rawPath, str):
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "'Path' must be a string.")
+
+        rawRecursive = self._GetCommandArg(jsonArgs, "Recursive")
+        recursive, recursiveError = self._ParseOptionalBool(rawRecursive, "Recursive", False)
+        if recursiveError is not None:
+            return recursiveError
+
+        try:
+            return CommandResponse.Success(self.HomeAssistantFileSystem.DeleteFile(rawPath, recursive))
+        except Exception as e:
+            return self._FileSystemExceptionToCommandResponse(e)
+
+
+    # Important! This must return the results in the same order as the requests!
+    def HandleBatchHaWebsocketApiCallCommand(self, jsonArgs:Dict[str, Any]) -> CommandResponse:
+
+        # Get the command list
+        requestList:Optional[List[Dict[str, Any]]] = jsonArgs.get("Requests", None)
+        if requestList is None:
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "No 'Requests' list provided.")
+        if not isinstance(requestList, list):
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, "'Requests' is not a list.")
+
+        def _InvokeWsApi(request:Dict[str, Any]) -> Dict[str, Any]:
+            start = time.time()
+            result:Dict[str, Any] = {}
+            try:
+                if not isinstance(request, dict):
+                    raise Exception("Request is not a dictionary.")
+
+                # Get the full Home Assistant WebSocket message object
+                requestMsg:Optional[Dict[str, Any]] = request.get("Message", None)
+                if requestMsg is None:
+                    raise Exception("No 'Message' provided in request.")
+                if not isinstance(requestMsg, dict):
+                    raise Exception("'Message' is not a dictionary.")
+                # Get the optional timeout for this request, default to 10 seconds if not provided.
+                timeoutSec = request.get("TimeoutSec", None)
+                if timeoutSec is None:
+                    timeoutSec = 10.0
+                timeoutSec = float(timeoutSec)
+
+                # Execute the request and get the result.
+                result.update(self._InvokeHaWebsocketApiCall(requestMsg, timeoutSec))
+            except Exception as e:
+                self.Logger.error(f"HandleBatchHaWebsocketApiCallCommand Exception from command: {e}")
+                result["Error"] = "Exception in making websocket API request."
+            result["DurationMs"] = int((time.time()-start) * 1000)
+            return result
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as pool:
+            futureList = {pool.submit(_InvokeWsApi, request): request for request in requestList}
+
+            # Wait for each task to complete in the order they were submitted, to ensure the results are in the same order as the requests.
+            results:List[Dict[str, Any]] = []
+            for future in futureList:
+                try:
+                    results.append(future.result(60*2))
+                except Exception as e:
+                    self.Logger.error(f"HandleBatchHaWebsocketApiCallCommand Exception from future: {e}")
+                    results.append({"Error":"Failed to execute"})
+
+        # Return the results.
+        return CommandResponse.Success({"Responses":results})
+
+
+    def _InvokeHaWebsocketApiCall(self, msg:Dict[str, Any], timeoutSec:float=10.0) -> Dict[str, Any]:
+        if self.HaWebSocketCon is None:
+            raise Exception("No Home Assistant WebSocket connection.")
+
+        haVersion = self.HaWebSocketCon.GetHomeAssistantVersionString()
+        result = self.HaWebSocketCon.SendAndReceiveMsg(dict(msg), timeoutSec=timeoutSec)
+        successful = result is not None
+        return {"Success": successful, "HaVersion": haVersion, "Result": result}
+
+
+    def _FileSystemNotSupportedResponse(self) -> CommandResponse:
+        return CommandResponse.Error(CommandHandler.c_CommandError_PluginTypeNotSupported, "This plugin type does not have access to the Home Assistant config file system.")
+
+
+    def _FileSystemExceptionToCommandResponse(self, e:Exception) -> CommandResponse:
+        if isinstance(e, ValueError):
+            return CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, str(e))
+        return CommandResponse.Error(CommandHandler.c_CommandError_ExecutionFailure, str(e))
+
+
+    def _GetCommandArg(self, jsonArgs_CanBeNone:Optional[Dict[str, Any]], key:str) -> Optional[Any]:
+        if jsonArgs_CanBeNone is None:
+            return None
+        if key in jsonArgs_CanBeNone:
+            return jsonArgs_CanBeNone[key]
+        lowerKey = key.lower()
+        if lowerKey in jsonArgs_CanBeNone:
+            return jsonArgs_CanBeNone[lowerKey]
+        for existingKey, value in jsonArgs_CanBeNone.items():
+            if isinstance(existingKey, str) and existingKey.lower() == lowerKey:
+                return value
+        return None
+
+
+    def _GetCommandName(self, commandPath:str) -> str:
+        return commandPath.split("?", 1)[0].strip("/").lower()
+
+
+    def _ParseOptionalBool(self, value:Optional[Any], argName:str, defaultValue:bool) -> Tuple[bool, Optional[CommandResponse]]:
+        if value is None:
+            return defaultValue, None
+        if isinstance(value, bool):
+            return value, None
+        if isinstance(value, str):
+            valueLower = value.strip().lower()
+            if valueLower in ["1", "true", "yes", "on"]:
+                return True, None
+            if valueLower in ["0", "false", "no", "off"]:
+                return False, None
+            return defaultValue, CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, f"'{argName}' must be a boolean.")
+        if isinstance(value, int):
+            if value == 1:
+                return True, None
+            if value == 0:
+                return False, None
+        return defaultValue, CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, f"'{argName}' must be a boolean.")
+
+
+    def _ParseOptionalPositiveInt(self, value:Optional[Any], argName:str) -> Tuple[Optional[int], Optional[CommandResponse]]:
+        if value is None:
+            return None, None
+        parsedValue:Optional[int] = None
+        if isinstance(value, bool):
+            parsedValue = None
+        elif isinstance(value, int):
+            parsedValue = value
+        elif isinstance(value, str) and value.strip().isdecimal():
+            parsedValue = int(value.strip())
+        if parsedValue is None:
+            return None, CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, f"'{argName}' must be an integer.")
+        if parsedValue <= 0:
+            return None, CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, f"'{argName}' must be greater than zero.")
+        return parsedValue, None
+
+
+    def _ParseOptionalNonNegativeInt(self, value:Optional[Any], argName:str) -> Tuple[Optional[int], Optional[CommandResponse]]:
+        if value is None:
+            return None, None
+        parsedValue:Optional[int] = None
+        if isinstance(value, bool):
+            parsedValue = None
+        elif isinstance(value, int):
+            parsedValue = value
+        elif isinstance(value, str) and value.strip().isdecimal():
+            parsedValue = int(value.strip())
+        if parsedValue is None:
+            return None, CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, f"'{argName}' must be an integer.")
+        if parsedValue < 0:
+            return None, CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, f"'{argName}' must be greater than or equal to zero.")
+        return parsedValue, None
+
+
+    def _ParseOptionalString(self, value:Optional[Any], argName:str) -> Tuple[Optional[str], Optional[CommandResponse]]:
+        if value is None:
+            return None, None
+        if not isinstance(value, str):
+            return None, CommandResponse.Error(CommandHandler.c_CommandError_ArgParseFailure, f"'{argName}' must be a string.")
+        return value, None
+
+
+    def _SerializeCompressionResult(self, compressionResult:Optional[Any]) -> Optional[Dict[str, Any]]:
+        if compressionResult is None:
+            return None
+
+        return {
+            "Data": base64.b64encode(compressionResult.Bytes.GetBytesLike()).decode(encoding="utf-8"),
+            "CompressionType": int(compressionResult.CompressionType),
+            "UncompressedSize": int(compressionResult.UncompressedSize),
+        }
+
+
+    # A helper to parse the context and json args. Throws if it fails!
+    def _GetPathAndJsonArgs(self, httpInitialContext:HttpInitialContext, postBody:UploadBodyOrNone) -> Tuple[str, str, Optional[Dict[str, Any]]]:
+        commandPath, commandPathLower = self._GetCommandPath(httpInitialContext)
+        jsonObj = self._GetJsonArgs(commandPath, postBody)
+        return (commandPath, commandPathLower, jsonObj)
+
+
+    def _GetCommandPath(self, httpInitialContext:HttpInitialContext) -> Tuple[str, str]:
+        # Get the command path.
+        path = StreamMsgBuilder.BytesToString(httpInitialContext.Path())
+        if path is None:
+            raise Exception("IsCommandHttpRequest Http request has no path field in HandleCommand.")
+
+        # Everything after our prefix is part of the command path
+        commandPath = path[len(CommandHandler.c_CommandHandlerPathPrefix):]
+        commandPathLower = commandPath.lower()
+        return (commandPath, commandPathLower)
+
+
+    def _GetJsonArgs(self, commandPath:str, postBody:UploadBodyOrNone) -> Optional[Dict[str, Any]]:
+        # Parse the args. Args are optional, it depends on the command.
+        # Note some of these commands can also be GET requests, so we need to handle that.
+        jsonObj:Optional[Dict[str, Any]] = None
+
+        # Parse the POST body if there is one.
+        if postBody is not None:
+            bodyBuffer = postBody.GetBodyAsBuffer(postBody.MaxInMemoryBodyBytes)
+            if bodyBuffer is not None:
+                jsonObj = json.loads(bodyBuffer.GetBytesLike())
+
+        # If there is no json object, try for get args.
+        if jsonObj is None:
+            # This will return None if there are no args.
+            # Use the cased version of the string, so get args keep the correct case.
+            jsonObj = self._ParseGetArgsAsJson(commandPath)
+        return jsonObj
+
+
+    # If there are GET args, this will parse them into a json object where all values as strings
+    # If there are no args, this will return None.
+    def _ParseGetArgsAsJson(self, commandPath:str) -> Optional[Dict[str, str]]:
+        # We need to remove the ? and split on & to get the args.
+        if "?" not in commandPath:
+            return None
+        try:
+            jsonObj:Dict[str, str] = {}
+            query = commandPath.split("?", 1)[1]
+            for key, value in parse_qsl(query, keep_blank_values=True):
+                # Ensure the key is always lower case, but don't mess with the value; things like passwords might need to be case sensitive.
+                jsonObj[str(key).lower()] = value
+            return jsonObj
+        except Exception as e:
+            Sentry.OnException("CommandHandler error while parsing GET command args.", e)
+        return None

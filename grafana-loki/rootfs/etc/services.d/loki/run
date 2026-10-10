@@ -1,0 +1,50 @@
+#!/usr/bin/with-contenv bashio
+
+declare LOG_LEVEL
+BIND_ADDR=0.0.0.0
+HTTP_PORT=3100
+LOKI_CONFIG='/etc/loki/default-config.yaml'
+RETENTION_PERIOD="$(bashio::config 'days_to_keep' 1)d"
+
+if bashio::config.exists 'config_path'; then
+    CONF_PATH=$(bashio::config 'config_path')
+    if [ -f "${CONF_PATH}" ]; then
+        bashio::log.info "Using config at ${CONF_PATH}"
+        LOKI_CONFIG=$CONF_PATH
+    else
+        bashio::log.info "No config at given path - Using default config"
+    fi
+else
+    bashio::log.info "Using default config"
+fi
+
+bashio::log.info "Retention period set to ${RETENTION_PERIOD}"
+export "RETENTION_PERIOD=${RETENTION_PERIOD}"
+
+case "$(bashio::config 'log_level')" in \
+    trace)      ;& \
+    debug)      LOG_LEVEL='debug' ;; \
+    notice)     ;& \
+    warning)    LOG_LEVEL='warn' ;; \
+    error)      ;& \
+    fatal)      LOG_LEVEL='error' ;; \
+    *)          LOG_LEVEL='info' ;; \
+esac;
+bashio::log.info "Loki log level set to ${LOG_LEVEL}"
+
+bashio::log.info 'Starting Loki...'
+
+loki_args=(
+    "-config.expand-env=true"
+    "-config.file=${LOKI_CONFIG}"
+    "-server.http-listen-address=${BIND_ADDR}"
+    "-server.http-listen-port=${HTTP_PORT}"
+    "-log.level=${LOG_LEVEL}"
+)
+if [ "${LOG_LEVEL}" == "debug" ]; then
+    bashio::log.debug "Logging full config on startup for debugging..."
+    loki_args+=("-print-config-stderr=true")
+fi
+
+bashio::log.info "Handing over control to Loki..."
+exec s6-setuidgid loki /usr/bin/loki "${loki_args[@]}"

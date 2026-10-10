@@ -1,0 +1,8 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Runs the NGINX daemon
+# ==============================================================================
+
+bashio::log.info "Starting NGINX..."
+exec nginx

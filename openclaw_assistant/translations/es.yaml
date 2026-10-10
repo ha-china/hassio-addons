@@ -1,0 +1,148 @@
+configuration:
+  timezone:
+    name: Zona horaria
+    description: Zona horaria para el complemento (ej. Europe/Sofia, America/New_York)
+  
+  enable_terminal:
+    name: Activar terminal web
+    description: Activar botón de terminal web dentro de Home Assistant (Ingress) mediante ttyd
+  
+  terminal_port:
+    name: Puerto del terminal
+    description: Número de puerto para el terminal web (predeterminado - 7681). Cambie si este puerto entra en conflicto con otro servicio.
+  
+  gateway_public_url:
+    name: URL pública del Gateway
+    description: URL base pública para abrir la interfaz web del Gateway en una nueva pestaña (no integrada). Ejemplo - https://example.duckdns.org:12345 o http://192.168.1.10:18789
+  
+  homeassistant_token:
+    name: Token de Home Assistant
+    description: Opcional - Token de larga duración de Home Assistant para scripts/herramientas de API local
+
+  http_proxy:
+    name: Proxy HTTP de salida
+    description: Opcional - URL de proxy para solicitudes HTTP/HTTPS salientes (ejemplo - http://192.168.2.1:3128)
+  
+  router_ssh_host:
+    name: Host SSH del router
+    description: Opcional - Nombre de host SSH o dirección IP del router/firewall
+  
+  router_ssh_user:
+    name: Usuario SSH del router
+    description: Opcional - Nombre de usuario SSH del router/firewall
+  
+  router_ssh_key_path:
+    name: Ruta de clave SSH del router
+    description: Ruta a la clave privada SSH para acceso al router (predeterminado - /data/keys/router_ssh)
+  
+  clean_session_locks_on_start:
+    name: Limpiar bloqueos de sesión al iniciar
+    description: Limpiar archivos de bloqueo de sesión obsoletos dejados después de fallos/reinicios cuando se inicia el complemento
+  
+  clean_session_locks_on_exit:
+    name: Limpiar bloqueos de sesión al salir
+    description: Limpiar archivos de bloqueo de sesión cuando el complemento se detiene correctamente
+
+  persist_node_global:
+    name: Conservar habilidades globales de npm
+    description: Cuando está activado, guarda las habilidades npm instaladas por el usuario y los paquetes globales en /config/.node_global para que sobrevivan a reconstrucciones del complemento. Por defecto está desactivado para mantener pequeñas las copias de seguridad de Home Assistant.
+
+  persist_brew_tools:
+    name: Conservar herramientas de Homebrew
+    description: Cuando está activado, guarda Homebrew y las herramientas CLI instaladas con brew en /config/.linuxbrew para que sobrevivan a reconstrucciones del complemento. Por defecto está desactivado para mantener pequeñas las copias de seguridad de Home Assistant.
+  
+  gateway_mode:
+    name: Modo del Gateway
+    description: Modo de operación del Gateway - local (ejecutar gateway localmente, recomendado) o remote (conectar a un gateway remoto)
+    options:
+      local: "Local (recomendado)"
+      remote: "Remoto"
+
+  gateway_remote_url:
+    name: URL del Gateway Remoto
+    description: URL WebSocket del gateway remoto utilizada cuando Gateway Mode es Remote (ejemplo - ws://192.168.1.20:18789 o wss://gateway.example.com:443)
+
+  gateway_additional_allowed_origins:
+    name: Orígenes permitidos adicionales
+    description: Orígenes extra de Control UI separados por comas que se combinan en gateway.controlUi.allowedOrigins en modo lan_https (ejemplo - https://ha.example.com:8443,capacitor://localhost)
+
+  controlui_disable_device_auth:
+    name: Desactivar emparejamiento de dispositivos en Control UI (obsoleto)
+    description: "Ya no tiene ningún efecto. OpenClaw retiró gateway.controlUi.dangerouslyDisableDeviceAuth en la serie 2026.8.x, por lo que cada navegador se empareja una vez. Apruebe un navegador desde el terminal del complemento con: openclaw devices list y luego openclaw devices approve <requestId>."
+
+  gateway_bind_mode:
+    name: Modo de enlace del Gateway
+    description: "Modo de enlace de red: loopback (solo 127.0.0.1, más seguro), lan (todas las interfaces) o tailnet (solo interfaz Tailscale). Se anula con las preselecciones del modo de acceso."
+    options:
+      loopback: "Loopback (solo 127.0.0.1, más seguro)"
+      lan: "LAN (todas las interfaces)"
+      tailnet: "Tailnet (solo Tailscale)"
+
+  gateway_port:
+    name: Puerto del Gateway
+    description: Número de puerto en el que el gateway de OpenClaw escuchará (predeterminado - 18789)
+
+  access_mode:
+    name: Modo de acceso
+    description: "Simplifica la configuración de acceso seguro. Anula gateway_bind_mode y gateway_auth_mode cuando no es Personalizado."
+    options:
+      custom: "Personalizado (configuración individual)"
+      local_only: "Solo local (loopback + token, solo Ingress)"
+      lan_https: "LAN HTTPS (proxy HTTPS integrado — recomendado para teléfonos)"
+      lan_reverse_proxy: "LAN Proxy inverso (proxy externo con auth trusted-proxy)"
+      tailnet_https: "Tailscale HTTPS (Tailscale + token)"
+
+  gateway_auth_mode:
+    name: Modo de autenticación del Gateway
+    description: Modo de autenticación - token (predeterminado) o trusted-proxy (para proxys inversos HTTPS). Se anula cuando access_mode no es Personalizado.
+    options:
+      token: "Token (predeterminado)"
+      trusted-proxy: "Proxy de confianza (para proxys inversos)"
+
+  gateway_trusted_proxies:
+    name: Proxys de confianza del Gateway
+    description: Lista de IPs/CIDR de proxys de confianza separados por comas para el modo trusted-proxy (ejemplo - 127.0.0.1,192.168.88.0/24).
+
+  enable_openai_api:
+    name: Activar API OpenAI
+    description: Activar endpoint de Chat Completions compatible con OpenAI. Permite usar OpenClaw como agente de conversación en HA Assist pipeline mediante Extended OpenAI Conversation (HACS) o cualquier cliente compatible con OpenAI.
+  force_ipv4_dns:
+    name: Forzar orden DNS IPv4
+    description: Fuerza prioridad IPv4 en DNS. La mayoría de VMs HAOS no tienen salida IPv6 — causa errores en web_fetch y Telegram. Recomendado ACTIVADO (por defecto).
+  nginx_log_level:
+    name: Nivel de log Nginx
+    description: "Nivel de detalle del log de acceso de nginx. 'minimal' (por defecto) suprime las solicitudes repetitivas de health-check y polling de HA. 'full' registra todo."
+    options:
+      minimal: "Mínimo (suprimir ruido de polling HA)"
+      full: "Completo (registrar todas las solicitudes)"
+  gateway_env_vars:
+    name: Variables de entorno del Gateway
+    description: Variables de entorno que se pasan al proceso del gateway OpenClaw al iniciarse (lista de entradas name/value en la UI de Home Assistant; maximo 50 variables, claves de hasta 255 caracteres, valores de hasta 10 000 caracteres).
+  auto_configure_mcp:
+    name: Configurar MCP automáticamente para Home Assistant
+    description: "Cuando está ACTIVADO y el token de Home Assistant está configurado, registra automáticamente Home Assistant como servidor MCP en cada inicio. Esto permite a OpenClaw controlar entidades, servicios y automatizaciones de HA mediante el Model Context Protocol. Desactive solo si administra la configuración de mcporter manualmente."
+
+  resource_profile:
+    name: Perfil de recursos
+    description: "Mantiene el complemento estable en hardware de bajos recursos limitando el heap de Node.js que usa el gateway. 'auto' (recomendado) elige el perfil según la arquitectura de CPU y la RAM total, y nunca modifica su configuración de OpenClaw. 'low' además desactiva la automatización del navegador, pero solo en ajustes que usted no haya establecido."
+    options:
+      auto: "Automático (detectar por hardware)"
+      low: "Bajo (Raspberry Pi / menos de 2 GB de RAM)"
+      balanced: "Equilibrado (2-6 GB de RAM)"
+      high: "Alto (sin límite de heap)"
+
+  ha_health_sensors:
+    name: Publicar sensores de estado
+    description: Publica el estado del gateway, la versión de OpenClaw, la memoria del gateway, el uso de disco y la caducidad del certificado TLS como entidades sensor de Home Assistant (sensor.openclaw_*) para crear automatizaciones y alertas. Requiere que el token de Home Assistant esté configurado.
+
+  ha_health_interval:
+    name: Intervalo de los sensores de estado
+    description: Con qué frecuencia (en segundos) se actualizan los sensores de estado. Rango 15-3600, por defecto 60.
+
+  ha_base_url:
+    name: URL base de Home Assistant
+    description: URL base de su instancia de Home Assistant para los sensores de estado. Déjela vacía para detectarla automáticamente (prueba https y http en 127.0.0.1, localhost, homeassistant y homeassistant.local, puerto 8123). Configúrela si Home Assistant usa un puerto u host distinto, por ejemplo https://192.168.1.10:8123
+
+  config_backup_keep:
+    name: Copias de configuración a conservar
+    description: Cuántas copias de openclaw.json se conservan en /config/.openclaw/backups. Se crea una copia antes de la primera escritura de configuración de cada inicio, de modo que los cambios no deseados se pueden revertir con 'oc-config restore'. Use 0 para desactivar las copias.

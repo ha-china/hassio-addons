@@ -1,0 +1,16 @@
+name: HaspelSync
+version: "1.3.4-0"
+slug: haspelsync
+description: "[老王杂谈说]：与 Spoolman 同步您的 Bambu Lab AMS 线轴，自动进行。"
+url: https://gh-proxy.org/github.com/bytenoodle/hassioaddon
+arch:
+  - amd64
+  - aarch64
+startup: services
+init: false
+map:
+  - app_config:rw
+  - data:rw
+ports:
+  4000/tcp: 4000
+webui: "http://[HOST]:[PORT:4000]"

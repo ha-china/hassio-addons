@@ -1,0 +1,41 @@
+#
+# These are the packages we require for the homeway addon.
+#
+# Notes on versions
+#
+# octowebsocket_client
+#   We forked this package so we could add a flag to disable websocket frame masking when sending messages, which got us a 30% CPU reduction.
+#   For a full list of changes, reasons, and version details, see the repo readme.md
+#   For the source lib, we must be on version 1.6 due to a bug before that version.
+# dnspython
+#	We depend on a feature that was released with 2.3.0, so we need to require at least that.
+# zstandard
+#   zstandard gives us great compression that's super fast, but it requires a native lib to installed. The PY package will come with a lib and or try to build it, but we can also install it via apt-get.
+#   For the complexity, we can't list it as a required install, since it won't work on some platforms. So instead we will try to install it during runtime, and then it will be used after the following restart.
+#   The package version is defined in homeway.compression.ZStandardPipPackageString
+#
+# Other lib version notes:
+#   certifi - We use to keep certs on the device that we need for let's encrypt. So we want to keep it fresh.
+#   httpx - Is an asyncio http lib. It seems to be required by dnspython, but dnspython doesn't enforce it. We had a user having an issue that updated to 0.24.0, and it resolved the issue.
+#   urllib3 - There is a bug with parsing headers in versions older than 1.26.? (https://github.com/diyan/pywinrm/issues/269). At least 1.26.6 fixes it, ubt we decide to just stick with a newer version.
+#   wyoming - For sage and the local assist APIs. We have built or logic on 1.6 and since this isn't a huge lib we will lock to that.
+#   zeroconf - Used internally in the wyoming lib for service discovery.
+#   sentry-sdk - For error reporting. We want to keep this as current as possible to get the latest fixes and features.
+#
+octowebsocket_client==1.9.1
+octoflatbuffers==24.3.27
+# Keep these as current as possible.
+requests>=2.32.3,<3.0
+urllib3>=2.2.0,<3.0
+aiohttp>=3.10.0,<4.0
+certifi>=2026.2.25
+rsa>=4.9
+dnspython>=2.6.0
+httpx>=0.28.1
+pyyaml
+configparser
+patch-ng>=1.19.1,<2.0
+wyoming>=1.8.0,<1.9
+zeroconf>=0.136.2,<0.149.0
+sentry-sdk>=2.44.0,<3
+#zstandard <version> - Installed dynamically if the platform supports it.
