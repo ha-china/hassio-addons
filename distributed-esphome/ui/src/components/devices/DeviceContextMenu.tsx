@@ -1,0 +1,262 @@
+import { memo } from 'react';
+import { MoreVertical } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuGroup,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from '../ui/dropdown-menu';
+import { DeviceMenuSection } from './DeviceMenuSection';
+import { useVersioningEnabled } from '../../hooks/useVersioning';
+import type { Target } from '../../types';
+
+/**
+ * Per-row hamburger menu for the Devices tab (QS.16).
+ *
+ * Replaces the hand-rolled `DeviceMenu` that used `position: fixed` with
+ * pixel-coordinate tracking, a custom viewport-flip calculation, and a
+ * backdrop click-catcher. shadcn's DropdownMenu (Radix-based) handles all
+ * of that natively: placement, click-outside, Escape-to-close, focus trap,
+ * and keyboard navigation.
+ *
+ * Menu items preserve their previous ordering, disabled-with-tooltip
+ * behaviors (Restart when no `has_restart_button`, Copy API Key when no
+ * `has_api_key`), and click-through actions. The trigger remains the ⋮
+ * glyph so the row visual is unchanged.
+ *
+ * #2/#3: wrapped in React.memo with a custom equality check. SWR hands us
+ * a fresh `target` object every poll (new reference, same values), which
+ * would otherwise re-render the DropdownMenu and cause a visible flash in
+ * the overlay's CSS transitions. The compare below treats function props
+ * as always-equal (identity changes don't matter for behavior) and
+ * compares the target fields we actually read. Open state lives in the
+ * parent, so it's still authoritative across re-renders.
+ */
+
+interface Props {
+  target: Target;
+  onToast: (msg: string, type?: 'info' | 'success' | 'error') => void;
+  onRename: (target: string) => void;
+  onDuplicate: (target: Target) => void;
+  onDelete: (target: string) => void;
+  /** Bug #3: Archive directly from the hamburger menu — no confirmation
+   *  dialog, since archived devices can be restored from Settings →
+   *  Archived devices. */
+  onArchive: (target: string) => void;
+  /** DM.1: restore an archived row back to the active config dir.
+   *  Only invoked from rows where ``target.archived === true``. */
+  onUnarchive: (target: string) => void;
+  /** DM.1: permanently delete an archived YAML. Two-step ``Dialog``
+   *  confirmation is owned by DevicesTab, so this just opens that
+   *  dialog (no immediate destructive call). */
+  onPermanentDelete: (target: string) => void;
+  onLogs: (target: string) => void;
+  onPin: (target: string) => void;
+  onUnpin: (target: string) => void;
+  /** AV.6: open the per-file History panel. */
+  onOpenHistory: (target: string) => void;
+  /** JH.5: open the per-device Compile History panel. */
+  onOpenCompileHistory: (target: string) => void;
+  /** Bug #16: open the manual-commit dialog for this target. Only
+   * offered when the target has uncommitted changes. */
+  onCommitChanges: (target: string) => void;
+  /** RC.1: open the read-only modal showing the YAML *as ESPHome will
+   *  compile it* (substitutions / packages / !secret resolved). */
+  onViewRenderedConfig: (target: string) => void;
+  /** DM.2: open the ICMP ping diagnostic modal. */
+  onPing: (target: string) => void;
+  /** DM.3: open the "Install to Specific Address" modal. */
+  onInstallToAddress: (target: string) => void;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+function DeviceContextMenuImpl({
+  target: t,
+  onToast,
+  onRename,
+  onDuplicate,
+  onDelete,
+  onArchive,
+  onUnarchive,
+  onPermanentDelete,
+  onLogs,
+  onPin,
+  onUnpin,
+  onOpenHistory,
+  onOpenCompileHistory,
+  onCommitChanges,
+  onViewRenderedConfig,
+  onPing,
+  onInstallToAddress,
+  open,
+  onOpenChange,
+}: Props) {
+  // Bugs #111/#112: gate the "Config history…" + "Commit changes…" items
+  // on whether versioning is actually on. Items stay visible but go
+  // disabled so the menu shape doesn't jump around when a user flips
+  // versioning off/on in Settings — matches the "disable, don't fail"
+  // convention the rest of the hamburger already uses (Restart, Copy
+  // API Key).
+  const versioningEnabled = useVersioningEnabled();
+
+  // DM.1: archived rows expose ONLY Unarchive + Permanently delete.
+  // All other actions (Live Logs, Restart, Compile, Pin, Rename,
+  // Duplicate, Commit changes, etc.) are meaningless when the YAML
+  // sits in ``.archive/`` — the poller / scheduler / queue do not see
+  // archived targets, so any of those would either no-op or 404. Drop
+  // the whole "Device" / "Config" sections and render a minimal menu.
+  if (t.archived) {
+    return (
+      <DropdownMenu open={open} onOpenChange={onOpenChange}>
+        <DropdownMenuTrigger
+          className="action-menu-trigger cursor-pointer inline-flex items-center justify-center"
+          aria-label="More actions"
+          title="More actions"
+        >
+          <MoreVertical className="size-4" />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent
+          align="end"
+          className="min-w-[200px] w-max max-w-[320px] data-[state=closed]:!animate-none"
+        >
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Archived</DropdownMenuLabel>
+            <DropdownMenuItem onClick={() => onUnarchive(t.target)}>
+              Unarchive
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              variant="destructive"
+              onClick={() => onPermanentDelete(t.target)}
+            >
+              Permanently delete…
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  }
+
+  return (
+    <DropdownMenu open={open} onOpenChange={onOpenChange}>
+      <DropdownMenuTrigger
+        className="action-menu-trigger cursor-pointer inline-flex items-center justify-center"
+        aria-label="More actions"
+        title="More actions"
+      >
+        <MoreVertical className="size-4" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        align="end"
+        /* #4: disable the Base-UI close animation for this menu instance.
+           Across SWR polls, even small layout shifts in the row can cause
+           Base-UI's Positioner to fire, and if the `data-closed` state
+           toggles briefly the animate-out+animate-in sequence is visible
+           as a "twitch". The open-in animation on first open is preserved;
+           only the close animation is suppressed. */
+        className="min-w-[200px] w-max max-w-[320px] data-[state=closed]:!animate-none"
+      >
+        {/* #209: shared "Device" section so the Devices-tab hamburger
+            and the Queue-tab hamburger render the exact same actions. */}
+        <DeviceMenuSection
+          target={t}
+          onToast={onToast}
+          onLogs={onLogs}
+          onOpenCompileHistory={onOpenCompileHistory}
+          onPing={onPing}
+          onInstallToAddress={onInstallToAddress}
+        />
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>Config</DropdownMenuLabel>
+          {/* #93: "Schedule Upgrade…" removed — accessible via the Upgrade
+              button by switching to "Scheduled" mode.
+              Bug #29: "Pin version" was ambiguous under a "Config" group
+              (pins the ESPHome compiler version, not the config). Spell
+              it out — the config version concept lives in "View history…"
+              just below. */}
+          {t.pinned_version ? (
+            <DropdownMenuItem onClick={() => onUnpin(t.target)}>
+              Unpin ESPHome version ({t.pinned_version})
+            </DropdownMenuItem>
+          ) : (
+            <DropdownMenuItem onClick={() => onPin(t.target)}>
+              Pin ESPHome version to current
+            </DropdownMenuItem>
+          )}
+          <DropdownMenuItem onClick={() => onRename(t.target)}>Rename</DropdownMenuItem>
+          {/* CD.6: duplicate this device into a new file */}
+          <DropdownMenuItem onClick={() => onDuplicate(t)}>Duplicate…</DropdownMenuItem>
+          {/* AV.6: per-file config history + diff + rollback. Bug #29:
+              "Config history…" disambiguates from ESPHome-version history
+              (which lives in the version dropdown in the header).
+              Bug #111: disabled when versioning is off — no history exists
+              to show, and clicking would open an empty drawer. */}
+          <DropdownMenuItem
+            onClick={() => onOpenHistory(t.target)}
+            disabled={!versioningEnabled}
+            title={versioningEnabled ? undefined : 'Config versioning is off — enable it in Settings to record a history.'}
+          >
+            Config history…
+          </DropdownMenuItem>
+          {/* RC.1: open the read-only "what will ESPHome compile?"
+              view. Cheap to surface — runs `esphome config <yaml>`
+              server-side and caches the result keyed by mtime. */}
+          <DropdownMenuItem onClick={() => onViewRenderedConfig(t.target)}>
+            View rendered config…
+          </DropdownMenuItem>
+          {/* Bug #16: only shown when the target has uncommitted changes.
+              Bug #111: and only when versioning is on — the "commit"
+              vocabulary is meaningless otherwise. */}
+          {versioningEnabled && t.has_uncommitted_changes && (
+            <DropdownMenuItem onClick={() => onCommitChanges(t.target)}>
+              Commit changes…
+            </DropdownMenuItem>
+          )}
+          {/* Bug #3: Archive as a first-order action — no confirmation
+              modal, archived configs are restorable from
+              Settings → Archived devices. */}
+          <DropdownMenuItem onClick={() => onArchive(t.target)}>
+            Archive
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            variant="destructive"
+            onClick={() => onDelete(t.target)}
+          >
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+/**
+ * Custom equality: compare only the Target fields we actually use in render,
+ * plus `open`. Function props are treated as always-equal — the cell inlines
+ * fresh arrows every render (closing over the current `setMenuOpenTarget`),
+ * but their behavior is identical as long as they eventually call the same
+ * underlying handlers.
+ */
+function propsEqual(prev: Props, next: Props): boolean {
+  if (prev.open !== next.open) return false;
+  const a = prev.target;
+  const b = next.target;
+  return (
+    a.target === b.target &&
+    a.has_restart_button === b.has_restart_button &&
+    a.has_api_key === b.has_api_key &&
+    a.pinned_version === b.pinned_version &&
+    // Bug #16: dirty state controls the "Commit changes…" item's visibility.
+    a.has_uncommitted_changes === b.has_uncommitted_changes &&
+    // DM.1: ``archived`` flips the entire menu shape — must invalidate.
+    a.archived === b.archived
+  );
+}
+
+export const DeviceContextMenu = memo(DeviceContextMenuImpl, propsEqual);

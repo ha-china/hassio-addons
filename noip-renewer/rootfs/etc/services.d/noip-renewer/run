@@ -1,0 +1,36 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Start noip-renewer with options
+# s6-overlay docs: https://github.com/just-containers/s6-overlay
+# ==============================================================================
+
+current_timestamp=$(date +'%Y-%m-%dT%H:%M:%S%z')
+bashio::log.blue "Log file created on: $current_timestamp"
+
+CONFIG_PATH=/data/options.json
+
+message=$(echo "PWD is current directory $(pwd)")
+
+export NO_IP_USERNAME="$(jq --raw-output '.NOIP_Email' $CONFIG_PATH)"
+
+export NO_IP_PASSWORD="$(jq --raw-output '.NOIP_Password' $CONFIG_PATH)"
+
+export NO_IP_TOTP_KEY="$(jq --raw-output '.NOIP_TOTP_KEY' $CONFIG_PATH)"
+
+export TRANSLATE_ENABLED="$(jq --raw-output '.Translate_Enabled' $CONFIG_PATH)"
+
+bashio::log.cyan "${NO_IP_USERNAME}"
+bashio::log.magenta "${PASSWORD}"
+bashio::log.yellow "${NO_IP_PASSWORD}"
+bashio::log.green "${TRANSLATE_ENABLED}"
+message=$(echo "The current time is $(date)")
+
+ts="$(bashio::config 'DateTimeFormat' '%H:%M:%S %d-%m-%y')"
+
+sleep 20
+
+# Set the entrypoint py script
+WORKDIR /app
+
+ENTRYPOINT ["python3", "renew.py"]

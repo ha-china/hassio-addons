@@ -1,0 +1,15 @@
+---
+build_from:
+  aarch64: "ghcr.nju.edu.cn/home-assistant/aarch64-base:3.24"
+  amd64: "ghcr.nju.edu.cn/home-assistant/amd64-base:3.24"
+labels:
+  maintainer: "bluemaex <homeassistant@blmx.de>"
+  org.opencontainers.image.authors: "bluemaex <homeassistant@blmx.de>"
+  org.opencontainers.image.licenses: "MIT License"
+  org.opencontainers.image.title: "Home Assistant Unofficial Add-on: unpoller"
+  org.opencontainers.image.url: https://gh-proxy.org/github.com/bluemaex/home-assistant-addons
+  org.opencontainers.image.source: https://gh-proxy.org/github.com/bluemaex/home-assistant-addons/unpoller
+  org.opencontainers.image.documentation: https://gh-proxy.org/github.com/bluemaex/home-assistant-addons/unpoller/README.md
+  org.opencontainers.image.created: "2026-09-04T22:34:59Z"
+  org.opencontainers.image.revision: 7872c785a42786dd0bd2747b8d0ce82c309fe306
+  org.opencontainers.image.version: 5.0.2

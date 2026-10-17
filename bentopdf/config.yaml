@@ -1,0 +1,26 @@
+name: "BentoPDF"
+slug: bentopdf
+image: ghcr.nju.edu.cn/alexbelgium/bentopdf-{arch}
+description: "[老王杂谈说]：以隐私为先的 PDF 工具套件。拥有 50 多种工具，所有处理均在浏览器中客户端完成。文件永远不会离开您的设备。"
+version: "2.8.8"
+url: "https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/bentopdf"
+arch:
+  - amd64
+  - aarch64
+startup: application
+init: false
+stage: stable
+ports:
+  8080/tcp: 8080
+  8443/tcp: 8443
+ports_description:
+  8080/tcp: "BentoPDF HTTP (watchdog / redirect to HTTPS)"
+  8443/tcp: "BentoPDF HTTPS Web UI"
+webui: "https://[HOST]:[PORT:8443]"
+watchdog: "http://[HOST]:[PORT:8080]/"
+panel_icon: mdi:file-pdf-box
+panel_title: BentoPDF
+options:
+  log_level: "info"
+schema:
+  log_level: list(info|debug|warn|error)

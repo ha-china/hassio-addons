@@ -1,0 +1,23 @@
+{
+  "name": "HassOS Serial Configurator",
+  "version": "0.5a",
+  "slug": "hassos_serial_configurator_addon",
+  "description": "这使串行。完成后您可以卸载。",
+  "arch": [
+    "armhf",
+    "armv7",
+    "aarch64"
+  ],
+  "startup": "once",
+  "init": false,
+  "url": "https://community.home-assistant.io/t/add-on-hassos-serial-configurator/264169",
+  "stage": "experimental",
+  "privileged": [
+    "SYS_ADMIN"
+  ],
+  "ingress": true,
+  "full_access": true,
+  "boot": "manual",
+  "options": {},
+  "schema": {}
+}

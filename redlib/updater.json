@@ -1,0 +1,10 @@
+{
+  "github_fulltag": "false",
+  "last_update": "21-03-2025",
+  "beta": "false",
+  "repository": "jdeath/homeassistant-addons",
+  "slug": "redlib",
+  "source": "github",
+  "upstream_repo": "redlib-org/redlib",
+  "upstream_version": "0.36.0"
+}

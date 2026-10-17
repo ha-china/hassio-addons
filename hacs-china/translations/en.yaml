@@ -1,0 +1,7 @@
+configuration:
+  channel:
+    name: 安装渠道
+    description: 请选择要安装的版本，正式版(current)/开发版(development)
+  component:
+    name: 选择集成
+    description: 选择要安装的集成，保存后启动加载项即可完成安装

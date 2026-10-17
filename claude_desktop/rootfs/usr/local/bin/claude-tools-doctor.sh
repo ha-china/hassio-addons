@@ -1,0 +1,236 @@
+#!/usr/bin/with-contenv bashio
+# Diagnose installation, registration, routing, indexing, permissions, and recorded savings without
+# printing MCP environment values or authentication material.
+# shellcheck shell=bash
+set +e
+set -o pipefail
+export NO_COLOR=1
+export PATH="/lsiopy/bin:/usr/local/bin:/usr/bin:/bin:${PATH}"
+
+RUNTIME_HOME="$(getent passwd abc | cut -d: -f6)"
+if [ -z "$RUNTIME_HOME" ]; then
+    RUNTIME_HOME="/data/data"
+fi
+
+section() {
+    printf '\n=== %s ===\n' "$1"
+}
+
+section "Installed binaries"
+for tool in claude claude-desktop headroom rtk tokensave codex git gh rg jq shellcheck yamllint hadolint actionlint; do
+    resolved="$(command -v "$tool" 2> /dev/null || true)"
+    if [ -n "$resolved" ]; then
+        printf '%-16s %s\n' "$tool" "$resolved"
+    else
+        printf '%-16s %s\n' "$tool" "MISSING"
+    fi
+done
+
+section "Configured switches"
+for option in permission_mode install_headroom headroom_wrap_claude_code expose_headroom_dashboard install_rtk install_tokensave install_codex_cli codex_sandbox_mode install_caveman enable_tools_health_report; do
+    printf '%-30s %s\n' "$option" "$(bashio::config "$option")"
+done
+
+section "Runtime identity"
+printf '%-30s %s\n' "configured PUID:PGID" "$(bashio::config 'PUID'):$(bashio::config 'PGID')"
+printf '%-30s %s\n' "effective abc UID:GID" "$(id -u abc):$(id -g abc)"
+printf '%-30s %s\n' "abc runtime home" "$RUNTIME_HOME"
+printf '%-30s %s\n' "current process UID:GID" "$(id -u):$(id -g)"
+if [ "$(bashio::config 'permission_mode')" = "bypass" ]; then
+    if [ "$(id -u abc)" -eq 0 ]; then
+        echo "bypass runtime: ERROR - Claude Code will reject bypass permissions while abc is root"
+    else
+        echo "bypass runtime: OK - Claude Desktop and Cowork run as a non-root UID"
+    fi
+fi
+
+section "Claude Code permission state"
+RUNTIME_HOME="$RUNTIME_HOME" python3 - <<'PY'
+import json
+import os
+from pathlib import Path
+
+path = Path(os.environ["RUNTIME_HOME"]) / ".claude/settings.json"
+try:
+    data = json.loads(path.read_text())
+except FileNotFoundError:
+    print("settings: MISSING")
+except Exception as exc:
+    print(f"settings: INVALID: {exc}")
+else:
+    permissions = data.get("permissions", {})
+    if isinstance(permissions, dict):
+        print(f"permissions.defaultMode: {permissions.get('defaultMode', '<upstream default>')}")
+    else:
+        print("permissions: INVALID")
+PY
+
+section "MCP registrations (environment values redacted)"
+RUNTIME_HOME="$RUNTIME_HOME" python3 - <<'PY'
+import json
+import os
+from pathlib import Path
+
+home = Path(os.environ["RUNTIME_HOME"])
+paths = [
+    home / ".claude.json",
+    home / ".config/Claude/claude_desktop_config.json",
+]
+for path in paths:
+    print(path)
+    try:
+        data = json.loads(path.read_text())
+    except FileNotFoundError:
+        print("  MISSING")
+        continue
+    except Exception as exc:
+        print(f"  INVALID: {exc}")
+        continue
+    servers = data.get("mcpServers", {})
+    if not isinstance(servers, dict) or not servers:
+        print("  no MCP servers")
+        continue
+    for name, spec in sorted(servers.items()):
+        if not isinstance(spec, dict):
+            print(f"  {name}: invalid entry")
+            continue
+        command = spec.get("command", "?")
+        args = spec.get("args", [])
+        server_type = spec.get("type", "")
+        suffix = f" type={server_type}" if server_type else ""
+        print(f"  {name}: {command} {args}{suffix}")
+        if spec.get("env"):
+            print("    env: <redacted>")
+PY
+
+section "Claude Code hooks"
+RUNTIME_HOME="$RUNTIME_HOME" python3 - <<'PY'
+import json
+import os
+from pathlib import Path
+
+path = Path(os.environ["RUNTIME_HOME"]) / ".claude/settings.json"
+try:
+    data = json.loads(path.read_text())
+except FileNotFoundError:
+    print("MISSING")
+    raise SystemExit(0)
+except Exception as exc:
+    print(f"INVALID: {exc}")
+    raise SystemExit(0)
+
+hooks = data.get("hooks", {})
+if not isinstance(hooks, dict) or not hooks:
+    print("no hooks")
+    raise SystemExit(0)
+for event, entries in hooks.items():
+    print(event)
+    if not isinstance(entries, list):
+        print("  invalid entries")
+        continue
+    for entry in entries:
+        matcher = entry.get("matcher", "*") if isinstance(entry, dict) else "?"
+        commands = entry.get("hooks", []) if isinstance(entry, dict) else []
+        rendered = []
+        for command in commands if isinstance(commands, list) else []:
+            if isinstance(command, dict):
+                rendered.append(" ".join([str(command.get("command", "?")), *map(str, command.get("args", []))]))
+        print(f"  matcher={matcher}: {', '.join(rendered) or 'no command'}")
+PY
+
+section "Headroom"
+if bashio::config.true 'install_headroom'; then
+    curl -fsS --max-time 2 http://127.0.0.1:8787/health && echo || echo "proxy health: FAILED"
+    headroom mcp status || true
+    headroom savings || true
+else
+    echo "disabled"
+fi
+
+section "RTK"
+if bashio::config.true 'install_rtk'; then
+    rtk gain || true
+else
+    echo "disabled"
+fi
+
+section "TokenSave"
+if bashio::config.true 'install_tokensave'; then
+    tokensave doctor --agent claude || true
+    tokensave gain --all --range 30d || true
+    # Capture before looping — see the matching comment in 82-claude_tools.sh.
+    TOKENSAVE_PROJECT_PATHS="$(bashio::config 'tokensave_project_paths')"
+    while IFS= read -r configured_path || [ -n "$configured_path" ]; do
+        if [ -z "$configured_path" ] || [ "$configured_path" = "null" ]; then
+            continue
+        fi
+        repo_root="$(s6-setuidgid abc env HOME="$RUNTIME_HOME" git -c safe.directory='*' -C "$configured_path" rev-parse --show-toplevel 2> /dev/null || true)"
+        if [ -z "$repo_root" ]; then
+            echo "${configured_path}: not a Git repository"
+        elif [ -f "$repo_root/.tokensave/tokensave.db" ]; then
+            s6-setuidgid abc env HOME="$RUNTIME_HOME" tokensave status "$repo_root" --short || true
+        else
+            echo "${repo_root}: NOT INITIALIZED"
+        fi
+    done <<< "$TOKENSAVE_PROJECT_PATHS"
+else
+    echo "disabled"
+fi
+
+section "Codex"
+if bashio::config.true 'install_codex_cli'; then
+    codex_bin="/data/codex/bin/codex"
+    if [ -x "$codex_bin" ]; then
+        printf '%-30s %s\n' "installed" "$("$codex_bin" --version 2> /dev/null || echo 'FAILED TO RUN')"
+        printf '%-30s %s\n' "installed version stamp" "$(cat /data/codex/bin/.version 2> /dev/null || echo 'MISSING')"
+        # Codex runs every shell and file-read tool call through this companion binary. When it is
+        # absent the CLI still starts, authenticates and answers, but each tool call fails and the
+        # run still exits 0 — so report it explicitly rather than leaving it to be inferred.
+        if [ -x /data/codex/bin/codex-code-mode-host ] \
+            && [ -f /data/codex/codex-package.json ] \
+            && [ -f /data/codex/bin/.version ]; then
+            printf '%-30s %s\n' "package layout" "complete"
+        else
+            printf '%-30s %s\n' "package layout" "INCOMPLETE - tool calls will fail; restart the add-on to reinstall"
+        fi
+        printf '%-30s %s\n' "release policy" "latest stable, SHA-256 verified"
+        printf '%-30s %s\n' "authentication policy" "ChatGPT subscription only"
+
+        # Never forward raw `login status` output: non-ChatGPT modes can include masked secret
+        # fragments. Only print explicitly allow-listed states.
+        codex_status="$(
+            s6-setuidgid abc env -u OPENAI_API_KEY \
+                HOME="$RUNTIME_HOME" CODEX_HOME="$RUNTIME_HOME/.codex" \
+                "$codex_bin" login status 2>&1
+        )"
+        codex_status_rc=$?
+        case "$codex_status" in
+            *"Logged in using ChatGPT"*)
+                echo "Logged in using ChatGPT"
+                ;;
+            *"Not logged in"*)
+                echo "Not logged in; run 'codex-login' to activate a ChatGPT subscription"
+                ;;
+            *)
+                if [ "$codex_status_rc" -eq 0 ]; then
+                    echo "Authenticated with a non-ChatGPT method; run 'codex-login' to enforce subscription authentication"
+                else
+                    echo "Unable to determine Codex login status safely; run 'codex-login'"
+                fi
+                ;;
+        esac
+    else
+        echo "enabled but ${codex_bin} is MISSING (download failed or add-on not yet restarted)"
+    fi
+else
+    echo "disabled"
+fi
+
+section "Claude routing"
+printf 'PATH claude: %s\n' "$(command -v claude 2> /dev/null || true)"
+printf 'real claude: %s\n' "$([ -x /usr/bin/claude ] && echo /usr/bin/claude || echo MISSING)"
+if bashio::config.true 'headroom_wrap_claude_code'; then
+    echo "PATH-based Claude Code launches are configured for Headroom wrapping."
+else
+    echo "Claude Code Headroom wrapping is disabled; Headroom remains available through MCP."
+fi

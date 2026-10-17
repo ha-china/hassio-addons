@@ -1,0 +1,28 @@
+---
+configuration:
+  subscription_key:
+    name: Abonnementssleutel
+    description: >-
+      Uw Microsoft Azure Speech Service abonnementssleutel.
+  service_region:
+    name: Service Regio
+    description: >-
+      De regio waar u uw Speech Service-instantie hebt ingesteld (bijv. westeurope).
+  update_languages:
+    name: Update talen
+    description: >-
+      Download de lijst met nieuwe talen automatisch elke keer dat de add-on
+      start. U moet ook de Wyoming-integratie voor Microsoft in Home
+      Assistant opnieuw laden om nieuwe talen te zien.
+  profanity:
+    name: Vloeken
+    description: >-
+      Het niveau van vloekfiltering dat moet worden toegepast op de spraakherkenning. Off
+      betekent geen filtering, Masked betekent dat de vloek wordt vervangen door asterisken,
+      en Removed betekent dat de vloek uit de tekst wordt verwijderd.
+  debug_logging:
+    name: Debug logging
+    description: >-
+      Print debug berichten naar het logboek van de add-on.
+network:
+  10300/tcp: Microsoft Wyoming Protocol

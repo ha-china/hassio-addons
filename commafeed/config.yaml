@@ -1,0 +1,31 @@
+name: CommaFeed
+version: "7.3.2-h2"
+upstream: 5.3.4-h2
+slug: commafeed
+description: >-
+  [老王杂谈说]：一个基于 Quarkus 和 React/TypeScript 的 Google Reader 启用的自建 RSS 阅读器。
+arch:
+  - amd64
+  - aarch64
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+ports:
+  8082/tcp: 8082
+ports_description:
+  8082/tcp: "Web Interface"
+map:
+  - type: addon_config
+    read_only: false
+    path: /commafeed/data
+#image: athou/commafeed
+boot: auto
+startup: services
+webui: "[PROTO:ssl]://[HOST]:[PORT:8082]"
+panel_admin: false
+ingress: true
+ingress_port: 8082
+options:
+  USE_ENV_FILE: false
+  N8N_ENV_FILES: "/commafeed/data/config.env"
+schema:
+  USE_ENV_FILE: "bool"
+  N8N_ENV_FILES: "str"

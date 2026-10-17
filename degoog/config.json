@@ -1,0 +1,34 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：一个聚合搜索工具，可查询多个引擎并将结果展示在单一界面；您还可添加自定义搜索引擎、bang-command 插件、插槽插件（查询触发的结果上方/下方面板或侧边栏插件）以及传输方式（自定义 HTTP 获取策略如 curl、FlareSolverr 或自设方案）。终极愿景是建立一个由用户构建的插件/引擎市场。",
+  "environment": {
+    "DEGOOG_DATA_DIR": "/config/",
+    "PUID": "0",
+    "PGID": "0"
+  },
+  "map": [
+    "addon_config:rw"
+  ],
+  "version": "1.1.0",
+  "name": "degoog",
+  "options": {},
+  "ports": {
+    "4445/tcp": "4445"
+  },
+  "ports_description": {
+    "4445/tcp": "Web interface (direct, without ingress)"
+  },
+  "schema": {},
+  "slug": "degoog",
+  "startup": "services",
+  "upstream": "latest",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:4445]",
+  "panel_admin": false,
+  "ingress": true,
+  "ingress_port": 4444
+}

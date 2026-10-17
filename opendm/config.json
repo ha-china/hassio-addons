@@ -1,0 +1,33 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "manual",
+  "description": "[老王杂谈说]：开放地堡大师在您的本机上使用人工智能地堡大师运行多人（及单人）ungeons & Dragons 5e 战役，而叙述者则是您现有的任意人工智能：本地模型（llama.cpp、Ollama、LM Studio、vLLM）、API 密钥（OpenAI、OpenRouter，或任何兼容 OpenAI 的终端），或您已付费的命令行代理（Claude Code、Codex、opencode、Grok Build），这些代理无需移交 API 密钥即可独立订阅描述。",
+  "environment": {
+    "AD_SERVER__PORT": "4141"
+  },
+  "map": [
+    {
+      "type": "addon_config",
+      "read_only": false,
+      "path": "/app/data"
+    }
+  ],
+  "version": "0.27.1",
+  "name": "opendm",
+  "ports": {
+    "3005/tcp": "3005"
+  },
+  "ports_description": {
+    "3005/tcp": "WebUI"
+  },
+  "slug": "opendm",
+  "startup": "services",
+  "upstream": "0.1.0",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:3005]",
+  "ingress": false,
+  "ingress_port": 3005,
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+}

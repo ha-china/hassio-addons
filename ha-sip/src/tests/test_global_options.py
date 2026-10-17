@@ -1,0 +1,80 @@
+import unittest
+
+from options_global import parse_global_options
+
+
+class GlobalOptionsTest(unittest.TestCase):
+    def test_parse_transport_default(self):
+        options = parse_global_options('')
+        self.assertEqual(options.enable_udp, True)
+        self.assertEqual(options.enable_tcp, True)
+        self.assertEqual(options.enable_tls, False)
+        self.assertEqual(options.stun_server, None)
+
+    def test_parse_transport_udp_enabled(self):
+        options = parse_global_options('--udp enabled')
+        self.assertEqual(options.enable_udp, True)
+
+    def test_parse_transport_udp_disabled(self):
+        options = parse_global_options('--udp=disabled')
+        self.assertEqual(options.enable_udp, False)
+
+    def test_parse_transport_tcp_enabled(self):
+        options = parse_global_options('--tcp=enabled')
+        self.assertEqual(options.enable_tcp, True)
+
+    def test_parse_transport_tcp_disabled(self):
+        options = parse_global_options('--tcp disabled')
+        self.assertEqual(options.enable_tcp, False)
+
+    def test_parse_transport_tls_enabled(self):
+        options = parse_global_options('--tls=enabled')
+        self.assertEqual(options.enable_tls, True)
+
+    def test_parse_transport_tls_disabled(self):
+        options = parse_global_options('--tls=disabled')
+        self.assertEqual(options.enable_tls, False)
+
+    def test_parse_stun_server(self):
+        options = parse_global_options('--stun-server stun.example.com')
+        self.assertEqual(options.stun_server, 'stun.example.com')
+
+    def test_parse_debug_headers_default(self):
+        options = parse_global_options('')
+        self.assertEqual(options.debug_headers, False)
+
+    def test_parse_debug_headers_enabled(self):
+        options = parse_global_options('--debug-headers enabled')
+        self.assertEqual(options.debug_headers, True)
+
+    def test_parse_debug_headers_disabled(self):
+        options = parse_global_options('--debug-headers disabled')
+        self.assertEqual(options.debug_headers, False)
+
+    def test_parse_mqtt_defaults(self):
+        options = parse_global_options('')
+        self.assertEqual(options.enable_mqtt, False)
+        self.assertEqual(options.mqtt_address, '')
+        self.assertEqual(options.mqtt_port, 1883)
+        self.assertEqual(options.mqtt_username, '')
+        self.assertEqual(options.mqtt_password, '')
+        self.assertEqual(options.mqtt_topic, 'hasip/execute')
+        self.assertEqual(options.mqtt_state_topic, 'hasip/state')
+
+    def test_parse_mqtt_enabled(self):
+        options = parse_global_options('--enable-mqtt')
+        self.assertEqual(options.enable_mqtt, True)
+
+    def test_parse_mqtt_full(self):
+        options = parse_global_options(
+            '--enable-mqtt --mqtt-address 192.168.1.1 --mqtt-port 1884 '
+            '--mqtt-username admin --mqtt-password secret '
+            '--mqtt-topic=custom/execute --mqtt-state-topic custom/state'
+        )
+        self.assertEqual(options.enable_mqtt, True)
+        self.assertEqual(options.mqtt_address, '192.168.1.1')
+        self.assertEqual(options.mqtt_port, 1884)
+        self.assertEqual(options.mqtt_username, 'admin')
+        self.assertEqual(options.mqtt_password, 'secret')
+        self.assertEqual(options.mqtt_topic, 'custom/execute')
+        self.assertEqual(options.mqtt_state_topic, 'custom/state')

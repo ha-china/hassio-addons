@@ -1,0 +1,34 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Start service
+# ==============================================================================
+export PYTHONPATH=/usr/src
+
+extra_args=()
+if bashio::config.true 'debug_logging'; then
+    extra_args+=('--debug')
+fi
+
+if bashio::config.true 'udp_mic'; then
+    extra_args+=('--udp-mic' 5000)
+fi
+
+if [ "$(bashio::core.ssl)" == 'true' ]; then
+    extra_args+=('--protocol' 'https')
+fi
+
+exec python3 -m homeassistant_satellite \
+    --host "$(bashio::config 'host')" \
+    --port "$(bashio::core.port)" \
+    --token "$(bashio::config 'token')" \
+    --volume "$(bashio::config 'volume')" \
+    --awake-sound "$(bashio::config 'awake_sound')" \
+    --done-sound "$(bashio::config 'done_sound')" \
+    --wake-buffer-seconds "$(bashio::config 'wake_buffer_seconds')" \
+    --noise-suppression "$(bashio::config 'noise_suppression')" \
+    --auto-gain "$(bashio::config 'auto_gain')" \
+    --volume-multiplier "$(bashio::config 'volume_multiplier')" \
+    --vad "$(bashio::config 'vad')" \
+    --pipeline "$(bashio::config 'pipeline')" \
+    --debug-recording-dir "$(bashio::config 'debug_recording_dir')" ${extra_args[@]}

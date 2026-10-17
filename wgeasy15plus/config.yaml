@@ -1,0 +1,33 @@
+name: WG Easy 15+
+version: "15.4.0"
+upstream: 15.4.0
+slug: wgeasy15plus
+description: >-
+  [老王杂谈说]：WireGuard Easy 15+: WireGuard + 界面一体化
+arch:
+  - amd64
+  - aarch64
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+ports:
+  51820/udp: "51820"
+  51821/tcp: "51821"
+ports_description:
+  51820/udp: "WireGuard: forward this udp port in your router"
+  51821/tcp: "WireGuard: forward this tcp port in your router"
+map:
+  - type: addon_config
+    read_only: false
+    path: /etc/wireguard
+environment:
+  INSECURE: "true"
+boot: auto
+startup: services
+ingress: true
+ingress_port: 8099
+panel_icon: mdi:shield-lock
+panel_title: WireGuard
+webui: http://[HOST]:[PORT:51821]
+privileged:
+  - "NET_ADMIN"
+devices:
+  - "/dev/net/tun"

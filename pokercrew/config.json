@@ -1,0 +1,22 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "manual",
+  "description": "[老王杂谈说]：面向 2 至 8 人的自托管无限制德州扑克锦标赛：一款使用 Three.js 渲染扑克桌，并内置语音和视频聊天功能的应用。只有一张桌子，任何拥有此链接的人无需注册账号即可加入。",
+  "environment": {},
+  "map": [],
+  "ports": {
+    "3000/tcp": "3000"
+  },
+  "ports_description": {
+    "3000/tcp": "Web interface"
+  },
+  "version": "dev",
+  "name": "Poker Crew",
+  "slug": "pokercrew",
+  "startup": "services",
+  "upstream": "0.1.0",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+}
