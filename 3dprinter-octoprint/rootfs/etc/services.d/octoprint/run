@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Add-on: 3dprinter-octoprint
+# Runs OctoPrint
+# ==============================================================================
+
+bashio::log.info "Starting OctoPrint..."
+
+## Run your program
+exec octoprint --basedir /data/config/octoprint serve --iknowwhatimdoing --host 127.0.0.1 --port 80

@@ -1,0 +1,439 @@
+import { useEffect, useReducer, useRef, useState } from 'react';
+import type { ServerInfo, WorkerPreset } from '../types';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from './ui/dialog';
+import { Button } from './ui/button';
+import { ButtonGroup } from './ui/button-group';
+import { Input } from './ui/input';
+import { Label } from './ui/label';
+import { Select } from './ui/select';
+import { TagChipInput } from './ui/tag-chip-input';
+
+interface Props {
+  serverInfo: ServerInfo;
+  esphomeVersion: string | null;
+  onClose: () => void;
+  /** Pre-populate fields when reconnecting an existing worker (bug #7). */
+  preset?: WorkerPreset | null;
+  /** Bug #25: fleet-wide tag pool for the Tags field's autocomplete
+   *  dropdown. Same pool the Devices/Workers tabs feed into TagsEditDialog. */
+  tagSuggestions?: string[];
+}
+
+// UX.10: supported output formats in the Connect Worker modal. `compose`
+// emits a docker-compose.yml snippet, replacing the old static
+// docker-compose.worker.yml that was retired from the repo root — the
+// modal generates the live-from-server equivalent with the real
+// SERVER_URL / SERVER_TOKEN baked in.
+type Format = 'bash' | 'powershell' | 'compose';
+
+function buildDockerCmd(params: {
+  serverUrl: string;
+  token: string;
+  containerName: string;
+  hostname: string;
+  maxJobs: number;
+  seedVersion: string;
+  hostPlatform: string;
+  /** TG.7: comma-joined tag list (already trimmed/deduped by the form). */
+  tags: string;
+  /** DQ.10: integer GiB; ``null`` means "use fleet default" (no env var emitted). */
+  diskQuotaGb: number | null;
+  restartPolicy: string;
+  clientTag: string;
+  format: Format;
+}): string {
+  const {
+    serverUrl, token, containerName, hostname, maxJobs,
+    seedVersion, hostPlatform, tags, diskQuotaGb, restartPolicy, clientTag, format,
+  } = params;
+
+  if (format === 'compose') {
+    const envLines: string[] = [
+      `      - SERVER_URL=${serverUrl}`,
+      `      - SERVER_TOKEN=${token}`,
+      `      - MAX_PARALLEL_JOBS=${maxJobs}`,
+    ];
+    if (hostname) envLines.push(`      - HOSTNAME=${hostname}`);
+    if (seedVersion) envLines.push(`      - ESPHOME_SEED_VERSION=${seedVersion}`);
+    if (hostPlatform) envLines.push(`      - HOST_PLATFORM=${hostPlatform}`);
+    // TG.7: WORKER_TAGS only emitted when the user typed at least one
+    // tag — keeps the docker invocation clean for users who don't care
+    // about routing yet.
+    if (tags) envLines.push(`      - WORKER_TAGS=${tags}`);
+    // DQ.10: WORKER_DISK_QUOTA_GB only emitted when the user picked
+    // "custom" — default mode lets the worker inherit the fleet default
+    // (the server pushes the effective value on every heartbeat).
+    if (diskQuotaGb !== null) {
+      envLines.push(`      - WORKER_DISK_QUOTA_GB=${diskQuotaGb}`);
+    }
+    const yaml = [
+      'name: esphome-fleet-worker',
+      '',
+      'services:',
+      '  worker:',
+      `    image: ghcr.io/weirded/esphome-dist-client:${clientTag}`,
+      `    container_name: ${containerName}`,
+      ...(restartPolicy !== 'no' ? [`    restart: ${restartPolicy}`] : []),
+      '    network_mode: host',
+      '    environment:',
+      ...envLines,
+      '    volumes:',
+      '      - esphome-versions:/esphome-versions',
+      '',
+      'volumes:',
+      '  esphome-versions:',
+      '    name: esphome-versions',
+    ];
+    return yaml.join('\n');
+  }
+
+  const cont = format === 'powershell' ? '`' : '\\';
+  const hostnameVar = format === 'powershell' ? '$env:COMPUTERNAME' : '$(hostname)';
+
+  const lines = [`docker run -d ${cont}`];
+  lines.push(`  --name ${containerName} ${cont}`);
+  if (restartPolicy !== 'no') {
+    lines.push(`  --restart ${restartPolicy} ${cont}`);
+  }
+  // TR.4: match the compose branch's `network_mode: host` — without it,
+  // the worker starts on docker's default bridge and can't reach ESP
+  // devices on the host's LAN, so every OTA fails.
+  lines.push(`  --network host ${cont}`);
+  lines.push(`  --hostname ${hostname || hostnameVar} ${cont}`);
+  lines.push(`  -e SERVER_URL=${serverUrl} ${cont}`);
+  lines.push(`  -e SERVER_TOKEN=${token} ${cont}`);
+  lines.push(`  -e MAX_PARALLEL_JOBS=${maxJobs} ${cont}`);
+  if (seedVersion) {
+    lines.push(`  -e ESPHOME_SEED_VERSION=${seedVersion} ${cont}`);
+  }
+  if (hostPlatform) {
+    lines.push(`  -e HOST_PLATFORM=${JSON.stringify(hostPlatform)} ${cont}`);
+  }
+  if (tags) {
+    lines.push(`  -e WORKER_TAGS=${tags} ${cont}`);
+  }
+  if (diskQuotaGb !== null) {
+    lines.push(`  -e WORKER_DISK_QUOTA_GB=${diskQuotaGb} ${cont}`);
+  }
+  lines.push(`  -v esphome-versions:/esphome-versions ${cont}`);
+  lines.push(`  ghcr.io/weirded/esphome-dist-client:${clientTag}`);
+
+  return lines.join('\n');
+}
+
+// QS.27: consolidate the modal's form fields under one reducer instead
+// of 8 parallel useState hooks. Makes the "preset" pre-population path
+// a single dispatch + keeps the pre-rendered docker command derived
+// from one source of truth.
+interface FormState {
+  serverUrl: string;
+  containerName: string;
+  hostname: string;
+  maxJobs: number;
+  seedVersion: string;
+  hostPlatform: string;
+  /** TG.7: comma-separated WORKER_TAGS. The server normalises (trim /
+   *  drop empties / dedupe) on registration; the docker command emits
+   *  the field verbatim so the user can paste this into `.env` later. */
+  tags: string;
+  /** DQ.10: 'default' inherits the fleet default; 'custom' bakes a
+   *  ``WORKER_DISK_QUOTA_GB`` env var into the docker invocation. */
+  diskQuotaMode: 'default' | 'custom';
+  /** DQ.10: integer GiB; only consulted when diskQuotaMode === 'custom'. */
+  diskQuotaGb: number;
+  restartPolicy: string;
+  // UX.10: renamed from `shell` to cover the new `compose` output too.
+  format: Format;
+}
+
+type FormAction =
+  | { type: 'set'; field: keyof FormState; value: FormState[keyof FormState] }
+  | { type: 'reset'; next: FormState };
+
+function formReducer(state: FormState, action: FormAction): FormState {
+  switch (action.type) {
+    case 'set':
+      return { ...state, [action.field]: action.value };
+    case 'reset':
+      return action.next;
+  }
+}
+
+export function ConnectWorkerModal({ serverInfo, esphomeVersion, onClose, preset, tagSuggestions = [] }: Props) {
+  const port = serverInfo.port || 8765;
+  const addrs = serverInfo.server_addresses?.length
+    ? serverInfo.server_addresses
+    : [serverInfo.server_ip || window.location.hostname];
+  const urlOptions = addrs.map(addr => `http://${addr}:${port}`);
+
+  // Preset fields pre-populate when reconnecting an existing worker
+  // (bug #7). We read them once at mount and don't sync later — the
+  // modal is short-lived and a mid-edit prop change would be surprising.
+  const [form, dispatch] = useReducer(formReducer, {
+    serverUrl: urlOptions[0] || '',
+    // UX.9: renamed from 'distributed-esphome-worker' to the shorter
+    // 'esphome-fleet-worker' (Docker-friendly slug; intentionally kept
+    // through the 1.7.1 "Fleet for ESPHome" rebrand — flipping the
+    // container name would break every operator's `docker ps` muscle
+    // memory). Shows in `docker ps`, dashboards, and logs — only
+    // affects newly-copied commands, not existing containers.
+    containerName: 'esphome-fleet-worker',
+    hostname: preset?.hostname ?? '',
+    maxJobs: preset?.max_parallel_jobs ?? 2,
+    seedVersion: esphomeVersion || '',
+    hostPlatform: preset?.host_platform ?? '',
+    tags: '',
+    diskQuotaMode: 'default',
+    diskQuotaGb: 10,
+    restartPolicy: 'unless-stopped',
+    format: 'bash',
+  });
+  const seedUserEdited = useRef(false);
+  const [copied, setCopied] = useState(false);
+
+  // Convenience aliases so JSX stays readable.
+  const { serverUrl, containerName, hostname, maxJobs, seedVersion,
+    hostPlatform, tags, diskQuotaMode, diskQuotaGb, restartPolicy, format } = form;
+  const set = <K extends keyof FormState>(field: K, value: FormState[K]) =>
+    dispatch({ type: 'set', field, value });
+
+  // Sync seed version from props unless user manually edited it
+  useEffect(() => {
+    if (!seedUserEdited.current && esphomeVersion) {
+      dispatch({ type: 'set', field: 'seedVersion', value: esphomeVersion });
+    }
+  }, [esphomeVersion]);
+
+  // Keep server URL dropdown in sync when addresses change
+  useEffect(() => {
+    if (!urlOptions.includes(serverUrl)) {
+      dispatch({ type: 'set', field: 'serverUrl', value: urlOptions[0] || '' });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serverInfo.server_addresses, serverInfo.server_ip, serverInfo.port]);
+
+  const clientTag = serverInfo.addon_version || 'latest';
+  const fleetDefaultGb = serverInfo.default_worker_disk_quota_bytes
+    ? Math.round(serverInfo.default_worker_disk_quota_bytes / (1024 ** 3))
+    : 10;
+  const effectiveDiskQuotaGb = diskQuotaMode === 'custom' ? diskQuotaGb : null;
+  const dockerCmd = buildDockerCmd({
+    serverUrl,
+    token: serverInfo.token || '',
+    containerName,
+    hostname,
+    maxJobs,
+    seedVersion,
+    hostPlatform,
+    tags,
+    diskQuotaGb: effectiveDiskQuotaGb,
+    restartPolicy,
+    clientTag,
+    format,
+  });
+
+  function handleCopy() {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(dockerCmd).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      });
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = dockerCmd;
+      ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  }
+
+  return (
+    <Dialog open onOpenChange={(open) => { if (!open) onClose(); }}>
+      <DialogContent style={{ maxWidth: 720 }}>
+        <DialogHeader>
+          <DialogTitle>Connect a Build Worker</DialogTitle>
+        </DialogHeader>
+        <div className="p-[18px]">
+          <div className="connect-form">
+            <div>
+              <Label>Server URL</Label>
+              <Select value={serverUrl} onChange={e => set('serverUrl', e.target.value)}>
+                {urlOptions.map(u => <option key={u} value={u}>{u}</option>)}
+              </Select>
+            </div>
+            <div>
+              <Label>Server Token</Label>
+              <Input
+                className="sensitive text-[var(--text-muted)] cursor-default"
+                type="text"
+                value={serverInfo.token || ''}
+                readOnly
+              />
+            </div>
+            <div>
+              <Label>Container Name</Label>
+              <Input
+                type="text"
+                value={containerName}
+                onChange={e => set('containerName', e.target.value)}
+              />
+            </div>
+            <div>
+              <Label>Hostname</Label>
+              <Input
+                type="text"
+                value={hostname}
+                placeholder="$(hostname)"
+                onChange={e => set('hostname', e.target.value)}
+              />
+            </div>
+            <div>
+              <Label>Max Parallel Jobs</Label>
+              <Input
+                type="number"
+                value={maxJobs}
+                min={1}
+                max={8}
+                onChange={e => set('maxJobs', parseInt(e.target.value, 10) || 2)}
+              />
+            </div>
+            <div>
+              <Label>ESPHome Seed Version</Label>
+              <Input
+                type="text"
+                value={seedVersion}
+                onChange={e => { seedUserEdited.current = true; set('seedVersion', e.target.value); }}
+              />
+            </div>
+            <div>
+              <Label>
+                Host Platform{' '}
+                <span className="text-[var(--text-muted)] font-normal normal-case">(optional)</span>
+              </Label>
+              <Input
+                type="text"
+                value={hostPlatform}
+                placeholder="e.g. macOS 15.3 (Apple M1 Pro)"
+                onChange={e => set('hostPlatform', e.target.value)}
+              />
+            </div>
+            {/* TG.7: WORKER_TAGS — chip-input editor (bug #25) with
+                fleet-wide autocomplete; serialised to a comma-joined
+                string for the docker invocation. Only the *first*
+                registration seeds the server-side store; later edits
+                live in the Workers tab Tags column. */}
+            <div>
+              <Label>
+                Tags{' '}
+                <span className="text-[var(--text-muted)] font-normal normal-case">(optional)</span>
+              </Label>
+              <TagChipInput
+                tags={tags ? tags.split(',').map(s => s.trim()).filter(Boolean) : []}
+                onChange={(next) => set('tags', next.join(','))}
+                suggestions={tagSuggestions}
+                placeholder="e.g. linux, fast, prod"
+              />
+            </div>
+            {/* DQ.10: Disk quota — default radio inherits the fleet default
+                (server pushes effective value via heartbeat); custom radio
+                bakes WORKER_DISK_QUOTA_GB into the docker invocation. */}
+            <div>
+              <Label>Disk Quota</Label>
+              <div className="flex items-center gap-3 flex-wrap">
+                <label className="flex items-center gap-1.5 text-sm">
+                  <input
+                    type="radio"
+                    name="disk-quota-mode"
+                    value="default"
+                    checked={diskQuotaMode === 'default'}
+                    onChange={() => set('diskQuotaMode', 'default')}
+                  />
+                  <span>Use fleet default ({fleetDefaultGb} GiB)</span>
+                </label>
+                <label className="flex items-center gap-1.5 text-sm">
+                  <input
+                    type="radio"
+                    name="disk-quota-mode"
+                    value="custom"
+                    checked={diskQuotaMode === 'custom'}
+                    onChange={() => set('diskQuotaMode', 'custom')}
+                  />
+                  <span>Custom</span>
+                </label>
+                <Input
+                  type="number"
+                  min={1}
+                  max={1024}
+                  value={diskQuotaGb}
+                  disabled={diskQuotaMode !== 'custom'}
+                  onChange={e => set('diskQuotaGb', Math.max(1, parseInt(e.target.value, 10) || 10))}
+                  className="w-24"
+                  aria-label="Disk quota in GiB"
+                />
+                <span className="text-sm text-[var(--text-muted)]">GiB</span>
+              </div>
+            </div>
+            <div>
+              <Label>Restart Policy</Label>
+              <Select value={restartPolicy} onChange={e => set('restartPolicy', e.target.value)}>
+                <option value="unless-stopped">unless-stopped</option>
+                <option value="always">always</option>
+                <option value="no">no</option>
+              </Select>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 mb-2">
+            <Label className="mb-0">Format</Label>
+            <ButtonGroup>
+              <Button
+                variant={format === 'bash' ? 'default' : 'secondary'}
+                size="sm"
+                onClick={() => set('format', 'bash')}
+              >
+                Bash
+              </Button>
+              <Button
+                variant={format === 'powershell' ? 'default' : 'secondary'}
+                size="sm"
+                onClick={() => set('format', 'powershell')}
+              >
+                PowerShell
+              </Button>
+              {/* UX.10: `docker compose` tab replaces the repo-root
+                  docker-compose.worker.yml file. The snippet below
+                  bakes in the user's real SERVER_URL + SERVER_TOKEN,
+                  so it can't drift from the running server config. */}
+              <Button
+                variant={format === 'compose' ? 'default' : 'secondary'}
+                size="sm"
+                onClick={() => set('format', 'compose')}
+              >
+                Docker Compose
+              </Button>
+            </ButtonGroup>
+          </div>
+          <div className="docker-cmd-wrap">
+            <pre className="docker-cmd sensitive">{dockerCmd}</pre>
+            <Button variant="secondary" size="sm" className="docker-cmd-copy" onClick={handleCopy}>
+              {copied ? 'Copied!' : 'Copy'}
+            </Button>
+          </div>
+          <p style={{ color: 'var(--text-muted)', fontSize: 12, marginTop: 12 }}>
+            {format === 'compose'
+              ? 'Save this snippet as docker-compose.yml on a Docker host with network access to your ESP devices, then run `docker compose up -d`.'
+              : 'Run this command on any Docker host that has network access to your ESP devices (port 3232 for OTA). The worker will poll this server for build jobs, compile firmware, and push updates directly to your devices.'}
+          </p>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}

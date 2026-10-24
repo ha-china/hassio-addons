@@ -1,0 +1,30 @@
+arch:
+  - aarch64
+  - amd64
+description: '[老王杂谈说]：开源 AI 推理网关和路由器（兼容 OpenAI 的即插即用替代品）'
+image: ghcr.nju.edu.cn/alexbelgium/omniroute-{arch}
+ingress: true
+init: false
+map:
+  - app_config:rw
+name: OmniRoute
+options:
+  env_vars: []
+  REQUIRE_API_KEY: true
+  OMNIROUTE_MEMORY_MB: 1024
+panel_icon: mdi:router-network
+ports:
+  20128/tcp: null
+ports_description:
+  20128/tcp: OmniRoute Web UI and OpenAI API gateway (opt-in)
+schema:
+  env_vars:
+    - name: match(^[A-Za-z0-9_]+$)
+      value: str?
+  INITIAL_PASSWORD: password?
+  REQUIRE_API_KEY: bool
+  OMNIROUTE_MEMORY_MB: int
+  TZ: str?
+slug: omniroute
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/omniroute
+version: "3.8.52"

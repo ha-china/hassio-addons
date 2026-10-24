@@ -1,0 +1,5 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+
+/etc/s6-overlay/s6-rc.d/init-sensorsgen/run

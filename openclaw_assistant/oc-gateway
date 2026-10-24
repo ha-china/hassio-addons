@@ -1,0 +1,133 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cmd="${1:-status}"
+shift || true
+
+find_gateway_pid() {
+  local port="${1:-18789}"
+  local pid=""
+
+  # 1) Port owner (most accurate)
+  if command -v ss >/dev/null 2>&1; then
+    pid=$(ss -tlnp 2>/dev/null \
+      | grep ":${port} " \
+      | sed -n 's/.*pid=\([0-9]*\).*/\1/p' \
+      | head -1 || true)
+    if [ -n "$pid" ] && [ -r "/proc/$pid/cmdline" ]; then
+      local cmdline
+      cmdline=$(tr '\0' ' ' < "/proc/$pid/cmdline" 2>/dev/null || true)
+      if echo "$cmdline" | grep -qi "openclaw\|node"; then
+        echo "$pid"
+        return 0
+      fi
+    fi
+  fi
+
+  # 2) Process title
+  pid=$(pgrep -f "openclaw-gateway" 2>/dev/null | head -1 || true)
+  if [ -n "$pid" ]; then
+    echo "$pid"
+    return 0
+  fi
+
+  # 3) /proc cmdline fallback
+  for f in /proc/[0-9]*/cmdline; do
+    [ -r "$f" ] || continue
+    if tr '\0' ' ' < "$f" 2>/dev/null | grep -qi "openclaw"; then
+      echo "${f#/proc/}" | cut -d/ -f1
+      return 0
+    fi
+  done
+
+  return 1
+}
+
+get_gateway_port() {
+  python3 - <<'PY'
+import json, os
+p = os.environ.get('OPENCLAW_CONFIG_PATH', '/config/.openclaw/openclaw.json')
+try:
+    with open(p, 'r', encoding='utf-8') as f:
+        cfg = json.load(f)
+    print(int(cfg.get('gateway', {}).get('port', 18789)))
+except Exception:
+    print(18789)
+PY
+}
+
+status_cmd() {
+  local port pid
+  port="$(get_gateway_port)"
+  pid="$(find_gateway_pid "$port" || true)"
+
+  echo "OpenClaw add-on gateway status"
+  echo "Supervisor: run.sh (not systemd)"
+  echo "Configured port: ${port}"
+
+  if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
+    echo "Gateway process: running (PID ${pid})"
+    if command -v ss >/dev/null 2>&1 && ss -tlnp 2>/dev/null | grep -q ":${port} "; then
+      echo "Listener: active on :${port}"
+    else
+      echo "Listener: process found, port bind not detected yet"
+    fi
+    exit 0
+  fi
+
+  echo "Gateway process: not detected"
+  echo "Tip: Check add-on logs in Home Assistant for startup errors."
+  exit 1
+}
+
+restart_cmd() {
+  local port pid
+  port="$(get_gateway_port)"
+  pid="$(find_gateway_pid "$port" || true)"
+
+  if [ -z "$pid" ] || ! kill -0 "$pid" 2>/dev/null; then
+    echo "No running gateway process found to restart."
+    echo "Tip: If startup failed, inspect add-on logs."
+    exit 1
+  fi
+
+  echo "Requesting gateway self-restart via SIGUSR1 (PID ${pid})..."
+  kill -USR1 "$pid"
+
+  for _ in $(seq 1 20); do
+    sleep 1
+    local new_pid
+    new_pid="$(find_gateway_pid "$port" || true)"
+    if [ -n "$new_pid" ] && kill -0 "$new_pid" 2>/dev/null; then
+      echo "Gateway active (PID ${new_pid})"
+      exit 0
+    fi
+  done
+
+  echo "Restart signal sent; gateway may still be reinitializing."
+  echo "Run 'oc-gateway status' again in a few seconds."
+  exit 0
+}
+
+case "$cmd" in
+  status)
+    status_cmd
+    ;;
+  restart|reload)
+    restart_cmd
+    ;;
+  help|-h|--help)
+    cat <<'EOF'
+Usage: oc-gateway <status|restart|reload>
+
+status   Show add-on-native gateway status (run.sh-supervised)
+restart  Request gateway self-restart via SIGUSR1
+reload   Alias of restart
+EOF
+    ;;
+  *)
+    echo "Unknown command: $cmd" >&2
+    echo "Run: oc-gateway help" >&2
+    exit 2
+    ;;
+esac

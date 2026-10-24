@@ -1,0 +1,3381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title %>
+  </title>
+  <link rel="icon" href="<%= url('/favicon.ico') %>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="<%= url('/static/css/style.css?v=2.3.0.1') %>">
+  <script>
+    // Set theme immediately (before <body> exists) to prevent flash
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    const root = document.documentElement;
+    root.setAttribute('data-theme', savedTheme);
+    root.style.colorScheme = savedTheme === 'light' ? 'light' : 'dark';
+    root.classList.add('theme-preload');
+    window.__initialTheme = savedTheme;
+  </script>
+  <script defer src="<%= url('/static/js/strings-language.js?v=2.3.0.1') %>"></script>
+</head>
+
+<body data-esphome-enabled="<%= esphomeEnabled ? 'true' : 'false' %>"
+  data-packages-enabled="<%= packagesEnabled ? 'true' : 'false' %>" data-language="<%= language || 'en' %>">
+  <script>
+    (function applyInitialTheme(theme) {
+      const normalized = theme === 'light' ? 'light' : 'dark';
+      const root = document.documentElement;
+      root.setAttribute('data-theme', normalized);
+      root.style.colorScheme = normalized;
+      document.body.setAttribute('data-theme', normalized);
+      document.body.style.colorScheme = normalized;
+      requestAnimationFrame(() => {
+        root.classList.remove('theme-preload');
+      });
+    })(window.__initialTheme);
+  </script>
+  <!-- Notification Toast -->
+  <div id="notification" class="notification" style="display: none;"></div>
+
+  <!-- Diff Viewer Modal -->
+  <div id="diffModal" class="modal" style="display: none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <h2 id="diffTitle">Compare Configuration</h2>
+          <p id="diffSubtitle" style="font-size: 14px; color: #9ca3af;"></p>
+        </div>
+        <button id="closeDiff" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body modal-body--diff" id="diffModalBody">
+        <!-- Content will be dynamically inserted based on status -->
+      </div>
+      <div class="modal-footer modal-footer--diff">
+        <button id="cancelDiff" class="btn-secondary">Cancel</button>
+        <button id="restoreBtn" class="btn-primary">Restore This Version</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settingsModal" class="modal" style="display: none;">
+    <div class="modal-backdrop"></div>
+    <div class="settings-card">
+      <form id="settingsForm">
+        <h2 id="settingsTitle"></h2>
+
+        <div id="haConnectionFields" class="ha-connection-fields">
+          <div class="form-group form-group--stacked" style="margin-bottom: 0;">
+            <label for="haUrl" id="haUrlLabel">Home Assistant URL</label>
+            <input type="text" id="haUrl" placeholder="http://homeassistant.local:8123">
+            <p id="haUrlError" class="settings-error-text"></p>
+          </div>
+
+          <div class="form-group form-group--stacked">
+            <label for="haToken" id="haTokenLabel">Long-Lived Access Token</label>
+            <input type="password" id="haToken" placeholder="Enter your long-lived access token">
+            <p id="haTokenError" class="settings-error-text"></p>
+            <button type="button" id="testConnection" class="btn-secondary settings-inline-btn"
+              style="margin-top: 0;">Test Connection</button>
+            <p id="connectionStatus" class="settings-inline-text"></p>
+          </div>
+        </div>
+
+        <div class="form-group form-group--stacked" style="margin-bottom: 0;">
+          <label for="liveConfigPath" id="liveConfigPathLabel">Config Folder Path</label>
+          <input type="text" id="liveConfigPath" value="/config">
+          <p id="liveConfigPathError" class="settings-error-text"></p>
+        </div>
+
+        <div class="form-group form-group--stacked">
+          <label for="backupFolderPath" id="backupFolderPathLabel">Backup Folder Path</label>
+          <input type="text" id="backupFolderPath" value="/media/timemachine">
+          <p id="backupFolderPathError" class="settings-error-text"></p>
+          <button type="button" id="backupNow" class="btn-secondary settings-inline-btn" style="margin-top: 0;">Backup
+            Now</button>
+          <p id="backupStatus" class="settings-inline-text"></p>
+        </div>
+
+        <div id="smartBackupSection"
+          style="margin: 0 !important; padding-top: 0 !important; margin-bottom: 16px !important;">
+          <div class="form-group toggle-group" style="margin-bottom: 0;">
+            <label id="smartBackupLabel">Smart Backup</label>
+            <label class="toggle">
+              <input type="checkbox" id="smartBackupEnabled">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+
+        <div class="form-group toggle-group" style="margin-bottom: 16px;">
+          <label id="showOnlyChangesLabel">Show only snapshots with changes</label>
+          <label class="toggle">
+            <input type="checkbox" id="showOnlyChangesEnabled">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="form-group toggle-group" style="margin-bottom: 0;">
+          <label id="enableScheduledBackupLabel">Enable Scheduled Backup</label>
+          <label class="toggle">
+            <input type="checkbox" id="scheduleEnabled">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div id="scheduleOptions" class="settings-schedule" style="display: none; margin: 0 !important;"
+          data-frequency="daily">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="scheduleFrequency" id="frequencyLabel">Frequency</label>
+              <select id="scheduleFrequency">
+                <option value="daily" selected id="daily-option"></option>
+                <option value="hourly" id="hourly-option"></option>
+                <option value="weekly" id="weekly-option"></option>
+              </select>
+              <p id="scheduleFrequencyError" class="settings-error-text"></p>
+              <style>
+                #scheduleFrequency:focus {
+                  outline: none !important;
+                  box-shadow: none !important;
+                }
+              </style>
+            </div>
+            <div class="form-group" id="scheduleTimeGroup">
+              <label for="scheduleTime" id="timeLabel">Time</label>
+              <input type="time" id="scheduleTime" value="00:00" class="time-input">
+              <p id="scheduleTimeError" class="settings-error-text"></p>
+            </div>
+            <div class="form-group" id="scheduleDayGroup" style="display: none;">
+              <label for="scheduleDay" id="dayLabel">Day</label>
+              <select id="scheduleDay">
+                <option value="0">Sunday</option>
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+              </select>
+              <p id="scheduleDayError" class="settings-error-text"></p>
+            </div>
+          </div>
+        </div>
+
+        <div id="maxBackupsSection" style="display: none; margin: 0 !important; padding-top: 0 !important;">
+          <div class="form-group toggle-group" style="margin-bottom: 0;">
+            <label id="maxBackupsLabel">Max Backups</label>
+            <label class="toggle">
+              <input type="checkbox" id="maxBackupsEnabled">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div id="maxBackupsOptions" class="settings-schedule" style="display: none; margin-top: 0 !important;">
+            <div class="form-group">
+              <label for="maxBackupsCount" id="maxBackupsCountLabel">Backups to Keep</label>
+              <input type="number" id="maxBackupsCount" min="1" max="9999" value="100" placeholder="100">
+              <p id="maxBackupsCountError" class="settings-error-text"></p>
+              <style>
+                #maxBackupsCount::-webkit-inner-spin-button,
+                #maxBackupsCount::-webkit-outer-spin-button {
+                  display: none;
+                  margin: 0;
+                  height: 20px;
+                  position: relative;
+                  right: 4px;
+                }
+
+                #maxBackupsCount {
+                  -webkit-appearance: textfield;
+                  -moz-appearance: textfield;
+                  appearance: textfield;
+                }
+              </style>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="settings-actions">
+
+          <button type="button" id="cancelSettings" class="btn-secondary">Cancel</button>
+          <button type="submit" class="btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmModal" class="modal" style="display: none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog confirm-dialog">
+      <div class="modal-header confirm-modal-header">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div id="confirmIcon" class="confirm-icon-container"></div>
+          <h2 id="confirmTitle">Confirm Action</h2>
+        </div>
+      </div>
+      <div class="modal-body confirm-modal-body">
+        <p id="confirmMessage"></p>
+      </div>
+      <div class="modal-footer confirm-modal-footer">
+        <button id="confirmCancelBtn" class="btn-secondary">Cancel</button>
+        <button id="confirmActionBtn" class="btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <header class="header">
+      <div class="header-content">
+        <img src="<%= url('/static/images/icon.png') %>" alt="Logo" class="logo" onerror="this.style.display='none'">
+        <div>
+          <h1>Home Assistant Time Machine</h1>
+          <p class="version" id="heroSubtitle"></p>
+        </div>
+      </div>
+      <button id="settingsBtn" class="btn-secondary">Settings</button>
+    </header>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="automations" id="automationsTab">Automations</button>
+      <button class="tab" data-tab="scripts" id="scriptsTab">Scripts</button>
+      <button class="tab" data-tab="lovelace" id="lovelaceTab">Lovelace</button>
+      <button class="tab" data-tab="esphome" id="esphomeTab" <% if (!esphomeEnabled) { %>style="display: none;"<% } %>
+          >ESPHome</button>
+      <button class="tab" data-tab="packages" id="packagesTab" <% if (!packagesEnabled) { %>style="display: none;"<% }
+          %>>Packages</button>
+    </div>
+
+    <div class="content">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-header-info">
+            <h2 id="backupsTitle">Backups</h2>
+            <p id="backupCount">Loading...</p>
+          </div>
+        </div>
+        <div id="backupList" class="list">
+          <p class="loading">Loading backups...</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-header-top">
+            <div class="panel-header-info">
+              <h2 id="itemsTitle">Select a backup</h2>
+              <p id="itemsSubtitle"></p>
+            </div>
+            <div class="panel-header-actions">
+              <select id="sortSelect" class="select">
+                <option value="default">Default Order</option>
+                <option value="alpha-asc">A → Z</option>
+                <option value="alpha-desc">Z → A</option>
+              </select>
+            </div>
+          </div>
+          <div class="search-section">
+            <svg class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input type="text" id="searchBox" class="search-input" placeholder="Search...">
+          </div>
+        </div>
+        <div id="itemsList" class="list">
+          <div
+            style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center;">
+            <div class="file-icon-container">
+              <svg class="file-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0112.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <p class="empty-state-message" id="emptyStateMessage"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Base path for all API calls
+    const BASE_PATH = '<%= ingressPath %>';
+    const url = (path) => BASE_PATH + path;
+
+    console.log('[app] Loaded! v<%= version %>');
+    console.log('[app] Base path:', BASE_PATH || '(direct access)');
+
+    // State
+    let currentMode = 'automations';
+    let currentBackupPath = null;
+    let currentBackupName = null;
+    let currentBackupMtime = null;
+    let allItems = [];
+    let liveItemsMap = {};
+    let itemStatuses = {};
+    let selectedItem = null;
+    let haConfig = null;
+    let currentTheme = document.body.dataset.theme || document.documentElement.dataset.theme || 'dark';
+    let esphomeFeatureEnabled = document.body.dataset.esphomeEnabled === 'true';
+    let packagesFeatureEnabled = document.body.dataset.packagesEnabled === 'true';
+    let showOnlyChanges = false; // Will be set from server in loadAppSettings()
+
+    // Keyboard navigation state
+    let activePanel = 'backups'; // 'backups' or 'items'
+    let currentBackupIndex = -1;
+    let currentItemIndex = -1;
+    let filteredBackupsGlobal = []; // Keep track of backups for arrow navigation
+    let filteredItemsGlobal = []; // Keep track of items for arrow navigation
+
+    if (!document.body.dataset.theme) {
+      document.body.dataset.theme = currentTheme;
+      document.body.style.colorScheme = currentTheme;
+    }
+    if (!document.documentElement.dataset.theme) {
+      document.documentElement.dataset.theme = currentTheme;
+      document.documentElement.style.colorScheme = currentTheme;
+    }
+
+
+    const SETTINGS_MESSAGE_LOOKUP = {
+      directory_not_found: 'ui.settingsMessages.directoryNotFound',
+      not_directory: 'ui.settingsMessages.notDirectory',
+      missing_automations: 'ui.settingsMessages.missingAutomations',
+      cannot_access: 'ui.settingsMessages.cannotAccess',
+      backup_dir_unwritable: 'ui.settingsMessages.backupDirUnwritable',
+      backup_dir_create_failed: 'ui.settingsMessages.backupDirCreateFailed',
+      BACKUP_DIR_UNWRITABLE: 'ui.settingsMessages.backupDirUnwritable',
+      BACKUP_DIR_CREATE_FAILED: 'ui.settingsMessages.backupDirCreateFailed',
+      BACKUP_FAILED: 'ui.settingsMessages.unknownError',
+      unknown: 'ui.settingsMessages.unknownError'
+    };
+
+    function getSettingsMessageFromCode(code, replacements = {}) {
+      if (!code) return '';
+      const key = SETTINGS_MESSAGE_LOOKUP[code] || 'ui.settingsMessages.unknownError';
+      const sanitized = {};
+      Object.entries(replacements || {}).forEach(([k, v]) => {
+        if (v !== undefined && v !== null && v !== '') {
+          sanitized[k] = v;
+        }
+      });
+      return getStyledText(key, sanitized);
+    }
+
+    function applyTheme(theme) {
+      const normalized = theme === 'light' ? 'light' : 'dark';
+      const root = document.documentElement;
+      root.classList.add('theme-transition-suppress');
+      root.setAttribute('data-theme', normalized);
+      root.style.colorScheme = normalized;
+      document.body.dataset.theme = normalized;
+      document.body.style.colorScheme = normalized;
+      currentTheme = normalized;
+      localStorage.setItem('theme', normalized);
+      requestAnimationFrame(() => {
+        root.classList.remove('theme-transition-suppress');
+      });
+    }
+
+    function waitForStrings(timeoutMs = 3000) {
+      if (window.STRINGS) return Promise.resolve();
+
+      return new Promise((resolve) => {
+        const start = Date.now();
+        const tick = () => {
+          if (window.STRINGS) {
+            resolve();
+          } else if (Date.now() - start >= timeoutMs) {
+            console.warn('[ui] STRINGS failed to load before timeout');
+            resolve();
+          } else {
+            requestAnimationFrame(tick);
+          }
+        };
+        tick();
+      });
+    }
+
+    function updateUIText() {
+      if (!window.STRINGS) {
+        console.warn('[ui] STRINGS not loaded yet, skipping text update');
+        return;
+      }
+      if (!document.getElementById('settingsTitle')) {
+        console.warn('[ui] Settings modal not in DOM yet, skipping text update');
+        return;
+      }
+      // Update settings modal elements
+      document.getElementById('settingsTitle').textContent = getStyledText('ui.settings.title');
+      document.getElementById('haUrlLabel').textContent = getStyledText('ui.settings.haUrlLabel');
+      document.getElementById('haTokenLabel').textContent = getStyledText('ui.settings.haTokenLabel');
+      document.getElementById('liveConfigPathLabel').textContent = getStyledText('ui.settings.liveConfigPathLabel');
+      document.getElementById('backupFolderPathLabel').textContent = getStyledText('ui.settings.backupFolderPathLabel');
+      document.getElementById('enableScheduledBackupLabel').textContent = getStyledText('ui.settings.enableScheduledBackup');
+      document.getElementById('frequencyLabel').textContent = getStyledText('ui.settings.frequencyLabel');
+      document.getElementById('timeLabel').textContent = getStyledText('ui.settings.timeLabel');
+      const dayLabel = document.getElementById('dayLabel');
+      if (dayLabel) dayLabel.textContent = 'Day'; // This could be made dynamic too
+      document.getElementById('maxBackupsLabel').textContent = getStyledText('ui.labels.maxBackups');
+      document.getElementById('maxBackupsCountLabel').textContent = getStyledText('ui.labels.backupsToKeep');
+
+      // Update frequency options
+      document.getElementById('daily-option').textContent = getStyledText('ui.settings.daily');
+      document.getElementById('hourly-option').textContent = getStyledText('ui.settings.hourly');
+      document.getElementById('weekly-option').textContent = getStyledText('ui.settings.weekly');
+
+      // Update tab buttons
+      document.getElementById('automationsTab').textContent = getStyledText('ui.buttons.automations');
+      document.getElementById('scriptsTab').textContent = getStyledText('ui.buttons.scripts');
+      document.getElementById('lovelaceTab').textContent = getStyledText('ui.buttons.lovelace');
+      document.getElementById('esphomeTab').textContent = getStyledText('ui.buttons.esphome');
+      document.getElementById('packagesTab').textContent = getStyledText('ui.buttons.packages');
+      document.getElementById('settingsBtn').textContent = getStyledText('ui.buttons.settings');
+
+      // Update main panel titles
+      document.getElementById('backupsTitle').textContent = getStyledText('ui.labels.backups');
+      document.getElementById('itemsTitle').textContent = getStyledText(`ui.buttons.${currentMode}`);
+
+      // Update sort options
+      const sortSelect = document.getElementById('sortSelect');
+      if (sortSelect) {
+        const options = sortSelect.options;
+        if (options[0]) options[0].textContent = getStyledText('ui.labels.sortDefault');
+        if (options[1]) options[1].textContent = getStyledText('ui.labels.sortAlphaAsc');
+        if (options[2]) options[2].textContent = getStyledText('ui.labels.sortAlphaDesc');
+      }
+
+      // Update buttons in settings modal
+      document.getElementById('testConnection').textContent = getStyledText('ui.buttons.testConnection');
+      document.getElementById('backupNow').textContent = getStyledText('ui.buttons.backupNow');
+      document.getElementById('cancelSettings').textContent = getStyledText('ui.buttons.cancel');
+      document.getElementById('cancelDiff').textContent = getStyledText('ui.buttons.cancel');
+
+      // Update save button (this is inside the form submit handler, so we need to find it differently)
+      const saveBtn = document.querySelector('#settingsForm button[type="submit"]');
+      if (saveBtn) saveBtn.textContent = getStyledText('ui.buttons.save');
+
+      // Update restore button text
+      document.getElementById('restoreBtn').textContent = getStyledText('ui.buttons.restore');
+
+      // Update show only changes label and initialize checkbox
+      const showOnlyChangesLabel = document.getElementById('showOnlyChangesLabel');
+      if (showOnlyChangesLabel) {
+        showOnlyChangesLabel.textContent = getStyledText('ui.snapshotFilter.showOnlyChanges');
+      }
+      const showOnlyChangesCheckbox = document.getElementById('showOnlyChangesEnabled');
+      if (showOnlyChangesCheckbox) {
+        showOnlyChangesCheckbox.checked = showOnlyChanges;
+      }
+
+      // Update empty state message
+      const emptyStateMode = getStyledText(`ui.buttons.${currentMode}`) || currentMode;
+      const emptyStateEl = document.getElementById('emptyStateMessage');
+      if (emptyStateEl) {
+        emptyStateEl.textContent = getStyledText('ui.itemsList.selectBackup', { mode: emptyStateMode });
+      }
+
+      // Update placeholders
+      updatePlaceholders();
+    }
+
+    let currentLanguage = 'en';
+
+    function getStyledText(path, replacements = {}) {
+      if (!window.STRINGS) {
+        return '';
+      }
+
+      const keys = path.split('.');
+      let value = window.STRINGS;
+
+      for (const key of keys) {
+        value = value?.[key];
+      }
+
+      if (!value) return '';
+
+      // Get the string for the current language, fallback to english
+      let translatedText = value[currentLanguage] || value['en'] || '';
+
+      // Replace placeholders like {mode}, {error}, etc.
+      return translatedText.replace(/{(\w+)}/g, (match, key) => {
+        return replacements[key] || match;
+      });
+    }
+
+    function applyTextStyle(message, tone = 'info') {
+      return message || '';
+    }
+
+    function getEsphomeDisabledMessage() {
+      return getStyledText('ui.esphome.disabled') || 'ESPHome backups are disabled. Enable them in Settings to view files.';
+    }
+
+    function getPackagesDisabledMessage() {
+      return getStyledText('ui.packages.disabled') || 'Packages backups are disabled. Enable them in the add-on configuration to view files.';
+    }
+
+    function updateEsphomeVisibility() {
+      const esphomeTab = document.getElementById('esphomeTab');
+      if (esphomeTab) {
+        esphomeTab.style.display = esphomeFeatureEnabled ? 'inline-block' : 'none';
+      }
+    }
+
+    function updatePackagesVisibility() {
+      const packagesTab = document.getElementById('packagesTab');
+      if (packagesTab) {
+        packagesTab.style.display = packagesFeatureEnabled ? 'inline-block' : 'none';
+      }
+    }
+
+    const describeAuthSource = (mode) => {
+      switch (mode) {
+        case 'supervisor':
+          return 'automatic Home Assistant credentials';
+        case 'env':
+          return 'environment credentials';
+        case 'stored':
+          return 'saved credentials';
+        case 'manual':
+          return 'manual credentials';
+        default:
+          return 'credentials';
+      }
+    };
+
+    // Load HA config from server
+    async function loadAppSettings() {
+      try {
+        const response = await fetch(url('/api/app-settings'));
+        if (response.ok) {
+          haConfig = await response.json();
+          await waitForStrings();
+          currentLanguage = document.body.dataset.language || 'en';
+          applyTheme(haConfig?.theme);
+          if (haConfig?.diffPalette) {
+            setDiffPalette(parseInt(haConfig.diffPalette), false);
+          }
+          // Load showOnlyChanges setting from server
+          showOnlyChanges = !!haConfig?.showOnlyChanges;
+          esphomeFeatureEnabled = !!haConfig?.esphomeEnabled;
+          updateEsphomeVisibility();
+          packagesFeatureEnabled = !!haConfig?.packagesEnabled;
+          updatePackagesVisibility();
+          document.getElementById('heroSubtitle').textContent = getStyledText('ui.hero.subtitle');
+          document.getElementById('itemsSubtitle').textContent = getStyledText('ui.itemsList.noBackupSelected');
+          updateUIText(); // Update all UI text elements
+        }
+      } catch (error) {
+        console.error('Failed to load app settings:', error);
+      }
+    }
+
+    // Notification system
+    function showNotification(message, type = 'success') {
+      const notification = document.getElementById('notification');
+      notification.textContent = applyTextStyle(message, type);
+      notification.className = `notification ${type}`;
+      notification.style.display = 'block';
+
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, type === 'error' ? 5000 : 3000);
+    }
+
+    function showRestartNotification(message, haConfig) {
+      const notification = document.getElementById('notification');
+      const canRestart = !!(haConfig && haConfig.haAuthConfigured);
+      const restartLabel = getStyledText('notifications.restartButton') || 'Restart';
+      const manualMessage = getStyledText('notifications.restartManually') || 'Restart from Home Assistant when ready.';
+      const tone = canRestart ? 'success' : 'info';
+      const formattedMessage = applyTextStyle(message, tone);
+      const manualNote = canRestart ? '' : ` ${applyTextStyle(manualMessage, 'info')}`;
+
+      notification.innerHTML = `
+        <span>${formattedMessage}${manualNote}</span>
+        <button id="restartHaBtn" style="margin-left: 10px; background-color: transparent; color: white; border: 1px solid rgba(255, 255, 255, 0.3); cursor: pointer; font-weight: 500; border-radius: 8px; padding: 4px 8px;">${restartLabel}</button>
+      `;
+      notification.className = `notification ${tone}`;
+      notification.style.display = 'flex';
+
+      const restartBtn = document.getElementById('restartHaBtn');
+
+      if (canRestart) {
+        restartBtn.onclick = async () => {
+          notification.style.display = 'none';
+          showNotification(getStyledText('notifications.haRestarting') || 'Home Assistant is restarting...', 'info');
+          try {
+            const response = await fetch(url('/api/reload-home-assistant'), {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ service: 'homeassistant.restart' })
+            });
+            if (!response.ok) {
+              const error = await response.json().catch(() => ({}));
+              throw new Error(error.error || 'Restart failed');
+            }
+            showNotification(getStyledText('notifications.haRestarted') || 'Home Assistant restarted successfully!', 'success');
+          } catch (error) {
+            console.error('[restart-ha] Error:', error);
+            showNotification(getStyledText('notifications.errorRestartingHA', { error: error.message }) || ('Error restarting Home Assistant: ' + error.message), 'error');
+          }
+        };
+      } else {
+        restartBtn.onclick = () => {
+          notification.style.display = 'none';
+          showNotification(manualMessage, 'info');
+        };
+      }
+
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 8000);
+    }
+
+    // Update search placeholder based on mode
+    function updatePlaceholders() {
+      const searchBox = document.getElementById('searchBox');
+      const currentTabName = getStyledText(`ui.buttons.${currentMode}`) || currentMode.charAt(0).toUpperCase() + currentMode.slice(1);
+      searchBox.placeholder = getStyledText('ui.placeholders.search', { mode: currentTabName });
+
+      // Update HA input placeholders - only if managed by supervisor (addon mode)
+      // In Docker mode, the settings modal click handler sets appropriate placeholders
+      const haUrlInput = document.getElementById('haUrl');
+      const haTokenInput = document.getElementById('haToken');
+      if (haConfig && haConfig.haAuthMode === 'supervisor') {
+        if (haUrlInput) haUrlInput.placeholder = getStyledText('ui.placeholders.managedByHA');
+        if (haTokenInput) haTokenInput.placeholder = getStyledText('ui.placeholders.managedByHA');
+      }
+    }
+
+    // Format backup folder name to date/time
+    // Handles format: YYYY-MM-DD-HHMMSS (e.g., 2025-10-17-085000)
+    function formatFolderName(folderName, mtime) {
+      let date;
+      // Try parsing YYYY-MM-DD-HHMMSS
+      if (/^\d{4}-\d{2}-\d{2}-\d{6}$/.test(folderName)) {
+        const year = parseInt(folderName.substring(0, 4));
+        const month = parseInt(folderName.substring(5, 7)) - 1;
+        const day = parseInt(folderName.substring(8, 10));
+        const hour = parseInt(folderName.substring(11, 13));
+        const minute = parseInt(folderName.substring(13, 15));
+        const second = parseInt(folderName.substring(15, 17));
+        date = new Date(year, month, day, hour, minute, second);
+      } else if (/^\d{12}$/.test(folderName)) {
+        // Try parsing YYYYMMDDHHmm
+        const year = parseInt(folderName.substring(0, 4));
+        const month = parseInt(folderName.substring(4, 6)) - 1;
+        const day = parseInt(folderName.substring(6, 8));
+        const hour = parseInt(folderName.substring(8, 10));
+        const minute = parseInt(folderName.substring(10, 12));
+        date = new Date(year, month, day, hour, minute);
+      } else if (mtime) {
+        date = new Date(mtime);
+      } else {
+        // Fallback for unknown formats
+        return folderName;
+      }
+
+      if (isNaN(date.getTime())) {
+        return folderName; // Invalid date, return original name
+      }
+
+      // Use a single Intl.DateTimeFormat call for full date and time formatting
+      return new Intl.DateTimeFormat(currentLanguage, {
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true // This will handle AM/PM and 'at' for English, and appropriate for other locales
+      }).format(date);
+    }
+
+    // Format backup name
+    function formatBackupName(folderName) {
+      const year = folderName.substring(0, 4);
+      const month = folderName.substring(4, 6);
+      const day = folderName.substring(6, 8);
+      const hour = folderName.substring(8, 10);
+      const minute = folderName.substring(10, 12);
+
+      const date = new Date(year, month - 1, day, hour, minute);
+      return new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: '2-digit',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      }).format(date);
+    }
+
+    // Load backups
+    async function loadBackups() {
+      const backupList = document.getElementById('backupList');
+      const backupCount = document.getElementById('backupCount');
+
+      // Don't clear existing content - keep it visible while loading
+      // Only show loading state if the list is currently empty
+      const hasExistingContent = backupList.children.length > 0 &&
+        !backupList.querySelector('.loading') &&
+        !backupList.querySelector('.empty-state');
+
+      if (!hasExistingContent) {
+        backupCount.innerHTML = '&nbsp;';
+        backupList.innerHTML = `<p class="loading">${getStyledText('ui.backupList.loading')}</p>`;
+      }
+
+      try {
+        const backupRootPath = haConfig?.backupFolderPath || '/media/timemachine';
+        const response = await fetch(url('/api/scan-backups'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ backupRootPath, mode: currentMode })
+        });
+        const data = await response.json();
+        console.log('[loadBackups] Scan response data:', data);
+
+        if (!data.backups || data.backups.length === 0) {
+          backupCount.textContent = getStyledText('ui.backupList.noBackups');
+          backupList.innerHTML = `<p class="empty-state">${getStyledText('ui.backupList.noBackups')}</p>`;
+          filteredBackupsGlobal = [];
+          return;
+        }
+
+        filteredBackupsGlobal = data.backups;
+
+        // If showOnlyChanges is enabled, do sequential filtering
+        if (showOnlyChanges) {
+          await loadBackupsWithChangesFilter(data.backups, backupList, backupCount);
+        } else {
+          // Normal mode: show all backups immediately
+          backupCount.textContent = getStyledText('ui.backupList.snapshotsAvailable', { count: data.backups.length });
+          renderBackupList(data.backups, backupList);
+        }
+      } catch (error) {
+        console.error('[loadBackups] Error:', error);
+        showNotification('Error loading backups: ' + error.message, 'error');
+      }
+    }
+
+    // Helper to render backup list
+    function renderBackupList(backups, backupList) {
+      backupList.innerHTML = `<div id="backupListContainer" style="display: flex; flex-direction: column; gap: 8px;">` +
+        backups.map((backup, index) => {
+          const isSelected = currentBackupPath === backup.path;
+          const isLightMode = currentTheme === 'light';
+          const bgColor = isSelected ? '#007AFC' : (isLightMode ? 'white' : 'rgb(46, 46, 46)');
+          const borderColor = isLightMode ? 'rgba(148, 163, 184, 0.22)' : 'rgba(255, 255, 255, 0.05)';
+          const boxShadow = isSelected ? 'none' : (isLightMode ? '0 14px 30px -20px rgba(15, 23, 42, 0.45)' : 'none');
+          const textColor = isSelected ? 'white' : (isLightMode ? '#0f172a' : '#d1d5db');
+          return `
+            <button 
+              class="list-item" 
+              data-path="${backup.path}"
+              data-index="${index}"
+              data-locked="${backup.locked}"
+              onclick="selectBackup('${backup.path}', '${backup.folderName}', '${backup.mtime}', ${index})"
+              oncontextmenu="showContextMenu(event, '${backup.path}', ${backup.locked})"
+              style="width: 100%; text-align: left; padding: 16px; background-color: ${bgColor}; border-radius: 12px; border: 1px solid ${borderColor}; cursor: pointer; transition: all 0.2s; box-shadow: ${boxShadow}; color: ${textColor}; position: relative;"
+            >
+              <div style="display: flex; align-items: center; gap: 12px; width: 100%;">
+                <span style="font-weight: 400; font-size: 16px; flex: 1; min-width: 0;">${formatFolderName(backup.folderName, backup.mtime)}</span>
+                ${backup.locked ? `<span class="lock-indicator" aria-label="Locked backup" role="img">🔒</span>` : ''}
+              </div>
+            </button>
+          `;
+        }).join('') + `</div>`;
+    }
+
+    // Load backups with changes filter (sequential check with progressive rendering)
+    async function loadBackupsWithChangesFilter(allBackups, backupList, backupCount) {
+      const liveConfigPath = haConfig?.liveConfigPath || '/config';
+      const filteredBackups = [];
+
+      // Start with loading message and placeholder space
+      backupCount.innerHTML = '&nbsp;';
+      backupList.innerHTML = `<div id="backupListContainer" style="display: flex; flex-direction: column; gap: 8px;"><p class="loading">${getStyledText('ui.backupList.loading')}</p></div>`;
+      const container = document.getElementById('backupListContainer');
+
+      filteredBackupsGlobal = [];
+
+      // Check each backup sequentially, add to list as found
+      for (let i = 0; i < allBackups.length; i++) {
+        const backup = allBackups[i];
+
+        try {
+          const checkResponse = await fetch(url('/api/check-snapshot-changes'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ backupPath: backup.path, liveConfigPath, mode: currentMode })
+          });
+          const checkData = await checkResponse.json();
+
+          if (checkData.hasChanges) {
+            // Clear loading text on first item
+            if (filteredBackups.length === 0) {
+              container.innerHTML = '';
+            }
+            const index = filteredBackups.length;
+            filteredBackups.push(backup);
+            filteredBackupsGlobal = filteredBackups;
+            // Add this backup to the visible list immediately
+            appendBackupToList(backup, container, index);
+          }
+        } catch (error) {
+          console.error('[loadBackupsWithChangesFilter] Error checking backup:', backup.path, error);
+          // Clear loading text on first item
+          if (filteredBackups.length === 0) {
+            container.innerHTML = '';
+          }
+          const index = filteredBackups.length;
+          // On error, include the backup to be safe
+          filteredBackups.push(backup);
+          filteredBackupsGlobal = filteredBackups;
+          appendBackupToList(backup, container, index);
+        }
+      }
+
+      // Final state
+      if (filteredBackups.length === 0) {
+        backupCount.textContent = getStyledText('ui.snapshotFilter.noChangesFound');
+        backupList.innerHTML = `<p class="empty-state">${getStyledText('ui.snapshotFilter.noChangesFound')}</p>`;
+      } else {
+        backupCount.textContent = getStyledText('ui.snapshotFilter.snapshotsWithChanges', { count: filteredBackups.length });
+      }
+
+      // Clear server cache to free memory after filtering
+      fetch(url('/api/clear-cache'), { method: 'POST' }).catch(() => { });
+    }
+
+    // Append a single backup item to the list progressively
+    function appendBackupToList(backup, container, index) {
+      const isSelected = currentBackupPath === backup.path;
+      const isLightMode = currentTheme === 'light';
+      const bgColor = isSelected ? '#007AFC' : (isLightMode ? 'white' : 'rgb(46, 46, 46)');
+      const borderColor = isLightMode ? 'rgba(148, 163, 184, 0.22)' : 'rgba(255, 255, 255, 0.05)';
+      const boxShadow = isSelected ? 'none' : (isLightMode ? '0 14px 30px -20px rgba(15, 23, 42, 0.45)' : 'none');
+      const textColor = isSelected ? 'white' : (isLightMode ? '#0f172a' : '#d1d5db');
+
+      const button = document.createElement('button');
+      button.className = 'list-item';
+      button.dataset.path = backup.path;
+      button.dataset.index = index;
+      button.dataset.locked = backup.locked;
+      button.onclick = () => selectBackup(backup.path, backup.folderName, backup.mtime, index);
+      button.oncontextmenu = (e) => showContextMenu(e, backup.path, backup.locked);
+      button.style.cssText = `width: 100%; text-align: left; padding: 16px; background-color: ${bgColor}; border-radius: 12px; border: 1px solid ${borderColor}; cursor: pointer; transition: all 0.2s; box-shadow: ${boxShadow}; color: ${textColor}; margin-bottom: 8px; position: relative;`;
+
+      button.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 12px; width: 100%;">
+          <span style="font-weight: 400; font-size: 16px; flex: 1; min-width: 0;">${formatFolderName(backup.folderName, backup.mtime)}</span>
+          ${backup.locked ? `<span class="lock-indicator" aria-label="Locked backup" role="img">🔒</span>` : ''}
+        </div>
+      `;
+      container.appendChild(button);
+    }
+
+
+
+    // Select backup
+    async function selectBackup(backupPath, folderName, mtime, index = -1) {
+      currentBackupPath = backupPath;
+      currentBackupName = folderName;
+      currentBackupMtime = mtime;
+      if (index !== -1) currentBackupIndex = index;
+
+      // Update title and subtitle
+      document.getElementById('itemsTitle').textContent = getStyledText('ui.titles.items', { mode: getStyledText(`ui.buttons.${currentMode}`) });
+      document.getElementById('itemsSubtitle').textContent = formatFolderName(folderName, currentBackupMtime);
+
+      // Update selection styling inline (don't reload the entire list)
+      document.querySelectorAll('#backupList .list-item, #backupListContainer .list-item').forEach(btn => {
+        const isLightMode = currentTheme === 'light';
+        const selected = btn.dataset.path === backupPath;
+
+        if (selected) {
+          btn.style.backgroundColor = '#007AFC';
+          btn.style.color = 'white';
+          btn.style.boxShadow = 'none';
+        } else {
+          btn.style.backgroundColor = isLightMode ? 'white' : 'rgb(46, 46, 46)';
+          btn.style.color = isLightMode ? '#0f172a' : '#d1d5db';
+          btn.style.boxShadow = isLightMode ? '0 14px 30px -20px rgba(15, 23, 42, 0.45)' : 'none';
+        }
+      });
+
+
+      // Load items based on current mode
+      if (currentMode === 'lovelace') {
+        await loadLovelaceFiles();
+      } else if (currentMode === 'esphome') {
+        await loadEsphomeFiles();
+      } else if (currentMode === 'packages') {
+        await loadPackagesFiles();
+      } else {
+        await loadBackupItems();
+      }
+    }
+
+    // Helper to handle loading state without flashing
+    function setListLoading(isLoading, mode) {
+      const itemsList = document.getElementById('itemsList');
+      if (!itemsList) return;
+
+      const hasContent = itemsList.children.length > 0 &&
+        !itemsList.querySelector('.loading') &&
+        !itemsList.querySelector('.empty-state') &&
+        !itemsList.querySelector('.error') &&
+        !itemsList.querySelector('.file-icon-container'); // initial state
+
+      if (isLoading) {
+        if (hasContent) {
+          // Keep existing content visible, just disable interaction
+          itemsList.style.pointerEvents = 'none';
+        } else {
+          // If empty, show loading text
+          let loadingText = getStyledText('ui.itemsList.loading', { mode: mode }) || `Loading ${mode}...`;
+          if (mode === 'lovelace') loadingText = getStyledText('ui.lovelace.loading') || 'Loading Lovelace files...';
+          else if (mode === 'esphome') loadingText = getStyledText('ui.esphome.loading') || 'Loading ESPHome files...';
+          else if (mode === 'packages') loadingText = getStyledText('ui.packages.loading') || 'Loading Packages files...';
+
+          itemsList.innerHTML = `<p class="loading">${loadingText}</p>`;
+        }
+      } else {
+        itemsList.style.pointerEvents = 'auto';
+      }
+    }
+
+    // Load backup items
+    async function loadBackupItems() {
+      if (!currentBackupPath || currentMode === 'lovelace') return;
+
+      setListLoading(true, currentMode);
+
+      try {
+        const endpoint = currentMode === 'automations'
+          ? '/api/get-backup-automations'
+          : '/api/get-backup-scripts';
+
+        const response = await fetch(url(endpoint), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ backupPath: currentBackupPath })
+        });
+
+        const data = await response.json();
+        allItems = data.automations || data.scripts || [];
+
+        if (allItems.length === 0) {
+          document.getElementById('itemsList').innerHTML = `<p class="empty-state">${getStyledText('ui.itemsList.noItems', { mode: currentMode })}</p>`;
+          return;
+        }
+
+        // Load live items for comparison
+        await loadLiveItems();
+
+        // Apply search and sort
+        applyFilters();
+
+      } catch (error) {
+        console.error('[loadBackupItems] Error:', error);
+        allItems = [];
+        liveItemsMap = {};
+        itemStatuses = {};
+        document.getElementById('itemsList').innerHTML = `<p class="error">${applyTextStyle(`Error loading ${currentMode}: ${error.message}`, 'error')}</p>`;
+      } finally {
+        setListLoading(false, currentMode);
+      }
+    }
+
+    // Load live items
+    async function loadLiveItems() {
+      try {
+        const itemIdentifiers = allItems.map(item => item.id || item.alias).filter(Boolean);
+
+        const response = await fetch(url('/api/get-live-items'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ itemIdentifiers, mode: currentMode, liveConfigPath: haConfig.liveConfigPath })
+        });
+
+        const data = await response.json();
+        liveItemsMap = data.liveItems || {};
+
+        // Calculate statuses
+        itemStatuses = {};
+        allItems.forEach(item => {
+          const key = item.id || item.alias || '';
+          if (!key) return;
+
+          const liveItem = liveItemsMap[key];
+          if (!liveItem) {
+            itemStatuses[key] = 'deleted';
+          } else {
+            const backupYaml = jsyaml.dump(item);
+            const liveYaml = jsyaml.dump(liveItem);
+            itemStatuses[key] = backupYaml === liveYaml ? 'unchanged' : 'changed';
+          }
+        });
+      } catch (error) {
+        console.error('[loadLiveItems] Error:', error);
+        liveItemsMap = {};
+        itemStatuses = {};
+      }
+    }
+
+    // Apply filters (search and sort)
+    function applyFilters() {
+      // If no backup is selected, show empty state
+      if (!currentBackupPath) {
+        const modeLabel = getStyledText(`ui.buttons.${currentMode}`) || currentMode;
+        const emptyMessage = getStyledText('ui.itemsList.selectBackup', { mode: modeLabel });
+        document.getElementById('itemsList').innerHTML = `<p class="empty-state">${emptyMessage}</p>`;
+        return;
+      }
+
+      const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+      const sortOrder = document.getElementById('sortSelect').value;
+
+      const ensureArray = (value) => Array.isArray(value) ? [...value] : [];
+
+      const normalizeLabel = (item) => {
+        if (currentMode === 'lovelace' || currentMode === 'esphome' || currentMode === 'packages') {
+          return (item?.name || '').toLowerCase();
+        }
+        return (item?.alias || item?.id || '').toLowerCase();
+      };
+
+      const sortItems = (list) => {
+        if (sortOrder === 'alpha-asc') {
+          list.sort((a, b) => normalizeLabel(a).localeCompare(normalizeLabel(b)));
+        } else if (sortOrder === 'alpha-desc') {
+          list.sort((a, b) => normalizeLabel(b).localeCompare(normalizeLabel(a)));
+        }
+      };
+
+      if (currentMode === 'lovelace') {
+        let filtered = ensureArray(lovelaceFiles).filter(item => normalizeLabel(item).includes(searchTerm));
+
+        // If showOnlyChanges is enabled, filter to show only changed/deleted files
+        if (showOnlyChanges) {
+          filtered = filtered.filter(item => {
+            const status = lovelaceFileStatuses[item.name];
+            return status === 'changed' || status === 'deleted';
+          });
+        }
+
+        sortItems(filtered);
+        renderLovelaceFiles(filtered);
+        return;
+      }
+
+      if (currentMode === 'esphome') {
+        let filtered = ensureArray(esphomeFiles).filter(item => normalizeLabel(item).includes(searchTerm));
+
+        // If showOnlyChanges is enabled, filter to show only changed/deleted files
+        if (showOnlyChanges) {
+          filtered = filtered.filter(item => {
+            const status = esphomeFileStatuses[item.name];
+            return status === 'changed' || status === 'deleted';
+          });
+        }
+
+        sortItems(filtered);
+        renderEsphomeFiles(filtered);
+        return;
+      }
+
+      if (currentMode === 'packages') {
+        let filtered = ensureArray(packagesFiles).filter(item => normalizeLabel(item).includes(searchTerm));
+
+        // If showOnlyChanges is enabled, filter to show only changed/deleted files
+        if (showOnlyChanges) {
+          filtered = filtered.filter(item => {
+            const status = packagesFileStatuses[item.name];
+            return status === 'changed' || status === 'deleted';
+          });
+        }
+
+        sortItems(filtered);
+        renderPackagesFiles(filtered);
+        return;
+      }
+
+      // Automations/Scripts default behaviour
+      if (!Array.isArray(allItems)) {
+        allItems = [];
+      }
+
+      let filtered = allItems.filter(item => normalizeLabel(item).includes(searchTerm));
+
+      // If showOnlyChanges is enabled, also filter to show only changed/deleted items
+      if (showOnlyChanges) {
+        filtered = filtered.filter(item => {
+          const key = item.id || item.alias || '';
+          const status = itemStatuses[key];
+          return status === 'changed' || status === 'deleted';
+        });
+      }
+
+      sortItems(filtered);
+      renderItems(filtered);
+    }
+
+    // Render items
+    function renderItems(items) {
+      const itemsList = document.getElementById('itemsList');
+
+      if (items.length === 0) {
+        itemsList.innerHTML = `<p class="empty-state">${getStyledText('ui.itemsList.noMatchingItems')}</p>`;
+        return;
+      }
+
+      filteredItemsGlobal = items;
+      itemsList.innerHTML = items.map((item, idx) => {
+        const key = item.id || item.alias || '';
+        const status = itemStatuses[key] || '';
+        const isSelected = currentItemIndex === idx && activePanel === 'items';
+        const isLightMode = currentTheme === 'light';
+        const itemStyle = isSelected ? `style="background-color: var(--primary-color); color: white;"` : '';
+
+        const statusBadge = status === 'changed' ? `<span class="badge badge-changed">${getStyledText('ui.badges.changed')}</span>` :
+          status === 'deleted' ? `<span class="badge badge-deleted">${getStyledText('ui.badges.deleted')}</span>` : '';
+
+        return `
+          <div class="list-item ${isSelected ? 'selected' : ''}" data-index="${idx}" ${itemStyle}>
+            <div class="item-content">
+              <span class="dot"></span>
+              <span>${item.alias || item.id || `${currentMode} ${idx + 1}`}</span>
+            </div>
+            <div class="item-badges">
+              ${statusBadge}
+              <svg class="chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Add click handlers
+      document.querySelectorAll('#itemsList .list-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const idx = parseInt(item.dataset.index);
+          showDiffViewer(items[idx]);
+        });
+      });
+    }
+
+    // Show diff for a specific entity
+    async function showDiff(entityId, entityType) {
+      try {
+        const liveContent = await getLiveContent(entityId, entityType);
+        const backup = findBackupByEntityId(entityId);
+        if (!backup) {
+          throw new Error('Backup not found for this entity.');
+        }
+
+        const backupContent = backup.content;
+        const backupDate = new Date(backup.timestamp);
+        const formattedDate = `${backupDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })} at ${backupDate.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' })}`;
+
+        const bannerText = `${getStyledText('ui.diffViewer.backupVersion') || 'Backup version'} ${formattedDate}`;
+
+        const diffHtml = generateDiff(liveContent, backupContent, {
+          bannerText: bannerText
+        });
+
+        document.getElementById('diffContent').innerHTML = diffHtml;
+        document.getElementById('diffModal').style.display = 'flex';
+
+        // Set restore button attributes
+        const restoreBtn = document.getElementById('confirmRestore');
+        restoreBtn.dataset.entityId = entityId;
+        restoreBtn.dataset.entityType = entityType;
+
+      } catch (error) {
+        console.error('Error showing diff:', error);
+        showToast(`Error: ${error.message}`, 'error');
+      }
+    }
+
+    // Show diff viewer
+    async function showDiffViewer(item) {
+      selectedItem = item;
+      const key = item.id || item.alias || '';
+      const liveItem = liveItemsMap[key];
+      const status = itemStatuses[key];
+      const backupYaml = jsyaml.dump(item);
+      const liveYaml = liveItem ? jsyaml.dump(liveItem) : null;
+      const noChanges = backupYaml === liveYaml;
+
+      document.getElementById('diffTitle').textContent = item.alias || item.id || 'Item';
+
+      const modalBody = document.getElementById('diffModalBody');
+
+      // Hide close button for all states
+      document.getElementById('closeDiff').style.display = 'none';
+
+      if (!liveItem) {
+        // Deleted state
+        document.getElementById('diffSubtitle').innerHTML = `<span>${formatFolderName(currentBackupName, currentBackupMtime)}</span>`;
+        modalBody.innerHTML = `
+          <div class="diff-state-block">
+            <div class="diff-state-banner diff-state-banner-deleted">
+              <span class="diff-state-label">${getStyledText('ui.diffViewer.fileDeleted')}</span>
+            </div>
+            <pre class="code-viewer"><code>${backupYaml}</code></pre>
+                   </div>`;
+      } else if (noChanges) {
+        // Unchanged state
+        document.getElementById('diffSubtitle').textContent = getStyledText('ui.diffViewer.noChanges');
+        document.getElementById('closeDiff').style.display = 'none';
+        modalBody.innerHTML = `
+                           <div class="diff-state-block">            <div class="diff-state-banner diff-state-banner-unchanged">
+              <span class="diff-state-label">${getStyledText('ui.diffViewer.currentVersion')}</span>
+            </div>
+            <pre class="code-viewer"><code>${backupYaml}</code></pre>
+          </div>`;
+      } else {
+        // Changed state - side by side comparison with diff highlighting
+        document.getElementById('diffSubtitle').textContent = getStyledText('ui.diffViewer.compareVersions');
+        const backupTimestamp = currentBackupName ? formatFolderName(currentBackupName, currentBackupMtime) : '';
+        const diffHtml = generateDiff(liveYaml, backupYaml, {
+          leftLabel: getStyledText('ui.diffViewer.liveVersion'),
+          rightLabel: getStyledText('ui.diffViewer.backupVersion'),
+          rightMeta: backupTimestamp,
+          bannerText: formatFolderName(currentBackupName, currentBackupMtime)
+        });
+        modalBody.innerHTML = `
+          ${diffHtml}
+        `;
+      }
+
+      setDiffPalette(currentPalette);
+      document.getElementById('diffModal').style.display = 'flex';
+    }
+
+    // Restore item
+    async function restoreItem() {
+      if (!selectedItem) return;
+
+      try {
+        const endpoint = currentMode === 'automations' ? '/api/restore-automation' : '/api/restore-script';
+        const identifier = selectedItem.id || selectedItem.alias;
+        const body = {
+          backupPath: currentBackupPath,
+          automationIdentifier: identifier,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          liveConfigPath: haConfig.liveConfigPath
+        };
+
+        const response = await fetch(url(endpoint), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+
+        if (!response.ok) {
+          throw new Error('Restore failed');
+        }
+
+        document.getElementById('diffModal').style.display = 'none';
+
+        const modeLabel = currentMode === 'automations' ? 'Automation' : 'Script';
+
+        // Reload Home Assistant if configured
+        if (haConfig && haConfig.haAuthConfigured) {
+          const service = currentMode === 'automations' ? 'automation.reload' : 'script.reload';
+          try {
+            const reloadResponse = await fetch(url('/api/reload-home-assistant'), {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ service })
+            });
+            if (!reloadResponse.ok) {
+              throw new Error('Reload request failed');
+            }
+            showNotification(getStyledText('notifications.automationsReloaded', { mode: modeLabel }) || `${modeLabel} reloaded successfully in Home Assistant!`);
+          } catch (reloadError) {
+            console.error('[restoreItem] Reload error:', reloadError);
+            showNotification(getStyledText('notifications.itemRestoredManual', { mode: modeLabel }) || `${modeLabel} restored! Reload manually in Home Assistant.`, 'info');
+          }
+        } else {
+          showNotification(getStyledText('notifications.itemRestoredManual', { mode: modeLabel }) || `${modeLabel} restored! Manual reload required.`, 'info');
+        }
+
+        // Reload items
+        await loadBackupItems();
+      } catch (error) {
+        console.error('[restoreItem] Error:', error);
+        showNotification(getStyledText('notifications.errorGeneric', { error: error.message }) || ('Error restoring item: ' + error.message), 'error');
+      }
+    }
+
+    // Lovelace files state
+    let lovelaceFiles = [];
+    let lovelaceFileStatuses = {};
+    let selectedLovelaceFile = null;
+    let lovelaceBackupContent = '';
+    let lovelaceLiveContent = null;
+
+    // ESPHome files state
+    let esphomeFiles = [];
+    let esphomeFileStatuses = {};
+    let selectedEsphomeFile = null;
+    let esphomeBackupContent = '';
+    let esphomeLiveContent = null;
+
+    // Packages files state
+    let packagesFiles = [];
+    let packagesFileStatuses = {};
+    let selectedPackagesFile = null;
+    let packagesBackupContent = '';
+    let packagesLiveContent = null;
+
+    // Load Lovelace files
+    async function loadLovelaceFiles() {
+      if (!currentBackupPath) return;
+
+      setListLoading(true, 'lovelace');
+
+      try {
+        const response = await fetch(url('/api/get-backup-lovelace'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ backupPath: currentBackupPath })
+        });
+        const data = await response.json();
+        const fileNames = data.lovelaceFiles || [];
+        lovelaceFiles = [];
+        lovelaceFileStatuses = {};
+
+        for (const fileName of fileNames) {
+          let status = 'unchanged';
+          try {
+            const liveParams = new URLSearchParams({ fileName });
+            if (haConfig?.liveConfigPath) {
+              liveParams.append('liveConfigPath', haConfig.liveConfigPath);
+            }
+            const liveResp = await fetch(url(`/api/get-live-lovelace-file?${liveParams.toString()}`));
+            if (liveResp.ok) {
+              const liveData = await liveResp.text();
+              const backupResp = await fetch(url('/api/get-backup-lovelace-file'), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ backupPath: currentBackupPath, fileName })
+              });
+              const backupData = await backupResp.text();
+              if (backupData !== liveData) {
+                status = 'changed';
+              }
+            } else {
+              status = 'deleted';
+            }
+          } catch (err) {
+            console.error('Error checking Lovelace file status:', err);
+          }
+          lovelaceFiles.push({ name: fileName, status });
+          lovelaceFileStatuses[fileName] = status;
+        }
+        applyFilters(); // Use applyFilters to apply showOnlyChanges filtering
+      } catch (error) {
+        console.error('[loadLovelaceFiles] Error:', error);
+        document.getElementById('itemsList').innerHTML = `<p class="error">${applyTextStyle('Error loading Lovelace files: ' + error.message, 'error')}</p>`;
+      } finally {
+        setListLoading(false, 'lovelace');
+      }
+    }
+
+    // Render Lovelace files
+    function renderLovelaceFiles(files) {
+      const itemsList = document.getElementById('itemsList');
+      filteredItemsGlobal = files;
+      itemsList.innerHTML = files.map((file, idx) => {
+        const isSelected = currentItemIndex === idx && activePanel === 'items';
+        const itemStyle = isSelected ? `style="background-color: var(--primary-color); color: white;"` : '';
+        const status = lovelaceFileStatuses[file.name] || '';
+        const statusBadge = status === 'changed' ? `<span class="badge badge-changed">${getStyledText('ui.badges.changed')}</span>` :
+          status === 'deleted' ? `<span class="badge badge-deleted">${getStyledText('ui.badges.deleted')}</span>` : '';
+        return `
+          <div class="list-item ${isSelected ? 'selected' : ''}" data-index="${idx}" ${itemStyle}>
+            <div class="item-content">
+              <span class="dot"></span>
+              <span>${file.name}</span>
+            </div>
+            <div class="item-badges">
+              ${statusBadge}
+              <svg class="chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        `;
+      }).join('');
+      document.querySelectorAll('#itemsList .list-item').forEach((item, idx) => {
+        item.addEventListener('click', async () => {
+          const file = files[idx];
+          selectedLovelaceFile = file;
+          lovelaceBackupContent = '';
+          lovelaceLiveContent = null;
+          try {
+            const backupResp = await fetch(url('/api/get-backup-lovelace-file'), {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ backupPath: currentBackupPath, fileName: file.name })
+            });
+            lovelaceBackupContent = await backupResp.text();
+            if (file.status !== 'deleted') {
+              const liveParams = new URLSearchParams({ fileName: file.name });
+              if (haConfig?.liveConfigPath) {
+                liveParams.append('liveConfigPath', haConfig.liveConfigPath);
+              }
+              const liveResp = await fetch(url(`/api/get-live-lovelace-file?${liveParams.toString()}`));
+              if (liveResp.ok) {
+                lovelaceLiveContent = await liveResp.text();
+              }
+            }
+
+            // Generate split diff with paired columns
+            function generateDiff(oldText, newText, options = {}) {
+              const { leftLabel = getStyledText('ui.diffViewer.liveVersion') || 'Live version', rightLabel = getStyledText('ui.diffViewer.backupVersion') || 'Backup version', rightMeta = '', bannerText = '' } = options;
+
+              const diff = Diff.diffLines(oldText, newText);
+              const MAX_CONTEXT_LINES = 12;
+
+              const diffLines = [];
+              let oldLineNum = 1;
+              let newLineNum = 1;
+
+              diff.forEach(part => {
+                let lines = part.value.split('\n');
+                if (lines.length && lines[lines.length - 1] === '') {
+                  lines.pop();
+                }
+
+                if (part.added) {
+                  lines.forEach(line => {
+                    diffLines.push({ type: 'added', text: line, oldLine: null, newLine: newLineNum });
+                    newLineNum++;
+                  });
+                } else if (part.removed) {
+                  lines.forEach(line => {
+                    diffLines.push({ type: 'removed', text: line, oldLine: oldLineNum, newLine: null });
+                    oldLineNum++;
+                  });
+                } else {
+                  lines.forEach(line => {
+                    diffLines.push({ type: 'context', text: line, oldLine: oldLineNum, newLine: newLineNum });
+                    oldLineNum++;
+                    newLineNum++;
+                  });
+                }
+              });
+
+              const hunks = [];
+              let index = 0;
+
+              while (index < diffLines.length) {
+                while (index < diffLines.length && diffLines[index].type === 'context') {
+                  index++;
+                }
+
+                if (index >= diffLines.length) break;
+
+                let hunkStart = Math.max(0, index - MAX_CONTEXT_LINES);
+                let hunkEnd = index;
+                let postContextCount = 0;
+
+                while (hunkEnd < diffLines.length) {
+                  const line = diffLines[hunkEnd];
+                  if (line.type === 'context') {
+                    postContextCount++;
+                    if (postContextCount > MAX_CONTEXT_LINES) {
+                      break;
+                    }
+                  } else {
+                    postContextCount = 0;
+                  }
+                  hunkEnd++;
+                }
+
+                const hunkLines = diffLines.slice(hunkStart, hunkEnd);
+                const firstChangeIndex = hunkLines.findIndex(line => line.type !== 'context');
+
+                const contextBefore = firstChangeIndex > 0 ? hunkLines.slice(0, firstChangeIndex) : [];
+                const lines = firstChangeIndex >= 0 ? hunkLines.slice(firstChangeIndex) : hunkLines.slice();
+
+                const oldLines = hunkLines.filter(line => line.oldLine !== null);
+                const newLines = hunkLines.filter(line => line.newLine !== null);
+
+                hunks.push({
+                  oldStart: oldLines.length ? oldLines[0].oldLine : 1,
+                  newStart: newLines.length ? newLines[0].newLine : 1,
+                  oldCount: oldLines.length,
+                  newCount: newLines.length,
+                  contextBefore,
+                  lines
+                });
+
+                index = hunkEnd;
+              }
+
+              if (!hunks.length) {
+                return `
+          <div class="diff-empty-state">
+            <div class="diff-empty-card">
+              <h3>No visible differences</h3>
+              <p>Everything matches between backup and live.</p>
+            </div>
+          </div>
+        `;
+              }
+
+              return `
+        <div class="diff-banners-grid diff-banners-grid--standalone">
+          <div class="diff-state-banner diff-state-banner-current diff-state-banner--header"><span class="diff-state-label">${getStyledText('ui.diffViewer.currentVersion')}</span></div>
+          ${bannerText ? `<div class="diff-state-banner diff-state-banner-changed diff-state-banner--header"><span class="diff-state-label">${escapeHtml(bannerText)}</span></div>` : '<div class="diff-state-banner diff-state-banner-empty diff-state-banner--header"></div>'}
+        </div>
+        <div class="diff-viewer-shell">
+          <div class="diff-palette-bar">
+            <span class="diff-palette-label">Theme:</span>
+            <div class="diff-palette-btn active" data-palette="1" onclick="setDiffPalette(1)" title="Original"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+            <div class="diff-palette-btn" data-palette="2" onclick="setDiffPalette(2)" title="Rose & Emerald"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+            <div class="diff-palette-btn" data-palette="3" onclick="setDiffPalette(3)" title="Sunset & Ocean"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+            <div class="diff-palette-btn" data-palette="4" onclick="setDiffPalette(4)" title="Berry & Lime"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+            <div class="diff-palette-btn" data-palette="5" onclick="setDiffPalette(5)" title="Salmon & Seafoam"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+            <div class="diff-palette-btn" data-palette="6" onclick="setDiffPalette(6)" title="Ruby & Jade"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+            <div class="diff-palette-btn" data-palette="7" onclick="setDiffPalette(7)" title="Peach & Aqua"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+            <div class="diff-palette-btn" data-palette="8" onclick="setDiffPalette(8)" title="Magenta & Cyan"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+          </div>
+          <div class="diff-viewer-split">
+            <div class="diff-hunks">
+              ${hunks.map((hunk, index) => renderSplitHunk(hunk, index)).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+            }
+            showLovelaceDiffModal();
+          } catch (error) {
+            showNotification('Error loading file: ' + error.message, 'error');
+          }
+        });
+      });
+    }
+
+    // Show Lovelace diff modal
+    function showLovelaceDiffModal() {
+      const modal = document.getElementById('diffModal');
+      const status = lovelaceFileStatuses[selectedLovelaceFile.name];
+      const noChanges = lovelaceBackupContent === lovelaceLiveContent;
+
+      document.getElementById('diffTitle').textContent = selectedLovelaceFile.name;
+
+      const modalBody = document.getElementById('diffModalBody');
+
+      // Apply saved palette preference
+
+
+      // Hide close button for all states
+      document.getElementById('closeDiff').style.display = 'none';
+
+      if (!lovelaceLiveContent) {
+        // Deleted state
+        document.getElementById('diffSubtitle').innerHTML = `<span>${formatFolderName(currentBackupName, currentBackupMtime)}</span>`; modalBody.innerHTML = `
+          <div class="diff-state-block">
+            <div class="diff-state-banner diff-state-banner-deleted">
+              <span class="diff-state-label">${getStyledText('ui.diffViewer.fileDeleted')}</span>
+            </div>
+            <pre class="code-viewer"><code>${lovelaceBackupContent}</code></pre>
+          </div>
+        `;
+      } else if (noChanges) {
+        // Unchanged state
+        document.getElementById('diffSubtitle').textContent = getStyledText('ui.diffViewer.noChanges');
+        document.getElementById('closeDiff').style.display = 'none';
+        modalBody.innerHTML = `
+          <div class="diff-state-block">
+            <div class="diff-state-banner diff-state-banner-unchanged">
+              <span class="diff-state-label">${getStyledText('ui.diffViewer.currentVersion')}</span>
+            </div>
+            <pre class="code-viewer"><code>${lovelaceBackupContent}</code></pre>
+          </div>
+        `;
+      } else {
+        // Changed state - side by side comparison with diff highlighting
+        document.getElementById('diffSubtitle').textContent = getStyledText('ui.diffViewer.compareVersions');
+        const backupTimestamp = currentBackupName ? formatFolderName(currentBackupName, currentBackupMtime) : '';
+        const diffHtml = generateDiff(lovelaceLiveContent, lovelaceBackupContent, {
+          leftLabel: getStyledText('ui.diffViewer.liveVersion'),
+          rightLabel: getStyledText('ui.diffViewer.backupVersion'),
+          rightMeta: backupTimestamp,
+          bannerText: formatFolderName(currentBackupName, currentBackupMtime)
+        });
+        modalBody.innerHTML = `
+          ${diffHtml}
+        `;
+      }
+
+      setDiffPalette(currentPalette);
+      modal.style.display = 'flex';
+    }
+
+    // Restore Lovelace file
+    async function restoreLovelaceFile() {
+      if (!selectedLovelaceFile) return;
+
+      try {
+        const response = await fetch(url('/api/restore-lovelace-file'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fileName: selectedLovelaceFile.name,
+            content: lovelaceBackupContent,
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            liveConfigPath: haConfig.liveConfigPath
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Restore failed');
+        }
+
+        document.getElementById('diffModal').style.display = 'none';
+
+        // Reload Home Assistant if configured
+        if (haConfig && haConfig.haAuthConfigured) {
+          const service = 'lovelace.reload';
+          try {
+            const reloadResponse = await fetch(url('/api/reload-home-assistant'), {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ service })
+            });
+            if (!reloadResponse.ok) {
+              throw new Error('Reload request failed');
+            }
+            showRestartNotification(getStyledText('notifications.lovelaceRestored') || 'Lovelace successfully restored! Restart Home Assistant to see changes.', haConfig);
+          } catch (reloadError) {
+            console.error('[restoreLovelaceFile] Reload error:', reloadError);
+            showRestartNotification(getStyledText('notifications.lovelaceRestored') || 'Lovelace successfully restored! Restart Home Assistant to see changes.', haConfig);
+          }
+        } else {
+          showRestartNotification(getStyledText('notifications.lovelaceRestored') || 'Lovelace successfully restored! Restart Home Assistant to see changes.', haConfig);
+        }
+
+        // Reload items
+        await loadLovelaceFiles();
+      } catch (error) {
+        console.error('[restoreLovelaceFile] Error:', error);
+        showNotification(getStyledText('notifications.errorGeneric', { error: error.message }) || ('Error restoring file: ' + error.message), 'error');
+      }
+    }
+
+    // Load ESPHome files
+    async function loadEsphomeFiles() {
+      if (!currentBackupPath) return;
+      const itemsList = document.getElementById('itemsList');
+      if (!esphomeFeatureEnabled) {
+        itemsList.innerHTML = `<p class="empty-state">${getEsphomeDisabledMessage()}</p>`;
+        return;
+      }
+
+      setListLoading(true, 'esphome');
+
+      try {
+        const response = await fetch(url('/api/get-backup-esphome'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ backupPath: currentBackupPath })
+        });
+        if (response.status === 404) {
+          itemsList.innerHTML = `<p class="empty-state">${getEsphomeDisabledMessage()}</p>`;
+          return;
+        }
+        const data = await response.json();
+        const fileNames = data.esphomeFiles || [];
+        esphomeFiles = [];
+        esphomeFileStatuses = {};
+
+        for (const fileName of fileNames) {
+          let status = 'unchanged';
+          try {
+            const liveResp = await fetch(url('/api/get-live-esphome-file'), {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ fileName, liveConfigPath: haConfig.liveConfigPath })
+            });
+            if (liveResp.ok) {
+              const liveData = await liveResp.json();
+              const backupResp = await fetch(url('/api/get-backup-esphome-file'), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ backupPath: currentBackupPath, fileName })
+              });
+              const backupData = await backupResp.json();
+              if (backupData.content !== liveData.content) {
+                status = 'changed';
+              }
+            } else {
+              status = 'deleted';
+            }
+          } catch (err) {
+            console.error('Error checking ESPHome file status:', err);
+          }
+          esphomeFiles.push({ name: fileName, status });
+          esphomeFileStatuses[fileName] = status;
+        }
+        applyFilters(); // Use applyFilters to apply showOnlyChanges filtering
+      } catch (error) {
+        console.error('[loadEsphomeFiles] Error:', error);
+        itemsList.innerHTML = `<p class="${esphomeFeatureEnabled ? 'error' : 'empty-state'}">${esphomeFeatureEnabled ? applyTextStyle('Error loading ESPHome files: ' + error.message, 'error') : getEsphomeDisabledMessage()}</p>`;
+      } finally {
+        setListLoading(false, 'esphome');
+      }
+    }
+
+    // Render ESPHome files
+    function renderEsphomeFiles(files) {
+      const itemsList = document.getElementById('itemsList');
+      filteredItemsGlobal = files;
+      itemsList.innerHTML = files.map((file, idx) => {
+        const isSelected = currentItemIndex === idx && activePanel === 'items';
+        const itemStyle = isSelected ? `style="background-color: var(--primary-color); color: white;"` : '';
+        const status = esphomeFileStatuses[file.name] || '';
+        const statusBadge = status === 'changed' ? `<span class="badge badge-changed">${getStyledText('ui.badges.changed')}</span>` :
+          status === 'deleted' ? `<span class="badge badge-deleted">${getStyledText('ui.badges.deleted')}</span>` : '';
+        return `
+          <div class="list-item ${isSelected ? 'selected' : ''}" data-index="${idx}" ${itemStyle}>
+            <div class="item-content">
+              <span class="dot"></span>
+              <span>${file.name}</span>
+            </div>
+            <div class="item-badges">
+              ${statusBadge}
+              <svg class="chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        `;
+      }).join('');
+      document.querySelectorAll('#itemsList .list-item').forEach((item, idx) => {
+        item.addEventListener('click', async () => {
+          const file = files[idx];
+          selectedEsphomeFile = file;
+          esphomeBackupContent = '';
+          esphomeLiveContent = null;
+          try {
+            const backupResp = await fetch(url('/api/get-backup-esphome-file'), {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ backupPath: currentBackupPath, fileName: file.name })
+            });
+            const backupData = await backupResp.json();
+            esphomeBackupContent = backupData.content;
+            if (file.status !== 'deleted') {
+              const liveResp = await fetch(url('/api/get-live-esphome-file'), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ fileName: file.name, liveConfigPath: haConfig.liveConfigPath })
+              });
+              if (liveResp.ok) {
+                const liveData = await liveResp.json();
+                esphomeLiveContent = liveData.content;
+              }
+            }
+            showEsphomeDiffModal();
+          } catch (error) {
+            showNotification('Error loading file: ' + error.message, 'error');
+          }
+        });
+      });
+    }
+
+    // Show ESPHome diff modal
+    function showEsphomeDiffModal() {
+      const modal = document.getElementById('diffModal');
+      const status = esphomeFileStatuses[selectedEsphomeFile.name];
+      const noChanges = esphomeBackupContent === esphomeLiveContent;
+
+      document.getElementById('diffTitle').textContent = selectedEsphomeFile.name;
+
+      const modalBody = document.getElementById('diffModalBody');
+
+      // Apply saved palette preference
+
+
+      // Hide close button for all states
+      document.getElementById('closeDiff').style.display = 'none';
+
+      if (!esphomeLiveContent) {
+        // Deleted state
+        document.getElementById('diffSubtitle').innerHTML = `<span>${formatFolderName(currentBackupName, currentBackupMtime)}</span>`;
+        modalBody.innerHTML = `
+          <div class="diff-state-block">
+            <div class="diff-state-banner diff-state-banner-deleted">
+              <span class="diff-state-label">${getStyledText('ui.diffViewer.fileDeleted')}</span>
+            </div>
+            <pre class="code-viewer"><code>${esphomeBackupContent}</code></pre>
+          </div>
+        `;
+      } else if (noChanges) {
+        // Unchanged state
+        document.getElementById('diffSubtitle').textContent = getStyledText('ui.diffViewer.noChanges');
+        document.getElementById('closeDiff').style.display = 'none';
+        modalBody.innerHTML = `
+          <div class="diff-state-block">
+            <div class="diff-state-banner diff-state-banner-unchanged">
+              <span class="diff-state-label">${getStyledText('ui.diffViewer.currentVersion')}</span>
+            </div>
+            <pre class="code-viewer"><code>${esphomeBackupContent}</code></pre>
+          </div>
+        `;
+      } else {
+        // Changed state - side by side comparison with diff highlighting
+        document.getElementById('diffSubtitle').textContent = 'Compare backup with current live version.';
+        const backupTimestamp = currentBackupName ? formatFolderName(currentBackupName, currentBackupMtime) : '';
+        const diffHtml = generateDiff(esphomeLiveContent, esphomeBackupContent, {
+          leftLabel: getStyledText('ui.diffViewer.liveVersion'),
+          rightLabel: getStyledText('ui.diffViewer.backupVersion'),
+          rightMeta: backupTimestamp,
+          bannerText: formatFolderName(currentBackupName, currentBackupMtime)
+        });
+        modalBody.innerHTML = `
+          ${diffHtml}
+        `;
+      }
+
+      setDiffPalette(currentPalette);
+      modal.style.display = 'flex';
+    }
+
+    // Restore ESPHome file
+    async function restoreEsphomeFile() {
+      if (!selectedEsphomeFile) return;
+      if (!esphomeFeatureEnabled) return;
+      try {
+        const response = await fetch(url('/api/restore-esphome-file'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fileName: selectedEsphomeFile.name, content: esphomeBackupContent, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, liveConfigPath: haConfig.liveConfigPath })
+        });
+        if (!response.ok) throw new Error('Restore failed');
+        const data = await response.json(); // Get the response data
+        document.getElementById('diffModal').style.display = 'none';
+
+        showNotification('ESPHome file restored!', 'success');
+        await loadEsphomeFiles();
+      } catch (error) {
+        console.error('[restoreEsphomeFile] Error:', error);
+        showNotification(getStyledText('notifications.errorGeneric', { error: error.message }) || ('Error restoring file: ' + error.message), 'error');
+      }
+    }
+
+    // Load Packages files
+    async function loadPackagesFiles() {
+      if (!currentBackupPath) return;
+      const itemsList = document.getElementById('itemsList');
+      if (!packagesFeatureEnabled) {
+        itemsList.innerHTML = `<p class="empty-state">${getPackagesDisabledMessage()}</p>`;
+        return;
+      }
+
+      setListLoading(true, 'packages');
+
+      try {
+        const response = await fetch(url('/api/get-backup-packages'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ backupPath: currentBackupPath })
+        });
+        if (response.status === 404) {
+          itemsList.innerHTML = `<p class="empty-state">${getPackagesDisabledMessage()}</p>`;
+          return;
+        }
+        const data = await response.json();
+        const fileNames = data.packagesFiles || [];
+        packagesFiles = [];
+        packagesFileStatuses = {};
+
+        for (const fileName of fileNames) {
+          let status = 'unchanged';
+          try {
+            const liveResp = await fetch(url('/api/get-live-packages-file'), {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ fileName, liveConfigPath: haConfig.liveConfigPath })
+            });
+            if (liveResp.ok) {
+              const liveData = await liveResp.json();
+              const backupResp = await fetch(url('/api/get-backup-packages-file'), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ backupPath: currentBackupPath, fileName })
+              });
+              const backupData = await backupResp.json();
+              if (backupData.content !== liveData.content) {
+                status = 'changed';
+              }
+            } else {
+              status = 'deleted';
+            }
+          } catch (err) {
+            console.error('Error checking Packages file status:', err);
+          }
+          packagesFiles.push({ name: fileName, status });
+          packagesFileStatuses[fileName] = status;
+        }
+        applyFilters(); // Use applyFilters to apply showOnlyChanges filtering
+      } catch (error) {
+        console.error('[loadPackagesFiles] Error:', error);
+        itemsList.innerHTML = `<p class="${packagesFeatureEnabled ? 'error' : 'empty-state'}">${packagesFeatureEnabled ? applyTextStyle('Error loading Packages files: ' + error.message, 'error') : getPackagesDisabledMessage()}</p>`;
+      } finally {
+        setListLoading(false, 'packages');
+      }
+    }
+
+    // Render Packages files
+    function renderPackagesFiles(files) {
+      const itemsList = document.getElementById('itemsList');
+      filteredItemsGlobal = files;
+      itemsList.innerHTML = files.map((file, idx) => {
+        const isSelected = currentItemIndex === idx && activePanel === 'items';
+        const itemStyle = isSelected ? `style="background-color: var(--primary-color); color: white;"` : '';
+        const status = packagesFileStatuses[file.name] || '';
+        const statusBadge = status === 'changed' ? `<span class="badge badge-changed">${getStyledText('ui.badges.changed')}</span>` :
+          status === 'deleted' ? `<span class="badge badge-deleted">${getStyledText('ui.badges.deleted')}</span>` : '';
+        return `
+          <div class="list-item ${isSelected ? 'selected' : ''}" data-index="${idx}" ${itemStyle}>
+            <div class="item-content">
+              <span class="dot"></span>
+              <span>${file.name}</span>
+            </div>
+            <div class="item-badges">
+              ${statusBadge}
+              <svg class="chevron" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        `;
+      }).join('');
+      document.querySelectorAll('#itemsList .list-item').forEach((item, idx) => {
+        item.addEventListener('click', async () => {
+          const file = files[idx];
+          selectedPackagesFile = file;
+          packagesBackupContent = '';
+          packagesLiveContent = null;
+          try {
+            const backupResp = await fetch(url('/api/get-backup-packages-file'), {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ backupPath: currentBackupPath, fileName: file.name })
+            });
+            const backupData = await backupResp.json();
+            packagesBackupContent = backupData.content;
+            if (file.status !== 'deleted') {
+              const liveResp = await fetch(url('/api/get-live-packages-file'), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ fileName: file.name, liveConfigPath: haConfig.liveConfigPath })
+              });
+              if (liveResp.ok) {
+                const liveData = await liveResp.json();
+                packagesLiveContent = liveData.content;
+              }
+            }
+            showPackagesDiffModal();
+          } catch (error) {
+            showNotification('Error loading file: ' + error.message, 'error');
+          }
+        });
+      });
+    }
+
+    // Show Packages diff modal
+    function showPackagesDiffModal() {
+      const modal = document.getElementById('diffModal');
+      const status = packagesFileStatuses[selectedPackagesFile.name];
+      const noChanges = packagesBackupContent === packagesLiveContent;
+
+      document.getElementById('diffTitle').textContent = selectedPackagesFile.name;
+
+      const modalBody = document.getElementById('diffModalBody');
+
+      // Apply saved palette preference
+
+
+      // Hide close button for all states
+      document.getElementById('closeDiff').style.display = 'none';
+
+      if (!packagesLiveContent) {
+        // Deleted state
+        document.getElementById('diffSubtitle').innerHTML = `<span>${formatFolderName(currentBackupName, currentBackupMtime)}</span>`;
+        modalBody.innerHTML = `
+          <div class="diff-state-block">
+            <div class="diff-state-banner diff-state-banner-deleted">
+              <span class="diff-state-label">${getStyledText('ui.diffViewer.fileDeleted')}</span>
+            </div>
+            <pre class="code-viewer"><code>${packagesBackupContent}</code></pre>
+          </div>
+        `;
+      } else if (noChanges) {
+        // Unchanged state
+        document.getElementById('diffSubtitle').textContent = getStyledText('ui.diffViewer.noChanges');
+        document.getElementById('closeDiff').style.display = 'none';
+        modalBody.innerHTML = `
+          <div class="diff-state-block">
+            <div class="diff-state-banner diff-state-banner-unchanged">
+              <span class="diff-state-label">${getStyledText('ui.diffViewer.currentVersion')}</span>
+            </div>
+            <pre class="code-viewer"><code>${packagesBackupContent}</code></pre>
+          </div>
+        `;
+      } else {
+        // Changed state - side by side comparison with diff highlighting
+        document.getElementById('diffSubtitle').textContent = 'Compare backup with current live version.';
+        const backupTimestamp = currentBackupName ? formatFolderName(currentBackupName, currentBackupMtime) : '';
+        const diffHtml = generateDiff(packagesLiveContent, packagesBackupContent, {
+          leftLabel: getStyledText('ui.diffViewer.liveVersion'),
+          rightLabel: getStyledText('ui.diffViewer.backupVersion'),
+          rightMeta: backupTimestamp,
+          bannerText: formatFolderName(currentBackupName, currentBackupMtime)
+        });
+        modalBody.innerHTML = `
+          ${diffHtml}
+        `;
+      }
+
+      setDiffPalette(currentPalette);
+      modal.style.display = 'flex';
+    }
+
+    // Restore Packages file
+    async function restorePackagesFile() {
+      if (!selectedPackagesFile) return;
+      if (!packagesFeatureEnabled) return;
+      try {
+        const response = await fetch(url('/api/restore-packages-file'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fileName: selectedPackagesFile.name, content: packagesBackupContent, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, liveConfigPath: haConfig.liveConfigPath })
+        });
+        if (!response.ok) throw new Error('Restore failed');
+        const data = await response.json(); // Get the response data
+        document.getElementById('diffModal').style.display = 'none';
+
+        const canReload = data.needsRestart && haConfig && haConfig.haAuthConfigured;
+        if (canReload) {
+          try {
+            const reloadResponse = await fetch(url('/api/reload-home-assistant'), {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ service: 'homeassistant.reload_all' })
+            });
+            if (!reloadResponse.ok) {
+              throw new Error('Reload request failed');
+            }
+            showNotification(getStyledText('notifications.packagesReloaded') || 'Packages file restored and Home Assistant reloaded!', 'success');
+          } catch (reloadError) {
+            console.error('[restorePackagesFile] Reload error:', reloadError);
+            showNotification(getStyledText('notifications.packagesManualReload') || 'Packages file restored! Reload Home Assistant manually.', 'info');
+          }
+        } else if (data.needsRestart) {
+          showNotification(getStyledText('notifications.packagesManualReload') || 'Packages file restored! Reload Home Assistant manually.', 'info');
+        } else {
+          showNotification(getStyledText('notifications.packagesRestored') || 'Packages file restored!', 'success');
+        }
+        await loadPackagesFiles();
+      } catch (error) {
+        console.error('[restorePackagesFile] Error:', error);
+        showNotification(getStyledText('notifications.errorGeneric', { error: error.message }) || ('Error restoring file: ' + error.message), 'error');
+      }
+    }
+
+    // Update restore button for Lovelace
+    document.getElementById('restoreBtn').addEventListener('click', () => {
+      if (currentMode === 'lovelace') {
+        restoreLovelaceFile();
+      } else if (currentMode === 'esphome' && esphomeFeatureEnabled) {
+        restoreEsphomeFile();
+      } else if (currentMode === 'packages' && packagesFeatureEnabled) {
+        restorePackagesFile();
+      } else {
+        restoreItem();
+      }
+    });
+
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const newMode = tab.dataset.tab;
+        if (newMode === currentMode) return;
+
+        if (newMode === 'esphome' && !esphomeFeatureEnabled) {
+          showNotification(getEsphomeDisabledMessage(), 'info');
+          return;
+        }
+
+        if (newMode === 'packages' && !packagesFeatureEnabled) {
+          showNotification(getPackagesDisabledMessage(), 'info');
+          return;
+        }
+
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentMode = newMode;
+
+        // Clear backup selection when switching tabs
+        currentBackupPath = null;
+        currentBackupName = null;
+        currentBackupMtime = null;
+
+        // Immediately clear visual selection in backup list
+        document.querySelectorAll('#backupList .list-item').forEach(item => {
+          const isLightMode = currentTheme === 'light';
+          item.style.backgroundColor = isLightMode ? 'white' : 'rgb(46, 46, 46)';
+          item.style.color = isLightMode ? '#0f172a' : '#d1d5db';
+          item.style.boxShadow = isLightMode ? '0 14px 30px -20px rgba(15, 23, 42, 0.45)' : 'none';
+        });
+
+        // Reset items state
+        allItems = [];
+        liveItemsMap = {};
+        itemStatuses = {};
+
+        // Always reload backups when switching tabs (filtering is mode-specific)
+        loadBackups();
+
+        // Update search placeholder
+        updatePlaceholders();
+
+        // Update title and clear subtitle (no backup selected yet)
+        document.getElementById('itemsTitle').textContent = getStyledText(`ui.buttons.${newMode}`);
+        document.getElementById('itemsSubtitle').textContent = getStyledText('ui.itemsList.noBackupSelected');
+        // Note: Don't clear itemsList here - leave existing content visible until new content loads
+        // The list will be updated when user selects a backup from the newly loaded list
+      });
+    });
+
+    document.getElementById('searchBox').addEventListener('input', applyFilters);
+    document.getElementById('sortSelect').addEventListener('change', applyFilters);
+
+    // Path validation
+    async function validateLivePath(path) {
+      const errorEl = document.getElementById('liveConfigPathError');
+      if (!path) {
+        errorEl.textContent = '';
+        return;
+      }
+      try {
+        const response = await fetch(url('/api/validate-path'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path, type: 'live' })
+        });
+        const data = await response.json();
+        if (data.errorCode) {
+          errorEl.textContent = getSettingsMessageFromCode(data.errorCode, { path: data.path || path });
+        } else if (data.error) {
+          errorEl.textContent = applyTextStyle(data.error, 'error');
+        } else {
+          errorEl.textContent = '';
+        }
+      } catch (error) {
+        errorEl.textContent = getSettingsMessageFromCode('unknown', { path });
+      }
+    }
+
+    async function validateBackupPath(path) {
+      const errorEl = document.getElementById('backupPathError');
+      if (!path) {
+        errorEl.textContent = '';
+        return;
+      }
+      try {
+        const response = await fetch(url('/api/validate-path'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path, type: 'backup' })
+        });
+        const data = await response.json();
+        if (data.errorCode) {
+          errorEl.textContent = getSettingsMessageFromCode(data.errorCode, { path: data.path || path });
+        } else if (data.error) {
+          errorEl.textContent = applyTextStyle(data.error, 'error');
+        } else {
+          errorEl.textContent = '';
+        }
+      } catch (error) {
+        errorEl.textContent = getSettingsMessageFromCode('unknown', { path });
+      }
+    }
+
+    // Settings modal
+    document.getElementById('settingsBtn').addEventListener('click', () => {
+      if (haConfig) {
+        const isDocker = haConfig.mode === 'docker';
+        const allowManual = isDocker && !haConfig.haAuthConfigured;
+        const managedBySupervisor = haConfig.haAuthMode === 'supervisor';
+
+        const haConnectionFields = document.getElementById('haConnectionFields');
+        const haUrlField = document.getElementById('haUrl');
+        const haTokenField = document.getElementById('haToken');
+
+        // Toggle visibility of HA connection fields based on supervisor mode
+        if (managedBySupervisor) {
+          haConnectionFields.classList.add('managed-by-supervisor');
+        } else {
+          haConnectionFields.classList.remove('managed-by-supervisor');
+        }
+
+        if (allowManual) {
+          haUrlField.readOnly = false;
+          haUrlField.placeholder = 'http://your-ha-instance:8123';
+          haUrlField.style.color = '#d1d5db';
+          haUrlField.style.backgroundColor = '#2d2d2d';
+
+          haTokenField.readOnly = false;
+          haTokenField.placeholder = 'Your long-lived access token';
+          haTokenField.style.color = '#d1d5db';
+          haTokenField.style.backgroundColor = '#2d2d2d';
+        } else {
+          haUrlField.readOnly = true;
+          const credentialsSource = haConfig.haCredentialsSource;
+          let placeholderText;
+          if (managedBySupervisor) {
+            placeholderText = 'Automatically managed by Home Assistant';
+          } else if (credentialsSource === 'env') {
+            placeholderText = 'Configured via environment variables';
+          } else {
+            placeholderText = 'Configured via saved credentials';
+          }
+          haUrlField.placeholder = placeholderText;
+          haUrlField.style.color = '#9ca3af';
+          haUrlField.style.backgroundColor = '#2d2d2d';
+
+          haTokenField.readOnly = true;
+          haTokenField.placeholder = placeholderText;
+          haTokenField.style.color = '#9ca3af';
+          haTokenField.style.backgroundColor = '#2d2d2d';
+        }
+
+        haUrlField.value = allowManual ? (haConfig.haUrl || '') : '';
+        haTokenField.value = '';
+
+        document.getElementById('liveConfigPath').value = haConfig.liveConfigPath || '/config';
+        document.getElementById('backupFolderPath').value = haConfig.backupFolderPath || '/media/backups/yaml';
+      }
+      updateUIText(); // Update text for current style
+      loadScheduleSettings();
+
+      // Validate paths on open
+      const livePath = document.getElementById('liveConfigPath').value;
+      const backupPath = document.getElementById('backupFolderPath').value;
+      validateLivePath(livePath);
+      validateBackupPath(backupPath);
+
+      document.getElementById('settingsModal').style.display = 'flex';
+    });
+
+    // Add blur event listeners for path validation
+    document.getElementById('liveConfigPath').addEventListener('blur', (e) => {
+      validateLivePath(e.target.value);
+    });
+
+    document.getElementById('backupFolderPath').addEventListener('blur', (e) => {
+      validateBackupPath(e.target.value);
+    });
+
+    document.getElementById('cancelSettings').addEventListener('click', () => {
+      // Clear status messages when closing settings
+      document.getElementById('connectionStatus').textContent = '';
+      document.getElementById('backupStatus').textContent = '';
+      document.getElementById('settingsModal').style.display = 'none';
+    });
+
+    // Click outside to close settings modal
+    document.getElementById('settingsModal').addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal-backdrop')) {
+        // Clear status messages when closing settings
+        document.getElementById('connectionStatus').textContent = '';
+        document.getElementById('backupStatus').textContent = '';
+        document.getElementById('settingsModal').style.display = 'none';
+      }
+    });
+
+    // Settings form
+    document.getElementById('settingsForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const liveConfigPath = document.getElementById('liveConfigPath').value;
+      const backupFolderPath = document.getElementById('backupFolderPath').value;
+
+      const isDocker = haConfig && haConfig.mode === 'docker';
+      const isAddon = haConfig && haConfig.mode === 'addon';
+      const shouldPersistPaths = haConfig && (isDocker || isAddon);
+      const allowManual = haConfig && !haConfig.haAuthConfigured;
+
+      // Save HA credentials if in Docker mode without env vars
+      if (isDocker && allowManual) {
+        const homeAssistantUrl = document.getElementById('haUrl').value.trim();
+        const longLivedAccessToken = document.getElementById('haToken').value.trim();
+
+        if (homeAssistantUrl && longLivedAccessToken) {
+          try {
+            await fetch(url('/api/docker-ha-credentials'), {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                homeAssistantUrl,
+                longLivedAccessToken
+              })
+            });
+          } catch (error) {
+            console.error('[save-ha-credentials] Error:', error);
+          }
+        }
+      }
+
+      // Save Docker app settings if in Docker mode
+      if (shouldPersistPaths) {
+        console.log('[save-settings] Persisting settings:', { mode: haConfig?.mode, liveConfigPath, backupFolderPath });
+        try {
+          const response = await fetch(url('/api/app-settings'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              liveConfigPath,
+              backupFolderPath,
+              theme: currentTheme,
+              esphomeEnabled: esphomeFeatureEnabled,
+              packagesEnabled: packagesFeatureEnabled
+            })
+          });
+          console.log('[save-settings] Save response ok:', response.ok, 'status:', response.status);
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error('[save-settings] Save failed:', errorText);
+          }
+        } catch (error) {
+          console.error('[save-docker-settings] Error:', error);
+        }
+      }
+
+      // Update haConfig with paths only
+      if (haConfig) {
+        haConfig.liveConfigPath = liveConfigPath;
+        haConfig.backupFolderPath = backupFolderPath;
+        haConfig.esphomeEnabled = esphomeFeatureEnabled;
+        updateEsphomeVisibility();
+
+        // Update currentBackupPath if we're in a backup folder view
+        if (currentBackupPath && currentBackupPath.startsWith(haConfig.backupFolderPath)) {
+          // If we were in a backup folder, update the path to maintain the same relative location
+          const relativePath = currentBackupPath.substring(haConfig.backupFolderPath.length);
+          currentBackupPath = backupFolderPath + (relativePath.startsWith('/') ? '' : '/') + relativePath;
+        } else if (currentBackupPath) {
+          // If we were not in a backup folder, just update the base path
+          currentBackupPath = backupFolderPath;
+        }
+      }
+
+      // Save schedule
+      const scheduleEnabled = document.getElementById('scheduleEnabled').checked;
+      const scheduleFrequency = document.getElementById('scheduleFrequency').value;
+      const scheduleTime = document.getElementById('scheduleTime').value;
+      const scheduleDay = document.getElementById('scheduleDay').value;
+      const maxBackupsEnabled = document.getElementById('maxBackupsEnabled').checked;
+      const maxBackupsCount = parseInt(document.getElementById('maxBackupsCount').value) || 10;
+      const smartBackupEnabled = document.getElementById('smartBackupEnabled').checked;
+
+      const cronExpression = scheduleToCron(scheduleFrequency, scheduleTime, scheduleDay);
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+      await fetch(url('/api/schedule-backup'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: 'default-backup-job',
+          enabled: scheduleEnabled,
+          cronExpression,
+          timezone,
+          liveConfigPath,
+          backupFolderPath,
+          maxBackupsEnabled,
+          maxBackupsCount,
+          scheduleDay,
+          smartBackupEnabled
+        })
+      });
+
+      // Close the modal
+      document.getElementById('settingsModal').style.display = 'none';
+
+      // If we're in a backup folder view, reload the items to show the new path
+      if (currentBackupPath) {
+        if (currentMode === 'lovelace') {
+          await loadLovelaceFiles();
+        } else if (currentMode === 'esphome') {
+          await loadEsphomeFiles();
+        } else {
+          await loadBackupItems();
+        }
+
+      } else {
+        // If not in a specific backup folder, just reload the page
+        window.location.reload();
+      }
+    });
+
+    // Show only changes toggle handler
+    document.getElementById('showOnlyChangesEnabled').addEventListener('change', async (e) => {
+      showOnlyChanges = e.target.checked;
+      // Save to server
+      try {
+        await fetch(url('/api/app-settings'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ showOnlyChanges })
+        });
+      } catch (error) {
+        console.error('[showOnlyChanges] Failed to save setting:', error);
+      }
+      console.log('[showOnlyChanges] Changed to:', showOnlyChanges);
+      // Reload backups with new filter setting
+      loadBackups();
+    });
+
+    // Test connection
+    document.getElementById('testConnection').addEventListener('click', async () => {
+      const status = document.getElementById('connectionStatus');
+
+      status.textContent = '';
+      status.className = 'settings-inline-text';
+
+      try {
+        const haUrl = document.getElementById('haUrl').value.trim();
+        const haToken = document.getElementById('haToken').value.trim();
+        const payload = (haUrl && haToken) ? { haUrl, haToken } : {};
+
+        const response = await fetch(url('/api/test-home-assistant-connection'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+
+        if (response.ok) {
+          const showSuffix = ['manual', 'env', 'stored'].includes(data.authMode);
+          const baseMessage = `${data.message}${showSuffix ? ` (using ${describeAuthSource(data.authMode)})` : ''}`;
+          status.textContent = getStyledText('ui.connectionTest.connected');
+          status.className = 'settings-inline-text status-success';
+        } else {
+          // Error - show error message
+          status.textContent = getStyledText('ui.connectionTest.failed');
+          status.className = 'settings-inline-text status-error';
+        }
+      } catch (error) {
+        status.textContent = getStyledText('ui.connectionTest.failed');
+        status.className = 'settings-inline-text status-error';
+      }
+    });
+
+    // Backup now
+    document.getElementById('backupNow').addEventListener('click', async () => {
+      const backupStatus = document.getElementById('backupStatus');
+      backupStatus.textContent = getStyledText('ui.backupNow.creating');
+      backupStatus.className = 'settings-inline-text';
+
+      try {
+        const liveConfigPath = document.getElementById('liveConfigPath').value || '/config';
+        const backupFolderPath = document.getElementById('backupFolderPath').value || '/backup';
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        console.log('[backup-now-ui] Starting backup with paths:', { liveConfigPath, backupFolderPath, timezone });
+
+        const response = await fetch(url('/api/backup-now'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            liveConfigPath: document.getElementById('liveConfigPath').value || '/config',
+            backupFolderPath: document.getElementById('backupFolderPath').value || '/backup',
+            timezone,
+            smartBackupEnabled: document.getElementById('smartBackupEnabled')?.checked || false
+          })
+        });
+
+        console.log('[backup-now-ui] Response status:', response.status);
+        let data = null;
+        try {
+          data = await response.json();
+        } catch (parseError) {
+          console.warn('[backup-now-ui] Failed to parse response JSON:', parseError);
+        }
+        console.log('[backup-now-ui] Response data:', data);
+
+        if (!response.ok) {
+          const replacements = {
+            path: data?.meta?.path || data?.path || backupFolderPath,
+            parent: data?.meta?.parent
+          };
+          const friendly = getSettingsMessageFromCode(data?.errorCode, replacements);
+          const fallback = applyTextStyle('Error: ' + (data?.error || 'Backup failed'), 'error');
+          backupStatus.textContent = friendly || fallback;
+          backupStatus.className = 'settings-inline-text status-error';
+          return;
+        }
+
+        // Handle "no changes detected" response from smart backup
+        if (data.noChanges) {
+          backupStatus.textContent = getStyledText('ui.backupNow.noChanges') || 'No changes detected since last backup.';
+          backupStatus.className = 'settings-inline-text status-success';
+          return;
+        }
+
+        const successPath = data.path || backupFolderPath;
+        backupStatus.textContent = getStyledText('ui.backupNow.successWithPath', { path: successPath });
+        backupStatus.className = 'settings-inline-text status-success';
+      } catch (error) {
+        const friendly = getSettingsMessageFromCode(error?.code || 'unknown', { path: error?.meta?.path });
+        backupStatus.textContent = friendly || applyTextStyle('Error: ' + (error?.message || 'Unknown error'), 'error');
+        backupStatus.className = 'settings-inline-text status-error';
+      }
+    });
+
+    // Schedule toggle
+    document.getElementById('scheduleEnabled').addEventListener('change', (e) => {
+      const isEnabled = e.target.checked;
+      document.getElementById('scheduleOptions').style.display = isEnabled ? 'block' : 'none';
+      document.getElementById('maxBackupsSection').style.display = isEnabled ? 'block' : 'none';
+
+      // If schedule is disabled, also disable max backups and smart backup
+      if (!isEnabled) {
+        document.getElementById('maxBackupsEnabled').checked = false;
+        document.getElementById('maxBackupsOptions').style.display = 'none';
+      }
+    });
+
+    // Max backups toggle
+    document.getElementById('maxBackupsEnabled').addEventListener('change', (e) => {
+      document.getElementById('maxBackupsOptions').style.display = e.target.checked ? 'block' : 'none';
+    });
+
+
+    document.getElementById('scheduleFrequency').addEventListener('change', (e) => {
+      const freq = e.target.value;
+      const isWeekly = freq === 'weekly';
+      document.getElementById('scheduleTimeGroup').style.display = freq === 'hourly' ? 'none' : 'block';
+      document.getElementById('scheduleDayGroup').style.display = isWeekly ? 'block' : 'none';
+
+      document.getElementById('scheduleOptions').dataset.frequency = freq;
+    });
+
+    // Load schedule settings
+    async function loadScheduleSettings() {
+      try {
+        const response = await fetch(url('/api/schedule-backup'));
+        const data = await response.json();
+
+        if (data.jobs && data.jobs['default-backup-job']) {
+          const job = data.jobs['default-backup-job'];
+          const isEnabled = job.enabled;
+          document.getElementById('scheduleEnabled').checked = isEnabled;
+          document.getElementById('scheduleOptions').style.display = isEnabled ? 'block' : 'none';
+          document.getElementById('maxBackupsSection').style.display = isEnabled ? 'block' : 'none';
+
+          const { frequency, time, day } = cronToSchedule(job.cronExpression);
+          document.getElementById('scheduleFrequency').value = frequency;
+          document.getElementById('scheduleTime').value = time;
+          document.getElementById('scheduleDay').value = day || '0';
+
+          // Set displays
+          const isWeekly = frequency === 'weekly';
+          document.getElementById('scheduleTimeGroup').style.display = frequency === 'hourly' ? 'none' : 'block';
+          document.getElementById('scheduleDayGroup').style.display = isWeekly ? 'block' : 'none';
+
+          // Adjust layout based on frequency
+          document.getElementById('scheduleOptions').dataset.frequency = frequency;
+
+          // Load max backups settings
+          document.getElementById('maxBackupsEnabled').checked = job.maxBackupsEnabled || false;
+          document.getElementById('maxBackupsOptions').style.display = (job.maxBackupsEnabled) ? 'block' : 'none';
+          document.getElementById('maxBackupsCount').value = job.maxBackupsCount || 10;
+
+          // Load smart backup settings
+          document.getElementById('smartBackupEnabled').checked = job.smartBackupEnabled || false;
+        }
+      } catch (error) {
+        console.error('[loadScheduleSettings] Error:', error);
+      }
+    }
+
+    // Cron helpers
+    function scheduleToCron(frequency, time, day) {
+      const [hour, minute] = time.split(':').map(Number);
+      if (frequency === 'hourly') return '0 * * * *';
+      if (frequency === 'daily') return `${minute} ${hour} * * *`;
+      if (frequency === 'weekly') return `${minute} ${hour} * * ${day}`;
+      return '0 0 * * *';
+    }
+
+    function cronToSchedule(cron) {
+      const parts = cron.split(' ');
+      if (parts.length !== 5) return { frequency: 'daily', time: '00:00', day: '0' };
+
+      const [minute, hour, , , dayOfWeek] = parts;
+      const time = `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`;
+
+      if (hour === '*') return { frequency: 'hourly', time: '00:00', day: '0' };
+      if (dayOfWeek !== '*') return { frequency: 'weekly', time, day: dayOfWeek };
+      return { frequency: 'daily', time, day: '0' };
+    }
+
+    // Diff modal handlers
+    document.getElementById('closeDiff').addEventListener('click', () => {
+      document.getElementById('diffModal').style.display = 'none';
+    });
+
+    document.getElementById('cancelDiff').addEventListener('click', () => {
+      document.getElementById('diffModal').style.display = 'none';
+    });
+
+    // Initialize
+    (async () => {
+      updateEsphomeVisibility();
+      await loadAppSettings();
+      updatePlaceholders();
+      loadBackups();
+    })();
+
+    // Generate split diff with paired columns
+    function generateDiff(oldText, newText, options = {}) {
+      const { leftLabel = getStyledText('ui.diffViewer.liveVersion') || 'Live version', rightLabel = getStyledText('ui.diffViewer.backupVersion') || 'Backup version', rightMeta = '', bannerText = '' } = options;
+
+      const diff = Diff.diffLines(oldText, newText);
+      const MAX_CONTEXT_LINES = 12;
+
+      const diffLines = [];
+      let oldLineNum = 1;
+      let newLineNum = 1;
+
+      diff.forEach(part => {
+        let lines = part.value.split('\n');
+        if (lines.length && lines[lines.length - 1] === '') {
+          lines.pop();
+        }
+
+        if (part.added) {
+          lines.forEach(line => {
+            diffLines.push({ type: 'added', text: line, oldLine: null, newLine: newLineNum });
+            newLineNum++;
+          });
+        } else if (part.removed) {
+          lines.forEach(line => {
+            diffLines.push({ type: 'removed', text: line, oldLine: oldLineNum, newLine: null });
+            oldLineNum++;
+          });
+        } else {
+          lines.forEach(line => {
+            diffLines.push({ type: 'context', text: line, oldLine: oldLineNum, newLine: newLineNum });
+            oldLineNum++;
+            newLineNum++;
+          });
+        }
+      });
+
+      const hunks = [];
+      let index = 0;
+
+      while (index < diffLines.length) {
+        while (index < diffLines.length && diffLines[index].type === 'context') {
+          index++;
+        }
+
+        if (index >= diffLines.length) break;
+
+        let hunkStart = Math.max(0, index - MAX_CONTEXT_LINES);
+        let hunkEnd = index;
+        let postContextCount = 0;
+
+        while (hunkEnd < diffLines.length) {
+          const line = diffLines[hunkEnd];
+          if (line.type === 'context') {
+            postContextCount++;
+            if (postContextCount > MAX_CONTEXT_LINES) {
+              break;
+            }
+          } else {
+            postContextCount = 0;
+          }
+          hunkEnd++;
+        }
+
+        const hunkLines = diffLines.slice(hunkStart, hunkEnd);
+        const firstChangeIndex = hunkLines.findIndex(line => line.type !== 'context');
+
+        const contextBefore = firstChangeIndex > 0 ? hunkLines.slice(0, firstChangeIndex) : [];
+        const lines = firstChangeIndex >= 0 ? hunkLines.slice(firstChangeIndex) : hunkLines.slice();
+
+        const oldLines = hunkLines.filter(line => line.oldLine !== null);
+        const newLines = hunkLines.filter(line => line.newLine !== null);
+
+        hunks.push({
+          oldStart: oldLines.length ? oldLines[0].oldLine : 1,
+          newStart: newLines.length ? newLines[0].newLine : 1,
+          oldCount: oldLines.length,
+          newCount: newLines.length,
+          contextBefore,
+          lines
+        });
+
+        index = hunkEnd;
+      }
+
+      if (!hunks.length) {
+        return `
+          <div class="diff-empty-state">
+            <div class="diff-empty-card">
+              <h3>No visible differences</h3>
+              <p>Everything matches between backup and live.</p>
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="diff-banners-grid diff-banners-grid--standalone">
+          <div class="diff-state-banner diff-state-banner-current diff-state-banner--header"><span class="diff-state-label">${getStyledText('ui.diffViewer.currentVersion')}</span></div>
+          ${bannerText ? `<div class="diff-state-banner diff-state-banner-changed diff-state-banner--header"><span class="diff-state-label">${escapeHtml(bannerText)}</span></div>` : '<div class="diff-state-banner diff-state-banner-empty diff-state-banner--header"></div>'}
+        </div>
+        <div class="diff-viewer-shell">
+          <div class="diff-palette-bar">
+            <span class="diff-palette-label">Theme:</span>
+            <div class="diff-palette-btn active" data-palette="1" onclick="setDiffPalette(1)" title="Original"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+            <div class="diff-palette-btn" data-palette="2" onclick="setDiffPalette(2)" title="Rose & Emerald"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+            <div class="diff-palette-btn" data-palette="3" onclick="setDiffPalette(3)" title="Sunset & Ocean"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+            <div class="diff-palette-btn" data-palette="4" onclick="setDiffPalette(4)" title="Berry & Lime"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+            <div class="diff-palette-btn" data-palette="5" onclick="setDiffPalette(5)" title="Salmon & Seafoam"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+            <div class="diff-palette-btn" data-palette="6" onclick="setDiffPalette(6)" title="Ruby & Jade"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+            <div class="diff-palette-btn" data-palette="7" onclick="setDiffPalette(7)" title="Peach & Aqua"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+            <div class="diff-palette-btn" data-palette="8" onclick="setDiffPalette(8)" title="Magenta & Cyan"><div class="diff-palette-btn-left"></div><div class="diff-palette-btn-right"></div></div>
+          </div>
+          <div class="diff-viewer-split">
+            <div class="diff-hunks">
+              ${hunks.map((hunk, index) => renderSplitHunk(hunk, index)).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderSplitHunk(hunk, index) {
+      const oldCount = hunk.oldCount || 1;
+      const newCount = hunk.newCount || 1;
+      const oldEnd = oldCount ? hunk.oldStart + oldCount - 1 : hunk.oldStart;
+      const newEnd = newCount ? hunk.newStart + newCount - 1 : hunk.newStart;
+      const summary = `${getStyledText('ui.diffViewer.linesPrefix')} ${hunk.oldStart}${oldEnd !== hunk.oldStart ? `-${oldEnd}` : ''} ${getStyledText('ui.diffViewer.linesArrow')} ${hunk.newStart}${newEnd !== hunk.newStart ? `-${newEnd}` : ''}`;
+      const completeLines = [...(hunk.contextBefore || []), ...hunk.lines];
+      const rowsHtml = renderSplitRows(completeLines);
+      const contextLineCount = completeLines.filter(line => line.type === 'context').length;
+      const hunkId = `diff-hunk-${index}`;
+      const showLabel = getStyledText('ui.diffViewer.expandContext');
+      const hideLabel = 'Collapse context';
+      const buttonHtml = contextLineCount
+        ? `<button class="diff-context-toggle" type="button" data-show-label="${showLabel}" data-hide-label="${hideLabel}" aria-expanded="false" onclick="toggleHunkContext('${hunkId}', this)">${showLabel}</button>`
+        : '';
+      const hunkClasses = contextLineCount ? 'diff-hunk diff-hunk--context-collapsed' : 'diff-hunk';
+
+      return `
+        <div class="${hunkClasses}" id="${hunkId}">
+          <div class="diff-hunk-content">
+            ${rowsHtml}
+          </div>
+          <div class="diff-hunk-footer">
+            <div class="diff-hunk-summary">${summary}</div>
+            ${buttonHtml}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderSplitRows(lines) {
+      const rows = [];
+      let index = 0;
+
+      while (index < lines.length) {
+        const line = lines[index];
+
+        if (line.type === 'context') {
+          rows.push(renderSplitRow(
+            {
+              type: 'context',
+              text: line.text,
+              lineNumber: line.oldLine,
+              marker: ''
+            },
+            {
+              type: 'context',
+              text: line.text,
+              lineNumber: line.newLine,
+              marker: ''
+            }
+          ));
+          index++;
+          continue;
+        }
+
+        if (line.type === 'removed') {
+          const removed = [];
+          const added = [];
+
+          while (index < lines.length && lines[index].type === 'removed') {
+            removed.push(lines[index]);
+            index++;
+          }
+
+          while (index < lines.length && lines[index].type === 'added') {
+            added.push(lines[index]);
+            index++;
+          }
+
+          const maxRows = Math.max(removed.length, added.length);
+          for (let i = 0; i < maxRows; i++) {
+            // Check for word-level diffs if we have both removed and added lines
+            let leftText = removed[i] ? escapeHtml(removed[i].text) : '';
+            let rightText = added[i] ? escapeHtml(added[i].text) : '';
+
+            // Perform word diff if we have content on both sides
+            if (removed[i] && added[i]) {
+              const wordDiff = Diff.diffWords(removed[i].text, added[i].text);
+              leftText = '';
+              rightText = '';
+
+              wordDiff.forEach(part => {
+                const escapedPart = escapeHtml(part.value);
+                if (part.removed) {
+                  leftText += `<span class="diff-word-removed">${escapedPart}</span>`;
+                } else if (part.added) {
+                  rightText += `<span class="diff-word-added">${escapedPart}</span>`;
+                } else {
+                  leftText += escapedPart;
+                  rightText += escapedPart;
+                }
+              });
+            }
+
+            rows.push(renderSplitRow(
+              removed[i]
+                ? {
+                  type: 'removed',
+                  text: leftText, // Now contains HTML
+                  lineNumber: removed[i].oldLine,
+                  marker: '-',
+                  isHtml: true
+                }
+                : {
+                  type: 'empty',
+                  text: '',
+                  lineNumber: null,
+                  marker: ''
+                },
+              added[i]
+                ? {
+                  type: 'added',
+                  text: rightText, // Now contains HTML
+                  lineNumber: added[i].newLine,
+                  marker: '+',
+                  isHtml: true
+                }
+                : {
+                  type: 'empty',
+                  text: '',
+                  lineNumber: null,
+                  marker: ''
+                }
+            ));
+          }
+
+          continue;
+        }
+
+        if (line.type === 'added') {
+          const added = [];
+
+          while (index < lines.length && lines[index].type === 'added') {
+            added.push(lines[index]);
+            index++;
+          }
+
+          added.forEach(entry => {
+            rows.push(renderSplitRow(
+              {
+                type: 'empty',
+                text: '',
+                lineNumber: null,
+                marker: ''
+              },
+              {
+                type: 'added',
+                text: entry.text,
+                lineNumber: entry.newLine,
+                marker: '+'
+              }
+            ));
+          });
+
+          continue;
+        }
+
+        rows.push(renderSplitRow(
+          {
+            type: line.type,
+            text: line.text,
+            lineNumber: line.oldLine,
+            marker: ' '
+          },
+          {
+            type: line.type,
+            text: line.text,
+            lineNumber: line.newLine,
+            marker: ' '
+          }
+        ));
+        index++;
+      }
+
+      return rows.join('');
+    }
+
+    function renderSplitRow(left, right) {
+      return `
+        <div class="diff-row ${left.type === 'context' && right.type === 'context' ? 'diff-row-context' : ''}">
+          <div class="diff-cell diff-cell-left">
+            ${renderLineContent(left, 'left')}
+          </div>
+          <div class="diff-cell diff-cell-right">
+            ${renderLineContent(right, 'right')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderLineContent(line, position) {
+      if (line.type === 'empty') {
+        return '<div class="diff-line diff-line-empty"></div>';
+      }
+
+      const marker = line.marker || (line.type === 'added' ? '+' : line.type === 'removed' ? '-' : ' ');
+      const lineNum = line.lineNumber || '';
+      const lineClass = `diff-line diff-line-${line.type}`;
+
+      // If line.isHtml is true, line.text is already escaped HTML with spans.
+      // Otherwise, we need to escape it here.
+      const contentHtml = line.isHtml ? line.text : escapeHtml(line.text);
+
+      return `
+        <div class="${lineClass} diff-line-${position}">
+          <span class="diff-line-marker">${marker}</span>
+          <span class="diff-line-num">${lineNum}</span>
+          <pre class="diff-line-text"><code>${contentHtml}</code></pre>
+        </div>
+      `;
+    }
+
+    function toggleHunkContext(hunkId, button) {
+      const hunk = document.getElementById(hunkId);
+      if (!hunk || !button) {
+        return;
+      }
+
+      const collapsed = hunk.classList.toggle('diff-hunk--context-collapsed');
+      if (collapsed) {
+        button.textContent = button.dataset.showLabel;
+        button.setAttribute('aria-expanded', 'false');
+      } else {
+        button.textContent = button.dataset.hideLabel || 'Hide context';
+        button.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    // Set diff color palette
+    const TOTAL_PALETTES = 8;
+    let currentPalette = 1;
+
+    function setDiffPalette(paletteNum, saveToServer = true) {
+      currentPalette = paletteNum;
+      const modalBody = document.getElementById('diffModalBody');
+      if (modalBody) {
+        modalBody.setAttribute('data-diff-palette', paletteNum);
+        // Also set on parent modal-dialog so footer buttons get styled
+        const modalDialog = modalBody.closest('.modal-dialog');
+        if (modalDialog) {
+          modalDialog.setAttribute('data-diff-palette', paletteNum);
+        }
+      }
+
+      // Update UI buttons - remove active from all, add to current
+      document.querySelectorAll('.diff-palette-btn').forEach(btn => {
+        // Use loose equality or parseInt as dataset values are strings
+        if (parseInt(btn.dataset.palette) === paletteNum) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Save preference to server
+      if (saveToServer) {
+        fetch(url('/api/app-settings'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ diffPalette: paletteNum })
+        }).catch(err => console.error('[setDiffPalette] Failed to save palette to server:', err));
+      }
+    }
+
+    function cycleDiffPalette() {
+      currentPalette = (currentPalette % TOTAL_PALETTES) + 1;
+      setDiffPalette(currentPalette);
+    }
+
+    // Add click handler to banner headers for cycling palettes
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('.diff-banners-grid')) {
+        cycleDiffPalette();
+      }
+    });
+
+    let confirmDialogResolver = null;
+
+    function showConfirmDialog({ title, message, confirmLabel, cancelLabel = 'Cancel', danger = false, icon = '' }) {
+      const modal = document.getElementById('confirmModal');
+      const titleEl = document.getElementById('confirmTitle');
+      const iconEl = document.getElementById('confirmIcon');
+      const messageEl = document.getElementById('confirmMessage');
+      const cancelBtn = document.getElementById('confirmCancelBtn');
+      const actionBtn = document.getElementById('confirmActionBtn');
+
+      if (confirmDialogResolver) {
+        confirmDialogResolver(false);
+        confirmDialogResolver = null;
+      }
+
+      titleEl.textContent = title || 'Confirm Action';
+      messageEl.textContent = message || '';
+      cancelBtn.textContent = cancelLabel || 'Cancel';
+      actionBtn.textContent = confirmLabel || 'Confirm';
+      actionBtn.classList.toggle('confirm-btn-danger', Boolean(danger));
+
+      if (icon) {
+        iconEl.innerHTML = icon;
+        iconEl.style.display = 'flex';
+      } else {
+        iconEl.style.display = 'none';
+      }
+
+      modal.style.display = 'flex';
+      return new Promise((resolve) => {
+        confirmDialogResolver = resolve;
+      });
+    }
+
+    function closeConfirmDialog(confirmed = false) {
+      const modal = document.getElementById('confirmModal');
+      modal.style.display = 'none';
+
+      if (confirmDialogResolver) {
+        const resolve = confirmDialogResolver;
+        confirmDialogResolver = null;
+        resolve(confirmed);
+      }
+    }
+
+    document.getElementById('confirmCancelBtn').addEventListener('click', () => closeConfirmDialog(false));
+    document.getElementById('confirmActionBtn').addEventListener('click', () => closeConfirmDialog(true));
+    document.getElementById('confirmModal').addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal-backdrop')) {
+        closeConfirmDialog(false);
+      }
+    });
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      // Ignore if user is typing in an input/textarea/select
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+
+      // Ignore if modals are open (except for closing with Escape)
+      const isModalOpen = document.getElementById('diffModal').style.display === 'flex' ||
+        document.getElementById('settingsModal').style.display === 'flex' ||
+        document.getElementById('confirmModal').style.display === 'flex';
+
+      if (isModalOpen) {
+        if (e.key === 'Escape') {
+          document.getElementById('diffModal').style.display = 'none';
+          document.getElementById('settingsModal').style.display = 'none';
+          closeConfirmDialog(false);
+        }
+        return;
+      }
+
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (activePanel === 'backups') {
+          if (filteredBackupsGlobal.length === 0) return;
+          const newIndex = e.key === 'ArrowUp'
+            ? Math.max(0, currentBackupIndex - 1)
+            : Math.min(filteredBackupsGlobal.length - 1, currentBackupIndex + 1);
+
+          if (newIndex !== currentBackupIndex) {
+            const backup = filteredBackupsGlobal[newIndex];
+            selectBackup(backup.path, backup.folderName, backup.mtime, newIndex);
+
+            // Scroll into view
+            const btn = document.querySelector(`#backupListContainer .list-item[data-index="${newIndex}"]`);
+            if (btn) btn.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          }
+        } else if (activePanel === 'items') {
+          if (filteredItemsGlobal.length === 0) return;
+          const newIndex = e.key === 'ArrowUp'
+            ? Math.max(0, currentItemIndex - 1)
+            : Math.min(filteredItemsGlobal.length - 1, currentItemIndex + 1);
+
+          if (newIndex !== currentItemIndex) {
+            currentItemIndex = newIndex;
+            applyFilters(); // Re-render to show selection
+
+            // Scroll into view
+            const item = document.querySelector(`#itemsList .list-item[data-index="${newIndex}"]`);
+            if (item) item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          }
+        }
+      } else if (e.key === 'ArrowRight') {
+        if (activePanel === 'backups' && currentBackupPath) {
+          activePanel = 'items';
+          if (currentItemIndex === -1 && filteredItemsGlobal.length > 0) {
+            currentItemIndex = 0;
+          }
+          applyFilters();
+        }
+      } else if (e.key === 'ArrowLeft') {
+        if (activePanel === 'items') {
+          activePanel = 'backups';
+          applyFilters();
+        }
+      } else if (e.key === 'Enter') {
+        if (activePanel === 'items' && currentItemIndex !== -1) {
+          const item = filteredItemsGlobal[currentItemIndex];
+          if (item) {
+            if (currentMode === 'lovelace') {
+              document.querySelectorAll('#itemsList .list-item')[currentItemIndex].click();
+            } else if (currentMode === 'esphome') {
+              document.querySelectorAll('#itemsList .list-item')[currentItemIndex].click();
+            } else if (currentMode === 'packages') {
+              document.querySelectorAll('#itemsList .list-item')[currentItemIndex].click();
+            } else {
+              showDiffViewer(item);
+            }
+          }
+        }
+      }
+    });
+
+    // Context Menu Logic
+    function showContextMenu(e, backupPath, isLocked) {
+      e.preventDefault();
+      hideContextMenu();
+
+      const menu = document.createElement('div');
+      menu.id = 'contextMenu';
+      menu.className = 'context-menu';
+      menu.style.left = `${e.pageX}px`;
+      menu.style.top = `${e.pageY}px`;
+
+      const lockLabel = isLocked ? getStyledText('ui.contextMenu.unprotect') : getStyledText('ui.contextMenu.protect');
+      const lockIcon = isLocked
+        ? `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 10V7a4 4 0 1 1 8 0"/><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M12 14v2"/></svg>`
+        : `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 10V7a4 4 0 1 1 8 0v3"/><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M12 14v2"/></svg>`;
+
+      menu.innerHTML = `
+        <div class="context-menu-item" onclick="toggleLock('${backupPath}', ${isLocked})">
+          <i>${lockIcon}</i>
+          <span>${lockLabel}</span>
+        </div>
+        <div class="context-menu-item" onclick="exportBackup('${backupPath}')">
+          <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11"/><path d="m8 11 4 4 4-4"/><path d="M5 20h14"/></svg></i>
+          <span>${getStyledText('ui.contextMenu.export')}</span>
+        </div>
+        <div class="context-menu-separator"></div>
+        <div class="context-menu-item danger" onclick="confirmDeleteBackup('${backupPath}')">
+          <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 14h10l1-14"/><path d="M10 10v7"/><path d="M14 10v7"/></svg></i>
+          <span>${getStyledText('ui.contextMenu.delete')}</span>
+        </div>
+      `;
+
+      document.body.appendChild(menu);
+
+      // Prevent menu from going off-screen
+      const rect = menu.getBoundingClientRect();
+      if (rect.right > window.innerWidth) {
+        menu.style.left = `${window.innerWidth - rect.width - 10}px`;
+      }
+      if (rect.bottom > window.innerHeight) {
+        menu.style.top = `${window.innerHeight - rect.height - 10}px`;
+      }
+
+      // Hide menu on click outside
+      document.addEventListener('click', hideContextMenu);
+    }
+
+    function hideContextMenu() {
+      const menu = document.getElementById('contextMenu');
+      if (menu) {
+        menu.remove();
+        document.removeEventListener('click', hideContextMenu);
+      }
+    }
+
+    async function toggleLock(backupPath, currentlyLocked) {
+      hideContextMenu();
+
+      const confirmMsg = currentlyLocked ? getStyledText('ui.contextMenu.confirmUnlock') : getStyledText('ui.contextMenu.confirmLock');
+      const lockLabel = currentlyLocked ? getStyledText('ui.contextMenu.unprotect') : getStyledText('ui.contextMenu.protect');
+      const confirmed = await showConfirmDialog({
+        title: lockLabel,
+        message: confirmMsg,
+        confirmLabel: lockLabel,
+        danger: false,
+        icon: '<svg viewBox="0 0 24 24" style="width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;"><path d="M8 10V7a4 4 0 1 1 8 0v3"/><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M12 14v2"/></svg>'
+      });
+      if (!confirmed) return;
+
+      try {
+        const response = await fetch(url('/api/toggle-lock'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ backupPath })
+        });
+        const data = await response.json();
+
+        if (data.success) {
+          showNotification(currentlyLocked ? 'Backup unlocked' : 'Backup locked', 'success');
+          loadBackups(); // Refresh the list to update icons
+        } else {
+          showNotification('Error: ' + data.error, 'error');
+        }
+      } catch (error) {
+        console.error('[toggleLock] Error:', error);
+        showNotification('Error toggling lock: ' + error.message, 'error');
+      }
+    }
+
+    async function confirmDeleteBackup(backupPath) {
+      hideContextMenu();
+
+      const confirmed = await showConfirmDialog({
+        title: getStyledText('ui.contextMenu.delete') || 'Delete Backup',
+        message: getStyledText('ui.contextMenu.confirmDelete') || 'Are you sure you want to delete this backup?',
+        confirmLabel: getStyledText('ui.contextMenu.delete') || 'Delete Backup',
+        danger: true,
+        icon: '<svg viewBox="0 0 24 24" style="width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round;"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 14h10l1-14"/><path d="M10 10v7"/><path d="M14 10v7"/></svg>'
+      });
+      if (!confirmed) {
+        return;
+      }
+
+      try {
+        const response = await fetch(url('/api/delete-backup'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ backupPath })
+        });
+        const data = await response.json();
+
+        if (data.success) {
+          showNotification('Backup deleted successfully', 'success');
+          loadBackups(); // Refresh the list
+        } else {
+          showNotification('Error: ' + data.error, 'error');
+        }
+      } catch (error) {
+        console.error('[confirmDeleteBackup] Error:', error);
+        showNotification('Error deleting backup: ' + error.message, 'error');
+      }
+    }
+
+    async function exportBackup(backupPath) {
+      hideContextMenu();
+
+      try {
+        const response = await fetch(url(`/api/export-backup?backupPath=${encodeURIComponent(backupPath)}`));
+        if (!response.ok) {
+          let message = `Export failed (${response.status})`;
+          try {
+            const errorData = await response.json();
+            message = errorData.error || message;
+          } catch (parseError) {
+            // Ignore JSON parse errors and use the fallback message.
+          }
+          throw new Error(message);
+        }
+
+        const blob = await response.blob();
+        const downloadUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        const contentDisposition = response.headers.get('content-disposition') || '';
+        const filenameMatch = contentDisposition.match(/filename="([^"]+)"/i);
+        link.href = downloadUrl;
+        link.download = filenameMatch ? filenameMatch[1] : 'backup.tar.gz';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(downloadUrl);
+
+        showNotification('Backup exported successfully', 'success');
+      } catch (error) {
+        console.error('[exportBackup] Error:', error);
+        showNotification('Error exporting backup: ' + error.message, 'error');
+      }
+    }
+
+    // Global listener to hide context menu on scroll or resize
+    window.addEventListener('scroll', hideContextMenu);
+    window.addEventListener('resize', hideContextMenu);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') hideContextMenu();
+    });
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Include js-yaml for client-side YAML parsing
+    const yamlScript = document.createElement('script');
+    yamlScript.src = 'https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js';
+    document.head.appendChild(yamlScript);
+
+    // Include diff library for line-by-line comparison
+    const diffScript = document.createElement('script');
+    diffScript.src = 'https://cdn.jsdelivr.net/npm/diff@5.1.0/dist/diff.min.js';
+    document.head.appendChild(diffScript);
+  </script>
+</body>
+
+</html>

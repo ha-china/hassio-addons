@@ -1,0 +1,54 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+
+WEBUI_PORT=${WEBUI_PORT:-8080}
+export PATH="/usr/local/sbin:/usr/local/bin:${PATH}"
+
+# --- Configuration & Pre-checks ---
+
+if bashio::config.true 'silent'; then
+    sed -i 's|/proc/1/fd/1 hassio;|off;|g' /etc/nginx/nginx.conf
+fi
+
+# --- Main Execution ---
+
+openvpn_enabled=false
+wireguard_enabled=false
+
+if bashio::config.true 'openvpn_enabled'; then
+    openvpn_enabled=true
+fi
+
+if bashio::config.true 'wireguard_enabled'; then
+    wireguard_enabled=true
+fi
+
+if [[ "${openvpn_enabled}" == true && "${wireguard_enabled}" == true ]]; then
+    bashio::log.error "Both OpenVPN and WireGuard are enabled. Only one VPN mode is supported."
+    exit 1
+fi
+
+if [[ "${openvpn_enabled}" == true ]]; then
+    /usr/local/sbin/vpn openvpn up
+elif [[ "${wireguard_enabled}" == true ]]; then
+    /usr/local/sbin/vpn wireguard up
+fi
+
+# --- Launch qBittorrent ---
+
+# Determine log output based on silent mode
+QB_OUTPUT="/proc/1/fd/1"
+if bashio::config.true 'silent'; then
+    QB_OUTPUT="/dev/null"
+fi
+
+bashio::log.info "Starting qBittorrent..."
+
+if [ -f /etc/s6-overlay/s6-rc.d/svc-qbittorrent/notification-fd ]; then
+    exec \
+        s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost ${WEBUI_PORT}" \
+        s6-setuidgid abc /app/qbittorrent-nox --webui-port="${WEBUI_PORT}" > "${QB_OUTPUT}"
+else
+    sleep 10
+    exec s6-setuidgid abc /app/qbittorrent-nox --webui-port="${WEBUI_PORT}" > "${QB_OUTPUT}"
+fi

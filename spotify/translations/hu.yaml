@@ -1,0 +1,20 @@
+---
+configuration:
+  log_level:
+    name: Naplózási szint
+    description: >-
+      Ez vezérli, hogy a kiegészítő milyen részletesen legyen naplózva.
+  name:
+    name: Név
+    description: >-
+      Az új, Spotify Connect céleszköz neve. Ez jelenik meg a hivatalos
+       Spotify kliensekben.
+  bitrate:
+    name: Bitráta
+    description: >-
+      A Spotify által használt bitráta beállítása. Minél magasabb, annál jobb
+      minőségű, viszont ez nagyobb adatforgalommal jár.
+  initial_volume:
+    name: Kezdeti térfogat
+    description: >-
+      Kezdeti térfogat %-ban 0-100 között.

@@ -1,0 +1,28 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：一个支持 86 种文件格式、4 种配色方案及 13 种用户可选语言的自建拖放文件转换服务器和文件共享工具",
+  "environment": {},
+  "map": [],
+  "image": "zelon88/hrconvert2",
+  "version": "v3.8.4",
+  "name": "hrconvert2",
+  "options": {},
+  "ports": {
+    "80/tcp": "8080"
+  },
+  "ports_description": {
+    "80/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "hrconvert2",
+  "startup": "services",
+  "upstream": "v3.4.5",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:8080]",
+  "ingress": false,
+  "ingress_port": 80
+}

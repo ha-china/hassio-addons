@@ -1,0 +1,9 @@
+#!/usr/bin/env bashio
+# ==============================================================================
+# Home Assistant Community Add-on: Prometheus Node Exporter
+# Runs the Prometheus Node Exporter
+# ==============================================================================
+bashio::log.info "Starting Prometheus Node Exporter..."
+
+# Run Prometheus
+exec /usr/local/bin/node_exporter --web.config.file=/config/prometheus_node_exporter/node_exporter_web.yml $(bashio::config 'cmdline_extra_args' '')

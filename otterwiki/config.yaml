@@ -1,0 +1,24 @@
+name: Otter Wiki
+version: "2.26.0"
+upstream: 2.7.0
+slug: otterwiki
+description: >-
+  [老王杂谈说]：黑背渡鸦维基是一款以 Python 为基座的用于协作内容管理的维基软件，内容存储在 git 仓库中以追踪所有更改，Markdown 用作标记语言。黑背渡鸦维基使用 Python 的微框架 Flask 编写，halfmoon 作为 CSS 框架，CodeMirror 作为编辑器，Font Awesome Free 提供图标。
+arch:
+  - amd64
+  - aarch64
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+ports:
+  80/tcp: 8084
+ports_description:
+  80/tcp: "Web Interface"
+map:
+  - type: addon_config
+    read_only: false
+    path: /app-data
+image: redimp/otterwiki
+boot: auto
+startup: services
+webui: "[PROTO:ssl]://[HOST]:[PORT:80]"
+ingress: false
+ingress_port: 80

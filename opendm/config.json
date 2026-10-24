@@ -1,0 +1,33 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "manual",
+  "description": "[老王杂谈说]：开放的地牢大师在您的本地机器上运行网络版（以及单人版）的地牢探险 (5 版) 战役，采用 AI 地牢大师。讲述者可以是您已拥有的任何 AI：本地模型（llama.cpp、Ollama、LM Studio、vLLM），API 密钥（OpenAI、OpenRouter 或任何兼容 OpenAI 的端点），或您已付费使用的命令行代理（Claude Code、Codex、opencode、Grok Build），该代理将使用其账户订阅自行进行叙述，无需提供任何 API 密钥。",
+  "environment": {
+    "AD_SERVER__PORT": "4141"
+  },
+  "map": [
+    {
+      "type": "addon_config",
+      "read_only": false,
+      "path": "/app/data"
+    }
+  ],
+  "version": "0.29.1",
+  "name": "opendm",
+  "ports": {
+    "3005/tcp": "3005"
+  },
+  "ports_description": {
+    "3005/tcp": "WebUI"
+  },
+  "slug": "opendm",
+  "startup": "services",
+  "upstream": "0.1.0",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:3005]",
+  "ingress": false,
+  "ingress_port": 3005,
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+}

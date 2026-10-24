@@ -1,0 +1,18 @@
+name: Kokoru cpu
+version: "v0.9.0"
+upstream: "v0.9.0"
+slug: kokorucpu
+description: >-
+  [老王杂谈说]：Docker 封装的 Kokoro-82M 文本转语音模型。几分钟内即可生成数小时的优质语音。
+image: ghcr.nju.edu.cn/remsky/kokoro-fastapi-cpu
+arch:
+  - amd64
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+ports:
+  8880/tcp: 8880
+ports_description:
+  8880/tcp: "Web Interface"
+boot: auto
+startup: services
+panel_admin: false
+ingress: false

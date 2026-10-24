@@ -1,0 +1,95 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Start the SBFspot service
+# s6-overlay docs: https://github.com/just-containers/s6-overlay
+# ==============================================================================
+
+CONFIG_PATH=/data/options.json
+#CFG_PATH=/usr/bin/sbfspot/SBFspot.cfg
+#CFG_UPLOAD_PATH=/usr/bin/sbfspot/SBFspotUpload.cfg
+
+# --- GENERATE CONFIG --
+message=$(echo "PWD is current directory $(pwd)")
+bashio::log.debug "${message:=""}"
+cd /
+
+message=$(echo "PWD is current directory $(pwd)")
+bashio::log.debug "${message:=""}"
+
+# ---- Print Host sys info
+message=$(echo "$(uname -smrv)")
+bashio::log.info
+bashio::log.info ${__BASHIO_COLORS_CYAN} "${message:="Hello World..."}"
+bashio::log.info
+
+
+#set -x
+
+var="$(jq --raw-output '.Sensors_HA' $CONFIG_PATH)"
+if bashio::var.equals "${var}" "No"; then
+   bashio::log.yellow '|   SKIPPING MQTT SENSOR CREATION   |'
+
+elif bashio::var.equals "${var}" "Create"; then
+     bashio::log.magenta '|   INITIALISE MQTT SENSOR CREATION   |'
+     /usr/bin/sbfspot/mqttSensorConfig
+
+elif bashio::var.equals "$var" "Purge"; then
+      bashio::log.red '|    PURGING SENSORS FROM MQTT    |'
+      bashio::log.red '|        CONFIRM REMOVAL IN       |'
+      bashio::log.red '|        HA MQTT INTEGRATION      |'
+      bashio::log.red '|     MQTT BROKER RETAINED MSGS   |'
+      bashio::log.red '|            STATISTICS           |'
+      /usr/bin/sbfspot/purgeSen
+else
+     bashio::log.cyan '|    No One knows how you got here    |'
+     bashio::log.cyan '|     check your option selection     |'
+fi
+
+value=$(bashio::config 'Connection_Type')
+if  bashio::var.equals "${value}" "Bluetooth"; then
+    /usr/bin/sbfspot/genBluetoothConfig.sh /usr/bin/sbfspot/SBFspot.cfg /usr/bin/sbfspot/SBFspotUpload.cfg
+    bashio::log.info
+    # ---- Print Host BT Controller
+    message=$(echo "[Host Bluetooth MAC Address] $(bluetoothctl list)")
+    bashio::log.info
+    bashio::log.info ${__BASHIO_COLORS_BLUE} "${message:="Hello World..."}"
+    bashio::log.info
+    bashio::log.info
+    message=$(echo "||    Generating Bluetooth Configs    ||")
+    bashio::log.info ${__BASHIO_COLORS_BLUE} "${message:=""}"
+    message=$(echo "||    /usr/bin/sbfspot/SBFspot.cfg    ||")
+    bashio::log.info ${__BASHIO_COLORS_BLUE} "${message:=""}"
+    message=$(echo "|| /usr/bin/sbfspot/SBFspotUpload.cfg ||")
+    bashio::log.info ${__BASHIO_COLORS_BLUE} "${message:=""}"
+    bashio::log.info
+elif bashio::var.equals "${value}" "Ethernet"; then
+    /usr/bin/sbfspot/genEthernetConfig.sh /usr/bin/sbfspot/SBFspot.cfg /usr/bin/sbfspot/SBFspotUpload.cfg
+    bashio::log.info
+    bashio::log.info
+    message=$(echo "||    Generating Ethernet Configs     ||")
+    bashio::log.info ${__BASHIO_COLORS_MAGENTA} "${message:=""}"
+    message=$(echo "||    /usr/bin/sbfspot/SBFspot.cfg    ||")
+    bashio::log.info ${__BASHIO_COLORS_MAGENTA} "${message:=""}"
+    message=$(echo "|| /usr/bin/sbfspot/SBFspotUpload.cfg ||")
+    bashio::log.info ${__BASHIO_COLORS_MAGENTA} "${message:=""}"
+    bashio::log.info
+    bashio::log.info
+else
+    bashio::log.info ${__BASHIO_COLORS_RED} ================================
+    bashio::log.info ${__BASHIO_COLORS_RED} "Setup failed to create Configs"
+    bashio::log.info ${__BASHIO_COLORS_RED} ================================
+fi
+   
+# ---- RUN ----
+message=$(echo "[Starting SBFspotUpload]")
+bashio::log.info ${__BASHIO_COLORS_MAGENTA} "${message:=""}"
+
+# ---- Symbolic Links ----
+ln -sf /usr/bin/sbfspot/SBFspot /SBFspot
+ln -sf /usr/bin/sbfspot/SBFspot.cfg /SBFspot.cfg
+ln -sf /usr/bin/sbfspot/SBFspotUpload.cfg /SBFspotUpload.cfg
+
+# cron
+message=$(echo "[Starting cron in foreground]")
+bashio::log.info "${message:=""}"
+exec /usr/sbin/crond -f
