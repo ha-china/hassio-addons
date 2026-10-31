@@ -1,0 +1,17 @@
+name: Radarr
+version: 0.32.0
+slug: radarr
+description: '[老王杂谈说]：为我们使用户网络（Usenet）和磁碟 (torrent) 用户提供的电影组织/经理'
+url: https://gh-proxy.org/github.com/hassio-addons/app-radarr/tree/main/README.md
+webui: http://[HOST]:[PORT:7878]
+init: false
+arch:
+  - aarch64
+  - amd64
+map:
+  - addon_config:rw
+  - share:rw
+  - media:rw
+ports:
+  7878/tcp: 7878
+image: ghcr.nju.edu.cn/hassio-addons/radarr

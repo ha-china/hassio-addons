@@ -1,0 +1,354 @@
+"""ESPHome version manager with LRU eviction."""
+
+from __future__ import annotations
+
+import logging
+import os
+import shutil
+import subprocess
+import sys
+import threading
+from collections import OrderedDict
+from pathlib import Path
+
+logger = logging.getLogger(__name__)
+
+VERSIONS_BASE = Path(os.environ.get("ESPHOME_VERSIONS_DIR", "/esphome-versions"))
+# DQ.8: the disk-quota engine (``disk_quota.py``) is the authoritative
+# bound on cache size now. We always keep exactly 1 venv (most recently
+# used); byte-bounded eviction across every category (caches, slots,
+# pio-slots) happens in ``client.py`` at job boundaries via
+# ``disk_quota.enforce_quota``. The ``MAX_ESPHOME_VERSIONS`` env var
+# becomes a no-op with a one-time warning if set to anything but 1,
+# kept readable for backwards compat with deployed worker docker
+# invocations.
+MAX_ESPHOME_VERSIONS = 1
+_LEGACY_MAX_ESPHOME_VERSIONS = os.environ.get("MAX_ESPHOME_VERSIONS")
+if (
+    _LEGACY_MAX_ESPHOME_VERSIONS is not None
+    and _LEGACY_MAX_ESPHOME_VERSIONS.strip() not in ("", "1")
+):
+    logger.warning(
+        "MAX_ESPHOME_VERSIONS=%s is ignored — the disk-quota engine "
+        "now bounds the cache by bytes, not by venv count. Always 1 "
+        "venv kept (the most recently used).",
+        _LEGACY_MAX_ESPHOME_VERSIONS,
+    )
+# Minimum free disk percentage before we start evicting versions
+MIN_FREE_DISK_PCT = int(os.environ.get("MIN_FREE_DISK_PCT", "10"))
+
+# #119 (round 2): the in-container local worker shares
+# ``/data/esphome-versions/`` with the server's lazy-installed bundling
+# venv (see ``main.py``'s ``ESPHOME_VERSIONS_DIR=/data/esphome-versions``
+# in the local-worker spawn). The worker never *runs a job* on the
+# server's selected version, so from the worker's LRU / disk-quota point
+# of view that venv looks idle and gets evicted first — which deletes the
+# exact venv ``scanner.create_bundle`` shells into. Every subsequent
+# bundle then fails with ``FileNotFoundError: '.../bin/python'`` until the
+# add-on restarts (the original #119 symptom; that fix only covered the
+# Clean-Cache path, not LRU / disk-quota eviction).
+#
+# The server publishes its active version to this sentinel file in the
+# shared dir; every worker eviction path treats those versions as pinned.
+# Remote workers (own dir, no sentinel) read an empty set — no change.
+SERVER_ACTIVE_VERSION_FILE = ".server-active-version"
+
+
+def read_server_active_versions(base: Path) -> set[str]:
+    """Versions the server has pinned as its active bundling venv(s).
+
+    Returns an empty set when the sentinel is absent/unreadable (the
+    common case for remote workers with their own versions dir).
+    """
+    try:
+        raw = (Path(base) / SERVER_ACTIVE_VERSION_FILE).read_text()
+    except OSError:
+        return set()
+    return {line.strip() for line in raw.splitlines() if line.strip()}
+
+
+def write_server_active_version(base: Path, version: str) -> None:
+    """Publish *version* as the server's active bundling venv.
+
+    Best-effort: a write failure just means the worker may evict the
+    venv and the server self-heals by reinstalling (see
+    ``scanner.create_bundle``). Never raises.
+    """
+    try:
+        base = Path(base)
+        base.mkdir(parents=True, exist_ok=True)
+        (base / SERVER_ACTIVE_VERSION_FILE).write_text(version + "\n")
+    except OSError:
+        logger.warning(
+            "Could not write %s sentinel under %s; local worker may evict "
+            "the server's bundling venv (server will self-heal)",
+            SERVER_ACTIVE_VERSION_FILE, base, exc_info=True,
+        )
+
+
+class VersionManager:
+    """
+    Manages multiple ESPHome virtualenv installations.
+
+    Each version lives in ``{VERSIONS_BASE}/{version}/``.
+    An LRU cache evicts the oldest version when the count would
+    exceed ``max_versions``.
+
+    Thread-safe: multiple workers may call ensure_version() concurrently.
+    Two workers requesting the same version share a single install run.
+    """
+
+    def __init__(
+        self,
+        versions_base: Path = VERSIONS_BASE,
+        max_versions: int = MAX_ESPHOME_VERSIONS,
+    ) -> None:
+        self._base = versions_base
+        self._max_versions = max_versions
+        # OrderedDict[version_str, Path]: most-recent at end
+        self._lru: OrderedDict[str, Path] = OrderedDict()
+        self._lock = threading.Lock()
+        # Per-version Events for in-progress installs; signals waiters when done
+        self._installing: dict[str, threading.Event] = {}
+        self._base.mkdir(parents=True, exist_ok=True)
+        self._load_existing()
+
+    # ------------------------------------------------------------------
+    # Internal helpers
+    # ------------------------------------------------------------------
+
+    def _load_existing(self) -> None:
+        """Scan disk for already-installed versions and load them into LRU."""
+        for entry in sorted(self._base.iterdir(), key=lambda p: p.stat().st_mtime):
+            if entry.is_dir() and (entry / "bin" / "esphome").exists():
+                self._lru[entry.name] = entry
+        logger.info(
+            "Found %d existing ESPHome versions: %s",
+            len(self._lru),
+            list(self._lru.keys()),
+        )
+
+    def _venv_path(self, version: str) -> Path:
+        return self._base / version
+
+    def _esphome_bin(self, version: str) -> Path:
+        return self._venv_path(version) / "bin" / "esphome"
+
+    def _is_installed(self, version: str) -> bool:
+        return self._esphome_bin(version).exists()
+
+    def _evict_lru(self, keep_version: str | None = None) -> bool:
+        """Remove the least-recently-used version from disk and LRU cache.
+
+        Must be called with self._lock held.
+        Skips *keep_version* if provided (the version about to be installed).
+        Skips versions the server has pinned as its active bundling venv
+        (#119 round 2 — never evict the shared dir's server venv).
+        Returns True if a version was evicted, False if nothing evictable.
+        """
+        protected = read_server_active_versions(self._base)
+        for version, path in self._lru.items():
+            if version == keep_version or version in protected:
+                continue
+            logger.info("Evicting ESPHome version %s from %s", version, path)
+            try:
+                shutil.rmtree(str(path), ignore_errors=True)
+            except Exception:
+                logger.exception("Failed to remove version dir %s", path)
+            del self._lru[version]
+            return True
+        return False
+
+    def _free_disk_pct(self) -> float | None:
+        """Return free disk percentage on the versions volume, or None on error."""
+        try:
+            st = os.statvfs(str(self._base))
+            total = st.f_frsize * st.f_blocks
+            free = st.f_frsize * st.f_bavail
+            return (free / total) * 100 if total > 0 else None
+        except Exception:
+            return None
+
+    def _ensure_disk_space(self, keep_version: str | None = None) -> None:
+        """Evict LRU versions until free disk exceeds MIN_FREE_DISK_PCT.
+
+        Must be called with self._lock held.
+        """
+        while len(self._lru) > 1:  # always keep at least the current version
+            pct = self._free_disk_pct()
+            if pct is None or pct >= MIN_FREE_DISK_PCT:
+                break
+            logger.warning(
+                "Disk free %.1f%% < %d%% threshold — evicting unused ESPHome version",
+                pct, MIN_FREE_DISK_PCT,
+            )
+            if not self._evict_lru(keep_version=keep_version):
+                break
+
+    # Generous timeout for pip install on slow ARM hosts (HAOS, Raspberry Pi).
+    # PyPI downloads + sdist compiles (some ESPHome transitive deps lack ARM
+    # wheels and must be compiled from source) can legitimately take 3–5 min.
+    # Bug #127: default (None / unbounded) caused "uv installation via pip
+    # timed out" reports on HAOS 2026.4.4 — pip's own socket-level timeout is
+    # separate from this subprocess timeout, so this bounds the whole install.
+    _PIP_INSTALL_TIMEOUT = 300  # seconds
+
+    def _install(self, version: str) -> None:
+        """Create a venv and install esphome==version into it.
+
+        Must NOT be called with self._lock held (long-running subprocess).
+        Retries once on timeout or network failure (#127).
+        """
+        venv_dir = self._venv_path(version)
+        logger.info("Installing esphome==%s into %s", version, venv_dir)
+
+        # Create venv
+        subprocess.run(
+            [sys.executable, "-m", "venv", str(venv_dir)],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+        pip = venv_dir / "bin" / "pip"
+        install_cmd: list[str] = [
+            str(pip), "install", "--no-cache-dir", f"esphome=={version}",
+        ]
+
+        # Log the effective PyPI index so corporate-proxy / offline failures
+        # are debuggable from the log alone (#127).
+        index_url = os.environ.get("PIP_INDEX_URL", "https://pypi.org/simple/")
+
+        last_exc: Exception | None = None
+        for attempt in range(1, 3):  # attempts 1 and 2
+            logger.info(
+                "Running: %s  (index=%s, timeout=%ds, attempt=%d/2)",
+                " ".join(install_cmd), index_url, self._PIP_INSTALL_TIMEOUT, attempt,
+            )
+            try:
+                result = subprocess.run(
+                    install_cmd,
+                    capture_output=True,
+                    text=True,
+                    timeout=self._PIP_INSTALL_TIMEOUT,
+                )
+            except subprocess.TimeoutExpired as exc:
+                last_exc = exc
+                logger.warning(
+                    "pip install esphome==%s timed out after %ds (attempt %d/2)",
+                    version, self._PIP_INSTALL_TIMEOUT, attempt,
+                )
+                if attempt < 2:
+                    logger.warning(
+                        "pip install retry 1/1 after %s: %s", type(exc).__name__, exc,
+                    )
+                continue
+
+            if result.returncode == 0:
+                logger.info("esphome==%s installed successfully", version)
+                return
+
+            stderr_excerpt = (result.stderr or "")[-2000:]  # last 2000 chars
+            stdout_excerpt = (result.stdout or "")[-1000:]
+            logger.error(
+                "pip install esphome==%s failed (exit %d, attempt %d/2):\nstderr: %s\nstdout: %s",
+                version, result.returncode, attempt, stderr_excerpt, stdout_excerpt,
+            )
+            # Non-zero exit is a hard failure (bad version, bad index, etc.) —
+            # don't retry, it won't help.
+            shutil.rmtree(str(venv_dir), ignore_errors=True)
+            raise RuntimeError(
+                f"pip install esphome=={version} failed (exit {result.returncode}):\n"
+                f"{stderr_excerpt}"
+            )
+
+        # Reached only after two consecutive timeouts.
+        shutil.rmtree(str(venv_dir), ignore_errors=True)
+        raise RuntimeError(
+            f"pip install esphome=={version} timed out after {self._PIP_INSTALL_TIMEOUT}s "
+            f"(network slow or PyPI unreachable). "
+            f"Retry the compile or check the worker host's network."
+        ) from last_exc
+
+    # ------------------------------------------------------------------
+    # Public API
+    # ------------------------------------------------------------------
+
+    def ensure_version(self, version: str) -> str:
+        """
+        Ensure ESPHome *version* is installed.
+
+        Returns the path to the ``esphome`` binary.
+        Installs if necessary; evicts LRU version if limit would be exceeded.
+        Thread-safe: concurrent calls for the same version share one install.
+        """
+        while True:
+            install_event: threading.Event | None = None
+            wait_event: threading.Event | None = None
+
+            with self._lock:
+                if self._is_installed(version):
+                    if version in self._lru:
+                        self._lru.move_to_end(version)
+                    else:
+                        self._lru[version] = self._venv_path(version)
+                    logger.debug("esphome==%s already installed", version)
+                    return str(self._esphome_bin(version))
+
+                if version in self._installing:
+                    # Another thread is installing this version — wait for it
+                    wait_event = self._installing[version]
+                else:
+                    # We'll do the install; evict if at capacity
+                    while len(self._lru) >= self._max_versions:
+                        # _evict_lru returns False once only protected /
+                        # keep versions remain — stop then so we don't spin
+                        # forever (the server's pinned venv legitimately
+                        # keeps us above max_versions).
+                        if not self._evict_lru(keep_version=version):
+                            break
+                    # Also evict if disk is low
+                    self._ensure_disk_space(keep_version=version)
+                    install_event = threading.Event()
+                    self._installing[version] = install_event
+
+            if wait_event is not None:
+                logger.debug("Waiting for esphome==%s install in progress...", version)
+                if not wait_event.wait(timeout=600):  # 10 minute timeout
+                    logger.error("Timed out waiting for esphome==%s install", version)
+                    raise RuntimeError(f"Timed out waiting for esphome=={version} install (another thread may have crashed)")
+                continue  # re-check from the top
+
+            # We own the install — run outside the lock (slow subprocess)
+            assert install_event is not None
+            try:
+                self._install(version)
+                with self._lock:
+                    self._lru[version] = self._venv_path(version)
+                    self._installing.pop(version, None)
+            except Exception:
+                with self._lock:
+                    self._installing.pop(version, None)
+                install_event.set()  # wake up any waiters
+                raise
+
+            install_event.set()  # wake up waiters
+            return str(self._esphome_bin(version))
+
+    def get_esphome_path(self, version: str) -> str:
+        """Return the path to the esphome binary for *version* (must be installed)."""
+        path = self._esphome_bin(version)
+        if not path.exists():
+            raise FileNotFoundError(
+                f"esphome=={version} is not installed at {path}. "
+                "Call ensure_version() first."
+            )
+        with self._lock:
+            if version in self._lru:
+                self._lru.move_to_end(version)
+        return str(path)
+
+    def installed_versions(self) -> list[str]:
+        """Return list of installed versions (LRU order, oldest first)."""
+        with self._lock:
+            return list(self._lru.keys())

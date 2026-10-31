@@ -1,0 +1,28 @@
+---
+version: "3.0"
+slug: rpc_shutdown
+name: RPC Shutdown
+description: '[老王杂谈说]：远程关闭 Windows 机器'
+url: https://gh-proxy.org/github.com/home-assistant/addons/tree/master/rpc_shutdown
+arch:
+  - aarch64
+  - amd64
+host_network: true
+image: docker.1panel.live/homeassistant/{arch}-addon-rpc_shutdown
+options:
+  computers:
+    - address: 192.168.0.1
+      alias: test-pc
+      credentials: user%password
+      delay: 0
+      message: Home Assistant is shutting down this PC. This cannot be canceled. Please save your work!
+schema:
+  computers:
+    - address: str
+      alias: match(^[\w-]*$)
+      credentials: match(^[^%]*(?:%.*)?$)
+      delay: int(0,600)?
+      message: str?
+startup: services
+stdin: true
+init: false

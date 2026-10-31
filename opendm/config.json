@@ -1,0 +1,33 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "manual",
+  "description": "Open Game Master runs multiplayer (and solo) 5e campaigns with an AI Game Master, on your own machine.",
+  "environment": {
+    "AD_SERVER__PORT": "4141"
+  },
+  "map": [
+    {
+      "type": "addon_config",
+      "read_only": false,
+      "path": "/app/data"
+    }
+  ],
+  "version": "0.31.2",
+  "name": "Open Game Master",
+  "ports": {
+    "3005/tcp": "3005"
+  },
+  "ports_description": {
+    "3005/tcp": "WebUI"
+  },
+  "slug": "opendm",
+  "startup": "services",
+  "upstream": "0.1.0",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:3005]",
+  "ingress": false,
+  "ingress_port": 3005,
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+}

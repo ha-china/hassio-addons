@@ -1,0 +1,29 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "A suite of tools for 5th Edition Dungeons & Dragons players and Dungeon Masters.",
+  "environment": {},
+  "map": [],
+  "image": "ghcr.nju.edu.cn/5etools-mirror-3/5etools-src",
+  "version": "2.39.0",
+  "name": "5etools",
+  "options": {},
+  "ports": {
+    "80/tcp": "8080"
+  },
+  "ports_description": {
+    "80/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "5etools",
+  "startup": "services",
+  "upstream": "latest",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:8080]",
+  "panel_admin": false,
+  "ingress": true,
+  "ingress_port": 80
+}

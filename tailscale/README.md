@@ -1,0 +1,55 @@
+# Home Assistant 社区应用：Tailscale
+
+[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
+
+[![Discord][discord-shield]][discord] [![Community Forum][forum-shield]][forum]
+
+[![Sponsor Frenck via GitHub Sponsors][github-sponsors-shield]][github-sponsors]
+
+[![Support Frenck on Patreon][patreon-shield]][patreon]
+
+零配置 VPN，用于构建安全的网络。
+
+## 关于
+
+Tailscale 是一项零配置 VPN 服务，可在几分钟内安装在任何设备上，包括您的 Home Assistant 实例。
+
+创建您的服务器、计算机和云实例之间的安全网络。即使因防火墙或子网分隔，Tailscale 也能正常工作。Tailscale 会自动管理防火墙规则，并可从您所在的任何地点使用。
+
+[discord-shield]: https://img.shields.io/discord/478094546522079232.svg
+[discord]: https://discord.me/hassioaddons
+[forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg
+[forum]: https://community.home-assistant.io/?u=frenck
+[github-sponsors-shield]: https://frenck.dev/wp-content/uploads/2019/12/github_sponsor.png
+[github-sponsors]: https://github.com/sponsors/frenck
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
+[patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png
+[patreon]: https://www.patreon.com/frenck
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg
+[release-shield]: https://img.shields.io/badge/version-v0.30.5-blue.svg
+[release]: https://github.com/hassio-addons/app-tailscale/tree/v0.30.5
+
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

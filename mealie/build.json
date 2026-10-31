@@ -1,0 +1,6 @@
+{
+  "build_from": {
+    "aarch64": "hkotel/mealie:latest",
+    "amd64": "hkotel/mealie:latest"
+  }
+}

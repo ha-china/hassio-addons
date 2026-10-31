@@ -1,0 +1,63 @@
+# Home Assistant Add-on: Samba NAS 2 ![Logo](https://github.com/dianlight/hassio-addons/raw/devrelease/sambanas2/sambanas2/docs/full_logo.png)
+
+The next generation addon for 
+share your disks over the network using Windows file sharing.
+
+
+![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
+
+2026.10.1 is the first stable release of Samba NAS2, closing the 2026.10 release candidate series.
+
+## Installations
+
+![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fanalytics.home-assistant.io%2Faddons.json&query=%24.1a32f091_sambanas2.total&label=SambaNas2%20Installations&link=https%3A%2F%2Faddonstats.poeschl.xyz%2F%23)
+![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fanalytics.home-assistant.io%2Faddons.json&query=%24.c9a35110_sambanas2.total&label=SambaNas2%20β%20Installations&link=https%3A%2F%2Faddonstats.poeschl.xyz%2F%23)
+
+## Help Me!
+
+[![](https://img.shields.io/github/sponsors/dianlight?label=Sponsor&logo=GitHub)](https://github.com/sponsors/dianlight)
+
+<a href="https://www.buymeacoffee.com/ypKZ2I0"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=ypKZ2I0&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
+
+
+## About
+
+This Add-on allows you to enable file sharing across different operating systems over a network.
+
+
+
+[aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
+[amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
+[armhf-shield]: https://img.shields.io/badge/armhf-yes-green.svg
+[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
+[discord]: https://discord.gg/c5DvZ4e
+[forum]: https://community.home-assistant.io
+[i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
+[issue]: https://github.com/dianlight/hassio-addons/issues
+[reddit]: https://reddit.com/r/homeassistant
+[repository]: https://github.com/dianlight/hassio-addons
+
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

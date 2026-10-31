@@ -1,0 +1,60 @@
+# Home Assistant App: Cloudflared
+
+[![GitHub Release][releases-shield]][releases]
+![Project Stage][project-stage-shield]
+![Project Maintenance][maintenance-shield]
+![Reported Installations][installations-shield-stable]
+
+Connect remotely to your Home Assistant instance without opening any ports using
+Cloudflared.
+
+## About
+
+Cloudflared connects your Home Assistant Instance via a secure tunnel to a domain
+or subdomain at Cloudflare. Doing that, you can expose your Home Assistant to the
+Internet without opening ports in your router. Additionally, you can utilize
+Cloudflare Teams, their Zero Trust platform to further secure your Home Assistant
+connection.
+
+**To use this app, you have to own a domain name (e.g. example.com) that is
+using Cloudflare for its DNS entries. You can find more information about that
+in our [Wiki][wiki]**.
+
+## Disclaimer
+
+Please make sure to be compliant with the
+[Cloudflare Self-Serve Subscription Agreement][cloudflare-sssa] when using this
+app.
+
+[cloudflare-sssa]: https://www.cloudflare.com/terms/
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
+[releases-shield]: https://img.shields.io/github/v/release/homeassistant-apps/app-cloudflared?include_prereleases
+[releases]: https://github.com/homeassistant-apps/app-cloudflared/releases
+[wiki]: https://github.com/homeassistant-apps/app-cloudflared/wiki/How-tos
+[installations-shield-edge]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fanalytics.home-assistant.io%2Faddons.json&query=%24%5B%22ffd6a162_cloudflared%22%5D.total&label=Reported%20Installations&link=https%3A%2F%2Fanalytics.home-assistant.io/add-ons
+[installations-shield-stable]: https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fanalytics.home-assistant.io%2Faddons.json&query=%24%5B%229074a9fa_cloudflared%22%5D.total&label=Reported%20Installations&link=https%3A%2F%2Fanalytics.home-assistant.io/add-ons
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

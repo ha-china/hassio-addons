@@ -1,0 +1,1623 @@
+# Changelog
+
+<!-- GENERATED FILE. Do not edit by hand. Produced from the root CHANGELOG.md by
+     src/tools/sync-addon-changelog.ts. Run `npm run sync:addon-changelog` after
+     the root changelog changes. -->
+
+The add-on version always matches the application version, so every entry below
+applies to this add-on.
+
+## [1.38.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.37.0...v1.38.0) (2026-10-29)
+
+
+### Added
+
+* **addon:** expose qn_user_slot as an add-on option ([af9cfef](https://github.com/KristianP26/ble-scale-sync/commit/af9cfefbb6ae32394d2700cb39e47bb0d2dab8de)), closes [#501](https://github.com/KristianP26/ble-scale-sync/issues/501)
+* **qn:** ble.qn_user_slot sets the user slot of the profile frame ([732b0d6](https://github.com/KristianP26/ble-scale-sync/commit/732b0d6ad786df09d7f0aa48be8725c4e79285ef)), closes [#501](https://github.com/KristianP26/ble-scale-sync/issues/501)
+* **qn:** send the vendor app's profile frame on the 20-byte dialect with ble.qn_user_key ([8b040f4](https://github.com/KristianP26/ble-scale-sync/commit/8b040f42c55c3e0f3e8e12dc8271f99b30f6b142)), closes [#501](https://github.com/KristianP26/ble-scale-sync/issues/501)
+* **renpho:** recognise the A-R003 advertisement before connecting ([bf1da60](https://github.com/KristianP26/ble-scale-sync/commit/bf1da60f59d468322ccbb0d7bfe409a25b00f790)), closes [#507](https://github.com/KristianP26/ble-scale-sync/issues/507)
+* **renpho:** recognise the nameless Renpho A-R003 by its characteristics ([e74ddea](https://github.com/KristianP26/ble-scale-sync/commit/e74ddea369a3eabda24401a113b9ac733221f257)), closes [#507](https://github.com/KristianP26/ble-scale-sync/issues/507)
+* **scales:** add the Huawei CH100 / AH100 adapter ([9f1b9b7](https://github.com/KristianP26/ble-scale-sync/commit/9f1b9b7646b27cfffab17003b0ba17e9ae2562cb)), closes [#503](https://github.com/KristianP26/ble-scale-sync/issues/503)
+
+
+### Fixed
+
+* **deps:** bump garminconnect from 0.3.19 to 0.3.20 ([1afee2f](https://github.com/KristianP26/ble-scale-sync/commit/1afee2f3c429b14916f1ee0eb92218aeae342d1e))
+* **qn:** keep a session without a 0x12 off slot 1 with ble.qn_user_slot ([b68ecc2](https://github.com/KristianP26/ble-scale-sync/commit/b68ecc2eba2227688756a4d685317b5021dada00)), closes [#501](https://github.com/KristianP26/ble-scale-sync/issues/501)
+* **renpho:** stop computing ES-WBE28 body fat from a misread impedance ([252af9c](https://github.com/KristianP26/ble-scale-sync/commit/252af9cc83def5398eba0794d7978192ec36c796)), closes [#507](https://github.com/KristianP26/ble-scale-sync/issues/507)
+
+
+### Docs
+
+* **exporters:** note that a Strava API app needs a subscription ([3fadce5](https://github.com/KristianP26/ble-scale-sync/commit/3fadce5a4a3b15efb5a3c4fab4671693721842cc)), closes [#498](https://github.com/KristianP26/ble-scale-sync/issues/498)
+* **exporters:** use a bind mount owned by UID 1000 for the File exporter in Docker ([01bc715](https://github.com/KristianP26/ble-scale-sync/commit/01bc715c270f9e33294a3242e93c0580b88ecb43))
+* **interfaces:** deviceAddress is the CoreBluetooth UUID on macOS, not empty ([eafe8e9](https://github.com/KristianP26/ble-scale-sync/commit/eafe8e9f236ae4f152c164e6d3bd62e5dfebad8f)), closes [#503](https://github.com/KristianP26/ble-scale-sync/issues/503)
+* **scales:** list the Renpho A-R003 ([cb2e4e5](https://github.com/KristianP26/ble-scale-sync/commit/cb2e4e513e3a0354ac9adfeb01def136dd10531e)), closes [#507](https://github.com/KristianP26/ble-scale-sync/issues/507)
+
+## [1.37.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.36.0...v1.37.0) (2026-10-25)
+
+
+### Added
+
+* **addon:** user_estimate_body_composition option ([1d42686](https://github.com/KristianP26/ble-scale-sync/commit/1d42686c6ad2083331c59d8fa4000d4900e9f787))
+* **ble:** log why BlueZ ended a scale connection, in debug ([5a5dc59](https://github.com/KristianP26/ble-scale-sync/commit/5a5dc599cb4c2922e739b47d2f498f75d5250c1e))
+* **config:** users[].estimate_body_composition turns the BMI estimate off ([9475789](https://github.com/KristianP26/ble-scale-sync/commit/9475789a4c85bd638d62aa5bf2c1e56db1dab8e6))
+* **scales:** export the R-MSC04's own skeletal muscle percentage ([a2968ca](https://github.com/KristianP26/ble-scale-sync/commit/a2968ca1b9540a93ae64536b756e3f98a70128d6))
+* **scales:** export the R-MSC04's ten segment impedances as diagnostic values ([de3e6f6](https://github.com/KristianP26/ble-scale-sync/commit/de3e6f686f5f31ef917e28a01b4e92c59eaf7bd6))
+
+
+### Fixed
+
+* **ble:** log a dropped BlueZ device once instead of on every broadcast poll ([158d8a2](https://github.com/KristianP26/ble-scale-sync/commit/158d8a2b890ee3da23e4d9a4c4c105b995de838b))
+
+
+### Docs
+
+* HACS cannot distribute Supervisor add-ons ([43eee54](https://github.com/KristianP26/ble-scale-sync/commit/43eee545ce252dbab5414362fb9bddcb2f86e1b2))
+* on Linux, noble_driver does switch to a noble handler ([3202780](https://github.com/KristianP26/ble-scale-sync/commit/3202780bdf22b4ef221458fabfc887b2632e6dd3))
+* rewrite the docs site, README and add-on help to be shorter ([2b632c3](https://github.com/KristianP26/ble-scale-sync/commit/2b632c3be60b9c45b97219370c2b7fc7eac6c563))
+* say the R-MSC04 can still lose the connection on some weigh-ins ([31c33c0](https://github.com/KristianP26/ble-scale-sync/commit/31c33c0c1af606d795431f6fc5d2ba5d365a8dbd))
+* say the R-MSC04 profile byte is confirmed on one unit ([11259ab](https://github.com/KristianP26/ble-scale-sync/commit/11259aba52a55ed4ce22384c4f05045f19d2fede))
+
+## [1.36.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.35.0...v1.36.0) (2026-10-22)
+
+
+### Added
+
+* **addon:** expose rmsc04_profile_byte as an add-on option ([dd9a52f](https://github.com/KristianP26/ble-scale-sync/commit/dd9a52fee76502e0c9d0ba6356d47be331c11360))
+* **ble:** clear a stale bond on BlueZ before 5.83 too ([#471](https://github.com/KristianP26/ble-scale-sync/issues/471)) ([5d16b89](https://github.com/KristianP26/ble-scale-sync/commit/5d16b89fc65ea57309e2650ae154cb6cc45066a4))
+* **scales:** export the R-MSC04 body fat with ble.rmsc04_profile_byte ([1076ea9](https://github.com/KristianP26/ble-scale-sync/commit/1076ea984bb546a24f0e6a90aaf6bff649d46b24))
+* warn at startup when the running Node.js is not supported ([eedf00a](https://github.com/KristianP26/ble-scale-sync/commit/eedf00a6c1ab959832ca3a5f74d0702a01d4e28c))
+
+
+### Fixed
+
+* **ble:** tell when a failed connection ended on BlueZ before 5.79 ([3521649](https://github.com/KristianP26/ble-scale-sync/commit/35216494343e147314efa9e24187e82eeda63b02))
+* **docker:** move the base image to Node.js 22.23.4 ([b2beab0](https://github.com/KristianP26/ble-scale-sync/commit/b2beab06496bd2bef57bf5ff939cbf8025b81512))
+* require a Node.js release with the October 2026 security fixes ([9a66e9f](https://github.com/KristianP26/ble-scale-sync/commit/9a66e9f86c994066b480e96904e016f4c9896994))
+
+
+### Docs
+
+* configuration, supported-scales, body-composition, multi-user. ([1076ea9](https://github.com/KristianP26/ble-scale-sync/commit/1076ea984bb546a24f0e6a90aaf6bff649d46b24))
+* troubleshooting. ([eedf00a](https://github.com/KristianP26/ble-scale-sync/commit/eedf00a6c1ab959832ca3a5f74d0702a01d4e28c))
+
+## [1.35.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.34.0...v1.35.0) (2026-10-21)
+
+
+### Added
+
+* **mqtt:** publish the measurement time and a Home Assistant timestamp sensor ([60ab09e](https://github.com/KristianP26/ble-scale-sync/commit/60ab09e8ed796b892f35ef362d4423e62f3c326e))
+* **qn:** use the scale's own BMR and body age on the 19-byte dialect ([e5aff44](https://github.com/KristianP26/ble-scale-sync/commit/e5aff44f27aa4aebf3513e485df2f0e6426346dc))
+
+
+### Fixed
+
+* **ble:** count node-ble's waitDevice timeout as the MAC no-show ([3074b26](https://github.com/KristianP26/ble-scale-sync/commit/3074b26c3c9cdb10d3d9b703d9ef8e7930149658))
+* **ble:** give a noble session the manufacturer data its scale advertised earlier in the run ([41d7fbb](https://github.com/KristianP26/ble-scale-sync/commit/41d7fbb90c22a174f9c844934982f3c541ccf3d9))
+* **ble:** give a node-ble session the manufacturer data its scale advertised earlier in the run ([3deb5d7](https://github.com/KristianP26/ble-scale-sync/commit/3deb5d73dc8e74d633b1e6a59a9cfcade8c277b4))
+* **ble:** treat the reconnects to a scale that stays on as one window ([4372ee4](https://github.com/KristianP26/ble-scale-sync/commit/4372ee4720a20762ada7f0d3a27530d26abb2f39))
+* **config:** keep the startup noble driver across a config reload ([66acf20](https://github.com/KristianP26/ble-scale-sync/commit/66acf208de33fdbfb46a405877c4de2d84405a19))
+* **config:** report ble.mqtt_proxy.auto_connect as restart-required ([c8dacfe](https://github.com/KristianP26/ble-scale-sync/commit/c8dacfe90068022ca2454f62b3b9ef40252c7f98))
+* **config:** warn that a runtime.watch_config edit needs a restart ([8ffcdd2](https://github.com/KristianP26/ble-scale-sync/commit/8ffcdd2160f12eff7d2e051a1cd680ff12dcde8c))
+* **qn:** export a stored weigh-in the 18-byte scale kept for no user ([7f50115](https://github.com/KristianP26/ble-scale-sync/commit/7f50115a4390a26e00f25f7513ce2e2a9b8204e7))
+* **qn:** read an 18-byte impedance only a scrambled body gives unscrambled when no advertisement came ([3558a06](https://github.com/KristianP26/ble-scale-sync/commit/3558a060e8507f80db38d4cb117e6aa4b1764e18))
+* **runtime:** keep the dedup marks file when it cannot be read ([3eaa407](https://github.com/KristianP26/ble-scale-sync/commit/3eaa40709135b851d41d1dcaedc2618e3545342a))
+* **runtime:** keep the exporter slot across a config reload ([988adcc](https://github.com/KristianP26/ble-scale-sync/commit/988adcc2e549d9ba3d78113a0c691eec3f09c2fc))
+* **yunmai:** stop the reply to the unlock from holding a session open ([c12706a](https://github.com/KristianP26/ble-scale-sync/commit/c12706a5b91346f270042b64e8e32627e20a7506))
+
+
+### Docs
+
+* **addon:** say the MQTT sensors are always in kg and where the payload goes ([d72acfa](https://github.com/KristianP26/ble-scale-sync/commit/d72acfa34aa6225ec0e24cdaaf31a246cf689aa1))
+* **config:** say a single-shot mqtt-proxy run honours session_timeout_sec ([b958c53](https://github.com/KristianP26/ble-scale-sync/commit/b958c533befcec7f348d5bb53fb2d6b7810f6551))
+* **scales:** say the Yunmai Mini 2 impedance and body fat are confirmed on hardware ([24c59f6](https://github.com/KristianP26/ble-scale-sync/commit/24c59f601c5bd2f89b5d8c5c62303b71a16140b8))
+
+## [1.34.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.33.0...v1.34.0) (2026-10-20)
+
+
+### Added
+
+* **addon:** expose no_reading_rescan_delay ([a64ad37](https://github.com/KristianP26/ble-scale-sync/commit/a64ad37659e6f2cd3cde9f7855d9285cb6f15e52))
+* **addon:** expose pairing_retry_max_min ([9b708b4](https://github.com/KristianP26/ble-scale-sync/commit/9b708b444561ecefe637c8e0f5043e974ffc4c3b))
+* **addon:** expose qn_result_ack as an add-on option ([d71898e](https://github.com/KristianP26/ble-scale-sync/commit/d71898ee6457c69ec247551c9d39838f3a08266c))
+* **ble:** hold back an unpaired scale whose pairing nobody confirmed ([54aeaaf](https://github.com/KristianP26/ble-scale-sync/commit/54aeaaf714c4b1f42873f6e59701e1fde8cda70d))
+* **ble:** log how each failed connect to a scale ended ([1ba2164](https://github.com/KristianP26/ble-scale-sync/commit/1ba2164c1b898e4f9b2ff112a36f9db22ccfa426))
+* **qn:** send the end-of-measurement frame after a 19-byte result with ble.qn_result_ack ([0ced062](https://github.com/KristianP26/ble-scale-sync/commit/0ced0621385a26b555ab3815e1c746eb2889841a))
+* **runtime:** wait at least a set time after a session that sent no reading ([9ba6f31](https://github.com/KristianP26/ble-scale-sync/commit/9ba6f31d8a4d71b1979053b937d2c974550c58ff))
+* **scales:** let an adapter claim a MiBeacon product id like a name ([05a11d9](https://github.com/KristianP26/ble-scale-sync/commit/05a11d93297ea3e6415fd0746a74eebe64a2f148))
+* **scales:** pair a BF915 at once when it advertises a stored weigh-in ([6c1f98b](https://github.com/KristianP26/ble-scale-sync/commit/6c1f98b73ec267f8cc4ceb8df3652f4b6607e267))
+* **yunmai:** recognise the Mini 2 (M1690) by its MiBeacon product id ([8ddede0](https://github.com/KristianP26/ble-scale-sync/commit/8ddede07c9d9752533c8042f36cf86b948d48830))
+
+
+### Fixed
+
+* **ble:** bound RemoveDevice and StopDiscovery on the node-ble connect and teardown path ([788134d](https://github.com/KristianP26/ble-scale-sync/commit/788134d5da35c8fbced4523bacf01eb4f17d9df9))
+* **ble:** clear a stale bond only when BlueZ reports that the scale refused the key ([#471](https://github.com/KristianP26/ble-scale-sync/issues/471)) ([40d4da3](https://github.com/KristianP26/ble-scale-sync/commit/40d4da3d585590069fa00585445b7c7cddaaee53))
+* **ble:** clear the reason probe deadline when a shutdown ends the probe ([16d4a1e](https://github.com/KristianP26/ble-scale-sync/commit/16d4a1e0f509c2dad1fc729a9de65b2002ba8fee))
+* **ble:** do not log a write refused by a closed D-Bus stream as BlueZ's answer ([08d1289](https://github.com/KristianP26/ble-scale-sync/commit/08d12897252b67a72edb8e2923fa0e6277c98b36))
+* **ble:** do not say a connection never came up when BlueZ gave a reason for ending it ([86486e8](https://github.com/KristianP26/ble-scale-sync/commit/86486e853c2898093766def97332e9e0ee0f4448))
+* **ble:** do not throw on a stored reading whose time cannot be read ([adfaf7d](https://github.com/KristianP26/ble-scale-sync/commit/adfaf7da836c5edde7a2b68f43adb6a4437ecefd))
+* **ble:** end a session for a shutdown without settling it on its held reading ([e8db55c](https://github.com/KristianP26/ble-scale-sync/commit/e8db55c037ccba354315df68a87f00eac86b10a3))
+* **ble:** end an ESPHome scan's GATT session at once on a shutdown ([9e04efd](https://github.com/KristianP26/ble-scale-sync/commit/9e04efd123d65f92d7e007a7c2f308385926dda3))
+* **ble:** fail calls left on a D-Bus connection we replaced instead of parking them ([6803d05](https://github.com/KristianP26/ble-scale-sync/commit/6803d05f2bcaaa6e5a39a805a682da2103aba9bb))
+* **ble:** give every node-ble Disconnect a deadline and stop retrying on a stale link ([f174029](https://github.com/KristianP26/ble-scale-sync/commit/f17402948898c78d966ecf182d8bff2e038ccd2c))
+* **ble:** keep a GATT-only scale's BlueZ object between cycles ([a46cecd](https://github.com/KristianP26/ble-scale-sync/commit/a46cecdee3f1123f65046f5872f3e20a5c8c3912))
+* **ble:** keep a pairing agent call on a replaced connection off the new one's state ([3a80853](https://github.com/KristianP26/ble-scale-sync/commit/3a808536898a6cd672d01d41e5651dca50675304))
+* **ble:** keep the stale-link brake per scale ([19fce15](https://github.com/KristianP26/ble-scale-sync/commit/19fce150c041557b40ec5ddc7b8fff2fbc9d9d0a))
+* **ble:** keep the stale-link recovery short on shutdown, bounded, and from piling up calls ([31b2ed4](https://github.com/KristianP26/ble-scale-sync/commit/31b2ed4c3dd5000e1d612924b5c8df238a8ed21f))
+* **ble:** let a pairing hold count the scale's reports as hearing the radio ([8825d1b](https://github.com/KristianP26/ble-scale-sync/commit/8825d1b7aea59eb63ea0867a9cf86ecd8705fe06))
+* **ble:** let a shutdown end the check after a stale-link power-cycle ([cb5c0dd](https://github.com/KristianP26/ble-scale-sync/commit/cb5c0dddd5df4e3631a865564de2ef414e23efab))
+* **ble:** log a Disconnect written after the D-Bus connection closed as not sent ([752ece3](https://github.com/KristianP26/ble-scale-sync/commit/752ece33b619c5de2664cef36a691130bb96209e))
+* **ble:** name the host reboot, not a Home Assistant restart, in the stale-link warning ([7145f75](https://github.com/KristianP26/ble-scale-sync/commit/7145f75fce218ca4408c8694192948704dd2dca6))
+* **ble:** power-cycle the adapter when BlueZ keeps a dead link marked as connected ([31570ff](https://github.com/KristianP26/ble-scale-sync/commit/31570ff8b70dfa8ecb6f9a1ebe58b49ddd98a6fd))
+* **ble:** say how a held pairing goes on once its wait is over ([1eeb186](https://github.com/KristianP26/ble-scale-sync/commit/1eeb1865dfb60d2c51c086102a31de429cd5f7f5))
+* **ble:** stop warning when a proxy reconnects to a scale still on after its reading ([f5b9241](https://github.com/KristianP26/ble-scale-sync/commit/f5b9241fde262cb3474d1a7f631e1d6a33faeabe))
+* **ble:** tear a session down through the adapter the connect retry moved to ([3439fe3](https://github.com/KristianP26/ble-scale-sync/commit/3439fe3deb2154989b4dbbb4dfa7cc2bcfa58550))
+* **esphome-proxy:** key a stored-only GATT reading by its record time in the dedup window ([a6ccae2](https://github.com/KristianP26/ble-scale-sync/commit/a6ccae225368da312a73a20cb6cb6c6a1e5b7b1e))
+* **mqtt-proxy:** mark a known broadcast scale passive on its first advert ([#470](https://github.com/KristianP26/ble-scale-sync/issues/470)) ([1d013f5](https://github.com/KristianP26/ble-scale-sync/commit/1d013f5e254e0d961de101acd8f9f923d0e3aa77))
+* **qn:** blame the scale, not the option, for a stored weigh-in it gave no user ([775d7d2](https://github.com/KristianP26/ble-scale-sync/commit/775d7d29e8e52d128d353eeea2458e5fab7230de))
+* **qn:** bound a stored record's stamp in a session without a scale-info frame ([4f07222](https://github.com/KristianP26/ble-scale-sync/commit/4f07222b4888f65e1038ef07eb642c4706093d31))
+* **qn:** do not take a long-dialect record stamped after its receipt as the live weigh-in ([ed6592f](https://github.com/KristianP26/ble-scale-sync/commit/ed6592f1f4ddfff214d9e3f3b746f023ee91373e))
+* **qn:** drop a 0x15 left over from an earlier 19-byte result block ([a1a4382](https://github.com/KristianP26/ble-scale-sync/commit/a1a4382433b7847482c1da0649334f6b435a4e46))
+* **qn:** export a weigh-in the 18-byte scale kept from before the connection ([1a80ab4](https://github.com/KristianP26/ble-scale-sync/commit/1a80ab43e029d8769022e195e579f02608259ecb))
+* **qn:** export an 18-byte stored record only after the first user's profile was accepted ([252459e](https://github.com/KristianP26/ble-scale-sync/commit/252459e707c0c722a9bbaf7f2efa7c4a5ac19941))
+* **qn:** log the scale's muscle and bone as percentages with their kg ([fe85d6d](https://github.com/KristianP26/ble-scale-sync/commit/fe85d6dc108b7eeaf9ae3ad300b8ed1b685e1bd8))
+* **qn:** log why a stored weigh-in is not read ([024337a](https://github.com/KristianP26/ble-scale-sync/commit/024337ad02bd5e43c58c243575aa1cc7f2f8082a))
+* **qn:** never read a classic scale's 0x23 through the long-frame layout ([cfba76f](https://github.com/KristianP26/ble-scale-sync/commit/cfba76f500e7783bdca52455b66b75f670d7d8cd))
+* **qn:** pick the ES-30M live layout by the frame's shape, not by the divisor ([7cf45e5](https://github.com/KristianP26/ble-scale-sync/commit/7cf45e5c4d262279a92ced969ece41d4eeb85a76))
+* **qn:** say why a session ended with an 18-byte weigh-in still held for the stored ones ([1fc7a7e](https://github.com/KristianP26/ble-scale-sync/commit/1fc7a7e316a11a7fc556ee119f7530c5779da400))
+* **qn:** take the long-frame divisor from the scale-info flags too ([706af1f](https://github.com/KristianP26/ble-scale-sync/commit/706af1f31f1b47af0624cc3ae4101a4d817e5938))
+* **qn:** take the weight divisor from bit 0 of the classic scale-info flags ([e35b085](https://github.com/KristianP26/ble-scale-sync/commit/e35b0858cad4f592385e0ff98a3c596090afbd4b))
+* **qn:** use the scale's composition when its weight settled before it accepted the profile ([49f15c0](https://github.com/KristianP26/ble-scale-sync/commit/49f15c097df1301eec29588f8b876afed1c1b393))
+* **qn:** wait for the stored weigh-ins before ending an 18-byte session ([fd0c608](https://github.com/KristianP26/ble-scale-sync/commit/fd0c6086b9f4ef8aa4b99683053a75f38be9a609)), closes [#463](https://github.com/KristianP26/ble-scale-sync/issues/463)
+* **runtime:** date the replay anchor on the scale's clock when the live weigh-in has a stamp ([0ed2fb7](https://github.com/KristianP26/ble-scale-sync/commit/0ed2fb7d0b8b3f699b9d1e558b6a6fb588e75ff9))
+* **runtime:** do not announce a pairing wait a single-shot run never keeps ([0f00b54](https://github.com/KristianP26/ble-scale-sync/commit/0f00b54f0294163c366c1064375d9085c4ca8656))
+* **runtime:** keep a stored weigh-in measured after the last export from being dropped as a replay ([671439f](https://github.com/KristianP26/ble-scale-sync/commit/671439f0a253599336d6713b16f6b7a28a0c950e))
+* **runtime:** keep the last live weigh-in across a restart for the replay check ([51e5c2c](https://github.com/KristianP26/ble-scale-sync/commit/51e5c2c0eabc93b928e43d11931b10076f1be080))
+* **runtime:** keep the later saved weigh-in of another user when saving replay anchors ([911bb62](https://github.com/KristianP26/ble-scale-sync/commit/911bb627d1f6f2a721aba7b2b6e16b89f390f566))
+* **runtime:** treat a replay anchor time before 2024 as unknown ([8288807](https://github.com/KristianP26/ble-scale-sync/commit/8288807f96911e363d0d46e0fe3566b4f5368764))
+* **runtime:** warn about a failed replay anchor save once per process ([cfd5b6b](https://github.com/KristianP26/ble-scale-sync/commit/cfd5b6b140def3db63eca1a3558cf5832c37714a))
+* **scales:** use the R-MSC04 record when the weight settled before the connection ([ffae70a](https://github.com/KristianP26/ble-scale-sync/commit/ffae70aac6792b22c70c42361ea95afec1547990))
+* **wizard:** say the scan cooldown only applies to the built-in Bluetooth handlers ([deda875](https://github.com/KristianP26/ble-scale-sync/commit/deda87590592eb79b18f9a048d7054df0cf6fce5))
+* **yunmai:** read resistance and body fat from the frame, not the name ([d6bf620](https://github.com/KristianP26/ble-scale-sync/commit/d6bf62073d1616f231001ae7612617a1ca72c944))
+* **yunmai:** use the BMI estimate, not generic BIA, when the Yunmai formula gives up ([3dd5835](https://github.com/KristianP26/ble-scale-sync/commit/3dd5835a0e7a3ce859f18b26fefa4322efa10023))
+
+
+### Docs
+
+* **ble:** correct the cooldown and post-reading comments ([b574b27](https://github.com/KristianP26/ble-scale-sync/commit/b574b27f2d5668c55ed6f90c2f84c976d295518a))
+* **ble:** correct what the stale-link comments say ([4a1179f](https://github.com/KristianP26/ble-scale-sync/commit/4a1179f823b753f80913252e6e6df16de2891556))
+* **ble:** describe the pairing wait as it doubles up to its cap ([c64dda8](https://github.com/KristianP26/ble-scale-sync/commit/c64dda89fae31972ed93fc125265488c93a23acb))
+* **ble:** name every path where the freshness tracker's first check proves nothing ([0f1ff1a](https://github.com/KristianP26/ble-scale-sync/commit/0f1ff1ad8ab2a33c31a5451fa2b6fa5499a86cfc))
+* **ble:** name the RSSI re-discovery among the paths where the first freshness check proves nothing ([1429ec4](https://github.com/KristianP26/ble-scale-sync/commit/1429ec4ec5266d641bbf27d3e99f86ac4ea8d825))
+* **ble:** say a call through a replaced connection fails, not that it hangs ([3622ec5](https://github.com/KristianP26/ble-scale-sync/commit/3622ec5a51a56becdd660cbc56b21a301eb02034))
+* **ble:** say a connection over a refused key outlives the error by one interval minus the 100 ms channel timer ([e6b222a](https://github.com/KristianP26/ble-scale-sync/commit/e6b222a0eb0be904c1136e1defac38bd4817713c))
+* **ble:** say where the freshness tracker's first check is not evidence ([fe557c3](https://github.com/KristianP26/ble-scale-sync/commit/fe557c382e373a27d99271b28426492f67c2b659))
+* **ble:** stop the pairing wait example at 32 minutes in the backoff header too ([09a665e](https://github.com/KristianP26/ble-scale-sync/commit/09a665eaff4146d319c17acfc7169f8d3c06b9ee))
+* correct what the QN stored weigh-in and history pages say ([bc01a64](https://github.com/KristianP26/ble-scale-sync/commit/bc01a647d0653a981ec861a95228cb0acf8191d0))
+* describe the 19-byte QN results confirmed on two units ([5d3db6a](https://github.com/KristianP26/ble-scale-sync/commit/5d3db6a7f0727e1461f24c54194ac00c9eb01d37))
+* drop the 64-minute example from the pairing retry schedule ([be5416f](https://github.com/KristianP26/ble-scale-sync/commit/be5416f992f503a3bd0b58dd3b0a2f50ac290b41))
+* **ha-addon:** list the Strava token directory in the persistence table ([34e5386](https://github.com/KristianP26/ble-scale-sync/commit/34e53868e8aca3a33a2deb719f3787eb1dee67f8))
+* mark the Runstar FG2431WB as confirmed on hardware ([d88826f](https://github.com/KristianP26/ble-scale-sync/commit/d88826ffe95c9583ad4a7c553ef80f2c8a6368c6))
+* mount config.yaml writable in the docker run examples ([73f7098](https://github.com/KristianP26/ble-scale-sync/commit/73f709877dcb87ff1ba24430c1d759858c79a5da))
+* name the real ble.handler value the scan waits apply to ([509695d](https://github.com/KristianP26/ble-scale-sync/commit/509695d70b02f828bed6a4aef9875664495dad5f))
+* **qn:** place the qn_result_ack write line where it is logged ([6d3e175](https://github.com/KristianP26/ble-scale-sync/commit/6d3e1752b89eaf63887d50146a23164cb2212769))
+* **qn:** say where the classic fixture values come from and which ES-CS20M reads 0x23 ([ffab5de](https://github.com/KristianP26/ble-scale-sync/commit/ffab5de71b53ebc2aa081596de7272017a1f10d6))
+* say a QN stored weigh-in needs the first user's profile accepted ([7ea115b](https://github.com/KristianP26/ble-scale-sync/commit/7ea115bd2c1a1f23f1535c16118d1ce1a0f2f0fc))
+* say a saved weigh-in far from last_known_weight is dropped only at the next start ([a89a632](https://github.com/KristianP26/ble-scale-sync/commit/a89a63299ce9a8ba839e23b4d1a90924988e2bfd))
+* say a saved weigh-in far from last_known_weight is dropped only at the next start ([3e01758](https://github.com/KristianP26/ble-scale-sync/commit/3e01758dd1bcc98b914f0c105b26819b4241caca))
+* say adapter test frames have to come from the real scale ([36595f7](https://github.com/KristianP26/ble-scale-sync/commit/36595f72f8f7e726fa25789b16460f50819590ee))
+* say auto_clear_stale_bond clears a pairing only when BlueZ reports a refused key ([79cce31](https://github.com/KristianP26/ble-scale-sync/commit/79cce31494a0ed75411ffa2ab596298e189038d4))
+* say only the RemoveDevice after a failed connection triggers the stale-link power-cycle ([18861b9](https://github.com/KristianP26/ble-scale-sync/commit/18861b91617400ac0f326570f5dcdaf2be7b3ff2))
+* say only what the logs show about the two early 18-byte QN weigh-ins ([c712c26](https://github.com/KristianP26/ble-scale-sync/commit/c712c26a0f6b5d65dacf159b7e16262db035e5aa))
+* say retry_failed_exports false keeps no queue, not nothing on disk ([6d8a33c](https://github.com/KristianP26/ble-scale-sync/commit/6d8a33c60dc83c73caf208261a2ce3e29ebf35e9))
+* say scan_cooldown only applies to the built-in Bluetooth handlers ([570558d](https://github.com/KristianP26/ble-scale-sync/commit/570558d7776948d6bb37123ee836b9bf288c2237))
+* say SIGHUP cannot reload a config replaced under a single-file mount ([362dcc3](https://github.com/KristianP26/ble-scale-sync/commit/362dcc35d99f6573563623283383c7db0e2a56cf))
+* say the pairing retry wait keeps doubling up to pairing_retry_max_min ([509f162](https://github.com/KristianP26/ble-scale-sync/commit/509f162ed8bba1bc323083e3fc6ffbb38d8ea629))
+* say the stale-link power-cycle follows the RemoveDevice after any connect or GATT session without a reading ([f986199](https://github.com/KristianP26/ble-scale-sync/commit/f986199c6b9ba5d885542c57794dbdec60543205))
+* say the stored weigh-in stamp bound also covers sessions without a scale-info frame ([dee4a1d](https://github.com/KristianP26/ble-scale-sync/commit/dee4a1da7660dff796b715271004cb592cb0b2ac))
+* say the weigh-in signal is seen on a BF915 only ([8836ffe](https://github.com/KristianP26/ble-scale-sync/commit/8836ffec765b9b99335d9a83ecf998cf1744f6d4))
+* say what the stale-link brake holds back, and how to restart Bluetooth on HA OS ([99ba2f1](https://github.com/KristianP26/ble-scale-sync/commit/99ba2f14ba3a0b433b270e6031e272dfa24e8805))
+* say what the two early 18-byte QN weigh-ins had in common ([aa99e6f](https://github.com/KristianP26/ble-scale-sync/commit/aa99e6f4c3854354aba85e09a87d05175076f60f))
+* say when a weigh-in does not ask for the pairing again ([5a4f1cd](https://github.com/KristianP26/ble-scale-sync/commit/5a4f1cd6c68492272ece904aebd0051628a27376))
+* say when auto_clear_stale_bond clears a pairing and why a weak link does not ([#471](https://github.com/KristianP26/ble-scale-sync/issues/471)) ([c241aa0](https://github.com/KristianP26/ble-scale-sync/commit/c241aa056589f4125cbd60a75618c49762729185))
+* say which failed connect attempts the debug log describes, and from when it gives BlueZ's reason ([dd32de2](https://github.com/KristianP26/ble-scale-sync/commit/dd32de2062d491feb85f48a1b5eaaf9f0652b72e))
+* say which QN stored weigh-ins are from memory and keep a dedup mark ([519fc38](https://github.com/KristianP26/ble-scale-sync/commit/519fc38b85b23e55ab612c5494cb82ad536a7340))
+* **scales:** describe the R-MSC04 record gates as the code has them ([2847e28](https://github.com/KristianP26/ble-scale-sync/commit/2847e28f9a968a31566c33c77bedb079d79d2cdc))
+* **scales:** say the version 2 MiBeacon frame is the one of the Mini 2 in [#474](https://github.com/KristianP26/ble-scale-sync/issues/474) ([6e5562d](https://github.com/KristianP26/ble-scale-sync/commit/6e5562d23ae9f035fc2d7fe7bbffed50da4cd1a0))
+* tell the two Beurer display problems apart and say what the wait holds up ([0eb7722](https://github.com/KristianP26/ble-scale-sync/commit/0eb772227fe6858ff521c04fb97cc94927892321))
+* **yunmai:** say only SIGNAL resistances from 150 up pass the impedance gate ([67d7f95](https://github.com/KristianP26/ble-scale-sync/commit/67d7f951636a9209e9e6182c671292d82b2baaa2))
+* **yunmai:** say that byte 4 was 0x01 once and what that may mean ([f2fcc43](https://github.com/KristianP26/ble-scale-sync/commit/f2fcc438c3cf984572d29dfeb91e1ba8bf8cb408))
+
+## [1.33.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.32.0...v1.33.0) (2026-10-13)
+
+
+### Added
+
+* **ble:** let an adapter turn a notify binding on after its own writes ([361c767](https://github.com/KristianP26/ble-scale-sync/commit/361c767a348aa957da6eab8b94188686a0d895d7)), closes [#408](https://github.com/KristianP26/ble-scale-sync/issues/408)
+* **es-cs20m:** compute body fat from the 0x18 resistance ([ee1d762](https://github.com/KristianP26/ble-scale-sync/commit/ee1d762cbd6d4d1009d482d73aec888ec1a5066e)), closes [#436](https://github.com/KristianP26/ble-scale-sync/issues/436)
+* **es-cs20m:** take the weight and resistance from the scale's 0x18 result ([6dce383](https://github.com/KristianP26/ble-scale-sync/commit/6dce3837cfb0eb180a330c3c84f7288409146bd4)), closes [#436](https://github.com/KristianP26/ble-scale-sync/issues/436)
+* **qn:** send the vendor app's profile frame when ble.qn_user_key is set ([6f1cdd0](https://github.com/KristianP26/ble-scale-sync/commit/6f1cdd0f463cf6a41a27244a73630782ee139544)), closes [#463](https://github.com/KristianP26/ble-scale-sync/issues/463)
+* **qn:** use the scale's own body composition on the 19-byte dialect ([4b37ef5](https://github.com/KristianP26/ble-scale-sync/commit/4b37ef5280460fc758453393ac60dad33178b34d)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **scales:** add the A&D UC-352BLE adapter ([887e68f](https://github.com/KristianP26/ble-scale-sync/commit/887e68fc17e1a20c87aa583ca31f9c703f728dfc)), closes [#408](https://github.com/KristianP26/ble-scale-sync/issues/408)
+* **scales:** add the Etekcity Fit 8S broadcast adapter ([0c21023](https://github.com/KristianP26/ble-scale-sync/commit/0c210231551d5dffc98c0fb302b54b96cd371af2)), closes [#408](https://github.com/KristianP26/ble-scale-sync/issues/408)
+* **scales:** add the Eufy C20 / P3 broadcast adapter ([cc50075](https://github.com/KristianP26/ble-scale-sync/commit/cc50075cc66a97b09f92551fdae19553df25d398)), closes [#408](https://github.com/KristianP26/ble-scale-sync/issues/408)
+* **scales:** add the PICOOC Mini Lite broadcast adapter ([66378c1](https://github.com/KristianP26/ble-scale-sync/commit/66378c167bc851aaf815c2a2921f53cbb84cfd44)), closes [#408](https://github.com/KristianP26/ble-scale-sync/issues/408)
+* **scales:** compute AC 27 body composition with the vendor's WLA07 formula ([6fbdab1](https://github.com/KristianP26/ble-scale-sync/commit/6fbdab1fe98de956791f63e2fb7606ef430eb8e8))
+* **scales:** send the FitDays profile handshake to AC 27 scales ([788d0ab](https://github.com/KristianP26/ble-scale-sync/commit/788d0ab107d969cc0871295dfb121661be93bb7b))
+
+
+### Fixed
+
+* **ble:** hand over the stored records of a session a timeout ends ([5634e05](https://github.com/KristianP26/ble-scale-sync/commit/5634e0569a2aaf3c9afff538e100ef96e0cdada6)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **ble:** keep the held reading when the scale disconnects after stored records ([ec88e4f](https://github.com/KristianP26/ble-scale-sync/commit/ec88e4fa2f7861b206a3eae6e611f5c66ddda17f)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **es-cs20m:** stop taking a stored record's resistance for the live weigh-in ([34a036e](https://github.com/KristianP26/ble-scale-sync/commit/34a036e5995fba913a4668031bdd04b3af45d626)), closes [#436](https://github.com/KristianP26/ble-scale-sync/issues/436)
+* **esphome:** log a notify handle mismatch only for a handle nobody subscribed to ([5f16659](https://github.com/KristianP26/ble-scale-sync/commit/5f16659e445c377e06eb94a7a83741ffdba0ad35)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **qn:** read the 19-byte stored records as one record each and report them with their time ([d3abdff](https://github.com/KristianP26/ble-scale-sync/commit/d3abdff6c1ef728f082186da9eee6bb9356e45e1)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **qn:** send the configured sex in the 19-byte profile frame ([32c12f4](https://github.com/KristianP26/ble-scale-sync/commit/32c12f45003e03b93992e224d9a9bbca5db7e26f)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **qn:** send the host's UTC offset in the 9-byte time sync ([df3e53f](https://github.com/KristianP26/ble-scale-sync/commit/df3e53f1fa522110c7dddd0043e257497dfccd40)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **runtime:** give every proxy GATT session the current user profile ([2f53dc8](https://github.com/KristianP26/ble-scale-sync/commit/2f53dc8be2222cde0d307312a0387a03d9d1bc34)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **scales:** complete AC 27 weigh-ins on a locked or steady weight ([9d61d93](https://github.com/KristianP26/ble-scale-sync/commit/9d61d93bc540cdc29b2c23fb13d764650895fcaf))
+* **scales:** give WLA07 the same whole-cm height the AC 27 scale gets ([5728af6](https://github.com/KristianP26/ble-scale-sync/commit/5728af6b4f1421a3d8d2966ce97fd6eef26c5b77))
+* **scales:** pair the Active Era impedance with this session's weight ([3372c69](https://github.com/KristianP26/ble-scale-sync/commit/3372c69c38d40e469192d45847128f7e36f1b4d1))
+* **scales:** pick AC 27 scales by their 0x27AC advertisement before MGB ([f041880](https://github.com/KristianP26/ble-scale-sync/commit/f0418802590138d8b8e0a213575d631a41ecb232))
+* **scales:** stop the Inlife adapter from claiming PICOOC scales ([9972b10](https://github.com/KristianP26/ble-scale-sync/commit/9972b104fc6001bc7c07489cbfa8ccde91d08076)), closes [#408](https://github.com/KristianP26/ble-scale-sync/issues/408)
+* **silvergear:** read the weight from the low 18 bits, not a fixed bias ([#467](https://github.com/KristianP26/ble-scale-sync/issues/467)) ([37453d8](https://github.com/KristianP26/ble-scale-sync/commit/37453d84e31e5227d31395ffc244513940dc22c8))
+
+
+### Docs
+
+* describe the 19-byte QN body composition and stored weigh-ins ([e4a2fcc](https://github.com/KristianP26/ble-scale-sync/commit/e4a2fcc03613a3290cd138dda77767a74449ff6f)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* describe the AC 27 family on the supported scales page ([1e8b3b2](https://github.com/KristianP26/ble-scale-sync/commit/1e8b3b269b5b262bf5f356e4534cb77b23634c4e))
+* list the Etekcity Fit 8S ([cdb381d](https://github.com/KristianP26/ble-scale-sync/commit/cdb381d457e54842fc1d382b6e7c7755f3a3d4ab)), closes [#408](https://github.com/KristianP26/ble-scale-sync/issues/408)
+* point source comments at public evidence, not private notes ([c9dcf9a](https://github.com/KristianP26/ble-scale-sync/commit/c9dcf9ac0ed8784a46f2031246513ca02abd9b40))
+* **qn:** describe the 0x20 extra byte as the UTC offset in the option comments ([68010c5](https://github.com/KristianP26/ble-scale-sync/commit/68010c59eb3b2aeee88cb3d92b01a0eabf90d240)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **readme:** credit etekcity_esf551_ble as the source of the Fit 8S layout ([adbafd3](https://github.com/KristianP26/ble-scale-sync/commit/adbafd3aea0302ea75a414d50c933d2b891aaaad)), closes [#408](https://github.com/KristianP26/ble-scale-sync/issues/408)
+* **readme:** drop the sentence above the contributors grid ([5012cce](https://github.com/KristianP26/ble-scale-sync/commit/5012cce4b250990fcea3fb2a5a436476ad077e85))
+* say the scale most likely, not certainly, computed with the male profile ([ededb48](https://github.com/KristianP26/ble-scale-sync/commit/ededb480ef593ac4da4deb4764756e8c1dc719a3)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* say when a 19-byte QN stored weigh-in gives way to a live one ([6f19e1e](https://github.com/KristianP26/ble-scale-sync/commit/6f19e1e8a703b2f38df384d19215ad15f17e71d7)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **scales:** describe the ES-CS20M result frame and confirm the AE01/AE02 sequence ([2bb2f96](https://github.com/KristianP26/ble-scale-sync/commit/2bb2f9695562100f2f15792ff0448f08be61a65a)), closes [#436](https://github.com/KristianP26/ble-scale-sync/issues/436)
+* **scales:** drop the address requirement the Fit 8S does not have on macOS ([d701113](https://github.com/KristianP26/ble-scale-sync/commit/d701113a4a1619dffb047dcfa2a6fc39fd69711a)), closes [#408](https://github.com/KristianP26/ble-scale-sync/issues/408)
+* **scales:** list the Foryond FG263LB (AAA002) under the Silvergear adapter ([6801ae7](https://github.com/KristianP26/ble-scale-sync/commit/6801ae7084b229574d38705cd4e7d8fbb4909293)), closes [#408](https://github.com/KristianP26/ble-scale-sync/issues/408)
+* **scales:** list the INSMART AAA006 under the Silvergear adapter ([f15417f](https://github.com/KristianP26/ble-scale-sync/commit/f15417f48d45b6301eaba0b59b05b18f16fcfb1a)), closes [#467](https://github.com/KristianP26/ble-scale-sync/issues/467)
+* **scales:** say the AC 27 display unit byte comes from the BS-06 handler ([f5b572d](https://github.com/KristianP26/ble-scale-sync/commit/f5b572dc4c80e95e714dbfa020c33dc712060383))
+* **scales:** say the Eufy P2 / P2 Pro reads body composition over GATT ([f4aefa1](https://github.com/KristianP26/ble-scale-sync/commit/f4aefa1f92dcb3276d72eb525ac75dd1f4b28aa5)), closes [#289](https://github.com/KristianP26/ble-scale-sync/issues/289)
+* **scales:** state the 30 s bound on the ES-CS20M result hold ([574659f](https://github.com/KristianP26/ble-scale-sync/commit/574659fc6667bff0a98510ef62c17a942be7318d)), closes [#436](https://github.com/KristianP26/ble-scale-sync/issues/436)
+
+## [1.32.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.31.0...v1.32.0) (2026-10-11)
+
+
+### Added
+
+* **addon:** add Home Assistant Bluetooth as a ble_transport, no token needed ([1ab2e39](https://github.com/KristianP26/ble-scale-sync/commit/1ab2e39fc1e0b5d33e35c7c47f022ff79d31aac5)), closes [#420](https://github.com/KristianP26/ble-scale-sync/issues/420)
+* **addon:** add the ble_transport option with an ESPHome proxy transport ([f6fba59](https://github.com/KristianP26/ble-scale-sync/commit/f6fba59d9cdb4124658aab227e42c68adc08d7f4)), closes [#420](https://github.com/KristianP26/ble-scale-sync/issues/420)
+* **addon:** add the ESP32 MQTT proxy as a ble_transport ([a82c025](https://github.com/KristianP26/ble-scale-sync/commit/a82c025c8efd487c78b896e056938141e295f71f)), closes [#420](https://github.com/KristianP26/ble-scale-sync/issues/420)
+* **addon:** stop when the ESP32 proxy cannot share the MQTT broker URL ([fd93b9b](https://github.com/KristianP26/ble-scale-sync/commit/fd93b9bdbeb5ca35602db5d8dc6537b610419c14)), closes [#420](https://github.com/KristianP26/ble-scale-sync/issues/420)
+* **addon:** warn when custom_config ignores the transport options ([0b21a42](https://github.com/KristianP26/ble-scale-sync/commit/0b21a428a8b5d3f78d99bc19aba0345d811ebaed)), closes [#420](https://github.com/KristianP26/ble-scale-sync/issues/420)
+* **exporters:** add a Dreeve exporter ([#421](https://github.com/KristianP26/ble-scale-sync/issues/421)) ([9fa3534](https://github.com/KristianP26/ble-scale-sync/commit/9fa3534e849c97fac0d11692569deab4b7e21aff))
+* **qn:** read the weight from the 19-byte dialect's measurement stream ([#331](https://github.com/KristianP26/ble-scale-sync/issues/331)) ([47514a3](https://github.com/KristianP26/ble-scale-sync/commit/47514a3e5e343fe133382f7218b4b209896e1141))
+* **scales:** add OKOK / Chipsea broadcast adapter (2.0 and C0) ([f779c1f](https://github.com/KristianP26/ble-scale-sync/commit/f779c1fd133425503195d1c1f997b67bccfec5c5)), closes [#408](https://github.com/KristianP26/ble-scale-sync/issues/408)
+* **scales:** choose the R-MSC04 connect writes with BLE_RMSC04_HANDSHAKE ([5c565c6](https://github.com/KristianP26/ble-scale-sync/commit/5c565c656db93c4e2741e7248f8f638060ea72eb)), closes [#434](https://github.com/KristianP26/ble-scale-sync/issues/434)
+* **scales:** log the R-MSC04 handshake replies, stored records and session length ([1052ba8](https://github.com/KristianP26/ble-scale-sync/commit/1052ba82bf56984d8089544e67d80109dfbaef93)), closes [#434](https://github.com/KristianP26/ble-scale-sync/issues/434)
+* **scales:** send the R-MSC04 clock and a guest profile instead of the start command ([74bb6e8](https://github.com/KristianP26/ble-scale-sync/commit/74bb6e825e2697f0234d50a40e140569c3e713b3)), closes [#434](https://github.com/KristianP26/ble-scale-sync/issues/434)
+
+
+### Fixed
+
+* **addon:** create config.yaml as 0600 on the first start ([0827149](https://github.com/KristianP26/ble-scale-sync/commit/0827149d45d4129a5cec92356a263a6758ef6262)), closes [#420](https://github.com/KristianP26/ble-scale-sync/issues/420)
+* **addon:** write option values into config.yaml exactly as entered ([297f5cf](https://github.com/KristianP26/ble-scale-sync/commit/297f5cf740a46f5e19cdf05fc7d1e1215465966b)), closes [#420](https://github.com/KristianP26/ble-scale-sync/issues/420)
+* **ble:** do not count a session that heard the scale toward the watchdog ([5cdeed9](https://github.com/KristianP26/ble-scale-sync/commit/5cdeed9890ebced973db43e3d0df430b820aa2e1)), closes [#460](https://github.com/KristianP26/ble-scale-sync/issues/460)
+* **ble:** report a session timeout as connected, not as no scale found ([0d1981d](https://github.com/KristianP26/ble-scale-sync/commit/0d1981deef37e17e37af7a7425bd16d9af417c05)), closes [#460](https://github.com/KristianP26/ble-scale-sync/issues/460)
+* **garmin:** keep an unquoted value out of setup_garmin's YAML error ([37fa30c](https://github.com/KristianP26/ble-scale-sync/commit/37fa30cc991229991db3e55270eaae18b4f3a1d0))
+* **ha-bluetooth:** fail a websocket that errors before opening at once ([37d5e96](https://github.com/KristianP26/ble-scale-sync/commit/37d5e96140737fe1817fb58a5cc9f99ad6c141c2)), closes [#420](https://github.com/KristianP26/ble-scale-sync/issues/420)
+* **ha-bluetooth:** stop reading Home Assistant's subscribe snapshot as clock skew ([227c264](https://github.com/KristianP26/ble-scale-sync/commit/227c264bd201c590431da3617fef22bd6f2c4a98)), closes [#420](https://github.com/KristianP26/ble-scale-sync/issues/420)
+* **ha-bluetooth:** use the newest packet's manufacturer data, not the merged history ([f064baa](https://github.com/KristianP26/ble-scale-sync/commit/f064baa5ee1672345cefdf44010e9b6aefdbba80)), closes [#408](https://github.com/KristianP26/ble-scale-sync/issues/408)
+* **qn:** read the stored record's resistances big-endian at [12..13] and [14..15] ([e18ec67](https://github.com/KristianP26/ble-scale-sync/commit/e18ec67b728d8184ea3339e8db1c56dcb98fda0e)), closes [#461](https://github.com/KristianP26/ble-scale-sync/issues/461)
+* **qn:** stop sending the delete-users frame by default ([72b2dd5](https://github.com/KristianP26/ble-scale-sync/commit/72b2dd5d4ede922672fa9ad64bf4cbd42d55e0a9)), closes [#461](https://github.com/KristianP26/ble-scale-sync/issues/461)
+* **qn:** unscramble the impedance of scales that advertise it scrambled ([ffce022](https://github.com/KristianP26/ble-scale-sync/commit/ffce022b47ff3baddeb252669f333a986865cc4c)), closes [#461](https://github.com/KristianP26/ble-scale-sync/issues/461)
+* **runtime:** keep the retry queue when its file cannot be read ([65270f7](https://github.com/KristianP26/ble-scale-sync/commit/65270f7529bb0ac6f9f56bd39cfdcd25a82ee749)), closes [#460](https://github.com/KristianP26/ble-scale-sync/issues/460)
+* **runtime:** say how many queued exports wait and when the next is due ([cb9cbe6](https://github.com/KristianP26/ble-scale-sync/commit/cb9cbe6ac9ed00eaaacb245d5d6673be8a0109fa)), closes [#460](https://github.com/KristianP26/ble-scale-sync/issues/460)
+* **scales:** report an R-MSC04 write still waiting at session end as pending ([785355b](https://github.com/KristianP26/ble-scale-sync/commit/785355b15bd6b828ce55078e87ccf324b49cd9d1)), closes [#434](https://github.com/KristianP26/ble-scale-sync/issues/434)
+* **security:** hide a fetch URL password that holds whitespace ([4897bff](https://github.com/KristianP26/ble-scale-sync/commit/4897bff32c5036c3e735db2beb8b855d5ee7ed58))
+* **security:** keep secret redaction linear on long lines ([6648f93](https://github.com/KristianP26/ble-scale-sync/commit/6648f93a694a19403bbca06cd9e7435a0a23a0af))
+* **security:** keep the config line out of YAML warnings ([5d99d59](https://github.com/KristianP26/ble-scale-sync/commit/5d99d593102577ed31f8e93384a3054cb18f92e5))
+* **security:** redact credentials from error messages and log lines ([372e8c3](https://github.com/KristianP26/ble-scale-sync/commit/372e8c3b84d9f108467923b7529063007cab484b))
+* **security:** redact export errors before they are queued or reported ([b648352](https://github.com/KristianP26/ble-scale-sync/commit/b648352b5993a61eb9e417b78b3a80690774b7ca))
+* **security:** redact lastError of queue entries written before redaction ([8ae956c](https://github.com/KristianP26/ble-scale-sync/commit/8ae956ca22bc97203d8898a353e245304848a765))
+* **security:** redact query string secrets and Telegram bot tokens ([d9af52f](https://github.com/KristianP26/ble-scale-sync/commit/d9af52f3fe821f6165f6bac40e1eb4edd7cd8040))
+* **wger:** type measurement category ids as string or number ([#459](https://github.com/KristianP26/ble-scale-sync/issues/459)) ([a8cc0bd](https://github.com/KristianP26/ble-scale-sync/commit/a8cc0bd74cf643d8f101ae141e9694562a288215))
+
+
+### Docs
+
+* add rolandgeider to contributors ([a3549ce](https://github.com/KristianP26/ble-scale-sync/commit/a3549ce6e3359a5727ad23dade0d594d0b10b475))
+* **addon:** document the Bluetooth transport options ([82d75e4](https://github.com/KristianP26/ble-scale-sync/commit/82d75e43d36518b3c6a6ba176c9b0fc73353908d)), closes [#420](https://github.com/KristianP26/ble-scale-sync/issues/420)
+* **addon:** point the ESP32 at the broker it shares, not always this host ([fcc072a](https://github.com/KristianP26/ble-scale-sync/commit/fcc072a70bfd1563ca937875f2769585a251cc77)), closes [#420](https://github.com/KristianP26/ble-scale-sync/issues/420)
+* **body-composition:** say a refused impedance is exported as 0 ([28a7bd5](https://github.com/KristianP26/ble-scale-sync/commit/28a7bd5e9fc877e05287e6476cd14726f7ccae99)), closes [#461](https://github.com/KristianP26/ble-scale-sync/issues/461)
+* **config:** finish the qn_report_byte warning in the example config ([73238d8](https://github.com/KristianP26/ble-scale-sync/commit/73238d872285edba8c21a5c28b149521cde50201)), closes [#461](https://github.com/KristianP26/ble-scale-sync/issues/461)
+* **config:** name the one handler that exempts an answered session ([13881b4](https://github.com/KristianP26/ble-scale-sync/commit/13881b4dcb894e1218c58368b8febcfa33e17438)), closes [#460](https://github.com/KristianP26/ble-scale-sync/issues/460)
+* **contributing:** explain how the contributors grid is generated ([2d7958c](https://github.com/KristianP26/ble-scale-sync/commit/2d7958c13673e3be719dde2084cb61fef916c14b))
+* **contributing:** match the release notes and release-please files to the config ([8bc2df4](https://github.com/KristianP26/ble-scale-sync/commit/8bc2df4abde0278fa87f772e55f78ae81f93f140))
+* **contributing:** name the .env mapping and the count tool for a new exporter ([03c3c42](https://github.com/KristianP26/ble-scale-sync/commit/03c3c42694fcc75e6f5c58924dbdc0f0a1920881)), closes [#421](https://github.com/KristianP26/ble-scale-sync/issues/421)
+* **contributing:** put co-author lines for a pull request in its description ([d59c5f1](https://github.com/KristianP26/ble-scale-sync/commit/d59c5f156cfe46754b45d220f14930e20f433351))
+* **contributing:** say the exporter name lists go beyond README and the home page ([99f97b7](https://github.com/KristianP26/ble-scale-sync/commit/99f97b7aab1b105530608fca8b79d01b62b8224a)), closes [#421](https://github.com/KristianP26/ble-scale-sync/issues/421)
+* describe the 19-byte QN weigh-in stream and what is read from it ([c2916d6](https://github.com/KristianP26/ble-scale-sync/commit/c2916d6d8506010019826b921c6ae91dfa775dc1)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **exporters:** show Wger and HealthLog as per-user exporters in config.yaml.example ([9e9f1f8](https://github.com/KristianP26/ble-scale-sync/commit/9e9f1f84b9b01bb6841c6a7a50f3610e5c3a5e5d)), closes [#421](https://github.com/KristianP26/ble-scale-sync/issues/421)
+* **ha-bluetooth:** explain the subscribe snapshot and the clock warning ([2ee996c](https://github.com/KristianP26/ble-scale-sync/commit/2ee996c46d62a838dbdc126c4cb67edeb12a29c9)), closes [#420](https://github.com/KristianP26/ble-scale-sync/issues/420)
+* list OKOK / Chipsea broadcast scales ([2081efe](https://github.com/KristianP26/ble-scale-sync/commit/2081efee96f24ccb089e17aed7f98492fd59dcb1)), closes [#408](https://github.com/KristianP26/ble-scale-sync/issues/408)
+* make the per-user exporter merge sentences read unambiguously ([e50648d](https://github.com/KristianP26/ble-scale-sync/commit/e50648d894b16f4d8f040e8fca28bf23b96b90fa)), closes [#421](https://github.com/KristianP26/ble-scale-sync/issues/421)
+* **readme:** add the missing code contributors to the grid ([09bd430](https://github.com/KristianP26/ble-scale-sync/commit/09bd4308b4ab83e657944f764d00c51bee1a89fe))
+* **readme:** show commit counts in the contributors grid, ordered by count ([3c1c87b](https://github.com/KristianP26/ble-scale-sync/commit/3c1c87b4dcad1008be4ee7861fed6e4bbd745230))
+* say per-user exporters are added to global_exporters ([86ec90a](https://github.com/KristianP26/ble-scale-sync/commit/86ec90aea89a3784b54f41291fe659a2cdc26841)), closes [#421](https://github.com/KristianP26/ble-scale-sync/issues/421)
+* **scales:** describe the R-MSC04 connect handshake ([c9e0614](https://github.com/KristianP26/ble-scale-sync/commit/c9e061409f90f17e6f9fc2e4fd4e2fbe6c453a30)), closes [#434](https://github.com/KristianP26/ble-scale-sync/issues/434)
+* the retry queue survives a container restart, not a re-create ([3a4a526](https://github.com/KristianP26/ble-scale-sync/commit/3a4a526e1b03d5f93c7b8db33d2b8a38fbcc6c8c)), closes [#460](https://github.com/KristianP26/ble-scale-sync/issues/460)
+* **troubleshooting:** which connected sessions the watchdog counts ([f04515f](https://github.com/KristianP26/ble-scale-sync/commit/f04515f8f93108e7a754d23ea2f5047ec8df78c1)), closes [#460](https://github.com/KristianP26/ble-scale-sync/issues/460)
+
+## [1.31.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.30.1...v1.31.0) (2026-10-06)
+
+
+### Added
+
+* **addon:** add the adapter_privacy option ([37ad5f8](https://github.com/KristianP26/ble-scale-sync/commit/37ad5f87d387d1759d1081c983c919153a37071c))
+* **ble:** add a 'blocked' scan failure for a scale found but not connected ([70bf715](https://github.com/KristianP26/ble-scale-sync/commit/70bf715ff92076a8cdbf75f870c34b761b184df4))
+* **ble:** extend the composition hold while a transfer is still arriving ([5563ec6](https://github.com/KristianP26/ble-scale-sync/commit/5563ec6374d100d3202012fd37fdba478a1580b7))
+* **ble:** restart a scan that stops delivering advertisements ([fc465f0](https://github.com/KristianP26/ble-scale-sync/commit/fc465f016c107b194069871b39d9d7effceed82b))
+* **ble:** turn on LE privacy so a Beurer scale keeps the bond ([#417](https://github.com/KristianP26/ble-scale-sync/issues/417)) ([3b4dc23](https://github.com/KristianP26/ble-scale-sync/commit/3b4dc23231002230b53b4af4316bd22676170290))
+* **config:** add ble.adapter_privacy and pass it to the node-ble scan ([1b65828](https://github.com/KristianP26/ble-scale-sync/commit/1b65828faa94b6c7eebe294ac2c5774971125255))
+* **garmin:** add skip_metabolic_age to leave metabolic age out of the upload ([#455](https://github.com/KristianP26/ble-scale-sync/issues/455)) ([b2e5584](https://github.com/KristianP26/ble-scale-sync/commit/b2e5584a6e814b9e9055c0b96a992b1a0e9f1322))
+* **scales:** build the QN A00D profile frame from an age and a height ([760fee4](https://github.com/KristianP26/ble-scale-sync/commit/760fee4943f60f0145cd45b1ab5e0f2b42995ac8))
+* **wizard:** ask for units and authorize Strava during setup ([2a39fbb](https://github.com/KristianP26/ble-scale-sync/commit/2a39fbbb97061a45d631ac5df372509103d031e1))
+* **wizard:** section menu, edit-aware BLE and secrets kept in .env ([bd0bb53](https://github.com/KristianP26/ble-scale-sync/commit/bd0bb5304569be94596290b4dca656ababc0d212))
+* **wizard:** show what an edit changes before saving it ([116cee6](https://github.com/KristianP26/ble-scale-sync/commit/116cee6190c3bb9394a86484f719df4a5e60050a))
+
+
+### Fixed
+
+* **ble:** count a no-show as idle when the scan watchdog heard the room ([7f0877b](https://github.com/KristianP26/ble-scale-sync/commit/7f0877b16e742e28fddbd12b6d5f384313094006))
+* **ble:** log when the scan watchdog cannot list devices ([605f6b1](https://github.com/KristianP26/ble-scale-sync/commit/605f6b1a4d1d1734facd17d2d9c56ef609a2f528))
+* **ble:** read the adapter state back after a btmgmt power cycle ([72d9c47](https://github.com/KristianP26/ble-scale-sync/commit/72d9c47e03535b06d0a466c0a44dabf43cb7449e))
+* **ble:** take over a Discovering state that no client owns ([c2960aa](https://github.com/KristianP26/ble-scale-sync/commit/c2960aa905090927c18b1ed193fb6ae0aa6e1abc))
+* **scales:** hold the Beurer/Sanitas link while the 0x59 stream is arriving ([#211](https://github.com/KristianP26/ble-scale-sync/issues/211)) ([3cd85e6](https://github.com/KristianP26/ble-scale-sync/commit/3cd85e6e043df0d9ca386ac4373fad3d1fd54ba9))
+* **scales:** send the Arboleaf app's profile sequence on the 19-byte QN dialect ([#331](https://github.com/KristianP26/ble-scale-sync/issues/331)) ([6cb5ad1](https://github.com/KristianP26/ble-scale-sync/commit/6cb5ad1918a4e8a0f5fa1ab3f6fe754d96e40808))
+* **scales:** send the Renpho app's start sequence to ES-CS20M units with AE01/AE02 ([#436](https://github.com/KristianP26/ble-scale-sync/issues/436)) ([269c504](https://github.com/KristianP26/ble-scale-sync/commit/269c504af8efa908ce0f71f046531038403e9b96))
+* **wizard:** keep comments on edit, test every exporter, mask the HA token ([8c99de6](https://github.com/KristianP26/ble-scale-sync/commit/8c99de6eebbe5608a8e7944471362933acea20f5))
+
+
+### Docs
+
+* **ble:** stop citing burst silences as proof of a stalled scan ([c9bd5fb](https://github.com/KristianP26/ble-scale-sync/commit/c9bd5fbd9f786685f3f0c27cd5843884e4627395))
+* describe the 19-byte QN profile frame sent under qn_weight_ack ([a724152](https://github.com/KristianP26/ble-scale-sync/commit/a724152b3c8856f8ea43b88191574e1d4d50e405))
+* describe the athlete metabolic age rule as a clamp above actual age ([6692acf](https://github.com/KristianP26/ble-scale-sync/commit/6692acf6a1780e49e9bca1086b243dbd5f43f673))
+* describe the ES-CS20M start sequence and the profile it writes to the scale ([c093733](https://github.com/KristianP26/ble-scale-sync/commit/c0937334d42b118c8e48d75de6b14e349958102a))
+* describe the wizard section menu and secrets kept in .env ([8cfb02d](https://github.com/KristianP26/ble-scale-sync/commit/8cfb02de9e2bf1489031500e9bebec4948bff0cd))
+* describe units, comment-preserving edits and Strava in the wizard ([c40b052](https://github.com/KristianP26/ble-scale-sync/commit/c40b052f349c931825b69110fa641f7e374ef43b))
+* explain ble.adapter_privacy and the Beurer bond it keeps ([37f77b6](https://github.com/KristianP26/ble-scale-sync/commit/37f77b6647940350209dde8427b219fe6b717d16))
+* explain how a stuck BlueZ scan is now healed ([1a4377d](https://github.com/KristianP26/ble-scale-sync/commit/1a4377d72c92302576dcf16e43d2b06380dac418))
+* **garmin:** limit 'depends on age alone' to profiles without is_athlete ([52f3fb0](https://github.com/KristianP26/ble-scale-sync/commit/52f3fb0b99225d368c933af525ed18fbedffe650))
+
+## [1.30.1](https://github.com/KristianP26/ble-scale-sync/compare/v1.30.0...v1.30.1) (2026-10-04)
+
+
+### Fixed
+
+* **addon:** declare the MQTT service and give btmgmt its capability ([80cb57d](https://github.com/KristianP26/ble-scale-sync/commit/80cb57de32af8fc23157ea7b142b98788b4429cb))
+* **addon:** restart the app after it exits and guard the Garmin token ([26be7ba](https://github.com/KristianP26/ble-scale-sync/commit/26be7bad1a7babe289b3524e6ce1be54fda5998d))
+* **ble:** harden the BLE transports, reloads and the run path ([1cf535f](https://github.com/KristianP26/ble-scale-sync/commit/1cf535f0cf7f80f295a96b5ec84e84b8efd66309))
+* **ble:** honour shutdown mid-session and tidy the transport edges ([90572d6](https://github.com/KristianP26/ble-scale-sync/commit/90572d6bf4ffb0b2c5a3d5b786b0cc1aa420511b))
+* **ble:** keep the pairing agent scoped to the scale being paired ([7dde25d](https://github.com/KristianP26/ble-scale-sync/commit/7dde25df5b4b9fa9db9d08cc229fdfc2117601f6))
+* **ble:** stop abandoned poll cycles, drop the SIG 0xFFFF weight, remember Salter exports ([08dacba](https://github.com/KristianP26/ble-scale-sync/commit/08dacbad84350645b188d89611615217f044ed27))
+* **ci:** repair GHCR cleanup, pin actions and images, harden add-on and worker ([e61d823](https://github.com/KristianP26/ble-scale-sync/commit/e61d82395aa7e828f6dd94480d65a12cbc519c59))
+* **config:** honour env overrides, legacy .env exporters and wizard edits ([9f1fd7b](https://github.com/KristianP26/ble-scale-sync/commit/9f1fd7b24d773c9bd531579033b7304a5428ca3f))
+* **config:** keep edits, read .env beside --config and follow symlinks ([5f5d394](https://github.com/KristianP26/ble-scale-sync/commit/5f5d3942ab237aa47b06551605dd08713268d637))
+* **config:** keep secrets out of reload, YAML and header log lines ([3483bf5](https://github.com/KristianP26/ble-scale-sync/commit/3483bf50d4762121906390267cbb63ebe666c9ca))
+* **config:** refuse two accounts sharing one Garmin or Strava token dir ([ac8e5fa](https://github.com/KristianP26/ble-scale-sync/commit/ac8e5fac9b03b3da7b3e4eea45f85b713348975a))
+* **config:** reload .env, escape ${ and tidy runtime and exporter edges ([2bff4cd](https://github.com/KristianP26/ble-scale-sync/commit/2bff4cdade9858fac3af5610305b3857b949abb5))
+* **config:** stop .env leftovers overriding config.yaml, load scan config properly ([242b605](https://github.com/KristianP26/ble-scale-sync/commit/242b6059a7ea6386532041d0ebf840bc2faeb422))
+* **exporters:** keep Garmin and Strava token directories owner-only ([b494e84](https://github.com/KristianP26/ble-scale-sync/commit/b494e84b9d91aa4892498ca077de38e643b7f16a))
+* **file:** create the export file owner-only ([891733e](https://github.com/KristianP26/ble-scale-sync/commit/891733e1476c10097cd6d35cc07b785a16b09b6d))
+* **firmware:** give host connects ownership, a time budget and TLS ([21a3bc7](https://github.com/KristianP26/ble-scale-sync/commit/21a3bc7ee1f06493ac9b5dcde9d6eb17d98310cb))
+* **firmware:** keep the ESP32 proxy scanning and connected ([1152b4c](https://github.com/KristianP26/ble-scale-sync/commit/1152b4ca7a123930f7a73b01b9c5fb3f998a39ac))
+* **firmware:** publish the newest advertisement of each device ([ae14129](https://github.com/KristianP26/ble-scale-sync/commit/ae141297c4be0095f75d133e65fb04ecf414ef42))
+* **firmware:** validate config, bound MQTT inputs and pin aioble ([a50398c](https://github.com/KristianP26/ble-scale-sync/commit/a50398c31f8f617afd6d43533970a6b78c2edbdb))
+* **garmin:** keep results across SIGTERM, treat 401 as permanent, check Python ([09af3e3](https://github.com/KristianP26/ble-scale-sync/commit/09af3e31d4c7e1ca790f111377d6ac69fff62132))
+* **mqtt-proxy:** require a password for a LAN-exposed embedded broker ([1f4057d](https://github.com/KristianP26/ble-scale-sync/commit/1f4057dd76db21ea1d5a1edd2e8c4d0e32b9631f))
+* **runtime:** give stored records their own time and owner, validate composition ([0e7d395](https://github.com/KristianP26/ble-scale-sync/commit/0e7d395f336c22e2d6ef654d3af9e33aae27b9e4))
+* **runtime:** keep scanning while the retry queue drains and exit cleanly ([40cbdb7](https://github.com/KristianP26/ble-scale-sync/commit/40cbdb70782198d4fb318a8e975c83bb66ee5f60))
+* **scales:** apply the record-time and composition rules to the adapters ([38f1b9b](https://github.com/KristianP26/ble-scale-sync/commit/38f1b9bb16e8c271fccf68732eb9f6a29f0b059b))
+* **scales:** bind QN timers to their session and check ESF-551 checksums ([40920fe](https://github.com/KristianP26/ble-scale-sync/commit/40920fe7411951b40d67c3f2f24470b3b0cc7d4d))
+* **wizard:** stop suggesting a public MQTT broker for health data ([a405cf8](https://github.com/KristianP26/ble-scale-sync/commit/a405cf87d6c7a37da25081ab01f4fc6ba1e7e260))
+
+
+### Docs
+
+* bring the guides back in line with the code ([c48cbc7](https://github.com/KristianP26/ble-scale-sync/commit/c48cbc76c4a92b8ea1e038d21e18912346a32795))
+* **configuration:** overrides come from the real environment, not .env ([9bf6778](https://github.com/KristianP26/ble-scale-sync/commit/9bf67784a98303610162a1f7576b60fb7c70ceca))
+* cover --config with .env, ESP32 TLS, structured proxy errors and live reload limits ([94709e1](https://github.com/KristianP26/ble-scale-sync/commit/94709e10fe1917ca6bd194bb280952b37e07e6d2))
+* describe the retry schedule, add-on MQTT and liveness fixes and wizard user edits ([835d37e](https://github.com/KristianP26/ble-scale-sync/commit/835d37e7bb9a9c4180b92ec04d06debca925615b))
+* **exporters:** do not ship a guessable ntfy topic in the examples ([879d78b](https://github.com/KristianP26/ble-scale-sync/commit/879d78bad4069c208bad1d1e1e983ccd40b9b8a8))
+* Garmin 401 and Python version messages, Salter dedup mark file ([a18e293](https://github.com/KristianP26/ble-scale-sync/commit/a18e2939e782de4c8008ddfea13df3d0694eb2f1))
+* **multi-user:** give each Garmin and Strava account its own token_dir ([5150f07](https://github.com/KristianP26/ble-scale-sync/commit/5150f076706a5a96b17ecd1e65e95eafd3e650fd))
+* per-user exporters merge, stored weigh-ins, composition without impedance ([7b0e5e9](https://github.com/KristianP26/ble-scale-sync/commit/7b0e5e9c983e2e07e9af8f36f5312e9ddb0f5578))
+
+## [1.30.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.29.0...v1.30.0) (2026-10-02)
+
+
+### Added
+
+* **addon:** expose preemptive_adapter_reset as an add-on option ([182dc7b](https://github.com/KristianP26/ble-scale-sync/commit/182dc7bc69b0784d63821e3a372195a151e34398)), closes [#417](https://github.com/KristianP26/ble-scale-sync/issues/417)
+* **ble:** let ble.preemptive_adapter_reset skip the post-GATT power-cycle ([c8c2263](https://github.com/KristianP26/ble-scale-sync/commit/c8c22639f22cb5a8ff7e9e801b42d78d01b4b772)), closes [#417](https://github.com/KristianP26/ble-scale-sync/issues/417)
+* **ble:** say once at info when the post-GATT power-cycle is off ([b9f18eb](https://github.com/KristianP26/ble-scale-sync/commit/b9f18eb77ac1a1eddb8b2509d15eecd81796a7db)), closes [#417](https://github.com/KristianP26/ble-scale-sync/issues/417)
+* **exporters:** add a HealthLog exporter ([#443](https://github.com/KristianP26/ble-scale-sync/issues/443)) ([6c1535d](https://github.com/KristianP26/ble-scale-sync/commit/6c1535d4d2fad4ba462ec18cf2fdffe0bb2ea436))
+* **garmin:** upload BMR as basal_met ([#432](https://github.com/KristianP26/ble-scale-sync/issues/432)) ([14d79e8](https://github.com/KristianP26/ble-scale-sync/commit/14d79e8f20355bf6445319938c233f513243e261))
+* **qn:** support an independent physical display unit ([#429](https://github.com/KristianP26/ble-scale-sync/issues/429)) ([ced93a0](https://github.com/KristianP26/ble-scale-sync/commit/ced93a0f7eb3c58ffc48da2f9a78063480c84659))
+* **scales:** acknowledge R-MSC04 status frames like the Renpho app ([563b9f5](https://github.com/KristianP26/ble-scale-sync/commit/563b9f5c670edcf0d3d4cdcd789a438a70dd58d7)), closes [#434](https://github.com/KristianP26/ble-scale-sync/issues/434)
+* **scales:** add Senssun IF_B7 broadcast adapter (Grifema GA2001) ([eaec55a](https://github.com/KristianP26/ble-scale-sync/commit/eaec55a40fd58507ae1eaa71458bd7310d47be00)), closes [#423](https://github.com/KristianP26/ble-scale-sync/issues/423)
+* **scales:** read a Senssun IF_B7 that displays lb ([c81d7ff](https://github.com/KristianP26/ble-scale-sync/commit/c81d7ff8ab4a70375afeae46af9bd2dd36580c0b)), closes [#423](https://github.com/KristianP26/ble-scale-sync/issues/423)
+* **scales:** wait for the R-MSC04 body composition record ([b8861eb](https://github.com/KristianP26/ble-scale-sync/commit/b8861eb1fc00b2a209c603e89dcbfe80cfb26459)), closes [#434](https://github.com/KristianP26/ble-scale-sync/issues/434)
+* **silvergear:** hold a settled weigh-in for its own post-weigh-in frame ([33a8e9d](https://github.com/KristianP26/ble-scale-sync/commit/33a8e9dea9938fcd195f314bf2a486f2cfd13a00)), closes [#357](https://github.com/KristianP26/ble-scale-sync/issues/357)
+
+
+### Fixed
+
+* **addon:** actually pass --config-path to setup_garmin.py ([22cbffb](https://github.com/KristianP26/ble-scale-sync/commit/22cbffb2f6a465133f8d5cbb2e75cfeff37afe6a)), closes [#435](https://github.com/KristianP26/ble-scale-sync/issues/435)
+* **addon:** don't offer to re-import a /share token that was already imported ([2571cb2](https://github.com/KristianP26/ble-scale-sync/commit/2571cb214286f9130212262548301176b301a714))
+* **addon:** import a Garmin token that is newer than the cached one ([#428](https://github.com/KristianP26/ble-scale-sync/issues/428)) ([7cd76a9](https://github.com/KristianP26/ble-scale-sync/commit/7cd76a9c57bcb63bfabaaba70319f85e4c68af7c))
+* **addon:** pass the config path to setup_garmin.py as --config-path ([b18342b](https://github.com/KristianP26/ble-scale-sync/commit/b18342b69195cc7455ef01474423bb48ef46ef23)), closes [#435](https://github.com/KristianP26/ble-scale-sync/issues/435)
+* **addon:** report a skipped /share Garmin token only when it was skipped ([aea66aa](https://github.com/KristianP26/ble-scale-sync/commit/aea66aaf4d1a9bd1a9ec6a6ded74121c36355dd3))
+* **ble:** keep a composition hold from being cut short by the idle timeout ([bd22b7c](https://github.com/KristianP26/ble-scale-sync/commit/bd22b7c9a97d97b55015d3ead1674eae2b24bbd2)), closes [#434](https://github.com/KristianP26/ble-scale-sync/issues/434)
+* **ble:** let a composition hold outlast the session cap ([b45ad0f](https://github.com/KristianP26/ble-scale-sync/commit/b45ad0f2606b2af3575da097614f8849d0ba9d60)), closes [#434](https://github.com/KristianP26/ble-scale-sync/issues/434)
+* **ble:** queue GATT writes per characteristic so BlueZ stops rejecting them as In Progress ([#211](https://github.com/KristianP26/ble-scale-sync/issues/211)) ([b3c81d2](https://github.com/KristianP26/ble-scale-sync/commit/b3c81d21962c833683e4307e1beef1d74765f27c))
+* **ble:** resolve a held broadcast reading at the scan deadline instead of dropping it ([2d3c12b](https://github.com/KristianP26/ble-scale-sync/commit/2d3c12b79655907ac301b837d1f0050c4fb1b463)), closes [#357](https://github.com/KristianP26/ble-scale-sync/issues/357)
+* **ble:** stop pointing a one-time pairing passkey at beurer_pin ([#430](https://github.com/KristianP26/ble-scale-sync/issues/430)) ([2a925c0](https://github.com/KristianP26/ble-scale-sync/commit/2a925c02c36bde6ca9dbe37295123dfaa8667f02))
+* **body-comp:** use the user's sex constant in the metabolic age reference ([7c9f9a5](https://github.com/KristianP26/ble-scale-sync/commit/7c9f9a5ed4d55cdaeefb92ed7d4bccf065fc702c)), closes [#433](https://github.com/KristianP26/ble-scale-sync/issues/433)
+* **config:** make `validate` build the exporters it reports on ([ecaf281](https://github.com/KristianP26/ble-scale-sync/commit/ecaf281d39d7646471f701800c0d66261f0d7fbd))
+* **config:** stop atomicWrite destroying the file it cannot replace ([efb7c8b](https://github.com/KristianP26/ble-scale-sync/commit/efb7c8b6f3043feb38758d02a8e8203a89dd8351))
+* **config:** validate what the schema and the env path both let through ([91b000b](https://github.com/KristianP26/ble-scale-sync/commit/91b000b64415197968963edba226f858e471b163))
+* **es-cs20m:** read 0x14 stability from the status low nibble ([91cba08](https://github.com/KristianP26/ble-scale-sync/commit/91cba0837690c8f8d568ac137ab127b53cafee1d)), closes [#376](https://github.com/KristianP26/ble-scale-sync/issues/376)
+* **exporters,config:** parse what the config says, and stop the watcher eating edits ([8a27c8b](https://github.com/KristianP26/ble-scale-sync/commit/8a27c8ba9501ab017f2895d0a65b67a67f0e133f))
+* **exporters:** own the MQTT client, and bound every step of an export ([ed94dca](https://github.com/KristianP26/ble-scale-sync/commit/ed94dca3d8ac0df1bf0895432abe25d3ee740a45))
+* **firmware:** build the config print as one f-string ([7feb850](https://github.com/KristianP26/ble-scale-sync/commit/7feb850965bfd50ce3aadf397e01818f5955187a)), closes [#422](https://github.com/KristianP26/ble-scale-sync/issues/422)
+* **firmware:** skip auto-connect for advertisement-read scales ([4c2b819](https://github.com/KristianP26/ble-scale-sync/commit/4c2b8192aaf13846b8c1749b06f3a60923d69d6a)), closes [#422](https://github.com/KristianP26/ble-scale-sync/issues/422)
+* **garmin:** redact query values and respect suppressed context in error chains ([8d2ae43](https://github.com/KristianP26/ble-scale-sync/commit/8d2ae4303c8a19762467bc2f0830c89c73d9ca79))
+* **garmin:** say the token file is missing instead of asking for a password ([2e3a304](https://github.com/KristianP26/ble-scale-sync/commit/2e3a304844fac7835a57c7aded7ec8a259b61068)), closes [#435](https://github.com/KristianP26/ble-scale-sync/issues/435)
+* **garmin:** stop setup reusing a stale token ([#427](https://github.com/KristianP26/ble-scale-sync/issues/427)) ([3699443](https://github.com/KristianP26/ble-scale-sync/commit/3699443889f7b7331302fb71f93d416d11be4c81))
+* **mi-scale:** export muscle mass, not skeletal muscle, for Xiaomi scales ([#431](https://github.com/KristianP26/ble-scale-sync/issues/431)) ([6e9ce36](https://github.com/KristianP26/ble-scale-sync/commit/6e9ce36d57975d0cef1d5f716c9a1dba5081640d))
+* **mqtt-proxy:** never drive a GATT session for an advertisement-read scale ([b074fa5](https://github.com/KristianP26/ble-scale-sync/commit/b074fa5c34b0849f7c9151f60cf04a64eb2073fa)), closes [#422](https://github.com/KristianP26/ble-scale-sync/issues/422)
+* **mqtt-proxy:** refuse an advertisement-read scale on the single-shot GATT path too ([24d3b95](https://github.com/KristianP26/ble-scale-sync/commit/24d3b95791406175a7b287a415833ab2adbc2cb4)), closes [#422](https://github.com/KristianP26/ble-scale-sync/issues/422)
+* **mqtt-proxy:** tell the ESP32 which scales are read from advertisements ([10dcb40](https://github.com/KristianP26/ble-scale-sync/commit/10dcb405989a8a697c32a391ad39ac5b9408eb8a)), closes [#422](https://github.com/KristianP26/ble-scale-sync/issues/422)
+* **qn:** send the weight anchor twice after START, where both Arboleaf captures put it ([513c027](https://github.com/KristianP26/ble-scale-sync/commit/513c027a7325bd8f84552681fffb6692e892b0a4)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331) [#75](https://github.com/KristianP26/ble-scale-sync/issues/75)
+* **qn:** stop answering 20-byte live frames with a 0.17 kg A2 ([9a9025a](https://github.com/KristianP26/ble-scale-sync/commit/9a9025aa98976338a026e55a205265ca3ca3ff01)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331) [#235](https://github.com/KristianP26/ble-scale-sync/issues/235)
+* **qn:** stop reading a 20-byte live frame through the original layout ([f33618e](https://github.com/KristianP26/ble-scale-sync/commit/f33618e29153165aff748879d634f719efdab5ef)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **runtime:** deliver a queued export to its own user, with its own timestamp ([4db38bf](https://github.com/KristianP26/ble-scale-sync/commit/4db38bfe7f6896fb89d6bdb9fae9442dbeb216aa))
+* **scales:** log Senssun IF_B7 frames in an unknown state ([cafa1d7](https://github.com/KristianP26/ble-scale-sync/commit/cafa1d732b2c4177a7e3a746246c48399ac5e864)), closes [#423](https://github.com/KristianP26/ble-scale-sync/issues/423)
+* **scales:** stop QN claiming a 0x1A10 scale on its AE00 service alone ([909c062](https://github.com/KristianP26/ble-scale-sync/commit/909c0629c7bcc50d03b431b57f77be2b2b0f6764)), closes [#436](https://github.com/KristianP26/ble-scale-sync/issues/436)
+* **silvergear:** export a weigh-in that ends before its post-weigh-in frame ([ad49bb3](https://github.com/KristianP26/ble-scale-sync/commit/ad49bb307e09116ef9baa4171ed7f705152d282e)), closes [#357](https://github.com/KristianP26/ble-scale-sync/issues/357)
+* **silvergear:** time the hold on a monotonic clock ([7470ac0](https://github.com/KristianP26/ble-scale-sync/commit/7470ac0c4c01acfc029616a71fd53c51cc234c4b)), closes [#357](https://github.com/KristianP26/ble-scale-sync/issues/357)
+* **utils,exporters:** give retries a delay, and make the HA metric check check ([985e86a](https://github.com/KristianP26/ble-scale-sync/commit/985e86aa91626ae448946abbe8cb48662870e27b))
+
+
+### Docs
+
+* **addon:** say where the QN weight anchor is sent ([b707812](https://github.com/KristianP26/ble-scale-sync/commit/b7078127ded19f2900a905d8f6af60c72147ba7a)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **ble:** count the composition hold in the session and cycle ceilings ([c042d64](https://github.com/KristianP26/ble-scale-sync/commit/c042d64689c1df819f5ced036e5eaae25eb2bc1c))
+* describe muscle mass as fat-free mass minus bone ([f8a9e89](https://github.com/KristianP26/ble-scale-sync/commit/f8a9e89843a13c90a702954877b9dbdc21534495))
+* describe the R-MSC04 composition wait ([66f524f](https://github.com/KristianP26/ble-scale-sync/commit/66f524f835f6f23c98a9afe1c3071054c3567632)), closes [#434](https://github.com/KristianP26/ble-scale-sync/issues/434)
+* document ble.preemptive_adapter_reset ([4c1e414](https://github.com/KristianP26/ble-scale-sync/commit/4c1e41498b0d9359b8f6e565197d0df6226ea362)), closes [#417](https://github.com/KristianP26/ble-scale-sync/issues/417)
+* **esp32-proxy:** explain how advertisement-read scales are handled ([686f30b](https://github.com/KristianP26/ble-scale-sync/commit/686f30b6988498d4c7198479c0c84794ce209290)), closes [#422](https://github.com/KristianP26/ble-scale-sync/issues/422)
+* **esp32-proxy:** say a restart can bring back one dropped connect ([e9d6f70](https://github.com/KristianP26/ble-scale-sync/commit/e9d6f70371e1317fcb4b5bf34351772dbacadc15)), closes [#422](https://github.com/KristianP26/ble-scale-sync/issues/422)
+* **faq:** describe the retry backoff and queue as they ship now ([0cf84de](https://github.com/KristianP26/ble-scale-sync/commit/0cf84de2ea91bd6145bfc3069c7338963165b775))
+* fix two figures from today's follow-ups ([07d9726](https://github.com/KristianP26/ble-scale-sync/commit/07d9726b24c5509ebafce81c8d9b8af579e40a8a))
+* **garmin:** list BMR among the fields weight_only leaves unset ([1c5f7e5](https://github.com/KristianP26/ble-scale-sync/commit/1c5f7e53a7ec5ebfebee71242600b29fbc62e464))
+* **interfaces:** say the completion hold is GATT-only ([094e719](https://github.com/KristianP26/ble-scale-sync/commit/094e71976a7015ce298e33dd5409a1d23d347c35)), closes [#357](https://github.com/KristianP26/ble-scale-sync/issues/357)
+* list the Grifema GA2001 / Senssun IF_B7 as a broadcast scale ([bde2812](https://github.com/KristianP26/ble-scale-sync/commit/bde2812f69f566811c3426f59b346e92c9b4be85)), closes [#423](https://github.com/KristianP26/ble-scale-sync/issues/423)
+* **qn:** document the post-START weight anchor ([f57e283](https://github.com/KristianP26/ble-scale-sync/commit/f57e283e3ed400cbb0c574ac15525d1563ce6ccf)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **qn:** record that 0x08 switches a QN-S500 to stone ([dd6ca9d](https://github.com/KristianP26/ble-scale-sync/commit/dd6ca9d6f4da187601e092ff95f09d4ef998fc64))
+* **qn:** say display_unit only reaches QN scales, and how sure 0x08 is ([e2b0449](https://github.com/KristianP26/ble-scale-sync/commit/e2b0449525a0ab596c89c8f0d4ecd5b1dcfa7a69))
+* **qn:** stop telling users to try qn_time_sync_long apart from qn_weight_ack ([e49fbeb](https://github.com/KristianP26/ble-scale-sync/commit/e49fbeb809a6d97169a386716bde520701819e61)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* qualify where preemptive_adapter_reset applies ([2cc878c](https://github.com/KristianP26/ble-scale-sync/commit/2cc878c08bd7709c042b6b03115cfd741b638d64)), closes [#417](https://github.com/KristianP26/ble-scale-sync/issues/417)
+* record the env-override and webhook header behaviour that changed ([7a2dbc4](https://github.com/KristianP26/ble-scale-sync/commit/7a2dbc4dfaa35c9c4ee498d9b793c6eca43fdb25))
+* say the Grifema GA2001 / Senssun IF_B7 reads in kg and lb ([08737bb](https://github.com/KristianP26/ble-scale-sync/commit/08737bb3f64b8948273237899a7ee42ea049fa65)), closes [#423](https://github.com/KristianP26/ble-scale-sync/issues/423)
+* say the Senssun IF_B7 lb reading rests on one weigh-in ([0f7e5f8](https://github.com/KristianP26/ble-scale-sync/commit/0f7e5f840b485d8bb637eb62f5648834bb2a5520)), closes [#423](https://github.com/KristianP26/ble-scale-sync/issues/423)
+* say which broadcast paths hold a partial reading ([289424b](https://github.com/KristianP26/ble-scale-sync/commit/289424b5a563e6e782eaa47b34886e8300b49b66)), closes [#357](https://github.com/KristianP26/ble-scale-sync/issues/357)
+* **scales:** note the Silvergear wait for its post-weigh-in frame ([15b4f29](https://github.com/KristianP26/ble-scale-sync/commit/15b4f292c641e4211816179d3779891302b7f4f3)), closes [#357](https://github.com/KristianP26/ble-scale-sync/issues/357)
+* **scales:** say the R-MSC04 profile is the one the app writes ([4bd5d16](https://github.com/KristianP26/ble-scale-sync/commit/4bd5d16809d2ac31f836b4770a877e3049301cea)), closes [#434](https://github.com/KristianP26/ble-scale-sync/issues/434)
+* **scales:** say when a Silvergear step-off sends the weight at once ([fdf1df9](https://github.com/KristianP26/ble-scale-sync/commit/fdf1df9a46072d3da7dfd80bc3191a1676873118)), closes [#357](https://github.com/KristianP26/ble-scale-sync/issues/357)
+* **troubleshooting:** cover scales that show a passkey to type, not to confirm ([#430](https://github.com/KristianP26/ble-scale-sync/issues/430)) ([6e2b0f6](https://github.com/KristianP26/ble-scale-sync/commit/6e2b0f6112f06e7653d40485b0d31800f11363f5))
+
+## [1.29.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.28.0...v1.29.0) (2026-09-09)
+
+
+### Added
+
+* **active-era:** log the raw impedance, which decided nothing until now ([e5525e4](https://github.com/KristianP26/ble-scale-sync/commit/e5525e49f074e13cdfa51e93f127f23867fd0ccf)), closes [#386](https://github.com/KristianP26/ble-scale-sync/issues/386)
+* **addon:** expose out_of_range as an add-on option ([83e2345](https://github.com/KristianP26/ble-scale-sync/commit/83e23458de933f289850d7231cbdc66651f61aee)), closes [#395](https://github.com/KristianP26/ble-scale-sync/issues/395)
+* **addon:** expose qn_config_long as an add-on option ([3a4922e](https://github.com/KristianP26/ble-scale-sync/commit/3a4922e8fd18a5384b013c9e075c1a14a6b94a09))
+* **addon:** expose the Garmin upload timeout ([7dd7123](https://github.com/KristianP26/ble-scale-sync/commit/7dd7123e2cda37ba62fb22472466fac761dd6a6e)), closes [#399](https://github.com/KristianP26/ble-scale-sync/issues/399)
+* **addon:** expose the idle rescan delay, and name three untranslated options ([ac083b2](https://github.com/KristianP26/ble-scale-sync/commit/ac083b238fd686287d0c9d3d4d602df314fdf78b)), closes [#398](https://github.com/KristianP26/ble-scale-sync/issues/398)
+* **ble:** add onSessionStart, the hook adapters can actually reset state in ([68d411c](https://github.com/KristianP26/ble-scale-sync/commit/68d411ca385f01d3e0a33091618c0fb5ec50dad3)), closes [#394](https://github.com/KristianP26/ble-scale-sync/issues/394)
+* **ble:** hand onSessionStart the device address ([a66f5dd](https://github.com/KristianP26/ble-scale-sync/commit/a66f5dd2c021b7764cf9146f18de1d87edabc780)), closes [#406](https://github.com/KristianP26/ble-scale-sync/issues/406)
+* **ble:** release the session device and report what BlueZ can see ([ea45116](https://github.com/KristianP26/ble-scale-sync/commit/ea45116a690881dd72149c75ef0729fdaa7d5722))
+* **config:** add ble.qn_config_long ([24d4dce](https://github.com/KristianP26/ble-scale-sync/commit/24d4dce92c0cc93e17f3eba88b9d51f606de76d7))
+* **config:** add out_of_range for readings no weight_range covers ([30cab53](https://github.com/KristianP26/ble-scale-sync/commit/30cab53892219ed28cdb9b64e886f362b81a05e6)), closes [#395](https://github.com/KristianP26/ble-scale-sync/issues/395)
+* **config:** add runtime.idle_rescan_delay ([fcb753f](https://github.com/KristianP26/ble-scale-sync/commit/fcb753f9e283c8561e0483a2d878f04ad02fa478)), closes [#398](https://github.com/KristianP26/ble-scale-sync/issues/398)
+* **config:** add runtime.retry_failed_exports ([975baca](https://github.com/KristianP26/ble-scale-sync/commit/975baca29eb455675705b1321f0fe85d5aebda45)), closes [#412](https://github.com/KristianP26/ble-scale-sync/issues/412)
+* **garmin:** make the uploader timeout configurable, and raise the default ([88f18c2](https://github.com/KristianP26/ble-scale-sync/commit/88f18c2bdf13134bb3ab34857d85dd019c172698)), closes [#399](https://github.com/KristianP26/ble-scale-sync/issues/399)
+* **inlife:** make the undecoded impedance field answerable from one log ([5a7de85](https://github.com/KristianP26/ble-scale-sync/commit/5a7de8528cac7d0d84841ff27ac18985318b4333)), closes [#405](https://github.com/KristianP26/ble-scale-sync/issues/405)
+* **qn:** send the vendor app's 10-byte 0x13 config frame behind a switch ([5172d7f](https://github.com/KristianP26/ble-scale-sync/commit/5172d7f03260d53af797b16db408ea60efc47c63))
+* **runtime:** add the failed-export queue ([fe9b81c](https://github.com/KristianP26/ble-scale-sync/commit/fe9b81cd909c817201823785a7af795ea8dd1c43)), closes [#412](https://github.com/KristianP26/ble-scale-sync/issues/412)
+* **runtime:** enqueue a failed export and flush it on the next cycle ([77b8755](https://github.com/KristianP26/ble-scale-sync/commit/77b8755f2d7d1e3a2bc522296bc3f9d03d158c6e)), closes [#412](https://github.com/KristianP26/ble-scale-sync/issues/412)
+* **runtime:** stop exporting a reading nobody's range vouches for ([2aa7628](https://github.com/KristianP26/ble-scale-sync/commit/2aa762811a5be0b041b3972000e06f8252927354)), closes [#395](https://github.com/KristianP26/ble-scale-sync/issues/395)
+* **runtime:** stop idle scan cycles using the error backoff ([7796c6d](https://github.com/KristianP26/ble-scale-sync/commit/7796c6d7b3eb2841b3584a08a95fcedf0962611c)), closes [#398](https://github.com/KristianP26/ble-scale-sync/issues/398)
+* **scales:** claim the FitTrack Dara under the Lefu AC02 adapter ([#408](https://github.com/KristianP26/ble-scale-sync/issues/408)) ([823b1f3](https://github.com/KristianP26/ble-scale-sync/commit/823b1f381a09906dc94f3a937679f5af1418c9d4))
+
+
+### Fixed
+
+* **beurer-bf720:** apply the sentinel rule to muscle, not only to fat ([83a21e5](https://github.com/KristianP26/ble-scale-sync/commit/83a21e53617a9030f2c3b26812bed1e4fa3e0322)), closes [#405](https://github.com/KristianP26/ble-scale-sync/issues/405)
+* **beurer:** clear the stability buffer and partial composition per session ([0a6e5f4](https://github.com/KristianP26/ble-scale-sync/commit/0a6e5f4d04138b904fb1fee6581dfb67d78dd054)), closes [#394](https://github.com/KristianP26/ble-scale-sync/issues/394)
+* **ble:** close the four gaps the review found in the cleanup work ([831a086](https://github.com/KristianP26/ble-scale-sync/commit/831a08600e4ee7b1c42839012d96ad13989f7acf)), closes [#404](https://github.com/KristianP26/ble-scale-sync/issues/404)
+* **ble:** correct dbus-next match-rule refcounting at runtime ([12c222e](https://github.com/KristianP26/ble-scale-sync/commit/12c222e957e06336b367fb7e783208dd23d2ffa0)), closes [#396](https://github.com/KristianP26/ble-scale-sync/issues/396)
+* **ble:** decide dbus-next is broken by behaviour, not by reading its source ([5b533de](https://github.com/KristianP26/ble-scale-sync/commit/5b533de1e8af006c0a42d0ba2d0b08b87b01dfed)), closes [#396](https://github.com/KristianP26/ble-scale-sync/issues/396)
+* **ble:** hand back the BlueZ device proxies the liveness probe creates ([80681ea](https://github.com/KristianP26/ble-scale-sync/commit/80681ea03e60e224903e3413b8fe2a09c1e73140))
+* **ble:** keep the duplicate-advertisement filter node-ble was overwriting ([2f0e476](https://github.com/KristianP26/ble-scale-sync/commit/2f0e476d506dd1fe580486b6d2f3610c068ad46d))
+* **ble:** key the filtered-scan claim on the adapter, not on module state ([acb7ba5](https://github.com/KristianP26/ble-scale-sync/commit/acb7ba5843bc5a2bd8a55862e0cd465f158ba4d9))
+* **ble:** let a reading session its caller gave up on clean itself up ([9adf018](https://github.com/KristianP26/ble-scale-sync/commit/9adf01855068bdee2f0dfb913446157fab9de7e2)), closes [#404](https://github.com/KristianP26/ble-scale-sync/issues/404)
+* **ble:** release the device proxies the connect and scan paths drop ([01a1612](https://github.com/KristianP26/ble-scale-sync/commit/01a1612439fd57ff4cb652dddb6900a7c2ae2b43)), closes [#404](https://github.com/KristianP26/ble-scale-sync/issues/404)
+* **ble:** release the device proxies the connect retry loop replaces ([db3f092](https://github.com/KristianP26/ble-scale-sync/commit/db3f092fe1a7787fcaaa9bfc2b0befcf4e722122))
+* **ble:** stop the detached broadcast poll rebuilding a released proxy ([0d7d815](https://github.com/KristianP26/ble-scale-sync/commit/0d7d81511b6651cd14e8727b400109ed154f0ccb))
+* close the gaps the review found in the two new settings ([e214da5](https://github.com/KristianP26/ble-scale-sync/commit/e214da58cc60965aa58eb94d4bdadeb02baf6a4b))
+* close the review's findings on the per-device variant work ([75ab1c4](https://github.com/KristianP26/ble-scale-sync/commit/75ab1c43643cbaf338aabaa0ebfec68600c4a919)), closes [#406](https://github.com/KristianP26/ble-scale-sync/issues/406)
+* **config:** honour BLE_HANDLER=esphome-proxy, and make the liveness timeout reloadable ([3b3f187](https://github.com/KristianP26/ble-scale-sync/commit/3b3f187b8c82de5f0356131384104e31f6f0c4de)), closes [#407](https://github.com/KristianP26/ble-scale-sync/issues/407)
+* **config:** warn about the five proxy keys that also need a restart ([f7327c8](https://github.com/KristianP26/ble-scale-sync/commit/f7327c8332fe5b92866b91988b5811a2ec18be40)), closes [#407](https://github.com/KristianP26/ble-scale-sync/issues/407)
+* **config:** warn that force_scale_adapter needs a restart ([29e1f21](https://github.com/KristianP26/ble-scale-sync/commit/29e1f21aca4fcd24dde107297cdfeb68161b5e12)), closes [#407](https://github.com/KristianP26/ble-scale-sync/issues/407)
+* **diagnose:** decode QN broadcasts with the real decoder, not a copy ([a7cf7ab](https://github.com/KristianP26/ble-scale-sync/commit/a7cf7abf14b4da66dca480e72bae139be04d35d9)), closes [#406](https://github.com/KristianP26/ble-scale-sync/issues/406)
+* **es-cs20m:** clear session state even when the scale sends no START frame ([14ef35b](https://github.com/KristianP26/ble-scale-sync/commit/14ef35b26270289159c0d0ca843ff9b90256992b))
+* **exporters:** parse numeric fields instead of casting them ([06c2da5](https://github.com/KristianP26/ble-scale-sync/commit/06c2da578d4c0b58b852fcfb9a2573756341e0d0)), closes [#399](https://github.com/KristianP26/ble-scale-sync/issues/399)
+* **hoffen:** stop decoding our own command echo as a weight ([40c4feb](https://github.com/KristianP26/ble-scale-sync/commit/40c4feb9e2b4bb1b2c22f64119823d73d04f56bc)), closes [#405](https://github.com/KristianP26/ble-scale-sync/issues/405)
+* **inlife:** log the frames this parser rejects, not only the ones it accepts ([492731d](https://github.com/KristianP26/ble-scale-sync/commit/492731d28e96991115b47895fc1b8e2d6a08512f)), closes [#405](https://github.com/KristianP26/ble-scale-sync/issues/405)
+* **inlife:** wait for the impedance frame instead of resolving on the first weight ([1f3390e](https://github.com/KristianP26/ble-scale-sync/commit/1f3390e48db18bd74f34074f11e904e32111ee8f)), closes [#413](https://github.com/KristianP26/ble-scale-sync/issues/413)
+* **mqtt-proxy:** undo a partial watcher start instead of leaking its listeners ([b8bb494](https://github.com/KristianP26/ble-scale-sync/commit/b8bb494b78b547147ddd3e0270e5fa389a960c7e)), closes [#404](https://github.com/KristianP26/ble-scale-sync/issues/404)
+* **qn:** reset the session state before the notify bindings go live ([093dbae](https://github.com/KristianP26/ble-scale-sync/commit/093dbae471e450886ac2255fdd4a5c62dccf28ed))
+* repair what the review found in the tech-debt sweep ([31e87d3](https://github.com/KristianP26/ble-scale-sync/commit/31e87d3ee6d4d3139856ae96e3d1ad4de841da19)), closes [#406](https://github.com/KristianP26/ble-scale-sync/issues/406)
+* **runtime:** close two ways the retry queue could lose or duplicate a reading ([bd28382](https://github.com/KristianP26/ble-scale-sync/commit/bd28382d75580aed51f2f5046f92eb638f25bc4a)), closes [#412](https://github.com/KristianP26/ble-scale-sync/issues/412)
+* **runtime:** make out_of_range warn actually warn ([b370434](https://github.com/KristianP26/ble-scale-sync/commit/b370434073820157740f9159b27805e8053aef13)), closes [#395](https://github.com/KristianP26/ble-scale-sync/issues/395)
+* **scales:** finish the [#394](https://github.com/KristianP26/ble-scale-sync/issues/394) session-state rollout across eight adapters ([155f39d](https://github.com/KristianP26/ble-scale-sync/commit/155f39de3301c52774564c95cbb60383a316803a))
+* **scales:** finish the sentinel rule, and correct the cross-check test ([2bd04a0](https://github.com/KristianP26/ble-scale-sync/commit/2bd04a07fcdd8c38a937afdba733cb5dd9fd30db)), closes [#405](https://github.com/KristianP26/ble-scale-sync/issues/405)
+* **scales:** guard the SIG body-composition sentinels in one decoder ([706ccf6](https://github.com/KristianP26/ble-scale-sync/commit/706ccf68f5b6428524e5bba513760814fcb7b695)), closes [#405](https://github.com/KristianP26/ble-scale-sync/issues/405)
+* **scales:** pin body composition to the reading it was measured for ([dff4019](https://github.com/KristianP26/ble-scale-sync/commit/dff401926ea6953ce0d70235a571cb0e4924e067))
+* **scales:** reject SIG date-time values the specification forbids ([74dce86](https://github.com/KristianP26/ble-scale-sync/commit/74dce86a3cbe0f62fba941469523d8ed316ca981))
+* **scales:** reset per-session state in onSessionStart, not onConnected ([d3cc7db](https://github.com/KristianP26/ble-scale-sync/commit/d3cc7dbc5a3f931439fb1941eb660ec328176430))
+* **scales:** route the last BIA callers through the plausibility guard ([e50c9f2](https://github.com/KristianP26/ble-scale-sync/commit/e50c9f264d3f4dd547c6b91839ef908765ce6283))
+* **scales:** stop six adapters exporting the previous person's weigh-in ([26f6a47](https://github.com/KristianP26/ble-scale-sync/commit/26f6a47f18bab724aff73d8bf58c7dfdb3507187)), closes [#394](https://github.com/KristianP26/ble-scale-sync/issues/394)
+* **scales:** widen five name gates to scales whose protocol we already ship ([fce8d7b](https://github.com/KristianP26/ble-scale-sync/commit/fce8d7b1991a3573dffde38efc82288260cb23b3)), closes [#409](https://github.com/KristianP26/ble-scale-sync/issues/409)
+* secret handling, file permissions, and log injection ([12d9acf](https://github.com/KristianP26/ble-scale-sync/commit/12d9acf6baafb61e8ee491b595629767ecd871c7))
+* three defects that crash the process or silently lose a weigh-in ([55050e6](https://github.com/KristianP26/ble-scale-sync/commit/55050e6dfe85963044377273ebef70fde5e8f190))
+* **yunmai:** resolve the Mini variant per device, at session start ([3271173](https://github.com/KristianP26/ble-scale-sync/commit/3271173c6d4f55dbca089b791d8f8753bc4d7114)), closes [#406](https://github.com/KristianP26/ble-scale-sync/issues/406)
+* **yunmai:** stop a later advertisement clearing the Mini variant flag ([c4b3559](https://github.com/KristianP26/ble-scale-sync/commit/c4b3559571cb228e0bf3c5822f9eea64bc827a54)), closes [#406](https://github.com/KristianP26/ble-scale-sync/issues/406)
+
+
+### Docs
+
+* correct five claims in the new documentation ([aeecb0a](https://github.com/KristianP26/ble-scale-sync/commit/aeecb0a5a83ccf8543e15e75189fed3995806492)), closes [#407](https://github.com/KristianP26/ble-scale-sync/issues/407)
+* document idle_rescan_delay, and correct what scan_cooldown governs ([1d968d6](https://github.com/KristianP26/ble-scale-sync/commit/1d968d6f873b40328ec2fec30cc0ddaa6e555e98)), closes [#398](https://github.com/KristianP26/ble-scale-sync/issues/398)
+* document out_of_range, and correct what weight_range actually does ([4e16e88](https://github.com/KristianP26/ble-scale-sync/commit/4e16e88a8a6bafcd47eeceb0630ea13a1664e472)), closes [#395](https://github.com/KristianP26/ble-scale-sync/issues/395)
+* document qn_config_long, and when to stop testing options one at a time ([d62f15c](https://github.com/KristianP26/ble-scale-sync/commit/d62f15c120687ec3eae3a41ac7b3f512fbc4ea27))
+* document the export retry queue, and correct the FAQ ([a26949a](https://github.com/KristianP26/ble-scale-sync/commit/a26949a39588dc9249f46ddfc07ee5c159859ada)), closes [#412](https://github.com/KristianP26/ble-scale-sync/issues/412)
+* document what the code does but the docs never said ([c4c69ed](https://github.com/KristianP26/ble-scale-sync/commit/c4c69edf8b8ed8f3cf07f482d0a21445b6d449ff)), closes [#407](https://github.com/KristianP26/ble-scale-sync/issues/407)
+* fix the config reference so a hand-written config actually loads ([f92db73](https://github.com/KristianP26/ble-scale-sync/commit/f92db739278c1705aaf503db59359f6efbfe929b))
+* **readme:** add gvarph and chrisauer to the contributors grid ([2ebb697](https://github.com/KristianP26/ble-scale-sync/commit/2ebb6974f6e81adcad82c176c9baa1b6eaa462c9))
+* say plainly that docker.mode is accepted and unused ([e609b29](https://github.com/KristianP26/ble-scale-sync/commit/e609b29394e87132076944d192dc2bdca25c6b25)), closes [#407](https://github.com/KristianP26/ble-scale-sync/issues/407)
+* **scales:** correct the exclusion notes on the SIG WSS decoder ([74b6575](https://github.com/KristianP26/ble-scale-sync/commit/74b6575cfbd1c996631edc79d2f71ea4ccbdbca9))
+* **scales:** repair the onSessionStart doc comments ([4d3a1ab](https://github.com/KristianP26/ble-scale-sync/commit/4d3a1abc288c97a2ffbc46cf593de1b9497d7184))
+* stop naming a version out_of_range has not shipped in yet ([0264bfe](https://github.com/KristianP26/ble-scale-sync/commit/0264bfef7b40d6b5d1a87d598e1c35d2736577a5))
+* switch the star history chart back to star-history.com ([15ac7bc](https://github.com/KristianP26/ble-scale-sync/commit/15ac7bc37dc99e4824ad0cbcca406a89b89c57dd))
+
+## [1.28.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.27.0...v1.28.0) (2026-09-07)
+
+
+### Added
+
+* **ble:** carry the device address, and auto-detect the anonymous ES-CS20M ([e5b34c1](https://github.com/KristianP26/ble-scale-sync/commit/e5b34c18e80a7320d369e394e1621e91759c2b4e)), closes [#376](https://github.com/KristianP26/ble-scale-sync/issues/376)
+* **qn:** add ble.qn_time_sync_long for the vendor app's 9-byte 0x20 frame ([4c8432c](https://github.com/KristianP26/ble-scale-sync/commit/4c8432cc71a7578f6a89e5693e5f9e7dcb955b01)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **scales:** add a shared impedance plausibility guard for BIA ([58127d7](https://github.com/KristianP26/ble-scale-sync/commit/58127d77d9b88ff57aade98c782ef03dfdc8b921)), closes [#386](https://github.com/KristianP26/ble-scale-sync/issues/386)
+* **tools:** derive the published adapter and exporter counts from the code ([770fd03](https://github.com/KristianP26/ble-scale-sync/commit/770fd03449b0c64a52f7c29d5d48bef1ba67cda3)), closes [#366](https://github.com/KristianP26/ble-scale-sync/issues/366)
+
+
+### Fixed
+
+* **addon:** emit the ble block when qn_a4_prelude is the only option set ([8da7b8d](https://github.com/KristianP26/ble-scale-sync/commit/8da7b8d05459ed241c6fa10318ed77224fee3dea)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **addon:** make the custom_config warning loop a real line continuation ([25f151c](https://github.com/KristianP26/ble-scale-sync/commit/25f151cf87443fbf2f400c8bccbf0cb3a27268ff))
+* **beurer:** a zeroed composition field is not a measurement ([79b509b](https://github.com/KristianP26/ble-scale-sync/commit/79b509bbcb326822c1ddca5d9d02b2d6bfeae6ea)), closes [#386](https://github.com/KristianP26/ble-scale-sync/issues/386)
+* **ble:** cancel a pairing with the method BlueZ actually has ([4ce82af](https://github.com/KristianP26/ble-scale-sync/commit/4ce82af5043ee5c15e50425f00043dbbd2067718)), closes [#335](https://github.com/KristianP26/ble-scale-sync/issues/335)
+* **ble:** set the BlueZ duplicate filter before starting discovery, not after ([4b37f20](https://github.com/KristianP26/ble-scale-sync/commit/4b37f203836d264e6b586b8f103514f6f18c2743)), closes [#372](https://github.com/KristianP26/ble-scale-sync/issues/372)
+* **ble:** stop cleanly while a BLE pairing is still in flight ([4451122](https://github.com/KristianP26/ble-scale-sync/commit/4451122dd484e7da1af4b98c96f3a56af6869e98)), closes [#335](https://github.com/KristianP26/ble-scale-sync/issues/335)
+* **exporters:** read every boolean field the safe way, not just garmin.weight_only ([a5183cb](https://github.com/KristianP26/ble-scale-sync/commit/a5183cb7f34d73854e52ce249288cbf537efbc89))
+* **qn:** send the weight anchor before START, where the vendor app sends it ([f18aa93](https://github.com/KristianP26/ble-scale-sync/commit/f18aa93b7743d14c078ba05cc30aa44536cc1699)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **qn:** send the weight anchor once, not at ready time and again before START ([66aae34](https://github.com/KristianP26/ble-scale-sync/commit/66aae34b56ed9bae48bf93838708a589c452f210))
+* **runtime:** force-exit with 0 when the stop was one you asked for ([8c7779a](https://github.com/KristianP26/ble-scale-sync/commit/8c7779a24179ecd553044ed0ed19cfbb81ea6b01)), closes [#335](https://github.com/KristianP26/ble-scale-sync/issues/335)
+* **scales:** use the impedance these four adapters already parse ([cc04ec4](https://github.com/KristianP26/ble-scale-sync/commit/cc04ec47745a259f81fcd84d61fac3198451d63b)), closes [#386](https://github.com/KristianP26/ble-scale-sync/issues/386)
+
+
+### Docs
+
+* **addon:** say that a custom config edit needs a restart ([6054a08](https://github.com/KristianP26/ble-scale-sync/commit/6054a089c94c290eef57f023cf708f89217a9d60))
+* **body-composition:** explain when an impedance is refused ([dbf9f98](https://github.com/KristianP26/ble-scale-sync/commit/dbf9f9890d447a043def4567a048ec2fb5ab3064)), closes [#386](https://github.com/KristianP26/ble-scale-sync/issues/386)
+* **qn:** reunite two docblocks with the code they document ([46bf2aa](https://github.com/KristianP26/ble-scale-sync/commit/46bf2aa366b9a228cb81906bc7bedc01c85777ab)), closes [#367](https://github.com/KristianP26/ble-scale-sync/issues/367)
+* **robi:** the S9 does not read an impedance, so it is not on the [#386](https://github.com/KristianP26/ble-scale-sync/issues/386) list ([411acef](https://github.com/KristianP26/ble-scale-sync/commit/411acefa2f17b32f676d965b8edf1f57c985183b))
+* **supported-scales:** two rows claimed body composition they do not produce ([adcf4a0](https://github.com/KristianP26/ble-scale-sync/commit/adcf4a093f886ee46c207275c87c6ec559766550)), closes [#386](https://github.com/KristianP26/ble-scale-sync/issues/386)
+
+## [1.27.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.26.0...v1.27.0) (2026-09-05)
+
+
+### Added
+
+* **scales:** add the Speediance Smart Scale FG2211WBF adapter ([#383](https://github.com/KristianP26/ble-scale-sync/issues/383)) ([e1284ad](https://github.com/KristianP26/ble-scale-sync/commit/e1284ad2b9d10dc4942f66c7e93b78d6f31b61f7))
+* **ble:** add the Home Assistant Bluetooth transport ([#375](https://github.com/KristianP26/ble-scale-sync/issues/375)) ([56489ca](https://github.com/KristianP26/ble-scale-sync/commit/56489ca27cb36fdd27da20b11ff916692277a293))
+* **ble:** name the missing npm package when a BLE transport is not installed ([1d1f448](https://github.com/KristianP26/ble-scale-sync/commit/1d1f448e4fb3826aa22ea66b53f57f20e82a1c6e)), closes [#364](https://github.com/KristianP26/ble-scale-sync/issues/364)
+* **cli:** dispatch subcommands from a single entry point ([a8e0f3e](https://github.com/KristianP26/ble-scale-sync/commit/a8e0f3ec940fd33beed2b463a1d6b52f58234074)), closes [#365](https://github.com/KristianP26/ble-scale-sync/issues/365)
+* **cli:** run the Garmin auth helper as a subcommand ([fc93208](https://github.com/KristianP26/ble-scale-sync/commit/fc93208efd8b2c41014eb9696cf8859a8c4b137d)), closes [#365](https://github.com/KristianP26/ble-scale-sync/issues/365)
+* **exporters:** let the Garmin exporter upload the weight alone ([#373](https://github.com/KristianP26/ble-scale-sync/issues/373)) ([d270901](https://github.com/KristianP26/ble-scale-sync/commit/d2709018d67af6c61a37eca64bee1d4380959af7))
+* **qn:** add ble.qn_a4_prelude, the two 0xA4 frames the Arboleaf app sends after START ([dbb39dd](https://github.com/KristianP26/ble-scale-sync/commit/dbb39dd70974ffe8668ba69afa76b8e0199ad940)), closes [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **scales:** add the Etekcity ESF-551 Smart Fitness Scale ([80769d4](https://github.com/KristianP26/ble-scale-sync/commit/80769d44a07aa2a7f83f1af198d6db28a42f1e98)), closes [#385](https://github.com/KristianP26/ble-scale-sync/issues/385)
+* **scales:** add the Xiaomi Body Composition Scale S400 adapter ([#374](https://github.com/KristianP26/ble-scale-sync/issues/374)) ([26b08e8](https://github.com/KristianP26/ble-scale-sync/commit/26b08e826f24bf10809510efadb3ebda5d0aeffc))
+
+
+### Fixed
+
+* **beurer:** latch the SBF70 frame layout so a forced adapter stops reading 12.80 kg ([f89561a](https://github.com/KristianP26/ble-scale-sync/commit/f89561ae0cbec96287614ec74a742a72c366ccaf)), closes [#384](https://github.com/KristianP26/ble-scale-sync/issues/384)
+* **ble:** make the missing-transport message actionable where the app runs ([db7edd2](https://github.com/KristianP26/ble-scale-sync/commit/db7edd2ffa3b3c0e36e3a7eb1caa7b2df00686e5)), closes [#364](https://github.com/KristianP26/ble-scale-sync/issues/364)
+* **cli:** answer --version, and stop promising flags a command ignores ([2b1cfd9](https://github.com/KristianP26/ble-scale-sync/commit/2b1cfd9db993ffa04e92b31ea6fdcf7326260886)), closes [#365](https://github.com/KristianP26/ble-scale-sync/issues/365)
+* **cli:** print the command the reader can actually type ([2f9c3d9](https://github.com/KristianP26/ble-scale-sync/commit/2f9c3d9b63f85a7d8ed70a951d4176c6f9d0eb1c)), closes [#365](https://github.com/KristianP26/ble-scale-sync/issues/365)
+* **cli:** translate the Garmin arguments the way docker-entrypoint does ([d16a36b](https://github.com/KristianP26/ble-scale-sync/commit/d16a36bd9e932bcd878ac9a7584e09f49c83c8cc)), closes [#365](https://github.com/KristianP26/ble-scale-sync/issues/365)
+* **config:** look for config.yaml and .env in the working directory first ([de98a29](https://github.com/KristianP26/ble-scale-sync/commit/de98a29392ab73830da89586c24356646f8b4a7a)), closes [#365](https://github.com/KristianP26/ble-scale-sync/issues/365)
+* **config:** read config.yaml and .env from one directory, not two ([6fddf9d](https://github.com/KristianP26/ble-scale-sync/commit/6fddf9dfcf4ec8a9bd0d3c592b0e6195414de33e)), closes [#365](https://github.com/KristianP26/ble-scale-sync/issues/365)
+* **diagnose:** say when the configured transport is a proxy, instead of failing to load Noble ([a4dd6aa](https://github.com/KristianP26/ble-scale-sync/commit/a4dd6aa8e668bb021fbd4df83b66212b265587d7)), closes [#376](https://github.com/KristianP26/ble-scale-sync/issues/376)
+* **influxdb:** authenticate the healthcheck so InfluxDB v3 passes ([4e4c846](https://github.com/KristianP26/ble-scale-sync/commit/4e4c8466b2d3e476b76ee1537652a833052d1915))
+* **qn:** hold the connection context across the FFE3 fallback so the 0x1F ack reaches the scale ([#371](https://github.com/KristianP26/ble-scale-sync/issues/371)) ([28d8397](https://github.com/KristianP26/ble-scale-sync/commit/28d8397466b70fc6279b3ca2d5cad0989e5b5ee7)), closes [#370](https://github.com/KristianP26/ble-scale-sync/issues/370)
+* **runtime:** fail fast when a BLE stack is missing, instead of retrying forever ([cdba062](https://github.com/KristianP26/ble-scale-sync/commit/cdba0625523cb34c06b675add421222dad5b6d99)), closes [#364](https://github.com/KristianP26/ble-scale-sync/issues/364)
+* **salter:** read both ends of a backlogged slot, not just the oldest ([#360](https://github.com/KristianP26/ble-scale-sync/issues/360)) ([8c66101](https://github.com/KristianP26/ble-scale-sync/commit/8c661017e3fc10bf597f7d48268e8c5c95e16047))
+* **silvergear:** log a settling weight once per value, not once per re-read ([c6926ef](https://github.com/KristianP26/ble-scale-sync/commit/c6926efbe0a8894f90eb2361803dfb1b747fefc8)), closes [#372](https://github.com/KristianP26/ble-scale-sync/issues/372)
+* **speediance:** run the BIA estimator, gate the impedance, and update the counts ([580b18a](https://github.com/KristianP26/ble-scale-sync/commit/580b18a7a2baadd9f53117c1dfd95737af29fd38))
+
+
+### Docs
+
+* **cli:** name the ble-scale-sync command in the remaining usage strings ([6a8466b](https://github.com/KristianP26/ble-scale-sync/commit/6a8466b38f7dff1568218cfef4e856d7e24628cb)), closes [#365](https://github.com/KristianP26/ble-scale-sync/issues/365)
+* correct the source deployment guides for tsx as a devDependency ([84529bf](https://github.com/KristianP26/ble-scale-sync/commit/84529bfc2580e354728c3e143195be3874ccfd57))
+* count 35 protocol adapters after the Xiaomi S400 landed ([dae289d](https://github.com/KristianP26/ble-scale-sync/commit/dae289d4f44075097675c603ebe6cb3568d30b6b))
+* document the npm install path, the subcommands and where config is read from ([420096b](https://github.com/KristianP26/ble-scale-sync/commit/420096bb054c9895facec3e0d782064fc1ef8cd2))
+* **index:** link the clone path instead of repeating it ([f09a68d](https://github.com/KristianP26/ble-scale-sync/commit/f09a68dcc9fd3740b3a688445bfa000d0611b5db)), closes [#365](https://github.com/KristianP26/ble-scale-sync/issues/365)
+* **supported-scales:** cut protocol detail and unpack the limitations ([20c8c06](https://github.com/KristianP26/ble-scale-sync/commit/20c8c0682f66ebd450c39aac2801134e274d92b6))
+
+## [1.26.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.25.0...v1.26.0) (2026-08-26)
+
+
+### Added
+
+* **ble:** add a provisional weight type that cannot reach an exporter ([3d8e7f1](https://github.com/KristianP26/ble-scale-sync/commit/3d8e7f18a2231eee3ef7c02ebfa405c77c5a8f6f)), closes [#356](https://github.com/KristianP26/ble-scale-sync/issues/356)
+* **ble:** expose transport liveness from the proxy watchers ([5753c66](https://github.com/KristianP26/ble-scale-sync/commit/5753c66db363966d337bf987cc53b93fdebf7d7e)), closes [#281](https://github.com/KristianP26/ble-scale-sync/issues/281)
+* **ble:** let removeDevice delete a bond when the caller asks ([c2ddca9](https://github.com/KristianP26/ble-scale-sync/commit/c2ddca9d125cde3b99d0f1ff224b460ae591aa3e)), closes [#335](https://github.com/KristianP26/ble-scale-sync/issues/335)
+* **ble:** opt-in recovery from a bond the scale has forgotten ([d8f8a92](https://github.com/KristianP26/ble-scale-sync/commit/d8f8a92034cc17edc985eab429ad59e53d88ed42)), closes [#335](https://github.com/KristianP26/ble-scale-sync/issues/335)
+* **ble:** show settling weights on the live status line ([817e952](https://github.com/KristianP26/ble-scale-sync/commit/817e952c5f3c258d74de4943d75a039fb944cb9d)), closes [#356](https://github.com/KristianP26/ble-scale-sync/issues/356)
+* **config:** resolve a per-user weight anchor into the user profile ([7ca681f](https://github.com/KristianP26/ble-scale-sync/commit/7ca681fc01f669b3a4c369d63e094c1468ff3871))
+* **qn:** let the pre-weigh-in A2 carry a real weight anchor ([a9aa0ae](https://github.com/KristianP26/ble-scale-sync/commit/a9aa0ae0119643a773a8f82bca374e6b4c005106))
+* **qn:** make the live weight acknowledgement configurable ([e25fc4e](https://github.com/KristianP26/ble-scale-sync/commit/e25fc4e858b240cfb53fea455bf4a9449aad5879))
+* **qn:** report a device whose layout is 1byone, not QN ([48d03be](https://github.com/KristianP26/ble-scale-sync/commit/48d03be3d2f9bd8f5f972a476e4ae37b0f7e8f49)), closes [#320](https://github.com/KristianP26/ble-scale-sync/issues/320)
+* **runtime:** restart a proxy transport that has gone silent ([a99bcdc](https://github.com/KristianP26/ble-scale-sync/commit/a99bcdc397a47b83900634e2f26de8db525ee98a)), closes [#281](https://github.com/KristianP26/ble-scale-sync/issues/281)
+* **silvergear:** report the settling stream as a live weight ([5d8ebd1](https://github.com/KristianP26/ble-scale-sync/commit/5d8ebd14c9e30e43f8e1fc49545a6ca2c6fa8f96)), closes [#356](https://github.com/KristianP26/ble-scale-sync/issues/356)
+* **update-check:** add a persisted cooldown state module ([d5aab9d](https://github.com/KristianP26/ble-scale-sync/commit/d5aab9d81d72674edd805e0e5378bae44a68c2af))
+
+
+### Fixed
+
+* **addon:** use a plain string for qn_live_weight_ack and normalise it ([4a995e2](https://github.com/KristianP26/ble-scale-sync/commit/4a995e221db0118431268324d85922ffc8022a61))
+* **beurer:** decode impedance instead of skipping it as unused ([b3239f8](https://github.com/KristianP26/ble-scale-sync/commit/b3239f87dc360bb7de771d3400763eac261cac1a)), closes [#354](https://github.com/KristianP26/ble-scale-sync/issues/354)
+* **beurer:** say why the provisioning commit reports 0 from config ([c3a469b](https://github.com/KristianP26/ble-scale-sync/commit/c3a469bbcdefca40163cfdc1f7b5a7dbf716b4ed)), closes [#335](https://github.com/KristianP26/ble-scale-sync/issues/335)
+* **beurer:** stop warning about consent silence on a successful session ([3eb96ca](https://github.com/KristianP26/ble-scale-sync/commit/3eb96ca09aaed11df5ed4953fbe2302765be8bd3))
+* **qn:** acknowledge each live weight frame with its own weight ([99486ab](https://github.com/KristianP26/ble-scale-sync/commit/99486aba018cd3dfe364ea65eaf3821f7eedd71f))
+* **qn:** say when the weight anchor falls back to the capture value ([98677e4](https://github.com/KristianP26/ble-scale-sync/commit/98677e4f663e22611abcafc7a7e258776872380d))
+* **qn:** send the configured weight anchor, not the captured 77.15 kg ([7bed196](https://github.com/KristianP26/ble-scale-sync/commit/7bed19631ffc5899be3fdacb22f9341b46a32215))
+* **salter:** set the scale clock when unset so weigh-ins are stored ([#355](https://github.com/KristianP26/ble-scale-sync/issues/355)) ([d30bec0](https://github.com/KristianP26/ble-scale-sync/commit/d30bec0c4c9e991cb323d9f7751eb317839c6063))
+* **update-check:** make the once-per-day cooldown survive restarts ([937916d](https://github.com/KristianP26/ble-scale-sync/commit/937916d7e0cf73e91393b088f201071c392c249b))
+* **worker:** label the stats dashboard units honestly ([22a3592](https://github.com/KristianP26/ble-scale-sync/commit/22a3592ea090e962d3bfd875acee8b1725ddaeca))
+* **worker:** say the inflated update-check count is still growing ([b6c1034](https://github.com/KristianP26/ble-scale-sync/commit/b6c10346872cfe310dcf44dc55fdf2645fa8d9c8))
+
+
+### Docs
+
+* **beurer:** correct the menu-profile claim and the battery-wipe scope ([e0d406d](https://github.com/KristianP26/ble-scale-sync/commit/e0d406dac6d8dafc0e930429170ed55f97595d66)), closes [#335](https://github.com/KristianP26/ble-scale-sync/issues/335)
+* **ble:** point the stale-bond message at the issue it describes ([70e35ba](https://github.com/KristianP26/ble-scale-sync/commit/70e35baf85e6dff3df05daa115d498cddfda92bd)), closes [#335](https://github.com/KristianP26/ble-scale-sync/issues/335)
+* correct adapter priority and exporter list claims ([0712e8d](https://github.com/KristianP26/ble-scale-sync/commit/0712e8d9b56e843ccb6b9312c55e34411dd6c6a3))
+* document qn_live_weight_ack and expose it in the add-on ([dd48faa](https://github.com/KristianP26/ble-scale-sync/commit/dd48faab0b0f006127c01190a6effec717e3b3a3)), closes [#75](https://github.com/KristianP26/ble-scale-sync/issues/75)
+* document the persisted update-check cooldown ([bf15cbb](https://github.com/KristianP26/ble-scale-sync/commit/bf15cbbcfc8e904fde9e054c8988acf3cc38449a))
+* document the proxy liveness timeout and expose it in the add-on ([eba1ea9](https://github.com/KristianP26/ble-scale-sync/commit/eba1ea96d001ec6ae43b595c646b515dc0909cb4)), closes [#281](https://github.com/KristianP26/ble-scale-sync/issues/281)
+* document the stale-bond recovery option and expose it in the add-on ([b44d0fa](https://github.com/KristianP26/ble-scale-sync/commit/b44d0fa83a253cef884d9ab75ae57522b5a2d6af)), closes [#335](https://github.com/KristianP26/ble-scale-sync/issues/335)
+* drop the unusable `--config` workaround for the cooldown state file ([ac47111](https://github.com/KristianP26/ble-scale-sync/commit/ac47111fe6848150756fe3b824c14d99c6d19ed0))
+* **readme:** add JamieSBenson to the contributors grid ([9660aa5](https://github.com/KristianP26/ble-scale-sync/commit/9660aa5ef1a5a109c316ae00ac19f390e22cfe11))
+* switch the star history chart to star-history.dera.page ([e0dfe2b](https://github.com/KristianP26/ble-scale-sync/commit/e0dfe2b75458ac50e0d9d2dbca5eede344fb22e7))
+* widen qn_weight_ack to cover the pre-weigh-in anchor ([5c5c119](https://github.com/KristianP26/ble-scale-sync/commit/5c5c119e89143f0a9d39192750a1a2750e65780a))
+
+## [1.25.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.24.0...v1.25.0) (2026-08-25)
+
+
+### Added
+
+* **beurer:** register a SIG user record when consent has nothing to consent to ([a517737](https://github.com/KristianP26/ble-scale-sync/commit/a5177379ca0d18b1ad94068017e44da89c3aeca5)), closes [#335](https://github.com/KristianP26/ble-scale-sync/issues/335)
+* **ble:** env-gated raw BLE frame capture for protocol debugging ([#211](https://github.com/KristianP26/ble-scale-sync/issues/211)) ([9102b59](https://github.com/KristianP26/ble-scale-sync/commit/9102b5999d527885e11eda7a60bdcc03b03adada))
+* **notifications:** report the other exporters' results with report_exports ([#350](https://github.com/KristianP26/ble-scale-sync/issues/350)) ([3a237f6](https://github.com/KristianP26/ble-scale-sync/commit/3a237f61306b4c97a4732b1169c78af79dff6943))
+* **qn:** add ble.qn_report_byte so the history-response byte can be tested ([74bd6cd](https://github.com/KristianP26/ble-scale-sync/commit/74bd6cdfde79bf8a83bcd9827aed5be0d6cf48ea))
+* **scales:** add Salter SA00656/SA00432 ([#341](https://github.com/KristianP26/ble-scale-sync/issues/341)) ([7586389](https://github.com/KristianP26/ble-scale-sync/commit/7586389b14917fdefb969757e18deeb077c00a1a))
+* **scales:** add the Silvergear Smart Scale 108 broadcast adapter ([53ed2d2](https://github.com/KristianP26/ble-scale-sync/commit/53ed2d239020edbf9881a394bab89921a93819dd)), closes [#297](https://github.com/KristianP26/ble-scale-sync/issues/297)
+* **scales:** add Xiaomi Mi Smart Scale 2 XMTZC04HM adapter ([#353](https://github.com/KristianP26/ble-scale-sync/issues/353)) ([e8bc91a](https://github.com/KristianP26/ble-scale-sync/commit/e8bc91a85f0fb3af5ec3633f064aa83d24e6a919))
+
+
+### Fixed
+
+* **addon:** normalise the QN byte options and stop ignoring them in silence ([a1b7b41](https://github.com/KristianP26/ble-scale-sync/commit/a1b7b411d0d4f2b56e2ffe2f0841a52afc0ed9cb))
+* **beurer:** provision the date of birth in UTC so the day does not shift west of Greenwich ([#348](https://github.com/KristianP26/ble-scale-sync/issues/348)) ([cb5af45](https://github.com/KristianP26/ble-scale-sync/commit/cb5af454803ca68f77737d9bbc81e789703db952))
+* **beurer:** say so when the scale never answers the consent ([aadfaf0](https://github.com/KristianP26/ble-scale-sync/commit/aadfaf0075521018c20b3cece160fd79bfcd7387))
+* **ble:** measure the reading deadline as scale silence, not time since connect ([#351](https://github.com/KristianP26/ble-scale-sync/issues/351)) ([c50fb7c](https://github.com/KristianP26/ble-scale-sync/commit/c50fb7c77e38374e19d9b71ec63321677fa99c3a))
+* **ble:** reach broadcast-only and nameless scales on every transport ([0c0d8bb](https://github.com/KristianP26/ble-scale-sync/commit/0c0d8bbc29453d5513b4b49e9c06fb49dc02c424))
+* **ble:** release the notify subscription when adapter init loses the startup race ([6b2138e](https://github.com/KristianP26/ble-scale-sync/commit/6b2138eabf66ccc64bc2f4fb06e7e856c32045f3)), closes [#338](https://github.com/KristianP26/ble-scale-sync/issues/338)
+* **ble:** write the CCCD directly when the driver's subscribe fails ([e47e779](https://github.com/KristianP26/ble-scale-sync/commit/e47e7790e64f49a01fa9233150b2b8edb7ab7283))
+* **config:** ignore watcher events that leave the config content unchanged ([#349](https://github.com/KristianP26/ble-scale-sync/issues/349)) ([c66b6e7](https://github.com/KristianP26/ble-scale-sync/commit/c66b6e77bdae7d34c96690a99957889cd3d3e215))
+* **docker:** install Python 3.12 for garminconnect 0.3.11 and keep the arm/v7 base ([#352](https://github.com/KristianP26/ble-scale-sync/issues/352)) ([6eeecb3](https://github.com/KristianP26/ble-scale-sync/commit/6eeecb3596c3d1f9836f34383fc6045fd39c5911))
+* **hutbit:** claim a named Lefu FFB0 advert that omits the D618 service ([4413599](https://github.com/KristianP26/ble-scale-sync/commit/441359984a85b828a488be90060d8b9b1d9c0332)), closes [#322](https://github.com/KristianP26/ble-scale-sync/issues/322)
+* **mqtt-proxy:** stop leaking message listeners from timed-out and failed GATT sessions ([#339](https://github.com/KristianP26/ble-scale-sync/issues/339)) ([cc2a050](https://github.com/KristianP26/ble-scale-sync/commit/cc2a0508515c70ac2bc1cdf1e3fd0eb697f2d670))
+* **notifications:** format weight, muscle and bone in the configured weight unit ([#347](https://github.com/KristianP26/ble-scale-sync/issues/347)) ([013810e](https://github.com/KristianP26/ble-scale-sync/commit/013810ef7dbe4c9d6774a0769a1efe726c27e782))
+* **qn:** apply the protocol byte override to the classic dialect and the pre-0x12 phases ([#337](https://github.com/KristianP26/ble-scale-sync/issues/337)) ([86352a7](https://github.com/KristianP26/ble-scale-sync/commit/86352a7558d3a50b27527c8e7e4b6697e5f16bcb))
+* **qn:** extend the 0xFC history-response byte to the es26m dialect ([be9bc13](https://github.com/KristianP26/ble-scale-sync/commit/be9bc139560bc662c80f528cdf12e8cd568e351e))
+* **qn:** send 0xFC in the history response on the extended dialect ([26553d2](https://github.com/KristianP26/ble-scale-sync/commit/26553d2e6ae1ddbcb234e2350475cb0007208ddc)), closes [#235](https://github.com/KristianP26/ble-scale-sync/issues/235)
+* **scan:** match on the advertisement in the node-ble discovery tool ([13e2a2e](https://github.com/KristianP26/ble-scale-sync/commit/13e2a2ed2069c943ad2d5382e8ca95fa49ccb5f1)), closes [#280](https://github.com/KristianP26/ble-scale-sync/issues/280)
+* **silvergear:** read only the low five bits of the last byte as a checksum ([7b30776](https://github.com/KristianP26/ble-scale-sync/commit/7b3077685bb4711fabdfcfe0e07c6f40c58e8ebc)), closes [#297](https://github.com/KristianP26/ble-scale-sync/issues/297)
+
+
+### Docs
+
+* correct the adapter file map, the MGB routing note and the ble example ([fc100ed](https://github.com/KristianP26/ble-scale-sync/commit/fc100ede35bee2c3d11c1ca1a76a95e80041afde))
+* **readme:** add the contributors whose code has been merged ([8fe22c8](https://github.com/KristianP26/ble-scale-sync/commit/8fe22c8e0b1443b78423e5a448ecc3dea9256f42))
+
+## [1.24.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.23.0...v1.24.0) (2026-08-21)
+
+
+### Added
+
+* **ble:** log every advertisement on the proxy transports ([857ff2c](https://github.com/KristianP26/ble-scale-sync/commit/857ff2c7242b32212cae06e9e70d1895b09d3535)), closes [#322](https://github.com/KristianP26/ble-scale-sync/issues/322)
+* **hutbit:** decode the raw impedance frame and feed it to body composition ([479ac02](https://github.com/KristianP26/ble-scale-sync/commit/479ac027d43df157b81a4fa11db0bb5dc08ebcbe)), closes [#322](https://github.com/KristianP26/ble-scale-sync/issues/322)
+* **qn:** decode extended-dialect b4/b1 result frames ([#235](https://github.com/KristianP26/ble-scale-sync/issues/235)) ([129aa21](https://github.com/KristianP26/ble-scale-sync/commit/129aa211dbb83aae45842988ef4d89f878809bd3))
+
+
+### Fixed
+
+* **beurer:** report the change-increment outcome in the profile commit line ([34e92dc](https://github.com/KristianP26/ble-scale-sync/commit/34e92dc9581cfaf983a58b863787e44348deab26)), closes [#229](https://github.com/KristianP26/ble-scale-sync/issues/229)
+* **beurer:** say when the consent was accepted but the vendor user table is empty ([3de33c3](https://github.com/KristianP26/ble-scale-sync/commit/3de33c39e417ff10d16a0c6ff241ff45e8b18198)), closes [#229](https://github.com/KristianP26/ble-scale-sync/issues/229)
+* **ble:** plumb the BlueZ advertisement into adapter matching on Linux ([4a212e4](https://github.com/KristianP26/ble-scale-sync/commit/4a212e4db700358d21cd54528c1a9b1e889af53a))
+* **hutbit:** do not pair an impedance with a weight from an earlier weigh-in ([ff8d0eb](https://github.com/KristianP26/ble-scale-sync/commit/ff8d0eb59a8be4ea6382bc85e885c378183ff3ed))
+* **qn:** echo the protocol byte on 19-byte scale info, with `ble.qn_protocol_byte` to override it ([9401627](https://github.com/KristianP26/ble-scale-sync/commit/94016271cc9e2cdfd3258c2724030a94988054dc)), closes [#75](https://github.com/KristianP26/ble-scale-sync/issues/75) [#331](https://github.com/KristianP26/ble-scale-sync/issues/331)
+* **qn:** take the extended-dialect weight from the live 0xB1, not the stored 0xB4 ([0c0b03f](https://github.com/KristianP26/ble-scale-sync/commit/0c0b03f3ed07fa688d4210d328becafe975ac2de)), closes [#235](https://github.com/KristianP26/ble-scale-sync/issues/235)
+
+
+### Changed
+
+* **ble:** only build the advertisement line when debug logging is on ([2095316](https://github.com/KristianP26/ble-scale-sync/commit/20953167c3ed6e428081ec3dae82abd72994ad0d))
+
+
+### Docs
+
+* **scales:** the Hutbit family now reports its raw impedance ([74c9a08](https://github.com/KristianP26/ble-scale-sync/commit/74c9a085f05abbcaf55ad3262baffdc2bc77b1e3)), closes [#322](https://github.com/KristianP26/ble-scale-sync/issues/322)
+
+## [1.23.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.22.1...v1.23.0) (2026-08-19)
+
+
+### Added
+
+* **ble:** answer the QN AE00 authentication challenge ([#235](https://github.com/KristianP26/ble-scale-sync/issues/235), [#75](https://github.com/KristianP26/ble-scale-sync/issues/75)) ([93bc9d3](https://github.com/KristianP26/ble-scale-sync/commit/93bc9d3bb1ff9d24c6fcf5a52af4bb14f34cd8b2))
+* **ble:** honour ble.session_timeout_sec on the native read path ([#83](https://github.com/KristianP26/ble-scale-sync/issues/83)) ([840cbb1](https://github.com/KristianP26/ble-scale-sync/commit/840cbb16356a2350729b22713493ca3de37aec70))
+* **config:** add ble.force_scale_adapter to override protocol detection ([#318](https://github.com/KristianP26/ble-scale-sync/issues/318), [#319](https://github.com/KristianP26/ble-scale-sync/issues/319)) ([9c67525](https://github.com/KristianP26/ble-scale-sync/commit/9c67525d8899296e76005c5171b4be08fbe588fe))
+* **config:** add users[].beurer_provision and ble.session_timeout_sec ([#229](https://github.com/KristianP26/ble-scale-sync/issues/229), [#83](https://github.com/KristianP26/ble-scale-sync/issues/83)) ([1d70cbc](https://github.com/KristianP26/ble-scale-sync/commit/1d70cbc093f740f713ce18c2d75f4742dffed03d))
+* **docker:** report the image channel and commit at startup ([#318](https://github.com/KristianP26/ble-scale-sync/issues/318)) ([7759fde](https://github.com/KristianP26/ble-scale-sync/commit/7759fde6c0035b017ed6cef00fc592f601bb2212))
+* **scales:** decode Eufy P2 Pro impedance from bytes [4..5] ([#289](https://github.com/KristianP26/ble-scale-sync/issues/289)) ([416a038](https://github.com/KristianP26/ble-scale-sync/commit/416a038da69ed5e2510bcc128e8a1e0491e5d8f8))
+
+
+### Fixed
+
+* **ble:** resolve the right adapter on both mqtt-proxy GATT paths ([#317](https://github.com/KristianP26/ble-scale-sync/issues/317), [#319](https://github.com/KristianP26/ble-scale-sync/issues/319)) ([044d72b](https://github.com/KristianP26/ble-scale-sync/commit/044d72b596daefd18463da7539eeb3f5429db9fe))
+* **ble:** stop a BlueZ write rejection from killing the process ([#138](https://github.com/KristianP26/ble-scale-sync/issues/138)) ([f198fd3](https://github.com/KristianP26/ble-scale-sync/commit/f198fd35b0adf682604d66a01c183d3e0911585e))
+* **config:** warn instead of silently dropping unknown config keys ([#318](https://github.com/KristianP26/ble-scale-sync/issues/318)) ([1bb67a3](https://github.com/KristianP26/ble-scale-sync/commit/1bb67a36514ba80f3611aff9265be0bd27e7fcf0))
+* **firmware:** use esptool v5 command names and require esptool 5 or newer ([49ccecd](https://github.com/KristianP26/ble-scale-sync/commit/49ccecd178c8ab958f8d56738ae89e0c8b53b7b8))
+* **qn-scale:** echo the protocol type from the twenty byte scale info frame ([#235](https://github.com/KristianP26/ble-scale-sync/issues/235)) ([03fd3d7](https://github.com/KristianP26/ble-scale-sync/commit/03fd3d70cb1625782f102f31082f5b5f63df55e8))
+* **qn-scale:** send the measurement trigger the extended dialect waits for ([#235](https://github.com/KristianP26/ble-scale-sync/issues/235)) ([6083307](https://github.com/KristianP26/ble-scale-sync/commit/6083307f05f9417caf5164aa7c21ae5e58eb5ad8))
+* **runtime:** survive a stray promise rejection in continuous mode ([#138](https://github.com/KristianP26/ble-scale-sync/issues/138)) ([ba8dd63](https://github.com/KristianP26/ble-scale-sync/commit/ba8dd6377a50ed5acfe0974fcd176c38339b3ab3))
+* **scales:** accept the six-byte Lefu OEM advertisement ([#318](https://github.com/KristianP26/ble-scale-sync/issues/318)) ([cc20fe7](https://github.com/KristianP26/ble-scale-sync/commit/cc20fe72b42f2154b162dc25fe687e07e47ea881))
+* **scales:** correct defects found reviewing the issue sweep ([#229](https://github.com/KristianP26/ble-scale-sync/issues/229), [#235](https://github.com/KristianP26/ble-scale-sync/issues/235), [#318](https://github.com/KristianP26/ble-scale-sync/issues/318)) ([f102a46](https://github.com/KristianP26/ble-scale-sync/commit/f102a466678c9b5a8301cc53d09b0824c212fdb4))
+* **scales:** make an unprovisioned Beurer scale diagnosable ([#229](https://github.com/KristianP26/ble-scale-sync/issues/229)) ([92cb8aa](https://github.com/KristianP26/ble-scale-sync/commit/92cb8aa149b1b47a486daca4ab7133f1638bac8d))
+
+
+### Docs
+
+* **addon:** point Home Assistant OS testers at the dev add-on channel ([8399415](https://github.com/KristianP26/ble-scale-sync/commit/83994154b70fdf5444e7046fa9394b43cf49d883))
+* explain dev builds, unknown config keys and the Beurer battery wipe ([eeeeba0](https://github.com/KristianP26/ble-scale-sync/commit/eeeeba0daf960b282e2db1bbd0293c91941ca308))
+* **scales:** stop claiming the Hutbit family has no usable impedance sensor ([#322](https://github.com/KristianP26/ble-scale-sync/issues/322)) ([1873569](https://github.com/KristianP26/ble-scale-sync/commit/18735697e6062fb7874dc2df3723158c9eab3dfe))
+* scope session_timeout_sec honestly and stop publishing planning notes ([758b53d](https://github.com/KristianP26/ble-scale-sync/commit/758b53d104158048ccc4abeb5123102142e0867b))
+
+## [1.22.1](https://github.com/KristianP26/ble-scale-sync/compare/v1.22.0...v1.22.1) (2026-08-02)
+
+
+### Fixed
+
+* **ble:** tear down the replacement client when an ESPHome rebuild fails ([#303](https://github.com/KristianP26/ble-scale-sync/issues/303)) ([be875dd](https://github.com/KristianP26/ble-scale-sync/commit/be875dd82f05db57e0fe83697f1bae8d42668914))
+
+## [1.22.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.21.2...v1.22.0) (2026-08-02)
+
+
+### Added
+
+* **ble:** add an opt-in ESPHome advertisement liveness watchdog ([#303](https://github.com/KristianP26/ble-scale-sync/issues/303), [#281](https://github.com/KristianP26/ble-scale-sync/issues/281)) ([2d0a8bc](https://github.com/KristianP26/ble-scale-sync/commit/2d0a8bcc4dca08fe73b447ee63fd47c5f0a30389))
+
+
+### Fixed
+
+* **ble:** handle D-Bus transport errors and bound the poll cycle ([#290](https://github.com/KristianP26/ble-scale-sync/issues/290)) ([8915190](https://github.com/KristianP26/ble-scale-sync/commit/891519068333b98da6568bd286784ddb19c90ecf))
+* **ble:** log the ESPHome proxy client lifecycle and guarantee teardown ([#303](https://github.com/KristianP26/ble-scale-sync/issues/303), [#281](https://github.com/KristianP26/ble-scale-sync/issues/281)) ([8a4b5d5](https://github.com/KristianP26/ble-scale-sync/commit/8a4b5d569cd8221f7c9cccf595f66232886b7c6a))
+* **ble:** name the stale bond behind le-connection-abort-by-local ([#290](https://github.com/KristianP26/ble-scale-sync/issues/290), [#229](https://github.com/KristianP26/ble-scale-sync/issues/229)) ([04e7012](https://github.com/KristianP26/ble-scale-sync/commit/04e7012835504df240aa1199334c2010bdccf340))
+* **ble:** re-send a send-once unlock after notifications are enabled ([#283](https://github.com/KristianP26/ble-scale-sync/issues/283)) ([78d2cbb](https://github.com/KristianP26/ble-scale-sync/commit/78d2cbb092c230de888ed9fd6c462862b4615e61))
+* **ble:** register the BlueZ pairing agent for already-bonded scales ([#83](https://github.com/KristianP26/ble-scale-sync/issues/83)) ([fc2a568](https://github.com/KristianP26/ble-scale-sync/commit/fc2a568ba92c25f0994a20cda5c8904a6e78b786))
+* **ble:** stop retrying the BlueZ default-agent role once it is unavailable ([#83](https://github.com/KristianP26/ble-scale-sync/issues/83)) ([baa83ec](https://github.com/KristianP26/ble-scale-sync/commit/baa83ec772cc499a62072c0a7d72bd173061c890))
+* **ci:** check out the release branch without tracking so the add-on changelog sync runs ([#301](https://github.com/KristianP26/ble-scale-sync/issues/301)) ([eaa2002](https://github.com/KristianP26/ble-scale-sync/commit/eaa20025145bba80a0678e19c0e6a7f116bfe429))
+* **scales:** dispatch QN AE02 frames separately and subscribe to AE02 once ([#75](https://github.com/KristianP26/ble-scale-sync/issues/75), [#235](https://github.com/KristianP26/ble-scale-sync/issues/235)) ([c3c5fb0](https://github.com/KristianP26/ble-scale-sync/commit/c3c5fb01e63f5df66478a4c750de74a51303e2fe))
+* **scales:** log the QN frame that the weight parser discards ([#75](https://github.com/KristianP26/ble-scale-sync/issues/75), [#235](https://github.com/KristianP26/ble-scale-sync/issues/235)) ([6fcff59](https://github.com/KristianP26/ble-scale-sync/commit/6fcff593fb98b7995f2fad83c0b28f5c34976562))
+
+
+### Docs
+
+* resolve the Bluetooth group GID instead of hardcoding 112 ([#311](https://github.com/KristianP26/ble-scale-sync/issues/311)) ([734e5d7](https://github.com/KristianP26/ble-scale-sync/commit/734e5d7638823e695ef71a7ffa3cead3a49590a9))
+* **scales:** correct the Eufy P2 impedance claim and the R-MSC04 blocker ([#289](https://github.com/KristianP26/ble-scale-sync/issues/289), [#117](https://github.com/KristianP26/ble-scale-sync/issues/117)) ([179d9b0](https://github.com/KristianP26/ble-scale-sync/commit/179d9b04aa57a0ad1050d7c0b25687b754c88baa))
+
+## [1.21.2](https://github.com/KristianP26/ble-scale-sync/compare/v1.21.1...v1.21.2) (2026-07-27)
+
+
+### Fixed
+
+* **addon:** generate the add-on changelog from the project changelog ([#294](https://github.com/KristianP26/ble-scale-sync/issues/294)) ([249197e](https://github.com/KristianP26/ble-scale-sync/commit/249197e9db7724adc79c1b94c9a70c4431cd6971))
+* **ble:** also treat a bluetoothd UnknownObject on a device path as a dropped peer ([#297](https://github.com/KristianP26/ble-scale-sync/issues/297)) ([943bc81](https://github.com/KristianP26/ble-scale-sync/commit/943bc8174267a8d86ad841689f13f63a844921aa))
+* **ble:** connect with discovery active when BlueZ drops the peer object ([#297](https://github.com/KristianP26/ble-scale-sync/issues/297)) ([86f3b87](https://github.com/KristianP26/ble-scale-sync/commit/86f3b8755f01878c9bc9fb156df2b8513bc4463a))
+* **ble:** correct defects found reviewing the issue sweep ([#296](https://github.com/KristianP26/ble-scale-sync/issues/296), [#252](https://github.com/KristianP26/ble-scale-sync/issues/252), [#229](https://github.com/KristianP26/ble-scale-sync/issues/229)) ([74ad3a6](https://github.com/KristianP26/ble-scale-sync/commit/74ad3a60887201a450e85a3a875c417ae511fb09))
+* **ble:** decode esphome GATT payloads from the base64 data field ([#291](https://github.com/KristianP26/ble-scale-sync/issues/291)) ([2c868dc](https://github.com/KristianP26/ble-scale-sync/commit/2c868dc93fee876af80b520bfc18513bad433a35))
+* **ble:** write the CCCD over the ESPHome proxy so scales actually notify ([#252](https://github.com/KristianP26/ble-scale-sync/issues/252)) ([32e5af1](https://github.com/KristianP26/ble-scale-sync/commit/32e5af19642e820bac06661090d3a8a7f578f2c7))
+* **ci:** fetch the release branch with a refspec so the add-on changelog sync can check it out ([#300](https://github.com/KristianP26/ble-scale-sync/issues/300)) ([5569e96](https://github.com/KristianP26/ble-scale-sync/commit/5569e9615536d9845205a98374f87f2e384a2e10))
+* **firmware:** end a GATT session the host never finishes so scanning resumes ([#296](https://github.com/KristianP26/ble-scale-sync/issues/296)) ([73ded71](https://github.com/KristianP26/ble-scale-sync/commit/73ded716e996cc89df3402df1b5adfa976f4a7c3))
+* **firmware:** read indicate-only chars via indicated() so Robi S9 FFB3 result reaches the adapter ([#248](https://github.com/KristianP26/ble-scale-sync/issues/248)) ([9036d00](https://github.com/KristianP26/ble-scale-sync/commit/9036d0027ca311dcc63a24a089b1bf5cd564832a))
+* **scales:** commit the Beurer user profile after consent so the scale finishes ([#229](https://github.com/KristianP26/ble-scale-sync/issues/229)) ([fae6326](https://github.com/KristianP26/ble-scale-sync/commit/fae63267933ea82279a8c6ff6ff928a124cd6945))
+
+
+### Docs
+
+* add bondesen and junaidk to contributors ([e26419a](https://github.com/KristianP26/ble-scale-sync/commit/e26419a13b7232f9b29c21bcf42b110f1c9bf145))
+* **esphome-proxy:** document the CCCD fix and the unbonded-link limit ([#252](https://github.com/KristianP26/ble-scale-sync/issues/252)) ([1bc623f](https://github.com/KristianP26/ble-scale-sync/commit/1bc623f4e35c5464b18c77683e042f2666e6138f))
+
+## [1.21.1](https://github.com/KristianP26/ble-scale-sync/compare/v1.21.0...v1.21.1) (2026-07-22)
+
+
+### Fixed
+
+* **ble:** bond and retry GATT discovery for consent scales on timeout ([a3a828e](https://github.com/KristianP26/ble-scale-sync/commit/a3a828e869baf9a5dc886871b31355a6a6e5ef69))
+* **scales:** treat Eufy P2/P2 Pro GATT reading as weight-only ([76ca675](https://github.com/KristianP26/ble-scale-sync/commit/76ca67532ede4abce150d7f312988c531aa587a4))
+
+
+### Docs
+
+* correct adapter and exporter counts, add Robi S9 row ([87b6bbd](https://github.com/KristianP26/ble-scale-sync/commit/87b6bbd1d1d1478523ca2bf7260406b7b1a72e59))
+
+## [1.21.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.20.0...v1.21.0) (2026-07-20)
+
+
+### Added
+
+* **ble:** add weight-only Renpho R-MSC04 scale adapter ([#117](https://github.com/KristianP26/ble-scale-sync/issues/117), [#265](https://github.com/KristianP26/ble-scale-sync/issues/265)) ([f0dc658](https://github.com/KristianP26/ble-scale-sync/commit/f0dc658b2ced52550a98151caba94908b3e8ff07))
+
+
+### Fixed
+
+* **body-comp:** report muscle mass as fat-free mass minus bone ([#253](https://github.com/KristianP26/ble-scale-sync/issues/253)) ([7efa781](https://github.com/KristianP26/ble-scale-sync/commit/7efa7816fab080a0b629266dd1207d27842ee4bd))
+* **runtime:** tick the healthcheck heartbeat on a timer so idle is not unhealthy ([#277](https://github.com/KristianP26/ble-scale-sync/issues/277)) ([2fca68f](https://github.com/KristianP26/ble-scale-sync/commit/2fca68feb0fe921adc6bbfa0681b092798009469))
+* **scales:** claim OEM/rebranded Hutbit ("SWAN") via the 0x02AC manufacturer signature ([#279](https://github.com/KristianP26/ble-scale-sync/issues/279)) ([eb3b669](https://github.com/KristianP26/ble-scale-sync/commit/eb3b669759edb2ef110a306040fb238847131497))
+* **scales:** gate Eufy P2 and 1byone completion on a settled weight ([#284](https://github.com/KristianP26/ble-scale-sync/issues/284)) ([#285](https://github.com/KristianP26/ble-scale-sync/issues/285)) ([7edfe6c](https://github.com/KristianP26/ble-scale-sync/commit/7edfe6c5ef463ff4d45678cabcb335fe81d514f9))
+* **scales:** narrow the Hutbit OEM claim and pass mfg data on noble target-MAC ([#278](https://github.com/KristianP26/ble-scale-sync/issues/278)) ([9d17405](https://github.com/KristianP26/ble-scale-sync/commit/9d174056bc8c52c4fb92fa7527bcd1fe3b2898a1))
+* **scales:** route Beurer BF788 and BF950 to the SIG consent adapter ([#229](https://github.com/KristianP26/ble-scale-sync/issues/229), [#255](https://github.com/KristianP26/ble-scale-sync/issues/255)) ([5cd3f92](https://github.com/KristianP26/ble-scale-sync/commit/5cd3f929e496d25fb7e0e14b28faa14f79e8a974))
+* **scales:** stop the Beurer adapter hijacking its siblings, and honour lb frames ([c5362a2](https://github.com/KristianP26/ble-scale-sync/commit/c5362a2baefcafe8d5a659e947e3d0064e220c40))
+
+
+### Docs
+
+* document the shipped Renpho R-MSC04 adapter and its weight-only limitation ([#117](https://github.com/KristianP26/ble-scale-sync/issues/117)) ([8ece358](https://github.com/KristianP26/ble-scale-sync/commit/8ece358543352d1debfe06318ccd991bfe191f48))
+
+## [1.20.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.19.0...v1.20.0) (2026-07-13)
+
+
+### Added
+
+* **scales:** add Hutbit Smart Scale adapter ([#268](https://github.com/KristianP26/ble-scale-sync/issues/268)) ([f20f7a8](https://github.com/KristianP26/ble-scale-sync/commit/f20f7a87a6edcdde99edab671b679b840e78eba8))
+* **scales:** add Koogeek-S1 adapter ([#270](https://github.com/KristianP26/ble-scale-sync/issues/270)) ([50ae1d6](https://github.com/KristianP26/ble-scale-sync/commit/50ae1d6b5e0250a05c59dd88471ce0c5254da2d5))
+
+
+### Fixed
+
+* **addon:** run the Home Assistant add-on unconfined so it can reach BlueZ ([cac714b](https://github.com/KristianP26/ble-scale-sync/commit/cac714b6ea651b35b2d5f9e3b3af3922dd822cde)), closes [#271](https://github.com/KristianP26/ble-scale-sync/issues/271)
+* **ble:** keep the ESPHome proxy connection alive on unknown API messages ([#252](https://github.com/KristianP26/ble-scale-sync/issues/252)) ([e561b91](https://github.com/KristianP26/ble-scale-sync/commit/e561b91aecaebc656c6552130eb9a45a2afc8260))
+* **ble:** re-resolve adapter after GATT discovery on proxy paths ([#258](https://github.com/KristianP26/ble-scale-sync/issues/258), [#251](https://github.com/KristianP26/ble-scale-sync/issues/251), [#255](https://github.com/KristianP26/ble-scale-sync/issues/255)) ([9aca212](https://github.com/KristianP26/ble-scale-sync/commit/9aca21290f5df83ff5327c69affc881d5cd28e01))
+* **ble:** wrap dynamic-path device.gatt() in withTimeout ([#273](https://github.com/KristianP26/ble-scale-sync/issues/273)) ([0531e35](https://github.com/KristianP26/ble-scale-sync/commit/0531e35a9011f72d05253c99111cbbd50719d479))
+* **firmware:** enable BLE CCCD notifications in start_notify ([#274](https://github.com/KristianP26/ble-scale-sync/issues/274)) ([368353e](https://github.com/KristianP26/ble-scale-sync/commit/368353e846491e9527b041f891f7875de86b56be))
+* **renpho:** only require the UCP char, guard the vendor 0xFFE2 writes ([#267](https://github.com/KristianP26/ble-scale-sync/issues/267)) ([f4d7d5c](https://github.com/KristianP26/ble-scale-sync/commit/f4d7d5cb055163df009c81cdc39feb7ef20644f1))
+* **renpho:** perform SIG consent handshake so the ES-WBE28 streams readings ([#267](https://github.com/KristianP26/ble-scale-sync/issues/267)) ([65ed721](https://github.com/KristianP26/ble-scale-sync/commit/65ed7213f1108a867710a81072c794f743afb867))
+* **scales:** complete Yunmai weight-only reading instead of timing out ([a86ffe8](https://github.com/KristianP26/ble-scale-sync/commit/a86ffe873dd4854121e7de7c61a3ddf26b35c4e5))
+* **scales:** honour configured weight_unit in the QN display command ([#269](https://github.com/KristianP26/ble-scale-sync/issues/269)) ([d188970](https://github.com/KristianP26/ble-scale-sync/commit/d1889704be25b0505f0ef9bd335af736080a5cbf))
+* **scales:** identify Type-1 QN scales by char pair over the ESP32 proxy ([#272](https://github.com/KristianP26/ble-scale-sync/issues/272)) ([76737ed](https://github.com/KristianP26/ble-scale-sync/commit/76737edbdb4c63d7afeed81c629dd40125a1949b))
+* **scales:** route Beurer BF500 to the SIG consent adapter ([#83](https://github.com/KristianP26/ble-scale-sync/issues/83)) ([25bbc20](https://github.com/KristianP26/ble-scale-sync/commit/25bbc200271d1b505245e3cb214468ca5d0fb43c))
+* **scales:** write the Hutbit FFB1 handshake without response ([#268](https://github.com/KristianP26/ble-scale-sync/issues/268)) ([de12300](https://github.com/KristianP26/ble-scale-sync/commit/de123007abdc97ebd667fec26916344e471652ae))
+
+## [1.19.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.18.0...v1.19.0) (2026-06-19)
+
+
+### Added
+
+* **config:** add ble.bind_key and adapter configure() hook ([#232](https://github.com/KristianP26/ble-scale-sync/issues/232)) ([b319e69](https://github.com/KristianP26/ble-scale-sync/commit/b319e69f7ea085472bfcb5ba6218b21b37aaede1))
+* **scales:** add declarative MatchDescriptor and matchesDescriptor helper ([#245](https://github.com/KristianP26/ble-scale-sync/issues/245)) ([7e63799](https://github.com/KristianP26/ble-scale-sync/commit/7e637998ba8c68002fad9f9bb331f9340263305e))
+* **scales:** add Xiaomi Mijia S800 broadcast adapter ([#232](https://github.com/KristianP26/ble-scale-sync/issues/232)) ([5ee2c2e](https://github.com/KristianP26/ble-scale-sync/commit/5ee2c2eb4edf600eba414e91585743b103db641c))
+* **scales:** central resolveAdapter with priority-based precedence and startup overlap detection ([#245](https://github.com/KristianP26/ble-scale-sync/issues/245)) ([dcc2bdd](https://github.com/KristianP26/ble-scale-sync/commit/dcc2bddafa31f5320729538b1d59a1ac08fad2ba))
+* **scales:** register Xiaomi S800 and inject bind key at startup ([#232](https://github.com/KristianP26/ble-scale-sync/issues/232)) ([d3fdb65](https://github.com/KristianP26/ble-scale-sync/commit/d3fdb655fdf9d89f96f3e2770d15b0aa9c7db685))
+
+
+### Fixed
+
+* **ble:** advertise lazy_notify capability to ESP32 proxy ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([9004d31](https://github.com/KristianP26/ble-scale-sync/commit/9004d316b60b70c3cc7e76f673a4dbada609fa96))
+* **ble:** command host-ordered proxy notify enable after subscribe ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([d33e3aa](https://github.com/KristianP26/ble-scale-sync/commit/d33e3aa60214dad1326c706bdb9cbde97c09fa61))
+* **ble:** correct Robi S9 weight scaling to 3-byte grams ([#248](https://github.com/KristianP26/ble-scale-sync/issues/248)) ([21b3afa](https://github.com/KristianP26/ble-scale-sync/commit/21b3afa5a707815ddceb3f8a750f65f2eea69ee9))
+* **firmware:** add per-board IDF-heap guard tunables defaulting to 0 ([#139](https://github.com/KristianP26/ble-scale-sync/issues/139)) ([59bd65f](https://github.com/KristianP26/ble-scale-sync/commit/59bd65f8a7b83851c1acecd75c8d91054409b992))
+* **firmware:** drain aioble services before characteristic discovery ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([c584098](https://github.com/KristianP26/ble-scale-sync/commit/c58409824672a9ab163d523a9bcbe3d7e9a36498))
+* **firmware:** drive aioble GATT discovery with async for ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([c943e11](https://github.com/KristianP26/ble-scale-sync/commit/c943e11b87213300619872656b5af91ea3579970))
+* **firmware:** enable proxy notify lazily on per-char subscribe command ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([f4a4492](https://github.com/KristianP26/ble-scale-sync/commit/f4a4492606bd798d3813d698806d5c46f8cb073f))
+* **firmware:** parse lazy_notify capability flag from config ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([b24292a](https://github.com/KristianP26/ble-scale-sync/commit/b24292a447bd851f92c7db9508047b3050a05841))
+* **firmware:** refuse GATT connect on near-empty IDF heap instead of crashing ([#139](https://github.com/KristianP26/ble-scale-sync/issues/139)) ([1beac82](https://github.com/KristianP26/ble-scale-sync/commit/1beac82c6fdf57279855a7f06972f83a05502ac2))
+* **firmware:** retry opposite BLE address type on any connect failure ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([7a958ab](https://github.com/KristianP26/ble-scale-sync/commit/7a958ab0f4ca83364014617281bed1f21a259d64))
+* **firmware:** trust controller-reported BLE address type on autonomous connect ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([4ae2662](https://github.com/KristianP26/ble-scale-sync/commit/4ae2662fd96e8b29d13226c1909a97222254f758))
+* **scales:** preserve exact/startsWith claim semantics in generic-adapter exclusion ([#245](https://github.com/KristianP26/ble-scale-sync/issues/245)) ([99a5a10](https://github.com/KristianP26/ble-scale-sync/commit/99a5a1085f13c91bba3661a8a88e2c0fe459103b))
+
+
+### Docs
+
+* align scale-type vs board support table cells for [#139](https://github.com/KristianP26/ble-scale-sync/issues/139) ([e301da7](https://github.com/KristianP26/ble-scale-sync/commit/e301da7839398fd8868e48bb23704aae0df96831))
+* document no-PSRAM broadcast-only vs PSRAM GATT support for [#139](https://github.com/KristianP26/ble-scale-sync/issues/139) ([fa63930](https://github.com/KristianP26/ble-scale-sync/commit/fa6393045e168020b7dc19932f96a7cc8da311bb))
+* document Xiaomi S800 support and ble.bind_key ([#232](https://github.com/KristianP26/ble-scale-sync/issues/232)) ([6ccccb0](https://github.com/KristianP26/ble-scale-sync/commit/6ccccb09e937db62ac09f58aebea9b38c98f3ae9))
+* **firmware:** correct gc-vs-IDF-heap comment around the connect guard ([#139](https://github.com/KristianP26/ble-scale-sync/issues/139)) ([e576e8e](https://github.com/KristianP26/ble-scale-sync/commit/e576e8e4d36baac608c1dd9419e099dfa4c79242))
+* fix stale counts, logo easter egg, and consolidate changelog menu ([cf85243](https://github.com/KristianP26/ble-scale-sync/commit/cf852434b591a49370f8d711008dcd7920946735))
+* unify historical changelog entries to release-please format ([6d29c7e](https://github.com/KristianP26/ble-scale-sync/commit/6d29c7e839827685cefd6072c1a172523a64d4a5))
+
+## [1.18.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.17.0...v1.18.0) (2026-06-16)
+
+
+### Added
+
+* **exporter:** add Runalyze exporter ([#204](https://github.com/KristianP26/ble-scale-sync/issues/204)) ([8f8d7a0](https://github.com/KristianP26/ble-scale-sync/commit/8f8d7a0222bfb883fedf9c989764aed585769712))
+* **exporter:** add Wger exporter ([#205](https://github.com/KristianP26/ble-scale-sync/issues/205)) ([a9aed3a](https://github.com/KristianP26/ble-scale-sync/commit/a9aed3a7d57db9a8a93ebf6c6bc1bc8d710085d3))
+
+
+### Fixed
+
+* **ble:** bootstrap ESP32 autonomous GATT connect for GATT-only scales ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([2266086](https://github.com/KristianP26/ble-scale-sync/commit/226608682f973e444b3741cae4af92a9c98d5427))
+* **ble:** connect before publishing scan results on autonomous path ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([793fdb2](https://github.com/KristianP26/ble-scale-sync/commit/793fdb2025d8da47500b2eaa5a102c34811c0d2e))
+* **ble:** connect random-address GATT scales via ESP32 proxy ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([989ace6](https://github.com/KristianP26/ble-scale-sync/commit/989ace6a529d8252a149016349bad231fe07f940))
+* **ble:** correct misreported static-random addr_type at scan source ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([0a2097e](https://github.com/KristianP26/ble-scale-sync/commit/0a2097e8973445a6201599b41d5a7f872dfeb34e))
+* **ble:** derive connect addr_type from MAC bits for misreported random scales ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([4909038](https://github.com/KristianP26/ble-scale-sync/commit/4909038b2a4f2052d0fba85e7fc10131e4fad938))
+* **ble:** preserve bond by not RemoveDevice'ing paired scales ([#168](https://github.com/KristianP26/ble-scale-sync/issues/168)) ([d662199](https://github.com/KristianP26/ble-scale-sync/commit/d662199e45a14c6bfaf45018682177bbe618e6a1))
+* **ble:** register BlueZ pairing agent for BF720 encrypted bonding ([#168](https://github.com/KristianP26/ble-scale-sync/issues/168)) ([d2a1aaf](https://github.com/KristianP26/ble-scale-sync/commit/d2a1aafa650c4e02dc5da89db7c99d15a0f0e012))
+* **esp32:** restore aioble IRQ before GATT connect ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([c29dc1c](https://github.com/KristianP26/ble-scale-sync/commit/c29dc1c41439b35207b16759481aa81ffd6c5d9e))
+
+
+### Changed
+
+* **ble:** single pre-connect GC pass on PSRAM boards ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([62e134b](https://github.com/KristianP26/ble-scale-sync/commit/62e134b1f4859a613bfb99f002d60bbc5316edb6))
+
+
+### Docs
+
+* note minimal-delay autonomous connect for GATT scales ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([b679550](https://github.com/KristianP26/ble-scale-sync/commit/b6795504c6dc562c18c2551629fbbe38cd381c61))
+* recommend scale_mac for GATT-only scales over the ESP32 proxy ([#231](https://github.com/KristianP26/ble-scale-sync/issues/231)) ([8b670c1](https://github.com/KristianP26/ble-scale-sync/commit/8b670c1e1042d1b8d76fcb9c65d8eb3743cc49f7))
+
+## [1.17.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.16.1...v1.17.0) (2026-06-15)
+
+
+### Added
+
+* **ble:** add Robi S9 adapter (Lefu/Fitdays FFB0-new protocol) ([#228](https://github.com/KristianP26/ble-scale-sync/issues/228)) ([4a8fda5](https://github.com/KristianP26/ble-scale-sync/commit/4a8fda56fa57bbb4f97b2a7cb36ca475a70e5515))
+
+
+### Fixed
+
+* **ble:** attempt bonding and name failed CCCD subscribe for Beurer BF720 ([#168](https://github.com/KristianP26/ble-scale-sync/issues/168)) ([45bfd87](https://github.com/KristianP26/ble-scale-sync/commit/45bfd87cf51de6ec565d6fdcd7038f5da197d31e))
+* **ble:** match QN scales advertising AE00 alongside fff0 ([#235](https://github.com/KristianP26/ble-scale-sync/issues/235)) ([6a12687](https://github.com/KristianP26/ble-scale-sync/commit/6a126877120b106ff1a9d452e46eb146477c3160))
+* **firmware:** ease GATT connect on no-PSRAM ESP32 + heap diagnostic ([#139](https://github.com/KristianP26/ble-scale-sync/issues/139)) ([7bef0f6](https://github.com/KristianP26/ble-scale-sync/commit/7bef0f6866a3e1700eff607d1adbe18dea0cf00e))
+
+## [1.16.1](https://github.com/KristianP26/ble-scale-sync/compare/v1.16.0...v1.16.1) (2026-06-15)
+
+
+### Fixed
+
+* **ble:** decode Sanitas SBF70/BF710 body composition via 0x59 ACK stream ([#211](https://github.com/KristianP26/ble-scale-sync/issues/211)) ([c3beb00](https://github.com/KristianP26/ble-scale-sync/commit/c3beb007372ff0a051a82d1ba411b6ef14d9e7ab))
+* **ble:** parse QN 0x23 stored record for V10 Renpho/ES-CS20M ([#213](https://github.com/KristianP26/ble-scale-sync/issues/213)) ([5617f28](https://github.com/KristianP26/ble-scale-sync/commit/5617f28fb7d02f47a34c86a2aa7b29fbdbe33688))
+* **ble:** read ESPHome proxy pre-decoded GATT uuid ([#229](https://github.com/KristianP26/ble-scale-sync/issues/229)) ([#234](https://github.com/KristianP26/ble-scale-sync/issues/234)) ([c1079c7](https://github.com/KristianP26/ble-scale-sync/commit/c1079c72375856b8179234bebd5d5e1ef82a7f60))
+
+## [1.16.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.15.0...v1.16.0) (2026-06-04)
+
+
+### Added
+
+* **ble:** add adapter liveness probe for watchdog classification ([#213](https://github.com/KristianP26/ble-scale-sync/issues/213)) ([e50ce5b](https://github.com/KristianP26/ble-scale-sync/commit/e50ce5b0128ab488f06ec3895306cdc4e557bfbe))
+* **ble:** add poll-failure classification helpers ([#213](https://github.com/KristianP26/ble-scale-sync/issues/213)) ([484e16a](https://github.com/KristianP26/ble-scale-sync/commit/484e16ac32d58bd24dd78fe6d190afd97bd5dd04))
+* **mqtt-proxy:** ESP32 autonomous GATT connect for fast-sleeping scales ([#214](https://github.com/KristianP26/ble-scale-sync/issues/214)) ([c4a3b33](https://github.com/KristianP26/ble-scale-sync/commit/c4a3b33ce28a003e63dfbdf14ae10991d6df9ff1))
+
+
+### Fixed
+
+* **ble:** keep a permanent error listener on the ESPHome proxy client ([#210](https://github.com/KristianP26/ble-scale-sync/issues/210)) ([ca7eb7d](https://github.com/KristianP26/ble-scale-sync/commit/ca7eb7d2f048a6f90d65d75878340ba7b0544525))
+* **ble:** reset gattInProgress on failed GATT connect + clearer ESP32 errors ([#201](https://github.com/KristianP26/ble-scale-sync/issues/201)) ([dcd1ac6](https://github.com/KristianP26/ble-scale-sync/commit/dcd1ac6f7d1a456b1e83eecf57a3709bddb2dd5f))
+* **ble:** send BLE address type on ESPHome proxy GATT connect ([#215](https://github.com/KristianP26/ble-scale-sync/issues/215)) ([#223](https://github.com/KristianP26/ble-scale-sync/issues/223)) ([71e735b](https://github.com/KristianP26/ble-scale-sync/commit/71e735b6c3460f9aa2b3d2d9e724c06da94ddeae))
+* **ble:** tag idle vs wedge poll failures in scanAndReadRaw ([#213](https://github.com/KristianP26/ble-scale-sync/issues/213)) ([407753e](https://github.com/KristianP26/ble-scale-sync/commit/407753e261815f31e128a88b5f97da7352baabda))
+* **config:** accept bare 32-hex CoreBluetooth UUID for scale_mac ([#212](https://github.com/KristianP26/ble-scale-sync/issues/212)) ([#224](https://github.com/KristianP26/ble-scale-sync/issues/224)) ([47d5033](https://github.com/KristianP26/ble-scale-sync/commit/47d503329a828c5127c827df98e902dc26cee36c))
+* **firmware:** flush scan batch early on a known scale MAC ([#201](https://github.com/KristianP26/ble-scale-sync/issues/201)) ([c692b42](https://github.com/KristianP26/ble-scale-sync/commit/c692b426972edaf0fb895475262afa166cf72587))
+* **runtime:** watchdog ignores idle no-shows ([#213](https://github.com/KristianP26/ble-scale-sync/issues/213)) ([9e1588f](https://github.com/KristianP26/ble-scale-sync/commit/9e1588faf84ac352ec3f9e41029d8406007e060c))
+
+
+### Docs
+
+* note idle-aware watchdog behavior ([#213](https://github.com/KristianP26/ble-scale-sync/issues/213)) ([7de309e](https://github.com/KristianP26/ble-scale-sync/commit/7de309ed6a33fab0150a2101909bcaa65544af6f))
+
+## [1.15.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.14.1...v1.15.0) (2026-05-21)
+
+
+### Added
+
+* **exporter:** add Intervals.icu exporter ([#203](https://github.com/KristianP26/ble-scale-sync/issues/203)) ([60af3d0](https://github.com/KristianP26/ble-scale-sync/commit/60af3d0e98fdb90268dbe43d7316b6bc8e9ff3c1))
+* **exporter:** add Telegram exporter ([#207](https://github.com/KristianP26/ble-scale-sync/issues/207)) ([0b73e0f](https://github.com/KristianP26/ble-scale-sync/commit/0b73e0f76601603e578f824d5b92cccf2c451e29))
+* **firmware:** support generic ESP-WROOM-32 boards ([487e482](https://github.com/KristianP26/ble-scale-sync/commit/487e482084ac42be73f8f6f4bde9d356f2f6a1a1))
+
+
+### Fixed
+
+* **ble:** route dual-mode adapters to GATT when no broadcast data ([#201](https://github.com/KristianP26/ble-scale-sync/issues/201)) ([9de2dee](https://github.com/KristianP26/ble-scale-sync/commit/9de2deea0f8223f72a1c631ed31584a5600a6fba))
+* **exporters:** fail fast on non-retryable HTTP errors + validate required config ([6ebea77](https://github.com/KristianP26/ble-scale-sync/commit/6ebea77b81320eeb7bf20a106c96b1cb460c524a))
+* **firmware:** harden constrained ESP32 boards against scan-buffer OOM ([c99605e](https://github.com/KristianP26/ble-scale-sync/commit/c99605e22f667f06023fdd9ee3f57c4f0c8b9e36))
+* **firmware:** parse 128-bit / 32-bit service UUIDs and service data ([bf918ad](https://github.com/KristianP26/ble-scale-sync/commit/bf918ad75fbaeb35465544af74871a5f0bd286fb))
+* **firmware:** publish service-UUID-only devices in scan results ([c1f9723](https://github.com/KristianP26/ble-scale-sync/commit/c1f9723013972749846acb7ff76fa5ec169a164c)), closes [#201](https://github.com/KristianP26/ble-scale-sync/issues/201)
+
+
+### Docs
+
+* bump adapter and exporter counts to 25 and 8 ([0e21abe](https://github.com/KristianP26/ble-scale-sync/commit/0e21abe88f5073238d2e3bdc7da840a505270304))
+* **scales:** note Mi Scale 2 works on all BLE transports ([e126848](https://github.com/KristianP26/ble-scale-sync/commit/e126848ad11a976c6956dbff5ee67ce755553306))
+
+## [1.14.1](https://github.com/KristianP26/ble-scale-sync/compare/v1.14.0...v1.14.1) (2026-05-19)
+
+
+### Fixed
+
+* **firmware:** correct mip ref position for async primitives install ([8974caa](https://github.com/KristianP26/ble-scale-sync/commit/8974caa1f9b55cabb792fb0532b29785518feabb)), closes [#198](https://github.com/KristianP26/ble-scale-sync/issues/198)
+* force-exit on hung shutdown so the watchdog actually restarts the container ([#194](https://github.com/KristianP26/ble-scale-sync/issues/194)) ([#196](https://github.com/KristianP26/ble-scale-sync/issues/196)) ([3b60393](https://github.com/KristianP26/ble-scale-sync/commit/3b6039397f53bc4d85f94a9889b7fedac4b24356))
+
+## [1.14.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.13.1...v1.14.0) (2026-05-18)
+
+
+### Added
+
+* **ble:** registry self-check to prevent adapter matches() collisions ([#182](https://github.com/KristianP26/ble-scale-sync/issues/182)) ([663f55a](https://github.com/KristianP26/ble-scale-sync/commit/663f55a8a9736967626312ca6d4f561a6db62295))
+* **ble:** ESPHome proxy Phase 2 - GATT + multi-proxy ([#116](https://github.com/KristianP26/ble-scale-sync/issues/116)) ([#187](https://github.com/KristianP26/ble-scale-sync/issues/187)) ([c850aa3](https://github.com/KristianP26/ble-scale-sync/commit/c850aa3b55b018143cb99e4659b53f04f1720ae2))
+* **scales:** Beurer BF720 / BF105 SIG-standard adapter ([#168](https://github.com/KristianP26/ble-scale-sync/issues/168)) ([#180](https://github.com/KristianP26/ble-scale-sync/issues/180)) ([3f52568](https://github.com/KristianP26/ble-scale-sync/commit/3f525688a099d5e5510edfb96e60cec9ab91fe3e))
+* **scales:** add Eufy T9120 (A1) support ([#178](https://github.com/KristianP26/ble-scale-sync/issues/178)) ([3f5ecd4](https://github.com/KristianP26/ble-scale-sync/commit/3f5ecd44e6f511b86e343f4dd392a9d031960ba1))
+
+
+### Fixed
+
+* **scales:** defer Renpho ES-WBE28 from the QN adapter ([#191](https://github.com/KristianP26/ble-scale-sync/issues/191)) ([27a58d5](https://github.com/KristianP26/ble-scale-sync/commit/27a58d5dda2e10ff6aced5df296637efa890c851))
+* **ble:** characteristic-aware adapter matching for 0xFFF0 collision ([#177](https://github.com/KristianP26/ble-scale-sync/issues/177)) ([#179](https://github.com/KristianP26/ble-scale-sync/issues/179)) ([6cb7992](https://github.com/KristianP26/ble-scale-sync/commit/6cb799290687fd02c84dbcbfb7dd1fc5106eddcb))
+
+
+### Docs
+
+* add boildead and alexw23 to contributors ([bf15b87](https://github.com/KristianP26/ble-scale-sync/commit/bf15b8766da1670600dc71d246d04d7587001226))
+
+## [1.13.1](https://github.com/KristianP26/ble-scale-sync/compare/v1.13.0...v1.13.1) (2026-05-18)
+
+
+### Fixed
+
+* **docker:** add missing setup-strava command to entrypoint ([#188](https://github.com/KristianP26/ble-scale-sync/issues/188)) ([#189](https://github.com/KristianP26/ble-scale-sync/issues/189)) ([af47e3a](https://github.com/KristianP26/ble-scale-sync/commit/af47e3aa1322fa34a440f8d43781793802a46080))
+
+## [1.13.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.12.1...v1.13.0) (2026-05-13)
+
+
+### Added
+
+* drop Node 20 support, require Node 22+ ([25712d1](https://github.com/KristianP26/ble-scale-sync/commit/25712d1b84274fbab95f0adbef3c76bcf423f3d8))
+* replay cached offline frames with timestamps ([#164](https://github.com/KristianP26/ble-scale-sync/issues/164)) ([6bae585](https://github.com/KristianP26/ble-scale-sync/commit/6bae5858a8d63f373361ed1aef979915a23c1183))
+* **scale:** support Renpho ES-32MD via ES-CS20M adapter ([#172](https://github.com/KristianP26/ble-scale-sync/issues/172)) ([068c14f](https://github.com/KristianP26/ble-scale-sync/commit/068c14f4563a6529afb6b5bbc7bfaa716371642f))
+
+
+### Fixed
+
+* **deps:** regen package-lock.json with emnapi entries (CI fix) ([40b3d9d](https://github.com/KristianP26/ble-scale-sync/commit/40b3d9dd5e77aeafc45818363a52db3bb50ab15a))
+* **runtime:** use raw weight for single-user mqtt display ([b8d0b90](https://github.com/KristianP26/ble-scale-sync/commit/b8d0b909874f44385d2d2b595481d7a3f8e3f306))
+
+## [1.12.1](https://github.com/KristianP26/ble-scale-sync/compare/v1.12.0...v1.12.1) (2026-05-12)
+
+
+### Fixed
+
+* **ble:** RSSI freshness no longer treats absent prop as stale ([#167](https://github.com/KristianP26/ble-scale-sync/issues/167)) ([8340caa](https://github.com/KristianP26/ble-scale-sync/commit/8340caa0ef3de7a5499dfca26190cc5864ab8e7e)), closes [#169](https://github.com/KristianP26/ble-scale-sync/issues/169)
+
+## [1.12.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.11.0...v1.12.0) (2026-05-06)
+
+
+### Added
+
+* **config:** hot-reload config.yaml without restart ([#123](https://github.com/KristianP26/ble-scale-sync/issues/123)) ([d213d5c](https://github.com/KristianP26/ble-scale-sync/commit/d213d5ccd242312f5251c59128708ca503b0cb23))
+* **runtime:** systemd Type=notify watchdog integration ([#144](https://github.com/KristianP26/ble-scale-sync/issues/144)) ([68ee5bf](https://github.com/KristianP26/ble-scale-sync/commit/68ee5bf4b1aede87080c432512233f4e09b5a680))
+* **scales:** add Xiaomi Mi Scale 2 broadcast adapter ([#134](https://github.com/KristianP26/ble-scale-sync/issues/134)) ([6e5ffb4](https://github.com/KristianP26/ble-scale-sync/commit/6e5ffb4fa994546231d42b6493cd875e2f2e46fe))
+* **scales:** scaffold experimental ADE A2 adapter ([#159](https://github.com/KristianP26/ble-scale-sync/issues/159)) ([#160](https://github.com/KristianP26/ble-scale-sync/issues/160)) ([11aec6f](https://github.com/KristianP26/ble-scale-sync/commit/11aec6f79bc01c4c4a7dee9e68ffa2e0c72b2d51))
+* **trisa:** implement ADE BA 1600 challenge response ([#138](https://github.com/KristianP26/ble-scale-sync/issues/138)) ([#158](https://github.com/KristianP26/ble-scale-sync/issues/158)) ([91aa28e](https://github.com/KristianP26/ble-scale-sync/commit/91aa28eedef68e0c77da7ceb389fe411b151f48c))
+
+
+### Fixed
+
+* **ble:** guard against dying-peer connect stall ([#143](https://github.com/KristianP26/ble-scale-sync/issues/143)) ([abd3c22](https://github.com/KristianP26/ble-scale-sync/commit/abd3c227547c4a92f05f2d5be47087049339b7c3))
+* **ble:** per-address grace state in esphome-proxy scanAndReadRaw ([#161](https://github.com/KristianP26/ble-scale-sync/issues/161)) ([875cb28](https://github.com/KristianP26/ble-scale-sync/commit/875cb283c9df725e615f76e1c9919185ad773cc0))
+* **review:** address v1.12.0 review findings ([ed90fbf](https://github.com/KristianP26/ble-scale-sync/commit/ed90fbf4d7fc3bbc1bdd94bc241942ef10df7c10))
+* **runtime:** cache systemd-notify ENOENT to avoid spawn-storm on hosts without it ([#144](https://github.com/KristianP26/ble-scale-sync/issues/144)) ([8959287](https://github.com/KristianP26/ble-scale-sync/commit/895928768b78e84cd70c79a9bc7e26ff285a308d))
+* **scales:** ack offline frames on Renpho ES-26BB-B ([#157](https://github.com/KristianP26/ble-scale-sync/issues/157)) ([70f2066](https://github.com/KristianP26/ble-scale-sync/commit/70f20669e178d99a2aa6783ed1f65b3c8fed1997))
+* **scales:** warn instead of debug when ES-26BB-B offline ack write fails ([4e265e1](https://github.com/KristianP26/ble-scale-sync/commit/4e265e16bf20c5bedaff52c636f0fe71128982bf))
+
+
+### Docs
+
+* deep consistency sweep across guide and reference pages ([e979b0c](https://github.com/KristianP26/ble-scale-sync/commit/e979b0cf5b12d75f6d74e3152db9628a824297b8))
+* **readme:** bump scale count, note Linux stability features ([5a47c06](https://github.com/KristianP26/ble-scale-sync/commit/5a47c064911a36b46f909e3e8bd55b7ad1a1fdab))
+
+## [1.11.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.10.2...v1.11.0) (2026-05-01)
+
+
+### Added
+
+* **ble:** consecutive-failure watchdog for BlueZ stuck-state recovery ([#154](https://github.com/KristianP26/ble-scale-sync/pull/154)) ([dcc822d](https://github.com/KristianP26/ble-scale-sync/commit/dcc822d16bbebe7682490114febc92326b69a611))
+* **trisa:** support ADE BA 1600 (fitvigo) firmware variant — weight only ([#153](https://github.com/KristianP26/ble-scale-sync/pull/153)) ([515d1a7](https://github.com/KristianP26/ble-scale-sync/commit/515d1a72faab28abbadddc41ddca60337358b68b))
+
+
+### Fixed
+
+* **firmware:** match scan_duration_ms to GATT connect timeout ([#141](https://github.com/KristianP26/ble-scale-sync/issues/141)) ([54dcc3b](https://github.com/KristianP26/ble-scale-sync/commit/54dcc3bda965ac9482659017f3c08d68efea716d))
+* **node-ble:** add timeout to device.gatt() and waitForRawReading ([#142](https://github.com/KristianP26/ble-scale-sync/pull/142)) ([2e45366](https://github.com/KristianP26/ble-scale-sync/commit/2e45366623f873aaf1b415c3f1ccc4edef860613)), closes [#140](https://github.com/KristianP26/ble-scale-sync/issues/140)
+* prevent orphaned BlueZ discovery sessions in continuous mode ([#81](https://github.com/KristianP26/ble-scale-sync/pull/81)) ([e6ee513](https://github.com/KristianP26/ble-scale-sync/commit/e6ee51350ced0ef9a50d77380d201a21627fcc76))
+* **trisa:** fail fast when no measurement char and harden ADE parser boundary ([74a34a6](https://github.com/KristianP26/ble-scale-sync/commit/74a34a6e14d6b525114ed78372c43e07a0de6cd3))
+
+
+### Docs
+
+* **addon:** backfill CHANGELOG and refresh DOCS for v1.8.2 through v1.10.2 ([d918a1d](https://github.com/KristianP26/ble-scale-sync/commit/d918a1d677dad982dc123133352ae58539b93fb1))
+* document Pi 3/4 BlueZ stuck-state limitation + watchdog mitigation ([a039b4b](https://github.com/KristianP26/ble-scale-sync/commit/a039b4b155b5677001994a1f6a3bbfc723b2b876))
+* **esp32-proxy:** add Windows flashing guidance ([#152](https://github.com/KristianP26/ble-scale-sync/pull/152)) ([2796d7b](https://github.com/KristianP26/ble-scale-sync/commit/2796d7b0bcbced0bc1e5bca026fc275b6e02be21))
+* **trisa:** clarify optional-binding + variant-detection semantics ([ae87d84](https://github.com/KristianP26/ble-scale-sync/commit/ae87d8421a446dd3b56cec63ab3baad476d87a0a))
+
+
+### Thanks
+
+* [@fromport](https://github.com/fromport) for the `device.gatt()` / `waitForRawReading` GATT-acquisition timeout fix that prevents indefinite hangs on stalled BlueZ adapters ([#142](https://github.com/KristianP26/ble-scale-sync/pull/142))
+
+## [1.10.2](https://github.com/KristianP26/ble-scale-sync/compare/v1.10.1...v1.10.2) (2026-04-24)
+
+
+### Fixed
+
+* **Renpho ES-26M**: the 18-byte `0x12` scale-info frame (where byte[1] is the packet length and bytes [2-7] carry the device MAC) was being misread as "byte[2] is the protocol type", yielding `proto=0xFF` and causing every subsequent handshake command to be rejected by the scale. No `0x10` weight frames were ever returned. The QN-Scale adapter now detects the long-frame format (`data.length >= 18 && data[1] === length`) and falls through to the ES-30M code path with `weightScaleFactor=10`, so the existing heuristic auto-corrects the weight divisor. The unconditional skip of `R1=R2=0` stable frames in ES-30M mode is also lifted: the ES-26M never reports impedance when the user is wearing socks, and those frames are the only stable reading available in that scenario. Contributed by [@fromport](https://github.com/fromport) ([#128](https://github.com/KristianP26/ble-scale-sync/pull/128))
+
+
+### Changed
+
+* **ESPHome proxy**: the handler now logs a one-time Phase 1 capability summary on connect, listing which configured scale adapters are broadcast-capable (produce readings on this transport) and which are GATT-only (will time out until Phase 2 / [#116](https://github.com/KristianP26/ble-scale-sync/issues/116) ships). Users who were only seeing the generic `Timed out waiting for any recognized scale broadcast via ESPHome proxy` line now immediately see whether their scale brand is in the broadcast-capable set, instead of having to reproduce the failure twice to catch the per-MAC warn. Surfaces the Yunmai / Beurer / Mi Scale 2 / etc. mismatch reported by [@geniusliang](https://github.com/geniusliang) in [#133](https://github.com/KristianP26/ble-scale-sync/issues/133)
+
+
+### Docs
+
+* **CONTRIBUTING.md**: project structure tree refreshed to match the current layout (HA add-on, ESPHome proxy handler, updated scale/test files)
+* **README**: contributors migrated to a GitHub-style table with inline avatars, [@fromport](https://github.com/fromport) added for the ES-26M contribution
+
+
+### Thanks
+
+* [@fromport](https://github.com/fromport) for diagnosing and fixing the ES-26M handshake end to end, including the heuristic weight-divisor path
+* [@geniusliang](https://github.com/geniusliang) for the detailed ESPHome proxy repro that led to the capability-summary UX improvement
+
+## [1.10.1](https://github.com/KristianP26/ble-scale-sync/compare/v1.10.0...v1.10.1) (2026-04-22)
+
+
+### Fixed
+
+* **ESPHome proxy**: the `ReadingWatcher` silently dropped advertisements from dual-mode scale adapters (`parseBroadcast` defined **and** `charNotifyUuid` set) when the broadcast frame was not weight-bearing. Reported by [@deadhurricane](https://github.com/deadhurricane) on an Elis 1 / ES-30M, which matches by name as a QN-Scale but only beacons its MAC in manufacturer data and carries weight over GATT. The handler now warns once per MAC that the scale needs a GATT connection (Phase 2), pointing the user at the native BLE handler or the ESP32 MQTT proxy as workarounds instead of leaving them staring at a silent log ([#116](https://github.com/KristianP26/ble-scale-sync/issues/116), [#75](https://github.com/KristianP26/ble-scale-sync/issues/75))
+* **Logger**: `runtime.debug: true` in `config.yaml` did not switch the log level to DEBUG, only the `DEBUG=true` env var did. The app now honors the config value on startup, so HA Add-on users (who pass `debug` as an option, not an env var) and anyone driving the runtime from `config.yaml` get the verbose BLE logs they expect
+
+## [1.10.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.9.0...v1.10.0) (2026-04-22)
+
+
+### Added
+
+* **Embedded MQTT broker for the ESP32 proxy**: zero-config setup, no Mosquitto required. When `ble.mqtt_proxy.broker_url` is omitted, BLE Scale Sync now starts an embedded [aedes](https://github.com/moscajs/aedes) broker on `0.0.0.0:1883` by default; the internal client connects over loopback, and the ESP32 firmware just points at the host machine's LAN IP. Port and bind interface are configurable via `embedded_broker_port` and `embedded_broker_bind`, optional username/password are enforced when set. Existing `broker_url` setups are untouched ([#54](https://github.com/KristianP26/ble-scale-sync/issues/54))
+* **ESPHome Bluetooth proxy transport (experimental, phase 1 / broadcast-only)**: third BLE handler option `ble.handler: esphome-proxy`. If you already run an [ESPHome Bluetooth proxy](https://esphome.io/components/bluetooth_proxy.html) mesh for Home Assistant, BLE Scale Sync can connect to it over Native API (port 6053, optional Noise encryption or legacy password) and reuse it as its BLE radio, so no dedicated ESP32 with custom firmware and no MQTT broker are required. Phase 1 handles broadcast scales only; GATT scales log a warning and are skipped until phase 2 lands. New `docs/guide/esphome-proxy.md` covers setup, encryption key handling and limitations ([#116](https://github.com/KristianP26/ble-scale-sync/issues/116))
+* **Setup wizard**: new "Use built-in embedded broker" option for the mqtt-proxy handler, so new installs skip the external broker prompt by default. Handler selection now also includes "Via ESPHome Bluetooth proxy" with prompts for host, port and authentication mode
+
+
+### Security
+
+* **Embedded MQTT broker**: configs that bind the embedded broker to a non-loopback interface (default `0.0.0.0`) now require `username` + `password` and are rejected at schema validation time. The wizard defaults to requiring auth and falls back to `127.0.0.1` when the user declines, so misconfiguration cannot silently expose a LAN-reachable broker without credentials.
+* **ESPHome proxy**: configs that set both `encryption_key` and `password` are rejected at schema validation time. Pick Noise (`encryption_key`, recommended) or legacy password, not both.
+
+## [1.9.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.8.2...v1.9.0) (2026-04-21)
+
+
+### Added
+
+* **Eufy Smart Scale P2 (T9148) and P2 Pro (T9149)**: new dedicated adapter with the AES-128-CBC C0/C1/C2/C3 handshake required by these models. Weight + impedance over GATT FFF2 after authentication, passive weight reading from the 19-byte advertisement without connecting. Prevents the prior false match as a QN scale that crashed with `Operation is not supported` on FFF1 ([#98](https://github.com/KristianP26/ble-scale-sync/issues/98))
+
+
+### Fixed
+
+* **Setup wizard**: picking no exporter in the export-targets checkbox silently produced a config without any `global_exporters` block, so the first run emitted `All exports failed` and exited with code 1. The wizard now asks an explicit `Continue without exporters?` confirmation when the checkbox is submitted empty and re-prompts if the user declines ([#98](https://github.com/KristianP26/ble-scale-sync/issues/98))
+* **Orchestrator**: `dispatchExports([])` logged `All exports failed` because `allFailed` defaulted to `true` with zero iterations. Empty exporter lists now short-circuit with a clear warning (`No exporters configured — measurement processed but not sent anywhere`) and return `success`, so single-shot mode no longer exits with code 1 when the config has no exporters
+
+
+### Thanks
+
+* [@mart1058](https://github.com/mart1058) and [@dbrb2](https://github.com/dbrb2) for diagnose output, HCI snoop logs, and testing the Eufy P2 Pro protocol reverse-engineering ([#98](https://github.com/KristianP26/ble-scale-sync/issues/98))
+* [bdr99/eufylife-ble-client](https://github.com/bdr99/eufylife-ble-client) for the reference Python implementation of the Eufy T9148/T9149 auth handshake and frame formats
+
+## [1.8.2](https://github.com/KristianP26/ble-scale-sync/compare/v1.8.1...v1.8.2) (2026-04-20)
+
+
+### Fixed
+
+* **Sanitas SBF70 / Beurer BF710 family**: weight parsed as a stuck `12.80 kg` regardless of the real reading on the scale. Root cause: the BF710 variant (start byte `0xE7`) sends a compact 5-byte `0x58` frame with weight at bytes `[3-4]` BE, not the 6+ byte BF700/BF800 layout the adapter assumed. The adapter rejected every live weight frame as too short and then mis-parsed the `0x59` finalize frame. Now branches on `isBf710Type` and applies a 3-reading stability window (0.3 kg tolerance) so the scale's initial metadata frame does not trigger early completion ([#112](https://github.com/KristianP26/ble-scale-sync/issues/112))
+
+
+### Thanks
+
+* [@flow778](https://github.com/flow778) for capturing raw BLE frames that made the fix possible ([#112](https://github.com/KristianP26/ble-scale-sync/issues/112))
+
+## [1.8.1](https://github.com/KristianP26/ble-scale-sync/compare/v1.8.0...v1.8.1) (2026-04-20)
+
+
+### Fixed
+
+* **Garmin**: upload failed with `'Garmin' object has no attribute 'garth'` after `garminconnect` released 0.3.0 on 2026-04-02, which dropped the `garth` dependency in favor of native authentication. The Python bridge accessed `garmin.garth.sess.headers` and `garmin.garth.dump()`, both removed in 0.3.x. Migrated to the new API: `Garmin.login(tokenstore)` auto-persists on successful credential login, and `client.dump(token_dir)` saves tokens after MFA. Custom User-Agent override is no longer needed because `garminconnect` now uses `curl_cffi` TLS impersonation and randomized browser fingerprints internally ([#114](https://github.com/KristianP26/ble-scale-sync/issues/114))
+* **Docker**: added `libcurl4-openssl-dev` so `curl_cffi` (new transitive dep via `garminconnect` 0.3.x) builds from source on armv7, where PyPI has no prebuilt wheel
+
+
+### Breaking
+
+* Tokens from `garminconnect` 0.2.x (old garth OAuth1/OAuth2 files) are incompatible with 0.3.x. Existing installs must re-authenticate: `npm run setup-garmin`, or in the HA Add-on just restart the add-on so it re-runs setup from the credentials you entered. The setup script auto-removes leftover `oauth*_token.json` files before writing the new token format.
+
+
+### Thanks
+
+* [@Phipseyy](https://github.com/Phipseyy) and [@mooredav87](https://github.com/mooredav87) for reporting the Garmin upload regression ([#114](https://github.com/KristianP26/ble-scale-sync/issues/114))
+
+## [1.8.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.7.5...v1.8.0) (2026-04-17)
+
+
+### Added
+
+* **HA Add-on**: one-click install via a [My Home Assistant](https://www.home-assistant.io/integrations/my/) badge in the README, landing page, getting-started guide, and HA Add-on guide. Manual steps remain as a fallback for users without My Home Assistant configured
+* **HA Add-on**: `weight_unit` and `height_unit` exposed as add-on options (kg/lbs, cm/in). The CLI and exporters display in the chosen unit while internal math stays in kg/cm
+* **HA Add-on**: `last_known_weight` persists across restarts. The runtime config lives at `/data/config.yaml` and a small Python helper (`merge_last_weights.py`) copies preserved per-user weights from the previous run into the freshly generated config on every startup, so multi-user identification by weight stays accurate after reboots and add-on updates
+* **Docs**: new [Home Assistant Add-on guide](https://blescalesync.dev/guide/home-assistant-addon) covering install, full configuration reference, MQTT auto-detection, Garmin setup (including the MFA and IP-block workarounds), custom config mode, persistence semantics, and troubleshooting. Promoted to a first-class quick-start in the README and landing page
+
+## [1.7.5](https://github.com/KristianP26/ble-scale-sync/compare/v1.7.4...v1.7.5) (2026-04-15)
+
+
+### Fixed
+
+* **HA Add-on**: Garmin Connect uploads now work out of the box. The add-on previously created an empty `/data/garmin-tokens/` directory and never ran the authentication step, so the first upload always failed with `No such file or directory: '/data/garmin-tokens/oauth1_token.json'`. On first start the add-on now runs `setup_garmin.py --from-config` to generate OAuth tokens from the email and password you entered in the UI ([#111](https://github.com/KristianP26/ble-scale-sync/issues/111))
+* **Docker**: armv7 image builds failed because `cffi` (transitive dep via `garminconnect`) had no pre-built wheel for armv7 + Python 3.11 and pip could not compile from source. Added `python3-dev`, `libffi-dev`, and `libssl-dev` to the image so cffi builds cleanly
+
+
+### Added
+
+* **HA Add-on**: MFA-friendly token import. If your Garmin account uses 2FA, drop pre-generated `oauth1_token.json` and `oauth2_token.json` files into `/share/ble-scale-sync/garmin-tokens/` and the add-on imports them on startup, skipping the interactive auth that has no terminal inside an add-on container
+* **HA Add-on**: DOCS.md now explains the full Garmin setup flow including the MFA workaround and the IP-block workaround
+
+
+### Thanks
+
+* [@Phipseyy](https://github.com/Phipseyy) for reporting the HA Add-on Garmin failure ([#111](https://github.com/KristianP26/ble-scale-sync/issues/111))
+
+## [1.7.4](https://github.com/KristianP26/ble-scale-sync/compare/v1.7.3...v1.7.4) (2026-04-02)
+
+
+### Fixed
+
+* **QN Scale**: rewrote adapter as a notification-driven state machine for newer firmware (Renpho Elis 1, ES-CS20M) that requires an AE00 service handshake before measurement data flows ([#75](https://github.com/KristianP26/ble-scale-sync/issues/75), [#84](https://github.com/KristianP26/ble-scale-sync/issues/84))
+* **QN Scale**: added ES-30M weight frame format detection (different byte layout for weight and impedance)
+* **QN Scale**: 0x13 config byte now sends 0x01 (kg) instead of 0x08, which was switching the scale display to lb
+* **QN Scale**: 2-second fallback timer for Linux (BlueZ D-Bus) where the initial 0x12 frame may be lost due to a CCCD subscription race condition
+* **QN Scale**: skip impedance-less stable frames on ES-30M so the adapter waits for the full body composition reading
+
+
+### Thanks
+
+* [@DJBenson](https://github.com/DJBenson) for extensive macOS testing, packet capture analysis, and reverse-engineering the state machine flow ([#84](https://github.com/KristianP26/ble-scale-sync/issues/84))
+* [@ericandreani](https://github.com/ericandreani) for persistent Linux/Docker testing across multiple iterations ([#75](https://github.com/KristianP26/ble-scale-sync/issues/75))
+
+## [1.7.3](https://github.com/KristianP26/ble-scale-sync/compare/v1.7.2...v1.7.3) (2026-04-02)
+
+
+### Fixed
+
+* **Docker**: `diagnose` command was missing from the entrypoint, causing "exec: diagnose: not found" when running `docker run ... diagnose <MAC>` ([#98](https://github.com/KristianP26/ble-scale-sync/issues/98))
+
+
+### Thanks
+
+* [@mart1058](https://github.com/mart1058) for reporting the missing Docker diagnose command ([#98](https://github.com/KristianP26/ble-scale-sync/issues/98))
+
+## [1.7.2](https://github.com/KristianP26/ble-scale-sync/compare/v1.7.1...v1.7.2) (2026-04-01)
+
+
+### Fixed
+
+* **QN Scale**: UUID fallback (FFF0/FFE0) no longer matches named devices from other brands. Prevents Eufy, 1byone, and similar scales that share the FFF0 service from being incorrectly identified as QN Scale and failing with "Operation is not supported" ([#98](https://github.com/KristianP26/ble-scale-sync/issues/98))
+
+
+### Thanks
+
+* [@mart1058](https://github.com/mart1058) for reporting the Eufy P2 Pro connection failure ([#98](https://github.com/KristianP26/ble-scale-sync/issues/98))
+
+## [1.7.1](https://github.com/KristianP26/ble-scale-sync/compare/v1.7.0...v1.7.1) (2026-03-30)
+
+
+### Fixed
+
+* **Update check**: replaced strict 24-hour cooldown with calendar-day (UTC) comparison. Users who weigh in slightly earlier each day (e.g. 7:00 AM, then 6:55 AM) were being skipped
+
+## [1.7.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.6.4...v1.7.0) (2026-03-29)
+
+
+### Added
+
+* **Update check** with anonymous usage statistics ([#87](https://github.com/KristianP26/ble-scale-sync/issues/87)). After each successful measurement (max once per 24h), the app checks `api.blescalesync.dev` for newer versions. Only the app version, OS, and architecture are sent via the User-Agent header. Disable with `update_check: false` in config.yaml. Automatically disabled in CI environments
+* **Cloudflare Worker** (`worker/`) serving the `/version` endpoint and a public stats dashboard at [stats.blescalesync.dev](https://stats.blescalesync.dev) with aggregated anonymous data (version distribution, OS/architecture breakdown)
+* Setup wizard shows an update notice before the first step if a newer version is available
+* **CI**: GitHub Actions workflow for automatic Cloudflare Worker deployment on push to main (`worker.yml`)
+
+## [1.6.4](https://github.com/KristianP26/ble-scale-sync/compare/v1.6.3...v1.6.4) (2026-03-27)
+
+
+### Fixed
+
+* **BLE**: use ATT Write Request instead of Reliable Write in node-ble handler, fixing "Operation is not supported" errors on Medisana BS430 and similar scales that do not support reliable writes ([#85](https://github.com/KristianP26/ble-scale-sync/issues/85))
+
+
+### Improved
+
+* **BLE**: GATT characteristic flags are now logged during discovery (`DEBUG=true`) for easier troubleshooting
+
+
+### Thanks
+
+* [@Ikari34](https://github.com/Ikari34) for reporting the Medisana BS430 issue ([#85](https://github.com/KristianP26/ble-scale-sync/issues/85))
+
+## [1.6.3](https://github.com/KristianP26/ble-scale-sync/compare/v1.6.2...v1.6.3) (2026-03-04)
+
+
+### Fixed
+
+* **Docker**: removed cleanup workflow that was deleting multi-arch platform manifests, making all Docker images unpullable ([#74](https://github.com/KristianP26/ble-scale-sync/issues/74), [#76](https://github.com/KristianP26/ble-scale-sync/issues/76))
+
+
+### Thanks
+
+* [@marcelorodrigo](https://github.com/marcelorodrigo) for reporting the broken Docker images ([#74](https://github.com/KristianP26/ble-scale-sync/issues/74))
+* [@mtcerio](https://github.com/mtcerio) for the additional report ([#76](https://github.com/KristianP26/ble-scale-sync/issues/76))
+
+## [1.6.2](https://github.com/KristianP26/ble-scale-sync/compare/v1.6.1...v1.6.2) (2026-03-02)
+
+
+### Changed
+
+* **CI**: Docker `latest` tag now only applies to GitHub releases, not every push to main ([#70](https://github.com/KristianP26/ble-scale-sync/pull/70))
+* **CI**: Removed push-to-main Docker build trigger ([#71](https://github.com/KristianP26/ble-scale-sync/pull/71))
+* **Docs**: SEO meta keywords added to all documentation pages ([#69](https://github.com/KristianP26/ble-scale-sync/pull/69))
+* **Docs**: Alternatives page updated with Strava, file export, and ESP32 proxy sections ([#68](https://github.com/KristianP26/ble-scale-sync/pull/68))
+* **Docs**: ESP32 BLE proxy section added to getting started guide ([#67](https://github.com/KristianP26/ble-scale-sync/pull/67))
+
+## [1.6.1](https://github.com/KristianP26/ble-scale-sync/compare/v1.6.0...v1.6.1) (2026-03-01)
+
+
+### Fixed
+
+* **BlueZ stale discovery recovery** after Docker container restart. Adds kernel-level adapter reset via `btmgmt` as Tier 4 fallback when D-Bus recovery fails, plus proactive adapter reset in Docker entrypoint ([#39](https://github.com/KristianP26/ble-scale-sync/issues/39), [#43](https://github.com/KristianP26/ble-scale-sync/pull/43))
+
+
+### Changed
+
+* **CI**: Docker cleanup workflow removes PR images and untagged versions from GHCR ([#58](https://github.com/KristianP26/ble-scale-sync/pull/58))
+* **Docs**: Contributors section added to README
+* **Node.js**: minimum version bumped to 20.19.0 (required by eslint 10.0.2)
+* **Deps**: @stoprocent/noble 2.3.16, eslint 10.0.2, typescript-eslint 8.56.1, @types/node 25.3.3, @inquirer/prompts 8.3.0
+
+
+### Thanks
+
+* [@marcelorodrigo](https://github.com/marcelorodrigo) for reporting the stale BlueZ discovery issue ([#39](https://github.com/KristianP26/ble-scale-sync/issues/39))
+
+## [1.6.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.5.0...v1.6.0) (2026-02-28)
+
+
+### Added
+
+* **ESP32 BLE proxy** (experimental) for remote BLE scanning over MQTT. Use a cheap ESP32 board (~8€) as a wireless Bluetooth radio, enabling BLE Scale Sync on machines without local Bluetooth. Supports both broadcast and GATT scales
+* **ESP32 display board** (Guition ESP32-S3-4848S040) with LVGL UI showing scan status, user matches, and export results
+* **Beep feedback** on ESP32 boards with I2S buzzer (Atom Echo) when a known scale is detected
+* **Streaming BLE scan** for ESP32-S3 boards with hardware radio coexistence
+* **Docker mqtt-proxy compose** (`docker-compose.mqtt-proxy.yml`) requiring no BlueZ, D-Bus, or `NET_ADMIN`
+* Setup wizard includes interactive mqtt-proxy configuration
+* `BLE_HANDLER=mqtt-proxy` environment variable as alternative to config.yaml
+* ESP32 proxy documentation page with architecture diagram, flashing guide, and MQTT topics reference
+
+
+### Changed
+
+* Renpho broadcast parsing consolidated into QN scale adapter
+* Landing page updated with ESP32 proxy and Setup Wizard feature cards
+
+
+### Thanks
+
+* [@APIUM](https://github.com/APIUM) for the ESP32 MQTT proxy implementation ([#45](https://github.com/KristianP26/ble-scale-sync/pull/45))
+
+## [1.5.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.4.0...v1.5.0) (2026-02-24)
+
+
+### Added
+
+* **File exporter** (CSV/JSONL) for local measurement logging without external services. Auto-header CSV with proper escaping, JSONL format, per-user file paths, and directory writability healthcheck
+* **Strava exporter** with OAuth2 token management. Updates athlete weight via PUT /api/v3/athlete. Automatic token refresh, restricted file permissions (0o600), and interactive setup script (`npm run setup-strava`)
+* Strava API application setup guide in documentation with step-by-step instructions
+
+## [1.4.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.3.1...v1.4.0) (2026-02-24)
+
+
+### Added
+
+* **BLE diagnostic tool** (`npm run diagnose`) for detailed device analysis: advertisement data, service UUIDs, RSSI, connectable flag, and step-by-step GATT connection testing
+* **Broadcast mode** for non-connectable QN-protocol scales (#34). Reads weight directly from BLE advertisement data without requiring a GATT connection
+* **Garmin 2FA/MFA support** in `setup_garmin.py`. Prompts for authenticator code when Garmin requires multi-factor authentication
+
+
+### Fixed
+
+* **QN broadcast parser**: corrected byte layout (LE uint16 at bytes 17-18, stability flag at byte 15). Previous layout produced incorrect weight values
+* **ES-CS20M**: service UUID 0x1A10 fallback for unnamed Yunmai-protocol devices (#34)
+* **ES-CS20M**: 0x11 STOP frame support as stability signal (#34)
+
+
+### Changed
+
+* **CI**: Node.js 24 added to test matrix (required check)
+* **CI**: PR-triggered Docker image builds with `pr-{id}` tags (#44)
+* **Deps**: ESLint v10, typescript-eslint v8.56
+
+
+### Thanks
+
+* [@APIUM](https://github.com/APIUM) for Garmin 2FA support ([#41](https://github.com/KristianP26/ble-scale-sync/pull/41))
+* [@Tosiman-Global](https://github.com/Tosiman-Global) and [@BenBaril83](https://github.com/BenBaril83) for debugging the ES-CS20M broadcast protocol (#34)
+* [@marcelorodrigo](https://github.com/marcelorodrigo) for PR-triggered Docker builds ([#44](https://github.com/KristianP26/ble-scale-sync/pull/44))
+
+## [1.3.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.2.2...v1.3.0) (2026-02-16)
+
+
+### Added
+
+* Garmin multi-user Docker authentication — `setup-garmin --user <name>` and `--all-users` commands
+* `setup_garmin.py --from-config` mode reads users and credentials from `config.yaml`
+* `--token-dir` argument for `garmin_upload.py` and `setup_garmin.py` — per-user token directories
+* Tilde expansion for `token_dir` in TypeScript exporter
+* 4 new Garmin exporter tests (token_dir passing, tilde expansion, backward compat)
+* `pyyaml` dependency for config.yaml parsing in Python scripts
+* Docker multi-user volume examples in `docker-compose.example.yml` and docs
+
+
+### Fixed
+
+* Friendly error message when D-Bus socket is not accessible (missing `-v /var/run/dbus:/var/run/dbus:ro` in Docker) instead of raw `ENOENT` crash (#25)
+
+
+### Changed
+
+* Wizard passes Garmin credentials via environment variables instead of CLI arguments (security)
+
+
+### Thanks
+
+* [@marcelorodrigo](https://github.com/marcelorodrigo) for [#29](https://github.com/KristianP26/ble-scale-sync/pull/29) — the initial implementation that inspired this solution
+
+## [1.2.2](https://github.com/KristianP26/ble-scale-sync/compare/v1.2.1...v1.2.2) (2026-02-14)
+
+
+### Added
+
+* Annotated `config.yaml.example` with all sections and exporters
+* `CONTRIBUTING.md` — development guide, project structure, test coverage, adding adapters/exporters, PR guidelines
+* `CHANGELOG.md`
+* GitHub Release and TypeScript badges
+* Documentation split into `docs/` — exporters, multi-user, body-composition, troubleshooting
+
+
+### Changed
+
+* Rewrite README (~220 lines, Docker-first quick start, simplified scales table)
+* Move dev content (project structure, test coverage, adding adapters/exporters) into CONTRIBUTING.md
+* `.env.example` now notes that `config.yaml` is the preferred configuration method
+
+## [1.2.1](https://github.com/KristianP26/ble-scale-sync/compare/v1.2.0...v1.2.1) (2026-02-13)
+
+
+### Added
+
+* Docker support with multi-arch images (`linux/amd64`, `linux/arm64`, `linux/arm/v7`)
+* `Dockerfile`, `docker-entrypoint.sh`, `docker-compose.example.yml`
+* GitHub Actions workflow for automated GHCR builds on release
+* Docker health check via heartbeat file
+
+## [1.2.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.1.0...v1.2.0) (2026-02-13)
+
+
+### Added
+
+* Interactive setup wizard (`npm run setup`) — BLE discovery, user profiles, exporter configuration, connectivity tests
+* Edit mode — reconfigure any section without starting over
+* Non-interactive mode (`--non-interactive`) for CI/automation
+* Schema-driven exporter prompts — new exporters auto-appear in the wizard
+
+## [1.1.0](https://github.com/KristianP26/ble-scale-sync/compare/v1.0.1...v1.1.0) (2026-02-13)
+
+
+### Added
+
+* Multi-user support — weight-based user matching (4-tier priority)
+* Per-user exporters (override global for specific users)
+* `config.yaml` as primary configuration format (`.env` fallback preserved)
+* Automatic `last_known_weight` tracking (debounced, atomic YAML writes)
+* Drift detection — warns when weight approaches range boundaries
+* `unknown_user` strategy (`nearest`, `log`, `ignore`)
+* SIGHUP config reload (Linux/macOS)
+* Exporter registry with self-describing schemas
+* Multi-user context propagation to all 5 exporters (MQTT topic routing, InfluxDB tags, Webhook fields, Ntfy prefix)
+
+## [1.0.1](https://github.com/KristianP26/ble-scale-sync/compare/v1.0.0...v1.0.1) (2026-02-13)
+
+
+### Changed
+
+* Configuration is now `config.yaml`-first with `.env` as legacy fallback
+* README rewritten for `config.yaml` workflow
+
+## [1.0.0](https://github.com/KristianP26/ble-scale-sync/releases/tag/v1.0.0) (2026-02-12)
+
+
+### Added
+
+* Initial release
+* 23 BLE scale adapters (QN-Scale, Xiaomi Mi Scale 2, Yunmai, Beurer, Sanitas, Medisana, and more)
+* 5 export targets: Garmin Connect, MQTT (Home Assistant), Webhook, InfluxDB, Ntfy
+* BIA body composition calculation (10 metrics)
+* Cross-platform BLE support (Linux/node-ble, Windows/@abandonware/noble, macOS/@stoprocent/noble)
+* Continuous mode with auto-reconnect
+* Auto-discovery (no MAC address required)
+* Exporter healthchecks at startup
+* 894 unit tests across 49 test files

@@ -1,0 +1,10 @@
+configuration:
+  SPOOLMAN_DEBUG_MODE:
+    name: Debug mode
+    description: Enable debug logging for Spoolman.
+  SPOOLMAN_LEGACY_CLIENT:
+    name: Legacy client
+    description: "Switch back to the old Spoolman interface. Only use this if you experience issues with the new interface. After enabling, do a hard refresh (Ctrl+F5) in your browser to clear the cache."
+  SPOOLMAN_CORS_ORIGIN:
+    name: CORS origin
+    description: "Required if you access Spoolman via SSL or a reverse proxy. Enter your external URL, e.g. https://spoolman.example.com. Leave empty if not needed."

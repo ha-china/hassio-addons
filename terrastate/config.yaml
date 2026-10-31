@@ -1,0 +1,29 @@
+---
+name: Terrastate
+version: 0.0.2
+slug: terrastate
+description: |-
+  [老王杂谈说]：Terrastate——一个带锁机制的 Terraform/OpenTofu HTTP 状态后端。
+arch:
+  - aarch64
+  - amd64
+image: "ghcr.nju.edu.cn/bluemaex/ha-addons-terrastate"
+startup: system
+url: https://gh-proxy.org/github.com/bluemaex/home-assistant-addons/tree/master/terrastate
+init: false
+backup: cold
+ports:
+  8445/tcp: 8445
+ports_description:
+  8445/tcp: Terraform HTTP state backend
+options:
+  log_level: info
+  username: terraform
+  password: ""
+  env_vars: []
+schema:
+  log_level: list(debug|info|warn|error)
+  username: str
+  password: password
+  env_vars:
+    - str

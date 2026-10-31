@@ -1,0 +1,851 @@
+# Changelog
+
+## 1.25.0
+
+### Added
+
+- Sensor card actions can ask for confirmation: the first tap arms the action for three seconds and a second tap runs it. This works for the button, icon and whole-card triggers and for the on/off toggle, and the confirmation text can be changed (#255).
+- A centered layout for large sensor cards that show a state. It looks like the inactive media card, with a round green or red action button (#255).
+- Music Assistant players get a Music Assistant button in the media popup and on the media page. It opens the Music Assistant add-on panel in Home Assistant, or an address set under Settings → Connection (#256).
+- A new "Open link" sensor card action opens a web address in a new tab, for example as a shortcut to Music Assistant (#256).
+
+## Changed
+
+- Add release notes.
+
+## 1.24.2
+
+### Fixed
+
+- The Home Assistant add-on builds again: the base image's pinned musl conflicted with the newer musl-dev pulled in by g++ (#253).
+- Lawn mower popup triggers open the mower details again; the mower id was never set, so the popup stayed empty (#251).
+
+### Changed
+
+- Continued the TypeScript migration: config, translations, icons, utilities, services, shared types, contexts and hooks are now strict TypeScript (#246, #247, #248, #249, #250).
+
+## Changed
+
+- Add release notes.
+
+## 1.24.1
+
+### Fixed
+
+- Settings changed from the settings panels (theme, language, page tabs, grid, header) now sync to the server; before, only changes made in edit mode were uploaded (#244).
+- An edit finished while another upload was running, or an upload that failed, is retried instead of staying only on the device (#244).
+- Turning off auto-sync also cancels an upload that was already waiting (#244).
+
+### Changed
+
+- Server code is typechecked in strict mode, and every supported language must have a translation table (#243).
+- Added tooling for a gradual TypeScript migration: TypeScript files are linted and strictly typechecked, and new source files must be TypeScript (#245).
+
+## Changed
+
+- Add release notes.
+
+## 1.24.0
+
+### Added
+
+- Sensor card graphs can show bars instead of a line, over 1 hour to 30 days, with average, min, max or change per bar; change on an energy meter gives consumption per bar (#241).
+- Page tabs have five styles (pill, segmented, underline, minimal, expand), three sizes, an accent colour for the active page and icon and uppercase options under Layout → Page tabs (#241).
+- The large Android TV card has an off state with a power button (#241).
+- The energy cost card shows the month total on the small card and a month forecast on the large card (#241).
+- Duplicate dashboard cards with independent settings (#239).
+
+### Changed
+
+- Sensor card graphs reach the card edges, like the weather card (#241).
+- Dialogs open faster, and dashboard, editing and weather animations are calmer (#241).
+- Improved theme-aware backgrounds, keyboard navigation, focus visibility, and Chinese translations; load person maps on demand (#239).
+- Updated production and development dependencies, including Vite 8.3.5 and ip-address 10.7.4 (#236, #237, #238, #240).
+
+### Fixed
+
+- Logging out now signs out every open dashboard tab instead of being undone by another tab (#241).
+- An expired Home Assistant login shows the log-in prompt instead of the setup wizard, also when it is rejected at startup (#241).
+- Settings sync remembers the last synced revision, so a reload applies newer server settings or reports a real conflict (#241).
+- The connection to Home Assistant retries with increasing delays after it is lost (#241).
+- Home Assistant persistent notifications no longer pop up on the dashboard (#241).
+- Require an explicit choice for settings sync conflicts and preserve newer settings on publish targets (#239).
+
+### Security
+
+- The server only validates logins against configured Home Assistant addresses. Docker installs must set `TUNET_INTERNAL_HA_URL` (and optionally `TUNET_INTERNAL_HA_FALLBACK_URL`); without it, profiles and settings sync return 503. The add-on has matching `internal_ha_url` options for direct-port access; sidebar access needs no change (#241).
+- Encrypted profiles and settings are never overwritten or silently dropped: the server checks the encryption key at startup and returns 503 for rows it cannot decrypt (#241).
+
+## 1.23.0
+
+### Added
+
+- Added a Spanish (es-ES) translation (#224).
+
+### Changed
+
+- Updated React to 19.3, along with lucide-react, hls.js, home-assistant-js-websocket, react-router-dom, and ws (#220).
+- Updated build and test tooling, including Vite 8.3, Vitest 5.0.3, and jsdom 30.1 (#217).
+
+### Fixed
+
+- A new device now picks up dashboard settings already saved on the server instead of starting empty (#225).
+
+### Security
+
+- Updated proxy-addr, shell-quote, and source-map-js to resolve dependency security alerts (#226, #227, #228).
+
+## 1.22.2
+
+### Fixed
+
+- Fixed a crash when rendering MDI icons with custom styles in React 19 (#223).
+
+## 1.22.1
+
+### Changed
+
+- Simplified custom card settings and kept scene and action cards consistent with the standard sensor layout (#218).
+- Custom action text now appears for button, icon, and whole-card actions, with buttons that fit narrow mobile cards.
+
+### Fixed
+
+- Editing action text now replaces old on/off labels, and unsupported action targets cannot be activated.
+
+### Security
+
+- Updated ip-address, js-yaml, and brace-expansion to resolve dependency security alerts (#212, #219, #221).
+
+## 1.22.0
+
+### Added
+
+- Added flexible entity cards: place the same entity on a page more than once and give each card its own name, subtitle, icon, status source, layout, and tap action.
+- Added card actions for entity cards: open details, toggle, turn on or off, activate a scene, run a script, press a button, or call any Home Assistant action, with progress and confirmation feedback.
+- Added an Apple TV card and popup with media controls, an optional remote, linked speakers, and a tap action.
+- Added power buttons with progress feedback to climate and Apple TV cards, plus a tap action setting to open details or toggle power.
+
+### Changed
+
+- Rebuilt the sensor card editor into Content, Status, Appearance, and Action sections, with a live preview beside the settings on wide screens. Options only appear when they apply.
+- Lights, climate devices, and buttons can now be added as sensor cards. Existing sensor cards keep working.
+- Climate power buttons fall back to setting the HVAC mode when a device cannot be turned off directly.
+
+### Fixed
+
+- Fixed Escape closing a whole dialog instead of only the dropdown menu that was open.
+
+## 1.21.3
+
+### Changed
+
+- Made mobile connection warnings quieter and restarted the reconnect grace period when returning to the app.
+- Removed the press-to-shrink effect while swiping weather cards.
+
+### Fixed
+
+- Show expired-login warnings immediately and keep them visible when the app resumes.
+
+## 1.21.2
+
+### Changed
+
+- Updated production and development dependencies (#208, #209) and the release action (#204).
+
+### Security
+
+- Updated qs to 6.16.0 to fix two denial-of-service vulnerabilities (#207).
+
+### Fixed
+
+- Fixed weather forecast toggle prop types so CI type checking passes.
+
+## 1.21.1
+
+### Changed
+
+- Includes dashboard release `1.21.1` with swipeable weather views and refined light, calendar, and media interfaces.
+
+### Fixed
+
+- Restores go2rtc and MSE camera playback and fixes Firefox card-setting persistence (#164).
+
+## 1.21.0
+
+### Added
+
+- Adds configurable climate mode shortcuts and automatic camera source fallback (#140, #164).
+
+### Changed
+
+- Includes dashboard release `1.21.0` with refined navigation and a media chooser that works across Sonos, Music Assistant, Emby, and standard media players.
+
+### Fixed
+
+- Improves camera stream reliability and the phone layout for media popups.
+
+## 1.20.9
+
+### Changed
+
+- Includes dashboard release `1.20.9` with redesigned settings sidebars, per-card mobile width controls, and configurable script status text.
+
+### Fixed
+
+- Improves Home Assistant reconnect feedback and mobile grid behavior.
+
+## 1.20.8
+
+### Changed
+
+- Includes dashboard release `1.20.8` with a more compact mobile header and phone-optimized card popups, including TV and vacuum controls.
+
+### Fixed
+
+- Improves Home Assistant reconnection after returning to the app and delays premature offline or stale-data notices.
+- Fixes PWA installation metadata when Tunet is served through Cloudflare Access.
+
+## 1.20.7
+
+### Added
+
+- Adds the add-on store icon and logo, so Tunet is no longer shown without branding.
+
+### Fixed
+
+- Includes dashboard release `1.20.7`, fixing Roborock vacuum consumable percentages and the sensor reset action (#157).
+
+### Security
+
+- Patches advisories in ip-address, js-yaml, and react-router.
+
+## 1.20.6
+
+### Changed
+
+- Includes dashboard release `1.20.6` with low-battery status pills, configurable Sensor-pill precision, and improved sensor charts.
+
+## 1.20.5
+
+### Changed
+
+- Migrates deprecated build metadata into the Dockerfile and removes the unsupported `armv7` target.
+
+### Fixed
+
+- Restores App Store installs by updating the app base image to resolve the musl package conflict (#188).
+
+## 1.20.4
+
+### Changed
+
+- Includes dashboard release `1.20.4` with current dependencies and the Node 26 builder.
+
+### Fixed
+
+- Adds the native build toolchain required to install better-sqlite3 13.
+
+## 1.20.3
+
+### Changed
+
+- Includes dashboard release `1.20.3`.
+- Improves vacuum maintenance reset button detection for consumable-style Home Assistant button names.
+
+### Fixed
+
+- Restores the Vacuum modal maintenance sensor reset action.
+
+## 1.20.2
+
+### Changed
+
+- Add release notes.
+
+## 1.20.1
+
+### Changed
+
+- Includes dashboard release `1.20.1`.
+- Broadens vacuum map entity auto-detection to cover both camera and image domains with friendly-name token matching.
+- Persists vacuum map zoom and pan per vacuum so the map view restores when reopening the modal.
+
+### Fixed
+
+- Fixes vacuum map detection for setups where the entity friendly name (but not the entity ID) references the vacuum.
+- Adds Norwegian `kart` keyword to fallback map entity discovery.
+- Fixes ModernDropdown portal click-outside handling.
+
+## 1.20.0
+
+### Changed
+
+- Includes dashboard release `1.20.0` with full live map zooming/panning, customizable room select integration, modern minimalist history layout, responsive snug heights, and translation files.
+
+## 1.19.0
+
+### Added
+
+- Includes dashboard release `1.19.0`.
+- Adds smart Status Pills for lights that are on, open doors/windows, and open covers (#143).
+
+### Changed
+
+- Redesigns the Status Pills config modal with a cleaner layout and clearer smart-pill setup.
+- Refines the smart pill popup and entity scoping controls.
+
+<p>
+  <img src="https://raw.githubusercontent.com/oyvhov/Tunet/v1.19.0/public/release-assets/Pills.png" alt="Redesigned Status Pills and smart pill preview" width="430" />
+</p>
+
+**Full Changelog**: https://github.com/oyvhov/Tunet/compare/v1.18.1...v1.19.0
+
+## 1.18.1
+
+### Added
+
+- Includes dashboard release `1.18.1`.
+
+### Changed
+
+- Reduces idle dashboard background work for wall tablets and low-power displays.
+
+### Fixed
+
+- Fixes the add-on container healthcheck probe to use `127.0.0.1`.
+
+### Security
+
+- Clears the `ip-address` advisory through the `express-rate-limit` dependency update.
+
+**Full Changelog**: https://github.com/oyvhov/Tunet/compare/v1.18.0...v1.18.1
+
+## 1.18.0
+
+### Added
+
+- Includes dashboard release `1.18.0`.
+- Adds a Home Assistant Lock card with lock, unlock, and open/unlatch controls for `lock.*` entities (#148).
+
+### Changed
+
+- Registers Lock cards across dashboard add/edit/render flows.
+
+### Fixed
+
+- Handles Home Assistant `open`/`opening` lock states and code-protected lock actions.
+- Retries settings-sync revision conflicts when the local device has unsynced changes.
+
+**Full Changelog**: https://github.com/oyvhov/Tunet/compare/v1.17.0...v1.18.0
+
+## 1.17.0
+
+### Added
+
+- Includes dashboard release `1.17.0`.
+- Adds Cards-only dashboard mode for tablet/kiosk setups, hiding the header, status pills, page navigation, Settings, Add, and Edit controls while keeping dashboard cards visible (#149).
+- To enable it, open Settings, go to Header, expand Visibility, and turn on **Show only cards**. To leave cards-only mode, press `Esc` on a keyboard or long-press an empty area of the dashboard.
+
+### Changed
+
+- Splits specialized dashboard pages into lazy-loaded chunks so the main app bundle stays under the CI size gate.
+
+### Fixed
+
+- Keeps critical recovery UI available in cards-only mode, including connection/auth warning surfaces, so users are not locked out of setup or troubleshooting.
+
+**Full Changelog**: https://github.com/oyvhov/Tunet/compare/v1.16.2...v1.17.0
+
+## 1.16.2
+
+### Added
+
+- Includes dashboard release `1.16.2`.
+- Small release preview for the refreshed Status Pills feature.
+- Adds new animation presets for Status Pills.
+
+<p>
+  <img src="https://raw.githubusercontent.com/oyvhov/Tunet/v1.16.2/public/release-assets/image.png" alt="Status Pills release preview" width="430" />
+</p>
+
+### Changed
+
+- Refines Status Pills with animation presets, expanded color choices, clearer icon-only naming, and more predictable manual heading behavior.
+- Reduces unnecessary profile/settings bootstrap work when profile prefetch is intentionally disabled.
+
+### Fixed
+
+- Keeps Status Pills heading and subtitle visibility settings stable across reopen and reload, and commits pending condition values when saving.
+- Prevents newly added visible sensor and alarm pills from disappearing after save by requiring an entity selection before the pill can be saved.
+- Improves Home Assistant backend auth logging and Docker fallback URL handling for easier connection troubleshooting.
+
+**Full Changelog**: https://github.com/oyvhov/Tunet/compare/v1.16.1...v1.16.2
+
+## 1.16.1
+
+### Added
+
+- Includes dashboard release `1.16.1`.
+
+### Changed
+
+- Improves localization verification by extending i18n parity checks to cover French.
+
+### Fixed
+
+- Restores full French UI activation by wiring `fr` into runtime translation mapping and language selectors.
+
+## 1.16.0
+
+### Added
+
+- Includes dashboard release `1.16.0`.
+- Adds support for mower cards and mower popup controls for `lawn_mower.*` entities.
+
+### Changed
+
+- Improves Media/Sonos page presentation with empty-state messaging, stronger action labels, and more resilient grouping behavior.
+
+### Fixed
+
+- Improves backend Home Assistant URL fallback handling for Docker-hosted setups, reducing profile/settings backend unavailable errors.
+
+## 1.15.4
+
+### Changed
+
+- Includes dashboard release `1.15.4`.
+- Adds sensor-card support for Home Assistant `select.*` and `input_select.*` entities (#135).
+
+### Fixed
+
+- Keeps styled sensor select dropdowns and related popup activity inside clean card bounds without noisy retry spam.
+
+## 1.15.3
+
+### Changed
+
+- Includes dashboard release `1.15.3`.
+
+### Fixed
+
+- Restores missing Weather card condition icons by switching to a stable Meteocons CDN path (#134).
+
+## 1.15.2
+
+### Changed
+
+- Edit button moved into the settings dropdown on mobile.
+- Sensor card mobile layout improved: name no longer truncates on large cards.
+- Haptic feedback suppressed during scroll gestures.
+
+### Added
+
+- Toggle to show/hide page pill labels on mobile (Header settings).
+
+## 1.15.1
+
+### Fixed
+
+- Fixed add-on installation and update failures caused by a build dependency conflict (#128).
+
+## 1.15.0
+
+### Added
+
+- Battery page, Lights page, and Room Explorer page for dedicated device management.
+- Lava Lamp and Silk animated backgrounds.
+- Toast notifications and PWA support.
+
+### Changed
+
+- Includes dashboard release `1.15.0`.
+- Restyled page navigation, Add Page dropdown, and modal type tabs.
+
+### Security
+
+- Hashed auth tokens, added CSP headers, and hardened server routes.
+
+## 1.14.9
+
+### Changed
+
+- Includes dashboard release `1.14.9`.
+
+### Fixed
+
+- Keeps the Status Pills editor open while creating a new pill so the add-on UI no longer drops the editor pane mid-edit.
+
+## 1.14.8
+
+### Changed
+
+- Includes dashboard release `1.14.8`.
+
+### Fixed
+
+- Keeps mobile sensor card titles, controls, and range visuals inside compact card bounds on narrow screens.
+
+## 1.14.7
+
+### Changed
+
+### Fixed
+
+- Includes dashboard release `1.14.7`.
+- Preserves working OAuth API calls when proactive refresh fails temporarily and keeps backend validation responses aligned with real auth failures versus reachability errors.
+
+## 1.14.6
+
+### Changed
+
+- Includes dashboard release `1.14.6`.
+
+### Fixed
+
+- Keeps long update names inside the Updates panel layout instead of overflowing the action area.
+
+### Security
+
+- Restricts Supervisor ingress header trust to explicit add-on mode while preserving Home Assistant sidebar ingress access.
+
+## 1.14.5
+
+### Fixed
+
+- Report clear error and prevent redirect loops when using an HTTP Home Assistant URL from an HTTPS dashboard (#108).
+
+## 1.14.4
+
+### Fixed
+
+- Prevent spurious logouts when the backend fails to connect to the Home Assistant URL (#106).
+
+## 1.14.3
+
+### Changed
+
+- Includes dashboard release `1.14.3`.
+- Improves mobile-friendly layouts for core card types (Alarm, Android TV, Car, Climate, Cover, Cost, Fan, Light, Media, Nordpool, Room, and Vacuum).
+
+## 1.14.2
+
+### Changed
+
+- Includes dashboard release `1.14.2`.
+- Refreshes Home Assistant OAuth access tokens proactively for protected API calls and restores API auth from stored browser sessions during startup.
+
+### Fixed
+
+- Reduces repeated invalid-auth websocket validation attempts against Home Assistant when Docker or add-on requests reuse a stale token.
+
+## 1.14.1
+
+### Changed
+
+- Includes dashboard release `1.14.1`.
+- Restores persistent OAuth browser sessions so login survives closing and reopening the browser.
+
+### Fixed
+
+- Preserves same-browser OAuth reuse across tabs while keeping refreshed session tokens synchronized.
+
+## 1.14.0
+
+### Changed
+
+- Includes dashboard release `1.14.0`.
+- Restores Docker and add-on compatibility for protected backend calls with internal and fallback Home Assistant URL handling.
+- Improves multi-device settings sync with revision-checked conflict handling and immediate reconciliation.
+
+### Fixed
+
+- Reduces lazy-loaded chunk failures by removing asset throttling.
+- Fixes Status Pills editor behavior when reselecting the same pill.
+
+### Security
+
+- Hardens Profiles and Settings authorization by validating Home Assistant identity on the backend.
+- Limits OAuth token persistence to the browser session.
+
+## 1.13.0
+
+- Includes dashboard release `1.13.0`.
+- Adds Playwright E2E infrastructure (initially 33 tests) for OAuth, drag-and-drop, and modal flows.
+- Improves dashboard runtime performance by memoizing all card components.
+- Improves modal accessibility focus behavior and adds optional Person zone badge icon support.
+- Adds option to hide page pill when only one page exists (outside edit mode).
+
+## Unreleased
+
+- Mobile friendly cards - First batch: Alarm, Android TV, Car, Climate, Cover, Cost, Fan, Light, Media, Nordpool, Room, and Vacuum cards.
+
+## 1.12.3
+
+- Includes dashboard release `1.12.3`.
+- Improves Car/auto popup layout by reducing map height to leave room for more sensors on vehicles with dense telemetry (#84).
+- Fixes missing car charge-control actions in popup flows configured from Edit Card, with broader control-domain support (#84).
+
+## 1.12.2
+
+- Includes dashboard release `1.12.2`.
+- Improves Climate card fan-speed display by normalizing fan-mode values across integrations, preventing non-auto modes from showing as AUTO (#102).
+- Improves Simplified Chinese translations for alarm/climate flows and corrects multiple machine-translated labels (#101).
+
+## 1.12.1
+
+- Includes dashboard release `1.12.1`.
+- Improves Vacuum popup compatibility for mixed integrations (state labels and capability-aware controls).
+- Adds vacuum sensor-mapping labels/translations across supported locales.
+- Removes the temporary Vacuum image-view toggle and keeps the popup focused on controls and stats.
+
+## 1.12.0
+
+- Includes dashboard release `1.12.0`.
+- **Breaking:** Splits Media and SONOS into separate page and card types.
+- Adds dedicated SONOS page creation and SONOS group card creation flows.
+- Updates dashboard routing/rendering so Media and SONOS are handled independently.
+- Refines Room Modal visuals with cleaner media player rows and a flatter Temp Overview layout.
+
+## 1.11.2
+
+- Includes dashboard release `1.11.2`.
+- Adds Room Card door/window status support, including editor domain filter, main-entity selection, and per-card visibility toggle.
+- Improves Room Card pill overflow behavior with progressive label collapse and icon-only size consistency for Cover/Door pills.
+- Fixes duplicate `vacuum.lastCleaned` translation keys across `en`, `nb`, `nn`, `sv`, and `de` locales.
+
+## 1.11.1
+
+- Includes dashboard release `1.11.1`.
+- Adds Simplified Chinese language support (#96).
+- Adds room action buttons to the Vacuum popup for room cleaning (#85).
+- Expands the Vacuum popup with more sensors (#85).
+
+## 1.11.0
+
+- Includes dashboard release `1.11.0`.
+- Adds Sensor card variants (`gauge`, `bar`, `donut`, `number`) with improved layout behavior for both large and small cards.
+- Adds Sensor Edit Card options for range sources (value/entity), icon visibility toggle, and value display mode.
+- Adds configurable three-step color thresholds for sensor chart variants, with optional disable fallback to blue accent mode.
+- Improves PR formatting checks by validating changed files only, reducing unrelated baseline failures.
+- Keeps app and add-on versions synchronized at `1.11.0`.
+
+## 1.10.0
+
+- Includes dashboard release `1.10.0`.
+- Adds Room Card (BETA) enhancements: area-icon defaults, icon watermark toggle, and improved room popup controls.
+- Adds bulk Room Card creation from Add Card flow (multi-room select/add).
+- Adds support for filtering entities using labels (`#76`).
+- Improves Room Card pill responsiveness and wrap behavior with cleaner borderless styling.
+- Improves stale chunk recovery in production through server-side hashed asset fallback.
+- Keeps app and add-on versions synchronized at `1.10.0`.
+
+## 1.9.0
+
+- Release metadata sync.
+
+## 1.8.1
+
+- Release metadata sync.
+
+## 1.8.0
+
+- Release metadata sync.
+
+## 1.7.2
+
+- Release metadata sync.
+
+## 1.7.1
+
+- Includes dashboard release `1.7.1`.
+- Adds improved settings sync workflows (selected-target publish, revision load, device naming, and device cleanup).
+- Adds compact dashboard import/export controls under saved profiles.
+- Aligns Media Page volume controls with modal behavior.
+- Reduces reload flicker by delaying temporary missing-entity placeholders during startup sync.
+- Keeps app and add-on versions synchronized at `1.7.1`.
+
+## 1.7.0
+
+- Includes dashboard release `1.7.0`.
+- **Major Visual Upgrade**: "High-End Glass" aesthetic with refined gradients and glassmorphism.
+- **Dynamic Typography**: Modern thin fonts for data values and bolder labels.
+- **Enhanced Charts**: Smoother sparklines and weather graphs with bezier curves.
+- **Micro-interactions**: Subtle animations and hover effects throughout the interface.
+- Keeps app and add-on versions synchronized at `1.7.0`.
+
+## 1.6.2
+
+- Includes dashboard release `1.6.2`.
+- Updates Add Card and Add Page selection/CTA styling to use accent-highlighted selected states for better clarity.
+- Fixes edit-overlay resize control color to follow theme accent color.
+- Includes lint hardening updates required for release checks and CI stability.
+- Keeps app and add-on versions synchronized at `1.6.2`.
+
+## 1.6.1
+
+- Release metadata sync.
+
+## 1.6.0
+
+- Includes dashboard release `1.6.0`.
+- Adds settings/edit lock with PIN-protected unlock flow (touch keypad + keyboard entry support).
+- Improves Person popup layout on desktop with larger map-focused presentation and configurable telemetry/info rows.
+- Adds Person card edit options for last updated, GPS/speed/heading, distance from home, and zone emphasis.
+- Fixes climate unit follow behavior so cards and modal correctly reflect Home Assistant metric/imperial changes.
+- Makes WeatherTemp graph color limits follow active unit mode in both display and editor.
+- Keeps app and add-on versions synchronized at `1.6.0`.
+
+## 1.5.1
+
+- Includes dashboard release `1.5.1`.
+- Improves camera reliability with fallback from WebRTC to Home Assistant stream and snapshot.
+- Adds camera stream-engine settings in card edit flow and related translation coverage updates.
+- Updates modal styling consistency by replacing bright blue accents with the dashboard glass theme.
+- Keeps app and add-on versions synchronized at `1.5.1`.
+
+## 1.5.0
+
+- Release metadata sync.
+
+## 1.4.0
+
+- Includes dashboard release `1.4.0`.
+- Added dedicated fan card and fan modal with strict Home Assistant feature-flag handling.
+- Added on-card fan controls for speed, oscillation, and direction with state-reflective icons.
+- Added fan card support in Add Card flow and rendering pipeline.
+- Added fan animation toggle in card edit settings and completed fan translation coverage.
+- Restored on-card delete button visibility for fan cards in edit mode.
+- Keeps app and add-on versions synchronized at `1.4.0`.
+
+## 1.3.3
+
+- Release metadata sync.
+
+## 1.3.2
+
+- Includes dashboard release `1.3.2`.
+- Added camera card live-stream improvements with snapshot fallback, interval/motion refresh options, and motion-sensor-driven updates.
+- Added Outlook-style calendar week time-grid enhancements with responsive multi-column layout improvements.
+- Improved Status Pills media/sonos filtering and badge-based active-player count behavior.
+- Added calendar entity selection in Add Card and fixed calendar add-list flicker.
+- Keeps app and add-on versions synchronized at `1.3.2`.
+
+## 1.3.1
+
+- Includes dashboard release `1.3.1`.
+- Fixed Status Pills configurator picker behavior for Icon and Data Source editing in the modal.
+- Keeps app and add-on versions synchronized at `1.3.1`.
+
+## 1.3.0
+
+- Includes dashboard release `1.3.0`.
+- Improved Status Pills configurator with unit source override, conditional controls, mobile-friendly editing, and cleaner UI.
+- Fixed conditional visibility handling consistency across cards (including media groups and mapped entities).
+- Fixed persistence/restore for custom page named `lights`.
+
+## 1.2.1
+
+- Includes dashboard release `1.2.1`.
+- Added conditional card visibility configuration in Edit Card modal.
+- Added advanced visibility rules (AND/OR, duration, and entity targeting).
+- Improved visibility-condition handling consistency across cards and status pills.
+
+## 1.2.0
+
+- Includes dashboard release `1.2.0`.
+- Added Sonos favorites browse/play and Music Assistant browse support.
+- Added Cover artwork mode for Media cards.
+- Includes Media Page Sonos enhancements and related bug fixes.
+
+## 1.1.0
+
+### Changed
+
+- **BREAKING**: Synchronized application and addon versions to move in lockstep
+- Graduated from beta status to stable release
+- Unified version numbering across all components
+
+### Migration
+
+- Both the application and Home Assistant addon now use the same version number
+- This ensures consistency and easier tracking of releases
+
+## 1.0.16
+
+- Release metadata sync.
+
+## 1.0.15
+
+- Release metadata sync.
+
+## 1.0.14
+
+- Release metadata sync.
+
+## 1.0.13
+
+- Includes dashboard release `1.0.0-beta.16`.
+- Fixes session persistence so users do not need to reauthenticate after reopening the dashboard.
+- Includes Room card visibility toggle fixes and reduced frontend icon bundle impact.
+
+## 1.0.12
+
+- Includes dashboard release `1.0.0-beta.15` with profile-load hardening for page navigation state.
+- Fixes an issue where loading incomplete profile data could leave only the Home tab visible.
+- Adds a small in-app summary when profile page data is repaired on load.
+
+## 1.0.11
+
+- Includes dashboard release `1.0.0-beta.14` with Home Assistant camera cards and popup stream/snapshot modal.
+- Updated i18n coverage for camera card workflows to keep add-on UI translations consistent.
+
+## 1.0.10
+
+- Release metadata sync.
+
+## 1.0.9
+
+- Release metadata sync.
+
+## 1.0.8
+
+- Release metadata sync.
+
+## 1.0.7
+
+- Synced release metadata with dashboard beta.10 fixes.
+- Added clearer update guidance for Docker, Add-on, and source installs.
+- Updated add-on build source tracking to follow `main` branch.
+
+## 1.0.6
+
+- Simplified onboarding for add-on users (auto-detected URL, token-only auth).
+- Added documentation, changelog, and improved add-on metadata.
+
+## 1.0.5
+
+- Cleaned up debug logging and unused code.
+
+## 1.0.4
+
+- Added build verification to diagnose Docker caching issues.
+
+## 1.0.3
+
+- Fixed Docker layer caching preventing new code from being deployed.
+
+## 1.0.2
+
+- Fixed double `/api/api/websocket` in WebSocket URL.
+
+## 1.0.1
+
+- Fixed token persistence across page reloads in Ingress mode.
+- Added `HashRouter` for correct asset loading behind Ingress proxy.
+- Switched Ingress auth from OAuth to Long-Lived Access Token.
+
+## 1.0.0
+
+- Initial add-on release.
+- Ingress support for Home Assistant sidebar integration.

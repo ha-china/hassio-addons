@@ -1,0 +1,108 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Habuild addon Sensors Generate
+# Runs SensorsGen
+# ==============================================================================
+declare -a options
+
+bashio::log.info "Starting SensorsGen..."
+
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Community Add-on: HAOS-SBF-MQTT-SensorsGen
+# Generates Discovery MQTT messages for SBFspot sensors
+# ==============================================================================
+
+set -e
+CONFIG_PATH=/data/options.json 
+# '%Y-%m-%dT%H:%M:%S%z' best
+# '%H:%M:%S %d-%m-%y' standard needed for sbfspot config reading, not here.
+current_timestamp=$(date +'%Y-%m-%dT%H:%M:%S%z')
+
+echo "Log file created on: $current_timestamp"
+
+PLANTNAME="$(bashio::config 'Plantname')"
+MQTT_Host="$(bashio::config 'MQTT_Host' 'core-mosquitto')"
+MQTT_User="$(bashio::config 'MQTT_User')"
+MQTT_Pass="$(bashio::config 'MQTT_Pass')"
+MQTT_Topic="$(bashio::config 'MQTT_Topic')"
+MQTT_Data="$(bashio::config 'MQTT_Data')"
+#  arg="$(jq --raw-output '.MQTT_Data' /data/options.json | tr ',' '\n')"
+
+ts="$(bashio::config 'DateTimeFormat' '%H:%M:%S %d/%m/%Y')"
+
+bashio::log.magenta "$PLANTNAME"
+bashio::log.red "${MQTT_Host}"
+bashio::log.green "${MQTT_User}"
+#  echo "${MQTT_Pass}"
+bashio::log.blue "${MQTT_Topic}"
+bashio::log.cyan "${MQTT_Data}"
+
+
+#DEVICE_PATH=/data/device  #disable device file as not created here
+DEVICE_PATH=/data/options.json
+
+InvSerial="$(jq --raw-output '.InvSerial' $DEVICE_PATH)"   #    <<< ---- change to Dummy serial if needed to get from mqtt 
+InvName="$(jq --raw-output '.InvName' $DEVICE_PATH)"     #    <<< ---- prints bad formant SN: SerialNo or perhaps not
+InvSwVer="$(jq --raw-output '.InvSwVer' $DEVICE_PATH)"
+# InvType="$(jq --raw-output '.InvType' $DEVICE_PATH)"   # Might need to add this to config, although probably unsed.
+# InvClass="$(jq --raw-output '.InvClass' $DEVICE_PATH)" # Might need to add this to config, although probably unsed.
+
+
+#Extra Sensor Info 
+# Inv_Number:="$(bashio::config 'Inv_Number')"
+PLANTNAME2="$(bashio::config 'Plantname2')"
+InvSerial2="$(bashio::config 'InvSerial2')"
+InvName2="$(bashio::config 'InvName2')" 
+InvSwVer2="$(bashio::config 'InvSwVer2')"
+InvType2="$(bashio::config 'InvType2')"
+InvClass2="$(bashio::config 'InvClass2')"
+
+bashio::log "$(cat "$DEVICE_PATH" | jq -C )"
+
+
+bashio::log.cyan "${InvSerial}"
+bashio::log.green "${InvSerial2}"
+
+Debug_MQTT="$(bashio::config 'Debug_MQTT')"
+debugMQTT="$Debug_MQTT"    #  debug   '-d' or '--quiet'
+RoK='-r'               #  retain  '-r' or  '-d' depending on value above 
+
+#  Array stuff     ####    https://stackoverflow.com/questions/3685970/check-if-a-bash-array-contains-a-value
+#if [[ " ${array[*]} " =~ " ${value} " ]]; then                     
+#    # whatever you want to do when array contains value
+#fi
+#
+#if [[ ! " ${array[*]} " =~ " ${value} " ]]; then
+#    # whatever you want to do when array doesn't contain value
+#fi
+#
+##   ALL MQTT_Data Option Values ARRAY creation   ##   https://riptutorial.com/bash/example/27007/split-string-into-an-array-in-bash
+IFS=',' read -r -a array <<< "$MQTT_Data"
+bashio::log.magenta "${array[@]}"
+
+####  All Sensors List
+#  PrgVersion,Plantname,Timestamp,SunRise,SunSet,InvSerial,InvName,InvTime,InvStatus,InvSwVer,InvClass,InvType,InvTemperature,InvGridRelay,EToday,ETotal,GridFreq,PACTot,PAC1,PAC2,PAC3,UAC1,UAC2,UAC3,IAC1,IAC2,IAC3,OperTm,FeedTm,PDCTot,PDC1,PDC2,PDC,UDC1,UDC2,UDC,IDC1,IDC2,IDC,BTSignal,BatTmpVal,BatVol,BatAmp,BatChaStt,InvWakeupTm,InvSleepTm,MeteringWOut,MeteringWIn,MeteringWTot
+####  
+
+ if bashio::config.true 'test_msg'; then 
+
+        /usr/bin/mosquitto_pub -h "$MQTT_Host" -u "$MQTT_User" -P "$MQTT_Pass" -t homeassistant/sbfspot_"$PLANTNAME"/sbfspot_"$InvSerial2" -m "{\"PrgVersion\": \"3100\",\"Plantname\": \"SNA5000\",\"Timestamp\": \"$current_timestamp\",\"SunRise\": \"$current_timestamp\",\"SunSet\": \"$current_timestamp\",\"InvSerial\": \"2120108811\",\"InvName\": \"SN: 2120108811\",\"InvTime\": \"$current_timestamp\",\"InvStatus\": \"Ok\",\"InvSwVer\": \"031037R\",\"InvClass\": \"Solar Inverters\",\"InvType\": \"SB 5000TL-20\",\"InvTemperature\": \"0000\",\"InvGridRelay\": \"Information not available\",\"EToday\": \"6334\",\"ETotal\": \"75462350\",\"GridFreq\": \"2000\",\"PACTot\": \"0.000\",\"PAC1\": \"0000\",\"UAC1\": \"0000\",\"IAC1\": \"0000\",\"OperTm\": \"59117104\",\"FeedTm\": \"57784924\",\"PDCTot\": \"0000\",\"UDC1\": \"0000\",\"UDC2\": \"0000\",\"IDC1\": \"22\",\"IDC2\": \"454\",\"PDC1\": \"465400\",\"PDC2\": \"55000\",\"BTSignal\": \"68627\",\"InvWakeupTm\": \"$current_timestamp\",\"InvSleepTm\": \"$current_timestamp\"}" -d
+
+ fi
+
+########## Sending commands not allowed
+
+######## Command 1
+MESSAGE1="$(bashio::config 'Message1')"
+ if bashio::config.true 'Send_Message1'; then
+              /usr/bin/mosquitto_pub -h "$MQTT_Host" -u "$MQTT_User" -P "$MQTT_Pass" -t homeassistant/sbfspot_"$PLANTNAME"/sbfspot_"$InvSerial" -m "$MESSAGE1" -d
+ fi
+
+######## Command 2
+MESSAGE2="$(bashio::config 'Message2')"
+ if bashio::config.true 'Send_Message2'; then
+              /usr/bin/mosquitto_pub -h "$MQTT_Host" -u "$MQTT_User" -P "$MQTT_Pass" -t homeassistant/sbfspot_"$PLANTNAME"/sbfspot_"$InvSerial2" -m "$MESSAGE2" -d
+ fi

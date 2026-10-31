@@ -1,0 +1,25 @@
+ 
+## 0.34.35 (2026-10-31)
+- Update to latest version from ghcr.io/letta-ai/letta-code:latest
+## 0.34.26.1 (28-10-2026)
+
+- Fix builds failing with `ghcr.io/letta-ai/letta-code:0.34.24: not found`: upstream regularly tags releases (0.34.22 to 0.34.24) whose image push fails, and the updater followed those releases. The image is now built from `ghcr.io/letta-ai/letta-code:latest` (as set in `build.json`), and the updater follows the version label of that published image instead of GitHub releases, so only versions that exist on the registry are picked up
+
+## 0.34.26 (2026-10-28)
+- Update to latest version from letta-ai/letta-code (changelog : https://github.com/letta-ai/letta-code/releases)
+## 0.34.21.1 (24-10-2026)
+
+- Fix `getcwd: cannot access parent directories` at startup: the image now starts from `/` instead of upstream's `/workspace`, which is replaced by a symlink to `/config/workspace` during init
+
+## 0.34.21 (2026-10-24)
+
+- Update to latest version from letta-ai/letta-code (changelog: <https://github.com/letta-ai/letta-code/releases>)
+- Use 0.34.21: upstream tagged 0.34.22 and 0.34.23 but their image publish failed, so `ghcr.io/letta-ai/letta-code:0.34.23` does not exist
+- Updater: only follow GitHub releases with assets (`github_havingasset`), so tags whose image publish failed are skipped
+
+## 0.34.19 (2026-10-22)
+
+- Initial release, based on upstream letta-ai/letta-code 0.34.19 (changelog: <https://github.com/letta-ai/letta-code/releases>)
+- Stateful AI agent platform and App Server with long-term memory (MemFS), skills, and multi-agent reasoning
+- Direct App Server access on port 4500 for WebSockets, health probes, and OpenAI-compatible API routes
+- Persistent storage for agents, workspaces, and credentials in `/config`

@@ -1,0 +1,28 @@
+arch:
+  - aarch64
+  - amd64
+description: '[老王杂谈说]：具有长期记忆、技能和多智能体推理能力的状态型 AI 智能体平台与应用服务器'
+image: ghcr.nju.edu.cn/alexbelgium/letta_code-{arch}
+init: false
+map:
+  - addon_config:rw
+name: Letta Code
+options:
+  backend: local
+  env_vars: []
+  openai_api: true
+ports:
+  4500/tcp: null
+ports_description:
+  4500/tcp: Letta App Server (WebSocket, HTTP & OpenAI API)
+schema:
+  TZ: str?
+  backend: list(local|cloud)
+  env_vars:
+    - name: match(^[A-Za-z_][A-Za-z0-9_]*$)
+      value: str?
+  openai_api: bool
+  token: password?
+slug: letta_code
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/letta_code
+version: "0.34.35"

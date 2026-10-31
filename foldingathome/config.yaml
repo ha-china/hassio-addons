@@ -1,0 +1,26 @@
+name: Folding@home
+version: 1.0.0
+slug: foldingathome
+description: '[老王杂谈说]：用广域网分布的超级计算机与疾病作斗争'
+url: https://gh-proxy.org/github.com/hassio-addons/app-foldingathome
+arch:
+  - amd64
+init: false
+hassio_api: true
+ports:
+  7396/tcp: null
+ports_description:
+  7396/tcp: Client API, only needed for direct local control
+options:
+  user: Anonymous
+  team: 247478
+  machine_name: Home Assistant
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+  user: str
+  team: int(0,2147483647)
+  passkey: match(^[0-9a-fA-F]{32}$)?
+  account_token: str?
+  machine_name: str
+  cpus: int(1,)?
+image: ghcr.nju.edu.cn/hassio-addons/foldingathome/{arch}

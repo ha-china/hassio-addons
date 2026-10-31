@@ -1,0 +1,32 @@
+name: 'Tunet'
+description: 'A modern, responsive dashboard for Home Assistant'
+version: '1.25.0'
+slug: 'tunet'
+url: 'https://gh-proxy.org/github.com/oyvhov/Tunet'
+init: false
+startup: application
+arch:
+  - aarch64
+  - amd64
+homeassistant_api: true
+auth_api: true
+ingress: true
+ingress_port: 3002
+panel_icon: 'mdi:view-dashboard-variant'
+panel_title: 'Tunet'
+ports:
+  3002/tcp: null
+ports_description:
+  3002/tcp: 'Tunet Web Interface (not needed when using Ingress)'
+options:
+  internal_ha_url: ''
+  internal_ha_fallback_url: ''
+  data_encryption_mode: 'off'
+  data_encryption_key: ''
+  data_encryption_salt: ''
+schema:
+  internal_ha_url: 'str?'
+  internal_ha_fallback_url: 'str?'
+  data_encryption_mode: 'list(off|dual|enc_only)?'
+  data_encryption_key: 'password?'
+  data_encryption_salt: 'password?'
