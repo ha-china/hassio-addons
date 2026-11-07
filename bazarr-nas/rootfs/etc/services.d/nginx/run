@@ -1,0 +1,32 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+set -e
+# ==============================================================================
+
+# Set variables
+slug=bazarr
+port=6767
+CONFIG_LOCATION=/config/config/config.yaml
+
+# Wait for bazarr to become available
+bashio::net.wait_for "$port" localhost 900
+
+# Set base_url
+if [ -f "$CONFIG_LOCATION" ]; then
+    if ! bashio::config.true "ingress_disabled"; then
+        if ! bashio::config.has_value "connection_mode" || [ "$(bashio::config 'connection_mode')" != "noingress_auth" ]; then
+            if ! sed -n "/^general:/,/^[^ ]/ { /^  base_url: \/$slug$/p; }" "$CONFIG_LOCATION" | grep -q .; then
+                bashio::log.warning "BaseUrl not set properly, restarting"
+                # Must start with / for Flask blueprint registration. Scoped to
+                # the general: block only -- config.yaml also carries a base_url
+                # under each configured *arr integration (radarr.base_url,
+                # sonarr.base_url, ...) and those must not be touched.
+                sed -i "/^general:/,/^[^ ]/{ s|  base_url:.*|  base_url: /$slug|; }" "$CONFIG_LOCATION"
+                bashio::addon.restart
+            fi
+        fi
+    fi
+fi
+
+bashio::log.info "Starting NGinx..."
+exec nginx

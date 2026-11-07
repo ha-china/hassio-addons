@@ -1,0 +1,27 @@
+bindPort = 7000
+vhostHTTPPort = 8123
+
+auth.method = "token"
+auth.token = "123456789"
+
+webServer.addr = "your_addr"
+webServer.port = 7500
+webServer.user = "admin"
+webServer.password = "123456789"
+
+log.to = "./frps.log"
+# trace, debug, info, warn, error
+log.level = "info"
+log.maxDays = 3
+
+tls.force = false
+
+# transport.tls.certFile = "./fullchain.pem"
+# transport.tls.keyFile = "./privkey.pem"
+# transport.tls.trustedCaFile = "./fullchain.pem"
+
+allowPorts = [
+  { single = 8123 },
+  { single = 7500 },
+  { single = 7000 }
+]

@@ -1,0 +1,41 @@
+version: 6.3.0
+slug: configurator
+name: File editor
+description: '[老王杂谈说]：为 Home Assistant 设计的简单基于浏览器的文件编辑器'
+url: https://gh-proxy.org/github.com/home-assistant/app-configurator
+arch:
+  - aarch64
+  - amd64
+homeassistant: 0.91.1
+homeassistant_api: true
+image: ghcr.nju.edu.cn/home-assistant/app-configurator
+ingress: true
+init: false
+map:
+  - all_app_configs:rw
+  - backup:rw
+  - homeassistant_config:rw
+  - media:rw
+  - share:rw
+  - ssl:rw
+options:
+  dirsfirst: false
+  enforce_basepath: true
+  git: true
+  ignore_pattern:
+    - __pycache__
+    - .cloud
+    - .storage
+    - deps
+  log_level: info
+  ssh_keys: []
+panel_icon: mdi:wrench
+schema:
+  dirsfirst: bool
+  enforce_basepath: bool
+  git: bool
+  ignore_pattern:
+    - str
+  log_level: list(debug|info|warning|error|critical)?
+  ssh_keys:
+    - str

@@ -1,0 +1,162 @@
+#============================#
+#  ALEXBELGIUM'S DOCKERFILE  #
+#============================#
+#           _.------.
+#       _.-`    ('>.-`"""-.
+# '.--'`       _'`   _ .--.)
+#    -'         '-.-';`   `
+#    ' -      _.'  ``'--.
+#      d  '---`    .-'""`
+#               /`
+#=== Home Assistant Addon ===#
+
+#################
+# 1 Build Image #
+#################
+
+ARG BUILD_VERSION
+ARG BUILD_FROM
+FROM $BUILD_FROM
+
+##################
+# 2 Modify Image #
+##################
+
+# Set S6 wait time
+ENV S6_CMD_WAIT_FOR_SERVICES=1 \
+    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
+    S6_SERVICES_GRACETIME=0
+
+USER root
+
+# Global LSIO modifications
+COPY ha_lsio.sh /ha_lsio.sh
+ARG CONFIGLOCATION="/config"
+RUN chmod 744 /ha_lsio.sh && if grep -qr "lsio" /etc; then /ha_lsio.sh "$CONFIGLOCATION"; fi && rm /ha_lsio.sh
+
+# Install REDIS
+ENV DOCKER_MODS="imagegenius/mods:universal-redis"
+
+##################
+# 3 Install apps #
+##################
+
+# Add rootfs
+COPY rootfs/ /
+
+# FIX BUG 1: scope find to HA-owned directories only, never the whole filesystem.
+# Running `find .` from WORKDIR=/ hits node_modules inside /app/immich and fails chmod (exit 1).
+RUN find /etc /usr/local/bin /usr/local/lib /usr/local/share \
+    -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) \
+    -exec chmod +x {} \; 2>/dev/null || true
+
+# Uses /bin for compatibility purposes
+# hadolint ignore=DL4005
+RUN if [ ! -f /bin/sh ] && [ -f /usr/bin/sh ]; then ln -s /usr/bin/sh /bin/sh; fi && \
+    if [ ! -f /bin/bash ] && [ -f /usr/bin/bash ]; then ln -s /usr/bin/bash /bin/bash; fi
+
+# Modules
+ARG MODULES="00-banner.sh 01-custom_script.sh 00-global_var.sh 00-local_mounts.sh 00-smb_mounts.sh"
+
+# Automatic modules download
+COPY ha_automodules.sh /ha_automodules.sh
+RUN chmod 744 /ha_automodules.sh && /ha_automodules.sh "$MODULES" && rm /ha_automodules.sh
+
+# Manual apps
+ENV PACKAGES="sudo yamllint pip sed jq"
+
+# Automatic apps & bashio
+COPY ha_autoapps.sh /ha_autoapps.sh
+RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.sh
+
+################
+# 4 Entrypoint #
+################
+
+# Add entrypoint
+ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
+COPY ha_entrypoint.sh /ha_entrypoint.sh
+RUN chmod 777 /ha_entrypoint.sh
+
+# Install bashio
+COPY bashio-standalone.sh /usr/local/lib/bashio-standalone.sh
+RUN chmod 0755 /usr/local/lib/bashio-standalone.sh
+
+# FIX BUG 2: /etc/s6-overlay/s6-rc.d/init-test-run/run no longer exists in the
+# imagegenius base image (service was removed). Guard with file existence check.
+# The base image already ships postgresql-client-14 through 18, so the redundant
+# install is removed. Only the conditional sed is kept for backward compatibility
+# in case a future base image re-introduces the file.
+RUN if [ -f /etc/s6-overlay/s6-rc.d/init-test-run/run ]; then \
+        sed -i "s|postgresql-16|postgresql-15|g" /etc/s6-overlay/s6-rc.d/init-test-run/run; \
+    fi
+
+# postgresql-client (for the psql CLI used in 99-run.sh) is already installed by the
+# imagegenius base image, so no separate install is needed here. A previous PGDG-repo
+# install using `apt-key add` was removed: the base image moved to a release where the
+# apt-key binary no longer exists, breaking the build. Fail the build early, rather than
+# surfacing a cryptic runtime failure in 99-run.sh, if a future base image drops it.
+RUN command -v psql || { echo "psql not found in base image; postgresql-client must be provided by the upstream base image" >&2; exit 1; }
+
+#ENTRYPOINT [ "/usr/bin/env" ]
+#CMD [ "/ha_entrypoint.sh" ]
+
+############
+# 5 Labels #
+############
+
+ARG BUILD_ARCH
+ARG BUILD_DATE
+ARG BUILD_DESCRIPTION
+ARG BUILD_NAME
+ARG BUILD_REF
+ARG BUILD_REPOSITORY
+ARG BUILD_VERSION
+ENV BUILD_VERSION="${BUILD_VERSION}"
+LABEL \
+    io.hass.name="${BUILD_NAME}" \
+    io.hass.description="${BUILD_DESCRIPTION}" \
+    io.hass.arch="${BUILD_ARCH}" \
+    io.hass.type="addon" \
+    io.hass.version=${BUILD_VERSION} \
+    maintainer="alexbelgium (https://gh-proxy.org/github.com/alexbelgium)" \
+    org.opencontainers.image.title="${BUILD_NAME}" \
+    org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
+    org.opencontainers.image.vendor="Home Assistant Add-ons" \
+    org.opencontainers.image.authors="alexbelgium (https://gh-proxy.org/github.com/alexbelgium)" \
+    org.opencontainers.image.licenses="MIT" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/alexbelgium" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.created=${BUILD_DATE} \
+    org.opencontainers.image.revision=${BUILD_REF} \
+    org.opencontainers.image.version=${BUILD_VERSION}
+
+#################
+# 6 Healthcheck #
+#################
+
+# Avoid spamming logs
+# hadolint ignore=SC2016
+RUN \
+    # Handle Apache configuration
+    if [ -d /etc/apache2/sites-available ]; then \
+        for file in /etc/apache2/sites-*/*.conf; do \
+            sed -i '/<VirtualHost/a \ \n    # Match requests with the custom User-Agent "HealthCheck" \n    SetEnvIf User-Agent "HealthCheck" dontlog \n    # Exclude matching requests from access logs \n    CustomLog ${APACHE_LOG_DIR}/access.log combined env=!dontlog' "$file"; \
+        done; \
+    fi && \
+    \
+    # Handle Nginx configuration
+    if [ -f /etc/nginx/nginx.conf ]; then \
+        awk '/http \{/{print; print "map $http_user_agent $dontlog {\n  default 0;\n  \"~*HealthCheck\" 1;\n}\naccess_log /var/log/nginx/access.log combined if=$dontlog;"; next}1' /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.new && \
+        mv /etc/nginx/nginx.conf.new /etc/nginx/nginx.conf; \
+    fi
+
+ENV HEALTH_PORT="8080" \
+    HEALTH_URL="/api/server/ping"
+HEALTHCHECK \
+    --interval=5s \
+    --retries=5 \
+    --start-period=30s \
+    --timeout=25s \
+    CMD curl -A "HealthCheck: Docker/1.0" -s -f "http://127.0.0.1:${HEALTH_PORT}${HEALTH_URL}" &>/dev/null || exit 1

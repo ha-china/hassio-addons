@@ -1,0 +1,31 @@
+{
+  "name": "[重要说明]",
+  "version": "1.9.8",
+  "slug": "ha_china_status",
+  "description": "！！请先阅读此说明",
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "startup": "services",
+  "boot": "auto",
+  "homeassistant_api": true,
+  "image": "crpi-tuq1xajq0lk6s0kt.cn-shanghai.personal.cr.aliyuncs.com/hachina/service-status-{arch}",
+  "hassio_api": true,
+  "hassio_role": "manager",
+  "webui": "http://[HOST]:[PORT:8099]",
+  "ports": {
+    "8099/tcp": 8099
+  },
+  "ports_description": {
+    "8099/tcp": "Web界面访问端口"
+  },
+  "options": {
+    "notify": true,
+    "interval": 600
+  },
+  "schema": {
+    "notify": "bool?",
+    "interval": "int?"
+  }
+}

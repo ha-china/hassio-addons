@@ -1,0 +1,69 @@
+name: TimescaleDB
+version: 5.4.2
+slug: timescaledb
+description: '[老王杂谈说]：一个基于PostgreSQL构建的开源数据库，用于使用SQL的强大和便利性分析时间序列数据'
+url: https://gh-proxy.org/github.com/expaso/hassos-addon-timescaledb
+codenotary: hans@expaso.nl
+arch:
+  - armhf
+  - aarch64
+  - amd64
+  - armv7
+  - i386
+startup: system
+init: false
+tmpfs: true
+map:
+  - share:rw
+  - backup:rw
+  - media:rw
+timeout: 60
+backup_pre: /usr/share/timescaledb/backup_pre.sh
+backup_post: /usr/share/timescaledb/backup_post.sh
+backup_exclude:
+  - data/postgres/**
+  - postgres/**
+ports:
+  5432/tcp: null
+ports_description:
+  5432/tcp: PostgreSQL Port. Beware! This port may already be in use. Choose another port-number if the add-on won't start.
+options:
+  databases:
+    - homeassistant
+  timescale_enabled:
+    - homeassistant
+  timescaledb:
+    telemetry: basic
+    maxmemory: 512MB
+    maxcpus: 4
+  max_connections: 50
+  system_packages: []
+  init_commands: []
+  retry_upgrade: false
+  postgresql_config: {}
+  pg_hba_config: []
+schema:
+  databases:
+    - str
+  timescale_enabled:
+    - str
+  timescaledb:
+    telemetry: list(off|basic)
+    maxmemory: str?
+    maxcpus: int(1,)?
+  max_connections: int(20,)
+  system_packages:
+    - str
+  init_commands:
+    - str
+  retry_upgrade: bool?
+  postgresql_config:
+    match(^[a-z_]+$)?: str?
+  pg_hba_config:
+    - type: list(local|host|hostssl|hostnossl)?
+      database: str?
+      user: str?
+      address: str?
+      method: list(trust|reject|md5|password|scram-sha-256|gss|sspi|ident|peer|pam|ldap|radius|cert)?
+      options: str?
+image: ghcr.nju.edu.cn/expaso/timescaledb/{arch}

@@ -1,0 +1,5 @@
+{
+  "build_from": {
+    "amd64": "docker.1panel.live/linuxserver/joplin:latest"
+  }
+}

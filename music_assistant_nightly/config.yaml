@@ -1,0 +1,41 @@
+name: Music Assistant (NIGHTLY)
+version: 2.11.0.dev2026110704
+slug: music_assistant_nightly
+description: '[老王杂谈说]：夜间版的音乐助手。如果您想保持与音乐助手最新前沿开发的同步，请安装此版本。请勿忽视风险，它可能不推荐用于日常或生产用途，因为可能会不稳定。'
+url: https://music-assistant.io
+arch:
+  - amd64
+  - aarch64
+homeassistant_api: true
+hassio_api: true
+hassio_role: manager
+discovery:
+  - music_assistant
+  - mcp
+auth_api: true
+host_network: true
+ingress: true
+ingress_port: 8094
+audio: true
+panel_icon: mdi:music-assistant
+panel_title: Music Assistant
+panel_admin: false
+uart: false
+map:
+  - media:rw
+  - ssl:ro
+init: false
+backup_exclude:
+  - cache.db
+  - collage_images/*
+  - .cache/*
+  - library.db.backup
+stage: experimental
+image: ghcr.nju.edu.cn/music-assistant/server
+tmpfs: true
+options:
+  log_level: info
+  safe_mode: false
+schema:
+  log_level: list(debug|info|warning|error)
+  safe_mode: bool

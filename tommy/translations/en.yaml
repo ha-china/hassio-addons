@@ -1,0 +1,7 @@
+configuration:
+  allowed_origins:
+    name: Allowed origins
+    description: >-
+      Only needed if you open the dashboard on port 8089 through your own
+      reverse proxy that changes the host name. Add the address you open it on,
+      for example https://tommy.example.com.

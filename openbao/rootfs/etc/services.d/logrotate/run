@@ -1,0 +1,17 @@
+#!/usr/bin/with-contenv bashio
+# Service run scripts must not use errexit — a failed rotation should log and
+# retry, not exit and have s6 restart us in a loop.
+set +e
+
+CONF="/etc/logrotate.d/openbao-audit"
+STATE="/data/openbao/logs/.logrotate.state"
+INTERVAL=3600
+
+bashio::log.info "Audit log rotation active (checking hourly, see ${CONF})."
+
+while true; do
+    sleep "${INTERVAL}"
+    if ! logrotate --state "${STATE}" "${CONF}"; then
+        bashio::log.warning "logrotate exited non-zero — the audit log may be growing unchecked."
+    fi
+done

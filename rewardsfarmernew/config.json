@@ -1,0 +1,33 @@
+{
+  "arch": [
+    "amd64"
+  ],
+  "boot": "manual",
+  "description": "[老王杂谈说]：微软奖励计划的自动化",
+  "environment": {},
+  "map": [
+    {
+      "type": "addon_config",
+      "read_only": false,
+      "path": "/app/data-dir"
+    }
+  ],
+  "ports": {
+    "6080/tcp": "6080"
+  },
+  "ports_description": {
+    "6080/tcp": "Web interface"
+  },
+  "options": {
+    "MODE": "signin"
+  },
+  "schema": {
+    "MODE": "list(signin|run)"
+  },
+  "version": "dev",
+  "name": "MS Rewards Farmer New",
+  "slug": "rewardsfarmernew",
+  "startup": "services",
+  "upstream": "0.1.0",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+}

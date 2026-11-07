@@ -1,0 +1,19 @@
+name: InfluxDB3 Explorer
+version: 1.0.0
+slug: influxdb3-explorer
+description: '[老王杂谈说]：null'
+url: https://gh-proxy.org/github.com/erik73/hassio-addons
+init: false
+arch:
+  - aarch64
+  - amd64
+webui: http://[HOST]:[PORT:80]
+ports:
+  80/tcp: 8888
+ports_description:
+  80/tcp: InfluxDB3 Explorer
+options:
+  log_level: info
+schema:
+  log_level: list(trace|debug|info|notice|warning|error|fatal)
+image: ghcr.nju.edu.cn/erik73/influxdb3-explorer/{arch}

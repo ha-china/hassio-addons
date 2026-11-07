@@ -1,0 +1,33 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "manual",
+  "description": "[老王杂谈说]：开箱即用式游戏大师在您的机器上运行多玩家（及单人）5 版战役，配备 AI 游戏大师。",
+  "environment": {
+    "AD_SERVER__PORT": "4141"
+  },
+  "map": [
+    {
+      "type": "addon_config",
+      "read_only": false,
+      "path": "/app/data"
+    }
+  ],
+  "version": "0.32.3",
+  "name": "Open Game Master",
+  "ports": {
+    "3005/tcp": "3005"
+  },
+  "ports_description": {
+    "3005/tcp": "WebUI"
+  },
+  "slug": "opendm",
+  "startup": "services",
+  "upstream": "0.1.0",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:3005]",
+  "ingress": false,
+  "ingress_port": 3005,
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+}

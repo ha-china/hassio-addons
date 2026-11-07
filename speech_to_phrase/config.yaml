@@ -1,0 +1,25 @@
+---
+version: 1.4.5
+slug: speech-to-phrase
+name: Speech-to-Phrase
+description: '[老王杂谈说]：快速且个性化的本地语音转文本'
+url: http://github.com/OHF-voice/speech-to-phrase
+arch:
+  - amd64
+  - aarch64
+init: false
+discovery:
+  - wyoming
+map:
+  - share:rw
+backup_exclude:
+  - "*/models/*"
+homeassistant_api: true
+options:
+  debug_logging: false
+schema:
+  debug_logging: bool
+ports:
+  "10300/tcp": null
+homeassistant: 2023.11.0
+image: docker.1panel.live/homeassistant/{arch}-addon-speech-to-phrase

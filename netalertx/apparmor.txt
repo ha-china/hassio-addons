@@ -1,0 +1,35 @@
+#include <tunables/global>
+
+profile netalertx_addon flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+
+  capability chown,
+  capability dac_override,
+  capability fowner,
+  capability net_admin,
+  capability net_raw,
+  capability setgid,
+  capability setuid,
+  capability sys_chroot,
+  file,
+  signal,
+  mount,
+  remount,
+  umount,
+  network,
+  ptrace,
+
+  /init ix,
+  /run/{s6,s6-rc*,service}/** ix,
+  /package/** ix,
+  /command/** ix,
+  /bin/** ix,
+  /usr/bin/** ix,
+  /usr/lib/bashio/** ix,
+  /etc/s6/** rix,
+  /run/s6/** rix,
+  /etc/services.d/** rwix,
+  /etc/cont-init.d/** rwix,
+  /etc/cont-finish.d/** rwix,
+}
+

@@ -1,0 +1,42 @@
+# 应用：InfluxDB3
+
+可扩展的指标、事件和实时分析数据存储库。
+此版本使用带有家庭许可的 InfluxDB3 Enterprise。
+
+## 简介
+
+InfluxDB3 是为高写入量优化的时序数据库。
+它可用于记录指标、传感器数据、事件，并执行分析。它通过 HTTP API 暴露给客户端交互，并通常与 Grafana 结合使用以可视化数据。
+
+# InfluxData 家庭许可
+
+要使用此软件，您需要在应用配置中提供您的电子邮件地址。
+将向您发送 Influxdata 的家庭许可请求。家庭用途为免费。请在接受许可之前阅读激活邮件中的软件许可条款！
+
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
+
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

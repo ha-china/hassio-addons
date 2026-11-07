@@ -1,0 +1,34 @@
+---
+configuration:
+  default_compile_process_limit:
+    name: Default compile process limit
+    description: >-
+      The default compile process limit. This is the maximum number of
+      simultaneous compile processes that ESPHome will run.
+  esphome_fork:
+    name: Install ESPHome from a fork or branch
+    description: >-
+      For example to test a pull request, use `pull/XXXX/head` where `XXXX` is
+      the PR number, or you can specify the username of the fork owner and
+      branch `username:branch` which assumes the repository is named `esphome`
+      still.
+
+      If you need to test the latest commit on dev branch before the image is
+      updated you can enter `dev` here.
+
+      Please note that the fork or branch you are using **must** be up to
+      date with ESPHome dev or the App **will not start**.
+  home_assistant_dashboard_integration:
+    name: Home Assistant Dashboard Integration
+    description: >-
+      Enables/Disables the ESPHome dashboard integrating with Home Assistant
+      for automatic configuration of devices and device updates. If you use
+      multiple version of the ESPHome App, make sure it is enabled on a
+      single App only.
+  leave_front_door_open:
+    name: Disable external authentication
+    description: >-
+      Disables external authentication when having opened the App
+      on an external port. **WARNING**: This is a security risk!
+network:
+  6052/tcp: Web interface (to use without Home Assistant)

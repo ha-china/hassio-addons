@@ -1,0 +1,148 @@
+configuration:
+  timezone:
+    name: Timezone
+    description: Timezone for the add-on (e.g., Europe/Sofia, America/New_York)
+  
+  enable_terminal:
+    name: Enable Web Terminal
+    description: Enable web terminal Button inside Home Assistant (Ingress) via ttyd
+  
+  terminal_port:
+    name: Terminal Port
+    description: Port number for the web terminal (default - 7681). Change if this port conflicts with another service.
+  
+  gateway_public_url:
+    name: Gateway Public URL
+    description: Public base URL for opening the Gateway Web UI in a new tab (not embedded). Example - https://example.duckdns.org:12345 or http://192.168.1.10:18789
+  
+  homeassistant_token:
+    name: Home Assistant Token
+    description: Optional - Home Assistant long-lived token for local HA API scripts/tools
+
+  http_proxy:
+    name: Outbound HTTP Proxy
+    description: Optional - Proxy URL for outbound HTTP/HTTPS requests (example - http://192.168.2.1:3128)
+  
+  router_ssh_host:
+    name: Router SSH Host
+    description: Optional - Router/firewall SSH hostname or IP address
+  
+  router_ssh_user:
+    name: Router SSH User
+    description: Optional - Router/firewall SSH username
+  
+  router_ssh_key_path:
+    name: Router SSH Key Path
+    description: Path to SSH private key for router access (default - /data/keys/router_ssh)
+  
+  clean_session_locks_on_start:
+    name: Clean Session Locks on Start
+    description: Cleanup stale session lock files left after crashes/restarts when add-on starts
+  
+  clean_session_locks_on_exit:
+    name: Clean Session Locks on Exit
+    description: Cleanup session lock files when add-on stops gracefully
+
+  persist_node_global:
+    name: Persist npm Global Skills
+    description: When ON, store user-installed npm skills and global packages under /config/.node_global so they survive add-on rebuilds. Default OFF to keep Home Assistant backups smaller.
+
+  persist_brew_tools:
+    name: Persist Homebrew Tools
+    description: When ON, store Homebrew and brew-installed CLI tools under /config/.linuxbrew so they survive add-on rebuilds. Default OFF to keep Home Assistant backups smaller.
+  
+  gateway_mode:
+    name: Gateway Mode
+    description: Gateway operation mode - local (run gateway locally, recommended) or remote (connect to a remote gateway)
+    options:
+      local: "Local (recommended)"
+      remote: "Remote"
+
+  gateway_remote_url:
+    name: Remote Gateway URL
+    description: Remote gateway WebSocket URL used when Gateway Mode is Remote (example - ws://192.168.1.20:18789 or wss://gateway.example.com:443)
+
+  gateway_additional_allowed_origins:
+    name: Additional Allowed Origins
+    description: Comma-separated extra Control UI origins to merge into gateway.controlUi.allowedOrigins in lan_https mode (example - https://ha.example.com:8443,capacitor://localhost)
+
+  controlui_disable_device_auth:
+    name: Disable Control UI Device Pairing (deprecated)
+    description: "No longer has any effect. OpenClaw retired gateway.controlUi.dangerouslyDisableDeviceAuth in the 2026.8.x line, so every browser now pairs once. Approve a browser from the add-on terminal with: openclaw devices list, then openclaw devices approve <requestId>."
+
+  gateway_bind_mode:
+    name: Gateway Bind Mode
+    description: Network bind mode - loopback (127.0.0.1 only, most secure), lan (all interfaces), or tailnet (Tailscale interface only). Overridden by access_mode presets.
+    options:
+      loopback: "Loopback (127.0.0.1 only, most secure)"
+      lan: "LAN (all interfaces)"
+      tailnet: "Tailnet (Tailscale only)"
+
+  gateway_port:
+    name: Gateway Port
+    description: Port number for the OpenClaw gateway to listen on (default - 18789)
+
+  access_mode:
+    name: Access Mode
+    description: "Simplifies secure access setup. Overrides gateway_bind_mode and gateway_auth_mode when not set to Custom."
+    options:
+      custom: "Custom (use individual settings)"
+      local_only: "Local Only (loopback + token, Ingress only)"
+      lan_https: "LAN HTTPS (built-in HTTPS proxy — recommended for phones)"
+      lan_reverse_proxy: "LAN Reverse Proxy (external proxy with trusted-proxy auth)"
+      tailnet_https: "Tailscale HTTPS (Tailscale bind + token)"
+
+  gateway_auth_mode:
+    name: Gateway Auth Mode
+    description: Gateway auth mode - token (default) or trusted-proxy (for HTTPS reverse proxies). Overridden when access_mode is not Custom.
+    options:
+      token: "Token (default)"
+      trusted-proxy: "Trusted Proxy (for reverse proxies)"
+
+  gateway_trusted_proxies:
+    name: Gateway Trusted Proxies
+    description: Comma-separated trusted proxy IP/CIDR list for trusted-proxy mode (example - 127.0.0.1,192.168.88.0/24).
+
+  enable_openai_api:
+    name: Enable OpenAI API
+    description: Enable OpenAI-compatible Chat Completions endpoint. Allows using OpenClaw as a conversation agent in HA Assist pipeline via Extended OpenAI Conversation (HACS) or any OpenAI-compatible client.
+  force_ipv4_dns:
+    name: Force IPv4 DNS Order
+    description: Force IPv4-first DNS ordering for Node network calls. Most HAOS VMs lack IPv6 egress, causing web_fetch and Telegram timeouts. Recommended ON (default).
+  nginx_log_level:
+    name: Nginx Log Level
+    description: "Access log verbosity for the built-in nginx proxy. 'minimal' (default) suppresses repetitive HA health-check and polling requests. 'full' logs everything."
+    options:
+      minimal: "Minimal (suppress HA polling noise)"
+      full: "Full (log all requests)"
+  gateway_env_vars:
+    name: Gateway Environment Variables
+    description: Environment variables passed to the OpenClaw gateway process at startup (list entries with name/value in Home Assistant UI; max 50 variables, keys up to 255 characters, values up to 10,000 characters).
+  auto_configure_mcp:
+    name: Auto-Configure MCP for Home Assistant
+    description: "When ON and Home Assistant Token is set, automatically registers Home Assistant as an MCP server on each startup. This lets OpenClaw control HA entities, services, and automations via the Model Context Protocol. Disable only if you manage mcporter configuration manually."
+
+  resource_profile:
+    name: Resource Profile
+    description: "Keeps the add-on well behaved on low-power hardware by capping the Node.js heap used by the gateway. 'auto' (recommended) picks a profile from CPU architecture and total RAM and never changes your OpenClaw configuration. 'low' additionally disables OpenClaw browser automation, but only for settings you have not already chosen yourself."
+    options:
+      auto: "Auto (detect from hardware)"
+      low: "Low (Raspberry Pi / under 2 GB RAM)"
+      balanced: "Balanced (2-6 GB RAM)"
+      high: "High (no heap limit)"
+
+  ha_health_sensors:
+    name: Publish Health Sensors
+    description: Publish gateway status, OpenClaw version, gateway memory, disk usage and TLS certificate expiry as Home Assistant sensor entities (sensor.openclaw_*) so you can build automations and alerts on them. Requires Home Assistant Token to be set.
+
+  ha_health_interval:
+    name: Health Sensor Interval
+    description: How often (in seconds) the health sensors are refreshed. Range 15-3600, default 60.
+
+  ha_base_url:
+    name: Home Assistant Base URL
+    description: Base URL of your Home Assistant instance for the health sensors. Leave empty to auto-detect (tries https and http on 127.0.0.1, localhost, homeassistant and homeassistant.local, port 8123). Set it if Home Assistant uses a non-default port or another host, e.g. https://192.168.1.10:8123
+
+  config_backup_keep:
+    name: Config Snapshots to Keep
+    description: How many openclaw.json snapshots to keep in /config/.openclaw/backups. A snapshot is taken before the add-on's first configuration write on each start, so unwanted changes can be rolled back with 'oc-config restore'. Set to 0 to disable snapshots.

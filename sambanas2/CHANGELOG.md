@@ -1,0 +1,361 @@
+# Changelog
+
+## [2026.10.1] - 2026-10-27
+
+### 🙏 Thanks
+
+- Thanks to all the contributors and users that help to make this app better.
+
+### 🚨 Notes
+
+- This is the first stable release of the 2026.10 line, closing the release candidate series.
+- Minimum supported Home Assistant version is 2026.4.0.
+- **Breaking change:** the `srat_update_channel: develop` option is no longer accepted in this stable release. Existing configurations using `develop` should migrate to `prerelease` (or `release`) before upgrading.
+
+### 🏗 Chore
+
+- Update HA CLI to v5.6.0.
+- Update SRAT to [v2026.10.1](https://github.com/dianlight/srat/blob/2026.10.1/CHANGELOG.md)
+
+## 2026.10.0-rc19
+
+### 🙏 Thanks
+
+- Thanks to all the contributors and users that help to make this app better.
+
+### 🚨 Notes
+
+- This is a release candidate version, it may contain bugs and issues. Use it at your own risk. It is not recommended to use this version in production environments.
+- Minimum supported Home Assistant version is 2026.4.0.
+
+### 🐛 Bug Fixes
+
+- Share names containing hyphens are now accepted, and suggested names preserve hyphens instead of being rejected or mangled (from SRAT v2026.10.0-rc19)
+- Automount now skips native/system mounts and protected-mode environments, avoiding failed mount attempts and log noise (from SRAT v2026.10.0-rc19)
+- Already-mounted devices are skipped quietly, with corrected NTFS defaults that prevent remount loops (from SRAT v2026.10.0-rc19)
+- NTFS shares omit force user when MountFlagProber is wired into ServerService (from SRAT v2026.10.0-rc19)
+- A supervisor "target not empty" response is downgraded to a warning instead of surfacing as an error (from SRAT v2026.10.0-rc19)
+- Wizard commit failures now surface backend error context in the UI (from SRAT v2026.10.0-rc19)
+
+### 🏗 Chore
+
+- Update base image to v21.0.8.
+- Update dnspython to v2.9.0.
+- Update SRAT to [v2026.10.0-rc19](https://github.com/dianlight/srat/blob/2026.10.0-rc19/CHANGELOG.md)
+
+## 2026.10.0-rc18
+
+### 🙏 Thanks
+
+- Thanks to all the contributors and users that help to make this app better.
+
+### 🚨 Notes
+
+- This is a release candidate version, it may contain bugs and issues. Use it at your own risk. It is not recommended to use this version in production environments.
+- Minimum supported Home Assistant version is 2026.4.0.
+
+### 🐛 Bug Fixes
+
+- Trust HA ingress proxy WebSocket and CORS origins so the UI is no longer rejected behind ingress (from SRAT v2026.10.0-rc18)
+
+### 🏗 Chore
+
+- Update SRAT to [v2026.10.0-rc18](https://github.com/dianlight/srat/blob/2026.10.0-rc18/CHANGELOG.md)
+
+## 2026.10.0-rc17
+
+### 🙏 Thanks
+
+- Thanks to all the contributors and users that help to make this app better.
+
+### 🚨 Notes
+
+- This is a release candidate version, it may contain bugs and issues. Use it at your own risk. It is not recommended to use this version in production environments.
+- Minimum supported Home Assistant version is 2026.4.0.
+
+### 🐛 Bug Fixes
+
+- Fix Time Machine backups with a dedicated recycle VFS module (from SRAT v2026.10.0-rc17)
+- Show non-internal shares when protected mode is active (from SRAT v2026.10.0-rc17)
+- Sanitize hyphenated share names so Supervisor mounts are accepted (from SRAT v2026.10.0-rc17)
+- Apply per-filesystem mount defaults and Samba `force-user` mapping, fixing NTFS/FAT volumes (from SRAT v2026.10.0-rc17)
+- Retry automount on transient device-not-found errors during boot (from SRAT v2026.10.0-rc17)
+- Retain post-format filesystem labels across hardware refreshes (from SRAT v2026.10.0-rc17)
+- Send the full volumes snapshot on WebSocket connect to avoid stale disk state (from SRAT v2026.10.0-rc17)
+- Derive the notification badge from live problem state (from SRAT v2026.10.0-rc17)
+- Suppress full UI reloads on brief WebSocket reconnects (from SRAT v2026.10.0-rc17)
+- Auto-clear the restart reminder when the HA component reconnects (from SRAT v2026.10.0-rc17)
+- Harden CORS, WebSocket origin, and IP allowlist enforcement (from SRAT v2026.10.0-rc17)
+- Create `/etc/samba/smbusers` placeholder so Samba starts without `username map` errors ([#764](https://github.com/dianlight/hassio-addons/issues/764))
+- Lift `libcrypto3`/`libssl3` pins before adding packages to avoid openssl version skew on base 21.0.7
+
+### 🏗 Chore
+
+- Update SRAT to [v2026.10.0-rc17](https://github.com/dianlight/srat/blob/2026.10.0-rc17/CHANGELOG.md)
+- Update base image to v21.0.7.
+
+## 2026.9.2-rc16
+
+### 🙏 Thanks
+
+- Thanks to all the contributors and users that help to make this app better.
+
+### 🚨 Notes
+
+- This is a release candidate version, it may contain bugs and issues. Use it at your own risk. It is not recommended to use this version in production environments.
+- Minimum supported Home Assistant version is 2026.4.0.
+
+### ✨ Features
+
+- Alerts settings category with per-alert toggles and permanent ignore (from SRAT v2026.9.2-rc16)
+- Protected mode now raises an ignorable HA repair issue (from SRAT v2026.9.2-rc16)
+- Hide delete on internal shares, color-code user shares (from SRAT v2026.9.2-rc16)
+- Gate Supervisor discovery behind opt-in setting (from SRAT v2026.9.2-rc16)
+
+### 🐛 Bug Fixes
+
+- Re-enable ignored alerts via `PUT /api/problems/{key}` (was a no-op) (from SRAT v2026.9.2-rc16)
+- Dismiss stale custom-component problem when alerts are disabled in settings (from SRAT v2026.9.2-rc16)
+- Hide server-ignored issues on the dashboard without a local seed (from SRAT v2026.9.2-rc16)
+- Report SMART self-test progress and reconcile health check (from SRAT v2026.9.2-rc16)
+- Reject shares on unmounted volumes (from SRAT v2026.9.2-rc16)
+- Persist falsy booleans on share update (from SRAT v2026.9.2-rc16)
+- Preserve stored password on password-less rename (from SRAT v2026.9.2-rc16)
+- Dismiss problem toast and badge on ignore (from SRAT v2026.9.2-rc16)
+- Persist user share removals on update (from SRAT v2026.9.2-rc16)
+- Reset clears dirty state, reject empty hostname (from SRAT v2026.9.2-rc16)
+
+### 🏗 Chore
+
+- Update SRAT to [v2026.9.2-rc16](https://github.com/dianlight/srat/blob/2026.9.2-rc16/CHANGELOG.md)
+
+## 2026.9.1-rc15
+
+### 🙏 Thanks
+
+- Thanks to all the contributors and users that help to make this app better.
+
+### 🚨 Notes
+
+- This is a release candidate version, it may contain bugs and issues. Use it at your own risk. It is not recommended to use this version in production environments.
+- Minimum supported Home Assistant version is 2026.4.0.
+
+### 🏗 Chore
+
+- Update SRAT to v2026.9.1-rc15
+- Update smartmontools-sdk to v8.0.2-pre.541 (dev channel)
+
+### 🐭 Features from SRAT [v2026.9.1-rc15](https://github.com/dianlight/srat/releases/tag/2026.9.1-rc15)
+
+#### ✨ Features
+
+- Speed up Shares tab first paint with deferred Swagger load and cached user validity
+- Dashboard news abstracts with type icons and version gate
+- Replace smart_mode enum with smart_on toggle
+
+#### 🐛 Bug Fixes
+
+- Simplify mount path suggestion retry logic
+- Annotate mode-hidden standard shares with is_hidden
+- Avoid logging full share struct with password flow
+- Harden zip extraction against ZipSlip escape
+- Bound-check loop minor before uint32 conversion
+
+## 2026.9.1-rc14
+
+### 🙏 Thanks
+
+- Thanks to all the contributors and users that help to make this app better.
+
+### 🚨 Notes
+
+- This is a release candidate version, it may contain bugs and issues. Use it at your own risk. It is not recommended to use this version in production environments.
+- Minimum supported Home Assistant version is 2026.4.0.
+
+### ✨ Features
+
+- Refreshed documentation in plain language: new sections for Lab Mode, local-network discovery, disk health and disk sleep, volumes, faster connections, and troubleshooting.
+
+### 🏗 Chore
+
+- Update base image to v21.0.5.
+
+## 2026.9.0-rc14
+
+### 🙏 Thanks
+
+- Thanks to all the contributors and users that help to make this app better.
+- Special thanks to supporters and sponsors. With our support I was able to buy an opencode-go subscription to help me code faster and better.
+
+### 🚨 Notes
+- This is a release candidate version, it may contain bugs and issues. Use it at your own risk. It is not recommended to use this version in production environments.
+
+### 🐛 Bug Fixes
+- Improved hardware service stability
+
+## 2026.8.0-rc13
+
+### 🏗 Chore
+- Update [smartmontools-sdk](https://github.com/dianlight/smartmontools-sdk) to the new monorepo layout and release model: the SDK now ships as native-core releases (version scheme `v<AC_INIT>.<N>`), replacing the retired standalone `v7.5` tag. The release tarball additionally includes the `libsmartmon_go.so` C ABI wrapper shared library.
+- Track the smartmontools-sdk **dev channel**: pin the latest prerelease build `v8.0.2-pre.514` instead of the stable `v8.0.x` line.
+- Add a Renovate custom manager for `SMARTMONTOOLS_SDK_VERSION` so dependency updates are proposed automatically, with prereleases allowed for `dianlight/smartmontools-sdk`.
+
+#### 🐛 Bug Fixes
+- Fix [#729](https://github.com/dianlight/hassio-addons/issues/729) 🐛 [SAMBA NAS2 - beta] Failing to load - Nil pointer in hardwareService
+- Fix [#727](https://github.com/dianlight/hassio-addons/issues/727) ❓ [addon] Upgrade from version 1
+
+## 2026.8.0-rc12
+
+### 🚨 Notes
+- This is a release candidate version, it may contain bugs and issues. Use it at your own risk. It is not recommended to use this version in production environments.
+- This version is not compatible with the previous SambaNas addon, it is a complete rewrite and refactor of the addon. It is recommended to backup your configuration before updating to this version.
+- This version is only tested with Home Assistant OS and Supervised installations. It may not work properly with Home Assistant Core or Container installations.
+- ***Your existing configuration may be lost when updating to this version. Please backup your configuration before updating.***
+
+### 💥 Breaking Changes
+
+- **Minimum Home Assistant version raised to `2026.4.0`** (previously `2025.8.0`), following the "add-on" to "app" rename in Home Assistant and the new Supervisor mount layout.
+- **Shares and map entries renamed to match the Home Assistant "app" rebranding**:
+  - Share `addons` -> `local_apps` (mounted at `/local_apps`)
+  - Share `addon_configs` -> `app_configs` (mounted at `/app_configs`)
+  - Map entries: `addons:rw` -> `local_apps:rw`, `addon_config:rw` -> `app_config:rw`, `all_addon_configs:rw` -> `all_app_configs:rw`
+
+### 🔄 Migration Notes
+
+- The `addons` and `addon_configs` shares are renamed to `local_apps` and `app_configs`, preserving their configured users and settings.
+- SMB clients connecting to the `addons` or `addon_configs` shares must use the new `local_apps` / `app_configs` names.
+- Update Home Assistant to 2026.4.0 or newer before installing this version.
+
+### 🏗 Chore
+- Update SRAT to v2026.8.0-rc12
+
+#### 🐛 Bug Fixes
+- Fix [#726](https://github.com/dianlight/hassio-addons/issues/726) [Samba NAS2] No way to manually mount disk
+
+## 2026.7.0-rc11
+
+### 🏗 Chore
+- Update SRAT to v2026.7.0-rc11
+
+## 2026.6.0-rc10
+
+### 🏗 Chore
+- Update SRAT to v2026.6.0-rc10
+- Update Base image to v21.0.0 (Alpine base image to v3.24.0)
+
+### ✨ Features
+- New 'Lab Mode' setting in Settings → General section to enable experimental features and configurations for advanced users and testers. When enabled, this setting allows access to features that are still in development or testing phases, providing early access to new functionality while clearly indicating that these features may be unstable or subject to change.
+
+## 2026.5.0-rc9
+
+### 🏗 Chore
+- Update SRAT to v2026.5.0-rc9
+
+### ✨ Features
+- Install [smartmontools-sdk v7.5](https://github.com/dianlight/smartmontools-sdk) (`libsmartmon.a` + headers) providing in-process SMART device access without spawning a subprocess
+- Set `LIBRARY_PATH` and `CPATH` environment variables for all container processes so that components linking against `libsmartmon` are automatically found
+- Register `/etc/profile.d/smartmontools-sdk.sh` so interactive login shells also inherit the correct library and include paths
+
+## 2026.5.0-rc8
+
+### 🏗 Chore
+- Update SRAT to v2026.5.0-rc8
+
+## 2026.5.0-rc7
+
+### 🏗 Chore
+- Update SRAT to v2026.5.0-rc7
+- Update homeassistant client to 5.1.0
+
+### ✨ Features
+- Add a allert when Protected Mode is enabled in Home Assistant (See [DOCS](DOCS.md) )
+
+## 2026.5.0-rc6 
+
+### 🏗 Chore
+- Update SRAT to v2026.5.0-rc6
+
+
+### 🐭 Features from SRAT [v2026.5.0-rc6](https://github.com/dianlight/srat)
+
+#### 🐛 Bug Fixes
+- Fix compile issue in github actions that was cause of freezed UI in some cases.
+
+
+## 2026.5.0-rc5
+
+#### 🏗 Chore
+- Update SRAT to v2026.5.0-rc5
+
+### 🐭 Features from SRAT [v2026.5.0-rc5](https://github.com/dianlight/srat)
+
+#### ✨ Features
+
+- New startup wizard for first-run configuration of essential Samba settings (hostname, workgroup, admin password) and optional telemetry opt-in. The wizard is implemented as a multi-step dialog with a progress stepper and integrated with the existing guided tour system for contextual help. It is accessible from the Settings page and automatically shown on first run.
+
+#### 🐛 Bug Fixes
+
+#### 🏗 Chore
+
+## 2026.4.0-rc4
+
+Internal release for testing and finalization of 2026.4.0-rc3 changes. No public changes since 2026.4.0-rc3.
+
+## 2026.4.0-rc3
+
+### 💥 Breaking Changes
+
+- **Container registry changed**: images are now published to `ghcr.io/dianlight/` (GitHub Container Registry) instead of `docker.io/dianlight/` (Docker Hub). The addon store URL in Home Assistant must be updated.
+- **Image renamed**: the per-architecture image prefix has been dropped. Old image: `dianlight/{arch}-addon-sambanas2`. New image: `ghcr.io/dianlight/addon-sambanas2`. The multi-arch manifest is resolved automatically; no architecture-specific tag is needed.
+
+### 🔄 Migration Notes
+
+If you are pulling the image directly (outside of HA Supervisor), update your image reference from `docker.io/dianlight/amd64-addon-sambanas2:<tag>` to `ghcr.io/dianlight/addon-sambanas2:<tag>`.
+
+### 🐭 Features from SRAT [v2026.5.0-rc5](https://github.com/dianlight/srat)
+
+#### ✨ Features
+
+- New startup wizard for first-run configuration of essential Samba settings (hostname, workgroup, admin password) and optional telemetry opt-in. The wizard is implemented as a multi-step dialog with a progress stepper and integrated with the existing guided tour system for contextual help. It is accessible from the Settings page and automatically shown on first run.
+
+#### 🐛 Bug Fixes
+
+#### 🏗 Chore
+
+
+## 2026.4.0-rc2
+
+### 🏗 Chore
+
+- General code refactor and cleanup
+- Update dependencies and base image
+- Add more logging and error handling
+- Add more documentation and examples
+- Add more tests and CI/CD pipelines
+
+## 2026.3.0-rc1
+
+#### 💥 Breaking Changes (from SambaNas addon)
+- New configuration format (See [DOCS](DOCS.md) )
+- Remove support to armv7 architecture
+- Remove HDIdle support (for now is added back in future releases)
+- Remove Avahi/mDNS support (due to side effects on some systems)
+
+###  ✨ Features (from SambaNas addon)
+- Brand New icon and logo AI Generated
+- New option `use_external_kernel_modules` (default: false) to downloads extra kernel modules from
+[https://github.com/dianlight/hasos_more_modules](https://github.com/dianlight/hasos_more_modules) (See [DOCS](DOCS.md) )
+- New option `srat_update_channel`to manage SRAT Update (EXPERIMENTAL [DOCS](DOCS.md) )
+- New option `auto_update` (default: true) to automatically download and install SRAT updates
+- New option `factory_reset` (default: false) to delete all configurations, settings, and database (See [DOCS](DOCS.md) )
+- New UI (SRAT) to read and control the addon. (See [SRAT Repository](https://github.com/dianlight/srat) )
+- Support Wsdd-native for better Windows Discovery (Remove WSDD and WSDD2 due to instability)
+- Automatic modprobe for all kernel fs
+- Add ability to use Custom Samba Version - Custom Build Only 
+- Add new IPv6 disable option to disable IPv6 stack inside the addon (See [DOCS](DOCS.md) )
+- Experimental NFS server support via s6; exports auto-managed by SRAT for Media/Backup/Share share types (internal HA-addon use only)
+
+### 🏗 Chore
+
+
+[docs]: https://github.com/dianlight/hassio-addons/blob/master/sambanas2/DOCS.md

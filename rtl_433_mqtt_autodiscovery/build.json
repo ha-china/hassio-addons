@@ -1,0 +1,6 @@
+{
+  "build_from": {
+    "aarch64": "ghcr.nju.edu.cn/home-assistant/aarch64-base-python:3.12-alpine3.21",
+    "amd64": "ghcr.nju.edu.cn/home-assistant/amd64-base-python:3.12-alpine3.21"
+  }
+}

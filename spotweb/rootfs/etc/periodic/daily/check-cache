@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+set -e
+# ==============================================================================
+# Runs the daily task to check the spotweb cache
+# ==============================================================================
+
+bashio::log.info "Running daily spotweb cache check" &>/proc/1/fd/1
+
+s6-setuidgid nginx php /app/bin/check-cache.php &>/proc/1/fd/1

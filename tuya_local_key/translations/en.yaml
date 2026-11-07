@@ -1,0 +1,17 @@
+configuration:
+  QR_SCHEME:
+    name: QR scheme
+    description: >-
+      Scheme used for the login QR code. Use "smartlife" for the Smart Life app or "tuyaSmart" for the Tuya Smart app. Switch schemes if scanning or confirmation does not work for your account.
+  LAN_SUBNET:
+    name: Network to scan
+    description: >-
+      Optional IoT VLAN or subnet that prefills the "Scan network" box, e.g. 192.168.2.0/24. Separate several with commas. The scan finds each device's local IP and protocol version over TCP port 6668, so the firewall must let this Home Assistant host reach port 6668 on those networks.
+  AUTH_USERNAME:
+    name: Basic Auth username
+    description: >-
+      Optional username for HTTP Basic Auth. A login is required only when both username and password are set. (Not used in Home Assistant ingress acess)
+  AUTH_PASSWORD:
+    name: Basic Auth password
+    description: >-
+      Optional password for HTTP Basic Auth. A login is required only when both username and password are set. (Not used in Home Assistant ingress acess)

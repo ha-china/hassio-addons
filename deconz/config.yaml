@@ -1,0 +1,55 @@
+---
+version: 8.8.0
+slug: deconz
+name: deCONZ
+description: >-
+  [老王杂谈说]：通过德累斯顿电子公司的 ConBee 或 RaspBee 控制 Zigbee 网络。
+url: https://gh-proxy.org/github.com/home-assistant/addons/tree/master/deconz
+apparmor: false
+arch:
+  - amd64
+  - aarch64
+backup_exclude:
+  - "*/otau"
+devices:
+  - /dev/mem
+discovery:
+  - deconz
+gpio: true
+homeassistant: 0.91.2
+image: docker.1panel.live/homeassistant/{arch}-addon-deconz
+ingress: true
+ingress_entry: ingress.html
+init: false
+kernel_modules: true
+options:
+  device: null
+  ota_update:
+    bosch: false
+    ikea: false
+    ledvance: false
+panel_icon: mdi:zigbee
+ports:
+  40850/tcp: null
+  5900/tcp: null
+  8081/tcp: null
+privileged:
+  - SYS_RAWIO
+schema:
+  device: device(subsystem=tty)
+  ota_update:
+    bosch: bool
+    ikea: bool
+    ledvance: bool
+  dbg_info: int(0,2)?
+  dbg_aps: int(0,2)?
+  dbg_zcl: int(0,1)?
+  dbg_zdp: int(0,1)?
+  dbg_ddf: int(0,1)?
+  dbg_dev: int(0,1)?
+  dbg_ota: int(0,1)?
+  dbg_error: int(0,2)?
+  dbg_http: int(0,1)?
+startup: services
+udev: true
+usb: true
