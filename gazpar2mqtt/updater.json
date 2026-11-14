@@ -1,0 +1,8 @@
+{
+  "last_update": "2026-11-14",
+  "repository": "alexbelgium/hassio-addons",
+  "slug": "gazpar2mqtt",
+  "source": "dockerhub",
+  "upstream_repo": "ssenart/gazpar2mqtt",
+  "upstream_version": "0.3.1"
+}

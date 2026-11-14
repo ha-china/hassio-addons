@@ -1,0 +1,44 @@
+---
+configuration:
+  domain:
+    name: Domain
+    description: The domain name to use for the proxy.
+  hsts:
+    name: HSTS
+    description: >-
+      Value for the HSTS HTTP header to send. If empty, the header is not sent.
+  certfile:
+    name: Certificate File
+    description: >-
+      The certificate file to use in the `/ssl` directory.
+  keyfile:
+    name: Private Key File
+    description: Private Private Key File to use in the `/ssl` directory.
+  cloudflare:
+    name: CloudFlare
+    description: >-
+      If enabled, configure Nginx with a list of IP addresses directly from
+      Cloudflare that will be used for `set_real_ip_from` directive Nginx
+      config.
+  use_ssl_backend:
+    name: Use SSL Backend
+    description: >-
+      If enabled, configure Nginx to use SSL to connect to backend.
+  client_max_body_size_megabytes:
+    name: Max body size (in MB)
+    description: >-
+      Configures Nginx to limit the maximum allowed size of the client request
+      body, specified in megabytes. Set to 0 to allow requests of any size.
+  customize:
+    name: Customize
+    description: >-
+      See the Documentation tab for more information about these options.
+  real_ip_from:
+    name: Real IP from (enables PROXY protocol)
+    description: >-
+      Configures Nginx to use TCP Proxy Protocol,
+      specifies what IP to trust TLS upstream requests from.
+network:
+  443/tcp: HTTPS (SSL) Port
+  443/udp: HTTP/3 (QUIC) Port, set to same as HTTPS (SSL) port to enable HTTP/3
+  80/tcp: HTTP (non-SSL) Port

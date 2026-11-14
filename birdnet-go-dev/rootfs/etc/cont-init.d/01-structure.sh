@@ -1,0 +1,1 @@
+../../../../birdnet-go/rootfs/etc/cont-init.d/01-structure.sh

@@ -1,0 +1,12 @@
+name: "Rhasspy 3 (en)"
+description: "离线语音助手 (en)"
+version: "0.0.4"
+slug: "rhasspy3_en"
+init: false
+homeassistant_api: true
+ports:
+  "13331/tcp": 13331
+arch:
+  - amd64
+  - aarch64
+webui: "[PROTO:ssl]://[HOST]:[PORT:13331]/"

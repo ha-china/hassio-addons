@@ -1,0 +1,35 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：MindSpark 是一款您真正拥有的开源思维导图应用程序 - 无需账号、无需付费墙、无功能限制、无使用限制。只需一条命令即可自建托管，在浏览器中免费运行，并将每张地图保存到您专属的 GitHub 仓库中，或者添加一个小小的 Cloudflare Worker 即可解锁实时分享与协作功能。它基于原生 JavaScript，无运行时依赖，采用 MIT 协议，并支持人工智能辅助，完全由您运行、修改和扩展。",
+  "environment": {},
+  "map": [
+    {
+      "type": "addon_config",
+      "read_only": false,
+      "path": "/app/data"
+    }
+  ],
+  "image": "ghcr.nju.edu.cn/prasadpatil25/mindspark",
+  "version": "latest",
+  "name": "Mind Spark",
+  "options": {},
+  "ports": {
+    "3000/tcp": "3000"
+  },
+  "ports_description": {
+    "3000/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "mindspark",
+  "startup": "services",
+  "upstream": "latest",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:3000]",
+  "panel_admin": false,
+  "ingress": true,
+  "ingress_port": 3000
+}

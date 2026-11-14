@@ -1,0 +1,17 @@
+name: OWASP Juice Shop
+version: 1.2.3
+slug: juice-shop
+description: '[老王杂谈说]：最值得信赖的网上商店'
+url: https://gh-proxy.org/github.com/Poeschl-HomeAssistant-Addons/juice-shop
+arch:
+  - amd64
+image: ghcr.nju.edu.cn/poeschl-homeassistant-addons/juice-shop-{arch}
+init: false
+ports:
+  3000/tcp: null
+ports_description:
+  3000/tcp: Port serving the Juice Shop (Not required for Supervisor Ingress)
+ingress: true
+ingress_port: 3000
+panel_title: OWASP Juice Shop
+panel_icon: mdi:basket

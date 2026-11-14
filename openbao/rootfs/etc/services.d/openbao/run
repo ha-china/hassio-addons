@@ -1,0 +1,88 @@
+#!/usr/bin/with-contenv bashio
+# Service run scripts must not use errexit — we manage exit codes explicitly.
+# bashio sources set -o errexit, so we disable it here.
+set +e
+
+export BAO_ADDR="http://127.0.0.1:8200"
+export VAULT_ADDR="${BAO_ADDR}"  # compat for older tooling
+# bao CLI looks for $HOME/.bao for the token helper. The default HOME=/root is
+# not accessible by the openbao user (read-only in HA containers). Use /tmp instead.
+export HOME="/tmp"
+
+ENV_VARS=$(gomplate \
+    -d options=/data/options.json \
+    -i '{{ range (ds "options").env_vars }}{{ . }} {{ end }}')
+
+# Kill any orphaned bao process from a previous crash so the bolt lock is released.
+pkill -f '/usr/local/bin/bao server' > /dev/null 2>&1 || true
+
+bashio::log.info "Starting OpenBao server..."
+
+if [ -z "${ENV_VARS}" ]; then
+    s6-setuidgid openbao \
+        /usr/local/bin/bao server \
+        -config=/data/openbao/config/openbao.json &
+else
+    env ${ENV_VARS} s6-setuidgid openbao \
+        /usr/local/bin/bao server \
+        -config=/data/openbao/config/openbao.json &
+fi
+
+BAO_PID=$!
+
+# Wait for OpenBao's TCP listener to accept connections.
+# Cannot use 'bao status' here: before 'operator init', the fresh Raft cluster
+# has no leader and the API returns HTTP errors (exit code 1) indefinitely.
+# 'nc -z' checks TCP reachability only, bypassing all CLI env-var issues.
+bashio::log.info "Waiting for OpenBao to become ready..."
+attempts=0
+while true; do
+    nc -z 127.0.0.1 8200 2>/dev/null && break
+    attempts=$((attempts + 1))
+    if [ "${attempts}" -ge 60 ]; then
+        bashio::log.error "OpenBao did not become ready after 60s. Exiting."
+        kill "${BAO_PID}"; exit 1
+    fi
+    sleep 1
+done
+bashio::log.info "OpenBao is responding."
+
+# Query seal-status via HTTP directly to avoid bao CLI env-var issues
+# (BAO_ADDR vs VAULT_ADDR naming changed in OpenBao v2.x).
+SEAL_STATUS=$(curl -sf "${BAO_ADDR}/v1/sys/seal-status" 2>/dev/null || echo '{}')
+INIT_STATUS=$(echo "${SEAL_STATUS}" | jq -r '.initialized' 2>/dev/null || echo "unknown")
+
+if [ "${INIT_STATUS}" = "false" ]; then
+    bashio::log.info "First run: initializing OpenBao with single key share..."
+    s6-setuidgid openbao /usr/local/bin/bao operator init \
+        -key-shares=1 -key-threshold=1 -format=json > /data/openbao/init.json
+    if [ ! -s /data/openbao/init.json ]; then
+        bashio::log.error "operator init produced no output — initialization failed. Check logs above."
+        kill "${BAO_PID}"; exit 1
+    fi
+    chmod 600 /data/openbao/init.json
+    bashio::log.warning "IMPORTANT: Back up /data/openbao/init.json (contains root token + unseal key)."
+    # Refresh status after init (Raft leader is now elected)
+    SEAL_STATUS=$(curl -sf "${BAO_ADDR}/v1/sys/seal-status" 2>/dev/null || echo '{}')
+fi
+
+# Auto-unseal if enabled
+if bashio::config.true 'auto_unseal'; then
+    SEALED=$(echo "${SEAL_STATUS}" | jq -r '.sealed' 2>/dev/null || echo "unknown")
+    if [ "${SEALED}" = "true" ]; then
+        if ! bashio::fs.file_exists '/data/openbao/init.json'; then
+            bashio::log.error "auto_unseal enabled but /data/openbao/init.json missing. Cannot unseal."
+            kill "${BAO_PID}"; exit 1
+        fi
+        UNSEAL_KEY=$(jq -r '.unseal_keys_b64[0]' /data/openbao/init.json)
+        s6-setuidgid openbao /usr/local/bin/bao operator unseal "${UNSEAL_KEY}" > /dev/null
+        bashio::log.info "OpenBao unsealed."
+    else
+        bashio::log.info "OpenBao already unsealed."
+    fi
+else
+    bashio::log.warning "auto_unseal disabled. Unseal manually: bao operator unseal <key>"
+fi
+
+bashio::log.info "OpenBao is ready."
+wait "${BAO_PID}"

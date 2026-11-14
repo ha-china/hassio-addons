@@ -1,0 +1,30 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64",
+    "armv7"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：一个简单的 Web GUI，可让您用自定义设置编译出色的 Tasmota 固件。",
+  "environment": {
+    "TZ": "America/New_York"
+  },
+  "name": "tasmocompiler",
+  "options": {},
+  "ports": {
+    "3000/tcp": 3000
+  },
+  "ports_description": {
+    "3000/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "tasmocompiler",
+  "startup": "services",
+  "upstream": "1.0",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
+  "image": "benzino77/tasmocompiler",
+  "version": "14.0.1",
+  "ingress": false,
+  "ingress_port": 3000,
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:3000]"
+}

@@ -1,0 +1,113 @@
+{
+  "config": {
+    "flow_title": "Fleet for ESPHome",
+    "step": {
+      "user": {
+        "title": "Connect to Fleet for ESPHome",
+        "description": "Enter the base URL of your Fleet for ESPHome add-on (for example {example_url}) and the **Server token** shown in the add-on's Settings drawer, under Authentication.",
+        "data": {
+          "base_url": "Base URL",
+          "token": "Add-on token"
+        }
+      },
+      "discovery_confirm": {
+        "title": "Set up {name}",
+        "description": "Home Assistant found a Fleet for ESPHome server at {url}. Confirm or edit the URL to finish setup.",
+        "data": {
+          "base_url": "Base URL",
+          "token": "Add-on token"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Fleet for ESPHome needs a new token",
+        "description": "The add-on at {url} is rejecting requests. Open the add-on, click **Settings → Authentication**, copy the **Server token**, and paste it below.",
+        "data": {
+          "token": "Add-on token"
+        }
+      },
+      "reconfigure_confirm": {
+        "title": "Reconfigure Fleet for ESPHome",
+        "description": "Update the base URL or token for the Fleet for ESPHome add-on currently at {url}.",
+        "data": {
+          "base_url": "Base URL",
+          "token": "Add-on token"
+        },
+        "submit": "Save changes"
+      }
+    },
+    "error": {
+      "invalid_url": "Enter a valid http(s) URL.",
+      "cannot_connect": "Could not reach the Fleet for ESPHome server at that URL. Check the URL, that the add-on is running, and that this host can reach it.",
+      "token_required": "The add-on token is required. Copy it from the add-on's **Settings → Authentication → Server token**."
+    },
+    "abort": {
+      "already_configured": "This server is already configured.",
+      "already_in_progress": "Setup is already in progress for this server via Supervisor discovery.",
+      "invalid_discovery_info": "The Supervisor discovery record was missing host or port.",
+      "reauth_successful": "The token was updated and the integration reloaded.",
+      "reauth_unknown_entry": "Couldn't find the integration entry to re-authenticate. Try removing and re-adding the integration.",
+      "reconfigure_successful": "The integration was updated and reloaded.",
+      "reconfigure_unknown_entry": "Couldn't find the integration entry to reconfigure. Try removing and re-adding the integration."
+    }
+  },
+  "services": {
+    "compile": {
+      "name": "Compile",
+      "description": "Enqueue an ESPHome firmware compile."
+    },
+    "cancel": {
+      "name": "Cancel",
+      "description": "Cancel a queued or running compile job."
+    },
+    "validate": {
+      "name": "Validate",
+      "description": "Run ESPHome config validation on a target YAML."
+    }
+  },
+  "system_health": {
+    "info": {
+      "add_on_url": "Add-on URL",
+      "last_update_success": "Last poll",
+      "esphome_version": "ESPHome version",
+      "add_on_version": "Add-on version",
+      "workers": "Workers",
+      "queue_depth": "Queue depth",
+      "status": "Status"
+    }
+  },
+  "issues": {
+    "config_entry_reauth": {
+      "title": "Fleet for ESPHome needs a new token",
+      "fix_flow": {
+        "step": {
+          "init": {
+            "description": "The add-on at {url} is rejecting requests — the shared token may have been rotated. Open the add-on, click **Settings → Authentication**, copy the current **Server token**, then click **Submit** to paste it into the re-authentication form."
+          }
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "no_config_entry": {
+      "message": "No Fleet for ESPHome config entry configured — add the integration first via Settings → Devices & Services."
+    },
+    "no_managed_target_in_selection": {
+      "message": "None of the selected devices are managed by Fleet for ESPHome."
+    },
+    "no_target_selected": {
+      "message": "Select at least one device or provide a 'targets' list."
+    },
+    "no_single_target_selected": {
+      "message": "Select a device or provide a 'target' filename."
+    },
+    "invalid_worker_device": {
+      "message": "The selected worker is not a Fleet for ESPHome build worker."
+    },
+    "no_targets_match_tags": {
+      "message": "No managed devices match the supplied tag expression."
+    },
+    "tags_match_multiple": {
+      "message": "The tag expression matches {count} devices ({matches}); validate accepts a single target. Use compile for a fleet-wide run."
+    }
+  }
+}

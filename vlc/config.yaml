@@ -1,0 +1,20 @@
+version: 1.2.0
+slug: vlc
+name: VLC
+description: '[老王杂谈说]：将您的设备变为带有 VLC 的媒体播放器'
+url: https://gh-proxy.org/github.com/home-assistant/app-vlc
+arch:
+  - aarch64
+  - amd64
+audio: true
+discovery:
+  - vlc_telnet
+homeassistant: 2021.3.0.dev20210216
+image: ghcr.nju.edu.cn/home-assistant/app-vlc
+ingress: true
+init: false
+map:
+  - share:ro
+  - media:ro
+panel_icon: mdi:vlc
+startup: services

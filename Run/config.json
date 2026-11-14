@@ -1,0 +1,50 @@
+{
+  "name": "Run On Startup.d",
+  "version": "0.11a",
+  "slug": "run_on_startup_addon",
+  "description": "这个在启动时运行。禁用保护模式！检查日志和入口以获取信息。",
+  "arch": [
+    "i386",
+    "amd64",
+    "armhf",
+    "armv7",
+    "aarch64"
+  ],
+  "startup": "application",
+  "url": "https://community.home-assistant.io/t/run-on-startup-d/271008",
+  "host_network": true,
+  "homeassistant": true,
+  "hassio_role": "admin",
+  "hassio_api": true,
+  "auth_api": true,
+  "init": false,
+  "homeassistant_api": true,
+  "ingress": true,
+  "stage": "experimental",
+  "docker_api": true,
+  "privileged": [
+    "SYS_ADMIN"
+  ],
+  "stdin": true,
+  "full_access": "yes",
+  "boot": "auto",
+  "devicetree": false,
+  "map": [
+    "config:rw",
+    "ssl:rw",
+    "addons:rw",
+    "media:rw",
+    "backup:rw",
+    "share:rw"
+  ],
+  "options": {
+    "Seconds to wait before startup scripts execute": "1",
+    "Create example scripts in /config/startup/startup.d": false,
+    "Retain old logs in /config/startup/logs/ instead of deleting old logs": true
+  },
+  "schema": {
+    "Seconds to wait before startup scripts execute": "int(1,9999999)",
+    "Create example scripts in /config/startup/startup.d": "bool",
+    "Retain old logs in /config/startup/logs/ instead of deleting old logs": "bool"
+  }
+}

@@ -1,0 +1,137 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+set -e
+
+declare CONFIG
+#declare incomplete_bool
+declare download_dir
+declare incomplete_dir
+declare USER
+declare PASS
+declare WHITELIST
+#declare HOST_WHITELIST
+
+CONFIGDIR="/config/addons_config/transmission"
+
+####################
+#  Migrate folders #
+####################
+
+if [ -d /config/transmission ]; then
+    cp -r /config/transmission /config/addons_config/transmission
+    rm -r /config/transmission
+fi
+
+###############
+# PERMISSIONS #
+###############
+
+#Default folders
+echo "Updating folders"
+mkdir -p "$CONFIGDIR"
+mkdir -p /watch || true
+chown -R "$PUID:$PGID" "$CONFIGDIR"
+
+if ! bashio::fs.file_exists "$CONFIGDIR/settings.json"; then
+    echo "Creating default config"
+    cp "/defaults/settings.json" "$CONFIGDIR/settings.json"
+fi
+
+#################
+# CONFIGURATION #
+#################
+
+# Alternate UI
+##############
+
+if bashio::config.has_value 'customUI'; then
+    CUSTOMUI=$(bashio::config 'customUI')
+
+fi
+bashio::log.info "UI selected : $CUSTOMUI"
+bashio::log.warning "If UI was changed, you need to clear browser cache for it to show in Ingress"
+
+# INCOMPLETE DIR
+################
+
+echo "Creating config"
+download_dir=$(bashio::config 'download_dir')
+incomplete_dir=$(bashio::config 'incomplete_dir')
+# bashio::config prints the literal string "null" for an absent option (its
+# own default-value argument cannot be an empty string: bash's ${2:-null}
+# treats "" the same as unset). Without this, an option missing entirely
+# (upgrade from before this key existed) would count as a 4-character dir and
+# create one literally named "null"
+[ "$incomplete_dir" = "null" ] && incomplete_dir=""
+# Enabled unless explicitly false: an absent key reads as "null" in bashio and
+# as "" in the standalone shim, which ignores bashio::config's default argument
+incomplete_dir_enabled=$(bashio::config 'incomplete_dir_enabled')
+CONFIG=$(< $CONFIGDIR/settings.json)
+
+# Permissions
+echo "Updating permissions"
+mkdir -p "$download_dir"
+chown "$PUID:$PGID" "$download_dir"
+
+# The addon's own toggle wins on every restart, which is the point: Transmission's
+# Web UI toggle is overwritten here regardless, so a permanent "off" has to come
+# from an option this script reads, not from the Web UI (issue #3059). A dir
+# shorter than 2 characters (empty, "/") is treated as unset either way.
+if [ "$incomplete_dir_enabled" != "false" ] && [ ${#incomplete_dir} -ge 2 ]; then
+    echo "Incomplete dir set: $incomplete_dir"
+    CONFIG=$(bashio::jq "${CONFIG}" ".\"incomplete-dir-enabled\"=true")
+    mkdir -p "$incomplete_dir"
+    chown "$PUID:$PGID" "$incomplete_dir"
+else
+    echo "Incomplete dir disabled"
+    CONFIG=$(bashio::jq "${CONFIG}" ".\"incomplete-dir-enabled\"=false")
+fi
+
+# Defaults
+CONFIG=$(bashio::jq "${CONFIG}" ".\"incomplete-dir\"=\"${incomplete_dir}\"")
+CONFIG=$(bashio::jq "${CONFIG}" ".\"download-dir\"=\"${download_dir}\"")
+CONFIG=$(bashio::jq "${CONFIG}" ".\"rpc-host-whitelist-enabled\"=false")
+CONFIG=$(bashio::jq "${CONFIG}" ".\"bind-address-ipv4\"=\"0.0.0.0\"")
+
+if bashio::config.has_value 'watch_dir'; then
+    CONFIG=$(bashio::jq "${CONFIG}" ".\"watch-dir\"=\"$(bashio::config 'watch_dir')\"")
+fi
+
+echo "${CONFIG}" > "$CONFIGDIR"/settings.json \
+    && jq . -S "$CONFIGDIR"/settings.json | cat > temp.json && mv temp.json $CONFIGDIR/settings.json
+
+# USER and PASS
+###############
+
+CONFIG=$(< "$CONFIGDIR"/settings.json)
+USER=$(bashio::config 'user')
+PASS=$(bashio::config 'pass')
+if bashio::config.has_value 'user'; then
+    BOOLEAN=true
+    bashio::log.info "User & Pass set, authentification will be with user : $USER and pass : $PASS"
+else
+    BOOLEAN=false
+    bashio::log.warning "User & Pass not set, no authentification required"
+fi
+CONFIG=$(bashio::jq "${CONFIG}" ".\"rpc-authentication-required\"=${BOOLEAN}")
+CONFIG=$(bashio::jq "${CONFIG}" ".\"rpc-username\"=\"${USER}\"")
+CONFIG=$(bashio::jq "${CONFIG}" ".\"rpc-password\"=\"${PASS}\"")
+echo "${CONFIG}" > "$CONFIGDIR"/settings.json \
+    && jq . -S "$CONFIGDIR"/settings.json | cat > temp.json && mv temp.json "$CONFIGDIR"/settings.json
+
+# WHITELIST
+###########
+
+CONFIG=$(< "$CONFIGDIR"/settings.json)
+WHITELIST=$(bashio::config 'whitelist')
+if bashio::config.has_value 'whitelist'; then
+    BOOLEAN=true
+    bashio::log.info "Whitelist set, no authentification from IP $WHITELIST"
+else
+    BOOLEAN=false
+    sed -i "2 i\"rpc-whitelist-enabled\": false," "$CONFIGDIR"/settings.json
+fi
+CONFIG=$(bashio::jq "${CONFIG}" ".\"rpc-whitelist-enabled\"=${BOOLEAN}")
+CONFIG=$(bashio::jq "${CONFIG}" ".\"rpc-whitelist\"=\"$WHITELIST\"")
+echo "${CONFIG}" > "$CONFIGDIR"/settings.json \
+    && jq . -S "$CONFIGDIR"/settings.json | cat > temp.json && mv temp.json "$CONFIGDIR"/settings.json

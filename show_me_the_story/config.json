@@ -1,0 +1,28 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：一款用于创作长篇虚构作品的本地应用程序。单个可执行文件和浏览器界面可连接到与 OpenAI 兼容的模型服务，用于管理设置、规划章节批处理、起草和修订文字以及导出作品。",
+  "environment": {},
+  "map": [
+    "addon_config:rw"
+  ],
+  "version": "v4.0.2",
+  "name": "Show Me The Story",
+  "ports": {
+    "48090/tcp": "48090"
+  },
+  "ports_description": {
+    "48090/tcp": "Web interface"
+  },
+  "slug": "show_me_the_story",
+  "startup": "services",
+  "upstream": "v4.0.2",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:48090]",
+  "ingress": false,
+  "init": false,
+  "ingress_port": 48090
+}

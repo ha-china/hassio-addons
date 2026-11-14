@@ -1,0 +1,248 @@
+from __future__ import annotations
+
+import collections.abc
+import sys
+import os
+from typing import Optional, List
+
+import pjsua2 as pj
+
+import account
+import call
+import command_client
+import ha
+import state
+import utils
+from constants import DEFAULT_RING_TIMEOUT
+from event_sender import EventSender
+from log import log
+from post_action import PostActionHangup
+
+
+class CommandHandler(object):
+    def __init__(
+        self,
+        end_point: pj.Endpoint,
+        sip_accounts: dict[int, account.Account],
+        call_state: state.State,
+        ha_config: ha.HaConfig,
+        event_sender: EventSender,
+    ):
+        self.end_point = end_point
+        self.sip_accounts = sip_accounts
+        self.ha_config = ha_config
+        self.event_sender = event_sender
+        self.call_state = call_state
+
+    def get_call_from_state(self, call_key: str) -> Optional[call.Call]:
+        return self.call_state.get_call(call_key)
+
+    def get_call_from_state_unsafe(self, call_key: str) -> call.Call:
+        return self.call_state.get_call_unsafe(call_key)
+
+    def is_active(self, call_key: str) -> bool:
+        return self.call_state.is_active(call_key)
+
+    def register_call(self, callback_id: str, new_call: call.Call, additional_ids: List[str]) -> None:
+        self.call_state.register_call(callback_id, new_call, additional_ids)
+
+    def forget_call(self, callback_id: str) -> None:
+        self.call_state.forget_call(callback_id)
+
+    def handle_command(self, command: command_client.Command, from_call: Optional[call.Call]) -> None:
+        if not isinstance(command, collections.abc.Mapping):
+            log(None, f'Error: Not an object: {command}')
+            return
+        verb = command.get('command')
+        number_unknown_type = command.get('number')
+        number = str(number_unknown_type) if number_unknown_type is not None else None
+        match verb:
+            case 'call_service' | None:
+                domain = command.get('domain')
+                service = command.get('service')
+                entity_id = command.get('entity_id')
+                service_data = command.get('service_data')
+                if (not domain) or (not service):
+                    log(None, 'Error: one of domain or service was not provided')
+                    return
+                log(None, f'Calling home assistant service on domain {domain} service {service} with entity {entity_id}')
+                try:
+                    ha.call_service(self.ha_config, domain, service, entity_id, service_data)
+                except Exception as e:
+                    log(None, f'Error calling home-assistant service: {e}')
+            case 'dial':
+                if not number:
+                    log(None, 'Error: Missing number for command "dial"')
+                    return
+                log(None, f'Got "dial" command for {number}')
+                if self.is_active(number):
+                    log(None, f'Warning: call already in progress: {number}')
+                    return
+                menu = command.get('menu')
+                ring_timeout = utils.convert_to_float(command.get('ring_timeout'), DEFAULT_RING_TIMEOUT)
+                sip_account_number = utils.convert_to_int(command.get('sip_account'), -1)
+                webhooks = command.get('webhook_to_call')
+                sip_account = self.sip_accounts.get(sip_account_number, next(iter(self.sip_accounts.values())))
+                call.make_call(self.end_point, sip_account, number, menu, self, self.event_sender, self.ha_config, ring_timeout, webhooks)
+            case 'hangup':
+                if not number:
+                    log(None, 'Error: Missing number for command "hangup"')
+                    return
+                log(None, f'Got "hangup" command for {number}')
+                if not self.is_active(number):
+                    self.call_not_in_progress_error(number)
+                    return
+                current_call = self.get_call_from_state_unsafe(number)
+                sip_code = utils.convert_to_int(command.get('sip_code'), 0)
+                current_call.hangup_call(sip_code=sip_code)
+            case 'answer':
+                if not number:
+                    log(None, 'Error: Missing number for command "answer"')
+                    return
+                log(None, f'Got "answer" command for {number}')
+                if not self.is_active(number):
+                    self.call_not_in_progress_error(number)
+                    return
+                menu = command.get('menu')
+                webhooks = command.get('webhook_to_call')
+                current_call = self.get_call_from_state_unsafe(number)
+                current_call.answer_call(menu, webhooks)
+            case 'transfer':
+                if not number:
+                    log(None, 'Error: Missing number for command "transfer"')
+                    return
+                transfer_to = command.get('transfer_to')
+                if not transfer_to:
+                    log(None, 'Error: Missing transfer_to for command "transfer_to"')
+                    return
+                if not self.is_active(number):
+                    self.call_not_in_progress_error(number)
+                    return
+                current_call = self.get_call_from_state_unsafe(number)
+                current_call.transfer(transfer_to)
+            case 'bridge_audio':
+                if not number:
+                    log(None, 'Error: Missing number for command "bridge_audio"')
+                    return
+                bridge_to = command.get('bridge_to')
+                if not bridge_to:
+                    log(None, 'Error: Missing bridge_to for command "bridge_audio"')
+                    return
+                call_one = from_call if number == 'self' else self.get_call_from_state(number)
+                call_two = from_call if bridge_to == 'self' else self.get_call_from_state(bridge_to)
+                if not call_one:
+                    self.call_not_in_progress_error(number)
+                    return
+                if not call_two:
+                    self.call_not_in_progress_error(bridge_to)
+                    return
+                call_one.bridge_audio(call_two)
+            case 'send_dtmf':
+                if not number:
+                    log(None, 'Error: Missing number for command "send_dtmf"')
+                    return
+                digits = command.get('digits')
+                method = command.get('method', 'in_band')
+                if method not in ('in_band', 'rfc2833', 'sip_info'):
+                    log(None, 'Error: method must be one of in_band, rfc2833, sip_info')
+                    return
+                if not digits:
+                    log(None, 'Error: Missing digits for command "send_dtmf"')
+                    return
+                log(None, f'Got "send_dtmf" command for {number}')
+                if not self.is_active(number):
+                    self.call_not_in_progress_error(number)
+                    return
+                current_call = self.get_call_from_state_unsafe(number)
+                current_call.send_dtmf(digits, method)
+            case 'play_audio_file':
+                if not number:
+                    log(None, 'Error: Missing number for command "play_audio_file"')
+                    return
+                if not self.is_active(number):
+                    self.call_not_in_progress_error(number)
+                    return
+                current_call = self.get_call_from_state_unsafe(number)
+                audio_file = command.get('audio_file')
+                if not audio_file:
+                    log(None, 'Error: Missing parameter "audio_file" for command "play_audio_file"')
+                    return
+                cache_audio = command.get('cache_audio') or False
+                wait_for_audio_to_finish = command.get('wait_for_audio_to_finish') or False
+                match command.get('post_action'):
+                    case 'hangup':
+                        current_call.scheduled_post_action = PostActionHangup(action="hangup")
+                    case 'noop':
+                        pass
+                    case _:
+                        log(None, 'Only post_action "hangup" is supported. Assuming noop.')
+                current_call.play_audio_file(audio_file, cache_audio, wait_for_audio_to_finish)
+            case 'play_message':
+                if not number:
+                    log(None, 'Error: Missing number for command "play_message"')
+                    return
+                if not self.is_active(number):
+                    self.call_not_in_progress_error(number)
+                    return
+                current_call = self.get_call_from_state_unsafe(number)
+                message = command.get('message')
+                if not message:
+                    log(None, 'Error: Missing parameter "message" for command "play_message"')
+                    return
+                handle_as_template = command.get('handle_as_template')
+                if handle_as_template:
+                    message = ha.render_template(current_call.ha_config, message)
+                tts_language = command.get('tts_language') or self.ha_config.tts_config['language']
+                cache_audio = command.get('cache_audio') or False
+                wait_for_audio_to_finish = command.get('wait_for_audio_to_finish') or False
+                match command.get('post_action'):
+                    case 'hangup':
+                        current_call.scheduled_post_action = PostActionHangup(action="hangup")
+                    case 'noop':
+                        pass
+                    case _:
+                        log(None, 'Only post_action "hangup" is supported. Assuming noop.')
+                current_call.play_message(message, tts_language, cache_audio, wait_for_audio_to_finish)
+            case 'stop_playback':
+                if not number:
+                    log(None, 'Error: Missing number for command "stop_playback"')
+                    return
+                if not self.is_active(number):
+                    self.call_not_in_progress_error(number)
+                    return
+                current_call = self.get_call_from_state_unsafe(number)
+                current_call.stop_playback()
+            case 'start_recording':
+                if not number:
+                    log(None, 'Error: Missing number for command "start_recording"')
+                    return
+                if not self.is_active(number):
+                    self.call_not_in_progress_error(number)
+                    return
+                current_call = self.get_call_from_state_unsafe(number)
+                recording_file = command.get('recording_file')
+                if not recording_file or not os.path.isabs(recording_file):
+                    log(None, 'Error: Missing recording_file or path not absolute for command "start_recording"')
+                    return
+                current_call.start_recording(recording_file)
+            case 'stop_recording':
+                if not number:
+                    log(None, 'Error: Missing number for command "stop_recording"')
+                    return
+                if not self.is_active(number):
+                    self.call_not_in_progress_error(number)
+                    return
+                current_call = self.get_call_from_state_unsafe(number)
+                current_call.stop_recording()
+            case 'state':
+                self.call_state.output()
+            case 'quit':
+                log(None, 'Quit.')
+                self.end_point.libDestroy()
+                sys.exit(0)
+            case _:
+                log(None, f'Error: Unknown command: {verb}')
+
+    def call_not_in_progress_error(self, number: str):
+        log(None, f'Warning: call not in progress: {number}')
+        self.call_state.output()

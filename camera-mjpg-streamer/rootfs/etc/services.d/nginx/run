@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Add-on: mjpg-streamer
+# Runs the Nginx daemon
+# ==============================================================================
+
+# Wait for aiortc web server to be available
+bashio::net.wait_for 80
+
+bashio::log.info "Starting NGinx..."
+exec nginx
