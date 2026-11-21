@@ -1,0 +1,27 @@
+version: 3.1.0
+slug: rpc_shutdown
+name: RPC Shutdown
+description: '[老王杂谈说]：远程关闭 Windows 计算机'
+url: https://gh-proxy.org/github.com/home-assistant/app-rpc-shutdown
+arch:
+  - aarch64
+  - amd64
+host_network: true
+image: ghcr.nju.edu.cn/home-assistant/app-rpc-shutdown
+options:
+  computers:
+    - address: 192.168.0.1
+      alias: test-pc
+      credentials: user%password
+      delay: 0
+      message: Home Assistant is shutting down this PC. This cannot be canceled. Please save your work!
+schema:
+  computers:
+    - address: str
+      alias: match(^[\w-]*$)
+      credentials: match(^[^%]*(?:%.*)?$)
+      delay: int(0,600)?
+      message: str?
+startup: services
+stdin: true
+init: false

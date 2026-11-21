@@ -1,0 +1,9 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Add-on: 3dprinter-remote
+# Runs ser2net
+# ==============================================================================
+
+bashio::log.info "Starting ser2net.."
+
+exec ser2net -d

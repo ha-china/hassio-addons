@@ -1,0 +1,6 @@
+{
+    "build_from": {
+        "aarch64": "docker.1panel.live/linuxserver/ombi:arm64v8-development",
+        "amd64": "docker.1panel.live/linuxserver/ombi:amd64-development"
+    }
+}

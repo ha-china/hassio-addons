@@ -1,0 +1,7 @@
+{
+  "build_from": {
+    "aarch64": "senexcrenshaw/xteve:latest",
+    "amd64": "senexcrenshaw/xteve:latest",
+    "armv7": "senexcrenshaw/xteve:latest"
+  }
+}

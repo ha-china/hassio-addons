@@ -1,0 +1,166 @@
+# Home assistant add-on: Postgres
+
+
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## Addon informations
+
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fpostgres%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fpostgres%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fpostgres%2Fconfig.yaml)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/postgres/stats.png)
+
+## About
+
+PostgreSQL, often simply "Postgres", is an object-relational database management system (ORDBMS) with an emphasis on extensibility and standards-compliance. As a database server, its primary function is to store data, securely and supporting best practices, and retrieve it later, as requested by other software applications, be it those on the same computer or those running on another computer across a network (including the Internet). It can handle workloads ranging from small single-machine applications to large Internet-facing applications with many concurrent users. Recent versions also provide replication of the database itself for security and scalability.
+
+This addon is based on the official image : https://hub.docker.com/_/postgres
+
+## Configuration
+
+Postgres port is by default 5432 and is exposed to the host network.
+
+default user: `postgres`
+password: `set by POSTGRES_PASSWORD`
+
+You can configure this options:
+
+```yaml
+POSTGRES_PASSWORD
+POSTGRES_USER
+POSTGRES_DB
+POSTGRES_INITDB_ARGS
+POSTGRES_HOST_AUTH_METHOD
+```
+
+For more info check [base image docs](https://hub.docker.com/_/postgres).
+
+To change PostgreSQL settings, create a file named `postgresql.override.conf` in the add-on config folder (`/addon_configs/xxx-postgres_latest/`, next to the `database` folder) with one `setting = value` per line, then restart the add-on. It is read last, so it wins over the defaults of the add-on, and it is kept across updates and upgrades. A setting PostgreSQL does not accept prevents it from starting: check the log after a change.
+
+### Custom Scripts and Environment Variables
+
+This addon supports custom scripts and environment variables through the `app_config` mapping:
+
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+
+## Automatic updates and upgrades
+
+The add-on follows the upstream image (`ghcr.io/immich-app/postgres`) by itself: new PostgreSQL
+minor releases and new VectorChord / pgvector releases arrive as ordinary add-on updates.
+
+At every start, before PostgreSQL accepts connections, the add-on prepares the database:
+
+- **Extensions** are updated to the versions shipped by the add-on, and VectorChord indexes are
+  rebuilt in the same transaction when VectorChord itself changed. Running Immich add-ons are
+  restarted afterwards.
+- **A database from an older PostgreSQL major** (15) is upgraded with `pg_upgrade`. The upgrade
+  runs on a copy; your database is only replaced once the upgraded copy has been started and
+  checked. It needs as much free space as the database itself.
+  - On success, the previous database is kept in `database.pg<version>.bak` (next to `database`
+    in the add-on config folder) and removed at the first start of the add-on 7 days or more
+    after the upgrade. You can delete it earlier.
+  - On failure, your database stays on its PostgreSQL major (only its extensions have been
+    updated), PostgreSQL of that *previous* major is started instead (the add-on ships it), and
+    a notification is shown in Home Assistant. When `pg_upgrade` itself failed, its logs are kept
+    in `database.upgrade_logs` and the upgrade is tried again with the next version of the
+    add-on, or at the next start if you delete the file `database.upgrade_failed`.
+  - If the very last step fails (the upgraded database cannot be renamed into place), nothing is
+    started: your previous database is then in `database.pg<version>.bak` and the upgraded one
+    in `database.upgrade/new`; the next start finishes the step.
+  - Not handled automatically: tablespaces outside the database folder, and logical replication
+    slots when coming from PostgreSQL 15 (they do not survive `pg_upgrade`; resynchronise the
+    consumer, PowerSync for instance).
+
+Applications are disconnected for the duration of an upgrade (roughly the time needed to copy
+the database). Roles, passwords, access rules, port and hostname are unchanged afterwards.
+
+**Take a backup of the add-on before updating it** (Home Assistant offers it in the update
+dialog). An extension update cannot be undone: going back to an older version of the add-on
+requires restoring that backup.
+
+Requirements for applications using this database:
+
+- Immich: version 2.5.0 or newer (VectorChord 1.x). pgvecto.rs (`vectors`) is no longer shipped;
+  Immich has not used it since its migration to VectorChord.
+
+## Installation
+
+The installation of this add-on is pretty straightforward and not different in comparison to installing any other add-on.
+
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Set the add-on options to your preferences, at least POSTGRES_PASSWORD is required.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Use any Postgres client to connect, e.g. to `homeassistant.local:5432`
+
+Migration from the Postgres 15 add-on:
+
+- stop the Postgres 15 add-on
+- use the Filebrowser add-on to copy the `database` folder from `/addon_configs/xxx-postgres` to `/addon_configs/xxx-postgres_latest`
+- start this add-on: the database is upgraded automatically as described above. Your data stays in the Postgres 15 add-on until you remove it
+- point your applications to this add-on: the internal hostname changes from `db21ed7f-postgres` to `db21ed7f-postgres-latest` (nothing to change if they use `homeassistant.local:5432`)
+
+## Security
+
+The `POSTGRES_PASSWORD` option ships with the default value `homeassistant`. With port `5432` published, anyone on your network who knows it gets a superuser, who can read or change every database and run commands in the container (for example with `COPY ... FROM PROGRAM`). On a new install, change it in the add-on options before the first start. On an existing database the option alone does not change the stored password: run `ALTER USER <superuser> PASSWORD '...';` first, where `<superuser>` is the role the cluster was created with (`POSTGRES_USER`, `postgres` by default; `\du` lists it), then set the same value in the option and in the add-ons that connect to Postgres. The add-on prints a warning in its startup log while the default is still set.
+
+By default, Postgres will be reachable on the local network of your host system. To improve security, you can disable this behavior and make Postgres available only to other Add-ons within Home Assistant.
+
+1. Configure all Add-ons that use Postgres to connect via the internal DNS name: `db21ed7f-postgres-latest:5432`.
+2. Go to **Settings → Add-ons → Postgres 17 → Configuration**, and under **Network**, remove port `5432` by clearing the text field.
+3. Click **Save** and restart the Add-on.
+4. Postgres is now only accessible from other Add-ons and no longer reachable from your local network (e.g., laptop, IoT devices, etc.).
+
+## Support
+
+Create an issue on github
+
+[repository]: https://github.com/alexbelgium/hassio-addons
+
+
+
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

@@ -1,0 +1,4 @@
+#!/usr/bin/env bashio
+
+bashio::log.warning "Halt add-on"
+exec /run/s6/basedir/bin/halt

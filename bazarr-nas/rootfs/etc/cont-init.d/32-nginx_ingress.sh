@@ -1,0 +1,72 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+set -e
+
+#################
+# NGINX SETTING #
+#################
+declare ingress_interface
+declare ingress_port
+
+ingress_port=$(bashio::app.ingress_port)
+ingress_interface=$(bashio::app.ip_address)
+ingress_entry=$(bashio::app.ingress_entry)
+sed -i "s/%%port%%/${ingress_port}/g" /etc/nginx/servers/ingress.conf
+sed -i "s/%%interface%%/${ingress_interface}/g" /etc/nginx/servers/ingress.conf
+sed -i "s|%%ingress_entry%%|${ingress_entry}|g" /etc/nginx/servers/ingress.conf
+
+##################
+# CONFIG SETTING #
+##################
+
+# Values
+slug=bazarr
+CONFIG_LOCATION=/config/config/config.yaml
+
+# Before the config.yaml guard: a fresh Bazarr also starts without authentication
+if [ "$(bashio::config "connection_mode")" = "ingress_noauth" ] && bashio::var.has_value "$(bashio::app.port 6767)"; then
+    bashio::log.warning "SECURITY RISK: Bazarr runs without authentication and port 6767 is published on host port $(bashio::app.port 6767)."
+    bashio::log.warning "Anyone on your network can use it without logging in, change its settings, including provider credentials and API keys, and edit subtitles."
+    bashio::log.warning "Set connection_mode to ingress_auth and set a login in Bazarr (Settings > General > Security), or disable the port in the add-on Network settings and use Ingress."
+fi
+
+if [ -f "$CONFIG_LOCATION" ]; then
+
+    # Define addon mode
+    connection_mode="$(bashio::config "connection_mode")"
+    bashio::log.green "---------------------------"
+    bashio::log.green "Connection_mode is $connection_mode"
+    bashio::log.green "---------------------------"
+    case "$connection_mode" in
+        # Ingress mode, authentication is disabled
+        ingress_noauth)
+            bashio::log.green "Ingress is enabled, authentication is disabled"
+            # Set base_url (must start with / for Flask blueprint registration).
+            # Scoped to the general: block only -- config.yaml also carries a
+            # base_url under each configured *arr integration (radarr.base_url,
+            # sonarr.base_url, ...) and those must not be touched.
+            sed -i "/^general:/,/^[^ ]/{ s|  base_url:.*|  base_url: /$slug|; }" "$CONFIG_LOCATION"
+            # Disable auth
+            sed -i '/^auth:/,/^[^ ]/{ s/  type:.*/  type: null/ }' "$CONFIG_LOCATION"
+            ;;
+        # Ingress mode, with authentication
+        ingress_auth)
+            bashio::log.green "Ingress is enabled, and external authentication is enabled"
+            # Set base_url (must start with / for Flask blueprint registration).
+            # Scoped to the general: block only -- see note above.
+            sed -i "/^general:/,/^[^ ]/{ s|  base_url:.*|  base_url: /$slug|; }" "$CONFIG_LOCATION"
+            # Enable Bazarr auth when leaving ingress_noauth
+            sed -i '/^auth:/,/^[^ ]/{ s/  type:.*/  type: form/ }' "$CONFIG_LOCATION"
+            ;;
+        # No ingress mode, with authentication
+        noingress_auth)
+            bashio::log.green "Disabling ingress and enabling authentication"
+            bashio::log.yellow "WARNING : Ingress is disabled so the app won't be available from HA itself !"
+            # Scoped to the general: block only -- see note above.
+            sed -i "/^general:/,/^[^ ]/{ s/  base_url:.*/  base_url: ''/; }" "$CONFIG_LOCATION"
+            # Enable Bazarr auth when leaving ingress_noauth
+            sed -i '/^auth:/,/^[^ ]/{ s/  type:.*/  type: form/ }' "$CONFIG_LOCATION"
+            ;;
+    esac
+
+fi

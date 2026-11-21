@@ -1,0 +1,43 @@
+version: 4.0.0
+breaking_versions:
+  - 3.0.0
+  - 4.0.0
+slug: mariadb
+name: MariaDB
+description: '[老王杂谈说]：一个 SQL 数据库服务器'
+url: https://gh-proxy.org/github.com/home-assistant/app-mariadb
+arch:
+  - aarch64
+  - amd64
+backup_post: unlock-tables-for-backup
+backup_pre: lock-tables-for-backup
+image: ghcr.nju.edu.cn/home-assistant/app-mariadb
+init: false
+options:
+  databases:
+    - homeassistant
+  logins:
+    - password: null
+      username: homeassistant
+  rights:
+    - database: homeassistant
+      username: homeassistant
+ports:
+  3306/tcp: null
+schema:
+  databases:
+    - match(^[\w$-]{1,64}$)
+  logins:
+    - username: match(^[\w.@ -]{1,128}$)
+      password: password
+  rights:
+    - database: match(^[\w$-]{1,64}$)
+      privileges:
+        - list(ALTER|CREATE|CREATE ROUTINE|CREATE TEMPORARY TABLES|CREATE VIEW|DELETE|DELETE HISTORY|DROP|EVENT|GRANT OPTION|INDEX|INSERT|LOCK TABLES|SELECT|SHOW VIEW|TRIGGER|UPDATE)?
+      username: match(^[\w.@ -]{1,128}$)
+  mariadb_server_args:
+    - str?
+services:
+  - mysql:provide
+startup: system
+timeout: 300

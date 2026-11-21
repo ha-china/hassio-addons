@@ -1,0 +1,34 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：注疏是一个与大型语言模型协作创作长篇虚构作品的自托管写作工具：你为故事的各个部分撰写指令，模型负责撰写文字，而注疏则会围绕其保持一切有序：包括分支故事、世界设定、维持长篇书籍在模型上下文范围内的小结，以及塑造风格的首发设置。",
+  "environment": {
+    "JAVA_TOOL_OPTIONS": "-Duser.home=/config -Xms256m -Xmx1g",
+    "MARGINALIA_DATA": "/config"
+  },
+  "map": [
+    "addon_config:rw"
+  ],
+  "image": "ghcr.nju.edu.cn/enerccio/marginalia",
+  "version": "1.8.0",
+  "name": "Marginalia",
+  "options": {},
+  "ports": {
+    "8080/tcp": "8080"
+  },
+  "ports_description": {
+    "8080/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "marginalia",
+  "startup": "services",
+  "upstream": "latest",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:8080]",
+  "panel_admin": false,
+  "ingress": true,
+  "ingress_port": 8080
+}

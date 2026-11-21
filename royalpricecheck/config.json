@@ -1,0 +1,20 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "manual",
+  "description": "[老王杂谈说]：价格下跌时自动通知皇家加勒比船上的附加费用或邮轮行程",
+  "environment": {},
+  "map": [
+    "addon_config:ro"
+  ],
+  "version": "3.6.2",
+  "name": "Royal Caribbean Price Check",
+  "ports": {},
+  "ports_description": {},
+  "slug": "royalpricecheck",
+  "startup": "services",
+  "upstream": "0.1.0",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+}

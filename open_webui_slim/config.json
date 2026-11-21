@@ -1,0 +1,36 @@
+{
+  "name": "OpenWebUI Slim",
+  "slug": "openwebuislim",
+  "description": "[老王杂谈说]：Open WebUI 是人工智能的家园，一个可扩展功能丰富且易用的自托管人工智能平台，旨在完全离线运行。其轻量镜像比主镜像小 88%，在首次拉取可节省约 1.42 GB 空间。可配合托管 API、您自己的模型服务器，或独立的 Ollama 实例使用。",
+  "version": "v0.13.4",
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "manual",
+  "startup": "application",
+  "map": [
+    {
+      "type": "addon_config",
+      "read_only": false,
+      "path": "/app/backend/data"
+    }
+  ],
+  "options": {
+    "WEBUI_SECRET_KEY": "ccbd372db280a9e97ca87c8e35c221e253dcd29d9f5cdfa8bbf15cf84d4cdbb7"
+  },
+  "schema": {
+    "WEBUI_SECRET_KEY": "str"
+  },
+  "panel_icon": "mdi:credit-card-multiple",
+  "panel_admin": true,
+  "ports": {
+    "8080/tcp": "8080"
+  },
+  "ports_description": {
+    "8080/tcp": "Web interface"
+  },
+  "ingress": false,
+  "ingress_port": 8080,
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+}

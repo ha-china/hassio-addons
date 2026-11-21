@@ -1,0 +1,28 @@
+worker_processes 1;
+error_log /dev/stdout info;
+pid /tmp/nginx.pid;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    access_log off;
+
+    server {
+        listen 7912;
+
+        location / {
+            rewrite ^(.*)$ __INGRESS_PATH__$1 break;
+            proxy_pass http://127.0.0.1:7913;
+            proxy_http_version 1.1;
+            proxy_set_header Host $host;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_read_timeout 300s;
+            proxy_buffering off;
+        }
+    }
+}

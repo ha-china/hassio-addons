@@ -1,0 +1,37 @@
+{
+  "version": "v1.4.0",
+  "slug": "ai_hub_tts",
+  "name": "AI Hub TTS",
+  "description": "[老王杂谈说]：离线语音合成，基于 MeloTTS-ONNX 中文模型，兼容 Wyoming 协议并支持流式返回",
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "init": false,
+  "host_network": true,
+  "image": "crpi-tuq1xajq0lk6s0kt.cn-shanghai.personal.cr.aliyuncs.com/hachina/ai_hub_tts-{arch}",
+  "ports": {
+    "10301/tcp": 10301
+  },
+  "map": [
+    "config:rw"
+  ],
+  "backup_exclude": [
+    "/data/tts"
+  ],
+  "discovery": [
+    "wyoming"
+  ],
+  "options": {
+    "voice": "ZH_MIX_EN",
+    "sample_rate": 44100,
+    "speed": 1.0,
+    "no_bert": true
+  },
+  "schema": {
+    "voice": "list(ZH_MIX_EN)",
+    "sample_rate": "list(44100)",
+    "speed": "float(0.5,2.0)",
+    "no_bert": "bool"
+  }
+}

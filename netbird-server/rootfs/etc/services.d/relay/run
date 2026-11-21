@@ -1,0 +1,23 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+set -euo pipefail
+
+# ==============================================================================
+# Home Assistant Add-on: NetBird Server
+# Runs the NetBird Relay (includes embedded STUN)
+# ==============================================================================
+
+RELAY_ENV_FILE="/config/netbird/relay/relay.env"
+
+if [[ -f "$RELAY_ENV_FILE" ]]; then
+  set -a
+  # shellcheck disable=SC1090
+  . "$RELAY_ENV_FILE"
+  set +a
+else
+  bashio::log.error "Missing relay env file at ${RELAY_ENV_FILE}."
+  bashio::exit.nok
+fi
+
+bashio::log.info "Starting NetBird Relay..."
+exec /usr/local/bin/netbird-relay

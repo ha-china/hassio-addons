@@ -1,0 +1,13 @@
+#!/usr/bin/with-contenv bashio
+
+bashio::log.info "Starting internal MongoDB..."
+
+DATA_DIR="/opt/tplink/EAPController/data/db"
+LOG_DIR="/opt/tplink/EAPController/logs"
+
+mkdir -p "$DATA_DIR" "$LOG_DIR"
+chown -R 508:508 "$DATA_DIR" "$LOG_DIR"
+
+exec gosu 508:508 mongod \
+    --dbpath "$DATA_DIR" --port 27217 --bind_ip 127.0.0.1 \
+    --logpath "$LOG_DIR/mongod.log" --logappend

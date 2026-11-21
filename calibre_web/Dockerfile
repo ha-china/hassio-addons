@@ -1,0 +1,173 @@
+#============================#
+#  ALEXBELGIUM'S DOCKERFILE  #
+#============================#
+#           _.------.
+#       _.-`    ('>.-`"""-.
+# '.--'`       _'`   _ .--.)
+#    -'         '-.-';`   `
+#    ' -      _.'  ``'--.
+#        '---`    .-'""`
+#               /`
+#=== Home Assistant Addon ===#
+
+#################
+# 1 Build Image #
+#################
+
+ARG BUILD_FROM
+ARG BUILD_VERSION
+ARG BUILD_UPSTREAM="latest"
+FROM ${BUILD_FROM}${BUILD_UPSTREAM}
+ENV BASHIO_VERSION=1.29.1
+
+##################
+# 2 Modify Image #
+##################
+
+# Set S6 wait time
+ENV S6_CMD_WAIT_FOR_SERVICES=1 \
+    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
+    S6_SERVICES_GRACETIME=0
+
+
+RUN \
+    echo '#!/bin/sh' > /usr/bin/xdg-icon-resource && chmod +x /usr/bin/xdg-icon-resource \
+    && echo '#!/bin/sh' > /usr/bin/xdg-desktop-menu && chmod +x /usr/bin/xdg-desktop-menu \
+    && echo '#!/bin/sh' > /usr/bin/xdg-mime && chmod +x /usr/bin/xdg-mime
+
+# By default the calibre binaries (calibredb, ebook-convert, ebook-meta) are installed at start by
+# the linuxserver/mods:universal-calibre docker mod, set as the default DOCKER_MODS in config.yaml.
+# The xdg-* stubs above keep its calibre_postinstall step quiet.
+
+# Global LSIO modifications
+COPY ha_lsio.sh /ha_lsio.sh
+ARG CONFIGLOCATION="/config"
+RUN chmod 744 /ha_lsio.sh && if grep -qr "lsio" /etc; then /ha_lsio.sh "$CONFIGLOCATION"; fi && rm /ha_lsio.sh
+
+# Specific images modifications
+# The base image installs kepubify with "curl -o /usr/bin/kepubify", which both leaves it mode
+# 0644 and gives it a name calibre-web does not accept : binary_helper.py only takes
+# "kepubify-linux-64bit" or "kepubify-linux-32bit", and only when os.access(X_OK) passes. Both
+# defects have to be fixed, which is why enabling Kobo sync failed with "Kepubify binary not
+# found" even when the path was set by hand. Publish it under an accepted name in /opt/kepubify,
+# the directory calibre-web's own autodetect_kepubify_binary() already probes, so calibre-web
+# fills the setting in itself. The second link keeps /usr/bin working as well : that is the value
+# already stored by anyone who applied the "ln -sf /usr/bin/kepubify /usr/bin/kepubify-linux-64bit"
+# workaround, and their setting is not empty, so it is left alone below and has to keep resolving.
+# Unguarded on purpose: if a future base image stops shipping the binary, the build must fail here
+# rather than ship a silently broken add-on.
+RUN \
+    usermod --home /config abc \
+    && chmod 0755 /usr/bin/kepubify \
+    && mkdir -p /opt/kepubify \
+    && ln -s /usr/bin/kepubify /opt/kepubify/kepubify-linux-64bit \
+    && ln -s /usr/bin/kepubify /usr/bin/kepubify-linux-64bit
+
+##################
+# 3 Install apps #
+##################
+
+# Copy local files
+COPY rootfs/ /
+RUN find . -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -exec chmod +x {} \;
+
+# Uses /bin for compatibility purposes
+# hadolint ignore=DL4005
+RUN if [ ! -f /bin/sh ] && [ -f /usr/bin/sh ]; then ln -s /usr/bin/sh /bin/sh; fi && \
+    if [ ! -f /bin/bash ] && [ -f /usr/bin/bash ]; then ln -s /usr/bin/bash /bin/bash; fi
+
+# Modules
+ARG MODULES="00-banner.sh 01-custom_script.sh 00-global_var.sh 00-local_mounts.sh 00-smb_mounts.sh"
+
+# Automatic modules download
+COPY ha_automodules.sh /ha_automodules.sh
+RUN chmod 744 /ha_automodules.sh && /ha_automodules.sh "$MODULES" && rm /ha_automodules.sh
+
+# Manual apps
+ENV PACKAGES="libnss3 libxtst6 libxrandr2"
+
+# Automatic apps & bashio
+COPY ha_autoapps.sh /ha_autoapps.sh
+RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" && rm /ha_autoapps.sh
+
+# Install sqlite3 & set defaults
+RUN if ! command -v sqlite3 > /dev/null 2>/dev/null; then (apt-get update && apt-get install -yqq --no-install-recommends sqlite3 || apk add --no-cache sqlite3) > /dev/null; fi \
+    && echo "sqlite3 /config/app.db 'update settings set config_reverse_proxy_login_header_name=\"X-WebAuth-User\",config_allow_reverse_proxy_header_login=1'" >> /etc/s6-overlay/s6-rc.d/init-calibre-web-config/run
+
+################
+# 4 Entrypoint #
+################
+
+# Add entrypoint
+ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
+COPY ha_entrypoint.sh /ha_entrypoint.sh
+RUN chmod 777 /ha_entrypoint.sh
+
+# Install bashio
+COPY bashio-standalone.sh /usr/local/lib/bashio-standalone.sh
+RUN chmod 0755 /usr/local/lib/bashio-standalone.sh
+
+#
+#WORKDIR /
+#ENTRYPOINT [ "/usr/bin/env" ]
+#CMD [ "/ha_entrypoint.sh" ]
+
+############
+# 5 Labels #
+############
+
+ARG BUILD_ARCH
+ARG BUILD_DATE
+ARG BUILD_DESCRIPTION
+ARG BUILD_NAME
+ARG BUILD_REF
+ARG BUILD_REPOSITORY
+ARG BUILD_VERSION
+ENV BUILD_VERSION="${BUILD_VERSION}"
+LABEL \
+    io.hass.name="${BUILD_NAME}" \
+    io.hass.description="${BUILD_DESCRIPTION}" \
+    io.hass.arch="${BUILD_ARCH}" \
+    io.hass.type="addon" \
+    io.hass.version=${BUILD_VERSION} \
+    maintainer="alexbelgium (https://gh-proxy.org/github.com/alexbelgium)" \
+    org.opencontainers.image.title="${BUILD_NAME}" \
+    org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
+    org.opencontainers.image.vendor="Home Assistant Add-ons" \
+    org.opencontainers.image.authors="alexbelgium (https://gh-proxy.org/github.com/alexbelgium)" \
+    org.opencontainers.image.licenses="MIT" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/alexbelgium" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.created=${BUILD_DATE} \
+    org.opencontainers.image.revision=${BUILD_REF} \
+    org.opencontainers.image.version=${BUILD_VERSION}
+
+#################
+# 6 Healthcheck #
+#################
+
+# Avoid spamming logs
+# hadolint ignore=SC2016
+RUN \
+    # Handle Apache configuration
+    if [ -d /etc/apache2/sites-available ]; then \
+        for file in /etc/apache2/sites-*/*.conf; do \
+            sed -i '/<VirtualHost/a \ \n    # Match requests with the custom User-Agent "HealthCheck" \n    SetEnvIf User-Agent "HealthCheck" dontlog \n    # Exclude matching requests from access logs \n    CustomLog ${APACHE_LOG_DIR}/access.log combined env=!dontlog' "$file"; \
+        done; \
+    fi && \
+    \
+    # Handle Nginx configuration
+    if [ -f /etc/nginx/nginx.conf ]; then \
+        awk '/http \{/{print; print "map $http_user_agent $dontlog {\n  default 0;\n  \"~*HealthCheck\" 1;\n}\naccess_log /var/log/nginx/access.log combined if=$dontlog;"; next}1' /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.new && \
+        mv /etc/nginx/nginx.conf.new /etc/nginx/nginx.conf; \
+    fi
+
+ENV HEALTH_PORT="8083" \
+    HEALTH_URL=""
+HEALTHCHECK \
+    --interval=5s \
+    --retries=5 \
+    --start-period=30s \
+    --timeout=25s \
+    CMD curl -A "HealthCheck: Docker/1.0" -s -f "http://127.0.0.1:${HEALTH_PORT}${HEALTH_URL}" &>/dev/null || exit 1
