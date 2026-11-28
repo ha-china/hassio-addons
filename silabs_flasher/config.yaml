@@ -1,0 +1,26 @@
+version: 1.0.0
+slug: silabs_flasher
+name: Silicon Labs Flasher
+description: '[老王杂谈说]：矽兰芯片系统固件烧录应用程序'
+url: https://gh-proxy.org/github.com/home-assistant/app-silabs-flasher
+arch:
+  - aarch64
+  - amd64
+gpio: true
+hassio_api: true
+image: ghcr.nju.edu.cn/home-assistant/app-silabs-flasher
+init: false
+options:
+  device: null
+  firmware_url: null
+  verbose: false
+schema:
+  device: device(subsystem=tty)?
+  firmware_url: url?
+  profile: list(yellow|zbt1|zbt2|ihost|slzb07|rts_dtr)?
+  probe_methods: str?
+  bootloader_reset: str?
+  verbose: bool?
+stage: experimental
+startup: once
+boot: manual

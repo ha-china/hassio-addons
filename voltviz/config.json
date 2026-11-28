@@ -1,0 +1,26 @@
+{
+  "name": "VoltViz",
+  "version": "0.36.0",
+  "slug": "voltviz",
+  "description": "[老王杂谈说]：一个动态的实时音乐可视化器，将声音转化为令人惊叹的视觉体验。",
+  "arch": [
+    "aarch64",
+    "amd64"
+  ],
+  "image": "ghcr.nju.edu.cn/sanderdw/hassio-addons/ha-voltviz",
+  "url": "https://gh-proxy.org/github.com/sanderdw/voltviz",
+  "ingress": true,
+  "ingress_stream": true,
+  "panel_icon": "mdi:waveform",
+  "webui": "http://[HOST]:[PORT:80]",
+  "hassio_api": true,
+  "ports": {
+    "80/tcp": null
+  },
+  "options": {
+    "SENDSPIN_URL": "http://d5369777-music-assistant:8927"
+  },
+  "schema": {
+    "SENDSPIN_URL": "str?"
+  }
+}

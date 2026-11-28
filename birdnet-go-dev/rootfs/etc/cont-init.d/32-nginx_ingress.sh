@@ -1,0 +1,1 @@
+../../../../birdnet-go/rootfs/etc/cont-init.d/32-nginx_ingress.sh

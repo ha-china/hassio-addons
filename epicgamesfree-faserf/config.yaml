@@ -1,0 +1,21 @@
+name: "Epic Games Freebies Claimer"
+slug: "epicgamesfree-faserf"
+image: ghcr.nju.edu.cn/faserf/hassio-addons-epicgamesfree-{arch}
+description: "[老王杂谈说]：自动登录、在 /data 持久化会话，并从 Epic 游戏商店领取促销免费游戏"
+version: "0.1.3"
+arch:
+  - aarch64
+  - amd64
+startup: services
+ingress: true
+ingress_port: 3000
+panel_icon: mdi:gamepad-variant
+schema:
+  auto_claim: bool
+  cron_schedule: str
+  log_level: "list(trace|debug|info|notice|warning|error|fatal)?"
+options:
+  auto_claim: true
+  cron_schedule: "10 17 * * 4"
+  log_level: info
+stage: experimental

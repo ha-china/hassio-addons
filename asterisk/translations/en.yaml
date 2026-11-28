@@ -1,0 +1,72 @@
+configuration:
+  ami_password:
+    name: AMI Password
+    description: >-
+      The password that will be used for the `admin` user in AMI.
+  video_support:
+    name: Video Support
+    description: >-
+      Enables videosupport for the auto-added extensions.
+      Video support does not work for the companion app.
+  auto_add_secret:
+    name: Auto Add Secret
+    description: >-
+      The secret set for every auto-added extension.
+      Change this to something secure.
+  auto_add:
+    name: Auto Add Extensions
+    description: >-
+      Whether to enable the automatic creation of extensions for
+      every person registered in Home Assistant. They will have
+      their number/username auto-generated starting from 100.
+  additional_sounds:
+    name: Additional Sounds Languages to Download
+    description: >-
+      The additional sounds languages to download from
+      https://downloads.asterisk.org/pub/telephony/sounds/ on add-on startup,
+      skipping when already downloaded. Examples: fr, en_GB.
+  register_ingress_entry:
+    name: Register Ingress Entry
+    description: >-
+      Whether to register the ingress entry for the add-on as a Home Assistant
+      entity or not. This is useful for the SIP card to avoid needing to
+      manually expose Asterisk's WebSockets interface.
+  generate_ssl_cert:
+    name: Generate SSL Certifcate
+    description: >-
+      Enables/disables the generation of a self-signed certificate
+      for use with the SSL interfaces (WSS and TLS).
+  certfile:
+    name: Certificate File
+    description: >-
+      The certificate file to use for SSL in your `/ssl/` folder,
+      when `generate_ssl_cert` is disabled.
+  keyfile:
+    name: Private Key File
+    description: >-
+      The key file to use for SSL in your `/ssl/` folder, when
+      `generate_ssl_cert` is disabled.
+  mailbox:
+    name: Mailbox Server
+    description: >-
+      Enables the mailbox server to send voicemails to the Asterisk mailbox integration.
+  mailbox_port:
+    name: Mailbox Server Port
+    description: >-
+      The port used by the mailbox server.
+  mailbox_password:
+    name: Mailbox Server Password
+    description: >-
+      The password for the mailbox server.
+  mailbox_extension:
+    name: Mailbox Server Extension
+    description: >-
+      Which extension to get the voicemails from.
+  mailbox_google_api_key:
+    name: Google API Key
+    description: >-
+      The API Key for speech-to-text.
+  log_level:
+    name: Log Level
+    description: >-
+      The log level to configure Asterisk to use.

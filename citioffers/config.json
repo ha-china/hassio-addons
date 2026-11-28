@@ -1,0 +1,33 @@
+{
+  "name": "Citibank Merchant Offers",
+  "slug": "citioffers",
+  "description": "[老王杂谈说]：登录花旗银行并激活所有可用商户卡片优惠。",
+  "version": "1.0.0",
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "manual",
+  "startup": "application",
+  "map": [
+    "addon_config:rw"
+  ],
+  "environment": {
+    "HOME": "/root",
+    "CITI_CONFIG": "/config/credentials.yaml",
+    "CITI_OUT_DIR": "/config/out"
+  },
+  "options": {
+    "mode": "activate",
+    "delay": "1.0",
+    "timeout": "180"
+  },
+  "schema": {
+    "mode": "list(list|activate)",
+    "delay": "float",
+    "timeout": "float"
+  },
+  "panel_icon": "mdi:credit-card-multiple",
+  "panel_admin": true,
+  "url": "https://gh-proxy.org/github.com/example/citi-offers"
+}

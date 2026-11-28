@@ -1,0 +1,87 @@
+#!/command/with-contenv bashio
+# ==============================================================================
+# Starts the datalogger. s6 runs this script again when the datalogger has
+# stopped (see finish).
+# ==============================================================================
+function _info() { printf "\\r[ \\033[00;34mINFO\\033[0m ] %s\\n" "$@"; }
+
+function _check_update {
+  local app_version
+  local check_update
+  app_version="$(bashio::app.version)"
+  _info "Home Assistant App release: ${app_version}"
+  # The check must not stop or hold up the datalogger when its server does not answer.
+  check_update=$(curl -s --max-time 10 "https://api-check.duckdns.org/dsmr-datalogger-addon/${app_version}") || true
+  if [[ "${check_update}" == *"response_string"* ]]; then
+    _info "$(jq --raw-output .response_string <<<"${check_update}")"
+  else
+    _info "Home Assistant App: Update check failed"
+  fi
+}
+
+# A wrong option does not fix itself: stop the app with an error and the reason in the log,
+# instead of starting the datalogger again every few seconds.
+function _config_error {
+  bashio::log.fatal "$1"
+  bashio::log.fatal "Change it on the app's Configuration tab and start the app again."
+  echo 1 >/run/s6-linux-init-container-results/exitcode
+  exec /run/s6/basedir/bin/halt
+}
+
+function _check_config {
+  if [[ "$(bashio::config 'DATALOGGER_API_HOSTS')" == *"<YOUR_DSMR_HOST>"* ]]; then
+    _config_error "Set the DSMR Reader address (DATALOGGER_API_HOSTS), for example http://192.168.1.10:7777."
+  fi
+  if [[ "$(bashio::config 'DATALOGGER_API_KEYS')" == *"<YOUR_API_KEY>"* ]]; then
+    _config_error "Set the API key (DATALOGGER_API_KEYS) from the receiving DSMR Reader's configuration."
+  fi
+  if [[ "$(bashio::config 'DATALOGGER_INPUT_METHOD')" == "ipv4" ]]; then
+    if ! bashio::config.has_value 'DATALOGGER_NETWORK_HOST'; then
+      _config_error "Input ipv4 needs a network host (DATALOGGER_NETWORK_HOST): the device with the P1 cable."
+    fi
+    if ! bashio::config.has_value 'DATALOGGER_NETWORK_PORT'; then
+      _config_error "Input ipv4 needs a network port (DATALOGGER_NETWORK_PORT): the port that device sends the telegrams on."
+    fi
+  fi
+}
+
+# The datalogger reads DSMRREADER_REMOTE_<option>. An option without a value is left out, so
+# the datalogger uses its own default instead of the text "null".
+function _export_options {
+  local option
+  local value
+  for option in \
+    DATALOGGER_DEBUG_LOGGING DATALOGGER_TIMEOUT DATALOGGER_SLEEP DATALOGGER_INPUT_METHOD \
+    DATALOGGER_API_HOSTS DATALOGGER_API_KEYS DATALOGGER_MIN_SLEEP_FOR_RECONNECT \
+    DATALOGGER_SERIAL_PORT DATALOGGER_SERIAL_BAUDRATE DATALOGGER_SERIAL_BYTESIZE \
+    DATALOGGER_SERIAL_PARITY DATALOGGER_NETWORK_HOST DATALOGGER_NETWORK_PORT; do
+    if bashio::config.has_value "${option}"; then
+      value="$(bashio::config "${option}")"
+      export "DSMRREADER_REMOTE_${option}=${value}"
+    fi
+  done
+}
+
+#---------------------------------------------------------------------------------------------------------------------------
+# MAIN
+#---------------------------------------------------------------------------------------------------------------------------
+
+# s6 runs this script again when the datalogger has stopped, for example because the P1 cable
+# was pulled out. Wait before the next try, so a failure that stays does not flood the log.
+RESTART_DELAY=10
+STARTED_BEFORE=/run/datalogger-started-before
+
+if [[ -f "${STARTED_BEFORE}" ]]; then
+  _info "Starting the datalogger again in ${RESTART_DELAY} seconds"
+  sleep "${RESTART_DELAY}"
+else
+  touch "${STARTED_BEFORE}"
+  _check_update
+  _check_config
+fi
+
+_export_options
+_info "Datalogger started"
+
+# exec: the datalogger takes this script's place, so the stop signal reaches it.
+exec python3 -u /usr/bin/dsmr_datalogger_api_client.py

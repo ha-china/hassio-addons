@@ -1,0 +1,27 @@
+arch:
+  - aarch64
+  - amd64
+description: "[老王杂谈说]：null"
+image: ghcr.nju.edu.cn/alexbelgium/netbird-server-{arch}
+init: false
+map:
+  - addon_config:rw
+name: NetBird Server
+options:
+  domain: netbird.example.com
+slug: netbird-server
+ports:
+  80/tcp: 80
+  443/tcp: 443
+  443/udp: 443
+  3478/udp: 3478
+ports_description:
+  80/tcp: Caddy HTTP (ACME HTTP-01)
+  443/tcp: Caddy HTTPS (dashboard + APIs)
+  443/udp: Caddy HTTP/3 (optional)
+  3478/udp: NetBird Relay STUN
+schema:
+  domain: str
+url: https://gh-proxy.org/github.com/alexbelgium/hassio-addons/tree/master/netbird-server
+version: 0.64.5-8
+webui: "[PROTO:ssl]://[HOST]:[PORT:443]"

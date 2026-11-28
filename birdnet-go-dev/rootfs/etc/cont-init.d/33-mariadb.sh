@@ -1,0 +1,1 @@
+../../../../birdnet-go/rootfs/etc/cont-init.d/33-mariadb.sh

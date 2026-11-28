@@ -1,0 +1,17 @@
+name: Radarr
+version: 0.32.0
+slug: radarr
+description: '[老王杂谈说]：网络新闻组与番茄种植用户的电影组织者/管理员'
+url: https://gh-proxy.org/github.com/hassio-addons/app-radarr/tree/main/README.md
+webui: http://[HOST]:[PORT:7878]
+init: false
+arch:
+  - aarch64
+  - amd64
+map:
+  - addon_config:rw
+  - share:rw
+  - media:rw
+ports:
+  7878/tcp: 7878
+image: ccr.ccs.tencentyun.com/hassio-addons/radarr

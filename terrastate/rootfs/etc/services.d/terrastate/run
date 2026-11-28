@@ -1,0 +1,28 @@
+#!/usr/bin/with-contenv bashio
+# Service run scripts must not use errexit — we manage exit codes explicitly.
+# bashio sources set -o errexit, so we disable it here.
+set +e
+
+USERNAME="$(bashio::config 'username')"
+PASSWORD="$(bashio::config 'password')"
+LOG_LEVEL="$(bashio::config 'log_level')"
+
+if bashio::var.is_empty "${PASSWORD}"; then
+    bashio::exit.nok "Option 'password' is required — set it in the add-on configuration."
+fi
+
+cd /data/terrastate || bashio::exit.nok "State directory /data/terrastate is missing."
+
+ENV_VARS=$(gomplate \
+    -d options=/data/options.json \
+    -i '{{ range (ds "options").env_vars }}{{ . }} {{ end }}')
+
+export TERRASTATE_ACCESS_USERNAME="${USERNAME}"
+export TERRASTATE_ACCESS_PASSWORD="${PASSWORD}"
+
+bashio::log.info "Starting Terraform state backend (terrastate) on port 8445..."
+
+exec env ${ENV_VARS} s6-setuidgid terrastate \
+    /usr/local/bin/terrastate server \
+    --server-addr "0.0.0.0:8445" \
+    --log-level "${LOG_LEVEL}"

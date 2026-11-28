@@ -1,0 +1,78 @@
+name: "MediaPipe 手势识别"
+version: "2.1.3"
+slug: mediapipe_gesture_control
+description: "[老王杂谈说]：基于 MediaPipe 的实时手势识别系统"
+url: "https://gh-proxy.org/github.com/yanfeng17/shoushi-ha-addon"
+arch:
+  - amd64
+  - aarch64
+startup: application
+boot: auto
+host_network: true
+map:
+  - config:rw
+options:
+  # RTSP 摄像头配置
+  rtsp_url: "rtsp://admin:password@192.168.1.100:554/stream1"
+  rtsp_reconnect_delay: 5
+  # MQTT 配置
+  mqtt_broker: "core-mosquitto"
+  mqtt_port: 1883
+  mqtt_username: ""
+  mqtt_password: ""
+  # MediaPipe 手部检测参数
+  min_hand_detection_confidence: 0.5
+  min_tracking_confidence: 0.5
+  # 视频处理参数
+  frame_width: 320
+  frame_height: 240
+  target_fps: 15
+  skip_frames: 1
+  # 手势识别参数
+  gesture_confidence_threshold: 0.5
+  gesture_min_detections: 2
+  gesture_cooldown: 1.5
+  # 手势开关（v2.1.3 - 7 种 Google 内置 + 1 种自定义）
+  enable_closed_fist: true
+  enable_open_palm: true
+  enable_pointing_up: true
+  enable_thumbs_down: true
+  enable_thumbs_up: true
+  enable_peace: true
+  enable_i_love_you: true
+  enable_ok_sign: true
+  # 日志
+  log_level: "INFO"
+schema:
+  # RTSP
+  rtsp_url: str
+  rtsp_reconnect_delay: int(1,60)?
+  # MQTT
+  mqtt_broker: str
+  mqtt_port: int(1,65535)?
+  mqtt_username: str?
+  mqtt_password: password?
+  # MediaPipe 参数
+  min_hand_detection_confidence: float(0.0,1.0)?
+  min_tracking_confidence: float(0.0,1.0)?
+  # 视频处理
+  frame_width: int(160,1920)?
+  frame_height: int(120,1080)?
+  target_fps: int(5,30)?
+  skip_frames: int(1,5)?
+  # 手势识别
+  gesture_confidence_threshold: float(0.3,1.0)?
+  gesture_min_detections: int(2,10)?
+  gesture_cooldown: float(0.5,10.0)?
+  # 手势开关（v2.1.3 - 8 种手势）
+  enable_closed_fist: bool?
+  enable_open_palm: bool?
+  enable_pointing_up: bool?
+  enable_thumbs_down: bool?
+  enable_thumbs_up: bool?
+  enable_peace: bool?
+  enable_i_love_you: bool?
+  enable_ok_sign: bool?
+  # 日志
+  log_level: list(DEBUG|INFO|WARNING|ERROR)?
+image: "ghcr.nju.edu.cn/yanfeng17/shoushi-ha-addon-{arch}"

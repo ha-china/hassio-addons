@@ -1,0 +1,40 @@
+name: MariaDB
+slug: mariadb-erik73
+version: 2.0.11
+description: '[老王杂谈说]：一个 SQL 数据库服务器'
+url: https://gh-proxy.org/github.com/erik73/hassio-addons
+arch:
+  - aarch64
+  - amd64
+backup_post: unlock-tables-for-backup
+backup_pre: lock-tables-for-backup
+image: ghcr.nju.edu.cn/erik73/mariadb/{arch}
+init: false
+options:
+  databases:
+    - homeassistant
+  logins:
+    - password: null
+      username: homeassistant
+  rights:
+    - database: homeassistant
+      username: homeassistant
+ports:
+  3306/tcp: null
+schema:
+  databases:
+    - str
+  logins:
+    - username: str
+      password: password
+  rights:
+    - database: str
+      privileges:
+        - list(ALTER|CREATE|CREATE ROUTINE|CREATE TEMPORARY TABLES|CREATE VIEW|DELETE|DELETE HISTORY|DROP|EVENT|GRANT OPTION|INDEX|INSERT|LOCK TABLES|SELECT|SHOW VIEW|TRIGGER|UPDATE)?
+      username: str
+  mariadb_server_args:
+    - str?
+services:
+  - mysql:provide
+startup: system
+timeout: 300

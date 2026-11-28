@@ -1,0 +1,19 @@
+# https://gh-proxy.org/github.com/AlexxIT/builder/blob/master/builder.sh
+name: go2rtc
+description: '[老王杂谈说]：普通用户的默认版本。Intel（VAAPI）和 Raspberry（V4L2）的转码支持。'
+url: https://gh-proxy.org/github.com/AlexxIT/go2rtc
+image: alexxit/go2rtc
+arch: [amd64, aarch64, i386, armv7]
+# https://developers.home-assistant.io/docs/add-ons/configuration
+version: 1.9.15
+slug: go2rtc
+init: false
+startup: system
+host_network: true
+homeassistant_api: true
+video: true
+audio: true
+ingress: true
+ingress_port: 1984
+panel_icon: mdi:camera-wireless
+map: ["config:rw", "media", "ssl"]

@@ -1,0 +1,32 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：使用 Rust 编写的 Bitwarden 服务器 API 的替代实现，兼容上游 Bitwarden 客户端*，非常适合在官方资源密集型服务可能不理想的地方进行自托管部署。",
+  "environment": {
+    "DATA_FOLDER": "/config"
+  },
+  "map": [
+    "addon_config:rw"
+  ],
+  "image": "ghcr.nju.edu.cn/dani-garcia/vaultwarden",
+  "version": "1.37.5",
+  "name": "Vaultwarden",
+  "options": {},
+  "ports": {
+    "80/tcp": "7277"
+  },
+  "ports_description": {
+    "80/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "vaultwarden",
+  "startup": "services",
+  "upstream": "1.37.1",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:80]",
+  "ingress": true,
+  "ingress_port": 80
+}

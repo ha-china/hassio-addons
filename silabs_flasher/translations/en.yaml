@@ -1,0 +1,28 @@
+---
+configuration:
+  device:
+    name: Device
+    description: The serial port where the Silicon Labs radio is connected to.
+  firmware_url:
+    name: Firmware URL
+    description: >-
+      URL of the firmware to flash (GBL file, or a ZIP archive containing one).
+  profile:
+    name: Device profile
+    description: >-
+      Use the predefined flashing profile of a known device. Cannot be combined
+      with probe methods or bootloader reset.
+  probe_methods:
+    name: Probe methods
+    description: >-
+      Comma-separated list of application type and baudrate pairs used to
+      detect the running firmware, e.g. `bootloader:115200,ezsp:115200`.
+  bootloader_reset:
+    name: Bootloader reset
+    description: >-
+      Comma-separated list of reset methods used to enter the bootloader
+      (`yellow`, `ihost`, `slzb07`, `rts_dtr`, `baudrate`).
+  verbose:
+    name: Verbose mode
+    description: >-
+      Start universal-silabs-flasher in verbose mode.

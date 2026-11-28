@@ -1,0 +1,159 @@
+# Home assistant add-on: Guacamole
+
+
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## Addon informations
+
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fguacamole%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fguacamole%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fguacamole%2Fconfig.yaml)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/guacamole/stats.png)
+
+## About
+
+[Apache Guacamole](https://guacamole.apache.org/) is a clientless remote desktop gateway that supports standard protocols like VNC, RDP, and SSH. It provides a web-based interface for accessing remote systems without requiring any client software on the user's device. Guacamole acts as a proxy, translating between the web-based frontend and the actual remote desktop protocols.
+
+This addon combines both the Guacamole server (guacd) and web application components with an integrated PostgreSQL database for storing connection configurations and user management. The solution provides a complete remote desktop gateway that can be used to securely access computers and servers from anywhere via a web browser.
+
+This addon is based on the docker image from: https://github.com/abesnier/docker-guacamole
+
+## Configuration
+
+Webui can be found at `<your-ip>:8080` or through the sidebar using Ingress.
+
+The default username is `guacadmin` with password `guacadmin`. It is strongly recommended to change this password immediately after first login.
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `EXTENSIONS` | str | `auth-totp` | Guacamole extensions to enable (e.g., `auth-totp`, `history-recording-storage`) |
+| `recording_search_path` | str | `/config/recordings` | Directory added to `guacamole.properties` as the `recording-search-path` used by the history recording storage extension |
+| `login_with_ha_user` | bool | `false` | Log in through Ingress as your Home Assistant username instead of always `guacadmin` (needs the `auth-header` extension) |
+| `TZ` | str | | Timezone (e.g., `Europe/London`) |
+
+### Example Configuration
+
+```yaml
+EXTENSIONS: "auth-totp,history-recording-storage"
+recording_search_path: "/config/recordings"
+TZ: "Europe/London"
+```
+
+### Home Assistant single sign-on
+
+Set `EXTENSIONS: "auth-header"` and `login_with_ha_user: true`, then create a Guacamole user for
+each Home Assistant username that should have access. Ingress then signs each person in as their
+own Home Assistant user instead of always `guacadmin`. A Home Assistant user with no matching
+Guacamole account gets the normal login form instead.
+
+Notes:
+
+- The option feeds the `auth-header` extension through its default header, `REMOTE_USER`. If you
+  previously added an `http-auth-header:` line to `/config/guacamole.properties`, remove it, or
+  the extension will keep reading the header you named there and this option will do nothing.
+- Stick to plain ASCII usernames. Accented or non-Latin characters have to survive nginx, Tomcat
+  and Java without an agreed encoding, and they are not guaranteed to match the Guacamole account.
+
+> [!WARNING]
+> **Security risk: `auth-header` with the published port.** Guacamole's header authentication
+> trusts whoever sends the `REMOTE_USER` header, and port `8080/tcp` (host port `4822` by default)
+> goes straight to Guacamole, bypassing the Ingress proxy. While `auth-header` is enabled, anyone
+> who can reach that port can send the header themselves and log in as any user, including
+> `guacadmin`. The add-on prints a `SECURITY RISK` warning in its startup log in that case. Clear
+> the port in the add-on's Network settings and use Ingress only, or remove `auth-header`.
+
+### Database Setup
+
+The addon automatically configures a PostgreSQL database for storing Guacamole configurations, users, and connections. The database files are stored in `/config/postgres` and are automatically created on first startup.
+
+> [!IMPORTANT]
+> **Make a backup of the add-on before updating to 1.6.0.2 or later.** The database is upgraded from PostgreSQL 13 to 18, and an earlier version of the add-on cannot read the upgraded database: going back means restoring that backup.
+
+The database uses PostgreSQL 18. A database from an earlier version of the add-on (PostgreSQL 13) is upgraded in place at the first start, by the upstream image ([details](https://github.com/abesnier/docker-guacamole/blob/master/UPGRADE.md)):
+
+- The upgrade downloads the PostgreSQL 13 server for the duration of the upgrade, so the first start needs internet access and takes longer than usual. Do not stop the add-on while it runs.
+- The upgraded database replaces `/config/postgres` only once `pg_upgrade` and a full reindex have succeeded. The previous database is kept as `/config/postgres.pg13.bak`; delete it once everything works. Upgrade logs are in `/config/pg_upgrade_logs`.
+- If the upgrade fails, `/config/postgres` is left unchanged, but the add-on cannot use it until the upgrade succeeds: fix the cause shown in the log and restart the add-on.
+
+### Custom Scripts and Environment Variables
+
+This addon supports custom scripts and environment variables through the `app_config` mapping:
+
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+
+## Installation
+
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
+
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Go to the web interface and log in with the default credentials (`guacadmin`/`guacadmin`).
+1. Change the default password immediately for security.
+1. Configure your remote connections through the Guacamole web interface.
+
+## Setup
+
+After installation and first login:
+
+1. **Change Default Password**: Go to Settings → Users → guacadmin and change the password
+2. **Create Connections**: Use the web interface to add RDP, VNC, or SSH connections to your remote systems
+3. **Configure Extensions**: If using TOTP authentication, configure it in the user settings
+4. **User Management**: Create additional users and assign connection permissions as needed
+
+## Support
+
+Create an issue on [GitHub][repository]
+
+[repository]: https://github.com/alexbelgium/hassio-addons
+
+
+
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

@@ -1,0 +1,8 @@
+---
+configuration:
+  log_level:
+    name: Log level
+    description: >-
+      Controls the level of log details the app provides.
+network:
+  8181/tcp: Web interface

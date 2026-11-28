@@ -1,0 +1,34 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "auto",
+  "description": "[老王杂谈说]：Marginalia 是一款用于与大型语言模型共同创作长篇小说的自建写作工具：您为故事各部分撰写指令，模型负责撰写正文，而 Marginalia 则统筹安排所有内容，包括分支故事、世界观设定、用于在模型上下文中维持长篇小说连贯性的概要，以及塑造风格的提示设置。",
+  "environment": {
+    "JAVA_TOOL_OPTIONS": "-Duser.home=/config -Xms256m -Xmx1g",
+    "MARGINALIA_DATA": "/config"
+  },
+  "map": [
+    "addon_config:rw"
+  ],
+  "image": "ghcr.nju.edu.cn/enerccio/marginalia",
+  "version": "1.9.0",
+  "name": "Marginalia",
+  "options": {},
+  "ports": {
+    "8080/tcp": "8080"
+  },
+  "ports_description": {
+    "8080/tcp": "Web interface"
+  },
+  "schema": {},
+  "slug": "marginalia",
+  "startup": "services",
+  "upstream": "latest",
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:8080]",
+  "panel_admin": false,
+  "ingress": true,
+  "ingress_port": 8080
+}

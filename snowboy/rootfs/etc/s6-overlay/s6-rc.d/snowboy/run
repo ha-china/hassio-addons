@@ -1,0 +1,38 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Start snowboy service
+# ==============================================================================
+cd /usr/src
+
+flags=()
+
+if bashio::config.true 'debug_logging'; then
+    flags+=('--debug')
+fi
+
+train_dir='/share/snowboy/train'
+# Train models in a directory with the structure:
+# <train_dir>/
+#   <language>/
+#     <wake_word>/
+#       sample1.wav
+#       ...
+#
+# When trained, a .pmdl file with the same name as the directory will be
+# present.
+if [ -n "${train_dir}" ]; then
+    train_flags=()
+    if bashio::config.true 'debug_logging'; then
+        train_flags+=('--debug')
+    fi
+
+    .venv/bin/python3 train.py \
+        --train-dir "${train_dir}" \
+        --snowman-dir . "${train_flags[@]}"
+fi
+
+exec .venv/bin/python3 -m wyoming_snowboy \
+    --uri 'tcp://0.0.0.0:10400' \
+    --custom-model-dir /share/snowboy \
+    --sensitivity "$(bashio::config 'sensitivity')" ${flags[@]}

@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
+set -e
+
+bashio::log.info "Starting PHP-FPM..."
+
+exec php-fpm"$PHPVERS" --nodaemonize

@@ -1,0 +1,179 @@
+#============================#
+#  ALEXBELGIUM'S DOCKERFILE  #
+#============================#
+#           _.------.
+#       _.-`    ('>.-`"""-.
+# '.--'`       _'`   _ .--.)
+#    -'         '-.-';`   `
+#    ' -      _.'  ``'--.
+#        '---`    .-'""`
+#               /`
+#=== Home Assistant Addon ===#
+
+#################
+# 1 Build Image #
+#################
+
+ARG BUILD_VERSION
+ARG BUILD_FROM
+
+# PowerSync is only started when the POWERSYNC_ENABLED option is set, but its files
+# always ship in the image: an add-on is a single container, so there is nowhere else
+# to put them. Pinned on purpose - the service tree is copied onto an Ubuntu 24.04
+# base, so the glibc/libstdc++ floor of its node binary has to stay a known quantity.
+FROM docker.1panel.live/journeyapps/powersync-service:1.27.0 AS powersync
+
+FROM wger/server:latest
+
+##################
+# 2 Modify Image #
+##################
+
+# Set S6 wait time
+ENV S6_CMD_WAIT_FOR_SERVICES=1 \
+    S6_CMD_WAIT_FOR_SERVICES_MAXTIME=0 \
+    S6_SERVICES_GRACETIME=0
+
+
+# The upstream image no longer ships database defaults; settings/main.py reads
+# DJANGO_DB_ENGINE and DJANGO_DB_DATABASE with no fallback, so they must be set here.
+# DJANGO_DEBUG=False must be explicit: upstream's entrypoint only runs collectstatic
+# when the variable is literally "False", otherwise node/fontawesome assets 404
+ENV SYNC_EXERCISES_ON_STARTUP=True \
+    DOWNLOAD_EXERCISE_IMAGES_ON_STARTUP=True \
+    FROM_EMAIL='wger Workout Manager <wger@example.com>' \
+    DJANGO_DB_ENGINE="django.db.backends.sqlite3" \
+    DJANGO_DB_DATABASE="/data/database.sqlite" \
+    DJANGO_DEBUG=False \
+    DJANGO_PERFORM_MIGRATIONS=True \
+    DJANGO_MEDIA_ROOT="/data/media" \
+    DJANGO_STATIC_ROOT="/data/static"
+
+# PowerSync defaults. Inert unless 89-powersync-run.sh starts the service: PS_PORT and
+# PS_JWKS_URL are read only by PowerSync itself, and the wger settings already default
+# PS_STORAGE_PG_URI, which the user has to override to a reachable database anyway.
+ENV PS_PORT=8080 \
+    PS_JWKS_URL="http://127.0.0.1:8000/api/v2/powersync-keys" \
+    POWERSYNC_CONFIG_PATH=/etc/powersync/powersync.yaml
+
+USER root
+
+# The third sed is the guard that stops a failed SQLite import from turning into a
+# fresh instance: 89-powersync-run.sh writes that marker and the add-on stops here,
+# before "wger bootstrap" can create an admin user in the empty Postgres database and
+# make the import look unnecessary for ever after.
+RUN echo "wger ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
+    sed -i "1a sudo -E /./ha_entrypoint.sh" /home/wger/entrypoint.sh && \
+    sed -i "/ha_entrypoint/a . /data/env.sh" /home/wger/entrypoint.sh && \
+    sed -i '/data\/env.sh/a if [ -f /data/powersync/import-failed ]; then echo "The SQLite import into Postgres did not complete; refusing to start wger so the data stays importable. See the errors above."; exit 1; fi' /home/wger/entrypoint.sh
+
+##################
+# 3 Install apps #
+##################
+
+# PowerSync service tree and its own node runtime. Copying node from the upstream
+# image rather than installing one keeps the exact runtime it was built against; the
+# version check below fails the build loudly if that binary cannot run on this base.
+# FSL-1.1-ALv2 permits this redistribution and requires the licence to travel with it.
+COPY --from=powersync /app /opt/powersync
+COPY --from=powersync /usr/local/bin/node /opt/powersync/bin/node
+# node --version exercises the full dynamic link of the interpreter; the ldd clauses
+# then assert that the tree's one native module was found and that every library it
+# needs resolves on this base. Between them the build fails loudly here rather than
+# at runtime if a future PowerSync release raises its ABI floor.
+RUN /opt/powersync/bin/node --version && \
+    find /opt/powersync -name '*.node' -exec ldd {} + > /tmp/ldd.out && \
+    grep -c "=> /" /tmp/ldd.out && \
+    ! grep "not found" /tmp/ldd.out && \
+    rm /tmp/ldd.out && \
+    mkdir -p /opt/powersync/.probes /etc/nginx/ps && \
+    chown -R wger:wger /opt/powersync/.probes
+
+# Add rootfs
+COPY rootfs/ /
+RUN find . -type f \( -name "*.sh" -o -name "run" -o -name "finish" \) -print -exec chmod +x {} \;
+
+# Uses /bin for compatibility purposes
+# hadolint ignore=DL4005
+RUN if [ ! -f /bin/sh ] && [ -f /usr/bin/sh ]; then ln -s /usr/bin/sh /bin/sh; fi && \
+    if [ ! -f /bin/bash ] && [ -f /usr/bin/bash ]; then ln -s /usr/bin/bash /bin/bash; fi
+
+# Modules
+ARG MODULES="00-banner.sh 01-custom_script.sh 01-config_yaml.sh"
+
+# Automatic modules download
+COPY ha_automodules.sh /ha_automodules.sh
+RUN chmod 744 /ha_automodules.sh && /ha_automodules.sh "$MODULES" && rm /ha_automodules.sh
+
+# Manual apps
+ENV PACKAGES="sudo nginx"
+
+# Automatic apps & bashio
+COPY ha_autoapps.sh /ha_autoapps.sh
+RUN chmod 744 /ha_autoapps.sh && /ha_autoapps.sh "$PACKAGES" || true && rm /ha_autoapps.sh
+
+# /etc/sudoers was created above holding only the wger rule, so installing sudo keeps it
+# and parks its default (with the root rule) as sudoers.dpkg-new. The cont-init scripts
+# run as root and call "sudo -u wger", which fails without a root rule.
+RUN echo "root ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+################
+# 4 Entrypoint #
+################
+
+# Add entrypoint
+ENV S6_STAGE2_HOOK=/ha_entrypoint.sh
+COPY ha_entrypoint.sh /ha_entrypoint.sh
+RUN chmod 777 /ha_entrypoint.sh
+
+# Install bashio
+COPY bashio-standalone.sh /usr/local/lib/bashio-standalone.sh
+RUN chmod 0755 /usr/local/lib/bashio-standalone.sh
+
+USER wger
+#ENTRYPOINT ["/usr/bin/env"]
+#CMD ["/ha_entrypoint.sh"]
+
+############
+# 5 Labels #
+############
+
+ARG BUILD_ARCH
+ARG BUILD_DATE
+ARG BUILD_DESCRIPTION
+ARG BUILD_NAME
+ARG BUILD_REF
+ARG BUILD_REPOSITORY
+ARG BUILD_VERSION
+ENV BUILD_VERSION="${BUILD_VERSION}"
+LABEL \
+    io.hass.name="${BUILD_NAME}" \
+    io.hass.description="${BUILD_DESCRIPTION}" \
+    io.hass.arch="${BUILD_ARCH}" \
+    io.hass.type="addon" \
+    io.hass.version=${BUILD_VERSION} \
+    maintainer="alexbelgium (https://gh-proxy.org/github.com/alexbelgium)" \
+    org.opencontainers.image.title="${BUILD_NAME}" \
+    org.opencontainers.image.description="${BUILD_DESCRIPTION}" \
+    org.opencontainers.image.vendor="Home Assistant Add-ons" \
+    org.opencontainers.image.authors="alexbelgium (https://gh-proxy.org/github.com/alexbelgium)" \
+    org.opencontainers.image.licenses="MIT" \
+    org.opencontainers.image.url="https://gh-proxy.org/github.com/alexbelgium" \
+    org.opencontainers.image.source="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}" \
+    org.opencontainers.image.documentation="https://gh-proxy.org/github.com/${BUILD_REPOSITORY}/blob/main/README.md" \
+    org.opencontainers.image.created=${BUILD_DATE} \
+    org.opencontainers.image.revision=${BUILD_REF} \
+    org.opencontainers.image.version=${BUILD_VERSION}
+
+#################
+# 6 Healthcheck #
+#################
+
+ENV HEALTH_PORT="80" \
+    HEALTH_URL=""
+HEALTHCHECK \
+    --interval=5s \
+    --retries=5 \
+    --start-period=30s \
+    --timeout=25s \
+    CMD curl -A "HealthCheck: Docker/1.0" -s -f "http://127.0.0.1:${HEALTH_PORT}${HEALTH_URL}" &>/dev/null || exit 1

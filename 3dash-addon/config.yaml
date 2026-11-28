@@ -1,0 +1,19 @@
+name: "3Dash"
+version: "1.2.2"
+slug: "3dash"
+description: "[老王杂谈说]：Home Assistant 3D 仪表盘"
+url: "https://gh-proxy.org/github.com/kdcius/3Dash_webapp"
+arch:
+  - amd64
+  - aarch64
+  - armv7
+ingress: false
+ports:
+  8099/tcp: 8099
+ports_description:
+  8099/tcp: "Web interface"
+init: false
+startup: "application"
+boot: "auto"
+options: {}
+schema: {}

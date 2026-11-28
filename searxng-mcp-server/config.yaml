@@ -1,0 +1,29 @@
+name: searxng-mcp-server
+version: "1.1"
+upstream: "1.0"
+slug: searxngmcpserver
+description: >-
+  [老王杂谈说]：一个与 SearXNG 集成的基于 SSE 的 Model Context Protocol (MCP) 服务器实现，用于为 AI 智能体提供强大且尊重隐私的搜索能力。
+arch:
+  - amd64
+  - aarch64
+url: "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+ports:
+  8081/tcp: 8081
+ports_description:
+  8081/tcp: "API Interface"
+map:
+  - type: addon_config
+    read_only: false
+environment:
+  MCP_HTTP_HOST: "0.0.0.0"
+  MCP_HTTP_PORT: "8081"
+  ODS_CONFIG_PATH: "/config/ods_config.json"
+options:
+  SEARXNG_ENGINE_API_BASE_URL: "http://172.17.0.1:8080/search"
+schema:
+  SEARXNG_ENGINE_API_BASE_URL: "str"
+boot: manual
+#host_pid: true
+init: false
+startup: services

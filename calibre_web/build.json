@@ -1,0 +1,6 @@
+{
+  "build_from": {
+    "aarch64": "docker.1panel.live/linuxserver/calibre-web:arm64v8-",
+    "amd64": "docker.1panel.live/linuxserver/calibre-web:amd64-"
+  }
+}

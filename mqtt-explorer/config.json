@@ -1,0 +1,25 @@
+{
+  "name": "MQTT Explorer",
+  "version": "browser-1.0.3",
+  "slug": "mqtt_explorer",
+  "description": "MQTT Explorer is a comprehensive MQTT client that provides a structured overview of your MQTT topics and makes working with devices/services on your broker dead-simple.",
+  "arch": ["armhf", "armv7", "amd64", "aarch64"],
+  "startup": "application",
+  "boot": "auto",
+  "ingress": true,
+  "ingress_port": 4000,
+  "panel_admin": true,
+  "panel_icon": "mdi:access-point-network",
+  "image": "smeagolworms4/mqtt-explorer",
+  "map": [ "addons" ],
+  "environment": {
+    "CONFIG_PATH": "/data",
+    "INITIAL_CONFIG": "{\"ConnectionManager_connections\":{\"f69723c3-4fcd-4bd9-a63d-c81864946931\":{\"configVersion\":1,\"certValidation\":true,\"clientId\":\"mqtt-explorer-52dfac40\",\"id\":\"f69723c3-4fcd-4bd9-a63d-c81864946931\",\"name\":\"homeassistant\",\"encryption\":false,\"subscriptions\":[{\"topic\":\"#\",\"qos\":0},{\"topic\":\"$SYS/#\",\"qos\":0}],\"type\":\"mqtt\",\"host\":\"core-mosquitto.local.hass.io\",\"port\":1883,\"protocol\":\"mqtt\"}}}"
+  },
+  "ports": {
+    "4000": null
+  },
+  "ports_description": {
+    "4000": "Exposed HTTP port"
+  }
+}

@@ -1,0 +1,51 @@
+# Home Assistant 社区应用：MQTT 浏览
+
+[![Release][release-shield]][release] ![Project Stage][project-stage-shield] ![Project Maintenance][maintenance-shield]
+
+[![Sponsor Frenck via GitHub Sponsors][github-sponsors-shield]][github-sponsors]
+
+[![Support Frenck on Patreon][patreon-shield]][patreon]
+
+探索你的 MQTT 代理上的主题和消息。
+
+## 关于
+
+[MQTT Explorer][mqtt-explorer] 展示了 MQTT 代理的内部运作情况。  
+它看到的每个主题都以树状结构呈现，包含最后一个消息、该主题的变化频率以及之前的内容。值可以实时绘图，消息可以发布回代理，整棵树在装满数据的同时保持可搜索。当设备未显示、主题名称与文档不符，或者你只是想查看所有流量的实际内容时，这就是你要打开的工具。
+
+它首先是一个桌面应用，本应用运行的是其网页版：相同的界面，由 Home Assistant 提供并从副导航栏打开。Home Assistant 使用的 MQTT 代理在其打开时的连接列表中已有，包含地址和凭据，因此只需一次点击即可进入树状结构。
+
+[github-sponsors-shield]: https://frenck.dev/wp-content/uploads/2019/12/github_sponsor.png  
+[github-sponsors]: https://github.com/sponsors/frenck  
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2026.svg  
+[mqtt-explorer]: https://mqtt-explorer.com/  
+[patreon-shield]: https://frenck.dev/wp-content/uploads/2019/12/patreon.png  
+[patreon]: https://www.patreon.com/frenck  
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-experimental-yellow.svg  
+[release-shield]: https://img.shields.io/badge/version-v0.1.0-blue.svg  
+[release]: https://github.com/hassio-addons/app-mqtt-explorer/tree/v0.1.0
+
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

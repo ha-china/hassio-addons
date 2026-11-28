@@ -1,0 +1,192 @@
+# Hass.io Add-ons: Mealie
+
+
+I maintain this and other Home Assistant add-ons in my free time: keeping up with upstream changes, HA changes, and testing on real hardware takes a lot of time (and some money). I use around 5-10 of my >110 addons so regularly I install test machines (and purchase some test services such as vpn) that I don't use myself to troubleshoot and improve the addons
+
+If this add-on saves you time or makes your setup easier, I would be very grateful for your support!
+
+[![Buy me a coffee][donation-badge]](https://www.buymeacoffee.com/alexbelgium)
+[![Donate via PayPal][paypal-badge]](https://www.paypal.com/donate/?hosted_button_id=DZFULJZTP3UQA)
+
+## Addon informations
+
+![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmealie%2Fconfig.yaml)
+![Ingress](https://img.shields.io/badge/dynamic/yaml?label=Ingress&query=%24.ingress&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmealie%2Fconfig.yaml)
+![Arch](https://img.shields.io/badge/dynamic/yaml?color=success&label=Arch&query=%24.arch&url=https%3A%2F%2Fraw.githubusercontent.com%2Falexbelgium%2Fhassio-addons%2Fmaster%2Fmealie%2Fconfig.yaml)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9c6cf10bdbba45ecb202d7f579b5be0e)](https://www.codacy.com/gh/alexbelgium/hassio-addons/dashboard?utm_source=github.com&utm_medium=referral&utm_content=alexbelgium/hassio-addons&utm_campaign=Badge_Grade)
+[![GitHub Super-Linter](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/weekly-supelinter.yaml?label=Lint%20code%20base)](https://github.com/alexbelgium/hassio-addons/actions/workflows/weekly-supelinter.yaml)
+[![Builder](https://img.shields.io/github/actions/workflow/status/alexbelgium/hassio-addons/onpush_builder.yaml?label=Builder)](https://github.com/alexbelgium/hassio-addons/actions/workflows/onpush_builder.yaml)
+
+[donation-badge]: https://img.shields.io/badge/Buy%20me%20a%20coffee-%23d32f2f?logo=buy-me-a-coffee&style=flat&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/Donate%20via%20PayPal-0070BA?logo=paypal&style=flat&logoColor=white
+
+Warning : armv7 only supported up to version 0.4.3! It won't be updated with later versions
+
+_Thanks to everyone having starred my repo! To star it click on the image below, then it will be on top right. Thanks!_
+
+[![Stargazers repo roster for @alexbelgium/hassio-addons](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/.github/stars2.svg)](https://github.com/alexbelgium/hassio-addons/stargazers)
+
+![downloads evolution](https://raw.githubusercontent.com/alexbelgium/hassio-addons/master/mealie/stats.png)
+
+## About
+
+Mealie is a self hosted recipe manager and meal planner with a RestAPI backend and a reactive frontend application built in Vue for a pleasant user experience for the whole family.
+This addon for mealie 1.0 is based on the combined [docker image](https://hub.docker.com/r/hendrix04/mealie-combined) from hendrix04.
+This addon is based on the [docker image](https://hub.docker.com/r/hkotel/mealie) from hay-kot.
+
+## Configuration
+
+Webui can be found at <http://homeassistant:PORT> or through the sidebar using Ingress.
+Configurations can be done through the app webUI, except for the following options.
+
+- Start the addon. Wait a while and check the log for any errors.
+- Default credentials:
+  - Username: changeme@example.com
+  - Password: MyPassword
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `PGID` | int | `1000` | Group ID for file permissions |
+| `PUID` | int | `1000` | User ID for file permissions |
+| `ssl` | bool | `false` | Enable HTTPS for the web interface |
+| `certfile` | str | `fullchain.pem` | SSL certificate file (must be in /ssl) |
+| `keyfile` | str | `privkey.pem` | SSL key file (must be in /ssl) |
+| `BASE_URL` | str | | Optional external base URL |
+| `DATA_DIR` | str | `/config` | Data directory path |
+| `ALLOW_SIGNUP` | bool | `false` | Allow new user signup |
+| `login_with_ha_user` | bool | `true` | Log in through Ingress as your Home Assistant username |
+
+To configure Gunicorn's `--forwarded-allow-ips` setting for trusted reverse proxies, manually add a `FORWARDED_ALLOW_IPS` entry to your add-on configuration (comma-separated IPs). It is optional and hidden from the default options tab. For example: `FORWARDED_ALLOW_IPS: "192.168.1.1,10.0.0.1"`
+
+### Example Configuration
+
+```yaml
+PGID: 1000
+PUID: 1000
+ssl: false
+certfile: "fullchain.pem"
+keyfile: "privkey.pem"
+BASE_URL: "https://mealie.mydomain.com"
+DATA_DIR: "/config"
+ALLOW_SIGNUP: false
+```
+
+### Custom Scripts and Environment Variables
+
+This addon supports custom scripts and environment variables through the `app_config` mapping:
+
+- **Custom scripts**: See [Running Custom Scripts in Addons](https://github.com/alexbelgium/hassio-addons/wiki/Running-custom-scripts-in-Addons)
+- **env_vars option**: Use the add-on `env_vars` option to pass extra environment variables (uppercase or lowercase names). See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+
+You can add environment variables by creating `/homeassistant/addons_config/xxx-mealie/config.yaml`.
+
+The complete list of options can be found here: https://nightly.mealie.io/documentation/getting-started/installation/backend-config/
+
+### Log in with your Home Assistant user
+
+With `login_with_ha_user` (on by default), the Ingress panel signs you in automatically as the Mealie user whose username matches your Home Assistant username. It uses Mealie's [reverse proxy auth](https://mealie.io/documentation/getting-started/installation/backend-config/#reverse-proxy-auth) with the `X-Remote-User-Name` header that Home Assistant Ingress sends.
+
+- If no Mealie user has that username, the normal login page is shown. To create the user automatically instead, add `REVERSE_PROXY_AUTH_SIGNUP_ENABLED` with value `true` to the `env_vars` option.
+- Matching ignores case, and also accepts the Mealie user's email.
+- Any Home Assistant user who can open the panel gets the matching Mealie account, admins included.
+- Only Ingress can log in this way: it sends Mealie a secret generated at each start, so requests through the direct web port (9090 by default) always get the normal Mealie login.
+- Set `login_with_ha_user: false` to turn it off.
+
+## Integration with HA
+
+### Detailed infos (Thanks @michelangelonz)
+
+Create a restful sensor
+
+```yaml
+sensor:
+  - platform: rest
+    resource: "http://###.###.#.#:9090/api/groups/mealplans/today"
+    method: GET
+    name: Mealie todays meal
+    headers:
+      Authorization: Bearer <put  auth here>
+    value_template: "{{ value_json.value }}"
+    json_attributes_path: $..recipe
+    json_attributes:
+      - name
+      - id
+      - totalTime
+      - prepTime
+      - performTime
+      - description
+      - slug
+```
+
+Create template sensors from attributes
+
+```yaml
+- name: TodaysDinner
+  unique_id: sensor.TodaysDinner
+  state: "{{ state_attr('sensor.mealie_todays_meal', 'name') }}"
+- name: TodaysDinnerDescription
+  unique_id: sensor.DinnerDescription
+  state: "{{ state_attr('sensor.mealie_todays_meal', 'description') }}"
+- name: TodaysDinnerSlug
+  unique_id: sensor.DinnerSlug
+  state: "{{ state_attr('sensor.mealie_todays_meal', 'slug') }}"
+- name: TodaysDinnerID
+  unique_id: sensor.DinnerID
+  state: "{{ state_attr('sensor.mealie_todays_meal', 'id') }}"
+```
+
+Add a generic camera for image
+http://###.###.#.#:9090/api/media/recipes/{{ state_attr('sensor.mealie_todays_meal', 'id') }}/images/min-original.webp
+
+### Global infos
+
+Read here : https://hay-kot.github.io/mealie/documentation/community-guide/home-assistant/
+
+## Installation
+
+The installation of this add-on is pretty straightforward and not different in
+comparison to installing any other Hass.io add-on.
+
+1. Add my add-ons repository to your home assistant instance (in supervisor addons store at top right, or click button below if you have configured my HA)
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Falexbelgium%2Fhassio-addons)
+1. Install this add-on.
+1. Click the `Save` button to store your configuration.
+1. Start the add-on.
+1. Check the logs of the add-on to see if everything went well.
+1. Carefully configure the add-on to your preferences, see the official documentation for for that.
+
+## Support
+
+If you have in issue with your installation, please be sure to checkout github.
+
+[repository]: https://github.com/alexbelgium/hassio-addons
+
+
+
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

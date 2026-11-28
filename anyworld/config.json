@@ -1,0 +1,29 @@
+{
+  "arch": [
+    "amd64",
+    "aarch64"
+  ],
+  "boot": "manual",
+  "description": "[老王杂谈说]：这是一款多人文字冒险游戏，你无需掷骰子或计分——只需写下你角色的所作所为。一名玩家（主持人）描述场景，之后所有人轮流用自己的文字进行扮演，而我们的 AI 则将每一个选择编织进不断展开的故事中。",
+  "environment": {
+    "AD_SERVER__PORT": "4141"
+  },
+  "map": [
+    "addon_config:rw"
+  ],
+  "version": "dev",
+  "name": "Anyworld",
+  "ports": {
+    "4141/tcp": "4141"
+  },
+  "ports_description": {
+    "4141/tcp": "WebUI"
+  },
+  "slug": "anyworld",
+  "startup": "services",
+  "upstream": "0.1.0",
+  "webui": "[PROTO:ssl]://[HOST]:[PORT:4141]",
+  "ingress": false,
+  "ingress_port": 4141,
+  "url": "https://gh-proxy.org/github.com/jdeath/homeassistant-addons"
+}

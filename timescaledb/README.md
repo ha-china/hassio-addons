@@ -1,0 +1,369 @@
+![Project Stage][project-stage-shield]
+![Maintenance][maintenance-shield]
+[![License][license-shield]](https://github.com/expaso/hassos-addon-timescaledb/blob/main/LICENSE)
+
+<a href="https://www.buymeacoffee.com/expaso" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
+# Home Assistant Add-on: [PostgreSQL](https://www.postgresql.org/) [TimescaleDB](https://www.timescale.com/)
+
+## [PostgreSql 18](https://www.postgresql.org/) & [Postgis 3.6.4](https://postgis.net/) & [TimescaleDB 2.31.0](https://www.timescale.com/) & [TimescaleDB Toolkit 1.27.0](https://github.com/timescale/timescaledb-toolkit) & [pgAgent 4.2.3](https://www.pgadmin.org/docs/pgadmin4/development/pgagent.html) & [pgVector 0.8.7](https://github.com/pgvector/pgvector) & [VectorChord 1.1.1](https://github.com/tensorchord/VectorChord)
+
+#### Upgrading from version 5.x
+
+Version 6 upgrades your databases from PostgreSQL 17 to 18 automatically on the first start. Take a backup first; the upgrade can take a while on large databases.
+
+- New option `postgres_password` to set the password of the `postgres` user. New installations use `scram-sha-256` password authentication; existing installations keep `md5`.
+- Databases on PostgreSQL 15 or 16: install version 5.x first, which upgrades them to PostgreSQL 17, then update to version 6.
+- Version 6 only supports `aarch64` and `amd64`, like Home Assistant itself. Use version 5.x on `armhf`, `armv7` or `i386`.
+- The `postgresql_config` option is replaced by `postgresql_settings` (a list of `name=value` entries). The old option never worked, so there is nothing to migrate.
+
+#### Configuation
+
+Example add-on configuration:
+
+```
+ {
+    "databases": ["homeassistant"],
+    "timescale_enabled": ["homeassistant"],
+    "timescaledb": {
+      "telemetry": "basic",
+      "maxmemory": "512MB",
+      "maxcpus": "4"
+      },
+      "max_connections": 20,
+      "system_packages": [],
+      "init_commands": []
+ }
+```
+
+#### Option: `postgres_password`
+
+The password of the `postgres` superuser. When set, the add-on applies it on every start, so you can change it here at any time. When not set, a new installation gets the default password `homeassistant`, with a warning in the log, and an existing installation keeps its current password.
+
+Remember to update the password everywhere you connect with the `postgres` user, like the `db_url` of the recorder or LTSS.
+
+#### Option: `databases`
+
+Sets a list of database-names that will be created for you, once you start the add-on.
+You can also create databases on your own ofcourse, using a psql client of your choice.
+
+#### Option: `timescale_enabled`
+
+Sets a list of database-names where the timescale-extentions will be enabled for.
+Databases not in this list will act like normal Postgre databases.
+
+#### Option: `timescaledb.telemetry`
+
+Switches the telemetry of TimescaleDb on or off.
+Valid options are: 'basic' or 'off'.
+See: https://www.tigerdata.com/docs/self-hosted/latest/configuration/telemetry
+
+#### Option: `timescaledb.maxmemory`
+
+Sets the maximum amount of memory that PostgreSQL will claim.
+It's important to leave breathing room for other processes on your machine (or raspberry pi), so set these level not too high (say max 50% of your total ram).
+
+Example: `maxmemory="1024MB"`
+Or leave empty for accepting auto-tune.
+
+#### Option: `timescaledb.maxcpu`
+
+Sets the maximum number of cores that PostgreSQL will use.
+It's important to leave breathing room for other processes on your machine (or raspberry pi), so set these level not too high (say max 75% of your total number of cores).
+
+Example: `maxcpu="2"`
+Or leave empty for accepting auto-tune.
+
+See also:
+https://www.tigerdata.com/docs/self-hosted/latest/configuration/about-configuration
+for further tuning. Your Postgres.config file is located in the addon's data directory.
+
+#### Option: `max_connections`
+
+Sets the maximum number of connections that PostgreSql will accept.
+Setting this higher could lead to more memory usage.
+
+Example: `max_connections=30`
+
+#### Option: `vectorchord`
+
+Loads the [VectorChord](https://github.com/tensorchord/VectorChord) extension (`vchord`) at startup, which [Immich](https://immich.app/) needs for its smart search and face recognition. Off by default, as only Immich needs it; changing it needs a restart of the add-on.
+
+To use the database for [Immich](https://immich.app/), turn the option on, restart the add-on, and prepare a database once (for example in pgAdmin, or `psql` in the add-on console):
+
+```sql
+CREATE DATABASE immich;
+\c immich
+CREATE EXTENSION vchord CASCADE;
+CREATE EXTENSION earthdistance CASCADE;
+```
+
+Then point Immich at it with `DB_URL=postgresql://postgres:<password>@<home assistant host>:5432/immich` (map the port in the Network section). `vchord CASCADE` also installs pgvector, which VectorChord builds on.
+
+#### Option: `system_packages`
+
+Advanced users only!
+A list of extra alpine packages to iunstall during addon-startup.
+
+Example: ['nano']
+
+#### Option: `init_commands`
+
+Advanced users only!
+A list of extra commands to run during startup.
+
+To alter something in the postgresql.conf file for example:
+
+Example: ['sed -i -e "/max_connections =/ s/= .*/= 50/" /data/postgres/postgresql.conf']
+
+#### Option: `retry_upgrade`
+
+Advanced users only!
+When set, the upgrade from Postgres 17 to 18 could be retryed if it failed mid-flight.
+Basically this will try to find the old database-files from Postgres 17, and restore them before trying to upgrade to Postgres 18 again.
+
+!! Please don't set this if you don't know what you are doing or before taking a backup. !!
+
+#### Option: `postgresql_settings`
+
+Allows you to customize PostgreSQL server parameters, as a list of `name=value` entries. They are written to their own file that is included at the end of `postgresql.conf`, so they override the default settings. The file is rewritten on every start, so removing an entry also removes the setting.
+
+Example:
+```yaml
+postgresql_settings:
+  - "log_statement=all"
+  - "work_mem=16MB"
+  - "maintenance_work_mem=256MB"
+```
+
+Quote values that contain spaces with single quotes, for example `"log_line_prefix='%m [%p] '"`.
+
+See [PostgreSQL documentation](https://www.postgresql.org/docs/current/runtime-config.html) for available parameters.
+
+**Note:** Some critical parameters cannot be modified (e.g., `shared_preload_libraries`, `port`, `data_directory`) as they are managed by the addon. If PostgreSQL rejects a setting, all settings are ignored for that start and the error is shown in the log. This option replaces `postgresql_config` of version 5.x, which never worked.
+
+#### Option: `pg_hba_config`
+
+Allows you to add custom authentication rules to `pg_hba.conf`. Rules are appended to default rules.
+
+Example:
+```yaml
+pg_hba_config:
+  - type: "host"
+    database: "homeassistant"
+    user: "all"
+    address: "192.168.1.0/24"
+    method: "md5"
+```
+
+See [PostgreSQL documentation](https://www.postgresql.org/docs/current/auth-pg-hba-conf.html) for authentication methods.
+
+**Warning:** Incorrect configuration can lock you out of the database.
+
+### Running the container standalone.
+
+In this case, you need to have a working Docker installation on your machine.
+pull one of the images for the desired architecture from docker hub:
+
+```
+docker pull ghcr.io/expaso/timescaledb/amd64:stable
+docker pull ghcr.io/expaso/timescaledb/aarch64:stable
+```
+
+You can replace *stable* with the version number you want to use.
+
+Simply start it like this:
+
+```
+docker run \
+  --rm \
+  --name timescaledb \
+  --v ${PWD}/timescaledb_addon_data:/data \
+  -p 5432:5432 \
+  ghcr.io/expaso/timescaledb/amd64:stable
+```
+
+This will use ~/timescaledb_addon_data as the data directory for the container, and map the port 5432 to the host.
+
+If you want to start the container as a daemon, simply remove the `--rm` option and add the `-d` option like so:
+
+```
+docker run \
+  -d \
+  --name timescaledb \
+  --v ${PWD}/timescaledb_addon_data:/data \
+  -p 5432:5432 \
+  ghcr.io/expaso/timescaledb/amd64:stable
+```
+
+## Usage
+
+You are now ready to start using Postgres with TimescaleDb extenstions enabled!
+
+Seeking a nice web-based client? **Try the pgAdmin4 addon.**
+
+Please do not forget to also map the TCP/IP port in the network-section of the addon to the desired port number.
+The default is port `5432`
+
+**Securiy Notice!**
+
+The default username is `postgres` with password `homeassistant`.
+Change it immediately after activating the add-on with the `postgres_password` option, or in SQL:
+
+```
+ALTER USER postgres WITH PASSWORD 'strongpassword';
+```
+
+⚠️ It's considered best practice to create a separate user for each database you create, and transfer ownership of the database to that user.
+In this configuration, The `postgres` user should only be used for administrative tasks.
+
+Use the following commands to create a user `homeassistant` with password `mypassword` and transfer ownership of the database `mydatabase` to that user, or use _pgAdmin_ for this task if you prefer a GUI.
+
+```
+CREATE USER homeassistant WITH PASSWORD 'mypassword';
+ALTER DATABASE mydatabase OWNER TO homeassistant;
+```
+
+
+A default `pg_hba.conf` is created in the data directory with the following content, which allows local peer users and network users with passwords.:
+
+```
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+host    all             all             0.0.0.0/0               scram-sha-256
+host    all             all             ::/0                    scram-sha-256
+local   all             all                                     scram-sha-256
+local   all             all                                     peer
+```
+
+New installations use `scram-sha-256` (PostgreSQL 18 deprecates MD5 passwords). Installations upgraded from an older version, and databases restored from a backup, keep `md5`: their roles may still have MD5 password hashes, and `md5` accepts both MD5 and SCRAM hashes.
+
+Please review this configuration carefully by examine the docs:
+https://www.postgresql.org/docs/devel/auth-pg-hba-conf.html
+
+## Backup and Restore
+
+This addon implements a robust backup and restore mechanism designed to protect your database from data loss.
+
+### How Backups Work
+
+When Home Assistant's backup system runs, it automatically:
+
+1. **Pre-Backup**: Dumps every database with `pg_dump` in its compressed custom format, and the roles with `pg_dumpall --globals-only`, into `/data/backup`
+2. **Backup**: Backs up the dump along with other addon data (but excludes the PostgreSQL data directory)
+3. **Post-Backup**: Removes the dump again to save space
+
+This approach has several advantages:
+
+- **Consistency**: Each database dump is a transaction-consistent snapshot
+- **Safety**: No risk of backing up corrupted or in-transition database files
+- **Small Size**: The dump is compressed (zstd), and the large PostgreSQL data directory is excluded from the backup
+
+**Disk space:** the dump always leaves at least 1 GiB free on the data partition. When there is less space, or the free space drops below that while dumping, the dump is stopped and removed again, and an error is logged: PostgreSQL never runs out of disk because of a backup. The Home Assistant backup then does not contain the database, so free up disk space and back up again.
+
+### How Restore Works
+
+When you restore a Home Assistant backup:
+
+1. The addon starts up with the restored dump in `/data/backup`
+2. If the PostgreSQL data directory is missing or corrupted, the addon:
+   - Initializes a fresh PostgreSQL database
+   - Restores the roles, then every database the way TimescaleDB prescribes (`timescaledb_pre_restore()`, `pg_restore`, `timescaledb_post_restore()`)
+   - Moves every sequence up to at least the highest id in its table, so inserts cannot fail with a duplicate key afterwards
+   - Removes the dump after successful restoration
+
+Backups of older addon versions contain a plain SQL dump (`/data/backup_db.sql`, or `backup_db.sql.gz`). These are still restored, with the same TimescaleDB restore steps added.
+
+This automatic recovery process ensures your data is safely restored even if:
+
+- The database files were corrupted
+- You're restoring to a different system
+- A PostgreSQL upgrade failed
+
+### Manual Backup
+
+You can also create manual backups using the PostgreSQL command-line tools:
+
+**Create a backup of one database:**
+
+```bash
+docker exec addon_timescaledb_timescaledb su - postgres -c "pg_dump -U postgres -d homeassistant -Fc -f /data/manual_homeassistant_$(date +%Y%m%d).dump"
+```
+
+**Restore it into an empty database:**
+
+```bash
+docker exec addon_timescaledb_timescaledb su - postgres -c "psql -U postgres -d homeassistant -c 'SELECT timescaledb_pre_restore();'"
+docker exec addon_timescaledb_timescaledb su - postgres -c "pg_restore -U postgres -d homeassistant /data/manual_homeassistant_YYYYMMDD.dump"
+docker exec addon_timescaledb_timescaledb su - postgres -c "psql -U postgres -d homeassistant -c 'SELECT timescaledb_post_restore();'"
+```
+
+Do not use `pg_restore -j` (parallel): it does not restore the TimescaleDB catalog correctly.
+
+### Important Notes
+
+- The dump is only present during the backup process and is automatically cleaned up
+- The PostgreSQL data directory (`/data/postgres/*`) is excluded from backups to reduce backup size and improve reliability
+- Restore is automatic - no manual intervention required when restoring from a Home Assistant backup
+
+### Troubleshooting
+
+**If restore fails:**
+
+1. Check the addon logs and `/var/log/timescaledb.restore.log` in the addon for detailed error messages
+2. The dump is preserved in `/data/backup` (or `/data/backup_db.sql` for older backups) for manual recovery
+
+**If backup fails:**
+
+- Check that PostgreSQL is running during the backup
+- Ensure there's sufficient disk space: the compressed dump plus 1 GiB
+- Review the addon logs for specific error messages
+
+### Now what..
+
+Well.. Dive in!
+
+You can read additional documentation on how you van work with your data and Grafana here:
+
+https://github.com/expaso/hassos-addons/issues/1
+
+## Support
+
+- Got questions?
+  [Open an issue here][issues]
+
+- For a general repository issue or add-on ideas? [Open an issue here][repo-issues]
+
+[issues]: https://github.com/expaso/hassos-addon-timescaledb/issues
+[repo-issues]: https://github.com/expaso/hassos-addons/issues
+
+
+
+[project-stage-shield]: https://img.shields.io/badge/project%20stage-production%20ready-brightgreen.svg
+[release-shield]: https://img.shields.io/badge/version-v6.1.1-blue.svg
+[release]: https://github.com/expaso/hassos-addon-timescaledb/tree/v6.1.1
+[license-shield]: https://img.shields.io/github/license/expaso/hassos-addon-TimescaleDB.svg
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2025.svg
+---
+
+**⚠️ This resource is intended to help Chinese Home Assistant users more easily install excellent add-ons. If you are not a Chinese user, please read repository readme first**
+
+**⚠️ 这个资源用来帮助中国Home Assistant用户更容易地安装优秀的插件。如果您不是中国用户，请先阅读仓库的README，以下为收集者（汉化，加速）信息，非原作者信息**
+
+---
+
+## 📱 关注我
+
+扫描下面二维码，关注我。有需要可以随时给我留言：
+
+<img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/WeChat_QRCode.png" width="50%" /> 📲
+
+## ☕ 赞助支持
+
+如果您觉得我花费大量时间维护这个库对您有帮助，欢迎请我喝杯奶茶，您的支持将是我持续改进的动力！
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/Ali_Pay.jpg" height="350px" />
+  <img src="https://raw.gitcode.com/ha-china/ha-apps/raw/main/1_readme/WeChat_Pay.jpg" height="350px" />
+</div> 💖
+
+感谢您的支持与鼓励！

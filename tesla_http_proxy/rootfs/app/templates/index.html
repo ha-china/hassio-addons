@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+        }
+        div.content {
+            width: 100%;
+            padding: 10px;
+        }
+        button {
+            padding: 10px;
+            font-size: 18px;
+            width: 300px;
+        }
+        input {
+            padding: 10px;
+            font-size: 18px;
+            width: 276px;
+        }
+
+        div#main {
+            transform: translateY(50%);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: rgb(40, 40, 40);
+                color: rgb(200, 200, 200);
+            }
+            button {
+                background-color: black;
+                color: rgb(200, 200, 200);
+                border-color: rgb(40,40,40);
+            }
+        }
+
+        ::placeholder {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Tesla HTTP Proxy add-on</h2>
+    <hr>
+    <div id="main">
+        <div class="content">
+            <button type="button" onclick="login()">Login to Tesla account</button>
+        </div>
+        <form action="callback" method="get">
+        <div class="content">
+            <input type="text" name="callback_url" placeholder="paste Callback URL here">
+        </div>
+        <div class="content">
+            <button type="submit">Generate token from URL</button>
+        </div>
+        </form>
+        <hr/>
+        <div class="content">
+            <a href="https://tesla.com/_ak/{{domain}}" target="_blank"><button type="button">Enroll public key in your vehicle</button></a>
+        </div>
+        <div class="content">
+            <a href="https://{{domain}}/.well-known/appspecific/com.tesla.3p.public-key.pem" target="_blank"><button type="button">Test public key endpoint</button></a>
+        </div>
+    </div>
+</body>
+<script>
+    function login() {
+        window.alert('After logging into your Tesla account, you will see a "Page not found" error.  Copy that URL and paste it into the text box below.')
+        window.open("{{auth_endpoint}}/oauth2/v3/authorize?&client_id={{client_id}}&prompt=login&redirect_uri=https://{{domain}}/callback&response_type=code&scope={{scopes}}&state={{randomstate}}&nonce={{randomnonce}}", "_blank")
+    }
+</script>
+</html>

@@ -1,0 +1,30 @@
+## v2.7 (2026-08-01)
+
+- Version renamed from `v2-7`, which Home Assistant could not order and therefore could not reliably offer as an update: every number of the previous version is kept, as a section of its own. The addon itself and the upstream version it tracks are unchanged
+
+## v2-7 (13-01-2026)
+- Minor bugs fixed
+## v2-6 (13-01-2026)
+- Minor bugs fixed
+## v2-5 (13-01-2026)
+- Minor bugs fixed
+## v2-4 (11-01-2026)
+- Minor bugs fixed
+## v2-3 (11-01-2026)
+- Minor bugs fixed
+## v2-2 (18-03-2026)
+- Ensure folder permissions use configured PUID/PGID values
+
+## v2 (11-01-2026)
+- Minor bugs fixed
+
+## 1.601 (2025-12-27)
+- Update to latest version from causefx/organizr (changelog : https://github.com/causefx/organizr/releases)
+- The Home Assistant project has deprecated support for the armv7, armhf and i386 architectures. Support wil be fully dropped in the upcoming Home Assistant 2025.12 release
+
+- Added support for configuring extra environment variables via the `env_vars` add-on option alongside config.yaml. See https://github.com/alexbelgium/hassio-addons/wiki/Add-Environment-variables-to-your-Addon-2 for details.
+
+- WARNING : update to supervisor 2022.11 before installing
+- Add codenotary sign
+- New standardized logic for Dockerfile build and packages installation
+- Initial build
